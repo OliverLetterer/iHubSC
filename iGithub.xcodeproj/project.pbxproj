@@ -1,0 +1,310 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A7BF13FC1342149C001AE50D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7BF13FB1342149C001AE50D /* UIKit.framework */; };
+		A7BF13FE1342149C001AE50D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7BF13FD1342149C001AE50D /* Foundation.framework */; };
+		A7BF14001342149C001AE50D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7BF13FF1342149C001AE50D /* CoreGraphics.framework */; };
+		A7BF14061342149C001AE50D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A7BF14041342149C001AE50D /* InfoPlist.strings */; };
+		A7BF14091342149C001AE50D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A7BF14081342149C001AE50D /* main.m */; };
+		A7BF140C1342149C001AE50D /* iGithubAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A7BF140B1342149C001AE50D /* iGithubAppDelegate.m */; };
+		A7BF14101342149C001AE50D /* iGithubAppDelegate_iPhone.m in Sources */ = {isa = PBXBuildFile; fileRef = A7BF140F1342149C001AE50D /* iGithubAppDelegate_iPhone.m */; };
+		A7BF14131342149C001AE50D /* MainWindow_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = A7BF14111342149C001AE50D /* MainWindow_iPhone.xib */; };
+		A7BF14171342149C001AE50D /* iGithubAppDelegate_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = A7BF14161342149C001AE50D /* iGithubAppDelegate_iPad.m */; };
+		A7BF141A1342149C001AE50D /* MainWindow_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = A7BF14181342149C001AE50D /* MainWindow_iPad.xib */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		A7BF13F71342149C001AE50D /* iGithub.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iGithub.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A7BF13FB1342149C001AE50D /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		A7BF13FD1342149C001AE50D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		A7BF13FF1342149C001AE50D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		A7BF14031342149C001AE50D /* iGithub-Info.plist */ = {isa = PBXFileReference; path = "iGithub-Info.plist"; sourceTree = "<group>"; };
+		A7BF14051342149C001AE50D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		A7BF14071342149C001AE50D /* iGithub-Prefix.pch */ = {isa = PBXFileReference; path = "iGithub-Prefix.pch"; sourceTree = "<group>"; };
+		A7BF14081342149C001AE50D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		A7BF140A1342149C001AE50D /* iGithubAppDelegate.h */ = {isa = PBXFileReference; path = iGithubAppDelegate.h; sourceTree = "<group>"; };
+		A7BF140B1342149C001AE50D /* iGithubAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = iGithubAppDelegate.m; sourceTree = "<group>"; };
+		A7BF140E1342149C001AE50D /* iGithubAppDelegate_iPhone.h */ = {isa = PBXFileReference; name = iGithubAppDelegate_iPhone.h; path = iPhone/iGithubAppDelegate_iPhone.h; sourceTree = "<group>"; };
+		A7BF140F1342149C001AE50D /* iGithubAppDelegate_iPhone.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = iGithubAppDelegate_iPhone.m; path = iPhone/iGithubAppDelegate_iPhone.m; sourceTree = "<group>"; };
+		A7BF14121342149C001AE50D /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = iPhone/en.lproj/MainWindow_iPhone.xib; sourceTree = "<group>"; };
+		A7BF14151342149C001AE50D /* iGithubAppDelegate_iPad.h */ = {isa = PBXFileReference; name = iGithubAppDelegate_iPad.h; path = iPad/iGithubAppDelegate_iPad.h; sourceTree = "<group>"; };
+		A7BF14161342149C001AE50D /* iGithubAppDelegate_iPad.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = iGithubAppDelegate_iPad.m; path = iPad/iGithubAppDelegate_iPad.m; sourceTree = "<group>"; };
+		A7BF14191342149C001AE50D /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = iPad/en.lproj/MainWindow_iPad.xib; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A7BF13F41342149C001AE50D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A7BF13FC1342149C001AE50D /* UIKit.framework in Frameworks */,
+				A7BF13FE1342149C001AE50D /* Foundation.framework in Frameworks */,
+				A7BF14001342149C001AE50D /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		A7BF13EC1342149C001AE50D = {
+			isa = PBXGroup;
+			children = (
+				A7BF14011342149C001AE50D /* iGithub */,
+				A7BF13FA1342149C001AE50D /* Frameworks */,
+				A7BF13F81342149C001AE50D /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		A7BF13F81342149C001AE50D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A7BF13F71342149C001AE50D /* iGithub.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A7BF13FA1342149C001AE50D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A7BF13FB1342149C001AE50D /* UIKit.framework */,
+				A7BF13FD1342149C001AE50D /* Foundation.framework */,
+				A7BF13FF1342149C001AE50D /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		A7BF14011342149C001AE50D /* iGithub */ = {
+			isa = PBXGroup;
+			children = (
+				A7BF140A1342149C001AE50D /* iGithubAppDelegate.h */,
+				A7BF140B1342149C001AE50D /* iGithubAppDelegate.m */,
+				A7BF140D1342149C001AE50D /* iPhone */,
+				A7BF14141342149C001AE50D /* iPad */,
+				A7BF14021342149C001AE50D /* Supporting Files */,
+			);
+			path = iGithub;
+			sourceTree = "<group>";
+		};
+		A7BF14021342149C001AE50D /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				A7BF14031342149C001AE50D /* iGithub-Info.plist */,
+				A7BF14041342149C001AE50D /* InfoPlist.strings */,
+				A7BF14071342149C001AE50D /* iGithub-Prefix.pch */,
+				A7BF14081342149C001AE50D /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		A7BF140D1342149C001AE50D /* iPhone */ = {
+			isa = PBXGroup;
+			children = (
+				A7BF140E1342149C001AE50D /* iGithubAppDelegate_iPhone.h */,
+				A7BF140F1342149C001AE50D /* iGithubAppDelegate_iPhone.m */,
+				A7BF14111342149C001AE50D /* MainWindow_iPhone.xib */,
+			);
+			name = iPhone;
+			sourceTree = "<group>";
+		};
+		A7BF14141342149C001AE50D /* iPad */ = {
+			isa = PBXGroup;
+			children = (
+				A7BF14151342149C001AE50D /* iGithubAppDelegate_iPad.h */,
+				A7BF14161342149C001AE50D /* iGithubAppDelegate_iPad.m */,
+				A7BF14181342149C001AE50D /* MainWindow_iPad.xib */,
+			);
+			name = iPad;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A7BF13F61342149C001AE50D /* iGithub */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A7BF141D1342149C001AE50D /* Build configuration list for PBXNativeTarget "iGithub" */;
+			buildPhases = (
+				A7BF13F31342149C001AE50D /* Sources */,
+				A7BF13F41342149C001AE50D /* Frameworks */,
+				A7BF13F51342149C001AE50D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = iGithub;
+			productName = iGithub;
+			productReference = A7BF13F71342149C001AE50D /* iGithub.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A7BF13EE1342149C001AE50D /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				ORGANIZATIONNAME = Home;
+			};
+			buildConfigurationList = A7BF13F11342149C001AE50D /* Build configuration list for PBXProject "iGithub" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = A7BF13EC1342149C001AE50D;
+			productRefGroup = A7BF13F81342149C001AE50D /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A7BF13F61342149C001AE50D /* iGithub */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		A7BF13F51342149C001AE50D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A7BF14061342149C001AE50D /* InfoPlist.strings in Resources */,
+				A7BF14131342149C001AE50D /* MainWindow_iPhone.xib in Resources */,
+				A7BF141A1342149C001AE50D /* MainWindow_iPad.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A7BF13F31342149C001AE50D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A7BF14091342149C001AE50D /* main.m in Sources */,
+				A7BF140C1342149C001AE50D /* iGithubAppDelegate.m in Sources */,
+				A7BF14101342149C001AE50D /* iGithubAppDelegate_iPhone.m in Sources */,
+				A7BF14171342149C001AE50D /* iGithubAppDelegate_iPad.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		A7BF14041342149C001AE50D /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A7BF14051342149C001AE50D /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		A7BF14111342149C001AE50D /* MainWindow_iPhone.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A7BF14121342149C001AE50D /* en */,
+			);
+			name = MainWindow_iPhone.xib;
+			sourceTree = "<group>";
+		};
+		A7BF14181342149C001AE50D /* MainWindow_iPad.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A7BF14191342149C001AE50D /* en */,
+			);
+			name = MainWindow_iPad.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		A7BF141B1342149C001AE50D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		A7BF141C1342149C001AE50D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		A7BF141E1342149C001AE50D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "iGithub/iGithub-Prefix.pch";
+				INFOPLIST_FILE = "iGithub/iGithub-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		A7BF141F1342149C001AE50D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "iGithub/iGithub-Prefix.pch";
+				INFOPLIST_FILE = "iGithub/iGithub-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				VALIDATE_PRODUCT = YES;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A7BF13F11342149C001AE50D /* Build configuration list for PBXProject "iGithub" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A7BF141B1342149C001AE50D /* Debug */,
+				A7BF141C1342149C001AE50D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A7BF141D1342149C001AE50D /* Build configuration list for PBXNativeTarget "iGithub" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A7BF141E1342149C001AE50D /* Debug */,
+				A7BF141F1342149C001AE50D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = A7BF13EE1342149C001AE50D /* Project object */;
+}
