@@ -1,1828 +1,0 @@
-TiGithub
-v3
-r1
-cCheck dependencies
-cCpResource /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/ResourceRules.plist build/Debug-iphoneos/iGithub.app/ResourceRules.plist
-cProcessInfoPlistFile /Users/oliver/Development/iGithub/build/Debug-iphoneos/iGithub.app/Info.plist iGithub/iGithub-Info.plist
-cProcessPCH /var/folders/vP/vPS9LckaF3a+SXfRwj19bU+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/iGithub-Prefix-aojnksylhodcwkhawsnikbpmbcee/iGithub-Prefix.pch.gch iGithub/iGithub-Prefix.pch normal armv6 objective-c com.apple.compilers.llvmgcc42
-cProcessPCH /var/folders/vP/vPS9LckaF3a+SXfRwj19bU+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/iGithub-Prefix-eyxefnbkrszrqqhjgjitjtbkalmg/iGithub-Prefix.pch.gch iGithub/iGithub-Prefix.pch normal armv7 objective-c com.apple.compilers.llvmgcc42
-cCompileC build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv6/ASIDataDecompressor.o /Users/oliver/Development/iGithub/asi-http-request/Classes/ASIDataDecompressor.m normal armv6 objective-c com.apple.compilers.llvmgcc42
-cCompileC build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv6/JSONKit.o /Users/oliver/Development/iGithub/iGithub/../JSONKit/JSONKit.m normal armv6 objective-c com.apple.compilers.llvmgcc42
-cCompileC build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv6/GHAuthenticationViewController.o /Users/oliver/Development/iGithub/iGithub/../iGithub/GHAuthenticationViewController.m normal armv6 objective-c com.apple.compilers.llvmgcc42
-cCompileC build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv6/GHUser.o /Users/oliver/Development/iGithub/iGithub/../GHUser.m normal armv6 objective-c com.apple.compilers.llvmgcc42
-cCompileC build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv6/iGithubAppDelegate_iPhone.o /Users/oliver/Development/iGithub/iGithub/iPhone/iGithubAppDelegate_iPhone.m normal armv6 objective-c com.apple.compilers.llvmgcc42
-cCompileC build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv6/UITableViewCellWithTextField.o /Users/oliver/Development/iGithub/iGithub/../iGithub/UITableViewCellWithTextField.m normal armv6 objective-c com.apple.compilers.llvmgcc42
-cCompileC build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv6/ASIHTTPRequest.o /Users/oliver/Development/iGithub/asi-http-request/Classes/ASIHTTPRequest.m normal armv6 objective-c com.apple.compilers.llvmgcc42
-cCompileC build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv6/ASIDownloadCache.o /Users/oliver/Development/iGithub/asi-http-request/Classes/ASIDownloadCache.m normal armv6 objective-c com.apple.compilers.llvmgcc42
-cCompileC build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv6/SFHFKeychainUtils.o /Users/oliver/Development/iGithub/iGithub/../iGithub/SFHFKeychainUtils.m normal armv6 objective-c com.apple.compilers.llvmgcc42
-cCompileC build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv6/ASIFormDataRequest.o /Users/oliver/Development/iGithub/asi-http-request/Classes/ASIFormDataRequest.m normal armv6 objective-c com.apple.compilers.llvmgcc42
-cCompileC build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv6/main.o /Users/oliver/Development/iGithub/iGithub/main.m normal armv6 objective-c com.apple.compilers.llvmgcc42
-cCompileC build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv6/GHBackgroundQueue.o /Users/oliver/Development/iGithub/iGithub/../GHBackgroundQueue.m normal armv6 objective-c com.apple.compilers.llvmgcc42
-cCompileC build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv6/ASIInputStream.o /Users/oliver/Development/iGithub/asi-http-request/Classes/ASIInputStream.m normal armv6 objective-c com.apple.compilers.llvmgcc42
-cCompileC build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv6/ASIAuthenticationDialog.o /Users/oliver/Development/iGithub/asi-http-request/Classes/ASIAuthenticationDialog.m normal armv6 objective-c com.apple.compilers.llvmgcc42
-cCompileC build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv6/iGithubAppDelegate.o /Users/oliver/Development/iGithub/iGithub/iGithubAppDelegate.m normal armv6 objective-c com.apple.compilers.llvmgcc42
-cCompileC build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv6/ASIDataCompressor.o /Users/oliver/Development/iGithub/asi-http-request/Classes/ASIDataCompressor.m normal armv6 objective-c com.apple.compilers.llvmgcc42
-cCompileC build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv6/iGithubAppDelegate_iPad.o /Users/oliver/Development/iGithub/iGithub/iPad/iGithubAppDelegate_iPad.m normal armv6 objective-c com.apple.compilers.llvmgcc42
-cCompileC build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv6/Reachability.o /Users/oliver/Development/iGithub/iGithub/../asi-http-request/External/Reachability/Reachability.m normal armv6 objective-c com.apple.compilers.llvmgcc42
-cCompileC build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv6/GHSettingsHelper.o /Users/oliver/Development/iGithub/iGithub/../GHSettingsHelper.m normal armv6 objective-c com.apple.compilers.llvmgcc42
-cCompileC build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv6/ASINetworkQueue.o /Users/oliver/Development/iGithub/asi-http-request/Classes/ASINetworkQueue.m normal armv6 objective-c com.apple.compilers.llvmgcc42
-cCompileC build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv7/GHAuthenticationViewController.o /Users/oliver/Development/iGithub/iGithub/../iGithub/GHAuthenticationViewController.m normal armv7 objective-c com.apple.compilers.llvmgcc42
-cCompileC build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv7/ASIInputStream.o /Users/oliver/Development/iGithub/asi-http-request/Classes/ASIInputStream.m normal armv7 objective-c com.apple.compilers.llvmgcc42
-cCompileC build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv7/ASIDataCompressor.o /Users/oliver/Development/iGithub/asi-http-request/Classes/ASIDataCompressor.m normal armv7 objective-c com.apple.compilers.llvmgcc42
-cCompileC build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv7/iGithubAppDelegate_iPad.o /Users/oliver/Development/iGithub/iGithub/iPad/iGithubAppDelegate_iPad.m normal armv7 objective-c com.apple.compilers.llvmgcc42
-cCompileC build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv7/ASINetworkQueue.o /Users/oliver/Development/iGithub/asi-http-request/Classes/ASINetworkQueue.m normal armv7 objective-c com.apple.compilers.llvmgcc42
-cCompileC build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv7/ASIHTTPRequest.o /Users/oliver/Development/iGithub/asi-http-request/Classes/ASIHTTPRequest.m normal armv7 objective-c com.apple.compilers.llvmgcc42
-cCompileC build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv7/main.o /Users/oliver/Development/iGithub/iGithub/main.m normal armv7 objective-c com.apple.compilers.llvmgcc42
-cCompileC build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv7/Reachability.o /Users/oliver/Development/iGithub/iGithub/../asi-http-request/External/Reachability/Reachability.m normal armv7 objective-c com.apple.compilers.llvmgcc42
-cCompileC build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv7/SFHFKeychainUtils.o /Users/oliver/Development/iGithub/iGithub/../iGithub/SFHFKeychainUtils.m normal armv7 objective-c com.apple.compilers.llvmgcc42
-cCompileC build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv7/UITableViewCellWithTextField.o /Users/oliver/Development/iGithub/iGithub/../iGithub/UITableViewCellWithTextField.m normal armv7 objective-c com.apple.compilers.llvmgcc42
-cCompileC build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv7/iGithubAppDelegate.o /Users/oliver/Development/iGithub/iGithub/iGithubAppDelegate.m normal armv7 objective-c com.apple.compilers.llvmgcc42
-cCompileC build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv7/JSONKit.o /Users/oliver/Development/iGithub/iGithub/../JSONKit/JSONKit.m normal armv7 objective-c com.apple.compilers.llvmgcc42
-cCompileC build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv7/ASIDataDecompressor.o /Users/oliver/Development/iGithub/asi-http-request/Classes/ASIDataDecompressor.m normal armv7 objective-c com.apple.compilers.llvmgcc42
-cCompileC build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv7/GHSettingsHelper.o /Users/oliver/Development/iGithub/iGithub/../GHSettingsHelper.m normal armv7 objective-c com.apple.compilers.llvmgcc42
-cCompileC build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv7/ASIDownloadCache.o /Users/oliver/Development/iGithub/asi-http-request/Classes/ASIDownloadCache.m normal armv7 objective-c com.apple.compilers.llvmgcc42
-cCompileC build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv7/ASIAuthenticationDialog.o /Users/oliver/Development/iGithub/asi-http-request/Classes/ASIAuthenticationDialog.m normal armv7 objective-c com.apple.compilers.llvmgcc42
-cCompileC build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv7/ASIFormDataRequest.o /Users/oliver/Development/iGithub/asi-http-request/Classes/ASIFormDataRequest.m normal armv7 objective-c com.apple.compilers.llvmgcc42
-cCompileC build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv7/GHBackgroundQueue.o /Users/oliver/Development/iGithub/iGithub/../GHBackgroundQueue.m normal armv7 objective-c com.apple.compilers.llvmgcc42
-cCompileC build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv7/GHUser.o /Users/oliver/Development/iGithub/iGithub/../GHUser.m normal armv7 objective-c com.apple.compilers.llvmgcc42
-cCompileC build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv7/iGithubAppDelegate_iPhone.o /Users/oliver/Development/iGithub/iGithub/iPhone/iGithubAppDelegate_iPhone.m normal armv7 objective-c com.apple.compilers.llvmgcc42
-cLd /Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv6/iGithub normal armv6
-cLd /Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv7/iGithub normal armv7
-cCreateUniversalBinary /Users/oliver/Development/iGithub/build/Debug-iphoneos/iGithub.app/iGithub normal "armv6 armv7"
-cGenerateDSYMFile /Users/oliver/Development/iGithub/build/Debug-iphoneos/iGithub.app.dSYM /Users/oliver/Development/iGithub/build/Debug-iphoneos/iGithub.app/iGithub
-cCopyStringsFile /Users/oliver/Development/iGithub/build/Debug-iphoneos/iGithub.app/en.lproj/InfoPlist.strings iGithub/en.lproj/InfoPlist.strings
-cCompileXIB /Users/oliver/Development/iGithub/iGithub/iPhone/en.lproj/MainWindow_iPhone.xib
-cCompileXIB /Users/oliver/Development/iGithub/iGithub/iPad/en.lproj/MainWindow_iPad.xib
-cCopyPNGFile /Users/oliver/Development/iGithub/build/Debug-iphoneos/iGithub.app/DefaultUserImage.png iGithub/DefaultUserImage.png
-cCopyPNGFile /Users/oliver/Development/iGithub/build/Debug-iphoneos/iGithub.app/DefaultUserImage@2x.png iGithub/DefaultUserImage@2x.png
-cCompileXIB /Users/oliver/Development/iGithub/iGithub/../iGithub/GHAuthenticationViewController.xib
-cCopyPNGFile /Users/oliver/Development/iGithub/build/Debug-iphoneos/iGithub.app/GHGlossTopBorder@2x.png iGithub/GHGlossTopBorder@2x.png
-cCopyPNGFile /Users/oliver/Development/iGithub/build/Debug-iphoneos/iGithub.app/GHGlossBottomBorder@2x.png iGithub/GHGlossBottomBorder@2x.png
-cCopyPNGFile /Users/oliver/Development/iGithub/build/Debug-iphoneos/iGithub.app/GHGlossTopBorder.png iGithub/GHGlossTopBorder.png
-cCopyPNGFile /Users/oliver/Development/iGithub/build/Debug-iphoneos/iGithub.app/GHGlossBottomBorder.png iGithub/GHGlossBottomBorder.png
-cTouch /Users/oliver/Development/iGithub/build/Debug-iphoneos/iGithub.app
-cProcessProductPackaging /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/Entitlements.plist /Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub.xcent
-cCodeSign /Users/oliver/Development/iGithub/build/Debug-iphoneos/iGithub.app
-
-N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk
-c000000004D8BA2E20000000000000110
-t1300996834
-s272
-
-N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/Entitlements.plist
-c000000004D4F6A4700000000000001A7
-t1297050183
-s423
-
-N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/ResourceRules.plist
-c000000004D4F6A4700000000000001E5
-t1297050183
-s485
-
-N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/System/Library/Frameworks/CFNetwork.framework/CFNetwork
-c000000004D54D1B500000000002CAD60
-t1297404341
-s2927968
-
-N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/System/Library/Frameworks/CFNetwork.framework/Headers/CFNetwork.h
-c000000004D54D12700000000000004CF
-t1297404199
-s1231
-
-N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/System/Library/Frameworks/CoreFoundation.framework/Headers/CFArray.h
-c000000004D54CFAE0000000000007AC8
-t1297403822
-s31432
-
-N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/System/Library/Frameworks/CoreFoundation.framework/Headers/CFDictionary.h
-c000000004D54CFAE00000000000080D0
-t1297403822
-s32976
-
-N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/System/Library/Frameworks/CoreFoundation.framework/Headers/CFNumber.h
-c000000004D54CFAE0000000000000EDF
-t1297403822
-s3807
-
-N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/System/Library/Frameworks/CoreFoundation.framework/Headers/CFString.h
-c000000004D54CFAF000000000000B7CA
-t1297403823
-s47050
-
-N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/System/Library/Frameworks/CoreFoundation.framework/Headers/CoreFoundation.h
-c000000004D54CFAF0000000000000AB3
-t1297403823
-s2739
-
-N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/System/Library/Frameworks/CoreGraphics.framework/CoreGraphics
-c000000004D54D18C00000000003532A0
-t1297404300
-s3486368
-
-N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/System/Library/Frameworks/Foundation.framework/Foundation
-c000000004D54D1F500000000003E22F0
-t1297404405
-s4072176
-
-N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/System/Library/Frameworks/Foundation.framework/Headers/Foundation.h
-c000000004D54D1DD0000000000001466
-t1297404381
-s5222
-
-N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/System/Library/Frameworks/Foundation.framework/Headers/NSArray.h
-c000000004D54D1DD0000000000001B27
-t1297404381
-s6951
-
-N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/System/Library/Frameworks/Foundation.framework/Headers/NSAutoreleasePool.h
-c000000004D54D1DD00000000000001CB
-t1297404381
-s459
-
-N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/System/Library/Frameworks/Foundation.framework/Headers/NSData.h
-c000000004D54D1DD0000000000001777
-t1297404381
-s6007
-
-N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/System/Library/Frameworks/Foundation.framework/Headers/NSDictionary.h
-c000000004D54D1DD0000000000000E3B
-t1297404381
-s3643
-
-N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/System/Library/Frameworks/Foundation.framework/Headers/NSError.h
-c000000004D54D1DD0000000000001DE5
-t1297404381
-s7653
-
-N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/System/Library/Frameworks/Foundation.framework/Headers/NSException.h
-c000000004D54D1DD0000000000002033
-t1297404381
-s8243
-
-N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/System/Library/Frameworks/Foundation.framework/Headers/NSNull.h
-c000000004D54D1DD00000000000000B8
-t1297404381
-s184
-
-N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/System/Library/Frameworks/Foundation.framework/Headers/NSObjCRuntime.h
-c000000004D54D1DD0000000000002E87
-t1297404381
-s11911
-
-N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/System/Library/Frameworks/Foundation.framework/Headers/NSString.h
-c000000004D54D1DD0000000000006506
-t1297404381
-s25862
-
-N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/System/Library/Frameworks/MobileCoreServices.framework/Headers/MobileCoreServices.h
-c000000004D54D32C00000000000000EB
-t1297404716
-s235
-
-N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/System/Library/Frameworks/MobileCoreServices.framework/MobileCoreServices
-c000000004D54D32D0000000000094C50
-t1297404717
-s609360
-
-N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/System/Library/Frameworks/QuartzCore.framework/Headers/QuartzCore.h
-c000000004D54D49500000000000000C4
-t1297405077
-s196
-
-N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/System/Library/Frameworks/Security.framework/Headers/Security.h
-c000000004D54D09D00000000000004F5
-t1297404061
-s1269
-
-N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/System/Library/Frameworks/Security.framework/Security
-c000000004D54D0A600000000000CDED0
-t1297404070
-s843472
-
-N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/System/Library/Frameworks/SystemConfiguration.framework/Headers/SystemConfiguration.h
-c000000004D54D0D40000000000001A58
-t1297404116
-s6744
-
-N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/System/Library/Frameworks/SystemConfiguration.framework/SystemConfiguration
-c000000004D54D0E700000000000B0CA0
-t1297404135
-s724128
-
-N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/System/Library/Frameworks/UIKit.framework/Headers/UIKit.h
-c000000004D5A28AB0000000000000AA1
-t1297754283
-s2721
-
-N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/System/Library/Frameworks/UIKit.framework/UIKit
-c000000004D5A292A0000000000CA2AE0
-t1297754410
-s13249248
-
-N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/usr/include/Availability.h
-c000000004D4F74C20000000000001B19
-t1297052866
-s6937
-
-N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/usr/include/AvailabilityMacros.h
-c000000004D4F74C20000000000007A5E
-t1297052866
-s31326
-
-N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/usr/include/CommonCrypto/CommonHMAC.h
-c000000004D4F6E4A0000000000000DE2
-t1297051210
-s3554
-
-N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/usr/include/TargetConditionals.h
-c000000004D4F74C200000000000031E9
-t1297052866
-s12777
-
-N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/usr/include/arpa/inet.h
-c000000004D54C5330000000000001533
-t1297401139
-s5427
-
-N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/usr/include/assert.h
-c000000004D4F6E900000000000000F6E
-t1297051280
-s3950
-
-N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/usr/include/dispatch/dispatch.h
-c000000004D54C51D00000000000005E9
-t1297401117
-s1513
-
-N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/usr/include/ifaddrs.h
-c000000004D54C53300000000000008F5
-t1297401139
-s2293
-
-N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/usr/include/math.h
-c000000004D4F6E4300000000000004F1
-t1297051203
-s1265
-
-N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/usr/include/netdb.h
-c000000004D54C533000000000000307F
-t1297401139
-s12415
-
-N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/usr/include/netinet/in.h
-c000000004D54CB250000000000006BAC
-t1297402661
-s27564
-
-N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/usr/include/netinet6/in6.h
-c000000004D54CB24000000000000638F
-t1297402660
-s25487
-
-N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/usr/include/objc/runtime.h
-c000000004D54CADF00000000000063AF
-t1297402591
-s25519
-
-N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/usr/include/stdint.h
-c000000004D4F6E9000000000000018EF
-t1297051280
-s6383
-
-N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/usr/include/stdio.h
-c000000004D4F6E910000000000004763
-t1297051281
-s18275
-
-N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/usr/include/stdlib.h
-c000000004D4F6E9100000000000030A7
-t1297051281
-s12455
-
-N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/usr/include/string.h
-c000000004D4F6E910000000000001A3A
-t1297051281
-s6714
-
-N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/usr/include/sys/errno.h
-c000000004D54CB270000000000002A36
-t1297402663
-s10806
-
-N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/usr/include/sys/socket.h
-c000000004D54CB290000000000005ACF
-t1297402665
-s23247
-
-N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/usr/include/zlib.h
-c000000004D54C61500000000000102A5
-t1297401365
-s66213
-
-N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/usr/lib/libz.1.2.3.dylib
-c000000004D54C6160000000000020FE0
-t1297401366
-s135136
-
-N/Developer/Platforms/iPhoneOS.platform/Developer/usr/llvm-gcc-4.2/lib/gcc/arm-apple-darwin10/4.2.1/include/limits.h
-c000000004D54C8E30000000000000D03
-t1297402083
-s3331
-
-N/Developer/Platforms/iPhoneOS.platform/Developer/usr/llvm-gcc-4.2/lib/gcc/arm-apple-darwin10/4.2.1/include/stddef.h
-c000000004D54C8E30000000000003197
-t1297402083
-s12695
-
-N/Users/oliver/Development/iGithub/GHBackgroundQueue.h
-c000000004D92373000000000000001E8
-t1301428016
-s488
-i<Foundation/Foundation.h>
-i<dispatch/dispatch.h>
-
-N/Users/oliver/Development/iGithub/GHSettingsHelper.h
-c000000004D91DF530000000000000185
-t1301405523
-s389
-i<Foundation/Foundation.h>
-
-N/Users/oliver/Development/iGithub/GHUser.h
-c000000004D92D33600000000000009B4
-t1301467958
-s2484
-i<Foundation/Foundation.h>
-i<dispatch/dispatch.h>
-
-N/Users/oliver/Development/iGithub/GithubAPI.h
-c000000004D923B9700000000000000C5
-t1301429143
-s197
-i"GHBackgroundQueue.h"
-i"GHUser.h"
-i"JSONKit.h"
-
-N/Users/oliver/Development/iGithub/JSONKit/JSONKit.h
-c000000004D923B510000000000002D4A
-t1301429073
-s11594
-i<stddef.h>
-i<stdint.h>
-i<limits.h>
-i<TargetConditionals.h>
-i<AvailabilityMacros.h>
-i<Foundation/NSArray.h>
-i<Foundation/NSData.h>
-i<Foundation/NSDictionary.h>
-i<Foundation/NSError.h>
-i<Foundation/NSObjCRuntime.h>
-i<Foundation/NSString.h>
-
-N/Users/oliver/Development/iGithub/asi-http-request/Classes/ASIAuthenticationDialog.h
-c000000004D9247FF0000000000000453
-t1301432319
-s1107
-i<Foundation/Foundation.h>
-i<UIKit/UIKit.h>
-
-N/Users/oliver/Development/iGithub/asi-http-request/Classes/ASIAuthenticationDialog.m
-c000000004D9247FF0000000000003DED
-t1301432319
-s15853
-i"ASIAuthenticationDialog.h"
-i"ASIHTTPRequest.h"
-i<QuartzCore/QuartzCore.h>
-
-N/Users/oliver/Development/iGithub/asi-http-request/Classes/ASICacheDelegate.h
-c000000004D9247FF00000000000011D1
-t1301432319
-s4561
-i<Foundation/Foundation.h>
-
-N/Users/oliver/Development/iGithub/asi-http-request/Classes/ASIDataCompressor.h
-c000000004D9247FF000000000000072C
-t1301432319
-s1836
-i<Foundation/Foundation.h>
-i<zlib.h>
-
-N/Users/oliver/Development/iGithub/asi-http-request/Classes/ASIDataCompressor.m
-c000000004D9247FF0000000000001AAD
-t1301432319
-s6829
-i"ASIDataCompressor.h"
-i"ASIHTTPRequest.h"
-
-N/Users/oliver/Development/iGithub/asi-http-request/Classes/ASIDataDecompressor.h
-c000000004D9247FF00000000000006A3
-t1301432319
-s1699
-i<Foundation/Foundation.h>
-i<zlib.h>
-
-N/Users/oliver/Development/iGithub/asi-http-request/Classes/ASIDataDecompressor.m
-c000000004D9247FF0000000000001968
-t1301432319
-s6504
-i"ASIDataDecompressor.h"
-i"ASIHTTPRequest.h"
-
-N/Users/oliver/Development/iGithub/asi-http-request/Classes/ASIDownloadCache.h
-c000000004D9247FF0000000000000812
-t1301432319
-s2066
-i<Foundation/Foundation.h>
-i"ASICacheDelegate.h"
-
-N/Users/oliver/Development/iGithub/asi-http-request/Classes/ASIDownloadCache.m
-c000000004D924843000000000000420D
-t1301432387
-s16909
-i"ASIDownloadCache.h"
-i"ASIHTTPRequest.h"
-i<CommonCrypto/CommonHMAC.h>
-
-N/Users/oliver/Development/iGithub/asi-http-request/Classes/ASIFormDataRequest.h
-c000000004D9247FF0000000000000A6D
-t1301432319
-s2669
-i<Foundation/Foundation.h>
-i"ASIHTTPRequest.h"
-i"ASIHTTPRequestConfig.h"
-
-N/Users/oliver/Development/iGithub/asi-http-request/Classes/ASIFormDataRequest.m
-c000000004D9247FF0000000000002B6A
-t1301432319
-s11114
-i"ASIFormDataRequest.h"
-
-N/Users/oliver/Development/iGithub/asi-http-request/Classes/ASIHTTPRequest.h
-c000000004D9247FF000000000000AB64
-t1301432319
-s43876
-i<Foundation/Foundation.h>
-i<CFNetwork/CFNetwork.h>
-i<UIKit/UIKit.h>
-i<stdio.h>
-i"ASIHTTPRequestConfig.h"
-i"ASIHTTPRequestDelegate.h"
-i"ASIProgressDelegate.h"
-i"ASICacheDelegate.h"
-
-N/Users/oliver/Development/iGithub/asi-http-request/Classes/ASIHTTPRequest.m
-c000000004D9247FF000000000002A041
-t1301432319
-s172097
-i"ASIHTTPRequest.h"
-i"Reachability.h"
-i"ASIAuthenticationDialog.h"
-i<MobileCoreServices/MobileCoreServices.h>
-i<SystemConfiguration/SystemConfiguration.h>
-i"ASIInputStream.h"
-i"ASIDataDecompressor.h"
-i"ASIDataCompressor.h"
-
-N/Users/oliver/Development/iGithub/asi-http-request/Classes/ASIHTTPRequestConfig.h
-c000000004D9247FF00000000000003B0
-t1301432319
-s944
-
-N/Users/oliver/Development/iGithub/asi-http-request/Classes/ASIHTTPRequestDelegate.h
-c000000004D9247FF000000000000063E
-t1301432319
-s1598
-
-N/Users/oliver/Development/iGithub/asi-http-request/Classes/ASIInputStream.h
-c000000004D9247FF00000000000003C9
-t1301432319
-s969
-i<Foundation/Foundation.h>
-
-N/Users/oliver/Development/iGithub/asi-http-request/Classes/ASIInputStream.m
-c000000004D9247FF0000000000000C14
-t1301432319
-s3092
-i"ASIInputStream.h"
-i"ASIHTTPRequest.h"
-
-N/Users/oliver/Development/iGithub/asi-http-request/Classes/ASINetworkQueue.h
-c000000004D9247FF000000000000120D
-t1301432319
-s4621
-i<Foundation/Foundation.h>
-i"ASIHTTPRequestDelegate.h"
-i"ASIProgressDelegate.h"
-
-N/Users/oliver/Development/iGithub/asi-http-request/Classes/ASINetworkQueue.m
-c000000004D9247FF0000000000002C8D
-t1301432319
-s11405
-i"ASINetworkQueue.h"
-i"ASIHTTPRequest.h"
-
-N/Users/oliver/Development/iGithub/asi-http-request/Classes/ASIProgressDelegate.h
-c000000004D9247FF0000000000000678
-t1301432319
-s1656
-
-N/Users/oliver/Development/iGithub/asi-http-request/External/Reachability/Reachability.h
-c000000004D9247FF0000000000001D0E
-t1301432319
-s7438
-i<Foundation/Foundation.h>
-i<SystemConfiguration/SystemConfiguration.h>
-
-N/Users/oliver/Development/iGithub/build/Debug-iphoneos/iGithub.app
-t1301468317
-s544
-
-N/Users/oliver/Development/iGithub/build/Debug-iphoneos/iGithub.app.dSYM
-t1301468317
-s102
-
-N/Users/oliver/Development/iGithub/build/Debug-iphoneos/iGithub.app/DefaultUserImage.png
-t1301468157
-s3238
-
-N/Users/oliver/Development/iGithub/build/Debug-iphoneos/iGithub.app/DefaultUserImage@2x.png
-t1301468157
-s2152
-
-N/Users/oliver/Development/iGithub/build/Debug-iphoneos/iGithub.app/GHAuthenticationViewController.nib
-t1301468157
-s3302
-
-N/Users/oliver/Development/iGithub/build/Debug-iphoneos/iGithub.app/GHGlossBottomBorder.png
-t1301468157
-s7663
-
-N/Users/oliver/Development/iGithub/build/Debug-iphoneos/iGithub.app/GHGlossBottomBorder@2x.png
-t1301468157
-s18377
-
-N/Users/oliver/Development/iGithub/build/Debug-iphoneos/iGithub.app/GHGlossTopBorder.png
-t1301468157
-s2349
-
-N/Users/oliver/Development/iGithub/build/Debug-iphoneos/iGithub.app/GHGlossTopBorder@2x.png
-t1301468157
-s4108
-
-N/Users/oliver/Development/iGithub/build/Debug-iphoneos/iGithub.app/Info.plist
-t1301468147
-s1205
-
-N/Users/oliver/Development/iGithub/build/Debug-iphoneos/iGithub.app/PkgInfo
-t1301468147
-s8
-
-N/Users/oliver/Development/iGithub/build/Debug-iphoneos/iGithub.app/ResourceRules.plist
-t1301468147
-s485
-
-N/Users/oliver/Development/iGithub/build/Debug-iphoneos/iGithub.app/en.lproj/InfoPlist.strings
-t1301468155
-s42
-
-N/Users/oliver/Development/iGithub/build/Debug-iphoneos/iGithub.app/en.lproj/MainWindow_iPad.nib
-t1301468156
-s2269
-
-N/Users/oliver/Development/iGithub/build/Debug-iphoneos/iGithub.app/en.lproj/MainWindow_iPhone.nib
-t1301468156
-s2272
-
-N/Users/oliver/Development/iGithub/build/Debug-iphoneos/iGithub.app/iGithub
-t1301468316
-s1168768
-
-N/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv6/ASIAuthenticationDialog.o
-t1301468149
-s98412
-
-N/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv6/ASIDataCompressor.o
-t1301468150
-s20584
-
-N/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv6/ASIDataDecompressor.o
-t1301468150
-s20556
-
-N/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv6/ASIDownloadCache.o
-t1301468150
-s57228
-
-N/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv6/ASIFormDataRequest.o
-t1301468150
-s42524
-
-N/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv6/ASIHTTPRequest.o
-t1301468152
-s465888
-
-N/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv6/ASIInputStream.o
-t1301468150
-s25204
-
-N/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv6/ASINetworkQueue.o
-t1301468151
-s57984
-
-N/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv6/GHAuthenticationViewController.o
-t1301468149
-s78408
-
-N/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv6/GHBackgroundQueue.o
-t1301468149
-s11564
-
-N/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv6/GHSettingsHelper.o
-t1301468149
-s7540
-
-N/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv6/GHUser.o
-t1301468316
-s56784
-
-N/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv6/JSONKit.o
-t1301468150
-s227308
-
-N/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv6/Reachability.o
-t1301468151
-s33232
-
-N/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv6/SFHFKeychainUtils.o
-t1301468149
-s15748
-
-N/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv6/UITableViewCellWithTextField.o
-t1301468149
-s43528
-
-N/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv6/iGithub
-t1301468316
-s558956
-
-N/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv6/iGithub.LinkFileList
-c000000004D92D3F300000000000009AF
-t1301468147
-s2479
-
-N/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv6/iGithubAppDelegate.o
-t1301468148
-s46836
-
-N/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv6/iGithubAppDelegate_iPad.o
-t1301468148
-s5008
-
-N/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv6/iGithubAppDelegate_iPhone.o
-t1301468148
-s48344
-
-N/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv6/main.o
-t1301468148
-s3892
-
-N/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv7/ASIAuthenticationDialog.o
-t1301468153
-s98192
-
-N/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv7/ASIDataCompressor.o
-t1301468153
-s20808
-
-N/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv7/ASIDataDecompressor.o
-t1301468153
-s20892
-
-N/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv7/ASIDownloadCache.o
-t1301468153
-s58056
-
-N/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv7/ASIFormDataRequest.o
-t1301468153
-s43196
-
-N/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv7/ASIHTTPRequest.o
-t1301468155
-s463084
-
-N/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv7/ASIInputStream.o
-t1301468154
-s25188
-
-N/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv7/ASINetworkQueue.o
-t1301468154
-s58224
-
-N/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv7/GHAuthenticationViewController.o
-t1301468151
-s78820
-
-N/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv7/GHBackgroundQueue.o
-t1301468152
-s11676
-
-N/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv7/GHSettingsHelper.o
-t1301468151
-s7572
-
-N/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv7/GHUser.o
-t1301468316
-s56960
-
-N/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv7/JSONKit.o
-t1301468153
-s243372
-
-N/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv7/Reachability.o
-t1301468154
-s34320
-
-N/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv7/SFHFKeychainUtils.o
-t1301468151
-s15892
-
-N/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv7/UITableViewCellWithTextField.o
-t1301468151
-s43548
-
-N/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv7/iGithub
-t1301468316
-s586680
-
-N/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv7/iGithub.LinkFileList
-c000000004D92D3F300000000000009AF
-t1301468147
-s2479
-
-N/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv7/iGithubAppDelegate.o
-t1301468148
-s46772
-
-N/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv7/iGithubAppDelegate_iPad.o
-t1301468151
-s5008
-
-N/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv7/iGithubAppDelegate_iPhone.o
-t1301468148
-s48416
-
-N/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv7/main.o
-t1301468148
-s3904
-
-N/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub.xcent
-t1301468157
-s354
-
-N/Users/oliver/Development/iGithub/iGithub/../GHBackgroundQueue.m
-c000000004D92374E0000000000000549
-t1301428046
-s1353
-i"GHBackgroundQueue.h"
-
-N/Users/oliver/Development/iGithub/iGithub/../GHSettingsHelper.h
-c000000004D91DF530000000000000185
-t1301405523
-s389
-i<Foundation/Foundation.h>
-
-N/Users/oliver/Development/iGithub/iGithub/../GHSettingsHelper.m
-c000000004D91DF6500000000000004CE
-t1301405541
-s1230
-i"GHSettingsHelper.h"
-i"SFHFKeychainUtils.h"
-
-N/Users/oliver/Development/iGithub/iGithub/../GHUser.m
-c000000004D92D49A00000000000020A2
-t1301468314
-s8354
-i"GHUser.h"
-i"GithubAPI.h"
-i"ASIHTTPRequest.h"
-
-N/Users/oliver/Development/iGithub/iGithub/../GithubAPI.h
-c000000004D923B9700000000000000C5
-t1301429143
-s197
-i"GHBackgroundQueue.h"
-i"GHUser.h"
-i"JSONKit.h"
-
-N/Users/oliver/Development/iGithub/iGithub/../JSONKit/JSONKit.h
-c000000004D923B510000000000002D4A
-t1301429073
-s11594
-i<stddef.h>
-i<stdint.h>
-i<limits.h>
-i<TargetConditionals.h>
-i<AvailabilityMacros.h>
-i<Foundation/NSArray.h>
-i<Foundation/NSData.h>
-i<Foundation/NSDictionary.h>
-i<Foundation/NSError.h>
-i<Foundation/NSObjCRuntime.h>
-i<Foundation/NSString.h>
-
-N/Users/oliver/Development/iGithub/iGithub/../JSONKit/JSONKit.m
-c000000004D923B51000000000002A6F5
-t1301429073
-s173813
-i<stdio.h>
-i<stdlib.h>
-i<stdint.h>
-i<string.h>
-i<assert.h>
-i<sys/errno.h>
-i<math.h>
-i<limits.h>
-i<objc/runtime.h>
-i"JSONKit.h"
-i<CoreFoundation/CFString.h>
-i<CoreFoundation/CFArray.h>
-i<CoreFoundation/CFDictionary.h>
-i<CoreFoundation/CFNumber.h>
-i<Foundation/NSArray.h>
-i<Foundation/NSAutoreleasePool.h>
-i<Foundation/NSData.h>
-i<Foundation/NSDictionary.h>
-i<Foundation/NSException.h>
-i<Foundation/NSNull.h>
-i<Foundation/NSObjCRuntime.h>
-
-N/Users/oliver/Development/iGithub/iGithub/../asi-http-request/External/Reachability/Reachability.h
-c000000004D9247FF0000000000001D0E
-t1301432319
-s7438
-i<Foundation/Foundation.h>
-i<SystemConfiguration/SystemConfiguration.h>
-
-N/Users/oliver/Development/iGithub/iGithub/../asi-http-request/External/Reachability/Reachability.m
-c000000004D9247FF0000000000005E0C
-t1301432319
-s24076
-i<sys/socket.h>
-i<netinet/in.h>
-i<netinet6/in6.h>
-i<arpa/inet.h>
-i<ifaddrs.h>
-i<netdb.h>
-i<CoreFoundation/CoreFoundation.h>
-i"Reachability.h"
-
-N/Users/oliver/Development/iGithub/iGithub/../iGithub/GHAuthenticationViewController.h
-c000000004D92D21C00000000000004AA
-t1301467676
-s1194
-i<UIKit/UIKit.h>
-i"UITableViewCellWithTextField.h"
-
-N/Users/oliver/Development/iGithub/iGithub/../iGithub/GHAuthenticationViewController.m
-c000000004D92D266000000000000253F
-t1301467750
-s9535
-i"GHAuthenticationViewController.h"
-i"GHSettingsHelper.h"
-i"GithubAPI.h"
-i<QuartzCore/QuartzCore.h>
-
-N/Users/oliver/Development/iGithub/iGithub/../iGithub/GHAuthenticationViewController.xib
-c000000004D92CDF80000000000004309
-t1301466616
-s17161
-
-N/Users/oliver/Development/iGithub/iGithub/../iGithub/SFHFKeychainUtils.m
-c000000004D7FB2D60000000000003A97
-t1300214486
-s14999
-i"SFHFKeychainUtils.h"
-i<Security/Security.h>
-
-N/Users/oliver/Development/iGithub/iGithub/../iGithub/UITableViewCellWithTextField.m
-c000000004D23651C000000000000052B
-t1294165276
-s1323
-i"UITableViewCellWithTextField.h"
-
-N/Users/oliver/Development/iGithub/iGithub/DefaultUserImage.png
-c000000004D91E0FB0000000000000DDB
-t1301405947
-s3547
-
-N/Users/oliver/Development/iGithub/iGithub/DefaultUserImage@2x.png
-c000000004D91E0CC00000000000007A2
-t1301405900
-s1954
-
-N/Users/oliver/Development/iGithub/iGithub/GHAuthenticationViewController.h
-c000000004D92D21C00000000000004AA
-t1301467676
-s1194
-i<UIKit/UIKit.h>
-i"UITableViewCellWithTextField.h"
-
-N/Users/oliver/Development/iGithub/iGithub/GHGlossBottomBorder.png
-c000000004D92CB9D000000000000223C
-t1301466013
-s8764
-
-N/Users/oliver/Development/iGithub/iGithub/GHGlossBottomBorder@2x.png
-c000000004D92CB8A0000000000003CA6
-t1301465994
-s15526
-
-N/Users/oliver/Development/iGithub/iGithub/GHGlossTopBorder.png
-c000000004D92CB9D0000000000000889
-t1301466013
-s2185
-
-N/Users/oliver/Development/iGithub/iGithub/GHGlossTopBorder@2x.png
-c000000004D92CB790000000000000B41
-t1301465977
-s2881
-
-N/Users/oliver/Development/iGithub/iGithub/SFHFKeychainUtils.h
-c000000004D7FB2D6000000000000071E
-t1300214486
-s1822
-i<UIKit/UIKit.h>
-
-N/Users/oliver/Development/iGithub/iGithub/UITableViewCellWithTextField.h
-c000000004D23651C000000000000028C
-t1294165276
-s652
-i<UIKit/UIKit.h>
-
-N/Users/oliver/Development/iGithub/iGithub/en.lproj/InfoPlist.strings
-c000000004D91DD1C000000000000002D
-t1301404956
-s45
-
-N/Users/oliver/Development/iGithub/iGithub/iGithub-Prefix.pch
-c000000004D91E3F20000000000000218
-t1301406706
-s536
-i<Availability.h>
-i<UIKit/UIKit.h>
-i<Foundation/Foundation.h>
-
-N/Users/oliver/Development/iGithub/iGithub/iGithubAppDelegate.h
-c000000004D91DD1C0000000000000128
-t1301404956
-s296
-i<UIKit/UIKit.h>
-
-N/Users/oliver/Development/iGithub/iGithub/iGithubAppDelegate.m
-c000000004D92D30B00000000000008AA
-t1301467915
-s2218
-i"iGithubAppDelegate.h"
-
-N/Users/oliver/Development/iGithub/iGithub/iPad/en.lproj/MainWindow_iPad.xib
-c000000004D91DD1C0000000000003F0B
-t1301404956
-s16139
-
-N/Users/oliver/Development/iGithub/iGithub/iPad/iGithubAppDelegate_iPad.h
-c000000004D91DD1C000000000000010D
-t1301404956
-s269
-i<UIKit/UIKit.h>
-i"iGithubAppDelegate.h"
-
-N/Users/oliver/Development/iGithub/iGithub/iPad/iGithubAppDelegate_iPad.m
-c000000004D91DD1C0000000000000108
-t1301404956
-s264
-i"iGithubAppDelegate_iPad.h"
-
-N/Users/oliver/Development/iGithub/iGithub/iPhone/en.lproj/MainWindow_iPhone.xib
-c000000004D91DD1C00000000000040FD
-t1301404956
-s16637
-
-N/Users/oliver/Development/iGithub/iGithub/iPhone/iGithubAppDelegate_iPhone.h
-c000000004D91E03F00000000000001D0
-t1301405759
-s464
-i<UIKit/UIKit.h>
-i"iGithubAppDelegate.h"
-i"GHAuthenticationViewController.h"
-
-N/Users/oliver/Development/iGithub/iGithub/iPhone/iGithubAppDelegate_iPhone.m
-c000000004D92D3AF0000000000000669
-t1301468079
-s1641
-i"iGithubAppDelegate_iPhone.h"
-i"GHSettingsHelper.h"
-i"GithubAPI.h"
-
-N/Users/oliver/Development/iGithub/iGithub/main.m
-c000000004D91DD1C000000000000015A
-t1301404956
-s346
-i<UIKit/UIKit.h>
-
-N/var/folders/vP/vPS9LckaF3a+SXfRwj19bU+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/iGithub-Prefix-aojnksylhodcwkhawsnikbpmbcee/iGithub-Prefix.pch.gch
-t1301468148
-s7939996
-
-N/var/folders/vP/vPS9LckaF3a+SXfRwj19bU+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/iGithub-Prefix-eyxefnbkrszrqqhjgjitjtbkalmg/iGithub-Prefix.pch.gch
-t1301468148
-s8435612
-
-NiGithub/iGithub-Info.plist
-c000000004D91DD1C000000000000060C
-t1301404956
-s1548
-
-CBuild AST from /Users/oliver/Development/iGithub/asi-http-request/Classes/ASIAuthenticationDialog.m
-r0
-
-CBuild AST from /Users/oliver/Development/iGithub/asi-http-request/Classes/ASIDataCompressor.m
-r0
-
-CBuild AST from /Users/oliver/Development/iGithub/asi-http-request/Classes/ASIDataDecompressor.m
-r0
-
-CBuild AST from /Users/oliver/Development/iGithub/asi-http-request/Classes/ASIDownloadCache.m
-r0
-
-CBuild AST from /Users/oliver/Development/iGithub/asi-http-request/Classes/ASIFormDataRequest.m
-r0
-
-CBuild AST from /Users/oliver/Development/iGithub/asi-http-request/Classes/ASIHTTPRequest.m
-r0
-
-CBuild AST from /Users/oliver/Development/iGithub/asi-http-request/Classes/ASIInputStream.m
-r0
-
-CBuild AST from /Users/oliver/Development/iGithub/asi-http-request/Classes/ASINetworkQueue.m
-r0
-
-CBuild AST from /Users/oliver/Development/iGithub/iGithub/../GHBackgroundQueue.m
-r0
-
-CBuild AST from /Users/oliver/Development/iGithub/iGithub/../GHSettingsHelper.m
-r0
-
-CBuild AST from /Users/oliver/Development/iGithub/iGithub/../GHUser.m
-r0
-
-CBuild AST from /Users/oliver/Development/iGithub/iGithub/../JSONKit/JSONKit.m
-r0
-
-CBuild AST from /Users/oliver/Development/iGithub/iGithub/../asi-http-request/External/Reachability/Reachability.m
-r0
-
-CBuild AST from /Users/oliver/Development/iGithub/iGithub/../iGithub/GHAuthenticationViewController.m
-r0
-
-CBuild AST from /Users/oliver/Development/iGithub/iGithub/../iGithub/SFHFKeychainUtils.m
-r0
-
-CBuild AST from /Users/oliver/Development/iGithub/iGithub/../iGithub/UITableViewCellWithTextField.m
-r0
-
-CBuild AST from /Users/oliver/Development/iGithub/iGithub/iGithubAppDelegate.m
-r0
-
-CBuild AST from /Users/oliver/Development/iGithub/iGithub/iPad/iGithubAppDelegate_iPad.m
-r0
-
-CBuild AST from /Users/oliver/Development/iGithub/iGithub/iPhone/iGithubAppDelegate_iPhone.m
-r0
-
-CBuild AST from /Users/oliver/Development/iGithub/iGithub/main.m
-r0
-
-CCheck dependencies
-r0
-lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection18"Check dependenciesc38029300c43b341^4ad132300c43b341^---0#1#0#--18"Check dependencies
-
-CCodeSign /Users/oliver/Development/iGithub/build/Debug-iphoneos/iGithub.app
-s323161117.077173
-e323161117.372300
-r1
-xCodeSign
-x/Users/oliver/Development/iGithub/build/Debug-iphoneos/iGithub.app
-lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection41"CodeSign build/Debug-iphoneos/iGithub.app9dd4131d0c43b341^ba4e5f1d0c43b341^---0#0#0#-19%DVTDocumentLocation2@83"file://localhost/Users/oliver/Development/iGithub/build/Debug-iphoneos/iGithub.app/0000000000000000^643"CodeSign build/Debug-iphoneos/iGithub.app    cd /Users/oliver/Development/iGithub    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    setenv _CODESIGN_ALLOCATE_ /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/codesign_allocate    /usr/bin/codesign -f -s "iPhone Developer" --resource-rules=/Users/oliver/Development/iGithub/build/Debug-iphoneos/iGithub.app/ResourceRules.plist --entitlements /Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub.xcent /Users/oliver/Development/iGithub/build/Debug-iphoneos/iGithub.app
-
-CCompileC build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv6/ASIAuthenticationDialog.o /Users/oliver/Development/iGithub/asi-http-request/Classes/ASIAuthenticationDialog.m normal armv6 objective-c com.apple.compilers.llvmgcc42
-s323160949.590517
-e323160949.907719
-r1
-xCompileC
-xbuild/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv6/ASIAuthenticationDialog.o
-x/Users/oliver/Development/iGithub/asi-http-request/Classes/ASIAuthenticationDialog.m
-xnormal
-xarmv6
-xobjective-c
-xcom.apple.compilers.llvmgcc42
-lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection92"Compile /Users/oliver/Development/iGithub/asi-http-request/Classes/ASIAuthenticationDialog.m1f4b97750b43b341^d05fe8750b43b341^---0#0#0#-19%DVTDocumentLocation2@100"file://localhost/Users/oliver/Development/iGithub/asi-http-request/Classes/ASIAuthenticationDialog.m0000000000000000^1938"CompileC build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv6/ASIAuthenticationDialog.o asi-http-request/Classes/ASIAuthenticationDialog.m normal armv6 objective-c com.apple.compilers.llvmgcc42    cd /Users/oliver/Development/iGithub    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/llvm-gcc-4.2 -x objective-c -arch armv6 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -DDEBUG -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk -gdwarf-2 -mthumb -miphoneos-version-min=4.0 -iquote /Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-generated-files.hmap -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-own-target-headers.hmap -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-all-target-headers.hmap -iquote /Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-project-headers.hmap -I/Users/oliver/Development/iGithub/build/Debug-iphoneos/include -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/DerivedSources/armv6 -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/DerivedSources -F/Users/oliver/Development/iGithub/build/Debug-iphoneos -include /var/folders/vP/vPS9LckaF3a+SXfRwj19bU+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/iGithub-Prefix-aojnksylhodcwkhawsnikbpmbcee/iGithub-Prefix.pch -c /Users/oliver/Development/iGithub/asi-http-request/Classes/ASIAuthenticationDialog.m -o /Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv6/ASIAuthenticationDialog.o
-
-CCompileC build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv6/ASIDataCompressor.o /Users/oliver/Development/iGithub/asi-http-request/Classes/ASIDataCompressor.m normal armv6 objective-c com.apple.compilers.llvmgcc42
-s323160949.908798
-e323160950.048915
-r1
-xCompileC
-xbuild/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv6/ASIDataCompressor.o
-x/Users/oliver/Development/iGithub/asi-http-request/Classes/ASIDataCompressor.m
-xnormal
-xarmv6
-xobjective-c
-xcom.apple.compilers.llvmgcc42
-lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection86"Compile /Users/oliver/Development/iGithub/asi-http-request/Classes/ASIDataCompressor.m65c5e8750b43b341^5e850c760b43b341^---0#0#0#-19%DVTDocumentLocation2@94"file://localhost/Users/oliver/Development/iGithub/asi-http-request/Classes/ASIDataCompressor.m0000000000000000^1914"CompileC build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv6/ASIDataCompressor.o asi-http-request/Classes/ASIDataCompressor.m normal armv6 objective-c com.apple.compilers.llvmgcc42    cd /Users/oliver/Development/iGithub    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/llvm-gcc-4.2 -x objective-c -arch armv6 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -DDEBUG -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk -gdwarf-2 -mthumb -miphoneos-version-min=4.0 -iquote /Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-generated-files.hmap -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-own-target-headers.hmap -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-all-target-headers.hmap -iquote /Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-project-headers.hmap -I/Users/oliver/Development/iGithub/build/Debug-iphoneos/include -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/DerivedSources/armv6 -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/DerivedSources -F/Users/oliver/Development/iGithub/build/Debug-iphoneos -include /var/folders/vP/vPS9LckaF3a+SXfRwj19bU+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/iGithub-Prefix-aojnksylhodcwkhawsnikbpmbcee/iGithub-Prefix.pch -c /Users/oliver/Development/iGithub/asi-http-request/Classes/ASIDataCompressor.m -o /Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv6/ASIDataCompressor.o
-
-CCompileC build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv6/ASIDataDecompressor.o /Users/oliver/Development/iGithub/asi-http-request/Classes/ASIDataDecompressor.m normal armv6 objective-c com.apple.compilers.llvmgcc42
-s323160950.049152
-e323160950.192129
-r1
-xCompileC
-xbuild/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv6/ASIDataDecompressor.o
-x/Users/oliver/Development/iGithub/asi-http-request/Classes/ASIDataDecompressor.m
-xnormal
-xarmv6
-xobjective-c
-xcom.apple.compilers.llvmgcc42
-lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection88"Compile /Users/oliver/Development/iGithub/asi-http-request/Classes/ASIDataDecompressor.m20b60c760b43b341^d82e31760b43b341^---0#0#0#-19%DVTDocumentLocation2@96"file://localhost/Users/oliver/Development/iGithub/asi-http-request/Classes/ASIDataDecompressor.m0000000000000000^1922"CompileC build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv6/ASIDataDecompressor.o asi-http-request/Classes/ASIDataDecompressor.m normal armv6 objective-c com.apple.compilers.llvmgcc42    cd /Users/oliver/Development/iGithub    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/llvm-gcc-4.2 -x objective-c -arch armv6 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -DDEBUG -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk -gdwarf-2 -mthumb -miphoneos-version-min=4.0 -iquote /Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-generated-files.hmap -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-own-target-headers.hmap -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-all-target-headers.hmap -iquote /Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-project-headers.hmap -I/Users/oliver/Development/iGithub/build/Debug-iphoneos/include -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/DerivedSources/armv6 -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/DerivedSources -F/Users/oliver/Development/iGithub/build/Debug-iphoneos -include /var/folders/vP/vPS9LckaF3a+SXfRwj19bU+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/iGithub-Prefix-aojnksylhodcwkhawsnikbpmbcee/iGithub-Prefix.pch -c /Users/oliver/Development/iGithub/asi-http-request/Classes/ASIDataDecompressor.m -o /Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv6/ASIDataDecompressor.o
-
-CCompileC build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv6/ASIDownloadCache.o /Users/oliver/Development/iGithub/asi-http-request/Classes/ASIDownloadCache.m normal armv6 objective-c com.apple.compilers.llvmgcc42
-s323160950.192372
-e323160950.466017
-r1
-xCompileC
-xbuild/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv6/ASIDownloadCache.o
-x/Users/oliver/Development/iGithub/asi-http-request/Classes/ASIDownloadCache.m
-xnormal
-xarmv6
-xobjective-c
-xcom.apple.compilers.llvmgcc42
-lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection85"Compile /Users/oliver/Development/iGithub/asi-http-request/Classes/ASIDownloadCache.m0f6031760b43b341^6e4c77760b43b341^---0#0#0#-19%DVTDocumentLocation2@93"file://localhost/Users/oliver/Development/iGithub/asi-http-request/Classes/ASIDownloadCache.m0000000000000000^1910"CompileC build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv6/ASIDownloadCache.o asi-http-request/Classes/ASIDownloadCache.m normal armv6 objective-c com.apple.compilers.llvmgcc42    cd /Users/oliver/Development/iGithub    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/llvm-gcc-4.2 -x objective-c -arch armv6 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -DDEBUG -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk -gdwarf-2 -mthumb -miphoneos-version-min=4.0 -iquote /Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-generated-files.hmap -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-own-target-headers.hmap -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-all-target-headers.hmap -iquote /Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-project-headers.hmap -I/Users/oliver/Development/iGithub/build/Debug-iphoneos/include -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/DerivedSources/armv6 -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/DerivedSources -F/Users/oliver/Development/iGithub/build/Debug-iphoneos -include /var/folders/vP/vPS9LckaF3a+SXfRwj19bU+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/iGithub-Prefix-aojnksylhodcwkhawsnikbpmbcee/iGithub-Prefix.pch -c /Users/oliver/Development/iGithub/asi-http-request/Classes/ASIDownloadCache.m -o /Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv6/ASIDownloadCache.o
-
-CCompileC build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv6/ASIFormDataRequest.o /Users/oliver/Development/iGithub/asi-http-request/Classes/ASIFormDataRequest.m normal armv6 objective-c com.apple.compilers.llvmgcc42
-s323160950.466264
-e323160950.686557
-r1
-xCompileC
-xbuild/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv6/ASIFormDataRequest.o
-x/Users/oliver/Development/iGithub/asi-http-request/Classes/ASIFormDataRequest.m
-xnormal
-xarmv6
-xobjective-c
-xcom.apple.compilers.llvmgcc42
-lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection87"Compile /Users/oliver/Development/iGithub/asi-http-request/Classes/ASIFormDataRequest.m787c77760b43b341^75caaf760b43b341^---0#0#0#-19%DVTDocumentLocation2@95"file://localhost/Users/oliver/Development/iGithub/asi-http-request/Classes/ASIFormDataRequest.m0000000000000000^1918"CompileC build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv6/ASIFormDataRequest.o asi-http-request/Classes/ASIFormDataRequest.m normal armv6 objective-c com.apple.compilers.llvmgcc42    cd /Users/oliver/Development/iGithub    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/llvm-gcc-4.2 -x objective-c -arch armv6 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -DDEBUG -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk -gdwarf-2 -mthumb -miphoneos-version-min=4.0 -iquote /Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-generated-files.hmap -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-own-target-headers.hmap -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-all-target-headers.hmap -iquote /Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-project-headers.hmap -I/Users/oliver/Development/iGithub/build/Debug-iphoneos/include -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/DerivedSources/armv6 -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/DerivedSources -F/Users/oliver/Development/iGithub/build/Debug-iphoneos -include /var/folders/vP/vPS9LckaF3a+SXfRwj19bU+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/iGithub-Prefix-aojnksylhodcwkhawsnikbpmbcee/iGithub-Prefix.pch -c /Users/oliver/Development/iGithub/asi-http-request/Classes/ASIFormDataRequest.m -o /Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv6/ASIFormDataRequest.o
-
-CCompileC build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv6/ASIHTTPRequest.o /Users/oliver/Development/iGithub/asi-http-request/Classes/ASIHTTPRequest.m normal armv6 objective-c com.apple.compilers.llvmgcc42
-s323160950.612981
-e323160952.837026
-r1
-xCompileC
-xbuild/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv6/ASIHTTPRequest.o
-x/Users/oliver/Development/iGithub/asi-http-request/Classes/ASIHTTPRequest.m
-xnormal
-xarmv6
-xobjective-c
-xcom.apple.compilers.llvmgcc42
-lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection83"Compile /Users/oliver/Development/iGithub/asi-http-request/Classes/ASIHTTPRequest.m840f9d760b43b341^124fd6780b43b341^---0#0#0#-19%DVTDocumentLocation2@91"file://localhost/Users/oliver/Development/iGithub/asi-http-request/Classes/ASIHTTPRequest.m0000000000000000^1902"CompileC build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv6/ASIHTTPRequest.o asi-http-request/Classes/ASIHTTPRequest.m normal armv6 objective-c com.apple.compilers.llvmgcc42    cd /Users/oliver/Development/iGithub    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/llvm-gcc-4.2 -x objective-c -arch armv6 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -DDEBUG -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk -gdwarf-2 -mthumb -miphoneos-version-min=4.0 -iquote /Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-generated-files.hmap -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-own-target-headers.hmap -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-all-target-headers.hmap -iquote /Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-project-headers.hmap -I/Users/oliver/Development/iGithub/build/Debug-iphoneos/include -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/DerivedSources/armv6 -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/DerivedSources -F/Users/oliver/Development/iGithub/build/Debug-iphoneos -include /var/folders/vP/vPS9LckaF3a+SXfRwj19bU+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/iGithub-Prefix-aojnksylhodcwkhawsnikbpmbcee/iGithub-Prefix.pch -c /Users/oliver/Development/iGithub/asi-http-request/Classes/ASIHTTPRequest.m -o /Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv6/ASIHTTPRequest.o
-
-CCompileC build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv6/ASIInputStream.o /Users/oliver/Development/iGithub/asi-http-request/Classes/ASIInputStream.m normal armv6 objective-c com.apple.compilers.llvmgcc42
-s323160950.686969
-e323160950.811505
-r1
-xCompileC
-xbuild/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv6/ASIInputStream.o
-x/Users/oliver/Development/iGithub/asi-http-request/Classes/ASIInputStream.m
-xnormal
-xarmv6
-xobjective-c
-xcom.apple.compilers.llvmgcc42
-lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection83"Compile /Users/oliver/Development/iGithub/asi-http-request/Classes/ASIInputStream.m4e09b0760b43b341^fcc6cf760b43b341^---0#0#0#-19%DVTDocumentLocation2@91"file://localhost/Users/oliver/Development/iGithub/asi-http-request/Classes/ASIInputStream.m0000000000000000^1902"CompileC build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv6/ASIInputStream.o asi-http-request/Classes/ASIInputStream.m normal armv6 objective-c com.apple.compilers.llvmgcc42    cd /Users/oliver/Development/iGithub    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/llvm-gcc-4.2 -x objective-c -arch armv6 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -DDEBUG -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk -gdwarf-2 -mthumb -miphoneos-version-min=4.0 -iquote /Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-generated-files.hmap -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-own-target-headers.hmap -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-all-target-headers.hmap -iquote /Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-project-headers.hmap -I/Users/oliver/Development/iGithub/build/Debug-iphoneos/include -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/DerivedSources/armv6 -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/DerivedSources -F/Users/oliver/Development/iGithub/build/Debug-iphoneos -include /var/folders/vP/vPS9LckaF3a+SXfRwj19bU+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/iGithub-Prefix-aojnksylhodcwkhawsnikbpmbcee/iGithub-Prefix.pch -c /Users/oliver/Development/iGithub/asi-http-request/Classes/ASIInputStream.m -o /Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv6/ASIInputStream.o
-
-CCompileC build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv6/ASINetworkQueue.o /Users/oliver/Development/iGithub/asi-http-request/Classes/ASINetworkQueue.m normal armv6 objective-c com.apple.compilers.llvmgcc42
-s323160950.812123
-e323160951.043381
-r1
-xCompileC
-xbuild/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv6/ASINetworkQueue.o
-x/Users/oliver/Development/iGithub/asi-http-request/Classes/ASINetworkQueue.m
-xnormal
-xarmv6
-xobjective-c
-xcom.apple.compilers.llvmgcc42
-lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection84"Compile /Users/oliver/Development/iGithub/asi-http-request/Classes/ASINetworkQueue.m7d06d0760b43b341^e31a0b770b43b341^---0#0#0#-19%DVTDocumentLocation2@92"file://localhost/Users/oliver/Development/iGithub/asi-http-request/Classes/ASINetworkQueue.m0000000000000000^1906"CompileC build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv6/ASINetworkQueue.o asi-http-request/Classes/ASINetworkQueue.m normal armv6 objective-c com.apple.compilers.llvmgcc42    cd /Users/oliver/Development/iGithub    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/llvm-gcc-4.2 -x objective-c -arch armv6 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -DDEBUG -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk -gdwarf-2 -mthumb -miphoneos-version-min=4.0 -iquote /Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-generated-files.hmap -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-own-target-headers.hmap -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-all-target-headers.hmap -iquote /Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-project-headers.hmap -I/Users/oliver/Development/iGithub/build/Debug-iphoneos/include -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/DerivedSources/armv6 -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/DerivedSources -F/Users/oliver/Development/iGithub/build/Debug-iphoneos -include /var/folders/vP/vPS9LckaF3a+SXfRwj19bU+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/iGithub-Prefix-aojnksylhodcwkhawsnikbpmbcee/iGithub-Prefix.pch -c /Users/oliver/Development/iGithub/asi-http-request/Classes/ASINetworkQueue.m -o /Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv6/ASINetworkQueue.o
-
-CCompileC build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv6/GHAuthenticationViewController.o /Users/oliver/Development/iGithub/iGithub/../iGithub/GHAuthenticationViewController.m normal armv6 objective-c com.apple.compilers.llvmgcc42
-s323160949.068933
-e323160949.345845
-r1
-xCompileC
-xbuild/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv6/GHAuthenticationViewController.o
-x/Users/oliver/Development/iGithub/iGithub/../iGithub/GHAuthenticationViewController.m
-xnormal
-xarmv6
-xobjective-c
-xcom.apple.compilers.llvmgcc42
-lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection93"Compile /Users/oliver/Development/iGithub/iGithub/../iGithub/GHAuthenticationViewController.m5cc611750b43b341^4b9158750b43b341^---0#0#0#-19%DVTDocumentLocation2@101"file://localhost/Users/oliver/Development/iGithub/iGithub/../iGithub/GHAuthenticationViewController.m0000000000000000^1954"CompileC build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv6/GHAuthenticationViewController.o iGithub/../iGithub/GHAuthenticationViewController.m normal armv6 objective-c com.apple.compilers.llvmgcc42    cd /Users/oliver/Development/iGithub    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/llvm-gcc-4.2 -x objective-c -arch armv6 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -DDEBUG -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk -gdwarf-2 -mthumb -miphoneos-version-min=4.0 -iquote /Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-generated-files.hmap -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-own-target-headers.hmap -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-all-target-headers.hmap -iquote /Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-project-headers.hmap -I/Users/oliver/Development/iGithub/build/Debug-iphoneos/include -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/DerivedSources/armv6 -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/DerivedSources -F/Users/oliver/Development/iGithub/build/Debug-iphoneos -include /var/folders/vP/vPS9LckaF3a+SXfRwj19bU+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/iGithub-Prefix-aojnksylhodcwkhawsnikbpmbcee/iGithub-Prefix.pch -c /Users/oliver/Development/iGithub/iGithub/../iGithub/GHAuthenticationViewController.m -o /Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv6/GHAuthenticationViewController.o
-
-CCompileC build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv6/GHBackgroundQueue.o /Users/oliver/Development/iGithub/iGithub/../GHBackgroundQueue.m normal armv6 objective-c com.apple.compilers.llvmgcc42
-s323160949.215260
-e323160949.311343
-r1
-xCompileC
-xbuild/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv6/GHBackgroundQueue.o
-x/Users/oliver/Development/iGithub/iGithub/../GHBackgroundQueue.m
-xnormal
-xarmv6
-xobjective-c
-xcom.apple.compilers.llvmgcc42
-lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection72"Compile /Users/oliver/Development/iGithub/iGithub/../GHBackgroundQueue.m543b37750b43b341^51de4f750b43b341^---0#0#0#-19%DVTDocumentLocation2@80"file://localhost/Users/oliver/Development/iGithub/iGithub/../GHBackgroundQueue.m0000000000000000^1886"CompileC build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv6/GHBackgroundQueue.o iGithub/../GHBackgroundQueue.m normal armv6 objective-c com.apple.compilers.llvmgcc42    cd /Users/oliver/Development/iGithub    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/llvm-gcc-4.2 -x objective-c -arch armv6 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -DDEBUG -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk -gdwarf-2 -mthumb -miphoneos-version-min=4.0 -iquote /Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-generated-files.hmap -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-own-target-headers.hmap -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-all-target-headers.hmap -iquote /Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-project-headers.hmap -I/Users/oliver/Development/iGithub/build/Debug-iphoneos/include -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/DerivedSources/armv6 -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/DerivedSources -F/Users/oliver/Development/iGithub/build/Debug-iphoneos -include /var/folders/vP/vPS9LckaF3a+SXfRwj19bU+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/iGithub-Prefix-aojnksylhodcwkhawsnikbpmbcee/iGithub-Prefix.pch -c /Users/oliver/Development/iGithub/iGithub/../GHBackgroundQueue.m -o /Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv6/GHBackgroundQueue.o
-
-CCompileC build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv6/GHSettingsHelper.o /Users/oliver/Development/iGithub/iGithub/../GHSettingsHelper.m normal armv6 objective-c com.apple.compilers.llvmgcc42
-s323160948.988255
-e323160949.068531
-r1
-xCompileC
-xbuild/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv6/GHSettingsHelper.o
-x/Users/oliver/Development/iGithub/iGithub/../GHSettingsHelper.m
-xnormal
-xarmv6
-xobjective-c
-xcom.apple.compilers.llvmgcc42
-lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection71"Compile /Users/oliver/Development/iGithub/iGithub/../GHSettingsHelper.m6422fd740b43b341^a9db11750b43b341^---0#0#0#-19%DVTDocumentLocation2@79"file://localhost/Users/oliver/Development/iGithub/iGithub/../GHSettingsHelper.m0000000000000000^1882"CompileC build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv6/GHSettingsHelper.o iGithub/../GHSettingsHelper.m normal armv6 objective-c com.apple.compilers.llvmgcc42    cd /Users/oliver/Development/iGithub    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/llvm-gcc-4.2 -x objective-c -arch armv6 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -DDEBUG -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk -gdwarf-2 -mthumb -miphoneos-version-min=4.0 -iquote /Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-generated-files.hmap -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-own-target-headers.hmap -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-all-target-headers.hmap -iquote /Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-project-headers.hmap -I/Users/oliver/Development/iGithub/build/Debug-iphoneos/include -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/DerivedSources/armv6 -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/DerivedSources -F/Users/oliver/Development/iGithub/build/Debug-iphoneos -include /var/folders/vP/vPS9LckaF3a+SXfRwj19bU+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/iGithub-Prefix-aojnksylhodcwkhawsnikbpmbcee/iGithub-Prefix.pch -c /Users/oliver/Development/iGithub/iGithub/../GHSettingsHelper.m -o /Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv6/GHSettingsHelper.o
-
-CCompileC build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv6/GHUser.o /Users/oliver/Development/iGithub/iGithub/../GHUser.m normal armv6 objective-c com.apple.compilers.llvmgcc42
-s323161116.365449
-e323161116.789360
-r1
-xCompileC
-xbuild/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv6/GHUser.o
-x/Users/oliver/Development/iGithub/iGithub/../GHUser.m
-xnormal
-xarmv6
-xobjective-c
-xcom.apple.compilers.llvmgcc42
-lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection61"Compile /Users/oliver/Development/iGithub/iGithub/../GHUser.m9ca85d1c0c43b341^1827ca1c0c43b341^---0#0#0#-19%DVTDocumentLocation2@69"file://localhost/Users/oliver/Development/iGithub/iGithub/../GHUser.m0000000000000000^1842"CompileC build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv6/GHUser.o iGithub/../GHUser.m normal armv6 objective-c com.apple.compilers.llvmgcc42    cd /Users/oliver/Development/iGithub    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/llvm-gcc-4.2 -x objective-c -arch armv6 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -DDEBUG -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk -gdwarf-2 -mthumb -miphoneos-version-min=4.0 -iquote /Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-generated-files.hmap -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-own-target-headers.hmap -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-all-target-headers.hmap -iquote /Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-project-headers.hmap -I/Users/oliver/Development/iGithub/build/Debug-iphoneos/include -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/DerivedSources/armv6 -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/DerivedSources -F/Users/oliver/Development/iGithub/build/Debug-iphoneos -include /var/folders/vP/vPS9LckaF3a+SXfRwj19bU+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/iGithub-Prefix-aojnksylhodcwkhawsnikbpmbcee/iGithub-Prefix.pch -c /Users/oliver/Development/iGithub/iGithub/../GHUser.m -o /Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv6/GHUser.o
-
-CCompileC build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv6/JSONKit.o /Users/oliver/Development/iGithub/iGithub/../JSONKit/JSONKit.m normal armv6 objective-c com.apple.compilers.llvmgcc42
-s323160949.346434
-e323160950.612814
-r1
-xCompileC
-xbuild/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv6/JSONKit.o
-x/Users/oliver/Development/iGithub/iGithub/../JSONKit/JSONKit.m
-xnormal
-xarmv6
-xobjective-c
-xcom.apple.compilers.llvmgcc42
-lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection70"Compile /Users/oliver/Development/iGithub/iGithub/../JSONKit/JSONKit.m14d058750b43b341^7cf29c760b43b341^---0#0#0#-19%DVTDocumentLocation2@78"file://localhost/Users/oliver/Development/iGithub/iGithub/../JSONKit/JSONKit.m0000000000000000^1862"CompileC build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv6/JSONKit.o iGithub/../JSONKit/JSONKit.m normal armv6 objective-c com.apple.compilers.llvmgcc42    cd /Users/oliver/Development/iGithub    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/llvm-gcc-4.2 -x objective-c -arch armv6 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -DDEBUG -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk -gdwarf-2 -mthumb -miphoneos-version-min=4.0 -iquote /Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-generated-files.hmap -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-own-target-headers.hmap -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-all-target-headers.hmap -iquote /Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-project-headers.hmap -I/Users/oliver/Development/iGithub/build/Debug-iphoneos/include -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/DerivedSources/armv6 -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/DerivedSources -F/Users/oliver/Development/iGithub/build/Debug-iphoneos -include /var/folders/vP/vPS9LckaF3a+SXfRwj19bU+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/iGithub-Prefix-aojnksylhodcwkhawsnikbpmbcee/iGithub-Prefix.pch -c /Users/oliver/Development/iGithub/iGithub/../JSONKit/JSONKit.m -o /Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv6/JSONKit.o
-
-CCompileC build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv6/Reachability.o /Users/oliver/Development/iGithub/iGithub/../asi-http-request/External/Reachability/Reachability.m normal armv6 objective-c com.apple.compilers.llvmgcc42
-s323160951.043627
-e323160951.242536
-r1
-xCompileC
-xbuild/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv6/Reachability.o
-x/Users/oliver/Development/iGithub/iGithub/../asi-http-request/External/Reachability/Reachability.m
-xnormal
-xarmv6
-xobjective-c
-xcom.apple.compilers.llvmgcc42
-lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection106"Compile /Users/oliver/Development/iGithub/iGithub/../asi-http-request/External/Reachability/Reachability.m234a0b770b43b341^4b1f3e770b43b341^---0#0#0#-19%DVTDocumentLocation2@114"file://localhost/Users/oliver/Development/iGithub/iGithub/../asi-http-request/External/Reachability/Reachability.m0000000000000000^1944"CompileC build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv6/Reachability.o iGithub/../asi-http-request/External/Reachability/Reachability.m normal armv6 objective-c com.apple.compilers.llvmgcc42    cd /Users/oliver/Development/iGithub    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/llvm-gcc-4.2 -x objective-c -arch armv6 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -DDEBUG -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk -gdwarf-2 -mthumb -miphoneos-version-min=4.0 -iquote /Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-generated-files.hmap -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-own-target-headers.hmap -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-all-target-headers.hmap -iquote /Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-project-headers.hmap -I/Users/oliver/Development/iGithub/build/Debug-iphoneos/include -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/DerivedSources/armv6 -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/DerivedSources -F/Users/oliver/Development/iGithub/build/Debug-iphoneos -include /var/folders/vP/vPS9LckaF3a+SXfRwj19bU+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/iGithub-Prefix-aojnksylhodcwkhawsnikbpmbcee/iGithub-Prefix.pch -c /Users/oliver/Development/iGithub/iGithub/../asi-http-request/External/Reachability/Reachability.m -o /Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv6/Reachability.o
-
-CCompileC build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv6/SFHFKeychainUtils.o /Users/oliver/Development/iGithub/iGithub/../iGithub/SFHFKeychainUtils.m normal armv6 objective-c com.apple.compilers.llvmgcc42
-s323160948.961361
-e323160949.089723
-r1
-xCompileC
-xbuild/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv6/SFHFKeychainUtils.o
-x/Users/oliver/Development/iGithub/iGithub/../iGithub/SFHFKeychainUtils.m
-xnormal
-xarmv6
-xobjective-c
-xcom.apple.compilers.llvmgcc42
-lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection80"Compile /Users/oliver/Development/iGithub/iGithub/../iGithub/SFHFKeychainUtils.mb43df6740b43b341^580017750b43b341^---0#0#0#-19%DVTDocumentLocation2@88"file://localhost/Users/oliver/Development/iGithub/iGithub/../iGithub/SFHFKeychainUtils.m0000000000000000^1902"CompileC build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv6/SFHFKeychainUtils.o iGithub/../iGithub/SFHFKeychainUtils.m normal armv6 objective-c com.apple.compilers.llvmgcc42    cd /Users/oliver/Development/iGithub    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/llvm-gcc-4.2 -x objective-c -arch armv6 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -DDEBUG -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk -gdwarf-2 -mthumb -miphoneos-version-min=4.0 -iquote /Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-generated-files.hmap -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-own-target-headers.hmap -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-all-target-headers.hmap -iquote /Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-project-headers.hmap -I/Users/oliver/Development/iGithub/build/Debug-iphoneos/include -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/DerivedSources/armv6 -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/DerivedSources -F/Users/oliver/Development/iGithub/build/Debug-iphoneos -include /var/folders/vP/vPS9LckaF3a+SXfRwj19bU+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/iGithub-Prefix-aojnksylhodcwkhawsnikbpmbcee/iGithub-Prefix.pch -c /Users/oliver/Development/iGithub/iGithub/../iGithub/SFHFKeychainUtils.m -o /Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv6/SFHFKeychainUtils.o
-
-CCompileC build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv6/UITableViewCellWithTextField.o /Users/oliver/Development/iGithub/iGithub/../iGithub/UITableViewCellWithTextField.m normal armv6 objective-c com.apple.compilers.llvmgcc42
-s323160949.090152
-e323160949.215086
-r1
-xCompileC
-xbuild/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv6/UITableViewCellWithTextField.o
-x/Users/oliver/Development/iGithub/iGithub/../iGithub/UITableViewCellWithTextField.m
-xnormal
-xarmv6
-xobjective-c
-xcom.apple.compilers.llvmgcc42
-lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection91"Compile /Users/oliver/Development/iGithub/iGithub/../iGithub/UITableViewCellWithTextField.m403417750b43b341^5e4c37750b43b341^---0#0#0#-19%DVTDocumentLocation2@99"file://localhost/Users/oliver/Development/iGithub/iGithub/../iGithub/UITableViewCellWithTextField.m0000000000000000^1946"CompileC build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv6/UITableViewCellWithTextField.o iGithub/../iGithub/UITableViewCellWithTextField.m normal armv6 objective-c com.apple.compilers.llvmgcc42    cd /Users/oliver/Development/iGithub    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/llvm-gcc-4.2 -x objective-c -arch armv6 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -DDEBUG -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk -gdwarf-2 -mthumb -miphoneos-version-min=4.0 -iquote /Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-generated-files.hmap -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-own-target-headers.hmap -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-all-target-headers.hmap -iquote /Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-project-headers.hmap -I/Users/oliver/Development/iGithub/build/Debug-iphoneos/include -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/DerivedSources/armv6 -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/DerivedSources -F/Users/oliver/Development/iGithub/build/Debug-iphoneos -include /var/folders/vP/vPS9LckaF3a+SXfRwj19bU+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/iGithub-Prefix-aojnksylhodcwkhawsnikbpmbcee/iGithub-Prefix.pch -c /Users/oliver/Development/iGithub/iGithub/../iGithub/UITableViewCellWithTextField.m -o /Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv6/UITableViewCellWithTextField.o
-
-CCompileC build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv6/iGithubAppDelegate.o /Users/oliver/Development/iGithub/iGithub/iGithubAppDelegate.m normal armv6 objective-c com.apple.compilers.llvmgcc42
-s323160948.693664
-e323160948.899344
-r1
-xCompileC
-xbuild/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv6/iGithubAppDelegate.o
-x/Users/oliver/Development/iGithub/iGithub/iGithubAppDelegate.m
-xnormal
-xarmv6
-xobjective-c
-xcom.apple.compilers.llvmgcc42
-lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection70"Compile /Users/oliver/Development/iGithub/iGithub/iGithubAppDelegate.m07b3b1740b43b341^ae46e6740b43b341^---0#0#0#-19%DVTDocumentLocation2@78"file://localhost/Users/oliver/Development/iGithub/iGithub/iGithubAppDelegate.m0000000000000000^1884"CompileC build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv6/iGithubAppDelegate.o iGithub/iGithubAppDelegate.m normal armv6 objective-c com.apple.compilers.llvmgcc42    cd /Users/oliver/Development/iGithub    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/llvm-gcc-4.2 -x objective-c -arch armv6 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -DDEBUG -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk -gdwarf-2 -mthumb -miphoneos-version-min=4.0 -iquote /Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-generated-files.hmap -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-own-target-headers.hmap -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-all-target-headers.hmap -iquote /Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-project-headers.hmap -I/Users/oliver/Development/iGithub/build/Debug-iphoneos/include -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/DerivedSources/armv6 -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/DerivedSources -F/Users/oliver/Development/iGithub/build/Debug-iphoneos -include /var/folders/vP/vPS9LckaF3a+SXfRwj19bU+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/iGithub-Prefix-aojnksylhodcwkhawsnikbpmbcee/iGithub-Prefix.pch -c /Users/oliver/Development/iGithub/iGithub/iGithubAppDelegate.m -o /Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv6/iGithubAppDelegate.o
-
-CCompileC build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv6/iGithubAppDelegate_iPad.o /Users/oliver/Development/iGithub/iGithub/iPad/iGithubAppDelegate_iPad.m normal armv6 objective-c com.apple.compilers.llvmgcc42
-s323160948.899518
-e323160948.988072
-r1
-xCompileC
-xbuild/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv6/iGithubAppDelegate_iPad.o
-x/Users/oliver/Development/iGithub/iGithub/iPad/iGithubAppDelegate_iPad.m
-xnormal
-xarmv6
-xobjective-c
-xcom.apple.compilers.llvmgcc42
-lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection80"Compile /Users/oliver/Development/iGithub/iGithub/iPad/iGithubAppDelegate_iPad.m4167e6740b43b341^0534fd740b43b341^---0#0#0#-19%DVTDocumentLocation2@88"file://localhost/Users/oliver/Development/iGithub/iGithub/iPad/iGithubAppDelegate_iPad.m0000000000000000^1914"CompileC build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv6/iGithubAppDelegate_iPad.o iGithub/iPad/iGithubAppDelegate_iPad.m normal armv6 objective-c com.apple.compilers.llvmgcc42    cd /Users/oliver/Development/iGithub    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/llvm-gcc-4.2 -x objective-c -arch armv6 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -DDEBUG -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk -gdwarf-2 -mthumb -miphoneos-version-min=4.0 -iquote /Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-generated-files.hmap -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-own-target-headers.hmap -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-all-target-headers.hmap -iquote /Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-project-headers.hmap -I/Users/oliver/Development/iGithub/build/Debug-iphoneos/include -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/DerivedSources/armv6 -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/DerivedSources -F/Users/oliver/Development/iGithub/build/Debug-iphoneos -include /var/folders/vP/vPS9LckaF3a+SXfRwj19bU+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/iGithub-Prefix-aojnksylhodcwkhawsnikbpmbcee/iGithub-Prefix.pch -c /Users/oliver/Development/iGithub/iGithub/iPad/iGithubAppDelegate_iPad.m -o /Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv6/iGithubAppDelegate_iPad.o
-
-CCompileC build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv6/iGithubAppDelegate_iPhone.o /Users/oliver/Development/iGithub/iGithub/iPhone/iGithubAppDelegate_iPhone.m normal armv6 objective-c com.apple.compilers.llvmgcc42
-s323160948.790358
-e323160948.961165
-r1
-xCompileC
-xbuild/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv6/iGithubAppDelegate_iPhone.o
-x/Users/oliver/Development/iGithub/iGithub/iPhone/iGithubAppDelegate_iPhone.m
-xnormal
-xarmv6
-xobjective-c
-xcom.apple.compilers.llvmgcc42
-lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection84"Compile /Users/oliver/Development/iGithub/iGithub/iPhone/iGithubAppDelegate_iPhone.mb29eca740b43b341^2652f6740b43b341^---0#0#0#-19%DVTDocumentLocation2@92"file://localhost/Users/oliver/Development/iGithub/iGithub/iPhone/iGithubAppDelegate_iPhone.m0000000000000000^1926"CompileC build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv6/iGithubAppDelegate_iPhone.o iGithub/iPhone/iGithubAppDelegate_iPhone.m normal armv6 objective-c com.apple.compilers.llvmgcc42    cd /Users/oliver/Development/iGithub    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/llvm-gcc-4.2 -x objective-c -arch armv6 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -DDEBUG -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk -gdwarf-2 -mthumb -miphoneos-version-min=4.0 -iquote /Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-generated-files.hmap -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-own-target-headers.hmap -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-all-target-headers.hmap -iquote /Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-project-headers.hmap -I/Users/oliver/Development/iGithub/build/Debug-iphoneos/include -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/DerivedSources/armv6 -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/DerivedSources -F/Users/oliver/Development/iGithub/build/Debug-iphoneos -include /var/folders/vP/vPS9LckaF3a+SXfRwj19bU+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/iGithub-Prefix-aojnksylhodcwkhawsnikbpmbcee/iGithub-Prefix.pch -c /Users/oliver/Development/iGithub/iGithub/iPhone/iGithubAppDelegate_iPhone.m -o /Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv6/iGithubAppDelegate_iPhone.o
-
-CCompileC build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv6/main.o /Users/oliver/Development/iGithub/iGithub/main.m normal armv6 objective-c com.apple.compilers.llvmgcc42
-s323160948.606842
-e323160948.693496
-r1
-xCompileC
-xbuild/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv6/main.o
-x/Users/oliver/Development/iGithub/iGithub/main.m
-xnormal
-xarmv6
-xobjective-c
-xcom.apple.compilers.llvmgcc42
-lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection56"Compile /Users/oliver/Development/iGithub/iGithub/main.m1c7a9b740b43b341^6ec2b1740b43b341^---0#0#0#-19%DVTDocumentLocation2@64"file://localhost/Users/oliver/Development/iGithub/iGithub/main.m0000000000000000^1828"CompileC build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv6/main.o iGithub/main.m normal armv6 objective-c com.apple.compilers.llvmgcc42    cd /Users/oliver/Development/iGithub    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/llvm-gcc-4.2 -x objective-c -arch armv6 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -DDEBUG -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk -gdwarf-2 -mthumb -miphoneos-version-min=4.0 -iquote /Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-generated-files.hmap -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-own-target-headers.hmap -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-all-target-headers.hmap -iquote /Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-project-headers.hmap -I/Users/oliver/Development/iGithub/build/Debug-iphoneos/include -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/DerivedSources/armv6 -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/DerivedSources -F/Users/oliver/Development/iGithub/build/Debug-iphoneos -include /var/folders/vP/vPS9LckaF3a+SXfRwj19bU+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/iGithub-Prefix-aojnksylhodcwkhawsnikbpmbcee/iGithub-Prefix.pch -c /Users/oliver/Development/iGithub/iGithub/main.m -o /Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv6/main.o
-
-CCompileC build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv7/ASIAuthenticationDialog.o /Users/oliver/Development/iGithub/asi-http-request/Classes/ASIAuthenticationDialog.m normal armv7 objective-c com.apple.compilers.llvmgcc42
-s323160952.837634
-e323160953.161091
-r1
-xCompileC
-xbuild/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv7/ASIAuthenticationDialog.o
-x/Users/oliver/Development/iGithub/asi-http-request/Classes/ASIAuthenticationDialog.m
-xnormal
-xarmv7
-xobjective-c
-xcom.apple.compilers.llvmgcc42
-lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection92"Compile /Users/oliver/Development/iGithub/asi-http-request/Classes/ASIAuthenticationDialog.md68ed6780b43b341^894429790b43b341^---0#0#0#-19%DVTDocumentLocation2@100"file://localhost/Users/oliver/Development/iGithub/asi-http-request/Classes/ASIAuthenticationDialog.m0000000000000000^1938"CompileC build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv7/ASIAuthenticationDialog.o asi-http-request/Classes/ASIAuthenticationDialog.m normal armv7 objective-c com.apple.compilers.llvmgcc42    cd /Users/oliver/Development/iGithub    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/llvm-gcc-4.2 -x objective-c -arch armv7 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -DDEBUG -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk -gdwarf-2 -mthumb -miphoneos-version-min=4.0 -iquote /Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-generated-files.hmap -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-own-target-headers.hmap -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-all-target-headers.hmap -iquote /Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-project-headers.hmap -I/Users/oliver/Development/iGithub/build/Debug-iphoneos/include -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/DerivedSources/armv7 -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/DerivedSources -F/Users/oliver/Development/iGithub/build/Debug-iphoneos -include /var/folders/vP/vPS9LckaF3a+SXfRwj19bU+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/iGithub-Prefix-eyxefnbkrszrqqhjgjitjtbkalmg/iGithub-Prefix.pch -c /Users/oliver/Development/iGithub/asi-http-request/Classes/ASIAuthenticationDialog.m -o /Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv7/ASIAuthenticationDialog.o
-
-CCompileC build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv7/ASIDataCompressor.o /Users/oliver/Development/iGithub/asi-http-request/Classes/ASIDataCompressor.m normal armv7 objective-c com.apple.compilers.llvmgcc42
-s323160953.335957
-e323160953.512076
-r1
-xCompileC
-xbuild/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv7/ASIDataCompressor.o
-x/Users/oliver/Development/iGithub/asi-http-request/Classes/ASIDataCompressor.m
-xnormal
-xarmv7
-xobjective-c
-xcom.apple.compilers.llvmgcc42
-lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection86"Compile /Users/oliver/Development/iGithub/asi-http-request/Classes/ASIDataCompressor.m8e1f56790b43b341^7c4583790b43b341^---0#0#0#-19%DVTDocumentLocation2@94"file://localhost/Users/oliver/Development/iGithub/asi-http-request/Classes/ASIDataCompressor.m0000000000000000^1914"CompileC build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv7/ASIDataCompressor.o asi-http-request/Classes/ASIDataCompressor.m normal armv7 objective-c com.apple.compilers.llvmgcc42    cd /Users/oliver/Development/iGithub    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/llvm-gcc-4.2 -x objective-c -arch armv7 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -DDEBUG -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk -gdwarf-2 -mthumb -miphoneos-version-min=4.0 -iquote /Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-generated-files.hmap -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-own-target-headers.hmap -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-all-target-headers.hmap -iquote /Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-project-headers.hmap -I/Users/oliver/Development/iGithub/build/Debug-iphoneos/include -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/DerivedSources/armv7 -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/DerivedSources -F/Users/oliver/Development/iGithub/build/Debug-iphoneos -include /var/folders/vP/vPS9LckaF3a+SXfRwj19bU+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/iGithub-Prefix-eyxefnbkrszrqqhjgjitjtbkalmg/iGithub-Prefix.pch -c /Users/oliver/Development/iGithub/asi-http-request/Classes/ASIDataCompressor.m -o /Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv7/ASIDataCompressor.o
-
-CCompileC build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv7/ASIDataDecompressor.o /Users/oliver/Development/iGithub/asi-http-request/Classes/ASIDataDecompressor.m normal armv7 objective-c com.apple.compilers.llvmgcc42
-s323160953.512268
-e323160953.670797
-r1
-xCompileC
-xbuild/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv7/ASIDataDecompressor.o
-x/Users/oliver/Development/iGithub/asi-http-request/Classes/ASIDataDecompressor.m
-xnormal
-xarmv7
-xobjective-c
-xcom.apple.compilers.llvmgcc42
-lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection88"Compile /Users/oliver/Development/iGithub/asi-http-request/Classes/ASIDataDecompressor.m0a4c83790b43b341^12c2ab790b43b341^---0#0#0#-19%DVTDocumentLocation2@96"file://localhost/Users/oliver/Development/iGithub/asi-http-request/Classes/ASIDataDecompressor.m0000000000000000^1922"CompileC build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv7/ASIDataDecompressor.o asi-http-request/Classes/ASIDataDecompressor.m normal armv7 objective-c com.apple.compilers.llvmgcc42    cd /Users/oliver/Development/iGithub    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/llvm-gcc-4.2 -x objective-c -arch armv7 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -DDEBUG -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk -gdwarf-2 -mthumb -miphoneos-version-min=4.0 -iquote /Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-generated-files.hmap -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-own-target-headers.hmap -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-all-target-headers.hmap -iquote /Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-project-headers.hmap -I/Users/oliver/Development/iGithub/build/Debug-iphoneos/include -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/DerivedSources/armv7 -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/DerivedSources -F/Users/oliver/Development/iGithub/build/Debug-iphoneos -include /var/folders/vP/vPS9LckaF3a+SXfRwj19bU+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/iGithub-Prefix-eyxefnbkrszrqqhjgjitjtbkalmg/iGithub-Prefix.pch -c /Users/oliver/Development/iGithub/asi-http-request/Classes/ASIDataDecompressor.m -o /Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv7/ASIDataDecompressor.o
-
-CCompileC build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv7/ASIDownloadCache.o /Users/oliver/Development/iGithub/asi-http-request/Classes/ASIDownloadCache.m normal armv7 objective-c com.apple.compilers.llvmgcc42
-s323160953.520371
-e323160953.818540
-r1
-xCompileC
-xbuild/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv7/ASIDownloadCache.o
-x/Users/oliver/Development/iGithub/asi-http-request/Classes/ASIDownloadCache.m
-xnormal
-xarmv7
-xobjective-c
-xcom.apple.compilers.llvmgcc42
-lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection85"Compile /Users/oliver/Development/iGithub/asi-http-request/Classes/ASIDownloadCache.m225485790b43b341^f294d1790b43b341^---0#0#0#-19%DVTDocumentLocation2@93"file://localhost/Users/oliver/Development/iGithub/asi-http-request/Classes/ASIDownloadCache.m0000000000000000^1910"CompileC build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv7/ASIDownloadCache.o asi-http-request/Classes/ASIDownloadCache.m normal armv7 objective-c com.apple.compilers.llvmgcc42    cd /Users/oliver/Development/iGithub    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/llvm-gcc-4.2 -x objective-c -arch armv7 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -DDEBUG -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk -gdwarf-2 -mthumb -miphoneos-version-min=4.0 -iquote /Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-generated-files.hmap -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-own-target-headers.hmap -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-all-target-headers.hmap -iquote /Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-project-headers.hmap -I/Users/oliver/Development/iGithub/build/Debug-iphoneos/include -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/DerivedSources/armv7 -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/DerivedSources -F/Users/oliver/Development/iGithub/build/Debug-iphoneos -include /var/folders/vP/vPS9LckaF3a+SXfRwj19bU+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/iGithub-Prefix-eyxefnbkrszrqqhjgjitjtbkalmg/iGithub-Prefix.pch -c /Users/oliver/Development/iGithub/asi-http-request/Classes/ASIDownloadCache.m -o /Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv7/ASIDownloadCache.o
-
-CCompileC build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv7/ASIFormDataRequest.o /Users/oliver/Development/iGithub/asi-http-request/Classes/ASIFormDataRequest.m normal armv7 objective-c com.apple.compilers.llvmgcc42
-s323160953.671547
-e323160953.930622
-r1
-xCompileC
-xbuild/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv7/ASIFormDataRequest.o
-x/Users/oliver/Development/iGithub/asi-http-request/Classes/ASIFormDataRequest.m
-xnormal
-xarmv7
-xobjective-c
-xcom.apple.compilers.llvmgcc42
-lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection87"Compile /Users/oliver/Development/iGithub/asi-http-request/Classes/ASIFormDataRequest.mfa0bad790b43b341^124fee790b43b341^---0#0#0#-19%DVTDocumentLocation2@95"file://localhost/Users/oliver/Development/iGithub/asi-http-request/Classes/ASIFormDataRequest.m0000000000000000^1918"CompileC build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv7/ASIFormDataRequest.o asi-http-request/Classes/ASIFormDataRequest.m normal armv7 objective-c com.apple.compilers.llvmgcc42    cd /Users/oliver/Development/iGithub    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/llvm-gcc-4.2 -x objective-c -arch armv7 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -DDEBUG -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk -gdwarf-2 -mthumb -miphoneos-version-min=4.0 -iquote /Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-generated-files.hmap -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-own-target-headers.hmap -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-all-target-headers.hmap -iquote /Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-project-headers.hmap -I/Users/oliver/Development/iGithub/build/Debug-iphoneos/include -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/DerivedSources/armv7 -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/DerivedSources -F/Users/oliver/Development/iGithub/build/Debug-iphoneos -include /var/folders/vP/vPS9LckaF3a+SXfRwj19bU+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/iGithub-Prefix-eyxefnbkrszrqqhjgjitjtbkalmg/iGithub-Prefix.pch -c /Users/oliver/Development/iGithub/asi-http-request/Classes/ASIFormDataRequest.m -o /Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv7/ASIFormDataRequest.o
-
-CCompileC build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv7/ASIHTTPRequest.o /Users/oliver/Development/iGithub/asi-http-request/Classes/ASIHTTPRequest.m normal armv7 objective-c com.apple.compilers.llvmgcc42
-s323160953.819194
-e323160955.544985
-r1
-xCompileC
-xbuild/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv7/ASIHTTPRequest.o
-x/Users/oliver/Development/iGithub/asi-http-request/Classes/ASIHTTPRequest.m
-xnormal
-xarmv7
-xobjective-c
-xcom.apple.compilers.llvmgcc42
-lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection83"Compile /Users/oliver/Development/iGithub/asi-http-request/Classes/ASIHTTPRequest.m45d7d1790b43b341^40858b7b0b43b341^---0#0#0#-19%DVTDocumentLocation2@91"file://localhost/Users/oliver/Development/iGithub/asi-http-request/Classes/ASIHTTPRequest.m0000000000000000^1902"CompileC build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv7/ASIHTTPRequest.o asi-http-request/Classes/ASIHTTPRequest.m normal armv7 objective-c com.apple.compilers.llvmgcc42    cd /Users/oliver/Development/iGithub    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/llvm-gcc-4.2 -x objective-c -arch armv7 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -DDEBUG -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk -gdwarf-2 -mthumb -miphoneos-version-min=4.0 -iquote /Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-generated-files.hmap -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-own-target-headers.hmap -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-all-target-headers.hmap -iquote /Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-project-headers.hmap -I/Users/oliver/Development/iGithub/build/Debug-iphoneos/include -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/DerivedSources/armv7 -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/DerivedSources -F/Users/oliver/Development/iGithub/build/Debug-iphoneos -include /var/folders/vP/vPS9LckaF3a+SXfRwj19bU+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/iGithub-Prefix-eyxefnbkrszrqqhjgjitjtbkalmg/iGithub-Prefix.pch -c /Users/oliver/Development/iGithub/asi-http-request/Classes/ASIHTTPRequest.m -o /Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv7/ASIHTTPRequest.o
-
-CCompileC build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv7/ASIInputStream.o /Users/oliver/Development/iGithub/asi-http-request/Classes/ASIInputStream.m normal armv7 objective-c com.apple.compilers.llvmgcc42
-s323160953.930791
-e323160954.058506
-r1
-xCompileC
-xbuild/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv7/ASIInputStream.o
-x/Users/oliver/Development/iGithub/asi-http-request/Classes/ASIInputStream.m
-xnormal
-xarmv7
-xobjective-c
-xcom.apple.compilers.llvmgcc42
-lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection83"Compile /Users/oliver/Development/iGithub/asi-http-request/Classes/ASIInputStream.m406bee790b43b341^fb050f7a0b43b341^---0#0#0#-19%DVTDocumentLocation2@91"file://localhost/Users/oliver/Development/iGithub/asi-http-request/Classes/ASIInputStream.m0000000000000000^1902"CompileC build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv7/ASIInputStream.o asi-http-request/Classes/ASIInputStream.m normal armv7 objective-c com.apple.compilers.llvmgcc42    cd /Users/oliver/Development/iGithub    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/llvm-gcc-4.2 -x objective-c -arch armv7 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -DDEBUG -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk -gdwarf-2 -mthumb -miphoneos-version-min=4.0 -iquote /Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-generated-files.hmap -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-own-target-headers.hmap -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-all-target-headers.hmap -iquote /Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-project-headers.hmap -I/Users/oliver/Development/iGithub/build/Debug-iphoneos/include -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/DerivedSources/armv7 -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/DerivedSources -F/Users/oliver/Development/iGithub/build/Debug-iphoneos -include /var/folders/vP/vPS9LckaF3a+SXfRwj19bU+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/iGithub-Prefix-eyxefnbkrszrqqhjgjitjtbkalmg/iGithub-Prefix.pch -c /Users/oliver/Development/iGithub/asi-http-request/Classes/ASIInputStream.m -o /Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv7/ASIInputStream.o
-
-CCompileC build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv7/ASINetworkQueue.o /Users/oliver/Development/iGithub/asi-http-request/Classes/ASINetworkQueue.m normal armv7 objective-c com.apple.compilers.llvmgcc42
-s323160954.058730
-e323160954.278641
-r1
-xCompileC
-xbuild/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv7/ASINetworkQueue.o
-x/Users/oliver/Development/iGithub/asi-http-request/Classes/ASINetworkQueue.m
-xnormal
-xarmv7
-xobjective-c
-xcom.apple.compilers.llvmgcc42
-lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection84"Compile /Users/oliver/Development/iGithub/asi-http-request/Classes/ASINetworkQueue.m392a0f7a0b43b341^7e54477a0b43b341^---0#0#0#-19%DVTDocumentLocation2@92"file://localhost/Users/oliver/Development/iGithub/asi-http-request/Classes/ASINetworkQueue.m0000000000000000^1906"CompileC build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv7/ASINetworkQueue.o asi-http-request/Classes/ASINetworkQueue.m normal armv7 objective-c com.apple.compilers.llvmgcc42    cd /Users/oliver/Development/iGithub    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/llvm-gcc-4.2 -x objective-c -arch armv7 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -DDEBUG -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk -gdwarf-2 -mthumb -miphoneos-version-min=4.0 -iquote /Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-generated-files.hmap -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-own-target-headers.hmap -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-all-target-headers.hmap -iquote /Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-project-headers.hmap -I/Users/oliver/Development/iGithub/build/Debug-iphoneos/include -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/DerivedSources/armv7 -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/DerivedSources -F/Users/oliver/Development/iGithub/build/Debug-iphoneos -include /var/folders/vP/vPS9LckaF3a+SXfRwj19bU+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/iGithub-Prefix-eyxefnbkrszrqqhjgjitjtbkalmg/iGithub-Prefix.pch -c /Users/oliver/Development/iGithub/asi-http-request/Classes/ASINetworkQueue.m -o /Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv7/ASINetworkQueue.o
-
-CCompileC build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv7/GHAuthenticationViewController.o /Users/oliver/Development/iGithub/iGithub/../iGithub/GHAuthenticationViewController.m normal armv7 objective-c com.apple.compilers.llvmgcc42
-s323160951.554062
-e323160951.791285
-r1
-xCompileC
-xbuild/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv7/GHAuthenticationViewController.o
-x/Users/oliver/Development/iGithub/iGithub/../iGithub/GHAuthenticationViewController.m
-xnormal
-xarmv7
-xobjective-c
-xcom.apple.compilers.llvmgcc42
-lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection93"Compile /Users/oliver/Development/iGithub/iGithub/../iGithub/GHAuthenticationViewController.m86028e770b43b341^1091ca770b43b341^---0#0#0#-19%DVTDocumentLocation2@101"file://localhost/Users/oliver/Development/iGithub/iGithub/../iGithub/GHAuthenticationViewController.m0000000000000000^1954"CompileC build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv7/GHAuthenticationViewController.o iGithub/../iGithub/GHAuthenticationViewController.m normal armv7 objective-c com.apple.compilers.llvmgcc42    cd /Users/oliver/Development/iGithub    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/llvm-gcc-4.2 -x objective-c -arch armv7 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -DDEBUG -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk -gdwarf-2 -mthumb -miphoneos-version-min=4.0 -iquote /Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-generated-files.hmap -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-own-target-headers.hmap -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-all-target-headers.hmap -iquote /Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-project-headers.hmap -I/Users/oliver/Development/iGithub/build/Debug-iphoneos/include -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/DerivedSources/armv7 -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/DerivedSources -F/Users/oliver/Development/iGithub/build/Debug-iphoneos -include /var/folders/vP/vPS9LckaF3a+SXfRwj19bU+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/iGithub-Prefix-eyxefnbkrszrqqhjgjitjtbkalmg/iGithub-Prefix.pch -c /Users/oliver/Development/iGithub/iGithub/../iGithub/GHAuthenticationViewController.m -o /Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv7/GHAuthenticationViewController.o
-
-CCompileC build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv7/GHBackgroundQueue.o /Users/oliver/Development/iGithub/iGithub/../GHBackgroundQueue.m normal armv7 objective-c com.apple.compilers.llvmgcc42
-s323160951.922530
-e323160952.022929
-r1
-xCompileC
-xbuild/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv7/GHBackgroundQueue.o
-x/Users/oliver/Development/iGithub/iGithub/../GHBackgroundQueue.m
-xnormal
-xarmv7
-xobjective-c
-xcom.apple.compilers.llvmgcc42
-lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection72"Compile /Users/oliver/Development/iGithub/iGithub/../GHBackgroundQueue.m9fcbec770b43b341^282b06780b43b341^---0#0#0#-19%DVTDocumentLocation2@80"file://localhost/Users/oliver/Development/iGithub/iGithub/../GHBackgroundQueue.m0000000000000000^1886"CompileC build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv7/GHBackgroundQueue.o iGithub/../GHBackgroundQueue.m normal armv7 objective-c com.apple.compilers.llvmgcc42    cd /Users/oliver/Development/iGithub    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/llvm-gcc-4.2 -x objective-c -arch armv7 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -DDEBUG -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk -gdwarf-2 -mthumb -miphoneos-version-min=4.0 -iquote /Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-generated-files.hmap -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-own-target-headers.hmap -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-all-target-headers.hmap -iquote /Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-project-headers.hmap -I/Users/oliver/Development/iGithub/build/Debug-iphoneos/include -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/DerivedSources/armv7 -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/DerivedSources -F/Users/oliver/Development/iGithub/build/Debug-iphoneos -include /var/folders/vP/vPS9LckaF3a+SXfRwj19bU+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/iGithub-Prefix-eyxefnbkrszrqqhjgjitjtbkalmg/iGithub-Prefix.pch -c /Users/oliver/Development/iGithub/iGithub/../GHBackgroundQueue.m -o /Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv7/GHBackgroundQueue.o
-
-CCompileC build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv7/GHSettingsHelper.o /Users/oliver/Development/iGithub/iGithub/../GHSettingsHelper.m normal armv7 objective-c com.apple.compilers.llvmgcc42
-s323160951.463447
-e323160951.553564
-r1
-xCompileC
-xbuild/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv7/GHSettingsHelper.o
-x/Users/oliver/Development/iGithub/iGithub/../GHSettingsHelper.m
-xnormal
-xarmv7
-xobjective-c
-xcom.apple.compilers.llvmgcc42
-lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection71"Compile /Users/oliver/Development/iGithub/iGithub/../GHSettingsHelper.m44c376770b43b341^1bbe8d770b43b341^---0#0#0#-19%DVTDocumentLocation2@79"file://localhost/Users/oliver/Development/iGithub/iGithub/../GHSettingsHelper.m0000000000000000^1882"CompileC build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv7/GHSettingsHelper.o iGithub/../GHSettingsHelper.m normal armv7 objective-c com.apple.compilers.llvmgcc42    cd /Users/oliver/Development/iGithub    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/llvm-gcc-4.2 -x objective-c -arch armv7 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -DDEBUG -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk -gdwarf-2 -mthumb -miphoneos-version-min=4.0 -iquote /Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-generated-files.hmap -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-own-target-headers.hmap -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-all-target-headers.hmap -iquote /Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-project-headers.hmap -I/Users/oliver/Development/iGithub/build/Debug-iphoneos/include -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/DerivedSources/armv7 -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/DerivedSources -F/Users/oliver/Development/iGithub/build/Debug-iphoneos -include /var/folders/vP/vPS9LckaF3a+SXfRwj19bU+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/iGithub-Prefix-eyxefnbkrszrqqhjgjitjtbkalmg/iGithub-Prefix.pch -c /Users/oliver/Development/iGithub/iGithub/../GHSettingsHelper.m -o /Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv7/GHSettingsHelper.o
-
-CCompileC build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv7/GHUser.o /Users/oliver/Development/iGithub/iGithub/../GHUser.m normal armv7 objective-c com.apple.compilers.llvmgcc42
-s323161116.433005
-e323161116.805489
-r1
-xCompileC
-xbuild/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv7/GHUser.o
-x/Users/oliver/Development/iGithub/iGithub/../GHUser.m
-xnormal
-xarmv7
-xobjective-c
-xcom.apple.compilers.llvmgcc42
-lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection61"Compile /Users/oliver/Development/iGithub/iGithub/../GHUser.m17f46e1c0c43b341^863cce1c0c43b341^---0#0#0#-19%DVTDocumentLocation2@69"file://localhost/Users/oliver/Development/iGithub/iGithub/../GHUser.m0000000000000000^1842"CompileC build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv7/GHUser.o iGithub/../GHUser.m normal armv7 objective-c com.apple.compilers.llvmgcc42    cd /Users/oliver/Development/iGithub    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/llvm-gcc-4.2 -x objective-c -arch armv7 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -DDEBUG -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk -gdwarf-2 -mthumb -miphoneos-version-min=4.0 -iquote /Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-generated-files.hmap -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-own-target-headers.hmap -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-all-target-headers.hmap -iquote /Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-project-headers.hmap -I/Users/oliver/Development/iGithub/build/Debug-iphoneos/include -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/DerivedSources/armv7 -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/DerivedSources -F/Users/oliver/Development/iGithub/build/Debug-iphoneos -include /var/folders/vP/vPS9LckaF3a+SXfRwj19bU+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/iGithub-Prefix-eyxefnbkrszrqqhjgjitjtbkalmg/iGithub-Prefix.pch -c /Users/oliver/Development/iGithub/iGithub/../GHUser.m -o /Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv7/GHUser.o
-
-CCompileC build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv7/JSONKit.o /Users/oliver/Development/iGithub/iGithub/../JSONKit/JSONKit.m normal armv7 objective-c com.apple.compilers.llvmgcc42
-s323160952.276429
-e323160953.335639
-r1
-xCompileC
-xbuild/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv7/JSONKit.o
-x/Users/oliver/Development/iGithub/iGithub/../JSONKit/JSONKit.m
-xnormal
-xarmv7
-xobjective-c
-xcom.apple.compilers.llvmgcc42
-lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection70"Compile /Users/oliver/Development/iGithub/iGithub/../JSONKit/JSONKit.m080347780b43b341^c8eb55790b43b341^---0#0#0#-19%DVTDocumentLocation2@78"file://localhost/Users/oliver/Development/iGithub/iGithub/../JSONKit/JSONKit.m0000000000000000^1862"CompileC build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv7/JSONKit.o iGithub/../JSONKit/JSONKit.m normal armv7 objective-c com.apple.compilers.llvmgcc42    cd /Users/oliver/Development/iGithub    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/llvm-gcc-4.2 -x objective-c -arch armv7 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -DDEBUG -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk -gdwarf-2 -mthumb -miphoneos-version-min=4.0 -iquote /Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-generated-files.hmap -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-own-target-headers.hmap -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-all-target-headers.hmap -iquote /Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-project-headers.hmap -I/Users/oliver/Development/iGithub/build/Debug-iphoneos/include -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/DerivedSources/armv7 -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/DerivedSources -F/Users/oliver/Development/iGithub/build/Debug-iphoneos -include /var/folders/vP/vPS9LckaF3a+SXfRwj19bU+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/iGithub-Prefix-eyxefnbkrszrqqhjgjitjtbkalmg/iGithub-Prefix.pch -c /Users/oliver/Development/iGithub/iGithub/../JSONKit/JSONKit.m -o /Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv7/JSONKit.o
-
-CCompileC build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv7/Reachability.o /Users/oliver/Development/iGithub/iGithub/../asi-http-request/External/Reachability/Reachability.m normal armv7 objective-c com.apple.compilers.llvmgcc42
-s323160954.278884
-e323160954.470132
-r1
-xCompileC
-xbuild/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv7/Reachability.o
-x/Users/oliver/Development/iGithub/iGithub/../asi-http-request/External/Reachability/Reachability.m
-xnormal
-xarmv7
-xobjective-c
-xcom.apple.compilers.llvmgcc42
-lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection106"Compile /Users/oliver/Development/iGithub/iGithub/../asi-http-request/External/Reachability/Reachability.m3484477a0b43b341^6f62787a0b43b341^---0#0#0#-19%DVTDocumentLocation2@114"file://localhost/Users/oliver/Development/iGithub/iGithub/../asi-http-request/External/Reachability/Reachability.m0000000000000000^1944"CompileC build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv7/Reachability.o iGithub/../asi-http-request/External/Reachability/Reachability.m normal armv7 objective-c com.apple.compilers.llvmgcc42    cd /Users/oliver/Development/iGithub    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/llvm-gcc-4.2 -x objective-c -arch armv7 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -DDEBUG -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk -gdwarf-2 -mthumb -miphoneos-version-min=4.0 -iquote /Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-generated-files.hmap -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-own-target-headers.hmap -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-all-target-headers.hmap -iquote /Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-project-headers.hmap -I/Users/oliver/Development/iGithub/build/Debug-iphoneos/include -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/DerivedSources/armv7 -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/DerivedSources -F/Users/oliver/Development/iGithub/build/Debug-iphoneos -include /var/folders/vP/vPS9LckaF3a+SXfRwj19bU+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/iGithub-Prefix-eyxefnbkrszrqqhjgjitjtbkalmg/iGithub-Prefix.pch -c /Users/oliver/Development/iGithub/iGithub/../asi-http-request/External/Reachability/Reachability.m -o /Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv7/Reachability.o
-
-CCompileC build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv7/SFHFKeychainUtils.o /Users/oliver/Development/iGithub/iGithub/../iGithub/SFHFKeychainUtils.m normal armv7 objective-c com.apple.compilers.llvmgcc42
-s323160951.323453
-e323160951.463094
-r1
-xCompileC
-xbuild/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv7/SFHFKeychainUtils.o
-x/Users/oliver/Development/iGithub/iGithub/../iGithub/SFHFKeychainUtils.m
-xnormal
-xarmv7
-xobjective-c
-xcom.apple.compilers.llvmgcc42
-lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection80"Compile /Users/oliver/Development/iGithub/iGithub/../iGithub/SFHFKeychainUtils.m82ae55770b43b341^539576770b43b341^---0#0#0#-19%DVTDocumentLocation2@88"file://localhost/Users/oliver/Development/iGithub/iGithub/../iGithub/SFHFKeychainUtils.m0000000000000000^1902"CompileC build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv7/SFHFKeychainUtils.o iGithub/../iGithub/SFHFKeychainUtils.m normal armv7 objective-c com.apple.compilers.llvmgcc42    cd /Users/oliver/Development/iGithub    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/llvm-gcc-4.2 -x objective-c -arch armv7 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -DDEBUG -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk -gdwarf-2 -mthumb -miphoneos-version-min=4.0 -iquote /Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-generated-files.hmap -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-own-target-headers.hmap -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-all-target-headers.hmap -iquote /Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-project-headers.hmap -I/Users/oliver/Development/iGithub/build/Debug-iphoneos/include -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/DerivedSources/armv7 -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/DerivedSources -F/Users/oliver/Development/iGithub/build/Debug-iphoneos -include /var/folders/vP/vPS9LckaF3a+SXfRwj19bU+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/iGithub-Prefix-eyxefnbkrszrqqhjgjitjtbkalmg/iGithub-Prefix.pch -c /Users/oliver/Development/iGithub/iGithub/../iGithub/SFHFKeychainUtils.m -o /Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv7/SFHFKeychainUtils.o
-
-CCompileC build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv7/UITableViewCellWithTextField.o /Users/oliver/Development/iGithub/iGithub/../iGithub/UITableViewCellWithTextField.m normal armv7 objective-c com.apple.compilers.llvmgcc42
-s323160951.791536
-e323160951.922353
-r1
-xCompileC
-xbuild/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv7/UITableViewCellWithTextField.o
-x/Users/oliver/Development/iGithub/iGithub/../iGithub/UITableViewCellWithTextField.m
-xnormal
-xarmv7
-xobjective-c
-xcom.apple.compilers.llvmgcc42
-lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection91"Compile /Users/oliver/Development/iGithub/iGithub/../iGithub/UITableViewCellWithTextField.me8c0ca770b43b341^bd35ec770b43b341^---0#0#0#-19%DVTDocumentLocation2@99"file://localhost/Users/oliver/Development/iGithub/iGithub/../iGithub/UITableViewCellWithTextField.m0000000000000000^1946"CompileC build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv7/UITableViewCellWithTextField.o iGithub/../iGithub/UITableViewCellWithTextField.m normal armv7 objective-c com.apple.compilers.llvmgcc42    cd /Users/oliver/Development/iGithub    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/llvm-gcc-4.2 -x objective-c -arch armv7 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -DDEBUG -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk -gdwarf-2 -mthumb -miphoneos-version-min=4.0 -iquote /Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-generated-files.hmap -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-own-target-headers.hmap -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-all-target-headers.hmap -iquote /Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-project-headers.hmap -I/Users/oliver/Development/iGithub/build/Debug-iphoneos/include -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/DerivedSources/armv7 -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/DerivedSources -F/Users/oliver/Development/iGithub/build/Debug-iphoneos -include /var/folders/vP/vPS9LckaF3a+SXfRwj19bU+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/iGithub-Prefix-eyxefnbkrszrqqhjgjitjtbkalmg/iGithub-Prefix.pch -c /Users/oliver/Development/iGithub/iGithub/../iGithub/UITableViewCellWithTextField.m -o /Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv7/UITableViewCellWithTextField.o
-
-CCompileC build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv7/iGithubAppDelegate.o /Users/oliver/Development/iGithub/iGithub/iGithubAppDelegate.m normal armv7 objective-c com.apple.compilers.llvmgcc42
-s323160948.388769
-e323160948.606669
-r1
-xCompileC
-xbuild/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv7/iGithubAppDelegate.o
-x/Users/oliver/Development/iGithub/iGithub/iGithubAppDelegate.m
-xnormal
-xarmv7
-xobjective-c
-xcom.apple.compilers.llvmgcc42
-lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection70"Compile /Users/oliver/Development/iGithub/iGithub/iGithubAppDelegate.m7aa663740b43b341^53af9b740b43b341^---0#0#0#-19%DVTDocumentLocation2@78"file://localhost/Users/oliver/Development/iGithub/iGithub/iGithubAppDelegate.m0000000000000000^1884"CompileC build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv7/iGithubAppDelegate.o iGithub/iGithubAppDelegate.m normal armv7 objective-c com.apple.compilers.llvmgcc42    cd /Users/oliver/Development/iGithub    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/llvm-gcc-4.2 -x objective-c -arch armv7 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -DDEBUG -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk -gdwarf-2 -mthumb -miphoneos-version-min=4.0 -iquote /Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-generated-files.hmap -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-own-target-headers.hmap -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-all-target-headers.hmap -iquote /Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-project-headers.hmap -I/Users/oliver/Development/iGithub/build/Debug-iphoneos/include -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/DerivedSources/armv7 -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/DerivedSources -F/Users/oliver/Development/iGithub/build/Debug-iphoneos -include /var/folders/vP/vPS9LckaF3a+SXfRwj19bU+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/iGithub-Prefix-eyxefnbkrszrqqhjgjitjtbkalmg/iGithub-Prefix.pch -c /Users/oliver/Development/iGithub/iGithub/iGithubAppDelegate.m -o /Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv7/iGithubAppDelegate.o
-
-CCompileC build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv7/iGithubAppDelegate_iPad.o /Users/oliver/Development/iGithub/iGithub/iPad/iGithubAppDelegate_iPad.m normal armv7 objective-c com.apple.compilers.llvmgcc42
-s323160951.242768
-e323160951.323042
-r1
-xCompileC
-xbuild/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv7/iGithubAppDelegate_iPad.o
-x/Users/oliver/Development/iGithub/iGithub/iPad/iGithubAppDelegate_iPad.m
-xnormal
-xarmv7
-xobjective-c
-xcom.apple.compilers.llvmgcc42
-lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection80"Compile /Users/oliver/Development/iGithub/iGithub/iPad/iGithubAppDelegate_iPad.m2f503e770b43b341^bfba52770b43b341^---0#0#0#-19%DVTDocumentLocation2@88"file://localhost/Users/oliver/Development/iGithub/iGithub/iPad/iGithubAppDelegate_iPad.m0000000000000000^1914"CompileC build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv7/iGithubAppDelegate_iPad.o iGithub/iPad/iGithubAppDelegate_iPad.m normal armv7 objective-c com.apple.compilers.llvmgcc42    cd /Users/oliver/Development/iGithub    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/llvm-gcc-4.2 -x objective-c -arch armv7 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -DDEBUG -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk -gdwarf-2 -mthumb -miphoneos-version-min=4.0 -iquote /Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-generated-files.hmap -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-own-target-headers.hmap -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-all-target-headers.hmap -iquote /Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-project-headers.hmap -I/Users/oliver/Development/iGithub/build/Debug-iphoneos/include -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/DerivedSources/armv7 -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/DerivedSources -F/Users/oliver/Development/iGithub/build/Debug-iphoneos -include /var/folders/vP/vPS9LckaF3a+SXfRwj19bU+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/iGithub-Prefix-eyxefnbkrszrqqhjgjitjtbkalmg/iGithub-Prefix.pch -c /Users/oliver/Development/iGithub/iGithub/iPad/iGithubAppDelegate_iPad.m -o /Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv7/iGithubAppDelegate_iPad.o
-
-CCompileC build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv7/iGithubAppDelegate_iPhone.o /Users/oliver/Development/iGithub/iGithub/iPhone/iGithubAppDelegate_iPhone.m normal armv7 objective-c com.apple.compilers.llvmgcc42
-s323160948.532311
-e323160948.790172
-r1
-xCompileC
-xbuild/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv7/iGithubAppDelegate_iPhone.o
-x/Users/oliver/Development/iGithub/iGithub/iPhone/iGithubAppDelegate_iPhone.m
-xnormal
-xarmv7
-xobjective-c
-xcom.apple.compilers.llvmgcc42
-lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection84"Compile /Users/oliver/Development/iGithub/iGithub/iPhone/iGithubAppDelegate_iPhone.m5e6688740b43b341^25b3ca740b43b341^---0#0#0#-19%DVTDocumentLocation2@92"file://localhost/Users/oliver/Development/iGithub/iGithub/iPhone/iGithubAppDelegate_iPhone.m0000000000000000^1926"CompileC build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv7/iGithubAppDelegate_iPhone.o iGithub/iPhone/iGithubAppDelegate_iPhone.m normal armv7 objective-c com.apple.compilers.llvmgcc42    cd /Users/oliver/Development/iGithub    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/llvm-gcc-4.2 -x objective-c -arch armv7 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -DDEBUG -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk -gdwarf-2 -mthumb -miphoneos-version-min=4.0 -iquote /Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-generated-files.hmap -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-own-target-headers.hmap -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-all-target-headers.hmap -iquote /Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-project-headers.hmap -I/Users/oliver/Development/iGithub/build/Debug-iphoneos/include -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/DerivedSources/armv7 -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/DerivedSources -F/Users/oliver/Development/iGithub/build/Debug-iphoneos -include /var/folders/vP/vPS9LckaF3a+SXfRwj19bU+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/iGithub-Prefix-eyxefnbkrszrqqhjgjitjtbkalmg/iGithub-Prefix.pch -c /Users/oliver/Development/iGithub/iGithub/iPhone/iGithubAppDelegate_iPhone.m -o /Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv7/iGithubAppDelegate_iPhone.o
-
-CCompileC build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv7/main.o /Users/oliver/Development/iGithub/iGithub/main.m normal armv7 objective-c com.apple.compilers.llvmgcc42
-s323160948.245711
-e323160948.388591
-r1
-xCompileC
-xbuild/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv7/main.o
-x/Users/oliver/Development/iGithub/iGithub/main.m
-xnormal
-xarmv7
-xobjective-c
-xcom.apple.compilers.llvmgcc42
-lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection56"Compile /Users/oliver/Development/iGithub/iGithub/main.mc9053f740b43b341^6c9263740b43b341^---0#0#0#-19%DVTDocumentLocation2@64"file://localhost/Users/oliver/Development/iGithub/iGithub/main.m0000000000000000^1828"CompileC build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv7/main.o iGithub/main.m normal armv7 objective-c com.apple.compilers.llvmgcc42    cd /Users/oliver/Development/iGithub    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/llvm-gcc-4.2 -x objective-c -arch armv7 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -DDEBUG -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk -gdwarf-2 -mthumb -miphoneos-version-min=4.0 -iquote /Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-generated-files.hmap -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-own-target-headers.hmap -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-all-target-headers.hmap -iquote /Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-project-headers.hmap -I/Users/oliver/Development/iGithub/build/Debug-iphoneos/include -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/DerivedSources/armv7 -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/DerivedSources -F/Users/oliver/Development/iGithub/build/Debug-iphoneos -include /var/folders/vP/vPS9LckaF3a+SXfRwj19bU+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/iGithub-Prefix-eyxefnbkrszrqqhjgjitjtbkalmg/iGithub-Prefix.pch -c /Users/oliver/Development/iGithub/iGithub/main.m -o /Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv7/main.o
-
-CCompileXIB /Users/oliver/Development/iGithub/iGithub/../iGithub/GHAuthenticationViewController.xib
-s323160957.028313
-e323160957.144638
-r1
-xCompileXIB
-x/Users/oliver/Development/iGithub/iGithub/../iGithub/GHAuthenticationViewController.xib
-lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection97"Compiling /Users/oliver/Development/iGithub/iGithub/../iGithub/GHAuthenticationViewController.xib8d60077d0b43b341^e10d257d0b43b341^---0#0#0#-19%DVTDocumentLocation2@103"file://localhost/Users/oliver/Development/iGithub/iGithub/../iGithub/GHAuthenticationViewController.xib0000000000000000^660"CompileXIB iGithub/../iGithub/GHAuthenticationViewController.xib    cd /Users/oliver/Development/iGithub    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    setenv XCODE_DEVELOPER_USR_PATH /Developer/usr/bin/..    /Developer/usr/bin/ibtool --errors --warnings --notices --output-format human-readable-text --compile /Users/oliver/Development/iGithub/build/Debug-iphoneos/iGithub.app/GHAuthenticationViewController.nib /Users/oliver/Development/iGithub/iGithub/../iGithub/GHAuthenticationViewController.xib --sdk /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk
-
-CCompileXIB /Users/oliver/Development/iGithub/iGithub/iPad/en.lproj/MainWindow_iPad.xib
-s323160955.885715
-e323160956.971478
-r1
-xCompileXIB
-x/Users/oliver/Development/iGithub/iGithub/iPad/en.lproj/MainWindow_iPad.xib
-lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection85"Compiling /Users/oliver/Development/iGithub/iGithub/iPad/en.lproj/MainWindow_iPad.xib9ed1e27b0b43b341^98bdf87c0b43b341^---0#0#0#-19%DVTDocumentLocation2@91"file://localhost/Users/oliver/Development/iGithub/iGithub/iPad/en.lproj/MainWindow_iPad.xib0000000000000000^630"CompileXIB iGithub/iPad/en.lproj/MainWindow_iPad.xib    cd /Users/oliver/Development/iGithub    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    setenv XCODE_DEVELOPER_USR_PATH /Developer/usr/bin/..    /Developer/usr/bin/ibtool --errors --warnings --notices --output-format human-readable-text --compile /Users/oliver/Development/iGithub/build/Debug-iphoneos/iGithub.app/en.lproj/MainWindow_iPad.nib /Users/oliver/Development/iGithub/iGithub/iPad/en.lproj/MainWindow_iPad.xib --sdk /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk
-
-CCompileXIB /Users/oliver/Development/iGithub/iGithub/iPhone/en.lproj/MainWindow_iPhone.xib
-s323160955.881621
-e323160956.949661
-r1
-xCompileXIB
-x/Users/oliver/Development/iGithub/iGithub/iPhone/en.lproj/MainWindow_iPhone.xib
-lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection89"Compiling /Users/oliver/Development/iGithub/iGithub/iPhone/en.lproj/MainWindow_iPhone.xib26c7e17b0b43b341^fc1cf37c0b43b341^---0#0#0#-19%DVTDocumentLocation2@95"file://localhost/Users/oliver/Development/iGithub/iGithub/iPhone/en.lproj/MainWindow_iPhone.xib0000000000000000^640"CompileXIB iGithub/iPhone/en.lproj/MainWindow_iPhone.xib    cd /Users/oliver/Development/iGithub    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    setenv XCODE_DEVELOPER_USR_PATH /Developer/usr/bin/..    /Developer/usr/bin/ibtool --errors --warnings --notices --output-format human-readable-text --compile /Users/oliver/Development/iGithub/build/Debug-iphoneos/iGithub.app/en.lproj/MainWindow_iPhone.nib /Users/oliver/Development/iGithub/iGithub/iPhone/en.lproj/MainWindow_iPhone.xib --sdk /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk
-
-CCopyPNGFile /Users/oliver/Development/iGithub/build/Debug-iphoneos/iGithub.app/DefaultUserImage.png iGithub/DefaultUserImage.png
-s323160956.950022
-e323160957.029721
-r1
-xCopyPNGFile
-x/Users/oliver/Development/iGithub/build/Debug-iphoneos/iGithub.app/DefaultUserImage.png
-xiGithub/DefaultUserImage.png
-lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection94"CopyPNGFile build/Debug-iphoneos/iGithub.app/DefaultUserImage.png iGithub/DefaultUserImage.png3849f37c0b43b341^dc9b077d0b43b341^---0#0#0#-19%DVTDocumentLocation2@78"file://localhost/Users/oliver/Development/iGithub/iGithub/DefaultUserImage.png0000000000000000^574"CopyPNGFile build/Debug-iphoneos/iGithub.app/DefaultUserImage.png iGithub/DefaultUserImage.png    cd /Users/oliver/Development/iGithub    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    "/Developer/Platforms/iPhoneOS.platform/Developer/Library/Xcode/PrivatePlugIns/iPhoneOS Build System Support.xcplugin/Contents/Resources/copypng" -compress "" /Users/oliver/Development/iGithub/iGithub/DefaultUserImage.png /Users/oliver/Development/iGithub/build/Debug-iphoneos/iGithub.app/DefaultUserImage.png
-
-CCopyPNGFile /Users/oliver/Development/iGithub/build/Debug-iphoneos/iGithub.app/DefaultUserImage@2x.png iGithub/DefaultUserImage@2x.png
-s323160956.971763
-e323160957.027913
-r1
-xCopyPNGFile
-x/Users/oliver/Development/iGithub/build/Debug-iphoneos/iGithub.app/DefaultUserImage@2x.png
-xiGithub/DefaultUserImage@2x.png
-lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection100"CopyPNGFile build/Debug-iphoneos/iGithub.app/DefaultUserImage@2x.png iGithub/DefaultUserImage@2x.png4ddaf87c0b43b341^802d077d0b43b341^---0#0#0#-19%DVTDocumentLocation2@81"file://localhost/Users/oliver/Development/iGithub/iGithub/DefaultUserImage@2x.png0000000000000000^590"CopyPNGFile "build/Debug-iphoneos/iGithub.app/DefaultUserImage@2x.png" "iGithub/DefaultUserImage@2x.png"    cd /Users/oliver/Development/iGithub    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    "/Developer/Platforms/iPhoneOS.platform/Developer/Library/Xcode/PrivatePlugIns/iPhoneOS Build System Support.xcplugin/Contents/Resources/copypng" -compress "" /Users/oliver/Development/iGithub/iGithub/DefaultUserImage@2x.png /Users/oliver/Development/iGithub/build/Debug-iphoneos/iGithub.app/DefaultUserImage@2x.png
-
-CCopyPNGFile /Users/oliver/Development/iGithub/build/Debug-iphoneos/iGithub.app/GHGlossBottomBorder.png iGithub/GHGlossBottomBorder.png
-s323160957.188420
-e323160957.274396
-r1
-xCopyPNGFile
-x/Users/oliver/Development/iGithub/build/Debug-iphoneos/iGithub.app/GHGlossBottomBorder.png
-xiGithub/GHGlossBottomBorder.png
-lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection100"CopyPNGFile build/Debug-iphoneos/iGithub.app/GHGlossBottomBorder.png iGithub/GHGlossBottomBorder.png1151307d0b43b341^293e467d0b43b341^---0#0#0#-19%DVTDocumentLocation2@81"file://localhost/Users/oliver/Development/iGithub/iGithub/GHGlossBottomBorder.png0000000000000000^586"CopyPNGFile build/Debug-iphoneos/iGithub.app/GHGlossBottomBorder.png iGithub/GHGlossBottomBorder.png    cd /Users/oliver/Development/iGithub    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    "/Developer/Platforms/iPhoneOS.platform/Developer/Library/Xcode/PrivatePlugIns/iPhoneOS Build System Support.xcplugin/Contents/Resources/copypng" -compress "" /Users/oliver/Development/iGithub/iGithub/GHGlossBottomBorder.png /Users/oliver/Development/iGithub/build/Debug-iphoneos/iGithub.app/GHGlossBottomBorder.png
-
-CCopyPNGFile /Users/oliver/Development/iGithub/build/Debug-iphoneos/iGithub.app/GHGlossBottomBorder@2x.png iGithub/GHGlossBottomBorder@2x.png
-s323160957.097390
-e323160957.295953
-r1
-xCopyPNGFile
-x/Users/oliver/Development/iGithub/build/Debug-iphoneos/iGithub.app/GHGlossBottomBorder@2x.png
-xiGithub/GHGlossBottomBorder@2x.png
-lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection106"CopyPNGFile build/Debug-iphoneos/iGithub.app/GHGlossBottomBorder@2x.png iGithub/GHGlossBottomBorder@2x.png1d04197d0b43b341^83c34b7d0b43b341^---0#0#0#-19%DVTDocumentLocation2@84"file://localhost/Users/oliver/Development/iGithub/iGithub/GHGlossBottomBorder@2x.png0000000000000000^602"CopyPNGFile "build/Debug-iphoneos/iGithub.app/GHGlossBottomBorder@2x.png" "iGithub/GHGlossBottomBorder@2x.png"    cd /Users/oliver/Development/iGithub    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    "/Developer/Platforms/iPhoneOS.platform/Developer/Library/Xcode/PrivatePlugIns/iPhoneOS Build System Support.xcplugin/Contents/Resources/copypng" -compress "" /Users/oliver/Development/iGithub/iGithub/GHGlossBottomBorder@2x.png /Users/oliver/Development/iGithub/build/Debug-iphoneos/iGithub.app/GHGlossBottomBorder@2x.png
-
-CCopyPNGFile /Users/oliver/Development/iGithub/build/Debug-iphoneos/iGithub.app/GHGlossTopBorder.png iGithub/GHGlossTopBorder.png
-s323160957.144987
-e323160957.188156
-r1
-xCopyPNGFile
-x/Users/oliver/Development/iGithub/build/Debug-iphoneos/iGithub.app/GHGlossTopBorder.png
-xiGithub/GHGlossTopBorder.png
-lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection94"CopyPNGFile build/Debug-iphoneos/iGithub.app/GHGlossTopBorder.png iGithub/GHGlossTopBorder.png1e32257d0b43b341^bb2a307d0b43b341^---0#0#0#-19%DVTDocumentLocation2@78"file://localhost/Users/oliver/Development/iGithub/iGithub/GHGlossTopBorder.png0000000000000000^574"CopyPNGFile build/Debug-iphoneos/iGithub.app/GHGlossTopBorder.png iGithub/GHGlossTopBorder.png    cd /Users/oliver/Development/iGithub    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    "/Developer/Platforms/iPhoneOS.platform/Developer/Library/Xcode/PrivatePlugIns/iPhoneOS Build System Support.xcplugin/Contents/Resources/copypng" -compress "" /Users/oliver/Development/iGithub/iGithub/GHGlossTopBorder.png /Users/oliver/Development/iGithub/build/Debug-iphoneos/iGithub.app/GHGlossTopBorder.png
-
-CCopyPNGFile /Users/oliver/Development/iGithub/build/Debug-iphoneos/iGithub.app/GHGlossTopBorder@2x.png iGithub/GHGlossTopBorder@2x.png
-s323160957.029837
-e323160957.097166
-r1
-xCopyPNGFile
-x/Users/oliver/Development/iGithub/build/Debug-iphoneos/iGithub.app/GHGlossTopBorder@2x.png
-xiGithub/GHGlossTopBorder@2x.png
-lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection100"CopyPNGFile build/Debug-iphoneos/iGithub.app/GHGlossTopBorder@2x.png iGithub/GHGlossTopBorder@2x.png5bb5077d0b43b341^bddf187d0b43b341^---0#0#0#-19%DVTDocumentLocation2@81"file://localhost/Users/oliver/Development/iGithub/iGithub/GHGlossTopBorder@2x.png0000000000000000^590"CopyPNGFile "build/Debug-iphoneos/iGithub.app/GHGlossTopBorder@2x.png" "iGithub/GHGlossTopBorder@2x.png"    cd /Users/oliver/Development/iGithub    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    "/Developer/Platforms/iPhoneOS.platform/Developer/Library/Xcode/PrivatePlugIns/iPhoneOS Build System Support.xcplugin/Contents/Resources/copypng" -compress "" /Users/oliver/Development/iGithub/iGithub/GHGlossTopBorder@2x.png /Users/oliver/Development/iGithub/build/Debug-iphoneos/iGithub.app/GHGlossTopBorder@2x.png
-
-CCopyStringsFile /Users/oliver/Development/iGithub/build/Debug-iphoneos/iGithub.app/en.lproj/InfoPlist.strings iGithub/en.lproj/InfoPlist.strings
-s323160955.881204
-e323160955.885397
-r1
-xCopyStringsFile
-x/Users/oliver/Development/iGithub/build/Debug-iphoneos/iGithub.app/en.lproj/InfoPlist.strings
-xiGithub/en.lproj/InfoPlist.strings
-lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection39"Copy iGithub/en.lproj/InfoPlist.strings07b3e17b0b43b341^3aaee27b0b43b341^---0#0#0#-19%DVTDocumentLocation2@84"file://localhost/Users/oliver/Development/iGithub/iGithub/en.lproj/InfoPlist.strings0000000000000000^480"CopyStringsFile build/Debug-iphoneos/iGithub.app/en.lproj/InfoPlist.strings iGithub/en.lproj/InfoPlist.strings    cd /Users/oliver/Development/iGithub    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    builtin-copyStrings --validate --inputencoding utf-8 --outputencoding binary --outdir /Users/oliver/Development/iGithub/build/Debug-iphoneos/iGithub.app/en.lproj -- iGithub/en.lproj/InfoPlist.strings
-
-CCpResource /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/ResourceRules.plist build/Debug-iphoneos/iGithub.app/ResourceRules.plist
-s323160947.179713
-e323160947.184878
-r1
-xCpResource
-x/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/ResourceRules.plist
-xbuild/Debug-iphoneos/iGithub.app/ResourceRules.plist
-lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection57"Copy build/Debug-iphoneos/iGithub.app/ResourceRules.plist65192e730b43b341^5f7e2f730b43b341^---0#0#0#-19%DVTDocumentLocation2@102"file://localhost/Users/oliver/Development/iGithub/build/Debug-iphoneos/iGithub.app/ResourceRules.plist000020442305f041^575"CpResource /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/ResourceRules.plist build/Debug-iphoneos/iGithub.app/ResourceRules.plist    cd /Users/oliver/Development/iGithub    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -resolve-src-symlinks /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/ResourceRules.plist /Users/oliver/Development/iGithub/build/Debug-iphoneos/iGithub.app
-
-CCreateUniversalBinary /Users/oliver/Development/iGithub/build/Debug-iphoneos/iGithub.app/iGithub normal "armv6 armv7"
-s323161116.928623
-e323161116.941051
-r1
-xCreateUniversalBinary
-x/Users/oliver/Development/iGithub/build/Debug-iphoneos/iGithub.app/iGithub
-xnormal
-xarmv6 armv7
-lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection98"Create universal binary /Users/oliver/Development/iGithub/build/Debug-iphoneos/iGithub.app/iGithub14cbed1c0c43b341^07eaf01c0c43b341^---0#0#0#-19%DVTDocumentLocation2@90"file://localhost/Users/oliver/Development/iGithub/build/Debug-iphoneos/iGithub.app/iGithub0000000000000000^582"CreateUniversalBinary build/Debug-iphoneos/iGithub.app/iGithub normal "armv6 armv7"    cd /Users/oliver/Development/iGithub    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /usr/bin/lipo -create /Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv6/iGithub /Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv7/iGithub -output /Users/oliver/Development/iGithub/build/Debug-iphoneos/iGithub.app/iGithub
-
-CGenerateDSYMFile /Users/oliver/Development/iGithub/build/Debug-iphoneos/iGithub.app.dSYM /Users/oliver/Development/iGithub/build/Debug-iphoneos/iGithub.app/iGithub
-s323161116.941237
-e323161117.059759
-r1
-xGenerateDSYMFile
-x/Users/oliver/Development/iGithub/build/Debug-iphoneos/iGithub.app.dSYM
-x/Users/oliver/Development/iGithub/build/Debug-iphoneos/iGithub.app/iGithub
-lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection82"Generating /Users/oliver/Development/iGithub/build/Debug-iphoneos/iGithub.app.dSYM0805f11c0c43b341^5e4c0f1d0c43b341^---0#0#0#-19%DVTDocumentLocation2@88"file://localhost/Users/oliver/Development/iGithub/build/Debug-iphoneos/iGithub.app.dSYM/0000000000000000^443"GenerateDSYMFile build/Debug-iphoneos/iGithub.app.dSYM build/Debug-iphoneos/iGithub.app/iGithub    cd /Users/oliver/Development/iGithub    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/usr/bin/dsymutil /Users/oliver/Development/iGithub/build/Debug-iphoneos/iGithub.app/iGithub -o /Users/oliver/Development/iGithub/build/Debug-iphoneos/iGithub.app.dSYM
-
-CLd /Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv6/iGithub normal armv6
-s323161116.790526
-e323161116.928259
-r1
-xLd
-x/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv6/iGithub
-xnormal
-xarmv6
-lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection116"Link /Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv6/iGithubd178ca1c0c43b341^d7a2ed1c0c43b341^---0#0#0#--1045"Ld build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv6/iGithub normal armv6    cd /Users/oliver/Development/iGithub    setenv IPHONEOS_DEPLOYMENT_TARGET 4.0    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/llvm-gcc-4.2 -arch armv6 -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk -L/Users/oliver/Development/iGithub/build/Debug-iphoneos -F/Users/oliver/Development/iGithub/build/Debug-iphoneos -filelist /Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv6/iGithub.LinkFileList -dead_strip -miphoneos-version-min=4.0 -lz.1.2.3 -framework CoreGraphics -framework MobileCoreServices -framework SystemConfiguration -framework CFNetwork -framework Security -framework UIKit -framework Foundation -o /Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv6/iGithub
-
-CLd /Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv7/iGithub normal armv7
-s323161116.807767
-e323161116.926566
-r1
-xLd
-x/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv7/iGithub
-xnormal
-xarmv7
-lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection116"Link /Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv7/iGithub42eace1c0c43b341^a436ed1c0c43b341^---0#0#0#--1045"Ld build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv7/iGithub normal armv7    cd /Users/oliver/Development/iGithub    setenv IPHONEOS_DEPLOYMENT_TARGET 4.0    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/llvm-gcc-4.2 -arch armv7 -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk -L/Users/oliver/Development/iGithub/build/Debug-iphoneos -F/Users/oliver/Development/iGithub/build/Debug-iphoneos -filelist /Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv7/iGithub.LinkFileList -dead_strip -miphoneos-version-min=4.0 -lz.1.2.3 -framework CoreGraphics -framework MobileCoreServices -framework SystemConfiguration -framework CFNetwork -framework Security -framework UIKit -framework Foundation -o /Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/Objects-normal/armv7/iGithub
-
-CProcessInfoPlistFile /Users/oliver/Development/iGithub/build/Debug-iphoneos/iGithub.app/Info.plist iGithub/iGithub-Info.plist
-s323160947.180333
-e323160947.185055
-r1
-xProcessInfoPlistFile
-x/Users/oliver/Development/iGithub/build/Debug-iphoneos/iGithub.app/Info.plist
-xiGithub/iGithub-Info.plist
-lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection34"Process iGithub/iGithub-Info.plist24432e730b43b341^90bc2f730b43b341^---0#0#0#-19%DVTDocumentLocation2@76"file://localhost/Users/oliver/Development/iGithub/iGithub/iGithub-Info.plist0000000000000000^642"ProcessInfoPlistFile build/Debug-iphoneos/iGithub.app/Info.plist iGithub/iGithub-Info.plist    cd /Users/oliver/Development/iGithub    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    builtin-infoPlistUtility iGithub/iGithub-Info.plist -genpkginfo /Users/oliver/Development/iGithub/build/Debug-iphoneos/iGithub.app/PkgInfo -expandbuildsettings -format binary -platform iphoneos -resourcerulesfile /Users/oliver/Development/iGithub/build/Debug-iphoneos/iGithub.app/ResourceRules.plist -o /Users/oliver/Development/iGithub/build/Debug-iphoneos/iGithub.app/Info.plist
-
-CProcessPCH /Users/oliver/Library/Developer/Xcode/DerivedData/iGithub-czmmzdunamfnugfichtzdgvwsxmp/Index/PrecompiledHeaders/iGithub-Prefix-eygafgjdiiqpeodkneuqpczymorr_ast/iGithub-Prefix.pch.pth iGithub/iGithub-Prefix.pch normal armv7 objective-c com.apple.compilers.llvm.clang.1_0.astbuilder
-r0
-
-CProcessPCH /Users/oliver/Library/Developer/Xcode/DerivedData/iGithub-czmmzdunamfnugfichtzdgvwsxmp/Index/PrecompiledHeaders/iGithub-Prefix-hihejwvpmawubbbfjppgijzrxhbb_ast/iGithub-Prefix.pch.pth iGithub/iGithub-Prefix.pch normal armv6 objective-c com.apple.compilers.llvm.clang.1_0.astbuilder
-r0
-
-CProcessPCH /var/folders/vP/vPS9LckaF3a+SXfRwj19bU+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/iGithub-Prefix-aojnksylhodcwkhawsnikbpmbcee/iGithub-Prefix.pch.gch iGithub/iGithub-Prefix.pch normal armv6 objective-c com.apple.compilers.llvmgcc42
-s323160947.188181
-e323160948.532064
-r1
-xProcessPCH
-x/var/folders/vP/vPS9LckaF3a+SXfRwj19bU+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/iGithub-Prefix-aojnksylhodcwkhawsnikbpmbcee/iGithub-Prefix.pch.gch
-xiGithub/iGithub-Prefix.pch
-xnormal
-xarmv6
-xobjective-c
-xcom.apple.compilers.llvmgcc42
-lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection37"Precompile iGithub/iGithub-Prefix.pch9d4c30730b43b341^6c7688740b43b341^---0#0#0#-19%DVTDocumentLocation2@76"file://localhost/Users/oliver/Development/iGithub/iGithub/iGithub-Prefix.pch0000000000000000^1833"ProcessPCH /var/folders/vP/vPS9LckaF3a+SXfRwj19bU+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/iGithub-Prefix-aojnksylhodcwkhawsnikbpmbcee/iGithub-Prefix.pch.gch iGithub/iGithub-Prefix.pch normal armv6 objective-c com.apple.compilers.llvmgcc42    cd /Users/oliver/Development/iGithub    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/llvm-gcc-4.2 -x objective-c-header -arch armv6 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -DDEBUG -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk -gdwarf-2 -mthumb -miphoneos-version-min=4.0 -iquote /Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-generated-files.hmap -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-own-target-headers.hmap -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-all-target-headers.hmap -iquote /Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-project-headers.hmap -I/Users/oliver/Development/iGithub/build/Debug-iphoneos/include -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/DerivedSources/armv6 -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/DerivedSources -F/Users/oliver/Development/iGithub/build/Debug-iphoneos -c /Users/oliver/Development/iGithub/iGithub/iGithub-Prefix.pch -o /var/folders/vP/vPS9LckaF3a+SXfRwj19bU+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/iGithub-Prefix-aojnksylhodcwkhawsnikbpmbcee/iGithub-Prefix.pch.gch
-
-CProcessPCH /var/folders/vP/vPS9LckaF3a+SXfRwj19bU+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/iGithub-Prefix-eyxefnbkrszrqqhjgjitjtbkalmg/iGithub-Prefix.pch.gch iGithub/iGithub-Prefix.pch normal armv7 objective-c com.apple.compilers.llvmgcc42
-s323160947.188912
-e323160948.245279
-r1
-xProcessPCH
-x/var/folders/vP/vPS9LckaF3a+SXfRwj19bU+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/iGithub-Prefix-eyxefnbkrszrqqhjgjitjtbkalmg/iGithub-Prefix.pch.gch
-xiGithub/iGithub-Prefix.pch
-xnormal
-xarmv7
-xobjective-c
-xcom.apple.compilers.llvmgcc42
-lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection37"Precompile iGithub/iGithub-Prefix.pch577b30730b43b341^e9ee3e740b43b341^---0#0#0#-19%DVTDocumentLocation2@76"file://localhost/Users/oliver/Development/iGithub/iGithub/iGithub-Prefix.pch0000000000000000^1833"ProcessPCH /var/folders/vP/vPS9LckaF3a+SXfRwj19bU+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/iGithub-Prefix-eyxefnbkrszrqqhjgjitjtbkalmg/iGithub-Prefix.pch.gch iGithub/iGithub-Prefix.pch normal armv7 objective-c com.apple.compilers.llvmgcc42    cd /Users/oliver/Development/iGithub    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/llvm-gcc-4.2 -x objective-c-header -arch armv7 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -DDEBUG -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk -gdwarf-2 -mthumb -miphoneos-version-min=4.0 -iquote /Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-generated-files.hmap -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-own-target-headers.hmap -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-all-target-headers.hmap -iquote /Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub-project-headers.hmap -I/Users/oliver/Development/iGithub/build/Debug-iphoneos/include -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/DerivedSources/armv7 -I/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/DerivedSources -F/Users/oliver/Development/iGithub/build/Debug-iphoneos -c /Users/oliver/Development/iGithub/iGithub/iGithub-Prefix.pch -o /var/folders/vP/vPS9LckaF3a+SXfRwj19bU+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/iGithub-Prefix-eyxefnbkrszrqqhjgjitjtbkalmg/iGithub-Prefix.pch.gch
-
-CProcessProductPackaging /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/Entitlements.plist /Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub.xcent
-s323160957.309479
-e323160957.320845
-r1
-xProcessProductPackaging
-x/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/Entitlements.plist
-x/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub.xcent
-lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection175"ProcessProductPackaging /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/Entitlements.plist build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub.xcent815b4f7d0b43b341^b01f527d0b43b341^---0#0#0#-19%DVTDocumentLocation2@112"file://localhost/Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub.xcent000020442305f041^598"ProcessProductPackaging /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/Entitlements.plist build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub.xcent    cd /Users/oliver/Development/iGithub    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    <com.apple.tools.product-pkg-utility> /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/Entitlements.plist -entitlements -format xml -o /Users/oliver/Development/iGithub/build/iGithub.build/Debug-iphoneos/iGithub.build/iGithub.xcent
-
-CTouch /Users/oliver/Development/iGithub/build/Debug-iphoneos/iGithub.app
-s323161117.064105
-e323161117.073925
-r1
-xTouch
-x/Users/oliver/Development/iGithub/build/Debug-iphoneos/iGithub.app
-lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection72"Touch /Users/oliver/Development/iGithub/build/Debug-iphoneos/iGithub.appcd77101d0c43b341^95ee121d0c43b341^---0#0#0#--293"Touch build/Debug-iphoneos/iGithub.app    cd /Users/oliver/Development/iGithub    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /usr/bin/touch -c /Users/oliver/Development/iGithub/build/Debug-iphoneos/iGithub.app
-
