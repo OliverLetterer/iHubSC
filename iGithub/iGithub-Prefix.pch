@@ -12,3 +12,12 @@
     #import <UIKit/UIKit.h>
     #import <Foundation/Foundation.h>
 #endif
+
+
+# define ALog(format, ...) NSLog((@"%s [%d] " format), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__);
+
+# ifdef DEBUG
+#  define DLog(format, ...) ALog(format, ##__VA_ARGS__);
+# else  
+#   define DLog(...)  
+# endif
