@@ -67,6 +67,4 @@
 
 + (void)authenticatedUserWithUsername:(NSString *)username password:(NSString *)password completionHandler:(void(^)(GHUser *user, NSError *error))handler;
 
-- (void)imageWithCompletionHandler:(void(^)(UIImage *image, NSError *error))handler;
-
 @end

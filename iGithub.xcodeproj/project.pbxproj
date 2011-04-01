@@ -24,6 +24,8 @@
 		A75057371343033200514A82 /* GHGlossBottomBorder@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A75057331343033200514A82 /* GHGlossBottomBorder@2x.png */; };
 		A75057381343033200514A82 /* GHGlossTopBorder.png in Resources */ = {isa = PBXBuildFile; fileRef = A75057341343033200514A82 /* GHGlossTopBorder.png */; };
 		A75057391343033200514A82 /* GHGlossBottomBorder.png in Resources */ = {isa = PBXBuildFile; fileRef = A75057351343033200514A82 /* GHGlossBottomBorder.png */; };
+		A750573E1343205000514A82 /* GHNewsFeed.m in Sources */ = {isa = PBXBuildFile; fileRef = A750573D1343205000514A82 /* GHNewsFeed.m */; };
+		A75057431343426300514A82 /* GHNewsFeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A75057421343426300514A82 /* GHNewsFeedViewController.m */; };
 		A7BF13FC1342149C001AE50D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7BF13FB1342149C001AE50D /* UIKit.framework */; };
 		A7BF13FE1342149C001AE50D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7BF13FD1342149C001AE50D /* Foundation.framework */; };
 		A7BF14001342149C001AE50D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7BF13FF1342149C001AE50D /* CoreGraphics.framework */; };
@@ -45,6 +47,16 @@
 		A7BF146D13426DC2001AE50D /* GHBackgroundQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = A7BF146C13426DC2001AE50D /* GHBackgroundQueue.m */; };
 		A7BF147213426F27001AE50D /* GHUser.m in Sources */ = {isa = PBXBuildFile; fileRef = A7BF147113426F27001AE50D /* GHUser.m */; };
 		A7BF147B13427305001AE50D /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = A7BF147A13427304001AE50D /* JSONKit.m */; };
+		A7CE1B101345BC9300169F94 /* GHActorAttributes.m in Sources */ = {isa = PBXBuildFile; fileRef = A7CE1B0F1345BC9300169F94 /* GHActorAttributes.m */; };
+		A7CE1B151345BDD700169F94 /* UIImage+Gravatar.m in Sources */ = {isa = PBXBuildFile; fileRef = A7CE1B141345BDD700169F94 /* UIImage+Gravatar.m */; };
+		A7CE1B191345BFD600169F94 /* GHPayload.m in Sources */ = {isa = PBXBuildFile; fileRef = A7CE1B181345BFD600169F94 /* GHPayload.m */; };
+		A7CE1B1C1345C21B00169F94 /* GHIssuePayload.m in Sources */ = {isa = PBXBuildFile; fileRef = A7CE1B1B1345C21A00169F94 /* GHIssuePayload.m */; };
+		A7CE1B1F1345C2D400169F94 /* GHPushPayload.m in Sources */ = {isa = PBXBuildFile; fileRef = A7CE1B1E1345C2D400169F94 /* GHPushPayload.m */; };
+		A7CE1B221345C31400169F94 /* GHCommitMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = A7CE1B211345C31300169F94 /* GHCommitMessage.m */; };
+		A7CE1B261345C5E100169F94 /* GHPullRequestPayload.m in Sources */ = {isa = PBXBuildFile; fileRef = A7CE1B251345C5E000169F94 /* GHPullRequestPayload.m */; };
+		A7CE1B2A1345C61800169F94 /* GHPullRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = A7CE1B291345C61800169F94 /* GHPullRequest.m */; };
+		A7CE1B2D1345C8CE00169F94 /* GHNewsFeedItem.m in Sources */ = {isa = PBXBuildFile; fileRef = A7CE1B2C1345C8CE00169F94 /* GHNewsFeedItem.m */; };
+		A7CE1B311345C98700169F94 /* GHRepository.m in Sources */ = {isa = PBXBuildFile; fileRef = A7CE1B301345C98700169F94 /* GHRepository.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -79,6 +91,10 @@
 		A75057331343033200514A82 /* GHGlossBottomBorder@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GHGlossBottomBorder@2x.png"; sourceTree = "<group>"; };
 		A75057341343033200514A82 /* GHGlossTopBorder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GHGlossTopBorder.png; sourceTree = "<group>"; };
 		A75057351343033200514A82 /* GHGlossBottomBorder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GHGlossBottomBorder.png; sourceTree = "<group>"; };
+		A750573C1343205000514A82 /* GHNewsFeed.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHNewsFeed.h; sourceTree = "<group>"; };
+		A750573D1343205000514A82 /* GHNewsFeed.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHNewsFeed.m; sourceTree = "<group>"; };
+		A75057411343426300514A82 /* GHNewsFeedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHNewsFeedViewController.h; sourceTree = "<group>"; };
+		A75057421343426300514A82 /* GHNewsFeedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHNewsFeedViewController.m; sourceTree = "<group>"; };
 		A7BF13F71342149C001AE50D /* iGithub.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iGithub.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A7BF13FB1342149C001AE50D /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		A7BF13FD1342149C001AE50D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -114,6 +130,26 @@
 		A7BF147113426F27001AE50D /* GHUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHUser.m; sourceTree = "<group>"; };
 		A7BF147913427304001AE50D /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JSONKit.h; path = JSONKit/JSONKit.h; sourceTree = "<group>"; };
 		A7BF147A13427304001AE50D /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JSONKit.m; path = JSONKit/JSONKit.m; sourceTree = "<group>"; };
+		A7CE1B0E1345BC9300169F94 /* GHActorAttributes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHActorAttributes.h; sourceTree = "<group>"; };
+		A7CE1B0F1345BC9300169F94 /* GHActorAttributes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHActorAttributes.m; sourceTree = "<group>"; };
+		A7CE1B131345BDD700169F94 /* UIImage+Gravatar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Gravatar.h"; sourceTree = "<group>"; };
+		A7CE1B141345BDD700169F94 /* UIImage+Gravatar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Gravatar.m"; sourceTree = "<group>"; };
+		A7CE1B171345BFD600169F94 /* GHPayload.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPayload.h; sourceTree = "<group>"; };
+		A7CE1B181345BFD600169F94 /* GHPayload.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPayload.m; sourceTree = "<group>"; };
+		A7CE1B1A1345C21A00169F94 /* GHIssuePayload.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHIssuePayload.h; sourceTree = "<group>"; };
+		A7CE1B1B1345C21A00169F94 /* GHIssuePayload.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHIssuePayload.m; sourceTree = "<group>"; };
+		A7CE1B1D1345C2D400169F94 /* GHPushPayload.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPushPayload.h; sourceTree = "<group>"; };
+		A7CE1B1E1345C2D400169F94 /* GHPushPayload.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPushPayload.m; sourceTree = "<group>"; };
+		A7CE1B201345C31300169F94 /* GHCommitMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHCommitMessage.h; sourceTree = "<group>"; };
+		A7CE1B211345C31300169F94 /* GHCommitMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHCommitMessage.m; sourceTree = "<group>"; };
+		A7CE1B241345C5E000169F94 /* GHPullRequestPayload.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPullRequestPayload.h; sourceTree = "<group>"; };
+		A7CE1B251345C5E000169F94 /* GHPullRequestPayload.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPullRequestPayload.m; sourceTree = "<group>"; };
+		A7CE1B281345C61800169F94 /* GHPullRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPullRequest.h; sourceTree = "<group>"; };
+		A7CE1B291345C61800169F94 /* GHPullRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPullRequest.m; sourceTree = "<group>"; };
+		A7CE1B2B1345C8CE00169F94 /* GHNewsFeedItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHNewsFeedItem.h; sourceTree = "<group>"; };
+		A7CE1B2C1345C8CE00169F94 /* GHNewsFeedItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHNewsFeedItem.m; sourceTree = "<group>"; };
+		A7CE1B2F1345C98700169F94 /* GHRepository.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHRepository.h; sourceTree = "<group>"; };
+		A7CE1B301345C98700169F94 /* GHRepository.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHRepository.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -162,6 +198,44 @@
 				A750571513427FB400514A82 /* ASIProgressDelegate.h */,
 			);
 			name = "ASI-HTTP";
+			sourceTree = "<group>";
+		};
+		A750573A13431FFD00514A82 /* GHUser */ = {
+			isa = PBXGroup;
+			children = (
+				A7BF147013426F27001AE50D /* GHUser.h */,
+				A7BF147113426F27001AE50D /* GHUser.m */,
+			);
+			name = GHUser;
+			sourceTree = "<group>";
+		};
+		A750573B1343203F00514A82 /* GHNewsFeed */ = {
+			isa = PBXGroup;
+			children = (
+				A750573C1343205000514A82 /* GHNewsFeed.h */,
+				A750573D1343205000514A82 /* GHNewsFeed.m */,
+				A7CE1B2B1345C8CE00169F94 /* GHNewsFeedItem.h */,
+				A7CE1B2C1345C8CE00169F94 /* GHNewsFeedItem.m */,
+			);
+			name = GHNewsFeed;
+			sourceTree = "<group>";
+		};
+		A750573F1343422200514A82 /* UserInterface */ = {
+			isa = PBXGroup;
+			children = (
+				A75057401343424100514A82 /* GHNewsFeedViewController */,
+				A7BF1423134214E7001AE50D /* GHAuthenticationViewController */,
+			);
+			name = UserInterface;
+			sourceTree = "<group>";
+		};
+		A75057401343424100514A82 /* GHNewsFeedViewController */ = {
+			isa = PBXGroup;
+			children = (
+				A75057411343426300514A82 /* GHNewsFeedViewController.h */,
+				A75057421343426300514A82 /* GHNewsFeedViewController.m */,
+			);
+			name = GHNewsFeedViewController;
 			sourceTree = "<group>";
 		};
 		A7BF13EC1342149C001AE50D = {
@@ -267,9 +341,9 @@
 		A7BF14321342159B001AE50D /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				A750573F1343422200514A82 /* UserInterface */,
 				A7BF146413426D85001AE50D /* Github API */,
 				A7BF1436134216EB001AE50D /* CGSettingsHelper */,
-				A7BF1423134214E7001AE50D /* GHAuthenticationViewController */,
 				A7BF142F1342154C001AE50D /* Keychain */,
 			);
 			name = Shared;
@@ -310,12 +384,18 @@
 		A7BF146413426D85001AE50D /* Github API */ = {
 			isa = PBXGroup;
 			children = (
+				A7CE1B2E1345C96E00169F94 /* GHRepository */,
+				A7CE1B271345C60200169F94 /* GHPullRequest */,
+				A7CE1B161345BFC400169F94 /* GHPayload */,
+				A7CE1B111345BD7D00169F94 /* Gravatar */,
+				A7CE1B0C1345BC5F00169F94 /* GHActorAttributes */,
+				A750573B1343203F00514A82 /* GHNewsFeed */,
 				A750570013427F9E00514A82 /* ASI-HTTP */,
 				A7BF147C13427309001AE50D /* JSONKit */,
 				A7BF146E13426ED9001AE50D /* GHBackgroundQueue */,
 				A7BF146F13426EF5001AE50D /* GithubAPI.h */,
-				A7BF147013426F27001AE50D /* GHUser.h */,
-				A7BF147113426F27001AE50D /* GHUser.m */,
+				A750573A13431FFD00514A82 /* GHUser */,
+				A7CE1B231345C31800169F94 /* GHCommitMessage */,
 			);
 			name = "Github API";
 			sourceTree = "<group>";
@@ -336,6 +416,74 @@
 				A7BF147A13427304001AE50D /* JSONKit.m */,
 			);
 			name = JSONKit;
+			sourceTree = "<group>";
+		};
+		A7CE1B0C1345BC5F00169F94 /* GHActorAttributes */ = {
+			isa = PBXGroup;
+			children = (
+				A7CE1B0E1345BC9300169F94 /* GHActorAttributes.h */,
+				A7CE1B0F1345BC9300169F94 /* GHActorAttributes.m */,
+			);
+			name = GHActorAttributes;
+			sourceTree = "<group>";
+		};
+		A7CE1B111345BD7D00169F94 /* Gravatar */ = {
+			isa = PBXGroup;
+			children = (
+				A7CE1B121345BD8A00169F94 /* UIImage+Gravatar */,
+			);
+			name = Gravatar;
+			sourceTree = "<group>";
+		};
+		A7CE1B121345BD8A00169F94 /* UIImage+Gravatar */ = {
+			isa = PBXGroup;
+			children = (
+				A7CE1B131345BDD700169F94 /* UIImage+Gravatar.h */,
+				A7CE1B141345BDD700169F94 /* UIImage+Gravatar.m */,
+			);
+			name = "UIImage+Gravatar";
+			sourceTree = "<group>";
+		};
+		A7CE1B161345BFC400169F94 /* GHPayload */ = {
+			isa = PBXGroup;
+			children = (
+				A7CE1B171345BFD600169F94 /* GHPayload.h */,
+				A7CE1B181345BFD600169F94 /* GHPayload.m */,
+				A7CE1B1A1345C21A00169F94 /* GHIssuePayload.h */,
+				A7CE1B1B1345C21A00169F94 /* GHIssuePayload.m */,
+				A7CE1B1D1345C2D400169F94 /* GHPushPayload.h */,
+				A7CE1B1E1345C2D400169F94 /* GHPushPayload.m */,
+				A7CE1B241345C5E000169F94 /* GHPullRequestPayload.h */,
+				A7CE1B251345C5E000169F94 /* GHPullRequestPayload.m */,
+			);
+			name = GHPayload;
+			sourceTree = "<group>";
+		};
+		A7CE1B231345C31800169F94 /* GHCommitMessage */ = {
+			isa = PBXGroup;
+			children = (
+				A7CE1B201345C31300169F94 /* GHCommitMessage.h */,
+				A7CE1B211345C31300169F94 /* GHCommitMessage.m */,
+			);
+			name = GHCommitMessage;
+			sourceTree = "<group>";
+		};
+		A7CE1B271345C60200169F94 /* GHPullRequest */ = {
+			isa = PBXGroup;
+			children = (
+				A7CE1B281345C61800169F94 /* GHPullRequest.h */,
+				A7CE1B291345C61800169F94 /* GHPullRequest.m */,
+			);
+			name = GHPullRequest;
+			sourceTree = "<group>";
+		};
+		A7CE1B2E1345C96E00169F94 /* GHRepository */ = {
+			isa = PBXGroup;
+			children = (
+				A7CE1B2F1345C98700169F94 /* GHRepository.h */,
+				A7CE1B301345C98700169F94 /* GHRepository.m */,
+			);
+			name = GHRepository;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -428,6 +576,18 @@
 				A750571C13427FB400514A82 /* ASIInputStream.m in Sources */,
 				A750571D13427FB400514A82 /* ASINetworkQueue.m in Sources */,
 				A7505729134280E900514A82 /* Reachability.m in Sources */,
+				A750573E1343205000514A82 /* GHNewsFeed.m in Sources */,
+				A75057431343426300514A82 /* GHNewsFeedViewController.m in Sources */,
+				A7CE1B101345BC9300169F94 /* GHActorAttributes.m in Sources */,
+				A7CE1B151345BDD700169F94 /* UIImage+Gravatar.m in Sources */,
+				A7CE1B191345BFD600169F94 /* GHPayload.m in Sources */,
+				A7CE1B1C1345C21B00169F94 /* GHIssuePayload.m in Sources */,
+				A7CE1B1F1345C2D400169F94 /* GHPushPayload.m in Sources */,
+				A7CE1B221345C31400169F94 /* GHCommitMessage.m in Sources */,
+				A7CE1B261345C5E100169F94 /* GHPullRequestPayload.m in Sources */,
+				A7CE1B2A1345C61800169F94 /* GHPullRequest.m in Sources */,
+				A7CE1B2D1345C8CE00169F94 /* GHNewsFeedItem.m in Sources */,
+				A7CE1B311345C98700169F94 /* GHRepository.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

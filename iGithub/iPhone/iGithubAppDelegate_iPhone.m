@@ -12,12 +12,22 @@
 
 @implementation iGithubAppDelegate_iPhone
 
-@synthesize tabBarController=_tabBarController;
+@synthesize tabBarController=_tabBarController, newsFeedViewController=_newsFeedViewController;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // build userInterface here
+    
+    NSMutableArray *tabBarItems = [NSMutableArray array];
+    
     self.tabBarController = [[[UITabBarController alloc] init] autorelease];
     [self.window addSubview:self.tabBarController.view];
+    
+    self.newsFeedViewController = [[[GHNewsFeedViewController alloc] init] autorelease];
+    [tabBarItems addObject:[[[UINavigationController alloc] initWithRootViewController:self.newsFeedViewController] autorelease] ];
+    
+    
+    self.tabBarController.viewControllers = tabBarItems;
+    
     
     if (![GHSettingsHelper isUserAuthenticated]) {
         GHAuthenticationViewController *authViewController = [[[GHAuthenticationViewController alloc] init] autorelease];
@@ -42,6 +52,7 @@
 - (void)dealloc
 {
     [_tabBarController release];
+    [_newsFeedViewController release];
 	[super dealloc];
 }
 

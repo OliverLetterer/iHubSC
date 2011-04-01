@@ -22,30 +22,6 @@
     return self.password != nil && self.planName != nil;
 }
 
-- (void)imageWithCompletionHandler:(void (^)(UIImage *, NSError *))handler {
-    if (!_image) {
-        dispatch_async(GHAPIBackgroundQueue(), ^(void) {
-            NSError *myError = nil;
-            NSURL *imageURL = [NSURL URLWithString:[NSString stringWithFormat:@"http://www.gravatar.com/avatar/%@?s=200", self.gravatarID]];
-            
-            NSData *imageData = [NSURLConnection sendSynchronousRequest:[NSURLRequest requestWithURL:imageURL] 
-                                                      returningResponse:NULL 
-                                                                  error:&myError];
-            
-            dispatch_async(dispatch_get_main_queue(), ^(void) {
-                if (myError) {
-                    handler(nil, myError);
-                } else {
-                    self.image = [[[UIImage alloc] initWithData:imageData] autorelease];
-                    handler(self.image, nil);
-                }
-            });
-        });
-    } else {
-        handler(self.image, nil);
-    }
-}
-
 #pragma mark - Initialization
 
 + (void)userWithName:(NSString *)username completionHandler:(void(^)(GHUser *user, NSError *error))handler {
