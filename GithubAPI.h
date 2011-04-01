@@ -21,4 +21,7 @@
 #import "GHRepository.h"
 
 #import "JSONKit.h"
+
 #import "UIImage+Gravatar.h"
+#import "GHGravatarBackgroundQueue.h"
+#import "GHGravatarImageCache.h"

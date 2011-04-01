@@ -44,21 +44,6 @@
             } else {
                 NSArray *feedArray = [feedString objectFromJSONString];
                 handler([[[GHNewsFeed alloc] initWithRawArray:feedArray] autorelease], nil);
-//                if (![[userDictionary objectForKey:@"user"] objectForKey:@"plan"]) {
-//                    // handle error
-//                    NSMutableDictionary *userInfo = [NSMutableDictionary dictionary];
-//                    [userInfo setObject:NSLocalizedString(@"Invalid Username or Password", @"") forKey:NSLocalizedDescriptionKey];
-//                    handler(nil, [NSError errorWithDomain:@"unkownError" code:0 userInfo:userInfo]);
-//                } else if ([userDictionary objectForKey:@"error"]) {
-//                    // handle error
-//                    NSMutableDictionary *userInfo = [NSMutableDictionary dictionary];
-//                    [userInfo setObject:[userDictionary objectForKey:@"error"] forKey:NSLocalizedDescriptionKey];
-//                    handler(nil, [NSError errorWithDomain:@"unkownError" code:0 userInfo:userInfo]);
-//                } else {
-//                    GHUser *user = [GHUser userFromRawUserDictionary:userDictionary];
-//                    user.password = password;
-//                    handler(user, nil);
-//                }
             }
         });
     });

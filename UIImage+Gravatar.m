@@ -12,8 +12,7 @@
 @implementation UIImage (GHGravatar)
 
 + (void)imageFromGravatarID:(NSString *)gravatarID withCompletionHandler:(void(^)(UIImage *image, NSError *error))handler {
-    UIImage *myImage = nil;
-    #warning receive cached image from here
+    UIImage *myImage = [GHGravatarImageCache cachedGravatarImageFromGravatarID:gravatarID];
     
     if (!myImage) {
         dispatch_async(GHAPIBackgroundQueue(), ^(void) {
@@ -23,14 +22,13 @@
             NSData *imageData = [NSURLConnection sendSynchronousRequest:[NSURLRequest requestWithURL:imageURL] 
                                                       returningResponse:NULL 
                                                                   error:&myError];
-            
             dispatch_async(dispatch_get_main_queue(), ^(void) {
                 if (myError) {
                     handler(nil, myError);
                 } else {
                     UIImage *newImage = [[[UIImage alloc] initWithData:imageData] autorelease];
-                    #warning cache the image here
-                    handler(myImage, nil);
+                    [GHGravatarImageCache cacheGravatarImage:newImage forGravatarID:gravatarID];
+                    handler(newImage, nil);
                 }
             });
         });

@@ -8,11 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
+@class GHNewsFeed;
 
 @interface GHNewsFeedViewController : UITableViewController {
     UISegmentedControl *_segmentControl;
+    GHNewsFeed *_newsFeed;
 }
 
 @property (nonatomic, retain) UISegmentedControl *segmentControl;
+@property (nonatomic, retain) GHNewsFeed *newsFeed;
 
 @end

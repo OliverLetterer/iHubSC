@@ -57,6 +57,10 @@
 		A7CE1B2A1345C61800169F94 /* GHPullRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = A7CE1B291345C61800169F94 /* GHPullRequest.m */; };
 		A7CE1B2D1345C8CE00169F94 /* GHNewsFeedItem.m in Sources */ = {isa = PBXBuildFile; fileRef = A7CE1B2C1345C8CE00169F94 /* GHNewsFeedItem.m */; };
 		A7CE1B311345C98700169F94 /* GHRepository.m in Sources */ = {isa = PBXBuildFile; fileRef = A7CE1B301345C98700169F94 /* GHRepository.m */; };
+		A7CE1B35134621CB00169F94 /* GHIssueFeedItemTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A7CE1B33134621CA00169F94 /* GHIssueFeedItemTableViewCell.m */; };
+		A7CE1B36134621CB00169F94 /* GHIssueFeedItemTableViewCellContentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A7CE1B34134621CB00169F94 /* GHIssueFeedItemTableViewCellContentView.xib */; };
+		A7CE1B3A134624B900169F94 /* GHGravatarImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = A7CE1B39134624B900169F94 /* GHGravatarImageCache.m */; };
+		A7CE1B3E1346267900169F94 /* GHGravatarBackgroundQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = A7CE1B3D1346267900169F94 /* GHGravatarBackgroundQueue.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -150,6 +154,13 @@
 		A7CE1B2C1345C8CE00169F94 /* GHNewsFeedItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHNewsFeedItem.m; sourceTree = "<group>"; };
 		A7CE1B2F1345C98700169F94 /* GHRepository.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHRepository.h; sourceTree = "<group>"; };
 		A7CE1B301345C98700169F94 /* GHRepository.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHRepository.m; sourceTree = "<group>"; };
+		A7CE1B32134621CA00169F94 /* GHIssueFeedItemTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHIssueFeedItemTableViewCell.h; sourceTree = "<group>"; };
+		A7CE1B33134621CA00169F94 /* GHIssueFeedItemTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHIssueFeedItemTableViewCell.m; sourceTree = "<group>"; };
+		A7CE1B34134621CB00169F94 /* GHIssueFeedItemTableViewCellContentView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GHIssueFeedItemTableViewCellContentView.xib; sourceTree = "<group>"; };
+		A7CE1B38134624B900169F94 /* GHGravatarImageCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHGravatarImageCache.h; sourceTree = "<group>"; };
+		A7CE1B39134624B900169F94 /* GHGravatarImageCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHGravatarImageCache.m; sourceTree = "<group>"; };
+		A7CE1B3C1346267900169F94 /* GHGravatarBackgroundQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHGravatarBackgroundQueue.h; sourceTree = "<group>"; };
+		A7CE1B3D1346267900169F94 /* GHGravatarBackgroundQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHGravatarBackgroundQueue.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -234,6 +245,9 @@
 			children = (
 				A75057411343426300514A82 /* GHNewsFeedViewController.h */,
 				A75057421343426300514A82 /* GHNewsFeedViewController.m */,
+				A7CE1B32134621CA00169F94 /* GHIssueFeedItemTableViewCell.h */,
+				A7CE1B33134621CA00169F94 /* GHIssueFeedItemTableViewCell.m */,
+				A7CE1B34134621CB00169F94 /* GHIssueFeedItemTableViewCellContentView.xib */,
 			);
 			name = GHNewsFeedViewController;
 			sourceTree = "<group>";
@@ -430,6 +444,8 @@
 		A7CE1B111345BD7D00169F94 /* Gravatar */ = {
 			isa = PBXGroup;
 			children = (
+				A7CE1B3B1346265700169F94 /* GHGravatarBackgroundQueue */,
+				A7CE1B371346247D00169F94 /* GHGravatarImageCache */,
 				A7CE1B121345BD8A00169F94 /* UIImage+Gravatar */,
 			);
 			name = Gravatar;
@@ -484,6 +500,24 @@
 				A7CE1B301345C98700169F94 /* GHRepository.m */,
 			);
 			name = GHRepository;
+			sourceTree = "<group>";
+		};
+		A7CE1B371346247D00169F94 /* GHGravatarImageCache */ = {
+			isa = PBXGroup;
+			children = (
+				A7CE1B38134624B900169F94 /* GHGravatarImageCache.h */,
+				A7CE1B39134624B900169F94 /* GHGravatarImageCache.m */,
+			);
+			name = GHGravatarImageCache;
+			sourceTree = "<group>";
+		};
+		A7CE1B3B1346265700169F94 /* GHGravatarBackgroundQueue */ = {
+			isa = PBXGroup;
+			children = (
+				A7CE1B3C1346267900169F94 /* GHGravatarBackgroundQueue.h */,
+				A7CE1B3D1346267900169F94 /* GHGravatarBackgroundQueue.m */,
+			);
+			name = GHGravatarBackgroundQueue;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -546,6 +580,7 @@
 				A75057371343033200514A82 /* GHGlossBottomBorder@2x.png in Resources */,
 				A75057381343033200514A82 /* GHGlossTopBorder.png in Resources */,
 				A75057391343033200514A82 /* GHGlossBottomBorder.png in Resources */,
+				A7CE1B36134621CB00169F94 /* GHIssueFeedItemTableViewCellContentView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -588,6 +623,9 @@
 				A7CE1B2A1345C61800169F94 /* GHPullRequest.m in Sources */,
 				A7CE1B2D1345C8CE00169F94 /* GHNewsFeedItem.m in Sources */,
 				A7CE1B311345C98700169F94 /* GHRepository.m in Sources */,
+				A7CE1B35134621CB00169F94 /* GHIssueFeedItemTableViewCell.m in Sources */,
+				A7CE1B3A134624B900169F94 /* GHGravatarImageCache.m in Sources */,
+				A7CE1B3E1346267900169F94 /* GHGravatarBackgroundQueue.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

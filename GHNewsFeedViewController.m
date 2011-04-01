@@ -9,10 +9,11 @@
 #import "GHNewsFeedViewController.h"
 #import "GithubAPI.h"
 #import "GHSettingsHelper.h"
+#import "GHIssueFeedItemTableViewCell.h"
 
 @implementation GHNewsFeedViewController
 
-@synthesize segmentControl=_segmentControl;
+@synthesize segmentControl=_segmentControl, newsFeed=_newsFeed;
 
 #pragma mark - Initialization
 
@@ -27,6 +28,7 @@
 
 - (void)dealloc {
     [_segmentControl release];
+    [_newsFeed release];
     [super dealloc];
 }
 
@@ -55,7 +57,8 @@
         [GHNewsFeed privateNewsFeedForUserNamed:[GHSettingsHelper username] 
                                        password:[GHSettingsHelper password] 
                               completionHandler:^(GHNewsFeed *feed, NSError *error) {
-                                  DLog(@"%@", feed.items);
+                                  self.newsFeed = feed;
+                                  [self.tableView reloadData];
                               }];
     }
 }
@@ -92,23 +95,45 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     // Return the number of sections.
-    return 0;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    return 0;
+    return [self.newsFeed.items count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *CellIdentifier = @"Cell";
+    
+    GHNewsFeedItem *item = [self.newsFeed.items objectAtIndex:indexPath.row];
+    
+    if (item.payload.type == GHPayloadTypeIssue) {
+        NSString *CellIdentifier = @"GHIssueFeedItemTableViewCell";
+        GHIssueFeedItemTableViewCell *cell = (GHIssueFeedItemTableViewCell *)[self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        
+        if (!cell) {
+            cell = [[[GHIssueFeedItemTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        }
+        
+        [UIImage imageFromGravatarID:item.actorAttributes.gravatarID withCompletionHandler:^(UIImage *image, NSError *error) {
+            cell.gravatarImageView.image = image;
+        }];
+        
+        return cell;
+    }
+    
+    NSString *CellIdentifier = @"Cell";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
     }
     
-    // Configure the cell...
+    if (item.payload.type == GHPayloadTypeIssue) {
+        cell.textLabel.text = @"Issue";
+    } else {
+        cell.textLabel.text = nil;
+    }
     
     return cell;
 }
