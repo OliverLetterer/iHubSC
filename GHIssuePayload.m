@@ -19,6 +19,15 @@
     return GHPayloadTypeIssue;
 }
 
+- (NSString *)action {
+    if ([_action isEqualToString:@"closed"]) {
+        return NSLocalizedString(@"Closed", @"");
+    } else if([_action isEqualToString:@"opened"]) {
+        return NSLocalizedString(@"Opened", @"");
+    }
+    return _action;
+}
+
 #pragma mark - Initialization
 
 - (id)initWithRawDictionary:(NSDictionary *)rawDictionary {

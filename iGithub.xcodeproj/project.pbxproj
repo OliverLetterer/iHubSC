@@ -61,6 +61,8 @@
 		A7CE1B36134621CB00169F94 /* GHIssueFeedItemTableViewCellContentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A7CE1B34134621CB00169F94 /* GHIssueFeedItemTableViewCellContentView.xib */; };
 		A7CE1B3A134624B900169F94 /* GHGravatarImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = A7CE1B39134624B900169F94 /* GHGravatarImageCache.m */; };
 		A7CE1B3E1346267900169F94 /* GHGravatarBackgroundQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = A7CE1B3D1346267900169F94 /* GHGravatarBackgroundQueue.m */; };
+		A7CE1B811346335D00169F94 /* GHDatabase.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = A7CE1B801346335D00169F94 /* GHDatabase.xcdatamodel */; };
+		A7CE1B831346349200169F94 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7CE1B821346349000169F94 /* CoreData.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -161,6 +163,8 @@
 		A7CE1B39134624B900169F94 /* GHGravatarImageCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHGravatarImageCache.m; sourceTree = "<group>"; };
 		A7CE1B3C1346267900169F94 /* GHGravatarBackgroundQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHGravatarBackgroundQueue.h; sourceTree = "<group>"; };
 		A7CE1B3D1346267900169F94 /* GHGravatarBackgroundQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHGravatarBackgroundQueue.m; sourceTree = "<group>"; };
+		A7CE1B801346335D00169F94 /* GHDatabase.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GHDatabase.xcdatamodel; sourceTree = "<group>"; };
+		A7CE1B821346349000169F94 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -168,6 +172,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A7CE1B831346349200169F94 /* CoreData.framework in Frameworks */,
 				A75057261342801300514A82 /* libz.1.2.3.dylib in Frameworks */,
 				A7BF14001342149C001AE50D /* CoreGraphics.framework in Frameworks */,
 				A750572313427FF600514A82 /* MobileCoreServices.framework in Frameworks */,
@@ -272,6 +277,7 @@
 		A7BF13FA1342149C001AE50D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A7CE1B821346349000169F94 /* CoreData.framework */,
 				A75057251342801300514A82 /* libz.1.2.3.dylib */,
 				A750572413427FFF00514A82 /* CoreGraphics.framework */,
 				A750572213427FF600514A82 /* MobileCoreServices.framework */,
@@ -376,6 +382,7 @@
 		A7BF143713421862001AE50D /* Ressources */ = {
 			isa = PBXGroup;
 			children = (
+				A7CE1B801346335D00169F94 /* GHDatabase.xcdatamodel */,
 				A75057321343033200514A82 /* GHGlossTopBorder@2x.png */,
 				A75057331343033200514A82 /* GHGlossBottomBorder@2x.png */,
 				A75057341343033200514A82 /* GHGlossTopBorder.png */,
@@ -626,6 +633,7 @@
 				A7CE1B35134621CB00169F94 /* GHIssueFeedItemTableViewCell.m in Sources */,
 				A7CE1B3A134624B900169F94 /* GHGravatarImageCache.m in Sources */,
 				A7CE1B3E1346267900169F94 /* GHGravatarBackgroundQueue.m in Sources */,
+				A7CE1B811346335D00169F94 /* GHDatabase.xcdatamodel in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

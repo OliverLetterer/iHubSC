@@ -11,7 +11,7 @@
 
 @implementation GHIssueFeedItemTableViewCell
 
-@synthesize gravatarImageView=_gravatarImageView;
+@synthesize gravatarImageView=_gravatarImageView, actorLabel=_actorLabel, statusLabel=_statusLabel;
 
 #pragma mark - Initialization
 
@@ -30,11 +30,17 @@
     // Configure the view for the selected state
 }
 
++ (CGFloat)height {
+    return 71.0;
+}
+
 #pragma mark - Memory management
 
 - (void)dealloc {
     [_myContentView release];
     [_gravatarImageView release];
+    [_actorLabel release];
+    [_statusLabel release];
     [super dealloc];
 }
 

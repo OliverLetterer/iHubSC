@@ -115,9 +115,14 @@
             cell = [[[GHIssueFeedItemTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
         }
         
+        GHIssuePayload *payload = (GHIssuePayload *)item.payload;
+        
         [UIImage imageFromGravatarID:item.actorAttributes.gravatarID withCompletionHandler:^(UIImage *image, NSError *error) {
             cell.gravatarImageView.image = image;
         }];
+        cell.actorLabel.text = item.actor;
+        
+        cell.statusLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ Issue %@", @""), payload.action, payload.number];
         
         return cell;
     }
@@ -175,7 +180,20 @@
 
 #pragma mark - Table view delegate
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    GHNewsFeedItem *item = [self.newsFeed.items objectAtIndex:indexPath.row];
+    
+    CGFloat height = 10.0;
+    
+    if (item.payload.type == GHPayloadTypeIssue) {
+        height = [GHIssueFeedItemTableViewCell height];
+    }
+    
+    return height;
+}
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [self.tableView deselectRowAtIndexPath:indexPath animated:NO];
     // Navigation logic may go here. Create and push another view controller.
     /*
      <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];

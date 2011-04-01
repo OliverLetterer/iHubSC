@@ -13,8 +13,14 @@
 @private
     IBOutlet UIView *_myContentView;
     IBOutlet UIImageView *_gravatarImageView;
+    IBOutlet UILabel *_actorLabel;
+    IBOutlet UILabel *_statusLabel;
 }
 
 @property (nonatomic, retain) UIImageView *gravatarImageView;
+@property (nonatomic, retain) UILabel *actorLabel;
+@property (nonatomic, retain) UILabel *statusLabel;
+
++ (CGFloat)height;
 
 @end
