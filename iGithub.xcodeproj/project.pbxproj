@@ -63,6 +63,8 @@
 		A7CE1B3E1346267900169F94 /* GHGravatarBackgroundQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = A7CE1B3D1346267900169F94 /* GHGravatarBackgroundQueue.m */; };
 		A7CE1B811346335D00169F94 /* GHDatabase.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = A7CE1B801346335D00169F94 /* GHDatabase.xcdatamodel */; };
 		A7CE1B831346349200169F94 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7CE1B821346349000169F94 /* CoreData.framework */; };
+		A7CE1B871346355100169F94 /* GHManagedObjectContext.m in Sources */ = {isa = PBXBuildFile; fileRef = A7CE1B861346355100169F94 /* GHManagedObjectContext.m */; };
+		A7CE1B8A13463A6E00169F94 /* GHIssue.m in Sources */ = {isa = PBXBuildFile; fileRef = A7CE1B8913463A6600169F94 /* GHIssue.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -165,6 +167,10 @@
 		A7CE1B3D1346267900169F94 /* GHGravatarBackgroundQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHGravatarBackgroundQueue.m; sourceTree = "<group>"; };
 		A7CE1B801346335D00169F94 /* GHDatabase.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GHDatabase.xcdatamodel; sourceTree = "<group>"; };
 		A7CE1B821346349000169F94 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		A7CE1B851346355100169F94 /* GHManagedObjectContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHManagedObjectContext.h; sourceTree = "<group>"; };
+		A7CE1B861346355100169F94 /* GHManagedObjectContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHManagedObjectContext.m; sourceTree = "<group>"; };
+		A7CE1B8813463A6100169F94 /* GHIssue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHIssue.h; sourceTree = "<group>"; };
+		A7CE1B8913463A6600169F94 /* GHIssue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHIssue.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -405,6 +411,9 @@
 		A7BF146413426D85001AE50D /* Github API */ = {
 			isa = PBXGroup;
 			children = (
+				A7CE1B8813463A6100169F94 /* GHIssue.h */,
+				A7CE1B8913463A6600169F94 /* GHIssue.m */,
+				A7CE1B841346352000169F94 /* GHManagedObjectContext */,
 				A7CE1B2E1345C96E00169F94 /* GHRepository */,
 				A7CE1B271345C60200169F94 /* GHPullRequest */,
 				A7CE1B161345BFC400169F94 /* GHPayload */,
@@ -527,6 +536,15 @@
 			name = GHGravatarBackgroundQueue;
 			sourceTree = "<group>";
 		};
+		A7CE1B841346352000169F94 /* GHManagedObjectContext */ = {
+			isa = PBXGroup;
+			children = (
+				A7CE1B851346355100169F94 /* GHManagedObjectContext.h */,
+				A7CE1B861346355100169F94 /* GHManagedObjectContext.m */,
+			);
+			name = GHManagedObjectContext;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -634,6 +652,8 @@
 				A7CE1B3A134624B900169F94 /* GHGravatarImageCache.m in Sources */,
 				A7CE1B3E1346267900169F94 /* GHGravatarBackgroundQueue.m in Sources */,
 				A7CE1B811346335D00169F94 /* GHDatabase.xcdatamodel in Sources */,
+				A7CE1B871346355100169F94 /* GHManagedObjectContext.m in Sources */,
+				A7CE1B8A13463A6E00169F94 /* GHIssue.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

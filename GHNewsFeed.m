@@ -43,6 +43,7 @@
                 handler(nil, myError);
             } else {
                 NSArray *feedArray = [feedString objectFromJSONString];
+//                DLog(@"%@", feedArray);
                 handler([[[GHNewsFeed alloc] initWithRawArray:feedArray] autorelease], nil);
             }
         });

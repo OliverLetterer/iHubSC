@@ -6,6 +6,8 @@
 //  Copyright 2011 Home. All rights reserved.
 //
 
+#import "GHManagedObjectContext.h"
+
 #import "GHBackgroundQueue.h"
 #import "GHUser.h"
 #import "GHNewsFeed.h"
@@ -15,6 +17,7 @@
 #import "GHIssuePayload.h"
 #import "GHPushPayload.h"
 #import "GHPullRequestPayload.h"
+#import "GHIssue.h"
 
 #import "GHCommitMessage.h"
 #import "GHPullRequest.h"

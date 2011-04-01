@@ -43,29 +43,29 @@
 				<int key="NSvFlags">258</int>
 				<object class="NSMutableArray" key="NSSubviews">
 					<bool key="EncodedWithXMLCoder">YES</bool>
-					<object class="IBUIImageView" id="873192507">
+					<object class="IBUIImageView" id="748206681">
 						<reference key="NSNextResponder" ref="165433497"/>
 						<int key="NSvFlags">274</int>
 						<string key="NSFrame">{{6, 4}, {64, 64}}</string>
 						<reference key="NSSuperview" ref="165433497"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="154228440"/>
+						<reference key="NSNextKeyView" ref="752998699"/>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 					</object>
-					<object class="IBUILabel" id="154228440">
+					<object class="IBUILabel" id="752998699">
 						<reference key="NSNextResponder" ref="165433497"/>
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{78, 4}, {155, 15}}</string>
 						<reference key="NSSuperview" ref="165433497"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
+						<reference key="NSNextKeyView" ref="316811863"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<int key="IBUIContentMode">7</int>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-						<string key="IBUIText">MCCDog</string>
+						<string key="IBUIText">MCCDog opened Issue 7</string>
 						<object class="NSFont" key="IBUIFont">
 							<string key="NSName">Helvetica-Bold</string>
 							<double key="NSSize">11</double>
@@ -74,7 +74,7 @@
 						<object class="NSColor" key="IBUITextColor">
 							<int key="NSColorSpace">3</int>
 							<bytes key="NSWhite">MC4yNQA</bytes>
-							<object class="NSColorSpace" key="NSCustomColorSpace" id="110068911">
+							<object class="NSColorSpace" key="NSCustomColorSpace" id="131617926">
 								<int key="NSID">2</int>
 							</object>
 						</object>
@@ -82,18 +82,19 @@
 						<int key="IBUIBaselineAdjustment">1</int>
 						<float key="IBUIMinimumFontSize">10</float>
 					</object>
-					<object class="IBUILabel" id="505566334">
+					<object class="IBUILabel" id="316811863">
 						<reference key="NSNextResponder" ref="165433497"/>
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{78, 20}, {222, 21}}</string>
 						<reference key="NSSuperview" ref="165433497"/>
 						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<int key="IBUIContentMode">7</int>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-						<string key="IBUIText">Opened Issue 7</string>
+						<string key="IBUIText">Content goes here</string>
 						<object class="NSFont" key="IBUIFont">
 							<string key="NSName">Helvetica-Bold</string>
 							<double key="NSSize">14</double>
@@ -102,7 +103,7 @@
 						<object class="NSColor" key="IBUITextColor">
 							<int key="NSColorSpace">3</int>
 							<bytes key="NSWhite">MC4yNQA</bytes>
-							<reference key="NSCustomColorSpace" ref="110068911"/>
+							<reference key="NSCustomColorSpace" ref="131617926"/>
 						</object>
 						<nil key="IBUIHighlightedColor"/>
 						<int key="IBUIBaselineAdjustment">1</int>
@@ -112,11 +113,11 @@
 				<string key="NSFrameSize">{320, 71}</string>
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
-				<reference key="NSNextKeyView" ref="873192507"/>
+				<reference key="NSNextKeyView" ref="748206681"/>
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">3</int>
 					<bytes key="NSWhite">MQA</bytes>
-					<reference key="NSCustomColorSpace" ref="110068911"/>
+					<reference key="NSCustomColorSpace" ref="131617926"/>
 				</object>
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 			</object>
@@ -136,7 +137,7 @@
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">_gravatarImageView</string>
 						<reference key="source" ref="841351856"/>
-						<reference key="destination" ref="873192507"/>
+						<reference key="destination" ref="748206681"/>
 					</object>
 					<int key="connectionID">8</int>
 				</object>
@@ -144,7 +145,7 @@
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">_actorLabel</string>
 						<reference key="source" ref="841351856"/>
-						<reference key="destination" ref="154228440"/>
+						<reference key="destination" ref="752998699"/>
 					</object>
 					<int key="connectionID">11</int>
 				</object>
@@ -152,7 +153,7 @@
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">_statusLabel</string>
 						<reference key="source" ref="841351856"/>
-						<reference key="destination" ref="505566334"/>
+						<reference key="destination" ref="316811863"/>
 					</object>
 					<int key="connectionID">13</int>
 				</object>
@@ -182,25 +183,25 @@
 						<reference key="object" ref="165433497"/>
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="873192507"/>
-							<reference ref="154228440"/>
-							<reference ref="505566334"/>
+							<reference ref="748206681"/>
+							<reference ref="752998699"/>
+							<reference ref="316811863"/>
 						</object>
 						<reference key="parent" ref="0"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">7</int>
-						<reference key="object" ref="873192507"/>
+						<reference key="object" ref="748206681"/>
 						<reference key="parent" ref="165433497"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">9</int>
-						<reference key="object" ref="154228440"/>
+						<reference key="object" ref="752998699"/>
 						<reference key="parent" ref="165433497"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">12</int>
-						<reference key="object" ref="505566334"/>
+						<reference key="object" ref="316811863"/>
 						<reference key="parent" ref="165433497"/>
 					</object>
 				</object>
@@ -238,7 +239,7 @@
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">13</int>
+			<int key="maxID">15</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">

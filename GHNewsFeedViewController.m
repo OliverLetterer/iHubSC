@@ -120,9 +120,17 @@
         [UIImage imageFromGravatarID:item.actorAttributes.gravatarID withCompletionHandler:^(UIImage *image, NSError *error) {
             cell.gravatarImageView.image = image;
         }];
-        cell.actorLabel.text = item.actor;
+        cell.actorLabel.text = [NSString stringWithFormat:@"%@ %@", item.actor, [NSString stringWithFormat:NSLocalizedString(@"%@ Issue %@", @""), payload.action, payload.number]];
         
-        cell.statusLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ Issue %@", @""), payload.action, payload.number];
+        [GHIssue issueOnRepository:payload.repo 
+                        withNumber:payload.number 
+                     loginUsername:[GHSettingsHelper username] 
+                          password:[GHSettingsHelper password] 
+                 completionHandler:^(GHIssue *issue, NSError *error) {
+                     
+                     cell.statusLabel.text = issue.title;
+                     
+                 }];
         
         return cell;
     }
