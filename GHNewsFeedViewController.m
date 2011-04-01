@@ -117,18 +117,33 @@
         
         GHIssuePayload *payload = (GHIssuePayload *)item.payload;
         
-        [UIImage imageFromGravatarID:item.actorAttributes.gravatarID withCompletionHandler:^(UIImage *image, NSError *error) {
-            cell.gravatarImageView.image = image;
+        [UIImage imageFromGravatarID:item.actorAttributes.gravatarID 
+               withCompletionHandler:^(UIImage *image, NSError *error) {
+                   cell.gravatarImageView.image = image;
         }];
+        
         cell.actorLabel.text = [NSString stringWithFormat:@"%@ %@", item.actor, [NSString stringWithFormat:NSLocalizedString(@"%@ Issue %@", @""), payload.action, payload.number]];
+        
+        cell.repositoryLabel.text = payload.repo;
         
         [GHIssue issueOnRepository:payload.repo 
                         withNumber:payload.number 
                      loginUsername:[GHSettingsHelper username] 
                           password:[GHSettingsHelper password] 
-                 completionHandler:^(GHIssue *issue, NSError *error) {
+                 completionHandler:^(GHIssue *issue, NSError *error, BOOL didDownload) {
+                     
+                     CGSize newLabelSize = [issue.title sizeWithFont:[UIFont boldSystemFontOfSize:14.0] 
+                                                   constrainedToSize:CGSizeMake(222.0f, MAXFLOAT)
+                                                       lineBreakMode:UILineBreakModeWordWrap];
                      
                      cell.statusLabel.text = issue.title;
+                     CGRect statusLabelFrame = cell.statusLabel.frame;
+                     statusLabelFrame.size = newLabelSize;
+                     cell.statusLabel.frame = statusLabelFrame;
+                     
+                     if (didDownload) {
+                         [self.tableView reloadData];
+                     }
                      
                  }];
         
@@ -140,12 +155,6 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
-    }
-    
-    if (item.payload.type == GHPayloadTypeIssue) {
-        cell.textLabel.text = @"Issue";
-    } else {
-        cell.textLabel.text = nil;
     }
     
     return cell;
@@ -194,7 +203,23 @@
     CGFloat height = 10.0;
     
     if (item.payload.type == GHPayloadTypeIssue) {
-        height = [GHIssueFeedItemTableViewCell height];
+        GHIssuePayload *payload = (GHIssuePayload *)item.payload;
+        
+        if ([GHIssue isIssueAvailableForRepository:payload.repo withNumber:payload.number]) {
+            GHIssue *issue = [GHIssue issueFromDatabaseOnRepository:payload.repo withNumber:payload.number];
+            
+            CGSize newLabelSize = [issue.title sizeWithFont:[UIFont boldSystemFontOfSize:14.0] 
+                                          constrainedToSize:CGSizeMake(222.0f, MAXFLOAT)
+                                              lineBreakMode:UILineBreakModeWordWrap];
+            
+            if (newLabelSize.height < 21) {
+                newLabelSize.height = 21;
+            }
+            
+            height = newLabelSize.height + 20.0 + 30.0; // X + top offset of status label + 30 px white space on the bottom
+        } else {
+            height = [GHIssueFeedItemTableViewCell height];
+        }
     }
     
     return height;
@@ -202,14 +227,6 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [self.tableView deselectRowAtIndexPath:indexPath animated:NO];
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     [detailViewController release];
-     */
 }
 
 @end

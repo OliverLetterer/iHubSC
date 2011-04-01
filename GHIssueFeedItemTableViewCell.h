@@ -15,11 +15,13 @@
     IBOutlet UIImageView *_gravatarImageView;
     IBOutlet UILabel *_actorLabel;
     IBOutlet UILabel *_statusLabel;
+    IBOutlet UILabel *_repositoryLabel;
 }
 
 @property (nonatomic, retain) UIImageView *gravatarImageView;
 @property (nonatomic, retain) UILabel *actorLabel;
 @property (nonatomic, retain) UILabel *statusLabel;
+@property (nonatomic, retain) UILabel *repositoryLabel;
 
 + (CGFloat)height;
 

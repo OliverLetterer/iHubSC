@@ -13,6 +13,7 @@
 @interface GHNewsFeedViewController : UITableViewController {
     UISegmentedControl *_segmentControl;
     GHNewsFeed *_newsFeed;
+    NSDictionary *_issuesDictionary;
 }
 
 @property (nonatomic, retain) UISegmentedControl *segmentControl;

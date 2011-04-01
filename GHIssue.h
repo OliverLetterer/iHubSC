@@ -36,9 +36,12 @@
 + (void)issueOnRepository:(NSString *)repositoriy 
           withNumber:(NSNumber *)number 
        loginUsername:(NSString *)loginUsername 
-            password:(NSString *)password completionHandler:(void (^)(GHIssue *issue, NSError *error))handler;
+            password:(NSString *)password completionHandler:(void (^)(GHIssue *issue, NSError *error, BOOL didDownload))handler;
 
 + (GHIssue *)issueFromDatabaseOnRepository:(NSString *)repositoriy 
+                           withNumber:(NSNumber *)number;
+
++ (BOOL)isIssueAvailableForRepository:(NSString *)repository 
                            withNumber:(NSNumber *)number;
 
 @end

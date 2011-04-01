@@ -57,13 +57,10 @@
     [request setEntity:entityDescription];
     
     // Set example predicate and sort orderings...
-//    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(number == %@) AND (repository LIKE '%@')", number, repository];
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(number == %@) AND (repository like %@)", number, repository];
 
     [request setPredicate:predicate];
     
-//    NSSortDescriptor *sortDescriptor = [[[NSSortDescriptor alloc] initWithKey:@"firstName" ascending:YES] autorelease];
-//    [request setSortDescriptors:[NSArray arrayWithObject:sortDescriptor]];
     
     NSError *error = nil;
     NSArray *array = [moc executeFetchRequest:request error:&error];
@@ -73,22 +70,34 @@
     }
     
     if ([array count] > 0) {
+        GHIssue *issue = [array objectAtIndex:0];
+        if (fabs([issue.lastUpdateDate timeIntervalSinceNow] > 172800)) {
+            // issue is not up to date, delete it
+            [moc deleteObject:issue];
+            [moc save:NULL];
+            return nil;
+        }
         return [array objectAtIndex:0];
     }
     
     return nil;
 }
 
++ (BOOL)isIssueAvailableForRepository:(NSString *)repository 
+                           withNumber:(NSNumber *)number {
+    return [self issueFromDatabaseOnRepository:repository withNumber:number] != nil;
+}
+
 + (void)issueOnRepository:(NSString *)repository 
                withNumber:(NSNumber *)number 
             loginUsername:(NSString *)loginUsername 
-                 password:(NSString *)password completionHandler:(void (^)(GHIssue *issue, NSError *error))handler {
+                 password:(NSString *)password completionHandler:(void (^)(GHIssue *issue, NSError *error, BOOL didDownload))handler {
     
     // use URL http://github.com/api/v2/json/issues/show/schacon/showoff/1
     
     GHIssue *cachedIssue = [GHIssue issueFromDatabaseOnRepository:repository withNumber:number];
     if (cachedIssue) {
-        handler(cachedIssue, nil);
+        handler(cachedIssue, nil, NO);
         return;
     }
     
@@ -112,7 +121,7 @@
         
         dispatch_async(dispatch_get_main_queue(), ^(void) {
             if (myError) {
-                handler(nil, myError);
+                handler(nil, myError, NO);
             } else {
                 NSDictionary *issueDictionary = [issueString objectFromJSONString];
                 NSManagedObjectContext *ctx = GHSharedManagedObjectContext();
@@ -122,7 +131,7 @@
                 [newIssue updateWithRawDictionary:rawDictionary onRepository:repository];
                 
                 [ctx save:NULL];
-                handler(newIssue, nil);
+                handler(newIssue, nil, YES);
             }
         });
     });
