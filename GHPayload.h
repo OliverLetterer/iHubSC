@@ -9,19 +9,20 @@
 #import <Foundation/Foundation.h>
 
 typedef enum {
-    GHPayloadTypeNone = 0,
-    GHPayloadTypeIssue,
-    GHPayloadTypePush,
-    GHPayloadTypePullRequest,
-    GHPayloadTypeCommitComment
-} GHPayloadType;
+    GHPayloadNoEvent = 0,
+    GHPayloadIssuesEvent,
+    GHPayloadPushEvent,
+    GHPayloadPullRequestEvent,
+    GHPayloadCommitCommentEvent,
+    GHPayloadFollowEvent
+} GHPayloadEvent;
 
 @interface GHPayload : NSObject {
     NSString *_actor;
     NSString *_gravatarID;
 }
 
-@property (nonatomic, readonly) GHPayloadType type;
+@property (nonatomic, readonly) GHPayloadEvent type;
 
 @property (nonatomic, copy) NSString *actor;
 @property (nonatomic, copy) NSString *gravatarID;

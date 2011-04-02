@@ -15,8 +15,8 @@
 
 #pragma mark - setters and getters
 
-- (GHPayloadType)type {
-    return GHPayloadTypeIssue;
+- (GHPayloadEvent)type {
+    return GHPayloadIssuesEvent;
 }
 
 - (NSString *)action {

@@ -15,8 +15,8 @@
 
 #pragma mark - setters and getters
 
-- (GHPayloadType)type {
-    return GHPayloadTypeNone;
+- (GHPayloadEvent)type {
+    return GHPayloadNoEvent;
 }
 
 #pragma mark - Initialization

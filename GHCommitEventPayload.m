@@ -13,8 +13,8 @@
 
 @synthesize commentID=_commentID, commit=_commit;
 
-- (GHPayloadType)type {
-    return GHPayloadTypeCommitComment;
+- (GHPayloadEvent)type {
+    return GHPayloadCommitCommentEvent;
 }
 
 #pragma mark - Initialization

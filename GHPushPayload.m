@@ -15,8 +15,8 @@
 
 #pragma mark - setters and getters
 
-- (GHPayloadType)type {
-    return GHPayloadTypePush;
+- (GHPayloadEvent)type {
+    return GHPayloadPushEvent;
 }
 
 - (NSString *)branch {

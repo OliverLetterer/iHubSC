@@ -146,7 +146,7 @@
     
     GHNewsFeedItem *item = [self.newsFeed.items objectAtIndex:indexPath.row];
     
-    if (item.payload.type == GHPayloadTypeIssue) {
+    if (item.payload.type == GHPayloadIssuesEvent) {
         // we will display an issue
         NSString *CellIdentifier = @"GHIssueFeedItemTableViewCell";
         GHIssueFeedItemTableViewCell *cell = (GHIssueFeedItemTableViewCell *)[self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
@@ -196,7 +196,7 @@
         }
                 
         return cell;
-    } else if (item.payload.type == GHPayloadTypePush) {
+    } else if (item.payload.type == GHPayloadPushEvent) {
         // tableView is asking for a push item
         
         NSString *CellIdentifier = @"GHPushFeedItemTableViewCell";
@@ -245,7 +245,7 @@
         }
         
         return cell;
-    } else if (item.payload.type == GHPayloadTypeCommitComment) {
+    } else if (item.payload.type == GHPayloadCommitCommentEvent) {
         NSString *CellIdentifier = @"GHNewsFeedItemTableViewCell";
         GHNewsFeedItemTableViewCell *cell = (GHNewsFeedItemTableViewCell *)[self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         
@@ -285,9 +285,9 @@
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
     }
     
-    if (item.payload.type == GHPayloadTypePullRequest) {
+    if (item.payload.type == GHPayloadPullRequestEvent) {
         cell.textLabel.text = @"Pull Request";
-    } else if (item.payload.type == GHPayloadTypePush) {
+    } else if (item.payload.type == GHPayloadPushEvent) {
         cell.textLabel.text = @"Pushed";
     } else {
         cell.textLabel.text = [NSString stringWithFormat:@"Unknown: %@", item.type];
@@ -339,7 +339,7 @@
     CGFloat height = 0.0;
     CGFloat minimumHeight = 0.0;
     
-    if (item.payload.type == GHPayloadTypeIssue) {
+    if (item.payload.type == GHPayloadIssuesEvent) {
         minimumHeight = 78.0;
         // this is the height for an issue cell, we will display the whole issue
         GHIssuePayload *payload = (GHIssuePayload *)item.payload;
@@ -359,7 +359,7 @@
         } else {
             height = [GHIssueFeedItemTableViewCell height];
         }
-    } else if (item.payload.type == GHPayloadTypePush) {
+    } else if (item.payload.type == GHPayloadPushEvent) {
         minimumHeight = 78.0;
         GHPushPayload *payload = (GHPushPayload *)item.payload;
         // this is a commit / push message, we will display max 2 commits
@@ -395,7 +395,7 @@
         }
 
         height = 20.0 + commitHeight + 30.0;
-    } else if(item.payload.type == GHPayloadTypeCommitComment) {
+    } else if(item.payload.type == GHPayloadCommitCommentEvent) {
         height = 71.0;
     }else {
         minimumHeight = 55.0;
