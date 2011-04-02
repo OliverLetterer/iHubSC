@@ -11,6 +11,9 @@
 
 @interface UIImage (GHGravatar)
 
-+ (void)imageFromGravatarID:(NSString *)gravatarID withCompletionHandler:(void(^)(UIImage *image, NSError *error))handler;
++ (void)imageFromGravatarID:(NSString *)gravatarID 
+      withCompletionHandler:(void(^)(UIImage *image, NSError *error, BOOL didDownload))handler;
+
++ (UIImage *)cachedImageFromGravatarID:(NSString *)gravatarID;
 
 @end

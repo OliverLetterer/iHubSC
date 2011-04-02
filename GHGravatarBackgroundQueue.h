@@ -11,9 +11,12 @@
 
 @interface GHGravatarBackgroundQueue : NSObject {
     dispatch_queue_t _backgroundQueue;
+    
+    NSCache *_imagesCache;
 }
 
 @property (nonatomic, readonly) dispatch_queue_t backgroundQueue;
+@property (nonatomic, retain)  NSCache *imagesCache;
 
 @end
 

@@ -11,7 +11,7 @@
 
 @implementation GHIssueFeedItemTableViewCell
 
-@synthesize gravatarImageView=_gravatarImageView, actorLabel=_actorLabel, statusLabel=_statusLabel, repositoryLabel=_repositoryLabel;
+@synthesize gravatarImageView=_gravatarImageView, actorLabel=_actorLabel, statusLabel=_statusLabel, repositoryLabel=_repositoryLabel, activityIndicatorView=_activityIndicatorView;
 
 #pragma mark - Initialization
 
@@ -42,12 +42,16 @@
 
 - (void)layoutSubviews {
     [super layoutSubviews];
-    
     _myContentView.frame = self.contentView.bounds;
-    
-//    CGRect repoFrame = self.repositoryLabel.frame;
-//    repoFrame.origin.y = _myContentView.bounds.size.height - 21.0;
-//    self.repositoryLabel.frame = repoFrame;
+}
+
+- (void)prepareForReuse {
+    [super prepareForReuse];
+    self.statusLabel.text = NSLocalizedString(@"Downloading ...", @"");
+    self.actorLabel.text = nil;
+    self.repositoryLabel.text = nil;
+    self.gravatarImageView.image = [UIImage imageNamed:@"DefaultUserImage.png"];
+    [self.activityIndicatorView stopAnimating];
 }
 
 + (CGFloat)height {
@@ -62,6 +66,7 @@
     [_actorLabel release];
     [_statusLabel release];
     [_repositoryLabel release];
+    [_activityIndicatorView release];
     [super dealloc];
 }
 

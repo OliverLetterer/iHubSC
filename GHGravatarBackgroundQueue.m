@@ -10,6 +10,8 @@
 
 @implementation GHGravatarBackgroundQueue
 
+@synthesize imagesCache=_imagesCache;
+
 - (dispatch_queue_t)backgroundQueue {
     if (!_backgroundQueue) {
         _backgroundQueue = dispatch_queue_create("de.olettere.GHAPI.gravatarBackgroundQueue", NULL);
@@ -21,7 +23,7 @@
 
 - (id)init {
     if ((self = [super init])) {
-        
+        self.imagesCache = [[[NSCache alloc] init] autorelease];
     }
     return self;
 }
@@ -29,7 +31,7 @@
 #pragma mark - Memory management
 
 - (void)dealloc {
-    
+    [_imagesCache release];
     [super dealloc];
 }
 

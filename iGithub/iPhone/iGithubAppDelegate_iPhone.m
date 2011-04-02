@@ -17,6 +17,11 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // build userInterface here
     
+#if DEBUG
+    [GHSettingsHelper setUsername:@"docmorelli"];
+    [GHSettingsHelper setPassword:@"1337-l0g1n"];
+#endif
+    
     NSMutableArray *tabBarItems = [NSMutableArray array];
     
     self.tabBarController = [[[UITabBarController alloc] init] autorelease];

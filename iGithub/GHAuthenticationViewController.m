@@ -231,7 +231,7 @@
         
         [GHUser userWithName:cell.textField.text completionHandler:^(GHUser *user, NSError *error) {
             
-            [UIImage imageFromGravatarID:user.gravatarID withCompletionHandler:^(UIImage *image, NSError *error) {
+            [UIImage imageFromGravatarID:user.gravatarID withCompletionHandler:^(UIImage *image, NSError *error, BOOL didDownload) {
                 self.imageView.image = image;
                 [UIView animateWithDuration:0.3 animations:^(void) {
                     self.imageView.alpha = 1.0;

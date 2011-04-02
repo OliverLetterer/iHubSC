@@ -37,10 +37,18 @@ NSString *GHGravatarImageCacheDirectory() {
         NSData *pngData = UIImagePNGRepresentation(gravatarImage);
         [pngData writeToFile:[imagesCacheDirectory stringByAppendingPathComponent:[gravatarID stringByAppendingString:@".png"]] 
                   atomically:YES];
+        [[GHGravatarBackgroundQueue sharedInstance].imagesCache setObject:gravatarImage 
+                                                                   forKey:gravatarID];
     });
 }
 
 + (UIImage *)cachedGravatarImageFromGravatarID:(NSString *)gravatarID {
+    
+    UIImage *inMemoryCachedImage = [[GHGravatarBackgroundQueue sharedInstance].imagesCache objectForKey:gravatarID];
+    if (inMemoryCachedImage) {
+        return inMemoryCachedImage;
+    }
+    
     NSString *imagesCacheDirectory = GHGravatarImageCacheDirectory();
     NSString *filePath = [imagesCacheDirectory stringByAppendingPathComponent:[gravatarID stringByAppendingString:@".png"]];
     

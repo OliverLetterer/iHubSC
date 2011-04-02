@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A703B92F134675EC0014235D /* UIImage+Alpha.m in Sources */ = {isa = PBXBuildFile; fileRef = A703B92A134675EC0014235D /* UIImage+Alpha.m */; };
+		A703B930134675EC0014235D /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = A703B92C134675EC0014235D /* UIImage+Resize.m */; };
+		A703B931134675EC0014235D /* UIImage+RoundedCorner.m in Sources */ = {isa = PBXBuildFile; fileRef = A703B92E134675EC0014235D /* UIImage+RoundedCorner.m */; };
 		A750571613427FB400514A82 /* ASIAuthenticationDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = A750570313427FB400514A82 /* ASIAuthenticationDialog.m */; };
 		A750571713427FB400514A82 /* ASIDataCompressor.m in Sources */ = {isa = PBXBuildFile; fileRef = A750570613427FB400514A82 /* ASIDataCompressor.m */; };
 		A750571813427FB400514A82 /* ASIDataDecompressor.m in Sources */ = {isa = PBXBuildFile; fileRef = A750570813427FB400514A82 /* ASIDataDecompressor.m */; };
@@ -68,6 +71,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A703B929134675EC0014235D /* UIImage+Alpha.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Alpha.h"; sourceTree = "<group>"; };
+		A703B92A134675EC0014235D /* UIImage+Alpha.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Alpha.m"; sourceTree = "<group>"; };
+		A703B92B134675EC0014235D /* UIImage+Resize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Resize.h"; sourceTree = "<group>"; };
+		A703B92C134675EC0014235D /* UIImage+Resize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Resize.m"; sourceTree = "<group>"; };
+		A703B92D134675EC0014235D /* UIImage+RoundedCorner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+RoundedCorner.h"; sourceTree = "<group>"; };
+		A703B92E134675EC0014235D /* UIImage+RoundedCorner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+RoundedCorner.m"; sourceTree = "<group>"; };
 		A750570213427FB400514A82 /* ASIAuthenticationDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASIAuthenticationDialog.h; path = "asi-http-request/Classes/ASIAuthenticationDialog.h"; sourceTree = SOURCE_ROOT; };
 		A750570313427FB400514A82 /* ASIAuthenticationDialog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ASIAuthenticationDialog.m; path = "asi-http-request/Classes/ASIAuthenticationDialog.m"; sourceTree = SOURCE_ROOT; };
 		A750570413427FB400514A82 /* ASICacheDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASICacheDelegate.h; path = "asi-http-request/Classes/ASICacheDelegate.h"; sourceTree = SOURCE_ROOT; };
@@ -193,6 +202,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A703B927134675D90014235D /* UIImage+Additions */ = {
+			isa = PBXGroup;
+			children = (
+				A703B929134675EC0014235D /* UIImage+Alpha.h */,
+				A703B92A134675EC0014235D /* UIImage+Alpha.m */,
+				A703B92B134675EC0014235D /* UIImage+Resize.h */,
+				A703B92C134675EC0014235D /* UIImage+Resize.m */,
+				A703B92D134675EC0014235D /* UIImage+RoundedCorner.h */,
+				A703B92E134675EC0014235D /* UIImage+RoundedCorner.m */,
+			);
+			name = "UIImage+Additions";
+			sourceTree = "<group>";
+		};
 		A750570013427F9E00514A82 /* ASI-HTTP */ = {
 			isa = PBXGroup;
 			children = (
@@ -367,6 +389,7 @@
 		A7BF14321342159B001AE50D /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				A703B927134675D90014235D /* UIImage+Additions */,
 				A750573F1343422200514A82 /* UserInterface */,
 				A7BF146413426D85001AE50D /* Github API */,
 				A7BF1436134216EB001AE50D /* CGSettingsHelper */,
@@ -654,6 +677,9 @@
 				A7CE1B811346335D00169F94 /* GHDatabase.xcdatamodel in Sources */,
 				A7CE1B871346355100169F94 /* GHManagedObjectContext.m in Sources */,
 				A7CE1B8A13463A6E00169F94 /* GHIssue.m in Sources */,
+				A703B92F134675EC0014235D /* UIImage+Alpha.m in Sources */,
+				A703B930134675EC0014235D /* UIImage+Resize.m in Sources */,
+				A703B931134675EC0014235D /* UIImage+RoundedCorner.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

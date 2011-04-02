@@ -18,7 +18,6 @@
 - (id)initWithRawArray:(NSArray *)array {
     if ((self = [super init]) && array) {
         // Initialization code
-        NSAssert(array.count == 4, @"%s array must contain 4  objects, head, EMail, message, name", __PRETTY_FUNCTION__);
         self.head = [array objectAtIndex:0];
         self.EMail = [array objectAtIndex:1];
         self.message = [array objectAtIndex:2];

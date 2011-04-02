@@ -117,36 +117,44 @@
         
         GHIssuePayload *payload = (GHIssuePayload *)item.payload;
         
-        [UIImage imageFromGravatarID:item.actorAttributes.gravatarID 
-               withCompletionHandler:^(UIImage *image, NSError *error) {
-                   cell.gravatarImageView.image = image;
-        }];
+        UIImage *gravatarImage = [UIImage cachedImageFromGravatarID:item.actorAttributes.gravatarID];
         
+        if (gravatarImage) {
+            cell.gravatarImageView.image = gravatarImage;
+            [cell.activityIndicatorView stopAnimating];
+        } else {
+            [cell.activityIndicatorView startAnimating];
+            
+            [UIImage imageFromGravatarID:item.actorAttributes.gravatarID 
+                   withCompletionHandler:^(UIImage *image, NSError *error, BOOL didDownload) {
+                       [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] 
+                                             withRowAnimation:UITableViewRowAnimationNone];
+                   }];
+
+        }
+        
+                
         cell.actorLabel.text = [NSString stringWithFormat:@"%@ %@", item.actor, [NSString stringWithFormat:NSLocalizedString(@"%@ Issue %@", @""), payload.action, payload.number]];
         
         cell.repositoryLabel.text = payload.repo;
         
-        [GHIssue issueOnRepository:payload.repo 
-                        withNumber:payload.number 
-                     loginUsername:[GHSettingsHelper username] 
-                          password:[GHSettingsHelper password] 
-                 completionHandler:^(GHIssue *issue, NSError *error, BOOL didDownload) {
-                     
-                     CGSize newLabelSize = [issue.title sizeWithFont:[UIFont boldSystemFontOfSize:14.0] 
-                                                   constrainedToSize:CGSizeMake(222.0f, MAXFLOAT)
-                                                       lineBreakMode:UILineBreakModeWordWrap];
-                     
-                     cell.statusLabel.text = issue.title;
-                     CGRect statusLabelFrame = cell.statusLabel.frame;
-                     statusLabelFrame.size = newLabelSize;
-                     cell.statusLabel.frame = statusLabelFrame;
-                     
-                     if (didDownload) {
-                         [self.tableView reloadData];
-                     }
-                     
-                 }];
+        GHIssue *issue = [GHIssue issueFromDatabaseOnRepository:payload.repo withNumber:payload.number];
         
+        if (issue) {            
+            cell.statusLabel.text = issue.title;
+        } else {
+            [GHIssue issueOnRepository:payload.repo 
+                            withNumber:payload.number 
+                         loginUsername:[GHSettingsHelper username] 
+                              password:[GHSettingsHelper password] 
+                     completionHandler:^(GHIssue *issue, NSError *error, BOOL didDownload) {
+                         
+                         [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] 
+                                               withRowAnimation:UITableViewRowAnimationNone];
+                     }];
+
+        }
+                
         return cell;
     }
     
@@ -200,7 +208,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     GHNewsFeedItem *item = [self.newsFeed.items objectAtIndex:indexPath.row];
     
-    CGFloat height = 10.0;
+    CGFloat height = 50.0;
     
     if (item.payload.type == GHPayloadTypeIssue) {
         GHIssuePayload *payload = (GHIssuePayload *)item.payload;
