@@ -14,6 +14,7 @@
 #import "GHNewsFeedItem.h"
 #import "GHActorAttributes.h"
 #import "GHIssue.h"
+#import "GHTarget.h"
 
 #import "GHPayload.h"
 #import "GHIssuePayload.h"
@@ -21,6 +22,7 @@
 #import "GHPullRequestPayload.h"
 #import "GHCommitEventPayload.h"
 #import "GHPayloadWithRepository.h"
+#import "GHFollowEventPayload.h"
 
 #import "GHCommitMessage.h"
 #import "GHPullRequest.h"

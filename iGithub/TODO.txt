@@ -5,7 +5,7 @@ support all these events
 [O] CreateEvent 
 [O] DeleteEvent 
 [O] DownloadEvent 
-[O] FollowEvent 
+[X] FollowEvent 
 [O] ForkApplyEvent 
 [O] ForkEvent 
 [O] GistEvent 

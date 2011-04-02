@@ -11,6 +11,7 @@
 #import "GHSettingsHelper.h"
 #import "GHIssueFeedItemTableViewCell.h"
 #import "GHPushFeedItemTableViewCell.h"
+#import "GHFollowEventTableViewCell.h"
 
 @implementation GHNewsFeedViewController
 
@@ -276,7 +277,54 @@
         cell.repositoryLabel.text = payload.repo;
         
         return cell;
+    } else if (item.payload.type == GHPayloadFollowEvent) {
+        NSString *CellIdentifier = @"GHFollowEventTableViewCell";
+        GHFollowEventTableViewCell *cell = (GHFollowEventTableViewCell *)[self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        
+        if (!cell) {
+            cell = [[[GHFollowEventTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        }
+        
+        GHFollowEventPayload *payload = (GHFollowEventPayload *)item.payload;
+        
+        UIImage *gravatarImage = [UIImage cachedImageFromGravatarID:item.actorAttributes.gravatarID];
+        
+        if (gravatarImage) {
+            cell.imageView.image = gravatarImage;
+            [cell.activityIndicatorView stopAnimating];
+        } else {
+            [cell.activityIndicatorView startAnimating];
+            
+            [UIImage imageFromGravatarID:item.actorAttributes.gravatarID 
+                   withCompletionHandler:^(UIImage *image, NSError *error, BOOL didDownload) {
+                       [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] 
+                                             withRowAnimation:UITableViewRowAnimationNone];
+                   }];
+            
+        }
+        
+        cell.titleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ started following", @""), item.actor];
+        
+        cell.targetNameLabel.text = payload.target.login;
+        
+        UIImage *targetImage = [UIImage cachedImageFromGravatarID:payload.target.gravatarID];
+        
+        if (targetImage) {
+            cell.targetImageView.image = targetImage;
+        } else {
+            [UIImage imageFromGravatarID:payload.target.gravatarID 
+                   withCompletionHandler:^(UIImage *image, NSError *error, BOOL didDownload) {
+                       [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] 
+                                             withRowAnimation:UITableViewRowAnimationNone];
+                   }];
+            
+        }
+        
+        return cell;
     }
+    
+    
+    
     
     NSString *CellIdentifier = @"Cell";
     
@@ -285,13 +333,7 @@
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
     }
     
-    if (item.payload.type == GHPayloadPullRequestEvent) {
-        cell.textLabel.text = @"Pull Request";
-    } else if (item.payload.type == GHPayloadPushEvent) {
-        cell.textLabel.text = @"Pushed";
-    } else {
-        cell.textLabel.text = [NSString stringWithFormat:@"Unknown: %@", item.type];
-    }
+    cell.textLabel.text = [NSString stringWithFormat:@"Unknown: %@", item.type];
     
     return cell;
 }
@@ -397,7 +439,9 @@
         height = 20.0 + commitHeight + 30.0;
     } else if(item.payload.type == GHPayloadCommitCommentEvent) {
         height = 71.0;
-    }else {
+    } else if(item.payload.type == GHPayloadFollowEvent) {
+        height = 71.0;
+    } else {
         minimumHeight = 55.0;
     }
     

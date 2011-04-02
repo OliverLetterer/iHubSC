@@ -38,6 +38,8 @@
             self.payload = [[[GHIssuePayload alloc] initWithRawDictionary:rawPayload] autorelease];
         } else if ([self.type isEqualToString:@"CommitCommentEvent"]) {
             self.payload = [[[GHCommitEventPayload alloc] initWithRawDictionary:rawPayload] autorelease];
+        } else if ([self.type isEqualToString:@"FollowEvent"]) {
+            self.payload = [[[GHFollowEventPayload alloc] initWithRawDictionary:rawPayload] autorelease];
         }
     }
     return self;
