@@ -7,7 +7,7 @@
 //
 
 #import "GHIssueFeedItemTableViewCell.h"
-
+#import "UITableViewCell+Background.h"
 
 @implementation GHIssueFeedItemTableViewCell
 
@@ -30,6 +30,8 @@
     [self.statusLabel setHighlighted:selected];
     [self.repositoryLabel setHighlighted:selected];
     [self.actorLabel setHighlighted:selected];
+    
+    [self setBackgroundShadowHeight:5.0];
 }
 
 - (void)setHighlighted:(BOOL)highlighted animated:(BOOL)animated {
@@ -38,6 +40,8 @@
     [self.statusLabel setHighlighted:highlighted];
     [self.repositoryLabel setHighlighted:highlighted];
     [self.actorLabel setHighlighted:highlighted];
+    
+    [self setBackgroundShadowHeight:5.0];
 }
 
 - (void)layoutSubviews {

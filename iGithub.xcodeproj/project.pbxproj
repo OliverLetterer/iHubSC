@@ -12,6 +12,8 @@
 		A703B931134675EC0014235D /* UIImage+RoundedCorner.m in Sources */ = {isa = PBXBuildFile; fileRef = A703B92E134675EC0014235D /* UIImage+RoundedCorner.m */; };
 		A703B9361347315B0014235D /* GHPushFeedItemTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A703B9341347315A0014235D /* GHPushFeedItemTableViewCell.m */; };
 		A703B9371347315B0014235D /* GHPushFeedItemTableViewCellContentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A703B9351347315B0014235D /* GHPushFeedItemTableViewCellContentView.xib */; };
+		A703B944134754FC0014235D /* UITableViewCell+Background.m in Sources */ = {isa = PBXBuildFile; fileRef = A703B943134754FC0014235D /* UITableViewCell+Background.m */; };
+		A703B9471347562B0014235D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A703B9461347562B0014235D /* QuartzCore.framework */; };
 		A750571613427FB400514A82 /* ASIAuthenticationDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = A750570313427FB400514A82 /* ASIAuthenticationDialog.m */; };
 		A750571713427FB400514A82 /* ASIDataCompressor.m in Sources */ = {isa = PBXBuildFile; fileRef = A750570613427FB400514A82 /* ASIDataCompressor.m */; };
 		A750571813427FB400514A82 /* ASIDataDecompressor.m in Sources */ = {isa = PBXBuildFile; fileRef = A750570813427FB400514A82 /* ASIDataDecompressor.m */; };
@@ -82,6 +84,10 @@
 		A703B9331347315A0014235D /* GHPushFeedItemTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPushFeedItemTableViewCell.h; sourceTree = "<group>"; };
 		A703B9341347315A0014235D /* GHPushFeedItemTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPushFeedItemTableViewCell.m; sourceTree = "<group>"; };
 		A703B9351347315B0014235D /* GHPushFeedItemTableViewCellContentView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GHPushFeedItemTableViewCellContentView.xib; sourceTree = "<group>"; };
+		A703B942134754FC0014235D /* UITableViewCell+Background.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableViewCell+Background.h"; sourceTree = "<group>"; };
+		A703B943134754FC0014235D /* UITableViewCell+Background.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableViewCell+Background.m"; sourceTree = "<group>"; };
+		A703B9451347560F0014235D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		A703B9461347562B0014235D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		A750570213427FB400514A82 /* ASIAuthenticationDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASIAuthenticationDialog.h; path = "asi-http-request/Classes/ASIAuthenticationDialog.h"; sourceTree = SOURCE_ROOT; };
 		A750570313427FB400514A82 /* ASIAuthenticationDialog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ASIAuthenticationDialog.m; path = "asi-http-request/Classes/ASIAuthenticationDialog.m"; sourceTree = SOURCE_ROOT; };
 		A750570413427FB400514A82 /* ASICacheDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASICacheDelegate.h; path = "asi-http-request/Classes/ASICacheDelegate.h"; sourceTree = SOURCE_ROOT; };
@@ -192,9 +198,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A703B9471347562B0014235D /* QuartzCore.framework in Frameworks */,
+				A7BF14001342149C001AE50D /* CoreGraphics.framework in Frameworks */,
 				A7CE1B831346349200169F94 /* CoreData.framework in Frameworks */,
 				A75057261342801300514A82 /* libz.1.2.3.dylib in Frameworks */,
-				A7BF14001342149C001AE50D /* CoreGraphics.framework in Frameworks */,
 				A750572313427FF600514A82 /* MobileCoreServices.framework in Frameworks */,
 				A750572113427FEF00514A82 /* SystemConfiguration.framework in Frameworks */,
 				A750571F13427FE800514A82 /* CFNetwork.framework in Frameworks */,
@@ -238,6 +245,15 @@
 				A703B9351347315B0014235D /* GHPushFeedItemTableViewCellContentView.xib */,
 			);
 			name = GHPushFeedItemTableViewCell;
+			sourceTree = "<group>";
+		};
+		A703B941134754D40014235D /* UITableViewCell+Additions */ = {
+			isa = PBXGroup;
+			children = (
+				A703B942134754FC0014235D /* UITableViewCell+Background.h */,
+				A703B943134754FC0014235D /* UITableViewCell+Background.m */,
+			);
+			name = "UITableViewCell+Additions";
 			sourceTree = "<group>";
 		};
 		A750570013427F9E00514A82 /* ASI-HTTP */ = {
@@ -292,6 +308,7 @@
 		A750573F1343422200514A82 /* UserInterface */ = {
 			isa = PBXGroup;
 			children = (
+				A703B941134754D40014235D /* UITableViewCell+Additions */,
 				A75057401343424100514A82 /* GHNewsFeedViewController */,
 				A7BF1423134214E7001AE50D /* GHAuthenticationViewController */,
 			);
@@ -329,6 +346,8 @@
 		A7BF13FA1342149C001AE50D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A703B9461347562B0014235D /* QuartzCore.framework */,
+				A703B9451347560F0014235D /* CoreGraphics.framework */,
 				A7CE1B821346349000169F94 /* CoreData.framework */,
 				A75057251342801300514A82 /* libz.1.2.3.dylib */,
 				A750572413427FFF00514A82 /* CoreGraphics.framework */,
@@ -706,6 +725,7 @@
 				A703B930134675EC0014235D /* UIImage+Resize.m in Sources */,
 				A703B931134675EC0014235D /* UIImage+RoundedCorner.m in Sources */,
 				A703B9361347315B0014235D /* GHPushFeedItemTableViewCell.m in Sources */,
+				A703B944134754FC0014235D /* UITableViewCell+Background.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
