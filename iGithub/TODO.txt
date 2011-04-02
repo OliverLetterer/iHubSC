@@ -17,5 +17,5 @@ support all these events
 [O] PullRequestEvent 
 [X] PushEvent
 [O] TeamAddEvent 
-[O] WatchEvent 
+[X] WatchEvent 
 [O] WikiEvent

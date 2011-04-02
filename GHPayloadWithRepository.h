@@ -7,9 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "GHPayload.h"
+#import "GHPayloadWithActor.h"
 
-@interface GHPayloadWithRepository : GHPayload {
+@interface GHPayloadWithRepository : GHPayloadWithActor {
     NSString *_repo;
 }
 

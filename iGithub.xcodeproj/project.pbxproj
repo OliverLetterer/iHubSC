@@ -22,6 +22,7 @@
 		A73E298C134795FA00E85282 /* GHFollowEventPayload.m in Sources */ = {isa = PBXBuildFile; fileRef = A73E298B134795FA00E85282 /* GHFollowEventPayload.m */; };
 		A73E29911347970500E85282 /* GHFollowEventTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A73E29901347970500E85282 /* GHFollowEventTableViewCell.m */; };
 		A73E29951347A8E800E85282 /* GHWatchEventPayload.m in Sources */ = {isa = PBXBuildFile; fileRef = A73E29941347A8E800E85282 /* GHWatchEventPayload.m */; };
+		A73E29981347AED500E85282 /* GHPayloadWithActor.m in Sources */ = {isa = PBXBuildFile; fileRef = A73E29971347AED500E85282 /* GHPayloadWithActor.m */; };
 		A750571613427FB400514A82 /* ASIAuthenticationDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = A750570313427FB400514A82 /* ASIAuthenticationDialog.m */; };
 		A750571713427FB400514A82 /* ASIDataCompressor.m in Sources */ = {isa = PBXBuildFile; fileRef = A750570613427FB400514A82 /* ASIDataCompressor.m */; };
 		A750571813427FB400514A82 /* ASIDataDecompressor.m in Sources */ = {isa = PBXBuildFile; fileRef = A750570813427FB400514A82 /* ASIDataDecompressor.m */; };
@@ -111,6 +112,8 @@
 		A73E29901347970500E85282 /* GHFollowEventTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHFollowEventTableViewCell.m; sourceTree = "<group>"; };
 		A73E29931347A8E800E85282 /* GHWatchEventPayload.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHWatchEventPayload.h; sourceTree = "<group>"; };
 		A73E29941347A8E800E85282 /* GHWatchEventPayload.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHWatchEventPayload.m; sourceTree = "<group>"; };
+		A73E29961347AED400E85282 /* GHPayloadWithActor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPayloadWithActor.h; sourceTree = "<group>"; };
+		A73E29971347AED500E85282 /* GHPayloadWithActor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPayloadWithActor.m; sourceTree = "<group>"; };
 		A750570213427FB400514A82 /* ASIAuthenticationDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASIAuthenticationDialog.h; path = "asi-http-request/Classes/ASIAuthenticationDialog.h"; sourceTree = SOURCE_ROOT; };
 		A750570313427FB400514A82 /* ASIAuthenticationDialog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ASIAuthenticationDialog.m; path = "asi-http-request/Classes/ASIAuthenticationDialog.m"; sourceTree = SOURCE_ROOT; };
 		A750570413427FB400514A82 /* ASICacheDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASICacheDelegate.h; path = "asi-http-request/Classes/ASICacheDelegate.h"; sourceTree = SOURCE_ROOT; };
@@ -352,6 +355,17 @@
 				A73E29901347970500E85282 /* GHFollowEventTableViewCell.m */,
 			);
 			name = GHFollowEventTableViewCell;
+			sourceTree = "<group>";
+		};
+		A73E29991347AF0100E85282 /* Abstract subclasses */ = {
+			isa = PBXGroup;
+			children = (
+				A703B955134791CF0014235D /* GHPayloadWithRepository.h */,
+				A703B956134791CF0014235D /* GHPayloadWithRepository.m */,
+				A73E29961347AED400E85282 /* GHPayloadWithActor.h */,
+				A73E29971347AED500E85282 /* GHPayloadWithActor.m */,
+			);
+			name = "Abstract subclasses";
 			sourceTree = "<group>";
 		};
 		A750570013427F9E00514A82 /* ASI-HTTP */ = {
@@ -646,8 +660,7 @@
 			children = (
 				A7CE1B171345BFD600169F94 /* GHPayload.h */,
 				A7CE1B181345BFD600169F94 /* GHPayload.m */,
-				A703B955134791CF0014235D /* GHPayloadWithRepository.h */,
-				A703B956134791CF0014235D /* GHPayloadWithRepository.m */,
+				A73E29991347AF0100E85282 /* Abstract subclasses */,
 				A703B94E13478BD60014235D /* GHIssuePayload */,
 				A703B94F13478BE00014235D /* GHPushPayload */,
 				A703B95013478BEA0014235D /* GHPullRequestPayload */,
@@ -836,6 +849,7 @@
 				A73E298C134795FA00E85282 /* GHFollowEventPayload.m in Sources */,
 				A73E29911347970500E85282 /* GHFollowEventTableViewCell.m in Sources */,
 				A73E29951347A8E800E85282 /* GHWatchEventPayload.m in Sources */,
+				A73E29981347AED500E85282 /* GHPayloadWithActor.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
