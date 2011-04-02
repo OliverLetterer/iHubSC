@@ -341,7 +341,7 @@
         return cell;
     }
     
-    return [self dummyCellWithText:[NSString stringWithFormat:@"Unknown: %@", item.type]];
+    return [self dummyCellWithText:item.type];
 }
 
 /*
