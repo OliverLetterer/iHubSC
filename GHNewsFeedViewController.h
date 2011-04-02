@@ -19,4 +19,6 @@
 @property (nonatomic, retain) UISegmentedControl *segmentControl;
 @property (nonatomic, retain) GHNewsFeed *newsFeed;
 
+- (void)segmentControlValueChanged:(UISegmentedControl *)segmentControl;
+
 @end

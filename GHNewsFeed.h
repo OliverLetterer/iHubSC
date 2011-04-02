@@ -17,6 +17,10 @@
                            password:(NSString *)password 
                   completionHandler:(void(^)(GHNewsFeed *feed, NSError *error))handler;
 
++ (void)usersNewsFeedForUserNamed:(NSString *)username 
+                         password:(NSString *)password 
+                completionHandler:(void(^)(GHNewsFeed *feed, NSError *error))handler;
+
 @property (nonatomic, retain) NSArray *items; // contains GHNewsFeedItem's
 
 - (id)initWithRawArray:(NSArray *)rawArray;

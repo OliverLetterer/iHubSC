@@ -43,11 +43,44 @@
                 handler(nil, myError);
             } else {
                 NSArray *feedArray = [feedString objectFromJSONString];
-//                DLog(@"%@", feedArray);
                 handler([[[GHNewsFeed alloc] initWithRawArray:feedArray] autorelease], nil);
             }
         });
     });
+}
+
++ (void)usersNewsFeedForUserNamed:(NSString *)username 
+                         password:(NSString *)password 
+                completionHandler:(void(^)(GHNewsFeed *feed, NSError *error))handler {
+    
+    // use URL https://github.com/docmorelli.json
+    
+    dispatch_async(GHAPIBackgroundQueue(), ^(void) {
+        
+        NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://github.com/%@.json",
+                                           [username stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]];
+        NSError *myError = nil;
+        
+        ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:URL];
+        [request addRequestHeader:@"Authorization" 
+                            value:[NSString stringWithFormat:@"Basic %@",[ASIHTTPRequest base64forData:[[NSString stringWithFormat:@"%@:%@",username,password] dataUsingEncoding:NSUTF8StringEncoding]]]];
+        [request startSynchronous];
+        
+        myError = [request error];
+        
+        NSData *feedData = [request responseData];
+        NSString *feedString = [[[NSString alloc] initWithData:feedData encoding:NSUTF8StringEncoding] autorelease];
+        
+        dispatch_async(dispatch_get_main_queue(), ^(void) {
+            if (myError) {
+                handler(nil, myError);
+            } else {
+                NSArray *feedArray = [feedString objectFromJSONString];
+                handler([[[GHNewsFeed alloc] initWithRawArray:feedArray] autorelease], nil);
+            }
+        });
+    });
+    
 }
 
 - (id)initWithRawArray:(NSArray *)rawArray {

@@ -52,6 +52,9 @@
     self.segmentControl.segmentedControlStyle = UISegmentedControlStyleBar;
     self.segmentControl.selectedSegmentIndex = 0;
     self.navigationItem.titleView = self.segmentControl;
+    self.segmentControl.userInteractionEnabled = NO;
+    self.segmentControl.alpha = 0.5;
+    [self.segmentControl addTarget:self action:@selector(segmentControlValueChanged:) forControlEvents:UIControlEventValueChanged];
     
     if ([GHSettingsHelper isUserAuthenticated]) {
         [GHNewsFeed privateNewsFeedForUserNamed:[GHSettingsHelper username] 
@@ -59,6 +62,8 @@
                               completionHandler:^(GHNewsFeed *feed, NSError *error) {
                                   self.newsFeed = feed;
                                   [self.tableView reloadData];
+                                  self.segmentControl.userInteractionEnabled = YES;
+                                  self.segmentControl.alpha = 1.0;
                               }];
     }
 }
@@ -90,6 +95,39 @@
     // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
+
+#pragma mark - target actions
+
+- (void)segmentControlValueChanged:(UISegmentedControl *)segmentControl {
+    
+    self.newsFeed = nil;
+    [self.tableView reloadData];
+    self.segmentControl.userInteractionEnabled = NO;
+    self.segmentControl.alpha = 0.5;
+    
+    if (segmentControl.selectedSegmentIndex == 0) {
+        // News Feed
+        [GHNewsFeed privateNewsFeedForUserNamed:[GHSettingsHelper username] 
+                                       password:[GHSettingsHelper password] 
+                              completionHandler:^(GHNewsFeed *feed, NSError *error) {
+                                  self.newsFeed = feed;
+                                  [self.tableView reloadData];
+                                  self.segmentControl.userInteractionEnabled = YES;
+                                  self.segmentControl.alpha = 1.0;
+                              }];
+    } else if (segmentControl.selectedSegmentIndex == 1) {
+        // My Actions
+        [GHNewsFeed usersNewsFeedForUserNamed:[GHSettingsHelper username] 
+                                     password:[GHSettingsHelper password] 
+                            completionHandler:^(GHNewsFeed *feed, NSError *error) {
+                                self.newsFeed = feed;
+                                [self.tableView reloadData];
+                                self.segmentControl.userInteractionEnabled = YES;
+                                self.segmentControl.alpha = 1.0;
+                            }];
+    }
+}
+
 
 #pragma mark - Table view data source
 
@@ -163,6 +201,14 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+    }
+    
+    if (item.payload.type == GHPayloadTypePullRequest) {
+        cell.textLabel.text = @"Pull Request";
+    } else if (item.payload.type == GHPayloadTypePush) {
+        cell.textLabel.text = @"Pushed";
+    } else {
+        cell.textLabel.text = [NSString stringWithFormat:@"Unknown: %@", item.type];
     }
     
     return cell;
