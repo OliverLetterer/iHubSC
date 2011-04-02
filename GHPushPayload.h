@@ -19,4 +19,6 @@
 @property (nonatomic, copy) NSString *ref;
 @property (nonatomic, retain) NSArray *commits;
 
+@property (nonatomic, readonly) NSString *branch;
+
 @end

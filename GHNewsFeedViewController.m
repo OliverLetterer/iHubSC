@@ -10,6 +10,7 @@
 #import "GithubAPI.h"
 #import "GHSettingsHelper.h"
 #import "GHIssueFeedItemTableViewCell.h"
+#import "GHPushFeedItemTableViewCell.h"
 
 @implementation GHNewsFeedViewController
 
@@ -146,6 +147,7 @@
     GHNewsFeedItem *item = [self.newsFeed.items objectAtIndex:indexPath.row];
     
     if (item.payload.type == GHPayloadTypeIssue) {
+        // we will display an issue
         NSString *CellIdentifier = @"GHIssueFeedItemTableViewCell";
         GHIssueFeedItemTableViewCell *cell = (GHIssueFeedItemTableViewCell *)[self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         
@@ -193,6 +195,55 @@
 
         }
                 
+        return cell;
+    } else if (item.payload.type == GHPayloadTypePush) {
+        // tableView is asking for a push item
+        
+        NSString *CellIdentifier = @"GHPushFeedItemTableViewCell";
+        GHPushFeedItemTableViewCell *cell = (GHPushFeedItemTableViewCell *)[self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        
+        if (!cell) {
+            cell = [[[GHPushFeedItemTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        }
+        
+        GHPushPayload *payload = (GHPushPayload *)item.payload;
+        
+        UIImage *gravatarImage = [UIImage cachedImageFromGravatarID:item.actorAttributes.gravatarID];
+        
+        if (gravatarImage) {
+            cell.gravatarImageView.image = gravatarImage;
+            [cell.activityIndicatorView stopAnimating];
+        } else {
+            [cell.activityIndicatorView startAnimating];
+            
+            [UIImage imageFromGravatarID:item.actorAttributes.gravatarID 
+                   withCompletionHandler:^(UIImage *image, NSError *error, BOOL didDownload) {
+                       [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] 
+                                             withRowAnimation:UITableViewRowAnimationNone];
+                   }];
+            
+        }
+
+        NSUInteger numberOfCommits = [payload.commits count];
+        
+        cell.titleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ pushed to %@ (%d)", @""), item.actor, payload.branch, numberOfCommits];
+        
+        cell.repositoryLabel.text = payload.repo;
+        
+        if (numberOfCommits > 0) {
+            GHCommitMessage *commit = [payload.commits objectAtIndex:0];
+            cell.firstCommitLabel.text = commit.message;
+        } else {
+            cell.firstCommitLabel.text = nil;
+        }
+        
+        if (numberOfCommits > 1) {
+            GHCommitMessage *commit = [payload.commits objectAtIndex:1];
+            cell.secondCommitLabel.text = commit.message;
+        } else {
+            cell.secondCommitLabel.text = nil;
+        }
+        
         return cell;
     }
     
@@ -257,12 +308,13 @@
     CGFloat height = 50.0;
     
     if (item.payload.type == GHPayloadTypeIssue) {
+        // this is the height for an issue cell, we will display the whole issue
         GHIssuePayload *payload = (GHIssuePayload *)item.payload;
         
         if ([GHIssue isIssueAvailableForRepository:payload.repo withNumber:payload.number]) {
             GHIssue *issue = [GHIssue issueFromDatabaseOnRepository:payload.repo withNumber:payload.number];
             
-            CGSize newLabelSize = [issue.title sizeWithFont:[UIFont boldSystemFontOfSize:14.0] 
+            CGSize newLabelSize = [issue.title sizeWithFont:[UIFont systemFontOfSize:12.0] 
                                           constrainedToSize:CGSizeMake(222.0f, MAXFLOAT)
                                               lineBreakMode:UILineBreakModeWordWrap];
             
@@ -273,6 +325,44 @@
             height = newLabelSize.height + 20.0 + 30.0; // X + top offset of status label + 30 px white space on the bottom
         } else {
             height = [GHIssueFeedItemTableViewCell height];
+        }
+    } else if (item.payload.type == GHPayloadTypePush) {
+        GHPushPayload *payload = (GHPushPayload *)item.payload;
+        // this is a commit / push message, we will display max 2 commits
+        CGFloat commitHeight = 0.0;
+        
+        NSUInteger numberOfCommits = [payload.commits count];
+        
+        if (numberOfCommits > 0) {
+            GHCommitMessage *commit = [payload.commits objectAtIndex:0];
+            CGSize firstCommitSize = [commit.message sizeWithFont:[GHPushFeedItemTableViewCell commitFont] 
+                                                            constrainedToSize:CGSizeMake(222.0f, MAXFLOAT)
+                                                                lineBreakMode:UILineBreakModeWordWrap];
+            if (firstCommitSize.height > [GHPushFeedItemTableViewCell maxCommitHeight]) {
+                firstCommitSize.height = [GHPushFeedItemTableViewCell maxCommitHeight];
+            }
+            
+            commitHeight += firstCommitSize.height;
+        }
+        
+        
+        
+        if (numberOfCommits > 1) {
+            GHCommitMessage *commit = [payload.commits objectAtIndex:1];
+            CGSize secondCommitSize = [commit.message sizeWithFont:[GHPushFeedItemTableViewCell commitFont] 
+                                                 constrainedToSize:CGSizeMake(222.0f, MAXFLOAT)
+                                                     lineBreakMode:UILineBreakModeWordWrap];
+            if (secondCommitSize.height > [GHPushFeedItemTableViewCell maxCommitHeight]) {
+                secondCommitSize.height = [GHPushFeedItemTableViewCell maxCommitHeight];
+            }
+            
+            commitHeight += secondCommitSize.height;
+            commitHeight += 7.0;
+        }
+
+        height = 20.0 + commitHeight + 30.0;
+        if (height < 71.0) {
+            height = 71.0;
         }
     }
     

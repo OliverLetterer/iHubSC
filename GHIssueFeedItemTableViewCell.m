@@ -41,8 +41,14 @@
 }
 
 - (void)layoutSubviews {
-    [super layoutSubviews];
-    _myContentView.frame = self.contentView.bounds;
+#warning remove these @try-@catch structure, we currently need it because of an CALayerInvalidGeometry exception (CALayer position contains NaN: [nan 57])
+    @try {
+        [super layoutSubviews];
+        _myContentView.frame = self.contentView.bounds;
+    }
+    @catch (NSException *exception) {
+        
+    }
 }
 
 - (void)prepareForReuse {

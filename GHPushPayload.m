@@ -19,6 +19,10 @@
     return GHPayloadTypePush;
 }
 
+- (NSString *)branch {
+    return [[self.ref componentsSeparatedByString:@"/"] lastObject];
+}
+
 #pragma mark - Initialization
 
 - (id)initWithRawDictionary:(NSDictionary *)rawDictionary {
