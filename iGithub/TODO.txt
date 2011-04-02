@@ -2,7 +2,7 @@ support all these events
 
 [X] CommitCommentEvent 
 [O] CommitEvent 
-[O] CreateEvent 
+[X] CreateEvent 
 [O] DeleteEvent 
 [O] DownloadEvent 
 [X] FollowEvent 

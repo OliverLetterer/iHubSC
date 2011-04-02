@@ -41,6 +41,42 @@
     // Release any cached data, images, etc that aren't in use.
 }
 
+#pragma mark - instance methods
+
+- (void)updateImageViewForCell:(GHNewsFeedItemTableViewCell *)cell 
+                   atIndexPath:(NSIndexPath *)indexPath 
+               forNewsFeedItem:(GHNewsFeedItem *)item {
+    
+    UIImage *gravatarImage = [UIImage cachedImageFromGravatarID:item.actorAttributes.gravatarID];
+    
+    if (gravatarImage) {
+        cell.imageView.image = gravatarImage;
+        [cell.activityIndicatorView stopAnimating];
+    } else {
+        [cell.activityIndicatorView startAnimating];
+        
+        [UIImage imageFromGravatarID:item.actorAttributes.gravatarID 
+               withCompletionHandler:^(UIImage *image, NSError *error, BOOL didDownload) {
+                   [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] 
+                                         withRowAnimation:UITableViewRowAnimationNone];
+               }];
+    }
+    
+}
+
+- (UITableViewCell *)dummyCellWithText:(NSString *)text {
+    NSString *CellIdentifier = @"DummyCell";
+    
+    UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (cell == nil) {
+        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+    }
+    
+    cell.textLabel.text = text;
+    
+    return cell;
+}
+
 #pragma mark - View lifecycle
 
 - (void)viewDidLoad {
@@ -158,24 +194,14 @@
         
         GHIssuePayload *payload = (GHIssuePayload *)item.payload;
         
-        UIImage *gravatarImage = [UIImage cachedImageFromGravatarID:item.actorAttributes.gravatarID];
-        
-        if (gravatarImage) {
-            cell.imageView.image = gravatarImage;
-            [cell.activityIndicatorView stopAnimating];
-        } else {
-            [cell.activityIndicatorView startAnimating];
-            
-            [UIImage imageFromGravatarID:item.actorAttributes.gravatarID 
-                   withCompletionHandler:^(UIImage *image, NSError *error, BOOL didDownload) {
-                       [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] 
-                                             withRowAnimation:UITableViewRowAnimationNone];
-                   }];
-
-        }
-        
-                
-        cell.titleLabel.text = [NSString stringWithFormat:@"%@ %@", item.actor, [NSString stringWithFormat:NSLocalizedString(@"%@ Issue %@", @""), payload.action, payload.number]];
+        [self updateImageViewForCell:cell atIndexPath:indexPath forNewsFeedItem:item];        
+        cell.titleLabel.text = [NSString stringWithFormat:@"%@ %@", 
+                                item.actor, 
+                                [NSString stringWithFormat:NSLocalizedString(@"%@ Issue %@", @""), 
+                                 payload.action, 
+                                 payload.number
+                                 ]
+                                ];
         
         cell.repositoryLabel.text = payload.repo;
         
@@ -209,26 +235,9 @@
         
         GHPushPayload *payload = (GHPushPayload *)item.payload;
         
-        UIImage *gravatarImage = [UIImage cachedImageFromGravatarID:item.actorAttributes.gravatarID];
-        
-        if (gravatarImage) {
-            cell.imageView.image = gravatarImage;
-            [cell.activityIndicatorView stopAnimating];
-        } else {
-            [cell.activityIndicatorView startAnimating];
-            
-            [UIImage imageFromGravatarID:item.actorAttributes.gravatarID 
-                   withCompletionHandler:^(UIImage *image, NSError *error, BOOL didDownload) {
-                       [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] 
-                                             withRowAnimation:UITableViewRowAnimationNone];
-                   }];
-            
-        }
-
+        [self updateImageViewForCell:cell atIndexPath:indexPath forNewsFeedItem:item];
         NSUInteger numberOfCommits = [payload.commits count];
-        
         cell.titleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ pushed to %@ (%d)", @""), item.actor, payload.branch, numberOfCommits];
-        
         cell.repositoryLabel.text = payload.repo;
         
         if (numberOfCommits > 0) {
@@ -237,7 +246,6 @@
         } else {
             cell.firstCommitLabel.text = nil;
         }
-        
         if (numberOfCommits > 1) {
             GHCommitMessage *commit = [payload.commits objectAtIndex:1];
             cell.secondCommitLabel.text = commit.message;
@@ -256,24 +264,8 @@
         
         GHCommitEventPayload *payload = (GHCommitEventPayload *)item.payload;
         
-        UIImage *gravatarImage = [UIImage cachedImageFromGravatarID:item.actorAttributes.gravatarID];
-        
-        if (gravatarImage) {
-            cell.imageView.image = gravatarImage;
-            [cell.activityIndicatorView stopAnimating];
-        } else {
-            [cell.activityIndicatorView startAnimating];
-            
-            [UIImage imageFromGravatarID:item.actorAttributes.gravatarID 
-                   withCompletionHandler:^(UIImage *image, NSError *error, BOOL didDownload) {
-                       [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] 
-                                             withRowAnimation:UITableViewRowAnimationNone];
-                   }];
-            
-        }
-        
+        [self updateImageViewForCell:cell atIndexPath:indexPath forNewsFeedItem:item];
         cell.titleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ commented on a commit", @""), item.actor];
-        
         cell.repositoryLabel.text = payload.repo;
         
         return cell;
@@ -287,24 +279,8 @@
         
         GHFollowEventPayload *payload = (GHFollowEventPayload *)item.payload;
         
-        UIImage *gravatarImage = [UIImage cachedImageFromGravatarID:item.actorAttributes.gravatarID];
-        
-        if (gravatarImage) {
-            cell.imageView.image = gravatarImage;
-            [cell.activityIndicatorView stopAnimating];
-        } else {
-            [cell.activityIndicatorView startAnimating];
-            
-            [UIImage imageFromGravatarID:item.actorAttributes.gravatarID 
-                   withCompletionHandler:^(UIImage *image, NSError *error, BOOL didDownload) {
-                       [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] 
-                                             withRowAnimation:UITableViewRowAnimationNone];
-                   }];
-            
-        }
-        
+        [self updateImageViewForCell:cell atIndexPath:indexPath forNewsFeedItem:item];
         cell.titleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ started following", @""), item.actor];
-        
         cell.targetNameLabel.text = payload.target.login;
         
         UIImage *targetImage = [UIImage cachedImageFromGravatarID:payload.target.gravatarID];
@@ -331,42 +307,41 @@
         
         GHWatchEventPayload *payload = (GHWatchEventPayload *)item.payload;
         
-        UIImage *gravatarImage = [UIImage cachedImageFromGravatarID:item.actorAttributes.gravatarID];
+        [self updateImageViewForCell:cell atIndexPath:indexPath forNewsFeedItem:item];
+        cell.titleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ %@ watching", @""), item.actor, payload.action];
+        cell.repositoryLabel.text = payload.repo;
         
-        if (gravatarImage) {
-            cell.imageView.image = gravatarImage;
-            [cell.activityIndicatorView stopAnimating];
-        } else {
-            [cell.activityIndicatorView startAnimating];
-            
-            [UIImage imageFromGravatarID:item.actorAttributes.gravatarID 
-                   withCompletionHandler:^(UIImage *image, NSError *error, BOOL didDownload) {
-                       [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] 
-                                             withRowAnimation:UITableViewRowAnimationNone];
-                   }];
-            
+        return cell;
+    } else if (item.payload.type == GHPayloadCreateEvent) {
+        NSString *CellIdentifier = @"GHNewsFeedItemTableViewCell";
+        GHNewsFeedItemTableViewCell *cell = (GHNewsFeedItemTableViewCell *)[self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        
+        if (!cell) {
+            cell = [[[GHNewsFeedItemTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
         }
         
-        cell.titleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ %@ watching", @""), item.actor, payload.action];
+        GHCreateEventPayload *payload = (GHCreateEventPayload *)item.payload;
         
-        cell.repositoryLabel.text = payload.repo;
+        [self updateImageViewForCell:cell atIndexPath:indexPath forNewsFeedItem:item];
+        
+        if (payload.objectType == GHCreateEventObjectRepository) {
+            cell.titleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ created repository", @""), item.actor];
+            cell.repositoryLabel.text = payload.name;
+        } else if (payload.objectType == GHCreateEventObjectBranch) {
+            cell.titleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ created branch %@", @""), item.actor, payload.objectName];
+            cell.repositoryLabel.text = [NSString stringWithFormat:@"%@/%@", item.actor,payload.name];
+        } else {
+            cell.titleLabel.text = @"__UNKNWON_CREATE_EVENT__";
+            cell.repositoryLabel.text = nil;
+        }
+        
+//        cell.titleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ created  %@ watching", @""), item.actor, payload.action];
+//        cell.repositoryLabel.text = payload.repo;
         
         return cell;
     }
     
-    
-    
-    
-    NSString *CellIdentifier = @"Cell";
-    
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
-    }
-    
-    cell.textLabel.text = [NSString stringWithFormat:@"Unknown: %@", item.type];
-    
-    return cell;
+    return [self dummyCellWithText:[NSString stringWithFormat:@"Unknown: %@", item.type]];
 }
 
 /*
@@ -473,6 +448,8 @@
     } else if(item.payload.type == GHPayloadFollowEvent) {
         height = 71.0;
     } else if(item.payload.type == GHPayloadWatchEvent) {
+        height = 71.0;
+    } else if(item.payload.type == GHPayloadCreateEvent) {
         height = 71.0;
     } else {
         minimumHeight = 15.0;

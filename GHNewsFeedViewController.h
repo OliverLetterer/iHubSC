@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@class GHNewsFeed;
+@class GHNewsFeed, GHNewsFeedItemTableViewCell, GHNewsFeedItem;
 
 @interface GHNewsFeedViewController : UITableViewController {
     UISegmentedControl *_segmentControl;
@@ -20,5 +20,11 @@
 @property (nonatomic, retain) GHNewsFeed *newsFeed;
 
 - (void)segmentControlValueChanged:(UISegmentedControl *)segmentControl;
+
+- (void)updateImageViewForCell:(GHNewsFeedItemTableViewCell *)cell 
+                   atIndexPath:(NSIndexPath *)indexPath 
+               forNewsFeedItem:(GHNewsFeedItem *)item;
+
+- (UITableViewCell *)dummyCellWithText:(NSString *)text;
 
 @end
