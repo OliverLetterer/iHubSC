@@ -17,6 +17,7 @@
 
 - (id)initWithRawDictionary:(NSDictionary *)rawDictionary {
     if ((self = [super init])) {
+        NSLog(@"%@", rawDictionary);
         // Initialization code
         self.actor = [rawDictionary objectForKey:@"actor"];
         self.creationDate = [rawDictionary objectForKey:@"created_at"];

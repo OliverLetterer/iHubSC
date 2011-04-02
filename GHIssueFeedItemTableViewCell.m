@@ -11,57 +11,40 @@
 
 @implementation GHIssueFeedItemTableViewCell
 
-@synthesize gravatarImageView=_gravatarImageView, actorLabel=_actorLabel, statusLabel=_statusLabel, repositoryLabel=_repositoryLabel, activityIndicatorView=_activityIndicatorView;
+@synthesize descriptionLabel=_descriptionLabel;
 
 #pragma mark - Initialization
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if ((self = [super initWithStyle:style reuseIdentifier:reuseIdentifier])) {
         // Initialization code
-        [[NSBundle mainBundle] loadNibNamed:@"GHIssueFeedItemTableViewCellContentView" owner:self options:nil];
-        [self.contentView addSubview:_myContentView];
+        self.descriptionLabel = [[[UILabel alloc] initWithFrame:CGRectMake(78.0, 20.0, 222.0, 21.0)] autorelease];
+        self.descriptionLabel.numberOfLines = 0;
+        self.descriptionLabel.font = [UIFont systemFontOfSize:12.0];
+        self.descriptionLabel.textColor = [UIColor colorWithWhite:0.25 alpha:1.0];
+        self.descriptionLabel.highlightedTextColor = [UIColor whiteColor];
+        self.descriptionLabel.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleHeight;
+        self.descriptionLabel.text = NSLocalizedString(@"Downloading ...", @"");
+        
+        [self.contentView addSubview:self.descriptionLabel];
     }
     return self;
 }
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
-    
-    [self.statusLabel setHighlighted:selected];
-    [self.repositoryLabel setHighlighted:selected];
-    [self.actorLabel setHighlighted:selected];
-    
-    [self setBackgroundShadowHeight:5.0];
-}
-
-- (void)setHighlighted:(BOOL)highlighted animated:(BOOL)animated {
-    [super setHighlighted:highlighted animated:animated];
-    
-    [self.statusLabel setHighlighted:highlighted];
-    [self.repositoryLabel setHighlighted:highlighted];
-    [self.actorLabel setHighlighted:highlighted];
-    
-    [self setBackgroundShadowHeight:5.0];
-}
-
 - (void)layoutSubviews {
-#warning remove these @try-@catch structure, we currently need it because of an CALayerInvalidGeometry exception (CALayer position contains NaN: [nan 57])
-    @try {
-        [super layoutSubviews];
-        _myContentView.frame = self.contentView.bounds;
-    }
-    @catch (NSException *exception) {
-        
-    }
+    [super layoutSubviews];
+    
+    CGSize size = [self.descriptionLabel.text sizeWithFont:self.descriptionLabel.font 
+                                         constrainedToSize:CGSizeMake(222.0, MAXFLOAT) 
+                                             lineBreakMode:UILineBreakModeWordWrap];
+    CGRect frame = self.descriptionLabel.frame;
+    frame.size = size;
+    self.descriptionLabel.frame = frame;
 }
 
 - (void)prepareForReuse {
     [super prepareForReuse];
-    self.statusLabel.text = NSLocalizedString(@"Downloading ...", @"");
-    self.actorLabel.text = nil;
-    self.repositoryLabel.text = nil;
-    self.gravatarImageView.image = [UIImage imageNamed:@"DefaultUserImage.png"];
-    [self.activityIndicatorView stopAnimating];
+    self.descriptionLabel.text = NSLocalizedString(@"Downloading ...", @"");
 }
 
 + (CGFloat)height {
@@ -71,12 +54,7 @@
 #pragma mark - Memory management
 
 - (void)dealloc {
-    [_myContentView release];
-    [_gravatarImageView release];
-    [_actorLabel release];
-    [_statusLabel release];
-    [_repositoryLabel release];
-    [_activityIndicatorView release];
+    [_descriptionLabel release];
     [super dealloc];
 }
 

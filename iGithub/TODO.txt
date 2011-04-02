@@ -1,0 +1,21 @@
+support all these events
+
+[O] CommitCommentEvent 
+[O] CommitEvent 
+[O] CreateEvent 
+[O] DeleteEvent 
+[O] DownloadEvent 
+[O] FollowEvent 
+[O] ForkApplyEvent 
+[O] ForkEvent 
+[O] GistEvent 
+[O] GitHubEvent 
+[O] GollumEvent 
+[X] IssuesEvent 
+[O] MemberEvent 
+[O] PublicEvent 
+[O] PullRequestEvent 
+[X] PushEvent
+[O] TeamAddEvent 
+[O] WatchEvent 
+[O] WikiEvent

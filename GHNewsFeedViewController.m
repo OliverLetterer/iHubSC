@@ -160,7 +160,7 @@
         UIImage *gravatarImage = [UIImage cachedImageFromGravatarID:item.actorAttributes.gravatarID];
         
         if (gravatarImage) {
-            cell.gravatarImageView.image = gravatarImage;
+            cell.imageView.image = gravatarImage;
             [cell.activityIndicatorView stopAnimating];
         } else {
             [cell.activityIndicatorView startAnimating];
@@ -174,14 +174,14 @@
         }
         
                 
-        cell.actorLabel.text = [NSString stringWithFormat:@"%@ %@", item.actor, [NSString stringWithFormat:NSLocalizedString(@"%@ Issue %@", @""), payload.action, payload.number]];
+        cell.titleLabel.text = [NSString stringWithFormat:@"%@ %@", item.actor, [NSString stringWithFormat:NSLocalizedString(@"%@ Issue %@", @""), payload.action, payload.number]];
         
         cell.repositoryLabel.text = payload.repo;
         
         GHIssue *issue = [GHIssue issueFromDatabaseOnRepository:payload.repo withNumber:payload.number];
         
         if (issue) {            
-            cell.statusLabel.text = issue.title;
+            cell.descriptionLabel.text = issue.title;
         } else {
             [GHIssue issueOnRepository:payload.repo 
                             withNumber:payload.number 
@@ -364,6 +364,8 @@
         }
 
         height = 20.0 + commitHeight + 30.0;
+    } else {
+        minimumHeight = 55.0;
     }
     
     return height < minimumHeight ? minimumHeight : height;

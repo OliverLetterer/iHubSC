@@ -14,6 +14,8 @@
 		A703B9371347315B0014235D /* GHPushFeedItemTableViewCellContentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A703B9351347315B0014235D /* GHPushFeedItemTableViewCellContentView.xib */; };
 		A703B944134754FC0014235D /* UITableViewCell+Background.m in Sources */ = {isa = PBXBuildFile; fileRef = A703B943134754FC0014235D /* UITableViewCell+Background.m */; };
 		A703B9471347562B0014235D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A703B9461347562B0014235D /* QuartzCore.framework */; };
+		A703B94913476FB20014235D /* TODO.txt in Resources */ = {isa = PBXBuildFile; fileRef = A703B94813476FB20014235D /* TODO.txt */; };
+		A703B94D1347713B0014235D /* GHNewsFeedItemTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A703B94C1347713B0014235D /* GHNewsFeedItemTableViewCell.m */; };
 		A750571613427FB400514A82 /* ASIAuthenticationDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = A750570313427FB400514A82 /* ASIAuthenticationDialog.m */; };
 		A750571713427FB400514A82 /* ASIDataCompressor.m in Sources */ = {isa = PBXBuildFile; fileRef = A750570613427FB400514A82 /* ASIDataCompressor.m */; };
 		A750571813427FB400514A82 /* ASIDataDecompressor.m in Sources */ = {isa = PBXBuildFile; fileRef = A750570813427FB400514A82 /* ASIDataDecompressor.m */; };
@@ -88,6 +90,9 @@
 		A703B943134754FC0014235D /* UITableViewCell+Background.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableViewCell+Background.m"; sourceTree = "<group>"; };
 		A703B9451347560F0014235D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		A703B9461347562B0014235D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		A703B94813476FB20014235D /* TODO.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TODO.txt; sourceTree = "<group>"; };
+		A703B94B1347713B0014235D /* GHNewsFeedItemTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHNewsFeedItemTableViewCell.h; sourceTree = "<group>"; };
+		A703B94C1347713B0014235D /* GHNewsFeedItemTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHNewsFeedItemTableViewCell.m; sourceTree = "<group>"; };
 		A750570213427FB400514A82 /* ASIAuthenticationDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASIAuthenticationDialog.h; path = "asi-http-request/Classes/ASIAuthenticationDialog.h"; sourceTree = SOURCE_ROOT; };
 		A750570313427FB400514A82 /* ASIAuthenticationDialog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ASIAuthenticationDialog.m; path = "asi-http-request/Classes/ASIAuthenticationDialog.m"; sourceTree = SOURCE_ROOT; };
 		A750570413427FB400514A82 /* ASICacheDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASICacheDelegate.h; path = "asi-http-request/Classes/ASICacheDelegate.h"; sourceTree = SOURCE_ROOT; };
@@ -256,6 +261,15 @@
 			name = "UITableViewCell+Additions";
 			sourceTree = "<group>";
 		};
+		A703B94A134770620014235D /* UITableViewCells */ = {
+			isa = PBXGroup;
+			children = (
+				A703B94B1347713B0014235D /* GHNewsFeedItemTableViewCell.h */,
+				A703B94C1347713B0014235D /* GHNewsFeedItemTableViewCell.m */,
+			);
+			name = UITableViewCells;
+			sourceTree = "<group>";
+		};
 		A750570013427F9E00514A82 /* ASI-HTTP */ = {
 			isa = PBXGroup;
 			children = (
@@ -318,6 +332,7 @@
 		A75057401343424100514A82 /* GHNewsFeedViewController */ = {
 			isa = PBXGroup;
 			children = (
+				A703B94A134770620014235D /* UITableViewCells */,
 				A75057411343426300514A82 /* GHNewsFeedViewController.h */,
 				A75057421343426300514A82 /* GHNewsFeedViewController.m */,
 				A703B9321347313A0014235D /* GHIssueFeedItemTableViewCell */,
@@ -461,6 +476,7 @@
 				A75057351343033200514A82 /* GHGlossBottomBorder.png */,
 				A7BF14381342188E001AE50D /* DefaultUserImage.png */,
 				A7BF14391342188E001AE50D /* DefaultUserImage@2x.png */,
+				A703B94813476FB20014235D /* TODO.txt */,
 			);
 			name = Ressources;
 			sourceTree = "<group>";
@@ -673,6 +689,7 @@
 				A75057391343033200514A82 /* GHGlossBottomBorder.png in Resources */,
 				A7CE1B36134621CB00169F94 /* GHIssueFeedItemTableViewCellContentView.xib in Resources */,
 				A703B9371347315B0014235D /* GHPushFeedItemTableViewCellContentView.xib in Resources */,
+				A703B94913476FB20014235D /* TODO.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -726,6 +743,7 @@
 				A703B931134675EC0014235D /* UIImage+RoundedCorner.m in Sources */,
 				A703B9361347315B0014235D /* GHPushFeedItemTableViewCell.m in Sources */,
 				A703B944134754FC0014235D /* UITableViewCell+Background.m in Sources */,
+				A703B94D1347713B0014235D /* GHNewsFeedItemTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
