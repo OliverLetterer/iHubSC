@@ -21,6 +21,7 @@
 		A703B95B134794F40014235D /* GHTarget.m in Sources */ = {isa = PBXBuildFile; fileRef = A703B95A134794F40014235D /* GHTarget.m */; };
 		A73E298C134795FA00E85282 /* GHFollowEventPayload.m in Sources */ = {isa = PBXBuildFile; fileRef = A73E298B134795FA00E85282 /* GHFollowEventPayload.m */; };
 		A73E29911347970500E85282 /* GHFollowEventTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A73E29901347970500E85282 /* GHFollowEventTableViewCell.m */; };
+		A73E29951347A8E800E85282 /* GHWatchEventPayload.m in Sources */ = {isa = PBXBuildFile; fileRef = A73E29941347A8E800E85282 /* GHWatchEventPayload.m */; };
 		A750571613427FB400514A82 /* ASIAuthenticationDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = A750570313427FB400514A82 /* ASIAuthenticationDialog.m */; };
 		A750571713427FB400514A82 /* ASIDataCompressor.m in Sources */ = {isa = PBXBuildFile; fileRef = A750570613427FB400514A82 /* ASIDataCompressor.m */; };
 		A750571813427FB400514A82 /* ASIDataDecompressor.m in Sources */ = {isa = PBXBuildFile; fileRef = A750570813427FB400514A82 /* ASIDataDecompressor.m */; };
@@ -108,6 +109,8 @@
 		A73E298B134795FA00E85282 /* GHFollowEventPayload.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHFollowEventPayload.m; sourceTree = "<group>"; };
 		A73E298F1347970500E85282 /* GHFollowEventTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHFollowEventTableViewCell.h; sourceTree = "<group>"; };
 		A73E29901347970500E85282 /* GHFollowEventTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHFollowEventTableViewCell.m; sourceTree = "<group>"; };
+		A73E29931347A8E800E85282 /* GHWatchEventPayload.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHWatchEventPayload.h; sourceTree = "<group>"; };
+		A73E29941347A8E800E85282 /* GHWatchEventPayload.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHWatchEventPayload.m; sourceTree = "<group>"; };
 		A750570213427FB400514A82 /* ASIAuthenticationDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASIAuthenticationDialog.h; path = "asi-http-request/Classes/ASIAuthenticationDialog.h"; sourceTree = SOURCE_ROOT; };
 		A750570313427FB400514A82 /* ASIAuthenticationDialog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ASIAuthenticationDialog.m; path = "asi-http-request/Classes/ASIAuthenticationDialog.m"; sourceTree = SOURCE_ROOT; };
 		A750570413427FB400514A82 /* ASICacheDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASICacheDelegate.h; path = "asi-http-request/Classes/ASICacheDelegate.h"; sourceTree = SOURCE_ROOT; };
@@ -283,8 +286,7 @@
 				A703B94C1347713B0014235D /* GHNewsFeedItemTableViewCell.m */,
 				A703B9321347313A0014235D /* GHIssueFeedItemTableViewCell */,
 				A703B9381347315E0014235D /* GHPushFeedItemTableViewCell */,
-				A73E298F1347970500E85282 /* GHFollowEventTableViewCell.h */,
-				A73E29901347970500E85282 /* GHFollowEventTableViewCell.m */,
+				A73E299213479C1600E85282 /* GHFollowEventTableViewCell */,
 			);
 			name = UITableViewCells;
 			sourceTree = "<group>";
@@ -341,6 +343,15 @@
 				A73E298B134795FA00E85282 /* GHFollowEventPayload.m */,
 			);
 			name = GHFollowEventPayload;
+			sourceTree = "<group>";
+		};
+		A73E299213479C1600E85282 /* GHFollowEventTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				A73E298F1347970500E85282 /* GHFollowEventTableViewCell.h */,
+				A73E29901347970500E85282 /* GHFollowEventTableViewCell.m */,
+			);
+			name = GHFollowEventTableViewCell;
 			sourceTree = "<group>";
 		};
 		A750570013427F9E00514A82 /* ASI-HTTP */ = {
@@ -642,6 +653,8 @@
 				A703B95013478BEA0014235D /* GHPullRequestPayload */,
 				A703B9541347901C0014235D /* GHCommitEventPayload */,
 				A73E298E1347960200E85282 /* GHFollowEventPayload */,
+				A73E29931347A8E800E85282 /* GHWatchEventPayload.h */,
+				A73E29941347A8E800E85282 /* GHWatchEventPayload.m */,
 			);
 			name = GHPayload;
 			sourceTree = "<group>";
@@ -822,6 +835,7 @@
 				A703B95B134794F40014235D /* GHTarget.m in Sources */,
 				A73E298C134795FA00E85282 /* GHFollowEventPayload.m in Sources */,
 				A73E29911347970500E85282 /* GHFollowEventTableViewCell.m in Sources */,
+				A73E29951347A8E800E85282 /* GHWatchEventPayload.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -40,6 +40,8 @@
             self.payload = [[[GHCommitEventPayload alloc] initWithRawDictionary:rawPayload] autorelease];
         } else if ([self.type isEqualToString:@"FollowEvent"]) {
             self.payload = [[[GHFollowEventPayload alloc] initWithRawDictionary:rawPayload] autorelease];
+        } else if ([self.type isEqualToString:@"WatchEvent"]) {
+            self.payload = [[[GHWatchEventPayload alloc] initWithRawDictionary:rawPayload] autorelease];
         }
     }
     return self;
