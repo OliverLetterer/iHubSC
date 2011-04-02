@@ -11,7 +11,7 @@
 
 @implementation GHPayload
 
-@synthesize actor=_actor, repo=_repo, gravatarID=_gravatarID;
+@synthesize actor=_actor, gravatarID=_gravatarID;
 
 #pragma mark - setters and getters
 
@@ -25,7 +25,6 @@
     if ((self = [super init])) {
         // Initialization code
         self.actor = [rawDictionary objectForKey:@"actor"];
-        self.repo = [rawDictionary objectForKey:@"repo"];
         self.gravatarID = [rawDictionary objectForKey:@"actor_gravatar"];
     }
     return self;
@@ -35,7 +34,6 @@
 
 - (void)dealloc {
     [_actor release];
-    [_repo release];
     [_gravatarID release];
     [super dealloc];
 }

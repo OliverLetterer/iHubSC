@@ -7,10 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "GHPayload.h"
+#import "GHPayloadWithRepository.h"
 #import "GHPullRequest.h"
 
-@interface GHPullRequestPayload : GHPayload {
+@interface GHPullRequestPayload : GHPayloadWithRepository {
     NSNumber *_number;
     NSString *_action;
     GHPullRequest *_pullRequest;

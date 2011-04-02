@@ -7,9 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "GHPayload.h"
+#import "GHPayloadWithRepository.h"
 
-@interface GHPushPayload : GHPayload {
+@interface GHPushPayload : GHPayloadWithRepository {
     NSString *_head;
     NSString *_ref;
     NSArray *_commits;

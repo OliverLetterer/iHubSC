@@ -13,12 +13,14 @@
 #import "GHNewsFeed.h"
 #import "GHNewsFeedItem.h"
 #import "GHActorAttributes.h"
+#import "GHIssue.h"
+
 #import "GHPayload.h"
 #import "GHIssuePayload.h"
 #import "GHPushPayload.h"
 #import "GHPullRequestPayload.h"
 #import "GHCommitEventPayload.h"
-#import "GHIssue.h"
+#import "GHPayloadWithRepository.h"
 
 #import "GHCommitMessage.h"
 #import "GHPullRequest.h"

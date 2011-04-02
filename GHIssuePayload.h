@@ -7,9 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "GHPayload.h"
+#import "GHPayloadWithRepository.h"
 
-@interface GHIssuePayload : GHPayload {
+@interface GHIssuePayload : GHPayloadWithRepository {
     NSString *_action;
     NSNumber *_issue;
     NSNumber *_number;

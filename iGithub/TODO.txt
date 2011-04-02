@@ -1,6 +1,6 @@
 support all these events
 
-[O] CommitCommentEvent 
+[X] CommitCommentEvent 
 [O] CommitEvent 
 [O] CreateEvent 
 [O] DeleteEvent 

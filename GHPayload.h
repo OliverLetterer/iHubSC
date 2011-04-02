@@ -18,14 +18,12 @@ typedef enum {
 
 @interface GHPayload : NSObject {
     NSString *_actor;
-    NSString *_repo;
     NSString *_gravatarID;
 }
 
 @property (nonatomic, readonly) GHPayloadType type;
 
 @property (nonatomic, copy) NSString *actor;
-@property (nonatomic, copy) NSString *repo;
 @property (nonatomic, copy) NSString *gravatarID;
 
 - (id)initWithRawDictionary:(NSDictionary *)rawDictionary;

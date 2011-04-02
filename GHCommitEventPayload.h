@@ -7,9 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "GHPayload.h"
+#import "GHPayloadWithRepository.h"
 
-@interface GHCommitEventPayload : GHPayload {
+@interface GHCommitEventPayload : GHPayloadWithRepository {
     NSNumber *_commentID;
     NSString *_commit;
 }
