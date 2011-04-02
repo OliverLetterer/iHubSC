@@ -211,7 +211,7 @@
         UIImage *gravatarImage = [UIImage cachedImageFromGravatarID:item.actorAttributes.gravatarID];
         
         if (gravatarImage) {
-            cell.gravatarImageView.image = gravatarImage;
+            cell.imageView.image = gravatarImage;
             [cell.activityIndicatorView stopAnimating];
         } else {
             [cell.activityIndicatorView startAnimating];

@@ -7,23 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GHNewsFeedItemTableViewCell.h"
 
-
-@interface GHPushFeedItemTableViewCell : UITableViewCell {
+@interface GHPushFeedItemTableViewCell : GHNewsFeedItemTableViewCell {
 @private
-    IBOutlet UIView *_myContentView;
-    IBOutlet UIImageView *_gravatarImageView;
-    IBOutlet UIActivityIndicatorView *_activityIndicatorView;
-    IBOutlet UILabel *_titleLabel;
-    IBOutlet UILabel *_repositoryLabel;
-    IBOutlet UILabel *_firstCommitLabel;
-    IBOutlet UILabel *_secondCommitLabel;
+    UILabel *_firstCommitLabel;
+    UILabel *_secondCommitLabel;
 }
 
-@property (nonatomic, retain) UIImageView *gravatarImageView;
-@property (nonatomic, retain) UIActivityIndicatorView *activityIndicatorView;
-@property (nonatomic, retain) UILabel *titleLabel;
-@property (nonatomic, retain) UILabel *repositoryLabel;
 @property (nonatomic, retain) UILabel *firstCommitLabel;
 @property (nonatomic, retain) UILabel *secondCommitLabel;
 

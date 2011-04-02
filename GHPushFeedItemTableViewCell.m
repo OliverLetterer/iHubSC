@@ -11,7 +11,7 @@
 
 @implementation GHPushFeedItemTableViewCell
 
-@synthesize gravatarImageView=_gravatarImageView, activityIndicatorView=_activityIndicatorView, titleLabel=_titleLabel, repositoryLabel=_repositoryLabel, firstCommitLabel=_firstCommitLabel, secondCommitLabel=_secondCommitLabel;
+@synthesize firstCommitLabel=_firstCommitLabel, secondCommitLabel=_secondCommitLabel;
 
 + (UIFont *)commitFont {
     return [UIFont systemFontOfSize:12.0];
@@ -26,30 +26,39 @@
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if ((self = [super initWithStyle:style reuseIdentifier:reuseIdentifier])) {
         // Initialization code
-        [[NSBundle mainBundle] loadNibNamed:@"GHPushFeedItemTableViewCellContentView" owner:self options:nil];
-        [self.contentView addSubview:_myContentView];
+        self.firstCommitLabel = [[[UILabel alloc] initWithFrame:CGRectMake(78.0, 20.0, 222.0, 16.0)] autorelease];
+        self.firstCommitLabel.numberOfLines = 2;
+        self.firstCommitLabel.font = [UIFont systemFontOfSize:12.0];
+        self.firstCommitLabel.highlightedTextColor = [UIColor whiteColor];
+        self.firstCommitLabel.textColor = [UIColor colorWithWhite:0.25 alpha:1.0];
+        self.firstCommitLabel.lineBreakMode = UILineBreakModeWordWrap;
+        [self.contentView addSubview:self.firstCommitLabel];
+        
+        self.secondCommitLabel = [[[UILabel alloc] initWithFrame:CGRectMake(78.0, 20.0, 222.0, 16.0)] autorelease];
+        self.secondCommitLabel.numberOfLines = 2;
+        self.secondCommitLabel.font = [UIFont systemFontOfSize:12.0];
+        self.secondCommitLabel.highlightedTextColor = [UIColor whiteColor];
+        self.secondCommitLabel.textColor = [UIColor colorWithWhite:0.25 alpha:1.0];
+        self.secondCommitLabel.lineBreakMode = UILineBreakModeWordWrap;
+        [self.contentView addSubview:self.secondCommitLabel];
     }
     return self;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-    
-    [self setBackgroundShadowHeight:5.0];
     // Configure the view for the selected state
 }
 
 - (void)setHighlighted:(BOOL)highlighted animated:(BOOL)animated {
     [super setHighlighted:highlighted animated:animated];
-    
-    [self setBackgroundShadowHeight:5.0];
 }
 
 - (void)layoutSubviews {
-#warning remove these @try-@catch structure, we currently need it because of an CALayerInvalidGeometry exception (CALayer position contains NaN: [nan 57])
+#warning remove these @try-@catch structure, we currently need it because of an CALayerInvalidGeometry exception (CALayer position contains NaN: [nan 57])    
+    
     @try {
         [super layoutSubviews];
-        _myContentView.frame = self.contentView.bounds;
         
         CGFloat commitHeight = 0.0;
         
@@ -86,10 +95,6 @@
 
 - (void)prepareForReuse {
     [super prepareForReuse];
-    self.gravatarImageView.image = nil;
-    [self.activityIndicatorView stopAnimating];
-    self.titleLabel.text = nil;
-    self.repositoryLabel.text = nil;
     self.firstCommitLabel.text = nil;
     self.secondCommitLabel.text = nil;
 }
@@ -97,11 +102,6 @@
 #pragma mark - Memory management
 
 - (void)dealloc {
-    [_myContentView release];
-    [_gravatarImageView release];
-    [_activityIndicatorView release];
-    [_titleLabel release];
-    [_repositoryLabel release];
     [_firstCommitLabel release];
     [_secondCommitLabel release];
     [super dealloc];
