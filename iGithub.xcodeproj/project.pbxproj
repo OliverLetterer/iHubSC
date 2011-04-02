@@ -16,6 +16,7 @@
 		A703B9471347562B0014235D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A703B9461347562B0014235D /* QuartzCore.framework */; };
 		A703B94913476FB20014235D /* TODO.txt in Resources */ = {isa = PBXBuildFile; fileRef = A703B94813476FB20014235D /* TODO.txt */; };
 		A703B94D1347713B0014235D /* GHNewsFeedItemTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A703B94C1347713B0014235D /* GHNewsFeedItemTableViewCell.m */; };
+		A703B95313478C4F0014235D /* GHCommitEventPayload.m in Sources */ = {isa = PBXBuildFile; fileRef = A703B95213478C4F0014235D /* GHCommitEventPayload.m */; };
 		A750571613427FB400514A82 /* ASIAuthenticationDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = A750570313427FB400514A82 /* ASIAuthenticationDialog.m */; };
 		A750571713427FB400514A82 /* ASIDataCompressor.m in Sources */ = {isa = PBXBuildFile; fileRef = A750570613427FB400514A82 /* ASIDataCompressor.m */; };
 		A750571813427FB400514A82 /* ASIDataDecompressor.m in Sources */ = {isa = PBXBuildFile; fileRef = A750570813427FB400514A82 /* ASIDataDecompressor.m */; };
@@ -93,6 +94,8 @@
 		A703B94813476FB20014235D /* TODO.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TODO.txt; sourceTree = "<group>"; };
 		A703B94B1347713B0014235D /* GHNewsFeedItemTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHNewsFeedItemTableViewCell.h; sourceTree = "<group>"; };
 		A703B94C1347713B0014235D /* GHNewsFeedItemTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHNewsFeedItemTableViewCell.m; sourceTree = "<group>"; };
+		A703B95113478C4F0014235D /* GHCommitEventPayload.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHCommitEventPayload.h; sourceTree = "<group>"; };
+		A703B95213478C4F0014235D /* GHCommitEventPayload.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHCommitEventPayload.m; sourceTree = "<group>"; };
 		A750570213427FB400514A82 /* ASIAuthenticationDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASIAuthenticationDialog.h; path = "asi-http-request/Classes/ASIAuthenticationDialog.h"; sourceTree = SOURCE_ROOT; };
 		A750570313427FB400514A82 /* ASIAuthenticationDialog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ASIAuthenticationDialog.m; path = "asi-http-request/Classes/ASIAuthenticationDialog.m"; sourceTree = SOURCE_ROOT; };
 		A750570413427FB400514A82 /* ASICacheDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASICacheDelegate.h; path = "asi-http-request/Classes/ASICacheDelegate.h"; sourceTree = SOURCE_ROOT; };
@@ -268,6 +271,42 @@
 				A703B94C1347713B0014235D /* GHNewsFeedItemTableViewCell.m */,
 			);
 			name = UITableViewCells;
+			sourceTree = "<group>";
+		};
+		A703B94E13478BD60014235D /* GHIssuePayload */ = {
+			isa = PBXGroup;
+			children = (
+				A7CE1B1A1345C21A00169F94 /* GHIssuePayload.h */,
+				A7CE1B1B1345C21A00169F94 /* GHIssuePayload.m */,
+			);
+			name = GHIssuePayload;
+			sourceTree = "<group>";
+		};
+		A703B94F13478BE00014235D /* GHPushPayload */ = {
+			isa = PBXGroup;
+			children = (
+				A7CE1B1D1345C2D400169F94 /* GHPushPayload.h */,
+				A7CE1B1E1345C2D400169F94 /* GHPushPayload.m */,
+			);
+			name = GHPushPayload;
+			sourceTree = "<group>";
+		};
+		A703B95013478BEA0014235D /* GHPullRequestPayload */ = {
+			isa = PBXGroup;
+			children = (
+				A7CE1B241345C5E000169F94 /* GHPullRequestPayload.h */,
+				A7CE1B251345C5E000169F94 /* GHPullRequestPayload.m */,
+			);
+			name = GHPullRequestPayload;
+			sourceTree = "<group>";
+		};
+		A703B9541347901C0014235D /* GHCommitEventPayload */ = {
+			isa = PBXGroup;
+			children = (
+				A703B95113478C4F0014235D /* GHCommitEventPayload.h */,
+				A703B95213478C4F0014235D /* GHCommitEventPayload.m */,
+			);
+			name = GHCommitEventPayload;
 			sourceTree = "<group>";
 		};
 		A750570013427F9E00514A82 /* ASI-HTTP */ = {
@@ -563,12 +602,10 @@
 			children = (
 				A7CE1B171345BFD600169F94 /* GHPayload.h */,
 				A7CE1B181345BFD600169F94 /* GHPayload.m */,
-				A7CE1B1A1345C21A00169F94 /* GHIssuePayload.h */,
-				A7CE1B1B1345C21A00169F94 /* GHIssuePayload.m */,
-				A7CE1B1D1345C2D400169F94 /* GHPushPayload.h */,
-				A7CE1B1E1345C2D400169F94 /* GHPushPayload.m */,
-				A7CE1B241345C5E000169F94 /* GHPullRequestPayload.h */,
-				A7CE1B251345C5E000169F94 /* GHPullRequestPayload.m */,
+				A703B94E13478BD60014235D /* GHIssuePayload */,
+				A703B94F13478BE00014235D /* GHPushPayload */,
+				A703B95013478BEA0014235D /* GHPullRequestPayload */,
+				A703B9541347901C0014235D /* GHCommitEventPayload */,
 			);
 			name = GHPayload;
 			sourceTree = "<group>";
@@ -744,6 +781,7 @@
 				A703B9361347315B0014235D /* GHPushFeedItemTableViewCell.m in Sources */,
 				A703B944134754FC0014235D /* UITableViewCell+Background.m in Sources */,
 				A703B94D1347713B0014235D /* GHNewsFeedItemTableViewCell.m in Sources */,
+				A703B95313478C4F0014235D /* GHCommitEventPayload.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

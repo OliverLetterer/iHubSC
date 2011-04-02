@@ -28,12 +28,16 @@
         
         self.actorAttributes = [[[GHActorAttributes alloc] initWithRawDictionary:[rawDictionary objectForKey:@"actor_attributes"]] autorelease];
         self.repository = [[[GHRepository alloc] initWithRawDictionary:[rawDictionary objectForKey:@"repository"]] autorelease];
+        
+        NSDictionary *rawPayload = [rawDictionary objectForKey:@"payload"];
         if ([self.type isEqualToString:@"PullRequestEvent"]) {
-            self.payload = [[[GHPullRequestPayload alloc] initWithRawDictionary:[rawDictionary objectForKey:@"payload"]] autorelease];
+            self.payload = [[[GHPullRequestPayload alloc] initWithRawDictionary:rawPayload] autorelease];
         } else if ([self.type isEqualToString:@"PushEvent"]) {
-            self.payload = [[[GHPushPayload alloc] initWithRawDictionary:[rawDictionary objectForKey:@"payload"]] autorelease];
+            self.payload = [[[GHPushPayload alloc] initWithRawDictionary:rawPayload] autorelease];
         } else if ([self.type isEqualToString:@"IssuesEvent"]) {
-            self.payload = [[[GHIssuePayload alloc] initWithRawDictionary:[rawDictionary objectForKey:@"payload"]] autorelease];
+            self.payload = [[[GHIssuePayload alloc] initWithRawDictionary:rawPayload] autorelease];
+        } else if ([self.type isEqualToString:@"CommitCommentEvent"]) {
+            self.payload = [[[GHCommitEventPayload alloc] initWithRawDictionary:rawPayload] autorelease];
         }
     }
     return self;

@@ -12,7 +12,8 @@ typedef enum {
     GHPayloadTypeNone = 0,
     GHPayloadTypeIssue,
     GHPayloadTypePush,
-    GHPayloadTypePullRequest
+    GHPayloadTypePullRequest,
+    GHPayloadTypeCommitComment
 } GHPayloadType;
 
 @interface GHPayload : NSObject {

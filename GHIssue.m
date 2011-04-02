@@ -51,6 +51,10 @@
 + (GHIssue *)issueFromDatabaseOnRepository:(NSString *)repository 
                                 withNumber:(NSNumber *)number {
     
+    if (repository == nil || number == nil) {
+        return nil;
+    }
+    
     NSManagedObjectContext *moc = GHSharedManagedObjectContext();
     NSEntityDescription *entityDescription = [NSEntityDescription entityForName:@"GHIssue" inManagedObjectContext:moc];
     NSFetchRequest *request = [[[NSFetchRequest alloc] init] autorelease];
@@ -58,7 +62,6 @@
     
     // Set example predicate and sort orderings...
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(number == %@) AND (repository like %@)", number, repository];
-
     [request setPredicate:predicate];
     
     

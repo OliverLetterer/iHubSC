@@ -245,6 +245,37 @@
         }
         
         return cell;
+    } else if (item.payload.type == GHPayloadTypeCommitComment) {
+        NSString *CellIdentifier = @"GHNewsFeedItemTableViewCell";
+        GHNewsFeedItemTableViewCell *cell = (GHNewsFeedItemTableViewCell *)[self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        
+        if (!cell) {
+            cell = [[[GHNewsFeedItemTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        }
+        
+        GHCommitEventPayload *payload = (GHCommitEventPayload *)item.payload;
+        
+        UIImage *gravatarImage = [UIImage cachedImageFromGravatarID:item.actorAttributes.gravatarID];
+        
+        if (gravatarImage) {
+            cell.imageView.image = gravatarImage;
+            [cell.activityIndicatorView stopAnimating];
+        } else {
+            [cell.activityIndicatorView startAnimating];
+            
+            [UIImage imageFromGravatarID:item.actorAttributes.gravatarID 
+                   withCompletionHandler:^(UIImage *image, NSError *error, BOOL didDownload) {
+                       [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] 
+                                             withRowAnimation:UITableViewRowAnimationNone];
+                   }];
+            
+        }
+        
+        cell.titleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ commented on a commit", @""), item.actor];
+        
+        cell.repositoryLabel.text = payload.repo;
+        
+        return cell;
     }
     
     NSString *CellIdentifier = @"Cell";
@@ -364,7 +395,9 @@
         }
 
         height = 20.0 + commitHeight + 30.0;
-    } else {
+    } else if(item.payload.type == GHPayloadTypeCommitComment) {
+        height = 71.0;
+    }else {
         minimumHeight = 55.0;
     }
     

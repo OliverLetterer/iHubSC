@@ -17,6 +17,7 @@
 #import "GHIssuePayload.h"
 #import "GHPushPayload.h"
 #import "GHPullRequestPayload.h"
+#import "GHCommitEventPayload.h"
 #import "GHIssue.h"
 
 #import "GHCommitMessage.h"
