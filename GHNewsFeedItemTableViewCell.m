@@ -67,10 +67,7 @@
     self.titleLabel.frame = CGRectMake(78.0, 4.0, 222.0, 15.0);
     self.repositoryLabel.frame = CGRectMake(78.0, self.contentView.bounds.size.height - GHNewsFeedItemTableViewCellRepositoryLabelHeight - GHNewsFeedItemTableViewCellRepositoryLabelBottomOffset, 222.0, GHNewsFeedItemTableViewCellRepositoryLabelHeight);
     
-    CGPoint centerPoint = self.imageView.frame.origin;
-    centerPoint.x += self.imageView.frame.size.width;
-    centerPoint.y += self.imageView.frame.size.height;
-    self.activityIndicatorView.center = centerPoint;
+    self.activityIndicatorView.center = self.imageView.center;
 }
 
 - (void)prepareForReuse {
