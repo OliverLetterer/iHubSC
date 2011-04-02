@@ -335,8 +335,20 @@
             cell.repositoryLabel.text = nil;
         }
         
-//        cell.titleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ created  %@ watching", @""), item.actor, payload.action];
-//        cell.repositoryLabel.text = payload.repo;
+        return cell;
+    } else if (item.payload.type == GHPayloadForkEvent) {
+        NSString *CellIdentifier = @"GHNewsFeedItemTableViewCell";
+        GHNewsFeedItemTableViewCell *cell = (GHNewsFeedItemTableViewCell *)[self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        
+        if (!cell) {
+            cell = [[[GHNewsFeedItemTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        }
+        
+        GHForkEventPayload *payload = (GHForkEventPayload *)item.payload;
+        
+        [self updateImageViewForCell:cell atIndexPath:indexPath forNewsFeedItem:item];
+        cell.titleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ forked repository", @""), item.actor];
+        cell.repositoryLabel.text = payload.repo;
         
         return cell;
     }
@@ -450,6 +462,8 @@
     } else if(item.payload.type == GHPayloadWatchEvent) {
         height = 71.0;
     } else if(item.payload.type == GHPayloadCreateEvent) {
+        height = 71.0;
+    } else if(item.payload.type == GHPayloadForkEvent) {
         height = 71.0;
     } else {
         minimumHeight = 15.0;

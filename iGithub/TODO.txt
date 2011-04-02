@@ -7,7 +7,7 @@ support all these events
 [O] DownloadEvent 
     [X] FollowEvent 
 [O] ForkApplyEvent 
-[O] ForkEvent 
+    [X] ForkEvent 
 [O] GistEvent 
 [O] GitHubEvent 
 [O] GollumEvent 

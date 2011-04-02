@@ -44,6 +44,8 @@
             self.payload = [[[GHWatchEventPayload alloc] initWithRawDictionary:rawPayload] autorelease];
         } else if ([self.type isEqualToString:@"CreateEvent"]) {
             self.payload = [[[GHCreateEventPayload alloc] initWithRawDictionary:rawPayload] autorelease];
+        } else if ([self.type isEqualToString:@"ForkEvent"]) {
+            self.payload = [[[GHForkEventPayload alloc] initWithRawDictionary:rawPayload] autorelease];
         }
     }
     return self;

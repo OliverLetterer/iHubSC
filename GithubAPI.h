@@ -25,6 +25,7 @@
 #import "GHFollowEventPayload.h"
 #import "GHWatchEventPayload.h"
 #import "GHCreateEventPayload.h"
+#import "GHForkEventPayload.h"
 
 #import "GHCommitMessage.h"
 #import "GHPullRequest.h"
