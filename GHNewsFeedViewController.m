@@ -305,9 +305,11 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     GHNewsFeedItem *item = [self.newsFeed.items objectAtIndex:indexPath.row];
     
-    CGFloat height = 50.0;
+    CGFloat height = 0.0;
+    CGFloat minimumHeight = 0.0;
     
     if (item.payload.type == GHPayloadTypeIssue) {
+        minimumHeight = 78.0;
         // this is the height for an issue cell, we will display the whole issue
         GHIssuePayload *payload = (GHIssuePayload *)item.payload;
         
@@ -327,6 +329,7 @@
             height = [GHIssueFeedItemTableViewCell height];
         }
     } else if (item.payload.type == GHPayloadTypePush) {
+        minimumHeight = 78.0;
         GHPushPayload *payload = (GHPushPayload *)item.payload;
         // this is a commit / push message, we will display max 2 commits
         CGFloat commitHeight = 0.0;
@@ -361,12 +364,9 @@
         }
 
         height = 20.0 + commitHeight + 30.0;
-        if (height < 71.0) {
-            height = 71.0;
-        }
     }
     
-    return height;
+    return height < minimumHeight ? minimumHeight : height;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
