@@ -472,6 +472,15 @@
 			name = GHDownloadEventPayload;
 			sourceTree = "<group>";
 		};
+		A73E29BF1348DC2A00E85282 /* GHMemberEventPayload */ = {
+			isa = PBXGroup;
+			children = (
+				A73E29BC1348D4D300E85282 /* GHMemberEventPayload.h */,
+				A73E29BD1348D4D900E85282 /* GHMemberEventPayload.m */,
+			);
+			name = GHMemberEventPayload;
+			sourceTree = "<group>";
+		};
 		A750570013427F9E00514A82 /* ASI-HTTP */ = {
 			isa = PBXGroup;
 			children = (
@@ -778,8 +787,7 @@
 				A73E29AA1348663100E85282 /* GHGollumEventPayload */,
 				A73E29B6134882B600E85282 /* GHGistEventPayload */,
 				A73E29BA1348836C00E85282 /* GHDownloadEventPayload */,
-				A73E29BC1348D4D300E85282 /* GHMemberEventPayload.h */,
-				A73E29BD1348D4D900E85282 /* GHMemberEventPayload.m */,
+				A73E29BF1348DC2A00E85282 /* GHMemberEventPayload */,
 			);
 			name = GHPayload;
 			sourceTree = "<group>";
