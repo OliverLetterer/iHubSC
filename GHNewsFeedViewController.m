@@ -374,6 +374,21 @@
         }
         
         return cell;
+    } else if (item.payload.type == GHPayloadGollumEvent) {
+        NSString *CellIdentifier = @"GHNewsFeedItemTableViewCell";
+        GHNewsFeedItemTableViewCell *cell = (GHNewsFeedItemTableViewCell *)[self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        
+        if (!cell) {
+            cell = [[[GHNewsFeedItemTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        }
+        
+        GHGollumEventPayload *payload = (GHGollumEventPayload *)item.payload;
+        
+        [self updateImageViewForCell:cell atIndexPath:indexPath forNewsFeedItem:item];
+        cell.titleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ %@ %@ in wiki", @""), item.actor, payload.action, payload.pageName];
+        cell.repositoryLabel.text = payload.repo;
+        
+        return cell;
     }
     
     return [self dummyCellWithText:item.type];
@@ -489,6 +504,8 @@
     } else if(item.payload.type == GHPayloadForkEvent) {
         height = 71.0;
     } else if(item.payload.type == GHPayloadDeleteEvent) {
+        height = 71.0;
+    } else if(item.payload.type == GHPayloadGollumEvent) {
         height = 71.0;
     } else {
         minimumHeight = 15.0;

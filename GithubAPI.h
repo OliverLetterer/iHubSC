@@ -27,6 +27,7 @@
 #import "GHCreateEventPayload.h"
 #import "GHForkEventPayload.h"
 #import "GHDeleteEventPayload.h"
+#import "GHGollumEventPayload.h"
 
 #import "GHCommitMessage.h"
 #import "GHPullRequest.h"
