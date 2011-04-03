@@ -458,6 +458,21 @@
         cell.titleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ %@ pull request %@", @""), item.actor, payload.action, payload.number];
         
         return cell;
+    } else if (item.payload.type == GHPayloadMemberEvent) {
+        NSString *CellIdentifier = @"GHNewsFeedItemTableViewCell";
+        GHNewsFeedItemTableViewCell *cell = (GHNewsFeedItemTableViewCell *)[self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        
+        if (!cell) {
+            cell = [[[GHNewsFeedItemTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        }
+        
+        GHMemberEventPayload *payload = (GHMemberEventPayload *)item.payload;
+        
+        [self updateImageViewForCell:cell atIndexPath:indexPath forNewsFeedItem:item];
+        cell.repositoryLabel.text = payload.repo;
+        cell.titleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ %@ %@", @""), payload.actor, payload.action, payload.member];
+        
+        return cell;
     }
     
     return [self dummyCellWithText:item.type];
@@ -594,6 +609,8 @@
         NSString *description = [NSString stringWithFormat:NSLocalizedString(@"%@ with %@ and %@", @""), commitsString, additionsString, deletionsString];
         
         height = [self heightForGHFeedItemWithDescriptionTableViewCellForDescription:description] + 20.0 + 5.0; // X + top offset of status label + 30 px white space on the bottom
+    } else if(item.payload.type == GHPayloadMemberEvent) {
+        height = 71.0;
     } else {
         minimumHeight = 15.0;
     }

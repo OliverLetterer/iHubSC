@@ -12,7 +12,7 @@ support all these events
 [O] GitHubEvent 
     [X] GollumEvent 
     [X] IssuesEvent 
-[O] MemberEvent 
+    [X] MemberEvent 
 [O] PublicEvent 
     [X] PullRequestEvent 
     [X] PushEvent

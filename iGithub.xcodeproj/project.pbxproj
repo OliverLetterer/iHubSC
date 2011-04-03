@@ -30,6 +30,7 @@
 		A73E29B013486AB000E85282 /* GHGistEventPayload.m in Sources */ = {isa = PBXBuildFile; fileRef = A73E29AF13486AAF00E85282 /* GHGistEventPayload.m */; };
 		A73E29B51348747E00E85282 /* NSDictionary+GHNullTermination.m in Sources */ = {isa = PBXBuildFile; fileRef = A73E29B41348747E00E85282 /* NSDictionary+GHNullTermination.m */; };
 		A73E29B9134882E200E85282 /* GHDownloadEventPayload.m in Sources */ = {isa = PBXBuildFile; fileRef = A73E29B8134882DF00E85282 /* GHDownloadEventPayload.m */; };
+		A73E29BE1348D4DF00E85282 /* GHMemberEventPayload.m in Sources */ = {isa = PBXBuildFile; fileRef = A73E29BD1348D4D900E85282 /* GHMemberEventPayload.m */; };
 		A750571613427FB400514A82 /* ASIAuthenticationDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = A750570313427FB400514A82 /* ASIAuthenticationDialog.m */; };
 		A750571713427FB400514A82 /* ASIDataCompressor.m in Sources */ = {isa = PBXBuildFile; fileRef = A750570613427FB400514A82 /* ASIDataCompressor.m */; };
 		A750571813427FB400514A82 /* ASIDataDecompressor.m in Sources */ = {isa = PBXBuildFile; fileRef = A750570813427FB400514A82 /* ASIDataDecompressor.m */; };
@@ -135,6 +136,8 @@
 		A73E29B41348747E00E85282 /* NSDictionary+GHNullTermination.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+GHNullTermination.m"; sourceTree = "<group>"; };
 		A73E29B7134882DB00E85282 /* GHDownloadEventPayload.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHDownloadEventPayload.h; sourceTree = "<group>"; };
 		A73E29B8134882DF00E85282 /* GHDownloadEventPayload.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHDownloadEventPayload.m; sourceTree = "<group>"; };
+		A73E29BC1348D4D300E85282 /* GHMemberEventPayload.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHMemberEventPayload.h; sourceTree = "<group>"; };
+		A73E29BD1348D4D900E85282 /* GHMemberEventPayload.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHMemberEventPayload.m; sourceTree = "<group>"; };
 		A750570213427FB400514A82 /* ASIAuthenticationDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASIAuthenticationDialog.h; path = "asi-http-request/Classes/ASIAuthenticationDialog.h"; sourceTree = SOURCE_ROOT; };
 		A750570313427FB400514A82 /* ASIAuthenticationDialog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ASIAuthenticationDialog.m; path = "asi-http-request/Classes/ASIAuthenticationDialog.m"; sourceTree = SOURCE_ROOT; };
 		A750570413427FB400514A82 /* ASICacheDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASICacheDelegate.h; path = "asi-http-request/Classes/ASICacheDelegate.h"; sourceTree = SOURCE_ROOT; };
@@ -775,6 +778,8 @@
 				A73E29AA1348663100E85282 /* GHGollumEventPayload */,
 				A73E29B6134882B600E85282 /* GHGistEventPayload */,
 				A73E29BA1348836C00E85282 /* GHDownloadEventPayload */,
+				A73E29BC1348D4D300E85282 /* GHMemberEventPayload.h */,
+				A73E29BD1348D4D900E85282 /* GHMemberEventPayload.m */,
 			);
 			name = GHPayload;
 			sourceTree = "<group>";
@@ -964,6 +969,7 @@
 				A73E29B013486AB000E85282 /* GHGistEventPayload.m in Sources */,
 				A73E29B51348747E00E85282 /* NSDictionary+GHNullTermination.m in Sources */,
 				A73E29B9134882E200E85282 /* GHDownloadEventPayload.m in Sources */,
+				A73E29BE1348D4DF00E85282 /* GHMemberEventPayload.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
