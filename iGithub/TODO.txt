@@ -3,7 +3,7 @@ support all these events
     [X] CommitCommentEvent
 [O] CommitEvent 
     [X] CreateEvent 
-[O] DeleteEvent 
+    [X] DeleteEvent 
 [O] DownloadEvent 
     [X] FollowEvent 
 [O] ForkApplyEvent 
