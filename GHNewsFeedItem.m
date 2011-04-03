@@ -53,6 +53,8 @@
             self.payload = [[[GHGollumEventPayload alloc] initWithRawDictionary:rawPayload] autorelease];
         } else if ([self.type isEqualToString:@"GistEvent"]) {
             self.payload = [[[GHGistEventPayload alloc] initWithRawDictionary:rawPayload] autorelease];
+        } else if ([self.type isEqualToString:@"DownloadEvent"]) {
+            self.payload = [[[GHDownloadEventPayload alloc] initWithRawDictionary:rawPayload] autorelease];
         }
     }
     return self;

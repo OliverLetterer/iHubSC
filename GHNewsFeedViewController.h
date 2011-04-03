@@ -26,5 +26,6 @@
                forNewsFeedItem:(GHNewsFeedItem *)item;
 
 - (UITableViewCell *)dummyCellWithText:(NSString *)text;
+- (CGFloat)heightForGHFeedItemWithDescriptionTableViewCellForDescription:(NSString *)description;
 
 @end

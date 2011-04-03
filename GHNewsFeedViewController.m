@@ -77,6 +77,14 @@
     return cell;
 }
 
+- (CGFloat)heightForGHFeedItemWithDescriptionTableViewCellForDescription:(NSString *)description {
+    CGSize newSize = [description sizeWithFont:[UIFont systemFontOfSize:12.0] 
+                                    constrainedToSize:CGSizeMake(222.0f, MAXFLOAT)
+                                        lineBreakMode:UILineBreakModeWordWrap];
+    
+    return newSize.height < 21 ? 21 : newSize.height;
+}
+
 #pragma mark - View lifecycle
 
 - (void)viewDidLoad {
@@ -412,6 +420,22 @@
         cell.descriptionLabel.text = payload.descriptionGist ? payload.descriptionGist : payload.snippet;
         
         return cell;
+    } else if (item.payload.type == GHPayloadDownloadEvent) {
+        NSString *CellIdentifier = @"GHFeedItemWithDescriptionTableViewCell";
+        GHFeedItemWithDescriptionTableViewCell *cell = (GHFeedItemWithDescriptionTableViewCell *)[self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        
+        if (!cell) {
+            cell = [[[GHFeedItemWithDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        }
+        
+        GHDownloadEventPayload *payload = (GHDownloadEventPayload *)item.payload;
+        
+        [self updateImageViewForCell:cell atIndexPath:indexPath forNewsFeedItem:item];
+        cell.repositoryLabel.text = [NSString stringWithFormat:@"%@/%@", item.repository.owner, item.repository.name];
+        cell.titleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ uploaded a file", @""), item.actor];
+        cell.descriptionLabel.text = [payload.URL lastPathComponent];
+        
+        return cell;
     }
     
     return [self dummyCellWithText:item.type];
@@ -468,15 +492,8 @@
         if ([GHIssue isIssueAvailableForRepository:payload.repo withNumber:payload.number]) {
             GHIssue *issue = [GHIssue issueFromDatabaseOnRepository:payload.repo withNumber:payload.number];
             
-            CGSize newLabelSize = [issue.title sizeWithFont:[UIFont systemFontOfSize:12.0] 
-                                          constrainedToSize:CGSizeMake(222.0f, MAXFLOAT)
-                                              lineBreakMode:UILineBreakModeWordWrap];
-            
-            if (newLabelSize.height < 21) {
-                newLabelSize.height = 21;
-            }
-            
-            height = newLabelSize.height + 20.0 + 30.0; // X + top offset of status label + 30 px white space on the bottom
+            NSString *description = issue.title;
+            height = [self heightForGHFeedItemWithDescriptionTableViewCellForDescription:description] + 20.0 + 30.0; // X + top offset of status label + 30 px white space on the bottom
         } else {
             height = [GHFeedItemWithDescriptionTableViewCell height];
         }
@@ -534,15 +551,16 @@
         minimumHeight = 78.0;
         // this is the height for an issue cell, we will display the whole issue
         GHGistEventPayload *payload = (GHGistEventPayload *)item.payload;
-        CGSize newLabelSize = [payload.descriptionGist ? payload.descriptionGist : payload.snippet sizeWithFont:[UIFont systemFontOfSize:12.0] 
-                                                                constrainedToSize:CGSizeMake(222.0f, MAXFLOAT)
-                                                                    lineBreakMode:UILineBreakModeWordWrap];
+        NSString *description = payload.descriptionGist ? payload.descriptionGist : payload.snippet;
         
-        if (newLabelSize.height < 21) {
-            newLabelSize.height = 21;
-        }
-        
-        height = newLabelSize.height + 20.0 + 5.0; // X + top offset of status label + 30 px white space on the bottom
+        height = [self heightForGHFeedItemWithDescriptionTableViewCellForDescription:description] + 20.0 + 5.0; // X + top offset of status label + 30 px white space on the bottom
+    } else if(item.payload.type == GHPayloadDownloadEvent) {
+        minimumHeight = 78.0;
+        // this is the height for an issue cell, we will display the whole issue
+        GHDownloadEventPayload *payload = (GHDownloadEventPayload *)item.payload;
+        NSString *description = [payload.URL lastPathComponent];
+        NSLog(@"for description: %@", description);
+        height = [self heightForGHFeedItemWithDescriptionTableViewCellForDescription:description] + 20.0 + 5.0; // X + top offset of status label + 30 px white space on the bottom
     } else {
         minimumHeight = 15.0;
     }

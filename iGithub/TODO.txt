@@ -4,7 +4,7 @@ support all these events
 [O] CommitEvent 
     [X] CreateEvent 
     [X] DeleteEvent 
-[O] DownloadEvent 
+    [X] DownloadEvent 
     [X] FollowEvent 
 [O] ForkApplyEvent 
     [X] ForkEvent 
