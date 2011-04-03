@@ -14,7 +14,7 @@ support all these events
     [X] IssuesEvent 
 [O] MemberEvent 
 [O] PublicEvent 
-[O] PullRequestEvent 
+    [X] PullRequestEvent 
     [X] PushEvent
 [O] TeamAddEvent 
     [X] WatchEvent 

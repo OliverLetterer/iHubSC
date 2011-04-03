@@ -436,6 +436,28 @@
         cell.descriptionLabel.text = [payload.URL lastPathComponent];
         
         return cell;
+    } else if (item.payload.type == GHPayloadPullRequestEvent) {
+        NSString *CellIdentifier = @"GHFeedItemWithDescriptionTableViewCell";
+        GHFeedItemWithDescriptionTableViewCell *cell = (GHFeedItemWithDescriptionTableViewCell *)[self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        
+        if (!cell) {
+            cell = [[[GHFeedItemWithDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        }
+        
+        GHPullRequestPayload *payload = (GHPullRequestPayload *)item.payload;
+        
+        NSString *additionsString = [NSString stringWithFormat:NSLocalizedString(@"%@ %@", @""), payload.pullRequest.additions, [payload.pullRequest.additions intValue] == 1 ? NSLocalizedString(@"addition", @"") : NSLocalizedString(@"additions", @"") ];
+        NSString *deletionsString = [NSString stringWithFormat:NSLocalizedString(@"%@ %@", @""), payload.pullRequest.deletions, [payload.pullRequest.deletions intValue] == 1 ? NSLocalizedString(@"deletion", @"") : NSLocalizedString(@"deletions", @"") ];
+        NSString *commitsString = [NSString stringWithFormat:NSLocalizedString(@"%@ %@", @""), payload.pullRequest.commits, [payload.pullRequest.commits intValue] == 1 ? NSLocalizedString(@"commit", @"") : NSLocalizedString(@"commits", @"") ];
+        
+        NSString *description = [NSString stringWithFormat:NSLocalizedString(@"%@ with %@ and %@", @""), commitsString, additionsString, deletionsString];
+        
+        [self updateImageViewForCell:cell atIndexPath:indexPath forNewsFeedItem:item];
+        cell.repositoryLabel.text = payload.repo;
+        cell.descriptionLabel.text = description;
+        cell.titleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ %@ pull request %@", @""), item.actor, payload.action, payload.number];
+        
+        return cell;
     }
     
     return [self dummyCellWithText:item.type];
@@ -559,7 +581,18 @@
         // this is the height for an issue cell, we will display the whole issue
         GHDownloadEventPayload *payload = (GHDownloadEventPayload *)item.payload;
         NSString *description = [payload.URL lastPathComponent];
-        NSLog(@"for description: %@", description);
+        height = [self heightForGHFeedItemWithDescriptionTableViewCellForDescription:description] + 20.0 + 30.0; // X + top offset of status label + 30 px white space on the bottom
+    } else if(item.payload.type == GHPayloadPullRequestEvent) {
+        minimumHeight = 78.0;
+        // this is the height for an issue cell, we will display the whole issue
+        GHPullRequestPayload *payload = (GHPullRequestPayload *)item.payload;
+        
+        NSString *additionsString = [NSString stringWithFormat:NSLocalizedString(@"%@ %@", @""), payload.pullRequest.additions, [payload.pullRequest.additions intValue] == 1 ? NSLocalizedString(@"addition", @"") : NSLocalizedString(@"additions", @"") ];
+        NSString *deletionsString = [NSString stringWithFormat:NSLocalizedString(@"%@ %@", @""), payload.pullRequest.deletions, [payload.pullRequest.deletions intValue] == 1 ? NSLocalizedString(@"deletion", @"") : NSLocalizedString(@"deletions", @"") ];
+        NSString *commitsString = [NSString stringWithFormat:NSLocalizedString(@"%@ %@", @""), payload.pullRequest.commits, [payload.pullRequest.commits intValue] == 1 ? NSLocalizedString(@"commit", @"") : NSLocalizedString(@"commits", @"") ];
+        
+        NSString *description = [NSString stringWithFormat:NSLocalizedString(@"%@ with %@ and %@", @""), commitsString, additionsString, deletionsString];
+        
         height = [self heightForGHFeedItemWithDescriptionTableViewCellForDescription:description] + 20.0 + 5.0; // X + top offset of status label + 30 px white space on the bottom
     } else {
         minimumHeight = 15.0;
