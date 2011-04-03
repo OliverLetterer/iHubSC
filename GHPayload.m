@@ -14,6 +14,7 @@
 #pragma mark - setters and getters
 
 - (GHPayloadEvent)type {
+    [self doesNotRecognizeSelector:@selector(type)];
     return GHPayloadNoEvent;
 }
 

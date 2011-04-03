@@ -351,6 +351,29 @@
         cell.repositoryLabel.text = payload.repo;
         
         return cell;
+    } else if (item.payload.type == GHPayloadDeleteEvent) {
+        NSString *CellIdentifier = @"GHNewsFeedItemTableViewCell";
+        GHNewsFeedItemTableViewCell *cell = (GHNewsFeedItemTableViewCell *)[self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        
+        if (!cell) {
+            cell = [[[GHNewsFeedItemTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        }
+        
+        GHDeleteEventPayload *payload = (GHDeleteEventPayload *)item.payload;
+        
+        [self updateImageViewForCell:cell atIndexPath:indexPath forNewsFeedItem:item];
+        cell.titleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ deleted %@ %@", @""), item.actor, payload.refType, payload.ref];
+        
+        NSString *repoURL = item.repository.URL;
+        NSArray *components = [repoURL componentsSeparatedByString:@"/"];
+        NSUInteger count = [components count];
+        if (count > 1) {
+            cell.repositoryLabel.text = [NSString stringWithFormat:@"%@/%@", [components objectAtIndex:count-2], [components lastObject]];
+        } else {
+            cell.repositoryLabel.text = item.repository.name;
+        }
+        
+        return cell;
     }
     
     return [self dummyCellWithText:item.type];
@@ -464,6 +487,8 @@
     } else if(item.payload.type == GHPayloadCreateEvent) {
         height = 71.0;
     } else if(item.payload.type == GHPayloadForkEvent) {
+        height = 71.0;
+    } else if(item.payload.type == GHPayloadDeleteEvent) {
         height = 71.0;
     } else {
         minimumHeight = 15.0;
