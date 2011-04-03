@@ -28,11 +28,11 @@
 - (id)initWithRawDictionary:(NSDictionary *)rawDictionary {
     if ((self = [super initWithRawDictionary:rawDictionary])) {
         // Initialization code
-        self.head = [rawDictionary objectForKey:@"head"];
-        self.ref = [rawDictionary objectForKey:@"ref"];
+        self.head = [rawDictionary objectForKeyOrNilOnNullObject:@"head"];
+        self.ref = [rawDictionary objectForKeyOrNilOnNullObject:@"ref"];
         
         NSMutableArray *commitsArray = [NSMutableArray array];
-        NSArray *commits = [rawDictionary objectForKey:@"shas"];
+        NSArray *commits = [rawDictionary objectForKeyOrNilOnNullObject:@"shas"];
         for (NSArray *commitArray in commits) {
             [commitsArray addObject:[[[GHCommitMessage alloc] initWithRawArray:commitArray] autorelease]];
         }

@@ -106,7 +106,7 @@
 - (id)initWithRawUserDictionary:(NSDictionary *)rawDictionary {
     if ((self = [super init])) {
         // setup here
-        NSDictionary *userDictionary = [rawDictionary objectForKey:@"user"];
+        NSDictionary *userDictionary = [rawDictionary objectForKeyOrNilOnNullObject:@"user"];
         
         self.createdAt = [userDictionary objectForKey:@"created_at"];
         self.gravatarID = [userDictionary objectForKey:@"gravatar_id"];

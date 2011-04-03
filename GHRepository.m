@@ -7,7 +7,7 @@
 //
 
 #import "GHRepository.h"
-
+#import "GithubAPI.h"
 
 @implementation GHRepository
 
@@ -19,24 +19,24 @@
 - (id)initWithRawDictionary:(NSDictionary *)rawDictionary {
     if ((self = [super init])) {
         // Initialization code
-        self.creationDate = [rawDictionary objectForKey:@"created_at"];
-        self.desctiptionRepo = [rawDictionary objectForKey:@"description"];
-        self.fork = [rawDictionary objectForKey:@"fork"];
-        self.forks = [rawDictionary objectForKey:@"forks"];
-        self.hasDownloads = [rawDictionary objectForKey:@"has_downloads"];
-        self.hasIssues = [rawDictionary objectForKey:@"has_issues"];
-        self.hasWiki = [rawDictionary objectForKey:@"has_wiki"];
-        self.homePage = [rawDictionary objectForKey:@"homepage"];
-        self.integrateBranch = [rawDictionary objectForKey:@"integrate_branch"];
-        self.language = [rawDictionary objectForKey:@"language"];
-        self.name = [rawDictionary objectForKey:@"name"];
-        self.openIssues = [rawDictionary objectForKey:@"open_issues"];
-        self.owner = [rawDictionary objectForKey:@"owner"];
-        self.private = [rawDictionary objectForKey:@"private"];
-        self.pushedAt = [rawDictionary objectForKey:@"pushed_at"];
-        self.size = [rawDictionary objectForKey:@"size"];
-        self.URL = [rawDictionary objectForKey:@"url"];
-        self.watchers = [rawDictionary objectForKey:@"watchers"];
+        self.creationDate = [rawDictionary objectForKeyOrNilOnNullObject:@"created_at"];
+        self.desctiptionRepo = [rawDictionary objectForKeyOrNilOnNullObject:@"description"];
+        self.fork = [rawDictionary objectForKeyOrNilOnNullObject:@"fork"];
+        self.forks = [rawDictionary objectForKeyOrNilOnNullObject:@"forks"];
+        self.hasDownloads = [rawDictionary objectForKeyOrNilOnNullObject:@"has_downloads"];
+        self.hasIssues = [rawDictionary objectForKeyOrNilOnNullObject:@"has_issues"];
+        self.hasWiki = [rawDictionary objectForKeyOrNilOnNullObject:@"has_wiki"];
+        self.homePage = [rawDictionary objectForKeyOrNilOnNullObject:@"homepage"];
+        self.integrateBranch = [rawDictionary objectForKeyOrNilOnNullObject:@"integrate_branch"];
+        self.language = [rawDictionary objectForKeyOrNilOnNullObject:@"language"];
+        self.name = [rawDictionary objectForKeyOrNilOnNullObject:@"name"];
+        self.openIssues = [rawDictionary objectForKeyOrNilOnNullObject:@"open_issues"];
+        self.owner = [rawDictionary objectForKeyOrNilOnNullObject:@"owner"];
+        self.private = [rawDictionary objectForKeyOrNilOnNullObject:@"private"];
+        self.pushedAt = [rawDictionary objectForKeyOrNilOnNullObject:@"pushed_at"];
+        self.size = [rawDictionary objectForKeyOrNilOnNullObject:@"size"];
+        self.URL = [rawDictionary objectForKeyOrNilOnNullObject:@"url"];
+        self.watchers = [rawDictionary objectForKeyOrNilOnNullObject:@"watchers"];
     }
     return self;
 }

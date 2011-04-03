@@ -9,7 +9,7 @@
 #import "GHNewsFeedViewController.h"
 #import "GithubAPI.h"
 #import "GHSettingsHelper.h"
-#import "GHIssueFeedItemTableViewCell.h"
+#import "GHFeedItemWithDescriptionTableViewCell.h"
 #import "GHPushFeedItemTableViewCell.h"
 #import "GHFollowEventTableViewCell.h"
 
@@ -185,11 +185,11 @@
     
     if (item.payload.type == GHPayloadIssuesEvent) {
         // we will display an issue
-        NSString *CellIdentifier = @"GHIssueFeedItemTableViewCell";
-        GHIssueFeedItemTableViewCell *cell = (GHIssueFeedItemTableViewCell *)[self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        NSString *CellIdentifier = @"GHFeedItemWithDescriptionTableViewCell";
+        GHFeedItemWithDescriptionTableViewCell *cell = (GHFeedItemWithDescriptionTableViewCell *)[self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         
         if (!cell) {
-            cell = [[[GHIssueFeedItemTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+            cell = [[[GHFeedItemWithDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
         }
         
         GHIssuePayload *payload = (GHIssuePayload *)item.payload;
@@ -389,6 +389,29 @@
         cell.repositoryLabel.text = payload.repo;
         
         return cell;
+    } else if (item.payload.type == GHPayloadGistEvent) {
+        NSString *CellIdentifier = @"GHFeedItemWithDescriptionTableViewCell";
+        GHFeedItemWithDescriptionTableViewCell *cell = (GHFeedItemWithDescriptionTableViewCell *)[self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        
+        if (!cell) {
+            cell = [[[GHFeedItemWithDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        }
+        
+        GHGistEventPayload *payload = (GHGistEventPayload *)item.payload;
+        
+        NSString *action = payload.action;
+        if ([action hasSuffix:@"e"]) {
+            action = [action stringByAppendingString:@"d"];
+        } else {
+            action = [action stringByAppendingString:@"ed"];
+        }
+        
+        [self updateImageViewForCell:cell atIndexPath:indexPath forNewsFeedItem:item];
+        cell.repositoryLabel.text = nil;
+        cell.titleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ %@ %@", @""), item.actor, action, payload.name];
+        cell.descriptionLabel.text = payload.descriptionGist ? payload.descriptionGist : payload.snippet;
+        
+        return cell;
     }
     
     return [self dummyCellWithText:item.type];
@@ -455,7 +478,7 @@
             
             height = newLabelSize.height + 20.0 + 30.0; // X + top offset of status label + 30 px white space on the bottom
         } else {
-            height = [GHIssueFeedItemTableViewCell height];
+            height = [GHFeedItemWithDescriptionTableViewCell height];
         }
     } else if (item.payload.type == GHPayloadPushEvent) {
         minimumHeight = 78.0;
@@ -507,6 +530,19 @@
         height = 71.0;
     } else if(item.payload.type == GHPayloadGollumEvent) {
         height = 71.0;
+    } else if(item.payload.type == GHPayloadGistEvent) {
+        minimumHeight = 78.0;
+        // this is the height for an issue cell, we will display the whole issue
+        GHGistEventPayload *payload = (GHGistEventPayload *)item.payload;
+        CGSize newLabelSize = [payload.descriptionGist ? payload.descriptionGist : payload.snippet sizeWithFont:[UIFont systemFontOfSize:12.0] 
+                                                                constrainedToSize:CGSizeMake(222.0f, MAXFLOAT)
+                                                                    lineBreakMode:UILineBreakModeWordWrap];
+        
+        if (newLabelSize.height < 21) {
+            newLabelSize.height = 21;
+        }
+        
+        height = newLabelSize.height + 20.0 + 5.0; // X + top offset of status label + 30 px white space on the bottom
     } else {
         minimumHeight = 15.0;
     }

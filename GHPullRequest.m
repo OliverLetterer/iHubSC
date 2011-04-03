@@ -7,7 +7,7 @@
 //
 
 #import "GHPullRequest.h"
-
+#import "GithubAPI.h"
 
 @implementation GHPullRequest
 
@@ -18,13 +18,13 @@
 - (id)initWithRawDictionary:(NSDictionary *)rawDictionary {
     if ((self = [super init])) {
         // Initialization code
-        self.additions = [rawDictionary objectForKey:@"additions"];
-        self.commits = [rawDictionary objectForKey:@"commits"];
-        self.deletions = [rawDictionary objectForKey:@"deletions"];
-        self.ID = [rawDictionary objectForKey:@"id"];
-        self.issueID = [rawDictionary objectForKey:@"issue_id"];
-        self.number = [rawDictionary objectForKey:@"number"];
-        self.title = [rawDictionary objectForKey:@"title"];
+        self.additions = [rawDictionary objectForKeyOrNilOnNullObject:@"additions"];
+        self.commits = [rawDictionary objectForKeyOrNilOnNullObject:@"commits"];
+        self.deletions = [rawDictionary objectForKeyOrNilOnNullObject:@"deletions"];
+        self.ID = [rawDictionary objectForKeyOrNilOnNullObject:@"id"];
+        self.issueID = [rawDictionary objectForKeyOrNilOnNullObject:@"issue_id"];
+        self.number = [rawDictionary objectForKeyOrNilOnNullObject:@"number"];
+        self.title = [rawDictionary objectForKeyOrNilOnNullObject:@"title"];
     }
     return self;
 }

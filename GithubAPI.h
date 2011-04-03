@@ -28,12 +28,14 @@
 #import "GHForkEventPayload.h"
 #import "GHDeleteEventPayload.h"
 #import "GHGollumEventPayload.h"
+#import "GHGistEventPayload.h"
 
 #import "GHCommitMessage.h"
 #import "GHPullRequest.h"
 #import "GHRepository.h"
 
 #import "JSONKit.h"
+#import "NSDictionary+GHNullTermination.h"
 
 #import "UIImage+Gravatar.h"
 #import "GHGravatarBackgroundQueue.h"

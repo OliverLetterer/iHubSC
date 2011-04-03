@@ -7,7 +7,7 @@
 //
 
 #import "GHCreateEventPayload.h"
-
+#import "GithubAPI.h"
 
 @implementation GHCreateEventPayload
 
@@ -32,9 +32,9 @@
 - (id)initWithRawDictionary:(NSDictionary *)rawDictionary {
     if ((self = [super initWithRawDictionary:rawDictionary])) {
         // Initialization code
-        self.name = [rawDictionary objectForKey:@"name"];
-        self.object = [rawDictionary objectForKey:@"object"];
-        self.objectName = [rawDictionary objectForKey:@"object_name"];
+        self.name = [rawDictionary objectForKeyOrNilOnNullObject:@"name"];
+        self.object = [rawDictionary objectForKeyOrNilOnNullObject:@"object"];
+        self.objectName = [rawDictionary objectForKeyOrNilOnNullObject:@"object_name"];
     }
     return self;
 }

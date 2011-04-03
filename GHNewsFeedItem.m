@@ -17,19 +17,20 @@
 
 - (id)initWithRawDictionary:(NSDictionary *)rawDictionary {
     if ((self = [super init])) {
+#warning remove debugging
         NSLog(@"%@", rawDictionary);
         // Initialization code
-        self.actor = [rawDictionary objectForKey:@"actor"];
-        self.creationDate = [rawDictionary objectForKey:@"created_at"];
-        self.public = [rawDictionary objectForKey:@"public"];
-        self.times = [rawDictionary objectForKey:@"times"];
-        self.type = [rawDictionary objectForKey:@"type"];
-        self.URL = [rawDictionary objectForKey:@"url"];
+        self.actor = [rawDictionary objectForKeyOrNilOnNullObject:@"actor"];
+        self.creationDate = [rawDictionary objectForKeyOrNilOnNullObject:@"created_at"];
+        self.public = [rawDictionary objectForKeyOrNilOnNullObject:@"public"];
+        self.times = [rawDictionary objectForKeyOrNilOnNullObject:@"times"];
+        self.type = [rawDictionary objectForKeyOrNilOnNullObject:@"type"];
+        self.URL = [rawDictionary objectForKeyOrNilOnNullObject:@"url"];
         
-        self.actorAttributes = [[[GHActorAttributes alloc] initWithRawDictionary:[rawDictionary objectForKey:@"actor_attributes"]] autorelease];
-        self.repository = [[[GHRepository alloc] initWithRawDictionary:[rawDictionary objectForKey:@"repository"]] autorelease];
+        self.actorAttributes = [[[GHActorAttributes alloc] initWithRawDictionary:[rawDictionary objectForKeyOrNilOnNullObject:@"actor_attributes"]] autorelease];
+        self.repository = [[[GHRepository alloc] initWithRawDictionary:[rawDictionary objectForKeyOrNilOnNullObject:@"repository"]] autorelease];
         
-        NSDictionary *rawPayload = [rawDictionary objectForKey:@"payload"];
+        NSDictionary *rawPayload = [rawDictionary objectForKeyOrNilOnNullObject:@"payload"];
         if ([self.type isEqualToString:@"PullRequestEvent"]) {
             self.payload = [[[GHPullRequestPayload alloc] initWithRawDictionary:rawPayload] autorelease];
         } else if ([self.type isEqualToString:@"PushEvent"]) {
@@ -50,6 +51,8 @@
             self.payload = [[[GHDeleteEventPayload alloc] initWithRawDictionary:rawPayload] autorelease];
         } else if ([self.type isEqualToString:@"GollumEvent"]) {
             self.payload = [[[GHGollumEventPayload alloc] initWithRawDictionary:rawPayload] autorelease];
+        } else if ([self.type isEqualToString:@"GistEvent"]) {
+            self.payload = [[[GHGistEventPayload alloc] initWithRawDictionary:rawPayload] autorelease];
         }
     }
     return self;

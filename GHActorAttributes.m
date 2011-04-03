@@ -7,7 +7,7 @@
 //
 
 #import "GHActorAttributes.h"
-
+#import "GithubAPI.h"
 
 @implementation GHActorAttributes
 
@@ -17,14 +17,14 @@
 
 - (id)initWithRawDictionary:(NSDictionary *)rawDictionary {
     if ((self = [super init])) {
-        self.blog = [rawDictionary objectForKey:@"blog"];
-        self.company = [rawDictionary objectForKey:@"company"];
-        self.EMail = [rawDictionary objectForKey:@"email"];
-        self.gravatarID = [rawDictionary objectForKey:@"gravatar_id"];
-        self.location = [rawDictionary objectForKey:@"location"];
-        self.login = [rawDictionary objectForKey:@"login"];
-        self.name = [rawDictionary objectForKey:@"name"];
-        self.type = [rawDictionary objectForKey:@"type"];
+        self.blog = [rawDictionary objectForKeyOrNilOnNullObject:@"blog"];
+        self.company = [rawDictionary objectForKeyOrNilOnNullObject:@"company"];
+        self.EMail = [rawDictionary objectForKeyOrNilOnNullObject:@"email"];
+        self.gravatarID = [rawDictionary objectForKeyOrNilOnNullObject:@"gravatar_id"];
+        self.location = [rawDictionary objectForKeyOrNilOnNullObject:@"location"];
+        self.login = [rawDictionary objectForKeyOrNilOnNullObject:@"login"];
+        self.name = [rawDictionary objectForKeyOrNilOnNullObject:@"name"];
+        self.type = [rawDictionary objectForKeyOrNilOnNullObject:@"type"];
     }
     return self;
 }

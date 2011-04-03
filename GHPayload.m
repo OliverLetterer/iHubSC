@@ -7,7 +7,7 @@
 //
 
 #import "GHPayload.h"
-
+#import "GithubAPI.h"
 
 @implementation GHPayload
 

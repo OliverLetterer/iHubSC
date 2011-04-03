@@ -30,19 +30,19 @@
 @synthesize repository;
 
 - (void)updateWithRawDictionary:(NSDictionary *)rawDictionary onRepository:(NSString *)theRepository {
-    self.gravatarID = [rawDictionary objectForKey:@"gravatar_id"];
-    self.position = [rawDictionary objectForKey:@"position"];
-    self.number = [rawDictionary objectForKey:@"number"];
-    self.votes = [rawDictionary objectForKey:@"votes"];
-    self.creationDate = [rawDictionary objectForKey:@"created_at"];
-    self.comments = [rawDictionary objectForKey:@"comments"];
-    self.body = [rawDictionary objectForKey:@"body"];
-    self.title = [rawDictionary objectForKey:@"title"];
-    self.updatedAd = [rawDictionary objectForKey:@"updated_at"];
-    self.closedAd = [rawDictionary objectForKey:@"closed_at"];
-    self.user = [rawDictionary objectForKey:@"user"];
-    self.labelsJSON = [(NSArray *)[rawDictionary objectForKey:@"labels"] JSONString];
-    self.state = [rawDictionary objectForKey:@"state"];
+    self.gravatarID = [rawDictionary objectForKeyOrNilOnNullObject:@"gravatar_id"];
+    self.position = [rawDictionary objectForKeyOrNilOnNullObject:@"position"];
+    self.number = [rawDictionary objectForKeyOrNilOnNullObject:@"number"];
+    self.votes = [rawDictionary objectForKeyOrNilOnNullObject:@"votes"];
+    self.creationDate = [rawDictionary objectForKeyOrNilOnNullObject:@"created_at"];
+    self.comments = [rawDictionary objectForKeyOrNilOnNullObject:@"comments"];
+    self.body = [rawDictionary objectForKeyOrNilOnNullObject:@"body"];
+    self.title = [rawDictionary objectForKeyOrNilOnNullObject:@"title"];
+    self.updatedAd = [rawDictionary objectForKeyOrNilOnNullObject:@"updated_at"];
+    self.closedAd = [rawDictionary objectForKeyOrNilOnNullObject:@"closed_at"];
+    self.user = [rawDictionary objectForKeyOrNilOnNullObject:@"user"];
+    self.labelsJSON = [(NSArray *)[rawDictionary objectForKeyOrNilOnNullObject:@"labels"] JSONString];
+    self.state = [rawDictionary objectForKeyOrNilOnNullObject:@"state"];
     
     self.lastUpdateDate = [NSDate date];
     self.repository = theRepository;

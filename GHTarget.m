@@ -7,7 +7,7 @@
 //
 
 #import "GHTarget.h"
-
+#import "GithubAPI.h"
 
 @implementation GHTarget
 
@@ -18,10 +18,10 @@
 - (id)initWithRawDictionary:(NSDictionary *)rawDictionary {
     if ((self = [super init])) {
         // Initialization code
-        self.followers = [rawDictionary objectForKey:@"followers"];
-        self.gravatarID = [rawDictionary objectForKey:@"gravatar_id"];
-        self.login = [rawDictionary objectForKey:@"login"];
-        self.repos = [rawDictionary objectForKey:@"repos"];
+        self.followers = [rawDictionary objectForKeyOrNilOnNullObject:@"followers"];
+        self.gravatarID = [rawDictionary objectForKeyOrNilOnNullObject:@"gravatar_id"];
+        self.login = [rawDictionary objectForKeyOrNilOnNullObject:@"login"];
+        self.repos = [rawDictionary objectForKeyOrNilOnNullObject:@"repos"];
     }
     return self;
 }

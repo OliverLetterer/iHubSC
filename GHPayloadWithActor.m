@@ -7,7 +7,7 @@
 //
 
 #import "GHPayloadWithActor.h"
-
+#import "GithubAPI.h"
 
 @implementation GHPayloadWithActor
 
@@ -18,8 +18,8 @@
 - (id)initWithRawDictionary:(NSDictionary *)rawDictionary {
     if ((self = [super initWithRawDictionary:rawDictionary])) {
         // Initialization code
-        self.actor = [rawDictionary objectForKey:@"actor"];
-        self.gravatarID = [rawDictionary objectForKey:@"actor_gravatar"];
+        self.actor = [rawDictionary objectForKeyOrNilOnNullObject:@"actor"];
+        self.gravatarID = [rawDictionary objectForKeyOrNilOnNullObject:@"actor_gravatar"];
     }
     return self;
 }

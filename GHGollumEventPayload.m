@@ -7,7 +7,7 @@
 //
 
 #import "GHGollumEventPayload.h"
-
+#import "GithubAPI.h"
 
 @implementation GHGollumEventPayload
 
@@ -22,11 +22,11 @@
 - (id)initWithRawDictionary:(NSDictionary *)rawDictionary {
     if ((self = [super initWithRawDictionary:rawDictionary])) {
         // Initialization code
-        self.action = [rawDictionary objectForKey:@"action"];
-        self.pageName = [rawDictionary objectForKey:@"page_name"];
-        self.sha = [rawDictionary objectForKey:@"sha"];
-        self.summary = [rawDictionary objectForKey:@"summary"];
-        self.title = [rawDictionary objectForKey:@"title"];
+        self.action = [rawDictionary objectForKeyOrNilOnNullObject:@"action"];
+        self.pageName = [rawDictionary objectForKeyOrNilOnNullObject:@"page_name"];
+        self.sha = [rawDictionary objectForKeyOrNilOnNullObject:@"sha"];
+        self.summary = [rawDictionary objectForKeyOrNilOnNullObject:@"summary"];
+        self.title = [rawDictionary objectForKeyOrNilOnNullObject:@"title"];
     }
     return self;
 }

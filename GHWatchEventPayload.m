@@ -7,7 +7,7 @@
 //
 
 #import "GHWatchEventPayload.h"
-
+#import "GithubAPI.h"
 
 @implementation GHWatchEventPayload
 
@@ -22,7 +22,7 @@
 - (id)initWithRawDictionary:(NSDictionary *)rawDictionary {
     if ((self = [super initWithRawDictionary:rawDictionary])) {
         // Initialization code
-        self.action = [rawDictionary objectForKey:@"action"];
+        self.action = [rawDictionary objectForKeyOrNilOnNullObject:@"action"];
     }
     return self;
 }

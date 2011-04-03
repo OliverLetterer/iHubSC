@@ -27,6 +27,8 @@
 		A73E29A11347C27100E85282 /* GHForkEventPayload.m in Sources */ = {isa = PBXBuildFile; fileRef = A73E29A01347C27100E85282 /* GHForkEventPayload.m */; };
 		A73E29A513485E4400E85282 /* GHDeleteEventPayload.m in Sources */ = {isa = PBXBuildFile; fileRef = A73E29A413485E4300E85282 /* GHDeleteEventPayload.m */; };
 		A73E29A91348635100E85282 /* GHGollumEventPayload.m in Sources */ = {isa = PBXBuildFile; fileRef = A73E29A81348635100E85282 /* GHGollumEventPayload.m */; };
+		A73E29B013486AB000E85282 /* GHGistEventPayload.m in Sources */ = {isa = PBXBuildFile; fileRef = A73E29AF13486AAF00E85282 /* GHGistEventPayload.m */; };
+		A73E29B51348747E00E85282 /* NSDictionary+GHNullTermination.m in Sources */ = {isa = PBXBuildFile; fileRef = A73E29B41348747E00E85282 /* NSDictionary+GHNullTermination.m */; };
 		A750571613427FB400514A82 /* ASIAuthenticationDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = A750570313427FB400514A82 /* ASIAuthenticationDialog.m */; };
 		A750571713427FB400514A82 /* ASIDataCompressor.m in Sources */ = {isa = PBXBuildFile; fileRef = A750570613427FB400514A82 /* ASIDataCompressor.m */; };
 		A750571813427FB400514A82 /* ASIDataDecompressor.m in Sources */ = {isa = PBXBuildFile; fileRef = A750570813427FB400514A82 /* ASIDataDecompressor.m */; };
@@ -77,7 +79,7 @@
 		A7CE1B2A1345C61800169F94 /* GHPullRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = A7CE1B291345C61800169F94 /* GHPullRequest.m */; };
 		A7CE1B2D1345C8CE00169F94 /* GHNewsFeedItem.m in Sources */ = {isa = PBXBuildFile; fileRef = A7CE1B2C1345C8CE00169F94 /* GHNewsFeedItem.m */; };
 		A7CE1B311345C98700169F94 /* GHRepository.m in Sources */ = {isa = PBXBuildFile; fileRef = A7CE1B301345C98700169F94 /* GHRepository.m */; };
-		A7CE1B35134621CB00169F94 /* GHIssueFeedItemTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A7CE1B33134621CA00169F94 /* GHIssueFeedItemTableViewCell.m */; };
+		A7CE1B35134621CB00169F94 /* GHFeedItemWithDescriptionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A7CE1B33134621CA00169F94 /* GHFeedItemWithDescriptionTableViewCell.m */; };
 		A7CE1B36134621CB00169F94 /* GHIssueFeedItemTableViewCellContentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A7CE1B34134621CB00169F94 /* GHIssueFeedItemTableViewCellContentView.xib */; };
 		A7CE1B3A134624B900169F94 /* GHGravatarImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = A7CE1B39134624B900169F94 /* GHGravatarImageCache.m */; };
 		A7CE1B3E1346267900169F94 /* GHGravatarBackgroundQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = A7CE1B3D1346267900169F94 /* GHGravatarBackgroundQueue.m */; };
@@ -126,6 +128,10 @@
 		A73E29A413485E4300E85282 /* GHDeleteEventPayload.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHDeleteEventPayload.m; sourceTree = "<group>"; };
 		A73E29A71348635000E85282 /* GHGollumEventPayload.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHGollumEventPayload.h; sourceTree = "<group>"; };
 		A73E29A81348635100E85282 /* GHGollumEventPayload.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHGollumEventPayload.m; sourceTree = "<group>"; };
+		A73E29AE13486AAE00E85282 /* GHGistEventPayload.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHGistEventPayload.h; sourceTree = "<group>"; };
+		A73E29AF13486AAF00E85282 /* GHGistEventPayload.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHGistEventPayload.m; sourceTree = "<group>"; };
+		A73E29B31348747E00E85282 /* NSDictionary+GHNullTermination.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+GHNullTermination.h"; sourceTree = "<group>"; };
+		A73E29B41348747E00E85282 /* NSDictionary+GHNullTermination.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+GHNullTermination.m"; sourceTree = "<group>"; };
 		A750570213427FB400514A82 /* ASIAuthenticationDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASIAuthenticationDialog.h; path = "asi-http-request/Classes/ASIAuthenticationDialog.h"; sourceTree = SOURCE_ROOT; };
 		A750570313427FB400514A82 /* ASIAuthenticationDialog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ASIAuthenticationDialog.m; path = "asi-http-request/Classes/ASIAuthenticationDialog.m"; sourceTree = SOURCE_ROOT; };
 		A750570413427FB400514A82 /* ASICacheDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASICacheDelegate.h; path = "asi-http-request/Classes/ASICacheDelegate.h"; sourceTree = SOURCE_ROOT; };
@@ -216,8 +222,8 @@
 		A7CE1B2C1345C8CE00169F94 /* GHNewsFeedItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHNewsFeedItem.m; sourceTree = "<group>"; };
 		A7CE1B2F1345C98700169F94 /* GHRepository.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHRepository.h; sourceTree = "<group>"; };
 		A7CE1B301345C98700169F94 /* GHRepository.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHRepository.m; sourceTree = "<group>"; };
-		A7CE1B32134621CA00169F94 /* GHIssueFeedItemTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHIssueFeedItemTableViewCell.h; sourceTree = "<group>"; };
-		A7CE1B33134621CA00169F94 /* GHIssueFeedItemTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHIssueFeedItemTableViewCell.m; sourceTree = "<group>"; };
+		A7CE1B32134621CA00169F94 /* GHFeedItemWithDescriptionTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHFeedItemWithDescriptionTableViewCell.h; sourceTree = "<group>"; };
+		A7CE1B33134621CA00169F94 /* GHFeedItemWithDescriptionTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHFeedItemWithDescriptionTableViewCell.m; sourceTree = "<group>"; };
 		A7CE1B34134621CB00169F94 /* GHIssueFeedItemTableViewCellContentView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GHIssueFeedItemTableViewCellContentView.xib; sourceTree = "<group>"; };
 		A7CE1B38134624B900169F94 /* GHGravatarImageCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHGravatarImageCache.h; sourceTree = "<group>"; };
 		A7CE1B39134624B900169F94 /* GHGravatarImageCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHGravatarImageCache.m; sourceTree = "<group>"; };
@@ -268,8 +274,8 @@
 		A703B9321347313A0014235D /* GHIssueFeedItemTableViewCell */ = {
 			isa = PBXGroup;
 			children = (
-				A7CE1B32134621CA00169F94 /* GHIssueFeedItemTableViewCell.h */,
-				A7CE1B33134621CA00169F94 /* GHIssueFeedItemTableViewCell.m */,
+				A7CE1B32134621CA00169F94 /* GHFeedItemWithDescriptionTableViewCell.h */,
+				A7CE1B33134621CA00169F94 /* GHFeedItemWithDescriptionTableViewCell.m */,
 				A7CE1B34134621CB00169F94 /* GHIssueFeedItemTableViewCellContentView.xib */,
 			);
 			name = GHIssueFeedItemTableViewCell;
@@ -423,6 +429,23 @@
 				A73E29A81348635100E85282 /* GHGollumEventPayload.m */,
 			);
 			name = GHGollumEventPayload;
+			sourceTree = "<group>";
+		};
+		A73E29B11348744300E85282 /* Foundation Additions */ = {
+			isa = PBXGroup;
+			children = (
+				A73E29B21348745800E85282 /* NSDictionary */,
+			);
+			name = "Foundation Additions";
+			sourceTree = "<group>";
+		};
+		A73E29B21348745800E85282 /* NSDictionary */ = {
+			isa = PBXGroup;
+			children = (
+				A73E29B31348747E00E85282 /* NSDictionary+GHNullTermination.h */,
+				A73E29B41348747E00E85282 /* NSDictionary+GHNullTermination.m */,
+			);
+			name = NSDictionary;
 			sourceTree = "<group>";
 		};
 		A750570013427F9E00514A82 /* ASI-HTTP */ = {
@@ -646,6 +669,7 @@
 		A7BF146413426D85001AE50D /* Github API */ = {
 			isa = PBXGroup;
 			children = (
+				A73E29B11348744300E85282 /* Foundation Additions */,
 				A703B958134794D80014235D /* GHTarget */,
 				A7CE1B8813463A6100169F94 /* GHIssue.h */,
 				A7CE1B8913463A6600169F94 /* GHIssue.m */,
@@ -728,6 +752,8 @@
 				A73E29A213485E1600E85282 /* GHForkEventPayload */,
 				A73E29A61348621D00E85282 /* GHDeleteEventPayload */,
 				A73E29AA1348663100E85282 /* GHGollumEventPayload */,
+				A73E29AE13486AAE00E85282 /* GHGistEventPayload.h */,
+				A73E29AF13486AAF00E85282 /* GHGistEventPayload.m */,
 			);
 			name = GHPayload;
 			sourceTree = "<group>";
@@ -891,7 +917,7 @@
 				A7CE1B2A1345C61800169F94 /* GHPullRequest.m in Sources */,
 				A7CE1B2D1345C8CE00169F94 /* GHNewsFeedItem.m in Sources */,
 				A7CE1B311345C98700169F94 /* GHRepository.m in Sources */,
-				A7CE1B35134621CB00169F94 /* GHIssueFeedItemTableViewCell.m in Sources */,
+				A7CE1B35134621CB00169F94 /* GHFeedItemWithDescriptionTableViewCell.m in Sources */,
 				A7CE1B3A134624B900169F94 /* GHGravatarImageCache.m in Sources */,
 				A7CE1B3E1346267900169F94 /* GHGravatarBackgroundQueue.m in Sources */,
 				A7CE1B811346335D00169F94 /* GHDatabase.xcdatamodel in Sources */,
@@ -914,6 +940,8 @@
 				A73E29A11347C27100E85282 /* GHForkEventPayload.m in Sources */,
 				A73E29A513485E4400E85282 /* GHDeleteEventPayload.m in Sources */,
 				A73E29A91348635100E85282 /* GHGollumEventPayload.m in Sources */,
+				A73E29B013486AB000E85282 /* GHGistEventPayload.m in Sources */,
+				A73E29B51348747E00E85282 /* NSDictionary+GHNullTermination.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -7,7 +7,7 @@
 //
 
 #import "GHPayloadWithRepository.h"
-
+#import "GithubAPI.h"
 
 @implementation GHPayloadWithRepository
 
@@ -18,7 +18,7 @@
 - (id)initWithRawDictionary:(NSDictionary *)rawDictionary {
     if ((self = [super initWithRawDictionary:rawDictionary])) {
         // Initialization code
-        self.repo = [rawDictionary objectForKey:@"repo"];
+        self.repo = [rawDictionary objectForKeyOrNilOnNullObject:@"repo"];
     }
     return self;
 }

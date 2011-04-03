@@ -7,7 +7,7 @@
 //
 
 #import "GHPullRequestPayload.h"
-
+#import "GithubAPI.h"
 
 @implementation GHPullRequestPayload
 
@@ -24,9 +24,9 @@
 - (id)initWithRawDictionary:(NSDictionary *)rawDictionary {
     if ((self = [super initWithRawDictionary:rawDictionary])) {
         // Initialization code
-        self.number = [rawDictionary objectForKey:@"number"];
-        self.action = [rawDictionary objectForKey:@"action"];
-        self.pullRequest = [[[GHPullRequest alloc] initWithRawDictionary:[rawDictionary objectForKey:@"pull_request"]] autorelease];
+        self.number = [rawDictionary objectForKeyOrNilOnNullObject:@"number"];
+        self.action = [rawDictionary objectForKeyOrNilOnNullObject:@"action"];
+        self.pullRequest = [[[GHPullRequest alloc] initWithRawDictionary:[rawDictionary objectForKeyOrNilOnNullObject:@"pull_request"]] autorelease];
     }
     return self;
 }

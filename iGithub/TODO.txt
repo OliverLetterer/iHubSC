@@ -8,7 +8,7 @@ support all these events
     [X] FollowEvent 
 [O] ForkApplyEvent 
     [X] ForkEvent 
-[O] GistEvent 
+    [X] GistEvent 
 [O] GitHubEvent 
     [X] GollumEvent 
     [X] IssuesEvent 

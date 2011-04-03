@@ -7,7 +7,7 @@
 //
 
 #import "GHFollowEventPayload.h"
-
+#import "GithubAPI.h"
 
 @implementation GHFollowEventPayload
 
@@ -22,7 +22,7 @@
 - (id)initWithRawDictionary:(NSDictionary *)rawDictionary {
     if ((self = [super initWithRawDictionary:rawDictionary])) {
         // Initialization code
-        self.target = [[[GHTarget alloc] initWithRawDictionary:[rawDictionary objectForKey:@"target"]] autorelease];
+        self.target = [[[GHTarget alloc] initWithRawDictionary:[rawDictionary objectForKeyOrNilOnNullObject:@"target"]] autorelease];
     }
     return self;
 }

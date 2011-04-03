@@ -7,7 +7,7 @@
 //
 
 #import "GHCommitEventPayload.h"
-
+#import "GithubAPI.h"
 
 @implementation GHCommitEventPayload
 
@@ -22,8 +22,8 @@
 - (id)initWithRawDictionary:(NSDictionary *)rawDictionary {
     if ((self = [super initWithRawDictionary:rawDictionary])) {
         // Initialization code
-        self.commit = [rawDictionary objectForKey:@"commit"];
-        self.commentID = [rawDictionary objectForKey:@"comment_id"];
+        self.commit = [rawDictionary objectForKeyOrNilOnNullObject:@"commit"];
+        self.commentID = [rawDictionary objectForKeyOrNilOnNullObject:@"comment_id"];
     }
     return self;
 }

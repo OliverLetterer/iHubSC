@@ -7,7 +7,7 @@
 //
 
 #import "GHCommitMessage.h"
-
+#import "GithubAPI.h"
 
 @implementation GHCommitMessage
 

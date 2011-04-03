@@ -7,7 +7,7 @@
 //
 
 #import "GHDeleteEventPayload.h"
-
+#import "GithubAPI.h"
 
 @implementation GHDeleteEventPayload
 
@@ -22,8 +22,8 @@
 - (id)initWithRawDictionary:(NSDictionary *)rawDictionary {
     if ((self = [super initWithRawDictionary:rawDictionary])) {
         // Initialization code
-        self.ref = [rawDictionary objectForKey:@"ref"];
-        self.refType = [rawDictionary objectForKey:@"ref_type"];
+        self.ref = [rawDictionary objectForKeyOrNilOnNullObject:@"ref"];
+        self.refType = [rawDictionary objectForKeyOrNilOnNullObject:@"ref_type"];
     }
     return self;
 }

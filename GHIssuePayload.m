@@ -7,7 +7,7 @@
 //
 
 #import "GHIssuePayload.h"
-
+#import "GithubAPI.h"
 
 @implementation GHIssuePayload
 
@@ -24,9 +24,9 @@
 - (id)initWithRawDictionary:(NSDictionary *)rawDictionary {
     if ((self = [super initWithRawDictionary:rawDictionary])) {
         // Initialization code
-        self.action = [rawDictionary objectForKey:@"action"];
-        self.issue = [rawDictionary objectForKey:@"issue"];
-        self.number = [rawDictionary objectForKey:@"number"];
+        self.action = [rawDictionary objectForKeyOrNilOnNullObject:@"action"];
+        self.issue = [rawDictionary objectForKeyOrNilOnNullObject:@"issue"];
+        self.number = [rawDictionary objectForKeyOrNilOnNullObject:@"number"];
     }
     return self;
 }
