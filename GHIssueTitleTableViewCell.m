@@ -16,7 +16,7 @@
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if ((self = [super initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:reuseIdentifier])) {
         // Initialization code
-        self.textLabel.font = [UIFont systemFontOfSize:17.0];
+        self.textLabel.font = [UIFont boldSystemFontOfSize:16.0];
         self.textLabel.numberOfLines = 0;
         
         self.detailTextLabel.font = [UIFont systemFontOfSize:11.0];
@@ -43,7 +43,7 @@
 - (void)layoutSubviews {
     [super layoutSubviews];
     
-    CGSize headerSize = [self.textLabel.text sizeWithFont:[UIFont systemFontOfSize:17.0]
+    CGSize headerSize = [self.textLabel.text sizeWithFont:[UIFont boldSystemFontOfSize:16.0]
                                         constrainedToSize:CGSizeMake(280.0, MAXFLOAT) 
                                             lineBreakMode:UILineBreakModeWordWrap];
     self.textLabel.frame = CGRectMake(10.0, 5.0, headerSize.width, headerSize.height);

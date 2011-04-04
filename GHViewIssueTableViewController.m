@@ -13,6 +13,7 @@
 #import "GHIssueDescriptionTableViewCell.h"
 #import "NSDate+Additions.h"
 #import "UICollapsingAndSpinningTableViewCell.h"
+#import "GHIssueCommentTableViewCell.h"
 
 @implementation GHViewIssueTableViewController
 
@@ -138,7 +139,6 @@
                             if (comments) {
                                 self.comments = comments;
                                 [self showComments];
-                                NSLog(@"%@", self.comments);
                             } else {
                                 UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", @"") 
                                                                                  message:[error localizedDescription] 
@@ -225,7 +225,7 @@
     NSInteger result = 0;
     
     if (_isDownloadingIssueData) {
-        result = 0;
+        result = 1;
     } else {
         if (section == 0) {
             // the issue itself
@@ -247,6 +247,22 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    if (_isDownloadingIssueData) {
+        NSString *CellIdentifier = @"UICollapsingAndSpinningTableViewCell";
+        
+        UICollapsingAndSpinningTableViewCell *cell = (UICollapsingAndSpinningTableViewCell *)[self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        if (cell == nil) {
+            cell = [[[UICollapsingAndSpinningTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        }
+        
+        // Configure the cell...
+        cell.textLabel.text = NSLocalizedString(@"Downloading Issue Data", @"");
+        
+        [cell setSpinning:YES];
+        
+        return cell;
+    }
     
     if (indexPath.section == 0) {
         // the issue itself
@@ -284,7 +300,7 @@
         // comments
         if (indexPath.row == 0) {
             // display comments header
-            static NSString *CellIdentifier = @"UICollapsingAndSpinningTableViewCell";
+            NSString *CellIdentifier = @"UICollapsingAndSpinningTableViewCell";
             
             UICollapsingAndSpinningTableViewCell *cell = (UICollapsingAndSpinningTableViewCell *)[self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
             if (cell == nil) {
@@ -304,6 +320,40 @@
                     cell.accessoryView.transform = CGAffineTransformIdentity;
                 }
             }
+            
+            return cell;
+        } else if (indexPath.row >= 1 && indexPath.row <= [self.issue.comments intValue]) {
+            GHIssueComment *comment = [self.comments objectAtIndex:indexPath.row - 1];
+            
+            NSString *CellIdentifier = @"GHIssueCommentTableViewCell";
+            
+            GHIssueCommentTableViewCell *cell = (GHIssueCommentTableViewCell *)[self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+            if (cell == nil) {
+                cell = [[[GHIssueCommentTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+            }
+            
+            cell.textLabel.text = comment.body;
+            cell.detailTextLabel.text = comment.user;
+            
+            NSString *lastUpdate = comment.updatedAt;
+            NSDateFormatter *formatter = [[[NSDateFormatter alloc] init] autorelease];
+            [formatter setDateFormat:@"yyyy/MM/dd HH:mm:ss ZZZ"];
+            NSDate *date = [formatter dateFromString:lastUpdate];
+            
+            cell.timeDetailsLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ ago", @""), date.prettyTimeIntervalSinceNow];
+            
+            return cell;
+        } else if (indexPath.row == [self.issue.comments intValue] + 1) {
+            // this is the new comment button
+            NSString *CellIdentifier = @"UITableViewCellForNewIssue";
+            
+            UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+            if (cell == nil) {
+                cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+                cell.textLabel.textAlignment = UITextAlignmentCenter;
+            }
+            
+            cell.textLabel.text = NSLocalizedString(@"New Comment", @"");
             
             return cell;
         }
@@ -347,34 +397,40 @@
 }
 */
 
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    NSString *result = nil;
-    if (_isDownloadingIssueData) {
-        result = NSLocalizedString(@"Downloading Data", @"");
-    }
-    
-    return result;
-}
-
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     CGFloat result = 44.0;
     
+    if (_isDownloadingIssueData) {
+        return result;
+    }
+    
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
-            CGSize headerSize = [self.issue.title sizeWithFont:[UIFont systemFontOfSize:17.0]
-                                             constrainedToSize:CGSizeMake(300.0, MAXFLOAT) 
+            // the issues title
+            CGSize headerSize = [self.issue.title sizeWithFont:[UIFont boldSystemFontOfSize:16.0]
+                                             constrainedToSize:CGSizeMake(280.0, MAXFLOAT) 
                                                  lineBreakMode:UILineBreakModeWordWrap];
             
             result = headerSize.height + 25.0;
             
         } else if (indexPath.row == 1) {
             // the description
-            
-            CGSize size = [self.issue.body sizeWithFont:[UIFont systemFontOfSize:17.0] 
+            CGSize size = [self.issue.body sizeWithFont:[UIFont systemFontOfSize:16.0] 
                                       constrainedToSize:CGSizeMake(300.0, MAXFLOAT) 
                                           lineBreakMode:UILineBreakModeWordWrap];
             
-            result = size.height + 20.0;
+            result = size.height + 30.0;
+        }
+    } else if (indexPath.section == 1) {
+        if (indexPath.row >= 1 && indexPath.row <= [self.issue.comments intValue]) {
+            // we are going to display a comment
+            GHIssueComment *comment = [self.comments objectAtIndex:indexPath.row - 1];
+            
+            CGSize size = [comment.body sizeWithFont:[UIFont systemFontOfSize:17.0] 
+                                   constrainedToSize:CGSizeMake(280.0, MAXFLOAT) 
+                                       lineBreakMode:UILineBreakModeWordWrap];
+            
+            result = size.height + 38.0;
         }
     }
     

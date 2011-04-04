@@ -41,7 +41,11 @@
 - (void)layoutSubviews {
     [super layoutSubviews];
     
-    self.textLabel.frame = CGRectMake(10.0, 5.0, self.contentView.bounds.size.width - 20.0, self.contentView.bounds.size.height - 10.0);
+    CGSize size = [self.textLabel.text sizeWithFont:[UIFont systemFontOfSize:16.0] 
+                                  constrainedToSize:CGSizeMake(280.0, MAXFLOAT) 
+                                      lineBreakMode:UILineBreakModeWordWrap];
+    
+    self.textLabel.frame = CGRectMake(10.0, 5.0, 280.0, size.height);
 }
 
 - (void)prepareForReuse {

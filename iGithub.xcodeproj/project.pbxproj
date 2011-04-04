@@ -30,6 +30,7 @@
 		A7089528134A2F24000DD6CE /* UITableViewCellAccessoryDisclosureIndicator@2x.PNG in Resources */ = {isa = PBXBuildFile; fileRef = A7089524134A2F23000DD6CE /* UITableViewCellAccessoryDisclosureIndicator@2x.PNG */; };
 		A708952C134A2F83000DD6CE /* UICollapsingAndSpinningTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A708952B134A2F83000DD6CE /* UICollapsingAndSpinningTableViewCell.m */; };
 		A7089530134A3DB0000DD6CE /* GHIssueComment.m in Sources */ = {isa = PBXBuildFile; fileRef = A708952F134A3DB0000DD6CE /* GHIssueComment.m */; };
+		A7089533134A4124000DD6CE /* GHIssueCommentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A7089532134A4123000DD6CE /* GHIssueCommentTableViewCell.m */; };
 		A73E298C134795FA00E85282 /* GHFollowEventPayload.m in Sources */ = {isa = PBXBuildFile; fileRef = A73E298B134795FA00E85282 /* GHFollowEventPayload.m */; };
 		A73E29911347970500E85282 /* GHFollowEventTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A73E29901347970500E85282 /* GHFollowEventTableViewCell.m */; };
 		A73E29951347A8E800E85282 /* GHWatchEventPayload.m in Sources */ = {isa = PBXBuildFile; fileRef = A73E29941347A8E800E85282 /* GHWatchEventPayload.m */; };
@@ -143,6 +144,8 @@
 		A708952B134A2F83000DD6CE /* UICollapsingAndSpinningTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UICollapsingAndSpinningTableViewCell.m; sourceTree = "<group>"; };
 		A708952E134A3DB0000DD6CE /* GHIssueComment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHIssueComment.h; sourceTree = "<group>"; };
 		A708952F134A3DB0000DD6CE /* GHIssueComment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHIssueComment.m; sourceTree = "<group>"; };
+		A7089531134A4122000DD6CE /* GHIssueCommentTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHIssueCommentTableViewCell.h; sourceTree = "<group>"; };
+		A7089532134A4123000DD6CE /* GHIssueCommentTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHIssueCommentTableViewCell.m; sourceTree = "<group>"; };
 		A73E298A134795FA00E85282 /* GHFollowEventPayload.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHFollowEventPayload.h; sourceTree = "<group>"; };
 		A73E298B134795FA00E85282 /* GHFollowEventPayload.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHFollowEventPayload.m; sourceTree = "<group>"; };
 		A73E298F1347970500E85282 /* GHFollowEventTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHFollowEventTableViewCell.h; sourceTree = "<group>"; };
@@ -402,6 +405,8 @@
 				A708950F1349FE0C000DD6CE /* GHIssueDescriptionTableViewCell.h */,
 				A70895101349FE0C000DD6CE /* GHIssueDescriptionTableViewCell.m */,
 				A70895111349FE0C000DD6CE /* GHIssueDescriptionTableViewCellContentView.xib */,
+				A7089531134A4122000DD6CE /* GHIssueCommentTableViewCell.h */,
+				A7089532134A4123000DD6CE /* GHIssueCommentTableViewCell.m */,
 			);
 			name = UITableViewCells;
 			sourceTree = "<group>";
@@ -1096,6 +1101,7 @@
 				A708951C134A0C72000DD6CE /* NSDate+Additions.m in Sources */,
 				A708952C134A2F83000DD6CE /* UICollapsingAndSpinningTableViewCell.m in Sources */,
 				A7089530134A3DB0000DD6CE /* GHIssueComment.m in Sources */,
+				A7089533134A4124000DD6CE /* GHIssueCommentTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1138,7 +1144,7 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
@@ -1153,7 +1159,7 @@
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
