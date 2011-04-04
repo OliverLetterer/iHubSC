@@ -32,6 +32,7 @@
         self.firstCommitLabel.highlightedTextColor = [UIColor whiteColor];
         self.firstCommitLabel.textColor = [UIColor colorWithWhite:0.25 alpha:1.0];
         self.firstCommitLabel.lineBreakMode = UILineBreakModeWordWrap;
+        self.firstCommitLabel.backgroundColor = [UIColor clearColor];
         [self.contentView addSubview:self.firstCommitLabel];
         
         self.secondCommitLabel = [[[UILabel alloc] initWithFrame:CGRectMake(78.0, 20.0, 222.0, 16.0)] autorelease];
@@ -40,6 +41,7 @@
         self.secondCommitLabel.highlightedTextColor = [UIColor whiteColor];
         self.secondCommitLabel.textColor = [UIColor colorWithWhite:0.25 alpha:1.0];
         self.secondCommitLabel.lineBreakMode = UILineBreakModeWordWrap;
+        self.secondCommitLabel.backgroundColor = [UIColor clearColor];
         [self.contentView addSubview:self.secondCommitLabel];
     }
     return self;

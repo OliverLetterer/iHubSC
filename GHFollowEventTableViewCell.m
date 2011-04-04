@@ -25,6 +25,7 @@
         self.targetNameLabel.font = [UIFont boldSystemFontOfSize:12.0];
         self.targetNameLabel.textColor = [UIColor colorWithWhite:0.25 alpha:1.0];
         self.targetNameLabel.highlightedTextColor = [UIColor whiteColor];
+        self.targetNameLabel.backgroundColor = [UIColor clearColor];
         [self.contentView addSubview:self.targetNameLabel];
     }
     return self;

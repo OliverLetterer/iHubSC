@@ -25,6 +25,7 @@
         self.descriptionLabel.highlightedTextColor = [UIColor whiteColor];
         self.descriptionLabel.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleHeight;
         self.descriptionLabel.text = NSLocalizedString(@"Downloading ...", @"");
+        self.descriptionLabel.backgroundColor = [UIColor clearColor];
         
         [self.contentView addSubview:self.descriptionLabel];
     }
