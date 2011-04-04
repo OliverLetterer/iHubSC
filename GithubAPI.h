@@ -7,6 +7,7 @@
 //
 
 #import "GHManagedObjectContext.h"
+#import "GHAuthenticationManager.h"
 
 #import "GHBackgroundQueue.h"
 #import "GHUser.h"
@@ -15,6 +16,7 @@
 #import "GHActorAttributes.h"
 #import "GHIssue.h"
 #import "GHTarget.h"
+#import "GHIssueComment.h"
 
 #import "GHPayload.h"
 #import "GHIssuePayload.h"

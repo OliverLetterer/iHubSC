@@ -86,6 +86,29 @@
     return nil;
 }
 
++ (void)deleteCachedIssueInDatabaseOnRepository:(NSString *)repository withNumber:(NSNumber *)number {
+    if (repository == nil || number == nil) {
+        return;
+    }
+    
+    NSManagedObjectContext *moc = GHSharedManagedObjectContext();
+    NSEntityDescription *entityDescription = [NSEntityDescription entityForName:@"GHIssue" inManagedObjectContext:moc];
+    NSFetchRequest *request = [[[NSFetchRequest alloc] init] autorelease];
+    [request setEntity:entityDescription];
+    
+    // Set example predicate and sort orderings...
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(number == %@) AND (repository like %@)", number, repository];
+    [request setPredicate:predicate];
+    
+    
+    NSError *error = nil;
+    NSArray *array = [moc executeFetchRequest:request error:&error];
+    for (GHIssue *issue in array) {
+        [moc deleteObject:issue];
+        [moc save:NULL];
+    }
+}
+
 + (BOOL)isIssueAvailableForRepository:(NSString *)repository 
                            withNumber:(NSNumber *)number {
     return [self issueFromDatabaseOnRepository:repository withNumber:number] != nil;
@@ -94,14 +117,18 @@
 + (void)issueOnRepository:(NSString *)repository 
                withNumber:(NSNumber *)number 
             loginUsername:(NSString *)loginUsername 
-                 password:(NSString *)password completionHandler:(void (^)(GHIssue *issue, NSError *error, BOOL didDownload))handler {
+                 password:(NSString *)password 
+    useDatabaseIfPossible:(BOOL)useDatabase
+        completionHandler:(void (^)(GHIssue *issue, NSError *error, BOOL didDownload))handler {
     
     // use URL http://github.com/api/v2/json/issues/show/schacon/showoff/1
     
-    GHIssue *cachedIssue = [GHIssue issueFromDatabaseOnRepository:repository withNumber:number];
-    if (cachedIssue) {
-        handler(cachedIssue, nil, NO);
-        return;
+    if (useDatabase) {
+        GHIssue *cachedIssue = [GHIssue issueFromDatabaseOnRepository:repository withNumber:number];
+        if (cachedIssue) {
+            handler(cachedIssue, nil, NO);
+            return;
+        }
     }
     
     dispatch_async(GHAPIBackgroundQueue(), ^(void) {
@@ -128,9 +155,11 @@
             } else {
                 NSDictionary *issueDictionary = [issueString objectFromJSONString];
                 NSManagedObjectContext *ctx = GHSharedManagedObjectContext();
+                [self deleteCachedIssueInDatabaseOnRepository:repository withNumber:number];
                 GHIssue *newIssue = (GHIssue *)[NSEntityDescription insertNewObjectForEntityForName:@"GHIssue" 
                                                                              inManagedObjectContext:ctx];
                 NSDictionary *rawDictionary = [issueDictionary objectForKey:@"issue"];
+                NSLog(@"%@", rawDictionary);
                 [newIssue updateWithRawDictionary:rawDictionary onRepository:repository];
                 
                 [ctx save:NULL];
@@ -138,7 +167,54 @@
             }
         });
     });
+}
+
+
++ (void)commentsForIssueOnRepository:(NSString *)repository 
+                          withNumber:(NSNumber *)number 
+                   completionHandler:(void (^)(NSArray *comments, NSError *error))handler {
+    
+    dispatch_async(GHAPIBackgroundQueue(), ^(void) {
+        
+        // issues/comments/:user/:repo/:number
+        
+        NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://github.com/api/v2/json/issues/comments/%@/%@",
+                                           [repository stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
+                                           number]];
+        
+        NSError *myError = nil;
+        
+        ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:URL];
+        [request addRequestHeader:@"Authorization" 
+                            value:[NSString stringWithFormat:@"Basic %@",
+                                   [ASIHTTPRequest base64forData:[[NSString stringWithFormat:@"%@:%@",[GHAuthenticationManager sharedInstance].username, [GHAuthenticationManager sharedInstance].password] dataUsingEncoding:NSUTF8StringEncoding]]]];
+        [request startSynchronous];
+        
+        myError = [request error];
+        
+        NSData *issueData = [request responseData];
+        NSString *issueString = [[[NSString alloc] initWithData:issueData encoding:NSUTF8StringEncoding] autorelease];
+        
+        dispatch_async(dispatch_get_main_queue(), ^(void) {
+            if (myError) {
+                handler(nil, myError);
+            } else {
+                
+                NSDictionary *dict = [issueString objectFromJSONString];
+                
+                NSArray *rawCommentsArray = [dict objectForKey:@"comments"];
+                
+                NSMutableArray *array = [NSMutableArray array];
+                for (NSDictionary *rawDictionary in rawCommentsArray) {
+                    [array addObject:[[[GHIssueComment alloc] initWithRawDictionary:rawDictionary] autorelease] ];
+                }
+                
+                handler(array, nil);
+            }
+        });
+    });
     
 }
+
 
 @end

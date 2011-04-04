@@ -51,4 +51,9 @@
 
 - (id)initWithRawDictionary:(NSDictionary *)rawDictionary;
 
++ (void)collaboratorsForRepository:(NSString *)repository 
+                          username:(NSString *)username 
+                          password:(NSString *)password 
+                 completionHandler:(void(^)(NSArray *collaborators, NSError *error))handler;
+
 @end

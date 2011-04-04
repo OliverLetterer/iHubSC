@@ -20,6 +20,8 @@
 #if DEBUG
     [GHSettingsHelper setUsername:@"docmorelli"];
     [GHSettingsHelper setPassword:@"1337-l0g1n"];
+    [GHAuthenticationManager sharedInstance].username = [GHSettingsHelper username];
+    [GHAuthenticationManager sharedInstance].password = [GHSettingsHelper password];
 #endif
     
     NSMutableArray *tabBarItems = [NSMutableArray array];

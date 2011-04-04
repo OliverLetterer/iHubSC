@@ -8,11 +8,48 @@
 
 #import "GHRepository.h"
 #import "GithubAPI.h"
+#import "ASIHTTPRequest.h"
 
 @implementation GHRepository
 
 @synthesize creationDate=_creationDate, desctiptionRepo=_desctiptionRepo, fork=_fork, forks=_forks, hasDownloads=_hasDownloads, hasIssues=_hasIssues, hasWiki=_hasWiki, homePage=_homePage, integrateBranch=_integrateBranch, language=_language, name=_name, openIssues=_openIssues, owner=_owner, private=_private, pushedAt=_pushedAt, size=_size, URL=_URL, watchers=_watchers;
 
+#pragma mark - class methods
+
++ (void)collaboratorsForRepository:(NSString *)repository 
+                          username:(NSString *)username 
+                          password:(NSString *)password 
+                 completionHandler:(void (^)(NSArray *, NSError *))handler {
+    
+    dispatch_async(GHAPIBackgroundQueue(), ^(void) {
+        
+        NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://github.com/api/v2/json/repos/show/%@/collaborators",
+                                           [repository stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]
+                                           ]];
+        NSError *myError = nil;
+        
+        ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:URL];
+        [request addRequestHeader:@"Authorization" 
+                            value:[NSString stringWithFormat:@"Basic %@",[ASIHTTPRequest base64forData:[[NSString stringWithFormat:@"%@:%@",username,password] dataUsingEncoding:NSUTF8StringEncoding]]]];
+        [request startSynchronous];
+        
+        myError = [request error];
+        
+        NSData *jsonData = [request responseData];
+        NSString *jsonString = [[[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding] autorelease];
+        
+        dispatch_async(dispatch_get_main_queue(), ^(void) {
+            if (myError) {
+                handler(nil, myError);
+            } else {
+                NSDictionary *info = [jsonString objectFromJSONString];
+                NSArray *collaborators = [info objectForKey:@"collaborators"];
+                handler(collaborators, nil);
+            }
+        });
+    });
+    
+}
 
 #pragma mark - Initialization
 

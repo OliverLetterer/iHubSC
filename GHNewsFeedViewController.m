@@ -12,6 +12,7 @@
 #import "GHFeedItemWithDescriptionTableViewCell.h"
 #import "GHPushFeedItemTableViewCell.h"
 #import "GHFollowEventTableViewCell.h"
+#import "GHViewIssueTableViewController.h"
 
 @implementation GHNewsFeedViewController
 
@@ -221,13 +222,12 @@
             [GHIssue issueOnRepository:payload.repo 
                             withNumber:payload.number 
                          loginUsername:[GHSettingsHelper username] 
-                              password:[GHSettingsHelper password] 
+                              password:[GHSettingsHelper password]
+                 useDatabaseIfPossible:YES 
                      completionHandler:^(GHIssue *issue, NSError *error, BOOL didDownload) {
-                         
                          [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] 
                                                withRowAnimation:UITableViewRowAnimationNone];
                      }];
-
         }
                 
         return cell;
@@ -619,7 +619,15 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [self.tableView deselectRowAtIndexPath:indexPath animated:NO];
+    GHNewsFeedItem *item = [self.newsFeed.items objectAtIndex:indexPath.row];
+    
+    if (item.payload.type == GHPayloadIssuesEvent) {
+        GHIssuePayload *payload = (GHIssuePayload *)item.payload;
+        GHViewIssueTableViewController *viewIssueViewController = [[[GHViewIssueTableViewController alloc] initWithRepository:payload.repo issueNumber:payload.number] autorelease];
+        [self.navigationController pushViewController:viewIssueViewController animated:YES];
+    } else {
+        [self.tableView deselectRowAtIndexPath:indexPath animated:NO];
+    }
 }
 
 @end

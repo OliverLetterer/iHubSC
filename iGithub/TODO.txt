@@ -23,3 +23,4 @@ support all these events
 
 - not showing NewsFeed after first login
 - in NewsFeed: crash while loading images and switching from "NewsFeed"->"My Actions"
+- adopt GHAuthenticationManager is every request automatically, so that we dont have to pass in the username and password all the time
