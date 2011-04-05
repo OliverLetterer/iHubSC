@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@class GHIssue;
+@class GHIssue, GHNewsFeedItemTableViewCell, GHIssueComment;
 
 @interface GHViewIssueTableViewController : UITableViewController {
 @private
@@ -23,6 +23,10 @@
     NSArray *_comments;
     BOOL _isShowingComments;
     BOOL _isDownloadingComments;
+    
+    UITextView *_textView;
+    
+    UIToolbar *_textViewToolBar;
 }
 
 @property (nonatomic, retain) GHIssue *issue;
@@ -31,6 +35,9 @@
 
 @property (nonatomic, retain) NSArray *comments;
 
+@property (nonatomic, retain) UITextView *textView;
+@property (nonatomic, retain) UIToolbar *textViewToolBar;
+
 - (id)initWithRepository:(NSString *)repository issueNumber:(NSNumber *)number;
 
 - (void)downloadIssueData;
@@ -38,6 +45,9 @@
 - (void)showComments;
 - (void)hideComments;
 - (void)downloadComments;
+
+- (void)toolbarCancelButtonClicked:(UIBarButtonItem *)barButton;
+- (void)toolbarDoneButtonClicked:(UIBarButtonItem *)barButton;
 
 @property (nonatomic, readonly) UITableViewCell *dummyCell;
 

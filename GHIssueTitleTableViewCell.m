@@ -16,14 +16,7 @@
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if ((self = [super initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:reuseIdentifier])) {
         // Initialization code
-        self.textLabel.font = [UIFont boldSystemFontOfSize:16.0];
-        self.textLabel.numberOfLines = 0;
         
-        self.detailTextLabel.font = [UIFont systemFontOfSize:11.0];
-        self.detailTextLabel.textColor = [UIColor blackColor];
-        self.detailTextLabel.textAlignment = UITextAlignmentRight;
-        
-        self.selectionStyle = UITableViewCellEditingStyleNone;
     }
     return self;
 }
@@ -43,12 +36,12 @@
 - (void)layoutSubviews {
     [super layoutSubviews];
     
-    CGSize headerSize = [self.textLabel.text sizeWithFont:[UIFont boldSystemFontOfSize:16.0]
-                                        constrainedToSize:CGSizeMake(280.0, MAXFLOAT) 
-                                            lineBreakMode:UILineBreakModeWordWrap];
-    self.textLabel.frame = CGRectMake(10.0, 5.0, headerSize.width, headerSize.height);
-    self.detailTextLabel.frame = CGRectMake(10.0, self.contentView.bounds.size.height - 17.0, 
-                                            280.0, 15.0);
+//    CGSize headerSize = [self.textLabel.text sizeWithFont:[UIFont boldSystemFontOfSize:16.0]
+//                                        constrainedToSize:CGSizeMake(280.0, MAXFLOAT) 
+//                                            lineBreakMode:UILineBreakModeWordWrap];
+//    self.textLabel.frame = CGRectMake(10.0, 5.0, headerSize.width, headerSize.height);
+//    self.detailTextLabel.frame = CGRectMake(10.0, self.contentView.bounds.size.height - 17.0, 
+//                                            280.0, 15.0);
 }
 
 - (void)prepareForReuse {

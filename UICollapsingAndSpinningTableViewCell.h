@@ -7,9 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "UITableViewCellWithLinearGradientBackgroundView.h"
 
-
-@interface UICollapsingAndSpinningTableViewCell : UITableViewCell {
+@interface UICollapsingAndSpinningTableViewCell : UITableViewCellWithLinearGradientBackgroundView {
 @private
     BOOL _isSpinning;
     

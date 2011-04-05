@@ -21,10 +21,6 @@
 
 - (void)segmentControlValueChanged:(UISegmentedControl *)segmentControl;
 
-- (void)updateImageViewForCell:(GHNewsFeedItemTableViewCell *)cell 
-                   atIndexPath:(NSIndexPath *)indexPath 
-               forNewsFeedItem:(GHNewsFeedItem *)item;
-
 - (UITableViewCell *)dummyCellWithText:(NSString *)text;
 - (CGFloat)heightForGHFeedItemWithDescriptionTableViewCellForDescription:(NSString *)description;
 

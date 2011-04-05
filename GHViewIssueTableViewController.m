@@ -11,15 +11,18 @@
 #import "GHSettingsHelper.h"
 #import "GHIssueTitleTableViewCell.h"
 #import "GHIssueDescriptionTableViewCell.h"
-#import "NSDate+Additions.h"
 #import "UICollapsingAndSpinningTableViewCell.h"
 #import "GHIssueCommentTableViewCell.h"
+#import "GHFeedItemWithDescriptionTableViewCell.h"
+#import "UITableViewController+Additions.h"
+#import "GHNewCommentTableViewCell.h"
 
 @implementation GHViewIssueTableViewController
 
 @synthesize issue=_issue;
 @synthesize repository=_repository, number=_number;
 @synthesize comments=_comments;
+@synthesize textView=_textView, textViewToolBar=_textViewToolBar;
 
 #pragma mark - setters and getters
 
@@ -39,7 +42,7 @@
 #pragma mark - Initialization
 
 - (id)initWithRepository:(NSString *)repository issueNumber:(NSNumber *)number {
-    if ((self = [super initWithStyle:UITableViewStyleGrouped])) {
+    if ((self = [super initWithStyle:UITableViewStylePlain])) {
         // Custom initialization
         self.repository = repository;
         self.number = number;
@@ -158,6 +161,8 @@
     [_repository release];
     [_number release];
     [_comments release];
+    [_textView release];
+    [_textViewToolBar release];
     [super dealloc];
 }
 
@@ -168,10 +173,67 @@
     // Release any cached data, images, etc that aren't in use.
 }
 
+#pragma mark - target actions
+
+- (void)toolbarCancelButtonClicked:(UIBarButtonItem *)barButton {
+    [self.textView resignFirstResponder];
+}
+
+- (void)toolbarDoneButtonClicked:(UIBarButtonItem *)barButton {
+    [GHIssue postComment:self.textView.text forIssueOnRepository:self.repository 
+              withNumber:self.number 
+       completionHandler:^(GHIssueComment *comment, NSError *error) {
+           NSMutableArray *commentsArray = [[self.comments mutableCopy] autorelease];
+           [commentsArray addObject:comment];
+           self.comments = commentsArray;
+           
+           self.issue.comments = [NSNumber numberWithInt:[self.issue.comments intValue] + 1];
+           
+           [self.tableView beginUpdates];
+           
+           [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:[self.comments count]+1 inSection:1]] withRowAnimation:UITableViewScrollPositionBottom];
+           [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:[self.comments count] inSection:1]] withRowAnimation:UITableViewRowAnimationFade];
+           
+           [self.tableView endUpdates];
+           
+           self.textView.text = nil;
+       }];
+}
+
 #pragma mark - View lifecycle
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.view.backgroundColor = [UIColor colorWithRed:245.0/255.0 green:245.0/255.0 blue:245.0/255.0 alpha:1.0];
+    
+    self.textViewToolBar = [[[UIToolbar alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0, 44.0)] autorelease];
+    self.textViewToolBar.barStyle = UIBarStyleBlackTranslucent;
+    
+    UIBarButtonItem *item = nil;
+    NSMutableArray *items = [NSMutableArray array];
+    
+    item = [[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Cancel", @"") 
+                                             style:UIBarButtonItemStyleBordered 
+                                            target:self 
+                                            action:@selector(toolbarCancelButtonClicked:)]
+                             autorelease];
+    [items addObject:item];
+    
+    item = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace 
+                                                          target:nil 
+                                                          action:@selector(noAction)]
+            autorelease];
+    [items addObject:item];
+    
+    item = [[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Submit", @"") 
+                                             style:UIBarButtonItemStyleDone 
+                                            target:self 
+                                            action:@selector(toolbarDoneButtonClicked:)]
+            autorelease];
+    [items addObject:item];
+    
+    self.textViewToolBar.items = items;
 }
 
 - (void)viewDidUnload {
@@ -229,7 +291,7 @@
         if (section == 0) {
             // the issue itself
             // title, description, number of votes
-            result = 2;
+            result = 1;
         } else if (section == 1) {
             // we display our comment
             // first cell = Comments (5)
@@ -275,23 +337,16 @@
             
             cell.textLabel.text = self.issue.title;
             
-            NSString *lastUpdate = self.issue.creationDate;
-            NSDateFormatter *formatter = [[[NSDateFormatter alloc] init] autorelease];
-            [formatter setDateFormat:@"yyyy/MM/dd HH:mm:ss ZZZ"];
-            NSDate *date = [formatter dateFromString:lastUpdate];
+            [self updateImageViewForCell:cell 
+                             atIndexPath:indexPath 
+                          withGravatarID:self.issue.gravatarID];
+            
+            NSDate *date = self.issue.creationDate.dateFromGithubAPIDateString;
             
             cell.detailTextLabel.text = [NSString stringWithFormat:@"by %@ %@ (%@ votes)", self.issue.user, [NSString stringWithFormat:NSLocalizedString(@"%@ ago", @""), date.prettyTimeIntervalSinceNow], self.issue.votes];
-            ;            
-            return cell;
-        } else if (indexPath.row == 1) {
-            // the issues description
-            NSString *CellIdentifier = @"GHIssueDescriptionTableViewCell";
-            GHIssueDescriptionTableViewCell *cell = (GHIssueDescriptionTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-            if (!cell) {
-                cell = [[[GHIssueDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
-            }
+            ;
             
-            cell.textLabel.text = self.issue.body;
+            cell.descriptionLabel.text = self.issue.body;
             
             return cell;
         }
@@ -322,37 +377,44 @@
             
             return cell;
         } else if (indexPath.row >= 1 && indexPath.row <= [self.issue.comments intValue]) {
+            // display a comment
             GHIssueComment *comment = [self.comments objectAtIndex:indexPath.row - 1];
             
-            NSString *CellIdentifier = @"GHIssueCommentTableViewCell";
+            NSString *CellIdentifier = @"GHFeedItemWithDescriptionTableViewCell";
             
-            GHIssueCommentTableViewCell *cell = (GHIssueCommentTableViewCell *)[self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+            GHFeedItemWithDescriptionTableViewCell *cell = (GHFeedItemWithDescriptionTableViewCell *)[self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
             if (cell == nil) {
-                cell = [[[GHIssueCommentTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+                cell = [[[GHFeedItemWithDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
             }
             
-            cell.textLabel.text = comment.body;
-            cell.detailTextLabel.text = comment.user;
+            [self updateImageViewForCell:cell 
+                             atIndexPath:indexPath 
+                          withGravatarID:comment.gravatarID];
             
-            NSString *lastUpdate = comment.updatedAt;
-            NSDateFormatter *formatter = [[[NSDateFormatter alloc] init] autorelease];
-            [formatter setDateFormat:@"yyyy/MM/dd HH:mm:ss ZZZ"];
-            NSDate *date = [formatter dateFromString:lastUpdate];
+            NSDate *date = comment.updatedAt.dateFromGithubAPIDateString;
             
-            cell.timeDetailsLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ ago", @""), date.prettyTimeIntervalSinceNow];
+            cell.titleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ (%@ ago)", @""), comment.user, date.prettyTimeIntervalSinceNow];
+            
+            cell.descriptionLabel.text = comment.body;
             
             return cell;
         } else if (indexPath.row == [self.issue.comments intValue] + 1) {
             // this is the new comment button
-            NSString *CellIdentifier = @"UITableViewCellForNewIssue";
+            NSString *CellIdentifier = @"GHNewCommentTableViewCell";
             
-            UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+            GHNewCommentTableViewCell *cell = (GHNewCommentTableViewCell *)[self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
             if (cell == nil) {
-                cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
-                cell.textLabel.textAlignment = UITextAlignmentCenter;
+                cell = [[[GHNewCommentTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
             }
             
-            cell.textLabel.text = NSLocalizedString(@"New Comment", @"");
+            [self updateImageViewForCell:cell 
+                             atIndexPath:indexPath 
+                          withGravatarID:[GHSettingsHelper gravatarID]];
+            
+            cell.titleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ (right now)", @""), [GHSettingsHelper username]];
+            
+            self.textView = cell.textView;
+            cell.textView.inputAccessoryView = self.textViewToolBar;
             
             return cell;
         }
@@ -406,11 +468,24 @@
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
             // the issues title
-            CGSize headerSize = [self.issue.title sizeWithFont:[UIFont boldSystemFontOfSize:16.0]
-                                             constrainedToSize:CGSizeMake(280.0, MAXFLOAT) 
+            
+            
+            
+            CGSize headerSize = [self.issue.title sizeWithFont:[UIFont boldSystemFontOfSize:11.0]
+                                             constrainedToSize:CGSizeMake(220.0, MAXFLOAT) 
                                                  lineBreakMode:UILineBreakModeWordWrap];
             
-            result = headerSize.height + 25.0;
+            result = headerSize.height;
+            
+            CGSize bodySize = [self.issue.body sizeWithFont:[UIFont systemFontOfSize:12.0] 
+                                          constrainedToSize:CGSizeMake(222.0, MAXFLOAT) 
+                                              lineBreakMode:UILineBreakModeWordWrap];
+            
+            result += bodySize.height + 30.0;
+            
+            if (result < 71.0) {
+                result = 71.0;
+            }
             
         } else if (indexPath.row == 1) {
             // the description
@@ -425,11 +500,18 @@
             // we are going to display a comment
             GHIssueComment *comment = [self.comments objectAtIndex:indexPath.row - 1];
             
-            CGSize size = [comment.body sizeWithFont:[UIFont systemFontOfSize:17.0] 
-                                   constrainedToSize:CGSizeMake(280.0, MAXFLOAT) 
+            CGSize size = [comment.body sizeWithFont:[UIFont systemFontOfSize:12.0] 
+                                   constrainedToSize:CGSizeMake(222.0, MAXFLOAT) 
                                        lineBreakMode:UILineBreakModeWordWrap];
             
-            result = size.height + 38.0;
+            result = size.height + 30.0;
+            
+            if (result < 71.0) {
+                result = 71.0;
+            }
+            
+        } else if (indexPath.row == [self.issue.comments intValue] + 1) {
+            result = 161.0;
         }
     }
     
@@ -440,6 +522,9 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 1) {
+        if (_isDownloadingComments) {
+            return;
+        }
         if (indexPath.row == 0) {
             if (self.comments == nil) {
                 [self downloadComments];
@@ -452,6 +537,8 @@
             }
         }
     }
+    
+    [self.tableView deselectRowAtIndexPath:indexPath animated:NO];
 }
 
 @end

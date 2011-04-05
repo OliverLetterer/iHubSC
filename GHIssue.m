@@ -9,6 +9,7 @@
 #import "GHIssue.h"
 #import "GithubAPI.h"
 #import "ASIHTTPRequest.h"
+#import "ASIFormDataRequest.h"
 
 @implementation GHIssue
 
@@ -216,5 +217,47 @@
     
 }
 
+
++ (void)postComment:(NSString *)comment forIssueOnRepository:(NSString *)repository 
+         withNumber:(NSNumber *)number 
+  completionHandler:(void (^)(GHIssueComment *, NSError *))handler {
+    
+    dispatch_async(GHAPIBackgroundQueue(), ^(void) {
+        
+        // https://github.com/api/v2/json/issues/comment/defunkt/dunder-mifflin/1
+        
+        NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://github.com/api/v2/json/issues/comment/%@/%@",
+                                           [repository stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
+                                           number]];
+        
+        NSError *myError = nil;
+        
+        ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:URL];
+        [request addRequestHeader:@"Authorization" 
+                            value:[NSString stringWithFormat:@"Basic %@",
+                                   [ASIHTTPRequest base64forData:[[NSString stringWithFormat:@"%@:%@",[GHAuthenticationManager sharedInstance].username, [GHAuthenticationManager sharedInstance].password] dataUsingEncoding:NSUTF8StringEncoding]]]];
+        [request setPostValue:comment forKey:@"comment"];
+        [request startSynchronous];
+        
+        myError = [request error];
+        
+        NSData *issueData = [request responseData];
+        NSString *issueString = [[[NSString alloc] initWithData:issueData encoding:NSUTF8StringEncoding] autorelease];
+        
+        dispatch_async(dispatch_get_main_queue(), ^(void) {
+            if (myError) {
+                handler(nil, myError);
+            } else {
+                NSDictionary *responseDictionary = [issueString objectFromJSONString];
+                NSDictionary *rawDictionary = [responseDictionary objectForKey:@"comment"];
+                
+                GHIssueComment *comment = [[[GHIssueComment alloc] initWithRawDictionary:rawDictionary] autorelease];
+                
+                handler(comment, nil);
+            }
+        });
+    });
+    
+}
 
 @end

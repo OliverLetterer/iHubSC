@@ -13,6 +13,10 @@
 
 - (void)setBackgroundShadowHeight:(CGFloat)height {
     
+    if (self.selectionStyle == UITableViewCellSelectionStyleNone) {
+        return;
+    }
+    
     NSMutableArray *array = [NSMutableArray array];
     for (CALayer *layer in self.selectedBackgroundView.layer.sublayers) {
         if ([layer isKindOfClass:NSClassFromString(@"CAGradientLayer")]) {

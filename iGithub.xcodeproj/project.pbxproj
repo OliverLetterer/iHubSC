@@ -23,7 +23,6 @@
 		A70895121349FE0C000DD6CE /* GHIssueDescriptionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A70895101349FE0C000DD6CE /* GHIssueDescriptionTableViewCell.m */; };
 		A70895131349FE0C000DD6CE /* GHIssueDescriptionTableViewCellContentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A70895111349FE0C000DD6CE /* GHIssueDescriptionTableViewCellContentView.xib */; };
 		A7089517134A03BA000DD6CE /* GHAuthenticationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A7089516134A03BA000DD6CE /* GHAuthenticationManager.m */; };
-		A708951C134A0C72000DD6CE /* NSDate+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = A708951B134A0C72000DD6CE /* NSDate+Additions.m */; };
 		A7089525134A2F24000DD6CE /* UITableViewCellAccessoryDisclosureIndicatorSelected.PNG in Resources */ = {isa = PBXBuildFile; fileRef = A7089521134A2F23000DD6CE /* UITableViewCellAccessoryDisclosureIndicatorSelected.PNG */; };
 		A7089526134A2F24000DD6CE /* UITableViewCellAccessoryDisclosureIndicator.PNG in Resources */ = {isa = PBXBuildFile; fileRef = A7089522134A2F23000DD6CE /* UITableViewCellAccessoryDisclosureIndicator.PNG */; };
 		A7089527134A2F24000DD6CE /* UITableViewCellAccessoryDisclosureIndicatorSelected@2x.PNG in Resources */ = {isa = PBXBuildFile; fileRef = A7089523134A2F23000DD6CE /* UITableViewCellAccessoryDisclosureIndicatorSelected@2x.PNG */; };
@@ -102,6 +101,11 @@
 		A7CE1B831346349200169F94 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7CE1B821346349000169F94 /* CoreData.framework */; };
 		A7CE1B871346355100169F94 /* GHManagedObjectContext.m in Sources */ = {isa = PBXBuildFile; fileRef = A7CE1B861346355100169F94 /* GHManagedObjectContext.m */; };
 		A7CE1B8A13463A6E00169F94 /* GHIssue.m in Sources */ = {isa = PBXBuildFile; fileRef = A7CE1B8913463A6600169F94 /* GHIssue.m */; };
+		A7F6260F134B3938006487CA /* UITableViewCellWithLinearGradientBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = A7F6260E134B3938006487CA /* UITableViewCellWithLinearGradientBackgroundView.m */; };
+		A7F62613134B767B006487CA /* UITableViewController+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = A7F62612134B767B006487CA /* UITableViewController+Additions.m */; };
+		A7F62616134B7CD2006487CA /* GHNewCommentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A7F62615134B7CD2006487CA /* GHNewCommentTableViewCell.m */; };
+		A7F62622134B88B8006487CA /* NSString+GithubAPIAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = A7F62621134B88B8006487CA /* NSString+GithubAPIAdditions.m */; };
+		A7F62626134B89E5006487CA /* NSDate+GithubAPIAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = A7F62625134B89E5006487CA /* NSDate+GithubAPIAdditions.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -134,8 +138,6 @@
 		A70895111349FE0C000DD6CE /* GHIssueDescriptionTableViewCellContentView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GHIssueDescriptionTableViewCellContentView.xib; sourceTree = "<group>"; };
 		A7089515134A03BA000DD6CE /* GHAuthenticationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHAuthenticationManager.h; sourceTree = "<group>"; };
 		A7089516134A03BA000DD6CE /* GHAuthenticationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHAuthenticationManager.m; sourceTree = "<group>"; };
-		A708951A134A0C72000DD6CE /* NSDate+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Additions.h"; sourceTree = "<group>"; };
-		A708951B134A0C72000DD6CE /* NSDate+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Additions.m"; sourceTree = "<group>"; };
 		A7089521134A2F23000DD6CE /* UITableViewCellAccessoryDisclosureIndicatorSelected.PNG */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UITableViewCellAccessoryDisclosureIndicatorSelected.PNG; sourceTree = "<group>"; };
 		A7089522134A2F23000DD6CE /* UITableViewCellAccessoryDisclosureIndicator.PNG */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UITableViewCellAccessoryDisclosureIndicator.PNG; sourceTree = "<group>"; };
 		A7089523134A2F23000DD6CE /* UITableViewCellAccessoryDisclosureIndicatorSelected@2x.PNG */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UITableViewCellAccessoryDisclosureIndicatorSelected@2x.PNG"; sourceTree = "<group>"; };
@@ -275,6 +277,16 @@
 		A7CE1B861346355100169F94 /* GHManagedObjectContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHManagedObjectContext.m; sourceTree = "<group>"; };
 		A7CE1B8813463A6100169F94 /* GHIssue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHIssue.h; sourceTree = "<group>"; };
 		A7CE1B8913463A6600169F94 /* GHIssue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHIssue.m; sourceTree = "<group>"; };
+		A7F6260D134B3938006487CA /* UITableViewCellWithLinearGradientBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UITableViewCellWithLinearGradientBackgroundView.h; sourceTree = "<group>"; };
+		A7F6260E134B3938006487CA /* UITableViewCellWithLinearGradientBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UITableViewCellWithLinearGradientBackgroundView.m; sourceTree = "<group>"; };
+		A7F62611134B767B006487CA /* UITableViewController+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableViewController+Additions.h"; sourceTree = "<group>"; };
+		A7F62612134B767B006487CA /* UITableViewController+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableViewController+Additions.m"; sourceTree = "<group>"; };
+		A7F62614134B7CD1006487CA /* GHNewCommentTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHNewCommentTableViewCell.h; sourceTree = "<group>"; };
+		A7F62615134B7CD2006487CA /* GHNewCommentTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHNewCommentTableViewCell.m; sourceTree = "<group>"; };
+		A7F62620134B88B8006487CA /* NSString+GithubAPIAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+GithubAPIAdditions.h"; sourceTree = "<group>"; };
+		A7F62621134B88B8006487CA /* NSString+GithubAPIAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+GithubAPIAdditions.m"; sourceTree = "<group>"; };
+		A7F62624134B89E5006487CA /* NSDate+GithubAPIAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+GithubAPIAdditions.h"; sourceTree = "<group>"; };
+		A7F62625134B89E5006487CA /* NSDate+GithubAPIAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+GithubAPIAdditions.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -407,6 +419,8 @@
 				A70895111349FE0C000DD6CE /* GHIssueDescriptionTableViewCellContentView.xib */,
 				A7089531134A4122000DD6CE /* GHIssueCommentTableViewCell.h */,
 				A7089532134A4123000DD6CE /* GHIssueCommentTableViewCell.m */,
+				A7F62614134B7CD1006487CA /* GHNewCommentTableViewCell.h */,
+				A7F62615134B7CD2006487CA /* GHNewCommentTableViewCell.m */,
 			);
 			name = UITableViewCells;
 			sourceTree = "<group>";
@@ -423,24 +437,18 @@
 		A7089518134A0C49000DD6CE /* Foundation Additions */ = {
 			isa = PBXGroup;
 			children = (
-				A7089519134A0C57000DD6CE /* NSDate+Additions */,
+				A7F62610134B764D006487CA /* UITableViewContoller+Additions */,
+				A703B941134754D40014235D /* UITableViewCell+Additions */,
 				A703B927134675D90014235D /* UIImage+Additions */,
 			);
 			name = "Foundation Additions";
 			sourceTree = "<group>";
 		};
-		A7089519134A0C57000DD6CE /* NSDate+Additions */ = {
-			isa = PBXGroup;
-			children = (
-				A708951A134A0C72000DD6CE /* NSDate+Additions.h */,
-				A708951B134A0C72000DD6CE /* NSDate+Additions.m */,
-			);
-			name = "NSDate+Additions";
-			sourceTree = "<group>";
-		};
 		A7089529134A2F69000DD6CE /* UITableViewCell */ = {
 			isa = PBXGroup;
 			children = (
+				A7F6260D134B3938006487CA /* UITableViewCellWithLinearGradientBackgroundView.h */,
+				A7F6260E134B3938006487CA /* UITableViewCellWithLinearGradientBackgroundView.m */,
 				A708952A134A2F83000DD6CE /* UICollapsingAndSpinningTableViewCell.h */,
 				A708952B134A2F83000DD6CE /* UICollapsingAndSpinningTableViewCell.m */,
 			);
@@ -533,6 +541,8 @@
 		A73E29B11348744300E85282 /* Foundation Additions */ = {
 			isa = PBXGroup;
 			children = (
+				A7F62623134B89CA006487CA /* NSDate */,
+				A7F6261F134B8886006487CA /* NSString */,
 				A73E29B21348745800E85282 /* NSDictionary */,
 			);
 			name = "Foundation Additions";
@@ -636,7 +646,6 @@
 		A750573F1343422200514A82 /* UserInterface */ = {
 			isa = PBXGroup;
 			children = (
-				A703B941134754D40014235D /* UITableViewCell+Additions */,
 				A75057401343424100514A82 /* GHNewsFeedViewController */,
 				A7BF1423134214E7001AE50D /* GHAuthenticationViewController */,
 				A73E29C31348E12C00E85282 /* GHViewIssueTableViewController */,
@@ -957,6 +966,33 @@
 			name = GHManagedObjectContext;
 			sourceTree = "<group>";
 		};
+		A7F62610134B764D006487CA /* UITableViewContoller+Additions */ = {
+			isa = PBXGroup;
+			children = (
+				A7F62611134B767B006487CA /* UITableViewController+Additions.h */,
+				A7F62612134B767B006487CA /* UITableViewController+Additions.m */,
+			);
+			name = "UITableViewContoller+Additions";
+			sourceTree = "<group>";
+		};
+		A7F6261F134B8886006487CA /* NSString */ = {
+			isa = PBXGroup;
+			children = (
+				A7F62620134B88B8006487CA /* NSString+GithubAPIAdditions.h */,
+				A7F62621134B88B8006487CA /* NSString+GithubAPIAdditions.m */,
+			);
+			name = NSString;
+			sourceTree = "<group>";
+		};
+		A7F62623134B89CA006487CA /* NSDate */ = {
+			isa = PBXGroup;
+			children = (
+				A7F62624134B89E5006487CA /* NSDate+GithubAPIAdditions.h */,
+				A7F62625134B89E5006487CA /* NSDate+GithubAPIAdditions.m */,
+			);
+			name = NSDate;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1098,10 +1134,14 @@
 				A708950E1349FB82000DD6CE /* GHIssueTitleTableViewCell.m in Sources */,
 				A70895121349FE0C000DD6CE /* GHIssueDescriptionTableViewCell.m in Sources */,
 				A7089517134A03BA000DD6CE /* GHAuthenticationManager.m in Sources */,
-				A708951C134A0C72000DD6CE /* NSDate+Additions.m in Sources */,
 				A708952C134A2F83000DD6CE /* UICollapsingAndSpinningTableViewCell.m in Sources */,
 				A7089530134A3DB0000DD6CE /* GHIssueComment.m in Sources */,
 				A7089533134A4124000DD6CE /* GHIssueCommentTableViewCell.m in Sources */,
+				A7F6260F134B3938006487CA /* UITableViewCellWithLinearGradientBackgroundView.m in Sources */,
+				A7F62613134B767B006487CA /* UITableViewController+Additions.m in Sources */,
+				A7F62616134B7CD2006487CA /* GHNewCommentTableViewCell.m in Sources */,
+				A7F62622134B88B8006487CA /* NSString+GithubAPIAdditions.m in Sources */,
+				A7F62626134B89E5006487CA /* NSDate+GithubAPIAdditions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

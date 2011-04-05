@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
+@class GHIssueComment;
 
 @interface GHIssue : NSManagedObject {
 @private
@@ -52,5 +53,9 @@
 + (void)commentsForIssueOnRepository:(NSString *)repository 
                           withNumber:(NSNumber *)number 
                    completionHandler:(void (^)(NSArray *comments, NSError *error))handler;
+
++ (void)postComment:(NSString *)comment forIssueOnRepository:(NSString *)repository 
+         withNumber:(NSNumber *)number 
+  completionHandler:(void (^)(GHIssueComment *comment, NSError *error))handler;
 
 @end

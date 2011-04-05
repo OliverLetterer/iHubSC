@@ -19,6 +19,9 @@
 + (NSString *)password;
 + (void)setPassword:(NSString *)password;
 
++ (NSString *)gravatarID;
++ (void)setGravatarID:(NSString *)gravatarID;
+
 + (BOOL)isUserAuthenticated;
 
 @end

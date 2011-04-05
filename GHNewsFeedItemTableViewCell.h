@@ -7,17 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <QuartzCore/QuartzCore.h>
+#import "UITableViewCellWithLinearGradientBackgroundView.h"
 
-@interface GHNewsFeedItemTableViewCell : UITableViewCell {
+@interface GHNewsFeedItemTableViewCell : UITableViewCellWithLinearGradientBackgroundView {
 @private
     UIActivityIndicatorView *_activityIndicatorView;
-    CAGradientLayer *_backgroundGradientLayer;
 }
 
 @property (nonatomic, retain) UIActivityIndicatorView *activityIndicatorView;
 @property (nonatomic, readonly) UILabel *titleLabel;
 @property (nonatomic, readonly) UILabel *repositoryLabel;
-@property (nonatomic, retain) CAGradientLayer *backgroundGradientLayer;
 
 @end

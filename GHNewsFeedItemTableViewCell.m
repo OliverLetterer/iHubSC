@@ -16,7 +16,7 @@
 
 @implementation GHNewsFeedItemTableViewCell
 
-@synthesize activityIndicatorView=_activityIndicatorView, backgroundGradientLayer=_backgroundGradientLayer;
+@synthesize activityIndicatorView=_activityIndicatorView;
 
 #pragma mark - setters and getters
 
@@ -47,16 +47,6 @@
         self.repositoryLabel.highlightedTextColor = [UIColor whiteColor];
         self.repositoryLabel.textAlignment = UITextAlignmentRight;
         self.repositoryLabel.backgroundColor = [UIColor clearColor];
-        
-        self.backgroundGradientLayer = [CAGradientLayer layer];
-        self.backgroundGradientLayer.colors = [NSArray arrayWithObjects:
-                                               (id)[UIColor whiteColor].CGColor, 
-                                               (id)[UIColor colorWithRed:245.0/255.0 green:245.0/255.0 blue:245.0/255.0 alpha:1.0].CGColor,
-                                               nil];
-        self.backgroundGradientLayer.locations = [NSArray arrayWithObjects:[NSNumber numberWithFloat:0.0], [NSNumber numberWithFloat:1.0], nil];
-        self.backgroundView = [[[UIView alloc] init] autorelease];
-        self.backgroundView.backgroundColor = [UIColor whiteColor];
-        [self.backgroundView.layer addSublayer:self.backgroundGradientLayer];
     }
     return self;
 }
@@ -65,12 +55,10 @@
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-    [self setBackgroundShadowHeight:5.0];
 }
 
 - (void)setHighlighted:(BOOL)highlighted animated:(BOOL)animated {
     [super setHighlighted:highlighted animated:animated];
-    [self setBackgroundShadowHeight:5.0];
 }
 
 - (void)layoutSubviews {
@@ -81,9 +69,6 @@
     self.repositoryLabel.frame = CGRectMake(78.0, self.contentView.bounds.size.height - GHNewsFeedItemTableViewCellRepositoryLabelHeight - GHNewsFeedItemTableViewCellRepositoryLabelBottomOffset, 222.0, GHNewsFeedItemTableViewCellRepositoryLabelHeight);
     
     self.activityIndicatorView.center = self.imageView.center;
-    
-    self.backgroundGradientLayer.frame = self.backgroundView.bounds;
-    NSLog(@"%@", self.backgroundView);
 }
 
 - (void)prepareForReuse {
@@ -99,7 +84,6 @@
 
 - (void)dealloc {
     [_activityIndicatorView release];
-    [_backgroundGradientLayer release];
     [super dealloc];
 }
 

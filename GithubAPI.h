@@ -40,7 +40,10 @@
 
 #import "JSONKit.h"
 #import "NSDictionary+GHNullTermination.h"
+#import "NSString+GithubAPIAdditions.h"
+#import "NSDate+GithubAPIAdditions.h"
 
 #import "UIImage+Gravatar.h"
 #import "GHGravatarBackgroundQueue.h"
 #import "GHGravatarImageCache.h"
+#import "NSDate+GithubAPIAdditions.h"

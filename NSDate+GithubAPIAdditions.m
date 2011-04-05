@@ -1,15 +1,15 @@
 //
-//  NSDate+Additions.m
+//  NSDate+GithubAPIAdditions.m
 //  iGithub
 //
-//  Created by Oliver Letterer on 04.04.11.
+//  Created by Oliver Letterer on 05.04.11.
 //  Copyright 2011 Home. All rights reserved.
 //
 
-#import "NSDate+Additions.h"
+#import "NSDate+GithubAPIAdditions.h"
 
 
-@implementation NSDate (GHPrettyTimeinterval)
+@implementation NSDate (GHAPIDateFormatting)
 
 - (NSString *)prettyTimeIntervalSinceNow {
     static NSString *valuesArray[] = {@"seconds", @"minutes", @"hours", @"days", @"years"};
@@ -37,6 +37,13 @@
     }
     
     return [NSString stringWithFormat:@"%d %@", difference, valuesArray[index]];
+}
+
+- (NSString *)stringInGithubAPIFormat {
+    NSDateFormatter *formatter = [[[NSDateFormatter alloc] init] autorelease];
+    [formatter setDateFormat:@"yyyy/MM/dd HH:mm:ss ZZZ"];
+    
+    return [formatter stringFromDate:self];
 }
 
 @end
