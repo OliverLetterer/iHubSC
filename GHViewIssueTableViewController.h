@@ -49,5 +49,6 @@
 
 - (void)toolbarCancelButtonClicked:(UIBarButtonItem *)barButton;
 - (void)toolbarDoneButtonClicked:(UIBarButtonItem *)barButton;
+- (void)titleTableViewCellLongPressRecognized:(UILongPressGestureRecognizer *)recognizer;
 
 @end

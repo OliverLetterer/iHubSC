@@ -185,6 +185,20 @@
        }];
 }
 
+- (void)titleTableViewCellLongPressRecognized:(UILongPressGestureRecognizer *)recognizer {
+    // TODO: support editing here in the future
+//    if (recognizer.state == UIGestureRecognizerStateBegan) {
+//        UIActionSheet *sheet = [[[UIActionSheet alloc] initWithTitle:NSLocalizedString(@"Edit this Issue", @"") 
+//                                                            delegate:self 
+//                                                   cancelButtonTitle:NSLocalizedString(@"Cancel", @"") 
+//                                              destructiveButtonTitle:nil 
+//                                                   otherButtonTitles:NSLocalizedString(@"Edit", @""), nil]
+//                                autorelease];
+//        sheet.actionSheetStyle = UIActionSheetStyleBlackTranslucent;
+//        [sheet showInView:self.tabBarController.view];
+//    }
+}
+
 #pragma mark - View lifecycle
 
 - (void)viewDidLoad {
@@ -316,6 +330,13 @@
             GHIssueTitleTableViewCell *cell = (GHIssueTitleTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
             if (!cell) {
                 cell = [[[GHIssueTitleTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
+                
+                if (_canUserAdministrateIssue) {
+                    UILongPressGestureRecognizer *recognizer = [[[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(titleTableViewCellLongPressRecognized:)] autorelease];
+                    recognizer.minimumPressDuration = 1.0;
+                    
+                    [cell addGestureRecognizer:recognizer];
+                }
             }
             
             cell.textLabel.text = self.issue.title;
