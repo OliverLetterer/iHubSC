@@ -24,6 +24,7 @@
 - (id)init {
     if ((self = [super initWithStyle:UITableViewStylePlain])) {
         // Custom initialization
+        self.pullToReleaseEnabled = YES;
     }
     return self;
 }
@@ -73,6 +74,7 @@
                                       self.segmentControl.userInteractionEnabled = YES;
                                       self.segmentControl.alpha = 1.0;
                                   }
+                                  [self dataSourceDidFinishLoadingNewData];
                               }];
     }
 }
@@ -107,6 +109,10 @@
 
 #pragma mark - target actions
 
+- (void)reloadTableViewDataSource {
+    [self loadDataBasedOnSegmentControl];
+}
+
 - (void)segmentControlValueChanged:(UISegmentedControl *)segmentControl {
     
     self.newsFeed = nil;
@@ -114,7 +120,11 @@
     self.segmentControl.userInteractionEnabled = NO;
     self.segmentControl.alpha = 0.5;
     
-    if (segmentControl.selectedSegmentIndex == 0) {
+    [self loadDataBasedOnSegmentControl];
+}
+
+- (void)loadDataBasedOnSegmentControl {
+    if (self.segmentControl.selectedSegmentIndex == 0) {
         // News Feed
         [GHNewsFeed privateNewsFeedForUserNamed:[GHSettingsHelper username] 
                                        password:[GHSettingsHelper password] 
@@ -128,8 +138,9 @@
                                       self.segmentControl.userInteractionEnabled = YES;
                                       self.segmentControl.alpha = 1.0;
                                   }
+                                  [self dataSourceDidFinishLoadingNewData];
                               }];
-    } else if (segmentControl.selectedSegmentIndex == 1) {
+    } else if (self.segmentControl.selectedSegmentIndex == 1) {
         // My Actions
         [GHNewsFeed usersNewsFeedForUserNamed:[GHSettingsHelper username] 
                                      password:[GHSettingsHelper password] 
@@ -143,10 +154,10 @@
                                     self.segmentControl.userInteractionEnabled = YES;
                                     self.segmentControl.alpha = 1.0;
                                 }
+                                [self dataSourceDidFinishLoadingNewData];
                             }];
     }
 }
-
 
 #pragma mark - Table view data source
 

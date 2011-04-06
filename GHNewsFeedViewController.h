@@ -24,4 +24,6 @@
 
 - (void)cacheHeightForTableView;
 
+- (void)loadDataBasedOnSegmentControl;
+
 @end

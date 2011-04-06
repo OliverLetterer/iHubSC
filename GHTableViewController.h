@@ -7,9 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PullToRefreshTableViewController.h"
 
-
-@interface GHTableViewController : UITableViewController {
+@interface GHTableViewController : PullToRefreshTableViewController {
 @private
     NSMutableDictionary *_cachedHeightsDictionary;
 }

@@ -62,6 +62,11 @@
 		A75057391343033200514A82 /* GHGlossBottomBorder.png in Resources */ = {isa = PBXBuildFile; fileRef = A75057351343033200514A82 /* GHGlossBottomBorder.png */; };
 		A750573E1343205000514A82 /* GHNewsFeed.m in Sources */ = {isa = PBXBuildFile; fileRef = A750573D1343205000514A82 /* GHNewsFeed.m */; };
 		A75057431343426300514A82 /* GHNewsFeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A75057421343426300514A82 /* GHNewsFeedViewController.m */; };
+		A765988D134CB5E100A3B30D /* EGORefreshTableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = A765988A134CB5E000A3B30D /* EGORefreshTableHeaderView.m */; };
+		A765988E134CB5E100A3B30D /* PullToRefreshTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A765988C134CB5E000A3B30D /* PullToRefreshTableViewController.m */; };
+		A765989A134CB63600A3B30D /* NSDate+Nibware.m in Sources */ = {isa = PBXBuildFile; fileRef = A7659899134CB63600A3B30D /* NSDate+Nibware.m */; };
+		A76598A7134CBD2500A3B30D /* PullToRefreshArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = A76598A5134CBD2400A3B30D /* PullToRefreshArrow.png */; };
+		A76598A8134CBD2500A3B30D /* PullToRefreshArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A76598A6134CBD2400A3B30D /* PullToRefreshArrow@2x.png */; };
 		A7BF13FC1342149C001AE50D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7BF13FB1342149C001AE50D /* UIKit.framework */; };
 		A7BF13FE1342149C001AE50D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7BF13FD1342149C001AE50D /* Foundation.framework */; };
 		A7BF14001342149C001AE50D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7BF13FF1342149C001AE50D /* CoreGraphics.framework */; };
@@ -210,6 +215,14 @@
 		A750573D1343205000514A82 /* GHNewsFeed.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHNewsFeed.m; sourceTree = "<group>"; };
 		A75057411343426300514A82 /* GHNewsFeedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHNewsFeedViewController.h; sourceTree = "<group>"; };
 		A75057421343426300514A82 /* GHNewsFeedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHNewsFeedViewController.m; sourceTree = "<group>"; };
+		A7659889134CB5DF00A3B30D /* EGORefreshTableHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EGORefreshTableHeaderView.h; sourceTree = "<group>"; };
+		A765988A134CB5E000A3B30D /* EGORefreshTableHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EGORefreshTableHeaderView.m; sourceTree = "<group>"; };
+		A765988B134CB5E000A3B30D /* PullToRefreshTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PullToRefreshTableViewController.h; sourceTree = "<group>"; };
+		A765988C134CB5E000A3B30D /* PullToRefreshTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PullToRefreshTableViewController.m; sourceTree = "<group>"; };
+		A7659898134CB63600A3B30D /* NSDate+Nibware.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Nibware.h"; sourceTree = "<group>"; };
+		A7659899134CB63600A3B30D /* NSDate+Nibware.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Nibware.m"; sourceTree = "<group>"; };
+		A76598A5134CBD2400A3B30D /* PullToRefreshArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PullToRefreshArrow.png; sourceTree = "<group>"; };
+		A76598A6134CBD2400A3B30D /* PullToRefreshArrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "PullToRefreshArrow@2x.png"; sourceTree = "<group>"; };
 		A7BF13F71342149C001AE50D /* iGithub.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iGithub.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A7BF13FB1342149C001AE50D /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		A7BF13FD1342149C001AE50D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -440,6 +453,8 @@
 		A7089518134A0C49000DD6CE /* Foundation Additions */ = {
 			isa = PBXGroup;
 			children = (
+				A7659898134CB63600A3B30D /* NSDate+Nibware.h */,
+				A7659899134CB63600A3B30D /* NSDate+Nibware.m */,
 				A7F62610134B764D006487CA /* UITableViewContoller+Additions */,
 				A703B941134754D40014235D /* UITableViewCell+Additions */,
 				A703B927134675D90014235D /* UIImage+Additions */,
@@ -649,6 +664,12 @@
 		A750573F1343422200514A82 /* UserInterface */ = {
 			isa = PBXGroup;
 			children = (
+				A76598A5134CBD2400A3B30D /* PullToRefreshArrow.png */,
+				A76598A6134CBD2400A3B30D /* PullToRefreshArrow@2x.png */,
+				A7659889134CB5DF00A3B30D /* EGORefreshTableHeaderView.h */,
+				A765988A134CB5E000A3B30D /* EGORefreshTableHeaderView.m */,
+				A765988B134CB5E000A3B30D /* PullToRefreshTableViewController.h */,
+				A765988C134CB5E000A3B30D /* PullToRefreshTableViewController.m */,
 				A7F62627134C45AE006487CA /* GHTableViewController */,
 				A75057401343424100514A82 /* GHNewsFeedViewController */,
 				A7BF1423134214E7001AE50D /* GHAuthenticationViewController */,
@@ -1074,6 +1095,8 @@
 				A7089526134A2F24000DD6CE /* UITableViewCellAccessoryDisclosureIndicator.PNG in Resources */,
 				A7089527134A2F24000DD6CE /* UITableViewCellAccessoryDisclosureIndicatorSelected@2x.PNG in Resources */,
 				A7089528134A2F24000DD6CE /* UITableViewCellAccessoryDisclosureIndicator@2x.PNG in Resources */,
+				A76598A7134CBD2500A3B30D /* PullToRefreshArrow.png in Resources */,
+				A76598A8134CBD2500A3B30D /* PullToRefreshArrow@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1156,6 +1179,9 @@
 				A7F62622134B88B8006487CA /* NSString+GithubAPIAdditions.m in Sources */,
 				A7F62626134B89E5006487CA /* NSDate+GithubAPIAdditions.m in Sources */,
 				A7F6262A134C45D5006487CA /* GHTableViewController.m in Sources */,
+				A765988D134CB5E100A3B30D /* EGORefreshTableHeaderView.m in Sources */,
+				A765988E134CB5E100A3B30D /* PullToRefreshTableViewController.m in Sources */,
+				A765989A134CB63600A3B30D /* NSDate+Nibware.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
