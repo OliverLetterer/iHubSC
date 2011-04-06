@@ -47,6 +47,35 @@
     
 }
 
++ (void)repositoriesForUserNamed:(NSString *)username 
+               completionHandler:(void (^)(NSArray *array, NSError *error))handler {
+    
+    dispatch_async(GHAPIBackgroundQueue(), ^(void) {
+        
+        NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://github.com/api/v2/json/repos/show/%@",
+                                           [username stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]
+                                           ]];
+        NSError *myError = nil;
+        
+        ASIHTTPRequest *request = [ASIHTTPRequest authenticatedFormDataRequestWithURL:URL];
+        [request startSynchronous];
+        
+        myError = [request error];
+        
+        NSString *jsonString = [request responseString];
+        
+        dispatch_async(dispatch_get_main_queue(), ^(void) {
+            if (myError) {
+                handler(nil, myError);
+            } else {
+                NSDictionary *reposDictionary = [jsonString objectFromJSONString];
+                NSLog(@"%@", reposDictionary);
+            }
+        });
+    });
+    
+}
+
 #pragma mark - Initialization
 
 - (id)initWithRawDictionary:(NSDictionary *)rawDictionary {

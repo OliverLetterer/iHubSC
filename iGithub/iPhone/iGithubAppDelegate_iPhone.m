@@ -12,7 +12,7 @@
 
 @implementation iGithubAppDelegate_iPhone
 
-@synthesize tabBarController=_tabBarController, newsFeedViewController=_newsFeedViewController;
+@synthesize tabBarController=_tabBarController, newsFeedViewController=_newsFeedViewController, repositoriesViewController=_repositoriesViewController;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // build userInterface here
@@ -33,6 +33,8 @@
     self.newsFeedViewController = [[[GHNewsFeedViewController alloc] init] autorelease];
     [tabBarItems addObject:[[[UINavigationController alloc] initWithRootViewController:self.newsFeedViewController] autorelease] ];
     
+    self.repositoriesViewController = [[[GHRepositoriesViewController alloc] init] autorelease];
+    [tabBarItems addObject:[[[UINavigationController alloc] initWithRootViewController:self.repositoriesViewController] autorelease] ];
     
     self.tabBarController.viewControllers = tabBarItems;
     
@@ -58,8 +60,8 @@
 
 #pragma mark - memory management
 
-- (void)dealloc
-{
+- (void)dealloc {
+    [_repositoriesViewController release];
     [_tabBarController release];
     [_newsFeedViewController release];
 	[super dealloc];

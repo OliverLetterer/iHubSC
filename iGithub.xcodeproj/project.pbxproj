@@ -72,6 +72,7 @@
 		A7BC677E134CCD1A0083F906 /* GHPrivateRepositoryIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A7BC677C134CCD1A0083F906 /* GHPrivateRepositoryIcon@2x.png */; };
 		A7BC677F134CCD1A0083F906 /* GHPrivateRepositoryIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = A7BC677D134CCD1A0083F906 /* GHPrivateRepositoryIcon.png */; };
 		A7BC6784134CCFF50083F906 /* ASIHTTPRequest+GithubAPIAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = A7BC6783134CCFF50083F906 /* ASIHTTPRequest+GithubAPIAdditions.m */; };
+		A7BC6787134CE7E00083F906 /* GHRepositoriesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7BC6786134CE7E00083F906 /* GHRepositoriesViewController.m */; };
 		A7BF13FC1342149C001AE50D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7BF13FB1342149C001AE50D /* UIKit.framework */; };
 		A7BF13FE1342149C001AE50D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7BF13FD1342149C001AE50D /* Foundation.framework */; };
 		A7BF14001342149C001AE50D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7BF13FF1342149C001AE50D /* CoreGraphics.framework */; };
@@ -234,6 +235,8 @@
 		A7BC677D134CCD1A0083F906 /* GHPrivateRepositoryIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GHPrivateRepositoryIcon.png; sourceTree = "<group>"; };
 		A7BC6782134CCFF50083F906 /* ASIHTTPRequest+GithubAPIAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ASIHTTPRequest+GithubAPIAdditions.h"; sourceTree = "<group>"; };
 		A7BC6783134CCFF50083F906 /* ASIHTTPRequest+GithubAPIAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ASIHTTPRequest+GithubAPIAdditions.m"; sourceTree = "<group>"; };
+		A7BC6785134CE7DF0083F906 /* GHRepositoriesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHRepositoriesViewController.h; sourceTree = "<group>"; };
+		A7BC6786134CE7E00083F906 /* GHRepositoriesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHRepositoriesViewController.m; sourceTree = "<group>"; };
 		A7BF13F71342149C001AE50D /* iGithub.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iGithub.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A7BF13FB1342149C001AE50D /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		A7BF13FD1342149C001AE50D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -567,7 +570,7 @@
 			name = GHGollumEventPayload;
 			sourceTree = "<group>";
 		};
-		A73E29B11348744300E85282 /* Foundation Additions */ = {
+		A73E29B11348744300E85282 /* Foundation & Class Additions */ = {
 			isa = PBXGroup;
 			children = (
 				A7BC6781134CCF890083F906 /* ASI-HTTP */,
@@ -575,7 +578,7 @@
 				A7F6261F134B8886006487CA /* NSString */,
 				A73E29B21348745800E85282 /* NSDictionary */,
 			);
-			name = "Foundation Additions";
+			name = "Foundation & Class Additions";
 			sourceTree = "<group>";
 		};
 		A73E29B21348745800E85282 /* NSDictionary */ = {
@@ -681,6 +684,8 @@
 				A75057401343424100514A82 /* GHNewsFeedViewController */,
 				A7BF1423134214E7001AE50D /* GHAuthenticationViewController */,
 				A73E29C31348E12C00E85282 /* GHViewIssueTableViewController */,
+				A7BC6785134CE7DF0083F906 /* GHRepositoriesViewController.h */,
+				A7BC6786134CE7E00083F906 /* GHRepositoriesViewController.m */,
 			);
 			name = UserInterface;
 			sourceTree = "<group>";
@@ -880,7 +885,7 @@
 			children = (
 				A708952D134A3D98000DD6CE /* GHIssueComment */,
 				A7089514134A0398000DD6CE /* GHAuthenticationManager */,
-				A73E29B11348744300E85282 /* Foundation Additions */,
+				A73E29B11348744300E85282 /* Foundation & Class Additions */,
 				A703B958134794D80014235D /* GHTarget */,
 				A7CE1B8813463A6100169F94 /* GHIssue.h */,
 				A7CE1B8913463A6600169F94 /* GHIssue.m */,
@@ -1220,6 +1225,7 @@
 				A765988E134CB5E100A3B30D /* PullToRefreshTableViewController.m in Sources */,
 				A765989A134CB63600A3B30D /* NSDate+Nibware.m in Sources */,
 				A7BC6784134CCFF50083F906 /* ASIHTTPRequest+GithubAPIAdditions.m in Sources */,
+				A7BC6787134CE7E00083F906 /* GHRepositoriesViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
