@@ -11,6 +11,8 @@
 
 @implementation GHTableViewController
 
+@synthesize cachedHeightsDictionary=_cachedHeightsDictionary;
+
 #pragma mark - setters and getters
 
 - (UITableViewCell *)dummyCell {
@@ -54,6 +56,7 @@
 - (id)initWithStyle:(UITableViewStyle)style {
     if ((self = [super initWithStyle:style])) {
         // Custom initialization
+        self.cachedHeightsDictionary = [NSMutableDictionary dictionary];
     }
     return self;
 }
@@ -61,7 +64,7 @@
 #pragma mark - Memory management
 
 - (void)dealloc {
-    
+    [_cachedHeightsDictionary release];
     [super dealloc];
 }
 
@@ -184,3 +187,22 @@
 }
 
 @end
+
+
+
+@implementation GHTableViewController (GHHeightCaching)
+
+- (void)cacheHeight:(CGFloat)height forRowAtIndexPath:(NSIndexPath *)indexPath {
+    [self.cachedHeightsDictionary setObject:[NSNumber numberWithFloat:height] forKey:indexPath];
+}
+
+- (CGFloat)cachedHeightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return [[self.cachedHeightsDictionary objectForKey:indexPath] floatValue];
+}
+
+- (BOOL)isHeightCachedForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return [self.cachedHeightsDictionary objectForKey:indexPath] != nil;
+}
+
+@end
+
