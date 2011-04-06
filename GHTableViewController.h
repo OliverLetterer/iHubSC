@@ -21,6 +21,8 @@
 - (UITableViewCell *)dummyCellWithText:(NSString *)text;
 - (CGFloat)heightForDescription:(NSString *)description;
 
+- (void)handleError:(NSError *)error;
+
 @end
 
 

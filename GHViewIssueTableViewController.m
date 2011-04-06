@@ -45,8 +45,10 @@
                                                break;
                                            }
                                        }
+                                       [self downloadIssueData];
+                                   } else {
+                                       [self handleError:error];
                                    }
-                                   [self downloadIssueData];
                                }];
     }
     return self;
@@ -66,13 +68,7 @@
                      _isDownloadingIssueData = NO;
                      [self.tableView reloadData];
                  } else {
-                     UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", @"") 
-                                                                      message:[error localizedDescription] 
-                                                                     delegate:nil 
-                                                            cancelButtonTitle:NSLocalizedString(@"OK", @"")
-                                                            otherButtonTitles:nil]
-                                           autorelease];
-                     [alert show];
+                     [self handleError:error];
                  }
              }];
 }
@@ -124,17 +120,11 @@
                             
                             [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:0 inSection:1] ] withRowAnimation:UITableViewRowAnimationNone];
                             
-                            if (comments) {
+                            if (!error) {
                                 self.comments = comments;
                                 [self showComments];
                             } else {
-                                UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", @"") 
-                                                                                 message:[error localizedDescription] 
-                                                                                delegate:nil 
-                                                                       cancelButtonTitle:NSLocalizedString(@"OK", @"")
-                                                                       otherButtonTitles:nil]
-                                                      autorelease];
-                                [alert show];
+                                [self handleError:error];
                             }
                         }];
 }
@@ -168,20 +158,24 @@
     [GHIssue postComment:self.textView.text forIssueOnRepository:self.repository 
               withNumber:self.number 
        completionHandler:^(GHIssueComment *comment, NSError *error) {
-           NSMutableArray *commentsArray = [[self.comments mutableCopy] autorelease];
-           [commentsArray addObject:comment];
-           self.comments = commentsArray;
-           
-           self.issue.comments = [NSNumber numberWithInt:[self.issue.comments intValue] + 1];
-           
-           [self.tableView beginUpdates];
-           
-           [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:[self.comments count]+1 inSection:1]] withRowAnimation:UITableViewScrollPositionBottom];
-           [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:[self.comments count] inSection:1]] withRowAnimation:UITableViewRowAnimationFade];
-           
-           [self.tableView endUpdates];
-           
-           self.textView.text = nil;
+           if (error) {
+               [self handleError:error];
+           } else {
+               NSMutableArray *commentsArray = [[self.comments mutableCopy] autorelease];
+               [commentsArray addObject:comment];
+               self.comments = commentsArray;
+               
+               self.issue.comments = [NSNumber numberWithInt:[self.issue.comments intValue] + 1];
+               
+               [self.tableView beginUpdates];
+               
+               [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:[self.comments count]+1 inSection:1]] withRowAnimation:UITableViewScrollPositionBottom];
+               [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:[self.comments count] inSection:1]] withRowAnimation:UITableViewRowAnimationFade];
+               
+               [self.tableView endUpdates];
+               
+               self.textView.text = nil;
+           }
        }];
 }
 

@@ -51,6 +51,12 @@
     return newSize.height < 21 ? 21 : newSize.height;
 }
 
+- (void)handleError:(NSError *)error {
+    if (error != nil) {
+        DLog(@"%@", error);
+    }
+}
+
 #pragma mark - Initialization
 
 - (id)initWithStyle:(UITableViewStyle)style {

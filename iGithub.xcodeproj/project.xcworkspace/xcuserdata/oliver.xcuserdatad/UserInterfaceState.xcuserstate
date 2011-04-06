@@ -14658,9 +14658,9 @@
     s = 0;
 }</string>
 		</dict>
-		<real>323790949.66593701</real>
-		<string>{7530, 1680}</string>
-		<string>{8423, 0}</string>
+		<real>323791255.34469402</real>
+		<string>{6015, 1482}</string>
+		<string>{7378, 0}</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -16663,19 +16663,19 @@
 			<array>
 				<dict>
 					<key>CF$UID</key>
-					<integer>98</integer>
+					<integer>950</integer>
 				</dict>
 				<dict>
 					<key>CF$UID</key>
-					<integer>99</integer>
+					<integer>952</integer>
 				</dict>
 				<dict>
 					<key>CF$UID</key>
-					<integer>100</integer>
+					<integer>951</integer>
 				</dict>
 				<dict>
 					<key>CF$UID</key>
-					<integer>101</integer>
+					<integer>953</integer>
 				</dict>
 			</array>
 			<key>NS.objects</key>
@@ -16698,9 +16698,9 @@
 				</dict>
 			</array>
 		</dict>
-		<real>323790099.12460202</real>
-		<string>{0, 821}</string>
-		<string>{316, 0}</string>
+		<real>323790998.91617602</real>
+		<string>{3, 852}</string>
+		<string>{578, 0}</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -17107,9 +17107,9 @@
 				</dict>
 			</array>
 		</dict>
-		<real>323790243.49540502</real>
-		<string>{3332, 1638}</string>
-		<string>{4616, 0}</string>
+		<real>323791162.82316899</real>
+		<string>{9855, 1839}</string>
+		<string>{11996, 7}</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -20182,23 +20182,23 @@
 			<array>
 				<dict>
 					<key>CF$UID</key>
-					<integer>98</integer>
+					<integer>949</integer>
 				</dict>
 				<dict>
 					<key>CF$UID</key>
-					<integer>99</integer>
+					<integer>950</integer>
 				</dict>
 				<dict>
 					<key>CF$UID</key>
-					<integer>100</integer>
+					<integer>951</integer>
 				</dict>
 				<dict>
 					<key>CF$UID</key>
-					<integer>959</integer>
+					<integer>952</integer>
 				</dict>
 				<dict>
 					<key>CF$UID</key>
-					<integer>101</integer>
+					<integer>953</integer>
 				</dict>
 			</array>
 			<key>NS.objects</key>
@@ -20225,8 +20225,6 @@
 				</dict>
 			</array>
 		</dict>
-		<real>323789967.83204502</real>
-		<string>{5288, 1102}</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -20238,25 +20236,27 @@
     c =     (
                 {
             l = DetailViewController;
-            r = "{5509, 24}";
+            r = "{5609, 24}";
             s = 1;
         },
                 {
             l = DetailViewController;
-            r = "{5560, 24}";
+            r = "{5660, 24}";
             s = 1;
         },
                 {
             l = "Nib name";
-            r = "{5610, 12}";
+            r = "{5710, 12}";
             s = 1;
         }
     );
-    r = "{0, 6390}";
+    r = "{0, 6490}";
     s = 0;
 }</string>
 		</dict>
-		<string>{1749, 0}</string>
+		<real>323791044.65739697</real>
+		<string>{976, 954}</string>
+		<string>{1611, 0}</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -23428,7 +23428,7 @@
 				</dict>
 				<dict>
 					<key>CF$UID</key>
-					<integer>1631</integer>
+					<integer>704</integer>
 				</dict>
 				<dict>
 					<key>CF$UID</key>
@@ -23468,7 +23468,7 @@
 				</dict>
 				<dict>
 					<key>CF$UID</key>
-					<integer>1633</integer>
+					<integer>1631</integer>
 				</dict>
 				<dict>
 					<key>CF$UID</key>
@@ -23508,7 +23508,7 @@
 				</dict>
 				<dict>
 					<key>CF$UID</key>
-					<integer>690</integer>
+					<integer>1633</integer>
 				</dict>
 				<dict>
 					<key>CF$UID</key>
@@ -23751,7 +23751,7 @@
 				<integer>63</integer>
 			</dict>
 			<key>NS.string</key>
-			<string>file://localhost/Users/oliver/Development/iGithub/GHNewsFeedViewController.m</string>
+			<string>file://localhost/Users/oliver/Development/iGithub/iGithub.xcodeproj/project.pbxproj</string>
 		</dict>
 		<dict>
 			<key>$class</key>
@@ -23777,7 +23777,7 @@
 				<integer>63</integer>
 			</dict>
 			<key>NS.string</key>
-			<string>file://localhost/Users/oliver/Development/iGithub/iGithub.xcodeproj/project.pbxproj</string>
+			<string>file://localhost/Users/oliver/Development/iGithub/GHTableViewController.h</string>
 		</dict>
 		<dict>
 			<key>$class</key>
@@ -24215,15 +24215,15 @@
 			<array>
 				<dict>
 					<key>CF$UID</key>
-					<integer>101</integer>
+					<integer>953</integer>
 				</dict>
 				<dict>
 					<key>CF$UID</key>
-					<integer>99</integer>
+					<integer>952</integer>
 				</dict>
 				<dict>
 					<key>CF$UID</key>
-					<integer>98</integer>
+					<integer>950</integer>
 				</dict>
 			</array>
 			<key>NS.objects</key>
@@ -24242,8 +24242,8 @@
 				</dict>
 			</array>
 		</dict>
-		<string>{19500, 1910}</string>
-		<real>323521583.078228</real>
+		<string>{1643, 1531}</string>
+		<real>323791257.91800201</real>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -27881,7 +27881,7 @@
 				<integer>1933</integer>
 			</dict>
 			<key>NS.time</key>
-			<real>323790819.08901298</real>
+			<real>323791236.37113702</real>
 		</dict>
 		<dict>
 			<key>$classes</key>
@@ -27892,7 +27892,7 @@
 			<key>$classname</key>
 			<string>NSDate</string>
 		</dict>
-		<string>Today at 15:53</string>
+		<string>Today at 16:00</string>
 		<integer>106</integer>
 		<string>iGithub</string>
 		<dict>
@@ -28331,7 +28331,7 @@
 				<integer>1971</integer>
 			</dict>
 		</dict>
-		<string>file://localhost/Users/oliver/Development/iGithub/GHViewIssueTableViewController.h</string>
+		<string>file://localhost/Users/oliver/Development/iGithub/GHNewsFeedViewController.m</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -28367,7 +28367,7 @@
 				<integer>1975</integer>
 			</dict>
 		</dict>
-		<string>file://localhost/Users/oliver/Development/iGithub/iGithub/TODO.txt</string>
+		<string>file://localhost/Users/oliver/Development/iGithub/GHTableViewController.m</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -28385,7 +28385,7 @@
 				<integer>1977</integer>
 			</dict>
 		</dict>
-		<string>file://localhost/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/System/Library/Frameworks/UIKit.framework/Headers/UIGestureRecognizer.h</string>
+		<string>file://localhost/Users/oliver/Development/iGithub/GHTableViewController.h</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -28403,7 +28403,7 @@
 				<integer>1979</integer>
 			</dict>
 		</dict>
-		<string>file://localhost/Users/oliver/Development/iGithub/iGithub/main.m</string>
+		<string>file://localhost/Users/oliver/Development/iGithub/GHViewIssueTableViewController.h</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -28421,7 +28421,7 @@
 				<integer>1981</integer>
 			</dict>
 		</dict>
-		<string>file://localhost/Users/oliver/Development/iGithub/GHIssueDescriptionTableViewCell.h</string>
+		<string>file://localhost/Users/oliver/Development/iGithub/iGithub/TODO.txt</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -28439,7 +28439,7 @@
 				<integer>1983</integer>
 			</dict>
 		</dict>
-		<string>file://localhost/Users/oliver/Development/iGithub/GHNewsFeedViewController.m</string>
+		<string>file://localhost/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/System/Library/Frameworks/UIKit.framework/Headers/UIGestureRecognizer.h</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -28457,7 +28457,7 @@
 				<integer>1985</integer>
 			</dict>
 		</dict>
-		<string>file://localhost/Users/oliver/Development/iGithub/GHFeedItemWithDescriptionTableViewCell.m</string>
+		<string>file://localhost/Users/oliver/Development/iGithub/iGithub/main.m</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -28475,7 +28475,7 @@
 				<integer>1987</integer>
 			</dict>
 		</dict>
-		<string>file://localhost/Users/oliver/Development/iGithub/GHTableViewController.h</string>
+		<string>file://localhost/Users/oliver/Development/iGithub/GHIssueDescriptionTableViewCell.h</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -28493,7 +28493,7 @@
 				<integer>1989</integer>
 			</dict>
 		</dict>
-		<string>file://localhost/Users/oliver/Development/iGithub/GHNewsFeedViewController.h</string>
+		<string>file://localhost/Users/oliver/Development/iGithub/GHFeedItemWithDescriptionTableViewCell.m</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -37900,7 +37900,7 @@
 				<integer>2494</integer>
 			</dict>
 		</dict>
-		<string>GHViewIssueTableViewController.m</string>
+		<string>GHNewsFeedViewController.m</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -37913,7 +37913,7 @@
 				<integer>2496</integer>
 			</dict>
 		</dict>
-		<string>GHViewIssueTableViewController</string>
+		<string>GHNewsFeedViewController</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -37989,7 +37989,7 @@
 				<integer>63</integer>
 			</dict>
 			<key>NS.string</key>
-			<string>file://localhost/Users/oliver/Development/iGithub/GHViewIssueTableViewController.m</string>
+			<string>file://localhost/Users/oliver/Development/iGithub/GHNewsFeedViewController.m</string>
 		</dict>
 		<dict>
 			<key>$class</key>
@@ -38001,19 +38001,15 @@
 			<array>
 				<dict>
 					<key>CF$UID</key>
-					<integer>949</integer>
-				</dict>
-				<dict>
-					<key>CF$UID</key>
 					<integer>950</integer>
 				</dict>
 				<dict>
 					<key>CF$UID</key>
-					<integer>951</integer>
+					<integer>952</integer>
 				</dict>
 				<dict>
 					<key>CF$UID</key>
-					<integer>952</integer>
+					<integer>951</integer>
 				</dict>
 				<dict>
 					<key>CF$UID</key>
@@ -38024,15 +38020,7 @@
 			<array>
 				<dict>
 					<key>CF$UID</key>
-					<integer>954</integer>
-				</dict>
-				<dict>
-					<key>CF$UID</key>
 					<integer>2507</integer>
-				</dict>
-				<dict>
-					<key>CF$UID</key>
-					<integer>31</integer>
 				</dict>
 				<dict>
 					<key>CF$UID</key>
@@ -38040,14 +38028,18 @@
 				</dict>
 				<dict>
 					<key>CF$UID</key>
+					<integer>31</integer>
+				</dict>
+				<dict>
+					<key>CF$UID</key>
 					<integer>2509</integer>
 				</dict>
 			</array>
 		</dict>
-		<real>323790949.66856003</real>
-		<string>{7530, 1680}</string>
-		<string>{8423, 0}</string>
-		<string>-titleTableViewCellLongPressRecognized:</string>
+		<real>323791257.918791</real>
+		<string>{9846, 1942}</string>
+		<string>{11996, 7}</string>
+		<string>-tableView:cellForRowAtIndexPath:</string>
 		<string>Xcode.IDEKit.EditorDocument.SourceCode</string>
 		<dict>
 			<key>$class</key>
@@ -38066,7 +38058,7 @@
 				<integer>2513</integer>
 			</dict>
 		</dict>
-		<string>file://localhost/Users/oliver/Development/iGithub/GHViewIssueTableViewController.m</string>
+		<string>file://localhost/Users/oliver/Development/iGithub/GHNewsFeedViewController.m</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -39552,7 +39544,7 @@
 		<string>IDESCMStatusFilteringEnabled</string>
 		<string>IDESelectedObjects</string>
 		<string>IDEExpandedItemsSet</string>
-		<string>{{0, 383}, {344, 702}}</string>
+		<string>{{0, 266}, {344, 702}}</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -39628,7 +39620,7 @@
 				</dict>
 				<dict>
 					<key>CF$UID</key>
-					<integer>2627</integer>
+					<integer>2628</integer>
 				</dict>
 				<dict>
 					<key>CF$UID</key>
@@ -39753,6 +39745,37 @@
 				</dict>
 				<dict>
 					<key>CF$UID</key>
+					<integer>2627</integer>
+				</dict>
+			</array>
+		</dict>
+		<string>GHViewIssueTableViewController</string>
+		<dict>
+			<key>$class</key>
+			<dict>
+				<key>CF$UID</key>
+				<integer>138</integer>
+			</dict>
+			<key>NS.objects</key>
+			<array>
+				<dict>
+					<key>CF$UID</key>
+					<integer>2620</integer>
+				</dict>
+				<dict>
+					<key>CF$UID</key>
+					<integer>1936</integer>
+				</dict>
+				<dict>
+					<key>CF$UID</key>
+					<integer>2500</integer>
+				</dict>
+				<dict>
+					<key>CF$UID</key>
+					<integer>2498</integer>
+				</dict>
+				<dict>
+					<key>CF$UID</key>
 					<integer>2496</integer>
 				</dict>
 			</array>
@@ -39783,38 +39806,7 @@
 				</dict>
 				<dict>
 					<key>CF$UID</key>
-					<integer>2628</integer>
-				</dict>
-			</array>
-		</dict>
-		<string>GHNewsFeedViewController</string>
-		<dict>
-			<key>$class</key>
-			<dict>
-				<key>CF$UID</key>
-				<integer>138</integer>
-			</dict>
-			<key>NS.objects</key>
-			<array>
-				<dict>
-					<key>CF$UID</key>
-					<integer>2620</integer>
-				</dict>
-				<dict>
-					<key>CF$UID</key>
-					<integer>1936</integer>
-				</dict>
-				<dict>
-					<key>CF$UID</key>
-					<integer>2500</integer>
-				</dict>
-				<dict>
-					<key>CF$UID</key>
-					<integer>2498</integer>
-				</dict>
-				<dict>
-					<key>CF$UID</key>
-					<integer>2628</integer>
+					<integer>2496</integer>
 				</dict>
 				<dict>
 					<key>CF$UID</key>
@@ -39885,7 +39877,7 @@
 				</dict>
 				<dict>
 					<key>CF$UID</key>
-					<integer>2628</integer>
+					<integer>2496</integer>
 				</dict>
 				<dict>
 					<key>CF$UID</key>
@@ -39919,7 +39911,7 @@
 				</dict>
 				<dict>
 					<key>CF$UID</key>
-					<integer>2628</integer>
+					<integer>2496</integer>
 				</dict>
 				<dict>
 					<key>CF$UID</key>
@@ -39958,7 +39950,7 @@
 				</dict>
 				<dict>
 					<key>CF$UID</key>
-					<integer>2628</integer>
+					<integer>2496</integer>
 				</dict>
 				<dict>
 					<key>CF$UID</key>
@@ -40612,7 +40604,7 @@
 		</dict>
 		<string>IDEUtilitiesArea</string>
 		<real>260</real>
-		<string>GHViewIssueTableViewController.m</string>
+		<string>GHNewsFeedViewController.m</string>
 		<dict>
 			<key>$class</key>
 			<dict>

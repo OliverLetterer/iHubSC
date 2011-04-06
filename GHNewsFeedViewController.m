@@ -64,11 +64,15 @@
         [GHNewsFeed privateNewsFeedForUserNamed:[GHSettingsHelper username] 
                                        password:[GHSettingsHelper password] 
                               completionHandler:^(GHNewsFeed *feed, NSError *error) {
-                                  self.newsFeed = feed;
-                                  [self cacheHeightForTableView];
-                                  [self.tableView reloadData];
-                                  self.segmentControl.userInteractionEnabled = YES;
-                                  self.segmentControl.alpha = 1.0;
+                                  if (error) {
+                                      [self handleError:error];
+                                  } else {
+                                      self.newsFeed = feed;
+                                      [self cacheHeightForTableView];
+                                      [self.tableView reloadData];
+                                      self.segmentControl.userInteractionEnabled = YES;
+                                      self.segmentControl.alpha = 1.0;
+                                  }
                               }];
     }
 }
@@ -115,22 +119,30 @@
         [GHNewsFeed privateNewsFeedForUserNamed:[GHSettingsHelper username] 
                                        password:[GHSettingsHelper password] 
                               completionHandler:^(GHNewsFeed *feed, NSError *error) {
-                                  self.newsFeed = feed;
-                                  [self cacheHeightForTableView];
-                                  [self.tableView reloadData];
-                                  self.segmentControl.userInteractionEnabled = YES;
-                                  self.segmentControl.alpha = 1.0;
+                                  if (error) {
+                                      [self handleError:error];
+                                  } else {
+                                      self.newsFeed = feed;
+                                      [self cacheHeightForTableView];
+                                      [self.tableView reloadData];
+                                      self.segmentControl.userInteractionEnabled = YES;
+                                      self.segmentControl.alpha = 1.0;
+                                  }
                               }];
     } else if (segmentControl.selectedSegmentIndex == 1) {
         // My Actions
         [GHNewsFeed usersNewsFeedForUserNamed:[GHSettingsHelper username] 
                                      password:[GHSettingsHelper password] 
                             completionHandler:^(GHNewsFeed *feed, NSError *error) {
-                                self.newsFeed = feed;
-                                [self cacheHeightForTableView];
-                                [self.tableView reloadData];
-                                self.segmentControl.userInteractionEnabled = YES;
-                                self.segmentControl.alpha = 1.0;
+                                if (error) {
+                                    [self handleError:error];
+                                } else {
+                                    self.newsFeed = feed;
+                                    [self cacheHeightForTableView];
+                                    [self.tableView reloadData];
+                                    self.segmentControl.userInteractionEnabled = YES;
+                                    self.segmentControl.alpha = 1.0;
+                                }
                             }];
     }
 }
@@ -187,8 +199,12 @@
                               password:[GHSettingsHelper password]
                  useDatabaseIfPossible:YES 
                      completionHandler:^(GHIssue *issue, NSError *error, BOOL didDownload) {
-                         [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] 
-                                               withRowAnimation:UITableViewRowAnimationNone];
+                         if (error) {
+                             [self handleError:error];
+                         } else {
+                             [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] 
+                                                   withRowAnimation:UITableViewRowAnimationNone];
+                         }
                      }];
         }
                 
@@ -266,8 +282,12 @@
         } else {
             [UIImage imageFromGravatarID:payload.target.gravatarID 
                    withCompletionHandler:^(UIImage *image, NSError *error, BOOL didDownload) {
-                       [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] 
-                                             withRowAnimation:UITableViewRowAnimationNone];
+                       if (error) {
+                           [self handleError:error];
+                       } else {
+                           [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] 
+                                                 withRowAnimation:UITableViewRowAnimationNone];
+                       }
                    }];
             
         }
