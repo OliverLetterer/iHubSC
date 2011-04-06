@@ -234,6 +234,8 @@
     [items addObject:item];
     
     self.textViewToolBar.items = items;
+    
+    self.tableView.scrollsToTop = YES;
 }
 
 - (void)viewDidUnload {
@@ -415,6 +417,7 @@
             
             self.textView = cell.textView;
             cell.textView.inputAccessoryView = self.textViewToolBar;
+            self.textView.scrollsToTop = NO;
             
             return cell;
         }
