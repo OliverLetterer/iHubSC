@@ -10,16 +10,22 @@
 
 
 @interface EGORefreshTableHeaderView : UIView {
-	UILabel *lastUpdatedLabel;
-	UILabel *statusLabel;
-	UIImageView *arrowImage;
-	UIActivityIndicatorView *activityView;
-	NSDate *lastUpdatedDate;
-	BOOL isFlipped;
+@private
+	UILabel *_lastUpdatedLabel;
+	UILabel *_statusLabel;
+	UIImageView *_arrowImage;
+	UIActivityIndicatorView *_activityView;
+	NSDate *_lastUpdatedDate;
+	BOOL _isFlipped;
 }
 
 @property(nonatomic,retain)NSDate *lastUpdatedDate;
 @property BOOL isFlipped;
+
+@property (nonatomic, retain) UILabel *lastUpdatedLabel;
+@property (nonatomic, retain) UILabel *statusLabel;
+@property (nonatomic, retain) UIImageView *arrowImage;
+@property (nonatomic, retain) UIActivityIndicatorView *activityView;
 
 - (void)flipImageAnimated:(BOOL)animated;
 - (void)toggleActivityView:(BOOL)isON;
