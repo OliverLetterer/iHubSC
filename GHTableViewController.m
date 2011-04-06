@@ -54,6 +54,14 @@
 - (void)handleError:(NSError *)error {
     if (error != nil) {
         DLog(@"%@", error);
+        
+        UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", @"") 
+                                                         message:[error localizedDescription] 
+                                                        delegate:nil 
+                                               cancelButtonTitle:NSLocalizedString(@"OK", @"") 
+                                               otherButtonTitles:nil]
+                              autorelease];
+        [alert show];
     }
 }
 
