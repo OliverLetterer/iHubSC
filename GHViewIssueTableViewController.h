@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GHTableViewController.h"
 
 @class GHIssue, GHNewsFeedItemTableViewCell, GHIssueComment;
 
-@interface GHViewIssueTableViewController : UITableViewController {
+@interface GHViewIssueTableViewController : GHTableViewController {
 @private
     GHIssue *_issue;
     
@@ -48,7 +49,5 @@
 
 - (void)toolbarCancelButtonClicked:(UIBarButtonItem *)barButton;
 - (void)toolbarDoneButtonClicked:(UIBarButtonItem *)barButton;
-
-@property (nonatomic, readonly) UITableViewCell *dummyCell;
 
 @end

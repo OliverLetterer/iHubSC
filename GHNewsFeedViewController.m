@@ -43,29 +43,6 @@
     // Release any cached data, images, etc that aren't in use.
 }
 
-#pragma mark - instance methods
-
-- (UITableViewCell *)dummyCellWithText:(NSString *)text {
-    NSString *CellIdentifier = @"DummyCell";
-    
-    UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
-    }
-    
-    cell.textLabel.text = text;
-    
-    return cell;
-}
-
-- (CGFloat)heightForGHFeedItemWithDescriptionTableViewCellForDescription:(NSString *)description {
-    CGSize newSize = [description sizeWithFont:[UIFont systemFontOfSize:12.0] 
-                                    constrainedToSize:CGSizeMake(222.0f, MAXFLOAT)
-                                        lineBreakMode:UILineBreakModeWordWrap];
-    
-    return newSize.height < 21 ? 21 : newSize.height;
-}
-
 #pragma mark - View lifecycle
 
 - (void)viewDidLoad {
@@ -543,7 +520,7 @@
             GHIssue *issue = [GHIssue issueFromDatabaseOnRepository:payload.repo withNumber:payload.number];
             
             NSString *description = issue.title;
-            height = [self heightForGHFeedItemWithDescriptionTableViewCellForDescription:description] + 20.0 + 30.0; // X + top offset of status label + 30 px white space on the bottom
+            height = [self heightForDescription:description] + 20.0 + 30.0; // X + top offset of status label + 30 px white space on the bottom
         } else {
             height = [GHFeedItemWithDescriptionTableViewCell height];
         }
@@ -603,13 +580,13 @@
         GHGistEventPayload *payload = (GHGistEventPayload *)item.payload;
         NSString *description = payload.descriptionGist ? payload.descriptionGist : payload.snippet;
         
-        height = [self heightForGHFeedItemWithDescriptionTableViewCellForDescription:description] + 20.0 + 5.0; // X + top offset of status label + 30 px white space on the bottom
+        height = [self heightForDescription:description] + 20.0 + 5.0; // X + top offset of status label + 30 px white space on the bottom
     } else if(item.payload.type == GHPayloadDownloadEvent) {
         minimumHeight = 78.0;
         // this is the height for an issue cell, we will display the whole issue
         GHDownloadEventPayload *payload = (GHDownloadEventPayload *)item.payload;
         NSString *description = [payload.URL lastPathComponent];
-        height = [self heightForGHFeedItemWithDescriptionTableViewCellForDescription:description] + 20.0 + 30.0; // X + top offset of status label + 30 px white space on the bottom
+        height = [self heightForDescription:description] + 20.0 + 30.0; // X + top offset of status label + 30 px white space on the bottom
     } else if(item.payload.type == GHPayloadPullRequestEvent) {
         minimumHeight = 78.0;
         // this is the height for an issue cell, we will display the whole issue
@@ -621,7 +598,7 @@
         
         NSString *description = [NSString stringWithFormat:NSLocalizedString(@"%@ with %@ and %@", @""), commitsString, additionsString, deletionsString];
         
-        height = [self heightForGHFeedItemWithDescriptionTableViewCellForDescription:description] + 20.0 + 5.0; // X + top offset of status label + 30 px white space on the bottom
+        height = [self heightForDescription:description] + 20.0 + 5.0; // X + top offset of status label + 30 px white space on the bottom
     } else if(item.payload.type == GHPayloadMemberEvent) {
         height = 71.0;
     } else {

@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GHTableViewController.h"
 
 @class GHNewsFeed, GHNewsFeedItemTableViewCell, GHNewsFeedItem;
 
-@interface GHNewsFeedViewController : UITableViewController {
+@interface GHNewsFeedViewController : GHTableViewController {
     UISegmentedControl *_segmentControl;
     GHNewsFeed *_newsFeed;
     NSDictionary *_issuesDictionary;
@@ -20,8 +21,5 @@
 @property (nonatomic, retain) GHNewsFeed *newsFeed;
 
 - (void)segmentControlValueChanged:(UISegmentedControl *)segmentControl;
-
-- (UITableViewCell *)dummyCellWithText:(NSString *)text;
-- (CGFloat)heightForGHFeedItemWithDescriptionTableViewCellForDescription:(NSString *)description;
 
 @end

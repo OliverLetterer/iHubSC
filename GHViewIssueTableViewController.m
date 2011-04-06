@@ -24,21 +24,6 @@
 @synthesize comments=_comments;
 @synthesize textView=_textView, textViewToolBar=_textViewToolBar;
 
-#pragma mark - setters and getters
-
-- (UITableViewCell *)dummyCell {
-    static NSString *CellIdentifier = @"DummyCell";
-    
-    UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
-    }
-    
-    // Configure the cell...
-    
-    return cell;
-}
-
 #pragma mark - Initialization
 
 - (id)initWithRepository:(NSString *)repository issueNumber:(NSNumber *)number {
@@ -205,8 +190,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.view.backgroundColor = [UIColor colorWithRed:245.0/255.0 green:245.0/255.0 blue:245.0/255.0 alpha:1.0];
-    
     self.textViewToolBar = [[[UIToolbar alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0, 44.0)] autorelease];
     self.textViewToolBar.barStyle = UIBarStyleBlackTranslucent;
     
@@ -234,8 +217,6 @@
     [items addObject:item];
     
     self.textViewToolBar.items = items;
-    
-    self.tableView.scrollsToTop = YES;
 }
 
 - (void)viewDidUnload {
