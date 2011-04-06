@@ -257,7 +257,73 @@
             }
         });
     });
+}
+
++ (void)closeIssueOnRepository:(NSString *)repository 
+                    withNumber:(NSNumber *)number 
+             completionHandler:(void (^)(NSError *error))handler {
+    
+    dispatch_async(GHAPIBackgroundQueue(), ^(void) {
+        
+        // https://github.com/api/v2/json/issues/close/:user/:repo/:number
+        
+        NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://github.com/api/v2/json/issues/close/%@/%@",
+                                           [repository stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
+                                           number]];
+        
+        NSError *myError = nil;
+        
+        ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:URL];
+        [request addRequestHeader:@"Authorization" 
+                            value:[NSString stringWithFormat:@"Basic %@",
+                                   [ASIHTTPRequest base64forData:[[NSString stringWithFormat:@"%@:%@",[GHAuthenticationManager sharedInstance].username, [GHAuthenticationManager sharedInstance].password] dataUsingEncoding:NSUTF8StringEncoding]]]];
+        [request startSynchronous];
+        
+        myError = [request error];
+        
+        dispatch_async(dispatch_get_main_queue(), ^(void) {
+            if (myError) {
+                handler(myError);
+            } else {
+                handler(nil);
+            }
+        });
+    });
     
 }
+
++ (void)reopenIssueOnRepository:(NSString *)repository 
+                     withNumber:(NSNumber *)number 
+              completionHandler:(void (^)(NSError *error))handler {
+    
+    dispatch_async(GHAPIBackgroundQueue(), ^(void) {
+        
+        // https://github.com/api/v2/json/issues/reopen/:user/:repo/:number
+        
+        NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://github.com/api/v2/json/issues/reopen/%@/%@",
+                                           [repository stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
+                                           number]];
+        
+        NSError *myError = nil;
+        
+        ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:URL];
+        [request addRequestHeader:@"Authorization" 
+                            value:[NSString stringWithFormat:@"Basic %@",
+                                   [ASIHTTPRequest base64forData:[[NSString stringWithFormat:@"%@:%@",[GHAuthenticationManager sharedInstance].username, [GHAuthenticationManager sharedInstance].password] dataUsingEncoding:NSUTF8StringEncoding]]]];
+        [request startSynchronous];
+        
+        myError = [request error];
+        
+        dispatch_async(dispatch_get_main_queue(), ^(void) {
+            if (myError) {
+                handler(myError);
+            } else {
+                handler(nil);
+            }
+        });
+    });
+    
+}
+
 
 @end

@@ -19,14 +19,15 @@
     NSNumber *_number;
     
     BOOL _isDownloadingIssueData;
+    
     BOOL _canUserAdministrateIssue;
+    BOOL _isShowingAdministration;
     
     NSArray *_comments;
     BOOL _isShowingComments;
     BOOL _isDownloadingComments;
     
     UITextView *_textView;
-    
     UIToolbar *_textViewToolBar;
 }
 
@@ -46,6 +47,9 @@
 - (void)showComments;
 - (void)hideComments;
 - (void)downloadComments;
+
+- (void)showAdministration;
+- (void)hideAdministration;
 
 - (void)toolbarCancelButtonClicked:(UIBarButtonItem *)barButton;
 - (void)toolbarDoneButtonClicked:(UIBarButtonItem *)barButton;

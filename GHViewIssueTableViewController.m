@@ -73,6 +73,26 @@
              }];
 }
 
+- (void)downloadComments {
+    _isDownloadingComments = YES;
+    [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:0 inSection:1] ] withRowAnimation:UITableViewRowAnimationNone];
+    
+    [GHIssue commentsForIssueOnRepository:self.repository 
+                               withNumber:self.number 
+                        completionHandler:^(NSArray *comments, NSError *error) {
+                            _isDownloadingComments = NO;
+                            
+                            [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:0 inSection:1] ] withRowAnimation:UITableViewRowAnimationNone];
+                            
+                            if (!error) {
+                                self.comments = comments;
+                                [self showComments];
+                            } else {
+                                [self handleError:error];
+                            }
+                        }];
+}
+
 - (void)showComments {
     _isShowingComments = YES;
     [self.tableView beginUpdates];
@@ -109,24 +129,34 @@
     [self.tableView endUpdates];
 }
 
-- (void)downloadComments {
-    _isDownloadingComments = YES;
-    [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:0 inSection:1] ] withRowAnimation:UITableViewRowAnimationNone];
+- (void)showAdministration {
+    _isShowingAdministration = YES;
     
-    [GHIssue commentsForIssueOnRepository:self.repository 
-                               withNumber:self.number 
-                        completionHandler:^(NSArray *comments, NSError *error) {
-                            _isDownloadingComments = NO;
-                            
-                            [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:0 inSection:1] ] withRowAnimation:UITableViewRowAnimationNone];
-                            
-                            if (!error) {
-                                self.comments = comments;
-                                [self showComments];
-                            } else {
-                                [self handleError:error];
-                            }
-                        }];
+    [self.tableView beginUpdates];
+    
+    [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:1 inSection:2] ] 
+                          withRowAnimation:UITableViewRowAnimationTop];
+    [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:0 inSection:2] ] 
+                          withRowAnimation:UITableViewRowAnimationNone];
+    
+    [self.tableView endUpdates];
+    
+    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:2] 
+                          atScrollPosition:UITableViewScrollPositionTop 
+                                  animated:YES];
+}
+
+- (void)hideAdministration {
+    _isShowingAdministration = NO;
+    
+    [self.tableView beginUpdates];
+    
+    [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:1 inSection:2] ] 
+                          withRowAnimation:UITableViewRowAnimationTop];
+    [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:0 inSection:2] ] 
+                          withRowAnimation:UITableViewRowAnimationNone];
+    
+    [self.tableView endUpdates];
 }
 
 #pragma mark - Memory management
@@ -266,7 +296,12 @@
         // section
         //  0: the issue itself
         //  1: comments
+        //  2: administrate
         result = 2;
+        
+        if (_canUserAdministrateIssue) {
+            result++;
+        }
     }
     
     return result;
@@ -291,6 +326,14 @@
             result = 1;
             if (_isShowingComments) {
                 result += [self.issue.comments intValue] + 1;
+            }
+        } else if (section == 2) {
+            // first will be administrate
+            result = 1;
+            
+            if (_isShowingAdministration) {
+                // open / close
+                result++;
             }
         }
     }
@@ -417,6 +460,46 @@
             
             return cell;
         }
+    } else if (indexPath.section == 2) {
+        // administrate
+        if (indexPath.row == 0) {
+            // Administrate cell
+            NSString *CellIdentifier = @"UICollapsingAndSpinningTableViewCell";
+            
+            UICollapsingAndSpinningTableViewCell *cell = (UICollapsingAndSpinningTableViewCell *)[self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+            if (cell == nil) {
+                cell = [[[UICollapsingAndSpinningTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+            }
+            
+            // Configure the cell...
+            cell.textLabel.text = NSLocalizedString(@"Administrate", @"");
+            [cell setSpinning:NO];
+            
+            if (!_isShowingAdministration) {
+                cell.accessoryView.transform = CGAffineTransformMakeRotation(M_PI);
+            } else {
+                cell.accessoryView.transform = CGAffineTransformIdentity;
+            }
+            
+            return cell;
+        } else if (indexPath.row == 1) {
+            // open/ close
+            
+            NSString *CellIdentifier = @"UITableViewCellWithLinearGradientBackgroundView";
+            
+            UITableViewCellWithLinearGradientBackgroundView *cell = (UITableViewCellWithLinearGradientBackgroundView *)[self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+            if (cell == nil) {
+                cell = [[[UITableViewCellWithLinearGradientBackgroundView alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+            }
+            
+            if ([self.issue.state isEqualToString:@"open"]) {
+                cell.textLabel.text = NSLocalizedString(@"Close this Issue", @"");
+            } else {
+                cell.textLabel.text = NSLocalizedString(@"Reopen this Issue", @"");
+            }
+            
+            return cell;
+        }
     }
     
     return self.dummyCell;
@@ -533,6 +616,40 @@
                 } else {
                     [self showComments];
                 }
+            }
+        }
+    } else if (indexPath.section == 2) {
+        if (indexPath.row == 0) {
+            if (_isShowingAdministration) {
+                [self hideAdministration];
+            } else {
+                [self showAdministration];
+            }
+        } else if (indexPath.row == 1) {
+            if ([self.issue.state isEqualToString:@"open"]) {
+                [GHIssue closeIssueOnRepository:self.repository 
+                                     withNumber:self.number 
+                              completionHandler:^(NSError *error) {
+                                  if (error) {
+                                      [self handleError:error];
+                                  } else {
+                                      self.issue.state = @"closed";
+                                      [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:1 inSection:2]] 
+                                                            withRowAnimation:UITableViewRowAnimationFade];
+                                  }
+                              }];
+            } else {
+                [GHIssue reopenIssueOnRepository:self.repository 
+                                      withNumber:self.number 
+                               completionHandler:^(NSError *error) {
+                                   if (error) {
+                                       [self handleError:error];
+                                   } else {
+                                       self.issue.state = @"open";
+                                       [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:1 inSection:2]] 
+                                                             withRowAnimation:UITableViewRowAnimationFade];
+                                   }
+                               }];
             }
         }
     }

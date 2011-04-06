@@ -23,6 +23,7 @@
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
     }
     
+    cell.textLabel.text = @"__DUMMY__";
     // Configure the cell...
     
     return cell;
