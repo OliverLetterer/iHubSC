@@ -35,12 +35,7 @@
 - (void)layoutSubviews {
     [super layoutSubviews];
     
-    CGSize size = [self.descriptionLabel.text sizeWithFont:self.descriptionLabel.font 
-                                         constrainedToSize:CGSizeMake(222.0, MAXFLOAT) 
-                                             lineBreakMode:UILineBreakModeWordWrap];
-    CGRect frame = self.descriptionLabel.frame;
-    frame.size = size;
-    self.descriptionLabel.frame = frame;
+    self.descriptionLabel.frame = CGRectMake(78.0, 15.0, 222.0, self.contentView.bounds.size.height - 50.0);
 }
 
 - (void)prepareForReuse {

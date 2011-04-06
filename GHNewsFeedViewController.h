@@ -22,4 +22,6 @@
 
 - (void)segmentControlValueChanged:(UISegmentedControl *)segmentControl;
 
+- (void)cacheHeightForTableView;
+
 @end

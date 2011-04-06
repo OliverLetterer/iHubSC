@@ -14,7 +14,7 @@
     NSMutableDictionary *_cachedHeightsDictionary;
 }
 
-@property (nonatomic, copy) NSMutableDictionary *cachedHeightsDictionary;
+@property (nonatomic, retain) NSMutableDictionary *cachedHeightsDictionary;
 
 @property (nonatomic, readonly) UITableViewCell *dummyCell;
 
