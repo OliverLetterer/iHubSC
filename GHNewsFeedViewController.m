@@ -25,6 +25,7 @@
     if ((self = [super initWithStyle:UITableViewStylePlain])) {
         // Custom initialization
         self.pullToReleaseEnabled = YES;
+        self.title = NSLocalizedString(@"News", @"");
     }
     return self;
 }
