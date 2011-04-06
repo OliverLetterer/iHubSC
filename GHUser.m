@@ -27,12 +27,15 @@
 + (void)userWithName:(NSString *)username completionHandler:(void(^)(GHUser *user, NSError *error))handler {
     dispatch_async(GHAPIBackgroundQueue(), ^(void) {
         NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://github.com/api/v2/json/user/show/%@", [username stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]];
-        NSURLRequest *request = [NSURLRequest requestWithURL:URL];
+        
         NSError *myError = nil;
         
-        NSData *userData = [NSURLConnection sendSynchronousRequest:request 
-                                                 returningResponse:NULL 
-                                                             error:&myError];
+        ASIHTTPRequest *request = [ASIHTTPRequest authenticatedFormDataRequestWithURL:URL];
+        [request startSynchronous];
+        
+        myError = [request error];
+        
+        NSData *userData = [request responseData];
         NSString *userString = [[[NSString alloc] initWithData:userData encoding:NSUTF8StringEncoding] autorelease];
         
         dispatch_async(dispatch_get_main_queue(), ^(void) {
@@ -65,8 +68,7 @@
         NSError *myError = nil;
         
         ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:URL];
-        [request addRequestHeader:@"Authorization" 
-                            value:[NSString stringWithFormat:@"Basic %@",[ASIHTTPRequest base64forData:[[NSString stringWithFormat:@"%@:%@",username,password] dataUsingEncoding:NSUTF8StringEncoding]]]];
+        [request addBasicAuthenticationHeaderWithUsername:username andPassword:password];
         [request startSynchronous];
         
         myError = [request error];

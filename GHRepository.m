@@ -17,8 +17,6 @@
 #pragma mark - class methods
 
 + (void)collaboratorsForRepository:(NSString *)repository 
-                          username:(NSString *)username 
-                          password:(NSString *)password 
                  completionHandler:(void (^)(NSArray *, NSError *))handler {
     
     dispatch_async(GHAPIBackgroundQueue(), ^(void) {
@@ -28,9 +26,7 @@
                                            ]];
         NSError *myError = nil;
         
-        ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:URL];
-        [request addRequestHeader:@"Authorization" 
-                            value:[NSString stringWithFormat:@"Basic %@",[ASIHTTPRequest base64forData:[[NSString stringWithFormat:@"%@:%@",username,password] dataUsingEncoding:NSUTF8StringEncoding]]]];
+        ASIHTTPRequest *request = [ASIHTTPRequest authenticatedFormDataRequestWithURL:URL];
         [request startSynchronous];
         
         myError = [request error];

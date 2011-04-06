@@ -117,8 +117,6 @@
 
 + (void)issueOnRepository:(NSString *)repository 
                withNumber:(NSNumber *)number 
-            loginUsername:(NSString *)loginUsername 
-                 password:(NSString *)password 
     useDatabaseIfPossible:(BOOL)useDatabase
         completionHandler:(void (^)(GHIssue *issue, NSError *error, BOOL didDownload))handler {
     
@@ -140,9 +138,7 @@
         
         NSError *myError = nil;
         
-        ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:URL];
-        [request addRequestHeader:@"Authorization" 
-                            value:[NSString stringWithFormat:@"Basic %@",[ASIHTTPRequest base64forData:[[NSString stringWithFormat:@"%@:%@",loginUsername,password] dataUsingEncoding:NSUTF8StringEncoding]]]];
+        ASIHTTPRequest *request = [ASIHTTPRequest authenticatedFormDataRequestWithURL:URL];
         [request startSynchronous];
         
         myError = [request error];
@@ -185,10 +181,7 @@
         
         NSError *myError = nil;
         
-        ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:URL];
-        [request addRequestHeader:@"Authorization" 
-                            value:[NSString stringWithFormat:@"Basic %@",
-                                   [ASIHTTPRequest base64forData:[[NSString stringWithFormat:@"%@:%@",[GHAuthenticationManager sharedInstance].username, [GHAuthenticationManager sharedInstance].password] dataUsingEncoding:NSUTF8StringEncoding]]]];
+        ASIHTTPRequest *request = [ASIHTTPRequest authenticatedFormDataRequestWithURL:URL];
         [request startSynchronous];
         
         myError = [request error];
@@ -232,10 +225,7 @@
         
         NSError *myError = nil;
         
-        ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:URL];
-        [request addRequestHeader:@"Authorization" 
-                            value:[NSString stringWithFormat:@"Basic %@",
-                                   [ASIHTTPRequest base64forData:[[NSString stringWithFormat:@"%@:%@",[GHAuthenticationManager sharedInstance].username, [GHAuthenticationManager sharedInstance].password] dataUsingEncoding:NSUTF8StringEncoding]]]];
+        ASIFormDataRequest *request = [ASIFormDataRequest authenticatedFormDataRequestWithURL:URL];
         [request setPostValue:comment forKey:@"comment"];
         [request startSynchronous];
         
@@ -273,10 +263,7 @@
         
         NSError *myError = nil;
         
-        ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:URL];
-        [request addRequestHeader:@"Authorization" 
-                            value:[NSString stringWithFormat:@"Basic %@",
-                                   [ASIHTTPRequest base64forData:[[NSString stringWithFormat:@"%@:%@",[GHAuthenticationManager sharedInstance].username, [GHAuthenticationManager sharedInstance].password] dataUsingEncoding:NSUTF8StringEncoding]]]];
+        ASIFormDataRequest *request = [ASIFormDataRequest authenticatedFormDataRequestWithURL:URL];
         [request startSynchronous];
         
         myError = [request error];
@@ -306,10 +293,7 @@
         
         NSError *myError = nil;
         
-        ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:URL];
-        [request addRequestHeader:@"Authorization" 
-                            value:[NSString stringWithFormat:@"Basic %@",
-                                   [ASIHTTPRequest base64forData:[[NSString stringWithFormat:@"%@:%@",[GHAuthenticationManager sharedInstance].username, [GHAuthenticationManager sharedInstance].password] dataUsingEncoding:NSUTF8StringEncoding]]]];
+        ASIFormDataRequest *request = [ASIFormDataRequest authenticatedFormDataRequestWithURL:URL];
         [request startSynchronous];
         
         myError = [request error];

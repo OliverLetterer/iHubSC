@@ -16,21 +16,17 @@
 
 #pragma mark - Initialization
 
-+ (void)privateNewsFeedForUserNamed:(NSString *)username 
-                           password:(NSString *)password 
-                  completionHandler:(void(^)(GHNewsFeed *feed, NSError *error))handler {
++ (void)privateNewsWithCompletionHandler:(void(^)(GHNewsFeed *feed, NSError *error))handler {
     
     // use URL https://github.com/docmorelli.private.json
     
     dispatch_async(GHAPIBackgroundQueue(), ^(void) {
         
         NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://github.com/%@.private.json",
-                                           [username stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]];
+                                           [[GHAuthenticationManager sharedInstance].username stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]];
         NSError *myError = nil;
         
-        ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:URL];
-        [request addRequestHeader:@"Authorization" 
-                            value:[NSString stringWithFormat:@"Basic %@",[ASIHTTPRequest base64forData:[[NSString stringWithFormat:@"%@:%@",username,password] dataUsingEncoding:NSUTF8StringEncoding]]]];
+        ASIHTTPRequest *request = [ASIHTTPRequest authenticatedFormDataRequestWithURL:URL];
         [request startSynchronous];
         
         myError = [request error];
@@ -49,9 +45,8 @@
     });
 }
 
-+ (void)usersNewsFeedForUserNamed:(NSString *)username 
-                         password:(NSString *)password 
-                completionHandler:(void(^)(GHNewsFeed *feed, NSError *error))handler {
++ (void)newsFeedForUserNamed:(NSString *)username 
+           completionHandler:(void(^)(GHNewsFeed *feed, NSError *error))handler {
     
     // use URL https://github.com/docmorelli.json
     
@@ -61,9 +56,7 @@
                                            [username stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]];
         NSError *myError = nil;
         
-        ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:URL];
-        [request addRequestHeader:@"Authorization" 
-                            value:[NSString stringWithFormat:@"Basic %@",[ASIHTTPRequest base64forData:[[NSString stringWithFormat:@"%@:%@",username,password] dataUsingEncoding:NSUTF8StringEncoding]]]];
+        ASIHTTPRequest *request = [ASIHTTPRequest authenticatedFormDataRequestWithURL:URL];
         [request startSynchronous];
         
         myError = [request error];

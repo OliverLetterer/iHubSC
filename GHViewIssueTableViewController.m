@@ -34,8 +34,6 @@
         self.title = [NSString stringWithFormat:NSLocalizedString(@"Issue %@", @""), self.number];
         _isDownloadingIssueData = YES;
         [GHRepository collaboratorsForRepository:self.repository 
-                                        username:[GHSettingsHelper username] 
-                                        password:[GHSettingsHelper password] 
                                completionHandler:^(NSArray *collaborators, NSError *error) {
                                    if (!error) {
                                        NSString *myUsername = [GHSettingsHelper username];
@@ -59,8 +57,6 @@
 - (void)downloadIssueData {
     [GHIssue issueOnRepository:self.repository 
                     withNumber:self.number 
-                 loginUsername:[GHSettingsHelper username] 
-                      password:[GHSettingsHelper password]
          useDatabaseIfPossible:NO 
              completionHandler:^(GHIssue *issue, NSError *error, BOOL didDownload) {
                  if (!error) {
@@ -105,7 +101,7 @@
     }
     [newArray addObject:[NSIndexPath indexPathForRow:[self.issue.comments intValue]+1 inSection:1]];
     
-    [self.tableView insertRowsAtIndexPaths:newArray withRowAnimation:UITableViewRowAnimationBottom];
+    [self.tableView insertRowsAtIndexPaths:newArray withRowAnimation:UITableViewRowAnimationTop];
     
     [self.tableView endUpdates];
     

@@ -62,20 +62,18 @@
     [self.segmentControl addTarget:self action:@selector(segmentControlValueChanged:) forControlEvents:UIControlEventValueChanged];
     
     if ([GHSettingsHelper isUserAuthenticated]) {
-        [GHNewsFeed privateNewsFeedForUserNamed:[GHSettingsHelper username] 
-                                       password:[GHSettingsHelper password] 
-                              completionHandler:^(GHNewsFeed *feed, NSError *error) {
-                                  if (error) {
-                                      [self handleError:error];
-                                  } else {
-                                      self.newsFeed = feed;
-                                      [self cacheHeightForTableView];
-                                      [self.tableView reloadData];
-                                      self.segmentControl.userInteractionEnabled = YES;
-                                      self.segmentControl.alpha = 1.0;
-                                  }
-                                  [self dataSourceDidFinishLoadingNewData];
-                              }];
+        [GHNewsFeed privateNewsWithCompletionHandler:^(GHNewsFeed *feed, NSError *error) {
+            if (error) {
+                [self handleError:error];
+            } else {
+                self.newsFeed = feed;
+                [self cacheHeightForTableView];
+                [self.tableView reloadData];
+                self.segmentControl.userInteractionEnabled = YES;
+                self.segmentControl.alpha = 1.0;
+            }
+            [self dataSourceDidFinishLoadingNewData];
+        }];
     }
 }
 
@@ -126,36 +124,33 @@
 - (void)loadDataBasedOnSegmentControl {
     if (self.segmentControl.selectedSegmentIndex == 0) {
         // News Feed
-        [GHNewsFeed privateNewsFeedForUserNamed:[GHSettingsHelper username] 
-                                       password:[GHSettingsHelper password] 
-                              completionHandler:^(GHNewsFeed *feed, NSError *error) {
-                                  if (error) {
-                                      [self handleError:error];
-                                  } else {
-                                      self.newsFeed = feed;
-                                      [self cacheHeightForTableView];
-                                      [self.tableView reloadData];
-                                      self.segmentControl.userInteractionEnabled = YES;
-                                      self.segmentControl.alpha = 1.0;
-                                  }
-                                  [self dataSourceDidFinishLoadingNewData];
-                              }];
+        [GHNewsFeed privateNewsWithCompletionHandler:^(GHNewsFeed *feed, NSError *error) {
+            if (error) {
+                [self handleError:error];
+            } else {
+                self.newsFeed = feed;
+                [self cacheHeightForTableView];
+                [self.tableView reloadData];
+                self.segmentControl.userInteractionEnabled = YES;
+                self.segmentControl.alpha = 1.0;
+            }
+            [self dataSourceDidFinishLoadingNewData];
+        }];
     } else if (self.segmentControl.selectedSegmentIndex == 1) {
         // My Actions
-        [GHNewsFeed usersNewsFeedForUserNamed:[GHSettingsHelper username] 
-                                     password:[GHSettingsHelper password] 
-                            completionHandler:^(GHNewsFeed *feed, NSError *error) {
-                                if (error) {
-                                    [self handleError:error];
-                                } else {
-                                    self.newsFeed = feed;
-                                    [self cacheHeightForTableView];
-                                    [self.tableView reloadData];
-                                    self.segmentControl.userInteractionEnabled = YES;
-                                    self.segmentControl.alpha = 1.0;
-                                }
-                                [self dataSourceDidFinishLoadingNewData];
-                            }];
+        [GHNewsFeed newsFeedForUserNamed:[GHSettingsHelper username] 
+                       completionHandler:^(GHNewsFeed *feed, NSError *error) {
+                           if (error) {
+                               [self handleError:error];
+                           } else {
+                               self.newsFeed = feed;
+                               [self cacheHeightForTableView];
+                               [self.tableView reloadData];
+                               self.segmentControl.userInteractionEnabled = YES;
+                               self.segmentControl.alpha = 1.0;
+                           }
+                           [self dataSourceDidFinishLoadingNewData];
+                       }];
     }
 }
 
@@ -206,8 +201,6 @@
         } else {
             [GHIssue issueOnRepository:payload.repo 
                             withNumber:payload.number 
-                         loginUsername:[GHSettingsHelper username] 
-                              password:[GHSettingsHelper password]
                  useDatabaseIfPossible:YES 
                      completionHandler:^(GHIssue *issue, NSError *error, BOOL didDownload) {
                          if (error) {

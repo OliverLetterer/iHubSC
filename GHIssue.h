@@ -36,8 +36,6 @@
 
 + (void)issueOnRepository:(NSString *)repository 
                withNumber:(NSNumber *)number 
-            loginUsername:(NSString *)loginUsername 
-                 password:(NSString *)password 
     useDatabaseIfPossible:(BOOL)useDatabase
         completionHandler:(void (^)(GHIssue *issue, NSError *error, BOOL didDownload))handler;
 

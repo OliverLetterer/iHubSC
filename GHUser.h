@@ -61,9 +61,10 @@
 
 @property (nonatomic, readonly) BOOL isAuthenticated;
 
-+ (void)userWithName:(NSString *)username completionHandler:(void(^)(GHUser *user, NSError *error))handler;
 + (GHUser *)userFromRawUserDictionary:(NSDictionary *)rawDictionary;
 - (id)initWithRawUserDictionary:(NSDictionary *)rawDictionary;
+
++ (void)userWithName:(NSString *)username completionHandler:(void(^)(GHUser *user, NSError *error))handler;
 
 + (void)authenticatedUserWithUsername:(NSString *)username password:(NSString *)password completionHandler:(void(^)(GHUser *user, NSError *error))handler;
 

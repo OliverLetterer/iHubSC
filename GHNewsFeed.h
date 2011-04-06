@@ -13,13 +13,10 @@
     NSArray *_items;
 }
 
-+ (void)privateNewsFeedForUserNamed:(NSString *)username 
-                           password:(NSString *)password 
-                  completionHandler:(void(^)(GHNewsFeed *feed, NSError *error))handler;
++ (void)privateNewsWithCompletionHandler:(void(^)(GHNewsFeed *feed, NSError *error))handler;
 
-+ (void)usersNewsFeedForUserNamed:(NSString *)username 
-                         password:(NSString *)password 
-                completionHandler:(void(^)(GHNewsFeed *feed, NSError *error))handler;
++ (void)newsFeedForUserNamed:(NSString *)username 
+           completionHandler:(void(^)(GHNewsFeed *feed, NSError *error))handler;
 
 @property (nonatomic, retain) NSArray *items; // contains GHNewsFeedItem's
 

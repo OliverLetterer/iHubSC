@@ -71,6 +71,7 @@
 		A7BC677A134CCAF00083F906 /* GHPublicRepositoryIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A7BC6778134CCAF00083F906 /* GHPublicRepositoryIcon@2x.png */; };
 		A7BC677E134CCD1A0083F906 /* GHPrivateRepositoryIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A7BC677C134CCD1A0083F906 /* GHPrivateRepositoryIcon@2x.png */; };
 		A7BC677F134CCD1A0083F906 /* GHPrivateRepositoryIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = A7BC677D134CCD1A0083F906 /* GHPrivateRepositoryIcon.png */; };
+		A7BC6784134CCFF50083F906 /* ASIHTTPRequest+GithubAPIAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = A7BC6783134CCFF50083F906 /* ASIHTTPRequest+GithubAPIAdditions.m */; };
 		A7BF13FC1342149C001AE50D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7BF13FB1342149C001AE50D /* UIKit.framework */; };
 		A7BF13FE1342149C001AE50D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7BF13FD1342149C001AE50D /* Foundation.framework */; };
 		A7BF14001342149C001AE50D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7BF13FF1342149C001AE50D /* CoreGraphics.framework */; };
@@ -225,12 +226,14 @@
 		A765988C134CB5E000A3B30D /* PullToRefreshTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PullToRefreshTableViewController.m; sourceTree = "<group>"; };
 		A7659898134CB63600A3B30D /* NSDate+Nibware.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Nibware.h"; sourceTree = "<group>"; };
 		A7659899134CB63600A3B30D /* NSDate+Nibware.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Nibware.m"; sourceTree = "<group>"; };
-		A76598A5134CBD2400A3B30D /* PullToRefreshArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PullToRefreshArrow.png; sourceTree = "<group>"; };
-		A76598A6134CBD2400A3B30D /* PullToRefreshArrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "PullToRefreshArrow@2x.png"; sourceTree = "<group>"; };
+		A76598A5134CBD2400A3B30D /* PullToRefreshArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = PullToRefreshArrow.png; path = ../PullToRefreshArrow.png; sourceTree = "<group>"; };
+		A76598A6134CBD2400A3B30D /* PullToRefreshArrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "PullToRefreshArrow@2x.png"; path = "../PullToRefreshArrow@2x.png"; sourceTree = "<group>"; };
 		A7BC6777134CCAF00083F906 /* GHPublicRepositoryIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GHPublicRepositoryIcon.png; sourceTree = "<group>"; };
 		A7BC6778134CCAF00083F906 /* GHPublicRepositoryIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GHPublicRepositoryIcon@2x.png"; sourceTree = "<group>"; };
 		A7BC677C134CCD1A0083F906 /* GHPrivateRepositoryIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GHPrivateRepositoryIcon@2x.png"; sourceTree = "<group>"; };
 		A7BC677D134CCD1A0083F906 /* GHPrivateRepositoryIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GHPrivateRepositoryIcon.png; sourceTree = "<group>"; };
+		A7BC6782134CCFF50083F906 /* ASIHTTPRequest+GithubAPIAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ASIHTTPRequest+GithubAPIAdditions.h"; sourceTree = "<group>"; };
+		A7BC6783134CCFF50083F906 /* ASIHTTPRequest+GithubAPIAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ASIHTTPRequest+GithubAPIAdditions.m"; sourceTree = "<group>"; };
 		A7BF13F71342149C001AE50D /* iGithub.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iGithub.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A7BF13FB1342149C001AE50D /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		A7BF13FD1342149C001AE50D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -567,6 +570,7 @@
 		A73E29B11348744300E85282 /* Foundation Additions */ = {
 			isa = PBXGroup;
 			children = (
+				A7BC6781134CCF890083F906 /* ASI-HTTP */,
 				A7F62623134B89CA006487CA /* NSDate */,
 				A7F6261F134B8886006487CA /* NSString */,
 				A73E29B21348745800E85282 /* NSDictionary */,
@@ -672,12 +676,7 @@
 		A750573F1343422200514A82 /* UserInterface */ = {
 			isa = PBXGroup;
 			children = (
-				A76598A5134CBD2400A3B30D /* PullToRefreshArrow.png */,
-				A76598A6134CBD2400A3B30D /* PullToRefreshArrow@2x.png */,
-				A7659889134CB5DF00A3B30D /* EGORefreshTableHeaderView.h */,
-				A765988A134CB5E000A3B30D /* EGORefreshTableHeaderView.m */,
-				A765988B134CB5E000A3B30D /* PullToRefreshTableViewController.h */,
-				A765988C134CB5E000A3B30D /* PullToRefreshTableViewController.m */,
+				A7BC6780134CCED40083F906 /* PullToRefreshTableViewController */,
 				A7F62627134C45AE006487CA /* GHTableViewController */,
 				A75057401343424100514A82 /* GHNewsFeedViewController */,
 				A7BF1423134214E7001AE50D /* GHAuthenticationViewController */,
@@ -694,6 +693,26 @@
 				A75057421343426300514A82 /* GHNewsFeedViewController.m */,
 			);
 			name = GHNewsFeedViewController;
+			sourceTree = "<group>";
+		};
+		A7BC6780134CCED40083F906 /* PullToRefreshTableViewController */ = {
+			isa = PBXGroup;
+			children = (
+				A7659889134CB5DF00A3B30D /* EGORefreshTableHeaderView.h */,
+				A765988A134CB5E000A3B30D /* EGORefreshTableHeaderView.m */,
+				A765988B134CB5E000A3B30D /* PullToRefreshTableViewController.h */,
+				A765988C134CB5E000A3B30D /* PullToRefreshTableViewController.m */,
+			);
+			name = PullToRefreshTableViewController;
+			sourceTree = "<group>";
+		};
+		A7BC6781134CCF890083F906 /* ASI-HTTP */ = {
+			isa = PBXGroup;
+			children = (
+				A7BC6782134CCFF50083F906 /* ASIHTTPRequest+GithubAPIAdditions.h */,
+				A7BC6783134CCFF50083F906 /* ASIHTTPRequest+GithubAPIAdditions.m */,
+			);
+			name = "ASI-HTTP";
 			sourceTree = "<group>";
 		};
 		A7BF13EC1342149C001AE50D = {
@@ -825,6 +844,8 @@
 		A7BF143713421862001AE50D /* Ressources */ = {
 			isa = PBXGroup;
 			children = (
+				A76598A5134CBD2400A3B30D /* PullToRefreshArrow.png */,
+				A76598A6134CBD2400A3B30D /* PullToRefreshArrow@2x.png */,
 				A7BC677C134CCD1A0083F906 /* GHPrivateRepositoryIcon@2x.png */,
 				A7BC677D134CCD1A0083F906 /* GHPrivateRepositoryIcon.png */,
 				A7BC6777134CCAF00083F906 /* GHPublicRepositoryIcon.png */,
@@ -1198,6 +1219,7 @@
 				A765988D134CB5E100A3B30D /* EGORefreshTableHeaderView.m in Sources */,
 				A765988E134CB5E100A3B30D /* PullToRefreshTableViewController.m in Sources */,
 				A765989A134CB63600A3B30D /* NSDate+Nibware.m in Sources */,
+				A7BC6784134CCFF50083F906 /* ASIHTTPRequest+GithubAPIAdditions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
