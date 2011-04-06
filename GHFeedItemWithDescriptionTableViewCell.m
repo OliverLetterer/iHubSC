@@ -35,7 +35,7 @@
 - (void)layoutSubviews {
     [super layoutSubviews];
     
-    self.descriptionLabel.frame = CGRectMake(78.0, 15.0, 222.0, self.contentView.bounds.size.height - 50.0);
+    self.descriptionLabel.frame = CGRectMake(78.0, 17.0, 222.0, self.contentView.bounds.size.height - 48.0);
 }
 
 - (void)prepareForReuse {

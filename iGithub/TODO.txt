@@ -24,3 +24,4 @@ support all these events
 - not showing NewsFeed after first login (implement a notification to handle if a new user got authenticated)
 - in NewsFeed: crash while loading images and switching from "NewsFeed"->"My Actions"
 - what happens if the password changed?
+- rename GHFeedItemWithDescriptionTableViewCell and all other cells

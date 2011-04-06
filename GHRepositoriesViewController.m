@@ -8,18 +8,29 @@
 
 #import "GHRepositoriesViewController.h"
 #import "GithubAPI.h"
+#import "GHFeedItemWithDescriptionTableViewCell.h"
 
 @implementation GHRepositoriesViewController
 
 @synthesize repositoriesArray=_repositoriesArray;
+@synthesize username=_username;
+
+#pragma mark - setters and getters
+
+- (void)setUsername:(NSString *)username {
+    [_username release];
+    _username = [username copy];
+    [self downloadRepositories];
+}
 
 #pragma mark - Initialization
 
-- (id)init {
+- (id)initWithUsername:(NSString *)username {
     if ((self = [super initWithStyle:UITableViewStylePlain])) {
         // Custom initialization
         self.title = NSLocalizedString(@"Repositories", @"");
         self.pullToReleaseEnabled = YES;
+        self.username = username;
     }
     return self;
 }
@@ -28,6 +39,7 @@
 
 - (void)dealloc {
     [_repositoriesArray release];
+    [_username release];
     [super dealloc];
 }
 
@@ -38,20 +50,46 @@
     // Release any cached data, images, etc that aren't in use.
 }
 
-#pragma mark - View lifecycle
+#pragma mark - instance methods
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-
-    [GHRepository repositoriesForUserNamed:[GHAuthenticationManager sharedInstance].username 
+- (void)downloadRepositories {
+    [GHRepository repositoriesForUserNamed:self.username 
                          completionHandler:^(NSArray *array, NSError *error) {
                              if (error) {
                                  [self handleError:error];
                              } else {
                                  self.repositoriesArray = array;
                              }
+                             [self cacheHeightForTableView];
                              [self dataSourceDidFinishLoadingNewData];
+                             [self.tableView reloadData];
                          }];
+}
+
+- (void)reloadTableViewDataSource {
+    [self downloadRepositories];
+}
+
+- (void)cacheHeightForTableView {
+    NSInteger i = 0;
+    for (GHRepository *repo in self.repositoriesArray) {
+        CGFloat height = [self heightForDescription:repo.desctiptionRepo] + 50.0;
+        
+        if (height < 71.0) {
+            height = 71.0;
+        }
+        
+        [self cacheHeight:height forRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
+        
+        i++;
+    }
+}
+
+#pragma mark - View lifecycle
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+
 }
 
 - (void)viewDidUnload {
@@ -85,20 +123,31 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     // Return the number of sections.
-    return 0;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    return 0;
+    return [self.repositoriesArray count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *CellIdentifier = @"Cell";
+    static NSString *CellIdentifier = @"GHFeedItemWithDescriptionTableViewCell";
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    GHFeedItemWithDescriptionTableViewCell *cell = (GHFeedItemWithDescriptionTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[[GHFeedItemWithDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+    }
+    
+    GHRepository *repository = [self.repositoriesArray objectAtIndex:indexPath.row];
+    
+    cell.titleLabel.text = repository.name;
+    cell.descriptionLabel.text = repository.desctiptionRepo;
+    
+    if ([repository.private boolValue]) {
+        cell.imageView.image = [UIImage imageNamed:@"GHPrivateRepositoryIcon.png"];
+    } else {
+        cell.imageView.image = [UIImage imageNamed:@"GHPublicRepositoryIcon.png"];
     }
     
     // Configure the cell...
@@ -144,14 +193,11 @@
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     [detailViewController release];
-     */
+    
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return [self cachedHeightForRowAtIndexPath:indexPath];
 }
 
 @end

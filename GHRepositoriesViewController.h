@@ -12,8 +12,16 @@
 @interface GHRepositoriesViewController : GHTableViewController {
 @private
     NSArray *_repositoriesArray;
+    NSString *_username;
 }
 
 @property (nonatomic, retain) NSArray *repositoriesArray;
+@property (nonatomic, copy) NSString *username;
+
+- (id)initWithUsername:(NSString *)username;
+
+- (void)downloadRepositories;
+
+- (void)cacheHeightForTableView;
 
 @end

@@ -33,7 +33,7 @@
     self.newsFeedViewController = [[[GHNewsFeedViewController alloc] init] autorelease];
     [tabBarItems addObject:[[[UINavigationController alloc] initWithRootViewController:self.newsFeedViewController] autorelease] ];
     
-    self.repositoriesViewController = [[[GHRepositoriesViewController alloc] init] autorelease];
+    self.repositoriesViewController = [[[GHRepositoriesViewController alloc] initWithUsername:[GHAuthenticationManager sharedInstance].username] autorelease];
     [tabBarItems addObject:[[[UINavigationController alloc] initWithRootViewController:self.repositoriesViewController] autorelease] ];
     
     self.tabBarController.viewControllers = tabBarItems;

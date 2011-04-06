@@ -156,7 +156,6 @@
                 GHIssue *newIssue = (GHIssue *)[NSEntityDescription insertNewObjectForEntityForName:@"GHIssue" 
                                                                              inManagedObjectContext:ctx];
                 NSDictionary *rawDictionary = [issueDictionary objectForKey:@"issue"];
-                NSLog(@"%@", rawDictionary);
                 [newIssue updateWithRawDictionary:rawDictionary onRepository:repository];
                 
                 [ctx save:NULL];

@@ -69,7 +69,14 @@
                 handler(nil, myError);
             } else {
                 NSDictionary *reposDictionary = [jsonString objectFromJSONString];
-                NSLog(@"%@", reposDictionary);
+                NSArray *repos = [reposDictionary objectForKey:@"repositories"];
+                
+                NSMutableArray *array = [NSMutableArray arrayWithCapacity:[repos count] ];
+                for (NSDictionary *rawRepository in repos) {
+                    [array addObject:[[[GHRepository alloc] initWithRawDictionary:rawRepository] autorelease] ];
+                }
+                
+                handler(array, nil);
             }
         });
     });
