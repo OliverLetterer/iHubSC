@@ -582,7 +582,7 @@
                                    constrainedToSize:CGSizeMake(222.0, MAXFLOAT) 
                                        lineBreakMode:UILineBreakModeWordWrap];
             
-            result = size.height + 30.0;
+            result = size.height + 50.0;
             
             if (result < 71.0) {
                 result = 71.0;
