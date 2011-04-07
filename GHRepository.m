@@ -64,8 +64,6 @@
         
         NSString *jsonString = [request responseString];
         
-        NSLog(@"%@", [request responseHeaders]);
-        
         dispatch_async(dispatch_get_main_queue(), ^(void) {
             if (myError) {
                 handler(nil, myError);
