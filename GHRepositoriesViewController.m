@@ -9,11 +9,13 @@
 #import "GHRepositoriesViewController.h"
 #import "GithubAPI.h"
 #import "GHFeedItemWithDescriptionTableViewCell.h"
+#import "UICollapsingAndSpinningTableViewCell.h"
 
 @implementation GHRepositoriesViewController
 
 @synthesize repositoriesArray=_repositoriesArray;
 @synthesize username=_username;
+@synthesize watchedRepositoriesArray=_watchedRepositoriesArray;
 
 #pragma mark - setters and getters
 
@@ -40,6 +42,7 @@
 - (void)dealloc {
     [_repositoriesArray release];
     [_username release];
+    [_watchedRepositoriesArray release];
     [super dealloc];
 }
 
@@ -95,6 +98,77 @@
     }
 }
 
+- (void)cacheHeightForWatchedRepositories {
+    NSInteger i = 0;
+    for (GHRepository *repo in self.watchedRepositoriesArray) {
+        CGFloat height = [self heightForDescription:repo.desctiptionRepo] + 50.0;
+        
+        if (height < 71.0) {
+            height = 71.0;
+        }
+        
+        [self cacheHeight:height forRowAtIndexPath:[NSIndexPath indexPathForRow:i+1 inSection:1]];
+        
+        i++;
+    }
+}
+
+- (void)downloadWatchedRepositories {
+    _isDownloadingWatchedRepositories = YES;
+    
+    [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:0 inSection:1]] 
+                          withRowAnimation:UITableViewRowAnimationFade];
+    
+    [GHRepository watchedRepositoriesOfUser:self.username 
+                          completionHandler:^(NSArray *array, NSError *error) {
+                              _isDownloadingWatchedRepositories = NO;
+                              if (error) {
+                                  [self handleError:error];
+                              } else {
+                                  self.watchedRepositoriesArray = array;
+                                  [self cacheHeightForWatchedRepositories];
+                                  [self showWatchedRepositories];
+                              }
+                          }];
+}
+
+- (void)showWatchedRepositories {
+    _isShowingWatchedRepositories = YES;
+    
+    [self.tableView beginUpdates];
+    
+    NSMutableArray *array = [NSMutableArray array];
+    for (int i = 0; i < [self.watchedRepositoriesArray count]; i++) {
+        [array addObject:[NSIndexPath indexPathForRow:i+1 inSection:1]];
+    }
+    
+    [self.tableView insertRowsAtIndexPaths:array withRowAnimation:UITableViewRowAnimationTop];
+    [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:0 inSection:1]] 
+                          withRowAnimation:UITableViewRowAnimationFade];
+    
+    [self.tableView endUpdates];
+    
+    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1] 
+                          atScrollPosition:UITableViewScrollPositionTop 
+                                  animated:YES];
+}
+
+- (void)hideWatchedRepositories {
+    _isShowingWatchedRepositories = NO;
+    [self.tableView beginUpdates];
+    
+    NSMutableArray *array = [NSMutableArray array];
+    for (int i = 0; i < [self.watchedRepositoriesArray count]; i++) {
+        [array addObject:[NSIndexPath indexPathForRow:i+1 inSection:1]];
+    }
+    
+    [self.tableView deleteRowsAtIndexPaths:array withRowAnimation:UITableViewRowAnimationTop];
+    [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:0 inSection:1]] 
+                          withRowAnimation:UITableViewRowAnimationFade];
+    
+    [self.tableView endUpdates];
+}
+
 #pragma mark - View lifecycle
 
 - (void)viewDidLoad {
@@ -138,36 +212,103 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     // Return the number of sections.
-    return 1;
+    // 0: all repositories
+    // 1: watching
+    return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    return [self.repositoriesArray count];
+    CGFloat result = 0;
+    
+    if (section == 0) {
+        result = [self.repositoriesArray count];
+    } else if (section == 1) {
+        // watched
+        result = 1;
+        if (_isShowingWatchedRepositories) {
+            result += [self.watchedRepositoriesArray count];
+        }
+    }
+    return result;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *CellIdentifier = @"GHFeedItemWithDescriptionTableViewCell";
-    
-    GHFeedItemWithDescriptionTableViewCell *cell = (GHFeedItemWithDescriptionTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
-        cell = [[[GHFeedItemWithDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+    if (indexPath.section == 0) {
+        // display all repostories
+        NSString *CellIdentifier = @"GHFeedItemWithDescriptionTableViewCell";
+        
+        GHFeedItemWithDescriptionTableViewCell *cell = (GHFeedItemWithDescriptionTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        if (cell == nil) {
+            cell = [[[GHFeedItemWithDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        }
+        
+        GHRepository *repository = [self.repositoriesArray objectAtIndex:indexPath.row];
+        
+        cell.titleLabel.text = repository.name;
+        cell.descriptionLabel.text = repository.desctiptionRepo;
+        
+        if ([repository.private boolValue]) {
+            cell.imageView.image = [UIImage imageNamed:@"GHPrivateRepositoryIcon.png"];
+        } else {
+            cell.imageView.image = [UIImage imageNamed:@"GHPublicRepositoryIcon.png"];
+        }
+        
+        // Configure the cell...
+        
+        return cell;
+    } else if (indexPath.section == 1) {
+        // watched repositories
+        if (indexPath.row == 0) {
+            NSString *CellIdientifier = @"UICollapsingAndSpinningTableViewCell";
+            
+            UICollapsingAndSpinningTableViewCell *cell = (UICollapsingAndSpinningTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdientifier];
+            
+            if (cell == nil) {
+                cell = [[[UICollapsingAndSpinningTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdientifier] autorelease];
+            }
+            
+            cell.textLabel.text = NSLocalizedString(@"Watched Repositories", @"");
+            
+            if (_isDownloadingWatchedRepositories) {
+                [cell setSpinning:YES];
+            } else {
+                [cell setSpinning:NO];
+                if (!_isShowingWatchedRepositories) {
+                    cell.accessoryView.transform = CGAffineTransformMakeRotation(M_PI);
+                } else {
+                    cell.accessoryView.transform = CGAffineTransformIdentity;
+                }
+            }
+            
+            return cell;
+        } else if (indexPath.row <= [self.watchedRepositoriesArray count] ) {
+            NSString *CellIdentifier = @"GHFeedItemWithDescriptionTableViewCell";
+            
+            GHFeedItemWithDescriptionTableViewCell *cell = (GHFeedItemWithDescriptionTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+            if (cell == nil) {
+                cell = [[[GHFeedItemWithDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+            }
+            
+            GHRepository *repository = [self.watchedRepositoriesArray objectAtIndex:indexPath.row-1];
+            
+            cell.titleLabel.text = [NSString stringWithFormat:@"%@/%@", repository.owner, repository.name];
+            
+            cell.descriptionLabel.text = repository.desctiptionRepo;
+            
+            if ([repository.private boolValue]) {
+                cell.imageView.image = [UIImage imageNamed:@"GHPrivateRepositoryIcon.png"];
+            } else {
+                cell.imageView.image = [UIImage imageNamed:@"GHPublicRepositoryIcon.png"];
+            }
+            
+            // Configure the cell...
+            
+            return cell;
+        }
     }
     
-    GHRepository *repository = [self.repositoriesArray objectAtIndex:indexPath.row];
-    
-    cell.titleLabel.text = repository.name;
-    cell.descriptionLabel.text = repository.desctiptionRepo;
-    
-    if ([repository.private boolValue]) {
-        cell.imageView.image = [UIImage imageNamed:@"GHPrivateRepositoryIcon.png"];
-    } else {
-        cell.imageView.image = [UIImage imageNamed:@"GHPublicRepositoryIcon.png"];
-    }
-    
-    // Configure the cell...
-    
-    return cell;
+    return self.dummyCell;
 }
 
 /*
@@ -208,11 +349,30 @@
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [self.tableView deselectRowAtIndexPath:indexPath animated:NO];
+    if (indexPath.section == 1 && indexPath.row == 0) {
+        // watched clicked
+        if (self.watchedRepositoriesArray == nil && !_isDownloadingWatchedRepositories) {
+            [self downloadWatchedRepositories];
+        } else {
+            if (_isShowingWatchedRepositories) {
+                [self hideWatchedRepositories];
+            } else {
+                [self showWatchedRepositories];
+            }
+        }
+    } else {
+        [self.tableView deselectRowAtIndexPath:indexPath animated:NO];
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return [self cachedHeightForRowAtIndexPath:indexPath];
+    if (indexPath.section == 0) {
+        return [self cachedHeightForRowAtIndexPath:indexPath];
+    } else if (indexPath.section == 1 && indexPath.row > 0) {
+        // watched repo
+        return [self cachedHeightForRowAtIndexPath:indexPath];
+    }
+    return 44.0;
 }
 
 #pragma mark - GHCreateRepositoryViewControllerDelegate

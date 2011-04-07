@@ -60,4 +60,7 @@
 + (void)createRepositoryWithTitle:(NSString *)title 
                       description:(NSString *)description public:(BOOL)public completionHandler:(void (^)(GHRepository *repository, NSError *error))handler;
 
++ (void)watchedRepositoriesOfUser:(NSString *)username 
+                completionHandler:(void (^)(NSArray *array, NSError *error))handler;
+
 @end

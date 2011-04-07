@@ -14,19 +14,27 @@
 @private
     NSArray *_repositoriesArray;
     NSString *_username;
+    
+    BOOL _isShowingWatchedRepositories;
+    BOOL _isDownloadingWatchedRepositories;
+    NSArray *_watchedRepositoriesArray;
 }
-
-#warning support multiple pages of repos
 
 @property (nonatomic, retain) NSArray *repositoriesArray;
 @property (nonatomic, copy) NSString *username;
+@property (nonatomic, retain) NSArray *watchedRepositoriesArray;
 
 - (id)initWithUsername:(NSString *)username;
 
 - (void)downloadRepositories;
 
 - (void)cacheHeightForTableView;
+- (void)cacheHeightForWatchedRepositories;
 
 - (void)createRepositoryButtonClicked:(UIBarButtonItem *)button;
+
+- (void)downloadWatchedRepositories;
+- (void)showWatchedRepositories;
+- (void)hideWatchedRepositories;
 
 @end
