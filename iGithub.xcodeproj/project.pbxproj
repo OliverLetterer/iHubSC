@@ -73,6 +73,8 @@
 		A7BC677F134CCD1A0083F906 /* GHPrivateRepositoryIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = A7BC677D134CCD1A0083F906 /* GHPrivateRepositoryIcon.png */; };
 		A7BC6784134CCFF50083F906 /* ASIHTTPRequest+GithubAPIAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = A7BC6783134CCFF50083F906 /* ASIHTTPRequest+GithubAPIAdditions.m */; };
 		A7BC6787134CE7E00083F906 /* GHRepositoriesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7BC6786134CE7E00083F906 /* GHRepositoriesViewController.m */; };
+		A7BC678B134D942C0083F906 /* GHCreateRepositoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7BC678A134D942C0083F906 /* GHCreateRepositoryViewController.m */; };
+		A7BC6790134D96DD0083F906 /* GHCreateRepositoryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A7BC678E134D96DD0083F906 /* GHCreateRepositoryTableViewCell.m */; };
 		A7BF13FC1342149C001AE50D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7BF13FB1342149C001AE50D /* UIKit.framework */; };
 		A7BF13FE1342149C001AE50D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7BF13FD1342149C001AE50D /* Foundation.framework */; };
 		A7BF14001342149C001AE50D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7BF13FF1342149C001AE50D /* CoreGraphics.framework */; };
@@ -118,6 +120,7 @@
 		A7F62622134B88B8006487CA /* NSString+GithubAPIAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = A7F62621134B88B8006487CA /* NSString+GithubAPIAdditions.m */; };
 		A7F62626134B89E5006487CA /* NSDate+GithubAPIAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = A7F62625134B89E5006487CA /* NSDate+GithubAPIAdditions.m */; };
 		A7F6262A134C45D5006487CA /* GHTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7F62629134C45D5006487CA /* GHTableViewController.m */; };
+		A7F7CA62134DA1FA005509D0 /* NSError+GithubAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = A7F7CA61134DA1FA005509D0 /* NSError+GithubAPI.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -237,6 +240,10 @@
 		A7BC6783134CCFF50083F906 /* ASIHTTPRequest+GithubAPIAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ASIHTTPRequest+GithubAPIAdditions.m"; sourceTree = "<group>"; };
 		A7BC6785134CE7DF0083F906 /* GHRepositoriesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHRepositoriesViewController.h; sourceTree = "<group>"; };
 		A7BC6786134CE7E00083F906 /* GHRepositoriesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHRepositoriesViewController.m; sourceTree = "<group>"; };
+		A7BC6789134D942C0083F906 /* GHCreateRepositoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHCreateRepositoryViewController.h; sourceTree = "<group>"; };
+		A7BC678A134D942C0083F906 /* GHCreateRepositoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHCreateRepositoryViewController.m; sourceTree = "<group>"; };
+		A7BC678D134D96DD0083F906 /* GHCreateRepositoryTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHCreateRepositoryTableViewCell.h; sourceTree = "<group>"; };
+		A7BC678E134D96DD0083F906 /* GHCreateRepositoryTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHCreateRepositoryTableViewCell.m; sourceTree = "<group>"; };
 		A7BF13F71342149C001AE50D /* iGithub.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iGithub.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A7BF13FB1342149C001AE50D /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		A7BF13FD1342149C001AE50D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -317,6 +324,8 @@
 		A7F62625134B89E5006487CA /* NSDate+GithubAPIAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+GithubAPIAdditions.m"; sourceTree = "<group>"; };
 		A7F62628134C45D5006487CA /* GHTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHTableViewController.h; sourceTree = "<group>"; };
 		A7F62629134C45D5006487CA /* GHTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHTableViewController.m; sourceTree = "<group>"; };
+		A7F7CA60134DA1FA005509D0 /* NSError+GithubAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSError+GithubAPI.h"; sourceTree = "<group>"; };
+		A7F7CA61134DA1FA005509D0 /* NSError+GithubAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSError+GithubAPI.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -573,6 +582,7 @@
 		A73E29B11348744300E85282 /* Foundation & Class Additions */ = {
 			isa = PBXGroup;
 			children = (
+				A7F7CA5E134DA1B1005509D0 /* NSError */,
 				A7BC6781134CCF890083F906 /* ASI-HTTP */,
 				A7F62623134B89CA006487CA /* NSDate */,
 				A7F6261F134B8886006487CA /* NSString */,
@@ -684,8 +694,7 @@
 				A75057401343424100514A82 /* GHNewsFeedViewController */,
 				A7BF1423134214E7001AE50D /* GHAuthenticationViewController */,
 				A73E29C31348E12C00E85282 /* GHViewIssueTableViewController */,
-				A7BC6785134CE7DF0083F906 /* GHRepositoriesViewController.h */,
-				A7BC6786134CE7E00083F906 /* GHRepositoriesViewController.m */,
+				A7BC6788134D94020083F906 /* GHRepositoriesViewController */,
 			);
 			name = UserInterface;
 			sourceTree = "<group>";
@@ -718,6 +727,27 @@
 				A7BC6783134CCFF50083F906 /* ASIHTTPRequest+GithubAPIAdditions.m */,
 			);
 			name = "ASI-HTTP";
+			sourceTree = "<group>";
+		};
+		A7BC6788134D94020083F906 /* GHRepositoriesViewController */ = {
+			isa = PBXGroup;
+			children = (
+				A7BC678C134D96C30083F906 /* UITableViewCells */,
+				A7BC6785134CE7DF0083F906 /* GHRepositoriesViewController.h */,
+				A7BC6786134CE7E00083F906 /* GHRepositoriesViewController.m */,
+				A7BC6789134D942C0083F906 /* GHCreateRepositoryViewController.h */,
+				A7BC678A134D942C0083F906 /* GHCreateRepositoryViewController.m */,
+			);
+			name = GHRepositoriesViewController;
+			sourceTree = "<group>";
+		};
+		A7BC678C134D96C30083F906 /* UITableViewCells */ = {
+			isa = PBXGroup;
+			children = (
+				A7BC678D134D96DD0083F906 /* GHCreateRepositoryTableViewCell.h */,
+				A7BC678E134D96DD0083F906 /* GHCreateRepositoryTableViewCell.m */,
+			);
+			name = UITableViewCells;
 			sourceTree = "<group>";
 		};
 		A7BF13EC1342149C001AE50D = {
@@ -1065,6 +1095,15 @@
 			name = GHTableViewController;
 			sourceTree = "<group>";
 		};
+		A7F7CA5E134DA1B1005509D0 /* NSError */ = {
+			isa = PBXGroup;
+			children = (
+				A7F7CA60134DA1FA005509D0 /* NSError+GithubAPI.h */,
+				A7F7CA61134DA1FA005509D0 /* NSError+GithubAPI.m */,
+			);
+			name = NSError;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1226,6 +1265,9 @@
 				A765989A134CB63600A3B30D /* NSDate+Nibware.m in Sources */,
 				A7BC6784134CCFF50083F906 /* ASIHTTPRequest+GithubAPIAdditions.m in Sources */,
 				A7BC6787134CE7E00083F906 /* GHRepositoriesViewController.m in Sources */,
+				A7BC678B134D942C0083F906 /* GHCreateRepositoryViewController.m in Sources */,
+				A7BC6790134D96DD0083F906 /* GHCreateRepositoryTableViewCell.m in Sources */,
+				A7F7CA62134DA1FA005509D0 /* NSError+GithubAPI.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

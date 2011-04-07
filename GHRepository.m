@@ -64,6 +64,8 @@
         
         NSString *jsonString = [request responseString];
         
+        NSLog(@"%@", [request responseHeaders]);
+        
         dispatch_async(dispatch_get_main_queue(), ^(void) {
             if (myError) {
                 handler(nil, myError);
@@ -77,6 +79,41 @@
                 }
                 
                 handler(array, nil);
+            }
+        });
+    });
+    
+}
+
++ (void)createRepositoryWithTitle:(NSString *)title 
+                      description:(NSString *)description public:(BOOL)public completionHandler:(void (^)(GHRepository *repository, NSError *error))handler {
+    
+    dispatch_async(GHAPIBackgroundQueue(), ^(void) {
+        
+        NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://github.com/api/v2/json/repos/create"]];
+        NSError *myError = nil;
+        
+        ASIFormDataRequest *request = [ASIFormDataRequest authenticatedFormDataRequestWithURL:URL];
+        
+        NSLog(@"title = %@", title);
+        [request setPostValue:title forKey:@"name"];
+        [request setPostValue:description forKey:@"description"];
+        [request setPostValue:[NSString stringWithFormat:@"%d", public] forKey:@"public"];
+        
+        [request startSynchronous];
+        
+        myError = [request error];
+        
+        if (!myError) {
+            myError = [NSError errorFromRawDictionary:[[request responseString] objectFromJSONString] ];
+        }
+        
+        dispatch_async(dispatch_get_main_queue(), ^(void) {
+            if (myError) {
+                handler(nil, myError);
+            } else {
+                NSDictionary *dict = [[request responseString] objectFromJSONString];
+                handler([[[GHRepository alloc] initWithRawDictionary:dict] autorelease], nil);
             }
         });
     });

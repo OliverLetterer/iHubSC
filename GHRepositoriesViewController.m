@@ -50,6 +50,16 @@
     // Release any cached data, images, etc that aren't in use.
 }
 
+#pragma mark - target actions
+
+- (void)createRepositoryButtonClicked:(UIBarButtonItem *)button {
+    GHCreateRepositoryViewController *createViewController = [[[GHCreateRepositoryViewController alloc] init] autorelease];
+    createViewController.delegate = self;
+    
+    UINavigationController *navController = [[[UINavigationController alloc] initWithRootViewController:createViewController] autorelease];
+    [self presentModalViewController:navController animated:YES];
+}
+
 #pragma mark - instance methods
 
 - (void)downloadRepositories {
@@ -89,7 +99,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    if ([[GHAuthenticationManager sharedInstance].username isEqualToString:self.username]) {
+        self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd 
+                                                                                                target:self 
+                                                                                                action:@selector(createRepositoryButtonClicked:)]
+                                                  autorelease];
+    }
 }
 
 - (void)viewDidUnload {
@@ -193,11 +208,23 @@
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
+    [self.tableView deselectRowAtIndexPath:indexPath animated:NO];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return [self cachedHeightForRowAtIndexPath:indexPath];
+}
+
+#pragma mark - GHCreateRepositoryViewControllerDelegate
+
+- (void)createRepositoryViewController:(GHCreateRepositoryViewController *)createRepositoryViewController 
+                   didCreateRepository:(GHRepository *)repository {
+    [self dismissModalViewControllerAnimated:YES];
+    [self downloadRepositories];
+}
+
+- (void)createRepositoryViewControllerDidCancel:(GHCreateRepositoryViewController *)createRepositoryViewController {
+    [self dismissModalViewControllerAnimated:YES];
 }
 
 @end

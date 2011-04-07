@@ -48,3 +48,4 @@
 #import "GHGravatarImageCache.h"
 #import "NSDate+GithubAPIAdditions.h"
 #import "ASIHTTPRequest+GithubAPIAdditions.h"
+#import "NSError+GithubAPI.h"

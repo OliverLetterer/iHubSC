@@ -8,12 +8,15 @@
 
 #import <UIKit/UIKit.h>
 #import "GHTableViewController.h"
+#import "GHCreateRepositoryViewController.h"
 
-@interface GHRepositoriesViewController : GHTableViewController {
+@interface GHRepositoriesViewController : GHTableViewController <GHCreateRepositoryViewControllerDelegate> {
 @private
     NSArray *_repositoriesArray;
     NSString *_username;
 }
+
+#warning support multiple pages of repos
 
 @property (nonatomic, retain) NSArray *repositoriesArray;
 @property (nonatomic, copy) NSString *username;
@@ -23,5 +26,7 @@
 - (void)downloadRepositories;
 
 - (void)cacheHeightForTableView;
+
+- (void)createRepositoryButtonClicked:(UIBarButtonItem *)button;
 
 @end

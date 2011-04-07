@@ -57,4 +57,7 @@
 + (void)repositoriesForUserNamed:(NSString *)username 
                completionHandler:(void (^)(NSArray *array, NSError *error))handler;
 
++ (void)createRepositoryWithTitle:(NSString *)title 
+                      description:(NSString *)description public:(BOOL)public completionHandler:(void (^)(GHRepository *repository, NSError *error))handler;
+
 @end

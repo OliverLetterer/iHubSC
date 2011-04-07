@@ -55,6 +55,8 @@
     [GHSettingsHelper setUsername:user.login];
     [GHSettingsHelper setPassword:user.password];
     [GHSettingsHelper setGravatarID:user.gravatarID];
+    [GHAuthenticationManager sharedInstance].username = user.login;
+    [GHAuthenticationManager sharedInstance].password = user.password;
     [self.tabBarController dismissModalViewControllerAnimated:YES];
 }
 
