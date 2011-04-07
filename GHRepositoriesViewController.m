@@ -81,6 +81,9 @@
 
 - (void)reloadTableViewDataSource {
     [self downloadRepositories];
+    if (self.watchedRepositoriesArray != nil) {
+        [self downloadWatchedRepositories];
+    }
 }
 
 - (void)cacheHeightForTableView {
@@ -127,7 +130,10 @@
                               } else {
                                   self.watchedRepositoriesArray = array;
                                   [self cacheHeightForWatchedRepositories];
-                                  [self showWatchedRepositories];
+                                  if (_shouldShowWatchedRepositoriesAfterDownload) {
+                                      [self showWatchedRepositories];
+                                  }
+                                  _shouldShowWatchedRepositoriesAfterDownload = NO;
                               }
                           }];
 }
@@ -352,6 +358,7 @@
     if (indexPath.section == 1 && indexPath.row == 0) {
         // watched clicked
         if (self.watchedRepositoriesArray == nil && !_isDownloadingWatchedRepositories) {
+            _shouldShowWatchedRepositoriesAfterDownload = YES;
             [self downloadWatchedRepositories];
         } else {
             if (_isShowingWatchedRepositories) {

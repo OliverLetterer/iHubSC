@@ -16,6 +16,7 @@
     NSString *_username;
     
     BOOL _isShowingWatchedRepositories;
+    BOOL _shouldShowWatchedRepositoriesAfterDownload;
     BOOL _isDownloadingWatchedRepositories;
     NSArray *_watchedRepositoriesArray;
 }
