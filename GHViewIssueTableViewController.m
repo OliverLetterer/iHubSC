@@ -547,19 +547,11 @@
         if (indexPath.row == 0) {
             // the issues title
             
-            
-            
-            CGSize headerSize = [self.issue.title sizeWithFont:[UIFont boldSystemFontOfSize:11.0]
-                                             constrainedToSize:CGSizeMake(220.0, MAXFLOAT) 
-                                                 lineBreakMode:UILineBreakModeWordWrap];
-            
-            result = headerSize.height;
-            
             CGSize bodySize = [self.issue.body sizeWithFont:[UIFont systemFontOfSize:12.0] 
                                           constrainedToSize:CGSizeMake(222.0, MAXFLOAT) 
                                               lineBreakMode:UILineBreakModeWordWrap];
             
-            result += bodySize.height + 30.0;
+            result = bodySize.height + 50.0;
             
             if (result < 71.0) {
                 result = 71.0;
