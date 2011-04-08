@@ -33,6 +33,10 @@
 		A73AE5A0134EE92900E9EBA4 /* EGORefreshTableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = A73AE59F134EE92900E9EBA4 /* EGORefreshTableHeaderView.m */; };
 		A73AE5A3134EE93200E9EBA4 /* EGOPullToReleaseTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A73AE5A2134EE93200E9EBA4 /* EGOPullToReleaseTableViewController.m */; };
 		A73AE5A7134EF4F100E9EBA4 /* UITableView+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = A73AE5A6134EF4F100E9EBA4 /* UITableView+Additions.m */; };
+		A73AE5AC134EFDF400E9EBA4 /* 56-feed.png in Resources */ = {isa = PBXBuildFile; fileRef = A73AE5A8134EFDF300E9EBA4 /* 56-feed.png */; };
+		A73AE5AD134EFDF400E9EBA4 /* 56-feed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A73AE5A9134EFDF300E9EBA4 /* 56-feed@2x.png */; };
+		A73AE5AE134EFDF400E9EBA4 /* 60-dialpad.png in Resources */ = {isa = PBXBuildFile; fileRef = A73AE5AA134EFDF400E9EBA4 /* 60-dialpad.png */; };
+		A73AE5AF134EFDF400E9EBA4 /* 60-dialpad@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A73AE5AB134EFDF400E9EBA4 /* 60-dialpad@2x.png */; };
 		A73E298C134795FA00E85282 /* GHFollowEventPayload.m in Sources */ = {isa = PBXBuildFile; fileRef = A73E298B134795FA00E85282 /* GHFollowEventPayload.m */; };
 		A73E29911347970500E85282 /* GHFollowEventTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A73E29901347970500E85282 /* GHFollowEventTableViewCell.m */; };
 		A73E29951347A8E800E85282 /* GHWatchEventPayload.m in Sources */ = {isa = PBXBuildFile; fileRef = A73E29941347A8E800E85282 /* GHWatchEventPayload.m */; };
@@ -168,6 +172,10 @@
 		A73AE5A2134EE93200E9EBA4 /* EGOPullToReleaseTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EGOPullToReleaseTableViewController.m; sourceTree = "<group>"; };
 		A73AE5A5134EF4F100E9EBA4 /* UITableView+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+Additions.h"; sourceTree = "<group>"; };
 		A73AE5A6134EF4F100E9EBA4 /* UITableView+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+Additions.m"; sourceTree = "<group>"; };
+		A73AE5A8134EFDF300E9EBA4 /* 56-feed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "56-feed.png"; sourceTree = "<group>"; };
+		A73AE5A9134EFDF300E9EBA4 /* 56-feed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "56-feed@2x.png"; sourceTree = "<group>"; };
+		A73AE5AA134EFDF400E9EBA4 /* 60-dialpad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "60-dialpad.png"; sourceTree = "<group>"; };
+		A73AE5AB134EFDF400E9EBA4 /* 60-dialpad@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "60-dialpad@2x.png"; sourceTree = "<group>"; };
 		A73E298A134795FA00E85282 /* GHFollowEventPayload.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHFollowEventPayload.h; sourceTree = "<group>"; };
 		A73E298B134795FA00E85282 /* GHFollowEventPayload.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHFollowEventPayload.m; sourceTree = "<group>"; };
 		A73E298F1347970500E85282 /* GHFollowEventTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHFollowEventTableViewCell.h; sourceTree = "<group>"; };
@@ -883,6 +891,10 @@
 		A7BF143713421862001AE50D /* Ressources */ = {
 			isa = PBXGroup;
 			children = (
+				A73AE5A8134EFDF300E9EBA4 /* 56-feed.png */,
+				A73AE5A9134EFDF300E9EBA4 /* 56-feed@2x.png */,
+				A73AE5AA134EFDF400E9EBA4 /* 60-dialpad.png */,
+				A73AE5AB134EFDF400E9EBA4 /* 60-dialpad@2x.png */,
 				A76598A5134CBD2400A3B30D /* PullToRefreshArrow.png */,
 				A76598A6134CBD2400A3B30D /* PullToRefreshArrow@2x.png */,
 				A7BC677C134CCD1A0083F906 /* GHPrivateRepositoryIcon@2x.png */,
@@ -1173,6 +1185,10 @@
 				A7BC677A134CCAF00083F906 /* GHPublicRepositoryIcon@2x.png in Resources */,
 				A7BC677E134CCD1A0083F906 /* GHPrivateRepositoryIcon@2x.png in Resources */,
 				A7BC677F134CCD1A0083F906 /* GHPrivateRepositoryIcon.png in Resources */,
+				A73AE5AC134EFDF400E9EBA4 /* 56-feed.png in Resources */,
+				A73AE5AD134EFDF400E9EBA4 /* 56-feed@2x.png in Resources */,
+				A73AE5AE134EFDF400E9EBA4 /* 60-dialpad.png in Resources */,
+				A73AE5AF134EFDF400E9EBA4 /* 60-dialpad@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
