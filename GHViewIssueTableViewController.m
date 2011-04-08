@@ -14,7 +14,6 @@
 #import "UICollapsingAndSpinningTableViewCell.h"
 #import "GHIssueCommentTableViewCell.h"
 #import "GHFeedItemWithDescriptionTableViewCell.h"
-#import "UITableViewController+Additions.h"
 #import "GHNewCommentTableViewCell.h"
 
 @implementation GHViewIssueTableViewController

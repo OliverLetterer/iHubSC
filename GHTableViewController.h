@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "EGOPullToReleaseTableViewController.h"
+#import "UITableView+Additions.h"
+
+@class GHNewsFeedItemTableViewCell;
 
 @interface GHTableViewController : EGOPullToReleaseTableViewController {
 @private
@@ -21,6 +24,10 @@
 - (CGFloat)heightForDescription:(NSString *)description;
 
 - (void)handleError:(NSError *)error;
+
+- (void)updateImageViewForCell:(GHNewsFeedItemTableViewCell *)cell 
+                   atIndexPath:(NSIndexPath *)indexPath 
+                withGravatarID:(NSString *)gravatarID;
 
 @end
 

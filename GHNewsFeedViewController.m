@@ -13,7 +13,6 @@
 #import "GHPushFeedItemTableViewCell.h"
 #import "GHFollowEventTableViewCell.h"
 #import "GHViewIssueTableViewController.h"
-#import "UITableViewController+Additions.h"
 
 @implementation GHNewsFeedViewController
 
@@ -207,8 +206,9 @@
                          if (error) {
                              [self handleError:error];
                          } else {
-                             [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] 
-                                                   withRowAnimation:UITableViewRowAnimationNone];
+                             if ([tableView containsIndexPath:indexPath]) {
+                                 [tableView reloadRowAtIndexPath:indexPath withRowAnimation:UITableViewRowAnimationNone];
+                             }
                          }
                      }];
         }
@@ -290,8 +290,9 @@
                        if (error) {
                            [self handleError:error];
                        } else {
-                           [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] 
-                                                 withRowAnimation:UITableViewRowAnimationNone];
+                           if ([tableView containsIndexPath:indexPath]) {
+                               [tableView reloadRowAtIndexPath:indexPath withRowAnimation:UITableViewRowAnimationNone];
+                           }
                        }
                    }];
             

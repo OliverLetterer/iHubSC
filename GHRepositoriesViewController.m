@@ -119,8 +119,7 @@
 - (void)downloadWatchedRepositories {
     _isDownloadingWatchedRepositories = YES;
     
-    [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:0 inSection:1]] 
-                          withRowAnimation:UITableViewRowAnimationFade];
+    [self.tableView reloadRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1] withRowAnimation:UITableViewRowAnimationFade];
     
     [GHRepository watchedRepositoriesOfUser:self.username 
                           completionHandler:^(NSArray *array, NSError *error) {
