@@ -74,12 +74,12 @@
                                  self.repositoriesArray = array;
                              }
                              [self cacheHeightForTableView];
-                             [self dataSourceDidFinishLoadingNewData];
+                             [self didReloadData];
                              [self.tableView reloadData];
                          }];
 }
 
-- (void)reloadTableViewDataSource {
+- (void)reloadData {
     [self downloadRepositories];
     if (self.watchedRepositoriesArray != nil) {
         [self downloadWatchedRepositories];

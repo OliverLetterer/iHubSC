@@ -30,6 +30,8 @@
 		A708952C134A2F83000DD6CE /* UICollapsingAndSpinningTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A708952B134A2F83000DD6CE /* UICollapsingAndSpinningTableViewCell.m */; };
 		A7089530134A3DB0000DD6CE /* GHIssueComment.m in Sources */ = {isa = PBXBuildFile; fileRef = A708952F134A3DB0000DD6CE /* GHIssueComment.m */; };
 		A7089533134A4124000DD6CE /* GHIssueCommentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A7089532134A4123000DD6CE /* GHIssueCommentTableViewCell.m */; };
+		A73AE5A0134EE92900E9EBA4 /* EGORefreshTableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = A73AE59F134EE92900E9EBA4 /* EGORefreshTableHeaderView.m */; };
+		A73AE5A3134EE93200E9EBA4 /* EGOPullToReleaseTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A73AE5A2134EE93200E9EBA4 /* EGOPullToReleaseTableViewController.m */; };
 		A73E298C134795FA00E85282 /* GHFollowEventPayload.m in Sources */ = {isa = PBXBuildFile; fileRef = A73E298B134795FA00E85282 /* GHFollowEventPayload.m */; };
 		A73E29911347970500E85282 /* GHFollowEventTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A73E29901347970500E85282 /* GHFollowEventTableViewCell.m */; };
 		A73E29951347A8E800E85282 /* GHWatchEventPayload.m in Sources */ = {isa = PBXBuildFile; fileRef = A73E29941347A8E800E85282 /* GHWatchEventPayload.m */; };
@@ -62,8 +64,6 @@
 		A75057391343033200514A82 /* GHGlossBottomBorder.png in Resources */ = {isa = PBXBuildFile; fileRef = A75057351343033200514A82 /* GHGlossBottomBorder.png */; };
 		A750573E1343205000514A82 /* GHNewsFeed.m in Sources */ = {isa = PBXBuildFile; fileRef = A750573D1343205000514A82 /* GHNewsFeed.m */; };
 		A75057431343426300514A82 /* GHNewsFeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A75057421343426300514A82 /* GHNewsFeedViewController.m */; };
-		A765988D134CB5E100A3B30D /* EGORefreshTableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = A765988A134CB5E000A3B30D /* EGORefreshTableHeaderView.m */; };
-		A765988E134CB5E100A3B30D /* PullToRefreshTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A765988C134CB5E000A3B30D /* PullToRefreshTableViewController.m */; };
 		A765989A134CB63600A3B30D /* NSDate+Nibware.m in Sources */ = {isa = PBXBuildFile; fileRef = A7659899134CB63600A3B30D /* NSDate+Nibware.m */; };
 		A76598A7134CBD2500A3B30D /* PullToRefreshArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = A76598A5134CBD2400A3B30D /* PullToRefreshArrow.png */; };
 		A76598A8134CBD2500A3B30D /* PullToRefreshArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A76598A6134CBD2400A3B30D /* PullToRefreshArrow@2x.png */; };
@@ -163,6 +163,10 @@
 		A708952F134A3DB0000DD6CE /* GHIssueComment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHIssueComment.m; sourceTree = "<group>"; };
 		A7089531134A4122000DD6CE /* GHIssueCommentTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHIssueCommentTableViewCell.h; sourceTree = "<group>"; };
 		A7089532134A4123000DD6CE /* GHIssueCommentTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHIssueCommentTableViewCell.m; sourceTree = "<group>"; };
+		A73AE59E134EE92900E9EBA4 /* EGORefreshTableHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EGORefreshTableHeaderView.h; sourceTree = "<group>"; };
+		A73AE59F134EE92900E9EBA4 /* EGORefreshTableHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EGORefreshTableHeaderView.m; sourceTree = "<group>"; };
+		A73AE5A1134EE93200E9EBA4 /* EGOPullToReleaseTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; path = EGOPullToReleaseTableViewController.h; sourceTree = "<group>"; };
+		A73AE5A2134EE93200E9EBA4 /* EGOPullToReleaseTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EGOPullToReleaseTableViewController.m; sourceTree = "<group>"; };
 		A73E298A134795FA00E85282 /* GHFollowEventPayload.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHFollowEventPayload.h; sourceTree = "<group>"; };
 		A73E298B134795FA00E85282 /* GHFollowEventPayload.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHFollowEventPayload.m; sourceTree = "<group>"; };
 		A73E298F1347970500E85282 /* GHFollowEventTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHFollowEventTableViewCell.h; sourceTree = "<group>"; };
@@ -224,10 +228,6 @@
 		A750573D1343205000514A82 /* GHNewsFeed.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHNewsFeed.m; sourceTree = "<group>"; };
 		A75057411343426300514A82 /* GHNewsFeedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHNewsFeedViewController.h; sourceTree = "<group>"; };
 		A75057421343426300514A82 /* GHNewsFeedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHNewsFeedViewController.m; sourceTree = "<group>"; };
-		A7659889134CB5DF00A3B30D /* EGORefreshTableHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EGORefreshTableHeaderView.h; sourceTree = "<group>"; };
-		A765988A134CB5E000A3B30D /* EGORefreshTableHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EGORefreshTableHeaderView.m; sourceTree = "<group>"; };
-		A765988B134CB5E000A3B30D /* PullToRefreshTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PullToRefreshTableViewController.h; sourceTree = "<group>"; };
-		A765988C134CB5E000A3B30D /* PullToRefreshTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PullToRefreshTableViewController.m; sourceTree = "<group>"; };
 		A7659898134CB63600A3B30D /* NSDate+Nibware.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Nibware.h"; sourceTree = "<group>"; };
 		A7659899134CB63600A3B30D /* NSDate+Nibware.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Nibware.m"; sourceTree = "<group>"; };
 		A76598A5134CBD2400A3B30D /* PullToRefreshArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = PullToRefreshArrow.png; path = ../PullToRefreshArrow.png; sourceTree = "<group>"; };
@@ -712,10 +712,10 @@
 		A7BC6780134CCED40083F906 /* PullToRefreshTableViewController */ = {
 			isa = PBXGroup;
 			children = (
-				A7659889134CB5DF00A3B30D /* EGORefreshTableHeaderView.h */,
-				A765988A134CB5E000A3B30D /* EGORefreshTableHeaderView.m */,
-				A765988B134CB5E000A3B30D /* PullToRefreshTableViewController.h */,
-				A765988C134CB5E000A3B30D /* PullToRefreshTableViewController.m */,
+				A73AE5A1134EE93200E9EBA4 /* EGOPullToReleaseTableViewController.h */,
+				A73AE5A2134EE93200E9EBA4 /* EGOPullToReleaseTableViewController.m */,
+				A73AE59E134EE92900E9EBA4 /* EGORefreshTableHeaderView.h */,
+				A73AE59F134EE92900E9EBA4 /* EGORefreshTableHeaderView.m */,
 			);
 			name = PullToRefreshTableViewController;
 			sourceTree = "<group>";
@@ -1260,14 +1260,14 @@
 				A7F62622134B88B8006487CA /* NSString+GithubAPIAdditions.m in Sources */,
 				A7F62626134B89E5006487CA /* NSDate+GithubAPIAdditions.m in Sources */,
 				A7F6262A134C45D5006487CA /* GHTableViewController.m in Sources */,
-				A765988D134CB5E100A3B30D /* EGORefreshTableHeaderView.m in Sources */,
-				A765988E134CB5E100A3B30D /* PullToRefreshTableViewController.m in Sources */,
 				A765989A134CB63600A3B30D /* NSDate+Nibware.m in Sources */,
 				A7BC6784134CCFF50083F906 /* ASIHTTPRequest+GithubAPIAdditions.m in Sources */,
 				A7BC6787134CE7E00083F906 /* GHRepositoriesViewController.m in Sources */,
 				A7BC678B134D942C0083F906 /* GHCreateRepositoryViewController.m in Sources */,
 				A7BC6790134D96DD0083F906 /* GHCreateRepositoryTableViewCell.m in Sources */,
 				A7F7CA62134DA1FA005509D0 /* NSError+GithubAPI.m in Sources */,
+				A73AE5A0134EE92900E9EBA4 /* EGORefreshTableHeaderView.m in Sources */,
+				A73AE5A3134EE93200E9EBA4 /* EGOPullToReleaseTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

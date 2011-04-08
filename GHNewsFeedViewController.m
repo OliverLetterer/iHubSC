@@ -73,7 +73,7 @@
                 self.segmentControl.userInteractionEnabled = YES;
                 self.segmentControl.alpha = 1.0;
             }
-            [self dataSourceDidFinishLoadingNewData];
+            [self didReloadData];
         }];
     }
 }
@@ -108,7 +108,7 @@
 
 #pragma mark - target actions
 
-- (void)reloadTableViewDataSource {
+- (void)reloadData {
     [self loadDataBasedOnSegmentControl];
 }
 
@@ -135,7 +135,7 @@
                 self.segmentControl.userInteractionEnabled = YES;
                 self.segmentControl.alpha = 1.0;
             }
-            [self dataSourceDidFinishLoadingNewData];
+            [self didReloadData];
         }];
     } else if (self.segmentControl.selectedSegmentIndex == 1) {
         // My Actions
@@ -150,7 +150,7 @@
                                self.segmentControl.userInteractionEnabled = YES;
                                self.segmentControl.alpha = 1.0;
                            }
-                           [self dataSourceDidFinishLoadingNewData];
+                           [self didReloadData];
                        }];
     }
 }

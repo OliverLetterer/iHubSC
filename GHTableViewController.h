@@ -7,15 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "PullToRefreshTableViewController.h"
+#import "EGOPullToReleaseTableViewController.h"
 
-@interface GHTableViewController : PullToRefreshTableViewController {
+@interface GHTableViewController : EGOPullToReleaseTableViewController {
 @private
     NSMutableDictionary *_cachedHeightsDictionary;
 }
 
 @property (nonatomic, retain) NSMutableDictionary *cachedHeightsDictionary;
-
 @property (nonatomic, readonly) UITableViewCell *dummyCell;
 
 - (UITableViewCell *)dummyCellWithText:(NSString *)text;
