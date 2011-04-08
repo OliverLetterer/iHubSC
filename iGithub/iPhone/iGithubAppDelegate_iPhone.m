@@ -14,8 +14,17 @@
 
 @synthesize tabBarController=_tabBarController, newsFeedViewController=_newsFeedViewController, repositoriesViewController=_repositoriesViewController;
 
+- (void)authenticationViewControllerdidAuthenticateUserCallback:(NSNotification *)notification {
+    self.repositoriesViewController.username = [GHSettingsHelper username];
+}
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // build userInterface here
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self 
+                                             selector:@selector(authenticationViewControllerdidAuthenticateUserCallback:) 
+                                                 name:GHAuthenticationViewControllerDidAuthenticateUserNotification 
+                                               object:nil];
     
 #if DEBUG
     [GHSettingsHelper setUsername:@"docmorelli"];
@@ -34,30 +43,12 @@
     [tabBarItems addObject:[[[UINavigationController alloc] initWithRootViewController:self.newsFeedViewController] autorelease] ];
     
     self.repositoriesViewController = [[[GHRepositoriesViewController alloc] initWithUsername:[GHAuthenticationManager sharedInstance].username] autorelease];
+    self.repositoriesViewController.reloadDataIfNewUserGotAuthenticated = YES;
     [tabBarItems addObject:[[[UINavigationController alloc] initWithRootViewController:self.repositoriesViewController] autorelease] ];
     
     self.tabBarController.viewControllers = tabBarItems;
     
-    
-    if (![GHSettingsHelper isUserAuthenticated]) {
-        GHAuthenticationViewController *authViewController = [[[GHAuthenticationViewController alloc] init] autorelease];
-        authViewController.delegate = self;
-        UINavigationController *navigationController = [[[UINavigationController alloc] initWithRootViewController:authViewController] autorelease];
-        [self.tabBarController presentModalViewController:navigationController animated:YES];
-    }
-    
     return [super application:application didFinishLaunchingWithOptions:launchOptions];
-}
-
-#pragma mark - GHAuthenticationViewControllerDelegate
-
-- (void)authenticationViewController:(GHAuthenticationViewController *)authenticationViewController didAuthenticateUser:(GHUser *)user {
-    [GHSettingsHelper setUsername:user.login];
-    [GHSettingsHelper setPassword:user.password];
-    [GHSettingsHelper setGravatarID:user.gravatarID];
-    [GHAuthenticationManager sharedInstance].username = user.login;
-    [GHAuthenticationManager sharedInstance].password = user.password;
-    [self.tabBarController dismissModalViewControllerAnimated:YES];
 }
 
 #pragma mark - memory management
@@ -66,6 +57,7 @@
     [_repositoriesViewController release];
     [_tabBarController release];
     [_newsFeedViewController release];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 	[super dealloc];
 }
 

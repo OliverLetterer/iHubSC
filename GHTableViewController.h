@@ -9,16 +9,22 @@
 #import <UIKit/UIKit.h>
 #import "EGOPullToReleaseTableViewController.h"
 #import "UITableView+Additions.h"
+#import "GHAuthenticationViewController.h"
 
 @class GHNewsFeedItemTableViewCell;
 
-@interface GHTableViewController : EGOPullToReleaseTableViewController {
+@interface GHTableViewController : EGOPullToReleaseTableViewController <GHAuthenticationViewControllerDelegate> {
 @private
     NSMutableDictionary *_cachedHeightsDictionary;
+    BOOL _reloadDataIfNewUserGotAuthenticated;
+    BOOL _reloadDataOnApplicationWillEnterForeground;
 }
 
 @property (nonatomic, retain) NSMutableDictionary *cachedHeightsDictionary;
 @property (nonatomic, readonly) UITableViewCell *dummyCell;
+
+@property (nonatomic, assign) BOOL reloadDataIfNewUserGotAuthenticated;
+@property (nonatomic, assign) BOOL reloadDataOnApplicationWillEnterForeground;  // default: YES
 
 - (UITableViewCell *)dummyCellWithText:(NSString *)text;
 - (CGFloat)heightForDescription:(NSString *)description;
@@ -28,6 +34,9 @@
 - (void)updateImageViewForCell:(GHNewsFeedItemTableViewCell *)cell 
                    atIndexPath:(NSIndexPath *)indexPath 
                 withGravatarID:(NSString *)gravatarID;
+
+- (void)authenticationViewControllerdidAuthenticateUserCallback:(NSNotification *)notification;
+- (void)applicationWillEnterForegroundCallback:(NSNotification *)notification;
 
 @end
 

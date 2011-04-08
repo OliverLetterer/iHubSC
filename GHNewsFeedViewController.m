@@ -30,6 +30,8 @@
                                                          image:[UIImage imageNamed:@"56-feed.png"] 
                                                            tag:0]
                            autorelease];
+        
+        self.reloadDataIfNewUserGotAuthenticated = YES;
     }
     return self;
 }

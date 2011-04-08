@@ -9,6 +9,10 @@
 #import <UIKit/UIKit.h>
 #import "UITableViewCellWithTextField.h"
 
+NSString *const GHAuthenticationViewControllerDidAuthenticateUserNotification;
+
+
+
 @class GHAuthenticationViewController, GHUser;
 
 @protocol GHAuthenticationViewControllerDelegate <NSObject>
@@ -33,5 +37,7 @@
 @property (nonatomic, retain) UITableView *tableView;
 @property (nonatomic, retain) UIImageView *imageView;
 @property (nonatomic, retain) UIActivityIndicatorView *activityIndicatorView;
+
++ (BOOL)isOneAuthenticationViewControllerActive;
 
 @end

@@ -14,6 +14,8 @@
 #define UsernameCellTag 13374
 #define PasswordCellTag 13375
 
+NSString *const GHAuthenticationViewControllerDidAuthenticateUserNotification = @"GHAuthenticationViewControllerDidAuthenticateUserNotification";
+
 @implementation GHAuthenticationViewController
 
 @synthesize delegate=_delegate;
@@ -29,6 +31,12 @@
 - (NSString *)password {
     UITableViewCellWithTextField *cell = (UITableViewCellWithTextField *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
     return cell.textField.text;
+}
+
+static BOOL _isOneAuthenticationViewControllerActive = NO;
+
++ (BOOL)isOneAuthenticationViewControllerActive {
+    return _isOneAuthenticationViewControllerActive;
 }
 
 #pragma mark - Initialization
@@ -254,6 +262,16 @@
                                                           autorelease];
                                     [alert show];
                                 } else {
+                                    
+                                    [GHSettingsHelper setUsername:user.login];
+                                    [GHSettingsHelper setPassword:user.password];
+                                    [GHSettingsHelper setGravatarID:user.gravatarID];
+                                    [GHAuthenticationManager sharedInstance].username = user.login;
+                                    [GHAuthenticationManager sharedInstance].password = user.password;
+                                    
+                                    [[NSNotificationCenter defaultCenter] postNotificationName:GHAuthenticationViewControllerDidAuthenticateUserNotification 
+                                                                                        object:nil];
+                                    
                                     [self.delegate authenticationViewController:self didAuthenticateUser:user];
                                 }
                             }];

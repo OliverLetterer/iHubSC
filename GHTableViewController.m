@@ -9,10 +9,12 @@
 #import "GHTableViewController.h"
 #import "GithubAPI.h"
 #import "GHNewsFeedItemTableViewCell.h"
+#import "GHAuthenticationViewController.h"
 
 @implementation GHTableViewController
 
 @synthesize cachedHeightsDictionary=_cachedHeightsDictionary;
+@synthesize reloadDataIfNewUserGotAuthenticated=_reloadDataIfNewUserGotAuthenticated, reloadDataOnApplicationWillEnterForeground=_reloadDataOnApplicationWillEnterForeground;
 
 #pragma mark - setters and getters
 
@@ -57,13 +59,26 @@
     if (error != nil) {
         DLog(@"%@", error);
         
-        UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", @"") 
-                                                         message:[error localizedDescription] 
-                                                        delegate:nil 
-                                               cancelButtonTitle:NSLocalizedString(@"OK", @"") 
-                                               otherButtonTitles:nil]
-                              autorelease];
-        [alert show];
+        if (error.code == 3) {
+            // authentication needed
+            if (![GHAuthenticationViewController isOneAuthenticationViewControllerActive]) {
+                GHAuthenticationViewController *authViewController = [[[GHAuthenticationViewController alloc] init] autorelease];
+                authViewController.delegate = self;
+                
+                UINavigationController *navController = [[[UINavigationController alloc] initWithRootViewController:authViewController] autorelease];
+                
+                [self presentModalViewController:navController animated:YES];
+                
+            }
+        } else {
+            UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", @"") 
+                                                             message:[error localizedDescription] 
+                                                            delegate:nil 
+                                                   cancelButtonTitle:NSLocalizedString(@"OK", @"") 
+                                                   otherButtonTitles:nil]
+                                  autorelease];
+            [alert show];
+        }
     }
 }
 
@@ -88,12 +103,35 @@
     }
 }
 
+- (void)authenticationViewControllerdidAuthenticateUserCallback:(NSNotification *)notification {
+    if (self.reloadDataIfNewUserGotAuthenticated) {
+        [self reloadData];
+    }
+}
+
+- (void)applicationWillEnterForegroundCallback:(NSNotification *)notification {
+    if (self.reloadDataOnApplicationWillEnterForeground) {
+        [self reloadData];
+    }
+}
+
 #pragma mark - Initialization
 
 - (id)initWithStyle:(UITableViewStyle)style {
     if ((self = [super initWithStyle:style])) {
         // Custom initialization
         self.cachedHeightsDictionary = [NSMutableDictionary dictionary];
+        [[NSNotificationCenter defaultCenter] addObserver:self 
+                                                 selector:@selector(authenticationViewControllerdidAuthenticateUserCallback:) 
+                                                     name:GHAuthenticationViewControllerDidAuthenticateUserNotification 
+                                                   object:nil];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self 
+                                                 selector:@selector(applicationWillEnterForegroundCallback:) 
+                                                     name:UIApplicationWillEnterForegroundNotification 
+                                                   object:nil];
+        
+        self.reloadDataOnApplicationWillEnterForeground = YES;
     }
     return self;
 }
@@ -101,6 +139,7 @@
 #pragma mark - Memory management
 
 - (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
     [_cachedHeightsDictionary release];
     [super dealloc];
 }
@@ -159,6 +198,12 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     return nil;
+}
+
+#pragma mark - GHAuthenticationViewControllerDelegate
+
+- (void)authenticationViewController:(GHAuthenticationViewController *)authenticationViewController didAuthenticateUser:(GHUser *)user {
+    [self dismissModalViewControllerAnimated:YES];
 }
 
 @end
