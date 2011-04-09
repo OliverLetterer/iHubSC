@@ -56,6 +56,11 @@
             self.payload = [[[GHDownloadEventPayload alloc] initWithRawDictionary:rawPayload] autorelease];
         } else if ([self.type isEqualToString:@"MemberEvent"]) {
             self.payload = [[[GHMemberEventPayload alloc] initWithRawDictionary:rawPayload] autorelease];
+        } else if ([self.type isEqualToString:@"IssueCommentEvent"]) {
+            self.payload = [[[GHIssuesCommentPayload alloc] initWithRawDictionary:rawPayload] autorelease];
+        } else {
+            DLog(@"Unknown Payload Event Type");
+            DLog(@"%@", rawDictionary);
         }
     }
     return self;

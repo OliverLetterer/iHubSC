@@ -499,6 +499,27 @@
         cell.titleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ %@ %@", @""), payload.actor, payload.action, payload.member];
         
         return cell;
+    } else if (item.payload.type == GHPayloadIssueCommentEvent) {
+        NSString *CellIdentifier = @"GHFeedItemWithDescriptionTableViewCell";
+        GHFeedItemWithDescriptionTableViewCell *cell = (GHFeedItemWithDescriptionTableViewCell *)[self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        
+        if (!cell) {
+            cell = [[[GHFeedItemWithDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        }
+        
+        GHIssuesCommentPayload *payload = (GHIssuesCommentPayload *)item.payload;
+        
+        [self updateImageViewForCell:cell 
+                         atIndexPath:indexPath 
+                      withGravatarID:item.actorAttributes.gravatarID];
+        
+        cell.repositoryLabel.text = payload.repo;
+        cell.titleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ commented on a pull request", @""), payload.actor];
+        
+        cell.titleLabel.text = payload.actor;
+        cell.descriptionLabel.text = NSLocalizedString(@"commented on a pull request", @"");
+        
+        return cell;
     }
     
     return [self dummyCellWithText:item.type];
@@ -636,6 +657,8 @@
             
             height = [self heightForDescription:description] + 20.0 + 5.0; // X + top offset of status label + 30 px white space on the bottom
         } else if(item.payload.type == GHPayloadMemberEvent) {
+            height = 71.0;
+        } else if(item.payload.type == GHPayloadIssueCommentEvent) {
             height = 71.0;
         } else {
             minimumHeight = 15.0;

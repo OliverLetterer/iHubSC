@@ -11,6 +11,7 @@ support all these events
     [X] GistEvent 
 [O] GitHubEvent 
     [X] GollumEvent 
+    [X] IssueCommentEvent
     [X] IssuesEvent 
     [X] MemberEvent 
 [O] PublicEvent 
@@ -24,3 +25,11 @@ support all these events
 - not showing NewsFeed after first login (implement a notification to handle if a new user got authenticated)
 - what happens if the password changed?
 - rename GHFeedItemWithDescriptionTableViewCell and all other cells
+
+ViewControllers for:
+- a single Repository
+- User
+- Commits
+- Pull Requests
+- search
+- gist

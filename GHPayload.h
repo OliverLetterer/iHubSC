@@ -22,7 +22,8 @@ typedef enum {
     GHPayloadGollumEvent,
     GHPayloadGistEvent,
     GHPayloadDownloadEvent,
-    GHPayloadMemberEvent
+    GHPayloadMemberEvent,
+    GHPayloadIssueCommentEvent
 } GHPayloadEvent;
 
 @interface GHPayload : NSObject {
