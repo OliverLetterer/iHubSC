@@ -10,6 +10,7 @@
 #import "GithubAPI.h"
 #import "GHFeedItemWithDescriptionTableViewCell.h"
 #import "UICollapsingAndSpinningTableViewCell.h"
+#import "GHSingleRepositoryViewController.h"
 
 @implementation GHRepositoriesViewController
 
@@ -371,6 +372,19 @@
                 [self showWatchedRepositories];
             }
         }
+    } else if (indexPath.section == 0) {
+        GHRepository *repo = [self.repositoriesArray objectAtIndex:indexPath.row];
+        
+        GHSingleRepositoryViewController *viewController = [[[GHSingleRepositoryViewController alloc] initWithRepository:[NSString stringWithFormat:@"%@/%@", repo.owner, repo.name] ] autorelease];
+        
+        [self.navigationController pushViewController:viewController animated:YES];
+        
+    } else if (indexPath.section == 1 && indexPath.row > 0) {
+        GHRepository *repo = [self.watchedRepositoriesArray objectAtIndex:indexPath.row-1];
+        
+        GHSingleRepositoryViewController *viewController = [[[GHSingleRepositoryViewController alloc] initWithRepository:[NSString stringWithFormat:@"%@/%@", repo.owner, repo.name] ] autorelease];
+        
+        [self.navigationController pushViewController:viewController animated:YES];
     } else {
         [self.tableView deselectRowAtIndexPath:indexPath animated:NO];
     }

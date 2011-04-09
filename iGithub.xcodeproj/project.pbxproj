@@ -38,6 +38,7 @@
 		A73AE5AE134EFDF400E9EBA4 /* 60-dialpad.png in Resources */ = {isa = PBXBuildFile; fileRef = A73AE5AA134EFDF400E9EBA4 /* 60-dialpad.png */; };
 		A73AE5AF134EFDF400E9EBA4 /* 60-dialpad@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A73AE5AB134EFDF400E9EBA4 /* 60-dialpad@2x.png */; };
 		A73AE5E31350AF3400E9EBA4 /* GHIssuesCommentPayload.m in Sources */ = {isa = PBXBuildFile; fileRef = A73AE5E21350AF3400E9EBA4 /* GHIssuesCommentPayload.m */; };
+		A73AE5E61350B27A00E9EBA4 /* GHSingleRepositoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A73AE5E51350B27A00E9EBA4 /* GHSingleRepositoryViewController.m */; };
 		A73E298C134795FA00E85282 /* GHFollowEventPayload.m in Sources */ = {isa = PBXBuildFile; fileRef = A73E298B134795FA00E85282 /* GHFollowEventPayload.m */; };
 		A73E29911347970500E85282 /* GHFollowEventTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A73E29901347970500E85282 /* GHFollowEventTableViewCell.m */; };
 		A73E29951347A8E800E85282 /* GHWatchEventPayload.m in Sources */ = {isa = PBXBuildFile; fileRef = A73E29941347A8E800E85282 /* GHWatchEventPayload.m */; };
@@ -179,6 +180,8 @@
 		A73AE5AB134EFDF400E9EBA4 /* 60-dialpad@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "60-dialpad@2x.png"; sourceTree = "<group>"; };
 		A73AE5E11350AF3400E9EBA4 /* GHIssuesCommentPayload.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHIssuesCommentPayload.h; sourceTree = "<group>"; };
 		A73AE5E21350AF3400E9EBA4 /* GHIssuesCommentPayload.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHIssuesCommentPayload.m; sourceTree = "<group>"; };
+		A73AE5E41350B27900E9EBA4 /* GHSingleRepositoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHSingleRepositoryViewController.h; sourceTree = "<group>"; };
+		A73AE5E51350B27A00E9EBA4 /* GHSingleRepositoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHSingleRepositoryViewController.m; sourceTree = "<group>"; };
 		A73E298A134795FA00E85282 /* GHFollowEventPayload.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHFollowEventPayload.h; sourceTree = "<group>"; };
 		A73E298B134795FA00E85282 /* GHFollowEventPayload.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHFollowEventPayload.m; sourceTree = "<group>"; };
 		A73E298F1347970500E85282 /* GHFollowEventTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHFollowEventTableViewCell.h; sourceTree = "<group>"; };
@@ -752,6 +755,8 @@
 				A7BC6786134CE7E00083F906 /* GHRepositoriesViewController.m */,
 				A7BC6789134D942C0083F906 /* GHCreateRepositoryViewController.h */,
 				A7BC678A134D942C0083F906 /* GHCreateRepositoryViewController.m */,
+				A73AE5E41350B27900E9EBA4 /* GHSingleRepositoryViewController.h */,
+				A73AE5E51350B27A00E9EBA4 /* GHSingleRepositoryViewController.m */,
 			);
 			name = GHRepositoriesViewController;
 			sourceTree = "<group>";
@@ -1284,6 +1289,7 @@
 				A73AE5A3134EE93200E9EBA4 /* EGOPullToReleaseTableViewController.m in Sources */,
 				A73AE5A7134EF4F100E9EBA4 /* UITableView+Additions.m in Sources */,
 				A73AE5E31350AF3400E9EBA4 /* GHIssuesCommentPayload.m in Sources */,
+				A73AE5E61350B27A00E9EBA4 /* GHSingleRepositoryViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
