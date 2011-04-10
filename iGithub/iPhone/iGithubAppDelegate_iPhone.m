@@ -42,7 +42,7 @@
     self.newsFeedViewController = [[[GHNewsFeedViewController alloc] init] autorelease];
     [tabBarItems addObject:[[[UINavigationController alloc] initWithRootViewController:self.newsFeedViewController] autorelease] ];
     
-    self.repositoriesViewController = [[[GHRepositoriesViewController alloc] initWithUsername:[GHAuthenticationManager sharedInstance].username] autorelease];
+    self.repositoriesViewController = [[[GHUserViewController alloc] initWithUsername:[GHAuthenticationManager sharedInstance].username] autorelease];
     self.repositoriesViewController.reloadDataIfNewUserGotAuthenticated = YES;
     [tabBarItems addObject:[[[UINavigationController alloc] initWithRootViewController:self.repositoriesViewController] autorelease] ];
     

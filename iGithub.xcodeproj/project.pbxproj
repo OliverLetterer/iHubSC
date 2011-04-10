@@ -81,7 +81,7 @@
 		A7BC677E134CCD1A0083F906 /* GHPrivateRepositoryIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A7BC677C134CCD1A0083F906 /* GHPrivateRepositoryIcon@2x.png */; };
 		A7BC677F134CCD1A0083F906 /* GHPrivateRepositoryIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = A7BC677D134CCD1A0083F906 /* GHPrivateRepositoryIcon.png */; };
 		A7BC6784134CCFF50083F906 /* ASIHTTPRequest+GithubAPIAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = A7BC6783134CCFF50083F906 /* ASIHTTPRequest+GithubAPIAdditions.m */; };
-		A7BC6787134CE7E00083F906 /* GHRepositoriesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7BC6786134CE7E00083F906 /* GHRepositoriesViewController.m */; };
+		A7BC6787134CE7E00083F906 /* GHUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7BC6786134CE7E00083F906 /* GHUserViewController.m */; };
 		A7BC678B134D942C0083F906 /* GHCreateRepositoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7BC678A134D942C0083F906 /* GHCreateRepositoryViewController.m */; };
 		A7BC6790134D96DD0083F906 /* GHCreateRepositoryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A7BC678E134D96DD0083F906 /* GHCreateRepositoryTableViewCell.m */; };
 		A7BF13FC1342149C001AE50D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7BF13FB1342149C001AE50D /* UIKit.framework */; };
@@ -260,8 +260,8 @@
 		A7BC677D134CCD1A0083F906 /* GHPrivateRepositoryIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GHPrivateRepositoryIcon.png; sourceTree = "<group>"; };
 		A7BC6782134CCFF50083F906 /* ASIHTTPRequest+GithubAPIAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ASIHTTPRequest+GithubAPIAdditions.h"; sourceTree = "<group>"; };
 		A7BC6783134CCFF50083F906 /* ASIHTTPRequest+GithubAPIAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ASIHTTPRequest+GithubAPIAdditions.m"; sourceTree = "<group>"; };
-		A7BC6785134CE7DF0083F906 /* GHRepositoriesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHRepositoriesViewController.h; sourceTree = "<group>"; };
-		A7BC6786134CE7E00083F906 /* GHRepositoriesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHRepositoriesViewController.m; sourceTree = "<group>"; };
+		A7BC6785134CE7DF0083F906 /* GHUserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHUserViewController.h; sourceTree = "<group>"; };
+		A7BC6786134CE7E00083F906 /* GHUserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHUserViewController.m; sourceTree = "<group>"; };
 		A7BC6789134D942C0083F906 /* GHCreateRepositoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHCreateRepositoryViewController.h; sourceTree = "<group>"; };
 		A7BC678A134D942C0083F906 /* GHCreateRepositoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHCreateRepositoryViewController.m; sourceTree = "<group>"; };
 		A7BC678D134D96DD0083F906 /* GHCreateRepositoryTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHCreateRepositoryTableViewCell.h; sourceTree = "<group>"; };
@@ -783,8 +783,8 @@
 			isa = PBXGroup;
 			children = (
 				A7BC678C134D96C30083F906 /* UITableViewCells */,
-				A7BC6785134CE7DF0083F906 /* GHRepositoriesViewController.h */,
-				A7BC6786134CE7E00083F906 /* GHRepositoriesViewController.m */,
+				A7BC6785134CE7DF0083F906 /* GHUserViewController.h */,
+				A7BC6786134CE7E00083F906 /* GHUserViewController.m */,
 				A7BC6789134D942C0083F906 /* GHCreateRepositoryViewController.h */,
 				A7BC678A134D942C0083F906 /* GHCreateRepositoryViewController.m */,
 				A73AE5E41350B27900E9EBA4 /* GHSingleRepositoryViewController.h */,
@@ -1162,6 +1162,7 @@
 				A7BF13F31342149C001AE50D /* Sources */,
 				A7BF13F41342149C001AE50D /* Frameworks */,
 				A7BF13F51342149C001AE50D /* Resources */,
+				A76FC9A3135248C8004C642E /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -1234,6 +1235,22 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		A76FC9A3135248C8004C642E /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "export CODESIGN_ALLOCATE=/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/codesign_allocate\nif [ \"${PLATFORM_NAME}\" == \"iphoneos\" ]; then\n/Developer/iphoneentitlements401/gen_entitlements.py \"my.company.${PROJECT_NAME}\" \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/${PROJECT_NAME}.xcent\";\ncodesign -f -s \"iPhone Developer\" --entitlements \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/${PROJECT_NAME}.xcent\" \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/\"\nfi";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		A7BF13F31342149C001AE50D /* Sources */ = {
@@ -1312,7 +1329,7 @@
 				A7F62626134B89E5006487CA /* NSDate+GithubAPIAdditions.m in Sources */,
 				A7F6262A134C45D5006487CA /* GHTableViewController.m in Sources */,
 				A7BC6784134CCFF50083F906 /* ASIHTTPRequest+GithubAPIAdditions.m in Sources */,
-				A7BC6787134CE7E00083F906 /* GHRepositoriesViewController.m in Sources */,
+				A7BC6787134CE7E00083F906 /* GHUserViewController.m in Sources */,
 				A7BC678B134D942C0083F906 /* GHCreateRepositoryViewController.m in Sources */,
 				A7BC6790134D96DD0083F906 /* GHCreateRepositoryTableViewCell.m in Sources */,
 				A7F7CA62134DA1FA005509D0 /* NSError+GithubAPI.m in Sources */,
@@ -1361,7 +1378,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;

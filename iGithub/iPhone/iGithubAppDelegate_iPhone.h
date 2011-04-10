@@ -9,17 +9,17 @@
 #import <UIKit/UIKit.h>
 #import "iGithubAppDelegate.h"
 #import "GHNewsFeedViewController.h"
-#import "GHRepositoriesViewController.h"
+#import "GHUserViewController.h"
 
 @interface iGithubAppDelegate_iPhone : iGithubAppDelegate {
     UITabBarController *_tabBarController;
     GHNewsFeedViewController *_newsFeedViewController;
-    GHRepositoriesViewController *_repositoriesViewController;
+    GHUserViewController *_repositoriesViewController;
 }
 
 @property (nonatomic, retain) UITabBarController *tabBarController;
 @property (nonatomic, retain) GHNewsFeedViewController *newsFeedViewController;
-@property (nonatomic, retain) GHRepositoriesViewController *repositoriesViewController;
+@property (nonatomic, retain) GHUserViewController *repositoriesViewController;
 
 - (void)authenticationViewControllerdidAuthenticateUserCallback:(NSNotification *)notification;
 
