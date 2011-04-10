@@ -23,9 +23,11 @@
     NSString *_name;
     NSNumber *_openIssues;
     NSString *_owner;
+    NSString *_parent;
     NSNumber *_private;
     NSString *_pushedAt;
     NSNumber *_size;
+    NSString *_source;
     NSString *_URL;
     NSNumber *_watchers;
 }
@@ -43,9 +45,11 @@
 @property (nonatomic, copy) NSString *name;
 @property (nonatomic, copy) NSNumber *openIssues;
 @property (nonatomic, copy) NSString *owner;
+@property (nonatomic, copy) NSString *parent;
 @property (nonatomic, copy) NSNumber *private;
 @property (nonatomic, copy) NSString *pushedAt;
 @property (nonatomic, copy) NSNumber *size;
+@property (nonatomic, copy) NSString *source;
 @property (nonatomic, copy) NSString *URL;
 @property (nonatomic, copy) NSNumber *watchers;
 
@@ -58,9 +62,23 @@
                completionHandler:(void (^)(NSArray *array, NSError *error))handler;
 
 + (void)createRepositoryWithTitle:(NSString *)title 
-                      description:(NSString *)description public:(BOOL)public completionHandler:(void (^)(GHRepository *repository, NSError *error))handler;
+                      description:(NSString *)description 
+                           public:(BOOL)public 
+                completionHandler:(void (^)(GHRepository *repository, NSError *error))handler;
 
 + (void)watchedRepositoriesOfUser:(NSString *)username 
                 completionHandler:(void (^)(NSArray *array, NSError *error))handler;
+
++ (void)repository:(NSString *)repository withCompletionHandler:(void (^)(GHRepository *repository, NSError *error))handler;
+
++ (void)watchingUserOfRepository:(NSString *)repository 
+          withCompletionHandler:(void (^)(NSArray *watchingUsers, NSError *error))handler;
+
++ (void)deleteTokenForRepository:(NSString *)repository 
+           withCompletionHandler:(void (^)(NSString *deleteToken, NSError *error))handler;
+
++ (void)deleteRepository:(NSString *)repository 
+               withToken:(NSString *)token 
+       completionHandler:(void (^)(NSError *error))handler;
 
 @end

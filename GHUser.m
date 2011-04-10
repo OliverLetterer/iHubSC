@@ -106,33 +106,38 @@
 }
 
 - (id)initWithRawUserDictionary:(NSDictionary *)rawDictionary {
+    NSDictionary *userDictionary = [rawDictionary objectForKeyOrNilOnNullObject:@"user"];
+    if ((self = [self initWithRawDictionary:userDictionary])) {
+        // setup here
+    }
+    return self;
+}
+
+- (id)initWithRawDictionary:(NSDictionary *)rawDictionary {
     if ((self = [super init])) {
         // setup here
-        NSDictionary *userDictionary = [rawDictionary objectForKeyOrNilOnNullObject:@"user"];
+        self.createdAt = [rawDictionary objectForKey:@"created_at"];
+        self.gravatarID = [rawDictionary objectForKey:@"gravatar_id"];
+        self.login = [rawDictionary objectForKey:@"login"];
+        self.type = [rawDictionary objectForKey:@"type"];
         
-        self.createdAt = [userDictionary objectForKey:@"created_at"];
-        self.gravatarID = [userDictionary objectForKey:@"gravatar_id"];
-        self.login = [userDictionary objectForKey:@"login"];
-        self.type = [userDictionary objectForKey:@"type"];
-        
-        self.followersCount = [[userDictionary objectForKey:@"followers_count"] intValue];
-        self.followingCount = [[userDictionary objectForKey:@"following_count"] intValue];
-        self.ID = [[userDictionary objectForKey:@"id"] intValue];
-        self.publicGistCount = [[userDictionary objectForKey:@"public_gist_count"] intValue];
-        self.publicRepoCount = [[userDictionary objectForKey:@"public_repo_count"] intValue];
+        self.followersCount = [[rawDictionary objectForKey:@"followers_count"] intValue];
+        self.followingCount = [[rawDictionary objectForKey:@"following_count"] intValue];
+        self.ID = [[rawDictionary objectForKey:@"id"] intValue];
+        self.publicGistCount = [[rawDictionary objectForKey:@"public_gist_count"] intValue];
+        self.publicRepoCount = [[rawDictionary objectForKey:@"public_repo_count"] intValue];
         
         // private github stuff
-        self.privateRepoCount = [[userDictionary objectForKey:@"total_private_repo_count"] intValue];
-        self.collaborators = [[userDictionary objectForKey:@"collaborators"] intValue];
-        self.diskUsage = [[userDictionary objectForKey:@"disk_usage"] intValue];
-        self.ownedPrivateRepoCount = [[userDictionary objectForKey:@"owned_private_repo_count"] intValue];
-        self.privateGistCount = [[userDictionary objectForKey:@"private_gist_count"] intValue];
+        self.privateRepoCount = [[rawDictionary objectForKey:@"total_private_repo_count"] intValue];
+        self.collaborators = [[rawDictionary objectForKey:@"collaborators"] intValue];
+        self.diskUsage = [[rawDictionary objectForKey:@"disk_usage"] intValue];
+        self.ownedPrivateRepoCount = [[rawDictionary objectForKey:@"owned_private_repo_count"] intValue];
+        self.privateGistCount = [[rawDictionary objectForKey:@"private_gist_count"] intValue];
         
-        self.planName = [[userDictionary objectForKey:@"plan"] objectForKey:@"name"];
-        self.planCollaborators = [[[userDictionary objectForKey:@"plan"] objectForKey:@"collaborators"] intValue];
-        self.planSpace = [[[userDictionary objectForKey:@"plan"] objectForKey:@"space"] intValue];
-        self.planPrivateRepos = [[[userDictionary objectForKey:@"plan"] objectForKey:@"private_repos"] intValue];
-        
+        self.planName = [[rawDictionary objectForKey:@"plan"] objectForKey:@"name"];
+        self.planCollaborators = [[[rawDictionary objectForKey:@"plan"] objectForKey:@"collaborators"] intValue];
+        self.planSpace = [[[rawDictionary objectForKey:@"plan"] objectForKey:@"space"] intValue];
+        self.planPrivateRepos = [[[rawDictionary objectForKey:@"plan"] objectForKey:@"private_repos"] intValue];
     }
     return self;
 }

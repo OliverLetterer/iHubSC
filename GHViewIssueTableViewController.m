@@ -467,7 +467,7 @@
             }
             
             // Configure the cell...
-            cell.textLabel.text = NSLocalizedString(@"Administrate", @"");
+            cell.textLabel.text = NSLocalizedString(@"Administration", @"");
             [cell setSpinning:NO];
             
             if (!_isShowingAdministration) {

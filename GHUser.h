@@ -63,6 +63,7 @@
 
 + (GHUser *)userFromRawUserDictionary:(NSDictionary *)rawDictionary;
 - (id)initWithRawUserDictionary:(NSDictionary *)rawDictionary;
+- (id)initWithRawDictionary:(NSDictionary *)rawDictionary;
 
 + (void)userWithName:(NSString *)username completionHandler:(void(^)(GHUser *user, NSError *error))handler;
 

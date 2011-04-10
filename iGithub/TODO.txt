@@ -25,9 +25,12 @@ support all these events
 - not showing NewsFeed after first login (implement a notification to handle if a new user got authenticated)
 - what happens if the password changed?
 - rename GHFeedItemWithDescriptionTableViewCell and all other cells
+- date formatting (1 day but 30 days, minutes, ...)
+
+GHSingleRepositoryViewController
+- administrate (delete, watch, unwatch)
 
 ViewControllers for:
-- a single Repository
 - User
 - Commits
 - Pull Requests

@@ -15,6 +15,7 @@
 #import "GHNewsFeedItem.h"
 #import "GHActorAttributes.h"
 #import "GHIssue.h"
+#import "GHRawIssue.h"
 #import "GHTarget.h"
 #import "GHIssueComment.h"
 

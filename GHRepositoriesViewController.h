@@ -9,8 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "GHTableViewController.h"
 #import "GHCreateRepositoryViewController.h"
+#import "GHSingleRepositoryViewController.h"
 
-@interface GHRepositoriesViewController : GHTableViewController <GHCreateRepositoryViewControllerDelegate> {
+@interface GHRepositoriesViewController : GHTableViewController <GHCreateRepositoryViewControllerDelegate, GHSingleRepositoryViewControllerDelegate> {
 @private
     NSArray *_repositoriesArray;
     NSString *_username;
@@ -19,11 +20,14 @@
     BOOL _shouldShowWatchedRepositoriesAfterDownload;
     BOOL _isDownloadingWatchedRepositories;
     NSArray *_watchedRepositoriesArray;
+    
+    NSIndexPath *_lastIndexPathForSingleRepositoryViewController;
 }
 
 @property (nonatomic, retain) NSArray *repositoriesArray;
 @property (nonatomic, copy) NSString *username;
 @property (nonatomic, retain) NSArray *watchedRepositoriesArray;
+@property (nonatomic, copy) NSIndexPath *lastIndexPathForSingleRepositoryViewController;
 
 - (id)initWithUsername:(NSString *)username;
 

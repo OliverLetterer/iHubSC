@@ -50,8 +50,8 @@
                                  autorelease];
 		self.lastUpdatedLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth;
 		self.lastUpdatedLabel.font = [UIFont systemFontOfSize:12.0f];
-		self.lastUpdatedLabel.textColor = TEXT_COLOR;
-		self.lastUpdatedLabel.shadowColor = [UIColor colorWithWhite:0.9f alpha:1.0f];
+		self.lastUpdatedLabel.textColor = [UIColor colorWithWhite:0.25f alpha:1.0];
+		self.lastUpdatedLabel.shadowColor = [UIColor whiteColor];
 		self.lastUpdatedLabel.shadowOffset = CGSizeMake(0.0f, 1.0f);
 		self.lastUpdatedLabel.backgroundColor = [UIColor clearColor];
 		self.lastUpdatedLabel.textAlignment = UITextAlignmentCenter;
@@ -61,8 +61,8 @@
                             autorelease];
 		self.statusLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth;
 		self.statusLabel.font = [UIFont boldSystemFontOfSize:13.0f];
-		self.statusLabel.textColor = TEXT_COLOR;
-		self.statusLabel.shadowColor = [UIColor colorWithWhite:0.9f alpha:1.0f];
+		self.statusLabel.textColor = [UIColor colorWithWhite:0.25f alpha:1.0];
+		self.statusLabel.shadowColor = [UIColor whiteColor];
 		self.statusLabel.shadowOffset = CGSizeMake(0.0f, 1.0f);
 		self.statusLabel.backgroundColor = [UIColor clearColor];
 		self.statusLabel.textAlignment = UITextAlignmentCenter;

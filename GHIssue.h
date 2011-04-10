@@ -64,4 +64,7 @@
                      withNumber:(NSNumber *)number 
               completionHandler:(void (^)(NSError *error))handler;
 
++ (void)openedIssuesOnRepository:(NSString *)repository 
+               completionHandler:(void (^)(NSArray *issues, NSError *error))handler;
+
 @end

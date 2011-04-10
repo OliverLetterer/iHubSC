@@ -17,6 +17,7 @@
 @synthesize repositoriesArray=_repositoriesArray;
 @synthesize username=_username;
 @synthesize watchedRepositoriesArray=_watchedRepositoriesArray;
+@synthesize lastIndexPathForSingleRepositoryViewController=_lastIndexPathForSingleRepositoryViewController;
 
 #pragma mark - setters and getters
 
@@ -49,6 +50,7 @@
     [_repositoriesArray release];
     [_username release];
     [_watchedRepositoriesArray release];
+    [_lastIndexPathForSingleRepositoryViewController release];
     [super dealloc];
 }
 
@@ -88,6 +90,9 @@
 - (void)reloadData {
     [self downloadRepositories];
     if (self.watchedRepositoriesArray != nil) {
+        if (_isShowingWatchedRepositories) {
+            [self hideWatchedRepositories];
+        }
         [self downloadWatchedRepositories];
     }
 }
@@ -130,6 +135,8 @@
     [GHRepository watchedRepositoriesOfUser:self.username 
                           completionHandler:^(NSArray *array, NSError *error) {
                               _isDownloadingWatchedRepositories = NO;
+                              [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:0 inSection:1] ] withRowAnimation:UITableViewRowAnimationNone];
+                              
                               if (error) {
                                   [self handleError:error];
                               } else {
@@ -375,15 +382,17 @@
     } else if (indexPath.section == 0) {
         GHRepository *repo = [self.repositoriesArray objectAtIndex:indexPath.row];
         
-        GHSingleRepositoryViewController *viewController = [[[GHSingleRepositoryViewController alloc] initWithRepository:[NSString stringWithFormat:@"%@/%@", repo.owner, repo.name] ] autorelease];
-        
+        GHSingleRepositoryViewController *viewController = [[[GHSingleRepositoryViewController alloc] initWithRepositoryString:[NSString stringWithFormat:@"%@/%@", repo.owner, repo.name] ] autorelease];
+        viewController.delegate = self;
+        self.lastIndexPathForSingleRepositoryViewController = indexPath;
         [self.navigationController pushViewController:viewController animated:YES];
         
     } else if (indexPath.section == 1 && indexPath.row > 0) {
         GHRepository *repo = [self.watchedRepositoriesArray objectAtIndex:indexPath.row-1];
         
-        GHSingleRepositoryViewController *viewController = [[[GHSingleRepositoryViewController alloc] initWithRepository:[NSString stringWithFormat:@"%@/%@", repo.owner, repo.name] ] autorelease];
-        
+        GHSingleRepositoryViewController *viewController = [[[GHSingleRepositoryViewController alloc] initWithRepositoryString:[NSString stringWithFormat:@"%@/%@", repo.owner, repo.name] ] autorelease];
+        viewController.delegate = self;
+        self.lastIndexPathForSingleRepositoryViewController = indexPath;
         [self.navigationController pushViewController:viewController animated:YES];
     } else {
         [self.tableView deselectRowAtIndexPath:indexPath animated:NO];
@@ -410,6 +419,30 @@
 
 - (void)createRepositoryViewControllerDidCancel:(GHCreateRepositoryViewController *)createRepositoryViewController {
     [self dismissModalViewControllerAnimated:YES];
+}
+
+#pragma mark - GHSingleRepositoryViewControllerDelegate
+
+- (void)singleRepositoryViewControllerDidDeleteRepository:(GHSingleRepositoryViewController *)singleRepositoryViewController {
+    
+    NSArray *oldArray = self.lastIndexPathForSingleRepositoryViewController.section == 0 ? self.repositoriesArray : self.watchedRepositoriesArray;
+    NSUInteger index = self.lastIndexPathForSingleRepositoryViewController.row;
+    if (self.lastIndexPathForSingleRepositoryViewController.section == 1) {
+        index--;
+    }
+    NSMutableArray *array = [[oldArray mutableCopy] autorelease];
+    [array removeObjectAtIndex:index];
+
+    if (self.lastIndexPathForSingleRepositoryViewController.section == 0) {
+        self.repositoriesArray = array;
+    } else {
+        self.watchedRepositoriesArray = array;
+    }
+    
+    [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:self.lastIndexPathForSingleRepositoryViewController] 
+                          withRowAnimation:UITableViewRowAnimationTop];
+    
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 @end

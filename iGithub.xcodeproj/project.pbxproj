@@ -39,6 +39,9 @@
 		A73AE5AF134EFDF400E9EBA4 /* 60-dialpad@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A73AE5AB134EFDF400E9EBA4 /* 60-dialpad@2x.png */; };
 		A73AE5E31350AF3400E9EBA4 /* GHIssuesCommentPayload.m in Sources */ = {isa = PBXBuildFile; fileRef = A73AE5E21350AF3400E9EBA4 /* GHIssuesCommentPayload.m */; };
 		A73AE5E61350B27A00E9EBA4 /* GHSingleRepositoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A73AE5E51350B27A00E9EBA4 /* GHSingleRepositoryViewController.m */; };
+		A73AE5F21350FB4400E9EBA4 /* NSString+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = A73AE5F11350FB4400E9EBA4 /* NSString+Additions.m */; };
+		A73AE6151351954500E9EBA4 /* GHWebViewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A73AE6141351953E00E9EBA4 /* GHWebViewViewController.m */; };
+		A73AE6191351B11600E9EBA4 /* GHRawIssue.m in Sources */ = {isa = PBXBuildFile; fileRef = A73AE6181351B11600E9EBA4 /* GHRawIssue.m */; };
 		A73E298C134795FA00E85282 /* GHFollowEventPayload.m in Sources */ = {isa = PBXBuildFile; fileRef = A73E298B134795FA00E85282 /* GHFollowEventPayload.m */; };
 		A73E29911347970500E85282 /* GHFollowEventTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A73E29901347970500E85282 /* GHFollowEventTableViewCell.m */; };
 		A73E29951347A8E800E85282 /* GHWatchEventPayload.m in Sources */ = {isa = PBXBuildFile; fileRef = A73E29941347A8E800E85282 /* GHWatchEventPayload.m */; };
@@ -182,6 +185,12 @@
 		A73AE5E21350AF3400E9EBA4 /* GHIssuesCommentPayload.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHIssuesCommentPayload.m; sourceTree = "<group>"; };
 		A73AE5E41350B27900E9EBA4 /* GHSingleRepositoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHSingleRepositoryViewController.h; sourceTree = "<group>"; };
 		A73AE5E51350B27A00E9EBA4 /* GHSingleRepositoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHSingleRepositoryViewController.m; sourceTree = "<group>"; };
+		A73AE5F01350FB4400E9EBA4 /* NSString+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Additions.h"; sourceTree = "<group>"; };
+		A73AE5F11350FB4400E9EBA4 /* NSString+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Additions.m"; sourceTree = "<group>"; };
+		A73AE6131351953900E9EBA4 /* GHWebViewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHWebViewViewController.h; sourceTree = "<group>"; };
+		A73AE6141351953E00E9EBA4 /* GHWebViewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHWebViewViewController.m; sourceTree = "<group>"; };
+		A73AE6171351B11600E9EBA4 /* GHRawIssue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHRawIssue.h; sourceTree = "<group>"; };
+		A73AE6181351B11600E9EBA4 /* GHRawIssue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHRawIssue.m; sourceTree = "<group>"; };
 		A73E298A134795FA00E85282 /* GHFollowEventPayload.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHFollowEventPayload.h; sourceTree = "<group>"; };
 		A73E298B134795FA00E85282 /* GHFollowEventPayload.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHFollowEventPayload.m; sourceTree = "<group>"; };
 		A73E298F1347970500E85282 /* GHFollowEventTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHFollowEventTableViewCell.h; sourceTree = "<group>"; };
@@ -487,6 +496,7 @@
 		A7089518134A0C49000DD6CE /* Foundation Additions */ = {
 			isa = PBXGroup;
 			children = (
+				A73AE5EF1350FB0200E9EBA4 /* NSString+Additions */,
 				A73AE5A4134EF4C900E9EBA4 /* UITableView+Additions */,
 				A703B941134754D40014235D /* UITableViewCell+Additions */,
 				A703B927134675D90014235D /* UIImage+Additions */,
@@ -521,6 +531,26 @@
 				A73AE5A6134EF4F100E9EBA4 /* UITableView+Additions.m */,
 			);
 			name = "UITableView+Additions";
+			sourceTree = "<group>";
+		};
+		A73AE5EF1350FB0200E9EBA4 /* NSString+Additions */ = {
+			isa = PBXGroup;
+			children = (
+				A73AE5F01350FB4400E9EBA4 /* NSString+Additions.h */,
+				A73AE5F11350FB4400E9EBA4 /* NSString+Additions.m */,
+			);
+			name = "NSString+Additions";
+			sourceTree = "<group>";
+		};
+		A73AE6161351B0EE00E9EBA4 /* GHIssue */ = {
+			isa = PBXGroup;
+			children = (
+				A7CE1B8813463A6100169F94 /* GHIssue.h */,
+				A7CE1B8913463A6600169F94 /* GHIssue.m */,
+				A73AE6171351B11600E9EBA4 /* GHRawIssue.h */,
+				A73AE6181351B11600E9EBA4 /* GHRawIssue.m */,
+			);
+			name = GHIssue;
 			sourceTree = "<group>";
 		};
 		A73E298E1347960200E85282 /* GHFollowEventPayload */ = {
@@ -713,6 +743,8 @@
 				A7BF1423134214E7001AE50D /* GHAuthenticationViewController */,
 				A73E29C31348E12C00E85282 /* GHViewIssueTableViewController */,
 				A7BC6788134D94020083F906 /* GHRepositoriesViewController */,
+				A73AE6131351953900E9EBA4 /* GHWebViewViewController.h */,
+				A73AE6141351953E00E9EBA4 /* GHWebViewViewController.m */,
 			);
 			name = UserInterface;
 			sourceTree = "<group>";
@@ -941,8 +973,7 @@
 				A7089514134A0398000DD6CE /* GHAuthenticationManager */,
 				A73E29B11348744300E85282 /* Foundation & Class Additions */,
 				A703B958134794D80014235D /* GHTarget */,
-				A7CE1B8813463A6100169F94 /* GHIssue.h */,
-				A7CE1B8913463A6600169F94 /* GHIssue.m */,
+				A73AE6161351B0EE00E9EBA4 /* GHIssue */,
 				A7CE1B841346352000169F94 /* GHManagedObjectContext */,
 				A7CE1B2E1345C96E00169F94 /* GHRepository */,
 				A7CE1B271345C60200169F94 /* GHPullRequest */,
@@ -1290,6 +1321,9 @@
 				A73AE5A7134EF4F100E9EBA4 /* UITableView+Additions.m in Sources */,
 				A73AE5E31350AF3400E9EBA4 /* GHIssuesCommentPayload.m in Sources */,
 				A73AE5E61350B27A00E9EBA4 /* GHSingleRepositoryViewController.m in Sources */,
+				A73AE5F21350FB4400E9EBA4 /* NSString+Additions.m in Sources */,
+				A73AE6151351954500E9EBA4 /* GHWebViewViewController.m in Sources */,
+				A73AE6191351B11600E9EBA4 /* GHRawIssue.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

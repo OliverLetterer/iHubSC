@@ -12,7 +12,7 @@
 
 @implementation GHRepository
 
-@synthesize creationDate=_creationDate, desctiptionRepo=_desctiptionRepo, fork=_fork, forks=_forks, hasDownloads=_hasDownloads, hasIssues=_hasIssues, hasWiki=_hasWiki, homePage=_homePage, integrateBranch=_integrateBranch, language=_language, name=_name, openIssues=_openIssues, owner=_owner, private=_private, pushedAt=_pushedAt, size=_size, URL=_URL, watchers=_watchers;
+@synthesize creationDate=_creationDate, desctiptionRepo=_desctiptionRepo, fork=_fork, forks=_forks, hasDownloads=_hasDownloads, hasIssues=_hasIssues, hasWiki=_hasWiki, homePage=_homePage, integrateBranch=_integrateBranch, language=_language, name=_name, openIssues=_openIssues, owner=_owner, parent=_parent, private=_private, pushedAt=_pushedAt, size=_size, source=_source, URL=_URL, watchers=_watchers;
 
 #pragma mark - class methods
 
@@ -155,6 +155,142 @@
             }
         });
     });
+}
+
++ (void)repository:(NSString *)repository withCompletionHandler:(void (^)(GHRepository *repository, NSError *error))handler {
+    
+    dispatch_async(GHAPIBackgroundQueue(), ^(void) {
+        
+        // repos/show/:user/:repo
+        
+        NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://github.com/api/v2/json/repos/show/%@", [repository stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] ]];
+        NSError *myError = nil;
+        
+        ASIFormDataRequest *request = [ASIFormDataRequest authenticatedFormDataRequestWithURL:URL];
+        
+        [request startSynchronous];
+        
+        myError = [request error];
+        
+        if (!myError) {
+            myError = [NSError errorFromRawDictionary:[[request responseString] objectFromJSONString] ];
+        }
+        
+        NSString *jsonString = [request responseString];
+        
+        dispatch_async(dispatch_get_main_queue(), ^(void) {
+            if (myError) {
+                handler(nil, myError);
+            } else {
+                NSDictionary *rawDictionary = [jsonString objectFromJSONString];
+                handler([[[GHRepository alloc] initWithRawDictionary:[rawDictionary objectForKey:@"repository"] ] autorelease], nil);
+            }
+        });
+    });
+}
+
++ (void)watchingUserOfRepository:(NSString *)repository 
+           withCompletionHandler:(void (^)(NSArray *watchingUsers, NSError *error))handler {
+    
+    dispatch_async(GHAPIBackgroundQueue(), ^(void) {
+        
+        // http://github.com/api/v2/json/repos/show/claudiob/csswaxer/watchers?full=1
+        
+        NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://github.com/api/v2/json/repos/show/%@/watchers?full=1", [repository stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] ]];
+        NSError *myError = nil;
+        
+        ASIFormDataRequest *request = [ASIFormDataRequest authenticatedFormDataRequestWithURL:URL];
+        
+        [request startSynchronous];
+        
+        myError = [request error];
+        
+        if (!myError) {
+            myError = [NSError errorFromRawDictionary:[[request responseString] objectFromJSONString] ];
+        }
+        
+        NSString *jsonString = [request responseString];
+        
+        dispatch_async(dispatch_get_main_queue(), ^(void) {
+            if (myError) {
+                handler(nil, myError);
+            } else {
+                NSDictionary *dictionary = [jsonString objectFromJSONString];
+                
+                NSMutableArray *userArray = [NSMutableArray array];
+                
+                for (NSDictionary *rawDictionary in [dictionary objectForKey:@"watchers"]) {
+                    [userArray addObject:[[[GHUser alloc] initWithRawDictionary:rawDictionary] autorelease] ];
+                }
+                
+                handler(userArray, nil);
+                
+            }
+        });
+    });
+}
+
++ (void)deleteTokenForRepository:(NSString *)repository 
+           withCompletionHandler:(void (^)(NSString *deleteToken, NSError *error))handler {
+    dispatch_async(GHAPIBackgroundQueue(), ^(void) {
+        
+        // repos/delete/:user/:repo
+        
+        NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://github.com/api/v2/json/repos/delete/%@/", [repository stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] ]];
+        NSError *myError = nil;
+        
+        ASIFormDataRequest *request = [ASIFormDataRequest authenticatedFormDataRequestWithURL:URL];
+        
+        [request startSynchronous];
+        
+        myError = [request error];
+        
+        if (!myError) {
+            myError = [NSError errorFromRawDictionary:[[request responseString] objectFromJSONString] ];
+        }
+        
+        NSString *jsonString = [request responseString];
+        
+        dispatch_async(dispatch_get_main_queue(), ^(void) {
+            if (myError) {
+                handler(nil, myError);
+            } else {
+                NSDictionary *dict = [jsonString objectFromJSONString];
+                handler([dict objectForKey:@"delete_token"], nil);
+            }
+        });
+    });
+}
+
++ (void)deleteRepository:(NSString *)repository 
+               withToken:(NSString *)token 
+       completionHandler:(void (^)(NSError *error))handler {
+    
+    dispatch_async(GHAPIBackgroundQueue(), ^(void) {
+        
+        // repos/delete/:user/:repo
+        
+        NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://github.com/api/v2/json/repos/delete/%@/", [repository stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] ]];
+        NSError *myError = nil;
+        
+        ASIFormDataRequest *request = [ASIFormDataRequest authenticatedFormDataRequestWithURL:URL];
+        [request setPostValue:token forKey:@"delete_token"];
+        [request startSynchronous];
+        
+        myError = [request error];
+        
+        if (!myError) {
+            myError = [NSError errorFromRawDictionary:[[request responseString] objectFromJSONString] ];
+        }
+        
+        dispatch_async(dispatch_get_main_queue(), ^(void) {
+            if (myError) {
+                handler(myError);
+            } else {
+                handler(nil);
+            }
+        });
+    });
     
 }
 
@@ -176,9 +312,11 @@
         self.name = [rawDictionary objectForKeyOrNilOnNullObject:@"name"];
         self.openIssues = [rawDictionary objectForKeyOrNilOnNullObject:@"open_issues"];
         self.owner = [rawDictionary objectForKeyOrNilOnNullObject:@"owner"];
+        self.parent = [rawDictionary objectForKeyOrNilOnNullObject:@"parent"];
         self.private = [rawDictionary objectForKeyOrNilOnNullObject:@"private"];
         self.pushedAt = [rawDictionary objectForKeyOrNilOnNullObject:@"pushed_at"];
         self.size = [rawDictionary objectForKeyOrNilOnNullObject:@"size"];
+        self.source = [rawDictionary objectForKeyOrNilOnNullObject:@"source"];
         self.URL = [rawDictionary objectForKeyOrNilOnNullObject:@"url"];
         self.watchers = [rawDictionary objectForKeyOrNilOnNullObject:@"watchers"];
     }
@@ -201,9 +339,11 @@
     [_name release];
     [_openIssues release];
     [_owner release];
+    [_parent release];
     [_private release];
     [_pushedAt release];
     [_size release];
+    [_source release];
     [_URL release];
     [_watchers release];
     
