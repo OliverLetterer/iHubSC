@@ -143,7 +143,7 @@
 #pragma mark - View lifecycle
 
 - (void)loadView {
-    self.tableView = [[[UIExpandableTableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain] autorelease];
+    self.tableView = [[[UIExpandableTableView alloc] initWithFrame:CGRectMake(0.0, 0.0, 10.0, 10.0) style:UITableViewStylePlain] autorelease];
     self.view = self.tableView;
 }
 

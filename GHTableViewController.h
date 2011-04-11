@@ -7,17 +7,27 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "EGOPullToReleaseTableViewController.h"
 #import "UITableView+Additions.h"
 #import "GHAuthenticationViewController.h"
+#import "EGORefreshTableHeaderView.h"
 
 @class GHNewsFeedItemTableViewCell;
 
-@interface GHTableViewController : EGOPullToReleaseTableViewController <GHAuthenticationViewControllerDelegate> {
+@interface GHTableViewController : UITableViewController <GHAuthenticationViewControllerDelegate, EGORefreshTableHeaderDelegate> {
 @private
     NSMutableDictionary *_cachedHeightsDictionary;
     BOOL _reloadDataIfNewUserGotAuthenticated;
     BOOL _reloadDataOnApplicationWillEnterForeground;
+    
+    // pull to release
+    EGORefreshTableHeaderView *_refreshHeaderView;
+	
+	//  Reloading var should really be your tableviews datasource
+	//  Putting it here for demo purposes 
+	BOOL _reloading;
+    BOOL _pullToReleaseEnabled;
+    
+    NSDate *_lastRefreshDate;
 }
 
 @property (nonatomic, retain) NSMutableDictionary *cachedHeightsDictionary;
@@ -37,6 +47,13 @@
 
 - (void)authenticationViewControllerdidAuthenticateUserCallback:(NSNotification *)notification;
 - (void)applicationWillEnterForegroundCallback:(NSNotification *)notification;
+
+@property (nonatomic, assign) BOOL pullToReleaseEnabled;
+
+@property (nonatomic, retain) NSDate *lastRefreshDate;
+
+- (void)reloadData;
+- (void)didReloadData;
 
 @end
 

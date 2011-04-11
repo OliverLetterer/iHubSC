@@ -15,6 +15,8 @@
 
 @synthesize cachedHeightsDictionary=_cachedHeightsDictionary;
 @synthesize reloadDataIfNewUserGotAuthenticated=_reloadDataIfNewUserGotAuthenticated, reloadDataOnApplicationWillEnterForeground=_reloadDataOnApplicationWillEnterForeground;
+@synthesize pullToReleaseEnabled=_pullToReleaseEnabled;
+@synthesize lastRefreshDate=_lastRefreshDate;
 
 #pragma mark - setters and getters
 
@@ -141,6 +143,8 @@
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     [_cachedHeightsDictionary release];
+    [_refreshHeaderView release];
+    [_lastRefreshDate release];
     [super dealloc];
 }
 
@@ -156,6 +160,17 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    if (!self.pullToReleaseEnabled) {
+        return;
+    }
+    
+    _refreshHeaderView = [[EGORefreshTableHeaderView alloc] initWithFrame:CGRectMake(0.0f, 0.0f - self.tableView.bounds.size.height, self.view.frame.size.width, self.tableView.bounds.size.height)];
+    _refreshHeaderView.delegate = self;
+    [self.tableView addSubview:_refreshHeaderView];
+	
+	//  update the last update date
+	[_refreshHeaderView refreshLastUpdatedDate];
+    
     self.tableView.scrollsToTop = YES;
     self.tableView.backgroundColor = [UIColor colorWithRed:245.0/255.0 green:245.0/255.0 blue:245.0/255.0 alpha:1.0];
     self.tableView.backgroundColor = [UIColor colorWithRed:235.0/255.0 green:235.0/255.0 blue:235.0/255.0 alpha:1.0];
@@ -166,6 +181,9 @@
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
+    
+    [_refreshHeaderView release];
+	_refreshHeaderView = nil;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -204,6 +222,61 @@
 
 - (void)authenticationViewController:(GHAuthenticationViewController *)authenticationViewController didAuthenticateUser:(GHUser *)user {
     [self dismissModalViewControllerAnimated:YES];
+}
+
+#pragma mark -
+#pragma mark Data Source Loading / Reloading Methods
+
+- (void)reloadData {
+    if (!self.pullToReleaseEnabled) {
+        return;
+    }
+	//  should be calling your tableviews data source model to reload
+	//  put here just for demo
+	_reloading = YES;
+}
+
+- (void)didReloadData {
+    if (!self.pullToReleaseEnabled) {
+        return;
+    }
+	//  model should call this when its done loading
+	_reloading = NO;
+    self.lastRefreshDate = [NSDate date];
+	[_refreshHeaderView egoRefreshScrollViewDataSourceDidFinishedLoading:self.tableView];
+}
+
+#pragma mark -
+#pragma mark UIScrollViewDelegate Methods
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    if (!self.pullToReleaseEnabled) {
+        return;
+    }
+	[_refreshHeaderView egoRefreshScrollViewDidScroll:scrollView];
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
+    if (!self.pullToReleaseEnabled) {
+        return;
+    }
+	[_refreshHeaderView egoRefreshScrollViewDidEndDragging:scrollView];
+}
+
+#pragma mark -
+#pragma mark EGORefreshTableHeaderDelegate Methods
+
+- (void)egoRefreshTableHeaderDidTriggerRefresh:(EGORefreshTableHeaderView*)view {
+	[self reloadData];
+}
+
+- (BOOL)egoRefreshTableHeaderDataSourceIsLoading:(EGORefreshTableHeaderView*)view {
+	return _reloading;
+}
+
+- (NSDate*)egoRefreshTableHeaderDataSourceLastUpdated:(EGORefreshTableHeaderView*)view{
+	return self.lastRefreshDate;
+	
 }
 
 @end

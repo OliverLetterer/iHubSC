@@ -31,7 +31,6 @@
 		A7089530134A3DB0000DD6CE /* GHIssueComment.m in Sources */ = {isa = PBXBuildFile; fileRef = A708952F134A3DB0000DD6CE /* GHIssueComment.m */; };
 		A7089533134A4124000DD6CE /* GHIssueCommentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A7089532134A4123000DD6CE /* GHIssueCommentTableViewCell.m */; };
 		A73AE5A0134EE92900E9EBA4 /* EGORefreshTableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = A73AE59F134EE92900E9EBA4 /* EGORefreshTableHeaderView.m */; };
-		A73AE5A3134EE93200E9EBA4 /* EGOPullToReleaseTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A73AE5A2134EE93200E9EBA4 /* EGOPullToReleaseTableViewController.m */; };
 		A73AE5A7134EF4F100E9EBA4 /* UITableView+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = A73AE5A6134EF4F100E9EBA4 /* UITableView+Additions.m */; };
 		A73AE5AC134EFDF400E9EBA4 /* 56-feed.png in Resources */ = {isa = PBXBuildFile; fileRef = A73AE5A8134EFDF300E9EBA4 /* 56-feed.png */; };
 		A73AE5AD134EFDF400E9EBA4 /* 56-feed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A73AE5A9134EFDF300E9EBA4 /* 56-feed@2x.png */; };
@@ -174,8 +173,6 @@
 		A7089532134A4123000DD6CE /* GHIssueCommentTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHIssueCommentTableViewCell.m; sourceTree = "<group>"; };
 		A73AE59E134EE92900E9EBA4 /* EGORefreshTableHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EGORefreshTableHeaderView.h; sourceTree = "<group>"; };
 		A73AE59F134EE92900E9EBA4 /* EGORefreshTableHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EGORefreshTableHeaderView.m; sourceTree = "<group>"; };
-		A73AE5A1134EE93200E9EBA4 /* EGOPullToReleaseTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EGOPullToReleaseTableViewController.h; sourceTree = "<group>"; };
-		A73AE5A2134EE93200E9EBA4 /* EGOPullToReleaseTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EGOPullToReleaseTableViewController.m; sourceTree = "<group>"; };
 		A73AE5A5134EF4F100E9EBA4 /* UITableView+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+Additions.h"; sourceTree = "<group>"; };
 		A73AE5A6134EF4F100E9EBA4 /* UITableView+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+Additions.m"; sourceTree = "<group>"; };
 		A73AE5A8134EFDF300E9EBA4 /* 56-feed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "56-feed.png"; sourceTree = "<group>"; };
@@ -775,8 +772,6 @@
 		A7BC6780134CCED40083F906 /* PullToRefreshTableViewController */ = {
 			isa = PBXGroup;
 			children = (
-				A73AE5A1134EE93200E9EBA4 /* EGOPullToReleaseTableViewController.h */,
-				A73AE5A2134EE93200E9EBA4 /* EGOPullToReleaseTableViewController.m */,
 				A73AE59E134EE92900E9EBA4 /* EGORefreshTableHeaderView.h */,
 				A73AE59F134EE92900E9EBA4 /* EGORefreshTableHeaderView.m */,
 			);
@@ -1347,7 +1342,6 @@
 				A7BC6790134D96DD0083F906 /* GHCreateRepositoryTableViewCell.m in Sources */,
 				A7F7CA62134DA1FA005509D0 /* NSError+GithubAPI.m in Sources */,
 				A73AE5A0134EE92900E9EBA4 /* EGORefreshTableHeaderView.m in Sources */,
-				A73AE5A3134EE93200E9EBA4 /* EGOPullToReleaseTableViewController.m in Sources */,
 				A73AE5A7134EF4F100E9EBA4 /* UITableView+Additions.m in Sources */,
 				A73AE5E31350AF3400E9EBA4 /* GHIssuesCommentPayload.m in Sources */,
 				A73AE5E61350B27A00E9EBA4 /* GHSingleRepositoryViewController.m in Sources */,
