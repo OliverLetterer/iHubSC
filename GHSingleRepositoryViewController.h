@@ -27,15 +27,9 @@
     NSString *_repositoryString;
     GHRepository *_repository;
     
-    BOOL _isShowingIssues;
-    BOOL _isDownloadIssues;
     NSArray *_issuesArray;
     
-    BOOL _isShowingWatchedUsers;
-    BOOL _isDownloadingWatchedUsers;
     NSArray *_watchedUsersArray;
-    
-    BOOL _isShowingAdminsitration;
     
     NSString *_deleteToken;
     
@@ -48,18 +42,9 @@
 @property (nonatomic, retain) GHRepository *repository;
 
 @property (nonatomic, retain) NSArray *issuesArray;
-- (void)showIssues;
-- (void)hideIssues;
-- (void)downloadIssues;
 - (void)cacheHeightForIssuesArray;
 
 @property (nonatomic, retain) NSArray *watchedUsersArray;
-- (void)showWatchedUsers;
-- (void)hideWatchedUsers;
-- (void)downloadWatchedUsers;
-
-- (void)showAdminsitration;
-- (void)hideAdminsitration;
 
 @property (nonatomic, copy) NSString *deleteToken;
 @property (nonatomic, assign) id<GHSingleRepositoryViewControllerDelegate> delegate;

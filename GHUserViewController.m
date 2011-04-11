@@ -25,7 +25,9 @@
     [_username release];
     _username = [username copy];
     self.title = self.username;
-    [self downloadRepositories];
+    self.watchedRepositoriesArray = nil;
+    self.repositoriesArray = nil;
+    [self.tableView reloadData];
 }
 
 #pragma mark - Initialization
