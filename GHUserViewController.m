@@ -21,14 +21,6 @@
 
 #pragma mark - setters and getters
 
-- (void)setTableView:(UIExpandableTableView *)tableView {
-    [super setTableView:tableView];
-}
-
-- (UIExpandableTableView *)tableView {
-    return (UIExpandableTableView *)[super tableView];
-}
-
 - (void)setUsername:(NSString *)username {
     [_username release];
     _username = [username copy];
@@ -141,11 +133,6 @@
 }
 
 #pragma mark - View lifecycle
-
-- (void)loadView {
-    self.tableView = [[[UIExpandableTableView alloc] initWithFrame:CGRectMake(0.0, 0.0, 10.0, 10.0) style:UITableViewStylePlain] autorelease];
-    self.view = self.tableView;
-}
 
 - (void)viewDidLoad {
     [super viewDidLoad];

@@ -20,6 +20,14 @@
 
 #pragma mark - setters and getters
 
+- (void)setTableView:(UIExpandableTableView *)tableView {
+    [super setTableView:tableView];
+}
+
+- (UIExpandableTableView *)tableView {
+    return (UIExpandableTableView *)[super tableView];
+}
+
 - (UITableViewCell *)dummyCell {
     static NSString *CellIdentifier = @"DummyCell";
     
@@ -157,6 +165,10 @@
 
 #pragma mark - View lifecycle
 
+- (void)loadView {
+    self.tableView = [[[UIExpandableTableView alloc] initWithFrame:CGRectMake(0.0, 0.0, 10.0, 10.0) style:UITableViewStylePlain] autorelease];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -277,6 +289,26 @@
 - (NSDate*)egoRefreshTableHeaderDataSourceLastUpdated:(EGORefreshTableHeaderView*)view{
 	return self.lastRefreshDate;
 	
+}
+
+#pragma mark - UIExpandableTableViewDatasource
+
+- (BOOL)tableView:(UIExpandableTableView *)tableView canExpandSection:(NSInteger)section {
+    return NO;
+}
+
+- (BOOL)tableView:(UIExpandableTableView *)tableView needsToDownloadDataForExpandableSection:(NSInteger)section {
+    return NO;
+}
+
+- (UITableViewCell<UIExpandingTableViewCell> *)tableView:(UIExpandableTableView *)tableView expandingCellForSection:(NSInteger)section {
+    return nil;
+}
+
+#pragma mark - UIExpandableTableViewDelegate
+
+- (void)tableView:(UIExpandableTableView *)tableView downloadDataForExpandableSection:(NSInteger)section {
+    
 }
 
 @end

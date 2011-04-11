@@ -12,7 +12,7 @@
 #import "GHSingleRepositoryViewController.h"
 #import "UIExpandableTableView.h"
 
-@interface GHUserViewController : GHTableViewController <GHCreateRepositoryViewControllerDelegate, GHSingleRepositoryViewControllerDelegate, UIExpandableTableViewDatasource, UIExpandableTableViewDelegate> {
+@interface GHUserViewController : GHTableViewController <GHCreateRepositoryViewControllerDelegate, GHSingleRepositoryViewControllerDelegate> {
 @private
     NSArray *_repositoriesArray;
     NSString *_username;
@@ -21,8 +21,6 @@
     
     NSIndexPath *_lastIndexPathForSingleRepositoryViewController;
 }
-
-@property (nonatomic, retain) UIExpandableTableView *tableView;
 
 @property (nonatomic, retain) NSArray *repositoriesArray;
 @property (nonatomic, copy) NSString *username;

@@ -10,10 +10,11 @@
 #import "UITableView+Additions.h"
 #import "GHAuthenticationViewController.h"
 #import "EGORefreshTableHeaderView.h"
+#import "UIExpandableTableView.h"
 
 @class GHNewsFeedItemTableViewCell;
 
-@interface GHTableViewController : UITableViewController <GHAuthenticationViewControllerDelegate, EGORefreshTableHeaderDelegate> {
+@interface GHTableViewController : UITableViewController <GHAuthenticationViewControllerDelegate, EGORefreshTableHeaderDelegate, UIExpandableTableViewDatasource, UIExpandableTableViewDelegate> {
 @private
     NSMutableDictionary *_cachedHeightsDictionary;
     BOOL _reloadDataIfNewUserGotAuthenticated;
@@ -29,6 +30,8 @@
     
     NSDate *_lastRefreshDate;
 }
+
+@property (nonatomic, retain) UIExpandableTableView *tableView;
 
 @property (nonatomic, retain) NSMutableDictionary *cachedHeightsDictionary;
 @property (nonatomic, readonly) UITableViewCell *dummyCell;
