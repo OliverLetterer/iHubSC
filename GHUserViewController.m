@@ -257,13 +257,13 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    CGFloat result = 0;
+    NSInteger result = 0;
     
     if (section == 0) {
-        result = [self.repositoriesArray count];
+        result = [self.repositoriesArray count] + 1;
     } else if (section == 1) {
         // watched
-        result = [self.watchedRepositoriesArray count];
+        result = [self.watchedRepositoriesArray count] + 1;
     }
     return result;
 }
@@ -278,7 +278,7 @@
             cell = [[[GHFeedItemWithDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
         }
         
-        GHRepository *repository = [self.repositoriesArray objectAtIndex:indexPath.row];
+        GHRepository *repository = [self.repositoriesArray objectAtIndex:indexPath.row-1];
         
         cell.titleLabel.text = repository.name;
         cell.descriptionLabel.text = repository.desctiptionRepo;
@@ -302,7 +302,7 @@
                 cell = [[[GHFeedItemWithDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
             }
             
-            GHRepository *repository = [self.watchedRepositoriesArray objectAtIndex:indexPath.row];
+            GHRepository *repository = [self.watchedRepositoriesArray objectAtIndex:indexPath.row-1];
             
             cell.titleLabel.text = [NSString stringWithFormat:@"%@/%@", repository.owner, repository.name];
             
@@ -362,15 +362,15 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
-        GHRepository *repo = [self.repositoriesArray objectAtIndex:indexPath.row];
+        GHRepository *repo = [self.repositoriesArray objectAtIndex:indexPath.row-1];
         
         GHSingleRepositoryViewController *viewController = [[[GHSingleRepositoryViewController alloc] initWithRepositoryString:[NSString stringWithFormat:@"%@/%@", repo.owner, repo.name] ] autorelease];
         viewController.delegate = self;
         self.lastIndexPathForSingleRepositoryViewController = indexPath;
         [self.navigationController pushViewController:viewController animated:YES];
         
-    } else if (indexPath.section == 1 && indexPath.row > 0) {
-        GHRepository *repo = [self.watchedRepositoriesArray objectAtIndex:indexPath.row];
+    } else if (indexPath.section == 1) {
+        GHRepository *repo = [self.watchedRepositoriesArray objectAtIndex:indexPath.row-1];
         
         GHSingleRepositoryViewController *viewController = [[[GHSingleRepositoryViewController alloc] initWithRepositoryString:[NSString stringWithFormat:@"%@/%@", repo.owner, repo.name] ] autorelease];
         viewController.delegate = self;
@@ -382,9 +382,12 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == 0 && indexPath.row > 0) {
+    if (indexPath.row == 0) {
+        return 44.0f;
+    }
+    if (indexPath.section == 0) {
         return [self cachedHeightForRowAtIndexPath:indexPath];
-    } else if (indexPath.section == 1 && indexPath.row > 0) {
+    } else if (indexPath.section == 1) {
         // watched repo
         return [self cachedHeightForRowAtIndexPath:indexPath];
     }
