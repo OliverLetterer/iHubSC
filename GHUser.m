@@ -16,6 +16,9 @@
 @synthesize followersCount=_followersCount, followingCount=_followingCount, ID=_ID, publicGistCount=_publicGistCount, publicRepoCount=_publicRepoCount;
 
 @synthesize privateRepoCount=_privateRepoCount, collaborators=_collaborators, diskUsage=_diskUsage, ownedPrivateRepoCount=_ownedPrivateRepoCount, privateGistCount=_privateGistCount, planCollaborators=_planCollaborators, planSpace=_planSpace, planPrivateRepos=_planPrivateRepos;
+
+@synthesize EMail=_EMail, location=_location, company=_company, blog=_blog;
+
 @synthesize planName=_planName, password=_password;
 
 - (BOOL)isAuthenticated {
@@ -44,10 +47,10 @@
             } else {
                 NSDictionary *userDictionary = nil;
                 userDictionary = [userString objectFromJSONString];
-                if ([userDictionary objectForKey:@"error"]) {
+                if ([userDictionary objectForKeyOrNilOnNullObject:@"error"]) {
                     // handle error
                     NSMutableDictionary *userInfo = [NSMutableDictionary dictionary];
-                    [userInfo setObject:[userDictionary objectForKey:@"error"] forKey:NSLocalizedDescriptionKey];
+                    [userInfo setObject:[userDictionary objectForKeyOrNilOnNullObject:@"error"] forKey:NSLocalizedDescriptionKey];
                     handler(nil, [NSError errorWithDomain:@"unkownError" code:0 userInfo:userInfo]);
                 } else {
                     handler([GHUser userFromRawUserDictionary:userDictionary], nil);
@@ -81,15 +84,15 @@
                 handler(nil, myError);
             } else {
                 NSDictionary *userDictionary = [userString objectFromJSONString];
-                if (![[userDictionary objectForKey:@"user"] objectForKey:@"plan"]) {
+                if (![[userDictionary objectForKeyOrNilOnNullObject:@"user"] objectForKeyOrNilOnNullObject:@"plan"]) {
                     // handle error
                     NSMutableDictionary *userInfo = [NSMutableDictionary dictionary];
                     [userInfo setObject:NSLocalizedString(@"Invalid Username or Password", @"") forKey:NSLocalizedDescriptionKey];
                     handler(nil, [NSError errorWithDomain:@"unkownError" code:0 userInfo:userInfo]);
-                } else if ([userDictionary objectForKey:@"error"]) {
+                } else if ([userDictionary objectForKeyOrNilOnNullObject:@"error"]) {
                     // handle error
                     NSMutableDictionary *userInfo = [NSMutableDictionary dictionary];
-                    [userInfo setObject:[userDictionary objectForKey:@"error"] forKey:NSLocalizedDescriptionKey];
+                    [userInfo setObject:[userDictionary objectForKeyOrNilOnNullObject:@"error"] forKey:NSLocalizedDescriptionKey];
                     handler(nil, [NSError errorWithDomain:@"unkownError" code:0 userInfo:userInfo]);
                 } else {
                     GHUser *user = [GHUser userFromRawUserDictionary:userDictionary];
@@ -109,6 +112,7 @@
     NSDictionary *userDictionary = [rawDictionary objectForKeyOrNilOnNullObject:@"user"];
     if ((self = [self initWithRawDictionary:userDictionary])) {
         // setup here
+        DLog(@"%@", rawDictionary);
     }
     return self;
 }
@@ -116,28 +120,33 @@
 - (id)initWithRawDictionary:(NSDictionary *)rawDictionary {
     if ((self = [super init])) {
         // setup here
-        self.createdAt = [rawDictionary objectForKey:@"created_at"];
-        self.gravatarID = [rawDictionary objectForKey:@"gravatar_id"];
-        self.login = [rawDictionary objectForKey:@"login"];
-        self.type = [rawDictionary objectForKey:@"type"];
+        self.createdAt = [rawDictionary objectForKeyOrNilOnNullObject:@"created_at"];
+        self.gravatarID = [rawDictionary objectForKeyOrNilOnNullObject:@"gravatar_id"];
+        self.login = [rawDictionary objectForKeyOrNilOnNullObject:@"login"];
+        self.type = [rawDictionary objectForKeyOrNilOnNullObject:@"type"];
         
-        self.followersCount = [[rawDictionary objectForKey:@"followers_count"] intValue];
-        self.followingCount = [[rawDictionary objectForKey:@"following_count"] intValue];
-        self.ID = [[rawDictionary objectForKey:@"id"] intValue];
-        self.publicGistCount = [[rawDictionary objectForKey:@"public_gist_count"] intValue];
-        self.publicRepoCount = [[rawDictionary objectForKey:@"public_repo_count"] intValue];
+        self.followersCount = [[rawDictionary objectForKeyOrNilOnNullObject:@"followers_count"] intValue];
+        self.followingCount = [[rawDictionary objectForKeyOrNilOnNullObject:@"following_count"] intValue];
+        self.ID = [[rawDictionary objectForKeyOrNilOnNullObject:@"id"] intValue];
+        self.publicGistCount = [[rawDictionary objectForKeyOrNilOnNullObject:@"public_gist_count"] intValue];
+        self.publicRepoCount = [[rawDictionary objectForKeyOrNilOnNullObject:@"public_repo_count"] intValue];
         
         // private github stuff
-        self.privateRepoCount = [[rawDictionary objectForKey:@"total_private_repo_count"] intValue];
-        self.collaborators = [[rawDictionary objectForKey:@"collaborators"] intValue];
-        self.diskUsage = [[rawDictionary objectForKey:@"disk_usage"] intValue];
-        self.ownedPrivateRepoCount = [[rawDictionary objectForKey:@"owned_private_repo_count"] intValue];
-        self.privateGistCount = [[rawDictionary objectForKey:@"private_gist_count"] intValue];
+        self.privateRepoCount = [[rawDictionary objectForKeyOrNilOnNullObject:@"total_private_repo_count"] intValue];
+        self.collaborators = [[rawDictionary objectForKeyOrNilOnNullObject:@"collaborators"] intValue];
+        self.diskUsage = [[rawDictionary objectForKeyOrNilOnNullObject:@"disk_usage"] intValue];
+        self.ownedPrivateRepoCount = [[rawDictionary objectForKeyOrNilOnNullObject:@"owned_private_repo_count"] intValue];
+        self.privateGistCount = [[rawDictionary objectForKeyOrNilOnNullObject:@"private_gist_count"] intValue];
         
-        self.planName = [[rawDictionary objectForKey:@"plan"] objectForKey:@"name"];
-        self.planCollaborators = [[[rawDictionary objectForKey:@"plan"] objectForKey:@"collaborators"] intValue];
-        self.planSpace = [[[rawDictionary objectForKey:@"plan"] objectForKey:@"space"] intValue];
-        self.planPrivateRepos = [[[rawDictionary objectForKey:@"plan"] objectForKey:@"private_repos"] intValue];
+        self.planName = [[rawDictionary objectForKeyOrNilOnNullObject:@"plan"] objectForKeyOrNilOnNullObject:@"name"];
+        self.planCollaborators = [[[rawDictionary objectForKeyOrNilOnNullObject:@"plan"] objectForKeyOrNilOnNullObject:@"collaborators"] intValue];
+        self.planSpace = [[[rawDictionary objectForKeyOrNilOnNullObject:@"plan"] objectForKeyOrNilOnNullObject:@"space"] intValue];
+        self.planPrivateRepos = [[[rawDictionary objectForKeyOrNilOnNullObject:@"plan"] objectForKeyOrNilOnNullObject:@"private_repos"] intValue];
+        
+        self.EMail = [rawDictionary objectForKeyOrNilOnNullObject:@"email"];
+        self.location = [rawDictionary objectForKeyOrNilOnNullObject:@"location"];
+        self.company = [rawDictionary objectForKeyOrNilOnNullObject:@"company"];
+        self.blog = [rawDictionary objectForKeyOrNilOnNullObject:@"blog"];
     }
     return self;
 }
@@ -152,6 +161,13 @@
     [_image release];
     [_planName release];
     [_password release];
+    
+    [_location release];
+    [_EMail release];
+    [_company release];
+    [_blog release];
+    
+    [_image release];
     [super dealloc];
 }
 

@@ -11,11 +11,18 @@
 #import "GHFeedItemWithDescriptionTableViewCell.h"
 #import "UICollapsingAndSpinningTableViewCell.h"
 #import "GHSingleRepositoryViewController.h"
+#import "GHWebViewViewController.h"
+#import "NSString+Additions.h"
+
+#define kUITableViewSectionUserData 0
+#define kUITableViewSectionRepositories 1
+#define kUITableViewSectionWatchedRepositories 2
+#define kUITableViewSectionPlan 3
 
 @implementation GHUserViewController
 
 @synthesize repositoriesArray=_repositoriesArray;
-@synthesize username=_username;
+@synthesize username=_username, user=_user;
 @synthesize watchedRepositoriesArray=_watchedRepositoriesArray;
 @synthesize lastIndexPathForSingleRepositoryViewController=_lastIndexPathForSingleRepositoryViewController;
 
@@ -25,8 +32,12 @@
     [_username release];
     _username = [username copy];
     self.title = self.username;
+    
     self.watchedRepositoriesArray = nil;
     self.repositoriesArray = nil;
+    self.user = nil;
+    
+    [self downloadUserData];
     [self.tableView reloadData];
 }
 
@@ -48,6 +59,7 @@
     [_username release];
     [_watchedRepositoriesArray release];
     [_lastIndexPathForSingleRepositoryViewController release];
+    [_user release];
     [super dealloc];
 }
 
@@ -70,6 +82,21 @@
 
 #pragma mark - instance methods
 
+- (void)downloadUserData {
+    _isDownloadingUserData = YES;
+    [GHUser userWithName:self.username 
+       completionHandler:^(GHUser *user, NSError *error) {
+           _isDownloadingUserData = NO;
+           if (error) {
+               [self handleError:error];
+           } else {
+               self.user = user;
+               [self didReloadData];
+               [self.tableView reloadData];
+           }
+       }];
+}
+
 - (void)downloadRepositories {
     [GHRepository repositoriesForUserNamed:self.username 
                          completionHandler:^(NSArray *array, NSError *error) {
@@ -85,10 +112,11 @@
 }
 
 - (void)reloadData {
-    [self downloadRepositories];
-    if (self.watchedRepositoriesArray != nil) {
-        [self downloadWatchedRepositories];
-    }
+    [self downloadUserData];
+    self.repositoriesArray = nil;
+    [self.tableView collapseSection:kUITableViewSectionRepositories animated:YES];
+    self.watchedRepositoriesArray = nil;
+    [self.tableView collapseSection:kUITableViewSectionWatchedRepositories animated:YES];
 }
 
 - (void)cacheHeightForTableView {
@@ -100,7 +128,7 @@
             height = 71.0;
         }
         
-        [self cacheHeight:height forRowAtIndexPath:[NSIndexPath indexPathForRow:i+1 inSection:0]];
+        [self cacheHeight:height forRowAtIndexPath:[NSIndexPath indexPathForRow:i+1 inSection:kUITableViewSectionRepositories]];
         
         i++;
     }
@@ -115,23 +143,10 @@
             height = 71.0;
         }
         
-        [self cacheHeight:height forRowAtIndexPath:[NSIndexPath indexPathForRow:i+1 inSection:1]];
+        [self cacheHeight:height forRowAtIndexPath:[NSIndexPath indexPathForRow:i+1 inSection:kUITableViewSectionWatchedRepositories]];
         
         i++;
     }
-}
-
-- (void)downloadWatchedRepositories {
-    [GHRepository watchedRepositoriesOfUser:self.username 
-                          completionHandler:^(NSArray *array, NSError *error) {
-                              if (error) {
-                                  [self handleError:error];
-                              } else {
-                                  self.watchedRepositoriesArray = array;
-                                  [self cacheHeightForWatchedRepositories];
-                                  [self.tableView reloadData];
-                              }
-                          }];
 }
 
 #pragma mark - View lifecycle
@@ -176,13 +191,13 @@
 #pragma mark - UIExpandableTableViewDatasource
 
 - (BOOL)tableView:(UIExpandableTableView *)tableView canExpandSection:(NSInteger)section {
-    return YES;
+    return section == kUITableViewSectionRepositories || section == kUITableViewSectionWatchedRepositories || section == kUITableViewSectionPlan;
 }
 
 - (BOOL)tableView:(UIExpandableTableView *)tableView needsToDownloadDataForExpandableSection:(NSInteger)section {
-    if (section == 0) {
+    if (section == kUITableViewSectionRepositories) {
         return self.repositoriesArray == nil;
-    } else if (section == 1) {
+    } else if (section == kUITableViewSectionWatchedRepositories) {
         return self.watchedRepositoriesArray == nil;
     }
     return NO;
@@ -197,10 +212,13 @@
         cell = [[[UICollapsingAndSpinningTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdientifier] autorelease];
     }
     
-    if (section == 0) {
-        cell.textLabel.text = NSLocalizedString(@"Repositories", @"");
-    } else if (section == 1) {
+    if (section == kUITableViewSectionRepositories) {
+        NSInteger numberOfRepositories = self.user.publicRepoCount + self.user.privateRepoCount;
+        cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Repositories (%d)", @""), numberOfRepositories];
+    } else if (section == kUITableViewSectionWatchedRepositories) {
         cell.textLabel.text = NSLocalizedString(@"Watched Repositories", @"");
+    } else if (section == kUITableViewSectionPlan) {
+        cell.textLabel.text = NSLocalizedString(@"Plan", @"");
     }
     
     return cell;
@@ -209,7 +227,7 @@
 #pragma mark - UIExpandableTableViewDelegate
 
 - (void)tableView:(UIExpandableTableView *)tableView downloadDataForExpandableSection:(NSInteger)section {
-    if (section == 0) {
+    if (section == kUITableViewSectionRepositories) {
         [GHRepository repositoriesForUserNamed:self.username 
                              completionHandler:^(NSArray *array, NSError *error) {
                                  if (error) {
@@ -221,7 +239,7 @@
                                  }
                                  [self didReloadData];
                              }];
-    } else if (section == 1) {
+    } else if (section == kUITableViewSectionWatchedRepositories) {
         [GHRepository watchedRepositoriesOfUser:self.username 
                               completionHandler:^(NSArray *array, NSError *error) {
                                   if (error) {
@@ -238,27 +256,82 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    // Return the number of sections.
-    // 0: all repositories
-    // 1: watching
-    return 2;
+    if (_isDownloadingUserData || !self.user) {
+        return 0;
+    }
+    return 4;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
     NSInteger result = 0;
     
-    if (section == 0) {
+    if (section == kUITableViewSectionUserData) {
+        result = 5;
+    } else if (section == kUITableViewSectionRepositories) {
         result = [self.repositoriesArray count] + 1;
-    } else if (section == 1) {
+    } else if (section == kUITableViewSectionWatchedRepositories) {
         // watched
         result = [self.watchedRepositoriesArray count] + 1;
+    } else if (section == kUITableViewSectionPlan && self.user.planName) {
+        result = 5;
     }
     return result;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == 0) {
+    if (indexPath.section == kUITableViewSectionUserData) {
+        if (indexPath.row == 0) {
+            NSString *CellIdentifier = @"TitleTableViewCell";
+            
+            GHFeedItemWithDescriptionTableViewCell *cell = (GHFeedItemWithDescriptionTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+            if (cell == nil) {
+                cell = [[[GHFeedItemWithDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+                cell.selectionStyle = UITableViewCellEditingStyleNone;
+            }
+            
+            cell.titleLabel.text = self.user.login;
+            cell.descriptionLabel.text = nil;
+            cell.repositoryLabel.text = nil;
+            
+            [self updateImageViewForCell:cell atIndexPath:indexPath withGravatarID:self.user.gravatarID];
+            
+            return cell;
+        } else {
+            NSString *CellIdentifier = @"DetailsTableViewCell";
+            
+            UITableViewCellWithLinearGradientBackgroundView *cell = (UITableViewCellWithLinearGradientBackgroundView *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+            if (!cell) {
+                cell = [[[UITableViewCellWithLinearGradientBackgroundView alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:CellIdentifier] autorelease];
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            }
+            
+            cell.accessoryType = UITableViewCellAccessoryNone;
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            
+            if (indexPath.row == 1) {
+                cell.textLabel.text = NSLocalizedString(@"E-Mail", @"");
+                cell.detailTextLabel.text = self.user.EMail ? self.user.EMail : @"-";
+            } else if (indexPath.row == 2) {
+                cell.textLabel.text = NSLocalizedString(@"Location", @"");
+                cell.detailTextLabel.text = self.user.location ? self.user.location : @"-";
+            } else if (indexPath.row == 3) {
+                cell.textLabel.text = NSLocalizedString(@"Company", @"");
+                cell.detailTextLabel.text = self.user.company ? self.user.company : @"-";
+            } else if (indexPath.row == 4) {
+                cell.textLabel.text = NSLocalizedString(@"Blog", @"");
+                cell.detailTextLabel.text = self.user.blog ? self.user.blog : @"-";
+                if (self.user.blog) {
+                    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+                    cell.selectionStyle = UITableViewCellSelectionStyleBlue;
+                }
+            } else {
+                cell.textLabel.text = NSLocalizedString(@"XXX", @"");
+                cell.detailTextLabel.text = @"-";
+            }
+            return cell;
+        }
+    } else if (indexPath.section == kUITableViewSectionRepositories) {
         // display all repostories
         NSString *CellIdentifier = @"GHFeedItemWithDescriptionTableViewCell";
         
@@ -278,10 +351,8 @@
             cell.imageView.image = [UIImage imageNamed:@"GHPublicRepositoryIcon.png"];
         }
         
-        // Configure the cell...
-        
         return cell;
-    } else if (indexPath.section == 1) {
+    } else if (indexPath.section == kUITableViewSectionWatchedRepositories) {
         // watched repositories
         if (indexPath.row <= [self.watchedRepositoriesArray count] ) {
             NSString *CellIdentifier = @"GHFeedItemWithDescriptionTableViewCell";
@@ -307,6 +378,35 @@
             
             return cell;
         }
+    } else if (indexPath.section == kUITableViewSectionPlan) {
+        NSString *CellIdentifier = @"DetailsTableViewCell";
+        
+        UITableViewCellWithLinearGradientBackgroundView *cell = (UITableViewCellWithLinearGradientBackgroundView *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        if (!cell) {
+            cell = [[[UITableViewCellWithLinearGradientBackgroundView alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:CellIdentifier] autorelease];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        }
+        
+        cell.accessoryType = UITableViewCellAccessoryNone;
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
+        if (indexPath.row == 1) {
+            cell.textLabel.text = NSLocalizedString(@"Type", @"");
+            cell.detailTextLabel.text = self.user.planName;
+        } else if (indexPath.row == 2) {
+            cell.textLabel.text = NSLocalizedString(@"Private Repos", @"");
+            cell.detailTextLabel.text = [NSString stringWithFormat:@"%d", self.user.planPrivateRepos];
+        } else if (indexPath.row == 3) {
+            cell.textLabel.text = NSLocalizedString(@"Collaborators", @"");
+            cell.detailTextLabel.text = [NSString stringWithFormat:@"%d", self.user.planCollaborators];
+        } else if (indexPath.row == 4) {
+            cell.textLabel.text = NSLocalizedString(@"Space", @"");
+            cell.detailTextLabel.text = [NSString stringFormFileSize:self.user.planSpace];
+        } else {
+            cell.textLabel.text = nil;
+            cell.detailTextLabel.text = nil;
+        }
+        return cell;
     }
     
     return self.dummyCell;
@@ -350,7 +450,14 @@
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == 0) {
+    if (indexPath.section == kUITableViewSectionUserData) {
+        if (indexPath.row == 4 && self.user.blog) {
+            NSURL *URL = [NSURL URLWithString:self.user.blog];
+            GHWebViewViewController *web = [[[GHWebViewViewController alloc] initWithURL:URL] autorelease];
+            [self.navigationController pushViewController:web animated:YES];
+        }
+    }
+    if (indexPath.section == kUITableViewSectionRepositories) {
         GHRepository *repo = [self.repositoriesArray objectAtIndex:indexPath.row-1];
         
         GHSingleRepositoryViewController *viewController = [[[GHSingleRepositoryViewController alloc] initWithRepositoryString:[NSString stringWithFormat:@"%@/%@", repo.owner, repo.name] ] autorelease];
@@ -358,7 +465,7 @@
         self.lastIndexPathForSingleRepositoryViewController = indexPath;
         [self.navigationController pushViewController:viewController animated:YES];
         
-    } else if (indexPath.section == 1) {
+    } else if (indexPath.section == kUITableViewSectionWatchedRepositories) {
         GHRepository *repo = [self.watchedRepositoriesArray objectAtIndex:indexPath.row-1];
         
         GHSingleRepositoryViewController *viewController = [[[GHSingleRepositoryViewController alloc] initWithRepositoryString:[NSString stringWithFormat:@"%@/%@", repo.owner, repo.name] ] autorelease];
@@ -371,12 +478,18 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row == 0) {
-        return 44.0f;
+    if (indexPath.section == kUITableViewSectionUserData && indexPath.row == 0) {
+        return 71.0f;
     }
-    if (indexPath.section == 0) {
+    if (indexPath.section == kUITableViewSectionRepositories) {
+        if (indexPath.row == 0) {
+            return 44.0f;
+        }
         return [self cachedHeightForRowAtIndexPath:indexPath];
-    } else if (indexPath.section == 1) {
+    } else if (indexPath.section == kUITableViewSectionWatchedRepositories) {
+        if (indexPath.row == 0) {
+            return 44.0f;
+        }
         // watched repo
         return [self cachedHeightForRowAtIndexPath:indexPath];
     }
@@ -399,15 +512,13 @@
 
 - (void)singleRepositoryViewControllerDidDeleteRepository:(GHSingleRepositoryViewController *)singleRepositoryViewController {
     
-    NSArray *oldArray = self.lastIndexPathForSingleRepositoryViewController.section == 0 ? self.repositoriesArray : self.watchedRepositoriesArray;
+    NSArray *oldArray = self.lastIndexPathForSingleRepositoryViewController.section == kUITableViewSectionRepositories ? self.repositoriesArray : self.watchedRepositoriesArray;
     NSUInteger index = self.lastIndexPathForSingleRepositoryViewController.row;
-    if (self.lastIndexPathForSingleRepositoryViewController.section == 1) {
-        index--;
-    }
+    
     NSMutableArray *array = [[oldArray mutableCopy] autorelease];
     [array removeObjectAtIndex:index];
 
-    if (self.lastIndexPathForSingleRepositoryViewController.section == 0) {
+    if (self.lastIndexPathForSingleRepositoryViewController.section == kUITableViewSectionRepositories) {
         self.repositoriesArray = array;
     } else {
         self.watchedRepositoriesArray = array;

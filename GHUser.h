@@ -32,6 +32,11 @@
     NSUInteger _planPrivateRepos;
     NSString *_password;
     
+    NSString *_EMail;
+    NSString *_location;
+    NSString *_company;
+    NSString *_blog;
+    
     UIImage *_image;
 }
 
@@ -56,6 +61,11 @@
 @property (nonatomic, assign) NSUInteger planSpace;
 @property (nonatomic, assign) NSUInteger planPrivateRepos;
 @property (nonatomic, copy) NSString *password;
+
+@property (nonatomic, copy) NSString *EMail;
+@property (nonatomic, copy) NSString *location;
+@property (nonatomic, copy) NSString *company;
+@property (nonatomic, copy) NSString *blog;
 
 @property (nonatomic, retain) UIImage *image;
 

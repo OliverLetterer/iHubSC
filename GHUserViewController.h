@@ -11,16 +11,21 @@
 #import "GHCreateRepositoryViewController.h"
 #import "GHSingleRepositoryViewController.h"
 #import "UIExpandableTableView.h"
+#import "GithubAPI.h"
 
 @interface GHUserViewController : GHTableViewController <GHCreateRepositoryViewControllerDelegate, GHSingleRepositoryViewControllerDelegate> {
 @private
-    NSArray *_repositoriesArray;
     NSString *_username;
+    BOOL _isDownloadingUserData;
+    GHUser *_user;
     
+    NSArray *_repositoriesArray;
     NSArray *_watchedRepositoriesArray;
     
     NSIndexPath *_lastIndexPathForSingleRepositoryViewController;
 }
+
+@property (nonatomic, retain) GHUser *user;
 
 @property (nonatomic, retain) NSArray *repositoriesArray;
 @property (nonatomic, copy) NSString *username;
@@ -29,13 +34,11 @@
 
 - (id)initWithUsername:(NSString *)username;
 
-- (void)downloadRepositories;
-
-- (void)cacheHeightForTableView;
-- (void)cacheHeightForWatchedRepositories;
-
 - (void)createRepositoryButtonClicked:(UIBarButtonItem *)button;
 
-- (void)downloadWatchedRepositories;
+- (void)downloadUserData;
+- (void)downloadRepositories;
+- (void)cacheHeightForTableView;
+- (void)cacheHeightForWatchedRepositories;
 
 @end
