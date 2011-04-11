@@ -43,6 +43,7 @@
     self.webView = [[[UIWebView alloc] init] autorelease];
     self.webView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
     self.webView.delegate = self;
+    self.webView.scalesPageToFit = YES;
     self.view = self.webView;
 }
 
