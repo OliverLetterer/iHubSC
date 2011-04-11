@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "UITableViewCellWithLinearGradientBackgroundView.h"
+#import "UIExpandableTableView.h"
 
-@interface UICollapsingAndSpinningTableViewCell : UITableViewCellWithLinearGradientBackgroundView {
+@interface UICollapsingAndSpinningTableViewCell : UITableViewCellWithLinearGradientBackgroundView <UIExpandingTableViewCell> {
 @private
     BOOL _isSpinning;
     
@@ -21,5 +22,8 @@
 @property (nonatomic, retain) UIImageView *disclosureIndicatorImageView;
 
 - (void)setSpinning:(BOOL)spinning;
+
+- (void)setLoading:(BOOL)loading;
+- (void)setExpansionStyle:(UIExpansionStyle)style;
 
 @end

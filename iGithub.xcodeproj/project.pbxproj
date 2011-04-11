@@ -35,8 +35,6 @@
 		A73AE5A7134EF4F100E9EBA4 /* UITableView+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = A73AE5A6134EF4F100E9EBA4 /* UITableView+Additions.m */; };
 		A73AE5AC134EFDF400E9EBA4 /* 56-feed.png in Resources */ = {isa = PBXBuildFile; fileRef = A73AE5A8134EFDF300E9EBA4 /* 56-feed.png */; };
 		A73AE5AD134EFDF400E9EBA4 /* 56-feed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A73AE5A9134EFDF300E9EBA4 /* 56-feed@2x.png */; };
-		A73AE5AE134EFDF400E9EBA4 /* 60-dialpad.png in Resources */ = {isa = PBXBuildFile; fileRef = A73AE5AA134EFDF400E9EBA4 /* 60-dialpad.png */; };
-		A73AE5AF134EFDF400E9EBA4 /* 60-dialpad@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A73AE5AB134EFDF400E9EBA4 /* 60-dialpad@2x.png */; };
 		A73AE5E31350AF3400E9EBA4 /* GHIssuesCommentPayload.m in Sources */ = {isa = PBXBuildFile; fileRef = A73AE5E21350AF3400E9EBA4 /* GHIssuesCommentPayload.m */; };
 		A73AE5E61350B27A00E9EBA4 /* GHSingleRepositoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A73AE5E51350B27A00E9EBA4 /* GHSingleRepositoryViewController.m */; };
 		A73AE5F21350FB4400E9EBA4 /* NSString+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = A73AE5F11350FB4400E9EBA4 /* NSString+Additions.m */; };
@@ -76,6 +74,9 @@
 		A75057431343426300514A82 /* GHNewsFeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A75057421343426300514A82 /* GHNewsFeedViewController.m */; };
 		A76598A7134CBD2500A3B30D /* PullToRefreshArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = A76598A5134CBD2400A3B30D /* PullToRefreshArrow.png */; };
 		A76598A8134CBD2500A3B30D /* PullToRefreshArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A76598A6134CBD2400A3B30D /* PullToRefreshArrow@2x.png */; };
+		A76FC9A61352D231004C642E /* 145-persondot.png in Resources */ = {isa = PBXBuildFile; fileRef = A76FC9A41352D231004C642E /* 145-persondot.png */; };
+		A76FC9A71352D231004C642E /* 145-persondot@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A76FC9A51352D231004C642E /* 145-persondot@2x.png */; };
+		A76FC9BE13534755004C642E /* UIExpandableTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = A76FC9BD13534755004C642E /* UIExpandableTableView.m */; };
 		A7BC6779134CCAF00083F906 /* GHPublicRepositoryIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = A7BC6777134CCAF00083F906 /* GHPublicRepositoryIcon.png */; };
 		A7BC677A134CCAF00083F906 /* GHPublicRepositoryIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A7BC6778134CCAF00083F906 /* GHPublicRepositoryIcon@2x.png */; };
 		A7BC677E134CCD1A0083F906 /* GHPrivateRepositoryIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A7BC677C134CCD1A0083F906 /* GHPrivateRepositoryIcon@2x.png */; };
@@ -179,8 +180,6 @@
 		A73AE5A6134EF4F100E9EBA4 /* UITableView+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+Additions.m"; sourceTree = "<group>"; };
 		A73AE5A8134EFDF300E9EBA4 /* 56-feed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "56-feed.png"; sourceTree = "<group>"; };
 		A73AE5A9134EFDF300E9EBA4 /* 56-feed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "56-feed@2x.png"; sourceTree = "<group>"; };
-		A73AE5AA134EFDF400E9EBA4 /* 60-dialpad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "60-dialpad.png"; sourceTree = "<group>"; };
-		A73AE5AB134EFDF400E9EBA4 /* 60-dialpad@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "60-dialpad@2x.png"; sourceTree = "<group>"; };
 		A73AE5E11350AF3400E9EBA4 /* GHIssuesCommentPayload.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHIssuesCommentPayload.h; sourceTree = "<group>"; };
 		A73AE5E21350AF3400E9EBA4 /* GHIssuesCommentPayload.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHIssuesCommentPayload.m; sourceTree = "<group>"; };
 		A73AE5E41350B27900E9EBA4 /* GHSingleRepositoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHSingleRepositoryViewController.h; sourceTree = "<group>"; };
@@ -254,6 +253,10 @@
 		A75057421343426300514A82 /* GHNewsFeedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHNewsFeedViewController.m; sourceTree = "<group>"; };
 		A76598A5134CBD2400A3B30D /* PullToRefreshArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = PullToRefreshArrow.png; path = ../PullToRefreshArrow.png; sourceTree = "<group>"; };
 		A76598A6134CBD2400A3B30D /* PullToRefreshArrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "PullToRefreshArrow@2x.png"; path = "../PullToRefreshArrow@2x.png"; sourceTree = "<group>"; };
+		A76FC9A41352D231004C642E /* 145-persondot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "145-persondot.png"; sourceTree = "<group>"; };
+		A76FC9A51352D231004C642E /* 145-persondot@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "145-persondot@2x.png"; sourceTree = "<group>"; };
+		A76FC9BC13534755004C642E /* UIExpandableTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UIExpandableTableView.h; path = UIExpandableTableView/UIExpandableTableView.h; sourceTree = "<group>"; };
+		A76FC9BD13534755004C642E /* UIExpandableTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UIExpandableTableView.m; path = UIExpandableTableView/UIExpandableTableView.m; sourceTree = "<group>"; };
 		A7BC6777134CCAF00083F906 /* GHPublicRepositoryIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GHPublicRepositoryIcon.png; sourceTree = "<group>"; };
 		A7BC6778134CCAF00083F906 /* GHPublicRepositoryIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GHPublicRepositoryIcon@2x.png"; sourceTree = "<group>"; };
 		A7BC677C134CCD1A0083F906 /* GHPrivateRepositoryIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GHPrivateRepositoryIcon@2x.png"; sourceTree = "<group>"; };
@@ -737,12 +740,13 @@
 		A750573F1343422200514A82 /* UserInterface */ = {
 			isa = PBXGroup;
 			children = (
+				A76FC9A81352D27E004C642E /* UICollapsingTableView */,
 				A7BC6780134CCED40083F906 /* PullToRefreshTableViewController */,
 				A7F62627134C45AE006487CA /* GHTableViewController */,
 				A75057401343424100514A82 /* GHNewsFeedViewController */,
 				A7BF1423134214E7001AE50D /* GHAuthenticationViewController */,
 				A73E29C31348E12C00E85282 /* GHViewIssueTableViewController */,
-				A7BC6788134D94020083F906 /* GHRepositoriesViewController */,
+				A7BC6788134D94020083F906 /* GHUserViewController */,
 				A73AE6131351953900E9EBA4 /* GHWebViewViewController.h */,
 				A73AE6141351953E00E9EBA4 /* GHWebViewViewController.m */,
 			);
@@ -757,6 +761,15 @@
 				A75057421343426300514A82 /* GHNewsFeedViewController.m */,
 			);
 			name = GHNewsFeedViewController;
+			sourceTree = "<group>";
+		};
+		A76FC9A81352D27E004C642E /* UICollapsingTableView */ = {
+			isa = PBXGroup;
+			children = (
+				A76FC9BC13534755004C642E /* UIExpandableTableView.h */,
+				A76FC9BD13534755004C642E /* UIExpandableTableView.m */,
+			);
+			name = UICollapsingTableView;
 			sourceTree = "<group>";
 		};
 		A7BC6780134CCED40083F906 /* PullToRefreshTableViewController */ = {
@@ -779,7 +792,7 @@
 			name = "ASI-HTTP";
 			sourceTree = "<group>";
 		};
-		A7BC6788134D94020083F906 /* GHRepositoriesViewController */ = {
+		A7BC6788134D94020083F906 /* GHUserViewController */ = {
 			isa = PBXGroup;
 			children = (
 				A7BC678C134D96C30083F906 /* UITableViewCells */,
@@ -790,7 +803,7 @@
 				A73AE5E41350B27900E9EBA4 /* GHSingleRepositoryViewController.h */,
 				A73AE5E51350B27A00E9EBA4 /* GHSingleRepositoryViewController.m */,
 			);
-			name = GHRepositoriesViewController;
+			name = GHUserViewController;
 			sourceTree = "<group>";
 		};
 		A7BC678C134D96C30083F906 /* UITableViewCells */ = {
@@ -931,10 +944,10 @@
 		A7BF143713421862001AE50D /* Ressources */ = {
 			isa = PBXGroup;
 			children = (
+				A76FC9A41352D231004C642E /* 145-persondot.png */,
+				A76FC9A51352D231004C642E /* 145-persondot@2x.png */,
 				A73AE5A8134EFDF300E9EBA4 /* 56-feed.png */,
 				A73AE5A9134EFDF300E9EBA4 /* 56-feed@2x.png */,
-				A73AE5AA134EFDF400E9EBA4 /* 60-dialpad.png */,
-				A73AE5AB134EFDF400E9EBA4 /* 60-dialpad@2x.png */,
 				A76598A5134CBD2400A3B30D /* PullToRefreshArrow.png */,
 				A76598A6134CBD2400A3B30D /* PullToRefreshArrow@2x.png */,
 				A7BC677C134CCD1A0083F906 /* GHPrivateRepositoryIcon@2x.png */,
@@ -1229,8 +1242,8 @@
 				A7BC677F134CCD1A0083F906 /* GHPrivateRepositoryIcon.png in Resources */,
 				A73AE5AC134EFDF400E9EBA4 /* 56-feed.png in Resources */,
 				A73AE5AD134EFDF400E9EBA4 /* 56-feed@2x.png in Resources */,
-				A73AE5AE134EFDF400E9EBA4 /* 60-dialpad.png in Resources */,
-				A73AE5AF134EFDF400E9EBA4 /* 60-dialpad@2x.png in Resources */,
+				A76FC9A61352D231004C642E /* 145-persondot.png in Resources */,
+				A76FC9A71352D231004C642E /* 145-persondot@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1341,6 +1354,7 @@
 				A73AE5F21350FB4400E9EBA4 /* NSString+Additions.m in Sources */,
 				A73AE6151351954500E9EBA4 /* GHWebViewViewController.m in Sources */,
 				A73AE6191351B11600E9EBA4 /* GHRawIssue.m in Sources */,
+				A76FC9BE13534755004C642E /* UIExpandableTableView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -10,19 +10,19 @@
 #import "GHTableViewController.h"
 #import "GHCreateRepositoryViewController.h"
 #import "GHSingleRepositoryViewController.h"
+#import "UIExpandableTableView.h"
 
-@interface GHUserViewController : GHTableViewController <GHCreateRepositoryViewControllerDelegate, GHSingleRepositoryViewControllerDelegate> {
+@interface GHUserViewController : GHTableViewController <GHCreateRepositoryViewControllerDelegate, GHSingleRepositoryViewControllerDelegate, UIExpandableTableViewDatasource, UIExpandableTableViewDelegate> {
 @private
     NSArray *_repositoriesArray;
     NSString *_username;
     
-    BOOL _isShowingWatchedRepositories;
-    BOOL _shouldShowWatchedRepositoriesAfterDownload;
-    BOOL _isDownloadingWatchedRepositories;
     NSArray *_watchedRepositoriesArray;
     
     NSIndexPath *_lastIndexPathForSingleRepositoryViewController;
 }
+
+@property (nonatomic, retain) UIExpandableTableView *tableView;
 
 @property (nonatomic, retain) NSArray *repositoriesArray;
 @property (nonatomic, copy) NSString *username;
@@ -39,7 +39,5 @@
 - (void)createRepositoryButtonClicked:(UIBarButtonItem *)button;
 
 - (void)downloadWatchedRepositories;
-- (void)showWatchedRepositories;
-- (void)hideWatchedRepositories;
 
 @end

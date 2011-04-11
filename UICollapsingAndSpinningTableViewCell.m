@@ -70,6 +70,25 @@
     
 }
 
+- (void)setLoading:(BOOL)loading {
+    [self setSpinning:loading];
+}
+
+- (void)setExpansionStyle:(UIExpansionStyle)style {
+    self.accessoryView = self.disclosureIndicatorImageView;
+    switch (style) {
+        case UIExpansionStyleExpanded:
+            self.accessoryView.transform = CGAffineTransformIdentity;
+            break;
+        case UIExpansionStyleCollapsed:
+            self.accessoryView.transform = CGAffineTransformMakeRotation(M_PI);
+            break;
+            
+        default:
+            break;
+    }
+}
+
 #pragma mark - Memory management
 
 - (void)dealloc {

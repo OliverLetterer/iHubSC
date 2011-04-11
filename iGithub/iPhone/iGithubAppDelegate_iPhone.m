@@ -44,6 +44,10 @@
     
     self.repositoriesViewController = [[[GHUserViewController alloc] initWithUsername:[GHAuthenticationManager sharedInstance].username] autorelease];
     self.repositoriesViewController.reloadDataIfNewUserGotAuthenticated = YES;
+    self.repositoriesViewController.tabBarItem = [[[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"My Profil", @"") 
+                                                                                image:[UIImage imageNamed:@"145-persondot.png"] 
+                                                                                  tag:0]
+                                                  autorelease];
     [tabBarItems addObject:[[[UINavigationController alloc] initWithRootViewController:self.repositoriesViewController] autorelease] ];
     
     self.tabBarController.viewControllers = tabBarItems;
