@@ -68,92 +68,6 @@
              }];
 }
 
-- (void)downloadComments {
-    _isDownloadingComments = YES;
-    [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:0 inSection:1] ] withRowAnimation:UITableViewRowAnimationNone];
-    
-    [GHIssue commentsForIssueOnRepository:self.repository 
-                               withNumber:self.number 
-                        completionHandler:^(NSArray *comments, NSError *error) {
-                            _isDownloadingComments = NO;
-                            
-                            [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:0 inSection:1] ] withRowAnimation:UITableViewRowAnimationNone];
-                            
-                            if (!error) {
-                                self.comments = comments;
-                                [self showComments];
-                            } else {
-                                [self handleError:error];
-                            }
-                        }];
-}
-
-- (void)showComments {
-    _isShowingComments = YES;
-    [self.tableView beginUpdates];
-    [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:0 inSection:1] ] withRowAnimation:UITableViewRowAnimationNone];
-    
-    NSMutableArray *newArray = [NSMutableArray array];
-    
-    for (int i = 0; i < [self.issue.comments intValue]; i++) {
-        [newArray addObject:[NSIndexPath indexPathForRow:i+1 inSection:1]];
-    }
-    [newArray addObject:[NSIndexPath indexPathForRow:[self.issue.comments intValue]+1 inSection:1]];
-    
-    [self.tableView insertRowsAtIndexPaths:newArray withRowAnimation:UITableViewRowAnimationTop];
-    
-    [self.tableView endUpdates];
-    
-    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1] atScrollPosition:UITableViewScrollPositionTop animated:YES];
-}
-
-- (void)hideComments {
-    _isShowingComments = NO;
-    [self.tableView beginUpdates];
-    [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:0 inSection:1] ] withRowAnimation:UITableViewRowAnimationNone];
-    
-    NSMutableArray *newArray = [NSMutableArray array];
-    
-    for (int i = 0; i < [self.issue.comments intValue]; i++) {
-        [newArray addObject:[NSIndexPath indexPathForRow:i+1 inSection:1]];
-    }
-    [newArray addObject:[NSIndexPath indexPathForRow:[self.issue.comments intValue]+1 inSection:1]];
-    
-    [self.tableView deleteRowsAtIndexPaths:newArray withRowAnimation:UITableViewRowAnimationTop];
-    
-    [self.tableView endUpdates];
-}
-
-- (void)showAdministration {
-    _isShowingAdministration = YES;
-    
-    [self.tableView beginUpdates];
-    
-    [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:1 inSection:2] ] 
-                          withRowAnimation:UITableViewRowAnimationTop];
-    [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:0 inSection:2] ] 
-                          withRowAnimation:UITableViewRowAnimationNone];
-    
-    [self.tableView endUpdates];
-    
-    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:2] 
-                          atScrollPosition:UITableViewScrollPositionTop 
-                                  animated:YES];
-}
-
-- (void)hideAdministration {
-    _isShowingAdministration = NO;
-    
-    [self.tableView beginUpdates];
-    
-    [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:1 inSection:2] ] 
-                          withRowAnimation:UITableViewRowAnimationTop];
-    [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:0 inSection:2] ] 
-                          withRowAnimation:UITableViewRowAnimationNone];
-    
-    [self.tableView endUpdates];
-}
-
 #pragma mark - Memory management
 
 - (void)dealloc {
@@ -279,6 +193,67 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
+#pragma mark - UIExpandableTableViewDatasource
+
+- (BOOL)tableView:(UIExpandableTableView *)tableView canExpandSection:(NSInteger)section {
+    if (_isDownloadingIssueData) {
+        return NO;
+    }
+    return section != 0;
+}
+
+- (BOOL)tableView:(UIExpandableTableView *)tableView needsToDownloadDataForExpandableSection:(NSInteger)section {
+    return section == 1 && self.comments == nil;
+}
+
+- (UITableViewCell<UIExpandingTableViewCell> *)tableView:(UIExpandableTableView *)tableView expandingCellForSection:(NSInteger)section {
+    if (section == 1) {
+        NSString *CellIdentifier = @"UICollapsingAndSpinningTableViewCell";
+        
+        UICollapsingAndSpinningTableViewCell *cell = (UICollapsingAndSpinningTableViewCell *)[self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        if (cell == nil) {
+            cell = [[[UICollapsingAndSpinningTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        }
+        
+        // Configure the cell...
+        cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Comments (%@)", @""), self.issue.comments];
+        
+        return cell;
+    } else if (section == 2) {
+        // Administrate cell
+        NSString *CellIdentifier = @"UICollapsingAndSpinningTableViewCell";
+        
+        UICollapsingAndSpinningTableViewCell *cell = (UICollapsingAndSpinningTableViewCell *)[self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        if (cell == nil) {
+            cell = [[[UICollapsingAndSpinningTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        }
+        
+        // Configure the cell...
+        cell.textLabel.text = NSLocalizedString(@"Administration", @"");
+        
+        return cell;
+    }
+    return nil;
+}
+
+#pragma mark - UIExpandableTableViewDelegate
+
+- (void)tableView:(UIExpandableTableView *)tableView downloadDataForExpandableSection:(NSInteger)section {
+    if (section == 1) {
+        [GHIssue commentsForIssueOnRepository:self.repository 
+                                   withNumber:self.number 
+                            completionHandler:^(NSArray *comments, NSError *error) {
+                                if (!error) {
+                                    self.comments = comments;
+                                    [tableView expandSection:section animated:YES];
+                                } else {
+                                    [tableView cancelDownloadInSection:section];
+                                    [self handleError:error];
+                                }
+                            }];
+    }
+}
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -318,18 +293,10 @@
             // first cell = Comments (5)
             // then all cells with the comments
             // then a cell to write a new comment
-            result = 1;
-            if (_isShowingComments) {
-                result += [self.issue.comments intValue] + 1;
-            }
+            result = [self.issue.comments intValue] + 2;
         } else if (section == 2) {
             // first will be administrate
-            result = 1;
-            
-            if (_isShowingAdministration) {
-                // open / close
-                result++;
-            }
+            result = 2;
         }
     }
     
@@ -388,31 +355,7 @@
         }
     } else if (indexPath.section == 1) {
         // comments
-        if (indexPath.row == 0) {
-            // display comments header
-            NSString *CellIdentifier = @"UICollapsingAndSpinningTableViewCell";
-            
-            UICollapsingAndSpinningTableViewCell *cell = (UICollapsingAndSpinningTableViewCell *)[self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-            if (cell == nil) {
-                cell = [[[UICollapsingAndSpinningTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
-            }
-            
-            // Configure the cell...
-            cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Comments (%@)", @""), self.issue.comments];
-            
-            if (_isDownloadingComments) {
-                [cell setSpinning:YES];
-            } else {
-                [cell setSpinning:NO];
-                if (!_isShowingComments) {
-                    cell.accessoryView.transform = CGAffineTransformMakeRotation(M_PI);
-                } else {
-                    cell.accessoryView.transform = CGAffineTransformIdentity;
-                }
-            }
-            
-            return cell;
-        } else if (indexPath.row >= 1 && indexPath.row <= [self.issue.comments intValue]) {
+        if (indexPath.row >= 1 && indexPath.row <= [self.issue.comments intValue]) {
             // display a comment
             GHIssueComment *comment = [self.comments objectAtIndex:indexPath.row - 1];
             
@@ -457,27 +400,7 @@
         }
     } else if (indexPath.section == 2) {
         // administrate
-        if (indexPath.row == 0) {
-            // Administrate cell
-            NSString *CellIdentifier = @"UICollapsingAndSpinningTableViewCell";
-            
-            UICollapsingAndSpinningTableViewCell *cell = (UICollapsingAndSpinningTableViewCell *)[self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-            if (cell == nil) {
-                cell = [[[UICollapsingAndSpinningTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
-            }
-            
-            // Configure the cell...
-            cell.textLabel.text = NSLocalizedString(@"Administration", @"");
-            [cell setSpinning:NO];
-            
-            if (!_isShowingAdministration) {
-                cell.accessoryView.transform = CGAffineTransformMakeRotation(M_PI);
-            } else {
-                cell.accessoryView.transform = CGAffineTransformIdentity;
-            }
-            
-            return cell;
-        } else if (indexPath.row == 1) {
+        if (indexPath.row == 1) {
             // open/ close
             
             NSString *CellIdentifier = @"UITableViewCellWithLinearGradientBackgroundView";
@@ -536,7 +459,7 @@
 */
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    CGFloat result = 44.0;
+    CGFloat result = 44.0f;
     
     if (_isDownloadingIssueData) {
         return result;
@@ -590,29 +513,8 @@
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == 1) {
-        if (_isDownloadingComments) {
-            return;
-        }
-        if (indexPath.row == 0) {
-            if (self.comments == nil) {
-                [self downloadComments];
-            } else {
-                if (_isShowingComments) {
-                    [self hideComments];
-                } else {
-                    [self showComments];
-                }
-            }
-        }
-    } else if (indexPath.section == 2) {
-        if (indexPath.row == 0) {
-            if (_isShowingAdministration) {
-                [self hideAdministration];
-            } else {
-                [self showAdministration];
-            }
-        } else if (indexPath.row == 1) {
+    if (indexPath.section == 2) {
+        if (indexPath.row == 1) {
             if ([self.issue.state isEqualToString:@"open"]) {
                 [GHIssue closeIssueOnRepository:self.repository 
                                      withNumber:self.number 
