@@ -167,6 +167,7 @@
 
 - (void)loadView {
     self.tableView = [[[UIExpandableTableView alloc] initWithFrame:CGRectMake(0.0, 0.0, 10.0, 10.0) style:UITableViewStylePlain] autorelease];
+    self.tableView.maximumRowCountToStillUseAnimationWhileExpanding = 100;
 }
 
 - (void)viewDidLoad {
