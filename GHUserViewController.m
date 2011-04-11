@@ -24,6 +24,7 @@
 - (void)setUsername:(NSString *)username {
     [_username release];
     _username = [username copy];
+    self.title = self.username;
     [self downloadRepositories];
 }
 
@@ -32,14 +33,8 @@
 - (id)initWithUsername:(NSString *)username {
     if ((self = [super initWithStyle:UITableViewStylePlain])) {
         // Custom initialization
-        self.title = NSLocalizedString(@"Repositories", @"");
         self.pullToReleaseEnabled = YES;
         self.username = username;
-        
-        self.tabBarItem = [[[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"Repositories", @"") 
-                                                         image:[UIImage imageNamed:@"60-dialpad.png"] 
-                                                           tag:0]
-                           autorelease];
     }
     return self;
 }
