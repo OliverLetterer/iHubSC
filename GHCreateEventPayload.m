@@ -22,6 +22,8 @@
         return GHCreateEventObjectRepository;
     } else if ([self.object isEqualToString:@"branch"]) {
         return GHCreateEventObjectBranch;
+    } else if ([self.object isEqualToString:@"tag"]) {
+        return GHCreateEventObjectTag;
     }
     
     return GHCreateEventObjectUnknown;
@@ -35,6 +37,11 @@
         self.name = [rawDictionary objectForKeyOrNilOnNullObject:@"name"];
         self.object = [rawDictionary objectForKeyOrNilOnNullObject:@"object"];
         self.objectName = [rawDictionary objectForKeyOrNilOnNullObject:@"object_name"];
+        
+        if (self.objectType == GHCreateEventObjectUnknown) {
+            DLog(@"%@", rawDictionary);
+            DLog(@"Detected Unkonw Create Event");
+        }
     }
     return self;
 }

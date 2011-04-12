@@ -23,10 +23,14 @@
 
 - (id)initWithRawDictionary:(NSDictionary *)rawDictionary {
     if ((self = [super initWithRawDictionary:rawDictionary])) {
-        // Initialization code
         self.number = [rawDictionary objectForKeyOrNilOnNullObject:@"number"];
         self.action = [rawDictionary objectForKeyOrNilOnNullObject:@"action"];
-        self.pullRequest = [[[GHPullRequest alloc] initWithRawDictionary:[rawDictionary objectForKeyOrNilOnNullObject:@"pull_request"]] autorelease];
+        NSObject *pullRequest = [rawDictionary objectForKeyOrNilOnNullObject:@"pull_request"];
+        if ([[pullRequest class] isSubclassOfClass:NSClassFromString(@"NSDictionary")]) {
+            self.pullRequest = [[[GHPullRequest alloc] initWithRawDictionary:(NSDictionary *)pullRequest] autorelease];
+        }
+        // Initialization code
+        
     }
     return self;
 }

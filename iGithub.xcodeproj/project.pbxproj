@@ -123,6 +123,8 @@
 		A7CE1B831346349200169F94 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7CE1B821346349000169F94 /* CoreData.framework */; };
 		A7CE1B871346355100169F94 /* GHManagedObjectContext.m in Sources */ = {isa = PBXBuildFile; fileRef = A7CE1B861346355100169F94 /* GHManagedObjectContext.m */; };
 		A7CE1B8A13463A6E00169F94 /* GHIssue.m in Sources */ = {isa = PBXBuildFile; fileRef = A7CE1B8913463A6600169F94 /* GHIssue.m */; };
+		A7D14F401354DB8600E1B980 /* GHOwnerNewsFeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7D14F3F1354DB8600E1B980 /* GHOwnerNewsFeedViewController.m */; };
+		A7D14F431354DD5D00E1B980 /* GHRecentActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7D14F421354DD5D00E1B980 /* GHRecentActivityViewController.m */; };
 		A7F6260F134B3938006487CA /* UITableViewCellWithLinearGradientBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = A7F6260E134B3938006487CA /* UITableViewCellWithLinearGradientBackgroundView.m */; };
 		A7F62616134B7CD2006487CA /* GHNewCommentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A7F62615134B7CD2006487CA /* GHNewCommentTableViewCell.m */; };
 		A7F62622134B88B8006487CA /* NSString+GithubAPIAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = A7F62621134B88B8006487CA /* NSString+GithubAPIAdditions.m */; };
@@ -334,6 +336,10 @@
 		A7CE1B861346355100169F94 /* GHManagedObjectContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHManagedObjectContext.m; sourceTree = "<group>"; };
 		A7CE1B8813463A6100169F94 /* GHIssue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHIssue.h; sourceTree = "<group>"; };
 		A7CE1B8913463A6600169F94 /* GHIssue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHIssue.m; sourceTree = "<group>"; };
+		A7D14F3E1354DB8600E1B980 /* GHOwnerNewsFeedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHOwnerNewsFeedViewController.h; sourceTree = "<group>"; };
+		A7D14F3F1354DB8600E1B980 /* GHOwnerNewsFeedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHOwnerNewsFeedViewController.m; sourceTree = "<group>"; };
+		A7D14F411354DD5C00E1B980 /* GHRecentActivityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHRecentActivityViewController.h; sourceTree = "<group>"; };
+		A7D14F421354DD5D00E1B980 /* GHRecentActivityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHRecentActivityViewController.m; sourceTree = "<group>"; };
 		A7F6260D134B3938006487CA /* UITableViewCellWithLinearGradientBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UITableViewCellWithLinearGradientBackgroundView.h; sourceTree = "<group>"; };
 		A7F6260E134B3938006487CA /* UITableViewCellWithLinearGradientBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UITableViewCellWithLinearGradientBackgroundView.m; sourceTree = "<group>"; };
 		A7F62614134B7CD1006487CA /* GHNewCommentTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHNewCommentTableViewCell.h; sourceTree = "<group>"; };
@@ -756,6 +762,10 @@
 				A703B94A134770620014235D /* UITableViewCells */,
 				A75057411343426300514A82 /* GHNewsFeedViewController.h */,
 				A75057421343426300514A82 /* GHNewsFeedViewController.m */,
+				A7D14F3E1354DB8600E1B980 /* GHOwnerNewsFeedViewController.h */,
+				A7D14F3F1354DB8600E1B980 /* GHOwnerNewsFeedViewController.m */,
+				A7D14F411354DD5C00E1B980 /* GHRecentActivityViewController.h */,
+				A7D14F421354DD5D00E1B980 /* GHRecentActivityViewController.m */,
 			);
 			name = GHNewsFeedViewController;
 			sourceTree = "<group>";
@@ -1349,6 +1359,8 @@
 				A73AE6151351954500E9EBA4 /* GHWebViewViewController.m in Sources */,
 				A73AE6191351B11600E9EBA4 /* GHRawIssue.m in Sources */,
 				A76FC9BE13534755004C642E /* UIExpandableTableView.m in Sources */,
+				A7D14F401354DB8600E1B980 /* GHOwnerNewsFeedViewController.m in Sources */,
+				A7D14F431354DD5D00E1B980 /* GHRecentActivityViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -215,7 +215,6 @@
     NSDictionary *userDictionary = [rawDictionary objectForKeyOrNilOnNullObject:@"user"];
     if ((self = [self initWithRawDictionary:userDictionary])) {
         // setup here
-        DLog(@"%@", rawDictionary);
     }
     return self;
 }

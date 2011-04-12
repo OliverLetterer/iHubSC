@@ -12,18 +12,12 @@
 @class GHNewsFeed, GHNewsFeedItemTableViewCell, GHNewsFeedItem;
 
 @interface GHNewsFeedViewController : GHTableViewController {
-    UISegmentedControl *_segmentControl;
+@private
     GHNewsFeed *_newsFeed;
-    NSDictionary *_issuesDictionary;
 }
 
-@property (nonatomic, retain) UISegmentedControl *segmentControl;
 @property (nonatomic, retain) GHNewsFeed *newsFeed;
 
-- (void)segmentControlValueChanged:(UISegmentedControl *)segmentControl;
-
 - (void)cacheHeightForTableView;
-
-- (void)loadDataBasedOnSegmentControl;
 
 @end

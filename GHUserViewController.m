@@ -13,6 +13,7 @@
 #import "GHSingleRepositoryViewController.h"
 #import "GHWebViewViewController.h"
 #import "NSString+Additions.h"
+#import "GHRecentActivityViewController.h"
 
 #define kUITableViewSectionUserData 0
 #define kUITableViewSectionRepositories 1
@@ -341,7 +342,7 @@
     NSInteger result = 0;
     
     if (section == kUITableViewSectionUserData) {
-        result = 5;
+        result = 6;
     } else if (section == kUITableViewSectionRepositories) {
         result = [self.repositoriesArray count] + 1;
     } else if (section == kUITableViewSectionWatchedRepositories) {
@@ -387,7 +388,22 @@
             [self updateImageViewForCell:cell atIndexPath:indexPath withGravatarID:self.user.gravatarID];
             
             return cell;
-        } else {
+        } 
+//        else if (indexPath.row == 5) {
+//            // Recent activity
+//            NSString *CellIdentifier = @"UITableViewCellWithLinearGradientBackgroundView";
+//            
+//            UITableViewCellWithLinearGradientBackgroundView *cell = (UITableViewCellWithLinearGradientBackgroundView *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+//            if (!cell) {
+//                cell = [[[UITableViewCellWithLinearGradientBackgroundView alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+//            }
+//            
+//            cell.textLabel.text = NSLocalizedString(@"Recent activity", @"");
+//            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+//            
+//            return cell;
+//        } 
+        else {
             NSString *CellIdentifier = @"DetailsTableViewCell";
             
             UITableViewCellWithLinearGradientBackgroundView *cell = (UITableViewCellWithLinearGradientBackgroundView *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
@@ -415,6 +431,11 @@
                     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
                     cell.selectionStyle = UITableViewCellSelectionStyleBlue;
                 }
+            } else if (indexPath.row == 5) {
+                cell.textLabel.text = NSLocalizedString(@"Public", @"");
+                cell.detailTextLabel.text = NSLocalizedString(@"Activity", @"");
+                cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+                cell.selectionStyle = UITableViewCellSelectionStyleBlue;
             } else {
                 cell.textLabel.text = NSLocalizedString(@"XXX", @"");
                 cell.detailTextLabel.text = @"-";
@@ -586,6 +607,9 @@
             NSURL *URL = [NSURL URLWithString:self.user.blog];
             GHWebViewViewController *web = [[[GHWebViewViewController alloc] initWithURL:URL] autorelease];
             [self.navigationController pushViewController:web animated:YES];
+        } else if (indexPath.row == 5) {
+            GHRecentActivityViewController *recentViewController = [[[GHRecentActivityViewController alloc] initWithUsername:self.username] autorelease];
+            [self.navigationController pushViewController:recentViewController animated:YES];
         }
     }
     if (indexPath.section == kUITableViewSectionRepositories) {

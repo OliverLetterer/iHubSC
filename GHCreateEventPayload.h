@@ -12,7 +12,8 @@
 typedef enum {
     GHCreateEventObjectUnknown = 0,
     GHCreateEventObjectRepository,
-    GHCreateEventObjectBranch
+    GHCreateEventObjectBranch,
+    GHCreateEventObjectTag
 } GHCreateEventObject;
 
 @interface GHCreateEventPayload : GHPayload {
