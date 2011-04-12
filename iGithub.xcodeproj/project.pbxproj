@@ -125,6 +125,7 @@
 		A7CE1B8A13463A6E00169F94 /* GHIssue.m in Sources */ = {isa = PBXBuildFile; fileRef = A7CE1B8913463A6600169F94 /* GHIssue.m */; };
 		A7D14F401354DB8600E1B980 /* GHOwnerNewsFeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7D14F3F1354DB8600E1B980 /* GHOwnerNewsFeedViewController.m */; };
 		A7D14F431354DD5D00E1B980 /* GHRecentActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7D14F421354DD5D00E1B980 /* GHRecentActivityViewController.m */; };
+		A7D14F451354E5A700E1B980 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7D14F441354E5A600E1B980 /* MessageUI.framework */; };
 		A7F6260F134B3938006487CA /* UITableViewCellWithLinearGradientBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = A7F6260E134B3938006487CA /* UITableViewCellWithLinearGradientBackgroundView.m */; };
 		A7F62616134B7CD2006487CA /* GHNewCommentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A7F62615134B7CD2006487CA /* GHNewCommentTableViewCell.m */; };
 		A7F62622134B88B8006487CA /* NSString+GithubAPIAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = A7F62621134B88B8006487CA /* NSString+GithubAPIAdditions.m */; };
@@ -340,6 +341,7 @@
 		A7D14F3F1354DB8600E1B980 /* GHOwnerNewsFeedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHOwnerNewsFeedViewController.m; sourceTree = "<group>"; };
 		A7D14F411354DD5C00E1B980 /* GHRecentActivityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHRecentActivityViewController.h; sourceTree = "<group>"; };
 		A7D14F421354DD5D00E1B980 /* GHRecentActivityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHRecentActivityViewController.m; sourceTree = "<group>"; };
+		A7D14F441354E5A600E1B980 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		A7F6260D134B3938006487CA /* UITableViewCellWithLinearGradientBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UITableViewCellWithLinearGradientBackgroundView.h; sourceTree = "<group>"; };
 		A7F6260E134B3938006487CA /* UITableViewCellWithLinearGradientBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UITableViewCellWithLinearGradientBackgroundView.m; sourceTree = "<group>"; };
 		A7F62614134B7CD1006487CA /* GHNewCommentTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHNewCommentTableViewCell.h; sourceTree = "<group>"; };
@@ -359,6 +361,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A7D14F451354E5A700E1B980 /* MessageUI.framework in Frameworks */,
 				A703B9471347562B0014235D /* QuartzCore.framework in Frameworks */,
 				A7BF14001342149C001AE50D /* CoreGraphics.framework in Frameworks */,
 				A7CE1B831346349200169F94 /* CoreData.framework in Frameworks */,
@@ -840,6 +843,7 @@
 		A7BF13FA1342149C001AE50D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A7D14F441354E5A600E1B980 /* MessageUI.framework */,
 				A703B9461347562B0014235D /* QuartzCore.framework */,
 				A703B9451347560F0014235D /* CoreGraphics.framework */,
 				A7CE1B821346349000169F94 /* CoreData.framework */,
@@ -987,6 +991,7 @@
 		A7BF146413426D85001AE50D /* Github API */ = {
 			isa = PBXGroup;
 			children = (
+				A7CE1B111345BD7D00169F94 /* Gravatar */,
 				A708952D134A3D98000DD6CE /* GHIssueComment */,
 				A7089514134A0398000DD6CE /* GHAuthenticationManager */,
 				A73E29B11348744300E85282 /* Foundation & Class Additions */,
@@ -996,7 +1001,6 @@
 				A7CE1B2E1345C96E00169F94 /* GHRepository */,
 				A7CE1B271345C60200169F94 /* GHPullRequest */,
 				A7CE1B161345BFC400169F94 /* GHPayload */,
-				A7CE1B111345BD7D00169F94 /* Gravatar */,
 				A7CE1B0C1345BC5F00169F94 /* GHActorAttributes */,
 				A750573B1343203F00514A82 /* GHNewsFeed */,
 				A750570013427F9E00514A82 /* ASI-HTTP */,

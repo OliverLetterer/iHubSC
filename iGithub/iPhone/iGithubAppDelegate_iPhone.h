@@ -6,12 +6,14 @@
 //  Copyright 2011 Home. All rights reserved.
 //
 
+#import <MessageUI/MessageUI.h>
 #import <UIKit/UIKit.h>
+
 #import "iGithubAppDelegate.h"
 #import "GHOwnerNewsFeedViewController.h"
 #import "GHUserViewController.h"
 
-@interface iGithubAppDelegate_iPhone : iGithubAppDelegate {
+@interface iGithubAppDelegate_iPhone : iGithubAppDelegate <MFMailComposeViewControllerDelegate> {
     UITabBarController *_tabBarController;
     GHOwnerNewsFeedViewController *_newsFeedViewController;
     GHUserViewController *_repositoriesViewController;

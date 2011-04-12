@@ -22,7 +22,13 @@
 - (id)initWithRawDictionary:(NSDictionary *)rawDictionary {
     if ((self = [super initWithRawDictionary:rawDictionary])) {
         // Initialization code
-        self.target = [[[GHTarget alloc] initWithRawDictionary:[rawDictionary objectForKeyOrNilOnNullObject:@"target"]] autorelease];
+        id targetDictionary = [rawDictionary objectForKeyOrNilOnNullObject:@"target"];
+        id targetAttributes = [rawDictionary objectForKeyOrNilOnNullObject:@"target_attributes"];
+        if ([[targetDictionary class] isSubclassOfClass:[NSDictionary class] ]) {
+            self.target = [[[GHTarget alloc] initWithRawDictionary:targetDictionary] autorelease];
+        } else if ([[targetAttributes class] isSubclassOfClass:[NSDictionary class] ]) {
+            self.target = [[[GHTarget alloc] initWithRawDictionary:targetAttributes] autorelease];
+        }
     }
     return self;
 }

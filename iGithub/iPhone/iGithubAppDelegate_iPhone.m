@@ -18,6 +18,18 @@
     self.repositoriesViewController.username = [GHSettingsHelper username];
 }
 
+- (void)unknownPayloadEventTypeCallback:(NSNotification *)notification {
+    MFMailComposeViewController* controller = [[[MFMailComposeViewController alloc] init] autorelease];
+    controller.mailComposeDelegate = self;
+    [controller setSubject:@"Unkown Event Type found"];
+    [controller setMessageBody:[[notification userInfo] description] isHTML:NO]; 
+    [self.tabBarController presentModalViewController:controller animated:YES];
+}
+
+- (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error {
+    [self.tabBarController dismissModalViewControllerAnimated:YES];
+}
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // build userInterface here
     
@@ -25,6 +37,12 @@
                                              selector:@selector(authenticationViewControllerdidAuthenticateUserCallback:) 
                                                  name:GHAuthenticationViewControllerDidAuthenticateUserNotification 
                                                object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self 
+                                             selector:@selector(unknownPayloadEventTypeCallback:) 
+                                                 name:@"GHUnknownPayloadEventType" 
+                                               object:nil];
+    
     
 #if DEBUG
     [GHSettingsHelper setUsername:@"docmorelli"];
