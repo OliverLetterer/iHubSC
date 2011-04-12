@@ -17,16 +17,34 @@
 #define kUITableViewSectionUserData 0
 #define kUITableViewSectionRepositories 1
 #define kUITableViewSectionWatchedRepositories 2
-#define kUITableViewSectionPlan 3
+#define kUITableViewFollowingUsers 3
+#define kUITableViewFollowedUsers 4
+#define kUITableViewSectionPlan 5
+#define kUITableViewNetwork 6
 
 @implementation GHUserViewController
 
 @synthesize repositoriesArray=_repositoriesArray;
 @synthesize username=_username, user=_user;
-@synthesize watchedRepositoriesArray=_watchedRepositoriesArray;
+@synthesize watchedRepositoriesArray=_watchedRepositoriesArray, followingUsers=_followingUsers, followedUsers=_followedUsers;
 @synthesize lastIndexPathForSingleRepositoryViewController=_lastIndexPathForSingleRepositoryViewController;
 
 #pragma mark - setters and getters
+
+- (BOOL)canFollowUser {
+    return ![self.username isEqualToString:[GHAuthenticationManager sharedInstance].username ];
+}
+
+- (BOOL)isFollowingUser {
+    return [self.followedUsers indexOfObjectPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {
+        NSString *object = (NSString *)obj;
+        if ([object isEqualToString:[GHAuthenticationManager sharedInstance].username]) {
+            *stop = YES;
+            return YES;
+        }
+        return NO;
+    }] != NSNotFound;
+}
 
 - (void)setUsername:(NSString *)username {
     [_username release];
@@ -36,6 +54,8 @@
     self.watchedRepositoriesArray = nil;
     self.repositoriesArray = nil;
     self.user = nil;
+    self.followingUsers = nil;
+    self.followedUsers = nil;
     
     [self downloadUserData];
     [self.tableView reloadData];
@@ -58,6 +78,8 @@
     [_repositoriesArray release];
     [_username release];
     [_watchedRepositoriesArray release];
+    [_followingUsers release];
+    [_followedUsers release];
     [_lastIndexPathForSingleRepositoryViewController release];
     [_user release];
     [super dealloc];
@@ -112,11 +134,12 @@
 }
 
 - (void)reloadData {
-    [self downloadUserData];
     self.repositoriesArray = nil;
-    [self.tableView collapseSection:kUITableViewSectionRepositories animated:YES];
     self.watchedRepositoriesArray = nil;
-    [self.tableView collapseSection:kUITableViewSectionWatchedRepositories animated:YES];
+    self.followingUsers = nil;
+    self.followedUsers = nil;
+    [self.tableView reloadData];
+    [self downloadUserData];
 }
 
 - (void)cacheHeightForTableView {
@@ -191,7 +214,12 @@
 #pragma mark - UIExpandableTableViewDatasource
 
 - (BOOL)tableView:(UIExpandableTableView *)tableView canExpandSection:(NSInteger)section {
-    return section == kUITableViewSectionRepositories || section == kUITableViewSectionWatchedRepositories || section == kUITableViewSectionPlan;
+    return section == kUITableViewSectionRepositories || 
+            section == kUITableViewSectionWatchedRepositories || 
+            section == kUITableViewSectionPlan ||
+            section == kUITableViewFollowingUsers ||
+            section == kUITableViewFollowedUsers ||
+            section == kUITableViewNetwork;
 }
 
 - (BOOL)tableView:(UIExpandableTableView *)tableView needsToDownloadDataForExpandableSection:(NSInteger)section {
@@ -199,6 +227,12 @@
         return self.repositoriesArray == nil;
     } else if (section == kUITableViewSectionWatchedRepositories) {
         return self.watchedRepositoriesArray == nil;
+    } else if (section == kUITableViewFollowingUsers) {
+        return self.followingUsers == nil;
+    } else if (section == kUITableViewFollowedUsers) {
+        return self.followedUsers == nil;
+    } else if (section == kUITableViewNetwork) {
+        return self.followedUsers == nil;
     }
     return NO;
 }
@@ -213,12 +247,17 @@
     }
     
     if (section == kUITableViewSectionRepositories) {
-        NSInteger numberOfRepositories = self.user.publicRepoCount + self.user.privateRepoCount;
-        cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Repositories (%d)", @""), numberOfRepositories];
+        cell.textLabel.text = NSLocalizedString(@"Repositories", @"");
     } else if (section == kUITableViewSectionWatchedRepositories) {
         cell.textLabel.text = NSLocalizedString(@"Watched Repositories", @"");
     } else if (section == kUITableViewSectionPlan) {
         cell.textLabel.text = NSLocalizedString(@"Plan", @"");
+    } else if (section == kUITableViewFollowingUsers) {
+        cell.textLabel.text = NSLocalizedString(@"Following", @"");
+    } else if (section == kUITableViewFollowedUsers) {
+        cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"User following %@", @""), self.username];
+    } else if (section == kUITableViewNetwork) {
+        cell.textLabel.text = NSLocalizedString(@"Network", @"");
     }
     
     return cell;
@@ -232,6 +271,7 @@
                              completionHandler:^(NSArray *array, NSError *error) {
                                  if (error) {
                                      [self handleError:error];
+                                     [tableView cancelDownloadInSection:section];
                                  } else {
                                      self.repositoriesArray = array;
                                      [self cacheHeightForTableView];
@@ -244,12 +284,46 @@
                               completionHandler:^(NSArray *array, NSError *error) {
                                   if (error) {
                                       [self handleError:error];
+                                      [tableView cancelDownloadInSection:section];
                                   } else {
                                       self.watchedRepositoriesArray = array;
                                       [self cacheHeightForWatchedRepositories];
                                       [self.tableView expandSection:section animated:YES];
                                   }
                               }];
+    } else if (section == kUITableViewFollowingUsers) {
+        [GHUser usersFollowingUserNamed:self.username 
+                      completionHandler:^(NSArray *users, NSError *error) {
+                          if (error) {
+                              [self handleError:error];
+                              [tableView cancelDownloadInSection:section];
+                          } else {
+                              self.followingUsers = users;
+                              [tableView expandSection:section animated:YES];
+                          }
+                      }];
+    } else if (section == kUITableViewFollowedUsers) {
+        [GHUser usersFollowedByUserNamed:self.username 
+                       completionHandler:^(NSArray *users, NSError *error) {
+                           if (error) {
+                               [self handleError:error];
+                               [tableView cancelDownloadInSection:section];
+                           } else {
+                               self.followedUsers = [[users mutableCopy] autorelease];
+                               [tableView expandSection:section animated:YES];
+                           }
+                       }];
+    } else if (section == kUITableViewNetwork) {
+        [GHUser usersFollowedByUserNamed:self.username 
+                       completionHandler:^(NSArray *users, NSError *error) {
+                           if (error) {
+                               [self handleError:error];
+                               [tableView cancelDownloadInSection:section];
+                           } else {
+                               self.followedUsers = [[users mutableCopy] autorelease];
+                               [tableView expandSection:section animated:YES];
+                           }
+                       }];
     }
 }
 
@@ -259,7 +333,7 @@
     if (_isDownloadingUserData || !self.user) {
         return 0;
     }
-    return 4;
+    return 7;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -275,6 +349,22 @@
         result = [self.watchedRepositoriesArray count] + 1;
     } else if (section == kUITableViewSectionPlan && self.user.planName) {
         result = 5;
+    } else if (section == kUITableViewFollowingUsers) {
+        if (self.user.followingCount == 0) {
+            return 0;
+        }
+        return [self.followingUsers count] + 1;
+    } else if (section == kUITableViewFollowedUsers) {
+        if (self.user.followersCount == 0) {
+            return 0;
+        }
+        return [self.followedUsers count] + 1;
+    } else if (section == kUITableViewNetwork) {
+        if (!self.canFollowUser) {
+            return 0;
+        } else {
+            return 2;
+        }
     }
     return result;
 }
@@ -401,11 +491,52 @@
             cell.detailTextLabel.text = [NSString stringWithFormat:@"%d", self.user.planCollaborators];
         } else if (indexPath.row == 4) {
             cell.textLabel.text = NSLocalizedString(@"Space", @"");
-            cell.detailTextLabel.text = [NSString stringFormFileSize:self.user.planSpace];
+            cell.detailTextLabel.text = [[NSString stringFormFileSize:self.user.planSpace] stringByAppendingFormat:NSLocalizedString(@" used", @"")];
         } else {
             cell.textLabel.text = nil;
             cell.detailTextLabel.text = nil;
         }
+        return cell;
+    } else if (indexPath.section == kUITableViewFollowingUsers) {
+        NSString *CellIdentifier = @"UITableViewCellWithLinearGradientBackgroundView";
+        
+        UITableViewCellWithLinearGradientBackgroundView *cell = (UITableViewCellWithLinearGradientBackgroundView *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        if (!cell) {
+            cell = [[[UITableViewCellWithLinearGradientBackgroundView alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        }
+        
+        
+        NSString *username = [self.followingUsers objectAtIndex:indexPath.row - 1];
+        
+        cell.textLabel.text = username;
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        
+        return cell;
+    } else if (indexPath.section == kUITableViewFollowedUsers) {
+        NSString *CellIdentifier = @"UITableViewCellWithLinearGradientBackgroundView";
+        
+        UITableViewCellWithLinearGradientBackgroundView *cell = (UITableViewCellWithLinearGradientBackgroundView *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        if (!cell) {
+            cell = [[[UITableViewCellWithLinearGradientBackgroundView alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        }
+        
+        
+        NSString *username = [self.followedUsers objectAtIndex:indexPath.row - 1];
+        
+        cell.textLabel.text = username;
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        
+        return cell;
+    } else if (indexPath.section == kUITableViewNetwork) {
+        NSString *CellIdentifier = @"UITableViewCellWithLinearGradientBackgroundViewNetwork2";
+        
+        UITableViewCellWithLinearGradientBackgroundView *cell = (UITableViewCellWithLinearGradientBackgroundView *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        if (!cell) {
+            cell = [[[UITableViewCellWithLinearGradientBackgroundView alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        }
+        
+        cell.textLabel.text = self.isFollowingUser ? NSLocalizedString(@"Unfollow", @"") : NSLocalizedString(@"Follow", @"");
+        
         return cell;
     }
     
@@ -472,6 +603,66 @@
         viewController.delegate = self;
         self.lastIndexPathForSingleRepositoryViewController = indexPath;
         [self.navigationController pushViewController:viewController animated:YES];
+    } else if (indexPath.section == kUITableViewFollowingUsers) {
+        NSString *username = [self.followingUsers objectAtIndex:indexPath.row - 1];
+        
+        GHUserViewController *userViewController = [[[GHUserViewController alloc] initWithUsername:username] autorelease];
+        [self.navigationController pushViewController:userViewController animated:YES];
+        
+    } else if (indexPath.section == kUITableViewFollowedUsers) {
+        NSString *username = [self.followedUsers objectAtIndex:indexPath.row - 1];
+        
+        GHUserViewController *userViewController = [[[GHUserViewController alloc] initWithUsername:username] autorelease];
+        [self.navigationController pushViewController:userViewController animated:YES];
+        
+    } else if (indexPath.section == kUITableViewNetwork) {
+        if (self.isFollowingUser) {
+            [GHUser unfollowUser:self.username 
+               completionHandler:^(NSError *error) {
+                   if (error) {
+                       [self handleError:error];
+                   } else {
+                       NSUInteger index = [self.followedUsers indexOfObjectPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {
+                           if ([[GHAuthenticationManager sharedInstance].username isEqualToString:obj]) {
+                               *stop = YES;
+                               return YES;
+                           }
+                           return NO;
+                       }];
+                       if (index != NSNotFound) {
+                           [self.followedUsers removeObjectAtIndex:index];
+                           NSMutableIndexSet *set = [NSMutableIndexSet indexSet];
+                           [set addIndex:kUITableViewNetwork];
+                           [set addIndex:kUITableViewFollowedUsers];
+                           [self.tableView reloadSections:set 
+                                         withRowAnimation:UITableViewRowAnimationNone];
+                       }
+                   }
+               }];
+        } else {
+            [GHUser followUser:self.username 
+               completionHandler:^(NSError *error) {
+                   if (error) {
+                       [self handleError:error];
+                   } else {
+                       NSUInteger index = [self.followedUsers indexOfObjectPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {
+                           if ([[GHAuthenticationManager sharedInstance].username isEqualToString:obj]) {
+                               *stop = YES;
+                               return YES;
+                           }
+                           return NO;
+                       }];
+                       if (index == NSNotFound) {
+                           [self.followedUsers addObject:[GHAuthenticationManager sharedInstance].username ];
+                           NSMutableIndexSet *set = [NSMutableIndexSet indexSet];
+                           [set addIndex:kUITableViewNetwork];
+                           [set addIndex:kUITableViewFollowedUsers];
+                           [self.tableView reloadSections:set 
+                                         withRowAnimation:UITableViewRowAnimationNone];
+                       }
+                   }
+               }];
+        }
     } else {
         [self.tableView deselectRowAtIndexPath:indexPath animated:NO];
     }

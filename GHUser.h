@@ -79,4 +79,11 @@
 
 + (void)authenticatedUserWithUsername:(NSString *)username password:(NSString *)password completionHandler:(void(^)(GHUser *user, NSError *error))handler;
 
+// returns an array of strings
++ (void)usersFollowingUserNamed:(NSString *)username completionHandler:(void(^)(NSArray *users, NSError *error))handler;
++ (void)usersFollowedByUserNamed:(NSString *)username completionHandler:(void(^)(NSArray *users, NSError *error))handler;
+
++ (void)followUser:(NSString *)username completionHandler:(void(^)(NSError *error))handler;
++ (void)unfollowUser:(NSString *)username completionHandler:(void(^)(NSError *error))handler;
+
 @end

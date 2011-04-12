@@ -108,6 +108,109 @@
     return [[[GHUser alloc] initWithRawUserDictionary:rawDictionary] autorelease];
 }
 
++ (void)usersFollowingUserNamed:(NSString *)username completionHandler:(void(^)(NSArray *users, NSError *error))handler {
+    
+    dispatch_async(GHAPIBackgroundQueue(), ^(void) {
+        
+        // /user/show/:user/following
+        
+        NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://github.com/api/v2/json/user/show/%@/following",
+                                           [username stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] ] ];
+        
+        NSError *myError = nil;
+        
+        ASIFormDataRequest *request = [ASIFormDataRequest authenticatedFormDataRequestWithURL:URL];
+        [request startSynchronous];
+        
+        myError = [request error];
+        
+        NSString *jsonString = [request responseString];
+        
+        dispatch_async(dispatch_get_main_queue(), ^(void) {
+            if (myError) {
+                handler(nil, myError);
+            } else {
+                NSDictionary *dictionary = [jsonString objectFromJSONString];
+                handler([dictionary objectForKey:@"users"], nil);            }
+        });
+    });
+}
+
++ (void)usersFollowedByUserNamed:(NSString *)username completionHandler:(void(^)(NSArray *users, NSError *error))handler {
+    
+    dispatch_async(GHAPIBackgroundQueue(), ^(void) {
+        
+        // /user/show/:user/followers
+        
+        NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://github.com/api/v2/json/user/show/%@/followers",
+                                           [username stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] ] ];
+        
+        NSError *myError = nil;
+        
+        ASIFormDataRequest *request = [ASIFormDataRequest authenticatedFormDataRequestWithURL:URL];
+        [request startSynchronous];
+        
+        myError = [request error];
+        
+        NSString *jsonString = [request responseString];
+        
+        dispatch_async(dispatch_get_main_queue(), ^(void) {
+            if (myError) {
+                handler(nil, myError);
+            } else {
+                NSDictionary *dictionary = [jsonString objectFromJSONString];
+                handler([dictionary objectForKey:@"users"], nil);
+            }
+        });
+    });
+}
+
++ (void)followUser:(NSString *)username completionHandler:(void(^)(NSError *error))handler {
+    dispatch_async(GHAPIBackgroundQueue(), ^(void) {
+        
+        // /user/follow/:user [POST]
+        
+        NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://github.com/api/v2/json/user/follow/%@",
+                                           [username stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] ] ];
+        
+        NSError *myError = nil;
+        
+        ASIFormDataRequest *request = [ASIFormDataRequest authenticatedFormDataRequestWithURL:URL];
+        [request setPostValue:username forKey:@"name"];
+        [request startSynchronous];
+        
+        myError = [request error];
+        
+        dispatch_async(dispatch_get_main_queue(), ^(void) {
+            handler(myError);
+        });
+    });
+}
+
++ (void)unfollowUser:(NSString *)username completionHandler:(void(^)(NSError *error))handler {
+    dispatch_async(GHAPIBackgroundQueue(), ^(void) {
+        
+        // /user/unfollow/:user [POST]
+        
+        NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://github.com/api/v2/json/user/unfollow/%@",
+                                           [username stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] ] ];
+        
+        NSError *myError = nil;
+        
+        ASIFormDataRequest *request = [ASIFormDataRequest authenticatedFormDataRequestWithURL:URL];
+        
+        [request setPostValue:username forKey:@"name"];
+        
+        [request startSynchronous];
+        
+        myError = [request error];
+        
+        dispatch_async(dispatch_get_main_queue(), ^(void) {
+            handler(myError);
+        });
+    });
+}
+
 - (id)initWithRawUserDictionary:(NSDictionary *)rawDictionary {
     NSDictionary *userDictionary = [rawDictionary objectForKeyOrNilOnNullObject:@"user"];
     if ((self = [self initWithRawDictionary:userDictionary])) {

@@ -21,6 +21,8 @@
     
     NSArray *_repositoriesArray;
     NSArray *_watchedRepositoriesArray;
+    NSArray *_followingUsers;
+    NSMutableArray *_followedUsers;
     
     NSIndexPath *_lastIndexPathForSingleRepositoryViewController;
 }
@@ -30,6 +32,12 @@
 @property (nonatomic, retain) NSArray *repositoriesArray;
 @property (nonatomic, copy) NSString *username;
 @property (nonatomic, retain) NSArray *watchedRepositoriesArray;
+@property (nonatomic, retain) NSArray *followingUsers;
+@property (nonatomic, retain) NSMutableArray *followedUsers;
+
+@property (nonatomic, readonly) BOOL canFollowUser;
+@property (nonatomic, readonly) BOOL isFollowingUser;
+
 @property (nonatomic, copy) NSIndexPath *lastIndexPathForSingleRepositoryViewController;
 
 - (id)initWithUsername:(NSString *)username;

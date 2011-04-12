@@ -22,17 +22,19 @@ support all these events
 [O] WikiEvent
 
 
-- not showing NewsFeed after first login (implement a notification to handle if a new user got authenticated)
 - what happens if the password changed?
 - rename GHFeedItemWithDescriptionTableViewCell and all other cells
 - date formatting (1 day but 30 days, minutes, ...)
+- commented on pull request is wrong (it can also be an issue)
 
 GHSingleRepositoryViewController
 - administrate (delete, watch, unwatch)
 
+GHUserViewController
+- recent activities
+
 ViewControllers for:
-- User
 - Commits
 - Pull Requests
 - search
-- gist
+(- gist)
