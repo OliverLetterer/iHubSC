@@ -81,4 +81,7 @@
                withToken:(NSString *)token 
        completionHandler:(void (^)(NSError *error))handler;
 
++ (void)followRepositorie:(NSString *)repository completionHandler:(void (^)(NSError *error))handler;
++ (void)unfollowRepositorie:(NSString *)repository completionHandler:(void (^)(NSError *error))handler;
+
 @end

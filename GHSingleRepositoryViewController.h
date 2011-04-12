@@ -29,13 +29,14 @@
     
     NSArray *_issuesArray;
     
-    NSArray *_watchedUsersArray;
+    NSMutableArray *_watchedUsersArray;
     
     NSString *_deleteToken;
     
     id<GHSingleRepositoryViewControllerDelegate> _delegate;
 }
 
+@property (nonatomic, readonly) BOOL isFollowingRepository;
 @property (nonatomic, readonly) BOOL canDeleteRepository;
 
 @property (nonatomic, copy) NSString *repositoryString;
@@ -44,7 +45,7 @@
 @property (nonatomic, retain) NSArray *issuesArray;
 - (void)cacheHeightForIssuesArray;
 
-@property (nonatomic, retain) NSArray *watchedUsersArray;
+@property (nonatomic, retain) NSMutableArray *watchedUsersArray;
 
 @property (nonatomic, copy) NSString *deleteToken;
 @property (nonatomic, assign) id<GHSingleRepositoryViewControllerDelegate> delegate;

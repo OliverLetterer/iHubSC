@@ -16,6 +16,11 @@
 #import "GHNewsFeedItemTableViewCell.h"
 #import "GHUserViewController.h"
 
+#define kUITableViewSectionUserData 0
+#define kUITableViewSectionIssues 1
+#define kUITableViewSectionWatchingUsers 2
+#define kUITableViewSectionAdministration 3
+
 @implementation GHSingleRepositoryViewController
 
 @synthesize repositoryString=_repositoryString, repository=_repository, issuesArray=_issuesArray, watchedUsersArray=_watchedUsersArray, deleteToken=_deleteToken, delegate=_delegate;
@@ -30,6 +35,16 @@
 
 - (BOOL)canDeleteRepository {
     return [self.repository.owner isEqualToString:[GHAuthenticationManager sharedInstance].username ];
+}
+
+- (BOOL)isFollowingRepository {
+    return [self.watchedUsersArray indexOfObjectPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {
+        if ([[GHAuthenticationManager sharedInstance].username isEqualToString:obj]) {
+            *stop = YES;
+            return YES;
+        }
+        return NO;
+    }] != NSNotFound;
 }
 
 #pragma mark - Initialization
@@ -121,55 +136,76 @@
     return section != 0;
 }
 - (BOOL)tableView:(UIExpandableTableView *)tableView needsToDownloadDataForExpandableSection:(NSInteger)section {
-    if (section == 1) {
+    if (section == kUITableViewSectionIssues) {
         return self.issuesArray == nil;
-    } else if (section == 2) {
+    } else if (section == kUITableViewSectionWatchingUsers) {
         return self.watchedUsersArray == nil;
+    } else if (section == kUITableViewSectionAdministration) {
+        if (!self.canDeleteRepository) {
+            return self.watchedUsersArray == nil;
+        }
     }
     return NO;
 }
 
 - (UITableViewCell<UIExpandingTableViewCell> *)tableView:(UIExpandableTableView *)tableView expandingCellForSection:(NSInteger)section {
-    if (section == 1) {
-        // Issues (X)
-        NSString *CellIdientifier = @"UICollapsingAndSpinningTableViewCell";
-        
-        UICollapsingAndSpinningTableViewCell *cell = (UICollapsingAndSpinningTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdientifier];
-        
-        if (cell == nil) {
-            cell = [[[UICollapsingAndSpinningTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdientifier] autorelease];
-        }
-        
-        cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Open Issues (%@)", @""), self.repository.openIssues];
-        
-        return cell;
-    } else if (section == 2) {
-        NSString *CellIdientifier = @"UICollapsingAndSpinningTableViewCell";
-        
-        UICollapsingAndSpinningTableViewCell *cell = (UICollapsingAndSpinningTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdientifier];
-        
-        if (cell == nil) {
-            cell = [[[UICollapsingAndSpinningTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdientifier] autorelease];
-        }
-        
-        cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Watching Users (%@)", @""), self.repository.watchers];
-        
-        return cell;
-    } else if (section == 3) {
-        NSString *CellIdientifier = @"UICollapsingAndSpinningTableViewCell";
-        
-        UICollapsingAndSpinningTableViewCell *cell = (UICollapsingAndSpinningTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdientifier];
-        
-        if (cell == nil) {
-            cell = [[[UICollapsingAndSpinningTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdientifier] autorelease];
-        }
-        
-        cell.textLabel.text = NSLocalizedString(@"Administration", @"");
-        
-        return cell;
+    NSString *CellIdientifier = @"UICollapsingAndSpinningTableViewCell";
+    
+    UICollapsingAndSpinningTableViewCell *cell = (UICollapsingAndSpinningTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdientifier];
+    
+    if (cell == nil) {
+        cell = [[[UICollapsingAndSpinningTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdientifier] autorelease];
     }
     
-    return nil;
+    if (section == kUITableViewSectionIssues) {
+        cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Open Issues (%@)", @""), self.repository.openIssues];
+    } else if (section == kUITableViewSectionWatchingUsers) {
+        cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Watching Users (%@)", @""), self.repository.watchers];
+    } else if (section == kUITableViewSectionAdministration) {
+        cell.textLabel.text = self.canDeleteRepository ? NSLocalizedString(@"Administration", @"") : NSLocalizedString(@"Network", @"");
+    }
+    
+    return cell;
+}
+
+#pragma mark - UIExpandableTableViewDelegate
+
+- (void)tableView:(UIExpandableTableView *)tableView downloadDataForExpandableSection:(NSInteger)section {
+    if (section == kUITableViewSectionIssues) {
+        [GHIssue openedIssuesOnRepository:self.repositoryString 
+                        completionHandler:^(NSArray *issues, NSError *error) {
+                            if (error) {
+                                [tableView cancelDownloadInSection:section];
+                                [self handleError:error];
+                            } else {
+                                self.issuesArray = issues;
+                                [self cacheHeightForIssuesArray];
+                                [tableView expandSection:section animated:YES];
+                            }
+                        }];
+    } else if (section == kUITableViewSectionWatchingUsers) {
+        [GHRepository watchingUserOfRepository:self.repositoryString 
+                         withCompletionHandler:^(NSArray *watchingUsers, NSError *error) {
+                             if (error) {
+                                 [tableView cancelDownloadInSection:section];
+                                 [self handleError:error];
+                             } else {
+                                 self.watchedUsersArray = [[watchingUsers mutableCopy] autorelease];
+                                 [tableView expandSection:section animated:YES];
+                             }
+                         }];
+    } else if (section == kUITableViewSectionAdministration) {
+        [GHRepository watchingUserOfRepository:self.repositoryString 
+                         withCompletionHandler:^(NSArray *watchingUsers, NSError *error) {
+                             if (error) {
+                                 [tableView cancelDownloadInSection:section];
+                                 [self handleError:error];
+                             } else {
+                                 self.watchedUsersArray = [[watchingUsers mutableCopy] autorelease];
+                                 [tableView expandSection:section animated:YES];
+                             }
+                         }];
+    }
 }
 
 #pragma mark - Table view data source
@@ -190,17 +226,17 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    if (section == 0) {
+    if (section == kUITableViewSectionUserData) {
         // title + description
         // + details (Created, Language, Size, Owner, Homepage, forked)
         return 7;
-    } else if (section == 1) {
+    } else if (section == kUITableViewSectionIssues) {
         // issues
         // title, issues, create new issue
         return [self.issuesArray count] + 2;
-    } else if (section == 2) {
+    } else if (section == kUITableViewSectionWatchingUsers) {
         return [self.watchedUsersArray count] + 1;
-    } else if (section == 3) {
+    } else if (section == kUITableViewSectionAdministration) {
         return 2;
     }
     
@@ -209,7 +245,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    if (indexPath.section == 0) {
+    if (indexPath.section == kUITableViewSectionUserData) {
         if (indexPath.row == 0) {
             // title + description
             NSString *CellIdentifier = @"GHFeedItemWithDescriptionTableViewCell";
@@ -335,7 +371,7 @@
             
             return cell;
         }
-    } else if (indexPath.section == 1) {
+    } else if (indexPath.section == kUITableViewSectionIssues) {
         // issues
         if (indexPath.row > 0 && indexPath.row <= [self.issuesArray count]) {
             NSString *CellIdentifier = @"GHIssueTitleTableViewCell";
@@ -373,7 +409,7 @@
             
             return cell;
         }
-    } else if (indexPath.section == 2) {
+    } else if (indexPath.section == kUITableViewSectionWatchingUsers) {
         // watching users
         if (indexPath.row > 0 && indexPath.row <= [self.watchedUsersArray count]) {
             NSString *CellIdentifier = @"UITableViewCellWithLinearGradientBackgroundView";
@@ -382,20 +418,17 @@
             if (!cell) {
                 cell = [[[UITableViewCellWithLinearGradientBackgroundView alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
             }
-
             
-            GHUser *user = [self.watchedUsersArray objectAtIndex:indexPath.row - 1];
-            
-            cell.textLabel.text = user.login;
+            cell.textLabel.text = [self.watchedUsersArray objectAtIndex:indexPath.row - 1];
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             
             return cell;
         }
-    } else if (indexPath.section == 3) {
+    } else if (indexPath.section == kUITableViewSectionAdministration) {
         // adminsitration
         if (indexPath.row == 1) {
             // first administration
-            NSString *CellIdentifier = @"UITableViewCellWithLinearGradientBackgroundView";
+            NSString *CellIdentifier = @"UITableViewCellWithLinearGradientBackgroundViewAdmin";
             
             UITableViewCellWithLinearGradientBackgroundView *cell = (UITableViewCellWithLinearGradientBackgroundView *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
             if (!cell) {
@@ -405,7 +438,7 @@
             if (self.canDeleteRepository) {
                 cell.textLabel.text = NSLocalizedString(@"Delete this Repository", @"");
             } else {
-                cell.textLabel.text = @"Watch/unwatch";
+                cell.textLabel.text = self.isFollowingRepository ? NSLocalizedString(@"Unfollow", @"") : NSLocalizedString(@"Follow", @"") ;
             }
             
             return cell;
@@ -452,7 +485,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    if (indexPath.section == 0 && indexPath.row == 0) {
+    if (indexPath.section == kUITableViewSectionUserData && indexPath.row == 0) {
         // title + description
         if (![self isHeightCachedForRowAtIndexPath:indexPath]) {
             [self cacheHeight:[self heightForDescription:self.repository.desctiptionRepo] + 50.0 
@@ -460,7 +493,7 @@
         }
         
         return [self cachedHeightForRowAtIndexPath:indexPath];
-    } else if (indexPath.section == 1 && indexPath.row > 0 && indexPath.row <= [self.issuesArray count]) {
+    } else if (indexPath.section == kUITableViewSectionIssues && indexPath.row > 0 && indexPath.row <= [self.issuesArray count]) {
         return [self cachedHeightForRowAtIndexPath:indexPath];
     }
     
@@ -470,7 +503,7 @@
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == 0) {
+    if (indexPath.section == kUITableViewSectionUserData) {
         if (indexPath.row == 1) {
             GHUserViewController *userViewController = [[[GHUserViewController alloc] initWithUsername:self.repository.owner] autorelease];
             [self.navigationController pushViewController:userViewController animated:YES];
@@ -486,7 +519,7 @@
         } else {
             [self.tableView deselectRowAtIndexPath:indexPath animated:NO];
         }
-    } else if (indexPath.section == 1) {
+    } else if (indexPath.section == kUITableViewSectionIssues) {
         if (indexPath.row > 0 && indexPath.row <= [self.issuesArray count]) {
             GHRawIssue *issue = [self.issuesArray objectAtIndex:indexPath.row-1];
             GHViewIssueTableViewController *issueViewController = [[[GHViewIssueTableViewController alloc] 
@@ -497,13 +530,13 @@
         } else {
             [self.tableView deselectRowAtIndexPath:indexPath animated:NO];
         }
-    } else if (indexPath.section == 2) {
+    } else if (indexPath.section == kUITableViewSectionWatchingUsers) {
         // watched user
-        GHUser *user = [self.watchedUsersArray objectAtIndex:indexPath.row-1];
-        GHUserViewController *userViewController = [[[GHUserViewController alloc] initWithUsername:user.login] autorelease];
+        NSString *user = [self.watchedUsersArray objectAtIndex:indexPath.row-1];
+        GHUserViewController *userViewController = [[[GHUserViewController alloc] initWithUsername:user] autorelease];
         [self.navigationController pushViewController:userViewController animated:YES];
         
-    } else if (indexPath.section == 3) {
+    } else if (indexPath.section == kUITableViewSectionAdministration) {
         if (indexPath.row == 1) {
             if (self.canDeleteRepository) {
                 [GHRepository deleteTokenForRepository:self.repositoryString 
@@ -523,9 +556,54 @@
                                          [alert show];
                                      }
                                  }];
+            } else {
+                if (self.isFollowingRepository) {
+                    [GHRepository unfollowRepositorie:self.repositoryString completionHandler:^(NSError *error) {
+                        if (error) {
+                            [self handleError:error];
+                        } else {
+                            NSUInteger index = [self.watchedUsersArray indexOfObjectPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {
+                                if ([[GHAuthenticationManager sharedInstance].username isEqualToString:obj]) {
+                                    *stop = YES;
+                                    return YES;
+                                }
+                                return NO;
+                            }];
+                            if (index != NSNotFound) {
+                                [self.watchedUsersArray removeObjectAtIndex:index];
+                                NSMutableIndexSet *set = [NSMutableIndexSet indexSet];
+                                [set addIndex:kUITableViewSectionWatchingUsers];
+                                [set addIndex:kUITableViewSectionAdministration];
+                                [self.tableView reloadSections:set 
+                                              withRowAnimation:UITableViewRowAnimationNone];
+                            }
+                        }
+                    }];
+                } else {
+                    [GHRepository followRepositorie:self.repositoryString completionHandler:^(NSError *error) {
+                        if (error) {
+                            [self handleError:error];
+                        } else {
+                            NSUInteger index = [self.watchedUsersArray indexOfObjectPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {
+                                if ([[GHAuthenticationManager sharedInstance].username isEqualToString:obj]) {
+                                    *stop = YES;
+                                    return YES;
+                                }
+                                return NO;
+                            }];
+                            if (index == NSNotFound) {
+                                [self.watchedUsersArray addObject:[GHAuthenticationManager sharedInstance].username ];
+                                NSMutableIndexSet *set = [NSMutableIndexSet indexSet];
+                                [set addIndex:kUITableViewSectionWatchingUsers];
+                                [set addIndex:kUITableViewSectionAdministration];
+                                [self.tableView reloadSections:set 
+                                              withRowAnimation:UITableViewRowAnimationNone];
+                            }
+                        }
+                    }];
+                }
+                [self.tableView deselectRowAtIndexPath:indexPath animated:NO];
             }
-        } else {
-            [self.tableView deselectRowAtIndexPath:indexPath animated:NO];
         }
     } else {
         [self.tableView deselectRowAtIndexPath:indexPath animated:NO];
@@ -554,35 +632,6 @@
     for (GHRawIssue *issue in self.issuesArray) {
         [self cacheHeight:[self heightForDescription:issue.title]+50.0f forRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:1] ];
         i++;
-    }
-}
-
-#pragma mark - UIExpandableTableViewDelegate
-
-- (void)tableView:(UIExpandableTableView *)tableView downloadDataForExpandableSection:(NSInteger)section {
-    if (section == 1) {
-        [GHIssue openedIssuesOnRepository:self.repositoryString 
-                        completionHandler:^(NSArray *issues, NSError *error) {
-                            if (error) {
-                                [tableView cancelDownloadInSection:section];
-                                [self handleError:error];
-                            } else {
-                                self.issuesArray = issues;
-                                [self cacheHeightForIssuesArray];
-                                [tableView expandSection:section animated:YES];
-                            }
-                        }];
-    } else if (section == 2) {
-        [GHRepository watchingUserOfRepository:self.repositoryString 
-                         withCompletionHandler:^(NSArray *watchingUsers, NSError *error) {
-                             if (error) {
-                                 [tableView cancelDownloadInSection:section];
-                                 [self handleError:error];
-                             } else {
-                                 self.watchedUsersArray = watchingUsers;
-                                 [tableView expandSection:section animated:YES];
-                             }
-                         }];
     }
 }
 

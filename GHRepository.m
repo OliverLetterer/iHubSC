@@ -196,7 +196,7 @@
         
         // http://github.com/api/v2/json/repos/show/claudiob/csswaxer/watchers?full=1
         
-        NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://github.com/api/v2/json/repos/show/%@/watchers?full=1", [repository stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] ]];
+        NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://github.com/api/v2/json/repos/show/%@/watchers", [repository stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] ]];
         NSError *myError = nil;
         
         ASIFormDataRequest *request = [ASIFormDataRequest authenticatedFormDataRequestWithURL:URL];
@@ -217,13 +217,7 @@
             } else {
                 NSDictionary *dictionary = [jsonString objectFromJSONString];
                 
-                NSMutableArray *userArray = [NSMutableArray array];
-                
-                for (NSDictionary *rawDictionary in [dictionary objectForKey:@"watchers"]) {
-                    [userArray addObject:[[[GHUser alloc] initWithRawDictionary:rawDictionary] autorelease] ];
-                }
-                
-                handler(userArray, nil);
+                handler([dictionary objectForKey:@"watchers"], nil);
                 
             }
         });
@@ -291,7 +285,48 @@
             }
         });
     });
-    
+}
+
++ (void)followRepositorie:(NSString *)repository completionHandler:(void (^)(NSError *error))handler {
+    dispatch_async(GHAPIBackgroundQueue(), ^(void) {
+        
+        // repos/watch/:user/:repo
+        
+        NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://github.com/api/v2/json/repos/watch/%@",
+                                           [repository stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] ] ];
+        
+        NSError *myError = nil;
+        
+        ASIFormDataRequest *request = [ASIFormDataRequest authenticatedFormDataRequestWithURL:URL];
+        [request startSynchronous];
+        
+        myError = [request error];
+        
+        dispatch_async(dispatch_get_main_queue(), ^(void) {
+            handler(myError);
+        });
+    });
+}
+
++ (void)unfollowRepositorie:(NSString *)repository completionHandler:(void (^)(NSError *error))handler {
+    dispatch_async(GHAPIBackgroundQueue(), ^(void) {
+        
+        // repos/unwatch/:user/:repo
+        
+        NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://github.com/api/v2/json/repos/unwatch/%@",
+                                           [repository stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] ] ];
+        
+        NSError *myError = nil;
+        
+        ASIFormDataRequest *request = [ASIFormDataRequest authenticatedFormDataRequestWithURL:URL];
+        [request startSynchronous];
+        
+        myError = [request error];
+        
+        dispatch_async(dispatch_get_main_queue(), ^(void) {
+            handler(myError);
+        });
+    });
 }
 
 #pragma mark - Initialization
