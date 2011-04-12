@@ -6,7 +6,7 @@ support all these events
     [X] DeleteEvent 
     [X] DownloadEvent 
     [X] FollowEvent 
-[O] ForkApplyEvent 
+    [X] ForkApplyEvent 
     [X] ForkEvent 
     [X] GistEvent 
 [O] GitHubEvent 

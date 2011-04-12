@@ -451,6 +451,26 @@
         cell.descriptionLabel.text = NSLocalizedString(@"commented on a pull request", @"");
         
         return cell;
+    } else if (item.payload.type == GHPayloadForkApplyEvent) {
+        NSString *CellIdentifier = @"GHFeedItemWithDescriptionTableViewCell";
+        GHFeedItemWithDescriptionTableViewCell *cell = (GHFeedItemWithDescriptionTableViewCell *)[self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        
+        if (!cell) {
+            cell = [[[GHFeedItemWithDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        }
+        
+        GHForkApplyEventPayload *payload = (GHForkApplyEventPayload *)item.payload;
+        
+        [self updateImageViewForCell:cell 
+                         atIndexPath:indexPath 
+                      withGravatarID:item.actorAttributes.gravatarID];
+        
+        cell.repositoryLabel.text = payload.repo;
+        cell.titleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ applied fork commits", @""), payload.actor];
+        
+        cell.descriptionLabel.text = payload.commit;
+        
+        return cell;
     }
     
     return [self dummyCellWithText:item.type];
@@ -590,6 +610,8 @@
         } else if(item.payload.type == GHPayloadMemberEvent) {
             height = 71.0;
         } else if(item.payload.type == GHPayloadIssueCommentEvent) {
+            height = 71.0;
+        } else if(item.payload.type == GHPayloadForkApplyEvent) {
             height = 71.0;
         } else {
             minimumHeight = 15.0;

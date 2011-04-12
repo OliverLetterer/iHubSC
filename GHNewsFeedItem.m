@@ -57,6 +57,8 @@
             self.payload = [[[GHMemberEventPayload alloc] initWithRawDictionary:rawPayload] autorelease];
         } else if ([self.type isEqualToString:@"IssueCommentEvent"]) {
             self.payload = [[[GHIssuesCommentPayload alloc] initWithRawDictionary:rawPayload] autorelease];
+        } else if ([self.type isEqualToString:@"ForkApplyEvent"]) {
+            self.payload = [[[GHForkApplyEventPayload alloc] initWithRawDictionary:rawPayload] autorelease];
         } else {
 #if DEBUG
             [[NSNotificationCenter defaultCenter] postNotificationName:@"GHUnknownPayloadEventType" object:nil userInfo:rawDictionary];
