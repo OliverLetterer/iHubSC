@@ -9,6 +9,7 @@
 #import "UIImage+Gravatar.h"
 #import "GithubAPI.h"
 #import "UIImage+Resize.h"
+#import "ASIHTTPRequest.h"
 
 @implementation UIImage (GHGravatar)
 
@@ -21,9 +22,13 @@
             NSError *myError = nil;
             NSURL *imageURL = [NSURL URLWithString:[NSString stringWithFormat:@"http://www.gravatar.com/avatar/%@?s=200", gravatarID]];
             
-            NSData *imageData = [NSURLConnection sendSynchronousRequest:[NSURLRequest requestWithURL:imageURL] 
-                                                      returningResponse:NULL 
-                                                                  error:&myError];
+            ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:imageURL];
+            [request startSynchronous];
+            
+            myError = [request error];
+            
+            NSData *imageData = [request responseData];
+            
             UIImage *theImage = [[[UIImage alloc] initWithData:imageData] autorelease];
             
             CGSize imageSize = CGSizeMake(64.0 * [UIScreen mainScreen].scale, 64.0 * [UIScreen mainScreen].scale);
