@@ -36,6 +36,7 @@
 #import "GHMemberEventPayload.h"
 #import "GHIssuesCommentPayload.h"
 #import "GHForkApplyEventPayload.h"
+#import "GHPublicEventPayload.h"
 
 #import "GHCommitMessage.h"
 #import "GHPullRequest.h"

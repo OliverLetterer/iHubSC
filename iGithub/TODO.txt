@@ -14,7 +14,7 @@ support all these events
     [X] IssueCommentEvent
     [X] IssuesEvent 
     [X] MemberEvent 
-[O] PublicEvent 
+    [X] PublicEvent 
     [X] PullRequestEvent 
     [X] PushEvent
 [O] TeamAddEvent 
@@ -27,6 +27,9 @@ support all these events
 - date formatting (1 day but 30 days, minutes, ...)
 - commented on pull request is wrong (it can also be an issue)
 
+GHSingleRepositoryViewController
+- create a new issue
+
 GHUserViewController
 - recent activities
 
@@ -34,4 +37,5 @@ ViewControllers for:
 - Commits
 - Pull Requests
 - search
+- create a new issue
 (- gist)
