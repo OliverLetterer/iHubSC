@@ -125,15 +125,16 @@
         
         cell.repositoryLabel.text = payload.repo;
         
-        GHIssue *issue = [GHIssue issueFromDatabaseOnRepository:payload.repo withNumber:payload.number];
+        GHIssue *issue = [GHIssue issueFromDatabaseOnRepository:[NSString stringWithFormat:@"%@/%@", item.repository.owner, item.repository.name] withNumber:payload.number];
         
         if (issue) {            
             cell.descriptionLabel.text = issue.title;
         } else {
-            [GHIssue issueOnRepository:payload.repo 
+            [GHIssue issueOnRepository:[NSString stringWithFormat:@"%@/%@", item.repository.owner, item.repository.name] 
                             withNumber:payload.number 
                  useDatabaseIfPossible:YES 
                      completionHandler:^(GHIssue *issue, NSError *error, BOOL didDownload) {
+                         DLog(@"issue : %@", issue);
                          if (error) {
                              [self handleError:error];
                          } else {
