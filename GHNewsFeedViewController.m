@@ -134,7 +134,6 @@
                             withNumber:payload.number 
                  useDatabaseIfPossible:YES 
                      completionHandler:^(GHIssue *issue, NSError *error, BOOL didDownload) {
-                         DLog(@"issue : %@", issue);
                          if (error) {
                              [self handleError:error];
                          } else {
