@@ -82,7 +82,7 @@
                                                           constrainedToSize:CGSizeMake(222.0f, MAXFLOAT)
                                                               lineBreakMode:UILineBreakModeWordWrap];
         if (secondCommitSize.height > [GHPushFeedItemTableViewCell maxCommitHeight]) {
-            firstCommitSize.height = [GHPushFeedItemTableViewCell maxCommitHeight];
+            secondCommitSize.height = [GHPushFeedItemTableViewCell maxCommitHeight];
         }
         commitHeight += secondCommitSize.height;
         secondCommitFrame.origin.y = self.firstCommitLabel.frame.size.height + self.firstCommitLabel.frame.origin.y + 7.0;
