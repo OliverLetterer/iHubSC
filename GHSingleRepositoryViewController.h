@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "GHTableViewController.h"
 #import "GithubAPI.h"
+#import "GHCreateIssueTableViewController.h"
 
 @class GHSingleRepositoryViewController;
 
@@ -22,7 +23,7 @@
 
 
 
-@interface GHSingleRepositoryViewController : GHTableViewController <UIAlertViewDelegate, GHSingleRepositoryViewControllerDelegate> {
+@interface GHSingleRepositoryViewController : GHTableViewController <UIAlertViewDelegate, GHSingleRepositoryViewControllerDelegate, GHCreateIssueTableViewControllerDelegate> {
 @private
     NSString *_repositoryString;
     GHRepository *_repository;

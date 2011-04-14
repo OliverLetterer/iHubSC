@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class GHIssueComment;
+@class GHIssueComment, GHRawIssue;
 
 @interface GHIssue : NSManagedObject {
 @private
@@ -66,5 +66,10 @@
 
 + (void)openedIssuesOnRepository:(NSString *)repository 
                completionHandler:(void (^)(NSArray *issues, NSError *error))handler;
+
++ (void)createIssueOnRepository:(NSString *)repository 
+                          title:(NSString *)title 
+                           body:(NSString *)body 
+              completionHandler:(void (^)(GHRawIssue *issue, NSError *error))handler;
 
 @end

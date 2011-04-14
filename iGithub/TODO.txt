@@ -26,16 +26,10 @@ support all these events
 - rename GHFeedItemWithDescriptionTableViewCell and all other cells
 - date formatting (1 day but 30 days, minutes, ...)
 - commented on pull request is wrong (it can also be an issue)
-
-GHSingleRepositoryViewController
-- create a new issue
-
-GHUserViewController
-- recent activities
+- Notifications if a repo gets deleted, an issue gets closed
 
 ViewControllers for:
 - Commits
 - Pull Requests
 - search
-- create a new issue
 (- gist)

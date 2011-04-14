@@ -528,7 +528,12 @@
                                                                    autorelease];
             [self.navigationController pushViewController:issueViewController animated:YES];
         } else {
-            [self.tableView deselectRowAtIndexPath:indexPath animated:NO];
+            GHCreateIssueTableViewController *createViewController = [[[GHCreateIssueTableViewController alloc] initWithRepository:self.repositoryString] autorelease];
+            createViewController.delegate = self;
+            
+            UINavigationController *navController = [[[UINavigationController alloc] initWithRootViewController:createViewController] autorelease];
+            
+            [self presentModalViewController:navController animated:YES];
         }
     } else if (indexPath.section == kUITableViewSectionWatchingUsers) {
         // watched user
@@ -639,6 +644,20 @@
 
 - (void)singleRepositoryViewControllerDidDeleteRepository:(GHSingleRepositoryViewController *)singleRepositoryViewController {
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+#pragma mark - GHCreateIssueTableViewControllerDelegate
+
+- (void)createIssueViewControllerDidCancel:(GHCreateIssueTableViewController *)createViewController {
+    [self dismissModalViewControllerAnimated:YES];
+}
+
+- (void)createIssueViewController:(GHCreateIssueTableViewController *)createViewController didCreateIssue:(GHRawIssue *)issue {
+    self.issuesArray = nil;
+    self.repository.openIssues = [NSNumber numberWithInt:[self.repository.openIssues intValue]+1 ];
+    [self.tableView reloadData];
+    [self.tableView expandSection:kUITableViewSectionIssues animated:YES];
+    [self dismissModalViewControllerAnimated:YES];
 }
 
 @end

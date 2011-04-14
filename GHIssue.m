@@ -343,6 +343,44 @@
             }
         });
     });
+}
+
++ (void)createIssueOnRepository:(NSString *)repository 
+                          title:(NSString *)title 
+                           body:(NSString *)body 
+              completionHandler:(void (^)(GHRawIssue *issue, NSError *error))handler {
+    
+    dispatch_async(GHAPIBackgroundQueue(), ^(void) {
+        
+        // issues/open/:user/:repo
+        
+        NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://github.com/api/v2/json/issues/open/%@",
+                                           [repository stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] ] ];
+        
+        NSError *myError = nil;
+        
+        ASIFormDataRequest *request = [ASIFormDataRequest authenticatedFormDataRequestWithURL:URL];
+        [request setPostValue:title forKey:@"title"];
+        [request setPostValue:body forKey:@"body"];
+        [request startSynchronous];
+        
+        myError = [request error];
+        
+        if (!myError) {
+            myError = [NSError errorFromRawDictionary:[[request responseString] objectFromJSONString] ];
+        }
+        
+        NSString *jsonString = [request responseString];
+        
+        dispatch_async(dispatch_get_main_queue(), ^(void) {
+            if (myError) {
+                handler(nil, myError);
+            } else {
+                NSDictionary *dictionary = [jsonString objectFromJSONString];
+                handler([[[GHRawIssue alloc] initWithRawDictionary:[dictionary objectForKey:@"issue"] ] autorelease], nil);
+            }
+        });
+    });
     
 }
 
