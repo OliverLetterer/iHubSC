@@ -23,6 +23,7 @@
     NSString *_authoredDate;
     NSString *_tree;
     GHUser *_commiter;
+    GHUser *_user;  // this is present for requeted Pull Requests, not for Commits in a Commit request
 }
 
 @property (nonatomic, copy) NSString *message;
@@ -37,6 +38,7 @@
 @property (nonatomic, retain) NSMutableArray *modified;   // contains GHCommitFileInformation
 @property (nonatomic, retain) GHUser *author;
 @property (nonatomic, retain) GHUser *commiter;
+@property (nonatomic, retain) GHUser *user;
 
 - (id)initWithRawDictionary:(NSDictionary *)rawDictionary;
 

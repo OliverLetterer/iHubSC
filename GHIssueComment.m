@@ -11,7 +11,7 @@
 
 @implementation GHIssueComment
 
-@synthesize body=_body, createdAt=_createdAt, gravatarID=_gravatarID, ID=_ID, updatedAt=_updatedAt, user=_user;
+@synthesize body=_body, createdAt=_createdAt, gravatarID=_gravatarID, ID=_ID, updatedAt=_updatedAt, user=_user, userInfo=_userInfo;
 
 #pragma mark - Initialization
 
@@ -23,7 +23,12 @@
         self.gravatarID = [rawDictionary objectForKeyOrNilOnNullObject:@"gravatar_id"];
         self.ID = [rawDictionary objectForKeyOrNilOnNullObject:@"id"];
         self.updatedAt = [rawDictionary objectForKeyOrNilOnNullObject:@"updated_at"];
-        self.user = [rawDictionary objectForKeyOrNilOnNullObject:@"user"];
+        id<NSObject> user = [rawDictionary objectForKeyOrNilOnNullObject:@"user"];
+        if ([user isKindOfClass:[NSString class] ]) {
+            self.user = (NSString *)user;
+        } else if ([user isKindOfClass:[NSDictionary class] ]) {
+            self.userInfo = [[[GHUser alloc] initWithRawDictionary:(NSDictionary *)user] autorelease];
+        }
     }
     return self;
 }
@@ -37,6 +42,7 @@
     [_ID release];
     [_updatedAt release];
     [_user release];
+    [_userInfo release];
     [super dealloc];
 }
 

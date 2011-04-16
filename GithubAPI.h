@@ -20,6 +20,11 @@
 #import "GHIssueComment.h"
 #import "GHCommit.h"
 #import "GHCommitFileInformation.h"
+#import "GHCommitMessage.h"
+#import "GHPullRequest.h"
+#import "GHPullRequestDiscussion.h"
+#import "GHPullRequestRepositoryInformation.h"
+#import "GHRepository.h"
 
 #import "GHPayload.h"
 #import "GHIssuePayload.h"
@@ -39,10 +44,6 @@
 #import "GHIssuesCommentPayload.h"
 #import "GHForkApplyEventPayload.h"
 #import "GHPublicEventPayload.h"
-
-#import "GHCommitMessage.h"
-#import "GHPullRequest.h"
-#import "GHRepository.h"
 
 #import "JSONKit.h"
 #import "NSDictionary+GHNullTermination.h"

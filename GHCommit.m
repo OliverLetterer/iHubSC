@@ -11,7 +11,7 @@
 
 @implementation GHCommit
 
-@synthesize message=_message, URL=_URL, ID=_ID, commitDate=_commitDate, authoredDate=_authoredDate, tree=_tree, added=_added, removed=_removed, parents=_parents, modified=_modified, author=_author, commiter=_commiter;
+@synthesize message=_message, URL=_URL, ID=_ID, commitDate=_commitDate, authoredDate=_authoredDate, tree=_tree, added=_added, removed=_removed, parents=_parents, modified=_modified, author=_author, commiter=_commiter, user=_user;
 
 #pragma mark - Initialization
 
@@ -26,6 +26,7 @@
         self.message = [rawDictionary objectForKeyOrNilOnNullObject:@"message"];
         self.tree = [rawDictionary objectForKeyOrNilOnNullObject:@"tree"];
         self.URL = [rawDictionary objectForKeyOrNilOnNullObject:@"url"];
+        self.user = [[[GHUser alloc] initWithRawDictionary:[rawDictionary objectForKey:@"user"] ] autorelease];
         
         self.modified = [NSMutableArray array];
         for (NSDictionary *fileInfo in [rawDictionary objectForKeyOrNilOnNullObject:@"modified"]) {
@@ -89,7 +90,6 @@
             } else {
                 NSDictionary *dictionary = [jsonString objectFromJSONString];
                 NSDictionary *rawCommitDictionary = [dictionary objectForKey:@"commit"];
-                DLog(@"%@", dictionary);
                 handler([[[GHCommit alloc] initWithRawDictionary:rawCommitDictionary] autorelease], nil);
             }
         });
@@ -112,6 +112,7 @@
     [_modified release];
     [_author release];
     [_commiter release];
+    [_user release];
     
     [super dealloc];
 }

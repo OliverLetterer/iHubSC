@@ -139,6 +139,8 @@
 		A7D41AC51358B6B500CD3A5C /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7D41AC41358B6B500CD3A5C /* CoreText.framework */; };
 		A7D41AC91358B6F500CD3A5C /* GHCommitDiffView.m in Sources */ = {isa = PBXBuildFile; fileRef = A7D41AC81358B6F500CD3A5C /* GHCommitDiffView.m */; };
 		A7D41ACC1358B7D300CD3A5C /* GHCommitDiffViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7D41ACB1358B7D300CD3A5C /* GHCommitDiffViewController.m */; };
+		A7D41AF41359DE4400CD3A5C /* GHPullRequestDiscussion.m in Sources */ = {isa = PBXBuildFile; fileRef = A7D41AF31359DE4300CD3A5C /* GHPullRequestDiscussion.m */; };
+		A7D41AF71359F8CC00CD3A5C /* GHPullRequestRepositoryInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = A7D41AF61359F8CC00CD3A5C /* GHPullRequestRepositoryInformation.m */; };
 		A7F6260F134B3938006487CA /* UITableViewCellWithLinearGradientBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = A7F6260E134B3938006487CA /* UITableViewCellWithLinearGradientBackgroundView.m */; };
 		A7F62616134B7CD2006487CA /* GHNewCommentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A7F62615134B7CD2006487CA /* GHNewCommentTableViewCell.m */; };
 		A7F62622134B88B8006487CA /* NSString+GithubAPIAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = A7F62621134B88B8006487CA /* NSString+GithubAPIAdditions.m */; };
@@ -379,6 +381,10 @@
 		A7D41AC81358B6F500CD3A5C /* GHCommitDiffView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHCommitDiffView.m; sourceTree = "<group>"; };
 		A7D41ACA1358B7D300CD3A5C /* GHCommitDiffViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHCommitDiffViewController.h; sourceTree = "<group>"; };
 		A7D41ACB1358B7D300CD3A5C /* GHCommitDiffViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHCommitDiffViewController.m; sourceTree = "<group>"; };
+		A7D41AF21359DE4300CD3A5C /* GHPullRequestDiscussion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPullRequestDiscussion.h; sourceTree = "<group>"; };
+		A7D41AF31359DE4300CD3A5C /* GHPullRequestDiscussion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPullRequestDiscussion.m; sourceTree = "<group>"; };
+		A7D41AF51359F8CB00CD3A5C /* GHPullRequestRepositoryInformation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPullRequestRepositoryInformation.h; sourceTree = "<group>"; };
+		A7D41AF61359F8CC00CD3A5C /* GHPullRequestRepositoryInformation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPullRequestRepositoryInformation.m; sourceTree = "<group>"; };
 		A7F6260D134B3938006487CA /* UITableViewCellWithLinearGradientBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UITableViewCellWithLinearGradientBackgroundView.h; sourceTree = "<group>"; };
 		A7F6260E134B3938006487CA /* UITableViewCellWithLinearGradientBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UITableViewCellWithLinearGradientBackgroundView.m; sourceTree = "<group>"; };
 		A7F62614134B7CD1006487CA /* GHNewCommentTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHNewCommentTableViewCell.h; sourceTree = "<group>"; };
@@ -733,8 +739,6 @@
 				A73E29C11348E12200E85282 /* GHViewIssueTableViewController.m */,
 				A7D14F741356F17300E1B980 /* GHCreateIssueTableViewController.h */,
 				A7D14F751356F17500E1B980 /* GHCreateIssueTableViewController.m */,
-				A7D14FAA1357578900E1B980 /* GHViewPullRequestViewController.h */,
-				A7D14FAB1357578C00E1B980 /* GHViewPullRequestViewController.m */,
 			);
 			name = GHViewIssueTableViewController;
 			sourceTree = "<group>";
@@ -791,6 +795,8 @@
 		A750573F1343422200514A82 /* UserInterface */ = {
 			isa = PBXGroup;
 			children = (
+				A7D14FAA1357578900E1B980 /* GHViewPullRequestViewController.h */,
+				A7D14FAB1357578C00E1B980 /* GHViewPullRequestViewController.m */,
 				A76FC9A81352D27E004C642E /* UICollapsingTableView */,
 				A7BC6780134CCED40083F906 /* PullToRefreshTableViewController */,
 				A7F62627134C45AE006487CA /* GHTableViewController */,
@@ -1156,6 +1162,10 @@
 			children = (
 				A7CE1B281345C61800169F94 /* GHPullRequest.h */,
 				A7CE1B291345C61800169F94 /* GHPullRequest.m */,
+				A7D41AF21359DE4300CD3A5C /* GHPullRequestDiscussion.h */,
+				A7D41AF31359DE4300CD3A5C /* GHPullRequestDiscussion.m */,
+				A7D41AF51359F8CB00CD3A5C /* GHPullRequestRepositoryInformation.h */,
+				A7D41AF61359F8CC00CD3A5C /* GHPullRequestRepositoryInformation.m */,
 			);
 			name = GHPullRequest;
 			sourceTree = "<group>";
@@ -1455,6 +1465,8 @@
 				A7D14FCB135834AB00E1B980 /* GHCommitFileInformation.m in Sources */,
 				A7D41AC91358B6F500CD3A5C /* GHCommitDiffView.m in Sources */,
 				A7D41ACC1358B7D300CD3A5C /* GHCommitDiffViewController.m in Sources */,
+				A7D41AF41359DE4400CD3A5C /* GHPullRequestDiscussion.m in Sources */,
+				A7D41AF71359F8CC00CD3A5C /* GHPullRequestRepositoryInformation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

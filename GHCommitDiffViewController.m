@@ -65,6 +65,7 @@
     self.scrollView.showsHorizontalScrollIndicator = YES;
     self.scrollView.contentInset = UIEdgeInsetsMake(5.0, 5.0, 5.0, 5.0);
     self.scrollView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    self.scrollView.delegate = self;
     [self.view addSubview:self.scrollView];
     
     self.diffView = [[[GHCommitDiffView alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0, 300.0) 
@@ -143,6 +144,11 @@
     [self.diffView sizeToFit];
     
     self.scrollView.contentSize = self.diffView.frame.size;
+    self.scrollView.minimumZoomScale = self.scrollView.bounds.size.width / self.diffView.frame.size.width;
+}
+
+- (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView {
+    return self.diffView;
 }
 
 @end

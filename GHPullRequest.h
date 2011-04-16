@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
+@class GHPullRequestDiscussion;
 
 @interface GHPullRequest : NSObject {
     NSNumber *_additions;
@@ -28,5 +29,9 @@
 @property (nonatomic, copy) NSString *title;
 
 - (id)initWithRawDictionary:(NSDictionary *)rawDictionary;
+
++ (void)pullRequestDiscussionOnRepository:(NSString *)repository 
+                                   number:(NSNumber *)number 
+                        completionHandler:(void(^)(GHPullRequestDiscussion *discussion, NSError *error))handler;
 
 @end

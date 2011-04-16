@@ -15,7 +15,7 @@ support all these events
     [-] IssuesEvent 
 [X] MemberEvent 
 [X] PublicEvent 
-[X] PullRequestEvent 
+    [-] PullRequestEvent 
 [X] PushEvent
 [O] TeamAddEvent 
     [-] WatchEvent 
@@ -32,12 +32,17 @@ support all these events
 - Notifications if a repo gets deleted, an issue gets closed or created
 - supporrt for logging out
 - view pull request commits and diffs
+- cell.selectionStyle = UITableViewCellSelectionStyleNone; if a cell is not selectable
 
-GHPushPayloadViewController needs to be GHPullRequestViewController
-GHPullRequestViewController
-- use 
-    Showing Pull Request Discussions from
-    http://develop.github.com/p/pulls.html
+GHViewIssueViewController
+- link to repository
+
+GHViewPullRequestViewController
+- link to repository
+
+GHSingleRepositoryViewController
+- show pull requests
+- list all files + branches
 
 ViewControllers for:
 - search

@@ -10,7 +10,7 @@
 #import <QuartzCore/QuartzCore.h>
 #import "GHCommitDiffView.h"
 
-@interface GHCommitDiffViewController : UIViewController <GHCommitDiffViewDelegate> {
+@interface GHCommitDiffViewController : UIViewController <GHCommitDiffViewDelegate, UIScrollViewDelegate> {
 @private
     NSString *_diffString;
     GHCommitDiffView *_diffView;

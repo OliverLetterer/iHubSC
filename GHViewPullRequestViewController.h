@@ -7,13 +7,28 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "GHViewIssueTableViewController.h"
+#import "GHTableViewController.h"
+#import "GithubAPI.h"
 
-@interface GHViewPullRequestViewController : GHViewIssueTableViewController {
+@interface GHViewPullRequestViewController : GHTableViewController {
 @private
+    NSString *_repository;
+    NSNumber *_number;
+    GHPullRequestDiscussion *_discussion;
     
+    UITextView *_textView;
+    UIToolbar *_textViewToolBar;
 }
 
-- (void)moreButtonClicked:(UIBarButtonItem *)sender;
+@property (nonatomic, copy) NSString *repository;
+@property (nonatomic, copy) NSNumber *number;
+@property (nonatomic, retain) GHPullRequestDiscussion *discussion;
+
+@property (nonatomic, retain) UITextView *textView;
+@property (nonatomic, retain) UIToolbar *textViewToolBar;
+
+- (id)initWithRepository:(NSString *)repository issueNumber:(NSNumber *)number;
+
+- (void)downloadDiscussionData;
 
 @end

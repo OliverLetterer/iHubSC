@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
+@class GHUser;
 
 @interface GHIssueComment : NSObject {
     NSString *_body;
@@ -16,6 +17,7 @@
     NSNumber *_ID;
     NSString *_updatedAt;
     NSString *_user;
+    GHUser *_userInfo;
 }
 
 @property (nonatomic, copy) NSString *body;
@@ -24,6 +26,7 @@
 @property (nonatomic, copy) NSNumber *ID;
 @property (nonatomic, copy) NSString *updatedAt;
 @property (nonatomic, copy) NSString *user;
+@property (nonatomic, retain) GHUser *userInfo;
 
 - (id)initWithRawDictionary:(NSDictionary *)rawDictionary;
 
