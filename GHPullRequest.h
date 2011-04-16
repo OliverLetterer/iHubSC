@@ -34,4 +34,7 @@
                                    number:(NSNumber *)number 
                         completionHandler:(void(^)(GHPullRequestDiscussion *discussion, NSError *error))handler;
 
++ (void)pullRequestsOnRepository:(NSString *)repository 
+               completionHandler:(void(^)(NSArray *requests, NSError *error))handler;   // requests contains GHPullRequestDiscussion's
+
 @end

@@ -31,6 +31,9 @@ NSString *GHGravatarImageCacheDirectory() {
 #pragma mark - class methods
 
 + (void)cacheGravatarImage:(UIImage *)gravatarImage forGravatarID:(NSString *)gravatarID {
+    if (!gravatarID) {
+        return;
+    }
     dispatch_async([GHGravatarBackgroundQueue sharedInstance].backgroundQueue, ^(void) {
         NSString *imagesCacheDirectory = GHGravatarImageCacheDirectory();
         
@@ -43,6 +46,10 @@ NSString *GHGravatarImageCacheDirectory() {
 }
 
 + (UIImage *)cachedGravatarImageFromGravatarID:(NSString *)gravatarID {
+    
+    if (!gravatarID) {
+        return [UIImage imageNamed:@"DefaultUserImage.png"];
+    }
     
     UIImage *inMemoryCachedImage = [[GHGravatarBackgroundQueue sharedInstance].imagesCache objectForKey:gravatarID];
     if (inMemoryCachedImage) {

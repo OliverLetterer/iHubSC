@@ -15,6 +15,7 @@
 
 + (void)imageFromGravatarID:(NSString *)gravatarID 
       withCompletionHandler:(void(^)(UIImage *image, NSError *error, BOOL didDownload))handler {
+    
     UIImage *myImage = [UIImage cachedImageFromGravatarID:gravatarID];
     
     if (!myImage) {
@@ -31,16 +32,22 @@
             
             UIImage *theImage = [[[UIImage alloc] initWithData:imageData] autorelease];
             
-            CGSize imageSize = CGSizeMake(64.0 * [UIScreen mainScreen].scale, 64.0 * [UIScreen mainScreen].scale);
-            
-            [theImage resizedImage:imageSize interpolationQuality:kCGInterpolationHigh];
-            [GHGravatarImageCache cacheGravatarImage:theImage forGravatarID:gravatarID];
+            if (theImage) {
+                CGSize imageSize = CGSizeMake(64.0 * [UIScreen mainScreen].scale, 64.0 * [UIScreen mainScreen].scale);
+                
+                [theImage resizedImage:imageSize interpolationQuality:kCGInterpolationHigh];
+                [GHGravatarImageCache cacheGravatarImage:theImage forGravatarID:gravatarID];
+            }
             
             dispatch_async(dispatch_get_main_queue(), ^(void) {
                 if (myError) {
                     handler(nil, myError, NO);
                 } else {
-                    handler(theImage, nil, YES);
+                    if (theImage) {
+                        handler(theImage, nil, YES);
+                    } else {
+                        handler([UIImage imageNamed:@"DefaultUserImage.png"], nil, NO);
+                    }
                 }
             });
         });

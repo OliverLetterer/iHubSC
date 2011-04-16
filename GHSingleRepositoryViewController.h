@@ -35,6 +35,8 @@
     NSString *_deleteToken;
     
     id<GHSingleRepositoryViewControllerDelegate> _delegate;
+    
+    NSArray *_pullRequests;
 }
 
 @property (nonatomic, readonly) BOOL isFollowingRepository;
@@ -50,6 +52,9 @@
 
 @property (nonatomic, copy) NSString *deleteToken;
 @property (nonatomic, assign) id<GHSingleRepositoryViewControllerDelegate> delegate;
+
+@property (nonatomic, retain) NSArray *pullRequests;
+- (void)cacheHeightForPullRequests;
 
 - (id)initWithRepositoryString:(NSString *)repositoryString;
 

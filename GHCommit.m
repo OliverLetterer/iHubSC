@@ -26,7 +26,7 @@
         self.message = [rawDictionary objectForKeyOrNilOnNullObject:@"message"];
         self.tree = [rawDictionary objectForKeyOrNilOnNullObject:@"tree"];
         self.URL = [rawDictionary objectForKeyOrNilOnNullObject:@"url"];
-        self.user = [[[GHUser alloc] initWithRawDictionary:[rawDictionary objectForKey:@"user"] ] autorelease];
+        self.user = [[[GHUser alloc] initWithRawDictionary:[rawDictionary objectForKeyOrNilOnNullObject:@"user"] ] autorelease];
         
         self.modified = [NSMutableArray array];
         for (NSDictionary *fileInfo in [rawDictionary objectForKeyOrNilOnNullObject:@"modified"]) {

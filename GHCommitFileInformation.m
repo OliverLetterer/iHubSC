@@ -17,7 +17,6 @@
 
 - (id)initWithRawDictionary:(NSDictionary *)rawDictionary {
     if ((self = [super init])) {
-        DLog(@"%@", rawDictionary);
         // Initialization code
         self.diff = [rawDictionary objectForKeyOrNilOnNullObject:@"diff"];
         self.filename = [rawDictionary objectForKeyOrNilOnNullObject:@"filename"];

@@ -66,6 +66,47 @@
     });
 }
 
++ (void)pullRequestsOnRepository:(NSString *)repository 
+               completionHandler:(void (^)(NSArray *, NSError *))handler {
+    
+    dispatch_async(GHAPIBackgroundQueue(), ^(void) {
+        
+        // /pulls/:user/:repo/:state
+        
+        NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://github.com/api/v2/json/pulls/%@/open",
+                                           [repository stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]] ];
+        
+        NSError *myError = nil;
+        
+        ASIHTTPRequest *request = [ASIHTTPRequest authenticatedFormDataRequestWithURL:URL];
+        [request startSynchronous];
+        
+        myError = [request error];
+        
+        if (!myError) {
+            myError = [NSError errorFromRawDictionary:[[request responseString] objectFromJSONString] ];
+        }
+        
+        NSString *jsonString = [request responseString];
+        
+        dispatch_async(dispatch_get_main_queue(), ^(void) {
+            if (myError) {
+                handler(nil, myError);
+            } else {
+                NSDictionary *dictionary = [jsonString objectFromJSONString];
+                NSArray *rawPulls = [dictionary objectForKeyOrNilOnNullObject:@"pulls"];
+                NSMutableArray *pulls = [NSMutableArray arrayWithCapacity:[rawPulls count] ];
+                
+                for (NSDictionary *rawPullDiscussion in rawPulls) {
+                    [pulls addObject:[[[GHPullRequestDiscussion alloc] initWithRawDictionary:rawPullDiscussion] autorelease] ];
+                }
+                handler(pulls, nil);
+            }
+        });
+    });
+    
+}
+
 #pragma mark - Memory management
 
 - (void)dealloc {

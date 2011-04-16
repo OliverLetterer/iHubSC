@@ -15,15 +15,18 @@
 #import "GHViewIssueTableViewController.h"
 #import "GHNewsFeedItemTableViewCell.h"
 #import "GHUserViewController.h"
+#import "GHViewPullRequestViewController.h"
 
 #define kUITableViewSectionUserData 0
 #define kUITableViewSectionIssues 1
 #define kUITableViewSectionWatchingUsers 2
-#define kUITableViewSectionAdministration 3
+#define kUITableViewSectionPullRequests 3
+#define kUITableViewSectionAdministration 4
 
 @implementation GHSingleRepositoryViewController
 
 @synthesize repositoryString=_repositoryString, repository=_repository, issuesArray=_issuesArray, watchedUsersArray=_watchedUsersArray, deleteToken=_deleteToken, delegate=_delegate;
+@synthesize pullRequests=_pullRequests;
 
 #pragma mark - setters and getters
 
@@ -81,6 +84,7 @@
     [_issuesArray release];
     [_watchedUsersArray release];
     [_deleteToken release];
+    [_pullRequests release];
     [super dealloc];
 }
 
@@ -144,6 +148,8 @@
         if (!self.canDeleteRepository) {
             return self.watchedUsersArray == nil;
         }
+    } else if (section == kUITableViewSectionPullRequests) {
+        return self.pullRequests == nil;
     }
     return NO;
 }
@@ -163,6 +169,8 @@
         cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Watching Users (%@)", @""), self.repository.watchers];
     } else if (section == kUITableViewSectionAdministration) {
         cell.textLabel.text = self.canDeleteRepository ? NSLocalizedString(@"Administration", @"") : NSLocalizedString(@"Network", @"");
+    } else if (section == kUITableViewSectionPullRequests) {
+        cell.textLabel.text = NSLocalizedString(@"Pull Requests", @"");
     }
     
     return cell;
@@ -205,6 +213,17 @@
                                  [tableView expandSection:section animated:YES];
                              }
                          }];
+    } else if (section == kUITableViewSectionPullRequests) {
+        [GHPullRequest pullRequestsOnRepository:self.repositoryString 
+                              completionHandler:^(NSArray *requests, NSError *error) {
+                                  if (error) {
+                                      [self handleError:error];
+                                  } else {
+                                      self.pullRequests = requests;
+                                      [self cacheHeightForPullRequests];
+                                      [self.tableView expandSection:section animated:YES];
+                                  }
+                              }];
     }
 }
 
@@ -220,8 +239,9 @@
     // 0 title + description
     // 1: open issues
     // 2: watching
-    // 3: administration
-    return 4;
+    // 3: Pull Requests
+    // 4: administration
+    return 5;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -238,6 +258,8 @@
         return [self.watchedUsersArray count] + 1;
     } else if (section == kUITableViewSectionAdministration) {
         return 2;
+    } else if (section == kUITableViewSectionPullRequests) {
+        return [self.pullRequests count] + 1;
     }
     
     return 0;
@@ -254,6 +276,8 @@
             if (!cell) {
                 cell = [[[GHFeedItemWithDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
             }
+            
+            cell.selectionStyle = UITableViewCellEditingStyleNone;
             
             if (self.repository.source) {
                 cell.titleLabel.text = [NSString stringWithFormat:@"%@/%@", self.repository.owner, self.repository.name];
@@ -443,6 +467,30 @@
             
             return cell;
         }
+    } else if (indexPath.section == kUITableViewSectionPullRequests) {
+        NSString *CellIdentifier = @"GHFeedItemWithDescriptionTableViewCell";
+        
+        GHFeedItemWithDescriptionTableViewCell *cell = (GHFeedItemWithDescriptionTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        if (cell == nil) {
+            cell = [[[GHFeedItemWithDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        }
+        
+        cell.selectionStyle = UITableViewCellSelectionStyleBlue;
+        
+        GHPullRequestDiscussion *discussion = [self.pullRequests objectAtIndex:indexPath.row-1];
+        
+        cell.titleLabel.text = discussion.user.login;
+        cell.descriptionLabel.text = discussion.title;
+        
+        NSDate *date = [discussion.createdAt dateFromGithubAPIDateString];
+        
+        cell.repositoryLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ ago", @""), date.prettyTimeIntervalSinceNow];
+        
+        [self updateImageViewForCell:cell 
+                         atIndexPath:indexPath 
+                      withGravatarID:discussion.user.gravatarID];
+        
+        return cell;
     }
     
     return self.dummyCell;
@@ -494,6 +542,8 @@
         
         return [self cachedHeightForRowAtIndexPath:indexPath];
     } else if (indexPath.section == kUITableViewSectionIssues && indexPath.row > 0 && indexPath.row <= [self.issuesArray count]) {
+        return [self cachedHeightForRowAtIndexPath:indexPath];
+    } else if (indexPath.section == kUITableViewSectionPullRequests && indexPath.row > 0 && indexPath.row <= [self.pullRequests count]) {
         return [self cachedHeightForRowAtIndexPath:indexPath];
     }
     
@@ -610,6 +660,13 @@
                 [self.tableView deselectRowAtIndexPath:indexPath animated:NO];
             }
         }
+    } else if (indexPath.section == kUITableViewSectionPullRequests) {
+        GHPullRequestDiscussion *discussion = [self.pullRequests objectAtIndex:indexPath.row-1];
+        
+        NSString *repo = [NSString stringWithFormat:@"%@/%@", discussion.base.repository.owner, discussion.base.repository.name];
+        
+        GHViewPullRequestViewController *viewIssueViewController = [[[GHViewPullRequestViewController alloc] initWithRepository:repo issueNumber:discussion.number] autorelease];
+        [self.navigationController pushViewController:viewIssueViewController animated:YES];
     } else {
         [self.tableView deselectRowAtIndexPath:indexPath animated:NO];
     }
@@ -632,10 +689,20 @@
     }
 }
 
+#pragma mark - height caching
+
 - (void)cacheHeightForIssuesArray {
     NSInteger i = 1;
     for (GHRawIssue *issue in self.issuesArray) {
-        [self cacheHeight:[self heightForDescription:issue.title]+50.0f forRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:1] ];
+        [self cacheHeight:[self heightForDescription:issue.title]+50.0f forRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:kUITableViewSectionIssues] ];
+        i++;
+    }
+}
+
+- (void)cacheHeightForPullRequests {
+    NSInteger i = 1;
+    for (GHPullRequestDiscussion *discussion in self.pullRequests) {
+        [self cacheHeight:[self heightForDescription:discussion.title]+50.0f forRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:kUITableViewSectionPullRequests] ];
         i++;
     }
 }

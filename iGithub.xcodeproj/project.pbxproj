@@ -803,6 +803,10 @@
 				A75057401343424100514A82 /* GHNewsFeedViewController */,
 				A7BF1423134214E7001AE50D /* GHAuthenticationViewController */,
 				A73E29C31348E12C00E85282 /* GHViewIssueTableViewController */,
+				A7BC6789134D942C0083F906 /* GHCreateRepositoryViewController.h */,
+				A7BC678A134D942C0083F906 /* GHCreateRepositoryViewController.m */,
+				A73AE5E41350B27900E9EBA4 /* GHSingleRepositoryViewController.h */,
+				A73AE5E51350B27A00E9EBA4 /* GHSingleRepositoryViewController.m */,
 				A7BC6788134D94020083F906 /* GHUserViewController */,
 				A7D14FBE13576D4200E1B980 /* GHWebViewViewController */,
 				A7D14FBF13576D9B00E1B980 /* GHPushPayloadViewController.h */,
@@ -864,10 +868,6 @@
 				A7BC678C134D96C30083F906 /* UITableViewCells */,
 				A7BC6785134CE7DF0083F906 /* GHUserViewController.h */,
 				A7BC6786134CE7E00083F906 /* GHUserViewController.m */,
-				A7BC6789134D942C0083F906 /* GHCreateRepositoryViewController.h */,
-				A7BC678A134D942C0083F906 /* GHCreateRepositoryViewController.m */,
-				A73AE5E41350B27900E9EBA4 /* GHSingleRepositoryViewController.h */,
-				A73AE5E51350B27A00E9EBA4 /* GHSingleRepositoryViewController.m */,
 			);
 			name = GHUserViewController;
 			sourceTree = "<group>";

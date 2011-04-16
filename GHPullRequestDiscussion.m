@@ -55,8 +55,6 @@
         
         self.commits = commits;
         self.commentsArray = comments;
-        
-        DLog(@"%@", rawDictionary);
     }
     return self;
 }
