@@ -42,6 +42,7 @@ GHViewPullRequestViewController
 
 GHSingleRepositoryViewController
 - list all files + branches
+- recent commits on a branch
 
 ViewControllers for:
 - search
