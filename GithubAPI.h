@@ -18,6 +18,8 @@
 #import "GHRawIssue.h"
 #import "GHTarget.h"
 #import "GHIssueComment.h"
+#import "GHCommit.h"
+#import "GHCommitFileInformation.h"
 
 #import "GHPayload.h"
 #import "GHIssuePayload.h"

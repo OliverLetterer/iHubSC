@@ -131,6 +131,14 @@
 		A7D14F761356F17600E1B980 /* GHCreateIssueTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7D14F751356F17500E1B980 /* GHCreateIssueTableViewController.m */; };
 		A7D14F7A1356FACF00E1B980 /* GHCreateIssueTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A7D14F781356FACD00E1B980 /* GHCreateIssueTableViewCell.m */; };
 		A7D14F7B1356FACF00E1B980 /* GHCreateIssueTableViewCellContentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A7D14F791356FACE00E1B980 /* GHCreateIssueTableViewCellContentView.xib */; };
+		A7D14FAC1357579000E1B980 /* GHViewPullRequestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7D14FAB1357578C00E1B980 /* GHViewPullRequestViewController.m */; };
+		A7D14FC113576DA300E1B980 /* GHPushPayloadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7D14FC013576DA000E1B980 /* GHPushPayloadViewController.m */; };
+		A7D14FC513582E9500E1B980 /* GHCommit.m in Sources */ = {isa = PBXBuildFile; fileRef = A7D14FC413582E9500E1B980 /* GHCommit.m */; };
+		A7D14FC81358316200E1B980 /* GHViewCommitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7D14FC71358315600E1B980 /* GHViewCommitViewController.m */; };
+		A7D14FCB135834AB00E1B980 /* GHCommitFileInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = A7D14FCA135834AB00E1B980 /* GHCommitFileInformation.m */; };
+		A7D41AC51358B6B500CD3A5C /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7D41AC41358B6B500CD3A5C /* CoreText.framework */; };
+		A7D41AC91358B6F500CD3A5C /* GHCommitDiffView.m in Sources */ = {isa = PBXBuildFile; fileRef = A7D41AC81358B6F500CD3A5C /* GHCommitDiffView.m */; };
+		A7D41ACC1358B7D300CD3A5C /* GHCommitDiffViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7D41ACB1358B7D300CD3A5C /* GHCommitDiffViewController.m */; };
 		A7F6260F134B3938006487CA /* UITableViewCellWithLinearGradientBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = A7F6260E134B3938006487CA /* UITableViewCellWithLinearGradientBackgroundView.m */; };
 		A7F62616134B7CD2006487CA /* GHNewCommentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A7F62615134B7CD2006487CA /* GHNewCommentTableViewCell.m */; };
 		A7F62622134B88B8006487CA /* NSString+GithubAPIAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = A7F62621134B88B8006487CA /* NSString+GithubAPIAdditions.m */; };
@@ -356,6 +364,21 @@
 		A7D14F771356FACB00E1B980 /* GHCreateIssueTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHCreateIssueTableViewCell.h; sourceTree = "<group>"; };
 		A7D14F781356FACD00E1B980 /* GHCreateIssueTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHCreateIssueTableViewCell.m; sourceTree = "<group>"; };
 		A7D14F791356FACE00E1B980 /* GHCreateIssueTableViewCellContentView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GHCreateIssueTableViewCellContentView.xib; sourceTree = "<group>"; };
+		A7D14FAA1357578900E1B980 /* GHViewPullRequestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHViewPullRequestViewController.h; sourceTree = "<group>"; };
+		A7D14FAB1357578C00E1B980 /* GHViewPullRequestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHViewPullRequestViewController.m; sourceTree = "<group>"; };
+		A7D14FBF13576D9B00E1B980 /* GHPushPayloadViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPushPayloadViewController.h; sourceTree = "<group>"; };
+		A7D14FC013576DA000E1B980 /* GHPushPayloadViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPushPayloadViewController.m; sourceTree = "<group>"; };
+		A7D14FC313582E9500E1B980 /* GHCommit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHCommit.h; sourceTree = "<group>"; };
+		A7D14FC413582E9500E1B980 /* GHCommit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHCommit.m; sourceTree = "<group>"; };
+		A7D14FC61358315100E1B980 /* GHViewCommitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHViewCommitViewController.h; sourceTree = "<group>"; };
+		A7D14FC71358315600E1B980 /* GHViewCommitViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHViewCommitViewController.m; sourceTree = "<group>"; };
+		A7D14FC9135834AA00E1B980 /* GHCommitFileInformation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHCommitFileInformation.h; sourceTree = "<group>"; };
+		A7D14FCA135834AB00E1B980 /* GHCommitFileInformation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHCommitFileInformation.m; sourceTree = "<group>"; };
+		A7D41AC41358B6B500CD3A5C /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
+		A7D41AC71358B6F500CD3A5C /* GHCommitDiffView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHCommitDiffView.h; sourceTree = "<group>"; };
+		A7D41AC81358B6F500CD3A5C /* GHCommitDiffView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHCommitDiffView.m; sourceTree = "<group>"; };
+		A7D41ACA1358B7D300CD3A5C /* GHCommitDiffViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHCommitDiffViewController.h; sourceTree = "<group>"; };
+		A7D41ACB1358B7D300CD3A5C /* GHCommitDiffViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHCommitDiffViewController.m; sourceTree = "<group>"; };
 		A7F6260D134B3938006487CA /* UITableViewCellWithLinearGradientBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UITableViewCellWithLinearGradientBackgroundView.h; sourceTree = "<group>"; };
 		A7F6260E134B3938006487CA /* UITableViewCellWithLinearGradientBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UITableViewCellWithLinearGradientBackgroundView.m; sourceTree = "<group>"; };
 		A7F62614134B7CD1006487CA /* GHNewCommentTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHNewCommentTableViewCell.h; sourceTree = "<group>"; };
@@ -375,6 +398,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A7D41AC51358B6B500CD3A5C /* CoreText.framework in Frameworks */,
 				A7D14F451354E5A700E1B980 /* MessageUI.framework in Frameworks */,
 				A703B9471347562B0014235D /* QuartzCore.framework in Frameworks */,
 				A7BF14001342149C001AE50D /* CoreGraphics.framework in Frameworks */,
@@ -709,6 +733,8 @@
 				A73E29C11348E12200E85282 /* GHViewIssueTableViewController.m */,
 				A7D14F741356F17300E1B980 /* GHCreateIssueTableViewController.h */,
 				A7D14F751356F17500E1B980 /* GHCreateIssueTableViewController.m */,
+				A7D14FAA1357578900E1B980 /* GHViewPullRequestViewController.h */,
+				A7D14FAB1357578C00E1B980 /* GHViewPullRequestViewController.m */,
 			);
 			name = GHViewIssueTableViewController;
 			sourceTree = "<group>";
@@ -772,8 +798,15 @@
 				A7BF1423134214E7001AE50D /* GHAuthenticationViewController */,
 				A73E29C31348E12C00E85282 /* GHViewIssueTableViewController */,
 				A7BC6788134D94020083F906 /* GHUserViewController */,
-				A73AE6131351953900E9EBA4 /* GHWebViewViewController.h */,
-				A73AE6141351953E00E9EBA4 /* GHWebViewViewController.m */,
+				A7D14FBE13576D4200E1B980 /* GHWebViewViewController */,
+				A7D14FBF13576D9B00E1B980 /* GHPushPayloadViewController.h */,
+				A7D14FC013576DA000E1B980 /* GHPushPayloadViewController.m */,
+				A7D14FC61358315100E1B980 /* GHViewCommitViewController.h */,
+				A7D14FC71358315600E1B980 /* GHViewCommitViewController.m */,
+				A7D41AC71358B6F500CD3A5C /* GHCommitDiffView.h */,
+				A7D41AC81358B6F500CD3A5C /* GHCommitDiffView.m */,
+				A7D41ACA1358B7D300CD3A5C /* GHCommitDiffViewController.h */,
+				A7D41ACB1358B7D300CD3A5C /* GHCommitDiffViewController.m */,
 			);
 			name = UserInterface;
 			sourceTree = "<group>";
@@ -862,6 +895,7 @@
 		A7BF13FA1342149C001AE50D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A7D41AC41358B6B500CD3A5C /* CoreText.framework */,
 				A7D14F441354E5A600E1B980 /* MessageUI.framework */,
 				A703B9461347562B0014235D /* QuartzCore.framework */,
 				A703B9451347560F0014235D /* CoreGraphics.framework */,
@@ -1010,6 +1044,7 @@
 		A7BF146413426D85001AE50D /* Github API */ = {
 			isa = PBXGroup;
 			children = (
+				A7D14FC213582E7900E1B980 /* GHCommit */,
 				A7CE1B111345BD7D00169F94 /* Gravatar */,
 				A708952D134A3D98000DD6CE /* GHIssueComment */,
 				A7089514134A0398000DD6CE /* GHAuthenticationManager */,
@@ -1159,6 +1194,26 @@
 				A7CE1B861346355100169F94 /* GHManagedObjectContext.m */,
 			);
 			name = GHManagedObjectContext;
+			sourceTree = "<group>";
+		};
+		A7D14FBE13576D4200E1B980 /* GHWebViewViewController */ = {
+			isa = PBXGroup;
+			children = (
+				A73AE6131351953900E9EBA4 /* GHWebViewViewController.h */,
+				A73AE6141351953E00E9EBA4 /* GHWebViewViewController.m */,
+			);
+			name = GHWebViewViewController;
+			sourceTree = "<group>";
+		};
+		A7D14FC213582E7900E1B980 /* GHCommit */ = {
+			isa = PBXGroup;
+			children = (
+				A7D14FC313582E9500E1B980 /* GHCommit.h */,
+				A7D14FC413582E9500E1B980 /* GHCommit.m */,
+				A7D14FC9135834AA00E1B980 /* GHCommitFileInformation.h */,
+				A7D14FCA135834AB00E1B980 /* GHCommitFileInformation.m */,
+			);
+			name = GHCommit;
 			sourceTree = "<group>";
 		};
 		A7F6261F134B8886006487CA /* NSString */ = {
@@ -1393,6 +1448,13 @@
 				A7D14F7213563BBB00E1B980 /* GHPublicEventPayload.m in Sources */,
 				A7D14F761356F17600E1B980 /* GHCreateIssueTableViewController.m in Sources */,
 				A7D14F7A1356FACF00E1B980 /* GHCreateIssueTableViewCell.m in Sources */,
+				A7D14FAC1357579000E1B980 /* GHViewPullRequestViewController.m in Sources */,
+				A7D14FC113576DA300E1B980 /* GHPushPayloadViewController.m in Sources */,
+				A7D14FC513582E9500E1B980 /* GHCommit.m in Sources */,
+				A7D14FC81358316200E1B980 /* GHViewCommitViewController.m in Sources */,
+				A7D14FCB135834AB00E1B980 /* GHCommitFileInformation.m in Sources */,
+				A7D41AC91358B6F500CD3A5C /* GHCommitDiffView.m in Sources */,
+				A7D41ACC1358B7D300CD3A5C /* GHCommitDiffViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

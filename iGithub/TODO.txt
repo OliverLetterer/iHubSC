@@ -1,35 +1,44 @@
 support all these events
 
-    [X] CommitCommentEvent
+[X] CommitCommentEvent
 [O] CommitEvent 
-    [X] CreateEvent 
-    [X] DeleteEvent 
-    [X] DownloadEvent 
-    [X] FollowEvent 
-    [X] ForkApplyEvent 
-    [X] ForkEvent 
-    [X] GistEvent 
+    [-] CreateEvent 
+[X] DeleteEvent 
+[X] DownloadEvent 
+    [-] FollowEvent 
+[X] ForkApplyEvent 
+[X] ForkEvent 
+[X] GistEvent 
 [O] GitHubEvent 
-    [X] GollumEvent 
-    [X] IssueCommentEvent
-    [X] IssuesEvent 
-    [X] MemberEvent 
-    [X] PublicEvent 
-    [X] PullRequestEvent 
-    [X] PushEvent
+[X] GollumEvent 
+[X] IssueCommentEvent
+    [-] IssuesEvent 
+[X] MemberEvent 
+[X] PublicEvent 
+[X] PullRequestEvent 
+[X] PushEvent
 [O] TeamAddEvent 
-    [X] WatchEvent 
+    [-] WatchEvent 
 [O] WikiEvent
 
+[O]: Not implemented
+[X]: Implemented
+[-]: clickable (include in navigation hierarchie)
 
 - what happens if the password changed?
 - rename GHFeedItemWithDescriptionTableViewCell and all other cells
 - date formatting (1 day but 30 days, minutes, ...)
 - commented on pull request is wrong (it can also be an issue)
-- Notifications if a repo gets deleted, an issue gets closed
+- Notifications if a repo gets deleted, an issue gets closed or created
+- supporrt for logging out
+- view pull request commits and diffs
+
+GHPushPayloadViewController needs to be GHPullRequestViewController
+GHPullRequestViewController
+- use 
+    Showing Pull Request Discussions from
+    http://develop.github.com/p/pulls.html
 
 ViewControllers for:
-- Commits
-- Pull Requests
 - search
 (- gist)
