@@ -30,7 +30,6 @@
         
         NSDictionary *rawPayload = [rawDictionary objectForKeyOrNilOnNullObject:@"payload"];
         if ([self.type isEqualToString:@"PullRequestEvent"]) {
-            DLog(@"%@", rawDictionary);
             self.payload = [[[GHPullRequestPayload alloc] initWithRawDictionary:rawPayload] autorelease];
         } else if ([self.type isEqualToString:@"PushEvent"]) {
             self.payload = [[[GHPushPayload alloc] initWithRawDictionary:rawPayload] autorelease];
