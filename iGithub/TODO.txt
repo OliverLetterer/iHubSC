@@ -41,7 +41,6 @@ GHViewPullRequestViewController
 - link to repository
 
 GHSingleRepositoryViewController
-- show pull requests
 - list all files + branches
 
 ViewControllers for:
