@@ -222,6 +222,16 @@
                                       self.pullRequests = requests;
                                       [self cacheHeightForPullRequests];
                                       [self.tableView expandSection:section animated:YES];
+                                      
+                                      if ([self.pullRequests count] == 0) {
+                                          UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", @"") 
+                                                                                           message:NSLocalizedString(@"This repository does not have any Pull Requests.", @"") 
+                                                                                          delegate:nil 
+                                                                                 cancelButtonTitle:NSLocalizedString(@"OK", @"") 
+                                                                                 otherButtonTitles:nil]
+                                                                autorelease];
+                                          [alert show];
+                                      }
                                   }
                               }];
     }
