@@ -34,15 +34,13 @@ NSString *GHGravatarImageCacheDirectory() {
     if (!gravatarID) {
         return;
     }
-    dispatch_async([GHGravatarBackgroundQueue sharedInstance].backgroundQueue, ^(void) {
-        NSString *imagesCacheDirectory = GHGravatarImageCacheDirectory();
-        
-        NSData *pngData = UIImagePNGRepresentation(gravatarImage);
-        [pngData writeToFile:[imagesCacheDirectory stringByAppendingPathComponent:[gravatarID stringByAppendingString:@".png"]] 
-                  atomically:YES];
-        [[GHGravatarBackgroundQueue sharedInstance].imagesCache setObject:gravatarImage 
-                                                                   forKey:gravatarID];
-    });
+    NSString *imagesCacheDirectory = GHGravatarImageCacheDirectory();
+    
+    NSData *pngData = UIImagePNGRepresentation(gravatarImage);
+    [pngData writeToFile:[imagesCacheDirectory stringByAppendingPathComponent:[gravatarID stringByAppendingString:@".png"]] 
+              atomically:YES];
+    [[GHGravatarBackgroundQueue sharedInstance].imagesCache setObject:gravatarImage 
+                                                               forKey:gravatarID];
 }
 
 + (UIImage *)cachedGravatarImageFromGravatarID:(NSString *)gravatarID {
