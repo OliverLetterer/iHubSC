@@ -62,7 +62,8 @@
 
 - (void)layoutSubviews {
     [super layoutSubviews];
-    
+    self.accessoryView.center = CGPointMake(15.0, 22.0);
+    self.textLabel.frame = CGRectMake(27.0, 0.0, self.contentView.bounds.size.width-27.0, 44.0);
 }
 
 - (void)prepareForReuse {
