@@ -141,6 +141,8 @@
     
     GHCommit *commit = [self.commits objectAtIndex:indexPath.row];
     
+    cell.imageView.image = [UIImage imageNamed:@"DefaultUserImage.png"];
+    
     cell.titleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ committed %@", @""), commit.author.login, commit.ID];
     cell.descriptionLabel.text = commit.message;
     

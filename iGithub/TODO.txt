@@ -39,7 +39,7 @@ GHSingleRepositoryViewController
 - list all branches -> show all files there
 
 GHCloudFileViewController
-- init with a branch and a relative file url
+- init with a repository, branch and a relative file url
 
 
 ViewControllers for:
