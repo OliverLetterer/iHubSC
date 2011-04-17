@@ -62,7 +62,7 @@
                              constrainedToSize:CGSizeMake(222.0f, MAXFLOAT)
                                  lineBreakMode:UILineBreakModeWordWrap];
     
-    return newSize.height < 21 ? 21 : newSize.height;
+    return newSize.height < 21.0f ? 21.0f : newSize.height;
 }
 
 - (void)handleError:(NSError *)error {

@@ -16,17 +16,19 @@
 #import "GHNewsFeedItemTableViewCell.h"
 #import "GHUserViewController.h"
 #import "GHViewPullRequestViewController.h"
+#import "GHRecentCommitsViewController.h"
 
 #define kUITableViewSectionUserData 0
 #define kUITableViewSectionIssues 1
 #define kUITableViewSectionWatchingUsers 2
 #define kUITableViewSectionPullRequests 3
-#define kUITableViewSectionAdministration 4
+#define kUITableViewSectionRecentCommits 4
+#define kUITableViewSectionAdministration 5
 
 @implementation GHSingleRepositoryViewController
 
 @synthesize repositoryString=_repositoryString, repository=_repository, issuesArray=_issuesArray, watchedUsersArray=_watchedUsersArray, deleteToken=_deleteToken, delegate=_delegate;
-@synthesize pullRequests=_pullRequests;
+@synthesize pullRequests=_pullRequests, branches=_branches;
 
 #pragma mark - setters and getters
 
@@ -85,6 +87,7 @@
     [_watchedUsersArray release];
     [_deleteToken release];
     [_pullRequests release];
+    [_branches release];
     [super dealloc];
 }
 
@@ -150,6 +153,8 @@
         }
     } else if (section == kUITableViewSectionPullRequests) {
         return self.pullRequests == nil;
+    } else if (section == kUITableViewSectionRecentCommits) {
+        return self.branches == nil;
     }
     return NO;
 }
@@ -171,6 +176,8 @@
         cell.textLabel.text = self.canDeleteRepository ? NSLocalizedString(@"Administration", @"") : NSLocalizedString(@"Network", @"");
     } else if (section == kUITableViewSectionPullRequests) {
         cell.textLabel.text = NSLocalizedString(@"Pull Requests", @"");
+    } else if (section == kUITableViewSectionRecentCommits) {
+        cell.textLabel.text = NSLocalizedString(@"Recent Commits", @"");
     }
     
     return cell;
@@ -234,6 +241,17 @@
                                       }
                                   }
                               }];
+    } else if (section == kUITableViewSectionRecentCommits) {
+        [GHRepository branchesOnRepository:self.repositoryString 
+                         completionHandler:^(NSArray *array, NSError *error) {
+                             if (error) {
+                                 [self handleError:error];
+                                 [tableView cancelDownloadInSection:section];
+                             } else {
+                                 self.branches = array;
+                                 [tableView expandSection:section animated:YES];
+                             }
+                         }];
     }
 }
 
@@ -250,8 +268,9 @@
     // 1: open issues
     // 2: watching
     // 3: Pull Requests
-    // 4: administration
-    return 5;
+    // 4: recent commits
+    // 5: administration
+    return 6;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -270,6 +289,8 @@
         return 2;
     } else if (section == kUITableViewSectionPullRequests) {
         return [self.pullRequests count] + 1;
+    } else if (section == kUITableViewSectionRecentCommits) {
+        return [self.branches count] + 1;
     }
     
     return 0;
@@ -501,6 +522,22 @@
                       withGravatarID:discussion.user.gravatarID];
         
         return cell;
+    } else if (indexPath.section == kUITableViewSectionRecentCommits) {
+        if (indexPath.row > 0) {
+            NSString *CellIdentifier = @"UITableViewCellWithLinearGradientBackgroundView";
+            
+            UITableViewCellWithLinearGradientBackgroundView *cell = (UITableViewCellWithLinearGradientBackgroundView *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+            if (!cell) {
+                cell = [[[UITableViewCellWithLinearGradientBackgroundView alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+            }
+            
+            GHBranch *branch = [self.branches objectAtIndex:indexPath.row - 1];
+            
+            cell.textLabel.text = branch.name;
+            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+            
+            return cell;
+        }
     }
     
     return self.dummyCell;
@@ -677,6 +714,13 @@
         
         GHViewPullRequestViewController *viewIssueViewController = [[[GHViewPullRequestViewController alloc] initWithRepository:repo issueNumber:discussion.number] autorelease];
         [self.navigationController pushViewController:viewIssueViewController animated:YES];
+    } else if (indexPath.section == kUITableViewSectionRecentCommits) {
+        GHBranch *branch = [self.branches objectAtIndex:indexPath.row - 1];
+        
+        GHRecentCommitsViewController *recentViewController = [[[GHRecentCommitsViewController alloc] initWithRepository:self.repositoryString 
+                                                                                                                  branch:branch.name]
+                                                               autorelease];
+        [self.navigationController pushViewController:recentViewController animated:YES];
     } else {
         [self.tableView deselectRowAtIndexPath:indexPath animated:NO];
     }

@@ -141,6 +141,8 @@
 		A7D41ACC1358B7D300CD3A5C /* GHCommitDiffViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7D41ACB1358B7D300CD3A5C /* GHCommitDiffViewController.m */; };
 		A7D41AF41359DE4400CD3A5C /* GHPullRequestDiscussion.m in Sources */ = {isa = PBXBuildFile; fileRef = A7D41AF31359DE4300CD3A5C /* GHPullRequestDiscussion.m */; };
 		A7D41AF71359F8CC00CD3A5C /* GHPullRequestRepositoryInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = A7D41AF61359F8CC00CD3A5C /* GHPullRequestRepositoryInformation.m */; };
+		A7D41AFD135ADA4600CD3A5C /* GHBranch.m in Sources */ = {isa = PBXBuildFile; fileRef = A7D41AFC135ADA3C00CD3A5C /* GHBranch.m */; };
+		A7D41B08135AE71B00CD3A5C /* GHRecentCommitsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7D41B07135AE71600CD3A5C /* GHRecentCommitsViewController.m */; };
 		A7F6260F134B3938006487CA /* UITableViewCellWithLinearGradientBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = A7F6260E134B3938006487CA /* UITableViewCellWithLinearGradientBackgroundView.m */; };
 		A7F62616134B7CD2006487CA /* GHNewCommentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A7F62615134B7CD2006487CA /* GHNewCommentTableViewCell.m */; };
 		A7F62622134B88B8006487CA /* NSString+GithubAPIAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = A7F62621134B88B8006487CA /* NSString+GithubAPIAdditions.m */; };
@@ -385,6 +387,10 @@
 		A7D41AF31359DE4300CD3A5C /* GHPullRequestDiscussion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPullRequestDiscussion.m; sourceTree = "<group>"; };
 		A7D41AF51359F8CB00CD3A5C /* GHPullRequestRepositoryInformation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPullRequestRepositoryInformation.h; sourceTree = "<group>"; };
 		A7D41AF61359F8CC00CD3A5C /* GHPullRequestRepositoryInformation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPullRequestRepositoryInformation.m; sourceTree = "<group>"; };
+		A7D41AFB135ADA3400CD3A5C /* GHBranch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHBranch.h; sourceTree = "<group>"; };
+		A7D41AFC135ADA3C00CD3A5C /* GHBranch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHBranch.m; sourceTree = "<group>"; };
+		A7D41B06135AE71300CD3A5C /* GHRecentCommitsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHRecentCommitsViewController.h; sourceTree = "<group>"; };
+		A7D41B07135AE71600CD3A5C /* GHRecentCommitsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHRecentCommitsViewController.m; sourceTree = "<group>"; };
 		A7F6260D134B3938006487CA /* UITableViewCellWithLinearGradientBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UITableViewCellWithLinearGradientBackgroundView.h; sourceTree = "<group>"; };
 		A7F6260E134B3938006487CA /* UITableViewCellWithLinearGradientBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UITableViewCellWithLinearGradientBackgroundView.m; sourceTree = "<group>"; };
 		A7F62614134B7CD1006487CA /* GHNewCommentTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHNewCommentTableViewCell.h; sourceTree = "<group>"; };
@@ -809,6 +815,8 @@
 				A73AE5E51350B27A00E9EBA4 /* GHSingleRepositoryViewController.m */,
 				A7BC6788134D94020083F906 /* GHUserViewController */,
 				A7D14FBE13576D4200E1B980 /* GHWebViewViewController */,
+				A7D41B06135AE71300CD3A5C /* GHRecentCommitsViewController.h */,
+				A7D41B07135AE71600CD3A5C /* GHRecentCommitsViewController.m */,
 				A7D14FBF13576D9B00E1B980 /* GHPushPayloadViewController.h */,
 				A7D14FC013576DA000E1B980 /* GHPushPayloadViewController.m */,
 				A7D14FC61358315100E1B980 /* GHViewCommitViewController.h */,
@@ -1069,6 +1077,8 @@
 				A7BF146F13426EF5001AE50D /* GithubAPI.h */,
 				A750573A13431FFD00514A82 /* GHUser */,
 				A7CE1B231345C31800169F94 /* GHCommitMessage */,
+				A7D41AFB135ADA3400CD3A5C /* GHBranch.h */,
+				A7D41AFC135ADA3C00CD3A5C /* GHBranch.m */,
 			);
 			name = "Github API";
 			sourceTree = "<group>";
@@ -1467,6 +1477,8 @@
 				A7D41ACC1358B7D300CD3A5C /* GHCommitDiffViewController.m in Sources */,
 				A7D41AF41359DE4400CD3A5C /* GHPullRequestDiscussion.m in Sources */,
 				A7D41AF71359F8CC00CD3A5C /* GHPullRequestRepositoryInformation.m in Sources */,
+				A7D41AFD135ADA4600CD3A5C /* GHBranch.m in Sources */,
+				A7D41B08135AE71B00CD3A5C /* GHRecentCommitsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

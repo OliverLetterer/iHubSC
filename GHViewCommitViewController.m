@@ -23,6 +23,7 @@
         // Custom initialization
         self.repository = repository;
         self.commitID = commitID;
+        self.title = NSLocalizedString(@"Commit", @"");
         [self downloadCommitData];
     }
     return self;

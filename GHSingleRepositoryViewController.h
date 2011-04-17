@@ -37,6 +37,7 @@
     id<GHSingleRepositoryViewControllerDelegate> _delegate;
     
     NSArray *_pullRequests;
+    NSArray *_branches;
 }
 
 @property (nonatomic, readonly) BOOL isFollowingRepository;
@@ -55,6 +56,8 @@
 
 @property (nonatomic, retain) NSArray *pullRequests;
 - (void)cacheHeightForPullRequests;
+
+@property (nonatomic, retain) NSArray *branches;
 
 - (id)initWithRepositoryString:(NSString *)repositoryString;
 

@@ -33,15 +33,16 @@ support all these events
 - supporrt for logging out
 - view pull request commits and diffs
 - cell.selectionStyle = UITableViewCellSelectionStyleNone; if a cell is not selectable
+- cancel tableView downloads in all completion handlers if error fails
 
 GHSingleRepositoryViewController
-- list all files + branches
-- recent commits on a branch
+- list all branches -> show all files there
 
 GHCloudFileViewController
 - init with a branch and a relative file url
 
 
 ViewControllers for:
+- support oAuth
 - search
 (- gist)

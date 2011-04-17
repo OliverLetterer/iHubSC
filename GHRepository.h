@@ -84,4 +84,11 @@
 + (void)followRepositorie:(NSString *)repository completionHandler:(void (^)(NSError *error))handler;
 + (void)unfollowRepositorie:(NSString *)repository completionHandler:(void (^)(NSError *error))handler;
 
++ (void)branchesOnRepository:(NSString *)repository 
+           completionHandler:(void (^)(NSArray *array, NSError *error))handler;
+
++ (void)recentCommitsOnRepository:(NSString *)repository 
+                           branch:(NSString *)branch
+                completionHandler:(void (^)(NSArray *array, NSError *error))handler;
+
 @end

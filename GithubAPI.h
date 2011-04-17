@@ -25,6 +25,7 @@
 #import "GHPullRequestDiscussion.h"
 #import "GHPullRequestRepositoryInformation.h"
 #import "GHRepository.h"
+#import "GHBranch.h"
 
 #import "GHPayload.h"
 #import "GHIssuePayload.h"
