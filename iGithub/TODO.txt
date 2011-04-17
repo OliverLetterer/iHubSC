@@ -41,6 +41,8 @@ GHSingleRepositoryViewController
 GHCloudFileViewController
 - init with a repository, branch and a relative file url
 
+GHViewCommitViewController
+- show added files
 
 ViewControllers for:
 - support oAuth
