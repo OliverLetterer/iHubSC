@@ -15,6 +15,8 @@
 #import "GHIssueCommentTableViewCell.h"
 #import "GHFeedItemWithDescriptionTableViewCell.h"
 #import "GHNewCommentTableViewCell.h"
+#import "GHUserViewController.h"
+#import "GHSingleRepositoryViewController.h"
 
 @implementation GHViewIssueTableViewController
 
@@ -288,7 +290,7 @@
         if (section == 0) {
             // the issue itself
             // title, description, number of votes
-            result = 1;
+            result = 2;
         } else if (section == 1) {
             // we display our comment
             // first cell = Comments (5)
@@ -351,6 +353,22 @@
             ;
             
             cell.descriptionLabel.text = self.issue.body;
+            
+            return cell;
+        } else if (indexPath.row == 1) {
+            NSString *CellIdentifier = @"DetailsTableViewCell";
+            
+            UITableViewCellWithLinearGradientBackgroundView *cell = (UITableViewCellWithLinearGradientBackgroundView *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+            if (!cell) {
+                cell = [[[UITableViewCellWithLinearGradientBackgroundView alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:CellIdentifier] autorelease];
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            }
+            
+            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+            cell.selectionStyle = UITableViewCellSelectionStyleBlue;
+            
+            cell.detailTextLabel.text = self.issue.repository;
+            cell.textLabel.text = NSLocalizedString(@"Repository", @"");
             
             return cell;
         }
@@ -482,11 +500,7 @@
             
         } else if (indexPath.row == 1) {
             // the description
-            CGSize size = [self.issue.body sizeWithFont:[UIFont systemFontOfSize:16.0] 
-                                      constrainedToSize:CGSizeMake(300.0, MAXFLOAT) 
-                                          lineBreakMode:UILineBreakModeWordWrap];
-            
-            result = size.height + 30.0;
+            return 44.0f;
         }
     } else if (indexPath.section == 1) {
         if (indexPath.row >= 1 && indexPath.row <= [self.issue.comments intValue]) {
@@ -542,9 +556,24 @@
                                }];
             }
         }
+    } else if (indexPath.section == 0) {
+        if (indexPath.row == 0) {
+            GHUserViewController *userViewController = [[[GHUserViewController alloc] initWithUsername:self.issue.user] autorelease];
+            [self.navigationController pushViewController:userViewController animated:YES];
+        } else if (indexPath.row == 1) {
+            GHSingleRepositoryViewController *repoViewController = [[[GHSingleRepositoryViewController alloc] initWithRepositoryString:self.issue.repository] autorelease];
+            [self.navigationController pushViewController:repoViewController animated:YES];
+        }
+    } else if (indexPath.section == 1) {
+        if (indexPath.row >= 1 && indexPath.row <= [self.issue.comments intValue]) {
+            // display a comment
+            GHIssueComment *comment = [self.comments objectAtIndex:indexPath.row - 1];
+            GHUserViewController *userViewController = [[[GHUserViewController alloc] initWithUsername:comment.user] autorelease];
+            [self.navigationController pushViewController:userViewController animated:YES];
+        }
+    } else {
+        [self.tableView deselectRowAtIndexPath:indexPath animated:NO];
     }
-    
-    [self.tableView deselectRowAtIndexPath:indexPath animated:NO];
 }
 
 @end

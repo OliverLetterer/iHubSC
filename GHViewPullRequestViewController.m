@@ -12,6 +12,8 @@
 #import "GHNewCommentTableViewCell.h"
 #import "GHSettingsHelper.h"
 #import "GHViewCommitViewController.h"
+#import "GHUserViewController.h"
+#import "GHSingleRepositoryViewController.h"
 
 @implementation GHViewPullRequestViewController
 
@@ -199,7 +201,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
     if (section == 0) {
-        return 1;
+        return 2;
     } else if (section == 1) {
         return [self.discussion.comments intValue] + 2; // comments + header + new comment
     } else if (section == 2) {
@@ -219,8 +221,6 @@
                 cell = [[[GHIssueTitleTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
             }
             
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            
             cell.textLabel.text = self.discussion.title;
             
             [self updateImageViewForCell:cell 
@@ -233,6 +233,21 @@
             ;
             
             cell.descriptionLabel.text = self.discussion.body;
+            
+            return cell;
+        } else if (indexPath.row == 1) {
+            NSString *CellIdentifier = @"DetailsTableViewCell";
+            
+            UITableViewCellWithLinearGradientBackgroundView *cell = (UITableViewCellWithLinearGradientBackgroundView *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+            if (!cell) {
+                cell = [[[UITableViewCellWithLinearGradientBackgroundView alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:CellIdentifier] autorelease];
+            }
+            
+            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+            cell.selectionStyle = UITableViewCellSelectionStyleBlue;
+            
+            cell.detailTextLabel.text = [NSString stringWithFormat:@"%@/%@", self.discussion.base.repository.owner, self.discussion.base.repository.name];
+            cell.textLabel.text = NSLocalizedString(@"Repository", @"");
             
             return cell;
         }
@@ -248,8 +263,6 @@
             if (cell == nil) {
                 cell = [[[GHFeedItemWithDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
             }
-            
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
             
             [self updateImageViewForCell:cell 
                              atIndexPath:indexPath 
@@ -270,8 +283,6 @@
             if (cell == nil) {
                 cell = [[[GHNewCommentTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
             }
-            
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
             
             [self updateImageViewForCell:cell 
                              atIndexPath:indexPath 
@@ -360,6 +371,21 @@
                                                                                                           commitID:commit.ID]
                                                             autorelease];
         [self.navigationController pushViewController:commitViewController animated:YES];
+    } else if (indexPath.section == 0) {
+        if (indexPath.row == 0) {
+            GHUserViewController *userViewController = [[[GHUserViewController alloc] initWithUsername:self.discussion.user.login] autorelease];
+            [self.navigationController pushViewController:userViewController animated:YES];
+        } else if (indexPath.row == 1) {
+            GHSingleRepositoryViewController *repoViewController = [[[GHSingleRepositoryViewController alloc] initWithRepositoryString:[NSString stringWithFormat:@"%@/%@", self.discussion.base.repository.owner, self.discussion.base.repository.name]] autorelease];
+            [self.navigationController pushViewController:repoViewController animated:YES];
+        }
+    } else if (indexPath.section == 1) {
+        if (indexPath.row >= 1 && indexPath.row <= [self.discussion.comments intValue]) {
+            // display a comment
+            GHIssueComment *comment = [self.discussion.commentsArray objectAtIndex:indexPath.row - 1];
+            GHUserViewController *userViewController = [[[GHUserViewController alloc] initWithUsername:comment.userInfo.login] autorelease];
+            [self.navigationController pushViewController:userViewController animated:YES];
+        }
     } else {
         [self.tableView deselectRowAtIndexPath:indexPath animated:NO];
     }
