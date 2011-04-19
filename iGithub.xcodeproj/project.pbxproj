@@ -14,7 +14,6 @@
 		A703B9371347315B0014235D /* GHPushFeedItemTableViewCellContentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A703B9351347315B0014235D /* GHPushFeedItemTableViewCellContentView.xib */; };
 		A703B944134754FC0014235D /* UITableViewCell+Background.m in Sources */ = {isa = PBXBuildFile; fileRef = A703B943134754FC0014235D /* UITableViewCell+Background.m */; };
 		A703B9471347562B0014235D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A703B9461347562B0014235D /* QuartzCore.framework */; };
-		A703B94913476FB20014235D /* TODO.txt in Resources */ = {isa = PBXBuildFile; fileRef = A703B94813476FB20014235D /* TODO.txt */; };
 		A703B94D1347713B0014235D /* GHNewsFeedItemTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A703B94C1347713B0014235D /* GHNewsFeedItemTableViewCell.m */; };
 		A703B95313478C4F0014235D /* GHCommitEventPayload.m in Sources */ = {isa = PBXBuildFile; fileRef = A703B95213478C4F0014235D /* GHCommitEventPayload.m */; };
 		A703B957134791D00014235D /* GHPayloadWithRepository.m in Sources */ = {isa = PBXBuildFile; fileRef = A703B956134791CF0014235D /* GHPayloadWithRepository.m */; };
@@ -158,7 +157,6 @@
 		A7D41B19135B897B00CD3A5C /* Icon-Small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A7D41B12135B897200CD3A5C /* Icon-Small@2x.png */; };
 		A7D41B1A135B897B00CD3A5C /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = A7D41B13135B897500CD3A5C /* Icon.png */; };
 		A7D41B1B135B897B00CD3A5C /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A7D41B14135B897600CD3A5C /* Icon@2x.png */; };
-		A7D41B1C135B897B00CD3A5C /* iTunesArtwork.png in Resources */ = {isa = PBXBuildFile; fileRef = A7D41B15135B897900CD3A5C /* iTunesArtwork.png */; };
 		A7F6260F134B3938006487CA /* UITableViewCellWithLinearGradientBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = A7F6260E134B3938006487CA /* UITableViewCellWithLinearGradientBackgroundView.m */; };
 		A7F62616134B7CD2006487CA /* GHNewCommentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A7F62615134B7CD2006487CA /* GHNewCommentTableViewCell.m */; };
 		A7F62622134B88B8006487CA /* NSString+GithubAPIAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = A7F62621134B88B8006487CA /* NSString+GithubAPIAdditions.m */; };
@@ -1497,7 +1495,6 @@
 				A75057391343033200514A82 /* GHGlossBottomBorder.png in Resources */,
 				A7CE1B36134621CB00169F94 /* GHIssueFeedItemTableViewCellContentView.xib in Resources */,
 				A703B9371347315B0014235D /* GHPushFeedItemTableViewCellContentView.xib in Resources */,
-				A703B94913476FB20014235D /* TODO.txt in Resources */,
 				A70895131349FE0C000DD6CE /* GHIssueDescriptionTableViewCellContentView.xib in Resources */,
 				A7089525134A2F24000DD6CE /* UITableViewCellAccessoryDisclosureIndicatorSelected.PNG in Resources */,
 				A7089526134A2F24000DD6CE /* UITableViewCellAccessoryDisclosureIndicator.PNG in Resources */,
@@ -1520,7 +1517,6 @@
 				A7D41B19135B897B00CD3A5C /* Icon-Small@2x.png in Resources */,
 				A7D41B1A135B897B00CD3A5C /* Icon.png in Resources */,
 				A7D41B1B135B897B00CD3A5C /* Icon@2x.png in Resources */,
-				A7D41B1C135B897B00CD3A5C /* iTunesArtwork.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
