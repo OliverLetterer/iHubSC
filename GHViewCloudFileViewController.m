@@ -205,6 +205,13 @@
     [self.progressView removeFromSuperview];
     self.progressView = nil;
     
+    [self.backgroundGradientLayer removeFromSuperlayer];
+    self.backgroundGradientLayer = nil;
+    [self.activityIndicatorView removeFromSuperview];
+    self.activityIndicatorView = nil;
+    [self.loadingLabel removeFromSuperview];
+    self.loadingLabel = nil;
+    
     self.imageView = [[[UIImageView alloc] initWithImage:self.contentImage] autorelease];
     [self.scrollView addSubview:self.imageView];
     [self.imageView sizeToFit];
@@ -226,7 +233,7 @@
     
     self.scrollView.minimumZoomScale = self.scrollView.bounds.size.width / self.imageView.frame.size.width;
     
-    [self.scrollView setZoomScale:self.scrollView.minimumZoomScale animated:YES];
+    [self.scrollView setZoomScale:self.scrollView.minimumZoomScale animated:NO];
 }
 
 - (void)viewDidLoad {

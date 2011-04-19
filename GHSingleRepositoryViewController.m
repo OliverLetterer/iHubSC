@@ -230,6 +230,7 @@
         [GHPullRequest pullRequestsOnRepository:self.repositoryString 
                               completionHandler:^(NSArray *requests, NSError *error) {
                                   if (error) {
+                                      [tableView cancelDownloadInSection:section];
                                       [self handleError:error];
                                   } else {
                                       self.pullRequests = requests;

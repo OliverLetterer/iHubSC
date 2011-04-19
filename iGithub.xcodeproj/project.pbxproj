@@ -603,8 +603,7 @@
 				A73AE5A4134EF4C900E9EBA4 /* UITableView+Additions */,
 				A703B941134754D40014235D /* UITableViewCell+Additions */,
 				A703B927134675D90014235D /* UIImage+Additions */,
-				A712B7D4135CC2130009B7A7 /* UIViewController+GHErrorHandling.h */,
-				A712B7D5135CC2130009B7A7 /* UIViewController+GHErrorHandling.m */,
+				A712B7EE135E0CF50009B7A7 /* UIViewController+GHViewControllerErrorhandling */,
 			);
 			name = "Foundation Additions";
 			sourceTree = "<group>";
@@ -655,6 +654,33 @@
 				A712B7D2135CC0DB0009B7A7 /* GHViewCloudFileViewController.m */,
 			);
 			name = "Browse content";
+			sourceTree = "<group>";
+		};
+		A712B7ED135E0B5E0009B7A7 /* DDProgressView */ = {
+			isa = PBXGroup;
+			children = (
+				A712B7EA135DEF900009B7A7 /* DDProgressView.h */,
+				A712B7EB135DEF920009B7A7 /* DDProgressView.m */,
+			);
+			name = DDProgressView;
+			sourceTree = "<group>";
+		};
+		A712B7EE135E0CF50009B7A7 /* UIViewController+GHViewControllerErrorhandling */ = {
+			isa = PBXGroup;
+			children = (
+				A712B7D4135CC2130009B7A7 /* UIViewController+GHErrorHandling.h */,
+				A712B7D5135CC2130009B7A7 /* UIViewController+GHErrorHandling.m */,
+			);
+			name = "UIViewController+GHViewControllerErrorhandling";
+			sourceTree = "<group>";
+		};
+		A712B7EF135E0D160009B7A7 /* GHBranch */ = {
+			isa = PBXGroup;
+			children = (
+				A7D41AFB135ADA3400CD3A5C /* GHBranch.h */,
+				A7D41AFC135ADA3C00CD3A5C /* GHBranch.m */,
+			);
+			name = GHBranch;
 			sourceTree = "<group>";
 		};
 		A73AE5A4134EF4C900E9EBA4 /* UITableView+Additions */ = {
@@ -872,8 +898,7 @@
 		A750573F1343422200514A82 /* UserInterface */ = {
 			isa = PBXGroup;
 			children = (
-				A712B7EA135DEF900009B7A7 /* DDProgressView.h */,
-				A712B7EB135DEF920009B7A7 /* DDProgressView.m */,
+				A712B7ED135E0B5E0009B7A7 /* DDProgressView */,
 				A712B7C7135CB58C0009B7A7 /* Browse content */,
 				A7D41B09135AFDA400CD3A5C /* GHViewPullRequestViewController */,
 				A76FC9A81352D27E004C642E /* UICollapsingTableView */,
@@ -1143,8 +1168,7 @@
 				A7BF146F13426EF5001AE50D /* GithubAPI.h */,
 				A750573A13431FFD00514A82 /* GHUser */,
 				A7CE1B231345C31800169F94 /* GHCommitMessage */,
-				A7D41AFB135ADA3400CD3A5C /* GHBranch.h */,
-				A7D41AFC135ADA3C00CD3A5C /* GHBranch.m */,
+				A712B7EF135E0D160009B7A7 /* GHBranch */,
 			);
 			name = "Github API";
 			sourceTree = "<group>";

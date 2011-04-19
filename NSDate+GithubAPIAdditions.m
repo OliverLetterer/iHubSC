@@ -12,8 +12,10 @@
 @implementation NSDate (GHAPIDateFormatting)
 
 - (NSString *)prettyTimeIntervalSinceNow {
-    static NSString *valuesArray[] = {@"seconds", @"minutes", @"hours", @"days", @"years"};
-    static NSUInteger timeDiffs[] = {60, 3600, 86400, 31536000};
+    static NSString *valuesArray[] = {@"second", @"minute", @"hour", @"day", @"year"};
+    static NSUInteger timeDiffs[] = {            60,        3600,    86400,  31536000};
+    
+    NSString *unit = nil;
     
     NSUInteger timeInterval = abs([self timeIntervalSinceNow]);
     
@@ -36,7 +38,13 @@
         difference = timeInterval;
     }
     
-    return [NSString stringWithFormat:@"%d %@", difference, valuesArray[index]];
+    unit = valuesArray[index];
+    
+    if (difference != 1) {
+        unit = [unit stringByAppendingString:@"s"];
+    }
+    
+    return [NSString stringWithFormat:@"%d %@", difference, unit];
 }
 
 - (NSString *)stringInGithubAPIFormat {

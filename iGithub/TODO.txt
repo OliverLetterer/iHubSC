@@ -14,9 +14,9 @@ support all these events
 [X] IssueCommentEvent
     [-] IssuesEvent 
 [X] MemberEvent 
-[X] PublicEvent 
+    [-] PublicEvent 
     [-] PullRequestEvent 
-[X] PushEvent
+    [-] PushEvent
 [O] TeamAddEvent 
     [-] WatchEvent 
 [O] WikiEvent
@@ -26,17 +26,8 @@ support all these events
 [-]: clickable (include in navigation hierarchie)
 
 - what happens if the password changed?
-- rename GHFeedItemWithDescriptionTableViewCell and all other cells
-- date formatting (1 day but 30 days, minutes, ...)
-- commented on pull request is wrong (it can also be an issue)
-- Notifications if a repo gets deleted, an issue gets closed or created
 - supporrt for logging out
-- view pull request commits and diffs
 - cell.selectionStyle = UITableViewCellSelectionStyleNone; if a cell is not selectable
-- cancel tableView downloads in all completion handlers if error fails
-
-GHCommitDiffViewController, GHCloudFileViewController
-- does view gets properly rebuilded on low memory?
 
 ViewControllers for:
 - search

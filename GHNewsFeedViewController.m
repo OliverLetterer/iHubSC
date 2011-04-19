@@ -449,10 +449,9 @@
                       withGravatarID:item.actorAttributes.gravatarID];
         
         cell.repositoryLabel.text = payload.repo;
-        cell.titleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ commented on a pull request", @""), payload.actor];
         
         cell.titleLabel.text = payload.actor;
-        cell.descriptionLabel.text = NSLocalizedString(@"commented on a pull request", @"");
+        cell.descriptionLabel.text = NSLocalizedString(@"commented on an Issue", @"");
         
         return cell;
     } else if (item.payload.type == GHPayloadForkApplyEvent) {
@@ -638,7 +637,11 @@
         } else if (item.payload.type == GHPayloadPublicEvent) {
             height = 71.0;
         } else {
-            minimumHeight = 15.0;
+#if DEBUG
+            minimumHeight = 15.0f;
+#else
+            minimumHeight = 0.0f;
+#endif
         }
         
         [self cacheHeight:height < minimumHeight ? minimumHeight : height forRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
@@ -650,107 +653,6 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return [self cachedHeightForRowAtIndexPath:indexPath];
-    
-    GHNewsFeedItem *item = [self.newsFeed.items objectAtIndex:indexPath.row];
-    
-    CGFloat height = 0.0;
-    CGFloat minimumHeight = 0.0;
-    
-    if (item.payload.type == GHPayloadIssuesEvent) {
-        minimumHeight = 78.0;
-        // this is the height for an issue cell, we will display the whole issue
-        GHIssuePayload *payload = (GHIssuePayload *)item.payload;
-        
-        if ([GHIssue isIssueAvailableForRepository:payload.repo withNumber:payload.number]) {
-            GHIssue *issue = [GHIssue issueFromDatabaseOnRepository:payload.repo withNumber:payload.number];
-            
-            NSString *description = issue.title;
-            height = [self heightForDescription:description] + 20.0 + 30.0; // X + top offset of status label + 30 px white space on the bottom
-        } else {
-            height = [GHFeedItemWithDescriptionTableViewCell height];
-        }
-    } else if (item.payload.type == GHPayloadPushEvent) {
-        minimumHeight = 78.0;
-        GHPushPayload *payload = (GHPushPayload *)item.payload;
-        // this is a commit / push message, we will display max 2 commits
-        CGFloat commitHeight = 0.0;
-        
-        NSUInteger numberOfCommits = [payload.commits count];
-        
-        if (numberOfCommits > 0) {
-            GHCommitMessage *commit = [payload.commits objectAtIndex:0];
-            CGSize firstCommitSize = [commit.message sizeWithFont:[GHPushFeedItemTableViewCell commitFont] 
-                                                            constrainedToSize:CGSizeMake(222.0f, MAXFLOAT)
-                                                                lineBreakMode:UILineBreakModeWordWrap];
-            if (firstCommitSize.height > [GHPushFeedItemTableViewCell maxCommitHeight]) {
-                firstCommitSize.height = [GHPushFeedItemTableViewCell maxCommitHeight];
-            }
-            
-            commitHeight += firstCommitSize.height;
-        }
-        
-        
-        
-        if (numberOfCommits > 1) {
-            GHCommitMessage *commit = [payload.commits objectAtIndex:1];
-            CGSize secondCommitSize = [commit.message sizeWithFont:[GHPushFeedItemTableViewCell commitFont] 
-                                                 constrainedToSize:CGSizeMake(222.0f, MAXFLOAT)
-                                                     lineBreakMode:UILineBreakModeWordWrap];
-            if (secondCommitSize.height > [GHPushFeedItemTableViewCell maxCommitHeight]) {
-                secondCommitSize.height = [GHPushFeedItemTableViewCell maxCommitHeight];
-            }
-            
-            commitHeight += secondCommitSize.height;
-            commitHeight += 7.0;
-        }
-
-        height = 20.0 + commitHeight + 30.0;
-    } else if(item.payload.type == GHPayloadCommitCommentEvent) {
-        height = 71.0;
-    } else if(item.payload.type == GHPayloadFollowEvent) {
-        height = 71.0;
-    } else if(item.payload.type == GHPayloadWatchEvent) {
-        height = 71.0;
-    } else if(item.payload.type == GHPayloadCreateEvent) {
-        height = 71.0;
-    } else if(item.payload.type == GHPayloadForkEvent) {
-        height = 71.0;
-    } else if(item.payload.type == GHPayloadDeleteEvent) {
-        height = 71.0;
-    } else if(item.payload.type == GHPayloadGollumEvent) {
-        height = 71.0;
-    } else if(item.payload.type == GHPayloadGistEvent) {
-        minimumHeight = 78.0;
-        // this is the height for an issue cell, we will display the whole issue
-        GHGistEventPayload *payload = (GHGistEventPayload *)item.payload;
-        NSString *description = payload.descriptionGist ? payload.descriptionGist : payload.snippet;
-        
-        height = [self heightForDescription:description] + 20.0 + 5.0; // X + top offset of status label + 30 px white space on the bottom
-    } else if(item.payload.type == GHPayloadDownloadEvent) {
-        minimumHeight = 78.0;
-        // this is the height for an issue cell, we will display the whole issue
-        GHDownloadEventPayload *payload = (GHDownloadEventPayload *)item.payload;
-        NSString *description = [payload.URL lastPathComponent];
-        height = [self heightForDescription:description] + 20.0 + 30.0; // X + top offset of status label + 30 px white space on the bottom
-    } else if(item.payload.type == GHPayloadPullRequestEvent) {
-        minimumHeight = 78.0;
-        // this is the height for an issue cell, we will display the whole issue
-        GHPullRequestPayload *payload = (GHPullRequestPayload *)item.payload;
-        
-        NSString *additionsString = [NSString stringWithFormat:NSLocalizedString(@"%@ %@", @""), payload.pullRequest.additions, [payload.pullRequest.additions intValue] == 1 ? NSLocalizedString(@"addition", @"") : NSLocalizedString(@"additions", @"") ];
-        NSString *deletionsString = [NSString stringWithFormat:NSLocalizedString(@"%@ %@", @""), payload.pullRequest.deletions, [payload.pullRequest.deletions intValue] == 1 ? NSLocalizedString(@"deletion", @"") : NSLocalizedString(@"deletions", @"") ];
-        NSString *commitsString = [NSString stringWithFormat:NSLocalizedString(@"%@ %@", @""), payload.pullRequest.commits, [payload.pullRequest.commits intValue] == 1 ? NSLocalizedString(@"commit", @"") : NSLocalizedString(@"commits", @"") ];
-        
-        NSString *description = [NSString stringWithFormat:NSLocalizedString(@"%@ with %@ and %@", @""), commitsString, additionsString, deletionsString];
-        
-        height = [self heightForDescription:description] + 20.0 + 5.0; // X + top offset of status label + 30 px white space on the bottom
-    } else if(item.payload.type == GHPayloadMemberEvent) {
-        height = 71.0;
-    } else {
-        minimumHeight = 15.0;
-    }
-    
-    return height < minimumHeight ? minimumHeight : height;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -792,6 +694,11 @@
         
         GHViewPullRequestViewController *viewIssueViewController = [[[GHViewPullRequestViewController alloc] initWithRepository:payload.repo issueNumber:payload.commentID] autorelease];
         [self.navigationController pushViewController:viewIssueViewController animated:YES];
+    } else if (item.payload.type == GHPayloadPublicEvent) {
+        GHPublicEventPayload *payload = (GHPublicEventPayload *)item.payload;
+        
+        GHSingleRepositoryViewController *repoViewController = [[[GHSingleRepositoryViewController alloc] initWithRepositoryString:payload.repo] autorelease];
+        [self.navigationController pushViewController:repoViewController animated:YES];
     } else {
         [self.tableView deselectRowAtIndexPath:indexPath animated:NO];
     }
