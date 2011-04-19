@@ -13,6 +13,7 @@
 @private
     NSString *_repository;
     NSString *_branch;
+    NSString *_branchHash;
     
     NSArray *_commits;
 }
@@ -20,6 +21,7 @@
 @property (nonatomic, copy) NSString *repository;
 @property (nonatomic, copy) NSString *branch;
 @property (nonatomic, retain) NSArray *commits;
+@property (nonatomic, copy) NSString *branchHash;
 
 - (id)initWithRepository:(NSString *)repository branch:(NSString *)branch;
 

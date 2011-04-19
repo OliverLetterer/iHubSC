@@ -719,6 +719,7 @@
         GHRecentCommitsViewController *recentViewController = [[[GHRecentCommitsViewController alloc] initWithRepository:self.repositoryString 
                                                                                                                   branch:branch.name]
                                                                autorelease];
+        recentViewController.branchHash = branch.hash;
         [self.navigationController pushViewController:recentViewController animated:YES];
     } else if (indexPath.section == kUITableViewSectionBrowseBranches) {
         GHBranch *branch = [self.branches objectAtIndex:indexPath.row - 1];

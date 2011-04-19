@@ -9,10 +9,11 @@
 #import "GHViewCommitViewController.h"
 #import "UICollapsingAndSpinningTableViewCell.h"
 #import "GHCommitDiffViewController.h"
+#import "GHViewCloudFileViewController.h"
 
 @implementation GHViewCommitViewController
 
-@synthesize repository=_repository, commitID=_commitID, commit=_commit;
+@synthesize repository=_repository, commitID=_commitID, commit=_commit, branchHash=_branchHash;
 
 #pragma mark - setters and getters
 
@@ -35,6 +36,7 @@
     [_repository release];
     [_commitID release];
     [_commit release];
+    [_branchHash release];
     
     [super dealloc];
 }
@@ -187,7 +189,7 @@
     }
     
     cell.textLabel.text = filename;
-    if (indexPath.section == 2) {
+    if (indexPath.section == 2 || indexPath.section == 0) {
         cell.selectionStyle = UITableViewCellSelectionStyleBlue;
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     } else {
@@ -241,6 +243,18 @@
         
         GHCommitDiffViewController *diffViewController = [[[GHCommitDiffViewController alloc] initWithDiffString:info.diff] autorelease];
         [self.navigationController pushViewController:diffViewController animated:YES];
+    } else if (indexPath.section == 0) {
+        NSString *filename = [self.commit.added objectAtIndex:indexPath.row-1];
+        
+        NSString *URL = [filename stringByDeletingLastPathComponent];
+        NSString *base = [filename lastPathComponent];
+        
+        GHViewCloudFileViewController *fileViewController = [[[GHViewCloudFileViewController alloc] initWithRepository:self.repository 
+                                                                                                                  tree:self.branchHash 
+                                                                                                              filename:base 
+                                                                                                           relativeURL:URL]
+                                                             autorelease];
+        [self.navigationController pushViewController:fileViewController animated:YES];
     } else {
         [tableView deselectRowAtIndexPath:indexPath animated:NO];
     }

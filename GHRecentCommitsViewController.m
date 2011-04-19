@@ -13,7 +13,7 @@
 
 @implementation GHRecentCommitsViewController
 
-@synthesize repository=_repository, branch=_branch, commits=_commits;
+@synthesize repository=_repository, branch=_branch, commits=_commits, branchHash=_branchHash;
 
 #pragma mark - Initialization
 
@@ -34,6 +34,7 @@
     [_repository release];
     [_branch release];
     [_commits release];
+    [_branchHash release];
     
     [super dealloc];
 }
@@ -196,6 +197,7 @@
     GHViewCommitViewController *commitViewController = [[[GHViewCommitViewController alloc] initWithRepository:self.repository 
                                                                                                       commitID:commit.ID]
                                                         autorelease];
+    commitViewController.branchHash = self.branchHash;
     [self.navigationController pushViewController:commitViewController animated:YES];
 }
 
