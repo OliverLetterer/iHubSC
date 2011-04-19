@@ -17,13 +17,15 @@
 #import "GHUserViewController.h"
 #import "GHViewPullRequestViewController.h"
 #import "GHRecentCommitsViewController.h"
+#import "GHViewRootDirectoryViewController.h"
 
-#define kUITableViewSectionUserData 0
-#define kUITableViewSectionIssues 1
-#define kUITableViewSectionWatchingUsers 2
-#define kUITableViewSectionPullRequests 3
-#define kUITableViewSectionRecentCommits 4
-#define kUITableViewSectionAdministration 5
+#define kUITableViewSectionUserData         0
+#define kUITableViewSectionIssues           1
+#define kUITableViewSectionWatchingUsers    2
+#define kUITableViewSectionPullRequests     3
+#define kUITableViewSectionRecentCommits    4
+#define kUITableViewSectionBrowseBranches   5
+#define kUITableViewSectionAdministration   6
 
 @implementation GHSingleRepositoryViewController
 
@@ -155,6 +157,8 @@
         return self.pullRequests == nil;
     } else if (section == kUITableViewSectionRecentCommits) {
         return self.branches == nil;
+    } else if (section == kUITableViewSectionBrowseBranches) {
+        return self.branches == nil;
     }
     return NO;
 }
@@ -178,6 +182,8 @@
         cell.textLabel.text = NSLocalizedString(@"Pull Requests", @"");
     } else if (section == kUITableViewSectionRecentCommits) {
         cell.textLabel.text = NSLocalizedString(@"Recent Commits", @"");
+    } else if (section == kUITableViewSectionBrowseBranches) {
+        cell.textLabel.text = NSLocalizedString(@"Browse Content", @"");
     }
     
     return cell;
@@ -241,7 +247,7 @@
                                       }
                                   }
                               }];
-    } else if (section == kUITableViewSectionRecentCommits) {
+    } else if (section == kUITableViewSectionRecentCommits || section == kUITableViewSectionBrowseBranches) {
         [GHRepository branchesOnRepository:self.repositoryString 
                          completionHandler:^(NSArray *array, NSError *error) {
                              if (error) {
@@ -263,14 +269,7 @@
         return 0;
     }
     
-    // sections:
-    // 0 title + description
-    // 1: open issues
-    // 2: watching
-    // 3: Pull Requests
-    // 4: recent commits
-    // 5: administration
-    return 6;
+    return 7;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -289,7 +288,7 @@
         return 2;
     } else if (section == kUITableViewSectionPullRequests) {
         return [self.pullRequests count] + 1;
-    } else if (section == kUITableViewSectionRecentCommits) {
+    } else if (section == kUITableViewSectionRecentCommits || section == kUITableViewSectionBrowseBranches) {
         return [self.branches count] + 1;
     }
     
@@ -522,7 +521,7 @@
                       withGravatarID:discussion.user.gravatarID];
         
         return cell;
-    } else if (indexPath.section == kUITableViewSectionRecentCommits) {
+    } else if (indexPath.section == kUITableViewSectionRecentCommits || indexPath.section == kUITableViewSectionBrowseBranches) {
         if (indexPath.row > 0) {
             NSString *CellIdentifier = @"UITableViewCellWithLinearGradientBackgroundView";
             
@@ -721,6 +720,14 @@
                                                                                                                   branch:branch.name]
                                                                autorelease];
         [self.navigationController pushViewController:recentViewController animated:YES];
+    } else if (indexPath.section == kUITableViewSectionBrowseBranches) {
+        GHBranch *branch = [self.branches objectAtIndex:indexPath.row - 1];
+        
+        GHViewRootDirectoryViewController *rootViewController = [[[GHViewRootDirectoryViewController alloc] initWithRepository:self.repositoryString
+                                                                                                                        branch:branch.name
+                                                                                                                          hash:branch.hash]
+                                                                 autorelease];
+        [self.navigationController pushViewController:rootViewController animated:YES];
     } else {
         [self.tableView deselectRowAtIndexPath:indexPath animated:NO];
     }

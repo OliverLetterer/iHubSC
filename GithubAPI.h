@@ -26,6 +26,10 @@
 #import "GHPullRequestRepositoryInformation.h"
 #import "GHRepository.h"
 #import "GHBranch.h"
+#import "GHFileSystemItem.h"
+#import "GHFile.h"
+#import "GHDirectory.h"
+#import "GHFileMetaData.h"
 
 #import "GHPayload.h"
 #import "GHIssuePayload.h"

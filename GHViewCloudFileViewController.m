@@ -1,0 +1,305 @@
+//
+//  GHViewCloudFileViewController.m
+//  iGithub
+//
+//  Created by Oliver Letterer on 18.04.11.
+//  Copyright 2011 Home. All rights reserved.
+//
+
+#import "GHViewCloudFileViewController.h"
+
+
+@implementation GHViewCloudFileViewController
+
+@synthesize repository=_repository, tree=_tree, filename=_filename, relativeURL=_relativeURL;
+@synthesize metadata=_metadata, contentString=_contentString, contentImage=_contentImage;
+@synthesize request=_request;
+@synthesize textView=_textView, scrollView=_scrollView, backgroundGradientLayer=_backgroundGradientLayer, loadingLabel=_loadingLabel, activityIndicatorView=_activityIndicatorView, progressView=_progressView, imageView=_imageView;
+
+#pragma mark - Initialization
+
+- (void)setMetadata:(GHFileMetaData *)metadata {
+    if (metadata != _metadata) {
+        [_metadata release];
+        _metadata = [metadata retain];
+        
+        if ([_metadata.mimeType rangeOfString:@"text"].location != NSNotFound) {
+            // now we need to download the text data
+            [_metadata contentOfFileWithCompletionHandler:^(NSData *data, NSError *error) {
+                if (error) {
+                    [self handleError:error];
+                } else {
+                    NSString *fileString = [[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] autorelease];
+                    
+                    if (fileString) {
+                        self.contentString = fileString;
+                        [self updateViewToShowPlainTextFile];
+                    } else {
+                        UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", @"") 
+                                                                         message:NSLocalizedString(@"Unable to show file!", @"") 
+                                                                        delegate:nil 
+                                                               cancelButtonTitle:NSLocalizedString(@"OK", @"") 
+                                                               otherButtonTitles:nil]
+                                              autorelease];
+                        [alert show];
+                        [self.activityIndicatorView removeFromSuperview];
+                        self.activityIndicatorView = nil;
+                        self.loadingLabel.text = NSLocalizedString(@"Unable to show file", @"");
+                    }
+                }
+            }];
+        } else if ([_metadata.mimeType rangeOfString:@"image"].location != NSNotFound) {
+            [self updateViewForImageDownload];
+            self.request = [self.metadata requestForContent];
+            self.request.delegate = self;
+            [self.request setCompletionBlock:^(void) {
+                self.contentImage = [[[UIImage alloc] initWithData:[self.request responseData] ] autorelease];
+                [self.request clearDelegatesAndCancel];
+                self.request = nil;
+                [self updateViewForImageContent];
+            }];
+            self.request.downloadProgressDelegate = self.progressView;
+            
+            [self.request startAsynchronous];
+        }
+    }
+}
+
+- (id)initWithRepository:(NSString *)repository tree:(NSString *)tree filename:(NSString *)filename relativeURL:(NSString *)relativeURL {
+    if ((self = [super init])) {
+        self.repository = repository;
+        self.tree = tree;
+        self.filename = filename;
+        self.relativeURL = relativeURL;
+        self.title = self.filename;
+        [GHFileMetaData metaDataOfFile:self.filename 
+                         atRelativeURL:self.relativeURL 
+                          onRepository:self.repository 
+                                  tree:self.tree 
+                     completionHandler:^(GHFileMetaData *metaData, NSError *error) {
+                         if (error) {
+                             [self handleError:error];
+                         } else {
+                             self.metadata = metaData;
+                         }
+                     }];
+    }
+    return self;
+}
+
+#pragma mark - Memory management
+
+- (void)dealloc {
+    [_repository release];
+    [_tree release];
+    [_filename release];
+    [_metadata release];
+    [_relativeURL release];
+    [_textView release];
+    [_scrollView release];
+    [_backgroundGradientLayer release];
+    [_loadingLabel release];
+    [_activityIndicatorView release];
+    [_progressView release];
+    [_imageView release];
+    
+    [_request clearDelegatesAndCancel];
+    [_request release];
+    
+    [super dealloc];
+}
+
+- (void)didReceiveMemoryWarning {
+    // Releases the view if it doesn't have a superview.
+    [super didReceiveMemoryWarning];
+    
+    // Release any cached data, images, etc that aren't in use.
+}
+
+#pragma mark - View lifecycle
+
+- (void)loadView {
+    [super loadView];
+    self.view.backgroundColor = [UIColor whiteColor];
+    
+    self.backgroundGradientLayer = [CAGradientLayer layer];
+    self.backgroundGradientLayer.colors = [NSArray arrayWithObjects:
+                                           (id)[UIColor whiteColor].CGColor, 
+                                           (id)[UIColor colorWithRed:245.0/255.0 green:245.0/255.0 blue:245.0/255.0 alpha:1.0].CGColor,
+                                           nil];
+    self.backgroundGradientLayer.locations = [NSArray arrayWithObjects:[NSNumber numberWithFloat:0.0], [NSNumber numberWithFloat:1.0], nil];
+    self.backgroundGradientLayer.frame = self.view.bounds;
+    [self.view.layer addSublayer:self.backgroundGradientLayer];
+    
+    self.scrollView = [[[UIScrollView alloc] initWithFrame:self.view.bounds] autorelease];
+    self.scrollView.backgroundColor = [UIColor clearColor];
+    self.scrollView.alwaysBounceVertical = YES;
+    self.scrollView.alwaysBounceHorizontal = YES;
+    self.scrollView.indicatorStyle = UIScrollViewIndicatorStyleBlack;
+    self.scrollView.showsVerticalScrollIndicator = YES;
+    self.scrollView.showsHorizontalScrollIndicator = YES;
+    self.scrollView.contentInset = UIEdgeInsetsMake(5.0, 5.0, 5.0, 5.0);
+    self.scrollView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    self.scrollView.delegate = self;
+    [self.view addSubview:self.scrollView];
+    
+    self.loadingLabel = [[[UILabel alloc] initWithFrame:CGRectMake(0.0, 170.0, 320.0, 20.0)] autorelease];
+    self.loadingLabel.backgroundColor = [UIColor clearColor];
+    self.loadingLabel.textColor = [UIColor blackColor];
+    self.loadingLabel.textAlignment = UITextAlignmentCenter;
+    self.loadingLabel.text = NSLocalizedString(@"Downloading ...", @"");
+    self.loadingLabel.font = [UIFont systemFontOfSize:17.0];
+    [self.view addSubview:self.loadingLabel];
+    
+    self.activityIndicatorView = [[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray] autorelease];
+    self.activityIndicatorView.center = CGPointMake(75.0, 180.0);
+    [self.activityIndicatorView startAnimating];
+    [self.view addSubview:self.activityIndicatorView];
+    
+    if (self.contentString) {
+        [self updateViewToShowPlainTextFile];
+    } else if (self.contentImage) {
+        [self updateViewForImageContent];
+    } else if (self.request) {
+        [self updateViewForImageDownload];
+    }
+}
+
+- (void)updateViewToShowPlainTextFile {
+    if (![self isViewLoaded]) {
+        return;
+    }
+    
+    [self.textView removeFromSuperview];
+    self.loadingLabel.text = NSLocalizedString(@"Parsing ...", @"");
+    self.textView = [[[GHTextView alloc] initWithFrame:CGRectZero text:self.contentString delegate:self] autorelease];
+    [self.scrollView addSubview:self.textView];
+}
+
+- (void)updateViewForImageDownload {
+    if (![self isViewLoaded]) {
+        return;
+    }
+    
+    [self.backgroundGradientLayer removeFromSuperlayer];
+    self.backgroundGradientLayer = nil;
+    [self.activityIndicatorView removeFromSuperview];
+    self.activityIndicatorView = nil;
+    [self.loadingLabel removeFromSuperview];
+    self.loadingLabel = nil;
+    
+    self.progressView = [[[DDProgressView alloc] initWithFrame:CGRectMake(20.0, 170.0, 280.0, 0.0)] autorelease];
+    self.progressView.alpha = 0.0;
+    [self.view addSubview:self.progressView];
+    [UIView animateWithDuration:0.3 animations:^(void) {
+        self.view.backgroundColor = [UIColor blackColor];
+        self.progressView.alpha = 1.0;
+    }];
+}
+
+- (void)updateViewForImageContent {
+    if (![self isViewLoaded]) {
+        return;
+    }
+    self.view.backgroundColor = [UIColor blackColor];
+    [self.progressView removeFromSuperview];
+    self.progressView = nil;
+    
+    self.imageView = [[[UIImageView alloc] initWithImage:self.contentImage] autorelease];
+    [self.scrollView addSubview:self.imageView];
+    [self.imageView sizeToFit];
+    
+    self.scrollView.contentSize = self.imageView.frame.size;
+    
+    if (self.scrollView.contentSize.width < self.scrollView.bounds.size.width) {
+        // move image into center
+        CGPoint oldCenter = self.imageView.center;
+        oldCenter.x = self.scrollView.bounds.size.width / 2.0f;
+        self.imageView.center = oldCenter;
+    }
+    
+    if (self.scrollView.contentSize.height < self.scrollView.bounds.size.height) {
+        CGPoint oldCenter = self.imageView.center;
+        oldCenter.y = self.scrollView.bounds.size.height / 2.0f;
+        self.imageView.center = oldCenter;
+    }
+    
+    self.scrollView.minimumZoomScale = self.scrollView.bounds.size.width / self.imageView.frame.size.width;
+    
+    [self.scrollView setZoomScale:self.scrollView.minimumZoomScale animated:YES];
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    // Uncomment the following line to preserve selection between presentations.
+    // self.clearsSelectionOnViewWillAppear = NO;
+    
+    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
+    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+}
+
+- (void)viewDidUnload {
+    [super viewDidUnload];
+    
+    [_textView release];
+    _textView = nil;
+    [_scrollView release];
+    _scrollView = nil;
+    [_backgroundGradientLayer release];
+    _backgroundGradientLayer = nil;
+    [_loadingLabel release];
+    _loadingLabel = nil;
+    [_activityIndicatorView release];
+    _activityIndicatorView = nil;
+    [_progressView release];
+    _progressView = nil;
+    [_imageView release];
+    _imageView = nil;
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+}
+
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+}
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
+    // Return YES for supported orientations
+    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+#pragma mark - GHTextViewDelegate
+
+- (void)textViewDidParseText:(GHTextView *)textView {
+    [self.activityIndicatorView removeFromSuperview];
+    self.activityIndicatorView = nil;
+    [self.loadingLabel removeFromSuperview];
+    self.loadingLabel = nil;
+    [self.textView sizeToFit];
+    
+    self.scrollView.contentSize = self.textView.frame.size;
+    self.scrollView.minimumZoomScale = self.scrollView.bounds.size.width / self.textView.frame.size.width;
+}
+
+- (NSAttributedString *)textView:(GHTextView *)textView formattedLineFromText:(NSString *)line {
+    NSMutableAttributedString *string = [[[NSMutableAttributedString alloc] initWithString:line] autorelease];
+    
+    return string;
+}
+
+- (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView {
+    return self.textView ? self.textView : self.imageView;
+}
+
+@end

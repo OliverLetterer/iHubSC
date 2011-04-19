@@ -65,33 +65,6 @@
     return newSize.height < 21.0f ? 21.0f : newSize.height;
 }
 
-- (void)handleError:(NSError *)error {
-    if (error != nil) {
-        DLog(@"%@", error);
-        
-        if (error.code == 3) {
-            // authentication needed
-            if (![GHAuthenticationViewController isOneAuthenticationViewControllerActive]) {
-                GHAuthenticationViewController *authViewController = [[[GHAuthenticationViewController alloc] init] autorelease];
-                authViewController.delegate = self;
-                
-                UINavigationController *navController = [[[UINavigationController alloc] initWithRootViewController:authViewController] autorelease];
-                
-                [self presentModalViewController:navController animated:YES];
-                
-            }
-        } else {
-            UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", @"") 
-                                                             message:[error localizedDescription] 
-                                                            delegate:nil 
-                                                   cancelButtonTitle:NSLocalizedString(@"OK", @"") 
-                                                   otherButtonTitles:nil]
-                                  autorelease];
-            [alert show];
-        }
-    }
-}
-
 - (void)updateImageViewForCell:(GHNewsFeedItemTableViewCell *)cell 
                    atIndexPath:(NSIndexPath *)indexPath 
                 withGravatarID:(NSString *)gravatarID {
@@ -229,12 +202,6 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     return nil;
-}
-
-#pragma mark - GHAuthenticationViewControllerDelegate
-
-- (void)authenticationViewController:(GHAuthenticationViewController *)authenticationViewController didAuthenticateUser:(GHUser *)user {
-    [self dismissModalViewControllerAnimated:YES];
 }
 
 #pragma mark -

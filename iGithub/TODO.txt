@@ -35,6 +35,9 @@ support all these events
 - cell.selectionStyle = UITableViewCellSelectionStyleNone; if a cell is not selectable
 - cancel tableView downloads in all completion handlers if error fails
 
+GHCommitDiffViewController, GHCloudFileViewController
+- does view gets properly rebuilded on low memory?
+
 GHSingleRepositoryViewController
 - list all branches -> show all files there
 

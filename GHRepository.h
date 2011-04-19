@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
+@class GHDirectory;
 
 @interface GHRepository : NSObject {
     NSString *_creationDate;
@@ -90,5 +91,9 @@
 + (void)recentCommitsOnRepository:(NSString *)repository 
                            branch:(NSString *)branch
                 completionHandler:(void (^)(NSArray *array, NSError *error))handler;
+
++ (void)filesOnRepository:(NSString *)repository 
+                   branch:(NSString *)branch
+        completionHandler:(void (^)(GHDirectory *rootDirectory, NSError *error))handler;
 
 @end

@@ -1,49 +1,35 @@
 //
-//  GHCommitDiffView.m
+//  GHTextView.m
 //  iGithub
 //
-//  Created by Oliver Letterer on 15.04.11.
+//  Created by Oliver Letterer on 19.04.11.
 //  Copyright 2011 Home. All rights reserved.
 //
 
-#import "GHCommitDiffView.h"
-#import <dispatch/dispatch.h>
+#import "GHTextView.h"
 
-@implementation GHCommitDiffView
 
-@synthesize diffString=_diffString, attributedString=_attributedString, delegate=_delegate;
+@implementation GHTextView
+
+@synthesize text=_text, attributedString=_attributedString, delegate=_delegate;
 
 #pragma mark - Initialization
 
-- (id)initWithFrame:(CGRect)frame diffString:(NSString *)diffString delegate:(id<GHCommitDiffViewDelegate>)delegate {
+- (id)initWithFrame:(CGRect)frame text:(NSString *)text delegate:(id<GHTextViewDelegate>)delegate {
     if ((self = [super initWithFrame:frame])) {
         // Initialization code
-        self.diffString = diffString;
+        self.text = text;
         self.attributedString = [[[NSMutableAttributedString alloc] init] autorelease];
         self.backgroundColor = [UIColor clearColor];
         self.delegate = delegate;
         dispatch_queue_t tmpQueue = dispatch_queue_create("de.olettere.tmpQueue001", NULL);
         
         dispatch_async(tmpQueue, ^(void) {
-            __block NSInteger loc = 0;
-            [self.diffString enumerateLinesUsingBlock:^(NSString *line, BOOL *stop) {
-                [self.attributedString appendAttributedString:[[[NSAttributedString alloc] initWithString:line] autorelease] ];
-                CGColorRef textColor = [UIColor blackColor].CGColor;
+            [self.text enumerateLinesUsingBlock:^(NSString *line, BOOL *stop) {
+                NSAttributedString *attributesString = [self.delegate textView:self formattedLineFromText:line];
+                [self.attributedString appendAttributedString:attributesString ];
                 
-                if ([line hasPrefix:@"---"] || [line hasPrefix:@"-"]) {
-                    textColor = [UIColor redColor].CGColor;
-                } else if ([line hasPrefix:@"+++"] || [line hasPrefix:@"+"]) {
-                    textColor = [UIColor greenColor].CGColor;
-                } else if ([line hasPrefix:@"@@"]) {
-                    textColor = [UIColor grayColor].CGColor;
-                }
-                
-                [self.attributedString addAttribute:(NSString *)kCTForegroundColorAttributeName 
-                                              value:(id)textColor 
-                                              range:NSMakeRange(loc, [line length])];
-                loc += [line length];
                 [self.attributedString appendAttributedString:[[[NSAttributedString alloc] initWithString:@"\n"] autorelease] ];
-                loc++;
             }];
             
             CTFontRef myFont = CTFontCreateWithName((CFStringRef)@"Courier", 16.0, NULL);
@@ -63,7 +49,7 @@
             dispatch_sync(dispatch_get_main_queue(), ^(void) {
                 dispatch_release(tmpQueue);
                 _frameSetter = frameSetter;
-                [self.delegate commitDiffViewDidParseText:self];
+                [self.delegate textViewDidParseText:self];
                 [self setNeedsDisplay];
             });
         });
@@ -107,7 +93,7 @@
 #pragma mark - Memory management
 
 - (void)dealloc {
-    [_diffString release];
+    [_text release];
     [_attributedString release];
     if (_frameSetter) {
         CFRelease(_frameSetter);

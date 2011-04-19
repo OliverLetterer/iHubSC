@@ -404,6 +404,43 @@
             }
         });
     });
+}
+
++ (void)filesOnRepository:(NSString *)repository 
+                   branch:(NSString *)branch 
+        completionHandler:(void (^)(GHDirectory *, NSError *))handler {
+    
+    dispatch_async(GHAPIBackgroundQueue(), ^(void) {
+        
+        // http://github.com/api/v2/json/blob/all/defunkt/facebox/master
+        
+        NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://github.com/api/v2/json/blob/all/%@/%@",
+                                           [repository stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
+                                           [branch stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] ] ];
+        
+        NSError *myError = nil;
+        
+        ASIFormDataRequest *request = [ASIFormDataRequest authenticatedFormDataRequestWithURL:URL];
+        [request startSynchronous];
+        
+        myError = [request error];
+        
+        if (!myError) {
+            myError = [NSError errorFromRawDictionary:[[request responseString] objectFromJSONString] ];
+        }
+        
+        dispatch_async(dispatch_get_main_queue(), ^(void) {
+            if (myError) {
+                handler(nil, myError);
+            } else {
+                NSDictionary *dictionary = [[request responseString] objectFromJSONString];
+                
+                GHDirectory *rootDirectory = [[[GHDirectory alloc] initWithFilesDictionary:[dictionary objectForKeyOrNilOnNullObject:@"blobs"] name:@"" ] autorelease];
+                
+                handler(rootDirectory, nil);
+            }
+        });
+    });
     
 }
 

@@ -68,9 +68,9 @@
     self.scrollView.delegate = self;
     [self.view addSubview:self.scrollView];
     
-    self.diffView = [[[GHCommitDiffView alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0, 300.0) 
-                                                  diffString:self.diffString 
-                                                    delegate:self] 
+    self.diffView = [[[GHTextView alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0, 300.0) 
+                                            text:self.diffString 
+                                              delegate:self] 
                      autorelease];
     [self.scrollView addSubview:self.diffView];
     
@@ -136,7 +136,7 @@
 
 #pragma mark - GHCommitDiffViewDelegate
 
-- (void)commitDiffViewDidParseText:(GHCommitDiffView *)commitDiffView {
+- (void)textViewDidParseText:(GHTextView *)textView {
     [self.activityIndicatorView removeFromSuperview];
     self.activityIndicatorView = nil;
     [self.loadingLabel removeFromSuperview];
@@ -145,6 +145,27 @@
     
     self.scrollView.contentSize = self.diffView.frame.size;
     self.scrollView.minimumZoomScale = self.scrollView.bounds.size.width / self.diffView.frame.size.width;
+}
+
+- (NSAttributedString *)textView:(GHTextView *)textView formattedLineFromText:(NSString *)line {
+    
+    NSMutableAttributedString *string = [[[NSMutableAttributedString alloc] initWithString:line] autorelease];
+    
+    CGColorRef textColor = [UIColor blackColor].CGColor;
+    
+    if ([line hasPrefix:@"---"] || [line hasPrefix:@"-"]) {
+        textColor = [UIColor redColor].CGColor;
+    } else if ([line hasPrefix:@"+++"] || [line hasPrefix:@"+"]) {
+        textColor = [UIColor greenColor].CGColor;
+    } else if ([line hasPrefix:@"@@"]) {
+        textColor = [UIColor grayColor].CGColor;
+    }
+    
+    [string addAttribute:(NSString *)kCTForegroundColorAttributeName 
+                   value:(id)textColor 
+                   range:NSMakeRange(0, [line length])];
+    
+    return string;
 }
 
 - (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView {

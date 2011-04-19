@@ -8,12 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import <QuartzCore/QuartzCore.h>
-#import "GHCommitDiffView.h"
+#import "GHTextView.h"
 
-@interface GHCommitDiffViewController : UIViewController <GHCommitDiffViewDelegate, UIScrollViewDelegate> {
+@interface GHCommitDiffViewController : UIViewController <GHTextViewDelegate, UIScrollViewDelegate> {
 @private
     NSString *_diffString;
-    GHCommitDiffView *_diffView;
+    GHTextView *_diffView;
     UIScrollView *_scrollView;
     CAGradientLayer *_backgroundGradientLayer;
     UILabel *_loadingLabel;
@@ -21,7 +21,7 @@
 }
 
 @property (nonatomic, copy) NSString *diffString;
-@property (nonatomic, retain) GHCommitDiffView *diffView;
+@property (nonatomic, retain) GHTextView *diffView;
 @property (nonatomic, retain) UIScrollView *scrollView;
 @property (nonatomic, retain) CAGradientLayer *backgroundGradientLayer;
 @property (nonatomic, retain) UILabel *loadingLabel;

@@ -7,3 +7,6 @@
 [submodule "UIExpandableTableView"]
 	path = UIExpandableTableView
 	url = git@github.com:docmorelli/UIExpandableTableView.git
+[submodule "DDProgressView"]
+	path = DDProgressView
+	url = https://github.com/ddeville/DDProgressView.git

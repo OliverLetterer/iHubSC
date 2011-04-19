@@ -11,6 +11,7 @@
 #import "GHAuthenticationViewController.h"
 #import "EGORefreshTableHeaderView.h"
 #import "UIExpandableTableView.h"
+#import "UIViewController+GHErrorHandling.h"
 
 @class GHNewsFeedItemTableViewCell;
 
@@ -41,8 +42,6 @@
 
 - (UITableViewCell *)dummyCellWithText:(NSString *)text;
 - (CGFloat)heightForDescription:(NSString *)description;
-
-- (void)handleError:(NSError *)error;
 
 - (void)updateImageViewForCell:(GHNewsFeedItemTableViewCell *)cell 
                    atIndexPath:(NSIndexPath *)indexPath 

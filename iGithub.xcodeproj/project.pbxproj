@@ -30,6 +30,16 @@
 		A708952C134A2F83000DD6CE /* UICollapsingAndSpinningTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A708952B134A2F83000DD6CE /* UICollapsingAndSpinningTableViewCell.m */; };
 		A7089530134A3DB0000DD6CE /* GHIssueComment.m in Sources */ = {isa = PBXBuildFile; fileRef = A708952F134A3DB0000DD6CE /* GHIssueComment.m */; };
 		A7089533134A4124000DD6CE /* GHIssueCommentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A7089532134A4123000DD6CE /* GHIssueCommentTableViewCell.m */; };
+		A712B7C0135C9A5D0009B7A7 /* GHFileSystemItem.m in Sources */ = {isa = PBXBuildFile; fileRef = A712B7BF135C9A5D0009B7A7 /* GHFileSystemItem.m */; };
+		A712B7C3135C9ACB0009B7A7 /* GHFile.m in Sources */ = {isa = PBXBuildFile; fileRef = A712B7C2135C9ACA0009B7A7 /* GHFile.m */; };
+		A712B7C6135C9AF10009B7A7 /* GHDirectory.m in Sources */ = {isa = PBXBuildFile; fileRef = A712B7C5135C9AF10009B7A7 /* GHDirectory.m */; };
+		A712B7CA135CB5B40009B7A7 /* GHViewDirectoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A712B7C9135CB5B40009B7A7 /* GHViewDirectoryViewController.m */; };
+		A712B7CD135CB7510009B7A7 /* GHViewRootDirectoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A712B7CC135CB7510009B7A7 /* GHViewRootDirectoryViewController.m */; };
+		A712B7D0135CBED10009B7A7 /* GHFileMetaData.m in Sources */ = {isa = PBXBuildFile; fileRef = A712B7CF135CBED10009B7A7 /* GHFileMetaData.m */; };
+		A712B7D3135CC0DB0009B7A7 /* GHViewCloudFileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A712B7D2135CC0DB0009B7A7 /* GHViewCloudFileViewController.m */; };
+		A712B7D6135CC2130009B7A7 /* UIViewController+GHErrorHandling.m in Sources */ = {isa = PBXBuildFile; fileRef = A712B7D5135CC2130009B7A7 /* UIViewController+GHErrorHandling.m */; };
+		A712B7E1135DDC180009B7A7 /* GHTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = A712B7E0135DDC180009B7A7 /* GHTextView.m */; };
+		A712B7EC135DEF940009B7A7 /* DDProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = A712B7EB135DEF920009B7A7 /* DDProgressView.m */; };
 		A73AE5A0134EE92900E9EBA4 /* EGORefreshTableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = A73AE59F134EE92900E9EBA4 /* EGORefreshTableHeaderView.m */; };
 		A73AE5A7134EF4F100E9EBA4 /* UITableView+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = A73AE5A6134EF4F100E9EBA4 /* UITableView+Additions.m */; };
 		A73AE5AC134EFDF400E9EBA4 /* 56-feed.png in Resources */ = {isa = PBXBuildFile; fileRef = A73AE5A8134EFDF300E9EBA4 /* 56-feed.png */; };
@@ -137,7 +147,6 @@
 		A7D14FC81358316200E1B980 /* GHViewCommitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7D14FC71358315600E1B980 /* GHViewCommitViewController.m */; };
 		A7D14FCB135834AB00E1B980 /* GHCommitFileInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = A7D14FCA135834AB00E1B980 /* GHCommitFileInformation.m */; };
 		A7D41AC51358B6B500CD3A5C /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7D41AC41358B6B500CD3A5C /* CoreText.framework */; };
-		A7D41AC91358B6F500CD3A5C /* GHCommitDiffView.m in Sources */ = {isa = PBXBuildFile; fileRef = A7D41AC81358B6F500CD3A5C /* GHCommitDiffView.m */; };
 		A7D41ACC1358B7D300CD3A5C /* GHCommitDiffViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7D41ACB1358B7D300CD3A5C /* GHCommitDiffViewController.m */; };
 		A7D41AF41359DE4400CD3A5C /* GHPullRequestDiscussion.m in Sources */ = {isa = PBXBuildFile; fileRef = A7D41AF31359DE4300CD3A5C /* GHPullRequestDiscussion.m */; };
 		A7D41AF71359F8CC00CD3A5C /* GHPullRequestRepositoryInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = A7D41AF61359F8CC00CD3A5C /* GHPullRequestRepositoryInformation.m */; };
@@ -198,6 +207,26 @@
 		A708952F134A3DB0000DD6CE /* GHIssueComment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHIssueComment.m; sourceTree = "<group>"; };
 		A7089531134A4122000DD6CE /* GHIssueCommentTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHIssueCommentTableViewCell.h; sourceTree = "<group>"; };
 		A7089532134A4123000DD6CE /* GHIssueCommentTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHIssueCommentTableViewCell.m; sourceTree = "<group>"; };
+		A712B7BE135C9A5D0009B7A7 /* GHFileSystemItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHFileSystemItem.h; sourceTree = "<group>"; };
+		A712B7BF135C9A5D0009B7A7 /* GHFileSystemItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHFileSystemItem.m; sourceTree = "<group>"; };
+		A712B7C1135C9ACA0009B7A7 /* GHFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHFile.h; sourceTree = "<group>"; };
+		A712B7C2135C9ACA0009B7A7 /* GHFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHFile.m; sourceTree = "<group>"; };
+		A712B7C4135C9AF00009B7A7 /* GHDirectory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHDirectory.h; sourceTree = "<group>"; };
+		A712B7C5135C9AF10009B7A7 /* GHDirectory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHDirectory.m; sourceTree = "<group>"; };
+		A712B7C8135CB5B40009B7A7 /* GHViewDirectoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHViewDirectoryViewController.h; sourceTree = "<group>"; };
+		A712B7C9135CB5B40009B7A7 /* GHViewDirectoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHViewDirectoryViewController.m; sourceTree = "<group>"; };
+		A712B7CB135CB7510009B7A7 /* GHViewRootDirectoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHViewRootDirectoryViewController.h; sourceTree = "<group>"; };
+		A712B7CC135CB7510009B7A7 /* GHViewRootDirectoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHViewRootDirectoryViewController.m; sourceTree = "<group>"; };
+		A712B7CE135CBED10009B7A7 /* GHFileMetaData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHFileMetaData.h; sourceTree = "<group>"; };
+		A712B7CF135CBED10009B7A7 /* GHFileMetaData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHFileMetaData.m; sourceTree = "<group>"; };
+		A712B7D1135CC0DB0009B7A7 /* GHViewCloudFileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHViewCloudFileViewController.h; sourceTree = "<group>"; };
+		A712B7D2135CC0DB0009B7A7 /* GHViewCloudFileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHViewCloudFileViewController.m; sourceTree = "<group>"; };
+		A712B7D4135CC2130009B7A7 /* UIViewController+GHErrorHandling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+GHErrorHandling.h"; sourceTree = "<group>"; };
+		A712B7D5135CC2130009B7A7 /* UIViewController+GHErrorHandling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+GHErrorHandling.m"; sourceTree = "<group>"; };
+		A712B7DF135DDC180009B7A7 /* GHTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHTextView.h; sourceTree = "<group>"; };
+		A712B7E0135DDC180009B7A7 /* GHTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHTextView.m; sourceTree = "<group>"; };
+		A712B7EA135DEF900009B7A7 /* DDProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DDProgressView.h; path = DDProgressView/DDProgressView/DDProgressView.h; sourceTree = "<group>"; };
+		A712B7EB135DEF920009B7A7 /* DDProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DDProgressView.m; path = DDProgressView/DDProgressView/DDProgressView.m; sourceTree = "<group>"; };
 		A73AE59E134EE92900E9EBA4 /* EGORefreshTableHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EGORefreshTableHeaderView.h; sourceTree = "<group>"; };
 		A73AE59F134EE92900E9EBA4 /* EGORefreshTableHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EGORefreshTableHeaderView.m; sourceTree = "<group>"; };
 		A73AE5A5134EF4F100E9EBA4 /* UITableView+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+Additions.h"; sourceTree = "<group>"; };
@@ -386,8 +415,6 @@
 		A7D14FC9135834AA00E1B980 /* GHCommitFileInformation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHCommitFileInformation.h; sourceTree = "<group>"; };
 		A7D14FCA135834AB00E1B980 /* GHCommitFileInformation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHCommitFileInformation.m; sourceTree = "<group>"; };
 		A7D41AC41358B6B500CD3A5C /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
-		A7D41AC71358B6F500CD3A5C /* GHCommitDiffView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHCommitDiffView.h; sourceTree = "<group>"; };
-		A7D41AC81358B6F500CD3A5C /* GHCommitDiffView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHCommitDiffView.m; sourceTree = "<group>"; };
 		A7D41ACA1358B7D300CD3A5C /* GHCommitDiffViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHCommitDiffViewController.h; sourceTree = "<group>"; };
 		A7D41ACB1358B7D300CD3A5C /* GHCommitDiffViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHCommitDiffViewController.m; sourceTree = "<group>"; };
 		A7D41AF21359DE4300CD3A5C /* GHPullRequestDiscussion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPullRequestDiscussion.h; sourceTree = "<group>"; };
@@ -576,6 +603,8 @@
 				A73AE5A4134EF4C900E9EBA4 /* UITableView+Additions */,
 				A703B941134754D40014235D /* UITableViewCell+Additions */,
 				A703B927134675D90014235D /* UIImage+Additions */,
+				A712B7D4135CC2130009B7A7 /* UIViewController+GHErrorHandling.h */,
+				A712B7D5135CC2130009B7A7 /* UIViewController+GHErrorHandling.m */,
 			);
 			name = "Foundation Additions";
 			sourceTree = "<group>";
@@ -598,6 +627,34 @@
 				A708952F134A3DB0000DD6CE /* GHIssueComment.m */,
 			);
 			name = GHIssueComment;
+			sourceTree = "<group>";
+		};
+		A712B7BC135C9A450009B7A7 /* GHFileSystem */ = {
+			isa = PBXGroup;
+			children = (
+				A712B7BE135C9A5D0009B7A7 /* GHFileSystemItem.h */,
+				A712B7BF135C9A5D0009B7A7 /* GHFileSystemItem.m */,
+				A712B7C1135C9ACA0009B7A7 /* GHFile.h */,
+				A712B7C2135C9ACA0009B7A7 /* GHFile.m */,
+				A712B7C4135C9AF00009B7A7 /* GHDirectory.h */,
+				A712B7C5135C9AF10009B7A7 /* GHDirectory.m */,
+				A712B7CE135CBED10009B7A7 /* GHFileMetaData.h */,
+				A712B7CF135CBED10009B7A7 /* GHFileMetaData.m */,
+			);
+			name = GHFileSystem;
+			sourceTree = "<group>";
+		};
+		A712B7C7135CB58C0009B7A7 /* Browse content */ = {
+			isa = PBXGroup;
+			children = (
+				A712B7C8135CB5B40009B7A7 /* GHViewDirectoryViewController.h */,
+				A712B7C9135CB5B40009B7A7 /* GHViewDirectoryViewController.m */,
+				A712B7CB135CB7510009B7A7 /* GHViewRootDirectoryViewController.h */,
+				A712B7CC135CB7510009B7A7 /* GHViewRootDirectoryViewController.m */,
+				A712B7D1135CC0DB0009B7A7 /* GHViewCloudFileViewController.h */,
+				A712B7D2135CC0DB0009B7A7 /* GHViewCloudFileViewController.m */,
+			);
+			name = "Browse content";
 			sourceTree = "<group>";
 		};
 		A73AE5A4134EF4C900E9EBA4 /* UITableView+Additions */ = {
@@ -815,6 +872,9 @@
 		A750573F1343422200514A82 /* UserInterface */ = {
 			isa = PBXGroup;
 			children = (
+				A712B7EA135DEF900009B7A7 /* DDProgressView.h */,
+				A712B7EB135DEF920009B7A7 /* DDProgressView.m */,
+				A712B7C7135CB58C0009B7A7 /* Browse content */,
 				A7D41B09135AFDA400CD3A5C /* GHViewPullRequestViewController */,
 				A76FC9A81352D27E004C642E /* UICollapsingTableView */,
 				A7BC6780134CCED40083F906 /* PullToRefreshTableViewController */,
@@ -1063,6 +1123,7 @@
 		A7BF146413426D85001AE50D /* Github API */ = {
 			isa = PBXGroup;
 			children = (
+				A712B7BC135C9A450009B7A7 /* GHFileSystem */,
 				A7D14FC213582E7900E1B980 /* GHCommit */,
 				A7CE1B111345BD7D00169F94 /* Gravatar */,
 				A708952D134A3D98000DD6CE /* GHIssueComment */,
@@ -1264,10 +1325,10 @@
 		A7D41B0B135AFDF500CD3A5C /* GHCommitDiffViewController */ = {
 			isa = PBXGroup;
 			children = (
-				A7D41AC71358B6F500CD3A5C /* GHCommitDiffView.h */,
-				A7D41AC81358B6F500CD3A5C /* GHCommitDiffView.m */,
 				A7D41ACA1358B7D300CD3A5C /* GHCommitDiffViewController.h */,
 				A7D41ACB1358B7D300CD3A5C /* GHCommitDiffViewController.m */,
+				A712B7DF135DDC180009B7A7 /* GHTextView.h */,
+				A712B7E0135DDC180009B7A7 /* GHTextView.m */,
 			);
 			name = GHCommitDiffViewController;
 			sourceTree = "<group>";
@@ -1557,12 +1618,21 @@
 				A7D14FC513582E9500E1B980 /* GHCommit.m in Sources */,
 				A7D14FC81358316200E1B980 /* GHViewCommitViewController.m in Sources */,
 				A7D14FCB135834AB00E1B980 /* GHCommitFileInformation.m in Sources */,
-				A7D41AC91358B6F500CD3A5C /* GHCommitDiffView.m in Sources */,
 				A7D41ACC1358B7D300CD3A5C /* GHCommitDiffViewController.m in Sources */,
 				A7D41AF41359DE4400CD3A5C /* GHPullRequestDiscussion.m in Sources */,
 				A7D41AF71359F8CC00CD3A5C /* GHPullRequestRepositoryInformation.m in Sources */,
 				A7D41AFD135ADA4600CD3A5C /* GHBranch.m in Sources */,
 				A7D41B08135AE71B00CD3A5C /* GHRecentCommitsViewController.m in Sources */,
+				A712B7C0135C9A5D0009B7A7 /* GHFileSystemItem.m in Sources */,
+				A712B7C3135C9ACB0009B7A7 /* GHFile.m in Sources */,
+				A712B7C6135C9AF10009B7A7 /* GHDirectory.m in Sources */,
+				A712B7CA135CB5B40009B7A7 /* GHViewDirectoryViewController.m in Sources */,
+				A712B7CD135CB7510009B7A7 /* GHViewRootDirectoryViewController.m in Sources */,
+				A712B7D0135CBED10009B7A7 /* GHFileMetaData.m in Sources */,
+				A712B7D3135CC0DB0009B7A7 /* GHViewCloudFileViewController.m in Sources */,
+				A712B7D6135CC2130009B7A7 /* UIViewController+GHErrorHandling.m in Sources */,
+				A712B7E1135DDC180009B7A7 /* GHTextView.m in Sources */,
+				A712B7EC135DEF940009B7A7 /* DDProgressView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
