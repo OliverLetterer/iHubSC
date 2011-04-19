@@ -14,6 +14,8 @@
 #define UsernameCellTag 13374
 #define PasswordCellTag 13375
 
+static BOOL _isOneAuthenticationViewControllerActive = NO;
+
 NSString *const GHAuthenticationViewControllerDidAuthenticateUserNotification = @"GHAuthenticationViewControllerDidAuthenticateUserNotification";
 
 @implementation GHAuthenticationViewController
@@ -32,8 +34,6 @@ NSString *const GHAuthenticationViewControllerDidAuthenticateUserNotification = 
     UITableViewCellWithTextField *cell = (UITableViewCellWithTextField *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
     return cell.textField.text;
 }
-
-static BOOL _isOneAuthenticationViewControllerActive = NO;
 
 + (BOOL)isOneAuthenticationViewControllerActive {
     return _isOneAuthenticationViewControllerActive;
@@ -109,6 +109,7 @@ static BOOL _isOneAuthenticationViewControllerActive = NO;
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+    _isOneAuthenticationViewControllerActive = YES;
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -117,6 +118,7 @@ static BOOL _isOneAuthenticationViewControllerActive = NO;
 
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
+    _isOneAuthenticationViewControllerActive = NO;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {

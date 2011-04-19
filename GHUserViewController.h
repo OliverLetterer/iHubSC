@@ -13,7 +13,7 @@
 #import "UIExpandableTableView.h"
 #import "GithubAPI.h"
 
-@interface GHUserViewController : GHTableViewController <GHCreateRepositoryViewControllerDelegate, GHSingleRepositoryViewControllerDelegate> {
+@interface GHUserViewController : GHTableViewController <GHCreateRepositoryViewControllerDelegate, GHSingleRepositoryViewControllerDelegate, UIAlertViewDelegate> {
 @private
     NSString *_username;
     BOOL _isDownloadingUserData;
@@ -43,6 +43,7 @@
 - (id)initWithUsername:(NSString *)username;
 
 - (void)createRepositoryButtonClicked:(UIBarButtonItem *)button;
+- (void)accountButtonClicked:(UIBarButtonItem *)button;
 
 - (void)downloadUserData;
 - (void)downloadRepositories;

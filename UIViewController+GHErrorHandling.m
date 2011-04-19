@@ -7,9 +7,19 @@
 //
 
 #import "UIViewController+GHErrorHandling.h"
-
+#import "GHAuthenticationManager.h"
+#import "GHSettingsHelper.h"
 
 @implementation UIViewController (GHViewControllerErrorhandling)
+
+- (void)invalidadUserData {
+    [GHSettingsHelper setPassword:nil];
+    [GHSettingsHelper setGravatarID:nil];
+    [GHSettingsHelper setUsername:nil];
+    
+    [GHAuthenticationManager sharedInstance].username = nil;
+    [GHAuthenticationManager sharedInstance].password = nil;
+}
 
 - (void)handleError:(NSError *)error {
     if (error != nil) {
@@ -18,13 +28,13 @@
         if (error.code == 3) {
             // authentication needed
             if (![GHAuthenticationViewController isOneAuthenticationViewControllerActive]) {
+                [self invalidadUserData];
                 GHAuthenticationViewController *authViewController = [[[GHAuthenticationViewController alloc] init] autorelease];
                 authViewController.delegate = self;
                 
                 UINavigationController *navController = [[[UINavigationController alloc] initWithRootViewController:authViewController] autorelease];
                 
                 [self presentModalViewController:navController animated:YES];
-                
             }
         } else {
             UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", @"") 

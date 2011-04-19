@@ -103,6 +103,16 @@
     [self presentModalViewController:navController animated:YES];
 }
 
+- (void)accountButtonClicked:(UIBarButtonItem *)button {
+    UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Account", @"") 
+                                                     message:[NSString stringWithFormat:NSLocalizedString(@"You are logged in as: %@", @""), [GHAuthenticationManager sharedInstance].username]
+                                                    delegate:self 
+                                           cancelButtonTitle:NSLocalizedString(@"Cancel", @"") 
+                                           otherButtonTitles:NSLocalizedString(@"Logout", @""), nil]
+                          autorelease];
+    [alert show];
+}
+
 #pragma mark - instance methods
 
 - (void)downloadUserData {
@@ -193,6 +203,12 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    if ([[self.navigationController viewControllers] objectAtIndex:0] == self && [[GHAuthenticationManager sharedInstance].username isEqualToString:self.username]) {
+        self.navigationItem.leftBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Account", @"") 
+                                                                                  style:UIBarButtonItemStyleBordered 
+                                                                                 target:self action:@selector(accountButtonClicked:)]
+                                                 autorelease];
+    }
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -743,6 +759,15 @@
                           withRowAnimation:UITableViewRowAnimationTop];
     
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+#pragma mark - UIAlertViewDelegate
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (buttonIndex == 1) {
+        // Logout clicked
+        [self handleError:[NSError errorWithDomain:@"" code:3 userInfo:nil] ];
+    }
 }
 
 @end

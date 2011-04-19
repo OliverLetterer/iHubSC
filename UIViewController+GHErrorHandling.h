@@ -12,5 +12,6 @@
 @interface UIViewController (GHViewControllerErrorhandling) <GHAuthenticationViewControllerDelegate>
 
 - (void)handleError:(NSError *)error;
+- (void)invalidadUserData;
 
 @end
