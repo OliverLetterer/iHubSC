@@ -38,16 +38,6 @@ support all these events
 GHCommitDiffViewController, GHCloudFileViewController
 - does view gets properly rebuilded on low memory?
 
-GHSingleRepositoryViewController
-- list all branches -> show all files there
-
-GHCloudFileViewController
-- init with a repository, branch and a relative file url
-
-GHViewCommitViewController
-- show added files
-
 ViewControllers for:
-- support oAuth
 - search
 (- gist)
