@@ -26,6 +26,7 @@ support all these events
 [-]: clickable (include in navigation hierarchie)
 
 - cell.selectionStyle = UITableViewCellSelectionStyleNone; if a cell is not selectable
+- image scroll performance
 
 ViewControllers for:
 - search

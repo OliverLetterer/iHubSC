@@ -39,6 +39,9 @@
 		A712B7D6135CC2130009B7A7 /* UIViewController+GHErrorHandling.m in Sources */ = {isa = PBXBuildFile; fileRef = A712B7D5135CC2130009B7A7 /* UIViewController+GHErrorHandling.m */; };
 		A712B7E1135DDC180009B7A7 /* GHTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = A712B7E0135DDC180009B7A7 /* GHTextView.m */; };
 		A712B7EC135DEF940009B7A7 /* DDProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = A712B7EB135DEF920009B7A7 /* DDProgressView.m */; };
+		A712B7F2135EBC990009B7A7 /* GHSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A712B7F1135EBC940009B7A7 /* GHSearchViewController.m */; };
+		A712B7F5135F09D90009B7A7 /* GHSearchRepositoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A712B7F4135F09D10009B7A7 /* GHSearchRepositoryViewController.m */; };
+		A712B7F8135F20BB0009B7A7 /* GHSearchUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A712B7F7135F20B40009B7A7 /* GHSearchUserViewController.m */; };
 		A73AE5A0134EE92900E9EBA4 /* EGORefreshTableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = A73AE59F134EE92900E9EBA4 /* EGORefreshTableHeaderView.m */; };
 		A73AE5A7134EF4F100E9EBA4 /* UITableView+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = A73AE5A6134EF4F100E9EBA4 /* UITableView+Additions.m */; };
 		A73AE5AC134EFDF400E9EBA4 /* 56-feed.png in Resources */ = {isa = PBXBuildFile; fileRef = A73AE5A8134EFDF300E9EBA4 /* 56-feed.png */; };
@@ -225,6 +228,12 @@
 		A712B7E0135DDC180009B7A7 /* GHTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHTextView.m; sourceTree = "<group>"; };
 		A712B7EA135DEF900009B7A7 /* DDProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DDProgressView.h; path = DDProgressView/DDProgressView/DDProgressView.h; sourceTree = "<group>"; };
 		A712B7EB135DEF920009B7A7 /* DDProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DDProgressView.m; path = DDProgressView/DDProgressView/DDProgressView.m; sourceTree = "<group>"; };
+		A712B7F0135EBC8C0009B7A7 /* GHSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHSearchViewController.h; sourceTree = "<group>"; };
+		A712B7F1135EBC940009B7A7 /* GHSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHSearchViewController.m; sourceTree = "<group>"; };
+		A712B7F3135F09C80009B7A7 /* GHSearchRepositoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHSearchRepositoryViewController.h; sourceTree = "<group>"; };
+		A712B7F4135F09D10009B7A7 /* GHSearchRepositoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHSearchRepositoryViewController.m; sourceTree = "<group>"; };
+		A712B7F6135F20B00009B7A7 /* GHSearchUserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHSearchUserViewController.h; sourceTree = "<group>"; };
+		A712B7F7135F20B40009B7A7 /* GHSearchUserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHSearchUserViewController.m; sourceTree = "<group>"; };
 		A73AE59E134EE92900E9EBA4 /* EGORefreshTableHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EGORefreshTableHeaderView.h; sourceTree = "<group>"; };
 		A73AE59F134EE92900E9EBA4 /* EGORefreshTableHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EGORefreshTableHeaderView.m; sourceTree = "<group>"; };
 		A73AE5A5134EF4F100E9EBA4 /* UITableView+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+Additions.h"; sourceTree = "<group>"; };
@@ -912,6 +921,12 @@
 				A7D41B0D135AFE2400CD3A5C /* GHPushPayloadViewController */,
 				A7D41B0C135AFE1300CD3A5C /* GHViewCommitViewController */,
 				A7D41B0B135AFDF500CD3A5C /* GHCommitDiffViewController */,
+				A712B7F0135EBC8C0009B7A7 /* GHSearchViewController.h */,
+				A712B7F1135EBC940009B7A7 /* GHSearchViewController.m */,
+				A712B7F3135F09C80009B7A7 /* GHSearchRepositoryViewController.h */,
+				A712B7F4135F09D10009B7A7 /* GHSearchRepositoryViewController.m */,
+				A712B7F6135F20B00009B7A7 /* GHSearchUserViewController.h */,
+				A712B7F7135F20B40009B7A7 /* GHSearchUserViewController.m */,
 			);
 			name = UserInterface;
 			sourceTree = "<group>";
@@ -1653,6 +1668,9 @@
 				A712B7D6135CC2130009B7A7 /* UIViewController+GHErrorHandling.m in Sources */,
 				A712B7E1135DDC180009B7A7 /* GHTextView.m in Sources */,
 				A712B7EC135DEF940009B7A7 /* DDProgressView.m in Sources */,
+				A712B7F2135EBC990009B7A7 /* GHSearchViewController.m in Sources */,
+				A712B7F5135F09D90009B7A7 /* GHSearchRepositoryViewController.m in Sources */,
+				A712B7F8135F20BB0009B7A7 /* GHSearchUserViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

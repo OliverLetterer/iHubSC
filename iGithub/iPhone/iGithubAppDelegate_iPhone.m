@@ -12,7 +12,7 @@
 
 @implementation iGithubAppDelegate_iPhone
 
-@synthesize tabBarController=_tabBarController, newsFeedViewController=_newsFeedViewController, repositoriesViewController=_repositoriesViewController;
+@synthesize tabBarController=_tabBarController, newsFeedViewController=_newsFeedViewController, repositoriesViewController=_repositoriesViewController, searchViewController=_searchViewController;
 
 - (void)authenticationViewControllerdidAuthenticateUserCallback:(NSNotification *)notification {
     self.repositoriesViewController.username = [GHSettingsHelper username];
@@ -67,6 +67,9 @@
                                                                                   tag:0]
                                                   autorelease];
     [tabBarItems addObject:[[[UINavigationController alloc] initWithRootViewController:self.repositoriesViewController] autorelease] ];
+    
+    self.searchViewController = [[[GHSearchViewController alloc] init] autorelease];
+    [tabBarItems addObject:[[[UINavigationController alloc] initWithRootViewController:self.searchViewController] autorelease] ];
     
     self.tabBarController.viewControllers = tabBarItems;
     

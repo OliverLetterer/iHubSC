@@ -86,4 +86,7 @@
 + (void)followUser:(NSString *)username completionHandler:(void(^)(NSError *error))handler;
 + (void)unfollowUser:(NSString *)username completionHandler:(void(^)(NSError *error))handler;
 
++ (void)searchUsersWithSearchString:(NSString *)searchString 
+                  completionHandler:(void(^)(NSArray *users, NSError *error))handler;
+
 @end

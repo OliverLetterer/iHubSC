@@ -211,6 +211,44 @@
     });
 }
 
++ (void)searchUsersWithSearchString:(NSString *)searchString completionHandler:(void (^)(NSArray *, NSError *))handler {
+    dispatch_async(GHAPIBackgroundQueue(), ^(void) {
+        
+        // http://github.com/api/v2/xml/user/search/chacon
+        
+        NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://github.com/api/v2/json/user/search/%@",
+                                           [searchString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] ] ];
+        
+        NSError *myError = nil;
+        
+        ASIFormDataRequest *request = [ASIFormDataRequest authenticatedFormDataRequestWithURL:URL];
+        [request startSynchronous];
+        
+        myError = [request error];
+        
+        if (!myError) {
+            myError = [NSError errorFromRawDictionary:[[request responseString] objectFromJSONString] ];
+        }
+        
+        dispatch_async(dispatch_get_main_queue(), ^(void) {
+            if (myError) {
+                handler(nil, myError);
+            } else {
+                NSDictionary *dictionary = [[request responseString] objectFromJSONString];
+                
+                NSArray *allUsers = [dictionary objectForKeyOrNilOnNullObject:@"users"];
+                NSMutableArray *users = [NSMutableArray arrayWithCapacity:[allUsers count] ];
+                
+                for (NSDictionary *rawUser in allUsers) {
+                    [users addObject:[[[GHUser alloc] initWithRawDictionary:rawUser] autorelease] ];
+                }
+                
+                handler(users, nil);
+            }
+        });
+    });
+}
+
 - (id)initWithRawUserDictionary:(NSDictionary *)rawDictionary {
     NSDictionary *userDictionary = [rawDictionary objectForKeyOrNilOnNullObject:@"user"];
     if ((self = [self initWithRawDictionary:userDictionary])) {

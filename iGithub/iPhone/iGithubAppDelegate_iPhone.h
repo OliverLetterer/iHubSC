@@ -12,16 +12,19 @@
 #import "iGithubAppDelegate.h"
 #import "GHOwnerNewsFeedViewController.h"
 #import "GHUserViewController.h"
+#import "GHSearchViewController.h"
 
 @interface iGithubAppDelegate_iPhone : iGithubAppDelegate <MFMailComposeViewControllerDelegate> {
     UITabBarController *_tabBarController;
     GHOwnerNewsFeedViewController *_newsFeedViewController;
     GHUserViewController *_repositoriesViewController;
+    GHSearchViewController *_searchViewController;
 }
 
 @property (nonatomic, retain) UITabBarController *tabBarController;
 @property (nonatomic, retain) GHOwnerNewsFeedViewController *newsFeedViewController;
 @property (nonatomic, retain) GHUserViewController *repositoriesViewController;
+@property (nonatomic, retain) GHSearchViewController *searchViewController;
 
 - (void)authenticationViewControllerdidAuthenticateUserCallback:(NSNotification *)notification;
 

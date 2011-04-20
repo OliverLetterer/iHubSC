@@ -96,4 +96,7 @@
                    branch:(NSString *)branch
         completionHandler:(void (^)(GHDirectory *rootDirectory, NSError *error))handler;
 
++ (void)searchRepositoriesWithSearchString:(NSString *)searchString 
+                         completionHandler:(void(^)(NSArray *repos, NSError *error))handler;
+
 @end
