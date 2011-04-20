@@ -91,7 +91,7 @@
         self.secondCommitLabel.frame = secondCommitFrame;
     }
     @catch (NSException *exception) {
-        
+        DLog(@"%@", exception);
     }
 }
 

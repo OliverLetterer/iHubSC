@@ -69,7 +69,9 @@ NSString *GHGravatarImageCacheDirectory() {
         return nil;
     }
     
-    return [UIImage imageWithContentsOfFile:filePath];
+    UIImage *image = [UIImage imageWithContentsOfFile:filePath];
+    [[GHGravatarBackgroundQueue sharedInstance].imagesCache setObject:image forKey:gravatarID];
+    return image;
 }
 
 #pragma mark - Initialization

@@ -25,7 +25,7 @@ support all these events
 [X]: Implemented
 [-]: clickable (include in navigation hierarchie)
 
-- image scroll performance
+- scroll performance
 
 ViewControllers for:
 (- gist)

@@ -20,6 +20,14 @@
     
     if (!myImage) {
         dispatch_async([GHGravatarBackgroundQueue sharedInstance].backgroundQueue, ^(void) {
+            UIImage *myImage = [UIImage cachedImageFromGravatarID:gravatarID];
+            if (myImage) {
+                dispatch_sync(dispatch_get_main_queue(), ^(void) {
+                    handler(myImage, nil, NO);
+                });
+                return;
+            }
+            
             NSError *myError = nil;
             NSURL *imageURL = [NSURL URLWithString:[NSString stringWithFormat:@"http://www.gravatar.com/avatar/%@?s=200", gravatarID]];
             
@@ -33,9 +41,9 @@
             UIImage *theImage = [[[UIImage alloc] initWithData:imageData] autorelease];
             
             if (theImage) {
-                CGSize imageSize = CGSizeMake(64.0 * [UIScreen mainScreen].scale, 64.0 * [UIScreen mainScreen].scale);
+                CGSize imageSize = CGSizeMake(56.0 * [UIScreen mainScreen].scale, 56.0 * [UIScreen mainScreen].scale);
                 
-                [theImage resizedImage:imageSize interpolationQuality:kCGInterpolationHigh];
+                theImage = [theImage resizedImage:imageSize interpolationQuality:kCGInterpolationHigh];
                 [GHGravatarImageCache cacheGravatarImage:theImage forGravatarID:gravatarID];
             }
             
