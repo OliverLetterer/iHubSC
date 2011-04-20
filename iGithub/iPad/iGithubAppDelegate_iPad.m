@@ -1,18 +1,18 @@
+////
+////  iGithubAppDelegate_iPad.m
+////  iGithub
+////
+////  Created by Oliver Letterer on 29.03.11.
+////  Copyright 2011 Home. All rights reserved.
+////
 //
-//  iGithubAppDelegate_iPad.m
-//  iGithub
+//#import "iGithubAppDelegate_iPad.h"
 //
-//  Created by Oliver Letterer on 29.03.11.
-//  Copyright 2011 Home. All rights reserved.
+//@implementation iGithubAppDelegate_iPad
 //
-
-#import "iGithubAppDelegate_iPad.h"
-
-@implementation iGithubAppDelegate_iPad
-
-- (void)dealloc
-{
-	[super dealloc];
-}
-
-@end
+//- (void)dealloc
+//{
+//	[super dealloc];
+//}
+//
+//@end
