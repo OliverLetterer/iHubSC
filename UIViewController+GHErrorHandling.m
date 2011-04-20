@@ -25,6 +25,17 @@
     if (error != nil) {
         DLog(@"%@", error);
         
+        if (![GHAuthenticationManager sharedInstance].username || [[GHAuthenticationManager sharedInstance].username isEqualToString:@""]) {
+            [self invalidadUserData];
+            GHAuthenticationViewController *authViewController = [[[GHAuthenticationViewController alloc] init] autorelease];
+            authViewController.delegate = self;
+            
+            UINavigationController *navController = [[[UINavigationController alloc] initWithRootViewController:authViewController] autorelease];
+            
+            [self presentModalViewController:navController animated:YES];
+            return;
+        }
+        
         if (error.code == 3) {
             // authentication needed
             if (![GHAuthenticationViewController isOneAuthenticationViewControllerActive]) {
