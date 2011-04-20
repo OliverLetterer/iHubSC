@@ -57,42 +57,35 @@
 }
 
 - (void)layoutSubviews {
-#warning remove these @try-@catch structure, we currently need it because of an CALayerInvalidGeometry exception (CALayer position contains NaN: [nan 57])    
+    [super layoutSubviews];
     
-    @try {
-        [super layoutSubviews];
-        
-        CGFloat commitHeight = 0.0;
-        
-        // update the first commit label
-        CGSize firstCommitSize = [self.firstCommitLabel.text sizeWithFont:[GHPushFeedItemTableViewCell commitFont] 
-                                                        constrainedToSize:CGSizeMake(222.0f, MAXFLOAT)
-                                                            lineBreakMode:UILineBreakModeWordWrap];
-        if (firstCommitSize.height > [GHPushFeedItemTableViewCell maxCommitHeight]) {
-            firstCommitSize.height = [GHPushFeedItemTableViewCell maxCommitHeight];
-        }
-        commitHeight += firstCommitSize.height;
-        CGRect firstCommitFrame = self.firstCommitLabel.frame;
-        firstCommitFrame.size = firstCommitSize;
-        self.firstCommitLabel.frame = firstCommitFrame;
-        
-        // update the second commit label
-        CGRect secondCommitFrame = self.secondCommitLabel.frame;
-        CGSize secondCommitSize = [self.secondCommitLabel.text sizeWithFont:[GHPushFeedItemTableViewCell commitFont] 
-                                                          constrainedToSize:CGSizeMake(222.0f, MAXFLOAT)
-                                                              lineBreakMode:UILineBreakModeWordWrap];
-        if (secondCommitSize.height > [GHPushFeedItemTableViewCell maxCommitHeight]) {
-            secondCommitSize.height = [GHPushFeedItemTableViewCell maxCommitHeight];
-        }
-        commitHeight += secondCommitSize.height;
-        secondCommitFrame.origin.y = self.firstCommitLabel.frame.size.height + self.firstCommitLabel.frame.origin.y + 7.0;
-        commitHeight += 7.0;
-        secondCommitFrame.size = secondCommitSize;
-        self.secondCommitLabel.frame = secondCommitFrame;
+    CGFloat commitHeight = 0.0;
+    
+    // update the first commit label
+    CGSize firstCommitSize = [self.firstCommitLabel.text sizeWithFont:[GHPushFeedItemTableViewCell commitFont] 
+                                                    constrainedToSize:CGSizeMake(222.0f, MAXFLOAT)
+                                                        lineBreakMode:UILineBreakModeWordWrap];
+    if (firstCommitSize.height > [GHPushFeedItemTableViewCell maxCommitHeight]) {
+        firstCommitSize.height = [GHPushFeedItemTableViewCell maxCommitHeight];
     }
-    @catch (NSException *exception) {
-        DLog(@"%@", exception);
+    commitHeight += firstCommitSize.height;
+    CGRect firstCommitFrame = self.firstCommitLabel.frame;
+    firstCommitFrame.size = firstCommitSize;
+    self.firstCommitLabel.frame = firstCommitFrame;
+    
+    // update the second commit label
+    CGRect secondCommitFrame = self.secondCommitLabel.frame;
+    CGSize secondCommitSize = [self.secondCommitLabel.text sizeWithFont:[GHPushFeedItemTableViewCell commitFont] 
+                                                      constrainedToSize:CGSizeMake(222.0f, MAXFLOAT)
+                                                          lineBreakMode:UILineBreakModeWordWrap];
+    if (secondCommitSize.height > [GHPushFeedItemTableViewCell maxCommitHeight]) {
+        secondCommitSize.height = [GHPushFeedItemTableViewCell maxCommitHeight];
     }
+    commitHeight += secondCommitSize.height;
+    secondCommitFrame.origin.y = self.firstCommitLabel.frame.size.height + self.firstCommitLabel.frame.origin.y + 7.0;
+    commitHeight += 7.0;
+    secondCommitFrame.size = secondCommitSize;
+    self.secondCommitLabel.frame = secondCommitFrame;
 }
 
 - (void)prepareForReuse {
