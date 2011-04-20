@@ -42,6 +42,8 @@
 		A712B7F2135EBC990009B7A7 /* GHSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A712B7F1135EBC940009B7A7 /* GHSearchViewController.m */; };
 		A712B7F5135F09D90009B7A7 /* GHSearchRepositoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A712B7F4135F09D10009B7A7 /* GHSearchRepositoryViewController.m */; };
 		A712B7F8135F20BB0009B7A7 /* GHSearchUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A712B7F7135F20B40009B7A7 /* GHSearchUserViewController.m */; };
+		A712B7FC135F33AF0009B7A7 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A712B7FA135F33AF0009B7A7 /* Default@2x.png */; };
+		A712B7FD135F33AF0009B7A7 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = A712B7FB135F33AF0009B7A7 /* Default.png */; };
 		A73AE5A0134EE92900E9EBA4 /* EGORefreshTableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = A73AE59F134EE92900E9EBA4 /* EGORefreshTableHeaderView.m */; };
 		A73AE5A7134EF4F100E9EBA4 /* UITableView+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = A73AE5A6134EF4F100E9EBA4 /* UITableView+Additions.m */; };
 		A73AE5AC134EFDF400E9EBA4 /* 56-feed.png in Resources */ = {isa = PBXBuildFile; fileRef = A73AE5A8134EFDF300E9EBA4 /* 56-feed.png */; };
@@ -234,6 +236,8 @@
 		A712B7F4135F09D10009B7A7 /* GHSearchRepositoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHSearchRepositoryViewController.m; sourceTree = "<group>"; };
 		A712B7F6135F20B00009B7A7 /* GHSearchUserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHSearchUserViewController.h; sourceTree = "<group>"; };
 		A712B7F7135F20B40009B7A7 /* GHSearchUserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHSearchUserViewController.m; sourceTree = "<group>"; };
+		A712B7FA135F33AF0009B7A7 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		A712B7FB135F33AF0009B7A7 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		A73AE59E134EE92900E9EBA4 /* EGORefreshTableHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EGORefreshTableHeaderView.h; sourceTree = "<group>"; };
 		A73AE59F134EE92900E9EBA4 /* EGORefreshTableHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EGORefreshTableHeaderView.m; sourceTree = "<group>"; };
 		A73AE5A5134EF4F100E9EBA4 /* UITableView+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+Additions.h"; sourceTree = "<group>"; };
@@ -1130,6 +1134,8 @@
 		A7BF143713421862001AE50D /* Ressources */ = {
 			isa = PBXGroup;
 			children = (
+				A712B7FA135F33AF0009B7A7 /* Default@2x.png */,
+				A712B7FB135F33AF0009B7A7 /* Default.png */,
 				A7D41B1D135B899100CD3A5C /* Icons */,
 				A76FC9A41352D231004C642E /* 145-persondot.png */,
 				A76FC9A51352D231004C642E /* 145-persondot@2x.png */,
@@ -1540,6 +1546,8 @@
 				A7D41B19135B897B00CD3A5C /* Icon-Small@2x.png in Resources */,
 				A7D41B1A135B897B00CD3A5C /* Icon.png in Resources */,
 				A7D41B1B135B897B00CD3A5C /* Icon@2x.png in Resources */,
+				A712B7FC135F33AF0009B7A7 /* Default@2x.png in Resources */,
+				A712B7FD135F33AF0009B7A7 /* Default.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

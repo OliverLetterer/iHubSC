@@ -50,6 +50,9 @@
     [GHSettingsHelper setGravatarID:@"534296d28e4a7118d2e75e84d04d571e"];
     [GHAuthenticationManager sharedInstance].username = [GHSettingsHelper username];
     [GHAuthenticationManager sharedInstance].password = [GHSettingsHelper password];
+#else
+    [GHAuthenticationManager sharedInstance].username = [GHSettingsHelper username];
+    [GHAuthenticationManager sharedInstance].password = [GHSettingsHelper password];
 #endif
     
     NSMutableArray *tabBarItems = [NSMutableArray array];

@@ -271,6 +271,8 @@ NSString *const GHAuthenticationViewControllerDidAuthenticateUserNotification = 
                                     [GHAuthenticationManager sharedInstance].username = user.login;
                                     [GHAuthenticationManager sharedInstance].password = user.password;
                                     
+                                    [[NSUserDefaults standardUserDefaults] synchronize];
+                                    
                                     [[NSNotificationCenter defaultCenter] postNotificationName:GHAuthenticationViewControllerDidAuthenticateUserNotification 
                                                                                         object:nil];
                                     
