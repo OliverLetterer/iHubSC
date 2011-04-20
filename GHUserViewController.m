@@ -187,12 +187,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    if ([[GHAuthenticationManager sharedInstance].username isEqualToString:self.username]) {
-        self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd 
-                                                                                                target:self 
-                                                                                                action:@selector(createRepositoryButtonClicked:)]
-                                                  autorelease];
-    }
 }
 
 - (void)viewDidUnload {
@@ -203,6 +197,13 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    if ([[GHAuthenticationManager sharedInstance].username isEqualToString:self.username]) {
+        self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd 
+                                                                                                target:self 
+                                                                                                action:@selector(createRepositoryButtonClicked:)]
+                                                  autorelease];
+    }
+    
     if ([[self.navigationController viewControllers] objectAtIndex:0] == self && [[GHAuthenticationManager sharedInstance].username isEqualToString:self.username]) {
         self.navigationItem.leftBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Account", @"") 
                                                                                   style:UIBarButtonItemStyleBordered 
