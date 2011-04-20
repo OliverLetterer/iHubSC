@@ -1,19 +1,19 @@
 support all these events
 
-[X] CommitCommentEvent
+    [-] CommitCommentEvent  - user commented on a commit
 [O] CommitEvent 
     [-] CreateEvent 
-[X] DeleteEvent 
-[X] DownloadEvent 
-    [-] FollowEvent 
-[X] ForkApplyEvent 
-[X] ForkEvent 
-[X] GistEvent 
+    [-] DeleteEvent 
+    [-] DownloadEvent       - when a user adds a download on a repo
+    [-] FollowEvent         - user started following another user
+    [-] ForkApplyEvent 
+    [-] ForkEvent           - user forked another repository
+    [X] GistEvent 
 [O] GitHubEvent 
-[X] GollumEvent 
-[X] IssueCommentEvent
+    [-] GollumEvent         - user created a page in the wiki
+    [-] IssueCommentEvent   - user commented on an issue
     [-] IssuesEvent 
-[X] MemberEvent 
+    [-] MemberEvent         - user added a Member to a repository
     [-] PublicEvent 
     [-] PullRequestEvent 
     [-] PushEvent
@@ -25,9 +25,7 @@ support all these events
 [X]: Implemented
 [-]: clickable (include in navigation hierarchie)
 
-- cell.selectionStyle = UITableViewCellSelectionStyleNone; if a cell is not selectable
 - image scroll performance
 
 ViewControllers for:
-- search
 (- gist)

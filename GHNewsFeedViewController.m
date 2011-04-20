@@ -687,18 +687,53 @@
         GHSingleRepositoryViewController *repoViewController = [[[GHSingleRepositoryViewController alloc] initWithRepositoryString:repo] autorelease];
         [self.navigationController pushViewController:repoViewController animated:YES];
     } else if (item.payload.type == GHPayloadIssueCommentEvent) {
-        [self.tableView deselectRowAtIndexPath:indexPath animated:NO];
+        GHSingleRepositoryViewController *repoViewController = [[[GHSingleRepositoryViewController alloc] initWithRepositoryString:
+                                                                 [NSString stringWithFormat:@"%@/%@", item.repository.owner, item.repository.name] ] autorelease];
+        
+        [self.navigationController pushViewController:repoViewController animated:YES];
         return;
 #warning not supported right now
-        GHIssuesCommentPayload *payload = (GHIssuesCommentPayload *)item.payload;
-        
-        GHViewPullRequestViewController *viewIssueViewController = [[[GHViewPullRequestViewController alloc] initWithRepository:payload.repo issueNumber:payload.commentID] autorelease];
-        [self.navigationController pushViewController:viewIssueViewController animated:YES];
+//        GHIssuesCommentPayload *payload = (GHIssuesCommentPayload *)item.payload;
+//        
+//        GHViewPullRequestViewController *viewIssueViewController = [[[GHViewPullRequestViewController alloc] initWithRepository:payload.repo issueNumber:payload.commentID] autorelease];
+//        [self.navigationController pushViewController:viewIssueViewController animated:YES];
     } else if (item.payload.type == GHPayloadPublicEvent) {
         GHPublicEventPayload *payload = (GHPublicEventPayload *)item.payload;
         
         GHSingleRepositoryViewController *repoViewController = [[[GHSingleRepositoryViewController alloc] initWithRepositoryString:payload.repo] autorelease];
         [self.navigationController pushViewController:repoViewController animated:YES];
+    } else if (item.payload.type == GHPayloadCommitCommentEvent) {
+        GHCommitEventPayload *payload = (GHCommitEventPayload *)item.payload;
+        
+        GHSingleRepositoryViewController *repoViewController = [[[GHSingleRepositoryViewController alloc] initWithRepositoryString:payload.repo] autorelease];
+        [self.navigationController pushViewController:repoViewController animated:YES];
+    } else if (item.payload.type == GHPayloadDeleteEvent) {
+        GHSingleRepositoryViewController *repoViewController = [[[GHSingleRepositoryViewController alloc] initWithRepositoryString:
+                                                                 [NSString stringWithFormat:@"%@/%@", item.repository.owner, item.repository.name] ] autorelease];
+        [self.navigationController pushViewController:repoViewController animated:YES];
+    } else if (item.payload.type == GHPayloadDownloadEvent) {
+        GHSingleRepositoryViewController *repoViewController = [[[GHSingleRepositoryViewController alloc] initWithRepositoryString:
+                                                                 [NSString stringWithFormat:@"%@/%@", item.repository.owner, item.repository.name] ] autorelease];
+        [self.navigationController pushViewController:repoViewController animated:YES];
+    } else if (item.payload.type == GHPayloadForkApplyEvent) {
+        GHSingleRepositoryViewController *repoViewController = [[[GHSingleRepositoryViewController alloc] initWithRepositoryString:
+                                                                 [NSString stringWithFormat:@"%@/%@", item.repository.owner, item.repository.name] ] autorelease];
+        [self.navigationController pushViewController:repoViewController animated:YES];
+    } else if (item.payload.type == GHPayloadGollumEvent) {
+        GHSingleRepositoryViewController *repoViewController = [[[GHSingleRepositoryViewController alloc] initWithRepositoryString:
+                                                                 [NSString stringWithFormat:@"%@/%@", item.repository.owner, item.repository.name] ] autorelease];
+        [self.navigationController pushViewController:repoViewController animated:YES];
+    } else if (item.payload.type == GHPayloadForkEvent) {
+        GHForkEventPayload *payload = (GHForkEventPayload *)item.payload;
+        
+        GHSingleRepositoryViewController *repoViewController = [[[GHSingleRepositoryViewController alloc] initWithRepositoryString:
+                                                                 payload.repo ] autorelease];
+        [self.navigationController pushViewController:repoViewController animated:YES];
+    } else if (item.payload.type == GHPayloadMemberEvent) {
+        GHMemberEventPayload *payload = (GHMemberEventPayload *)item.payload;
+        
+        GHUserViewController *userViewController = [[[GHUserViewController alloc] initWithUsername:payload.member] autorelease];
+        [self.navigationController pushViewController:userViewController animated:YES];
     } else {
         [self.tableView deselectRowAtIndexPath:indexPath animated:NO];
     }

@@ -690,6 +690,19 @@
 			name = GHBranch;
 			sourceTree = "<group>";
 		};
+		A712B7F9135F24C10009B7A7 /* GHSearchViewController's */ = {
+			isa = PBXGroup;
+			children = (
+				A712B7F0135EBC8C0009B7A7 /* GHSearchViewController.h */,
+				A712B7F1135EBC940009B7A7 /* GHSearchViewController.m */,
+				A712B7F3135F09C80009B7A7 /* GHSearchRepositoryViewController.h */,
+				A712B7F4135F09D10009B7A7 /* GHSearchRepositoryViewController.m */,
+				A712B7F6135F20B00009B7A7 /* GHSearchUserViewController.h */,
+				A712B7F7135F20B40009B7A7 /* GHSearchUserViewController.m */,
+			);
+			name = "GHSearchViewController's";
+			sourceTree = "<group>";
+		};
 		A73AE5A4134EF4C900E9EBA4 /* UITableView+Additions */ = {
 			isa = PBXGroup;
 			children = (
@@ -921,12 +934,7 @@
 				A7D41B0D135AFE2400CD3A5C /* GHPushPayloadViewController */,
 				A7D41B0C135AFE1300CD3A5C /* GHViewCommitViewController */,
 				A7D41B0B135AFDF500CD3A5C /* GHCommitDiffViewController */,
-				A712B7F0135EBC8C0009B7A7 /* GHSearchViewController.h */,
-				A712B7F1135EBC940009B7A7 /* GHSearchViewController.m */,
-				A712B7F3135F09C80009B7A7 /* GHSearchRepositoryViewController.h */,
-				A712B7F4135F09D10009B7A7 /* GHSearchRepositoryViewController.m */,
-				A712B7F6135F20B00009B7A7 /* GHSearchUserViewController.h */,
-				A712B7F7135F20B40009B7A7 /* GHSearchUserViewController.m */,
+				A712B7F9135F24C10009B7A7 /* GHSearchViewController's */,
 			);
 			name = UserInterface;
 			sourceTree = "<group>";
