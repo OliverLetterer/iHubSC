@@ -1471,7 +1471,6 @@
 				A7BF13F31342149C001AE50D /* Sources */,
 				A7BF13F41342149C001AE50D /* Frameworks */,
 				A7BF13F51342149C001AE50D /* Resources */,
-				A76FC9A3135248C8004C642E /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -1552,22 +1551,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		A76FC9A3135248C8004C642E /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "export CODESIGN_ALLOCATE=/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/codesign_allocate\nif [ \"${PLATFORM_NAME}\" == \"iphoneos\" ]; then\n/Developer/iphoneentitlements401/gen_entitlements.py \"my.company.${PROJECT_NAME}\" \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/${PROJECT_NAME}.xcent\";\ncodesign -f -s \"iPhone Developer\" --entitlements \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/${PROJECT_NAME}.xcent\" \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/\"\nfi";
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		A7BF13F31342149C001AE50D /* Sources */ = {
@@ -1724,8 +1707,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				CODE_SIGN_IDENTITY = "iPhone Developer: Oliver Letterer (U4JU39Q339)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Oliver Letterer (U4JU39Q339)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Oliver Letterer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Oliver Letterer";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
@@ -1734,8 +1717,8 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
-				PROVISIONING_PROFILE = "50B0AD23-7136-46DC-8A0A-137945BC211B";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "50B0AD23-7136-46DC-8A0A-137945BC211B";
+				PROVISIONING_PROFILE = "456D2B33-2635-4F21-A2F3-DB29A2DFCF55";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "456D2B33-2635-4F21-A2F3-DB29A2DFCF55";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1745,16 +1728,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				CODE_SIGN_IDENTITY = "iPhone Developer: Oliver Letterer (U4JU39Q339)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Oliver Letterer (U4JU39Q339)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Oliver Letterer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
-				PROVISIONING_PROFILE = "50B0AD23-7136-46DC-8A0A-137945BC211B";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "50B0AD23-7136-46DC-8A0A-137945BC211B";
+				PROVISIONING_PROFILE = "456D2B33-2635-4F21-A2F3-DB29A2DFCF55";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
