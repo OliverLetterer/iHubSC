@@ -46,11 +46,11 @@
             
             CFRelease(myFont);
             
-            dispatch_sync(dispatch_get_main_queue(), ^(void) {
-                dispatch_release(tmpQueue);
+            dispatch_async(dispatch_get_main_queue(), ^(void) {
                 _frameSetter = frameSetter;
                 [self.delegate textViewDidParseText:self];
                 [self setNeedsDisplay];
+                dispatch_release(tmpQueue);
             });
         });
     }
