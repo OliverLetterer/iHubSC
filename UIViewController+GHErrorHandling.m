@@ -17,6 +17,8 @@
     [GHSettingsHelper setGravatarID:nil];
     [GHSettingsHelper setUsername:nil];
     
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
     [GHAuthenticationManager sharedInstance].username = nil;
     [GHAuthenticationManager sharedInstance].password = nil;
 }
