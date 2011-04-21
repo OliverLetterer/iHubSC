@@ -37,6 +37,20 @@
     // Release any cached data, images, etc that aren't in use.
 }
 
+#pragma mark - target actions
+
+- (void)actionButtonClicked:(UIBarButtonItem *)sender {
+    UIActionSheet *sheet = [[[UIActionSheet alloc] initWithTitle:[self.webView.request.URL absoluteString]
+                                                        delegate:self 
+                                               cancelButtonTitle:NSLocalizedString(@"Cancel", @"") 
+                                          destructiveButtonTitle:nil 
+                                               otherButtonTitles:NSLocalizedString(@"Launch Safari", @""), nil]
+                            autorelease];
+    sheet.actionSheetStyle = UIActionSheetStyleBlackTranslucent;
+    
+    [sheet showInView:self.tabBarController.view];
+}
+
 #pragma mark - View lifecycle
 
 - (void)loadView {
@@ -51,6 +65,11 @@
     [super viewDidLoad];
     
     [self.webView loadRequest:[NSURLRequest requestWithURL:self.URL] ];
+    
+    self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction 
+                                                                                            target:self 
+                                                                                            action:@selector(actionButtonClicked:)]
+                                              autorelease];
 }
 
 - (void)viewDidUnload {
@@ -100,6 +119,15 @@
                                        otherButtonTitles:nil]
                       autorelease];
     [alert show];
+}
+
+#pragma mark - UIActionSheetDelegate
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (buttonIndex == 0) {
+        // Launch Safari clicked
+        [[UIApplication sharedApplication] openURL:self.webView.request.URL];
+    }
 }
 
 @end

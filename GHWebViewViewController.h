@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 
-@interface GHWebViewViewController : UIViewController <UIWebViewDelegate> {
+@interface GHWebViewViewController : UIViewController <UIWebViewDelegate, UIActionSheetDelegate> {
 @private
     NSURL *_URL;
     UIWebView *_webView;
@@ -19,5 +19,7 @@
 @property (nonatomic, retain) UIWebView *webView;
 
 - (id)initWithURL:(NSURL *)URL;
+
+- (void)actionButtonClicked:(UIBarButtonItem *)sender;
 
 @end
