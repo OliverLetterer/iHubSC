@@ -745,7 +745,7 @@
 - (void)singleRepositoryViewControllerDidDeleteRepository:(GHSingleRepositoryViewController *)singleRepositoryViewController {
     
     NSArray *oldArray = self.lastIndexPathForSingleRepositoryViewController.section == kUITableViewSectionRepositories ? self.repositoriesArray : self.watchedRepositoriesArray;
-    NSUInteger index = self.lastIndexPathForSingleRepositoryViewController.row;
+    NSUInteger index = self.lastIndexPathForSingleRepositoryViewController.row-1;
     
     NSMutableArray *array = [[oldArray mutableCopy] autorelease];
     [array removeObjectAtIndex:index];
