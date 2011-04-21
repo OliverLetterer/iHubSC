@@ -23,6 +23,7 @@
     GHFileMetaData *_metadata;
     NSString *_contentString;
     UIImage *_contentImage;
+    BOOL _isMimeTypeUnkonw;
     
     ASIHTTPRequest *_request;
     
@@ -59,5 +60,6 @@
 - (void)updateViewToShowPlainTextFile;
 - (void)updateViewForImageDownload;
 - (void)updateViewForImageContent;
+- (void)updateViewForUnkownMimeType;
 
 @end

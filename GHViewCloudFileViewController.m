@@ -61,6 +61,9 @@
             self.request.downloadProgressDelegate = self.progressView;
             
             [self.request startAsynchronous];
+        } else {
+            _isMimeTypeUnkonw = YES;
+            [self updateViewForUnkownMimeType];
         }
     }
 }
@@ -162,7 +165,20 @@
         [self updateViewForImageContent];
     } else if (self.request) {
         [self updateViewForImageDownload];
+    } else if (_isMimeTypeUnkonw) {
+        [self updateViewForUnkownMimeType];
     }
+}
+
+- (void)updateViewForUnkownMimeType {
+    if (![self isViewLoaded] || !_isMimeTypeUnkonw) {
+        return;
+    }
+    
+    [self.activityIndicatorView removeFromSuperview];
+    self.activityIndicatorView = nil;
+    
+    self.loadingLabel.text = NSLocalizedString(@"Unable to display MIME-Type", @"");
 }
 
 - (void)updateViewToShowPlainTextFile {
