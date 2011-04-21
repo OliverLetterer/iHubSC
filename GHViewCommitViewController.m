@@ -242,6 +242,7 @@
         GHCommitFileInformation *info = [self.commit.modified objectAtIndex:indexPath.row-1];
         
         GHCommitDiffViewController *diffViewController = [[[GHCommitDiffViewController alloc] initWithDiffString:info.diff] autorelease];
+        diffViewController.title = [info.filename lastPathComponent];
         [self.navigationController pushViewController:diffViewController animated:YES];
     } else if (indexPath.section == 0) {
         NSString *filename = [self.commit.added objectAtIndex:indexPath.row-1];
