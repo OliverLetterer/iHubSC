@@ -31,4 +31,4 @@ ViewControllers for:
 
 
 Features:
-- Network graph for recent activity
+- Network graph for recent activity (see Network API)
