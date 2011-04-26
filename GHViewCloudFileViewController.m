@@ -14,7 +14,7 @@
 @synthesize repository=_repository, tree=_tree, filename=_filename, relativeURL=_relativeURL;
 @synthesize metadata=_metadata, contentString=_contentString, contentImage=_contentImage;
 @synthesize request=_request;
-@synthesize textView=_textView, scrollView=_scrollView, backgroundGradientLayer=_backgroundGradientLayer, loadingLabel=_loadingLabel, activityIndicatorView=_activityIndicatorView, progressView=_progressView, imageView=_imageView;
+@synthesize scrollView=_scrollView, backgroundGradientLayer=_backgroundGradientLayer, loadingLabel=_loadingLabel, activityIndicatorView=_activityIndicatorView, progressView=_progressView, imageView=_imageView;
 
 #pragma mark - Initialization
 
@@ -98,7 +98,6 @@
     [_filename release];
     [_metadata release];
     [_relativeURL release];
-    [_textView release];
     [_scrollView release];
     [_backgroundGradientLayer release];
     [_loadingLabel release];
@@ -186,10 +185,14 @@
         return;
     }
     
-    [self.textView removeFromSuperview];
-    self.loadingLabel.text = NSLocalizedString(@"Parsing ...", @"");
-    self.textView = [[[GHTextView alloc] initWithFrame:CGRectZero text:self.contentString delegate:self] autorelease];
-    [self.scrollView addSubview:self.textView];
+    [self.scrollView removeFromSuperview];
+    self.scrollView = nil;
+    
+    UITextView *textView = [[[UITextView alloc] initWithFrame:self.view.bounds] autorelease];
+    textView.text = self.contentString;
+    textView.editable = NO;
+    textView.font = [UIFont systemFontOfSize:16.0];
+    [self.view addSubview:textView];
 }
 
 - (void)updateViewForImageDownload {
@@ -265,8 +268,6 @@
 - (void)viewDidUnload {
     [super viewDidUnload];
     
-    [_textView release];
-    _textView = nil;
     [_scrollView release];
     _scrollView = nil;
     [_backgroundGradientLayer release];
@@ -301,28 +302,4 @@
     // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
-
-#pragma mark - GHTextViewDelegate
-
-- (void)textViewDidParseText:(GHTextView *)textView {
-    [self.activityIndicatorView removeFromSuperview];
-    self.activityIndicatorView = nil;
-    [self.loadingLabel removeFromSuperview];
-    self.loadingLabel = nil;
-    [self.textView sizeToFit];
-    
-    self.scrollView.contentSize = self.textView.frame.size;
-    self.scrollView.minimumZoomScale = self.scrollView.bounds.size.width / self.textView.frame.size.width;
-}
-
-- (NSAttributedString *)textView:(GHTextView *)textView formattedLineFromText:(NSString *)line {
-    NSMutableAttributedString *string = [[[NSMutableAttributedString alloc] initWithString:line] autorelease];
-    
-    return string;
-}
-
-- (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView {
-    return self.textView ? self.textView : self.imageView;
-}
-
 @end

@@ -90,6 +90,8 @@
 		A76FC9A61352D231004C642E /* 145-persondot.png in Resources */ = {isa = PBXBuildFile; fileRef = A76FC9A41352D231004C642E /* 145-persondot.png */; };
 		A76FC9A71352D231004C642E /* 145-persondot@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A76FC9A51352D231004C642E /* 145-persondot@2x.png */; };
 		A76FC9BE13534755004C642E /* UIExpandableTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = A76FC9BD13534755004C642E /* UIExpandableTableView.m */; };
+		A7A80CB61362BA0800BE70B8 /* GHAdvancedTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = A7A80CB51362BA0800BE70B8 /* GHAdvancedTextView.m */; };
+		A7A80CBA1362BA3900BE70B8 /* GHAdvancedTextViewInternalCoreTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = A7A80CB91362BA3900BE70B8 /* GHAdvancedTextViewInternalCoreTextView.m */; };
 		A7BC6779134CCAF00083F906 /* GHPublicRepositoryIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = A7BC6777134CCAF00083F906 /* GHPublicRepositoryIcon.png */; };
 		A7BC677A134CCAF00083F906 /* GHPublicRepositoryIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A7BC6778134CCAF00083F906 /* GHPublicRepositoryIcon@2x.png */; };
 		A7BC677E134CCD1A0083F906 /* GHPrivateRepositoryIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A7BC677C134CCD1A0083F906 /* GHPrivateRepositoryIcon@2x.png */; };
@@ -210,6 +212,7 @@
 		A708952F134A3DB0000DD6CE /* GHIssueComment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHIssueComment.m; sourceTree = "<group>"; };
 		A7089531134A4122000DD6CE /* GHIssueCommentTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHIssueCommentTableViewCell.h; sourceTree = "<group>"; };
 		A7089532134A4123000DD6CE /* GHIssueCommentTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHIssueCommentTableViewCell.m; sourceTree = "<group>"; };
+		A709F740136733A300B0CDE7 /* Changelog.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Changelog.txt; sourceTree = "<group>"; };
 		A712B7BE135C9A5D0009B7A7 /* GHFileSystemItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHFileSystemItem.h; sourceTree = "<group>"; };
 		A712B7BF135C9A5D0009B7A7 /* GHFileSystemItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHFileSystemItem.m; sourceTree = "<group>"; };
 		A712B7C1135C9ACA0009B7A7 /* GHFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHFile.h; sourceTree = "<group>"; };
@@ -321,6 +324,10 @@
 		A76FC9A51352D231004C642E /* 145-persondot@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "145-persondot@2x.png"; sourceTree = "<group>"; };
 		A76FC9BC13534755004C642E /* UIExpandableTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UIExpandableTableView.h; path = UIExpandableTableView/UIExpandableTableView.h; sourceTree = "<group>"; };
 		A76FC9BD13534755004C642E /* UIExpandableTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UIExpandableTableView.m; path = UIExpandableTableView/UIExpandableTableView.m; sourceTree = "<group>"; };
+		A7A80CB41362BA0800BE70B8 /* GHAdvancedTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHAdvancedTextView.h; sourceTree = "<group>"; };
+		A7A80CB51362BA0800BE70B8 /* GHAdvancedTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHAdvancedTextView.m; sourceTree = "<group>"; };
+		A7A80CB81362BA3900BE70B8 /* GHAdvancedTextViewInternalCoreTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHAdvancedTextViewInternalCoreTextView.h; sourceTree = "<group>"; };
+		A7A80CB91362BA3900BE70B8 /* GHAdvancedTextViewInternalCoreTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHAdvancedTextViewInternalCoreTextView.m; sourceTree = "<group>"; };
 		A7BC6777134CCAF00083F906 /* GHPublicRepositoryIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GHPublicRepositoryIcon.png; sourceTree = "<group>"; };
 		A7BC6778134CCAF00083F906 /* GHPublicRepositoryIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GHPublicRepositoryIcon@2x.png"; sourceTree = "<group>"; };
 		A7BC677C134CCD1A0083F906 /* GHPrivateRepositoryIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GHPrivateRepositoryIcon@2x.png"; sourceTree = "<group>"; };
@@ -1159,6 +1166,7 @@
 				A7089523134A2F23000DD6CE /* UITableViewCellAccessoryDisclosureIndicatorSelected@2x.PNG */,
 				A7089524134A2F23000DD6CE /* UITableViewCellAccessoryDisclosureIndicator@2x.PNG */,
 				A703B94813476FB20014235D /* TODO.txt */,
+				A709F740136733A300B0CDE7 /* Changelog.txt */,
 			);
 			name = Ressources;
 			sourceTree = "<group>";
@@ -1380,6 +1388,10 @@
 				A7D41ACB1358B7D300CD3A5C /* GHCommitDiffViewController.m */,
 				A712B7DF135DDC180009B7A7 /* GHTextView.h */,
 				A712B7E0135DDC180009B7A7 /* GHTextView.m */,
+				A7A80CB41362BA0800BE70B8 /* GHAdvancedTextView.h */,
+				A7A80CB51362BA0800BE70B8 /* GHAdvancedTextView.m */,
+				A7A80CB81362BA3900BE70B8 /* GHAdvancedTextViewInternalCoreTextView.h */,
+				A7A80CB91362BA3900BE70B8 /* GHAdvancedTextViewInternalCoreTextView.m */,
 			);
 			name = GHCommitDiffViewController;
 			sourceTree = "<group>";
@@ -1670,6 +1682,8 @@
 				A712B7F2135EBC990009B7A7 /* GHSearchViewController.m in Sources */,
 				A712B7F5135F09D90009B7A7 /* GHSearchRepositoryViewController.m in Sources */,
 				A712B7F8135F20BB0009B7A7 /* GHSearchUserViewController.m in Sources */,
+				A7A80CB61362BA0800BE70B8 /* GHAdvancedTextView.m in Sources */,
+				A7A80CBA1362BA3900BE70B8 /* GHAdvancedTextViewInternalCoreTextView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1707,8 +1721,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Oliver Letterer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Oliver Letterer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Oliver Letterer (U4JU39Q339)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Oliver Letterer (U4JU39Q339)";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
@@ -1717,8 +1731,8 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
-				PROVISIONING_PROFILE = "456D2B33-2635-4F21-A2F3-DB29A2DFCF55";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "456D2B33-2635-4F21-A2F3-DB29A2DFCF55";
+				PROVISIONING_PROFILE = "11840588-BC61-420A-8EEF-09FD99BFF36B";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "11840588-BC61-420A-8EEF-09FD99BFF36B";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1728,16 +1742,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Oliver Letterer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Oliver Letterer (U4JU39Q339)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Oliver Letterer (U4JU39Q339)";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
-				PROVISIONING_PROFILE = "456D2B33-2635-4F21-A2F3-DB29A2DFCF55";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				PROVISIONING_PROFILE = "11840588-BC61-420A-8EEF-09FD99BFF36B";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "11840588-BC61-420A-8EEF-09FD99BFF36B";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

@@ -1,0 +1,2 @@
+V1.1
+- memory efficient TextView

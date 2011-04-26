@@ -10,10 +10,9 @@
 #import <QuartzCore/QuartzCore.h>
 #import "GithubAPI.h"
 #import "UIViewController+GHErrorHandling.h"
-#import "GHTextView.h"
 #import "DDProgressView.h"
 
-@interface GHViewCloudFileViewController : UIViewController <GHTextViewDelegate, UIScrollViewDelegate, ASIProgressDelegate> {
+@interface GHViewCloudFileViewController : UIViewController <UIScrollViewDelegate, ASIProgressDelegate> {
 @private
     NSString *_repository;
     NSString *_tree;
@@ -27,7 +26,6 @@
     
     ASIHTTPRequest *_request;
     
-    GHTextView *_textView;
     UIScrollView *_scrollView;
     CAGradientLayer *_backgroundGradientLayer;
     UILabel *_loadingLabel;
@@ -47,7 +45,6 @@
 
 @property (nonatomic, retain) ASIHTTPRequest *request;
 
-@property (nonatomic, retain) GHTextView *textView;
 @property (nonatomic, retain) UIScrollView *scrollView;
 @property (nonatomic, retain) CAGradientLayer *backgroundGradientLayer;
 @property (nonatomic, retain) UILabel *loadingLabel;

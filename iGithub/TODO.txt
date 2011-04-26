@@ -28,8 +28,12 @@ support all these events
 ViewControllers for:
 (- gist)
 
-
-
-Features:
-- Network graph for recent activity (see Network API)
+V1.1:
 - Organizations
+
+V1.5
+- ipad Interface
+
+Future Features:
+- Network graph for recent activity (see Network API)
+- You dont have permission to view this content. Would you like to change your user account?
