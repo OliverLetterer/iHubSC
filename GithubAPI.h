@@ -30,6 +30,7 @@
 #import "GHFile.h"
 #import "GHDirectory.h"
 #import "GHFileMetaData.h"
+#import "GHOrganization.h"
 
 #import "GHPayload.h"
 #import "GHIssuePayload.h"

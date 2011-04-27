@@ -29,11 +29,12 @@ ViewControllers for:
 (- gist)
 
 V1.1:
-- Organizations
+- Organizations + Teams
+- You dont have permission to view this content. Would you like to change your user account?
 
 V1.5
 - ipad Interface
 
 Future Features:
 - Network graph for recent activity (see Network API)
-- You dont have permission to view this content. Would you like to change your user account?
+

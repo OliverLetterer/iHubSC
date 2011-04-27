@@ -29,6 +29,8 @@
 		A708952C134A2F83000DD6CE /* UICollapsingAndSpinningTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A708952B134A2F83000DD6CE /* UICollapsingAndSpinningTableViewCell.m */; };
 		A7089530134A3DB0000DD6CE /* GHIssueComment.m in Sources */ = {isa = PBXBuildFile; fileRef = A708952F134A3DB0000DD6CE /* GHIssueComment.m */; };
 		A7089533134A4124000DD6CE /* GHIssueCommentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A7089532134A4123000DD6CE /* GHIssueCommentTableViewCell.m */; };
+		A709F7461367394300B0CDE7 /* GHOrganization.m in Sources */ = {isa = PBXBuildFile; fileRef = A709F7451367394300B0CDE7 /* GHOrganization.m */; };
+		A709F74A136876C500B0CDE7 /* GHOrganizationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A709F749136876C500B0CDE7 /* GHOrganizationViewController.m */; };
 		A712B7C0135C9A5D0009B7A7 /* GHFileSystemItem.m in Sources */ = {isa = PBXBuildFile; fileRef = A712B7BF135C9A5D0009B7A7 /* GHFileSystemItem.m */; };
 		A712B7C3135C9ACB0009B7A7 /* GHFile.m in Sources */ = {isa = PBXBuildFile; fileRef = A712B7C2135C9ACA0009B7A7 /* GHFile.m */; };
 		A712B7C6135C9AF10009B7A7 /* GHDirectory.m in Sources */ = {isa = PBXBuildFile; fileRef = A712B7C5135C9AF10009B7A7 /* GHDirectory.m */; };
@@ -213,6 +215,10 @@
 		A7089531134A4122000DD6CE /* GHIssueCommentTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHIssueCommentTableViewCell.h; sourceTree = "<group>"; };
 		A7089532134A4123000DD6CE /* GHIssueCommentTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHIssueCommentTableViewCell.m; sourceTree = "<group>"; };
 		A709F740136733A300B0CDE7 /* Changelog.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Changelog.txt; sourceTree = "<group>"; };
+		A709F7441367394300B0CDE7 /* GHOrganization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHOrganization.h; sourceTree = "<group>"; };
+		A709F7451367394300B0CDE7 /* GHOrganization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHOrganization.m; sourceTree = "<group>"; };
+		A709F748136876C500B0CDE7 /* GHOrganizationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHOrganizationViewController.h; sourceTree = "<group>"; };
+		A709F749136876C500B0CDE7 /* GHOrganizationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHOrganizationViewController.m; sourceTree = "<group>"; };
 		A712B7BE135C9A5D0009B7A7 /* GHFileSystemItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHFileSystemItem.h; sourceTree = "<group>"; };
 		A712B7BF135C9A5D0009B7A7 /* GHFileSystemItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHFileSystemItem.m; sourceTree = "<group>"; };
 		A712B7C1135C9ACA0009B7A7 /* GHFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHFile.h; sourceTree = "<group>"; };
@@ -646,6 +652,24 @@
 			name = GHIssueComment;
 			sourceTree = "<group>";
 		};
+		A709F7431367392600B0CDE7 /* GHOrganization */ = {
+			isa = PBXGroup;
+			children = (
+				A709F7441367394300B0CDE7 /* GHOrganization.h */,
+				A709F7451367394300B0CDE7 /* GHOrganization.m */,
+			);
+			name = GHOrganization;
+			sourceTree = "<group>";
+		};
+		A709F747136876A500B0CDE7 /* GHOrganizationViewController */ = {
+			isa = PBXGroup;
+			children = (
+				A709F748136876C500B0CDE7 /* GHOrganizationViewController.h */,
+				A709F749136876C500B0CDE7 /* GHOrganizationViewController.m */,
+			);
+			name = GHOrganizationViewController;
+			sourceTree = "<group>";
+		};
 		A712B7BC135C9A450009B7A7 /* GHFileSystem */ = {
 			isa = PBXGroup;
 			children = (
@@ -929,6 +953,7 @@
 		A750573F1343422200514A82 /* UserInterface */ = {
 			isa = PBXGroup;
 			children = (
+				A709F747136876A500B0CDE7 /* GHOrganizationViewController */,
 				A712B7ED135E0B5E0009B7A7 /* DDProgressView */,
 				A712B7C7135CB58C0009B7A7 /* Browse content */,
 				A7D41B09135AFDA400CD3A5C /* GHViewPullRequestViewController */,
@@ -1183,6 +1208,7 @@
 		A7BF146413426D85001AE50D /* Github API */ = {
 			isa = PBXGroup;
 			children = (
+				A709F7431367392600B0CDE7 /* GHOrganization */,
 				A712B7BC135C9A450009B7A7 /* GHFileSystem */,
 				A7D14FC213582E7900E1B980 /* GHCommit */,
 				A7CE1B111345BD7D00169F94 /* Gravatar */,
@@ -1684,6 +1710,8 @@
 				A712B7F8135F20BB0009B7A7 /* GHSearchUserViewController.m in Sources */,
 				A7A80CB61362BA0800BE70B8 /* GHAdvancedTextView.m in Sources */,
 				A7A80CBA1362BA3900BE70B8 /* GHAdvancedTextViewInternalCoreTextView.m in Sources */,
+				A709F7461367394300B0CDE7 /* GHOrganization.m in Sources */,
+				A709F74A136876C500B0CDE7 /* GHOrganizationViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
