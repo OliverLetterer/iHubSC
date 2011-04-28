@@ -14,9 +14,27 @@
 #import "GHFollowEventTableViewCell.h"
 #import "GHViewIssueTableViewController.h"
 
+#define GHOwnerNewsFeedViewControllerDefaultOrganizationNameKey @"GHOwnerNewsFeedViewControllerDefaultOrganizationName"
+
 @implementation GHOwnerNewsFeedViewController
 
-@synthesize segmentControl=_segmentControl;
+@synthesize segmentControl=_segmentControl, organizations=_organizations, defaultOrganizationName=_defaultOrganizationName;
+
+- (void)setDefaultOrganizationName:(NSString *)defaultOrganizationName {
+    [_defaultOrganizationName release];
+    _defaultOrganizationName = [defaultOrganizationName copy];
+    
+    [[NSUserDefaults standardUserDefaults] setObject:_defaultOrganizationName forKey:GHOwnerNewsFeedViewControllerDefaultOrganizationNameKey];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+- (NSString *)defaultOrganizationName {
+    if (!_defaultOrganizationName) {
+        _defaultOrganizationName = [[[NSUserDefaults standardUserDefaults] objectForKey:GHOwnerNewsFeedViewControllerDefaultOrganizationNameKey] copy];
+    }
+    
+    return _defaultOrganizationName;
+}
 
 #pragma mark - Initialization
 
@@ -38,6 +56,9 @@
 
 - (void)dealloc {
     [_segmentControl release];
+    [_organizations release];
+    [_defaultOrganizationName release];
+    
     [super dealloc];
 }
 
@@ -50,39 +71,31 @@
 
 #pragma mark - View lifecycle
 
-/*
- - (void)loadView {
- 
- }
- */
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
+- (void)loadView {
+    [super loadView];
     
     self.segmentControl = [[[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:
                                                                       NSLocalizedString(@"News Feed", @""), 
                                                                       NSLocalizedString(@"My Actions", @""), 
+                                                                      NSLocalizedString(@"Organizations", @""),
                                                                       nil]] 
                            autorelease];
     self.segmentControl.segmentedControlStyle = UISegmentedControlStyleBar;
-    self.segmentControl.selectedSegmentIndex = 0;
     self.navigationItem.titleView = self.segmentControl;
     self.segmentControl.userInteractionEnabled = NO;
     self.segmentControl.alpha = 0.5;
-    [self.segmentControl addTarget:self action:@selector(segmentControlValueChanged:) forControlEvents:UIControlEventValueChanged];
-    
-    if ([GHSettingsHelper isUserAuthenticated]) {
-        [GHNewsFeed privateNewsWithCompletionHandler:^(GHNewsFeed *feed, NSError *error) {
-            if (error) {
-                [self handleError:error];
-            } else {
-                self.newsFeed = feed;
-                self.segmentControl.userInteractionEnabled = YES;
-                self.segmentControl.alpha = 1.0;
-            }
-            [self didReloadData];
-        }];
+    if (self.defaultOrganizationName) {
+        self.segmentControl.selectedSegmentIndex = 2;
+    } else {
+        self.segmentControl.selectedSegmentIndex = 0;
     }
+    [self.segmentControl addTarget:self action:@selector(segmentControlValueChanged:) forControlEvents:UIControlEventValueChanged];
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    [self loadDataBasedOnSegmentControl];
 }
 
 - (void)viewDidUnload {
@@ -115,6 +128,11 @@
 
 #pragma mark - instance methods
 
+- (void)authenticationViewControllerdidAuthenticateUserCallback:(NSNotification *)notification {
+    self.segmentControl.selectedSegmentIndex = 0;
+    [super authenticationViewControllerdidAuthenticateUserCallback:notification];
+}
+
 - (void)reloadData {
     [self loadDataBasedOnSegmentControl];
 }
@@ -145,6 +163,77 @@
                            }
                            [self didReloadData];
                        }];
+    } else if (self.segmentControl.selectedSegmentIndex == 2) {
+        if (self.defaultOrganizationName) {
+            [GHNewsFeed newsFeedForUserNamed:self.defaultOrganizationName completionHandler:^(GHNewsFeed *feed, NSError *error) {
+                if (error) {
+                    [self handleError:error];
+                } else {
+                    self.newsFeed = feed;
+                    self.segmentControl.userInteractionEnabled = YES;
+                    self.segmentControl.alpha = 1.0;
+                }
+                [self didReloadData];
+            }];
+        } else {
+            [GHOrganization organizationsOfUser:[GHSettingsHelper username] 
+                              completionHandler:^(NSArray *organizations, NSError *error) {
+                                  
+                                  self.organizations = organizations;
+                                  
+                                  if (self.organizations.count > 0) {
+                                      UIActionSheet *sheet = [[[UIActionSheet alloc] init] autorelease];
+                                      
+                                      [sheet setTitle:NSLocalizedString(@"Select an Organization", @"")];
+                                      
+                                      for (GHOrganization *organization in organizations) {
+                                          [sheet addButtonWithTitle:organization.login];
+                                      }
+                                      
+                                      [sheet addButtonWithTitle:NSLocalizedString(@"Cancel", @"")];
+                                      sheet.cancelButtonIndex = sheet.numberOfButtons-1;
+                                      
+                                      sheet.actionSheetStyle = UIActionSheetStyleBlackTranslucent;
+                                      
+                                      sheet.delegate = self;
+                                      
+                                      [sheet showInView:self.tabBarController.view];
+                                      
+                                  } else {
+                                      self.segmentControl.selectedSegmentIndex = 0;
+                                      UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Organization Error", @"") 
+                                                                                       message:NSLocalizedString(@"You are not part of any Organization!", @"") 
+                                                                                      delegate:nil 
+                                                                             cancelButtonTitle:NSLocalizedString(@"OK", @"") 
+                                                                             otherButtonTitles:nil]
+                                                            autorelease];
+                                      [alert show];
+                                  }
+                              }];
+        }
+    }
+}
+
+#pragma mark - UIActionSheetDelegate
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (buttonIndex < actionSheet.numberOfButtons - 1) {
+        GHOrganization *organization = [self.organizations objectAtIndex:buttonIndex];
+        
+        self.defaultOrganizationName = organization.login;
+        
+        [GHNewsFeed newsFeedForUserNamed:self.defaultOrganizationName completionHandler:^(GHNewsFeed *feed, NSError *error) {
+            if (error) {
+                [self handleError:error];
+            } else {
+                self.newsFeed = feed;
+                self.segmentControl.userInteractionEnabled = YES;
+                self.segmentControl.alpha = 1.0;
+            }
+            [self didReloadData];
+        }];
+    } else {
+        [self.segmentControl setSelectedSegmentIndex:0];
     }
 }
 
@@ -154,6 +243,7 @@
     self.newsFeed = nil;
     self.segmentControl.userInteractionEnabled = NO;
     self.segmentControl.alpha = 0.5;
+    self.defaultOrganizationName = nil;
     
     [self loadDataBasedOnSegmentControl];
 }

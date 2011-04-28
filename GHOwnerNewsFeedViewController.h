@@ -9,12 +9,18 @@
 #import <UIKit/UIKit.h>
 #import "GHNewsFeedViewController.h"
 
-@interface GHOwnerNewsFeedViewController : GHNewsFeedViewController {
+@interface GHOwnerNewsFeedViewController : GHNewsFeedViewController <UIActionSheetDelegate> {
 @private
     UISegmentedControl *_segmentControl;
+    
+    NSArray *_organizations;
+    
+    NSString *_defaultOrganizationName;
 }
 
 @property (nonatomic, retain) UISegmentedControl *segmentControl;
+@property (nonatomic, retain) NSArray *organizations;
+@property (nonatomic, retain) NSString *defaultOrganizationName;
 
 - (void)segmentControlValueChanged:(UISegmentedControl *)segmentControl;
 - (void)loadDataBasedOnSegmentControl;
