@@ -26,6 +26,7 @@ support all these events
 [-]: clickable (include in navigation hierarchie)
 
 V1.2
+- Add news feed to GHOrganizationViewController
 - Support for Issues 2.0
 - Gist support
 
