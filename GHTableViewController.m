@@ -292,7 +292,16 @@
             // no user is logged in, handle the nice error
             [super handleError:error];
         } else {
-            DLog(@"Now we need to present the alert view");
+            UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Unauthorized", @"") 
+                                                             message:NSLocalizedString(@"You don't have permission do view this content. Would you like to change your Account?", @"") 
+                                                            delegate:nil 
+                                                   cancelButtonTitle:NSLocalizedString(@"No", @"") 
+                                                   otherButtonTitles:NSLocalizedString(@"Yes", @""), nil]
+                                  autorelease];
+            
+            [alert show];
+            
+            self.alertProxy = [[[GHTableViewControllerAlertViewProxy alloc] initWithAlertView:alert delegate:self] autorelease];
         }
     }
 }

@@ -36,9 +36,7 @@
 #pragma mark - UIAlertViewDelegate
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-    if ([self.delegate respondsToSelector:@selector(alertView:clickedButtonAtIndex:)]) {
-        [self.delegate alertView:alertView clickedButtonAtIndex:buttonIndex];
-    }
+    [self.delegate alertViewProxy:self alertView:alertView clickedButtonAtIndex:buttonIndex];
 }
 
 @end

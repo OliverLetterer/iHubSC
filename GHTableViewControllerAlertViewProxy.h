@@ -10,7 +10,10 @@
 
 @class GHTableViewControllerAlertViewProxy;
 
-@protocol GHTableViewControllerAlertViewProxyDelegate <UIAlertViewDelegate>
+@protocol GHTableViewControllerAlertViewProxyDelegate
+
+- (void)alertViewProxy:(GHTableViewControllerAlertViewProxy *)proxy alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex;
+
 @end
 
 

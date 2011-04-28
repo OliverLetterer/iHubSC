@@ -24,8 +24,16 @@
 
 #pragma mark - GHTableViewControllerAlertViewProxyDelegate
 
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-    DLog(@"wow, ive received a button !!!");
+- (void)alertViewProxy:(GHTableViewControllerAlertViewProxy *)proxy 
+             alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    
+    if (buttonIndex == 1) {
+        // user wants to change his account
+        [self invalidadUserData];
+        [self handleError:[NSError errorWithDomain:@"" code:3 userInfo:nil] ];
+    }
+    
+    self.alertProxy = nil;
 }
 
 @end
