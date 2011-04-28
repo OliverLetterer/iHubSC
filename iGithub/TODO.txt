@@ -29,8 +29,12 @@ ViewControllers for:
 (- gist)
 
 V1.1:
-- Organizations + Teams
+- Organization newsfeed (aka switch context)
 - You dont have permission to view this content. Would you like to change your user account?
+
+V1.2
+- Support for Issues 2.0
+- Gist support
 
 V1.5
 - ipad Interface

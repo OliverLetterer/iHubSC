@@ -23,8 +23,6 @@
         self.backgroundColor = [UIColor clearColor];
         self.delegate = delegate;
         
-        DLog(@"%d", self.text.length);
-        
         dispatch_queue_t tmpQueue = dispatch_queue_create("de.olettere.tmpQueue001", NULL);
         dispatch_async(tmpQueue, ^(void) {
             if ([self.text length] > 10000) {

@@ -67,8 +67,6 @@
                     [organizations addObject:[[[GHOrganization alloc] initWithRawDictionary:rawDictionary] autorelease] ];
                 }
                 
-                DLog(@"%@", dictionary);
-                
                 handler(organizations, nil);
             }
         });
@@ -101,8 +99,6 @@
                 NSDictionary *dictionary = [[request responseString] objectFromJSONString];
                 
                 NSDictionary *rawDictionary = [dictionary objectForKeyOrNilOnNullObject:@"organization"];
-                
-                DLog(@"%@", rawDictionary);
                 
                 handler([[[GHOrganization alloc] initWithRawDictionary:rawDictionary] autorelease], nil);
             }
@@ -210,8 +206,6 @@
                 handler(nil, myError);
             } else {
                 NSDictionary *dictionary = [[request responseString] objectFromJSONString];
-                
-                DLog(@"%@", dictionary);
                 
                 NSArray *rawArray = [dictionary objectForKeyOrNilOnNullObject:@"teams"];
                 NSMutableArray *finalArray = [NSMutableArray arrayWithCapacity:rawArray.count];
