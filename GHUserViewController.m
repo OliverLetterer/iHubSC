@@ -814,6 +814,7 @@
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     if (buttonIndex == 1) {
         // Logout clicked
+        [self invalidadUserData];
         [self handleError:[NSError errorWithDomain:@"" code:3 userInfo:nil] ];
     }
 }

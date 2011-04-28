@@ -10,6 +10,7 @@
 #import "GithubAPI.h"
 #import "GHNewsFeedItemTableViewCell.h"
 #import "GHAuthenticationViewController.h"
+#import "GHTableViewController+private.h"
 
 @implementation GHTableViewController
 
@@ -126,6 +127,9 @@
     [_cachedHeightsDictionary release];
     [_refreshHeaderView release];
     [_lastRefreshDate release];
+    _alertProxy.delegate = nil;
+    [_alertProxy release];
+    
     [super dealloc];
 }
 
@@ -277,6 +281,20 @@
 
 - (void)tableView:(UIExpandableTableView *)tableView downloadDataForExpandableSection:(NSInteger)section {
     
+}
+
+#pragma mark - super implementation
+
+- (void)handleError:(NSError *)error {
+    if ([error code] == 3) {
+        // authentication problem
+        if (![GHAuthenticationManager sharedInstance].username) {
+            // no user is logged in, handle the nice error
+            [super handleError:error];
+        } else {
+            DLog(@"Now we need to present the alert view");
+        }
+    }
 }
 
 @end

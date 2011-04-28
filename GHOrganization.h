@@ -51,5 +51,6 @@
 
 - (void)publicRepositoriesWithCompletionHandler:(void(^)(NSArray *repositories, NSError *error))handler;
 - (void)publicMembersWithCompletionHandler:(void(^)(NSArray *members, NSError *error))handler;
+- (void)teamsWithCompletionHandler:(void(^)(NSArray *teams, NSError *error))handler;
 
 @end

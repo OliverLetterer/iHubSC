@@ -1,2 +1,9 @@
 V1.1
 - memory efficient TextView
+- Organizations:
+    - View Organizations that a User is part of.
+    - View Public Repositories and Members.
+    - View Teams (Administration access required)
+    - Delete Teams
+    - View and delete Users of a Team
+    - View and delete repos of a Team

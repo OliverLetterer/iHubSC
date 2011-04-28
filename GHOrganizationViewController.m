@@ -12,16 +12,18 @@
 #import "UICollapsingAndSpinningTableViewCell.h"
 #import "GHSingleRepositoryViewController.h"
 #import "GHUserViewController.h"
+#import "GHTeamViewController.h"
 
 #define kUITableViewSectionInfo 0
 #define kUITableViewSectionPublicRepositories 1
 #define kUITableViewSectionPublicMembers 2
+#define kUITableViewSectionTeams 3
 
 @implementation GHOrganizationViewController
 
 @synthesize organizationLogin=_organizationLogin;
 @synthesize organization=_organization;
-@synthesize publicRepositories=_publicRepositories, publicMembers=_publicMembers;
+@synthesize publicRepositories=_publicRepositories, publicMembers=_publicMembers, teams=_teams;
 
 - (void)setOrganizationLogin:(NSString *)organizationLogin {
     [_organizationLogin release];
@@ -55,6 +57,7 @@
     [_organization release];
     [_publicRepositories release];
     [_publicMembers release];
+    [_teams release];
     
     [super dealloc];
 }
@@ -114,7 +117,7 @@
 #pragma mark - UIExpandableTableViewDatasource
 
 - (BOOL)tableView:(UIExpandableTableView *)tableView canExpandSection:(NSInteger)section {
-    return section == kUITableViewSectionPublicRepositories || section == kUITableViewSectionPublicMembers;
+    return section == kUITableViewSectionPublicRepositories || section == kUITableViewSectionPublicMembers || section == kUITableViewSectionTeams;
 }
 
 - (BOOL)tableView:(UIExpandableTableView *)tableView needsToDownloadDataForExpandableSection:(NSInteger)section {
@@ -122,6 +125,8 @@
         return self.publicRepositories == nil;
     } else if (section == kUITableViewSectionPublicMembers) {
         return self.publicMembers == nil;
+    } else if (section == kUITableViewSectionTeams) {
+        return self.teams == nil;
     }
     return NO;
 }
@@ -139,6 +144,8 @@
         cell.textLabel.text = NSLocalizedString(@"Public Repositories", @"");
     } else if (section == kUITableViewSectionPublicMembers) {
         cell.textLabel.text = NSLocalizedString(@"Public Members", @"");
+    } else if (section == kUITableViewSectionTeams) {
+        cell.textLabel.text = NSLocalizedString(@"Teams", @"");
     }
     
     return cell;
@@ -167,6 +174,26 @@
                 [tableView expandSection:section animated:YES];
             }
         }];
+    } else if (section == kUITableViewSectionTeams) {
+        [self.organization teamsWithCompletionHandler:^(NSArray *teams, NSError *error) {
+            if (error) {
+                [self handleError:error];
+                [tableView cancelDownloadInSection:section];
+            } else {
+                self.teams = [[teams mutableCopy] autorelease];
+                [tableView expandSection:section animated:YES];
+                
+                if (self.teams.count == 0) {
+                    UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Teams", @"") 
+                                                                     message:NSLocalizedString(@"There are no Teams available for this Organization", @"")
+                                                                    delegate:nil 
+                                                           cancelButtonTitle:NSLocalizedString(@"OK", @"") 
+                                                           otherButtonTitles:nil]
+                                          autorelease];
+                    [alert show];
+                }
+            }
+        }];
     }
 }
 
@@ -177,7 +204,7 @@
         return 0;
     }
     // Return the number of sections.
-    return 3;
+    return 4;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -187,6 +214,8 @@
         return self.publicRepositories.count + 1;
     } else if (section == kUITableViewSectionPublicMembers) {
         return self.publicMembers.count + 1;
+    } else if (section == kUITableViewSectionTeams) {
+        return self.teams.count + 1;
     }
     // Return the number of rows in the section.
     return 0;
@@ -281,31 +310,49 @@
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         
         return cell;
+    } else if (indexPath.section == kUITableViewSectionTeams) {
+        NSString *CellIdentifier = @"UITableViewCellWithLinearGradientBackgroundView";
+        
+        UITableViewCellWithLinearGradientBackgroundView *cell = (UITableViewCellWithLinearGradientBackgroundView *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        if (!cell) {
+            cell = [[[UITableViewCellWithLinearGradientBackgroundView alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        }
+        
+        
+        GHTeam *team = [self.teams objectAtIndex:indexPath.row - 1];
+        
+        cell.textLabel.text = team.name;
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        
+        return cell;
     }
     
     return self.dummyCell;
 }
 
-/*
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
     // Return NO if you do not want the specified item to be editable.
-    return YES;
+    return indexPath.section == kUITableViewSectionTeams && indexPath.row > 0;
 }
-*/
 
-/*
 // Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
+        GHTeam *team = [[[self.teams objectAtIndex:indexPath.row - 1] retain] autorelease];
+        
+        [team deleteWithCompletionHandler:^(NSError *error) {
+            if (error) {
+                [self handleError:error];
+                [tableView reloadRowAtIndexPath:indexPath withRowAnimation:UITableViewRowAnimationNone];
+            } else {
+                [self.teams removeObjectAtIndex:indexPath.row - 1];
+                [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+            }
+        }];
+    }
 }
-*/
 
 /*
 // Override to support rearranging the table view.
@@ -354,6 +401,11 @@
         
         GHUserViewController *userViewController = [[[GHUserViewController alloc] initWithUsername:user.login] autorelease];
         [self.navigationController pushViewController:userViewController animated:YES];
+    } else if (indexPath.section == kUITableViewSectionTeams) {
+        GHTeam *team = [self.teams objectAtIndex:indexPath.row - 1];
+        
+        GHTeamViewController *teamViewController = [[[GHTeamViewController alloc] initWithTeam:team] autorelease];
+        [self.navigationController pushViewController:teamViewController animated:YES];
     } else {
         [tableView deselectRowAtIndexPath:indexPath animated:NO];
     }

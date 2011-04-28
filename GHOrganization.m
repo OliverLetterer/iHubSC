@@ -186,6 +186,46 @@
     });
 }
 
+- (void)teamsWithCompletionHandler:(void(^)(NSArray *teams, NSError *error))handler {
+    dispatch_async(GHAPIBackgroundQueue(), ^(void) {
+        
+        // /organizations/:org/teams
+        
+        NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://github.com/api/v2/json/organizations/%@/teams",
+                                           [self.login stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] ] ];
+        
+        NSError *myError = nil;
+        
+        ASIFormDataRequest *request = [ASIFormDataRequest authenticatedFormDataRequestWithURL:URL];
+        [request startSynchronous];
+        
+        myError = [request error];
+        
+        if (!myError) {
+            myError = [NSError errorFromRawDictionary:[[request responseString] objectFromJSONString] ];
+        }
+        
+        dispatch_async(dispatch_get_main_queue(), ^(void) {
+            if (myError) {
+                handler(nil, myError);
+            } else {
+                NSDictionary *dictionary = [[request responseString] objectFromJSONString];
+                
+                DLog(@"%@", dictionary);
+                
+                NSArray *rawArray = [dictionary objectForKeyOrNilOnNullObject:@"teams"];
+                NSMutableArray *finalArray = [NSMutableArray arrayWithCapacity:rawArray.count];
+                
+                for (NSDictionary *rawDictionary in rawArray) {
+                    [finalArray addObject:[[[GHTeam alloc] initWithRawDictionary:rawDictionary] autorelease] ];
+                }
+                
+                handler(finalArray, nil);
+            }
+        });
+    });
+}
+
 #pragma mark - Memory management
 
 - (void)dealloc {
