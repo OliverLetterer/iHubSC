@@ -9,3 +9,6 @@ V1.1
     - View and delete Users of a Team
     - View and delete repos of a Team
     - minor interface improvements
+
+V1.2
+- Add news feed to GHOrganizationViewController

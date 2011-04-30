@@ -13,6 +13,7 @@
 #import "GHSingleRepositoryViewController.h"
 #import "GHUserViewController.h"
 #import "GHTeamViewController.h"
+#import "GHRecentActivityViewController.h"
 
 #define kUITableViewSectionInfo 0
 #define kUITableViewSectionPublicRepositories 1
@@ -209,7 +210,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (section == kUITableViewSectionInfo) {
-        return 4;
+        return 5;
     } else if (section == kUITableViewSectionPublicRepositories) {
         return self.publicRepositories.count + 1;
     } else if (section == kUITableViewSectionPublicMembers) {
@@ -266,6 +267,11 @@
                     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
                     cell.selectionStyle = UITableViewCellSelectionStyleBlue;
                 }
+            } else if (indexPath.row == 4) {
+                cell.textLabel.text = NSLocalizedString(@"Public", @"");
+                cell.detailTextLabel.text = NSLocalizedString(@"Activity", @"");
+                cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+                cell.selectionStyle = UITableViewCellSelectionStyleBlue;
             } else {
                 cell.textLabel.text = NSLocalizedString(@"XXX", @"");
                 cell.detailTextLabel.text = @"-";
@@ -391,6 +397,10 @@
         NSURL *URL = [NSURL URLWithString:self.organization.blog];
         GHWebViewViewController *web = [[[GHWebViewViewController alloc] initWithURL:URL] autorelease];
         [self.navigationController pushViewController:web animated:YES];
+    } else if (indexPath.section == kUITableViewSectionInfo && indexPath.row == 4) {
+        GHRecentActivityViewController *recentViewController = [[[GHRecentActivityViewController alloc] initWithUsername:self.organizationLogin] autorelease];
+        [self.navigationController pushViewController:recentViewController animated:YES];
+        
     } else if (indexPath.section == kUITableViewSectionPublicRepositories) {
         GHRepository *repo = [self.publicRepositories objectAtIndex:indexPath.row-1];
         
