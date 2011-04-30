@@ -193,17 +193,22 @@
 
 - (void)tableView:(UIExpandableTableView *)tableView downloadDataForExpandableSection:(NSInteger)section {
     if (section == kUITableViewSectionIssues) {
-        [GHIssue openedIssuesOnRepository:self.repositoryString 
-                        completionHandler:^(NSArray *issues, NSError *error) {
-                            if (error) {
-                                [tableView cancelDownloadInSection:section];
-                                [self handleError:error];
-                            } else {
-                                self.issuesArray = issues;
-                                [self cacheHeightForIssuesArray];
-                                [tableView expandSection:section animated:YES];
-                            }
-                        }];
+        [GHIssueV3 openedIssuesOnRepository:self.repositoryString 
+                                       page:1
+                          completionHandler:^(NSArray *issues, NSInteger nextPage, NSError *error) {
+                              if (error) {
+                                  _issuesNextPage = 0;
+                                  [tableView cancelDownloadInSection:section];
+                                  [self handleError:error];
+                              } else {
+                                  _issuesNextPage = nextPage;
+                                  self.issuesArray = issues;
+                                  [self cacheHeightForIssuesArray];
+                                  _canDownloadNextIssuePage = NO;
+                                  [tableView expandSection:section animated:YES];
+                                  _canDownloadNextIssuePage = YES;
+                              }
+                          }];
     } else if (section == kUITableViewSectionWatchingUsers) {
         [GHRepository watchingUserOfRepository:self.repositoryString 
                          withCompletionHandler:^(NSArray *watchingUsers, NSError *error) {
@@ -435,17 +440,17 @@
                 cell = [[[GHIssueTitleTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
             }
             
-            GHRawIssue *issue = [self.issuesArray objectAtIndex:indexPath.row - 1];
+            GHIssueV3 *issue = [self.issuesArray objectAtIndex:indexPath.row - 1];
             
             cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Issue %@", @""), issue.number];
             
             [self updateImageViewForCell:cell 
                              atIndexPath:indexPath 
-                          withGravatarID:issue.gravatarID];
+                          withGravatarID:issue.user.gravatarID];
             
-            NSDate *date = issue.creationDate.dateFromGithubAPIDateString;
+            NSDate *date = issue.createdAt.dateFromGithubAPIDateString;
             
-            cell.detailTextLabel.text = [NSString stringWithFormat:@"by %@ %@ (%@ votes)", issue.user, [NSString stringWithFormat:NSLocalizedString(@"%@ ago", @""), date.prettyTimeIntervalSinceNow], issue.votes];
+            cell.detailTextLabel.text = [NSString stringWithFormat:@"by %@ %@", issue.user.login, [NSString stringWithFormat:NSLocalizedString(@"%@ ago", @""), date.prettyTimeIntervalSinceNow]];
             ;
             
             cell.descriptionLabel.text = issue.title;
@@ -618,7 +623,7 @@
         }
     } else if (indexPath.section == kUITableViewSectionIssues) {
         if (indexPath.row > 0 && indexPath.row <= [self.issuesArray count]) {
-            GHRawIssue *issue = [self.issuesArray objectAtIndex:indexPath.row-1];
+            GHIssueV3 *issue = [self.issuesArray objectAtIndex:indexPath.row-1];
             GHViewIssueTableViewController *issueViewController = [[[GHViewIssueTableViewController alloc] 
                                                                     initWithRepository:self.repositoryString 
                                                                     issueNumber:issue.number]
@@ -735,6 +740,23 @@
     }
 }
 
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section == kUITableViewSectionIssues && indexPath.row == [self.issuesArray count] && indexPath.row != 0 && _issuesNextPage > 1 && _canDownloadNextIssuePage) {
+        [GHIssueV3 openedIssuesOnRepository:self.repositoryString page:_issuesNextPage completionHandler:^(NSArray *issues, NSInteger nextPage, NSError *error) {
+            if (error) {
+                [self handleError:error];
+            } else {
+                _issuesNextPage = nextPage;
+                NSMutableArray *mutablCopy = [[self.issuesArray mutableCopy] autorelease];
+                [mutablCopy addObjectsFromArray:issues];
+                self.issuesArray = mutablCopy;
+                [self cacheHeightForIssuesArray];
+                [tableView reloadSections:[NSIndexSet indexSetWithIndex:kUITableViewSectionIssues] withRowAnimation:UITableViewRowAnimationTop];
+            }
+        }];
+    }
+}
+
 #pragma mark - UIAlertViewDelegate
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
@@ -756,7 +778,7 @@
 
 - (void)cacheHeightForIssuesArray {
     NSInteger i = 1;
-    for (GHRawIssue *issue in self.issuesArray) {
+    for (GHIssueV3 *issue in self.issuesArray) {
         [self cacheHeight:[self heightForDescription:issue.title]+50.0f forRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:kUITableViewSectionIssues] ];
         i++;
     }

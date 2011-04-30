@@ -16,6 +16,7 @@
 #import "GHActorAttributes.h"
 #import "GHIssue.h"
 #import "GHRawIssue.h"
+#import "GHIssueV3.h"
 #import "GHTarget.h"
 #import "GHIssueComment.h"
 #import "GHCommit.h"
@@ -32,6 +33,7 @@
 #import "GHFileMetaData.h"
 #import "GHOrganization.h"
 #import "GHTeam.h"
+#import "GHMilestone.h"
 
 #import "GHPayload.h"
 #import "GHIssuePayload.h"

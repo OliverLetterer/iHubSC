@@ -287,6 +287,12 @@
         self.location = [rawDictionary objectForKeyOrNilOnNullObject:@"location"];
         self.company = [rawDictionary objectForKeyOrNilOnNullObject:@"company"];
         self.blog = [rawDictionary objectForKeyOrNilOnNullObject:@"blog"];
+        
+        // API v3
+        if (!self.gravatarID) {
+            NSString *gravatarURL = [rawDictionary objectForKeyOrNilOnNullObject:@"gravatar_url"];
+            self.gravatarID = gravatarURL.gravarID;
+        }
     }
     return self;
 }

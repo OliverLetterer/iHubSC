@@ -1,0 +1,40 @@
+//
+//  GHMilestone.h
+//  iGithub
+//
+//  Created by Oliver Letterer on 30.04.11.
+//  Copyright 2011 Home. All rights reserved.
+//
+
+#import <Foundation/Foundation.h>
+
+@class GHUser;
+
+@interface GHMilestone : NSObject {
+@private
+    NSNumber *_closedIssues;
+    NSString *_createdAt;
+    GHUser *_creator;
+    NSString *_milestoneDescription;
+    NSString *_duoOn;
+    NSNumber *_number;
+    NSNumber *_openIssues;
+    NSString *_state;
+    NSString *_title;
+    NSString *_URL;
+}
+
+@property (nonatomic, copy) NSNumber *closedIssues;
+@property (nonatomic, copy) NSString *createdAt;
+@property (nonatomic, retain) GHUser *creator;
+@property (nonatomic, copy) NSString *milestoneDescription;
+@property (nonatomic, copy) NSString *duoOn;
+@property (nonatomic, copy) NSNumber *number;
+@property (nonatomic, copy) NSNumber *openIssues;
+@property (nonatomic, copy) NSString *state;
+@property (nonatomic, copy) NSString *title;
+@property (nonatomic, copy) NSString *URL;
+
+- (id)initWithRawDictionary:(NSDictionary *)rawDictionay;
+
+@end

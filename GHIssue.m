@@ -307,44 +307,6 @@
     });
 }
 
-+ (void)openedIssuesOnRepository:(NSString *)repository 
-               completionHandler:(void (^)(NSArray *issues, NSError *error))handler {
-    
-    dispatch_async(GHAPIBackgroundQueue(), ^(void) {
-        
-        // issues/list/:user/:repo/open
-        
-        NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://github.com/api/v2/json/issues/list/%@/open",
-                                           [repository stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] ] ];
-        
-        NSError *myError = nil;
-        
-        ASIFormDataRequest *request = [ASIFormDataRequest authenticatedFormDataRequestWithURL:URL];
-        [request startSynchronous];
-        
-        myError = [request error];
-        
-        NSString *jsonString = [request responseString];
-        
-        dispatch_async(dispatch_get_main_queue(), ^(void) {
-            if (myError) {
-                handler(nil, myError);
-            } else {
-                NSDictionary *dictionary = [jsonString objectFromJSONString];
-                NSArray *issues = [dictionary objectForKey:@"issues"];
-                
-                NSMutableArray *issuesArray = [NSMutableArray arrayWithCapacity:[issues count] ];
-                
-                for (NSDictionary *rawDictionary in issues) {
-                    [issuesArray addObject: [[[GHRawIssue alloc] initWithRawDictionary:rawDictionary] autorelease] ];
-                }
-                
-                handler(issuesArray, nil);
-            }
-        });
-    });
-}
-
 + (void)createIssueOnRepository:(NSString *)repository 
                           title:(NSString *)title 
                            body:(NSString *)body 

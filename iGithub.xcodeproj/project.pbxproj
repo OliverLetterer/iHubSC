@@ -100,6 +100,8 @@
 		A76FC9A61352D231004C642E /* 145-persondot.png in Resources */ = {isa = PBXBuildFile; fileRef = A76FC9A41352D231004C642E /* 145-persondot.png */; };
 		A76FC9A71352D231004C642E /* 145-persondot@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A76FC9A51352D231004C642E /* 145-persondot@2x.png */; };
 		A76FC9BE13534755004C642E /* UIExpandableTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = A76FC9BD13534755004C642E /* UIExpandableTableView.m */; };
+		A7837E95136C905200B13B95 /* GHIssueV3.m in Sources */ = {isa = PBXBuildFile; fileRef = A7837E94136C905100B13B95 /* GHIssueV3.m */; };
+		A7837E9A136C93FC00B13B95 /* GHMilestone.m in Sources */ = {isa = PBXBuildFile; fileRef = A7837E99136C93FC00B13B95 /* GHMilestone.m */; };
 		A7A80CB61362BA0800BE70B8 /* GHAdvancedTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = A7A80CB51362BA0800BE70B8 /* GHAdvancedTextView.m */; };
 		A7A80CBA1362BA3900BE70B8 /* GHAdvancedTextViewInternalCoreTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = A7A80CB91362BA3900BE70B8 /* GHAdvancedTextViewInternalCoreTextView.m */; };
 		A7AF97EE1369F19B00EB2D00 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A7AF97EC1369F19B00EB2D00 /* Default@2x.png */; };
@@ -348,6 +350,10 @@
 		A76FC9A51352D231004C642E /* 145-persondot@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "145-persondot@2x.png"; sourceTree = "<group>"; };
 		A76FC9BC13534755004C642E /* UIExpandableTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UIExpandableTableView.h; path = UIExpandableTableView/UIExpandableTableView.h; sourceTree = "<group>"; };
 		A76FC9BD13534755004C642E /* UIExpandableTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UIExpandableTableView.m; path = UIExpandableTableView/UIExpandableTableView.m; sourceTree = "<group>"; };
+		A7837E93136C905100B13B95 /* GHIssueV3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHIssueV3.h; sourceTree = "<group>"; };
+		A7837E94136C905100B13B95 /* GHIssueV3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHIssueV3.m; sourceTree = "<group>"; };
+		A7837E98136C93FC00B13B95 /* GHMilestone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHMilestone.h; sourceTree = "<group>"; };
+		A7837E99136C93FC00B13B95 /* GHMilestone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHMilestone.m; sourceTree = "<group>"; };
 		A7A80CB41362BA0800BE70B8 /* GHAdvancedTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHAdvancedTextView.h; sourceTree = "<group>"; };
 		A7A80CB51362BA0800BE70B8 /* GHAdvancedTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHAdvancedTextView.m; sourceTree = "<group>"; };
 		A7A80CB81362BA3900BE70B8 /* GHAdvancedTextViewInternalCoreTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHAdvancedTextViewInternalCoreTextView.h; sourceTree = "<group>"; };
@@ -787,6 +793,8 @@
 				A7CE1B8913463A6600169F94 /* GHIssue.m */,
 				A73AE6171351B11600E9EBA4 /* GHRawIssue.h */,
 				A73AE6181351B11600E9EBA4 /* GHRawIssue.m */,
+				A7837E93136C905100B13B95 /* GHIssueV3.h */,
+				A7837E94136C905100B13B95 /* GHIssueV3.m */,
 			);
 			name = GHIssue;
 			sourceTree = "<group>";
@@ -1022,6 +1030,15 @@
 			name = UICollapsingTableView;
 			sourceTree = "<group>";
 		};
+		A7837E97136C93E500B13B95 /* GHMilestone */ = {
+			isa = PBXGroup;
+			children = (
+				A7837E98136C93FC00B13B95 /* GHMilestone.h */,
+				A7837E99136C93FC00B13B95 /* GHMilestone.m */,
+			);
+			name = GHMilestone;
+			sourceTree = "<group>";
+		};
 		A7BC6780134CCED40083F906 /* PullToRefreshTableViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -1233,6 +1250,7 @@
 		A7BF146413426D85001AE50D /* Github API */ = {
 			isa = PBXGroup;
 			children = (
+				A7837E97136C93E500B13B95 /* GHMilestone */,
 				A709F7541368A0CD00B0CDE7 /* GHTeam */,
 				A709F7431367392600B0CDE7 /* GHOrganization */,
 				A712B7BC135C9A450009B7A7 /* GHFileSystem */,
@@ -1746,6 +1764,8 @@
 				A709F75313689C9900B0CDE7 /* GHTableViewControllerAlertViewProxy.m in Sources */,
 				A709F7571368A0DC00B0CDE7 /* GHTeam.m in Sources */,
 				A709F75A1368B7E900B0CDE7 /* GHTeamViewController.m in Sources */,
+				A7837E95136C905200B13B95 /* GHIssueV3.m in Sources */,
+				A7837E9A136C93FC00B13B95 /* GHMilestone.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

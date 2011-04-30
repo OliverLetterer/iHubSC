@@ -29,4 +29,18 @@
     return date;
 }
 
+- (NSString *)gravarID {
+    NSRange range = [self rangeOfString:@"/avatar/"];
+    
+    if (range.length > 0) {
+        // found
+        NSUInteger length = 32;
+        NSUInteger location = range.location + range.length;
+        if (location + length <= self.length) {
+            return [self substringWithRange:NSMakeRange(location, length)];
+        }
+    }
+    return nil;
+}
+
 @end

@@ -7,13 +7,21 @@
 //
 
 #import "NSError+GithubAPI.h"
-
+#import "GithubAPI.h"
 
 @implementation NSError (GHGithubAPIAddition)
 
 + (NSError *)errorFromRawDictionary:(NSDictionary *)rawDictionary {
     
-    NSString *errorString = [rawDictionary objectForKey:@"error"];
+    if (![[rawDictionary class] isSubclassOfClass:[NSDictionary class] ]) {
+        return nil;
+    }
+    
+    NSString *errorString = [rawDictionary objectForKeyOrNilOnNullObject:@"error"];
+    
+    if (!errorString) {
+        errorString = [rawDictionary objectForKeyOrNilOnNullObject:@"message"];
+    }
     
     if (errorString) {
         NSMutableDictionary *userInfo = [NSMutableDictionary dictionary];

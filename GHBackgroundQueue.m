@@ -8,6 +8,8 @@
 
 #import "GHBackgroundQueue.h"
 
+#import "GithubAPI.h"
+
 dispatch_queue_t GHAPIBackgroundQueue() {
     return [GHBackgroundQueue sharedInstance].backgroundQueue;
 }
@@ -35,6 +37,40 @@ dispatch_queue_t GHAPIBackgroundQueue() {
 - (void)dealloc {
     
     [super dealloc];
+}
+
+#pragma mark - instance methods
+
+- (void)sendRequestToURL:(NSURL *)URL 
+            setupHandler:(void(^)(ASIFormDataRequest *request))setupHandler 
+       completionHandler:(void(^)(id object, NSError *error, ASIFormDataRequest *request))completionHandler {
+    
+    dispatch_async(self.backgroundQueue, ^(void) {
+        
+        NSError *myError = nil;
+        
+        ASIFormDataRequest *request = [ASIFormDataRequest authenticatedFormDataRequestWithURL:URL];
+        if (setupHandler) {
+            setupHandler(request);
+        }
+        [request startSynchronous];
+        
+        myError = [request error];
+        
+        if (!myError) {
+            myError = [NSError errorFromRawDictionary:[[request responseString] objectFromJSONString] ];
+        }
+        
+        dispatch_async(dispatch_get_main_queue(), ^(void) {
+            if (myError) {
+                completionHandler(nil, myError, request);
+            } else {
+                completionHandler([[request responseString] objectFromJSONString], nil, request);
+            }
+        });
+        
+    });
+    
 }
 
 @end

@@ -29,6 +29,8 @@
     GHRepository *_repository;
     
     NSArray *_issuesArray;
+    NSInteger _issuesNextPage;
+    BOOL _canDownloadNextIssuePage;
     
     NSMutableArray *_watchedUsersArray;
     

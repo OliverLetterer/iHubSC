@@ -303,6 +303,8 @@
             
             self.alertProxy = [[[GHTableViewControllerAlertViewProxy alloc] initWithAlertView:alert delegate:self] autorelease];
         }
+    } else {
+        [super handleError:error];
     }
 }
 

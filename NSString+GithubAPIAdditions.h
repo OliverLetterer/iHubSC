@@ -12,5 +12,6 @@
 @interface NSString (GHAPIDateFormatting)
 
 @property (nonatomic, readonly) NSDate *dateFromGithubAPIDateString;
+@property (nonatomic, readonly) NSString *gravarID;
 
 @end
