@@ -10,6 +10,7 @@
 #import "GithubAPI.h"
 #import "GHNewsFeedItemTableViewCell.h"
 #import "GHAuthenticationViewController.h"
+#import "GHTableViewController+private.h"
 
 @implementation GHTableViewController
 
@@ -126,6 +127,9 @@
     [_cachedHeightsDictionary release];
     [_refreshHeaderView release];
     [_lastRefreshDate release];
+    _alertProxy.delegate = nil;
+    [_alertProxy release];
+    
     [super dealloc];
 }
 
@@ -277,6 +281,29 @@
 
 - (void)tableView:(UIExpandableTableView *)tableView downloadDataForExpandableSection:(NSInteger)section {
     
+}
+
+#pragma mark - super implementation
+
+- (void)handleError:(NSError *)error {
+    if ([error code] == 3) {
+        // authentication problem
+        if (![GHAuthenticationManager sharedInstance].username) {
+            // no user is logged in, handle the nice error
+            [super handleError:error];
+        } else {
+            UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Unauthorized", @"") 
+                                                             message:NSLocalizedString(@"You don't have permission do view this content. Would you like to change your Account?", @"") 
+                                                            delegate:nil 
+                                                   cancelButtonTitle:NSLocalizedString(@"No", @"") 
+                                                   otherButtonTitles:NSLocalizedString(@"Yes", @""), nil]
+                                  autorelease];
+            
+            [alert show];
+            
+            self.alertProxy = [[[GHTableViewControllerAlertViewProxy alloc] initWithAlertView:alert delegate:self] autorelease];
+        }
+    }
 }
 
 @end

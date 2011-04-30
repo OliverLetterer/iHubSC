@@ -29,6 +29,12 @@
 		A708952C134A2F83000DD6CE /* UICollapsingAndSpinningTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A708952B134A2F83000DD6CE /* UICollapsingAndSpinningTableViewCell.m */; };
 		A7089530134A3DB0000DD6CE /* GHIssueComment.m in Sources */ = {isa = PBXBuildFile; fileRef = A708952F134A3DB0000DD6CE /* GHIssueComment.m */; };
 		A7089533134A4124000DD6CE /* GHIssueCommentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A7089532134A4123000DD6CE /* GHIssueCommentTableViewCell.m */; };
+		A709F7461367394300B0CDE7 /* GHOrganization.m in Sources */ = {isa = PBXBuildFile; fileRef = A709F7451367394300B0CDE7 /* GHOrganization.m */; };
+		A709F74A136876C500B0CDE7 /* GHOrganizationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A709F749136876C500B0CDE7 /* GHOrganizationViewController.m */; };
+		A709F74D13689C3900B0CDE7 /* GHTableViewController+private.m in Sources */ = {isa = PBXBuildFile; fileRef = A709F74C13689C3900B0CDE7 /* GHTableViewController+private.m */; };
+		A709F75313689C9900B0CDE7 /* GHTableViewControllerAlertViewProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = A709F75213689C9800B0CDE7 /* GHTableViewControllerAlertViewProxy.m */; };
+		A709F7571368A0DC00B0CDE7 /* GHTeam.m in Sources */ = {isa = PBXBuildFile; fileRef = A709F7561368A0DC00B0CDE7 /* GHTeam.m */; };
+		A709F75A1368B7E900B0CDE7 /* GHTeamViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A709F7591368B7E800B0CDE7 /* GHTeamViewController.m */; };
 		A712B7C0135C9A5D0009B7A7 /* GHFileSystemItem.m in Sources */ = {isa = PBXBuildFile; fileRef = A712B7BF135C9A5D0009B7A7 /* GHFileSystemItem.m */; };
 		A712B7C3135C9ACB0009B7A7 /* GHFile.m in Sources */ = {isa = PBXBuildFile; fileRef = A712B7C2135C9ACA0009B7A7 /* GHFile.m */; };
 		A712B7C6135C9AF10009B7A7 /* GHDirectory.m in Sources */ = {isa = PBXBuildFile; fileRef = A712B7C5135C9AF10009B7A7 /* GHDirectory.m */; };
@@ -42,8 +48,12 @@
 		A712B7F2135EBC990009B7A7 /* GHSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A712B7F1135EBC940009B7A7 /* GHSearchViewController.m */; };
 		A712B7F5135F09D90009B7A7 /* GHSearchRepositoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A712B7F4135F09D10009B7A7 /* GHSearchRepositoryViewController.m */; };
 		A712B7F8135F20BB0009B7A7 /* GHSearchUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A712B7F7135F20B40009B7A7 /* GHSearchUserViewController.m */; };
-		A712B7FC135F33AF0009B7A7 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A712B7FA135F33AF0009B7A7 /* Default@2x.png */; };
-		A712B7FD135F33AF0009B7A7 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = A712B7FB135F33AF0009B7A7 /* Default.png */; };
+		A7384D72136C005F00DD1BE5 /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = A7384D6B136C005F00DD1BE5 /* Icon-72.png */; };
+		A7384D73136C005F00DD1BE5 /* Icon-Small-50.png in Resources */ = {isa = PBXBuildFile; fileRef = A7384D6C136C005F00DD1BE5 /* Icon-Small-50.png */; };
+		A7384D74136C005F00DD1BE5 /* Icon-Small.png in Resources */ = {isa = PBXBuildFile; fileRef = A7384D6D136C005F00DD1BE5 /* Icon-Small.png */; };
+		A7384D75136C005F00DD1BE5 /* Icon-Small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A7384D6E136C005F00DD1BE5 /* Icon-Small@2x.png */; };
+		A7384D76136C005F00DD1BE5 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = A7384D6F136C005F00DD1BE5 /* Icon.png */; };
+		A7384D77136C005F00DD1BE5 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A7384D70136C005F00DD1BE5 /* Icon@2x.png */; };
 		A73AE5A0134EE92900E9EBA4 /* EGORefreshTableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = A73AE59F134EE92900E9EBA4 /* EGORefreshTableHeaderView.m */; };
 		A73AE5A7134EF4F100E9EBA4 /* UITableView+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = A73AE5A6134EF4F100E9EBA4 /* UITableView+Additions.m */; };
 		A73AE5AC134EFDF400E9EBA4 /* 56-feed.png in Resources */ = {isa = PBXBuildFile; fileRef = A73AE5A8134EFDF300E9EBA4 /* 56-feed.png */; };
@@ -90,6 +100,10 @@
 		A76FC9A61352D231004C642E /* 145-persondot.png in Resources */ = {isa = PBXBuildFile; fileRef = A76FC9A41352D231004C642E /* 145-persondot.png */; };
 		A76FC9A71352D231004C642E /* 145-persondot@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A76FC9A51352D231004C642E /* 145-persondot@2x.png */; };
 		A76FC9BE13534755004C642E /* UIExpandableTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = A76FC9BD13534755004C642E /* UIExpandableTableView.m */; };
+		A7A80CB61362BA0800BE70B8 /* GHAdvancedTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = A7A80CB51362BA0800BE70B8 /* GHAdvancedTextView.m */; };
+		A7A80CBA1362BA3900BE70B8 /* GHAdvancedTextViewInternalCoreTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = A7A80CB91362BA3900BE70B8 /* GHAdvancedTextViewInternalCoreTextView.m */; };
+		A7AF97EE1369F19B00EB2D00 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A7AF97EC1369F19B00EB2D00 /* Default@2x.png */; };
+		A7AF97EF1369F19B00EB2D00 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = A7AF97ED1369F19B00EB2D00 /* Default.png */; };
 		A7BC6779134CCAF00083F906 /* GHPublicRepositoryIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = A7BC6777134CCAF00083F906 /* GHPublicRepositoryIcon.png */; };
 		A7BC677A134CCAF00083F906 /* GHPublicRepositoryIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A7BC6778134CCAF00083F906 /* GHPublicRepositoryIcon@2x.png */; };
 		A7BC677E134CCD1A0083F906 /* GHPrivateRepositoryIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A7BC677C134CCD1A0083F906 /* GHPrivateRepositoryIcon@2x.png */; };
@@ -156,12 +170,6 @@
 		A7D41AF71359F8CC00CD3A5C /* GHPullRequestRepositoryInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = A7D41AF61359F8CC00CD3A5C /* GHPullRequestRepositoryInformation.m */; };
 		A7D41AFD135ADA4600CD3A5C /* GHBranch.m in Sources */ = {isa = PBXBuildFile; fileRef = A7D41AFC135ADA3C00CD3A5C /* GHBranch.m */; };
 		A7D41B08135AE71B00CD3A5C /* GHRecentCommitsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7D41B07135AE71600CD3A5C /* GHRecentCommitsViewController.m */; };
-		A7D41B16135B897B00CD3A5C /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = A7D41B0F135B896800CD3A5C /* Icon-72.png */; };
-		A7D41B17135B897B00CD3A5C /* Icon-Small-50.png in Resources */ = {isa = PBXBuildFile; fileRef = A7D41B10135B896C00CD3A5C /* Icon-Small-50.png */; };
-		A7D41B18135B897B00CD3A5C /* Icon-Small.png in Resources */ = {isa = PBXBuildFile; fileRef = A7D41B11135B897000CD3A5C /* Icon-Small.png */; };
-		A7D41B19135B897B00CD3A5C /* Icon-Small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A7D41B12135B897200CD3A5C /* Icon-Small@2x.png */; };
-		A7D41B1A135B897B00CD3A5C /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = A7D41B13135B897500CD3A5C /* Icon.png */; };
-		A7D41B1B135B897B00CD3A5C /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A7D41B14135B897600CD3A5C /* Icon@2x.png */; };
 		A7F6260F134B3938006487CA /* UITableViewCellWithLinearGradientBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = A7F6260E134B3938006487CA /* UITableViewCellWithLinearGradientBackgroundView.m */; };
 		A7F62616134B7CD2006487CA /* GHNewCommentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A7F62615134B7CD2006487CA /* GHNewCommentTableViewCell.m */; };
 		A7F62622134B88B8006487CA /* NSString+GithubAPIAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = A7F62621134B88B8006487CA /* NSString+GithubAPIAdditions.m */; };
@@ -210,6 +218,19 @@
 		A708952F134A3DB0000DD6CE /* GHIssueComment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHIssueComment.m; sourceTree = "<group>"; };
 		A7089531134A4122000DD6CE /* GHIssueCommentTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHIssueCommentTableViewCell.h; sourceTree = "<group>"; };
 		A7089532134A4123000DD6CE /* GHIssueCommentTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHIssueCommentTableViewCell.m; sourceTree = "<group>"; };
+		A709F740136733A300B0CDE7 /* Changelog.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Changelog.txt; sourceTree = "<group>"; };
+		A709F7441367394300B0CDE7 /* GHOrganization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHOrganization.h; sourceTree = "<group>"; };
+		A709F7451367394300B0CDE7 /* GHOrganization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHOrganization.m; sourceTree = "<group>"; };
+		A709F748136876C500B0CDE7 /* GHOrganizationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHOrganizationViewController.h; sourceTree = "<group>"; };
+		A709F749136876C500B0CDE7 /* GHOrganizationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHOrganizationViewController.m; sourceTree = "<group>"; };
+		A709F74B13689C3900B0CDE7 /* GHTableViewController+private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GHTableViewController+private.h"; sourceTree = "<group>"; };
+		A709F74C13689C3900B0CDE7 /* GHTableViewController+private.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "GHTableViewController+private.m"; sourceTree = "<group>"; };
+		A709F75113689C9800B0CDE7 /* GHTableViewControllerAlertViewProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHTableViewControllerAlertViewProxy.h; sourceTree = "<group>"; };
+		A709F75213689C9800B0CDE7 /* GHTableViewControllerAlertViewProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHTableViewControllerAlertViewProxy.m; sourceTree = "<group>"; };
+		A709F7551368A0DC00B0CDE7 /* GHTeam.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHTeam.h; sourceTree = "<group>"; };
+		A709F7561368A0DC00B0CDE7 /* GHTeam.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHTeam.m; sourceTree = "<group>"; };
+		A709F7581368B7E800B0CDE7 /* GHTeamViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHTeamViewController.h; sourceTree = "<group>"; };
+		A709F7591368B7E800B0CDE7 /* GHTeamViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHTeamViewController.m; sourceTree = "<group>"; };
 		A712B7BE135C9A5D0009B7A7 /* GHFileSystemItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHFileSystemItem.h; sourceTree = "<group>"; };
 		A712B7BF135C9A5D0009B7A7 /* GHFileSystemItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHFileSystemItem.m; sourceTree = "<group>"; };
 		A712B7C1135C9ACA0009B7A7 /* GHFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHFile.h; sourceTree = "<group>"; };
@@ -236,8 +257,14 @@
 		A712B7F4135F09D10009B7A7 /* GHSearchRepositoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHSearchRepositoryViewController.m; sourceTree = "<group>"; };
 		A712B7F6135F20B00009B7A7 /* GHSearchUserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHSearchUserViewController.h; sourceTree = "<group>"; };
 		A712B7F7135F20B40009B7A7 /* GHSearchUserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHSearchUserViewController.m; sourceTree = "<group>"; };
-		A712B7FA135F33AF0009B7A7 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
-		A712B7FB135F33AF0009B7A7 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		A7384D68136BFCE200DD1BE5 /* iHub - Icon Template.psd */ = {isa = PBXFileReference; lastKnownFileType = file; path = "iHub - Icon Template.psd"; sourceTree = "<group>"; };
+		A7384D6B136C005F00DD1BE5 /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72.png"; sourceTree = "<group>"; };
+		A7384D6C136C005F00DD1BE5 /* Icon-Small-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small-50.png"; sourceTree = "<group>"; };
+		A7384D6D136C005F00DD1BE5 /* Icon-Small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small.png"; sourceTree = "<group>"; };
+		A7384D6E136C005F00DD1BE5 /* Icon-Small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small@2x.png"; sourceTree = "<group>"; };
+		A7384D6F136C005F00DD1BE5 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
+		A7384D70136C005F00DD1BE5 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
+		A7384D71136C005F00DD1BE5 /* iTunesArtwork.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iTunesArtwork.png; sourceTree = "<group>"; };
 		A73AE59E134EE92900E9EBA4 /* EGORefreshTableHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EGORefreshTableHeaderView.h; sourceTree = "<group>"; };
 		A73AE59F134EE92900E9EBA4 /* EGORefreshTableHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EGORefreshTableHeaderView.m; sourceTree = "<group>"; };
 		A73AE5A5134EF4F100E9EBA4 /* UITableView+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+Additions.h"; sourceTree = "<group>"; };
@@ -321,6 +348,12 @@
 		A76FC9A51352D231004C642E /* 145-persondot@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "145-persondot@2x.png"; sourceTree = "<group>"; };
 		A76FC9BC13534755004C642E /* UIExpandableTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UIExpandableTableView.h; path = UIExpandableTableView/UIExpandableTableView.h; sourceTree = "<group>"; };
 		A76FC9BD13534755004C642E /* UIExpandableTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UIExpandableTableView.m; path = UIExpandableTableView/UIExpandableTableView.m; sourceTree = "<group>"; };
+		A7A80CB41362BA0800BE70B8 /* GHAdvancedTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHAdvancedTextView.h; sourceTree = "<group>"; };
+		A7A80CB51362BA0800BE70B8 /* GHAdvancedTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHAdvancedTextView.m; sourceTree = "<group>"; };
+		A7A80CB81362BA3900BE70B8 /* GHAdvancedTextViewInternalCoreTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHAdvancedTextViewInternalCoreTextView.h; sourceTree = "<group>"; };
+		A7A80CB91362BA3900BE70B8 /* GHAdvancedTextViewInternalCoreTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHAdvancedTextViewInternalCoreTextView.m; sourceTree = "<group>"; };
+		A7AF97EC1369F19B00EB2D00 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		A7AF97ED1369F19B00EB2D00 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		A7BC6777134CCAF00083F906 /* GHPublicRepositoryIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GHPublicRepositoryIcon.png; sourceTree = "<group>"; };
 		A7BC6778134CCAF00083F906 /* GHPublicRepositoryIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GHPublicRepositoryIcon@2x.png"; sourceTree = "<group>"; };
 		A7BC677C134CCD1A0083F906 /* GHPrivateRepositoryIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GHPrivateRepositoryIcon@2x.png"; sourceTree = "<group>"; };
@@ -436,13 +469,6 @@
 		A7D41AFC135ADA3C00CD3A5C /* GHBranch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHBranch.m; sourceTree = "<group>"; };
 		A7D41B06135AE71300CD3A5C /* GHRecentCommitsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHRecentCommitsViewController.h; sourceTree = "<group>"; };
 		A7D41B07135AE71600CD3A5C /* GHRecentCommitsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHRecentCommitsViewController.m; sourceTree = "<group>"; };
-		A7D41B0F135B896800CD3A5C /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72.png"; sourceTree = "<group>"; };
-		A7D41B10135B896C00CD3A5C /* Icon-Small-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small-50.png"; sourceTree = "<group>"; };
-		A7D41B11135B897000CD3A5C /* Icon-Small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small.png"; sourceTree = "<group>"; };
-		A7D41B12135B897200CD3A5C /* Icon-Small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small@2x.png"; sourceTree = "<group>"; };
-		A7D41B13135B897500CD3A5C /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
-		A7D41B14135B897600CD3A5C /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
-		A7D41B15135B897900CD3A5C /* iTunesArtwork.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iTunesArtwork.png; sourceTree = "<group>"; };
 		A7F6260D134B3938006487CA /* UITableViewCellWithLinearGradientBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UITableViewCellWithLinearGradientBackgroundView.h; sourceTree = "<group>"; };
 		A7F6260E134B3938006487CA /* UITableViewCellWithLinearGradientBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UITableViewCellWithLinearGradientBackgroundView.m; sourceTree = "<group>"; };
 		A7F62614134B7CD1006487CA /* GHNewCommentTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHNewCommentTableViewCell.h; sourceTree = "<group>"; };
@@ -637,6 +663,35 @@
 				A708952F134A3DB0000DD6CE /* GHIssueComment.m */,
 			);
 			name = GHIssueComment;
+			sourceTree = "<group>";
+		};
+		A709F7431367392600B0CDE7 /* GHOrganization */ = {
+			isa = PBXGroup;
+			children = (
+				A709F7441367394300B0CDE7 /* GHOrganization.h */,
+				A709F7451367394300B0CDE7 /* GHOrganization.m */,
+			);
+			name = GHOrganization;
+			sourceTree = "<group>";
+		};
+		A709F747136876A500B0CDE7 /* GHOrganizationViewController */ = {
+			isa = PBXGroup;
+			children = (
+				A709F748136876C500B0CDE7 /* GHOrganizationViewController.h */,
+				A709F749136876C500B0CDE7 /* GHOrganizationViewController.m */,
+				A709F7581368B7E800B0CDE7 /* GHTeamViewController.h */,
+				A709F7591368B7E800B0CDE7 /* GHTeamViewController.m */,
+			);
+			name = GHOrganizationViewController;
+			sourceTree = "<group>";
+		};
+		A709F7541368A0CD00B0CDE7 /* GHTeam */ = {
+			isa = PBXGroup;
+			children = (
+				A709F7551368A0DC00B0CDE7 /* GHTeam.h */,
+				A709F7561368A0DC00B0CDE7 /* GHTeam.m */,
+			);
+			name = GHTeam;
 			sourceTree = "<group>";
 		};
 		A712B7BC135C9A450009B7A7 /* GHFileSystem */ = {
@@ -922,6 +977,7 @@
 		A750573F1343422200514A82 /* UserInterface */ = {
 			isa = PBXGroup;
 			children = (
+				A709F747136876A500B0CDE7 /* GHOrganizationViewController */,
 				A712B7ED135E0B5E0009B7A7 /* DDProgressView */,
 				A712B7C7135CB58C0009B7A7 /* Browse content */,
 				A7D41B09135AFDA400CD3A5C /* GHViewPullRequestViewController */,
@@ -1134,8 +1190,9 @@
 		A7BF143713421862001AE50D /* Ressources */ = {
 			isa = PBXGroup;
 			children = (
-				A712B7FA135F33AF0009B7A7 /* Default@2x.png */,
-				A712B7FB135F33AF0009B7A7 /* Default.png */,
+				A7384D68136BFCE200DD1BE5 /* iHub - Icon Template.psd */,
+				A7AF97EC1369F19B00EB2D00 /* Default@2x.png */,
+				A7AF97ED1369F19B00EB2D00 /* Default.png */,
 				A7D41B1D135B899100CD3A5C /* Icons */,
 				A76FC9A41352D231004C642E /* 145-persondot.png */,
 				A76FC9A51352D231004C642E /* 145-persondot@2x.png */,
@@ -1159,6 +1216,7 @@
 				A7089523134A2F23000DD6CE /* UITableViewCellAccessoryDisclosureIndicatorSelected@2x.PNG */,
 				A7089524134A2F23000DD6CE /* UITableViewCellAccessoryDisclosureIndicator@2x.PNG */,
 				A703B94813476FB20014235D /* TODO.txt */,
+				A709F740136733A300B0CDE7 /* Changelog.txt */,
 			);
 			name = Ressources;
 			sourceTree = "<group>";
@@ -1175,6 +1233,8 @@
 		A7BF146413426D85001AE50D /* Github API */ = {
 			isa = PBXGroup;
 			children = (
+				A709F7541368A0CD00B0CDE7 /* GHTeam */,
+				A709F7431367392600B0CDE7 /* GHOrganization */,
 				A712B7BC135C9A450009B7A7 /* GHFileSystem */,
 				A7D14FC213582E7900E1B980 /* GHCommit */,
 				A7CE1B111345BD7D00169F94 /* Gravatar */,
@@ -1380,6 +1440,10 @@
 				A7D41ACB1358B7D300CD3A5C /* GHCommitDiffViewController.m */,
 				A712B7DF135DDC180009B7A7 /* GHTextView.h */,
 				A712B7E0135DDC180009B7A7 /* GHTextView.m */,
+				A7A80CB41362BA0800BE70B8 /* GHAdvancedTextView.h */,
+				A7A80CB51362BA0800BE70B8 /* GHAdvancedTextView.m */,
+				A7A80CB81362BA3900BE70B8 /* GHAdvancedTextViewInternalCoreTextView.h */,
+				A7A80CB91362BA3900BE70B8 /* GHAdvancedTextViewInternalCoreTextView.m */,
 			);
 			name = GHCommitDiffViewController;
 			sourceTree = "<group>";
@@ -1414,13 +1478,13 @@
 		A7D41B1D135B899100CD3A5C /* Icons */ = {
 			isa = PBXGroup;
 			children = (
-				A7D41B0F135B896800CD3A5C /* Icon-72.png */,
-				A7D41B10135B896C00CD3A5C /* Icon-Small-50.png */,
-				A7D41B11135B897000CD3A5C /* Icon-Small.png */,
-				A7D41B12135B897200CD3A5C /* Icon-Small@2x.png */,
-				A7D41B13135B897500CD3A5C /* Icon.png */,
-				A7D41B14135B897600CD3A5C /* Icon@2x.png */,
-				A7D41B15135B897900CD3A5C /* iTunesArtwork.png */,
+				A7384D6B136C005F00DD1BE5 /* Icon-72.png */,
+				A7384D6C136C005F00DD1BE5 /* Icon-Small-50.png */,
+				A7384D6D136C005F00DD1BE5 /* Icon-Small.png */,
+				A7384D6E136C005F00DD1BE5 /* Icon-Small@2x.png */,
+				A7384D6F136C005F00DD1BE5 /* Icon.png */,
+				A7384D70136C005F00DD1BE5 /* Icon@2x.png */,
+				A7384D71136C005F00DD1BE5 /* iTunesArtwork.png */,
 			);
 			name = Icons;
 			sourceTree = "<group>";
@@ -1448,6 +1512,10 @@
 			children = (
 				A7F62628134C45D5006487CA /* GHTableViewController.h */,
 				A7F62629134C45D5006487CA /* GHTableViewController.m */,
+				A709F74B13689C3900B0CDE7 /* GHTableViewController+private.h */,
+				A709F74C13689C3900B0CDE7 /* GHTableViewController+private.m */,
+				A709F75113689C9800B0CDE7 /* GHTableViewControllerAlertViewProxy.h */,
+				A709F75213689C9800B0CDE7 /* GHTableViewControllerAlertViewProxy.m */,
 			);
 			name = GHTableViewController;
 			sourceTree = "<group>";
@@ -1539,14 +1607,14 @@
 				A76FC9A61352D231004C642E /* 145-persondot.png in Resources */,
 				A76FC9A71352D231004C642E /* 145-persondot@2x.png in Resources */,
 				A7D14F7B1356FACF00E1B980 /* GHCreateIssueTableViewCellContentView.xib in Resources */,
-				A7D41B16135B897B00CD3A5C /* Icon-72.png in Resources */,
-				A7D41B17135B897B00CD3A5C /* Icon-Small-50.png in Resources */,
-				A7D41B18135B897B00CD3A5C /* Icon-Small.png in Resources */,
-				A7D41B19135B897B00CD3A5C /* Icon-Small@2x.png in Resources */,
-				A7D41B1A135B897B00CD3A5C /* Icon.png in Resources */,
-				A7D41B1B135B897B00CD3A5C /* Icon@2x.png in Resources */,
-				A712B7FC135F33AF0009B7A7 /* Default@2x.png in Resources */,
-				A712B7FD135F33AF0009B7A7 /* Default.png in Resources */,
+				A7AF97EE1369F19B00EB2D00 /* Default@2x.png in Resources */,
+				A7AF97EF1369F19B00EB2D00 /* Default.png in Resources */,
+				A7384D72136C005F00DD1BE5 /* Icon-72.png in Resources */,
+				A7384D73136C005F00DD1BE5 /* Icon-Small-50.png in Resources */,
+				A7384D74136C005F00DD1BE5 /* Icon-Small.png in Resources */,
+				A7384D75136C005F00DD1BE5 /* Icon-Small@2x.png in Resources */,
+				A7384D76136C005F00DD1BE5 /* Icon.png in Resources */,
+				A7384D77136C005F00DD1BE5 /* Icon@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1670,6 +1738,14 @@
 				A712B7F2135EBC990009B7A7 /* GHSearchViewController.m in Sources */,
 				A712B7F5135F09D90009B7A7 /* GHSearchRepositoryViewController.m in Sources */,
 				A712B7F8135F20BB0009B7A7 /* GHSearchUserViewController.m in Sources */,
+				A7A80CB61362BA0800BE70B8 /* GHAdvancedTextView.m in Sources */,
+				A7A80CBA1362BA3900BE70B8 /* GHAdvancedTextViewInternalCoreTextView.m in Sources */,
+				A709F7461367394300B0CDE7 /* GHOrganization.m in Sources */,
+				A709F74A136876C500B0CDE7 /* GHOrganizationViewController.m in Sources */,
+				A709F74D13689C3900B0CDE7 /* GHTableViewController+private.m in Sources */,
+				A709F75313689C9900B0CDE7 /* GHTableViewControllerAlertViewProxy.m in Sources */,
+				A709F7571368A0DC00B0CDE7 /* GHTeam.m in Sources */,
+				A709F75A1368B7E900B0CDE7 /* GHTeamViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1729,7 +1805,7 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Oliver Letterer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Oliver Letterer";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -1737,7 +1813,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PROVISIONING_PROFILE = "456D2B33-2635-4F21-A2F3-DB29A2DFCF55";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "456D2B33-2635-4F21-A2F3-DB29A2DFCF55";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

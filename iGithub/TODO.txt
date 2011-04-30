@@ -25,5 +25,20 @@ support all these events
 [X]: Implemented
 [-]: clickable (include in navigation hierarchie)
 
-ViewControllers for:
-(- gist)
+V1.2
+- Add news feed to GHOrganizationViewController
+- Support for Issues 2.0
+- Gist support
+Gist:
+- View Gists of any User
+- Browse Files of a given gist
+- view files
+- view comments and write comment
+- integrate gist in news feed view controller
+
+V1.5
+- ipad Interface
+
+Future Features:
+- Network graph for recent activity (see Network API)
+

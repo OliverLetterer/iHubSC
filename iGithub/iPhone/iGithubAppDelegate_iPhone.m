@@ -47,6 +47,9 @@
 #if DEBUG
     [GHSettingsHelper setUsername:@"docmorelli"];
     [GHSettingsHelper setPassword:@"1337-l0g1n"];
+    
+//    [GHSettingsHelper setUsername:@"OliverLetterer"];
+    
     [GHSettingsHelper setGravatarID:@"534296d28e4a7118d2e75e84d04d571e"];
     [GHAuthenticationManager sharedInstance].username = [GHSettingsHelper username];
     [GHAuthenticationManager sharedInstance].password = [GHSettingsHelper password];

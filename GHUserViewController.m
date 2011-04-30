@@ -14,20 +14,22 @@
 #import "GHWebViewViewController.h"
 #import "NSString+Additions.h"
 #import "GHRecentActivityViewController.h"
+#import "GHOrganizationViewController.h"
 
 #define kUITableViewSectionUserData 0
 #define kUITableViewSectionRepositories 1
 #define kUITableViewSectionWatchedRepositories 2
 #define kUITableViewFollowingUsers 3
 #define kUITableViewFollowedUsers 4
-#define kUITableViewSectionPlan 5
-#define kUITableViewNetwork 6
+#define kUITableViewOrganizations 5
+#define kUITableViewSectionPlan 6
+#define kUITableViewNetwork 7
 
 @implementation GHUserViewController
 
 @synthesize repositoriesArray=_repositoriesArray;
 @synthesize username=_username, user=_user;
-@synthesize watchedRepositoriesArray=_watchedRepositoriesArray, followingUsers=_followingUsers, followedUsers=_followedUsers;
+@synthesize watchedRepositoriesArray=_watchedRepositoriesArray, followingUsers=_followingUsers, followedUsers=_followedUsers, organizations=_organizations;
 @synthesize lastIndexPathForSingleRepositoryViewController=_lastIndexPathForSingleRepositoryViewController;
 
 #pragma mark - setters and getters
@@ -82,6 +84,7 @@
     [_followingUsers release];
     [_followedUsers release];
     [_lastIndexPathForSingleRepositoryViewController release];
+    [_organizations release];
     [_user release];
     [super dealloc];
 }
@@ -149,6 +152,7 @@
     self.watchedRepositoriesArray = nil;
     self.followingUsers = nil;
     self.followedUsers = nil;
+    self.organizations = nil;
     [self.tableView reloadData];
     [self downloadUserData];
 }
@@ -237,7 +241,8 @@
             section == kUITableViewSectionPlan ||
             section == kUITableViewFollowingUsers ||
             section == kUITableViewFollowedUsers ||
-            section == kUITableViewNetwork;
+            section == kUITableViewNetwork || 
+            section == kUITableViewOrganizations;
 }
 
 - (BOOL)tableView:(UIExpandableTableView *)tableView needsToDownloadDataForExpandableSection:(NSInteger)section {
@@ -251,6 +256,8 @@
         return self.followedUsers == nil;
     } else if (section == kUITableViewNetwork) {
         return self.followedUsers == nil;
+    } else if (section == kUITableViewOrganizations) {
+        return self.organizations == nil;
     }
     return NO;
 }
@@ -276,6 +283,8 @@
         cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"User following %@", @""), self.username];
     } else if (section == kUITableViewNetwork) {
         cell.textLabel.text = NSLocalizedString(@"Network", @"");
+    } else if (section == kUITableViewOrganizations) {
+        cell.textLabel.text = NSLocalizedString(@"Organizations", @"");
     }
     
     return cell;
@@ -342,6 +351,27 @@
                                [tableView expandSection:section animated:YES];
                            }
                        }];
+    } else if (section == kUITableViewOrganizations) {
+        [GHOrganization organizationsOfUser:self.username 
+                          completionHandler:^(NSArray *organizations, NSError *error) {
+                              if (error) {
+                                  [self handleError:error];
+                                  [tableView cancelDownloadInSection:section];
+                              } else {
+                                  self.organizations = organizations;
+                                  [tableView expandSection:section animated:YES];
+                                  
+                                  if ([self.organizations count] == 0) {
+                                      UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Organizations", @"") 
+                                                                                       message:[NSString stringWithFormat:NSLocalizedString(@"%@ is not a part of any Organization.", @""), self.username]
+                                                                                      delegate:nil 
+                                                                             cancelButtonTitle:NSLocalizedString(@"OK", @"") 
+                                                                             otherButtonTitles:nil]
+                                                            autorelease];
+                                      [alert show];
+                                  }
+                              }
+                          }];
     }
 }
 
@@ -351,7 +381,7 @@
     if (_isDownloadingUserData || !self.user) {
         return 0;
     }
-    return 7;
+    return 8;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -383,6 +413,8 @@
         } else {
             return 2;
         }
+    } else if (section == kUITableViewOrganizations) {
+        return [self.organizations count] + 1;
     }
     return result;
 }
@@ -405,22 +437,7 @@
             [self updateImageViewForCell:cell atIndexPath:indexPath withGravatarID:self.user.gravatarID];
             
             return cell;
-        } 
-//        else if (indexPath.row == 5) {
-//            // Recent activity
-//            NSString *CellIdentifier = @"UITableViewCellWithLinearGradientBackgroundView";
-//            
-//            UITableViewCellWithLinearGradientBackgroundView *cell = (UITableViewCellWithLinearGradientBackgroundView *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-//            if (!cell) {
-//                cell = [[[UITableViewCellWithLinearGradientBackgroundView alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
-//            }
-//            
-//            cell.textLabel.text = NSLocalizedString(@"Recent activity", @"");
-//            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-//            
-//            return cell;
-//        } 
-        else {
+        } else {
             NSString *CellIdentifier = @"DetailsTableViewCell";
             
             UITableViewCellWithLinearGradientBackgroundView *cell = (UITableViewCellWithLinearGradientBackgroundView *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
@@ -576,6 +593,25 @@
         cell.textLabel.text = self.isFollowingUser ? NSLocalizedString(@"Unfollow", @"") : NSLocalizedString(@"Follow", @"");
         
         return cell;
+    } else if (indexPath.section == kUITableViewOrganizations) {
+        NSString *CellIdentifier = @"GHFeedItemWithDescriptionTableViewCell";
+        
+        GHFeedItemWithDescriptionTableViewCell *cell = (GHFeedItemWithDescriptionTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        if (cell == nil) {
+            cell = [[[GHFeedItemWithDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        }
+        
+        GHOrganization *organization = [self.organizations objectAtIndex:indexPath.row-1];
+        
+        cell.titleLabel.text = organization.name ? organization.name : organization.login;
+        
+        cell.descriptionLabel.text = organization.type;
+        
+        [self updateImageViewForCell:cell atIndexPath:indexPath withGravatarID:organization.gravatarID];
+        
+        // Configure the cell...
+        
+        return cell;
     }
     
     return self.dummyCell;
@@ -704,6 +740,11 @@
                    }
                }];
         }
+    } else if (indexPath.section == kUITableViewOrganizations) {
+        GHOrganization *organization = [self.organizations objectAtIndex:indexPath.row - 1];
+        GHOrganizationViewController *organizationViewController = [[[GHOrganizationViewController alloc] initWithOrganizationLogin:organization.login] autorelease];
+        
+        [self.navigationController pushViewController:organizationViewController animated:YES];
     } else {
         [self.tableView deselectRowAtIndexPath:indexPath animated:NO];
     }
@@ -712,6 +753,12 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == kUITableViewSectionUserData && indexPath.row == 0) {
         return 71.0f;
+    }
+    if (indexPath.section == kUITableViewOrganizations) {
+        if (indexPath.row == 0) {
+            return 44.0f;
+        }
+        return 71.0;
     }
     if (indexPath.section == kUITableViewSectionRepositories) {
         if (indexPath.row == 0) {
@@ -767,6 +814,7 @@
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     if (buttonIndex == 1) {
         // Logout clicked
+        [self invalidadUserData];
         [self handleError:[NSError errorWithDomain:@"" code:3 userInfo:nil] ];
     }
 }

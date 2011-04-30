@@ -22,15 +22,19 @@
         self.attributedString = [[[NSMutableAttributedString alloc] init] autorelease];
         self.backgroundColor = [UIColor clearColor];
         self.delegate = delegate;
-        dispatch_queue_t tmpQueue = dispatch_queue_create("de.olettere.tmpQueue001", NULL);
         
+        dispatch_queue_t tmpQueue = dispatch_queue_create("de.olettere.tmpQueue001", NULL);
         dispatch_async(tmpQueue, ^(void) {
-            [self.text enumerateLinesUsingBlock:^(NSString *line, BOOL *stop) {
-                NSAttributedString *attributesString = [self.delegate textView:self formattedLineFromText:line];
-                [self.attributedString appendAttributedString:attributesString ];
-                
-                [self.attributedString appendAttributedString:[[[NSAttributedString alloc] initWithString:@"\n"] autorelease] ];
-            }];
+            if ([self.text length] > 10000) {
+                self.attributedString = [[[NSMutableAttributedString alloc] initWithString:self.text] autorelease];
+            } else {
+                [self.text enumerateLinesUsingBlock:^(NSString *line, BOOL *stop) {
+                    NSAttributedString *attributesString = [self.delegate textView:self formattedLineFromText:line];
+                    [self.attributedString appendAttributedString:attributesString ];
+                    
+                    [self.attributedString appendAttributedString:[[[NSAttributedString alloc] initWithString:@"\n"] autorelease] ];
+                }];
+            }
             
             CTFontRef myFont = CTFontCreateWithName((CFStringRef)@"Courier", 16.0, NULL);
             
@@ -78,7 +82,7 @@
     
     CGContextSetTextMatrix(context, CGAffineTransformIdentity);
     CGContextTranslateCTM(context, 0, ([self bounds]).size.height );
-	CGContextScaleCTM(context, 1.0, -1.0);
+    CGContextScaleCTM(context, 1.0, -1.0);
     
     CGMutablePathRef path = CGPathCreateMutable();
     CGPathAddRect(path, NULL, self.bounds);

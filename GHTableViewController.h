@@ -12,6 +12,7 @@
 #import "EGORefreshTableHeaderView.h"
 #import "UIExpandableTableView.h"
 #import "UIViewController+GHErrorHandling.h"
+#import "GHTableViewControllerAlertViewProxy.h"
 
 @class GHNewsFeedItemTableViewCell;
 
@@ -30,6 +31,8 @@
     BOOL _pullToReleaseEnabled;
     
     NSDate *_lastRefreshDate;
+    
+    GHTableViewControllerAlertViewProxy *_alertProxy;
 }
 
 @property (nonatomic, retain) UIExpandableTableView *tableView;

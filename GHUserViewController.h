@@ -22,6 +22,7 @@
     NSArray *_repositoriesArray;
     NSArray *_watchedRepositoriesArray;
     NSArray *_followingUsers;
+    NSArray *_organizations;
     NSMutableArray *_followedUsers;
     
     NSIndexPath *_lastIndexPathForSingleRepositoryViewController;
@@ -33,6 +34,7 @@
 @property (nonatomic, copy) NSString *username;
 @property (nonatomic, retain) NSArray *watchedRepositoriesArray;
 @property (nonatomic, retain) NSArray *followingUsers;
+@property (nonatomic, retain) NSArray *organizations;
 @property (nonatomic, retain) NSMutableArray *followedUsers;
 
 @property (nonatomic, readonly) BOOL canFollowUser;
