@@ -1,19 +1,18 @@
-build/
-
-*.mode1
+# xcode noise
 *.mode1v3
-*.mode2v3
-*.perspective
-*.perspectivev3
 *.pbxuser
-*.xcworkspace
-xcuserdata
- 
+*.perspective 
+*.perspectivev3
+*.pyc 
+*~.nib/
+build/*
+
+# Textmate - if you build your xcode projects with it
+*.tm_build_errors
+
+# old skool
 .svn
-CVS
- 
+
+# osx noise
 .DS_Store
-*~.nib
-*.swp
-.DS_Store
-*.swp
+profile
