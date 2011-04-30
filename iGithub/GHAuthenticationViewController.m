@@ -129,7 +129,7 @@ NSString *const GHAuthenticationViewControllerDidAuthenticateUserNotification = 
 #pragma mark - Table view data source
 
 - (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {
-    return NSLocalizedString(@"Please provide your github Username and Password here", @"");
+    return NSLocalizedString(@"Please provide your GitHub Username and Password here", @"");
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
