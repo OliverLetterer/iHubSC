@@ -18,19 +18,21 @@
 #import "GHViewPullRequestViewController.h"
 #import "GHRecentCommitsViewController.h"
 #import "GHViewRootDirectoryViewController.h"
+#import "GHMilestoneTableViewCell.h"
 
 #define kUITableViewSectionUserData         0
 #define kUITableViewSectionIssues           1
-#define kUITableViewSectionWatchingUsers    2
-#define kUITableViewSectionPullRequests     3
-#define kUITableViewSectionRecentCommits    4
-#define kUITableViewSectionBrowseBranches   5
-#define kUITableViewSectionAdministration   6
+#define kUITableViewSectionMilestones       2
+#define kUITableViewSectionWatchingUsers    3
+#define kUITableViewSectionPullRequests     4
+#define kUITableViewSectionRecentCommits    5
+#define kUITableViewSectionBrowseBranches   6
+#define kUITableViewSectionAdministration   7
 
 @implementation GHSingleRepositoryViewController
 
 @synthesize repositoryString=_repositoryString, repository=_repository, issuesArray=_issuesArray, watchedUsersArray=_watchedUsersArray, deleteToken=_deleteToken, delegate=_delegate;
-@synthesize pullRequests=_pullRequests, branches=_branches;
+@synthesize pullRequests=_pullRequests, branches=_branches, milestones=_milestones;
 
 #pragma mark - setters and getters
 
@@ -90,6 +92,7 @@
     [_deleteToken release];
     [_pullRequests release];
     [_branches release];
+    [_milestones release];
     [super dealloc];
 }
 
@@ -159,6 +162,8 @@
         return self.branches == nil;
     } else if (section == kUITableViewSectionBrowseBranches) {
         return self.branches == nil;
+    } else if (section == kUITableViewSectionMilestones) {
+        return self.milestones == nil;
     }
     return NO;
 }
@@ -184,6 +189,8 @@
         cell.textLabel.text = NSLocalizedString(@"Recent Commits", @"");
     } else if (section == kUITableViewSectionBrowseBranches) {
         cell.textLabel.text = NSLocalizedString(@"Browse Content", @"");
+    } else if (section == kUITableViewSectionMilestones) {
+        cell.textLabel.text = NSLocalizedString(@"Milestones", @"");
     }
     
     return cell;
@@ -264,6 +271,21 @@
                                  [tableView expandSection:section animated:YES];
                              }
                          }];
+    } else if (section == kUITableViewSectionMilestones) {
+        [GHIssueV3 milestonesForIssueOnRepository:self.repositoryString 
+                                       withNumber:nil 
+                                             page:1 
+                                completionHandler:^(NSArray *milestones, NSInteger nextPage, NSError *error) {
+                                    if (error) {
+                                        [tableView cancelDownloadInSection:section];
+                                        [self handleError:error];
+                                    } else {
+                                        self.milestones = milestones;
+                                        _canLoadNextMilestones = NO;
+                                        [tableView expandSection:section animated:YES];
+                                        _canLoadNextMilestones = YES;
+                                    }
+                                }];
     }
 }
 
@@ -275,7 +297,7 @@
         return 0;
     }
     
-    return 7;
+    return 8;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -296,6 +318,8 @@
         return [self.pullRequests count] + 1;
     } else if (section == kUITableViewSectionRecentCommits || section == kUITableViewSectionBrowseBranches) {
         return [self.branches count] + 1;
+    } else if (section == kUITableViewSectionMilestones) {
+        return self.milestones.count + 1;
     }
     
     return 0;
@@ -543,6 +567,27 @@
             
             return cell;
         }
+    } else if (indexPath.section == kUITableViewSectionMilestones) {
+        NSString *CellIdentifier = @"MilestoneCell";
+        
+        GHMilestoneTableViewCell *cell = (GHMilestoneTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        if (!cell) {
+            cell = [[[GHMilestoneTableViewCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:CellIdentifier] autorelease];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        }
+        
+        GHMilestone *milestone = [self.milestones objectAtIndex:indexPath.row - 1];
+        
+        cell.textLabel.text = milestone.title;
+        cell.detailTextLabel.text = milestone.dueFormattedString;
+        cell.progressView.progress = [milestone.closedIssues floatValue] / ([milestone.closedIssues floatValue] + [milestone.openIssues floatValue]);
+        if (milestone.dueInTime) {
+            [cell.progressView setTintColor:[UIColor greenColor] ];
+        } else {
+            [cell.progressView setTintColor:[UIColor redColor] ];
+        }
+        
+        return cell;
     }
     
     return self.dummyCell;
@@ -597,6 +642,8 @@
         return [self cachedHeightForRowAtIndexPath:indexPath];
     } else if (indexPath.section == kUITableViewSectionPullRequests && indexPath.row > 0 && indexPath.row <= [self.pullRequests count]) {
         return [self cachedHeightForRowAtIndexPath:indexPath];
+    } else if (indexPath.section == kUITableViewSectionMilestones && indexPath.row > 0) {
+        return GHMilestoneTableViewCellHeight;
     }
     
     return 44.0f;
@@ -754,6 +801,23 @@
                 [tableView reloadSections:[NSIndexSet indexSetWithIndex:kUITableViewSectionIssues] withRowAnimation:UITableViewRowAnimationTop];
             }
         }];
+    } else if (indexPath.section == kUITableViewSectionMilestones && indexPath.row == [self.milestones count] && indexPath.row != 0 && _milstonesNextPage > 1 && _canLoadNextMilestones) {
+        
+        [GHIssueV3 milestonesForIssueOnRepository:self.repositoryString withNumber:nil page:_milstonesNextPage 
+                                completionHandler:^(NSArray *milestones, NSInteger nextPage, NSError *error) {
+                                    
+                                    if (error) {
+                                        [self handleError:error];
+                                    } else {
+                                        _milstonesNextPage = nextPage;
+                                        NSMutableArray *mutablCopy = [[self.milestones mutableCopy] autorelease];
+                                        [mutablCopy addObjectsFromArray:milestones];
+                                        self.issuesArray = mutablCopy;
+                                        [tableView reloadSections:[NSIndexSet indexSetWithIndex:kUITableViewSectionMilestones] 
+                                                 withRowAnimation:UITableViewRowAnimationTop];
+                                    }
+                                }];
+        
     }
 }
 

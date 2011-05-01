@@ -52,5 +52,13 @@
                             page:(NSInteger)page
                completionHandler:(void (^)(NSArray *issues, NSInteger nextPage, NSError *error))handler;
 
++ (void)issueOnRepository:(NSString *)repository 
+               withNumber:(NSNumber *)number 
+        completionHandler:(void (^)(GHIssueV3 *issue, NSError *error))handler;
+
++ (void)milestonesForIssueOnRepository:(NSString *)repository 
+                            withNumber:(NSNumber *)number 
+                                  page:(NSInteger)page
+                     completionHandler:(void (^)(NSArray *milestones, NSInteger nextPage, NSError *error))handler;
 
 @end

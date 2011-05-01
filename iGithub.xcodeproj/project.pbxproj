@@ -102,6 +102,8 @@
 		A76FC9BE13534755004C642E /* UIExpandableTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = A76FC9BD13534755004C642E /* UIExpandableTableView.m */; };
 		A7837E95136C905200B13B95 /* GHIssueV3.m in Sources */ = {isa = PBXBuildFile; fileRef = A7837E94136C905100B13B95 /* GHIssueV3.m */; };
 		A7837E9A136C93FC00B13B95 /* GHMilestone.m in Sources */ = {isa = PBXBuildFile; fileRef = A7837E99136C93FC00B13B95 /* GHMilestone.m */; };
+		A7837EA1136CADA500B13B95 /* PDColoredProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = A7837EA0136CADA400B13B95 /* PDColoredProgressView.m */; };
+		A7837EA5136CADD400B13B95 /* GHMilestoneTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A7837EA4136CADD400B13B95 /* GHMilestoneTableViewCell.m */; };
 		A7A80CB61362BA0800BE70B8 /* GHAdvancedTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = A7A80CB51362BA0800BE70B8 /* GHAdvancedTextView.m */; };
 		A7A80CBA1362BA3900BE70B8 /* GHAdvancedTextViewInternalCoreTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = A7A80CB91362BA3900BE70B8 /* GHAdvancedTextViewInternalCoreTextView.m */; };
 		A7AF97EE1369F19B00EB2D00 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A7AF97EC1369F19B00EB2D00 /* Default@2x.png */; };
@@ -354,6 +356,10 @@
 		A7837E94136C905100B13B95 /* GHIssueV3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHIssueV3.m; sourceTree = "<group>"; };
 		A7837E98136C93FC00B13B95 /* GHMilestone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHMilestone.h; sourceTree = "<group>"; };
 		A7837E99136C93FC00B13B95 /* GHMilestone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHMilestone.m; sourceTree = "<group>"; };
+		A7837E9F136CADA300B13B95 /* PDColoredProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PDColoredProgressView.h; path = PDColoredProgressview/PDColoredProgressView.h; sourceTree = "<group>"; };
+		A7837EA0136CADA400B13B95 /* PDColoredProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PDColoredProgressView.m; path = PDColoredProgressview/PDColoredProgressView.m; sourceTree = "<group>"; };
+		A7837EA3136CADD400B13B95 /* GHMilestoneTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHMilestoneTableViewCell.h; sourceTree = "<group>"; };
+		A7837EA4136CADD400B13B95 /* GHMilestoneTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHMilestoneTableViewCell.m; sourceTree = "<group>"; };
 		A7A80CB41362BA0800BE70B8 /* GHAdvancedTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHAdvancedTextView.h; sourceTree = "<group>"; };
 		A7A80CB51362BA0800BE70B8 /* GHAdvancedTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHAdvancedTextView.m; sourceTree = "<group>"; };
 		A7A80CB81362BA3900BE70B8 /* GHAdvancedTextViewInternalCoreTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHAdvancedTextViewInternalCoreTextView.h; sourceTree = "<group>"; };
@@ -626,6 +632,8 @@
 				A7D14F771356FACB00E1B980 /* GHCreateIssueTableViewCell.h */,
 				A7D14F781356FACD00E1B980 /* GHCreateIssueTableViewCell.m */,
 				A7D14F791356FACE00E1B980 /* GHCreateIssueTableViewCellContentView.xib */,
+				A7837EA3136CADD400B13B95 /* GHMilestoneTableViewCell.h */,
+				A7837EA4136CADD400B13B95 /* GHMilestoneTableViewCell.m */,
 			);
 			name = UITableViewCells;
 			sourceTree = "<group>";
@@ -985,6 +993,7 @@
 		A750573F1343422200514A82 /* UserInterface */ = {
 			isa = PBXGroup;
 			children = (
+				A7837EA2136CADAB00B13B95 /* PDColoredProgressView */,
 				A709F747136876A500B0CDE7 /* GHOrganizationViewController */,
 				A712B7ED135E0B5E0009B7A7 /* DDProgressView */,
 				A712B7C7135CB58C0009B7A7 /* Browse content */,
@@ -1037,6 +1046,15 @@
 				A7837E99136C93FC00B13B95 /* GHMilestone.m */,
 			);
 			name = GHMilestone;
+			sourceTree = "<group>";
+		};
+		A7837EA2136CADAB00B13B95 /* PDColoredProgressView */ = {
+			isa = PBXGroup;
+			children = (
+				A7837E9F136CADA300B13B95 /* PDColoredProgressView.h */,
+				A7837EA0136CADA400B13B95 /* PDColoredProgressView.m */,
+			);
+			name = PDColoredProgressView;
 			sourceTree = "<group>";
 		};
 		A7BC6780134CCED40083F906 /* PullToRefreshTableViewController */ = {
@@ -1766,6 +1784,8 @@
 				A709F75A1368B7E900B0CDE7 /* GHTeamViewController.m in Sources */,
 				A7837E95136C905200B13B95 /* GHIssueV3.m in Sources */,
 				A7837E9A136C93FC00B13B95 /* GHMilestone.m in Sources */,
+				A7837EA1136CADA500B13B95 /* PDColoredProgressView.m in Sources */,
+				A7837EA5136CADD400B13B95 /* GHMilestoneTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

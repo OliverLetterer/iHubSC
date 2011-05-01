@@ -40,6 +40,10 @@
     
     NSArray *_pullRequests;
     NSArray *_branches;
+    
+    NSArray *_milestones;
+    NSInteger _milstonesNextPage;
+    BOOL _canLoadNextMilestones;
 }
 
 @property (nonatomic, readonly) BOOL isFollowingRepository;
@@ -50,6 +54,8 @@
 
 @property (nonatomic, retain) NSArray *issuesArray;
 - (void)cacheHeightForIssuesArray;
+
+@property (nonatomic, retain) NSArray *milestones;
 
 @property (nonatomic, retain) NSMutableArray *watchedUsersArray;
 

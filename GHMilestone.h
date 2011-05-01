@@ -16,7 +16,7 @@
     NSString *_createdAt;
     GHUser *_creator;
     NSString *_milestoneDescription;
-    NSString *_duoOn;
+    NSString *_dueOn;
     NSNumber *_number;
     NSNumber *_openIssues;
     NSString *_state;
@@ -28,12 +28,15 @@
 @property (nonatomic, copy) NSString *createdAt;
 @property (nonatomic, retain) GHUser *creator;
 @property (nonatomic, copy) NSString *milestoneDescription;
-@property (nonatomic, copy) NSString *duoOn;
+@property (nonatomic, copy) NSString *dueOn;
 @property (nonatomic, copy) NSNumber *number;
 @property (nonatomic, copy) NSNumber *openIssues;
 @property (nonatomic, copy) NSString *state;
 @property (nonatomic, copy) NSString *title;
 @property (nonatomic, copy) NSString *URL;
+
+@property (nonatomic, readonly) NSString *dueFormattedString;
+@property (nonatomic, readonly) BOOL dueInTime;
 
 - (id)initWithRawDictionary:(NSDictionary *)rawDictionay;
 

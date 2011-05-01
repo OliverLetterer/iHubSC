@@ -13,3 +13,11 @@ V1.1
 V1.2
 - Add news feed to GHOrganizationViewController
 - fixed error handling bug
+
+Support for Issues v2.0:
+- View assigned Milestone
+- View assignee.
+- View attatched pull request.
+
+Repositories:
+- View Milestones.

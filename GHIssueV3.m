@@ -96,4 +96,58 @@
     }];
 }
 
++ (void)issueOnRepository:(NSString *)repository 
+               withNumber:(NSNumber *)number 
+        completionHandler:(void (^)(GHIssueV3 *issue, NSError *error))handler {
+    
+    // v3:  https://api.github.com/repos/octocat/Hello-World/issues/1.json
+    
+    NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.github.com/repos/%@/issues/%@.json",
+                                       [repository stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
+                                       number]];
+    
+    [[GHBackgroundQueue sharedInstance] sendRequestToURL:URL setupHandler:nil completionHandler:^(id object, NSError *error, ASIFormDataRequest *request) {
+        if (error) {
+            handler(nil, error);
+        } else {
+            handler([[[GHIssueV3 alloc] initWithRawDictionary:object] autorelease], nil);
+        }
+    }];
+}
+
++ (void)milestonesForIssueOnRepository:(NSString *)repository 
+                            withNumber:(NSNumber *)number 
+                                  page:(NSInteger)page
+                     completionHandler:(void (^)(NSArray *milestones, NSInteger nextPage, NSError *error))handler {
+    
+    // v3: /repos/:user/:repo/milestones
+    
+    NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.github.com/repos/%@/milestones?page=%d",
+                                       [repository stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding], page ] ];
+    
+    [[GHBackgroundQueue sharedInstance] sendRequestToURL:URL setupHandler:nil completionHandler:^(id object, NSError *error, ASIFormDataRequest *request) {
+        if (error) {
+            handler(nil, 0, error);
+        } else {
+            NSArray *rawArray = object;
+            
+            NSMutableArray *finalArray = [NSMutableArray arrayWithCapacity:rawArray.count];
+            for (NSDictionary *rawDictionary in rawArray) {
+                [finalArray addObject:[[[GHMilestone alloc] initWithRawDictionary:rawDictionary] autorelease] ];
+            }
+            
+            NSString *XNext = [[request responseHeaders] objectForKey:@"X-Next"];
+            NSInteger nextPage = 0;
+            
+            if (XNext) {
+                NSString *page = [[XNext componentsSeparatedByString:@"page="] lastObject];
+                nextPage = [page intValue];
+            }
+            
+            handler(finalArray, nextPage, nil);
+        }
+    }];
+    
+}
+
 @end

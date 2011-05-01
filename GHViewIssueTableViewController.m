@@ -17,6 +17,13 @@
 #import "GHNewCommentTableViewCell.h"
 #import "GHUserViewController.h"
 #import "GHSingleRepositoryViewController.h"
+#import "GHMilestoneTableViewCell.h"
+#import "GHViewPullRequestViewController.h"
+
+#define kUITableViewSectionData             0
+#define kUITableViewSectionPullRequest      1
+#define kUITableViewSectionComments         2
+#define kUITableViewSectionAdministration   3
 
 @implementation GHViewIssueTableViewController
 
@@ -56,18 +63,16 @@
 #pragma mark - instance methods
 
 - (void)downloadIssueData {
-    [GHIssue issueOnRepository:self.repository 
-                    withNumber:self.number 
-         useDatabaseIfPossible:NO 
-             completionHandler:^(GHIssue *issue, NSError *error, BOOL didDownload) {
-                 if (!error) {
-                     self.issue = issue;
-                     _isDownloadingIssueData = NO;
-                     [self.tableView reloadData];
-                 } else {
-                     [self handleError:error];
-                 }
-             }];
+    
+    [GHIssueV3 issueOnRepository:self.repository withNumber:self.number completionHandler:^(GHIssueV3 *issue, NSError *error) {
+        if (error) {
+            [self handleError:error];
+        } else {
+            self.issue = issue;
+            _isDownloadingIssueData = NO;
+            [self.tableView reloadData];
+        }
+    }];
 }
 
 #pragma mark - Memory management
@@ -202,47 +207,38 @@
     if (_isDownloadingIssueData) {
         return NO;
     }
-    return section != 0;
+    return section != kUITableViewSectionData && section != kUITableViewSectionPullRequest;
 }
 
 - (BOOL)tableView:(UIExpandableTableView *)tableView needsToDownloadDataForExpandableSection:(NSInteger)section {
-    return section == 1 && self.comments == nil;
+    if (section == kUITableViewSectionComments) {
+        return self.comments == nil;
+    }
+    return NO;
 }
 
 - (UITableViewCell<UIExpandingTableViewCell> *)tableView:(UIExpandableTableView *)tableView expandingCellForSection:(NSInteger)section {
-    if (section == 1) {
-        NSString *CellIdentifier = @"UICollapsingAndSpinningTableViewCell";
-        
-        UICollapsingAndSpinningTableViewCell *cell = (UICollapsingAndSpinningTableViewCell *)[self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-        if (cell == nil) {
-            cell = [[[UICollapsingAndSpinningTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
-        }
-        
-        // Configure the cell...
-        cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Comments (%@)", @""), self.issue.comments];
-        
-        return cell;
-    } else if (section == 2) {
-        // Administrate cell
-        NSString *CellIdentifier = @"UICollapsingAndSpinningTableViewCell";
-        
-        UICollapsingAndSpinningTableViewCell *cell = (UICollapsingAndSpinningTableViewCell *)[self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-        if (cell == nil) {
-            cell = [[[UICollapsingAndSpinningTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
-        }
-        
-        // Configure the cell...
-        cell.textLabel.text = NSLocalizedString(@"Administration", @"");
-        
-        return cell;
+    
+    NSString *CellIdentifier = @"UICollapsingAndSpinningTableViewCell";
+    
+    UICollapsingAndSpinningTableViewCell *cell = (UICollapsingAndSpinningTableViewCell *)[self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (cell == nil) {
+        cell = [[[UICollapsingAndSpinningTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
     }
-    return nil;
+    
+    if (section == kUITableViewSectionComments) {
+        cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Comments (%@)", @""), self.issue.comments];
+    } else if (section == kUITableViewSectionAdministration) {
+        cell.textLabel.text = NSLocalizedString(@"Administration", @"");
+    }
+    
+    return cell;
 }
 
 #pragma mark - UIExpandableTableViewDelegate
 
 - (void)tableView:(UIExpandableTableView *)tableView downloadDataForExpandableSection:(NSInteger)section {
-    if (section == 1) {
+    if (section == kUITableViewSectionComments) {
         [GHIssue commentsForIssueOnRepository:self.repository 
                                    withNumber:self.number 
                             completionHandler:^(NSArray *comments, NSError *error) {
@@ -270,7 +266,7 @@
         //  0: the issue itself
         //  1: comments
         //  2: administrate
-        result = 2;
+        result = 4;
         
         if (_canUserAdministrateIssue) {
             result++;
@@ -287,19 +283,23 @@
     if (_isDownloadingIssueData) {
         result = 1;
     } else {
-        if (section == 0) {
+        if (section == kUITableViewSectionData) {
             // the issue itself
             // title, description, number of votes
-            result = 2;
-        } else if (section == 1) {
+            // assigned to
+            // milestone
+            result = 4;
+        } else if (section == kUITableViewSectionComments) {
             // we display our comment
             // first cell = Comments (5)
             // then all cells with the comments
             // then a cell to write a new comment
             result = [self.issue.comments intValue] + 2;
-        } else if (section == 2) {
+        } else if (section == kUITableViewSectionAdministration) {
             // first will be administrate
             result = 2;
+        } else if (section == kUITableViewSectionPullRequest) {
+            return self.issue.pullRequestID == nil ? 0 : 1;
         }
     }
     
@@ -324,7 +324,7 @@
         return cell;
     }
     
-    if (indexPath.section == 0) {
+    if (indexPath.section == kUITableViewSectionData) {
         // the issue itself
         if (indexPath.row == 0) {
             // the title
@@ -345,11 +345,11 @@
             
             [self updateImageViewForCell:cell 
                              atIndexPath:indexPath 
-                          withGravatarID:self.issue.gravatarID];
+                          withGravatarID:self.issue.user.gravatarID];
             
-            NSDate *date = self.issue.creationDate.dateFromGithubAPIDateString;
+            NSDate *date = self.issue.createdAt.dateFromGithubAPIDateString;
             
-            cell.detailTextLabel.text = [NSString stringWithFormat:@"by %@ %@ (%@ votes)", self.issue.user, [NSString stringWithFormat:NSLocalizedString(@"%@ ago", @""), date.prettyTimeIntervalSinceNow], self.issue.votes];
+            cell.detailTextLabel.text = [NSString stringWithFormat:@"by %@ %@", self.issue.user.login, [NSString stringWithFormat:NSLocalizedString(@"%@ ago", @""), date.prettyTimeIntervalSinceNow] ];
             ;
             
             cell.descriptionLabel.text = self.issue.body;
@@ -367,12 +367,77 @@
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             cell.selectionStyle = UITableViewCellSelectionStyleBlue;
             
-            cell.detailTextLabel.text = self.issue.repository;
+            cell.detailTextLabel.text = self.repository;
             cell.textLabel.text = NSLocalizedString(@"Repository", @"");
             
             return cell;
+        } else if (indexPath.row == 2) {
+            NSString *CellIdentifier = @"DetailsTableViewCell";
+            
+            UITableViewCellWithLinearGradientBackgroundView *cell = (UITableViewCellWithLinearGradientBackgroundView *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+            if (!cell) {
+                cell = [[[UITableViewCellWithLinearGradientBackgroundView alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:CellIdentifier] autorelease];
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            }
+            
+            if (self.issue.assignee.login) {
+                cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+                cell.selectionStyle = UITableViewCellSelectionStyleBlue;
+                
+                cell.detailTextLabel.text = self.issue.assignee.login;
+            } else {
+                cell.accessoryType = UITableViewCellAccessoryNone;
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                
+                cell.detailTextLabel.text = @"-";
+            }
+            
+            cell.textLabel.text = NSLocalizedString(@"Assigned to", @"");
+            
+            return cell;
+        } else if (indexPath.row == 3) {
+            if (self.issue.milestone.title) {
+                NSString *CellIdentifier = @"MilestoneCell";
+                
+                GHMilestoneTableViewCell *cell = (GHMilestoneTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+                if (!cell) {
+                    cell = [[[GHMilestoneTableViewCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:CellIdentifier] autorelease];
+                    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                }
+                
+                GHMilestone *milestone = self.issue.milestone;
+                
+                cell.textLabel.text = milestone.title;
+                cell.detailTextLabel.text = milestone.dueFormattedString;
+                cell.progressView.progress = [milestone.closedIssues floatValue] / ([milestone.closedIssues floatValue] + [milestone.openIssues floatValue]);
+                
+                if (milestone.dueInTime) {
+                    [cell.progressView setTintColor:[UIColor greenColor] ];
+                } else {
+                    [cell.progressView setTintColor:[UIColor redColor] ];
+                }
+                
+                return cell;
+            } else {
+                NSString *CellIdentifier = @"DetailsTableViewCell";
+                
+                UITableViewCellWithLinearGradientBackgroundView *cell = (UITableViewCellWithLinearGradientBackgroundView *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+                if (!cell) {
+                    cell = [[[UITableViewCellWithLinearGradientBackgroundView alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:CellIdentifier] autorelease];
+                    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                }
+                
+                cell.accessoryType = UITableViewCellAccessoryNone;
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                
+                cell.textLabel.text = NSLocalizedString(@"Milestone", @"");
+                cell.detailTextLabel.text = @"-";
+                
+                return cell;
+            }
         }
-    } else if (indexPath.section == 1) {
+
+    } else if (indexPath.section == kUITableViewSectionComments) {
         // comments
         if (indexPath.row >= 1 && indexPath.row <= [self.issue.comments intValue]) {
             // display a comment
@@ -417,7 +482,7 @@
             
             return cell;
         }
-    } else if (indexPath.section == 2) {
+    } else if (indexPath.section == kUITableViewSectionAdministration) {
         // administrate
         if (indexPath.row == 1) {
             // open/ close
@@ -437,6 +502,19 @@
             
             return cell;
         }
+    } else if (indexPath.section == kUITableViewSectionPullRequest) {
+        NSString *CellIdentifier = @"kUITableViewSectionPullRequestCell";
+        
+        UITableViewCellWithLinearGradientBackgroundView *cell = (UITableViewCellWithLinearGradientBackgroundView *)[self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        if (cell == nil) {
+            cell = [[[UITableViewCellWithLinearGradientBackgroundView alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        }
+        
+        cell.textLabel.text = NSLocalizedString(@"View attatched Pull Request", @"");
+        cell.selectionStyle = UITableViewCellSelectionStyleBlue;
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        
+        return cell;
     }
     
     return self.dummyCell;
@@ -484,7 +562,7 @@
         return result;
     }
     
-    if (indexPath.section == 0) {
+    if (indexPath.section == kUITableViewSectionData) {
         if (indexPath.row == 0) {
             // the issues title
             
@@ -501,8 +579,10 @@
         } else if (indexPath.row == 1) {
             // the description
             return 44.0f;
+        } else if (indexPath.row == 3) {
+            return GHMilestoneTableViewCellHeight;
         }
-    } else if (indexPath.section == 1) {
+    } else if (indexPath.section == kUITableViewSectionComments) {
         if (indexPath.row >= 1 && indexPath.row <= [self.issue.comments intValue]) {
             // we are going to display a comment
             GHIssueComment *comment = [self.comments objectAtIndex:indexPath.row - 1];
@@ -528,7 +608,7 @@
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == 2) {
+    if (indexPath.section == kUITableViewSectionAdministration) {
         if (indexPath.row == 1) {
             if ([self.issue.state isEqualToString:@"open"]) {
                 [GHIssue closeIssueOnRepository:self.repository 
@@ -556,21 +636,27 @@
                                }];
             }
         }
-    } else if (indexPath.section == 0) {
+    } else if (indexPath.section == kUITableViewSectionData) {
         if (indexPath.row == 0) {
-            GHUserViewController *userViewController = [[[GHUserViewController alloc] initWithUsername:self.issue.user] autorelease];
+            GHUserViewController *userViewController = [[[GHUserViewController alloc] initWithUsername:self.issue.user.login] autorelease];
             [self.navigationController pushViewController:userViewController animated:YES];
         } else if (indexPath.row == 1) {
-            GHSingleRepositoryViewController *repoViewController = [[[GHSingleRepositoryViewController alloc] initWithRepositoryString:self.issue.repository] autorelease];
+            GHSingleRepositoryViewController *repoViewController = [[[GHSingleRepositoryViewController alloc] initWithRepositoryString:self.repository] autorelease];
             [self.navigationController pushViewController:repoViewController animated:YES];
+        } else if (indexPath.row == 2 && self.issue.assignee.login) {
+            GHUserViewController *userViewController = [[[GHUserViewController alloc] initWithUsername:self.issue.assignee.login] autorelease];
+            [self.navigationController pushViewController:userViewController animated:YES];
         }
-    } else if (indexPath.section == 1) {
+    } else if (indexPath.section == kUITableViewSectionComments) {
         if (indexPath.row >= 1 && indexPath.row <= [self.issue.comments intValue]) {
             // display a comment
             GHIssueComment *comment = [self.comments objectAtIndex:indexPath.row - 1];
             GHUserViewController *userViewController = [[[GHUserViewController alloc] initWithUsername:comment.user] autorelease];
             [self.navigationController pushViewController:userViewController animated:YES];
         }
+    } else if (indexPath.section == kUITableViewSectionPullRequest) {
+        GHViewPullRequestViewController *pullViewController = [[[GHViewPullRequestViewController alloc] initWithRepository:self.repository issueNumber:self.issue.pullRequestID] autorelease];
+        [self.navigationController pushViewController:pullViewController animated:YES];
     } else {
         [self.tableView deselectRowAtIndexPath:indexPath animated:NO];
     }
