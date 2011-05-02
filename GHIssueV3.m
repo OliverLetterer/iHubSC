@@ -147,7 +147,48 @@
             handler(finalArray, nextPage, nil);
         }
     }];
+}
+
++ (void)createIssueOnRepository:(NSString *)repository 
+                          title:(NSString *)title 
+                           body:(NSString *)body 
+                       assignee:(NSString *)assignee 
+                      milestone:(NSNumber *)milestone 
+              completionHandler:(void (^)(GHIssueV3 *issue, NSError *error))handler {
     
+    // v3: POST /repos/:user/:repo/issues
+    
+    NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.github.com/repos/%@/issues",
+                                       [repository stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] ] ];
+    
+    [[GHBackgroundQueue sharedInstance] sendRequestToURL:URL 
+                                            setupHandler:^(ASIFormDataRequest *request) {
+                                                NSMutableDictionary *jsonDictionary = [NSMutableDictionary dictionaryWithCapacity:4];
+                                                if (title) {
+                                                    [jsonDictionary setObject:title forKey:@"title"];
+                                                }
+                                                if (body) {
+                                                    [jsonDictionary setObject:body forKey:@"body"];
+                                                }
+                                                if (assignee) {
+                                                    [jsonDictionary setObject:assignee forKey:@"assignee"];
+                                                }
+                                                if (milestone) {
+                                                    [jsonDictionary setObject:milestone forKey:@"milestone"];
+                                                }
+                                                NSString *jsonString = [jsonDictionary JSONString];
+                                                NSMutableData *jsonData = [[[jsonString dataUsingEncoding:NSUTF8StringEncoding] mutableCopy] autorelease];
+                                                [request setPostBody:jsonData];
+                                                [request setPostLength:[jsonString length] ];
+                                            } 
+                                       completionHandler:^(id object, NSError *error, ASIFormDataRequest *request) {
+                                           if (error) {
+                                               handler(nil, error);
+                                           } else {
+                                               NSDictionary *dictionary = object;
+                                               handler([[[GHIssueV3 alloc] initWithRawDictionary:dictionary ] autorelease], nil);
+                                           }
+                                       }];
 }
 
 @end

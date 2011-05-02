@@ -61,4 +61,11 @@
                                   page:(NSInteger)page
                      completionHandler:(void (^)(NSArray *milestones, NSInteger nextPage, NSError *error))handler;
 
++ (void)createIssueOnRepository:(NSString *)repository 
+                          title:(NSString *)title 
+                           body:(NSString *)body 
+                       assignee:(NSString *)assignee 
+                      milestone:(NSNumber *)milestone
+              completionHandler:(void (^)(GHIssueV3 *issue, NSError *error))handler;
+
 @end

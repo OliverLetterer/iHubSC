@@ -798,7 +798,7 @@
                 [mutablCopy addObjectsFromArray:issues];
                 self.issuesArray = mutablCopy;
                 [self cacheHeightForIssuesArray];
-                [tableView reloadSections:[NSIndexSet indexSetWithIndex:kUITableViewSectionIssues] withRowAnimation:UITableViewRowAnimationTop];
+                [tableView reloadSections:[NSIndexSet indexSetWithIndex:kUITableViewSectionIssues] withRowAnimation:UITableViewRowAnimationNone];
             }
         }];
     } else if (indexPath.section == kUITableViewSectionMilestones && indexPath.row == [self.milestones count] && indexPath.row != 0 && _milstonesNextPage > 1 && _canLoadNextMilestones) {
@@ -812,9 +812,9 @@
                                         _milstonesNextPage = nextPage;
                                         NSMutableArray *mutablCopy = [[self.milestones mutableCopy] autorelease];
                                         [mutablCopy addObjectsFromArray:milestones];
-                                        self.issuesArray = mutablCopy;
+                                        self.milestones = mutablCopy;
                                         [tableView reloadSections:[NSIndexSet indexSetWithIndex:kUITableViewSectionMilestones] 
-                                                 withRowAnimation:UITableViewRowAnimationTop];
+                                                 withRowAnimation:UITableViewRowAnimationNone];
                                     }
                                 }];
         
@@ -868,7 +868,7 @@
     [self dismissModalViewControllerAnimated:YES];
 }
 
-- (void)createIssueViewController:(GHCreateIssueTableViewController *)createViewController didCreateIssue:(GHRawIssue *)issue {
+- (void)createIssueViewController:(GHCreateIssueTableViewController *)createViewController didCreateIssue:(GHIssueV3 *)issue {
     self.issuesArray = nil;
     self.repository.openIssues = [NSNumber numberWithInt:[self.repository.openIssues intValue]+1 ];
     [self.tableView reloadData];

@@ -18,6 +18,7 @@ Support for Issues v2.0:
 - View assigned Milestone
 - View assignee.
 - View attatched pull request.
+- Create new Issues and assign someone and select a milestone.
 
 Repositories:
 - View Milestones.

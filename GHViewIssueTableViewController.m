@@ -618,7 +618,7 @@
                                       [self handleError:error];
                                   } else {
                                       self.issue.state = @"closed";
-                                      [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:1 inSection:2]] 
+                                      [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:1 inSection:kUITableViewSectionAdministration]] 
                                                             withRowAnimation:UITableViewRowAnimationFade];
                                   }
                               }];
@@ -630,7 +630,7 @@
                                        [self handleError:error];
                                    } else {
                                        self.issue.state = @"open";
-                                       [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:1 inSection:2]] 
+                                       [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:1 inSection:kUITableViewSectionAdministration]] 
                                                              withRowAnimation:UITableViewRowAnimationFade];
                                    }
                                }];

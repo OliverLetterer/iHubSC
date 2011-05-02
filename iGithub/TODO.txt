@@ -31,7 +31,6 @@ V1.2
 - post a comment
 - close
 - reopen
-- create (select assignee, milestone, labels)
 
 
 - Gist support

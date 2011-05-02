@@ -998,7 +998,7 @@
 				A712B7ED135E0B5E0009B7A7 /* DDProgressView */,
 				A712B7C7135CB58C0009B7A7 /* Browse content */,
 				A7D41B09135AFDA400CD3A5C /* GHViewPullRequestViewController */,
-				A76FC9A81352D27E004C642E /* UICollapsingTableView */,
+				A76FC9A81352D27E004C642E /* UIExpandableTableView */,
 				A7BC6780134CCED40083F906 /* PullToRefreshTableViewController */,
 				A7F62627134C45AE006487CA /* GHTableViewController */,
 				A75057401343424100514A82 /* GHNewsFeedViewController */,
@@ -1030,13 +1030,13 @@
 			name = GHNewsFeedViewController;
 			sourceTree = "<group>";
 		};
-		A76FC9A81352D27E004C642E /* UICollapsingTableView */ = {
+		A76FC9A81352D27E004C642E /* UIExpandableTableView */ = {
 			isa = PBXGroup;
 			children = (
 				A76FC9BC13534755004C642E /* UIExpandableTableView.h */,
 				A76FC9BD13534755004C642E /* UIExpandableTableView.m */,
 			);
-			name = UICollapsingTableView;
+			name = UIExpandableTableView;
 			sourceTree = "<group>";
 		};
 		A7837E97136C93E500B13B95 /* GHMilestone */ = {

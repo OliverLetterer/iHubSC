@@ -9,11 +9,17 @@
 #import "GHCreateIssueTableViewController.h"
 #import "GHCreateIssueTableViewCell.h"
 #import "GHSettingsHelper.h"
+#import "UICollapsingAndSpinningTableViewCell.h"
+
+#define kUITableViewSectionTitle 0
+#define kUITableViewSectionAssigned 1
+#define kUITableViewSectionMilestones 2
 
 @implementation GHCreateIssueTableViewController
 
 @synthesize delegate=_delegate;
 @synthesize repository=_repository;
+@synthesize textViewToolBar=_textViewToolBar, textView=_textView, collaborators=_collaborators, milestones=_milestones;
 
 #pragma mark - Initialization
 
@@ -30,6 +36,11 @@
 
 - (void)dealloc {
     [_repository release];
+    [_textViewToolBar release];
+    [_textView release];
+    [_collaborators release];
+    [_milestones release];
+    
     [super dealloc];
 }
 
@@ -42,19 +53,33 @@
 
 #pragma mark - target actions
 
+- (void)toolbarDoneButtonClicked:(UIBarButtonItem *)barButton {
+    [self.textView resignFirstResponder];
+}
+
 - (void)saveButtonClicked:(UIBarButtonItem *)sender {
     GHCreateIssueTableViewCell *cell = (GHCreateIssueTableViewCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] ];
     
-    [GHIssue createIssueOnRepository:self.repository 
-                               title:cell.titleTextField.text 
-                                body:cell.descriptionTextField.text 
-                   completionHandler:^(GHRawIssue *issue, NSError *error) {
-                       if (error) {
-                           [self handleError:error];
-                       } else {
-                           [self.delegate createIssueViewController:self didCreateIssue:issue];
-                       }
-                   }];
+    NSString *assignee = nil;
+    NSNumber *milestoneNumber = nil;
+    
+    if (_assignIndex > 0) {
+        assignee = [self.collaborators objectAtIndex:_assignIndex - 1];
+    }
+    if (_assignesMilestoneIndex > 0) {
+        GHMilestone *milestone = [self.milestones objectAtIndex:_assignesMilestoneIndex - 1];
+        milestoneNumber = milestone.number;
+    }
+    
+    [GHIssueV3 createIssueOnRepository:self.repository title:cell.titleTextField.text 
+                                  body:cell.descriptionTextField.text assignee:assignee milestone:milestoneNumber 
+                     completionHandler:^(GHIssueV3 *issue, NSError *error) {
+                         if (error) {
+                             [self handleError:error];
+                         } else {
+                             [self.delegate createIssueViewController:self didCreateIssue:issue];
+                         }
+                     }];
 }
 
 - (void)cancelButtonClicked:(UIBarButtonItem *)sender {
@@ -71,12 +96,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
     UIBarButtonItem *cancelButton = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel 
                                                                                    target:self 
@@ -89,12 +108,35 @@
                                                                                  action:@selector(saveButtonClicked:)]
                                    autorelease];
     self.navigationItem.rightBarButtonItem = saveButton;
+    
+    
+    self.textViewToolBar = [[[UIToolbar alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0, 44.0)] autorelease];
+    self.textViewToolBar.barStyle = UIBarStyleBlackTranslucent;
+    
+    UIBarButtonItem *item = nil;
+    NSMutableArray *items = [NSMutableArray array];
+    
+    item = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace 
+                                                          target:nil 
+                                                          action:@selector(noAction)]
+            autorelease];
+    [items addObject:item];
+    
+    item = [[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Done", @"") 
+                                             style:UIBarButtonItemStyleDone 
+                                            target:self 
+                                            action:@selector(toolbarDoneButtonClicked:)]
+            autorelease];
+    [items addObject:item];
+    
+    self.textViewToolBar.items = items;
 }
 
 - (void)viewDidUnload {
     [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
+    
+    self.textViewToolBar = nil;
+    self.textView = nil;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -118,30 +160,157 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
+#pragma mark - UIExpandableTableViewDatasource
+
+- (BOOL)tableView:(UIExpandableTableView *)tableView canExpandSection:(NSInteger)section {
+    return section == kUITableViewSectionAssigned || section == kUITableViewSectionMilestones;
+}
+
+- (BOOL)tableView:(UIExpandableTableView *)tableView needsToDownloadDataForExpandableSection:(NSInteger)section {
+    if (section == kUITableViewSectionAssigned) {
+        return self.collaborators == nil;
+    } else if (section == kUITableViewSectionMilestones) {
+        return self.milestones == nil;
+    }
+    return NO;
+}
+
+- (UITableViewCell<UIExpandingTableViewCell> *)tableView:(UIExpandableTableView *)tableView expandingCellForSection:(NSInteger)section {
+    
+    NSString *CellIdentifier = @"UICollapsingAndSpinningTableViewCell";
+    
+    UICollapsingAndSpinningTableViewCell *cell = (UICollapsingAndSpinningTableViewCell *)[self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (cell == nil) {
+        cell = [[[UICollapsingAndSpinningTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+    }
+    
+    if (section == kUITableViewSectionAssigned) {
+        if (_assignIndex != 0) {
+            cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Assigned to %@", @""), [self.collaborators objectAtIndex:_assignIndex-1]];
+        } else {
+            cell.textLabel.text = NSLocalizedString(@"Assign to", @"");
+        }
+    } else if (section == kUITableViewSectionMilestones) {
+        if (_assignesMilestoneIndex != 0) {
+            GHMilestone *milestone = [self.milestones objectAtIndex:_assignesMilestoneIndex - 1];
+            cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Milestone (%@)", @""), milestone.title];
+        } else {
+            cell.textLabel.text = NSLocalizedString(@"Select Milestone", @"");
+        }
+    }
+    
+    return cell;
+}
+
+#pragma mark - UIExpandableTableViewDelegate
+
+- (void)tableView:(UIExpandableTableView *)tableView downloadDataForExpandableSection:(NSInteger)section {
+    if (section == kUITableViewSectionAssigned) {
+        [GHRepository collaboratorsForRepository:self.repository completionHandler:^(NSArray *array, NSError *error) {
+            if (error) {
+                [tableView cancelDownloadInSection:section];
+                [self handleError:error];
+            } else {
+                self.collaborators = array;
+                [tableView expandSection:section animated:YES];
+            }
+        }];
+    } else if (section == kUITableViewSectionMilestones) {
+        [GHIssueV3 milestonesForIssueOnRepository:self.repository withNumber:nil 
+                                             page:1 
+                                completionHandler:^(NSArray *milestones, NSInteger nextPage, NSError *error) {
+                                    if (error) {
+                                        [tableView cancelDownloadInSection:section];
+                                        [self handleError:error];
+                                    } else {
+                                        _milestonesNextPage = nextPage;
+                                        self.milestones = milestones;
+                                        _canDownloadNextMilestonePage = NO;
+                                        [tableView expandSection:section animated:YES];
+                                        _canDownloadNextMilestonePage = YES;
+                                    }
+        }];
+    }
+}
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     // Return the number of sections.
-    return 1;
+    return 3;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    return 1;
+    if (section == kUITableViewSectionTitle) {
+        return 1;
+    } else if (section == kUITableViewSectionAssigned) {
+        return self.collaborators.count + 1;
+    } else if (section == kUITableViewSectionMilestones) {
+        return self.milestones.count + 1;
+    }
+    return 0;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *CellIdentifier = @"GHCreateIssueTableViewCell";
-    
-    GHCreateIssueTableViewCell *cell = (GHCreateIssueTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
-        cell = [[[GHCreateIssueTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
-        cell.selectionStyle = UITableViewCellEditingStyleNone;
+    if (indexPath.section == kUITableViewSectionTitle) {
+        if (indexPath.row == 0) {
+            NSString *CellIdentifier = @"GHCreateIssueTableViewCell";
+            
+            GHCreateIssueTableViewCell *cell = (GHCreateIssueTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+            if (cell == nil) {
+                cell = [[[GHCreateIssueTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+                cell.selectionStyle = UITableViewCellEditingStyleNone;
+            }
+            
+            [self updateImageViewForCell:cell atIndexPath:indexPath withGravatarID:[GHSettingsHelper gravatarID] ];
+            
+            cell.descriptionTextField.inputAccessoryView = self.textViewToolBar;
+            self.textView = cell.descriptionTextField;
+            
+            return cell;
+        }
+    } else if (indexPath.section == kUITableViewSectionAssigned) {
+        NSString *CellIdentifier = @"DetailsTableViewCell";
+        
+        UITableViewCellWithLinearGradientBackgroundView *cell = (UITableViewCellWithLinearGradientBackgroundView *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        if (!cell) {
+            cell = [[[UITableViewCellWithLinearGradientBackgroundView alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        }
+        
+        NSString *user = [self.collaborators objectAtIndex:indexPath.row - 1];
+        
+        if (indexPath.row == _assignIndex) {
+            cell.accessoryType = UITableViewCellAccessoryCheckmark;
+        } else {
+            cell.accessoryType = UITableViewCellAccessoryNone;
+        }
+        
+        cell.textLabel.text = user;
+        
+        return cell;
+    } else if (indexPath.section == kUITableViewSectionMilestones) {
+        NSString *CellIdentifier = @"DetailsTableViewCell";
+        
+        UITableViewCellWithLinearGradientBackgroundView *cell = (UITableViewCellWithLinearGradientBackgroundView *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        if (!cell) {
+            cell = [[[UITableViewCellWithLinearGradientBackgroundView alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        }
+        
+        GHMilestone *milestone = [self.milestones objectAtIndex:indexPath.row - 1];
+        
+        if (indexPath.row == _assignesMilestoneIndex) {
+            cell.accessoryType = UITableViewCellAccessoryCheckmark;
+        } else {
+            cell.accessoryType = UITableViewCellAccessoryNone;
+        }
+        
+        cell.textLabel.text = milestone.title;
+        
+        return cell;
     }
     
-    [self updateImageViewForCell:cell atIndexPath:indexPath withGravatarID:[GHSettingsHelper gravatarID] ];
-    
-    return cell;
+    return self.dummyCell;
 }
 
 /*
@@ -181,19 +350,45 @@
 
 #pragma mark - Table view delegate
 
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section == kUITableViewSectionMilestones && indexPath.row == [self.milestones count] && indexPath.row != 0 && _milestonesNextPage > 1 && _canDownloadNextMilestonePage) {
+        
+        [GHIssueV3 milestonesForIssueOnRepository:self.repository withNumber:nil page:_milestonesNextPage 
+                                completionHandler:^(NSArray *milestones, NSInteger nextPage, NSError *error) {
+                                    
+                                    if (error) {
+                                        [self handleError:error];
+                                    } else {
+                                        _milestonesNextPage = nextPage;
+                                        NSMutableArray *mutablCopy = [[self.milestones mutableCopy] autorelease];
+                                        [mutablCopy addObjectsFromArray:milestones];
+                                        self.milestones = mutablCopy;
+                                        [tableView reloadSections:[NSIndexSet indexSetWithIndex:kUITableViewSectionMilestones] 
+                                                 withRowAnimation:UITableViewRowAnimationNone];
+                                    }
+                                }];
+        
+    }
+}
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 200.0f;
+    if (indexPath.section == kUITableViewSectionTitle) {
+        return 200.0f;
+    }
+    
+    return 44.0f;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     [detailViewController release];
-     */
+    if (indexPath.section == kUITableViewSectionAssigned) {
+        _assignIndex = indexPath.row;
+        [tableView reloadSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationNone];
+    } else if (indexPath.section == kUITableViewSectionMilestones) {
+        _assignesMilestoneIndex = indexPath.row;
+        [tableView reloadSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationNone];
+    } else {
+        [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    }
 }
 
 @end
