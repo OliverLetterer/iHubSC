@@ -48,10 +48,6 @@
 + (BOOL)isIssueAvailableForRepository:(NSString *)repository 
                            withNumber:(NSNumber *)number;
 
-+ (void)commentsForIssueOnRepository:(NSString *)repository 
-                          withNumber:(NSNumber *)number 
-                   completionHandler:(void (^)(NSArray *comments, NSError *error))handler;
-
 + (void)postComment:(NSString *)comment forIssueOnRepository:(NSString *)repository 
          withNumber:(NSNumber *)number 
   completionHandler:(void (^)(GHIssueComment *comment, NSError *error))handler;

@@ -26,13 +26,6 @@ support all these events
 [-]: clickable (include in navigation hierarchie)
 
 V1.2
-- migrate all current API calls
-- get all comments
-- post a comment
-- close
-- reopen
-
-
 - Gist support
 Gist:
 - View Gists of any User
@@ -47,3 +40,6 @@ V1.5
 Future Features:
 - Network graph for recent activity (see Network API)
 
+Old APIv2 Calls:
+- close an Issue
+- reopen an Issue

@@ -166,50 +166,6 @@
 }
 
 
-+ (void)commentsForIssueOnRepository:(NSString *)repository 
-                          withNumber:(NSNumber *)number 
-                   completionHandler:(void (^)(NSArray *comments, NSError *error))handler {
-    
-    dispatch_async(GHAPIBackgroundQueue(), ^(void) {
-        
-        // issues/comments/:user/:repo/:number
-        
-        NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://github.com/api/v2/json/issues/comments/%@/%@",
-                                           [repository stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
-                                           number]];
-        
-        NSError *myError = nil;
-        
-        ASIHTTPRequest *request = [ASIHTTPRequest authenticatedFormDataRequestWithURL:URL];
-        [request startSynchronous];
-        
-        myError = [request error];
-        
-        NSData *issueData = [request responseData];
-        NSString *issueString = [[[NSString alloc] initWithData:issueData encoding:NSUTF8StringEncoding] autorelease];
-        
-        dispatch_async(dispatch_get_main_queue(), ^(void) {
-            if (myError) {
-                handler(nil, myError);
-            } else {
-                
-                NSDictionary *dict = [issueString objectFromJSONString];
-                
-                NSArray *rawCommentsArray = [dict objectForKey:@"comments"];
-                
-                NSMutableArray *array = [NSMutableArray array];
-                for (NSDictionary *rawDictionary in rawCommentsArray) {
-                    [array addObject:[[[GHIssueComment alloc] initWithRawDictionary:rawDictionary] autorelease] ];
-                }
-                
-                handler(array, nil);
-            }
-        });
-    });
-    
-}
-
-
 + (void)postComment:(NSString *)comment forIssueOnRepository:(NSString *)repository 
          withNumber:(NSNumber *)number 
   completionHandler:(void (^)(GHIssueComment *, NSError *))handler {

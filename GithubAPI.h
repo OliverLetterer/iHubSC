@@ -19,6 +19,7 @@
 #import "GHIssueV3.h"
 #import "GHTarget.h"
 #import "GHIssueComment.h"
+#import "GHIssueCommentV3.h"
 #import "GHCommit.h"
 #import "GHCommitFileInformation.h"
 #import "GHCommitMessage.h"

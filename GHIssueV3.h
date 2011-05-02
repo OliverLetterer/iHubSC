@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@class GHUser, GHMilestone;
+@class GHUser, GHMilestone, GHIssueCommentV3;
 
 @interface GHIssueV3 : NSObject {
 @private
@@ -67,5 +67,13 @@
                        assignee:(NSString *)assignee 
                       milestone:(NSNumber *)milestone
               completionHandler:(void (^)(GHIssueV3 *issue, NSError *error))handler;
+
++ (void)commentsForIssueOnRepository:(NSString *)repository 
+                          withNumber:(NSNumber *)number 
+                   completionHandler:(void (^)(NSArray *comments, NSError *error))handler;
+
++ (void)postComment:(NSString *)comment forIssueOnRepository:(NSString *)repository 
+         withNumber:(NSNumber *)number 
+  completionHandler:(void (^)(GHIssueCommentV3 *comment, NSError *error))handler;
 
 @end

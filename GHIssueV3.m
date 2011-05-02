@@ -191,4 +191,58 @@
                                        }];
 }
 
++ (void)commentsForIssueOnRepository:(NSString *)repository 
+                          withNumber:(NSNumber *)number 
+                   completionHandler:(void (^)(NSArray *comments, NSError *error))handler {
+    
+    // v3: GET /repos/:user/:repo/issues/:id/comments
+    
+    NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.github.com/repos/%@/issues/%@/comments",
+                                       [repository stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding], number ] ];
+    
+    
+    [[GHBackgroundQueue sharedInstance] sendRequestToURL:URL setupHandler:nil completionHandler:^(id object, NSError *error, ASIFormDataRequest *request) {
+        if (error) {
+            handler(nil, error);
+        } else {
+            NSArray *rawCommentsArray = object;
+            
+            NSMutableArray *array = [NSMutableArray arrayWithCapacity:rawCommentsArray.count];
+            for (NSDictionary *rawDictionary in rawCommentsArray) {
+                [array addObject:[[[GHIssueCommentV3 alloc] initWithRawDictionary:rawDictionary] autorelease] ];
+            }
+            
+            handler(array, nil);
+        }
+    }];
+}
+
++ (void)postComment:(NSString *)comment forIssueOnRepository:(NSString *)repository 
+         withNumber:(NSNumber *)number 
+  completionHandler:(void (^)(GHIssueCommentV3 *, NSError *))handler {
+    
+    // v3: POST /repos/:user/:repo/issues/:id/comments
+    
+    NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.github.com/repos/%@/issues/%@/comments",
+                                       [repository stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding], number ] ];
+    
+    
+    [[GHBackgroundQueue sharedInstance] sendRequestToURL:URL 
+                                            setupHandler:^(ASIFormDataRequest *request) { 
+                                                // {"body"=>"String"}
+                                                NSDictionary *jsonDictionary = [NSDictionary dictionaryWithObject:comment forKey:@"body"];
+                                                NSString *jsonString = [jsonDictionary JSONString];
+                                                NSMutableData *jsonData = [[[jsonString dataUsingEncoding:NSUTF8StringEncoding] mutableCopy] autorelease];
+                                                [request setPostBody:jsonData];
+                                                [request setPostLength:[jsonString length] ];
+                                            } 
+                                       completionHandler:^(id object, NSError *error, ASIFormDataRequest *request) {
+                                           if (error) {
+                                               handler(nil, error);
+                                           } else {
+                                               handler([[[GHIssueCommentV3 alloc] initWithRawDictionary:object] autorelease], nil);
+                                           }
+                                       }];
+}
+
 @end

@@ -58,7 +58,7 @@
 }
 
 - (void)saveButtonClicked:(UIBarButtonItem *)sender {
-    GHCreateIssueTableViewCell *cell = (GHCreateIssueTableViewCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] ];
+    GHCreateIssueTableViewCell *cell = (GHCreateIssueTableViewCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:kUITableViewSectionTitle] ];
     
     NSString *assignee = nil;
     NSNumber *milestoneNumber = nil;

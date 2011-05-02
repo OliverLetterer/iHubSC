@@ -101,28 +101,29 @@
 }
 
 - (void)toolbarDoneButtonClicked:(UIBarButtonItem *)barButton {
-    [GHIssue postComment:self.textView.text forIssueOnRepository:self.repository 
-              withNumber:self.number 
-       completionHandler:^(GHIssueComment *comment, NSError *error) {
-           if (error) {
-               [self handleError:error];
-           } else {
-               NSMutableArray *commentsArray = [[self.comments mutableCopy] autorelease];
-               [commentsArray addObject:comment];
-               self.comments = commentsArray;
-               
-               self.issue.comments = [NSNumber numberWithInt:[self.issue.comments intValue] + 1];
-               
-               [self.tableView beginUpdates];
-               
-               [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:[self.comments count]+1 inSection:1]] withRowAnimation:UITableViewScrollPositionBottom];
-               [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:[self.comments count] inSection:1]] withRowAnimation:UITableViewRowAnimationFade];
-               
-               [self.tableView endUpdates];
-               
-               self.textView.text = nil;
-           }
-       }];
+    [GHIssueV3 postComment:self.textView.text 
+      forIssueOnRepository:self.repository 
+                withNumber:self.number 
+         completionHandler:^(GHIssueCommentV3 *comment, NSError *error) {
+             if (error) {
+                 [self handleError:error];
+             } else {
+                 NSMutableArray *commentsArray = [[self.comments mutableCopy] autorelease];
+                 [commentsArray addObject:comment];
+                 self.comments = commentsArray;
+                 
+                 self.issue.comments = [NSNumber numberWithInt:[self.issue.comments intValue] + 1];
+                 
+                 [self.tableView beginUpdates];
+                 
+                 [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:[self.comments count]+1 inSection:kUITableViewSectionComments]] withRowAnimation:UITableViewScrollPositionBottom];
+                 [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:[self.comments count] inSection:kUITableViewSectionComments]] withRowAnimation:UITableViewRowAnimationFade];
+                 
+                 [self.tableView endUpdates];
+                 
+                 self.textView.text = nil;
+             }
+         }];
 }
 
 - (void)titleTableViewCellLongPressRecognized:(UILongPressGestureRecognizer *)recognizer {
@@ -239,17 +240,17 @@
 
 - (void)tableView:(UIExpandableTableView *)tableView downloadDataForExpandableSection:(NSInteger)section {
     if (section == kUITableViewSectionComments) {
-        [GHIssue commentsForIssueOnRepository:self.repository 
-                                   withNumber:self.number 
-                            completionHandler:^(NSArray *comments, NSError *error) {
-                                if (!error) {
-                                    self.comments = comments;
-                                    [tableView expandSection:section animated:YES];
-                                } else {
-                                    [tableView cancelDownloadInSection:section];
-                                    [self handleError:error];
-                                }
-                            }];
+        [GHIssueV3 commentsForIssueOnRepository:self.repository 
+                                     withNumber:self.number 
+                              completionHandler:^(NSArray *comments, NSError *error) {
+                                  if (!error) {
+                                      self.comments = comments;
+                                      [tableView expandSection:section animated:YES];
+                                  } else {
+                                      [tableView cancelDownloadInSection:section];
+                                      [self handleError:error];
+                                  }
+                              }];
     }
 }
 
@@ -441,7 +442,7 @@
         // comments
         if (indexPath.row >= 1 && indexPath.row <= [self.issue.comments intValue]) {
             // display a comment
-            GHIssueComment *comment = [self.comments objectAtIndex:indexPath.row - 1];
+            GHIssueCommentV3 *comment = [self.comments objectAtIndex:indexPath.row - 1];
             
             NSString *CellIdentifier = @"GHFeedItemWithDescriptionTableViewCell";
             
@@ -452,11 +453,11 @@
             
             [self updateImageViewForCell:cell 
                              atIndexPath:indexPath 
-                          withGravatarID:comment.gravatarID];
+                          withGravatarID:comment.user.gravatarID];
             
             NSDate *date = comment.updatedAt.dateFromGithubAPIDateString;
             
-            cell.titleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ (%@ ago)", @""), comment.user, date.prettyTimeIntervalSinceNow];
+            cell.titleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ (%@ ago)", @""), comment.user.login, date.prettyTimeIntervalSinceNow];
             
             cell.descriptionLabel.text = comment.body;
             
@@ -585,7 +586,7 @@
     } else if (indexPath.section == kUITableViewSectionComments) {
         if (indexPath.row >= 1 && indexPath.row <= [self.issue.comments intValue]) {
             // we are going to display a comment
-            GHIssueComment *comment = [self.comments objectAtIndex:indexPath.row - 1];
+            GHIssueCommentV3 *comment = [self.comments objectAtIndex:indexPath.row - 1];
             
             CGSize size = [comment.body sizeWithFont:[UIFont systemFontOfSize:12.0] 
                                    constrainedToSize:CGSizeMake(222.0, MAXFLOAT) 
@@ -650,8 +651,8 @@
     } else if (indexPath.section == kUITableViewSectionComments) {
         if (indexPath.row >= 1 && indexPath.row <= [self.issue.comments intValue]) {
             // display a comment
-            GHIssueComment *comment = [self.comments objectAtIndex:indexPath.row - 1];
-            GHUserViewController *userViewController = [[[GHUserViewController alloc] initWithUsername:comment.user] autorelease];
+            GHIssueCommentV3 *comment = [self.comments objectAtIndex:indexPath.row - 1];
+            GHUserViewController *userViewController = [[[GHUserViewController alloc] initWithUsername:comment.user.login] autorelease];
             [self.navigationController pushViewController:userViewController animated:YES];
         }
     } else if (indexPath.section == kUITableViewSectionPullRequest) {
