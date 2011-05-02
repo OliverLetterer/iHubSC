@@ -389,7 +389,7 @@
                 cell.accessoryType = UITableViewCellAccessoryNone;
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 
-                cell.detailTextLabel.text = @"-";
+                cell.detailTextLabel.text = @"No one is assigned";
             }
             
             cell.textLabel.text = NSLocalizedString(@"Assigned to", @"");
@@ -431,7 +431,7 @@
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 
                 cell.textLabel.text = NSLocalizedString(@"Milestone", @"");
-                cell.detailTextLabel.text = @"-";
+                cell.detailTextLabel.text = @"No milestone";
                 
                 return cell;
             }
