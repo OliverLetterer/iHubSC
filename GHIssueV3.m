@@ -67,9 +67,9 @@
                             page:(NSInteger)page
                completionHandler:(void (^)(NSArray *issues, NSInteger nextPage, NSError *error))handler {
     
-    // v3: https://api.github.com/repos/docmorelli/Installous/issues.json
+    // v3: GET /repos/:user/:repo/issues
     
-    NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.github.com/repos/%@/issues.json?page=%d",
+    NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.github.com/repos/%@/issues?page=%d",
                                        [repository stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding], page ] ];
     
     [[GHBackgroundQueue sharedInstance] sendRequestToURL:URL setupHandler:nil completionHandler:^(id object, NSError *error, ASIFormDataRequest *request) {
@@ -100,9 +100,9 @@
                withNumber:(NSNumber *)number 
         completionHandler:(void (^)(GHIssueV3 *issue, NSError *error))handler {
     
-    // v3:  https://api.github.com/repos/octocat/Hello-World/issues/1.json
+    // v3: GET /repos/:user/:repo/issues/:id
     
-    NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.github.com/repos/%@/issues/%@.json",
+    NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.github.com/repos/%@/issues/%@",
                                        [repository stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
                                        number]];
     
