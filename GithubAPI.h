@@ -35,6 +35,8 @@
 #import "GHOrganization.h"
 #import "GHTeam.h"
 #import "GHMilestone.h"
+#import "GHGist.h"
+#import "GHGistFile.h"
 
 #import "GHPayload.h"
 #import "GHIssuePayload.h"

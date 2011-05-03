@@ -225,9 +225,7 @@
                                     } else {
                                         _milestonesNextPage = nextPage;
                                         self.milestones = milestones;
-                                        _canDownloadNextMilestonePage = NO;
                                         [tableView expandSection:section animated:YES];
-                                        _canDownloadNextMilestonePage = YES;
                                     }
         }];
     }
@@ -351,7 +349,7 @@
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == kUITableViewSectionMilestones && indexPath.row == [self.milestones count] && indexPath.row != 0 && _milestonesNextPage > 1 && _canDownloadNextMilestonePage) {
+    if (indexPath.section == kUITableViewSectionMilestones && indexPath.row == [self.milestones count] && indexPath.row != 0 && _milestonesNextPage > 1) {
         
         [GHIssueV3 milestonesForIssueOnRepository:self.repository withNumber:nil page:_milestonesNextPage 
                                 completionHandler:^(NSArray *milestones, NSInteger nextPage, NSError *error) {

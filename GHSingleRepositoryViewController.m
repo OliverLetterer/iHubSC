@@ -211,9 +211,7 @@
                                   _issuesNextPage = nextPage;
                                   self.issuesArray = issues;
                                   [self cacheHeightForIssuesArray];
-                                  _canDownloadNextIssuePage = NO;
                                   [tableView expandSection:section animated:YES];
-                                  _canDownloadNextIssuePage = YES;
                               }
                           }];
     } else if (section == kUITableViewSectionWatchingUsers) {
@@ -281,9 +279,7 @@
                                         [self handleError:error];
                                     } else {
                                         self.milestones = milestones;
-                                        _canLoadNextMilestones = NO;
                                         [tableView expandSection:section animated:YES];
-                                        _canLoadNextMilestones = YES;
                                     }
                                 }];
     }
@@ -788,7 +784,7 @@
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == kUITableViewSectionIssues && indexPath.row == [self.issuesArray count] && indexPath.row != 0 && _issuesNextPage > 1 && _canDownloadNextIssuePage) {
+    if (indexPath.section == kUITableViewSectionIssues && indexPath.row == [self.issuesArray count] && indexPath.row != 0 && _issuesNextPage > 1) {
         [GHIssueV3 openedIssuesOnRepository:self.repositoryString page:_issuesNextPage completionHandler:^(NSArray *issues, NSInteger nextPage, NSError *error) {
             if (error) {
                 [self handleError:error];
@@ -801,7 +797,7 @@
                 [tableView reloadSections:[NSIndexSet indexSetWithIndex:kUITableViewSectionIssues] withRowAnimation:UITableViewRowAnimationNone];
             }
         }];
-    } else if (indexPath.section == kUITableViewSectionMilestones && indexPath.row == [self.milestones count] && indexPath.row != 0 && _milstonesNextPage > 1 && _canLoadNextMilestones) {
+    } else if (indexPath.section == kUITableViewSectionMilestones && indexPath.row == [self.milestones count] && indexPath.row != 0 && _milstonesNextPage > 1) {
         
         [GHIssueV3 milestonesForIssueOnRepository:self.repositoryString withNumber:nil page:_milstonesNextPage 
                                 completionHandler:^(NSArray *milestones, NSInteger nextPage, NSError *error) {

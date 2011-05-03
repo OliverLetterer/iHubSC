@@ -297,6 +297,33 @@
     return self;
 }
 
++ (void)gistsOfUser:(NSString *)username page:(NSInteger)page completionHandler:(void (^)(NSArray *gists, NSInteger nextPage, NSError *error))handler {
+    
+    // v3: GET /users/:user/gists
+    
+    NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.github.com/users/%@/gists?page=%d", 
+                                       [username stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding], page ] ];
+    
+    [[GHBackgroundQueue sharedInstance] sendRequestToURL:URL setupHandler:nil 
+                                       completionHandler:^(id object, NSError *error, ASIFormDataRequest *request) {
+                                           if (error) {
+                                               handler(nil, 0, error);
+                                           } else {
+                                               NSArray *rawArray = object;
+                                               
+                                               NSMutableArray *finalArray = [NSMutableArray arrayWithCapacity:rawArray.count];
+                                               for (NSDictionary *rawDictionary in rawArray) {
+                                                   [finalArray addObject:[[[GHGist alloc] initWithRawDictionary:rawDictionary] autorelease] ];
+                                               }
+                                               
+                                               NSString *linkHeader = [[request responseHeaders] objectForKey:@"Link"];
+                                               
+                                               handler(finalArray, linkHeader.nextPage, nil);
+                                           }
+                                           
+    }];
+}
+
 #pragma mark - Memory management
 
 - (void)dealloc {

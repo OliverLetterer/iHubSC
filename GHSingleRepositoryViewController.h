@@ -30,7 +30,6 @@
     
     NSArray *_issuesArray;
     NSInteger _issuesNextPage;
-    BOOL _canDownloadNextIssuePage;
     
     NSMutableArray *_watchedUsersArray;
     
@@ -43,7 +42,6 @@
     
     NSArray *_milestones;
     NSInteger _milstonesNextPage;
-    BOOL _canLoadNextMilestones;
 }
 
 @property (nonatomic, readonly) BOOL isFollowingRepository;

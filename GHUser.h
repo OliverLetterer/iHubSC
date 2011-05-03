@@ -89,4 +89,6 @@
 + (void)searchUsersWithSearchString:(NSString *)searchString 
                   completionHandler:(void(^)(NSArray *users, NSError *error))handler;
 
++ (void)gistsOfUser:(NSString *)username page:(NSInteger)page completionHandler:(void (^)(NSArray *gists, NSInteger nextPage, NSError *error))handler;
+
 @end

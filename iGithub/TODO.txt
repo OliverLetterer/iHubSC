@@ -31,6 +31,9 @@ Gist:
 - View Gists of any User
 - Browse Files of a given gist
 - view files
+- fork a gist
+- star/ unstar a gist
+- delete
 - view comments and write comment
 - integrate gist in news feed view controller
 

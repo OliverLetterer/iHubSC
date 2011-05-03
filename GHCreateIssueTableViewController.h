@@ -35,7 +35,6 @@
     NSArray *_milestones;
     NSUInteger _assignesMilestoneIndex;
     NSInteger _milestonesNextPage;
-    BOOL _canDownloadNextMilestonePage;
 }
 
 @property (nonatomic, assign) id<GHCreateIssueTableViewControllerDelegate> delegate;
