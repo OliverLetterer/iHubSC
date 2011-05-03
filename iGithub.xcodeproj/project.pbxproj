@@ -1224,20 +1224,20 @@
 				A7089518134A0C49000DD6CE /* Foundation Additions */,
 				A750573F1343422200514A82 /* UserInterface */,
 				A7BF146413426D85001AE50D /* Github API */,
-				A7BF1436134216EB001AE50D /* CGSettingsHelper */,
+				A7BF1436134216EB001AE50D /* GHSettingsHelper */,
 				A7BF142F1342154C001AE50D /* Keychain */,
 			);
 			name = Shared;
 			path = ..;
 			sourceTree = "<group>";
 		};
-		A7BF1436134216EB001AE50D /* CGSettingsHelper */ = {
+		A7BF1436134216EB001AE50D /* GHSettingsHelper */ = {
 			isa = PBXGroup;
 			children = (
 				A7BF1433134215C5001AE50D /* GHSettingsHelper.h */,
 				A7BF1434134215C5001AE50D /* GHSettingsHelper.m */,
 			);
-			name = CGSettingsHelper;
+			name = GHSettingsHelper;
 			sourceTree = "<group>";
 		};
 		A7BF143713421862001AE50D /* Ressources */ = {
