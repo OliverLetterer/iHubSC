@@ -44,3 +44,31 @@
 }
 
 @end
+
+
+
+@implementation NSString (GHAPIHTTPParsing)
+
+- (NSUInteger)nextPage {
+    NSArray *basicLinksArray = [self componentsSeparatedByString:@","];
+    
+    for (NSString *basicLinkString in basicLinksArray) {
+        if ([basicLinkString rangeOfString:@"rel=\"next\""].length > 0) {
+            NSArray *furtherComponents = [basicLinkString componentsSeparatedByString:@"?page="];
+            
+            NSString *lastObject = [furtherComponents lastObject];
+            
+            NSArray *lastComponents = [lastObject componentsSeparatedByString:@">"];
+            
+            if (lastComponents.count > 0) {
+                NSString *nextPageNumber = [lastComponents objectAtIndex:0];
+                return [nextPageNumber intValue];
+            }
+        }
+    }
+    
+    return 0;
+}
+
+@end
+

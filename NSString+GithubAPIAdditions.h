@@ -15,3 +15,9 @@
 @property (nonatomic, readonly) NSString *gravarID;
 
 @end
+
+@interface NSString (GHAPIHTTPParsing)
+
+@property (nonatomic, readonly) NSUInteger nextPage;
+
+@end

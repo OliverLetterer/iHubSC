@@ -83,15 +83,9 @@
                 [finalArray addObject:[[[GHIssueV3 alloc] initWithRawDictionary:rawDictionary] autorelease] ];
             }
             
-            NSString *XNext = [[request responseHeaders] objectForKey:@"X-Next"];
-            NSInteger nextPage = 0;
+            NSString *linkHeader = [[request responseHeaders] objectForKey:@"Link"];
             
-            if (XNext) {
-                NSString *page = [[XNext componentsSeparatedByString:@"page="] lastObject];
-                nextPage = [page intValue];
-            }
-            
-            handler(finalArray, nextPage, nil);
+            handler(finalArray, linkHeader.nextPage, nil);
         }
     }];
 }
@@ -136,15 +130,9 @@
                 [finalArray addObject:[[[GHMilestone alloc] initWithRawDictionary:rawDictionary] autorelease] ];
             }
             
-            NSString *XNext = [[request responseHeaders] objectForKey:@"X-Next"];
-            NSInteger nextPage = 0;
+            NSString *linkHeader = [[request responseHeaders] objectForKey:@"Link"];
             
-            if (XNext) {
-                NSString *page = [[XNext componentsSeparatedByString:@"page="] lastObject];
-                nextPage = [page intValue];
-            }
-            
-            handler(finalArray, nextPage, nil);
+            handler(finalArray, linkHeader.nextPage, nil);
         }
     }];
 }
