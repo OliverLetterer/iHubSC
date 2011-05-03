@@ -1038,6 +1038,15 @@
 			name = GHNewsFeedViewController;
 			sourceTree = "<group>";
 		};
+		A7677150137078B1006D70D6 /* Appirater */ = {
+			isa = PBXGroup;
+			children = (
+				A7EE1121136F480D00A1E693 /* Appirater.h */,
+				A7EE1122136F481100A1E693 /* Appirater.m */,
+			);
+			name = Appirater;
+			sourceTree = "<group>";
+		};
 		A76FC9A81352D27E004C642E /* UIExpandableTableView */ = {
 			isa = PBXGroup;
 			children = (
@@ -1210,8 +1219,7 @@
 		A7BF14321342159B001AE50D /* Shared */ = {
 			isa = PBXGroup;
 			children = (
-				A7EE1121136F480D00A1E693 /* Appirater.h */,
-				A7EE1122136F481100A1E693 /* Appirater.m */,
+				A7677150137078B1006D70D6 /* Appirater */,
 				A7089529134A2F69000DD6CE /* UITableViewCell */,
 				A7089518134A0C49000DD6CE /* Foundation Additions */,
 				A750573F1343422200514A82 /* UserInterface */,
