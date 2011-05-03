@@ -5,7 +5,7 @@
 *.perspectivev3
 *.pyc 
 *~.nib/
-build/*
+build/
 xcuserdata/
 
 # Textmate - if you build your xcode projects with it
