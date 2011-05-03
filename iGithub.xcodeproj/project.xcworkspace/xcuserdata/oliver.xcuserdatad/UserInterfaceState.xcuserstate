@@ -57185,8 +57185,8 @@
 				</dict>
 			</array>
 		</dict>
-		<real>326133477.35951501</real>
-		<string>{361, 771}</string>
+		<real>326133833.87304097</real>
+		<string>{0, 1132}</string>
 		<string>{835, 0}</string>
 		<dict>
 			<key>$class</key>
@@ -99350,7 +99350,7 @@
 			<array>
 				<dict>
 					<key>CF$UID</key>
-					<integer>48</integer>
+					<integer>78</integer>
 				</dict>
 				<dict>
 					<key>CF$UID</key>
@@ -99730,8 +99730,8 @@
 				</dict>
 			</array>
 		</dict>
-		<real>326133477.36571199</real>
-		<string>{361, 771}</string>
+		<real>326133833.88520199</real>
+		<string>{0, 1132}</string>
 		<string>{835, 0}</string>
 		<string>Xcode.IDEKit.EditorDocument.SourceCode</string>
 		<dict>
@@ -99766,7 +99766,7 @@
 				</dict>
 			</array>
 		</dict>
-		<string>{{0, 0}, {1068, 476}}</string>
+		<string>{{0, 0}, {1068, 746}}</string>
 		<dict>
 			<key>$class</key>
 			<dict>
