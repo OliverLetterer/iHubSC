@@ -145,9 +145,7 @@
     cell.titleLabel.text = user.login;
     cell.descriptionLabel.text = nil;
     
-    NSDate *date = user.createdAt.dateFromGithubAPIDateString;
-    
-    cell.repositoryLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Since %@", @""), date.prettyTimeIntervalSinceNow];
+    cell.repositoryLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Since %@", @""), user.createdAt.prettyTimeIntervalSinceNow];
     
     [self updateImageViewForCell:cell atIndexPath:indexPath withGravatarID:user.gravatarID];
     

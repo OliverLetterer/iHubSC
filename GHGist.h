@@ -35,8 +35,6 @@
 @property (nonatomic, copy) NSString *pushURL;
 @property (nonatomic, copy) NSString *createdAt;
 
-#warning check if "id" is really a string
-
 - (id)initWithRawDictionary:(NSDictionary *)rawDictionay;
 
 @end

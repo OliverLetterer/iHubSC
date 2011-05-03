@@ -7,7 +7,7 @@
 //
 
 #import "NSString+GithubAPIAdditions.h"
-
+#import "NSDate+GithubAPIAdditions.h"
 
 @implementation NSString (GHAPIDateFormatting)
 
@@ -41,6 +41,11 @@
         }
     }
     return nil;
+}
+
+- (NSString *)prettyTimeIntervalSinceNow {
+    NSDate *date = self.dateFromGithubAPIDateString;
+    return date.prettyTimeIntervalSinceNow;
 }
 
 @end

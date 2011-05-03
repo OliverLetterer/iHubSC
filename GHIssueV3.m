@@ -69,7 +69,7 @@
     
     // v3: GET /repos/:user/:repo/issues
     
-    NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.github.com/repos/%@/issues?page=%d",
+    NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.github.com/repos/%@/issues?page=%d&per_page=100",
                                        [repository stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding], page ] ];
     
     [[GHBackgroundQueue sharedInstance] sendRequestToURL:URL setupHandler:nil completionHandler:^(id object, NSError *error, ASIFormDataRequest *request) {
@@ -116,7 +116,7 @@
     
     // v3: /repos/:user/:repo/milestones
     
-    NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.github.com/repos/%@/milestones?page=%d",
+    NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.github.com/repos/%@/milestones?page=%d&per_page=100",
                                        [repository stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding], page ] ];
     
     [[GHBackgroundQueue sharedInstance] sendRequestToURL:URL setupHandler:nil completionHandler:^(id object, NSError *error, ASIFormDataRequest *request) {

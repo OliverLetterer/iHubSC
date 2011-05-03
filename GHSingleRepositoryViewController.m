@@ -361,10 +361,8 @@
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
             }
             
-            NSDate *date = [self.repository.creationDate dateFromGithubAPIDateString];
-            
             cell.textLabel.text = NSLocalizedString(@"Created", @"");
-            cell.detailTextLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ ago", @""), date.prettyTimeIntervalSinceNow];
+            cell.detailTextLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ ago", @""), self.repository.creationDate.prettyTimeIntervalSinceNow];
             
             
             return cell;
@@ -468,9 +466,7 @@
                              atIndexPath:indexPath 
                           withGravatarID:issue.user.gravatarID];
             
-            NSDate *date = issue.createdAt.dateFromGithubAPIDateString;
-            
-            cell.detailTextLabel.text = [NSString stringWithFormat:@"by %@ %@", issue.user.login, [NSString stringWithFormat:NSLocalizedString(@"%@ ago", @""), date.prettyTimeIntervalSinceNow]];
+            cell.detailTextLabel.text = [NSString stringWithFormat:@"by %@ %@", issue.user.login, [NSString stringWithFormat:NSLocalizedString(@"%@ ago", @""), issue.createdAt.prettyTimeIntervalSinceNow]];
             ;
             
             cell.descriptionLabel.text = issue.title;
@@ -538,9 +534,7 @@
         cell.titleLabel.text = discussion.user.login;
         cell.descriptionLabel.text = discussion.title;
         
-        NSDate *date = [discussion.createdAt dateFromGithubAPIDateString];
-        
-        cell.repositoryLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ ago", @""), date.prettyTimeIntervalSinceNow];
+        cell.repositoryLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ ago", @""), discussion.createdAt.prettyTimeIntervalSinceNow];
         
         [self updateImageViewForCell:cell 
                          atIndexPath:indexPath 

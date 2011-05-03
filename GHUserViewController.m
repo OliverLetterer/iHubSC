@@ -16,20 +16,21 @@
 #import "GHRecentActivityViewController.h"
 #import "GHOrganizationViewController.h"
 
-#define kUITableViewSectionUserData 0
-#define kUITableViewSectionRepositories 1
-#define kUITableViewSectionWatchedRepositories 2
-#define kUITableViewFollowingUsers 3
-#define kUITableViewFollowedUsers 4
-#define kUITableViewOrganizations 5
-#define kUITableViewSectionPlan 6
-#define kUITableViewNetwork 7
+#define kUITableViewSectionUserData             0
+#define kUITableViewSectionRepositories         1
+#define kUITableViewSectionWatchedRepositories  2
+#define kUITableViewFollowingUsers              3
+#define kUITableViewFollowedUsers               4
+#define kUITableViewGists                       5
+#define kUITableViewOrganizations               6
+#define kUITableViewSectionPlan                 7
+#define kUITableViewNetwork                     8
 
 @implementation GHUserViewController
 
 @synthesize repositoriesArray=_repositoriesArray;
 @synthesize username=_username, user=_user;
-@synthesize watchedRepositoriesArray=_watchedRepositoriesArray, followingUsers=_followingUsers, followedUsers=_followedUsers, organizations=_organizations;
+@synthesize watchedRepositoriesArray=_watchedRepositoriesArray, followingUsers=_followingUsers, followedUsers=_followedUsers, organizations=_organizations, gists=_gists;
 @synthesize lastIndexPathForSingleRepositoryViewController=_lastIndexPathForSingleRepositoryViewController;
 
 #pragma mark - setters and getters
@@ -86,6 +87,7 @@
     [_lastIndexPathForSingleRepositoryViewController release];
     [_organizations release];
     [_user release];
+    [_gists release];
     [super dealloc];
 }
 
@@ -153,6 +155,7 @@
     self.followingUsers = nil;
     self.followedUsers = nil;
     self.organizations = nil;
+    self.gists = nil;
     [self.tableView reloadData];
     [self downloadUserData];
 }
@@ -185,6 +188,20 @@
         
         i++;
     }
+}
+
+- (void)cacheGistsHeight {
+    [self.gists enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        GHGist *gist = obj;
+        
+        CGFloat height = [self heightForDescription:gist.description] + 50.0;
+        
+        if (height < 71.0) {
+            height = 71.0;
+        }
+        
+        [self cacheHeight:height forRowAtIndexPath:[NSIndexPath indexPathForRow:idx+1 inSection:kUITableViewGists]];
+    }];
 }
 
 #pragma mark - View lifecycle
@@ -242,7 +259,8 @@
             section == kUITableViewFollowingUsers ||
             section == kUITableViewFollowedUsers ||
             section == kUITableViewNetwork || 
-            section == kUITableViewOrganizations;
+            section == kUITableViewOrganizations ||
+            section == kUITableViewGists;
 }
 
 - (BOOL)tableView:(UIExpandableTableView *)tableView needsToDownloadDataForExpandableSection:(NSInteger)section {
@@ -258,6 +276,8 @@
         return self.followedUsers == nil;
     } else if (section == kUITableViewOrganizations) {
         return self.organizations == nil;
+    } else if (section == kUITableViewGists) {
+        return self.gists == nil;
     }
     return NO;
 }
@@ -285,6 +305,8 @@
         cell.textLabel.text = NSLocalizedString(@"Network", @"");
     } else if (section == kUITableViewOrganizations) {
         cell.textLabel.text = NSLocalizedString(@"Organizations", @"");
+    } else if (section == kUITableViewGists) {
+        cell.textLabel.text = NSLocalizedString(@"Gists", @"");
     }
     
     return cell;
@@ -372,6 +394,18 @@
                                   }
                               }
                           }];
+    } else if (section == kUITableViewGists) {
+        [GHUser gistsOfUser:self.username page:1 completionHandler:^(NSArray *gists, NSInteger nextPage, NSError *error) {
+            if (error) {
+                [self handleError:error];
+                [tableView cancelDownloadInSection:section];
+            } else {
+                self.gists = gists;
+                _gistsNextPage = nextPage;
+                [self cacheGistsHeight];
+                [tableView expandSection:section animated:YES];
+            }
+        }];
     }
 }
 
@@ -381,7 +415,7 @@
     if (_isDownloadingUserData || !self.user) {
         return 0;
     }
-    return 8;
+    return 9;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -415,6 +449,8 @@
         }
     } else if (section == kUITableViewOrganizations) {
         return [self.organizations count] + 1;
+    } else if (section == kUITableViewGists) {
+        return self.gists.count + 1;
     }
     return result;
 }
@@ -612,6 +648,22 @@
         // Configure the cell...
         
         return cell;
+    } else if (indexPath.section == kUITableViewGists) {
+        NSString *CellIdentifier = @"GHFeedItemWithDescriptionTableViewCell";
+        
+        GHFeedItemWithDescriptionTableViewCell *cell = (GHFeedItemWithDescriptionTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        if (cell == nil) {
+            cell = [[[GHFeedItemWithDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        }
+        
+        GHGist *gist = [self.gists objectAtIndex:indexPath.row-1];
+        
+        cell.titleLabel.text = [NSString stringWithFormat:@"Gist: %@", gist.ID];
+        
+        cell.descriptionLabel.text = gist.description;
+        cell.repositoryLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Created %@ ago", @""), gist.createdAt.prettyTimeIntervalSinceNow];
+        
+        return cell;
     }
     
     return self.dummyCell;
@@ -750,6 +802,23 @@
     }
 }
 
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section == kUITableViewGists && indexPath.row == [self.gists count] && indexPath.row != 0 && _gistsNextPage > 1) {
+        [GHUser gistsOfUser:self.username page:_gistsNextPage completionHandler:^(NSArray *gists, NSInteger nextPage, NSError *error) {
+            if (error) {
+                [self handleError:error];
+            } else {
+                _gistsNextPage = nextPage;
+                NSMutableArray *mutablCopy = [[self.gists mutableCopy] autorelease];
+                [mutablCopy addObjectsFromArray:gists];
+                self.gists = mutablCopy;
+                [self cacheGistsHeight];
+                [tableView reloadSections:[NSIndexSet indexSetWithIndex:kUITableViewGists] withRowAnimation:UITableViewRowAnimationNone];
+            }
+        }];
+    }
+}
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == kUITableViewSectionUserData && indexPath.row == 0) {
         return 71.0f;
@@ -770,6 +839,11 @@
             return 44.0f;
         }
         // watched repo
+        return [self cachedHeightForRowAtIndexPath:indexPath];
+    } else if (indexPath.section == kUITableViewGists) {
+        if (indexPath.row == 0) {
+            return 44.0f;
+        }
         return [self cachedHeightForRowAtIndexPath:indexPath];
     }
     return 44.0;

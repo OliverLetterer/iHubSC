@@ -348,9 +348,7 @@
                              atIndexPath:indexPath 
                           withGravatarID:self.issue.user.gravatarID];
             
-            NSDate *date = self.issue.createdAt.dateFromGithubAPIDateString;
-            
-            cell.detailTextLabel.text = [NSString stringWithFormat:@"by %@ %@", self.issue.user.login, [NSString stringWithFormat:NSLocalizedString(@"%@ ago", @""), date.prettyTimeIntervalSinceNow] ];
+            cell.detailTextLabel.text = [NSString stringWithFormat:@"by %@ %@", self.issue.user.login, [NSString stringWithFormat:NSLocalizedString(@"%@ ago", @""), self.issue.createdAt.prettyTimeIntervalSinceNow] ];
             ;
             
             cell.descriptionLabel.text = self.issue.body;
@@ -455,9 +453,7 @@
                              atIndexPath:indexPath 
                           withGravatarID:comment.user.gravatarID];
             
-            NSDate *date = comment.updatedAt.dateFromGithubAPIDateString;
-            
-            cell.titleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ (%@ ago)", @""), comment.user.login, date.prettyTimeIntervalSinceNow];
+            cell.titleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ (%@ ago)", @""), comment.user.login, comment.updatedAt.prettyTimeIntervalSinceNow];
             
             cell.descriptionLabel.text = comment.body;
             

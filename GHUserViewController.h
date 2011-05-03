@@ -24,6 +24,8 @@
     NSArray *_followingUsers;
     NSArray *_organizations;
     NSMutableArray *_followedUsers;
+    NSArray *_gists;
+    NSUInteger _gistsNextPage;
     
     NSIndexPath *_lastIndexPathForSingleRepositoryViewController;
 }
@@ -36,6 +38,7 @@
 @property (nonatomic, retain) NSArray *followingUsers;
 @property (nonatomic, retain) NSArray *organizations;
 @property (nonatomic, retain) NSMutableArray *followedUsers;
+@property (nonatomic, retain) NSArray *gists;
 
 @property (nonatomic, readonly) BOOL canFollowUser;
 @property (nonatomic, readonly) BOOL isFollowingUser;
@@ -51,5 +54,6 @@
 - (void)downloadRepositories;
 - (void)cacheHeightForTableView;
 - (void)cacheHeightForWatchedRepositories;
+- (void)cacheGistsHeight;
 
 @end

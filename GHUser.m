@@ -301,7 +301,7 @@
     
     // v3: GET /users/:user/gists
     
-    NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.github.com/users/%@/gists?page=%d", 
+    NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.github.com/users/%@/gists?page=%d&per_page=100", 
                                        [username stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding], page ] ];
     
     [[GHBackgroundQueue sharedInstance] sendRequestToURL:URL setupHandler:nil 

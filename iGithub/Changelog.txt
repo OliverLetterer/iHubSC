@@ -22,3 +22,9 @@ Support for Issues v2.0:
 
 Repositories:
 - View Milestones.
+
+
+
+V1.3
+Gist support;
+- View Gists of any User

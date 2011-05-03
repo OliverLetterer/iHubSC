@@ -26,9 +26,7 @@ support all these events
 [-]: clickable (include in navigation hierarchie)
 
 V1.3
-- Gist support
-Gist:
-- View Gists of any User
+Gist support:
 - Browse Files of a given gist
 - view files
 - fork a gist
