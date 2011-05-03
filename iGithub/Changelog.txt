@@ -26,5 +26,6 @@ Repositories:
 
 
 V1.3
+- new Icon
 Gist support;
 - View Gists of any User

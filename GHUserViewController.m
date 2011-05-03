@@ -663,6 +663,12 @@
         cell.descriptionLabel.text = gist.description;
         cell.repositoryLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Created %@ ago", @""), gist.createdAt.prettyTimeIntervalSinceNow];
         
+        if ([gist.public boolValue]) {
+            cell.imageView.image = [UIImage imageNamed:@"GHClipBoard.png"];
+        } else {
+            cell.imageView.image = [UIImage imageNamed:@"GHClipBoardPrivate.png"];
+        }
+        
         return cell;
     }
     

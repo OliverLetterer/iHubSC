@@ -99,6 +99,10 @@
 		A76770FE13705BC3006D70D6 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A76770F713705BC3006D70D6 /* Icon@2x.png */; };
 		A767715E13707A88006D70D6 /* GHGist.m in Sources */ = {isa = PBXBuildFile; fileRef = A767715D13707A88006D70D6 /* GHGist.m */; };
 		A767716113707C6F006D70D6 /* GHGistFile.m in Sources */ = {isa = PBXBuildFile; fileRef = A767716013707C6F006D70D6 /* GHGistFile.m */; };
+		A76771641370A34F006D70D6 /* GHClipBoard.png in Resources */ = {isa = PBXBuildFile; fileRef = A76771621370A34E006D70D6 /* GHClipBoard.png */; };
+		A76771651370A34F006D70D6 /* GHClipBoard@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A76771631370A34E006D70D6 /* GHClipBoard@2x.png */; };
+		A76771681370A5B2006D70D6 /* GHClipBoardPrivate.png in Resources */ = {isa = PBXBuildFile; fileRef = A76771661370A5B1006D70D6 /* GHClipBoardPrivate.png */; };
+		A76771691370A5B2006D70D6 /* GHClipBoardPrivate@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A76771671370A5B1006D70D6 /* GHClipBoardPrivate@2x.png */; };
 		A76FC9A61352D231004C642E /* 145-persondot.png in Resources */ = {isa = PBXBuildFile; fileRef = A76FC9A41352D231004C642E /* 145-persondot.png */; };
 		A76FC9A71352D231004C642E /* 145-persondot@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A76FC9A51352D231004C642E /* 145-persondot@2x.png */; };
 		A76FC9BE13534755004C642E /* UIExpandableTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = A76FC9BD13534755004C642E /* UIExpandableTableView.m */; };
@@ -356,6 +360,10 @@
 		A767715D13707A88006D70D6 /* GHGist.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHGist.m; sourceTree = "<group>"; };
 		A767715F13707C6F006D70D6 /* GHGistFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHGistFile.h; sourceTree = "<group>"; };
 		A767716013707C6F006D70D6 /* GHGistFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHGistFile.m; sourceTree = "<group>"; };
+		A76771621370A34E006D70D6 /* GHClipBoard.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GHClipBoard.png; sourceTree = "<group>"; };
+		A76771631370A34E006D70D6 /* GHClipBoard@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GHClipBoard@2x.png"; sourceTree = "<group>"; };
+		A76771661370A5B1006D70D6 /* GHClipBoardPrivate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GHClipBoardPrivate.png; sourceTree = "<group>"; };
+		A76771671370A5B1006D70D6 /* GHClipBoardPrivate@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GHClipBoardPrivate@2x.png"; sourceTree = "<group>"; };
 		A76FC9A41352D231004C642E /* 145-persondot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "145-persondot.png"; sourceTree = "<group>"; };
 		A76FC9A51352D231004C642E /* 145-persondot@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "145-persondot@2x.png"; sourceTree = "<group>"; };
 		A76FC9BC13534755004C642E /* UIExpandableTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UIExpandableTableView.h; path = UIExpandableTableView/UIExpandableTableView.h; sourceTree = "<group>"; };
@@ -1272,6 +1280,10 @@
 				A76598A6134CBD2400A3B30D /* PullToRefreshArrow@2x.png */,
 				A7BC677C134CCD1A0083F906 /* GHPrivateRepositoryIcon@2x.png */,
 				A7BC677D134CCD1A0083F906 /* GHPrivateRepositoryIcon.png */,
+				A76771621370A34E006D70D6 /* GHClipBoard.png */,
+				A76771631370A34E006D70D6 /* GHClipBoard@2x.png */,
+				A76771661370A5B1006D70D6 /* GHClipBoardPrivate.png */,
+				A76771671370A5B1006D70D6 /* GHClipBoardPrivate@2x.png */,
 				A7BC6777134CCAF00083F906 /* GHPublicRepositoryIcon.png */,
 				A7BC6778134CCAF00083F906 /* GHPublicRepositoryIcon@2x.png */,
 				A7CE1B801346335D00169F94 /* GHDatabase.xcdatamodel */,
@@ -1687,6 +1699,10 @@
 				A76770FC13705BC3006D70D6 /* Icon-Small@2x.png in Resources */,
 				A76770FD13705BC3006D70D6 /* Icon.png in Resources */,
 				A76770FE13705BC3006D70D6 /* Icon@2x.png in Resources */,
+				A76771641370A34F006D70D6 /* GHClipBoard.png in Resources */,
+				A76771651370A34F006D70D6 /* GHClipBoard@2x.png in Resources */,
+				A76771681370A5B2006D70D6 /* GHClipBoardPrivate.png in Resources */,
+				A76771691370A5B2006D70D6 /* GHClipBoardPrivate@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

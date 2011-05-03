@@ -59,11 +59,12 @@
 								<int key="NSID">2</int>
 							</object>
 						</object>
+						<int key="IBUIContentMode">1</int>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<object class="NSCustomResource" key="IBUIImage">
 							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">DefaultUserImage.png</string>
+							<string key="NSResourceName">GHClipBoard@2x.png</string>
 						</object>
 					</object>
 					<object class="IBUILabel" id="908067224">
@@ -395,8 +396,8 @@ b3IgdGhlIGxpYnJhcnkhA</string>
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<object class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
-			<string key="NS.key.0">DefaultUserImage.png</string>
-			<string key="NS.object.0">{70, 70}</string>
+			<string key="NS.key.0">GHClipBoard@2x.png</string>
+			<string key="NS.object.0">{102, 128}</string>
 		</object>
 		<string key="IBCocoaTouchPluginVersion">301</string>
 	</data>

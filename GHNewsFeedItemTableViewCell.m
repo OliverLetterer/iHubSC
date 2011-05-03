@@ -47,6 +47,8 @@
         self.repositoryLabel.highlightedTextColor = [UIColor whiteColor];
         self.repositoryLabel.textAlignment = UITextAlignmentRight;
         self.repositoryLabel.backgroundColor = [UIColor clearColor];
+        
+        self.imageView.contentMode = UIViewContentModeScaleAspectFit;
     }
     return self;
 }
