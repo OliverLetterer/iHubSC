@@ -13,17 +13,21 @@
 #import "NSString+Additions.h"
 #import "GHUserViewController.h"
 #import "GHViewCloudFileViewController.h"
+#import "GHNewCommentTableViewCell.h"
+#import "GHSettingsHelper.h"
 
 #define kUITableViewSectionInfo 0
 #define kUITableViewSectionFiles 1
 #define kUITableViewSectionForks 2
-#define kUITableViewSectionStar 3
+#define kUITableViewSectionComments 3
+#define kUITableViewSectionStar 4
 
-#define kUITableViewSections 4
+#define kUITableViewSections 5
 
 @implementation GHGistViewController
 
-@synthesize ID=_ID, gist=_gist;
+@synthesize ID=_ID, gist=_gist, comments=_comments;
+@synthesize textView=_textView, textViewToolBar=_textViewToolBar;
 
 #pragma mark - setters and getters
 
@@ -52,11 +56,44 @@
     return self;
 }
 
+#pragma mark - target actions
+
+- (void)toolbarCancelButtonClicked:(UIBarButtonItem *)barButton {
+    [self.textView resignFirstResponder];
+}
+
+- (void)toolbarDoneButtonClicked:(UIBarButtonItem *)barButton {
+    [self.textView resignFirstResponder];
+    
+    [GHGist postComment:self.textView.text 
+          forGistWithID:self.gist.ID 
+      completionHandler:^(GHGistComment *comment, NSError *error) {
+          if (error) {
+              [self handleError:error];
+          } else {
+              [self.comments addObject:comment];
+              [self cacheHeightForComments];
+              
+              [self.tableView beginUpdates];
+              
+              [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:[self.comments count]+1 inSection:kUITableViewSectionComments]] withRowAnimation:UITableViewScrollPositionBottom];
+              [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:[self.comments count] inSection:kUITableViewSectionComments]] withRowAnimation:UITableViewRowAnimationFade];
+              
+              [self.tableView endUpdates];
+              
+              self.textView.text = nil;
+          }
+      }];
+}
+
 #pragma mark - Memory management
 
 - (void)dealloc {
     [_ID release];
     [_gist release];
+    [_comments release];
+    [_textView release];
+    [_textViewToolBar release];
     
     [super dealloc];
 }
@@ -79,17 +116,40 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    self.textViewToolBar = [[[UIToolbar alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0, 44.0)] autorelease];
+    self.textViewToolBar.barStyle = UIBarStyleBlackTranslucent;
+    
+    UIBarButtonItem *item = nil;
+    NSMutableArray *items = [NSMutableArray array];
+    
+    item = [[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Cancel", @"") 
+                                             style:UIBarButtonItemStyleBordered 
+                                            target:self 
+                                            action:@selector(toolbarCancelButtonClicked:)]
+            autorelease];
+    [items addObject:item];
+    
+    item = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace 
+                                                          target:nil 
+                                                          action:@selector(noAction)]
+            autorelease];
+    [items addObject:item];
+    
+    item = [[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Submit", @"") 
+                                             style:UIBarButtonItemStyleDone 
+                                            target:self 
+                                            action:@selector(toolbarDoneButtonClicked:)]
+            autorelease];
+    [items addObject:item];
+    
+    self.textViewToolBar.items = items;
 }
 
 - (void)viewDidUnload {
     [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
+    
+    self.textView = nil;
+    self.textViewToolBar = nil;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -113,15 +173,33 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
+#pragma mark - instance methods
+
+- (void)cacheHeightForComments {
+    [self.comments enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        GHGistComment *comment = obj;
+        
+        CGFloat height = [self heightForDescription:comment.body] + 50.0;
+        
+        if (height < 71.0) {
+            height = 71.0;
+        }
+        
+        [self cacheHeight:height forRowAtIndexPath:[NSIndexPath indexPathForRow:idx+1 inSection:kUITableViewSectionComments]];
+    }];
+}
+
 #pragma mark - UIExpandableTableViewDatasource
 
 - (BOOL)tableView:(UIExpandableTableView *)tableView canExpandSection:(NSInteger)section {
-    return section == kUITableViewSectionFiles || section == kUITableViewSectionForks || section == kUITableViewSectionStar;
+    return section == kUITableViewSectionFiles || section == kUITableViewSectionForks || section == kUITableViewSectionStar || section == kUITableViewSectionComments;
 }
 
 - (BOOL)tableView:(UIExpandableTableView *)tableView needsToDownloadDataForExpandableSection:(NSInteger)section {
     if (section == kUITableViewSectionStar) {
         return !_hasStarData;
+    } else if (section == kUITableViewSectionComments) {
+        return self.comments == nil;
     }
     return NO;
 }
@@ -149,6 +227,8 @@
                 cell.textLabel.text = NSLocalizedString(@"Unstarred", @"");
             }
         }
+    } else if (section == kUITableViewSectionComments) {
+        cell.textLabel.text = NSLocalizedString(@"Comments", @"");
     }
     
     return cell;
@@ -165,6 +245,17 @@
             } else {
                 _hasStarData = YES;
                 _isGistStarred = starred;
+                [tableView expandSection:section animated:YES];
+            }
+        }];
+    } else if (section == kUITableViewSectionComments) {
+        [GHGist commentsForGistWithID:self.gist.ID completionHandler:^(NSMutableArray *comments, NSError *error) {
+            if (error) {
+                [self handleError:error];
+                [tableView cancelDownloadInSection:section];
+            } else {
+                self.comments = comments;
+                [self cacheHeightForComments];
                 [tableView expandSection:section animated:YES];
             }
         }];
@@ -194,6 +285,8 @@
         return self.gist.forks.count + 1;
     } else if (section == kUITableViewSectionStar) {
         return 2;
+    } else if (section == kUITableViewSectionComments) {
+        return self.comments.count + 2;
     }
     return 0;
 }
@@ -268,6 +361,50 @@
             
             return cell;
         }
+    } else if (indexPath.section == kUITableViewSectionComments) {
+        // comments
+        if (indexPath.row >= 1 && indexPath.row <= [self.comments count]) {
+            // display a comment
+            
+            NSString *CellIdentifier = @"GHFeedItemWithDescriptionTableViewCell";
+            
+            GHFeedItemWithDescriptionTableViewCell *cell = (GHFeedItemWithDescriptionTableViewCell *)[self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+            if (cell == nil) {
+                cell = [[[GHFeedItemWithDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+            }
+            
+            GHGistComment *comment = [self.comments objectAtIndex:indexPath.row - 1];
+            
+            [self updateImageViewForCell:cell 
+                             atIndexPath:indexPath 
+                          withGravatarID:comment.user.gravatarID];
+            
+            cell.titleLabel.text = comment.user.login;
+            cell.descriptionLabel.text = comment.body;
+            cell.repositoryLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ ago", @""), comment.createdAt.prettyTimeIntervalSinceNow];
+            
+            return cell;
+        } else if (indexPath.row == [self.comments count] + 1) {
+            // this is the new comment button
+            NSString *CellIdentifier = @"GHNewCommentTableViewCell";
+            
+            GHNewCommentTableViewCell *cell = (GHNewCommentTableViewCell *)[self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+            if (cell == nil) {
+                cell = [[[GHNewCommentTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+            }
+            
+            [self updateImageViewForCell:cell 
+                             atIndexPath:indexPath 
+                          withGravatarID:[GHSettingsHelper gravatarID]];
+            
+            cell.titleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ (right now)", @""), [GHSettingsHelper username]];
+            
+            self.textView = cell.textView;
+            cell.textView.inputAccessoryView = self.textViewToolBar;
+            self.textView.scrollsToTop = NO;
+            
+            return cell;
+        }
     }
     
     
@@ -321,6 +458,13 @@
             }
             
             return height;
+        }
+    } else if (indexPath.section == kUITableViewSectionComments) {
+        if (indexPath.row >= 1 && indexPath.row <= [self.comments count]) {
+            // we are going to display a comment
+            return [self cachedHeightForRowAtIndexPath:indexPath];
+        } else if (indexPath.row == [self.comments count] + 1) {
+            return 161.0;
         }
     }
     

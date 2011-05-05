@@ -19,11 +19,23 @@
     // star
     BOOL _hasStarData;
     BOOL _isGistStarred;
+    
+    NSMutableArray *_comments;
+    
+    UITextView *_textView;
+    UIToolbar *_textViewToolBar;
 }
 
 @property (nonatomic, copy) NSString *ID;
 @property (nonatomic, retain) GHGist *gist;
 
+@property (nonatomic, retain) NSMutableArray *comments;
+
+@property (nonatomic, retain) UITextView *textView;
+@property (nonatomic, retain) UIToolbar *textViewToolBar;
+
 - (id)initWithID:(NSString *)ID;
+
+- (void)cacheHeightForComments;
 
 @end

@@ -101,6 +101,8 @@
 }
 
 - (void)toolbarDoneButtonClicked:(UIBarButtonItem *)barButton {
+    [self.textView resignFirstResponder];
+    
     [GHIssueV3 postComment:self.textView.text 
       forIssueOnRepository:self.repository 
                 withNumber:self.number 

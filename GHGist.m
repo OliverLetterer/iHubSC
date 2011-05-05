@@ -135,6 +135,58 @@
                                        }];
 }
 
++ (void)commentsForGistWithID:(NSString *)ID completionHandler:(void(^)(NSMutableArray *gists, NSError *error))handler {
+    // v3: GET /gists/:gist_id/comments
+    
+    NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.github.com/gists/%@/comments", 
+                                       [ID stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] ] ];
+    
+    [[GHBackgroundQueue sharedInstance] sendRequestToURL:URL setupHandler:nil 
+                                       completionHandler:^(id object, NSError *error, ASIFormDataRequest *request) {
+                                           if (error) {
+                                               handler(nil, error);
+                                           } else {
+                                               NSArray *rawArray = object;
+                                               
+                                               NSMutableArray *finalArray = [NSMutableArray arrayWithCapacity:rawArray.count];
+                                               [rawArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+                                                   [finalArray addObject:[[[GHGistComment alloc] initWithRawDictionary:obj] autorelease] ];
+                                               }];
+                                               
+                                               handler(finalArray, nil);
+                                           }
+                                           
+                                       }];
+}
+
++ (void)postComment:(NSString *)comment forGistWithID:(NSString *)ID completionHandler:(void (^)(GHGistComment *, NSError *))handler {
+    // V3: POST /gists/:gist_id/comments
+    
+    NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.github.com/gists/%@/comments", 
+                                       [ID stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] ] ];
+    
+    [[GHBackgroundQueue sharedInstance] sendRequestToURL:URL 
+                                            setupHandler:^(ASIFormDataRequest *request) {
+                                                NSMutableDictionary *jsonDictionary = [NSMutableDictionary dictionaryWithCapacity:4];
+                                                if (comment) {
+                                                    [jsonDictionary setObject:comment forKey:@"body"];
+                                                }
+                                                
+                                                NSString *jsonString = [jsonDictionary JSONString];
+                                                NSMutableData *jsonData = [[[jsonString dataUsingEncoding:NSUTF8StringEncoding] mutableCopy] autorelease];
+                                                [request setPostBody:jsonData];
+                                                [request setPostLength:[jsonString length] ];
+                                                
+                                            } 
+                                       completionHandler:^(id object, NSError *error, ASIFormDataRequest *request) {
+                                           if (error) {
+                                               handler(nil, error);
+                                           } else {
+                                               handler([[[GHGistComment alloc] initWithRawDictionary:object] autorelease], nil);
+                                           }
+                                       }];
+}
+
 #pragma mark - Memory management
 
 - (void)dealloc {

@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@class GHUser;
+@class GHUser, GHGistComment;
 
 @interface GHGist : NSObject {
 @private
@@ -23,6 +23,7 @@
     NSString *_pushURL;
     NSString *_createdAt;
     NSArray *_forks;
+#warning GHGist::_history not supported yet
 //    NSArray *_history;           // TODO: <------- no support yet for history
 }
 
@@ -31,12 +32,12 @@
 @property (nonatomic, copy) NSString *description;
 @property (nonatomic, copy) NSNumber *public;
 @property (nonatomic, retain) GHUser *user;
-@property (nonatomic, retain) NSArray *files;
+@property (nonatomic, retain) NSArray *files;   // contains GHGistFile's
 @property (nonatomic, copy) NSNumber *comments;
 @property (nonatomic, copy) NSString *pullURL;
 @property (nonatomic, copy) NSString *pushURL;
 @property (nonatomic, copy) NSString *createdAt;
-@property (nonatomic, retain) NSArray *forks;
+@property (nonatomic, retain) NSArray *forks;   // contains GHGistFork's
 
 - (id)initWithRawDictionary:(NSDictionary *)rawDictionay;
 
@@ -45,5 +46,8 @@
 + (void)isGistStarredWithID:(NSString *)ID completionHandler:(void(^)(BOOL starred, NSError *error))handler;
 + (void)starGistWithID:(NSString *)ID completionHandler:(void(^)(NSError *error))handler;
 + (void)unstarGistWithID:(NSString *)ID completionHandler:(void(^)(NSError *error))handler;
+
++ (void)commentsForGistWithID:(NSString *)ID completionHandler:(void(^)(NSMutableArray *comments, NSError *error))handler;
++ (void)postComment:(NSString *)comment forGistWithID:(NSString *)ID completionHandler:(void(^)(GHGistComment *comment, NSError *error))handler;
 
 @end

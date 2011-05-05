@@ -25,10 +25,6 @@ support all these events
 [X]: Implemented
 [-]: clickable (include in navigation hierarchie)
 
-V1.3
-Gist support:
-- view comments and write comment
-
 V1.5
 - ipad Interface
 

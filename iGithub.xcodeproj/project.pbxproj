@@ -190,6 +190,7 @@
 		A7F7CA62134DA1FA005509D0 /* NSError+GithubAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = A7F7CA61134DA1FA005509D0 /* NSError+GithubAPI.m */; };
 		A7F92B881373149C000EBC5E /* GHGistFork.m in Sources */ = {isa = PBXBuildFile; fileRef = A7F92B871373149C000EBC5E /* GHGistFork.m */; };
 		A7F92B8D137318C3000EBC5E /* GHGistViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7F92B8C137318C3000EBC5E /* GHGistViewController.m */; };
+		A7F92B90137334E3000EBC5E /* GHGistComment.m in Sources */ = {isa = PBXBuildFile; fileRef = A7F92B8F137334E3000EBC5E /* GHGistComment.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -519,6 +520,8 @@
 		A7F92B871373149C000EBC5E /* GHGistFork.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHGistFork.m; sourceTree = "<group>"; };
 		A7F92B8B137318C3000EBC5E /* GHGistViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHGistViewController.h; sourceTree = "<group>"; };
 		A7F92B8C137318C3000EBC5E /* GHGistViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHGistViewController.m; sourceTree = "<group>"; };
+		A7F92B8E137334E2000EBC5E /* GHGistComment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHGistComment.h; sourceTree = "<group>"; };
+		A7F92B8F137334E3000EBC5E /* GHGistComment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHGistComment.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1077,6 +1080,8 @@
 				A767716013707C6F006D70D6 /* GHGistFile.m */,
 				A7F92B861373149C000EBC5E /* GHGistFork.h */,
 				A7F92B871373149C000EBC5E /* GHGistFork.m */,
+				A7F92B8E137334E2000EBC5E /* GHGistComment.h */,
+				A7F92B8F137334E3000EBC5E /* GHGistComment.m */,
 			);
 			name = GHGist;
 			sourceTree = "<group>";
@@ -1862,6 +1867,7 @@
 				A767716113707C6F006D70D6 /* GHGistFile.m in Sources */,
 				A7F92B881373149C000EBC5E /* GHGistFork.m in Sources */,
 				A7F92B8D137318C3000EBC5E /* GHGistViewController.m in Sources */,
+				A7F92B90137334E3000EBC5E /* GHGistComment.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

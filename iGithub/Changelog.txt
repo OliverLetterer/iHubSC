@@ -32,3 +32,4 @@ Gist support;
 - Watch users that forked a Gist
 - Delete your own Gists
 - Star and unstar any Gist
+- view comments and write comment

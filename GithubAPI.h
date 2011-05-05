@@ -38,6 +38,7 @@
 #import "GHGist.h"
 #import "GHGistFile.h"
 #import "GHGistFork.h"
+#import "GHGistComment.h"
 
 #import "GHPayload.h"
 #import "GHIssuePayload.h"
