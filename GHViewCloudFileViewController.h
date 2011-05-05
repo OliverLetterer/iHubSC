@@ -53,6 +53,7 @@
 @property (nonatomic, retain) UIImageView *imageView;
 
 - (id)initWithRepository:(NSString *)repository tree:(NSString *)tree filename:(NSString *)filename relativeURL:(NSString *)relativeURL;
+- (id)initWithFile:(NSString *)filename contentsOfFile:(NSString *)content;
 
 - (void)updateViewToShowPlainTextFile;
 - (void)updateViewForImageDownload;

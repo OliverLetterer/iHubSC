@@ -188,6 +188,8 @@
 		A7F62626134B89E5006487CA /* NSDate+GithubAPIAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = A7F62625134B89E5006487CA /* NSDate+GithubAPIAdditions.m */; };
 		A7F6262A134C45D5006487CA /* GHTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7F62629134C45D5006487CA /* GHTableViewController.m */; };
 		A7F7CA62134DA1FA005509D0 /* NSError+GithubAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = A7F7CA61134DA1FA005509D0 /* NSError+GithubAPI.m */; };
+		A7F92B881373149C000EBC5E /* GHGistFork.m in Sources */ = {isa = PBXBuildFile; fileRef = A7F92B871373149C000EBC5E /* GHGistFork.m */; };
+		A7F92B8D137318C3000EBC5E /* GHGistViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7F92B8C137318C3000EBC5E /* GHGistViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -513,6 +515,10 @@
 		A7F62629134C45D5006487CA /* GHTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHTableViewController.m; sourceTree = "<group>"; };
 		A7F7CA60134DA1FA005509D0 /* NSError+GithubAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSError+GithubAPI.h"; sourceTree = "<group>"; };
 		A7F7CA61134DA1FA005509D0 /* NSError+GithubAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSError+GithubAPI.m"; sourceTree = "<group>"; };
+		A7F92B861373149C000EBC5E /* GHGistFork.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHGistFork.h; sourceTree = "<group>"; };
+		A7F92B871373149C000EBC5E /* GHGistFork.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHGistFork.m; sourceTree = "<group>"; };
+		A7F92B8B137318C3000EBC5E /* GHGistViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHGistViewController.h; sourceTree = "<group>"; };
+		A7F92B8C137318C3000EBC5E /* GHGistViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHGistViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1015,6 +1021,7 @@
 		A750573F1343422200514A82 /* UserInterface */ = {
 			isa = PBXGroup;
 			children = (
+				A7F92B8A137318B1000EBC5E /* GHGistViewController */,
 				A7837EA2136CADAB00B13B95 /* PDColoredProgressView */,
 				A709F747136876A500B0CDE7 /* GHOrganizationViewController */,
 				A712B7ED135E0B5E0009B7A7 /* DDProgressView */,
@@ -1068,6 +1075,8 @@
 				A767715D13707A88006D70D6 /* GHGist.m */,
 				A767715F13707C6F006D70D6 /* GHGistFile.h */,
 				A767716013707C6F006D70D6 /* GHGistFile.m */,
+				A7F92B861373149C000EBC5E /* GHGistFork.h */,
+				A7F92B871373149C000EBC5E /* GHGistFork.m */,
 			);
 			name = GHGist;
 			sourceTree = "<group>";
@@ -1613,6 +1622,15 @@
 			name = NSError;
 			sourceTree = "<group>";
 		};
+		A7F92B8A137318B1000EBC5E /* GHGistViewController */ = {
+			isa = PBXGroup;
+			children = (
+				A7F92B8B137318C3000EBC5E /* GHGistViewController.h */,
+				A7F92B8C137318C3000EBC5E /* GHGistViewController.m */,
+			);
+			name = GHGistViewController;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1842,6 +1860,8 @@
 				A7EE1123136F481500A1E693 /* Appirater.m in Sources */,
 				A767715E13707A88006D70D6 /* GHGist.m in Sources */,
 				A767716113707C6F006D70D6 /* GHGistFile.m in Sources */,
+				A7F92B881373149C000EBC5E /* GHGistFork.m in Sources */,
+				A7F92B8D137318C3000EBC5E /* GHGistViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

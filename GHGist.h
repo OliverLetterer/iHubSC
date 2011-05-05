@@ -22,6 +22,8 @@
     NSString *_pullURL;
     NSString *_pushURL;
     NSString *_createdAt;
+    NSArray *_forks;
+//    NSArray *_history;           // TODO: <------- no support yet for history
 }
 
 @property (nonatomic, copy) NSString *URL;
@@ -34,7 +36,14 @@
 @property (nonatomic, copy) NSString *pullURL;
 @property (nonatomic, copy) NSString *pushURL;
 @property (nonatomic, copy) NSString *createdAt;
+@property (nonatomic, retain) NSArray *forks;
 
 - (id)initWithRawDictionary:(NSDictionary *)rawDictionay;
+
++ (void)gistWithID:(NSString *)ID completionHandler:(void(^)(GHGist *gist, NSError *error))handler;
++ (void)deleteGistWithID:(NSString *)ID completionHandler:(void(^)(NSError *error))handler;
++ (void)isGistStarredWithID:(NSString *)ID completionHandler:(void(^)(BOOL starred, NSError *error))handler;
++ (void)starGistWithID:(NSString *)ID completionHandler:(void(^)(NSError *error))handler;
++ (void)unstarGistWithID:(NSString *)ID completionHandler:(void(^)(NSError *error))handler;
 
 @end

@@ -90,6 +90,14 @@
     return self;
 }
 
+- (id)initWithFile:(NSString *)filename contentsOfFile:(NSString *)content {
+    if (self == [super init]) {
+        self.contentString = content;
+        self.title = filename;
+    }
+    return self;
+}
+
 #pragma mark - Memory management
 
 - (void)dealloc {
@@ -188,10 +196,13 @@
     [self.scrollView removeFromSuperview];
     self.scrollView = nil;
     
-    UITextView *textView = [[[UITextView alloc] initWithFrame:self.view.bounds] autorelease];
+    CGRect frame = CGRectMake(0.0, 0.0, 320.0, 367.0f);
+    
+    UITextView *textView = [[[UITextView alloc] initWithFrame:frame] autorelease];
     textView.text = self.contentString;
     textView.editable = NO;
     textView.font = [UIFont systemFontOfSize:16.0];
+    textView.alwaysBounceVertical = YES;
     [self.view addSubview:textView];
 }
 

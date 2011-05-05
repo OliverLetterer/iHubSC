@@ -15,6 +15,7 @@
 #import "NSString+Additions.h"
 #import "GHRecentActivityViewController.h"
 #import "GHOrganizationViewController.h"
+#import "GHGistViewController.h"
 
 #define kUITableViewSectionUserData             0
 #define kUITableViewSectionRepositories         1
@@ -36,7 +37,11 @@
 #pragma mark - setters and getters
 
 - (BOOL)canFollowUser {
-    return ![self.username isEqualToString:[GHAuthenticationManager sharedInstance].username ];
+    return !self.hasAdministrationRights;
+}
+
+- (BOOL)hasAdministrationRights {
+    return [self.username isEqualToString:[GHAuthenticationManager sharedInstance].username ];
 }
 
 - (BOOL)isFollowingUser {
@@ -400,7 +405,7 @@
                 [self handleError:error];
                 [tableView cancelDownloadInSection:section];
             } else {
-                self.gists = gists;
+                self.gists = [[gists mutableCopy] autorelease];
                 _gistsNextPage = nextPage;
                 [self cacheGistsHeight];
                 [tableView expandSection:section animated:YES];
@@ -675,26 +680,37 @@
     return self.dummyCell;
 }
 
-/*
+
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
     // Return NO if you do not want the specified item to be editable.
-    return YES;
+    if (indexPath.section == kUITableViewGists && indexPath.row > 0 && self.hasAdministrationRights) {
+        return YES;
+    }
+    return NO;
 }
-*/
 
-/*
 // Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
+        if (indexPath.section == kUITableViewGists && indexPath.row > 0) {
+            GHGist *gist = [self.gists objectAtIndex:indexPath.row - 1];
+            
+            [GHGist deleteGistWithID:gist.ID completionHandler:^(NSError *error) {
+                if (error) {
+                    [self handleError:error];
+                    [tableView reloadSections:[NSIndexSet indexSetWithIndex:indexPath.section] 
+                             withRowAnimation:UITableViewRowAnimationNone];
+                } else {
+                    [self.gists removeObjectAtIndex:indexPath.row - 1];
+                    [self cacheGistsHeight];
+                    [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+                }
+            }];
+        }
+    }  
 }
-*/
 
 /*
 // Override to support rearranging the table view.
@@ -803,6 +819,11 @@
         GHOrganizationViewController *organizationViewController = [[[GHOrganizationViewController alloc] initWithOrganizationLogin:organization.login] autorelease];
         
         [self.navigationController pushViewController:organizationViewController animated:YES];
+    } else if (indexPath.section == kUITableViewGists) {
+        GHGist *gist = [self.gists objectAtIndex:indexPath.row - 1];
+        
+        GHGistViewController *gistViewController = [[[GHGistViewController alloc] initWithID:gist.ID] autorelease];
+        [self.navigationController pushViewController:gistViewController animated:YES];
     } else {
         [self.tableView deselectRowAtIndexPath:indexPath animated:NO];
     }

@@ -17,6 +17,7 @@
 #import "GHPushPayloadViewController.h"
 #import "GHSingleRepositoryViewController.h"
 #import "GHUserViewController.h"
+#import "GHGistViewController.h"
 
 @implementation GHNewsFeedViewController
 
@@ -734,6 +735,11 @@
         
         GHUserViewController *userViewController = [[[GHUserViewController alloc] initWithUsername:payload.member] autorelease];
         [self.navigationController pushViewController:userViewController animated:YES];
+    } else if (item.payload.type == GHPayloadGistEvent) {
+        GHGistEventPayload *payload = (GHGistEventPayload *)item.payload;
+        
+        GHGistViewController *gistViewController = [[[GHGistViewController alloc] initWithID:payload.gistID] autorelease];
+        [self.navigationController pushViewController:gistViewController animated:YES];
     } else {
         [self.tableView deselectRowAtIndexPath:indexPath animated:NO];
     }

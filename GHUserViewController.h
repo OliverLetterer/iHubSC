@@ -24,7 +24,7 @@
     NSArray *_followingUsers;
     NSArray *_organizations;
     NSMutableArray *_followedUsers;
-    NSArray *_gists;
+    NSMutableArray *_gists;
     NSUInteger _gistsNextPage;
     
     NSIndexPath *_lastIndexPathForSingleRepositoryViewController;
@@ -38,10 +38,11 @@
 @property (nonatomic, retain) NSArray *followingUsers;
 @property (nonatomic, retain) NSArray *organizations;
 @property (nonatomic, retain) NSMutableArray *followedUsers;
-@property (nonatomic, retain) NSArray *gists;
+@property (nonatomic, retain) NSMutableArray *gists;
 
 @property (nonatomic, readonly) BOOL canFollowUser;
 @property (nonatomic, readonly) BOOL isFollowingUser;
+@property (nonatomic, readonly) BOOL hasAdministrationRights;
 
 @property (nonatomic, copy) NSIndexPath *lastIndexPathForSingleRepositoryViewController;
 

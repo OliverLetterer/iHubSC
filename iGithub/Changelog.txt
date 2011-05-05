@@ -24,8 +24,11 @@ Repositories:
 - View Milestones.
 
 
-
 V1.3
 - new Icon
 Gist support;
 - View Gists of any User
+- View all Files attatched to a Gist
+- Watch users that forked a Gist
+- Delete your own Gists
+- Star and unstar any Gist

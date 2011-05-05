@@ -37,6 +37,7 @@
 #import "GHMilestone.h"
 #import "GHGist.h"
 #import "GHGistFile.h"
+#import "GHGistFork.h"
 
 #import "GHPayload.h"
 #import "GHIssuePayload.h"

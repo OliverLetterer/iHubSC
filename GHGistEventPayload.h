@@ -15,6 +15,8 @@
     NSString *_name;
     NSString *_snippet;
     NSString *_URL;
+    
+    NSString *_gistID;
 }
 
 @property (nonatomic, copy) NSString *action;
@@ -22,5 +24,6 @@
 @property (nonatomic, copy) NSString *name;
 @property (nonatomic, copy) NSString *snippet;
 @property (nonatomic, copy) NSString *URL;
+@property (nonatomic, copy) NSString *gistID;
 
 @end
