@@ -112,8 +112,6 @@
 		A7837EA5136CADD400B13B95 /* GHMilestoneTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A7837EA4136CADD400B13B95 /* GHMilestoneTableViewCell.m */; };
 		A7A80CB61362BA0800BE70B8 /* GHAdvancedTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = A7A80CB51362BA0800BE70B8 /* GHAdvancedTextView.m */; };
 		A7A80CBA1362BA3900BE70B8 /* GHAdvancedTextViewInternalCoreTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = A7A80CB91362BA3900BE70B8 /* GHAdvancedTextViewInternalCoreTextView.m */; };
-		A7AF97EE1369F19B00EB2D00 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A7AF97EC1369F19B00EB2D00 /* Default@2x.png */; };
-		A7AF97EF1369F19B00EB2D00 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = A7AF97ED1369F19B00EB2D00 /* Default.png */; };
 		A7BC6779134CCAF00083F906 /* GHPublicRepositoryIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = A7BC6777134CCAF00083F906 /* GHPublicRepositoryIcon.png */; };
 		A7BC677A134CCAF00083F906 /* GHPublicRepositoryIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A7BC6778134CCAF00083F906 /* GHPublicRepositoryIcon@2x.png */; };
 		A7BC677E134CCD1A0083F906 /* GHPrivateRepositoryIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A7BC677C134CCD1A0083F906 /* GHPrivateRepositoryIcon@2x.png */; };
@@ -191,6 +189,8 @@
 		A7F92B881373149C000EBC5E /* GHGistFork.m in Sources */ = {isa = PBXBuildFile; fileRef = A7F92B871373149C000EBC5E /* GHGistFork.m */; };
 		A7F92B8D137318C3000EBC5E /* GHGistViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7F92B8C137318C3000EBC5E /* GHGistViewController.m */; };
 		A7F92B90137334E3000EBC5E /* GHGistComment.m in Sources */ = {isa = PBXBuildFile; fileRef = A7F92B8F137334E3000EBC5E /* GHGistComment.m */; };
+		A7F92B9C1373E26C000EBC5E /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = A7F92B9A1373E26C000EBC5E /* Default.png */; };
+		A7F92B9D1373E26C000EBC5E /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A7F92B9B1373E26C000EBC5E /* Default@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -383,8 +383,6 @@
 		A7A80CB51362BA0800BE70B8 /* GHAdvancedTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHAdvancedTextView.m; sourceTree = "<group>"; };
 		A7A80CB81362BA3900BE70B8 /* GHAdvancedTextViewInternalCoreTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHAdvancedTextViewInternalCoreTextView.h; sourceTree = "<group>"; };
 		A7A80CB91362BA3900BE70B8 /* GHAdvancedTextViewInternalCoreTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHAdvancedTextViewInternalCoreTextView.m; sourceTree = "<group>"; };
-		A7AF97EC1369F19B00EB2D00 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
-		A7AF97ED1369F19B00EB2D00 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		A7BC6777134CCAF00083F906 /* GHPublicRepositoryIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GHPublicRepositoryIcon.png; sourceTree = "<group>"; };
 		A7BC6778134CCAF00083F906 /* GHPublicRepositoryIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GHPublicRepositoryIcon@2x.png"; sourceTree = "<group>"; };
 		A7BC677C134CCD1A0083F906 /* GHPrivateRepositoryIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GHPrivateRepositoryIcon@2x.png"; sourceTree = "<group>"; };
@@ -522,6 +520,8 @@
 		A7F92B8C137318C3000EBC5E /* GHGistViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHGistViewController.m; sourceTree = "<group>"; };
 		A7F92B8E137334E2000EBC5E /* GHGistComment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHGistComment.h; sourceTree = "<group>"; };
 		A7F92B8F137334E3000EBC5E /* GHGistComment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHGistComment.m; sourceTree = "<group>"; };
+		A7F92B9A1373E26C000EBC5E /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		A7F92B9B1373E26C000EBC5E /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1283,8 +1283,8 @@
 			isa = PBXGroup;
 			children = (
 				A7384D68136BFCE200DD1BE5 /* iHub - Icon Template.psd */,
-				A7AF97EC1369F19B00EB2D00 /* Default@2x.png */,
-				A7AF97ED1369F19B00EB2D00 /* Default.png */,
+				A7F92B9A1373E26C000EBC5E /* Default.png */,
+				A7F92B9B1373E26C000EBC5E /* Default@2x.png */,
 				A7D41B1D135B899100CD3A5C /* Icons */,
 				A76FC9A41352D231004C642E /* 145-persondot.png */,
 				A76FC9A51352D231004C642E /* 145-persondot@2x.png */,
@@ -1714,8 +1714,6 @@
 				A76FC9A61352D231004C642E /* 145-persondot.png in Resources */,
 				A76FC9A71352D231004C642E /* 145-persondot@2x.png in Resources */,
 				A7D14F7B1356FACF00E1B980 /* GHCreateIssueTableViewCellContentView.xib in Resources */,
-				A7AF97EE1369F19B00EB2D00 /* Default@2x.png in Resources */,
-				A7AF97EF1369F19B00EB2D00 /* Default.png in Resources */,
 				A76770F913705BC3006D70D6 /* Icon-72.png in Resources */,
 				A76770FA13705BC3006D70D6 /* Icon-Small-50.png in Resources */,
 				A76770FB13705BC3006D70D6 /* Icon-Small.png in Resources */,
@@ -1726,6 +1724,8 @@
 				A76771651370A34F006D70D6 /* GHClipBoard@2x.png in Resources */,
 				A76771681370A5B2006D70D6 /* GHClipBoardPrivate.png in Resources */,
 				A76771691370A5B2006D70D6 /* GHClipBoardPrivate@2x.png in Resources */,
+				A7F92B9C1373E26C000EBC5E /* Default.png in Resources */,
+				A7F92B9D1373E26C000EBC5E /* Default@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
