@@ -278,7 +278,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
     if (section == kUITableViewSectionInfo) {
-        return 1;
+        return 2;
     } else if (section == kUITableViewSectionFiles) {
         return self.gist.files.count + 1;
     } else if (section == kUITableViewSectionForks) {
@@ -316,6 +316,19 @@
             }
             
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            
+            return cell;
+        } else if (indexPath.row == 1) {
+            NSString *CellIdentifier = @"DetailsTableViewCell";
+            
+            UITableViewCellWithLinearGradientBackgroundView *cell = (UITableViewCellWithLinearGradientBackgroundView *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+            if (!cell) {
+                cell = [[[UITableViewCellWithLinearGradientBackgroundView alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:CellIdentifier] autorelease];
+            }
+            
+            cell.textLabel.text = NSLocalizedString(@"Owner", @"");
+            cell.detailTextLabel.text = self.gist.user.login;
+            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             
             return cell;
         }
@@ -510,6 +523,9 @@
         GHGistComment *comment = [self.comments objectAtIndex:indexPath.row - 1];
         
         GHUserViewController *userViewController = [[[GHUserViewController alloc] initWithUsername:comment.user.login] autorelease];
+        [self.navigationController pushViewController:userViewController animated:YES];
+    } else if (indexPath.section == kUITableViewSectionInfo && indexPath.row == 1) {
+        GHUserViewController *userViewController = [[[GHUserViewController alloc] initWithUsername:self.gist.user.login] autorelease];
         [self.navigationController pushViewController:userViewController animated:YES];
     } else {
         [tableView deselectRowAtIndexPath:indexPath animated:NO];
