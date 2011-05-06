@@ -1966,7 +1966,7 @@
 				INFOPLIST_FILE = "iGithub/iGithub-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
-				VALIDATE_PRODUCT = YES;
+				VALIDATE_PRODUCT = NO;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
