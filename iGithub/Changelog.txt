@@ -41,6 +41,35 @@ Gist support;
 iTunes Changelog:
 
 V1.3
+- Fixed error handling bug 
+- New Icon 
+
+Updated Organizations: 
+================= 
+- Browse public News Feed 
+
+Added Issues v2.0 Support: 
+================= 
+- View assigned Milestone 
+- View assignee 
+- View attatched pull request 
+- Create new Issues, assign someone and select a milestone. 
+
+Updated Repositories: 
+================= 
+- View Milestones. 
+
+Added Gist support: 
+================= 
+- View Gists of any User 
+- View all Files attatched to a Gist 
+- Browse users that forked a Gist 
+- Delete your own Gists (swipe to delete in My Profile) 
+- Star and unstar any Gist 
+- View and write comments
+
+
+
 
 
 V1.1
