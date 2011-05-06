@@ -315,6 +315,8 @@
                 cell.imageView.image = [UIImage imageNamed:@"GHClipBoardPrivate.png"];
             }
             
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            
             return cell;
         }
     } else if (indexPath.section == kUITableViewSectionFiles) {
@@ -504,6 +506,11 @@
                          withRowAnimation:UITableViewRowAnimationNone];
             }];
         }
+    } else if (indexPath.section == kUITableViewSectionComments && indexPath.row > 0 && indexPath.row <= self.comments.count) {
+        GHGistComment *comment = [self.comments objectAtIndex:indexPath.row - 1];
+        
+        GHUserViewController *userViewController = [[[GHUserViewController alloc] initWithUsername:comment.user.login] autorelease];
+        [self.navigationController pushViewController:userViewController animated:YES];
     } else {
         [tableView deselectRowAtIndexPath:indexPath animated:NO];
     }

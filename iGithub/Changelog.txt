@@ -33,3 +33,28 @@ Gist support;
 - Delete your own Gists
 - Star and unstar any Gist
 - View and write comments
+
+
+
+
+
+iTunes Changelog:
+
+V1.3
+
+
+V1.1
+You can follow @iHubSC on Twitter to receive updates or to request features! 
+
+- Improved memory management 
+- minor interface improvements 
+- new icon 
+- new name 
+
+Added Support for Organizations: 
+- View Organization News Feed 
+- View Organizations that a User is part of. 
+- View Public Repositories and Members of an Organization. 
+- View and delete Teams 
+- View and delete Users of a Team 
+- View and delete repositories of a Team
