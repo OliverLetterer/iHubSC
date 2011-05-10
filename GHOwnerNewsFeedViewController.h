@@ -16,11 +16,14 @@
     NSArray *_organizations;
     
     NSString *_defaultOrganizationName;
+    
+    NSString *_lastCreationDate;
 }
 
 @property (nonatomic, retain) UISegmentedControl *segmentControl;
 @property (nonatomic, retain) NSArray *organizations;
 @property (nonatomic, retain) NSString *defaultOrganizationName;
+@property (nonatomic, copy) NSString *lastCreationDate;
 
 - (void)segmentControlValueChanged:(UISegmentedControl *)segmentControl;
 - (void)loadDataBasedOnSegmentControl;

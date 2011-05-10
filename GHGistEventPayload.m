@@ -22,7 +22,6 @@
 
 - (id)initWithRawDictionary:(NSDictionary *)rawDictionary {
     if ((self = [super initWithRawDictionary:rawDictionary])) {
-        DLog(@"%@", rawDictionary);
         // Initialization code
         self.action = [rawDictionary objectForKeyOrNilOnNullObject:@"action"];
         self.descriptionGist = [rawDictionary objectForKeyOrNilOnNullObject:@"desc"];

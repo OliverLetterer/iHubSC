@@ -12,7 +12,7 @@
 @class GHNewsFeed, GHNewsFeedItemTableViewCell, GHNewsFeedItem;
 
 @interface GHNewsFeedViewController : GHTableViewController {
-@private
+@protected
     GHNewsFeed *_newsFeed;
 }
 

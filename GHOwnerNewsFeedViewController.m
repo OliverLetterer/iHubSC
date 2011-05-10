@@ -15,10 +15,11 @@
 #import "GHViewIssueTableViewController.h"
 
 #define GHOwnerNewsFeedViewControllerDefaultOrganizationNameKey @"GHOwnerNewsFeedViewControllerDefaultOrganizationName"
+#define GHOwnerNewsFeedViewControllerLastCreationDateKey @"GHOwnerNewsFeedViewControllerLastCreationDate"
 
 @implementation GHOwnerNewsFeedViewController
 
-@synthesize segmentControl=_segmentControl, organizations=_organizations, defaultOrganizationName=_defaultOrganizationName;
+@synthesize segmentControl=_segmentControl, organizations=_organizations, defaultOrganizationName=_defaultOrganizationName, lastCreationDate=_lastCreationDate;
 
 - (void)setDefaultOrganizationName:(NSString *)defaultOrganizationName {
     [_defaultOrganizationName release];
@@ -34,6 +35,49 @@
     }
     
     return _defaultOrganizationName;
+}
+
+- (void)setLastCreationDate:(NSString *)lastCreationDate {
+    [_lastCreationDate release];
+    _lastCreationDate = [lastCreationDate copy];
+    
+    [[NSUserDefaults standardUserDefaults] setObject:_lastCreationDate forKey:GHOwnerNewsFeedViewControllerLastCreationDateKey];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+- (NSString *)lastCreationDate {
+    if (!_lastCreationDate) {
+        _lastCreationDate = [[[NSUserDefaults standardUserDefaults] objectForKey:GHOwnerNewsFeedViewControllerLastCreationDateKey] copy];
+    }
+    
+    return _lastCreationDate;
+}
+
+- (void)setNewsFeed:(GHNewsFeed *)newsFeed {
+    [super setNewsFeed:newsFeed];
+    
+    if (newsFeed) {
+        
+        NSUInteger index = [_newsFeed.items indexOfObjectPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {
+            GHNewsFeedItem *item = obj;
+            if ([item.creationDate isEqualToString:self.lastCreationDate]) {
+                *stop = YES;
+                return YES;
+            }
+            return NO;
+        }];
+        
+        if (index != NSNotFound && index > 0) {
+            CGRect rect = [self.tableView rectForRowAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0] ];
+            CGPoint scrollPoint = CGPointMake(0.0, rect.origin.y - 61.0f);
+            [self.tableView setContentOffset:scrollPoint animated:NO];
+        }
+        
+        if (newsFeed.items.count > 0) {
+            GHNewsFeedItem *item = [newsFeed.items objectAtIndex:0];
+            self.lastCreationDate = item.creationDate;
+        }
+    }
 }
 
 #pragma mark - Initialization
@@ -58,6 +102,7 @@
     [_segmentControl release];
     [_organizations release];
     [_defaultOrganizationName release];
+    [_lastCreationDate release];
     
     [super dealloc];
 }
