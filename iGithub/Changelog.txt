@@ -34,8 +34,9 @@ Gist support;
 - Star and unstar any Gist
 - View and write comments
 
-
-
+V1.3.1
+- storing last known News Feed position
+- if user can close/open an issue, Administration is no longer displayed
 
 
 iTunes Changelog:

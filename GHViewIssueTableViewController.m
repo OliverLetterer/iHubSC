@@ -25,6 +25,8 @@
 #define kUITableViewSectionComments         2
 #define kUITableViewSectionAdministration   3
 
+#define kUITableViesNumberOfSections        4
+
 @implementation GHViewIssueTableViewController
 
 @synthesize issue=_issue;
@@ -47,6 +49,7 @@
                                        NSString *myUsername = [GHSettingsHelper username];
                                        for (NSString *collaborator in collaborators) {
                                            if ([collaborator isEqualToString:myUsername]) {
+                                               DLog(@"_canUserAdministrateIssue");
                                                _canUserAdministrateIssue = YES;
                                                break;
                                            }
@@ -265,15 +268,7 @@
     if (_isDownloadingIssueData) {
         result = 1;
     } else {
-        // section
-        //  0: the issue itself
-        //  1: comments
-        //  2: administrate
-        result = 4;
-        
-        if (_canUserAdministrateIssue) {
-            result++;
-        }
+        return kUITableViesNumberOfSections;
     }
     
     return result;
@@ -300,6 +295,9 @@
             result = [self.issue.comments intValue] + 2;
         } else if (section == kUITableViewSectionAdministration) {
             // first will be administrate
+            if (!_canUserAdministrateIssue) {
+                return 0;
+            }
             result = 2;
         } else if (section == kUITableViewSectionPullRequest) {
             return self.issue.pullRequestID == nil ? 0 : 1;
