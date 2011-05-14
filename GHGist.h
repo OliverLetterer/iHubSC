@@ -23,8 +23,7 @@
     NSString *_pushURL;
     NSString *_createdAt;
     NSArray *_forks;
-#warning GHGist::_history not supported yet
-//    NSArray *_history;           // TODO: <------- no support yet for history
+//    NSArray *_history;           // TODO: GHGist::_history not supported yet
 }
 
 @property (nonatomic, copy) NSString *URL;

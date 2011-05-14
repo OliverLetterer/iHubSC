@@ -145,6 +145,56 @@
 - (void)loadView {
     self.tableView = [[[UIExpandableTableView alloc] initWithFrame:CGRectMake(0.0, 0.0, 10.0, 10.0) style:UITableViewStylePlain] autorelease];
     self.tableView.maximumRowCountToStillUseAnimationWhileExpanding = 100;
+    
+    NSDictionary *newActions = [NSDictionary dictionaryWithObjectsAndKeys:[NSNull null], @"onOrderIn",
+                                       [NSNull null], @"onOrderOut",
+                                       [NSNull null], @"sublayers",
+                                       [NSNull null], @"contents",
+                                       [NSNull null], @"bounds",
+                                       nil];
+    
+    CAGradientLayer *gradientLayer = nil;
+    UIView *view = nil;
+    
+    view = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, 480, 22)] autorelease];
+	view.backgroundColor = [UIColor clearColor];
+	gradientLayer = [CAGradientLayer layer];
+	gradientLayer.frame = CGRectMake(0, 0, 480, 22);
+	gradientLayer.colors = [NSArray arrayWithObjects:
+							(id)[UIColor colorWithWhite:1.0 alpha:0.0].CGColor,
+							(id)[UIColor colorWithWhite:0.0 alpha:0.3].CGColor,
+							nil];
+    gradientLayer.actions = newActions;
+	[view.layer addSublayer:gradientLayer];
+	self.tableView.tableHeaderView = view;
+	
+	view = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, 480, 22)] autorelease];
+	view.backgroundColor = [UIColor clearColor];
+	gradientLayer = [CAGradientLayer layer];
+	gradientLayer.frame = CGRectMake(0, 0, 480, 22);
+	gradientLayer.colors = [NSArray arrayWithObjects:
+							(id)[UIColor colorWithWhite:0.0 alpha:0.3].CGColor,
+							(id)[UIColor colorWithWhite:1.0 alpha:0.0].CGColor,
+							nil];
+    gradientLayer.actions = newActions;
+	[view.layer addSublayer:gradientLayer];
+	self.tableView.tableFooterView = view;
+    
+    self.tableView.contentInset = UIEdgeInsetsMake(-22, 0, -22, 0);
+    
+//    view = [[[UIView alloc] initWithFrame:self.view.bounds] autorelease];
+//    view.backgroundColor = [UIColor clearColor];
+//    
+//    gradientLayer = [CAGradientLayer layer];
+//	gradientLayer.frame = CGRectMake(0, 0, 480, 22);
+//	gradientLayer.colors = [NSArray arrayWithObjects:
+//							(id)[UIColor colorWithWhite:0.0 alpha:0.3].CGColor,
+//							(id)[UIColor colorWithWhite:1.0 alpha:0.0].CGColor,
+//							nil];
+//    gradientLayer.actions = newActions;
+//	[view.layer addSublayer:gradientLayer];
+//    self.tableView.backgroundView = view;
+    
 }
 
 - (void)viewDidLoad {
@@ -154,8 +204,9 @@
         return;
     }
     
-    _refreshHeaderView = [[EGORefreshTableHeaderView alloc] initWithFrame:CGRectMake(0.0f, 0.0f - self.tableView.bounds.size.height, self.view.frame.size.width, self.tableView.bounds.size.height)];
+    _refreshHeaderView = [[EGORefreshTableHeaderView alloc] initWithFrame:CGRectMake(0.0f, 22.0f - self.tableView.bounds.size.height, self.view.frame.size.width, self.tableView.bounds.size.height)];
     _refreshHeaderView.delegate = self;
+    _refreshHeaderView.defaultInset = self.tableView.contentInset;
     [self.tableView addSubview:_refreshHeaderView];
 	
 	//  update the last update date
@@ -228,6 +279,7 @@
 	_reloading = NO;
     self.lastRefreshDate = [NSDate date];
 	[_refreshHeaderView egoRefreshScrollViewDataSourceDidFinishedLoading:self.tableView];
+    self.tableView.contentInset = UIEdgeInsetsMake(-22, 0, -22, 0);
 }
 
 #pragma mark -

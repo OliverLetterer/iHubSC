@@ -55,6 +55,8 @@ typedef enum {
 	UILabel *_statusLabel;
 	CALayer *_arrowImage;
 	UIActivityIndicatorView *_activityView;
+    
+    UIEdgeInsets _defaultInset;
 }
 
 @property (nonatomic,assign) id<EGORefreshTableHeaderDelegate> delegate;
@@ -63,6 +65,8 @@ typedef enum {
 @property (nonatomic, retain) UILabel *statusLabel;
 @property (nonatomic, retain) CALayer *arrowImage;
 @property (nonatomic, retain) UIActivityIndicatorView *activityView;
+
+@property (nonatomic, assign) UIEdgeInsets defaultInset;
 
 - (void)refreshLastUpdatedDate;
 - (void)egoRefreshScrollViewDidScroll:(UIScrollView *)scrollView;

@@ -39,6 +39,7 @@
 
 @synthesize delegate=_delegate;
 @synthesize lastUpdatedLabel=_lastUpdatedLabel, statusLabel=_statusLabel, arrowImage=_arrowImage, activityView=_activityView;
+@synthesize defaultInset=_defaultInset;
 
 - (id)initWithFrame:(CGRect)frame {
     if (self == [super initWithFrame:frame]) {
@@ -162,14 +163,17 @@
 		
 		BOOL _loading = [self.delegate egoRefreshTableHeaderDataSourceIsLoading:self];
 		
-		if (_state == EGOOPullRefreshPulling && scrollView.contentOffset.y > -65.0f && scrollView.contentOffset.y < 0.0f && !_loading) {
+        CGFloat dragDistance = -65.0f - _defaultInset.top;
+        CGFloat min = _defaultInset.top;
+        
+		if (_state == EGOOPullRefreshPulling && scrollView.contentOffset.y > dragDistance && scrollView.contentOffset.y < min && !_loading) {
 			[self setState:EGOOPullRefreshNormal];
-		} else if (_state == EGOOPullRefreshNormal && scrollView.contentOffset.y < -65.0f && !_loading) {
+		} else if (_state == EGOOPullRefreshNormal && scrollView.contentOffset.y < dragDistance && !_loading) {
 			[self setState:EGOOPullRefreshPulling];
 		}
 		
-		if (scrollView.contentInset.top != 0) {
-			scrollView.contentInset = UIEdgeInsetsZero;
+		if (scrollView.contentInset.top != min) {
+			scrollView.contentInset = _defaultInset;
 		}
 		
 	}
@@ -180,7 +184,9 @@
 	
 	BOOL _loading = [self.delegate egoRefreshTableHeaderDataSourceIsLoading:self];
 	
-	if (scrollView.contentOffset.y <= - 65.0f && !_loading) {
+    CGFloat dragDistance = -65.0f - _defaultInset.top;
+    
+	if (scrollView.contentOffset.y <= dragDistance && !_loading) {
         [self.delegate egoRefreshTableHeaderDidTriggerRefresh:self];
 		
 		[self setState:EGOOPullRefreshLoading];
@@ -196,7 +202,7 @@
 - (void)egoRefreshScrollViewDataSourceDidFinishedLoading:(UIScrollView *)scrollView {	
 	[UIView beginAnimations:nil context:NULL];
 	[UIView setAnimationDuration:.3];
-	[scrollView setContentInset:UIEdgeInsetsMake(0.0f, 0.0f, 0.0f, 0.0f)];
+	[scrollView setContentInset:_defaultInset];
 	[UIView commitAnimations];
 	
 	[self setState:EGOOPullRefreshNormal];

@@ -24,6 +24,15 @@
                                                (id)[UIColor colorWithRed:245.0/255.0 green:245.0/255.0 blue:245.0/255.0 alpha:1.0].CGColor,
                                                nil];
         self.backgroundGradientLayer.locations = [NSArray arrayWithObjects:[NSNumber numberWithFloat:0.0], [NSNumber numberWithFloat:1.0], nil];
+        
+        NSDictionary *newActions = [NSDictionary dictionaryWithObjectsAndKeys:[NSNull null], @"onOrderIn",
+                                    [NSNull null], @"onOrderOut",
+                                    [NSNull null], @"sublayers",
+                                    [NSNull null], @"contents",
+                                    [NSNull null], @"bounds",
+                                    nil];
+        
+        self.backgroundGradientLayer.actions = newActions;
         self.backgroundView = [[[UIView alloc] init] autorelease];
         self.backgroundView.backgroundColor = [UIColor whiteColor];
         [self.backgroundView.layer addSublayer:self.backgroundGradientLayer];
