@@ -36,7 +36,8 @@ Gist support;
 
 V1.3.1
 - storing last known News Feed position
-- if user can close/open an issue, Administration is no longer displayed
+- if user can't close/open an issue, Administration is no longer displayed
+- visual improvements
 
 
 iTunes Changelog:

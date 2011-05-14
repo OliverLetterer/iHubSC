@@ -178,7 +178,8 @@
     [super authenticationViewControllerdidAuthenticateUserCallback:notification];
 }
 
-- (void)reloadData {
+- (void)pullToReleaseTableViewReloadData {
+    [super pullToReleaseTableViewReloadData];
     [self loadDataBasedOnSegmentControl];
 }
 
@@ -193,7 +194,7 @@
                 self.segmentControl.userInteractionEnabled = YES;
                 self.segmentControl.alpha = 1.0;
             }
-            [self didReloadData];
+            [self pullToReleaseTableViewDidReloadData];
         }];
     } else if (self.segmentControl.selectedSegmentIndex == 1) {
         // My Actions
@@ -206,7 +207,7 @@
                                self.segmentControl.userInteractionEnabled = YES;
                                self.segmentControl.alpha = 1.0;
                            }
-                           [self didReloadData];
+                           [self pullToReleaseTableViewDidReloadData];
                        }];
     } else if (self.segmentControl.selectedSegmentIndex == 2) {
         if (self.defaultOrganizationName) {
@@ -218,7 +219,7 @@
                     self.segmentControl.userInteractionEnabled = YES;
                     self.segmentControl.alpha = 1.0;
                 }
-                [self didReloadData];
+                [self pullToReleaseTableViewDidReloadData];
             }];
         } else {
             [GHOrganization organizationsOfUser:[GHSettingsHelper username] 
@@ -275,7 +276,7 @@
                 self.segmentControl.userInteractionEnabled = YES;
                 self.segmentControl.alpha = 1.0;
             }
-            [self didReloadData];
+            [self pullToReleaseTableViewDidReloadData];
         }];
     } else {
         [self.segmentControl setSelectedSegmentIndex:0];
@@ -290,7 +291,7 @@
     self.segmentControl.alpha = 0.5;
     self.defaultOrganizationName = nil;
     
-    [self loadDataBasedOnSegmentControl];
+    [self pullToReleaseTableViewReloadData];
 }
 
 @end

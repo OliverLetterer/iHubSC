@@ -21,8 +21,8 @@
     if ((self = [super initWithStyle:UITableViewStylePlain])) {
         // Custom initialization
         self.searchString = searchString;
-        [self reloadData];
-        self.pullToReleaseEnabled = YES;
+        [self pullToReleaseTableViewReloadData];
+        self.pullToReleaseEnabled = NO;
         self.title = self.searchString;
     }
     return self;
@@ -30,17 +30,18 @@
 
 #pragma mark - instance methids
 
-- (void)reloadData {
+- (void)pullToReleaseTableViewReloadData {
+    [super pullToReleaseTableViewReloadData];
     [GHUser searchUsersWithSearchString:self.searchString
                       completionHandler:^(NSArray *users, NSError *error) {
                           if (error) {
                               [self handleError:error];
                           } else {
-                              [self didReloadData];
                               self.users = users;
                               [self cacheHeightForRepositories];
                               [self.tableView reloadData];
                           }
+                          [self pullToReleaseTableViewDidReloadData];
                       }];
 }
 

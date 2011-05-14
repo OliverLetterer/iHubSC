@@ -67,7 +67,10 @@
     self.followedUsers = nil;
     
     [self downloadUserData];
-    [self.tableView reloadData];
+    
+    if ([self isViewLoaded]) {
+        [self.tableView reloadData];
+    }
 }
 
 #pragma mark - Initialization
@@ -75,8 +78,8 @@
 - (id)initWithUsername:(NSString *)username {
     if ((self = [super initWithStyle:UITableViewStylePlain])) {
         // Custom initialization
-        self.pullToReleaseEnabled = YES;
         self.username = username;
+        self.pullToReleaseEnabled = self.hasAdministrationRights;
     }
     return self;
 }
@@ -134,9 +137,9 @@
                [self handleError:error];
            } else {
                self.user = user;
-               [self didReloadData];
                [self.tableView reloadData];
            }
+           [self pullToReleaseTableViewDidReloadData];
        }];
 }
 
@@ -149,12 +152,13 @@
                                  self.repositoriesArray = array;
                              }
                              [self cacheHeightForTableView];
-                             [self didReloadData];
                              [self.tableView reloadData];
                          }];
 }
 
-- (void)reloadData {
+- (void)pullToReleaseTableViewReloadData {
+    [super pullToReleaseTableViewReloadData];
+    
     self.repositoriesArray = nil;
     self.watchedRepositoriesArray = nil;
     self.followingUsers = nil;
@@ -223,14 +227,14 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    if ([[GHAuthenticationManager sharedInstance].username isEqualToString:self.username]) {
+    if (self.hasAdministrationRights) {
         self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd 
                                                                                                 target:self 
                                                                                                 action:@selector(createRepositoryButtonClicked:)]
                                                   autorelease];
     }
     
-    if ([[self.navigationController viewControllers] objectAtIndex:0] == self && [[GHAuthenticationManager sharedInstance].username isEqualToString:self.username]) {
+    if ([[self.navigationController viewControllers] objectAtIndex:0] == self && self.hasAdministrationRights) {
         self.navigationItem.leftBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Account", @"") 
                                                                                   style:UIBarButtonItemStyleBordered 
                                                                                  target:self action:@selector(accountButtonClicked:)]
@@ -331,7 +335,6 @@
                                      [self cacheHeightForTableView];
                                      [self.tableView expandSection:section animated:YES];
                                  }
-                                 [self didReloadData];
                              }];
     } else if (section == kUITableViewSectionWatchedRepositories) {
         [GHRepository watchedRepositoriesOfUser:self.username 

@@ -18,7 +18,7 @@
 - (void)setUsername:(NSString *)username {
     [_username release];
     _username = [username copy];
-    [self reloadData];
+    [self pullToReleaseTableViewReloadData];
 }
 
 #pragma mark - Initialization
@@ -98,14 +98,15 @@
 
 #pragma mark - instance methods
 
-- (void)reloadData {
+- (void)pullToReleaseTableViewReloadData {
+    [super pullToReleaseTableViewReloadData];
     [GHNewsFeed newsFeedForUserNamed:self.username completionHandler:^(GHNewsFeed *feed, NSError *error) {
         if (error) {
             [self handleError:error];
         } else {
             self.newsFeed = feed;
         }
-        [self didReloadData];
+        [self pullToReleaseTableViewDidReloadData];
     }];
 }
 

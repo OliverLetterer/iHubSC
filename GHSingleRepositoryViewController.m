@@ -39,7 +39,7 @@
 - (void)setRepositoryString:(NSString *)repositoryString {
     [_repositoryString release];
     _repositoryString = [repositoryString copy];
-    [self reloadData];
+    [self pullToReleaseTableViewReloadData];
 }
 
 - (BOOL)canDeleteRepository {
@@ -69,16 +69,17 @@
 
 #pragma mark - instance methods
 
-- (void)reloadData {
+- (void)pullToReleaseTableViewReloadData {
+    [super pullToReleaseTableViewReloadData];
     [GHRepository repository:self.repositoryString 
        withCompletionHandler:^(GHRepository *repository, NSError *error) {
            if (error) {
                [self handleError:error];
            } else {
                self.repository = repository;
-               [self didReloadData];
                [self.tableView reloadData];
            }
+           [self pullToReleaseTableViewDidReloadData];
        }];
 }
 

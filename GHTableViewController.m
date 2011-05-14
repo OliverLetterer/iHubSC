@@ -16,8 +16,6 @@
 
 @synthesize cachedHeightsDictionary=_cachedHeightsDictionary;
 @synthesize reloadDataIfNewUserGotAuthenticated=_reloadDataIfNewUserGotAuthenticated, reloadDataOnApplicationWillEnterForeground=_reloadDataOnApplicationWillEnterForeground;
-@synthesize pullToReleaseEnabled=_pullToReleaseEnabled;
-@synthesize lastRefreshDate=_lastRefreshDate;
 
 #pragma mark - setters and getters
 
@@ -89,13 +87,13 @@
 
 - (void)authenticationViewControllerdidAuthenticateUserCallback:(NSNotification *)notification {
     if (self.reloadDataIfNewUserGotAuthenticated) {
-        [self reloadData];
+        [self pullToReleaseTableViewReloadData];
     }
 }
 
 - (void)applicationWillEnterForegroundCallback:(NSNotification *)notification {
     if (self.reloadDataOnApplicationWillEnterForeground) {
-        [self reloadData];
+        [self pullToReleaseTableViewReloadData];
     }
 }
 
@@ -125,8 +123,6 @@
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     [_cachedHeightsDictionary release];
-    [_refreshHeaderView release];
-    [_lastRefreshDate release];
     _alertProxy.delegate = nil;
     [_alertProxy release];
     
@@ -181,36 +177,11 @@
 	self.tableView.tableFooterView = view;
     
     self.tableView.contentInset = UIEdgeInsetsMake(-22, 0, -22, 0);
-    
-//    view = [[[UIView alloc] initWithFrame:self.view.bounds] autorelease];
-//    view.backgroundColor = [UIColor clearColor];
-//    
-//    gradientLayer = [CAGradientLayer layer];
-//	gradientLayer.frame = CGRectMake(0, 0, 480, 22);
-//	gradientLayer.colors = [NSArray arrayWithObjects:
-//							(id)[UIColor colorWithWhite:0.0 alpha:0.3].CGColor,
-//							(id)[UIColor colorWithWhite:1.0 alpha:0.0].CGColor,
-//							nil];
-//    gradientLayer.actions = newActions;
-//	[view.layer addSublayer:gradientLayer];
-//    self.tableView.backgroundView = view;
-    
+    self.defaultEdgeInset = self.tableView.contentInset;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    if (!self.pullToReleaseEnabled) {
-        return;
-    }
-    
-    _refreshHeaderView = [[EGORefreshTableHeaderView alloc] initWithFrame:CGRectMake(0.0f, 22.0f - self.tableView.bounds.size.height, self.view.frame.size.width, self.tableView.bounds.size.height)];
-    _refreshHeaderView.delegate = self;
-    _refreshHeaderView.defaultInset = self.tableView.contentInset;
-    [self.tableView addSubview:_refreshHeaderView];
-	
-	//  update the last update date
-	[_refreshHeaderView refreshLastUpdatedDate];
     
     self.tableView.scrollsToTop = YES;
     self.tableView.backgroundColor = [UIColor colorWithRed:245.0/255.0 green:245.0/255.0 blue:245.0/255.0 alpha:1.0];
@@ -222,13 +193,47 @@
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
-    
-    [_refreshHeaderView release];
-	_refreshHeaderView = nil;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    
+    if (!self.tableView.backgroundView) {
+        NSDictionary *newActions = [NSDictionary dictionaryWithObjectsAndKeys:[NSNull null], @"onOrderIn",
+                                    [NSNull null], @"onOrderOut",
+                                    [NSNull null], @"sublayers",
+                                    [NSNull null], @"contents",
+                                    [NSNull null], @"bounds",
+                                    nil];
+        
+        UIView *view = nil;
+        CAGradientLayer *gradientLayer = nil;
+        
+        view = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"GHBackgroundImage.png"] ] autorelease];
+        
+        gradientLayer = [CAGradientLayer layer];
+        gradientLayer.frame = CGRectMake(0.0f, 0.0f, 480.0f, 22.0f);
+        gradientLayer.colors = [NSArray arrayWithObjects:
+                                (id)[UIColor colorWithWhite:0.0 alpha:0.3].CGColor,
+                                (id)[UIColor colorWithWhite:1.0 alpha:0.0].CGColor,
+                                nil];
+        gradientLayer.actions = newActions;
+        view.layer.actions = newActions;
+        view.autoresizingMask = UIViewAutoresizingNone;
+        [view.layer addSublayer:gradientLayer];
+        
+        gradientLayer = [CAGradientLayer layer];
+        gradientLayer.frame = CGRectMake(0.0f, self.view.bounds.size.height - 22.0f, 480.0f, 22.0f);
+        gradientLayer.colors = [NSArray arrayWithObjects:
+                                (id)[UIColor colorWithWhite:1.0 alpha:0.0].CGColor,
+                                (id)[UIColor colorWithWhite:0.0 alpha:0.3].CGColor,
+                                nil];
+        gradientLayer.actions = newActions;
+        [view.layer addSublayer:gradientLayer];
+        
+        
+        self.tableView.backgroundView = view;
+    }
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -241,78 +246,6 @@
 
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
-}
-
-#pragma mark - Table view data source
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    // Return the number of sections.
-    return 0;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    // Return the number of rows in the section.
-    return 0;
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return nil;
-}
-
-#pragma mark -
-#pragma mark Data Source Loading / Reloading Methods
-
-- (void)reloadData {
-    if (!self.pullToReleaseEnabled) {
-        return;
-    }
-	//  should be calling your tableviews data source model to reload
-	//  put here just for demo
-	_reloading = YES;
-}
-
-- (void)didReloadData {
-    if (!self.pullToReleaseEnabled) {
-        return;
-    }
-	//  model should call this when its done loading
-	_reloading = NO;
-    self.lastRefreshDate = [NSDate date];
-	[_refreshHeaderView egoRefreshScrollViewDataSourceDidFinishedLoading:self.tableView];
-    self.tableView.contentInset = UIEdgeInsetsMake(-22, 0, -22, 0);
-}
-
-#pragma mark -
-#pragma mark UIScrollViewDelegate Methods
-
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    if (!self.pullToReleaseEnabled) {
-        return;
-    }
-	[_refreshHeaderView egoRefreshScrollViewDidScroll:scrollView];
-}
-
-- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
-    if (!self.pullToReleaseEnabled) {
-        return;
-    }
-	[_refreshHeaderView egoRefreshScrollViewDidEndDragging:scrollView];
-}
-
-#pragma mark -
-#pragma mark EGORefreshTableHeaderDelegate Methods
-
-- (void)egoRefreshTableHeaderDidTriggerRefresh:(EGORefreshTableHeaderView*)view {
-	[self reloadData];
-}
-
-- (BOOL)egoRefreshTableHeaderDataSourceIsLoading:(EGORefreshTableHeaderView*)view {
-	return _reloading;
-}
-
-- (NSDate*)egoRefreshTableHeaderDataSourceLastUpdated:(EGORefreshTableHeaderView*)view{
-	return self.lastRefreshDate;
-	
 }
 
 #pragma mark - UIExpandableTableViewDatasource
@@ -358,6 +291,16 @@
     } else {
         [super handleError:error];
     }
+}
+
+#pragma mark - UIScrollViewDelegate
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    [super scrollViewDidScroll:scrollView];
+    
+    CGRect frame = self.tableView.backgroundView.frame;
+    frame.origin = scrollView.contentOffset;
+    self.tableView.backgroundView.frame = frame;
 }
 
 @end
