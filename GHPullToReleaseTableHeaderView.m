@@ -8,11 +8,11 @@
 
 #import "GHPullToReleaseTableHeaderView.h"
 
-#define kGHPullToReleaseTableHeaderViewFlipAnimationDuration 0.3f
+#define kGHPullToReleaseTableHeaderViewFlipAnimationDuration 0.2f
 
 @implementation GHPullToReleaseTableHeaderView
 
-@synthesize lastUpdateLabel=_lastUpdateLabel, statusLabel=_statusLabel, arrowImage=_arrowImage, activityView=_activityView;
+@synthesize lastUpdateLabel=_lastUpdateLabel, statusLabel=_statusLabel, arrowImageLayer=_arrowImageLayer, activityIndicatorView=_activityIndicatorView;
 @synthesize lastUpdateDate=_lastUpdateDate;
 @synthesize state=_state;
 
@@ -26,37 +26,37 @@
             case GHPullToReleaseTableHeaderViewStateNormal:
                 // switching state to normal
                 
-                _statusLabel.text = NSLocalizedString(@"Pull down to refresh...", @"Pull down to refresh status");
-                _arrowImage.hidden = NO;
-                [_activityView stopAnimating];
+                self.statusLabel.text = NSLocalizedString(@"Pull down to refresh...", @"Pull down to refresh status");
+                self.arrowImageLayer.hidden = NO;
+                [self.activityIndicatorView stopAnimating];
                 
                 [CATransaction begin];
                 [CATransaction setAnimationDuration:kGHPullToReleaseTableHeaderViewFlipAnimationDuration];
-                _arrowImage.transform = CATransform3DIdentity;
+                self.arrowImageLayer.transform = CATransform3DIdentity;
                 [CATransaction commit];
                 
                 break;
                 
             case GHPullToReleaseTableHeaderViewStateDraggedDown:
                 
-                _statusLabel.text = NSLocalizedString(@"Release to refresh...", @"Release to refresh status");
+                self.statusLabel.text = NSLocalizedString(@"Release to refresh...", @"Release to refresh status");
                 
-                [_activityView stopAnimating];
-                _arrowImage.hidden = NO;
+                [self.activityIndicatorView stopAnimating];
+                self.arrowImageLayer.hidden = NO;
                 
                 [CATransaction begin];
                 [CATransaction setAnimationDuration:kGHPullToReleaseTableHeaderViewFlipAnimationDuration];
-                _arrowImage.transform = CATransform3DMakeRotation(M_PI, 0.0f, 0.0f, 1.0f);
+                self.arrowImageLayer.transform = CATransform3DMakeRotation(M_PI, 0.0f, 0.0f, 1.0f);
                 [CATransaction commit];
                 
                 break;
                 
             case GHPullToReleaseTableHeaderViewStateLoading:
                 
-                _statusLabel.text = NSLocalizedString(@"Loading...", @"Loading Status");
-                [_activityView startAnimating];
+                self.statusLabel.text = NSLocalizedString(@"Loading...", @"Loading Status");
+                [self.activityIndicatorView startAnimating];
                 
-                _arrowImage.hidden = YES;
+                self.arrowImageLayer.hidden = YES;
                 
                 break;
             default:
@@ -114,17 +114,17 @@
         self.statusLabel.text = NSLocalizedString(@"Pull down to refresh...", @"Pull down to refresh status");
 		[self addSubview:self.statusLabel];
 		
-		self.arrowImage = [CALayer layer];
-		self.arrowImage.frame = CGRectMake(25.0f, frame.size.height - 65.0f, 30.0f, 55.0f);
-		self.arrowImage.contentsGravity = kCAGravityResizeAspect;
-		self.arrowImage.contents = (id)[UIImage imageNamed:@"PullToRefreshArrow.png"].CGImage;
-		self.arrowImage.contentsScale = [[UIScreen mainScreen] scale];
-		[self.layer addSublayer:self.arrowImage];
+		self.arrowImageLayer = [CALayer layer];
+		self.arrowImageLayer.frame = CGRectMake(25.0f, frame.size.height - 65.0f, 30.0f, 55.0f);
+		self.arrowImageLayer.contentsGravity = kCAGravityCenter;
+		self.arrowImageLayer.contents = (id)[UIImage imageNamed:@"PullToRefreshArrow.png"].CGImage;
+		self.arrowImageLayer.contentsScale = [[UIScreen mainScreen] scale];
+		[self.layer addSublayer:self.arrowImageLayer];
 		
-        self.activityView = [[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray] autorelease];
-		self.activityView.frame = CGRectMake(25.0f, frame.size.height - 38.0f, 20.0f, 20.0f);
-        self.activityView.hidesWhenStopped = YES;
-		[self addSubview:self.activityView];
+        self.activityIndicatorView = [[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray] autorelease];
+		self.activityIndicatorView.frame = CGRectMake(25.0f, frame.size.height - 38.0f, 20.0f, 20.0f);
+        self.activityIndicatorView.hidesWhenStopped = YES;
+		[self addSubview:self.activityIndicatorView];
         
         self.state = GHPullToReleaseTableHeaderViewStateNormal;
         self.lastUpdateDate = nil;
@@ -144,9 +144,9 @@
 
 - (void)dealloc {
     [_lastUpdateLabel release];
-    [_statusLabel release];
-    [_arrowImage release];
-    [_activityView release];
+    [self.statusLabel release];
+    [_arrowImageLayer release];
+    [_activityIndicatorView release];
     
     [_lastUpdateDate release];
     

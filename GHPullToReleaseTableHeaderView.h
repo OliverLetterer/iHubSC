@@ -21,8 +21,8 @@ typedef enum {
 @private
     UILabel *_lastUpdateLabel;
 	UILabel *_statusLabel;
-	CALayer *_arrowImage;
-	UIActivityIndicatorView *_activityView;
+	CALayer *_arrowImageLayer;
+	UIActivityIndicatorView *_activityIndicatorView;
     
     NSDate *_lastUpdateDate;
     
@@ -31,8 +31,8 @@ typedef enum {
 
 @property (nonatomic, retain) UILabel *lastUpdateLabel;
 @property (nonatomic, retain) UILabel *statusLabel;
-@property (nonatomic, retain) CALayer *arrowImage;
-@property (nonatomic, retain) UIActivityIndicatorView *activityView;
+@property (nonatomic, retain) CALayer *arrowImageLayer;
+@property (nonatomic, retain) UIActivityIndicatorView *activityIndicatorView;
 
 @property (nonatomic, retain) NSDate *lastUpdateDate;
 
