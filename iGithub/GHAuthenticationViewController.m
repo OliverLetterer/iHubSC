@@ -13,6 +13,10 @@
 
 #define UsernameCellTag 13374
 #define PasswordCellTag 13375
+#define TokenCellTag 13376
+
+static const CGFloat kUIKeyboardPortraitHeight = 216.0f;
+static const CGFloat kUIKeyboardAnimationDuration = 0.3f;
 
 static BOOL _isOneAuthenticationViewControllerActive = NO;
 
@@ -51,6 +55,16 @@ NSString *const GHAuthenticationViewControllerDidAuthenticateUserNotification = 
 - (id)init {
     if ((self = [super init])) {
         self.title = NSLocalizedString(@"Login", @"");
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self 
+                                                 selector:@selector(keyboardWillShowCallback:) 
+                                                     name:UIKeyboardWillShowNotification 
+                                                   object:nil];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self 
+                                                 selector:@selector(keyboardWillHideCallback:) 
+                                                     name:UIKeyboardWillHideNotification 
+                                                   object:nil];
     }
     return self;
 }
@@ -58,9 +72,13 @@ NSString *const GHAuthenticationViewControllerDidAuthenticateUserNotification = 
 #pragma mark - Memory management
 
 - (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
     [_tableView release];
     [_imageView release];
     [_activityIndicatorView release];
+    [_borderImageView release];
+    [_glossImageView release];
+    
     [super dealloc];
 }
 
@@ -71,24 +89,76 @@ NSString *const GHAuthenticationViewControllerDidAuthenticateUserNotification = 
     // Release any cached data, images, etc that aren't in use.
 }
 
+#pragma mark - NSNotification callbacks
+
+- (void)keyboardWillShowCallback:(NSNotification *)notification {
+    CGRect frame = self.view.frame;
+    frame.size.height -= kUIKeyboardPortraitHeight;
+    
+    [UIView animateWithDuration:kUIKeyboardAnimationDuration 
+                     animations:^(void) {
+                         self.view.frame = frame;
+                     } 
+                     completion:^(BOOL finished) {
+                         [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0] 
+                                               atScrollPosition:UITableViewScrollPositionBottom 
+                                                       animated:YES];
+                     }];
+}
+
+- (void)keyboardWillHideCallback:(NSNotification *)notification {
+    CGRect frame = self.view.frame;
+    frame.size.height += kUIKeyboardPortraitHeight;
+    
+    [UIView animateWithDuration:kUIKeyboardAnimationDuration 
+                     animations:^(void) {
+                         self.view.frame = frame;
+                     } 
+                     completion:^(BOOL finished) {
+                         
+                     }];
+}
+
 #pragma mark - View lifecycle
+
+- (void)loadView {
+    [super loadView];
+    
+    UIEdgeInsets inset = UIEdgeInsetsMake(100.0f, 0.0f, 0.0f, 0.0f);
+    
+    _tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
+    _tableView.contentInset = inset;
+    _tableView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
+    [self.view addSubview:_tableView];
+    
+    _activityIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    _activityIndicatorView.frame = CGRectMake(150.0f, 45.0f - inset.top, 20.0f, 20.0f);
+    _activityIndicatorView.activityIndicatorViewStyle = UIActivityIndicatorViewStyleGray;
+    [_tableView addSubview:_activityIndicatorView];
+    
+    _borderImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"GHGlossBottomBorder.png"] ];
+    _borderImageView.frame = CGRectMake(100.0f, -4.0f - inset.top, 118.0f, 119.0f);
+    [_tableView addSubview:_borderImageView];
+    
+    _imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"DefaultUserImage.png"] ];
+    _imageView.frame = CGRectMake(125.0f, 20.0f - inset.top, 70.0f, 70.0f);
+    [_tableView addSubview:_imageView];
+    
+    _glossImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"GHGlossTopBorder.png"] ];
+    _glossImageView.frame = CGRectMake(100.0f, -4.0f - inset.top, 118.0f, 119.0f);
+    [_tableView addSubview:_glossImageView];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.tableView.contentInset = UIEdgeInsetsMake(self.imageView.frame.size.height+self.imageView.frame.origin.y + 10.0, 0, 0, 0);
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+    self.tableView.alwaysBounceVertical = YES;
     
     CALayer *layer = self.imageView.layer;
     layer.cornerRadius = 2.0;
     layer.masksToBounds = YES;
-    
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
 - (void)viewDidUnload {
@@ -98,6 +168,9 @@ NSString *const GHAuthenticationViewControllerDidAuthenticateUserNotification = 
     _imageView = nil;
     [_activityIndicatorView release];
     _activityIndicatorView = nil;
+    [_borderImageView release], _borderImageView = nil;
+    [_glossImageView release], _glossImageView = nil;
+    
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -129,7 +202,7 @@ NSString *const GHAuthenticationViewControllerDidAuthenticateUserNotification = 
 #pragma mark - Table view data source
 
 - (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {
-    return NSLocalizedString(@"Please provide your GitHub Username and Password here", @"");
+    return NSLocalizedString(@"Please provide your GitHub Username and Password here. Your Password will be stored in the keychain safely.", @"");
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -171,6 +244,21 @@ NSString *const GHAuthenticationViewControllerDidAuthenticateUserNotification = 
         cell.textLabel.text = NSLocalizedString(@"Password", @"");
         cell.delegate = self;
         cell.tag = PasswordCellTag;
+        
+        return cell;
+    } else if (indexPath.row == 2) {
+        NSString *CellIdentifier = @"TokenCell";
+        
+        UITableViewCellWithTextField *cell = (UITableViewCellWithTextField *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        if (cell == nil) {
+            cell = [[[UITableViewCellWithTextField alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+            cell.textField.autocorrectionType = UITextAutocorrectionTypeNo;
+            cell.textField.autocapitalizationType = UITextAutocapitalizationTypeNone;
+        }
+        
+        cell.textLabel.text = NSLocalizedString(@"Token", @"");
+        cell.delegate = self;
+        cell.tag = TokenCellTag;
         
         return cell;
     }

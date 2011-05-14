@@ -12,10 +12,15 @@
 
 @implementation iGithubAppDelegate_iPhone
 
-@synthesize tabBarController=_tabBarController, newsFeedViewController=_newsFeedViewController, repositoriesViewController=_repositoriesViewController, searchViewController=_searchViewController;
+@synthesize tabBarController=_tabBarController, newsFeedViewController=_newsFeedViewController, profileViewController=_profileViewController, searchViewController=_searchViewController;
 
 - (void)authenticationViewControllerdidAuthenticateUserCallback:(NSNotification *)notification {
-    self.repositoriesViewController.username = [GHSettingsHelper username];
+    self.profileViewController.username = [GHSettingsHelper username];
+    
+    self.profileViewController.tabBarItem = [[[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"My Profile", @"") 
+                                                                           image:[UIImage imageNamed:@"145-persondot.png"] 
+                                                                             tag:0]
+                                             autorelease];
 }
 
 - (void)unknownPayloadEventTypeCallback:(NSNotification *)notification {
@@ -67,13 +72,14 @@
     self.newsFeedViewController = [[[GHOwnerNewsFeedViewController alloc] init] autorelease];
     [tabBarItems addObject:[[[UINavigationController alloc] initWithRootViewController:self.newsFeedViewController] autorelease] ];
     
-    self.repositoriesViewController = [[[GHUserViewController alloc] initWithUsername:[GHAuthenticationManager sharedInstance].username] autorelease];
-    self.repositoriesViewController.reloadDataIfNewUserGotAuthenticated = YES;
-    self.repositoriesViewController.tabBarItem = [[[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"My Profile", @"") 
+    self.profileViewController = [[[GHUserViewController alloc] initWithUsername:[GHAuthenticationManager sharedInstance].username] autorelease];
+    self.profileViewController.reloadDataIfNewUserGotAuthenticated = YES;
+    self.profileViewController.pullToReleaseEnabled = YES;
+    self.profileViewController.tabBarItem = [[[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"My Profile", @"") 
                                                                                 image:[UIImage imageNamed:@"145-persondot.png"] 
                                                                                   tag:0]
                                                   autorelease];
-    [tabBarItems addObject:[[[UINavigationController alloc] initWithRootViewController:self.repositoriesViewController] autorelease] ];
+    [tabBarItems addObject:[[[UINavigationController alloc] initWithRootViewController:self.profileViewController] autorelease] ];
     
     self.searchViewController = [[[GHSearchViewController alloc] init] autorelease];
     [tabBarItems addObject:[[[UINavigationController alloc] initWithRootViewController:self.searchViewController] autorelease] ];
@@ -86,7 +92,7 @@
 #pragma mark - memory management
 
 - (void)dealloc {
-    [_repositoriesViewController release];
+    [_profileViewController release];
     [_tabBarController release];
     [_newsFeedViewController release];
     [[NSNotificationCenter defaultCenter] removeObserver:self];

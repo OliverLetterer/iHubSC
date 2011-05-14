@@ -11,8 +11,6 @@
 
 NSString *const GHAuthenticationViewControllerDidAuthenticateUserNotification;
 
-
-
 @class GHAuthenticationViewController, GHUser;
 
 @protocol GHAuthenticationViewControllerDelegate <NSObject>
@@ -28,6 +26,9 @@ NSString *const GHAuthenticationViewControllerDidAuthenticateUserNotification;
     IBOutlet UITableView *_tableView;
     IBOutlet UIImageView *_imageView;
     IBOutlet UIActivityIndicatorView *_activityIndicatorView;
+    
+    UIImageView *_borderImageView;
+    UIImageView *_glossImageView;
 }
 
 @property (nonatomic, readonly) NSString *username;
@@ -39,5 +40,8 @@ NSString *const GHAuthenticationViewControllerDidAuthenticateUserNotification;
 @property (nonatomic, retain) UIActivityIndicatorView *activityIndicatorView;
 
 + (BOOL)isOneAuthenticationViewControllerActive;
+
+- (void)keyboardWillShowCallback:(NSNotification *)notification;
+- (void)keyboardWillHideCallback:(NSNotification *)notification;
 
 @end

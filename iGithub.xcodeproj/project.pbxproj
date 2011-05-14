@@ -141,7 +141,7 @@
 		A7BF143A1342188E001AE50D /* DefaultUserImage.png in Resources */ = {isa = PBXBuildFile; fileRef = A7BF14381342188E001AE50D /* DefaultUserImage.png */; };
 		A7BF143B1342188E001AE50D /* DefaultUserImage@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A7BF14391342188E001AE50D /* DefaultUserImage@2x.png */; };
 		A7BF1452134222CD001AE50D /* GHAuthenticationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7BF1450134222CD001AE50D /* GHAuthenticationViewController.m */; };
-		A7BF1453134222CD001AE50D /* GHAuthenticationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A7BF1451134222CD001AE50D /* GHAuthenticationViewController.xib */; };
+		A7BF1453134222CD001AE50D /* ___GHAuthenticationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A7BF1451134222CD001AE50D /* ___GHAuthenticationViewController.xib */; };
 		A7BF146313422514001AE50D /* UITableViewCellWithTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = A7BF146213422514001AE50D /* UITableViewCellWithTextField.m */; };
 		A7BF146D13426DC2001AE50D /* GHBackgroundQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = A7BF146C13426DC2001AE50D /* GHBackgroundQueue.m */; };
 		A7BF147213426F27001AE50D /* GHUser.m in Sources */ = {isa = PBXBuildFile; fileRef = A7BF147113426F27001AE50D /* GHUser.m */; };
@@ -429,7 +429,7 @@
 		A7BF14391342188E001AE50D /* DefaultUserImage@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "DefaultUserImage@2x.png"; sourceTree = "<group>"; };
 		A7BF144F134222CD001AE50D /* GHAuthenticationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHAuthenticationViewController.h; sourceTree = "<group>"; };
 		A7BF1450134222CD001AE50D /* GHAuthenticationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHAuthenticationViewController.m; sourceTree = "<group>"; };
-		A7BF1451134222CD001AE50D /* GHAuthenticationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GHAuthenticationViewController.xib; sourceTree = "<group>"; };
+		A7BF1451134222CD001AE50D /* ___GHAuthenticationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "___GHAuthenticationViewController.xib"; sourceTree = "<group>"; };
 		A7BF146113422514001AE50D /* UITableViewCellWithTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UITableViewCellWithTextField.h; sourceTree = "<group>"; };
 		A7BF146213422514001AE50D /* UITableViewCellWithTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UITableViewCellWithTextField.m; sourceTree = "<group>"; };
 		A7BF146B13426DC2001AE50D /* GHBackgroundQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHBackgroundQueue.h; sourceTree = "<group>"; };
@@ -1248,7 +1248,7 @@
 				A7BF14411342196C001AE50D /* UITableViewCells */,
 				A7BF144F134222CD001AE50D /* GHAuthenticationViewController.h */,
 				A7BF1450134222CD001AE50D /* GHAuthenticationViewController.m */,
-				A7BF1451134222CD001AE50D /* GHAuthenticationViewController.xib */,
+				A7BF1451134222CD001AE50D /* ___GHAuthenticationViewController.xib */,
 			);
 			name = GHAuthenticationViewController;
 			path = iGithub;
@@ -1702,7 +1702,7 @@
 				A7BF141A1342149C001AE50D /* MainWindow_iPad.xib in Resources */,
 				A7BF143A1342188E001AE50D /* DefaultUserImage.png in Resources */,
 				A7BF143B1342188E001AE50D /* DefaultUserImage@2x.png in Resources */,
-				A7BF1453134222CD001AE50D /* GHAuthenticationViewController.xib in Resources */,
+				A7BF1453134222CD001AE50D /* ___GHAuthenticationViewController.xib in Resources */,
 				A75057361343033200514A82 /* GHGlossTopBorder@2x.png in Resources */,
 				A75057371343033200514A82 /* GHGlossBottomBorder@2x.png in Resources */,
 				A75057381343033200514A82 /* GHGlossTopBorder.png in Resources */,
