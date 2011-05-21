@@ -197,7 +197,7 @@
             
             NSMutableArray *array = [NSMutableArray arrayWithCapacity:rawCommentsArray.count];
             for (NSDictionary *rawDictionary in rawCommentsArray) {
-                [array addObject:[[[GHIssueCommentV3 alloc] initWithRawDictionary:rawDictionary] autorelease] ];
+                [array addObject:[[[GHAPIIssueCommentV3 alloc] initWithRawDictionary:rawDictionary] autorelease] ];
             }
             
             handler(array, nil);
@@ -207,7 +207,7 @@
 
 + (void)postComment:(NSString *)comment forIssueOnRepository:(NSString *)repository 
          withNumber:(NSNumber *)number 
-  completionHandler:(void (^)(GHIssueCommentV3 *, NSError *))handler {
+  completionHandler:(void (^)(GHAPIIssueCommentV3 *, NSError *))handler {
     
     // v3: POST /repos/:user/:repo/issues/:id/comments
     
@@ -228,7 +228,7 @@
                                            if (error) {
                                                handler(nil, error);
                                            } else {
-                                               handler([[[GHIssueCommentV3 alloc] initWithRawDictionary:object] autorelease], nil);
+                                               handler([[[GHAPIIssueCommentV3 alloc] initWithRawDictionary:object] autorelease], nil);
                                            }
                                        }];
 }

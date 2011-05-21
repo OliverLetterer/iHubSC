@@ -185,7 +185,7 @@
 		A7D41AF71359F8CC00CD3A5C /* GHPullRequestRepositoryInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = A7D41AF61359F8CC00CD3A5C /* GHPullRequestRepositoryInformation.m */; };
 		A7D41AFD135ADA4600CD3A5C /* GHBranch.m in Sources */ = {isa = PBXBuildFile; fileRef = A7D41AFC135ADA3C00CD3A5C /* GHBranch.m */; };
 		A7D41B08135AE71B00CD3A5C /* GHRecentCommitsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7D41B07135AE71600CD3A5C /* GHRecentCommitsViewController.m */; };
-		A7EE1120136F3FFB00A1E693 /* GHIssueCommentV3.m in Sources */ = {isa = PBXBuildFile; fileRef = A7EE111F136F3FFA00A1E693 /* GHIssueCommentV3.m */; };
+		A7EE1120136F3FFB00A1E693 /* GHAPIIssueCommentV3.m in Sources */ = {isa = PBXBuildFile; fileRef = A7EE111F136F3FFA00A1E693 /* GHAPIIssueCommentV3.m */; };
 		A7EE1123136F481500A1E693 /* Appirater.m in Sources */ = {isa = PBXBuildFile; fileRef = A7EE1122136F481100A1E693 /* Appirater.m */; };
 		A7F6260F134B3938006487CA /* UITableViewCellWithLinearGradientBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = A7F6260E134B3938006487CA /* UITableViewCellWithLinearGradientBackgroundView.m */; };
 		A7F62616134B7CD2006487CA /* GHNewCommentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A7F62615134B7CD2006487CA /* GHNewCommentTableViewCell.m */; };
@@ -382,13 +382,13 @@
 		A76FC9A51352D231004C642E /* 145-persondot@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "145-persondot@2x.png"; sourceTree = "<group>"; };
 		A76FC9BC13534755004C642E /* UIExpandableTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UIExpandableTableView.h; path = UIExpandableTableView/UIExpandableTableView.h; sourceTree = "<group>"; };
 		A76FC9BD13534755004C642E /* UIExpandableTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UIExpandableTableView.m; path = UIExpandableTableView/UIExpandableTableView.m; sourceTree = "<group>"; };
-		A7837E93136C905100B13B95 /* GHAPIIssueV3.h */ = {isa = PBXFileReference; fileEncoding = 4; path = GHAPIIssueV3.h; sourceTree = "<group>"; };
+		A7837E93136C905100B13B95 /* GHAPIIssueV3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHAPIIssueV3.h; sourceTree = "<group>"; };
 		A7837E94136C905100B13B95 /* GHAPIIssueV3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHAPIIssueV3.m; sourceTree = "<group>"; };
-		A7837E98136C93FC00B13B95 /* GHAPIMilestoneV3.h */ = {isa = PBXFileReference; fileEncoding = 4; path = GHAPIMilestoneV3.h; sourceTree = "<group>"; };
+		A7837E98136C93FC00B13B95 /* GHAPIMilestoneV3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHAPIMilestoneV3.h; sourceTree = "<group>"; };
 		A7837E99136C93FC00B13B95 /* GHAPIMilestoneV3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHAPIMilestoneV3.m; sourceTree = "<group>"; };
 		A7837E9F136CADA300B13B95 /* PDColoredProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PDColoredProgressView.h; path = PDColoredProgressview/PDColoredProgressView.h; sourceTree = "<group>"; };
 		A7837EA0136CADA400B13B95 /* PDColoredProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PDColoredProgressView.m; path = PDColoredProgressview/PDColoredProgressView.m; sourceTree = "<group>"; };
-		A7837EA3136CADD400B13B95 /* GHAPIMilestoneV3TableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; path = GHAPIMilestoneV3TableViewCell.h; sourceTree = "<group>"; };
+		A7837EA3136CADD400B13B95 /* GHAPIMilestoneV3TableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHAPIMilestoneV3TableViewCell.h; sourceTree = "<group>"; };
 		A7837EA4136CADD400B13B95 /* GHAPIMilestoneV3TableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHAPIMilestoneV3TableViewCell.m; sourceTree = "<group>"; };
 		A79F37FC13883C2C0028F492 /* GHUserV3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHUserV3.h; sourceTree = "<group>"; };
 		A79F37FD13883C2C0028F492 /* GHUserV3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHUserV3.m; sourceTree = "<group>"; };
@@ -513,8 +513,8 @@
 		A7D41AFC135ADA3C00CD3A5C /* GHBranch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHBranch.m; sourceTree = "<group>"; };
 		A7D41B06135AE71300CD3A5C /* GHRecentCommitsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHRecentCommitsViewController.h; sourceTree = "<group>"; };
 		A7D41B07135AE71600CD3A5C /* GHRecentCommitsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHRecentCommitsViewController.m; sourceTree = "<group>"; };
-		A7EE111E136F3FFA00A1E693 /* GHIssueCommentV3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHIssueCommentV3.h; sourceTree = "<group>"; };
-		A7EE111F136F3FFA00A1E693 /* GHIssueCommentV3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHIssueCommentV3.m; sourceTree = "<group>"; };
+		A7EE111E136F3FFA00A1E693 /* GHAPIIssueCommentV3.h */ = {isa = PBXFileReference; fileEncoding = 4; path = GHAPIIssueCommentV3.h; sourceTree = "<group>"; };
+		A7EE111F136F3FFA00A1E693 /* GHAPIIssueCommentV3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHAPIIssueCommentV3.m; sourceTree = "<group>"; };
 		A7EE1121136F480D00A1E693 /* Appirater.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Appirater.h; path = appirater/Appirater.h; sourceTree = "<group>"; };
 		A7EE1122136F481100A1E693 /* Appirater.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Appirater.m; path = appirater/Appirater.m; sourceTree = "<group>"; };
 		A7F6260D134B3938006487CA /* UITableViewCellWithLinearGradientBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UITableViewCellWithLinearGradientBackgroundView.h; sourceTree = "<group>"; };
@@ -1127,7 +1127,7 @@
 			children = (
 				A79F380213884CCD0028F492 /* GHUserPlan */,
 				A79F37FB13883C0B0028F492 /* GHUserV3 */,
-				A79F38031388581A0028F492 /* GHIssueCommentV3 */,
+				A79F38031388581A0028F492 /* GHAPIIssueCommentV3 */,
 				A79F37FA13883BF90028F492 /* GHAPIIssueV3 */,
 				A7BF146E13426ED9001AE50D /* GHBackgroundQueue */,
 				A7837E97136C93E500B13B95 /* GHAPIMilestoneV3 */,
@@ -1163,13 +1163,13 @@
 			name = GHUserPlan;
 			sourceTree = "<group>";
 		};
-		A79F38031388581A0028F492 /* GHIssueCommentV3 */ = {
+		A79F38031388581A0028F492 /* GHAPIIssueCommentV3 */ = {
 			isa = PBXGroup;
 			children = (
-				A7EE111E136F3FFA00A1E693 /* GHIssueCommentV3.h */,
-				A7EE111F136F3FFA00A1E693 /* GHIssueCommentV3.m */,
+				A7EE111E136F3FFA00A1E693 /* GHAPIIssueCommentV3.h */,
+				A7EE111F136F3FFA00A1E693 /* GHAPIIssueCommentV3.m */,
 			);
-			name = GHIssueCommentV3;
+			name = GHAPIIssueCommentV3;
 			sourceTree = "<group>";
 		};
 		A7BC6780134CCED40083F906 /* PullToRefreshTableViewController */ = {
@@ -1923,7 +1923,7 @@
 				A7837E9A136C93FC00B13B95 /* GHAPIMilestoneV3.m in Sources */,
 				A7837EA1136CADA500B13B95 /* PDColoredProgressView.m in Sources */,
 				A7837EA5136CADD400B13B95 /* GHAPIMilestoneV3TableViewCell.m in Sources */,
-				A7EE1120136F3FFB00A1E693 /* GHIssueCommentV3.m in Sources */,
+				A7EE1120136F3FFB00A1E693 /* GHAPIIssueCommentV3.m in Sources */,
 				A7EE1123136F481500A1E693 /* Appirater.m in Sources */,
 				A767715E13707A88006D70D6 /* GHGist.m in Sources */,
 				A767716113707C6F006D70D6 /* GHGistFile.m in Sources */,

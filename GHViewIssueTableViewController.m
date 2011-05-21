@@ -109,7 +109,7 @@
     [GHAPIIssueV3 postComment:self.textView.text 
       forIssueOnRepository:self.repository 
                 withNumber:self.number 
-         completionHandler:^(GHIssueCommentV3 *comment, NSError *error) {
+         completionHandler:^(GHAPIIssueCommentV3 *comment, NSError *error) {
              if (error) {
                  [self handleError:error];
              } else {
@@ -440,7 +440,7 @@
         // comments
         if (indexPath.row >= 1 && indexPath.row <= [self.issue.comments intValue]) {
             // display a comment
-            GHIssueCommentV3 *comment = [self.comments objectAtIndex:indexPath.row - 1];
+            GHAPIIssueCommentV3 *comment = [self.comments objectAtIndex:indexPath.row - 1];
             
             NSString *CellIdentifier = @"GHFeedItemWithDescriptionTableViewCell";
             
@@ -582,7 +582,7 @@
     } else if (indexPath.section == kUITableViewSectionComments) {
         if (indexPath.row >= 1 && indexPath.row <= [self.issue.comments intValue]) {
             // we are going to display a comment
-            GHIssueCommentV3 *comment = [self.comments objectAtIndex:indexPath.row - 1];
+            GHAPIIssueCommentV3 *comment = [self.comments objectAtIndex:indexPath.row - 1];
             
             CGSize size = [comment.body sizeWithFont:[UIFont systemFontOfSize:12.0] 
                                    constrainedToSize:CGSizeMake(222.0, MAXFLOAT) 
@@ -647,7 +647,7 @@
     } else if (indexPath.section == kUITableViewSectionComments) {
         if (indexPath.row >= 1 && indexPath.row <= [self.issue.comments intValue]) {
             // display a comment
-            GHIssueCommentV3 *comment = [self.comments objectAtIndex:indexPath.row - 1];
+            GHAPIIssueCommentV3 *comment = [self.comments objectAtIndex:indexPath.row - 1];
             GHUserViewController *userViewController = [[[GHUserViewController alloc] initWithUsername:comment.user.login] autorelease];
             [self.navigationController pushViewController:userViewController animated:YES];
         }

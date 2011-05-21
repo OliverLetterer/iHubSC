@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@class GHUserV3, GHAPIMilestoneV3, GHIssueCommentV3;
+@class GHUserV3, GHAPIMilestoneV3, GHAPIIssueCommentV3;
 
 @interface GHAPIIssueV3 : NSObject {
 @private
@@ -74,6 +74,6 @@
 
 + (void)postComment:(NSString *)comment forIssueOnRepository:(NSString *)repository 
          withNumber:(NSNumber *)number 
-  completionHandler:(void (^)(GHIssueCommentV3 *comment, NSError *error))handler;
+  completionHandler:(void (^)(GHAPIIssueCommentV3 *comment, NSError *error))handler;
 
 @end

@@ -1,15 +1,15 @@
 //
-//  GHIssueCommentV3.m
+//  GHAPIIssueCommentV3.m
 //  iGithub
 //
 //  Created by Oliver Letterer on 02.05.11.
 //  Copyright 2011 Home. All rights reserved.
 //
 
-#import "GHIssueCommentV3.h"
+#import "GHAPIIssueCommentV3.h"
 #import "GithubAPI.h"
 
-@implementation GHIssueCommentV3
+@implementation GHAPIIssueCommentV3
 
 @synthesize URL=_URL, body=_body, user=_user, createdAt=_createdAt, updatedAt=_updatedAt;
 
