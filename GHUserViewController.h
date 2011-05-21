@@ -17,7 +17,7 @@
 @private
     NSString *_username;
     BOOL _isDownloadingUserData;
-    GHUser *_user;
+    GHUserV3 *_user;
     
     NSArray *_repositoriesArray;
     NSArray *_watchedRepositoriesArray;
@@ -27,10 +27,13 @@
     NSMutableArray *_gists;
     NSUInteger _gistsNextPage;
     
+    BOOL _hasFollowingData;
+    BOOL _isFollowingUser;
+    
     NSIndexPath *_lastIndexPathForSingleRepositoryViewController;
 }
 
-@property (nonatomic, retain) GHUser *user;
+@property (nonatomic, retain) GHUserV3 *user;
 
 @property (nonatomic, retain) NSArray *repositoriesArray;
 @property (nonatomic, copy) NSString *username;
@@ -41,7 +44,6 @@
 @property (nonatomic, retain) NSMutableArray *gists;
 
 @property (nonatomic, readonly) BOOL canFollowUser;
-@property (nonatomic, readonly) BOOL isFollowingUser;
 @property (nonatomic, readonly) BOOL hasAdministrationRights;
 
 @property (nonatomic, copy) NSIndexPath *lastIndexPathForSingleRepositoryViewController;

@@ -37,7 +37,8 @@
         NSUInteger length = 32;
         NSUInteger location = range.location + range.length;
         if (location + length <= self.length) {
-            return [self substringWithRange:NSMakeRange(location, length)];
+            NSString *found = [self substringWithRange:NSMakeRange(location, length)];
+            return found;
         }
     }
     return nil;

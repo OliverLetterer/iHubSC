@@ -327,8 +327,7 @@ NSString *const GHAuthenticationViewControllerDidAuthenticateUserNotification = 
             [self.activityIndicatorView startAnimating];
         }];
         
-        [GHUser userWithName:cell.textField.text completionHandler:^(GHUser *user, NSError *error) {
-            
+        [GHUserV3 userWithName:cell.textField.text completionHandler:^(GHUserV3 *user, NSError *error) {
             [UIImage imageFromGravatarID:user.gravatarID withCompletionHandler:^(UIImage *image, NSError *error, BOOL didDownload) {
                 self.imageView.image = image;
                 [UIView animateWithDuration:0.3 animations:^(void) {
@@ -340,33 +339,32 @@ NSString *const GHAuthenticationViewControllerDidAuthenticateUserNotification = 
         }];
     } else if (cell.tag == PasswordCellTag) {
         // check auth
-        [GHUser authenticatedUserWithUsername:self.username 
-                                     password:self.password 
-                            completionHandler:^(GHUser *user, NSError *error) {
-                                if (error) {
-                                    UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", @"") 
-                                                                                     message:[error localizedDescription] 
-                                                                                    delegate:nil 
-                                                                           cancelButtonTitle:NSLocalizedString(@"OK", @"")
-                                                                           otherButtonTitles:nil]
-                                                          autorelease];
-                                    [alert show];
-                                } else {
-                                    
-                                    [GHSettingsHelper setUsername:user.login];
-                                    [GHSettingsHelper setPassword:user.password];
-                                    [GHSettingsHelper setGravatarID:user.gravatarID];
-                                    [GHAuthenticationManager sharedInstance].username = user.login;
-                                    [GHAuthenticationManager sharedInstance].password = user.password;
-                                    
-                                    [[NSUserDefaults standardUserDefaults] synchronize];
-                                    
-                                    [[NSNotificationCenter defaultCenter] postNotificationName:GHAuthenticationViewControllerDidAuthenticateUserNotification 
-                                                                                        object:nil];
-                                    
-                                    [self.delegate authenticationViewController:self didAuthenticateUser:user];
-                                }
-                            }];
+        [GHUserV3 authenticatedUserWithUsername:self.username password:self.password 
+                              completionHandler:^(GHUserV3 *user, NSError *error) {
+                                  if (error) {
+                                      UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", @"") 
+                                                                                       message:[error localizedDescription] 
+                                                                                      delegate:nil 
+                                                                             cancelButtonTitle:NSLocalizedString(@"OK", @"")
+                                                                             otherButtonTitles:nil]
+                                                            autorelease];
+                                      [alert show];
+                                  } else {
+                                      
+                                      [GHSettingsHelper setUsername:user.login];
+                                      [GHSettingsHelper setPassword:self.password];
+                                      [GHSettingsHelper setGravatarID:user.gravatarID];
+                                      [GHAuthenticationManager sharedInstance].username = user.login;
+                                      [GHAuthenticationManager sharedInstance].password = self.password;
+                                      
+                                      [[NSUserDefaults standardUserDefaults] synchronize];
+                                      
+                                      [[NSNotificationCenter defaultCenter] postNotificationName:GHAuthenticationViewControllerDidAuthenticateUserNotification 
+                                                                                          object:nil];
+                                      
+                                      [self.delegate authenticationViewController:self didAuthenticateUser:user];
+                                  }
+                              }];
     }
 }
 

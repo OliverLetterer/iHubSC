@@ -34,11 +34,15 @@
 #import "GHFileMetaData.h"
 #import "GHOrganization.h"
 #import "GHTeam.h"
+
+// V3
 #import "GHMilestone.h"
 #import "GHGist.h"
 #import "GHGistFile.h"
 #import "GHGistFork.h"
 #import "GHGistComment.h"
+#import "GHUserV3.h"
+#import "GHUserPlan.h"
 
 #import "GHPayload.h"
 #import "GHIssuePayload.h"

@@ -8,13 +8,13 @@
 
 #import <Foundation/Foundation.h>
 
-@class GHUser;
+@class GHUserV3;
 
 @interface GHMilestone : NSObject {
 @private
     NSNumber *_closedIssues;
     NSString *_createdAt;
-    GHUser *_creator;
+    GHUserV3 *_creator;
     NSString *_milestoneDescription;
     NSString *_dueOn;
     NSNumber *_number;
@@ -26,7 +26,7 @@
 
 @property (nonatomic, copy) NSNumber *closedIssues;
 @property (nonatomic, copy) NSString *createdAt;
-@property (nonatomic, retain) GHUser *creator;
+@property (nonatomic, retain) GHUserV3 *creator;
 @property (nonatomic, copy) NSString *milestoneDescription;
 @property (nonatomic, copy) NSString *dueOn;
 @property (nonatomic, copy) NSNumber *number;

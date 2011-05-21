@@ -8,20 +8,20 @@
 
 #import <Foundation/Foundation.h>
 
-@class GHUser;
+@class GHUserV3;
 
 @interface GHIssueCommentV3 : NSObject {
 @private
     NSString *_URL;
     NSString *_body;
-    GHUser *_user;
+    GHUserV3 *_user;
     NSString *_createdAt;
     NSString *_updatedAt;
 }
 
 @property (nonatomic, copy) NSString *URL;
 @property (nonatomic, copy) NSString *body;
-@property (nonatomic, retain) GHUser *user;
+@property (nonatomic, retain) GHUserV3 *user;
 @property (nonatomic, copy) NSString *createdAt;
 @property (nonatomic, copy) NSString *updatedAt;
 

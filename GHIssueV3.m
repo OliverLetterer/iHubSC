@@ -18,7 +18,7 @@
 - (id)initWithRawDictionary:(NSDictionary *)rawDictionay {
     if ((self = [super init])) {
         // Initialization code
-        self.assignee = [[[GHUser alloc] initWithRawDictionary:[rawDictionay objectForKeyOrNilOnNullObject:@"assignee"] ] autorelease];
+        self.assignee = [[[GHUserV3 alloc] initWithRawDictionary:[rawDictionay objectForKeyOrNilOnNullObject:@"assignee"] ] autorelease];
         self.body = [rawDictionay objectForKeyOrNilOnNullObject:@"body"];
         self.closedAt = [rawDictionay objectForKeyOrNilOnNullObject:@"closed_at"];
         self.comments = [rawDictionay objectForKeyOrNilOnNullObject:@"comments"];
@@ -30,7 +30,7 @@
         self.title = [rawDictionay objectForKeyOrNilOnNullObject:@"title"];
         self.updatedAt = [rawDictionay objectForKeyOrNilOnNullObject:@"updated_at"];
         self.URL = [rawDictionay objectForKeyOrNilOnNullObject:@"url"];
-        self.user = [[[GHUser alloc] initWithRawDictionary:[rawDictionay objectForKeyOrNilOnNullObject:@"user"] ] autorelease];
+        self.user = [[[GHUserV3 alloc] initWithRawDictionary:[rawDictionay objectForKeyOrNilOnNullObject:@"user"] ] autorelease];
         
         self.milestone = [[[GHMilestone alloc] initWithRawDictionary:[rawDictionay objectForKeyOrNilOnNullObject:@"milestone"] ] autorelease];
         NSString *htmlURL = [[rawDictionay objectForKeyOrNilOnNullObject:@"pull_request"] objectForKeyOrNilOnNullObject:@"html_url"];

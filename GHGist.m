@@ -21,7 +21,7 @@
         self.URL = [rawDictionay objectForKeyOrNilOnNullObject:@"url"];
         self.ID = [rawDictionay objectForKeyOrNilOnNullObject:@"id"];
         self.description = [rawDictionay objectForKeyOrNilOnNullObject:@"description"];
-        self.user = [[[GHUser alloc] initWithRawDictionary:[rawDictionay objectForKeyOrNilOnNullObject:@"user"]] autorelease];
+        self.user = [[[GHUserV3 alloc] initWithRawDictionary:[rawDictionay objectForKeyOrNilOnNullObject:@"user"]] autorelease];
         self.comments = [rawDictionay objectForKeyOrNilOnNullObject:@"comments"];
         self.pullURL = [rawDictionay objectForKeyOrNilOnNullObject:@"git_pull_url"];
         self.pushURL = [rawDictionay objectForKeyOrNilOnNullObject:@"git_push_url"];
@@ -94,14 +94,7 @@
                                        completionHandler:^(id object, NSError *error, ASIFormDataRequest *request) {
                                            int responseCode = [request responseStatusCode];
                                            
-                                           if (responseCode == 404) {
-                                               handler(NO, nil);
-                                           } else if (responseCode == 204) {
-                                               handler(YES, nil);
-                                           } else {
-                                               handler(NO, error);
-                                           }
-                                           
+                                           handler(responseCode == 204, nil);
                                        }];
 }
 

@@ -23,8 +23,10 @@
 + (ASIFormDataRequest *)authenticatedFormDataRequestWithURL:(NSURL *)URL {
     ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:URL];
     
-    [request addBasicAuthenticationHeaderWithUsername:[GHAuthenticationManager sharedInstance].username 
-                                          andPassword:[GHAuthenticationManager sharedInstance].password];
+    if ([GHAuthenticationManager sharedInstance].username && [GHAuthenticationManager sharedInstance].password) {
+        [request addBasicAuthenticationHeaderWithUsername:[GHAuthenticationManager sharedInstance].username 
+                                              andPassword:[GHAuthenticationManager sharedInstance].password];
+    }
     
     return request;
 }

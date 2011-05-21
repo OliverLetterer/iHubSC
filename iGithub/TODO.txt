@@ -28,6 +28,11 @@ support all these events
 V1.5
 - ipad Interface
 
+V1.4
+- view milestone with all completed and opened issues
+- support events for Issues and Pull Requests
+- support User V3
+
 Future Features:
 - Network graph for recent activity (see Network API)
 

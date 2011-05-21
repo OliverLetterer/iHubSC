@@ -39,6 +39,9 @@ V1.3.1
 - if user can't close/open an issue, Administration is no longer displayed
 - visual improvements
 
+V1.4
+- removed deprected API calls
+
 
 iTunes Changelog:
 

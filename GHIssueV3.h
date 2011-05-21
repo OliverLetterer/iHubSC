@@ -8,11 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
-@class GHUser, GHMilestone, GHIssueCommentV3;
+@class GHUserV3, GHMilestone, GHIssueCommentV3;
 
 @interface GHIssueV3 : NSObject {
 @private
-    GHUser *_assignee;
+    GHUserV3 *_assignee;
     NSString *_body;
     NSString *_closedAt;
     NSNumber *_comments;
@@ -26,10 +26,10 @@
     NSString *_title;
     NSString *_updatedAt;
     NSString *_URL;
-    GHUser *_user;
+    GHUserV3 *_user;
 }
 
-@property (nonatomic, retain) GHUser *assignee;
+@property (nonatomic, retain) GHUserV3 *assignee;
 @property (nonatomic, copy) NSString *body;
 @property (nonatomic, copy) NSString *closedAt;
 @property (nonatomic, copy) NSNumber *comments;
@@ -43,7 +43,7 @@
 @property (nonatomic, copy) NSString *title;
 @property (nonatomic, copy) NSString *updatedAt;
 @property (nonatomic, copy) NSString *URL;
-@property (nonatomic, retain) GHUser *user;
+@property (nonatomic, retain) GHUserV3 *user;
 
 - (id)initWithRawDictionary:(NSDictionary *)rawDictionay;
 

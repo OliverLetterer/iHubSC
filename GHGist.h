@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@class GHUser, GHGistComment;
+@class GHUserV3, GHGistComment;
 
 @interface GHGist : NSObject {
 @private
@@ -16,7 +16,7 @@
     NSString *_ID;
     NSString *_description;
     NSNumber *_public;
-    GHUser *_user;
+    GHUserV3 *_user;
     NSArray *_files;
     NSNumber *_comments;
     NSString *_pullURL;
@@ -30,7 +30,7 @@
 @property (nonatomic, copy) NSString *ID;
 @property (nonatomic, copy) NSString *description;
 @property (nonatomic, copy) NSNumber *public;
-@property (nonatomic, retain) GHUser *user;
+@property (nonatomic, retain) GHUserV3 *user;
 @property (nonatomic, retain) NSArray *files;   // contains GHGistFile's
 @property (nonatomic, copy) NSNumber *comments;
 @property (nonatomic, copy) NSString *pullURL;
