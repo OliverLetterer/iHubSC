@@ -1,15 +1,15 @@
 //
-//  GHIssueV3.m
+//  GHAPIIssueV3.m
 //  iGithub
 //
 //  Created by Oliver Letterer on 30.04.11.
 //  Copyright 2011 Home. All rights reserved.
 //
 
-#import "GHIssueV3.h"
+#import "GHAPIIssueV3.h"
 #import "GithubAPI.h"
 
-@implementation GHIssueV3
+@implementation GHAPIIssueV3
 
 @synthesize assignee=_assignee, body=_body, closedAt=_closedAt, comments=_comments, createdAt=_createdAt, HTMLURL=_HTMLURL, labels=_labels, milestone=_milestone, number=_number, pullRequestID=_pullRequestID, state=_state, title=_title, updatedAt=_updatedAt, URL=_URL, user=_user;
 
@@ -32,7 +32,7 @@
         self.URL = [rawDictionay objectForKeyOrNilOnNullObject:@"url"];
         self.user = [[[GHUserV3 alloc] initWithRawDictionary:[rawDictionay objectForKeyOrNilOnNullObject:@"user"] ] autorelease];
         
-        self.milestone = [[[GHMilestone alloc] initWithRawDictionary:[rawDictionay objectForKeyOrNilOnNullObject:@"milestone"] ] autorelease];
+        self.milestone = [[[GHAPIMilestoneV3 alloc] initWithRawDictionary:[rawDictionay objectForKeyOrNilOnNullObject:@"milestone"] ] autorelease];
         NSString *htmlURL = [[rawDictionay objectForKeyOrNilOnNullObject:@"pull_request"] objectForKeyOrNilOnNullObject:@"html_url"];
         self.pullRequestID = [[htmlURL componentsSeparatedByString:@"/"] lastObject];
     }
@@ -80,7 +80,7 @@
             
             NSMutableArray *finalArray = [NSMutableArray arrayWithCapacity:rawArray.count];
             for (NSDictionary *rawDictionary in rawArray) {
-                [finalArray addObject:[[[GHIssueV3 alloc] initWithRawDictionary:rawDictionary] autorelease] ];
+                [finalArray addObject:[[[GHAPIIssueV3 alloc] initWithRawDictionary:rawDictionary] autorelease] ];
             }
             
             NSString *linkHeader = [[request responseHeaders] objectForKey:@"Link"];
@@ -92,7 +92,7 @@
 
 + (void)issueOnRepository:(NSString *)repository 
                withNumber:(NSNumber *)number 
-        completionHandler:(void (^)(GHIssueV3 *issue, NSError *error))handler {
+        completionHandler:(void (^)(GHAPIIssueV3 *issue, NSError *error))handler {
     
     // v3: GET /repos/:user/:repo/issues/:id
     
@@ -104,7 +104,7 @@
         if (error) {
             handler(nil, error);
         } else {
-            handler([[[GHIssueV3 alloc] initWithRawDictionary:object] autorelease], nil);
+            handler([[[GHAPIIssueV3 alloc] initWithRawDictionary:object] autorelease], nil);
         }
     }];
 }
@@ -127,7 +127,7 @@
             
             NSMutableArray *finalArray = [NSMutableArray arrayWithCapacity:rawArray.count];
             for (NSDictionary *rawDictionary in rawArray) {
-                [finalArray addObject:[[[GHMilestone alloc] initWithRawDictionary:rawDictionary] autorelease] ];
+                [finalArray addObject:[[[GHAPIMilestoneV3 alloc] initWithRawDictionary:rawDictionary] autorelease] ];
             }
             
             NSString *linkHeader = [[request responseHeaders] objectForKey:@"Link"];
@@ -142,7 +142,7 @@
                            body:(NSString *)body 
                        assignee:(NSString *)assignee 
                       milestone:(NSNumber *)milestone 
-              completionHandler:(void (^)(GHIssueV3 *issue, NSError *error))handler {
+              completionHandler:(void (^)(GHAPIIssueV3 *issue, NSError *error))handler {
     
     // v3: POST /repos/:user/:repo/issues
     
@@ -174,7 +174,7 @@
                                                handler(nil, error);
                                            } else {
                                                NSDictionary *dictionary = object;
-                                               handler([[[GHIssueV3 alloc] initWithRawDictionary:dictionary ] autorelease], nil);
+                                               handler([[[GHAPIIssueV3 alloc] initWithRawDictionary:dictionary ] autorelease], nil);
                                            }
                                        }];
 }

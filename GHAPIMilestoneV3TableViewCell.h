@@ -1,5 +1,5 @@
 //
-//  GHMilestoneTableViewCell.h
+//  GHAPIMilestoneV3TableViewCell.h
 //  iGithub
 //
 //  Created by Oliver Letterer on 30.04.11.
@@ -10,9 +10,9 @@
 #import "PDColoredProgressView.h"
 #import "UITableViewCellWithLinearGradientBackgroundView.h"
 
-#define GHMilestoneTableViewCellHeight 44.0f;
+#define GHAPIMilestoneV3TableViewCellHeight 44.0f;
 
-@interface GHMilestoneTableViewCell : UITableViewCellWithLinearGradientBackgroundView {
+@interface GHAPIMilestoneV3TableViewCell : UITableViewCellWithLinearGradientBackgroundView {
 @private
     PDColoredProgressView *_progressView;
 }

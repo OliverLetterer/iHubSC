@@ -9,11 +9,11 @@
 #import <UIKit/UIKit.h>
 #import "GHTableViewController.h"
 
-@class GHIssueV3, GHNewsFeedItemTableViewCell, GHIssueComment;
+@class GHAPIIssueV3, GHNewsFeedItemTableViewCell, GHIssueComment;
 
 @interface GHViewIssueTableViewController : GHTableViewController {
 @private
-    GHIssueV3 *_issue;
+    GHAPIIssueV3 *_issue;
     
     NSString *_repository;
     NSNumber *_number;
@@ -28,7 +28,7 @@
     UIToolbar *_textViewToolBar;
 }
 
-@property (nonatomic, retain) GHIssueV3 *issue;
+@property (nonatomic, retain) GHAPIIssueV3 *issue;
 @property (nonatomic, copy) NSString *repository;
 @property (nonatomic, copy) NSNumber *number;
 

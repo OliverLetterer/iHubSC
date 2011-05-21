@@ -1,15 +1,15 @@
 //
-//  GHMilestone.m
+//  GHAPIMilestoneV3.m
 //  iGithub
 //
 //  Created by Oliver Letterer on 30.04.11.
 //  Copyright 2011 Home. All rights reserved.
 //
 
-#import "GHMilestone.h"
+#import "GHAPIMilestoneV3.h"
 #import "GithubAPI.h"
 
-@implementation GHMilestone
+@implementation GHAPIMilestoneV3
 
 @synthesize closedIssues=_closedIssues, createdAt=_createdAt, creator=_creator, milestoneDescription=_milestoneDescription, dueOn=_dueOn, number=_number, openIssues=_openIssues, state=_state, title=_title, URL=_URL;
 

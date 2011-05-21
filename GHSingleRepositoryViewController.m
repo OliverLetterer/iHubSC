@@ -18,7 +18,7 @@
 #import "GHViewPullRequestViewController.h"
 #import "GHRecentCommitsViewController.h"
 #import "GHViewRootDirectoryViewController.h"
-#import "GHMilestoneTableViewCell.h"
+#import "GHAPIMilestoneV3TableViewCell.h"
 
 #define kUITableViewSectionUserData         0
 #define kUITableViewSectionIssues           1
@@ -201,7 +201,7 @@
 
 - (void)tableView:(UIExpandableTableView *)tableView downloadDataForExpandableSection:(NSInteger)section {
     if (section == kUITableViewSectionIssues) {
-        [GHIssueV3 openedIssuesOnRepository:self.repositoryString 
+        [GHAPIIssueV3 openedIssuesOnRepository:self.repositoryString 
                                        page:1
                           completionHandler:^(NSArray *issues, NSInteger nextPage, NSError *error) {
                               if (error) {
@@ -271,7 +271,7 @@
                              }
                          }];
     } else if (section == kUITableViewSectionMilestones) {
-        [GHIssueV3 milestonesForIssueOnRepository:self.repositoryString 
+        [GHAPIIssueV3 milestonesForIssueOnRepository:self.repositoryString 
                                        withNumber:nil 
                                              page:1 
                                 completionHandler:^(NSArray *milestones, NSInteger nextPage, NSError *error) {
@@ -459,7 +459,7 @@
                 cell = [[[GHIssueTitleTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
             }
             
-            GHIssueV3 *issue = [self.issuesArray objectAtIndex:indexPath.row - 1];
+            GHAPIIssueV3 *issue = [self.issuesArray objectAtIndex:indexPath.row - 1];
             
             cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Issue %@", @""), issue.number];
             
@@ -561,13 +561,13 @@
     } else if (indexPath.section == kUITableViewSectionMilestones) {
         NSString *CellIdentifier = @"MilestoneCell";
         
-        GHMilestoneTableViewCell *cell = (GHMilestoneTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        GHAPIMilestoneV3TableViewCell *cell = (GHAPIMilestoneV3TableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         if (!cell) {
-            cell = [[[GHMilestoneTableViewCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:CellIdentifier] autorelease];
+            cell = [[[GHAPIMilestoneV3TableViewCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:CellIdentifier] autorelease];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
         }
         
-        GHMilestone *milestone = [self.milestones objectAtIndex:indexPath.row - 1];
+        GHAPIMilestoneV3 *milestone = [self.milestones objectAtIndex:indexPath.row - 1];
         
         cell.textLabel.text = milestone.title;
         cell.detailTextLabel.text = milestone.dueFormattedString;
@@ -634,7 +634,7 @@
     } else if (indexPath.section == kUITableViewSectionPullRequests && indexPath.row > 0 && indexPath.row <= [self.pullRequests count]) {
         return [self cachedHeightForRowAtIndexPath:indexPath];
     } else if (indexPath.section == kUITableViewSectionMilestones && indexPath.row > 0) {
-        return GHMilestoneTableViewCellHeight;
+        return GHAPIMilestoneV3TableViewCellHeight;
     }
     
     return 44.0f;
@@ -661,7 +661,7 @@
         }
     } else if (indexPath.section == kUITableViewSectionIssues) {
         if (indexPath.row > 0 && indexPath.row <= [self.issuesArray count]) {
-            GHIssueV3 *issue = [self.issuesArray objectAtIndex:indexPath.row-1];
+            GHAPIIssueV3 *issue = [self.issuesArray objectAtIndex:indexPath.row-1];
             GHViewIssueTableViewController *issueViewController = [[[GHViewIssueTableViewController alloc] 
                                                                     initWithRepository:self.repositoryString 
                                                                     issueNumber:issue.number]
@@ -780,7 +780,7 @@
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == kUITableViewSectionIssues && indexPath.row == [self.issuesArray count] && indexPath.row != 0 && _issuesNextPage > 1) {
-        [GHIssueV3 openedIssuesOnRepository:self.repositoryString page:_issuesNextPage completionHandler:^(NSArray *issues, NSInteger nextPage, NSError *error) {
+        [GHAPIIssueV3 openedIssuesOnRepository:self.repositoryString page:_issuesNextPage completionHandler:^(NSArray *issues, NSInteger nextPage, NSError *error) {
             if (error) {
                 [self handleError:error];
             } else {
@@ -794,7 +794,7 @@
         }];
     } else if (indexPath.section == kUITableViewSectionMilestones && indexPath.row == [self.milestones count] && indexPath.row != 0 && _milstonesNextPage > 1) {
         
-        [GHIssueV3 milestonesForIssueOnRepository:self.repositoryString withNumber:nil page:_milstonesNextPage 
+        [GHAPIIssueV3 milestonesForIssueOnRepository:self.repositoryString withNumber:nil page:_milstonesNextPage 
                                 completionHandler:^(NSArray *milestones, NSInteger nextPage, NSError *error) {
                                     
                                     if (error) {
@@ -833,7 +833,7 @@
 
 - (void)cacheHeightForIssuesArray {
     NSInteger i = 1;
-    for (GHIssueV3 *issue in self.issuesArray) {
+    for (GHAPIIssueV3 *issue in self.issuesArray) {
         [self cacheHeight:[self heightForDescription:issue.title]+50.0f forRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:kUITableViewSectionIssues] ];
         i++;
     }
@@ -859,7 +859,7 @@
     [self dismissModalViewControllerAnimated:YES];
 }
 
-- (void)createIssueViewController:(GHCreateIssueTableViewController *)createViewController didCreateIssue:(GHIssueV3 *)issue {
+- (void)createIssueViewController:(GHCreateIssueTableViewController *)createViewController didCreateIssue:(GHAPIIssueV3 *)issue {
     self.issuesArray = nil;
     self.repository.openIssues = [NSNumber numberWithInt:[self.repository.openIssues intValue]+1 ];
     [self.tableView reloadData];

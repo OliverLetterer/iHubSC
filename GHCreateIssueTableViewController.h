@@ -14,7 +14,7 @@
 
 @protocol GHCreateIssueTableViewControllerDelegate <NSObject>
 
-- (void)createIssueViewController:(GHCreateIssueTableViewController *)createViewController didCreateIssue:(GHIssueV3 *)issue;
+- (void)createIssueViewController:(GHCreateIssueTableViewController *)createViewController didCreateIssue:(GHAPIIssueV3 *)issue;
 - (void)createIssueViewControllerDidCancel:(GHCreateIssueTableViewController *)createViewController;
 
 @end

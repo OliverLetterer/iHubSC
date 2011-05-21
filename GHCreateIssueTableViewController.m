@@ -67,13 +67,13 @@
         assignee = [self.collaborators objectAtIndex:_assignIndex - 1];
     }
     if (_assignesMilestoneIndex > 0) {
-        GHMilestone *milestone = [self.milestones objectAtIndex:_assignesMilestoneIndex - 1];
+        GHAPIMilestoneV3 *milestone = [self.milestones objectAtIndex:_assignesMilestoneIndex - 1];
         milestoneNumber = milestone.number;
     }
     
-    [GHIssueV3 createIssueOnRepository:self.repository title:cell.titleTextField.text 
+    [GHAPIIssueV3 createIssueOnRepository:self.repository title:cell.titleTextField.text 
                                   body:cell.descriptionTextField.text assignee:assignee milestone:milestoneNumber 
-                     completionHandler:^(GHIssueV3 *issue, NSError *error) {
+                     completionHandler:^(GHAPIIssueV3 *issue, NSError *error) {
                          if (error) {
                              [self handleError:error];
                          } else {
@@ -192,7 +192,7 @@
         }
     } else if (section == kUITableViewSectionMilestones) {
         if (_assignesMilestoneIndex != 0) {
-            GHMilestone *milestone = [self.milestones objectAtIndex:_assignesMilestoneIndex - 1];
+            GHAPIMilestoneV3 *milestone = [self.milestones objectAtIndex:_assignesMilestoneIndex - 1];
             cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Milestone (%@)", @""), milestone.title];
         } else {
             cell.textLabel.text = NSLocalizedString(@"Select Milestone", @"");
@@ -216,7 +216,7 @@
             }
         }];
     } else if (section == kUITableViewSectionMilestones) {
-        [GHIssueV3 milestonesForIssueOnRepository:self.repository withNumber:nil 
+        [GHAPIIssueV3 milestonesForIssueOnRepository:self.repository withNumber:nil 
                                              page:1 
                                 completionHandler:^(NSArray *milestones, NSInteger nextPage, NSError *error) {
                                     if (error) {
@@ -295,7 +295,7 @@
             cell = [[[UITableViewCellWithLinearGradientBackgroundView alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
         }
         
-        GHMilestone *milestone = [self.milestones objectAtIndex:indexPath.row - 1];
+        GHAPIMilestoneV3 *milestone = [self.milestones objectAtIndex:indexPath.row - 1];
         
         if (indexPath.row == _assignesMilestoneIndex) {
             cell.accessoryType = UITableViewCellAccessoryCheckmark;
@@ -351,7 +351,7 @@
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == kUITableViewSectionMilestones && indexPath.row == [self.milestones count] && indexPath.row != 0 && _milestonesNextPage > 1) {
         
-        [GHIssueV3 milestonesForIssueOnRepository:self.repository withNumber:nil page:_milestonesNextPage 
+        [GHAPIIssueV3 milestonesForIssueOnRepository:self.repository withNumber:nil page:_milestonesNextPage 
                                 completionHandler:^(NSArray *milestones, NSInteger nextPage, NSError *error) {
                                     
                                     if (error) {

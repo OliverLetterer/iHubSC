@@ -1,15 +1,15 @@
 //
-//  GHMilestoneTableViewCell.m
+//  GHAPIMilestoneV3TableViewCell.m
 //  iGithub
 //
 //  Created by Oliver Letterer on 30.04.11.
 //  Copyright 2011 Home. All rights reserved.
 //
 
-#import "GHMilestoneTableViewCell.h"
+#import "GHAPIMilestoneV3TableViewCell.h"
 
 
-@implementation GHMilestoneTableViewCell
+@implementation GHAPIMilestoneV3TableViewCell
 
 @synthesize progressView=_progressView;
 

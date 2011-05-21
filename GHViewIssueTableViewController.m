@@ -17,7 +17,7 @@
 #import "GHNewCommentTableViewCell.h"
 #import "GHUserViewController.h"
 #import "GHSingleRepositoryViewController.h"
-#import "GHMilestoneTableViewCell.h"
+#import "GHAPIMilestoneV3TableViewCell.h"
 #import "GHViewPullRequestViewController.h"
 
 #define kUITableViewSectionData             0
@@ -67,7 +67,7 @@
 
 - (void)downloadIssueData {
     
-    [GHIssueV3 issueOnRepository:self.repository withNumber:self.number completionHandler:^(GHIssueV3 *issue, NSError *error) {
+    [GHAPIIssueV3 issueOnRepository:self.repository withNumber:self.number completionHandler:^(GHAPIIssueV3 *issue, NSError *error) {
         if (error) {
             [self handleError:error];
         } else {
@@ -106,7 +106,7 @@
 - (void)toolbarDoneButtonClicked:(UIBarButtonItem *)barButton {
     [self.textView resignFirstResponder];
     
-    [GHIssueV3 postComment:self.textView.text 
+    [GHAPIIssueV3 postComment:self.textView.text 
       forIssueOnRepository:self.repository 
                 withNumber:self.number 
          completionHandler:^(GHIssueCommentV3 *comment, NSError *error) {
@@ -245,7 +245,7 @@
 
 - (void)tableView:(UIExpandableTableView *)tableView downloadDataForExpandableSection:(NSInteger)section {
     if (section == kUITableViewSectionComments) {
-        [GHIssueV3 commentsForIssueOnRepository:self.repository 
+        [GHAPIIssueV3 commentsForIssueOnRepository:self.repository 
                                      withNumber:self.number 
                               completionHandler:^(NSArray *comments, NSError *error) {
                                   if (!error) {
@@ -398,13 +398,13 @@
             if (self.issue.milestone.title) {
                 NSString *CellIdentifier = @"MilestoneCell";
                 
-                GHMilestoneTableViewCell *cell = (GHMilestoneTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+                GHAPIMilestoneV3TableViewCell *cell = (GHAPIMilestoneV3TableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
                 if (!cell) {
-                    cell = [[[GHMilestoneTableViewCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:CellIdentifier] autorelease];
+                    cell = [[[GHAPIMilestoneV3TableViewCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:CellIdentifier] autorelease];
                     cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 }
                 
-                GHMilestone *milestone = self.issue.milestone;
+                GHAPIMilestoneV3 *milestone = self.issue.milestone;
                 
                 cell.textLabel.text = milestone.title;
                 cell.detailTextLabel.text = milestone.dueFormattedString;
@@ -577,7 +577,7 @@
             // the description
             return 44.0f;
         } else if (indexPath.row == 3) {
-            return GHMilestoneTableViewCellHeight;
+            return GHAPIMilestoneV3TableViewCellHeight;
         }
     } else if (indexPath.section == kUITableViewSectionComments) {
         if (indexPath.row >= 1 && indexPath.row <= [self.issue.comments intValue]) {

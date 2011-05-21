@@ -1,5 +1,5 @@
 //
-//  GHIssueV3.h
+//  GHAPIIssueV3.h
 //  iGithub
 //
 //  Created by Oliver Letterer on 30.04.11.
@@ -8,9 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
-@class GHUserV3, GHMilestone, GHIssueCommentV3;
+@class GHUserV3, GHAPIMilestoneV3, GHIssueCommentV3;
 
-@interface GHIssueV3 : NSObject {
+@interface GHAPIIssueV3 : NSObject {
 @private
     GHUserV3 *_assignee;
     NSString *_body;
@@ -19,7 +19,7 @@
     NSString *_createdAt;
     NSString *_HTMLURL;
     NSArray *_labels;
-    GHMilestone *_milestone;
+    GHAPIMilestoneV3 *_milestone;
     NSNumber *_number;
     NSNumber *_pullRequestID;
     NSString *_state;
@@ -36,7 +36,7 @@
 @property (nonatomic, copy) NSString *createdAt;
 @property (nonatomic, copy) NSString *HTMLURL;
 @property (nonatomic, copy) NSArray *labels;
-@property (nonatomic, retain) GHMilestone *milestone;
+@property (nonatomic, retain) GHAPIMilestoneV3 *milestone;
 @property (nonatomic, copy) NSNumber *number;
 @property (nonatomic, copy) NSNumber *pullRequestID;
 @property (nonatomic, copy) NSString *state;
@@ -54,7 +54,7 @@
 
 + (void)issueOnRepository:(NSString *)repository 
                withNumber:(NSNumber *)number 
-        completionHandler:(void (^)(GHIssueV3 *issue, NSError *error))handler;
+        completionHandler:(void (^)(GHAPIIssueV3 *issue, NSError *error))handler;
 
 + (void)milestonesForIssueOnRepository:(NSString *)repository 
                             withNumber:(NSNumber *)number 
@@ -66,7 +66,7 @@
                            body:(NSString *)body 
                        assignee:(NSString *)assignee 
                       milestone:(NSNumber *)milestone
-              completionHandler:(void (^)(GHIssueV3 *issue, NSError *error))handler;
+              completionHandler:(void (^)(GHAPIIssueV3 *issue, NSError *error))handler;
 
 + (void)commentsForIssueOnRepository:(NSString *)repository 
                           withNumber:(NSNumber *)number 

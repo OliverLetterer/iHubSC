@@ -1,5 +1,5 @@
 //
-//  GHMilestone.h
+//  GHAPIMilestoneV3.h
 //  iGithub
 //
 //  Created by Oliver Letterer on 30.04.11.
@@ -10,7 +10,7 @@
 
 @class GHUserV3;
 
-@interface GHMilestone : NSObject {
+@interface GHAPIMilestoneV3 : NSObject {
 @private
     NSNumber *_closedIssues;
     NSString *_createdAt;
