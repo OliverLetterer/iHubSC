@@ -290,7 +290,7 @@
         
         // API v3
         if (!self.gravatarID) {
-            NSString *gravatarURL = [rawDictionary objectForKeyOrNilOnNullObject:@"gravatar_url"];
+            NSString *gravatarURL = [rawDictionary objectForKeyOrNilOnNullObject:@"avatar_url"];
             self.gravatarID = gravatarURL.gravarID;
         }
     }
