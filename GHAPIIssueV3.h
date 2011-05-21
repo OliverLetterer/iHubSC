@@ -8,11 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
-@class GHUserV3, GHAPIMilestoneV3, GHAPIIssueCommentV3;
+@class GHAPIUserV3, GHAPIMilestoneV3, GHAPIIssueCommentV3;
 
 @interface GHAPIIssueV3 : NSObject {
 @private
-    GHUserV3 *_assignee;
+    GHAPIUserV3 *_assignee;
     NSString *_body;
     NSString *_closedAt;
     NSNumber *_comments;
@@ -26,10 +26,10 @@
     NSString *_title;
     NSString *_updatedAt;
     NSString *_URL;
-    GHUserV3 *_user;
+    GHAPIUserV3 *_user;
 }
 
-@property (nonatomic, retain) GHUserV3 *assignee;
+@property (nonatomic, retain) GHAPIUserV3 *assignee;
 @property (nonatomic, copy) NSString *body;
 @property (nonatomic, copy) NSString *closedAt;
 @property (nonatomic, copy) NSNumber *comments;
@@ -43,7 +43,7 @@
 @property (nonatomic, copy) NSString *title;
 @property (nonatomic, copy) NSString *updatedAt;
 @property (nonatomic, copy) NSString *URL;
-@property (nonatomic, retain) GHUserV3 *user;
+@property (nonatomic, retain) GHAPIUserV3 *user;
 
 - (id)initWithRawDictionary:(NSDictionary *)rawDictionay;
 

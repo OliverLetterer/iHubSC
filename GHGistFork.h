@@ -8,16 +8,16 @@
 
 #import <Foundation/Foundation.h>
 
-@class GHUserV3;
+@class GHAPIUserV3;
 
 @interface GHGistFork : NSObject {
 @private
-    GHUserV3 *_user;
+    GHAPIUserV3 *_user;
     NSString *_URL;
     NSString *_createdAt;
 }
 
-@property (nonatomic, retain) GHUserV3 *user;
+@property (nonatomic, retain) GHAPIUserV3 *user;
 @property (nonatomic, copy) NSString *URL;
 @property (nonatomic, copy) NSString *createdAt;
 

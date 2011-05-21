@@ -1,5 +1,5 @@
 //
-//  GHUserV3.h
+//  GHAPIUserV3.h
 //  iGithub
 //
 //  Created by Oliver Letterer on 21.05.11.
@@ -10,7 +10,7 @@
 
 @class GHUserPlan;
 
-@interface GHUserV3 : NSObject {
+@interface GHAPIUserV3 : NSObject {
 @private
     NSString *_login;
     NSNumber *_ID;
@@ -66,11 +66,11 @@
 - (id)initWithRawDictionary:(NSDictionary *)rawDictionay;
 
 
-+ (void)userWithName:(NSString *)username completionHandler:(void(^)(GHUserV3 *user, NSError *error))handler;
++ (void)userWithName:(NSString *)username completionHandler:(void(^)(GHAPIUserV3 *user, NSError *error))handler;
 
 + (void)authenticatedUserWithUsername:(NSString *)username 
                              password:(NSString *)password 
-                    completionHandler:(void(^)(GHUserV3 *user, NSError *error))handler;
+                    completionHandler:(void(^)(GHAPIUserV3 *user, NSError *error))handler;
 
 + (void)usersThatUsernameIsFollowing:(NSString *)username completionHandler:(void(^)(NSArray *users, NSError *error))handler;
 

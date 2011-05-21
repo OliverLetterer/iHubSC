@@ -327,7 +327,7 @@ NSString *const GHAuthenticationViewControllerDidAuthenticateUserNotification = 
             [self.activityIndicatorView startAnimating];
         }];
         
-        [GHUserV3 userWithName:cell.textField.text completionHandler:^(GHUserV3 *user, NSError *error) {
+        [GHAPIUserV3 userWithName:cell.textField.text completionHandler:^(GHAPIUserV3 *user, NSError *error) {
             [UIImage imageFromGravatarID:user.gravatarID withCompletionHandler:^(UIImage *image, NSError *error, BOOL didDownload) {
                 self.imageView.image = image;
                 [UIView animateWithDuration:0.3 animations:^(void) {
@@ -339,8 +339,8 @@ NSString *const GHAuthenticationViewControllerDidAuthenticateUserNotification = 
         }];
     } else if (cell.tag == PasswordCellTag) {
         // check auth
-        [GHUserV3 authenticatedUserWithUsername:self.username password:self.password 
-                              completionHandler:^(GHUserV3 *user, NSError *error) {
+        [GHAPIUserV3 authenticatedUserWithUsername:self.username password:self.password 
+                              completionHandler:^(GHAPIUserV3 *user, NSError *error) {
                                   if (error) {
                                       UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", @"") 
                                                                                        message:[error localizedDescription] 

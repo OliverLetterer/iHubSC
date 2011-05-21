@@ -119,8 +119,8 @@
 
 - (void)downloadUserData {
     _isDownloadingUserData = YES;
-    [GHUserV3 userWithName:self.username 
-         completionHandler:^(GHUserV3 *user, NSError *error) {
+    [GHAPIUserV3 userWithName:self.username 
+         completionHandler:^(GHAPIUserV3 *user, NSError *error) {
              _isDownloadingUserData = NO;
              if (error) {
                  [self handleError:error];
@@ -338,7 +338,7 @@
                                   }
                               }];
     } else if (section == kUITableViewFollowingUsers) {
-        [GHUserV3 usersThatUsernameIsFollowing:self.username 
+        [GHAPIUserV3 usersThatUsernameIsFollowing:self.username 
                         completionHandler:^(NSArray *users, NSError *error) {
                             if (error) {
                                 [self handleError:error];
@@ -349,7 +349,7 @@
                             }
                         }];
     } else if (section == kUITableViewFollowedUsers) {
-        [GHUserV3 userThatAreFollowingUserNamed:self.username 
+        [GHAPIUserV3 userThatAreFollowingUserNamed:self.username 
                        completionHandler:^(NSArray *users, NSError *error) {
                            if (error) {
                                [self handleError:error];
@@ -360,7 +360,7 @@
                            }
                        }];
     } else if (section == kUITableViewNetwork) {
-        [GHUserV3 isFollowingUserNamed:self.username 
+        [GHAPIUserV3 isFollowingUserNamed:self.username 
                      completionHandler:^(BOOL following, NSError *error) {
                          if (error) {
                              [self handleError:error];
@@ -393,7 +393,7 @@
                               }
                           }];
     } else if (section == kUITableViewGists) {
-        [GHUserV3 gistsOfUser:self.username page:1 completionHandler:^(NSArray *gists, NSInteger nextPage, NSError *error) {
+        [GHAPIUserV3 gistsOfUser:self.username page:1 completionHandler:^(NSArray *gists, NSInteger nextPage, NSError *error) {
             if (error) {
                 [self handleError:error];
                 [tableView cancelDownloadInSection:section];
@@ -595,7 +595,7 @@
         }
         
         
-        GHUserV3 *user = [self.followingUsers objectAtIndex:indexPath.row - 1];
+        GHAPIUserV3 *user = [self.followingUsers objectAtIndex:indexPath.row - 1];
         
         cell.textLabel.text = user.login;
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
@@ -610,7 +610,7 @@
         }
         
         
-        GHUserV3 *user = [self.followedUsers objectAtIndex:indexPath.row - 1];
+        GHAPIUserV3 *user = [self.followedUsers objectAtIndex:indexPath.row - 1];
         
         cell.textLabel.text = user.login;
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
@@ -748,20 +748,20 @@
         self.lastIndexPathForSingleRepositoryViewController = indexPath;
         [self.navigationController pushViewController:viewController animated:YES];
     } else if (indexPath.section == kUITableViewFollowingUsers) {
-        GHUserV3 *user = [self.followingUsers objectAtIndex:indexPath.row - 1];
+        GHAPIUserV3 *user = [self.followingUsers objectAtIndex:indexPath.row - 1];
         
         GHUserViewController *userViewController = [[[GHUserViewController alloc] initWithUsername:user.login] autorelease];
         [self.navigationController pushViewController:userViewController animated:YES];
         
     } else if (indexPath.section == kUITableViewFollowedUsers) {
-        GHUserV3 *user = [self.followedUsers objectAtIndex:indexPath.row - 1];
+        GHAPIUserV3 *user = [self.followedUsers objectAtIndex:indexPath.row - 1];
         
         GHUserViewController *userViewController = [[[GHUserViewController alloc] initWithUsername:user.login] autorelease];
         [self.navigationController pushViewController:userViewController animated:YES];
         
     } else if (indexPath.section == kUITableViewNetwork) {
         if (_isFollowingUser) {
-            [GHUserV3 unfollowUser:self.username 
+            [GHAPIUserV3 unfollowUser:self.username 
                  completionHandler:^(NSError *error) {
                      if (error) {
                          [self handleError:error];
@@ -776,7 +776,7 @@
                      }
                  }];
         } else {
-            [GHUserV3 followUser:self.username 
+            [GHAPIUserV3 followUser:self.username 
                completionHandler:^(NSError *error) {
                    if (error) {
                        [self handleError:error];
@@ -808,7 +808,7 @@
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == kUITableViewGists && indexPath.row == [self.gists count] && indexPath.row != 0 && _gistsNextPage > 1) {
-        [GHUserV3 gistsOfUser:self.username page:_gistsNextPage completionHandler:^(NSArray *gists, NSInteger nextPage, NSError *error) {
+        [GHAPIUserV3 gistsOfUser:self.username page:_gistsNextPage completionHandler:^(NSArray *gists, NSInteger nextPage, NSError *error) {
             if (error) {
                 [self handleError:error];
             } else {

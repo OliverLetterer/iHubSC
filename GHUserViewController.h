@@ -17,7 +17,7 @@
 @private
     NSString *_username;
     BOOL _isDownloadingUserData;
-    GHUserV3 *_user;
+    GHAPIUserV3 *_user;
     
     NSArray *_repositoriesArray;
     NSArray *_watchedRepositoriesArray;
@@ -33,7 +33,7 @@
     NSIndexPath *_lastIndexPathForSingleRepositoryViewController;
 }
 
-@property (nonatomic, retain) GHUserV3 *user;
+@property (nonatomic, retain) GHAPIUserV3 *user;
 
 @property (nonatomic, retain) NSArray *repositoriesArray;
 @property (nonatomic, copy) NSString *username;

@@ -8,13 +8,13 @@
 
 #import <Foundation/Foundation.h>
 
-@class GHUserV3;
+@class GHAPIUserV3;
 
 @interface GHAPIMilestoneV3 : NSObject {
 @private
     NSNumber *_closedIssues;
     NSString *_createdAt;
-    GHUserV3 *_creator;
+    GHAPIUserV3 *_creator;
     NSString *_milestoneDescription;
     NSString *_dueOn;
     NSNumber *_number;
@@ -26,7 +26,7 @@
 
 @property (nonatomic, copy) NSNumber *closedIssues;
 @property (nonatomic, copy) NSString *createdAt;
-@property (nonatomic, retain) GHUserV3 *creator;
+@property (nonatomic, retain) GHAPIUserV3 *creator;
 @property (nonatomic, copy) NSString *milestoneDescription;
 @property (nonatomic, copy) NSString *dueOn;
 @property (nonatomic, copy) NSNumber *number;

@@ -115,7 +115,7 @@
 		A7837E9A136C93FC00B13B95 /* GHAPIMilestoneV3.m in Sources */ = {isa = PBXBuildFile; fileRef = A7837E99136C93FC00B13B95 /* GHAPIMilestoneV3.m */; };
 		A7837EA1136CADA500B13B95 /* PDColoredProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = A7837EA0136CADA400B13B95 /* PDColoredProgressView.m */; };
 		A7837EA5136CADD400B13B95 /* GHAPIMilestoneV3TableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A7837EA4136CADD400B13B95 /* GHAPIMilestoneV3TableViewCell.m */; };
-		A79F37FE13883C2C0028F492 /* GHUserV3.m in Sources */ = {isa = PBXBuildFile; fileRef = A79F37FD13883C2C0028F492 /* GHUserV3.m */; };
+		A79F37FE13883C2C0028F492 /* GHAPIUserV3.m in Sources */ = {isa = PBXBuildFile; fileRef = A79F37FD13883C2C0028F492 /* GHAPIUserV3.m */; };
 		A79F380113883F740028F492 /* GHUserPlan.m in Sources */ = {isa = PBXBuildFile; fileRef = A79F380013883F740028F492 /* GHUserPlan.m */; };
 		A7A80CB61362BA0800BE70B8 /* GHAdvancedTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = A7A80CB51362BA0800BE70B8 /* GHAdvancedTextView.m */; };
 		A7A80CBA1362BA3900BE70B8 /* GHAdvancedTextViewInternalCoreTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = A7A80CB91362BA3900BE70B8 /* GHAdvancedTextViewInternalCoreTextView.m */; };
@@ -390,8 +390,8 @@
 		A7837EA0136CADA400B13B95 /* PDColoredProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PDColoredProgressView.m; path = PDColoredProgressview/PDColoredProgressView.m; sourceTree = "<group>"; };
 		A7837EA3136CADD400B13B95 /* GHAPIMilestoneV3TableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHAPIMilestoneV3TableViewCell.h; sourceTree = "<group>"; };
 		A7837EA4136CADD400B13B95 /* GHAPIMilestoneV3TableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHAPIMilestoneV3TableViewCell.m; sourceTree = "<group>"; };
-		A79F37FC13883C2C0028F492 /* GHUserV3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHUserV3.h; sourceTree = "<group>"; };
-		A79F37FD13883C2C0028F492 /* GHUserV3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHUserV3.m; sourceTree = "<group>"; };
+		A79F37FC13883C2C0028F492 /* GHAPIUserV3.h */ = {isa = PBXFileReference; fileEncoding = 4; path = GHAPIUserV3.h; sourceTree = "<group>"; };
+		A79F37FD13883C2C0028F492 /* GHAPIUserV3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHAPIUserV3.m; sourceTree = "<group>"; };
 		A79F37FF13883F740028F492 /* GHUserPlan.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHUserPlan.h; sourceTree = "<group>"; };
 		A79F380013883F740028F492 /* GHUserPlan.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHUserPlan.m; sourceTree = "<group>"; };
 		A7A80CB41362BA0800BE70B8 /* GHAdvancedTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHAdvancedTextView.h; sourceTree = "<group>"; };
@@ -1126,7 +1126,7 @@
 			isa = PBXGroup;
 			children = (
 				A79F380213884CCD0028F492 /* GHUserPlan */,
-				A79F37FB13883C0B0028F492 /* GHUserV3 */,
+				A79F37FB13883C0B0028F492 /* GHAPIUserV3 */,
 				A79F38031388581A0028F492 /* GHAPIIssueCommentV3 */,
 				A79F37FA13883BF90028F492 /* GHAPIIssueV3 */,
 				A7BF146E13426ED9001AE50D /* GHBackgroundQueue */,
@@ -1145,13 +1145,13 @@
 			name = GHAPIIssueV3;
 			sourceTree = "<group>";
 		};
-		A79F37FB13883C0B0028F492 /* GHUserV3 */ = {
+		A79F37FB13883C0B0028F492 /* GHAPIUserV3 */ = {
 			isa = PBXGroup;
 			children = (
-				A79F37FC13883C2C0028F492 /* GHUserV3.h */,
-				A79F37FD13883C2C0028F492 /* GHUserV3.m */,
+				A79F37FC13883C2C0028F492 /* GHAPIUserV3.h */,
+				A79F37FD13883C2C0028F492 /* GHAPIUserV3.m */,
 			);
-			name = GHUserV3;
+			name = GHAPIUserV3;
 			sourceTree = "<group>";
 		};
 		A79F380213884CCD0028F492 /* GHUserPlan */ = {
@@ -1932,7 +1932,7 @@
 				A7F92B90137334E3000EBC5E /* GHGistComment.m in Sources */,
 				A723F16A137ED1E000F7649B /* GHPullToReleaseTableViewController.m in Sources */,
 				A723F16D137ED1FC00F7649B /* GHPullToReleaseTableHeaderView.m in Sources */,
-				A79F37FE13883C2C0028F492 /* GHUserV3.m in Sources */,
+				A79F37FE13883C2C0028F492 /* GHAPIUserV3.m in Sources */,
 				A79F380113883F740028F492 /* GHUserPlan.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -21,7 +21,7 @@
         self.URL = [rawDictionay objectForKeyOrNilOnNullObject:@"url"];
         self.ID = [rawDictionay objectForKeyOrNilOnNullObject:@"id"];
         self.description = [rawDictionay objectForKeyOrNilOnNullObject:@"description"];
-        self.user = [[[GHUserV3 alloc] initWithRawDictionary:[rawDictionay objectForKeyOrNilOnNullObject:@"user"]] autorelease];
+        self.user = [[[GHAPIUserV3 alloc] initWithRawDictionary:[rawDictionay objectForKeyOrNilOnNullObject:@"user"]] autorelease];
         self.comments = [rawDictionay objectForKeyOrNilOnNullObject:@"comments"];
         self.pullURL = [rawDictionay objectForKeyOrNilOnNullObject:@"git_pull_url"];
         self.pushURL = [rawDictionay objectForKeyOrNilOnNullObject:@"git_push_url"];

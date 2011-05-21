@@ -11,11 +11,11 @@
 
 NSString *const GHAuthenticationViewControllerDidAuthenticateUserNotification;
 
-@class GHAuthenticationViewController, GHUserV3;
+@class GHAuthenticationViewController, GHAPIUserV3;
 
 @protocol GHAuthenticationViewControllerDelegate <NSObject>
 
-- (void)authenticationViewController:(GHAuthenticationViewController *)authenticationViewController didAuthenticateUser:(GHUserV3 *)user;
+- (void)authenticationViewController:(GHAuthenticationViewController *)authenticationViewController didAuthenticateUser:(GHAPIUserV3 *)user;
 
 @end
 

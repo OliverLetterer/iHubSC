@@ -63,7 +63,7 @@
 
 #pragma mark - GHAuthenticationViewControllerDelegate
 
-- (void)authenticationViewController:(GHAuthenticationViewController *)authenticationViewController didAuthenticateUser:(GHUserV3 *)user {
+- (void)authenticationViewController:(GHAuthenticationViewController *)authenticationViewController didAuthenticateUser:(GHAPIUserV3 *)user {
     [self dismissModalViewControllerAnimated:YES];
 }
 

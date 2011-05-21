@@ -8,21 +8,21 @@
 
 #import <Foundation/Foundation.h>
 
-@class GHUserV3;
+@class GHAPIUserV3;
 
 @interface GHGistComment : NSObject {
 @private
     NSNumber *_ID;
     NSString *_URL;
     NSString *_body;
-    GHUserV3 *_user;
+    GHAPIUserV3 *_user;
     NSString *_createdAt;
 }
 
 @property (nonatomic, copy) NSNumber *ID;
 @property (nonatomic, copy) NSString *URL;
 @property (nonatomic, copy) NSString *body;
-@property (nonatomic, retain) GHUserV3 *user;
+@property (nonatomic, retain) GHAPIUserV3 *user;
 @property (nonatomic, copy) NSString *createdAt;
 
 - (id)initWithRawDictionary:(NSDictionary *)rawDictionay;

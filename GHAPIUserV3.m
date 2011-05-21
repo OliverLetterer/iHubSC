@@ -1,15 +1,15 @@
 //
-//  GHUserV3.m
+//  GHAPIUserV3.m
 //  iGithub
 //
 //  Created by Oliver Letterer on 21.05.11.
 //  Copyright 2011 Home. All rights reserved.
 //
 
-#import "GHUserV3.h"
+#import "GHAPIUserV3.h"
 #import "GithubAPI.h"
 
-@implementation GHUserV3
+@implementation GHAPIUserV3
 
 @synthesize login=_login, ID=_ID, gravatarID=_gravatarID, URL=_URL, name=_name, company=_company, blog=_blog, location=_location, EMail=_EMail, hireable=_hireable, bio=_bio, publicRepos=_publicRepos, publicGists=_publicGists, followers=_followers, following=_following, htmlURL=_htmlURL, createdAt=_createdAt, type=_type, totalPrivateRepos=_totalPrivateRepos, ownedPrivateRepos=_ownedPrivateRepos, privateGists=_privateGists, diskUsage=_diskUsage, collaborators=_collaborators, plan=_plan;
 
@@ -48,7 +48,7 @@
 
 #pragma mark - Downloading
 
-+ (void)userWithName:(NSString *)username completionHandler:(void(^)(GHUserV3 *user, NSError *error))handler {
++ (void)userWithName:(NSString *)username completionHandler:(void(^)(GHAPIUserV3 *user, NSError *error))handler {
     
     // v3: GET /users/:user
     
@@ -61,14 +61,14 @@
                                                handler(nil, error);
                                            } else {
                                                NSDictionary *rawDictionary = object;
-                                               handler([[[GHUserV3 alloc] initWithRawDictionary:rawDictionary] autorelease] , nil);
+                                               handler([[[GHAPIUserV3 alloc] initWithRawDictionary:rawDictionary] autorelease] , nil);
                                            }
                                        }];
 }
 
 + (void)authenticatedUserWithUsername:(NSString *)username 
                              password:(NSString *)password 
-                    completionHandler:(void(^)(GHUserV3 *user, NSError *error))handler {
+                    completionHandler:(void(^)(GHAPIUserV3 *user, NSError *error))handler {
     
     // v3: GET /user
     
@@ -83,7 +83,7 @@
                                                handler(nil, error);
                                            } else {
                                                NSDictionary *rawDictionary = object;
-                                               handler([[[GHUserV3 alloc] initWithRawDictionary:rawDictionary] autorelease] , nil);
+                                               handler([[[GHAPIUserV3 alloc] initWithRawDictionary:rawDictionary] autorelease] , nil);
                                            }
                                        }];
     
@@ -104,7 +104,7 @@
                                                
                                                NSMutableArray *finalArray = [NSMutableArray arrayWithCapacity:rawArray.count];
                                                for (NSDictionary *rawDictionary in rawArray) {
-                                                   [finalArray addObject:[[[GHUserV3 alloc] initWithRawDictionary:rawDictionary] autorelease] ];
+                                                   [finalArray addObject:[[[GHAPIUserV3 alloc] initWithRawDictionary:rawDictionary] autorelease] ];
                                                }
                                                
                                                handler(finalArray, nil);
@@ -128,7 +128,7 @@
                                                
                                                NSMutableArray *finalArray = [NSMutableArray arrayWithCapacity:rawArray.count];
                                                for (NSDictionary *rawDictionary in rawArray) {
-                                                   [finalArray addObject:[[[GHUserV3 alloc] initWithRawDictionary:rawDictionary] autorelease] ];
+                                                   [finalArray addObject:[[[GHAPIUserV3 alloc] initWithRawDictionary:rawDictionary] autorelease] ];
                                                }
                                                
                                                handler(finalArray, nil);

@@ -49,7 +49,7 @@
         self.state = [rawDictionay objectForKeyOrNilOnNullObject:@"state"];
         self.title = [rawDictionay objectForKeyOrNilOnNullObject:@"title"];
         self.URL = [rawDictionay objectForKeyOrNilOnNullObject:@"url"];
-        self.creator = [[[GHUserV3 alloc] initWithRawDictionary:[rawDictionay objectForKeyOrNilOnNullObject:@"creator"] ] autorelease];
+        self.creator = [[[GHAPIUserV3 alloc] initWithRawDictionary:[rawDictionay objectForKeyOrNilOnNullObject:@"creator"] ] autorelease];
     }
     return self;
 }

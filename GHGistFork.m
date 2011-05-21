@@ -18,7 +18,7 @@
 - (id)initWithRawDictionary:(NSDictionary *)rawDictionay {
     if ((self = [super init])) {
         // Initialization code
-        self.user = [[[GHUserV3 alloc] initWithRawDictionary:[rawDictionay objectForKeyOrNilOnNullObject:@"user"] ] autorelease];
+        self.user = [[[GHAPIUserV3 alloc] initWithRawDictionary:[rawDictionay objectForKeyOrNilOnNullObject:@"user"] ] autorelease];
         self.URL = [rawDictionay objectForKeyOrNilOnNullObject:@"url"];
         self.createdAt = [rawDictionay objectForKeyOrNilOnNullObject:@"created_at"];
     }

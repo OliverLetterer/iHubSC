@@ -23,7 +23,7 @@
         self.updatedAt = [rawDictionary objectForKeyOrNilOnNullObject:@"updated_at"];
         self.URL = [rawDictionary objectForKeyOrNilOnNullObject:@"url"];
         
-        self.user = [[[GHUserV3 alloc] initWithRawDictionary:[rawDictionary objectForKeyOrNilOnNullObject:@"user"] ] autorelease];
+        self.user = [[[GHAPIUserV3 alloc] initWithRawDictionary:[rawDictionary objectForKeyOrNilOnNullObject:@"user"] ] autorelease];
     }
     return self;
 }

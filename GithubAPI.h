@@ -41,7 +41,7 @@
 #import "GHGistFile.h"
 #import "GHGistFork.h"
 #import "GHGistComment.h"
-#import "GHUserV3.h"
+#import "GHAPIUserV3.h"
 #import "GHUserPlan.h"
 
 #import "GHPayload.h"

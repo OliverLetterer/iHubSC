@@ -23,7 +23,7 @@
         self.body = [rawDictionay objectForKeyOrNilOnNullObject:@"body"];
         self.createdAt = [rawDictionay objectForKeyOrNilOnNullObject:@"created_at"];
         
-        self.user = [[[GHUserV3 alloc] initWithRawDictionary:[rawDictionay objectForKeyOrNilOnNullObject:@"user"] ] autorelease];
+        self.user = [[[GHAPIUserV3 alloc] initWithRawDictionary:[rawDictionay objectForKeyOrNilOnNullObject:@"user"] ] autorelease];
     }
     return self;
 }
