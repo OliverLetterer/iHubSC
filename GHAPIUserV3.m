@@ -199,7 +199,7 @@
                                                
                                                NSMutableArray *finalArray = [NSMutableArray arrayWithCapacity:rawArray.count];
                                                for (NSDictionary *rawDictionary in rawArray) {
-                                                   [finalArray addObject:[[[GHGist alloc] initWithRawDictionary:rawDictionary] autorelease] ];
+                                                   [finalArray addObject:[[[GHAPIGistV3 alloc] initWithRawDictionary:rawDictionary] autorelease] ];
                                                }
                                                
                                                NSString *linkHeader = [[request responseHeaders] objectForKey:@"Link"];

@@ -1,15 +1,15 @@
 //
-//  GHGistFile.m
+//  GHAPIGistFileV3.m
 //  iGithub
 //
 //  Created by Oliver Letterer on 03.05.11.
 //  Copyright 2011 Home. All rights reserved.
 //
 
-#import "GHGistFile.h"
+#import "GHAPIGistFileV3.h"
 #import "GithubAPI.h"
 
-@implementation GHGistFile
+@implementation GHAPIGistFileV3
 
 @synthesize filename=_filename, size=_size, URL=_URL, content=_content;
 

@@ -190,7 +190,7 @@
 
 - (void)cacheGistsHeight {
     [self.gists enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        GHGist *gist = obj;
+        GHAPIGistV3 *gist = obj;
         
         CGFloat height = [self heightForDescription:gist.description] + 50.0;
         
@@ -654,7 +654,7 @@
             cell = [[[GHFeedItemWithDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
         }
         
-        GHGist *gist = [self.gists objectAtIndex:indexPath.row-1];
+        GHAPIGistV3 *gist = [self.gists objectAtIndex:indexPath.row-1];
         
         cell.titleLabel.text = [NSString stringWithFormat:@"Gist: %@", gist.ID];
         
@@ -688,9 +688,9 @@
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         // Delete the row from the data source
         if (indexPath.section == kUITableViewGists && indexPath.row > 0) {
-            GHGist *gist = [self.gists objectAtIndex:indexPath.row - 1];
+            GHAPIGistV3 *gist = [self.gists objectAtIndex:indexPath.row - 1];
             
-            [GHGist deleteGistWithID:gist.ID completionHandler:^(NSError *error) {
+            [GHAPIGistV3 deleteGistWithID:gist.ID completionHandler:^(NSError *error) {
                 if (error) {
                     [self handleError:error];
                     [tableView reloadSections:[NSIndexSet indexSetWithIndex:indexPath.section] 
@@ -797,7 +797,7 @@
         
         [self.navigationController pushViewController:organizationViewController animated:YES];
     } else if (indexPath.section == kUITableViewGists) {
-        GHGist *gist = [self.gists objectAtIndex:indexPath.row - 1];
+        GHAPIGistV3 *gist = [self.gists objectAtIndex:indexPath.row - 1];
         
         GHGistViewController *gistViewController = [[[GHGistViewController alloc] initWithID:gist.ID] autorelease];
         [self.navigationController pushViewController:gistViewController animated:YES];

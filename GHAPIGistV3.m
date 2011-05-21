@@ -1,15 +1,15 @@
 //
-//  GHGist.m
+//  GHAPIGistV3.m
 //  iGithub
 //
 //  Created by Oliver Letterer on 03.05.11.
 //  Copyright 2011 Home. All rights reserved.
 //
 
-#import "GHGist.h"
+#import "GHAPIGistV3.h"
 #import "GithubAPI.h"
 
-@implementation GHGist
+@implementation GHAPIGistV3
 
 @synthesize URL=_URL, ID=_ID, description=_description, public=_public, user=_user, files=_files, comments=_comments, pullURL=_pullURL, pushURL=_pushURL, createdAt=_createdAt, forks=_forks;
 
@@ -32,7 +32,7 @@
         NSMutableArray *filesArray = [NSMutableArray arrayWithCapacity:[filesDictionary count]];
         
         [filesDictionary enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
-            [filesArray addObject:[[[GHGistFile alloc] initWithRawDictionary:obj] autorelease] ];
+            [filesArray addObject:[[[GHAPIGistFileV3 alloc] initWithRawDictionary:obj] autorelease] ];
         }];
         
         self.files = filesArray;
@@ -40,7 +40,7 @@
         NSArray *rawArray = [rawDictionay objectForKeyOrNilOnNullObject:@"forks"];
         NSMutableArray *finalArray = [NSMutableArray arrayWithCapacity:rawArray.count];
         [rawArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-            [finalArray addObject:[[[GHGistFork alloc] initWithRawDictionary:obj] autorelease] ];
+            [finalArray addObject:[[[GHAPIGistForkV3 alloc] initWithRawDictionary:obj] autorelease] ];
         }];
         
         self.forks = finalArray;
@@ -50,7 +50,7 @@
 
 #pragma mark - downloading
 
-+ (void)gistWithID:(NSString *)ID completionHandler:(void (^)(GHGist *, NSError *))handler {
++ (void)gistWithID:(NSString *)ID completionHandler:(void (^)(GHAPIGistV3 *, NSError *))handler {
     
     // v3: GET /gists/:id
     
@@ -62,7 +62,7 @@
                                            if (error) {
                                                handler(nil, error);
                                            } else {
-                                               handler([[[GHGist alloc] initWithRawDictionary:object] autorelease], nil);
+                                               handler([[[GHAPIGistV3 alloc] initWithRawDictionary:object] autorelease], nil);
                                            }
                                            
                                        }];
@@ -143,7 +143,7 @@
                                                
                                                NSMutableArray *finalArray = [NSMutableArray arrayWithCapacity:rawArray.count];
                                                [rawArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-                                                   [finalArray addObject:[[[GHGistComment alloc] initWithRawDictionary:obj] autorelease] ];
+                                                   [finalArray addObject:[[[GHAPIGistCommentV3 alloc] initWithRawDictionary:obj] autorelease] ];
                                                }];
                                                
                                                handler(finalArray, nil);
@@ -152,7 +152,7 @@
                                        }];
 }
 
-+ (void)postComment:(NSString *)comment forGistWithID:(NSString *)ID completionHandler:(void (^)(GHGistComment *, NSError *))handler {
++ (void)postComment:(NSString *)comment forGistWithID:(NSString *)ID completionHandler:(void (^)(GHAPIGistCommentV3 *, NSError *))handler {
     // V3: POST /gists/:gist_id/comments
     
     NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.github.com/gists/%@/comments", 
@@ -175,7 +175,7 @@
                                            if (error) {
                                                handler(nil, error);
                                            } else {
-                                               handler([[[GHGistComment alloc] initWithRawDictionary:object] autorelease], nil);
+                                               handler([[[GHAPIGistCommentV3 alloc] initWithRawDictionary:object] autorelease], nil);
                                            }
                                        }];
 }

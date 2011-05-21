@@ -35,7 +35,7 @@
     [_ID release];
     _ID = [ID copy];
     
-    [GHGist gistWithID:_ID completionHandler:^(GHGist *gist, NSError *error) {
+    [GHAPIGistV3 gistWithID:_ID completionHandler:^(GHAPIGistV3 *gist, NSError *error) {
         if (error) {
             [self handleError:error];
         } else {
@@ -65,9 +65,9 @@
 - (void)toolbarDoneButtonClicked:(UIBarButtonItem *)barButton {
     [self.textView resignFirstResponder];
     
-    [GHGist postComment:self.textView.text 
+    [GHAPIGistV3 postComment:self.textView.text 
           forGistWithID:self.gist.ID 
-      completionHandler:^(GHGistComment *comment, NSError *error) {
+      completionHandler:^(GHAPIGistCommentV3 *comment, NSError *error) {
           if (error) {
               [self handleError:error];
           } else {
@@ -177,7 +177,7 @@
 
 - (void)cacheHeightForComments {
     [self.comments enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        GHGistComment *comment = obj;
+        GHAPIGistCommentV3 *comment = obj;
         
         CGFloat height = [self heightForDescription:comment.body] + 50.0;
         
@@ -238,7 +238,7 @@
 
 - (void)tableView:(UIExpandableTableView *)tableView downloadDataForExpandableSection:(NSInteger)section {
     if (section == kUITableViewSectionStar) {
-        [GHGist isGistStarredWithID:self.gist.ID completionHandler:^(BOOL starred, NSError *error) {
+        [GHAPIGistV3 isGistStarredWithID:self.gist.ID completionHandler:^(BOOL starred, NSError *error) {
             if (error) {
                 [self handleError:error];
                 [tableView cancelDownloadInSection:section];
@@ -249,7 +249,7 @@
             }
         }];
     } else if (section == kUITableViewSectionComments) {
-        [GHGist commentsForGistWithID:self.gist.ID completionHandler:^(NSMutableArray *comments, NSError *error) {
+        [GHAPIGistV3 commentsForGistWithID:self.gist.ID completionHandler:^(NSMutableArray *comments, NSError *error) {
             if (error) {
                 [self handleError:error];
                 [tableView cancelDownloadInSection:section];
@@ -302,7 +302,7 @@
                 cell = [[[GHFeedItemWithDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
             }
             
-            GHGist *gist = self.gist;
+            GHAPIGistV3 *gist = self.gist;
             
             cell.titleLabel.text = [NSString stringWithFormat:@"Gist: %@", gist.ID];
             
@@ -341,7 +341,7 @@
         }
         
         
-        GHGistFile *file = [self.gist.files objectAtIndex:indexPath.row - 1];
+        GHAPIGistFileV3 *file = [self.gist.files objectAtIndex:indexPath.row - 1];
         
         cell.textLabel.text = file.filename;
         cell.detailTextLabel.text = [NSString stringFormFileSize:[file.size longLongValue] ];
@@ -356,7 +356,7 @@
             cell = [[[UITableViewCellWithLinearGradientBackgroundView alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
         }
         
-        GHGistFork *fork = [self.gist.forks objectAtIndex:indexPath.row - 1];
+        GHAPIGistForkV3 *fork = [self.gist.forks objectAtIndex:indexPath.row - 1];
         
         cell.textLabel.text = fork.user.login;
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
@@ -388,7 +388,7 @@
                 cell = [[[GHFeedItemWithDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
             }
             
-            GHGistComment *comment = [self.comments objectAtIndex:indexPath.row - 1];
+            GHAPIGistCommentV3 *comment = [self.comments objectAtIndex:indexPath.row - 1];
             
             [self updateImageViewForCell:cell 
                              atIndexPath:indexPath 
@@ -488,18 +488,18 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == kUITableViewSectionForks) {
-        GHGistFork *fork = [self.gist.forks objectAtIndex:indexPath.row - 1];
+        GHAPIGistForkV3 *fork = [self.gist.forks objectAtIndex:indexPath.row - 1];
         
         GHUserViewController *userViewController = [[[GHUserViewController alloc] initWithUsername:fork.user.login] autorelease];
         [self.navigationController pushViewController:userViewController animated:YES];
     } else if (indexPath.section == kUITableViewSectionFiles) {
-        GHGistFile *file = [self.gist.files objectAtIndex:indexPath.row - 1];
+        GHAPIGistFileV3 *file = [self.gist.files objectAtIndex:indexPath.row - 1];
         
         GHViewCloudFileViewController *fileViewController = [[[GHViewCloudFileViewController alloc] initWithFile:file.filename contentsOfFile:file.content] autorelease];
         [self.navigationController pushViewController:fileViewController animated:YES];
     } else if (indexPath.section == kUITableViewSectionStar && indexPath.row == 1) {
         if (_isGistStarred) {
-            [GHGist unstarGistWithID:self.gist.ID completionHandler:^(NSError *error) {
+            [GHAPIGistV3 unstarGistWithID:self.gist.ID completionHandler:^(NSError *error) {
                 if (error) {
                     [self handleError:error];
                 } else {
@@ -509,7 +509,7 @@
                          withRowAnimation:UITableViewRowAnimationNone];
             }];
         } else {
-            [GHGist starGistWithID:self.gist.ID completionHandler:^(NSError *error) {
+            [GHAPIGistV3 starGistWithID:self.gist.ID completionHandler:^(NSError *error) {
                 if (error) {
                     [self handleError:error];
                 } else {
@@ -520,7 +520,7 @@
             }];
         }
     } else if (indexPath.section == kUITableViewSectionComments && indexPath.row > 0 && indexPath.row <= self.comments.count) {
-        GHGistComment *comment = [self.comments objectAtIndex:indexPath.row - 1];
+        GHAPIGistCommentV3 *comment = [self.comments objectAtIndex:indexPath.row - 1];
         
         GHUserViewController *userViewController = [[[GHUserViewController alloc] initWithUsername:comment.user.login] autorelease];
         [self.navigationController pushViewController:userViewController animated:YES];

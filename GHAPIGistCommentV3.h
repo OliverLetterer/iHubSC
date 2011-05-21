@@ -1,5 +1,5 @@
 //
-//  GHGistComment.h
+//  GHAPIGistCommentV3.h
 //  iGithub
 //
 //  Created by Oliver Letterer on 05.05.11.
@@ -10,7 +10,7 @@
 
 @class GHAPIUserV3;
 
-@interface GHGistComment : NSObject {
+@interface GHAPIGistCommentV3 : NSObject {
 @private
     NSNumber *_ID;
     NSString *_URL;

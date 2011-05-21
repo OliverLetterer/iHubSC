@@ -37,10 +37,10 @@
 
 // V3
 #import "GHAPIMilestoneV3.h"
-#import "GHGist.h"
-#import "GHGistFile.h"
-#import "GHGistFork.h"
-#import "GHGistComment.h"
+#import "GHAPIGistV3.h"
+#import "GHAPIGistFileV3.h"
+#import "GHAPIGistForkV3.h"
+#import "GHAPIGistCommentV3.h"
 #import "GHAPIUserV3.h"
 #import "GHAPIUserPlanV3.h"
 

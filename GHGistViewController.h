@@ -9,12 +9,12 @@
 #import <UIKit/UIKit.h>
 #import "GHTableViewController.h"
 
-@class GHGist;
+@class GHAPIGistV3;
 
 @interface GHGistViewController : GHTableViewController {
 @private
     NSString *_ID;
-    GHGist *_gist;
+    GHAPIGistV3 *_gist;
     
     // star
     BOOL _hasStarData;
@@ -27,7 +27,7 @@
 }
 
 @property (nonatomic, copy) NSString *ID;
-@property (nonatomic, retain) GHGist *gist;
+@property (nonatomic, retain) GHAPIGistV3 *gist;
 
 @property (nonatomic, retain) NSMutableArray *comments;
 

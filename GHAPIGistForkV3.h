@@ -1,5 +1,5 @@
 //
-//  GHGistFork.h
+//  GHAPIGistForkV3.h
 //  iGithub
 //
 //  Created by Oliver Letterer on 05.05.11.
@@ -10,7 +10,7 @@
 
 @class GHAPIUserV3;
 
-@interface GHGistFork : NSObject {
+@interface GHAPIGistForkV3 : NSObject {
 @private
     GHAPIUserV3 *_user;
     NSString *_URL;

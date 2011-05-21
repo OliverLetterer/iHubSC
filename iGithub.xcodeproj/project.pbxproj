@@ -102,8 +102,8 @@
 		A75057391343033200514A82 /* GHGlossBottomBorder.png in Resources */ = {isa = PBXBuildFile; fileRef = A75057351343033200514A82 /* GHGlossBottomBorder.png */; };
 		A750573E1343205000514A82 /* GHNewsFeed.m in Sources */ = {isa = PBXBuildFile; fileRef = A750573D1343205000514A82 /* GHNewsFeed.m */; };
 		A75057431343426300514A82 /* GHNewsFeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A75057421343426300514A82 /* GHNewsFeedViewController.m */; };
-		A767715E13707A88006D70D6 /* GHGist.m in Sources */ = {isa = PBXBuildFile; fileRef = A767715D13707A88006D70D6 /* GHGist.m */; };
-		A767716113707C6F006D70D6 /* GHGistFile.m in Sources */ = {isa = PBXBuildFile; fileRef = A767716013707C6F006D70D6 /* GHGistFile.m */; };
+		A767715E13707A88006D70D6 /* GHAPIGistV3.m in Sources */ = {isa = PBXBuildFile; fileRef = A767715D13707A88006D70D6 /* GHAPIGistV3.m */; };
+		A767716113707C6F006D70D6 /* GHAPIGistFileV3.m in Sources */ = {isa = PBXBuildFile; fileRef = A767716013707C6F006D70D6 /* GHAPIGistFileV3.m */; };
 		A76771641370A34F006D70D6 /* GHClipBoard.png in Resources */ = {isa = PBXBuildFile; fileRef = A76771621370A34E006D70D6 /* GHClipBoard.png */; };
 		A76771651370A34F006D70D6 /* GHClipBoard@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A76771631370A34E006D70D6 /* GHClipBoard@2x.png */; };
 		A76771681370A5B2006D70D6 /* GHClipBoardPrivate.png in Resources */ = {isa = PBXBuildFile; fileRef = A76771661370A5B1006D70D6 /* GHClipBoardPrivate.png */; };
@@ -193,9 +193,9 @@
 		A7F62626134B89E5006487CA /* NSDate+GithubAPIAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = A7F62625134B89E5006487CA /* NSDate+GithubAPIAdditions.m */; };
 		A7F6262A134C45D5006487CA /* GHTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7F62629134C45D5006487CA /* GHTableViewController.m */; };
 		A7F7CA62134DA1FA005509D0 /* NSError+GithubAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = A7F7CA61134DA1FA005509D0 /* NSError+GithubAPI.m */; };
-		A7F92B881373149C000EBC5E /* GHGistFork.m in Sources */ = {isa = PBXBuildFile; fileRef = A7F92B871373149C000EBC5E /* GHGistFork.m */; };
+		A7F92B881373149C000EBC5E /* GHAPIGistForkV3.m in Sources */ = {isa = PBXBuildFile; fileRef = A7F92B871373149C000EBC5E /* GHAPIGistForkV3.m */; };
 		A7F92B8D137318C3000EBC5E /* GHGistViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7F92B8C137318C3000EBC5E /* GHGistViewController.m */; };
-		A7F92B90137334E3000EBC5E /* GHGistComment.m in Sources */ = {isa = PBXBuildFile; fileRef = A7F92B8F137334E3000EBC5E /* GHGistComment.m */; };
+		A7F92B90137334E3000EBC5E /* GHAPIGistCommentV3.m in Sources */ = {isa = PBXBuildFile; fileRef = A7F92B8F137334E3000EBC5E /* GHAPIGistCommentV3.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -370,10 +370,10 @@
 		A750573D1343205000514A82 /* GHNewsFeed.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHNewsFeed.m; sourceTree = "<group>"; };
 		A75057411343426300514A82 /* GHNewsFeedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHNewsFeedViewController.h; sourceTree = "<group>"; };
 		A75057421343426300514A82 /* GHNewsFeedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHNewsFeedViewController.m; sourceTree = "<group>"; };
-		A767715C13707A88006D70D6 /* GHGist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHGist.h; sourceTree = "<group>"; };
-		A767715D13707A88006D70D6 /* GHGist.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHGist.m; sourceTree = "<group>"; };
-		A767715F13707C6F006D70D6 /* GHGistFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHGistFile.h; sourceTree = "<group>"; };
-		A767716013707C6F006D70D6 /* GHGistFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHGistFile.m; sourceTree = "<group>"; };
+		A767715C13707A88006D70D6 /* GHAPIGistV3.h */ = {isa = PBXFileReference; fileEncoding = 4; path = GHAPIGistV3.h; sourceTree = "<group>"; };
+		A767715D13707A88006D70D6 /* GHAPIGistV3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHAPIGistV3.m; sourceTree = "<group>"; };
+		A767715F13707C6F006D70D6 /* GHAPIGistFileV3.h */ = {isa = PBXFileReference; fileEncoding = 4; path = GHAPIGistFileV3.h; sourceTree = "<group>"; };
+		A767716013707C6F006D70D6 /* GHAPIGistFileV3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHAPIGistFileV3.m; sourceTree = "<group>"; };
 		A76771621370A34E006D70D6 /* GHClipBoard.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GHClipBoard.png; sourceTree = "<group>"; };
 		A76771631370A34E006D70D6 /* GHClipBoard@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GHClipBoard@2x.png"; sourceTree = "<group>"; };
 		A76771661370A5B1006D70D6 /* GHClipBoardPrivate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GHClipBoardPrivate.png; sourceTree = "<group>"; };
@@ -390,9 +390,9 @@
 		A7837EA0136CADA400B13B95 /* PDColoredProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PDColoredProgressView.m; path = PDColoredProgressview/PDColoredProgressView.m; sourceTree = "<group>"; };
 		A7837EA3136CADD400B13B95 /* GHAPIMilestoneV3TableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHAPIMilestoneV3TableViewCell.h; sourceTree = "<group>"; };
 		A7837EA4136CADD400B13B95 /* GHAPIMilestoneV3TableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHAPIMilestoneV3TableViewCell.m; sourceTree = "<group>"; };
-		A79F37FC13883C2C0028F492 /* GHAPIUserV3.h */ = {isa = PBXFileReference; fileEncoding = 4; path = GHAPIUserV3.h; sourceTree = "<group>"; };
+		A79F37FC13883C2C0028F492 /* GHAPIUserV3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHAPIUserV3.h; sourceTree = "<group>"; };
 		A79F37FD13883C2C0028F492 /* GHAPIUserV3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHAPIUserV3.m; sourceTree = "<group>"; };
-		A79F37FF13883F740028F492 /* GHAPIUserPlanV3.h */ = {isa = PBXFileReference; fileEncoding = 4; path = GHAPIUserPlanV3.h; sourceTree = "<group>"; };
+		A79F37FF13883F740028F492 /* GHAPIUserPlanV3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHAPIUserPlanV3.h; sourceTree = "<group>"; };
 		A79F380013883F740028F492 /* GHAPIUserPlanV3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHAPIUserPlanV3.m; sourceTree = "<group>"; };
 		A7A80CB41362BA0800BE70B8 /* GHAdvancedTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHAdvancedTextView.h; sourceTree = "<group>"; };
 		A7A80CB51362BA0800BE70B8 /* GHAdvancedTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHAdvancedTextView.m; sourceTree = "<group>"; };
@@ -513,7 +513,7 @@
 		A7D41AFC135ADA3C00CD3A5C /* GHBranch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHBranch.m; sourceTree = "<group>"; };
 		A7D41B06135AE71300CD3A5C /* GHRecentCommitsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHRecentCommitsViewController.h; sourceTree = "<group>"; };
 		A7D41B07135AE71600CD3A5C /* GHRecentCommitsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHRecentCommitsViewController.m; sourceTree = "<group>"; };
-		A7EE111E136F3FFA00A1E693 /* GHAPIIssueCommentV3.h */ = {isa = PBXFileReference; fileEncoding = 4; path = GHAPIIssueCommentV3.h; sourceTree = "<group>"; };
+		A7EE111E136F3FFA00A1E693 /* GHAPIIssueCommentV3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHAPIIssueCommentV3.h; sourceTree = "<group>"; };
 		A7EE111F136F3FFA00A1E693 /* GHAPIIssueCommentV3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHAPIIssueCommentV3.m; sourceTree = "<group>"; };
 		A7EE1121136F480D00A1E693 /* Appirater.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Appirater.h; path = appirater/Appirater.h; sourceTree = "<group>"; };
 		A7EE1122136F481100A1E693 /* Appirater.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Appirater.m; path = appirater/Appirater.m; sourceTree = "<group>"; };
@@ -529,12 +529,12 @@
 		A7F62629134C45D5006487CA /* GHTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHTableViewController.m; sourceTree = "<group>"; };
 		A7F7CA60134DA1FA005509D0 /* NSError+GithubAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSError+GithubAPI.h"; sourceTree = "<group>"; };
 		A7F7CA61134DA1FA005509D0 /* NSError+GithubAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSError+GithubAPI.m"; sourceTree = "<group>"; };
-		A7F92B861373149C000EBC5E /* GHGistFork.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHGistFork.h; sourceTree = "<group>"; };
-		A7F92B871373149C000EBC5E /* GHGistFork.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHGistFork.m; sourceTree = "<group>"; };
+		A7F92B861373149C000EBC5E /* GHAPIGistForkV3.h */ = {isa = PBXFileReference; fileEncoding = 4; path = GHAPIGistForkV3.h; sourceTree = "<group>"; };
+		A7F92B871373149C000EBC5E /* GHAPIGistForkV3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHAPIGistForkV3.m; sourceTree = "<group>"; };
 		A7F92B8B137318C3000EBC5E /* GHGistViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHGistViewController.h; sourceTree = "<group>"; };
 		A7F92B8C137318C3000EBC5E /* GHGistViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHGistViewController.m; sourceTree = "<group>"; };
-		A7F92B8E137334E2000EBC5E /* GHGistComment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHGistComment.h; sourceTree = "<group>"; };
-		A7F92B8F137334E3000EBC5E /* GHGistComment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHGistComment.m; sourceTree = "<group>"; };
+		A7F92B8E137334E2000EBC5E /* GHAPIGistCommentV3.h */ = {isa = PBXFileReference; fileEncoding = 4; path = GHAPIGistCommentV3.h; sourceTree = "<group>"; };
+		A7F92B8F137334E3000EBC5E /* GHAPIGistCommentV3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHAPIGistCommentV3.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1080,19 +1080,19 @@
 			name = Appirater;
 			sourceTree = "<group>";
 		};
-		A767715B13707A7A006D70D6 /* GHGist */ = {
+		A767715B13707A7A006D70D6 /* GHAPIGistV3 */ = {
 			isa = PBXGroup;
 			children = (
-				A767715C13707A88006D70D6 /* GHGist.h */,
-				A767715D13707A88006D70D6 /* GHGist.m */,
-				A767715F13707C6F006D70D6 /* GHGistFile.h */,
-				A767716013707C6F006D70D6 /* GHGistFile.m */,
-				A7F92B861373149C000EBC5E /* GHGistFork.h */,
-				A7F92B871373149C000EBC5E /* GHGistFork.m */,
-				A7F92B8E137334E2000EBC5E /* GHGistComment.h */,
-				A7F92B8F137334E3000EBC5E /* GHGistComment.m */,
+				A767715C13707A88006D70D6 /* GHAPIGistV3.h */,
+				A767715D13707A88006D70D6 /* GHAPIGistV3.m */,
+				A767715F13707C6F006D70D6 /* GHAPIGistFileV3.h */,
+				A767716013707C6F006D70D6 /* GHAPIGistFileV3.m */,
+				A7F92B861373149C000EBC5E /* GHAPIGistForkV3.h */,
+				A7F92B871373149C000EBC5E /* GHAPIGistForkV3.m */,
+				A7F92B8E137334E2000EBC5E /* GHAPIGistCommentV3.h */,
+				A7F92B8F137334E3000EBC5E /* GHAPIGistCommentV3.m */,
 			);
-			name = GHGist;
+			name = GHAPIGistV3;
 			sourceTree = "<group>";
 		};
 		A76FC9A81352D27E004C642E /* UIExpandableTableView */ = {
@@ -1125,13 +1125,13 @@
 		A79F37F813883B650028F492 /* v3 */ = {
 			isa = PBXGroup;
 			children = (
+				A7BF146F13426EF5001AE50D /* GithubAPI.h */,
 				A79F380213884CCD0028F492 /* GHAPIUserPlanV3 */,
 				A79F37FB13883C0B0028F492 /* GHAPIUserV3 */,
 				A79F38031388581A0028F492 /* GHAPIIssueCommentV3 */,
 				A79F37FA13883BF90028F492 /* GHAPIIssueV3 */,
-				A7BF146E13426ED9001AE50D /* GHBackgroundQueue */,
 				A7837E97136C93E500B13B95 /* GHAPIMilestoneV3 */,
-				A767715B13707A7A006D70D6 /* GHGist */,
+				A767715B13707A7A006D70D6 /* GHAPIGistV3 */,
 			);
 			name = v3;
 			sourceTree = "<group>";
@@ -1392,6 +1392,10 @@
 		A7BF146413426D85001AE50D /* Github API */ = {
 			isa = PBXGroup;
 			children = (
+				A73E29B11348744300E85282 /* Foundation & Class Additions */,
+				A750570013427F9E00514A82 /* ASI-HTTP */,
+				A7BF147C13427309001AE50D /* JSONKit */,
+				A7BF146E13426ED9001AE50D /* GHBackgroundQueue */,
 				A79F37F813883B650028F492 /* v3 */,
 				A709F7541368A0CD00B0CDE7 /* GHTeam */,
 				A709F7431367392600B0CDE7 /* GHOrganization */,
@@ -1400,7 +1404,6 @@
 				A7CE1B111345BD7D00169F94 /* Gravatar */,
 				A708952D134A3D98000DD6CE /* GHIssueComment */,
 				A7089514134A0398000DD6CE /* GHAuthenticationManager */,
-				A73E29B11348744300E85282 /* Foundation & Class Additions */,
 				A703B958134794D80014235D /* GHTarget */,
 				A73AE6161351B0EE00E9EBA4 /* GHIssue */,
 				A7CE1B841346352000169F94 /* GHManagedObjectContext */,
@@ -1409,9 +1412,6 @@
 				A7CE1B161345BFC400169F94 /* GHPayload */,
 				A7CE1B0C1345BC5F00169F94 /* GHActorAttributes */,
 				A750573B1343203F00514A82 /* GHNewsFeed */,
-				A750570013427F9E00514A82 /* ASI-HTTP */,
-				A7BF147C13427309001AE50D /* JSONKit */,
-				A7BF146F13426EF5001AE50D /* GithubAPI.h */,
 				A750573A13431FFD00514A82 /* GHUser */,
 				A7CE1B231345C31800169F94 /* GHCommitMessage */,
 				A712B7EF135E0D160009B7A7 /* GHBranch */,
@@ -1925,11 +1925,11 @@
 				A7837EA5136CADD400B13B95 /* GHAPIMilestoneV3TableViewCell.m in Sources */,
 				A7EE1120136F3FFB00A1E693 /* GHAPIIssueCommentV3.m in Sources */,
 				A7EE1123136F481500A1E693 /* Appirater.m in Sources */,
-				A767715E13707A88006D70D6 /* GHGist.m in Sources */,
-				A767716113707C6F006D70D6 /* GHGistFile.m in Sources */,
-				A7F92B881373149C000EBC5E /* GHGistFork.m in Sources */,
+				A767715E13707A88006D70D6 /* GHAPIGistV3.m in Sources */,
+				A767716113707C6F006D70D6 /* GHAPIGistFileV3.m in Sources */,
+				A7F92B881373149C000EBC5E /* GHAPIGistForkV3.m in Sources */,
 				A7F92B8D137318C3000EBC5E /* GHGistViewController.m in Sources */,
-				A7F92B90137334E3000EBC5E /* GHGistComment.m in Sources */,
+				A7F92B90137334E3000EBC5E /* GHAPIGistCommentV3.m in Sources */,
 				A723F16A137ED1E000F7649B /* GHPullToReleaseTableViewController.m in Sources */,
 				A723F16D137ED1FC00F7649B /* GHPullToReleaseTableHeaderView.m in Sources */,
 				A79F37FE13883C2C0028F492 /* GHAPIUserV3.m in Sources */,
