@@ -608,29 +608,28 @@
     if (indexPath.section == kUITableViewSectionAdministration) {
         if (indexPath.row == 1) {
             if ([self.issue.state isEqualToString:@"open"]) {
-                [GHIssue closeIssueOnRepository:self.repository 
-                                     withNumber:self.number 
-                              completionHandler:^(NSError *error) {
-                                  if (error) {
-                                      [self handleError:error];
-                                  } else {
-                                      self.issue.state = @"closed";
-                                      [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:1 inSection:kUITableViewSectionAdministration]] 
-                                                            withRowAnimation:UITableViewRowAnimationFade];
-                                  }
-                              }];
+                [GHAPIIssueV3 closeIssueOnRepository:self.repository 
+                                          withNumber:self.number
+                                   completionHandler:^(NSError *error) {
+                                       if (error) {
+                                           [self handleError:error];
+                                       } else {
+                                           self.issue.state = @"closed";
+                                           [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:1 inSection:kUITableViewSectionAdministration]] 
+                                                                 withRowAnimation:UITableViewRowAnimationFade];
+                                       }
+                                   }];
             } else {
-                [GHIssue reopenIssueOnRepository:self.repository 
-                                      withNumber:self.number 
-                               completionHandler:^(NSError *error) {
-                                   if (error) {
-                                       [self handleError:error];
-                                   } else {
-                                       self.issue.state = @"open";
-                                       [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:1 inSection:kUITableViewSectionAdministration]] 
-                                                             withRowAnimation:UITableViewRowAnimationFade];
-                                   }
-                               }];
+                [GHAPIIssueV3 reopenIssueOnRepository:self.repository withNumber:self.number 
+                                    completionHandler:^(NSError *error) {
+                                        if (error) {
+                                            [self handleError:error];
+                                        } else {
+                                            self.issue.state = @"open";
+                                            [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:1 inSection:kUITableViewSectionAdministration]] 
+                                                                  withRowAnimation:UITableViewRowAnimationFade];
+                                        }
+                                    }];
             }
         }
     } else if (indexPath.section == kUITableViewSectionData) {

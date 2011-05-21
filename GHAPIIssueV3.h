@@ -76,4 +76,12 @@
          withNumber:(NSNumber *)number 
   completionHandler:(void (^)(GHAPIIssueCommentV3 *comment, NSError *error))handler;
 
++ (void)closeIssueOnRepository:(NSString *)repository 
+                    withNumber:(NSNumber *)number 
+             completionHandler:(void (^)(NSError *error))handler;
+
++ (void)reopenIssueOnRepository:(NSString *)repository 
+                     withNumber:(NSNumber *)number 
+              completionHandler:(void (^)(NSError *error))handler;
+
 @end

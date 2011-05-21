@@ -233,4 +233,60 @@
                                        }];
 }
 
++ (void)closeIssueOnRepository:(NSString *)repository 
+                    withNumber:(NSNumber *)number 
+             completionHandler:(void (^)(NSError *error))handler {
+    
+    // v3: PATCH /repos/:user/:repo/issues/:id
+    
+    NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.github.com/repos/%@/issues/%@",
+                                       [repository stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding], number ] ];
+    
+    
+    [[GHBackgroundQueue sharedInstance] sendRequestToURL:URL 
+                                            setupHandler:^(ASIFormDataRequest *request) { 
+                                                // {"body"=>"String"}
+                                                
+                                                [request setRequestMethod:@"PATCH"];
+                                                
+                                                NSDictionary *jsonDictionary = [NSDictionary dictionaryWithObject:@"closed" forKey:@"state"];
+                                                NSString *jsonString = [jsonDictionary JSONString];
+                                                NSMutableData *jsonData = [[[jsonString dataUsingEncoding:NSUTF8StringEncoding] mutableCopy] autorelease];
+                                                
+                                                [request setPostBody:jsonData];
+                                                [request setPostLength:[jsonString length] ];
+                                            } 
+                                       completionHandler:^(id object, NSError *error, ASIFormDataRequest *request) {
+                                           handler(error);
+                                       }];
+}
+
++ (void)reopenIssueOnRepository:(NSString *)repository 
+                     withNumber:(NSNumber *)number 
+              completionHandler:(void (^)(NSError *error))handler {
+    
+    // v3: PATCH /repos/:user/:repo/issues/:id
+    
+    NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.github.com/repos/%@/issues/%@",
+                                       [repository stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding], number ] ];
+    
+    
+    [[GHBackgroundQueue sharedInstance] sendRequestToURL:URL 
+                                            setupHandler:^(ASIFormDataRequest *request) { 
+                                                // {"body"=>"String"}
+                                                
+                                                [request setRequestMethod:@"PATCH"];
+                                                
+                                                NSDictionary *jsonDictionary = [NSDictionary dictionaryWithObject:@"open" forKey:@"state"];
+                                                NSString *jsonString = [jsonDictionary JSONString];
+                                                NSMutableData *jsonData = [[[jsonString dataUsingEncoding:NSUTF8StringEncoding] mutableCopy] autorelease];
+                                                
+                                                [request setPostBody:jsonData];
+                                                [request setPostLength:[jsonString length] ];
+                                            } 
+                                       completionHandler:^(id object, NSError *error, ASIFormDataRequest *request) {
+                                           handler(error);
+                                       }];
+}
+
 @end
