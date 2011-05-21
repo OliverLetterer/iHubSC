@@ -41,7 +41,7 @@
         self.privateGists = [rawDictionay objectForKeyOrNilOnNullObject:@"private_gists"];
         self.diskUsage = [rawDictionay objectForKeyOrNilOnNullObject:@"disk_usage"];
         self.collaborators = [rawDictionay objectForKeyOrNilOnNullObject:@"collaborators"];
-        self.plan = [[[GHUserPlan alloc] initWithRawDictionary:[rawDictionay objectForKeyOrNilOnNullObject:@"plan"] ] autorelease];
+        self.plan = [[[GHAPIUserPlanV3 alloc] initWithRawDictionary:[rawDictionay objectForKeyOrNilOnNullObject:@"plan"] ] autorelease];
     }
     return self;
 }

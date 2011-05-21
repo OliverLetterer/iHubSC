@@ -1,15 +1,15 @@
 //
-//  GHUserPlan.m
+//  GHAPIUserPlanV3.m
 //  iGithub
 //
 //  Created by Oliver Letterer on 21.05.11.
 //  Copyright 2011 Home. All rights reserved.
 //
 
-#import "GHUserPlan.h"
+#import "GHAPIUserPlanV3.h"
 #import "GithubAPI.h"
 
-@implementation GHUserPlan
+@implementation GHAPIUserPlanV3
 
 @synthesize space=_space, name=_name, collaborators=_collaborators, privateRepos=_privateRepos;
 

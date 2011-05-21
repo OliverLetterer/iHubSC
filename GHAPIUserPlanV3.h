@@ -1,5 +1,5 @@
 //
-//  GHUserPlan.h
+//  GHAPIUserPlanV3.h
 //  iGithub
 //
 //  Created by Oliver Letterer on 21.05.11.
@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 
 
-@interface GHUserPlan : NSObject {
+@interface GHAPIUserPlanV3 : NSObject {
 @private
     NSString *_name;
     NSNumber *_space;

@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@class GHUserPlan;
+@class GHAPIUserPlanV3;
 
 @interface GHAPIUserV3 : NSObject {
 @private
@@ -35,7 +35,7 @@
     NSNumber *_privateGists;
     NSNumber *_diskUsage;
     NSNumber *_collaborators;
-    GHUserPlan *_plan;
+    GHAPIUserPlanV3 *_plan;
 }
 
 @property (nonatomic, copy) NSString *login;
@@ -61,7 +61,7 @@
 @property (nonatomic, copy) NSNumber *privateGists;
 @property (nonatomic, copy) NSNumber *diskUsage;
 @property (nonatomic, copy) NSNumber *collaborators;
-@property (nonatomic, retain) GHUserPlan *plan;
+@property (nonatomic, retain) GHAPIUserPlanV3 *plan;
 
 - (id)initWithRawDictionary:(NSDictionary *)rawDictionay;
 

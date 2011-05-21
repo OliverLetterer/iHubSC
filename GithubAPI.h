@@ -42,7 +42,7 @@
 #import "GHGistFork.h"
 #import "GHGistComment.h"
 #import "GHAPIUserV3.h"
-#import "GHUserPlan.h"
+#import "GHAPIUserPlanV3.h"
 
 #import "GHPayload.h"
 #import "GHIssuePayload.h"
