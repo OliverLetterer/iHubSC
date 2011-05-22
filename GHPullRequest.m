@@ -43,7 +43,7 @@
         
         NSError *myError = nil;
         
-        ASIHTTPRequest *request = [ASIHTTPRequest authenticatedFormDataRequestWithURL:URL];
+        ASIFormDataRequest *request = [ASIFormDataRequest authenticatedFormDataRequestWithURL:URL];
         [request startSynchronous];
         
         myError = [request error];

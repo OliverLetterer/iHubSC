@@ -27,7 +27,7 @@ support all these events
 
 V1.4
 - view milestone with all completed and opened issues
-- support events for Issues and Pull Requests
+- remove GHViewPullRequestViewController
 
 Future Features:
 - Network graph for recent activity (see Network API)
@@ -35,3 +35,4 @@ Future Features:
 
 Old APIv2 Calls:
 - search for a user
+- view commits in a pull request

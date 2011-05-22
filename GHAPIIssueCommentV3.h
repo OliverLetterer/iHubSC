@@ -27,4 +27,6 @@
 
 - (id)initWithRawDictionary:(NSDictionary *)rawDictionary;
 
+- (NSComparisonResult)compare:(NSObject *)anObject;
+
 @end

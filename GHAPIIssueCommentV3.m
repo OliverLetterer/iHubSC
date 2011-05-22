@@ -28,6 +28,19 @@
     return self;
 }
 
+- (NSComparisonResult)compare:(NSObject *)anObject {
+    NSString *compareDateString = nil;
+    if ([anObject isKindOfClass:[GHAPIIssueEventV3 class] ]) {
+        GHAPIIssueEventV3 *event = (GHAPIIssueEventV3 *)anObject;
+        compareDateString = event.createdAt;
+    } else if ([anObject isKindOfClass:[GHAPIIssueCommentV3 class] ]) {
+        GHAPIIssueCommentV3 *comment = (GHAPIIssueCommentV3 *)anObject;
+        compareDateString = comment.updatedAt;
+    }
+    
+    return [self.updatedAt.dateFromGithubAPIDateString compare:compareDateString.dateFromGithubAPIDateString];
+}
+
 #pragma mark - Memory management
 
 - (void)dealloc {

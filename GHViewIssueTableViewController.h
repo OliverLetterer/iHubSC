@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "GHTableViewController.h"
 
-@class GHAPIIssueV3, GHNewsFeedItemTableViewCell, GHIssueComment;
+@class GHAPIIssueV3, GHNewsFeedItemTableViewCell, GHIssueComment, GHPullRequestDiscussion;
 
 @interface GHViewIssueTableViewController : GHTableViewController {
 @private
@@ -22,7 +22,8 @@
     
     BOOL _canUserAdministrateIssue;
     
-    NSArray *_comments;
+    NSArray *_history;
+    GHPullRequestDiscussion *_discussion;
     
     UITextView *_textView;
     UIToolbar *_textViewToolBar;
@@ -32,7 +33,10 @@
 @property (nonatomic, copy) NSString *repository;
 @property (nonatomic, copy) NSNumber *number;
 
-@property (nonatomic, retain) NSArray *comments;
+@property (nonatomic, readonly) NSString *issueName;
+
+@property (nonatomic, retain) NSArray *history;
+@property (nonatomic, retain) GHPullRequestDiscussion *discussion;
 
 @property (nonatomic, retain) UITextView *textView;
 @property (nonatomic, retain) UIToolbar *textViewToolBar;

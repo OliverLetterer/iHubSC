@@ -45,6 +45,8 @@
 @property (nonatomic, copy) NSString *URL;
 @property (nonatomic, retain) GHAPIUserV3 *user;
 
+@property (nonatomic, readonly) BOOL isPullRequest;
+
 - (id)initWithRawDictionary:(NSDictionary *)rawDictionay;
 
 
@@ -83,5 +85,12 @@
 + (void)reopenIssueOnRepository:(NSString *)repository 
                      withNumber:(NSNumber *)number 
               completionHandler:(void (^)(NSError *error))handler;
+
++ (void)eventforIssueWithID:(NSNumber *)issueID OnRepository:(NSString *)repository 
+          completionHandler:(void (^)(NSArray *events, NSError *error))handler;
+
+// history will contain GHAPIIssueEventV3's and GHAPIIssueCommentV3's
++ (void)historyForIssueWithID:(NSNumber *)issueID onRepository:(NSString *)repository 
+            completionHandler:(void (^)(NSArray *history, NSError *error))handler;
 
 @end

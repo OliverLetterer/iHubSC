@@ -19,10 +19,11 @@
 #import "GHSingleRepositoryViewController.h"
 #import "GHAPIMilestoneV3TableViewCell.h"
 #import "GHViewPullRequestViewController.h"
+#import "GHViewCommitViewController.h"
 
 #define kUITableViewSectionData             0
-#define kUITableViewSectionPullRequest      1
-#define kUITableViewSectionComments         2
+#define kUITableViewSectionCommits          1
+#define kUITableViewSectionHistory          2
 #define kUITableViewSectionAdministration   3
 
 #define kUITableViesNumberOfSections        4
@@ -31,8 +32,18 @@
 
 @synthesize issue=_issue;
 @synthesize repository=_repository, number=_number;
-@synthesize comments=_comments;
+@synthesize history=_history, discussion=_discussion;
 @synthesize textView=_textView, textViewToolBar=_textViewToolBar;
+
+#pragma mark - setters and getters
+
+- (NSString *)issueName {
+    if (self.issue.isPullRequest) {
+        return NSLocalizedString(@"Pull Request", @"");
+    } else {
+        return NSLocalizedString(@"Issue", @"");
+    }
+}
 
 #pragma mark - Initialization
 
@@ -49,7 +60,6 @@
                                        NSString *myUsername = [GHSettingsHelper username];
                                        for (NSString *collaborator in collaborators) {
                                            if ([collaborator isEqualToString:myUsername]) {
-                                               DLog(@"_canUserAdministrateIssue");
                                                _canUserAdministrateIssue = YES;
                                                break;
                                            }
@@ -72,6 +82,7 @@
             [self handleError:error];
         } else {
             self.issue = issue;
+            self.title = [NSString stringWithFormat:NSLocalizedString(@"%@ %@", @""), self.issueName, self.number];
             _isDownloadingIssueData = NO;
             [self.tableView reloadData];
         }
@@ -84,9 +95,11 @@
     [_issue release];
     [_repository release];
     [_number release];
-    [_comments release];
+    [_history release];
+    [_discussion release];
     [_textView release];
     [_textViewToolBar release];
+    
     [super dealloc];
 }
 
@@ -113,16 +126,16 @@
              if (error) {
                  [self handleError:error];
              } else {
-                 NSMutableArray *commentsArray = [[self.comments mutableCopy] autorelease];
-                 [commentsArray addObject:comment];
-                 self.comments = commentsArray;
+                 NSMutableArray *tmpArray = [[self.history mutableCopy] autorelease];
+                 [tmpArray addObject:comment];
+                 self.history = tmpArray;
                  
                  self.issue.comments = [NSNumber numberWithInt:[self.issue.comments intValue] + 1];
                  
                  [self.tableView beginUpdates];
                  
-                 [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:[self.comments count]+1 inSection:kUITableViewSectionComments]] withRowAnimation:UITableViewScrollPositionBottom];
-                 [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:[self.comments count] inSection:kUITableViewSectionComments]] withRowAnimation:UITableViewRowAnimationFade];
+                 [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:[self.history count]+1 inSection:kUITableViewSectionHistory]] withRowAnimation:UITableViewScrollPositionBottom];
+                 [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:[self.history count] inSection:kUITableViewSectionHistory]] withRowAnimation:UITableViewRowAnimationFade];
                  
                  [self.tableView endUpdates];
                  
@@ -213,12 +226,14 @@
     if (_isDownloadingIssueData) {
         return NO;
     }
-    return section != kUITableViewSectionData && section != kUITableViewSectionPullRequest;
+    return section != kUITableViewSectionData;
 }
 
 - (BOOL)tableView:(UIExpandableTableView *)tableView needsToDownloadDataForExpandableSection:(NSInteger)section {
-    if (section == kUITableViewSectionComments) {
-        return self.comments == nil;
+    if (section == kUITableViewSectionHistory) {
+        return self.history == nil;
+    } else if (section == kUITableViewSectionCommits) {
+        return self.discussion == nil;
     }
     return NO;
 }
@@ -232,10 +247,12 @@
         cell = [[[UICollapsingAndSpinningTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
     }
     
-    if (section == kUITableViewSectionComments) {
-        cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Comments (%@)", @""), self.issue.comments];
-    } else if (section == kUITableViewSectionAdministration) {
+    if (section == kUITableViewSectionAdministration) {
         cell.textLabel.text = NSLocalizedString(@"Administration", @"");
+    } else if (section == kUITableViewSectionHistory) {
+        cell.textLabel.text = NSLocalizedString(@"History", @"");
+    } else if (section == kUITableViewSectionCommits) {
+        cell.textLabel.text = NSLocalizedString(@"View attatched Commits", @"");
     }
     
     return cell;
@@ -244,18 +261,29 @@
 #pragma mark - UIExpandableTableViewDelegate
 
 - (void)tableView:(UIExpandableTableView *)tableView downloadDataForExpandableSection:(NSInteger)section {
-    if (section == kUITableViewSectionComments) {
-        [GHAPIIssueV3 commentsForIssueOnRepository:self.repository 
-                                     withNumber:self.number 
-                              completionHandler:^(NSArray *comments, NSError *error) {
-                                  if (!error) {
-                                      self.comments = comments;
-                                      [tableView expandSection:section animated:YES];
-                                  } else {
-                                      [tableView cancelDownloadInSection:section];
-                                      [self handleError:error];
-                                  }
-                              }];
+    if (section == kUITableViewSectionHistory) {
+        [GHAPIIssueV3 historyForIssueWithID:self.number onRepository:self.repository 
+                          completionHandler:^(NSArray *history, NSError *error) {
+                              if (!error) {
+                                  self.history = history;
+                                  [tableView expandSection:section animated:YES];
+                              } else {
+                                  [tableView cancelDownloadInSection:section];
+                                  [self handleError:error];
+                              }
+                          }];
+    } else if (section == kUITableViewSectionCommits) {
+        [GHPullRequest pullRequestDiscussionOnRepository:self.repository 
+                                                  number:self.number 
+                                       completionHandler:^(GHPullRequestDiscussion *discussion, NSError *error) {
+                                           if (error) {
+                                               [self handleError:error];
+                                               [tableView cancelDownloadInSection:section];
+                                           } else {
+                                               self.discussion = discussion;
+                                               [tableView expandSection:section animated:YES];
+                                           }
+                                       }];
     }
 }
 
@@ -287,20 +315,16 @@
             // assigned to
             // milestone
             result = 4;
-        } else if (section == kUITableViewSectionComments) {
-            // we display our comment
-            // first cell = Comments (5)
-            // then all cells with the comments
-            // then a cell to write a new comment
-            result = [self.issue.comments intValue] + 2;
-        } else if (section == kUITableViewSectionAdministration) {
+        }else if (section == kUITableViewSectionAdministration) {
             // first will be administrate
             if (!_canUserAdministrateIssue) {
                 return 0;
             }
             result = 2;
-        } else if (section == kUITableViewSectionPullRequest) {
-            return self.issue.pullRequestID == nil ? 0 : 1;
+        } else if (section == kUITableViewSectionHistory) {
+            return self.history.count + 2;
+        } else if (section == kUITableViewSectionCommits) {
+            return self.issue.isPullRequest ? [self.discussion.commits count] + 1 : 0;
         }
     }
     
@@ -436,49 +460,6 @@
             }
         }
 
-    } else if (indexPath.section == kUITableViewSectionComments) {
-        // comments
-        if (indexPath.row >= 1 && indexPath.row <= [self.issue.comments intValue]) {
-            // display a comment
-            GHAPIIssueCommentV3 *comment = [self.comments objectAtIndex:indexPath.row - 1];
-            
-            NSString *CellIdentifier = @"GHFeedItemWithDescriptionTableViewCell";
-            
-            GHFeedItemWithDescriptionTableViewCell *cell = (GHFeedItemWithDescriptionTableViewCell *)[self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-            if (cell == nil) {
-                cell = [[[GHFeedItemWithDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
-            }
-            
-            [self updateImageViewForCell:cell 
-                             atIndexPath:indexPath 
-                          withGravatarID:comment.user.gravatarID];
-            
-            cell.titleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ (%@ ago)", @""), comment.user.login, comment.updatedAt.prettyTimeIntervalSinceNow];
-            
-            cell.descriptionLabel.text = comment.body;
-            
-            return cell;
-        } else if (indexPath.row == [self.issue.comments intValue] + 1) {
-            // this is the new comment button
-            NSString *CellIdentifier = @"GHNewCommentTableViewCell";
-            
-            GHNewCommentTableViewCell *cell = (GHNewCommentTableViewCell *)[self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-            if (cell == nil) {
-                cell = [[[GHNewCommentTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
-            }
-            
-            [self updateImageViewForCell:cell 
-                             atIndexPath:indexPath 
-                          withGravatarID:[GHSettingsHelper gravatarID]];
-            
-            cell.titleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ (right now)", @""), [GHSettingsHelper username]];
-            
-            self.textView = cell.textView;
-            cell.textView.inputAccessoryView = self.textViewToolBar;
-            self.textView.scrollsToTop = NO;
-            
-            return cell;
-        }
     } else if (indexPath.section == kUITableViewSectionAdministration) {
         // administrate
         if (indexPath.row == 1) {
@@ -499,17 +480,120 @@
             
             return cell;
         }
-    } else if (indexPath.section == kUITableViewSectionPullRequest) {
-        NSString *CellIdentifier = @"kUITableViewSectionPullRequestCell";
-        
-        UITableViewCellWithLinearGradientBackgroundView *cell = (UITableViewCellWithLinearGradientBackgroundView *)[self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-        if (cell == nil) {
-            cell = [[[UITableViewCellWithLinearGradientBackgroundView alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+    } else if (indexPath.section == kUITableViewSectionHistory) {
+        if (indexPath.row == [self.history count] + 1) {
+            // this is the new comment button
+            NSString *CellIdentifier = @"GHNewCommentTableViewCell";
+            
+            GHNewCommentTableViewCell *cell = (GHNewCommentTableViewCell *)[self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+            if (cell == nil) {
+                cell = [[[GHNewCommentTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+            }
+            
+            [self updateImageViewForCell:cell 
+                             atIndexPath:indexPath 
+                          withGravatarID:[GHSettingsHelper gravatarID]];
+            
+            cell.titleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ (right now)", @""), [GHSettingsHelper username]];
+            
+            self.textView = cell.textView;
+            cell.textView.inputAccessoryView = self.textViewToolBar;
+            self.textView.scrollsToTop = NO;
+            
+            return cell;
         }
         
-        cell.textLabel.text = NSLocalizedString(@"View attatched Pull Request", @"");
+        NSObject *object = [self.history objectAtIndex:indexPath.row - 1];
+        
+        NSString *CellIdentifier = @"GHFeedItemWithDescriptionTableViewCell";
+        GHFeedItemWithDescriptionTableViewCell *cell = (GHFeedItemWithDescriptionTableViewCell *)[self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        
+        if (!cell) {
+            cell = [[[GHFeedItemWithDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        }
+        
+        if ([object isKindOfClass:[GHAPIIssueCommentV3 class] ]) {
+            // display a comment
+            GHAPIIssueCommentV3 *comment = (GHAPIIssueCommentV3 *)object;
+            
+            [self updateImageViewForCell:cell 
+                             atIndexPath:indexPath 
+                          withGravatarID:comment.user.gravatarID];
+            
+            cell.titleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ commented on this %@", @""), comment.user.login, self.issueName];
+            cell.descriptionLabel.text = comment.body;
+            cell.repositoryLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ ago", @""), comment.updatedAt.prettyTimeIntervalSinceNow];
+            
+            return cell;
+        } else if ([object isKindOfClass:[GHAPIIssueEventV3 class] ]) {
+            GHAPIIssueEventV3 *event = (GHAPIIssueEventV3 *)object;
+            
+            [self updateImageViewForCell:cell atIndexPath:indexPath withGravatarID:event.actor.gravatarID];
+            
+            cell.repositoryLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ ago", @""), event.createdAt.prettyTimeIntervalSinceNow];
+            
+            cell.descriptionLabel.text = nil;
+            cell.titleLabel.text = nil;
+            
+            switch (event.type) {
+                case GHAPIIssueEventTypeV3Closed:
+                    cell.titleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ closed this %@", @""), event.actor.login, self.issueName];
+                    break;
+                    
+                case GHAPIIssueEventTypeV3Reopened:
+                    cell.titleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ reopened this %@", @""), event.actor.login, self.issueName];
+                    break;
+                    
+                case GHAPIIssueEventTypeV3Subscribed:
+                    cell.titleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ subscribed to this %@", @""), event.actor.login, self.issueName];
+                    break;
+                    
+                case GHAPIIssueEventTypeV3Merged:
+                    cell.titleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ merged this %@ with", @""), event.actor.login, self.issueName];
+                    cell.descriptionLabel.text = event.commitID;
+                    
+                    break;
+                    
+                case GHAPIIssueEventTypeV3Referenced:
+                    cell.titleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"This %@ was referenced in", @""), self.issueName];
+                    cell.descriptionLabel.text = event.commitID;
+                    
+                    break;
+                    
+                case GHAPIIssueEventTypeV3Mentioned:
+                    cell.titleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ was mentioned in a body", @""), event.actor.login];
+                    
+                    break;
+                    
+                case GHAPIIssueEventTypeV3Assigned:
+                    cell.titleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ was assigned to this %@", @""), event.actor.login, self.issueName];
+                    
+                    break;
+                    
+                default:
+                    break;
+            }
+            
+            return cell;
+        }
+    } else if (indexPath.section == kUITableViewSectionCommits) {
+        NSString *CellIdentifier = @"GHFeedItemWithDescriptionTableViewCell";
+        GHFeedItemWithDescriptionTableViewCell *cell = (GHFeedItemWithDescriptionTableViewCell *)[self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        
+        if (!cell) {
+            cell = [[[GHFeedItemWithDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        }
+        
         cell.selectionStyle = UITableViewCellSelectionStyleBlue;
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        
+        GHCommit *commit = [self.discussion.commits objectAtIndex:indexPath.row-1];
+        
+        [self updateImageViewForCell:cell 
+                         atIndexPath:indexPath 
+                      withGravatarID:commit.user.gravatarID];
+        
+        cell.titleLabel.text = commit.ID;
+        cell.descriptionLabel.text = commit.message;
         
         return cell;
     }
@@ -579,10 +663,16 @@
         } else if (indexPath.row == 3) {
             return GHAPIMilestoneV3TableViewCellHeight;
         }
-    } else if (indexPath.section == kUITableViewSectionComments) {
-        if (indexPath.row >= 1 && indexPath.row <= [self.issue.comments intValue]) {
-            // we are going to display a comment
-            GHAPIIssueCommentV3 *comment = [self.comments objectAtIndex:indexPath.row - 1];
+    } else if (indexPath.section == kUITableViewSectionHistory && indexPath.row > 0) {
+        if (indexPath.row == [self.history count] + 1) {
+            return 161.0f;
+        }
+        
+        NSObject *object = [self.history objectAtIndex:indexPath.row - 1];
+        
+        if ([object isKindOfClass:[GHAPIIssueCommentV3 class] ]) {
+            // display a comment
+            GHAPIIssueCommentV3 *comment = (GHAPIIssueCommentV3 *)object;
             
             CGSize size = [comment.body sizeWithFont:[UIFont systemFontOfSize:12.0] 
                                    constrainedToSize:CGSizeMake(222.0, MAXFLOAT) 
@@ -594,9 +684,20 @@
                 result = 71.0;
             }
             
-        } else if (indexPath.row == [self.issue.comments intValue] + 1) {
-            result = 161.0;
+            return result;
+        } else if ([object isKindOfClass:[GHAPIIssueEventV3 class] ]) {
+            return 71.0f;
         }
+    } else if (indexPath.section == kUITableViewSectionCommits && indexPath.row > 0) {
+        GHCommit *commit = [self.discussion.commits objectAtIndex:indexPath.row - 1];
+        
+        CGFloat height = [self heightForDescription:commit.message] + 50.0f;
+        
+        if (height < 71.0) {
+            return 71.0;
+        }
+        
+        return height;
     }
     
     return result;
@@ -643,16 +744,68 @@
             GHUserViewController *userViewController = [[[GHUserViewController alloc] initWithUsername:self.issue.assignee.login] autorelease];
             [self.navigationController pushViewController:userViewController animated:YES];
         }
-    } else if (indexPath.section == kUITableViewSectionComments) {
-        if (indexPath.row >= 1 && indexPath.row <= [self.issue.comments intValue]) {
-            // display a comment
-            GHAPIIssueCommentV3 *comment = [self.comments objectAtIndex:indexPath.row - 1];
+    } else if (indexPath.section == kUITableViewSectionHistory && indexPath.row > 0 && indexPath.row < [self.history count]+1) {
+        
+        NSObject *object = [self.history objectAtIndex:indexPath.row - 1];
+        
+        if ([object isKindOfClass:[GHAPIIssueCommentV3 class] ]) {
+            GHAPIIssueCommentV3 *comment = (GHAPIIssueCommentV3 *)object;
             GHUserViewController *userViewController = [[[GHUserViewController alloc] initWithUsername:comment.user.login] autorelease];
             [self.navigationController pushViewController:userViewController animated:YES];
+        } else if ([object isKindOfClass:[GHAPIIssueEventV3 class] ]) {
+            GHAPIIssueEventV3 *event = (GHAPIIssueEventV3 *)object;
+            
+            UIViewController *nextViewController = nil;
+            
+            switch (event.type) {
+                case GHAPIIssueEventTypeV3Closed:
+                    nextViewController = [[[GHUserViewController alloc] initWithUsername:event.actor.login] autorelease];
+                    break;
+                    
+                case GHAPIIssueEventTypeV3Reopened:
+                    nextViewController = [[[GHUserViewController alloc] initWithUsername:event.actor.login] autorelease];
+                    break;
+                    
+                case GHAPIIssueEventTypeV3Subscribed:
+                    nextViewController = [[[GHUserViewController alloc] initWithUsername:event.actor.login] autorelease];
+                    break;
+                    
+                case GHAPIIssueEventTypeV3Merged:
+                    nextViewController = [[[GHViewCommitViewController alloc] initWithRepository:self.repository commitID:event.commitID] autorelease];
+                    break;
+                    
+                case GHAPIIssueEventTypeV3Referenced:
+                    nextViewController = [[[GHViewCommitViewController alloc] initWithRepository:self.repository commitID:event.commitID] autorelease];
+                    break;
+                    
+                case GHAPIIssueEventTypeV3Mentioned:
+                    nextViewController = [[[GHUserViewController alloc] initWithUsername:event.actor.login] autorelease];
+                    break;
+                    
+                case GHAPIIssueEventTypeV3Assigned:
+                    nextViewController = [[[GHUserViewController alloc] initWithUsername:event.actor.login] autorelease];
+                    break;
+                    
+                default:
+                    [self.tableView deselectRowAtIndexPath:indexPath animated:NO];
+                    break;
+            }
+            
+            if (nextViewController) {
+                [self.navigationController pushViewController:nextViewController animated:YES];
+            }
         }
-    } else if (indexPath.section == kUITableViewSectionPullRequest) {
-        GHViewPullRequestViewController *pullViewController = [[[GHViewPullRequestViewController alloc] initWithRepository:self.repository issueNumber:self.issue.pullRequestID] autorelease];
-        [self.navigationController pushViewController:pullViewController animated:YES];
+
+        
+    } else if (indexPath.section == kUITableViewSectionCommits && indexPath.row > 0) {
+        GHCommit *commit = [self.discussion.commits objectAtIndex:indexPath.row-1];
+        
+        NSString *repo = [NSString stringWithFormat:@"%@/%@", self.discussion.head.repository.owner, self.discussion.head.repository.name];
+        
+        GHViewCommitViewController *commitViewController = [[[GHViewCommitViewController alloc] initWithRepository:repo
+                                                                                                          commitID:commit.ID]
+                                                            autorelease];
+        [self.navigationController pushViewController:commitViewController animated:YES];
     } else {
         [self.tableView deselectRowAtIndexPath:indexPath animated:NO];
     }

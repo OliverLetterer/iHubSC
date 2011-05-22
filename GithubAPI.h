@@ -43,6 +43,7 @@
 #import "GHAPIGistCommentV3.h"
 #import "GHAPIUserV3.h"
 #import "GHAPIUserPlanV3.h"
+#import "GHAPIIssueEventV3.h"
 
 #import "GHPayload.h"
 #import "GHIssuePayload.h"

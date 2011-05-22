@@ -13,6 +13,12 @@
 
 @synthesize assignee=_assignee, body=_body, closedAt=_closedAt, comments=_comments, createdAt=_createdAt, HTMLURL=_HTMLURL, labels=_labels, milestone=_milestone, number=_number, pullRequestID=_pullRequestID, state=_state, title=_title, updatedAt=_updatedAt, URL=_URL, user=_user;
 
+#pragma mark - setters and getters
+
+- (BOOL)isPullRequest {
+    return self.pullRequestID != nil;
+}
+
 #pragma mark - Initialization
 
 - (id)initWithRawDictionary:(NSDictionary *)rawDictionay {
@@ -287,6 +293,56 @@
                                        completionHandler:^(id object, NSError *error, ASIFormDataRequest *request) {
                                            handler(error);
                                        }];
+}
+
++ (void)eventforIssueWithID:(NSNumber *)issueID OnRepository:(NSString *)repository 
+          completionHandler:(void (^)(NSArray *events, NSError *error))handler {
+    // v3: GET /repos/:user/:repo/issues/:issue_id/events
+    
+    NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.github.com/repos/%@/issues/%@/events",
+                                       [repository stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding], issueID ] ];
+    
+    [[GHBackgroundQueue sharedInstance] sendRequestToURL:URL setupHandler:nil completionHandler:^(id object, NSError *error, ASIFormDataRequest *request) {
+        if (error) {
+            handler(nil, error);
+        } else {
+            NSArray *rawArray = object;
+            
+            NSMutableArray *finalArray = [NSMutableArray arrayWithCapacity:rawArray.count];
+            for (NSDictionary *rawDictionary in rawArray) {
+                [finalArray addObject:[[[GHAPIIssueEventV3 alloc] initWithRawDictionary:rawDictionary] autorelease] ];
+            }
+            
+            handler(finalArray, nil);
+        }
+    }];
+}
+
++ (void)historyForIssueWithID:(NSNumber *)issueID onRepository:(NSString *)repository 
+            completionHandler:(void (^)(NSArray *history, NSError *error))handler {
+    
+    [self commentsForIssueOnRepository:repository withNumber:issueID 
+                     completionHandler:^(NSArray *comments, NSError *error) {
+                         if (error) {
+                             handler(nil, error);
+                         } else {
+                             [self eventforIssueWithID:issueID OnRepository:repository 
+                                     completionHandler:^(NSArray *events, NSError *error) {
+                                         if (error) {
+                                             handler(nil, error);
+                                         } else {
+                                             NSMutableArray *final = [NSMutableArray arrayWithCapacity:events.count + comments.count];
+                                             
+                                             [final addObjectsFromArray:comments];
+                                             [final addObjectsFromArray:events];
+                                             
+                                             [final sortUsingSelector:@selector(compare:)];
+                                             
+                                             handler(final, nil);
+                                         }
+                                     }];
+                         }
+                     }];
 }
 
 @end
