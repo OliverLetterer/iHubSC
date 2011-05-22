@@ -19,20 +19,25 @@
 #import "GHViewRootDirectoryViewController.h"
 #import "GHAPIMilestoneV3TableViewCell.h"
 #import "GHViewMilestoneViewController.h"
+#import "GHLabelTableViewCell.h"
+#import "GHViewLabelViewController.h"
 
 #define kUITableViewSectionUserData         0
 #define kUITableViewSectionIssues           1
 #define kUITableViewSectionMilestones       2
-#define kUITableViewSectionWatchingUsers    3
-#define kUITableViewSectionPullRequests     4
-#define kUITableViewSectionRecentCommits    5
-#define kUITableViewSectionBrowseBranches   6
-#define kUITableViewSectionAdministration   7
+#define kUITableViewSectionLabels           3
+#define kUITableViewSectionWatchingUsers    4
+#define kUITableViewSectionPullRequests     5
+#define kUITableViewSectionRecentCommits    6
+#define kUITableViewSectionBrowseBranches   7
+#define kUITableViewSectionAdministration   8
+
+#define kUITableViewNumberOfSections        9
 
 @implementation GHSingleRepositoryViewController
 
 @synthesize repositoryString=_repositoryString, repository=_repository, issuesArray=_issuesArray, watchedUsersArray=_watchedUsersArray, deleteToken=_deleteToken, delegate=_delegate;
-@synthesize pullRequests=_pullRequests, branches=_branches, milestones=_milestones;
+@synthesize pullRequests=_pullRequests, branches=_branches, milestones=_milestones, labels=_labels;
 
 #pragma mark - setters and getters
 
@@ -93,7 +98,9 @@
     [_deleteToken release];
     [_pullRequests release];
     [_branches release];
+    [_labels release];
     [_milestones release];
+    
     [super dealloc];
 }
 
@@ -146,7 +153,7 @@
 #pragma mark - UIExpandableTableViewDatasource
 
 - (BOOL)tableView:(UIExpandableTableView *)tableView canExpandSection:(NSInteger)section {
-    return section != 0;
+    return section != kUITableViewSectionUserData;
 }
 - (BOOL)tableView:(UIExpandableTableView *)tableView needsToDownloadDataForExpandableSection:(NSInteger)section {
     if (section == kUITableViewSectionIssues) {
@@ -165,6 +172,8 @@
         return self.branches == nil;
     } else if (section == kUITableViewSectionMilestones) {
         return self.milestones == nil;
+    } else if (section == kUITableViewSectionLabels) {
+        return self.labels == nil;
     }
     return NO;
 }
@@ -192,6 +201,8 @@
         cell.textLabel.text = NSLocalizedString(@"Browse Content", @"");
     } else if (section == kUITableViewSectionMilestones) {
         cell.textLabel.text = NSLocalizedString(@"Milestones", @"");
+    } else if (section == kUITableViewSectionLabels) {
+        cell.textLabel.text = NSLocalizedString(@"Labels", @"");
     }
     
     return cell;
@@ -283,6 +294,17 @@
                                         [tableView expandSection:section animated:YES];
                                     }
                                 }];
+    } else if (section == kUITableViewSectionLabels) {
+        [GHAPIRepositoryV3 labelOnRepository:self.repositoryString 
+                           completionHandler:^(NSArray *labels, NSError *error) {
+                               if (error) {
+                                   [tableView cancelDownloadInSection:section];
+                                   [self handleError:error];
+                               } else {
+                                   self.labels = labels;
+                                   [tableView expandSection:section animated:YES];
+                               }
+                           }];
     }
 }
 
@@ -294,7 +316,7 @@
         return 0;
     }
     
-    return 8;
+    return kUITableViewNumberOfSections;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -317,6 +339,8 @@
         return [self.branches count] + 1;
     } else if (section == kUITableViewSectionMilestones) {
         return self.milestones.count + 1;
+    } else if (section == kUITableViewSectionLabels) {
+        return self.labels.count + 1;
     }
     
     return 0;
@@ -581,6 +605,24 @@
         }
         
         return cell;
+    } else if (indexPath.section == kUITableViewSectionLabels) {
+        if (indexPath.row > 0) {
+            NSString *CellIdentifier = @"GHLabelTableViewCell";
+            
+            GHLabelTableViewCell *cell = (GHLabelTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+            if (!cell) {
+                cell = [[[GHLabelTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+            }
+            
+            GHAPILabelV3 *label = [self.labels objectAtIndex:indexPath.row - 1];
+            
+            cell.textLabel.text = label.name;
+            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+            
+            cell.colorView.backgroundColor = label.colorString.colorFromAPIColorString;
+            
+            return cell;
+        }
     }
     
     return self.dummyCell;
@@ -782,6 +824,13 @@
                                                                                                             milestoneNumber:milestone.number]
                                                                   autorelease];
         [self.navigationController pushViewController:milestoneViewController animated:YES];
+    } else if (indexPath.section == kUITableViewSectionLabels && indexPath.row > 0) {
+        GHAPILabelV3 *label = [self.labels objectAtIndex:indexPath.row - 1];
+        
+        GHViewLabelViewController *labelViewController = [[[GHViewLabelViewController alloc] initWithRepository:self.repositoryString  
+                                                                                                          label:label]
+                                                          autorelease];
+        [self.navigationController pushViewController:labelViewController animated:YES];
     } else {
         [self.tableView deselectRowAtIndexPath:indexPath animated:NO];
     }

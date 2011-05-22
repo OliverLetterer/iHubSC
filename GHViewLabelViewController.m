@@ -1,61 +1,47 @@
 //
-//  GHViewMilestoneViewController.m
+//  GHViewLabelViewController.m
 //  iGithub
 //
 //  Created by Oliver Letterer on 22.05.11.
 //  Copyright 2011 Home. All rights reserved.
 //
 
-#import "GHViewMilestoneViewController.h"
-#import "GHAPIMilestoneV3TableViewCell.h"
+#import "GHViewLabelViewController.h"
+#import "GHLabelTableViewCell.h"
 #import "UICollapsingAndSpinningTableViewCell.h"
 #import "GHIssueTitleTableViewCell.h"
 #import "GHViewIssueTableViewController.h"
 
-#define kUITableViewControllerSectionInfo               0
+#define kUITableViewSectionInfo                         0
 #define kUITableViewControllerSectionInfoOpenIssues     1
 #define kUITableViewControllerSectionInfoClosedIssues   2
 
-#define kUITableViewControllerNumberOfSections          3
+#define kUITableViewNumberOfSections                    3
 
-@implementation GHViewMilestoneViewController
+@implementation GHViewLabelViewController
 
-@synthesize milestone=_milestone, repository=_repository, milestoneNumber=_milestoneNumber;
+@synthesize repositoryString=_repositoryString;
+@synthesize label=_label;
 @synthesize openIssues=_openIssues, closedIssues=_closedIssues;
 
 #pragma mark - Initialization
 
-- (id)initWithRepository:(NSString *)repository milestoneNumber:(NSNumber *)milestoneNumber {
+- (id)initWithRepository:(NSString *)repository label:(GHAPILabelV3 *)label {
     if ((self = [super initWithStyle:UITableViewStylePlain])) {
         // Custom initialization
-        self.milestoneNumber = milestoneNumber;
-        self.repository = repository;
-        [self downloadMilestoneData];
+        self.repositoryString = repository;
+        self.label = label;
+        
+        self.title = label.name;
     }
     return self;
-}
-
-- (void)downloadMilestoneData {
-    [GHAPIMilestoneV3 milestoneOnRepository:self.repository number:self.milestoneNumber 
-                          completionHandler:^(GHAPIMilestoneV3 *milestone, NSError *error) {
-                              if (error) {
-                                  [self handleError:error];
-                              } else {
-                                  self.milestone = milestone;
-                                  self.title = self.milestone.title;
-                                  if ([self isViewLoaded]) {
-                                      [self.tableView reloadData];
-                                  }
-                              }
-                          }];
 }
 
 #pragma mark - Memory management
 
 - (void)dealloc {
-    [_milestone release];
-    [_repository release];
-    [_milestoneNumber release];
+    [_repositoryString release];
+    [_label release];
     [_openIssues release];
     [_closedIssues release];
     
@@ -117,9 +103,6 @@
 #pragma mark - UIExpandableTableViewDatasource
 
 - (BOOL)tableView:(UIExpandableTableView *)tableView canExpandSection:(NSInteger)section {
-    if (!self.milestone) {
-        return NO;
-    }
     return section == kUITableViewControllerSectionInfoOpenIssues || section == kUITableViewControllerSectionInfoClosedIssues;
 }
 
@@ -142,9 +125,9 @@
     }
     
     if (section == kUITableViewControllerSectionInfoOpenIssues) {
-        cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Open Issues (%@)", @""), self.milestone.openIssues];
+        cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Open Issues", @"")];
     } else if (section == kUITableViewControllerSectionInfoClosedIssues) {
-        cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Closed Issues (%@)", @""), self.milestone.closedIssues];
+        cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Closed Issues", @"")];
     }
     
     return cell;
@@ -154,7 +137,8 @@
 
 - (void)tableView:(UIExpandableTableView *)tableView downloadDataForExpandableSection:(NSInteger)section {
     if (section == kUITableViewControllerSectionInfoOpenIssues) {
-        [GHAPIIssueV3 issuesOnRepository:self.repository milestone:self.milestoneNumber labels:nil state:@"open" page:1 
+        [GHAPIIssueV3 issuesOnRepository:self.repositoryString milestone:nil 
+                                  labels:[NSArray arrayWithObject:self.label.name] state:@"open" page:1 
                        completionHandler:^(NSArray *issues, NSInteger nextPage, NSError *error) {
                            if (error) {
                                _openIssuesNextPage = 0;
@@ -168,7 +152,8 @@
                            }
                        }];
     } else if (section == kUITableViewControllerSectionInfoClosedIssues) {
-        [GHAPIIssueV3 issuesOnRepository:self.repository milestone:self.milestoneNumber labels:nil state:@"closed" page:1 
+        [GHAPIIssueV3 issuesOnRepository:self.repositoryString milestone:nil 
+                                  labels:[NSArray arrayWithObject:self.label.name] state:@"closed" page:1 
                        completionHandler:^(NSArray *issues, NSInteger nextPage, NSError *error) {
                            if (error) {
                                _closedIssuesNextPage = 0;
@@ -187,48 +172,42 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    // Return the number of sections.
-    if (!self.milestone) {
+    if (!self.label) {
         return 0;
     }
-    return kUITableViewControllerNumberOfSections;
+    return kUITableViewNumberOfSections;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    // Return the number of rows in the section.
-    if (section == kUITableViewControllerSectionInfo) {
+    if (section == kUITableViewSectionInfo) {
         return 1;
     } else if (section == kUITableViewControllerSectionInfoOpenIssues) {
         return self.openIssues.count + 1;
     } else if (section == kUITableViewControllerSectionInfoClosedIssues) {
         return self.closedIssues.count + 1;
     }
+
+    // Return the number of rows in the section.
     return 0;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == kUITableViewControllerSectionInfo) {
+    if (indexPath.section == kUITableViewSectionInfo) {
         if (indexPath.row == 0) {
-            NSString *CellIdentifier = @"MilestoneCell";
+            NSString *CellIdentifier = @"GHLabelTableViewCell";
             
-            GHAPIMilestoneV3TableViewCell *cell = (GHAPIMilestoneV3TableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+            GHLabelTableViewCell *cell = (GHLabelTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
             if (!cell) {
-                cell = [[[GHAPIMilestoneV3TableViewCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:CellIdentifier] autorelease];
-                cell.accessoryType = UITableViewCellAccessoryNone;
-                cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                cell = [[[GHLabelTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
             }
             
-            GHAPIMilestoneV3 *milestone = self.milestone;
+            GHAPILabelV3 *label = self.label;
             
-            cell.textLabel.text = milestone.title;
-            cell.detailTextLabel.text = milestone.dueFormattedString;
-            cell.progressView.progress = [milestone.closedIssues floatValue] / ([milestone.closedIssues floatValue] + [milestone.openIssues floatValue]);
+            cell.accessoryType = UITableViewCellAccessoryNone;
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
             
-            if (milestone.dueInTime) {
-                [cell.progressView setTintColor:[UIColor greenColor] ];
-            } else {
-                [cell.progressView setTintColor:[UIColor redColor] ];
-            }
+            cell.textLabel.text = label.name;
+            cell.colorView.backgroundColor = label.colorString.colorFromAPIColorString;
             
             return cell;
         }
@@ -322,7 +301,8 @@
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == kUITableViewControllerSectionInfoOpenIssues && indexPath.row == [self.openIssues count] && indexPath.row != 0 && _openIssuesNextPage > 1) {
-        [GHAPIIssueV3 issuesOnRepository:self.repository milestone:self.milestoneNumber labels:nil state:@"open" page:_openIssuesNextPage 
+        [GHAPIIssueV3 issuesOnRepository:self.repositoryString milestone:nil 
+                                  labels:[NSArray arrayWithObject:self.label.name] state:@"open" page:_openIssuesNextPage 
                        completionHandler:^(NSArray *issues, NSInteger nextPage, NSError *error) {
                            if (error) {
                                [self handleError:error];
@@ -337,7 +317,8 @@
                            }
                        }];
     } else if (indexPath.section == kUITableViewControllerSectionInfoClosedIssues && indexPath.row == [self.closedIssues count] && indexPath.row != 0 && _closedIssuesNextPage > 1) {
-        [GHAPIIssueV3 issuesOnRepository:self.repository milestone:self.milestoneNumber labels:nil state:@"closed" page:_closedIssuesNextPage 
+        [GHAPIIssueV3 issuesOnRepository:self.repositoryString milestone:nil 
+                                  labels:[NSArray arrayWithObject:self.label.name] state:@"closed" page:_closedIssuesNextPage 
                        completionHandler:^(NSArray *issues, NSInteger nextPage, NSError *error) {
                            if (error) {
                                [self handleError:error];
@@ -355,13 +336,11 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
     if (indexPath.section == kUITableViewControllerSectionInfoOpenIssues && indexPath.row > 0) {
         return [self cachedHeightForRowAtIndexPath:indexPath];
     } else if (indexPath.section == kUITableViewControllerSectionInfoClosedIssues && indexPath.row > 0) {
         return [self cachedHeightForRowAtIndexPath:indexPath];
     }
-    
     return 44.0f;
 }
 
@@ -369,7 +348,7 @@
     if (indexPath.section == kUITableViewControllerSectionInfoOpenIssues && indexPath.row > 0) {
         GHAPIIssueV3 *issue = [self.openIssues objectAtIndex:indexPath.row - 1];
         
-        GHViewIssueTableViewController *issueViewController = [[[GHViewIssueTableViewController alloc] initWithRepository:self.repository 
+        GHViewIssueTableViewController *issueViewController = [[[GHViewIssueTableViewController alloc] initWithRepository:self.repositoryString 
                                                                                                               issueNumber:issue.number]
                                                                autorelease];
         [self.navigationController pushViewController:issueViewController animated:YES];
@@ -377,7 +356,7 @@
     } else if (indexPath.section == kUITableViewControllerSectionInfoClosedIssues && indexPath.row > 0) {
         GHAPIIssueV3 *issue = [self.closedIssues objectAtIndex:indexPath.row - 1];
         
-        GHViewIssueTableViewController *issueViewController = [[[GHViewIssueTableViewController alloc] initWithRepository:self.repository 
+        GHViewIssueTableViewController *issueViewController = [[[GHViewIssueTableViewController alloc] initWithRepository:self.repositoryString 
                                                                                                               issueNumber:issue.number]
                                                                autorelease];
         [self.navigationController pushViewController:issueViewController animated:YES];

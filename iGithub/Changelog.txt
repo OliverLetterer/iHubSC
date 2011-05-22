@@ -46,6 +46,7 @@ Updated Issue and Pull Request:
 - Issues and Pull Requests are treated the same now
 - view attached Commits
 - View Event-History
+- Label support
 
 Milestones
 - Browse Milstone with current status, Open Issues, Closed Issues

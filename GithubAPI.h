@@ -16,10 +16,8 @@
 #import "GHActorAttributes.h"
 #import "GHIssue.h"
 #import "GHRawIssue.h"
-#import "GHAPIIssueV3.h"
 #import "GHTarget.h"
 #import "GHIssueComment.h"
-#import "GHAPIIssueCommentV3.h"
 #import "GHCommit.h"
 #import "GHCommitFileInformation.h"
 #import "GHCommitMessage.h"
@@ -36,6 +34,8 @@
 #import "GHTeam.h"
 
 // V3
+#import "GHAPIIssueCommentV3.h"
+#import "GHAPIIssueV3.h"
 #import "GHAPIMilestoneV3.h"
 #import "GHAPIGistV3.h"
 #import "GHAPIGistFileV3.h"
@@ -44,6 +44,8 @@
 #import "GHAPIUserV3.h"
 #import "GHAPIUserPlanV3.h"
 #import "GHAPIIssueEventV3.h"
+#import "GHAPILabelV3.h"
+#import "GHAPIRepositoryV3.h"
 
 #import "GHPayload.h"
 #import "GHIssuePayload.h"
@@ -75,3 +77,4 @@
 #import "NSDate+GithubAPIAdditions.h"
 #import "ASIHTTPRequest+GithubAPIAdditions.h"
 #import "NSError+GithubAPI.h"
+#import "UIColor+GithubAPI.h"

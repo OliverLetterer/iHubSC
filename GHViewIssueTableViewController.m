@@ -20,13 +20,16 @@
 #import "GHAPIMilestoneV3TableViewCell.h"
 #import "GHViewCommitViewController.h"
 #import "GHViewMilestoneViewController.h"
+#import "GHLabelTableViewCell.h"
+#import "GHViewLabelViewController.h"
 
 #define kUITableViewSectionData             0
 #define kUITableViewSectionCommits          1
-#define kUITableViewSectionHistory          2
-#define kUITableViewSectionAdministration   3
+#define kUITableViewSectionLabels           2
+#define kUITableViewSectionHistory          3
+#define kUITableViewSectionAdministration   4
 
-#define kUITableViesNumberOfSections        4
+#define kUITableViesNumberOfSections        5
 
 @implementation GHViewIssueTableViewController
 
@@ -253,6 +256,8 @@
         cell.textLabel.text = NSLocalizedString(@"History", @"");
     } else if (section == kUITableViewSectionCommits) {
         cell.textLabel.text = NSLocalizedString(@"View attatched Commits", @"");
+    } else if (section == kUITableViewSectionLabels) {
+        cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Labels (%d)", @""), self.issue.labels.count];
     }
     
     return cell;
@@ -325,6 +330,8 @@
             return self.history.count + 2;
         } else if (section == kUITableViewSectionCommits) {
             return self.issue.isPullRequest ? [self.discussion.commits count] + 1 : 0;
+        } else if (section == kUITableViewSectionLabels) {
+            return self.issue.labels.count + 1;
         }
     }
     
@@ -597,6 +604,22 @@
         cell.descriptionLabel.text = commit.message;
         
         return cell;
+    } else if (indexPath.section == kUITableViewSectionLabels && indexPath.row > 0) {
+        NSString *CellIdentifier = @"GHLabelTableViewCell";
+        
+        GHLabelTableViewCell *cell = (GHLabelTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        if (!cell) {
+            cell = [[[GHLabelTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        }
+        
+        GHAPILabelV3 *label = [self.issue.labels objectAtIndex:indexPath.row - 1];
+        
+        cell.textLabel.text = label.name;
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        
+        cell.colorView.backgroundColor = label.colorString.colorFromAPIColorString;
+        
+        return cell;
     }
     
     return self.dummyCell;
@@ -811,6 +834,13 @@
                                                                                                           commitID:commit.ID]
                                                             autorelease];
         [self.navigationController pushViewController:commitViewController animated:YES];
+    } else if (indexPath.section == kUITableViewSectionLabels && indexPath.row > 0) {
+        GHAPILabelV3 *label = [self.issue.labels objectAtIndex:indexPath.row - 1];
+        
+        GHViewLabelViewController *labelViewController = [[[GHViewLabelViewController alloc] initWithRepository:self.repository  
+                                                                                                          label:label]
+                                                          autorelease];
+        [self.navigationController pushViewController:labelViewController animated:YES];
     } else {
         [self.tableView deselectRowAtIndexPath:indexPath animated:NO];
     }

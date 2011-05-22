@@ -39,6 +39,7 @@
     
     NSArray *_pullRequests;
     NSArray *_branches;
+    NSArray *_labels;
     
     NSArray *_milestones;
     NSInteger _milstonesNextPage;
@@ -64,6 +65,7 @@
 - (void)cacheHeightForPullRequests;
 
 @property (nonatomic, retain) NSArray *branches;
+@property (nonatomic, retain) NSArray *labels;
 
 - (id)initWithRepositoryString:(NSString *)repositoryString;
 

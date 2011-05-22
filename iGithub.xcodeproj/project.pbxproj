@@ -121,6 +121,11 @@
 		A7A80CBA1362BA3900BE70B8 /* GHAdvancedTextViewInternalCoreTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = A7A80CB91362BA3900BE70B8 /* GHAdvancedTextViewInternalCoreTextView.m */; };
 		A7B5208E1388648D000FEE61 /* GHAPIIssueEventV3.m in Sources */ = {isa = PBXBuildFile; fileRef = A7B5208D1388648D000FEE61 /* GHAPIIssueEventV3.m */; };
 		A7B5209213890B68000FEE61 /* GHViewMilestoneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7B5209113890B68000FEE61 /* GHViewMilestoneViewController.m */; };
+		A7B5209613892338000FEE61 /* GHAPILabelV3.m in Sources */ = {isa = PBXBuildFile; fileRef = A7B5209513892338000FEE61 /* GHAPILabelV3.m */; };
+		A7B5209A13892450000FEE61 /* GHAPIRepositoryV3.m in Sources */ = {isa = PBXBuildFile; fileRef = A7B5209913892450000FEE61 /* GHAPIRepositoryV3.m */; };
+		A7B5209E13892876000FEE61 /* UIColor+GithubAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = A7B5209D13892876000FEE61 /* UIColor+GithubAPI.m */; };
+		A7B520A113892BEF000FEE61 /* GHLabelTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A7B520A013892BEF000FEE61 /* GHLabelTableViewCell.m */; };
+		A7B520A513896164000FEE61 /* GHViewLabelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7B520A413896164000FEE61 /* GHViewLabelViewController.m */; };
 		A7BC6779134CCAF00083F906 /* GHPublicRepositoryIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = A7BC6777134CCAF00083F906 /* GHPublicRepositoryIcon.png */; };
 		A7BC677A134CCAF00083F906 /* GHPublicRepositoryIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A7BC6778134CCAF00083F906 /* GHPublicRepositoryIcon@2x.png */; };
 		A7BC677E134CCD1A0083F906 /* GHPrivateRepositoryIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A7BC677C134CCD1A0083F906 /* GHPrivateRepositoryIcon@2x.png */; };
@@ -403,6 +408,16 @@
 		A7B5208D1388648D000FEE61 /* GHAPIIssueEventV3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GHAPIIssueEventV3.m; path = ../iGithub/GHAPIIssueEventV3.m; sourceTree = "<group>"; };
 		A7B5209013890B68000FEE61 /* GHViewMilestoneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GHViewMilestoneViewController.h; path = ../iGithub/GHViewMilestoneViewController.h; sourceTree = "<group>"; };
 		A7B5209113890B68000FEE61 /* GHViewMilestoneViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GHViewMilestoneViewController.m; path = ../iGithub/GHViewMilestoneViewController.m; sourceTree = "<group>"; };
+		A7B5209413892338000FEE61 /* GHAPILabelV3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GHAPILabelV3.h; path = ../iGithub/GHAPILabelV3.h; sourceTree = "<group>"; };
+		A7B5209513892338000FEE61 /* GHAPILabelV3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GHAPILabelV3.m; path = ../iGithub/GHAPILabelV3.m; sourceTree = "<group>"; };
+		A7B5209813892450000FEE61 /* GHAPIRepositoryV3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GHAPIRepositoryV3.h; path = ../iGithub/GHAPIRepositoryV3.h; sourceTree = "<group>"; };
+		A7B5209913892450000FEE61 /* GHAPIRepositoryV3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GHAPIRepositoryV3.m; path = ../iGithub/GHAPIRepositoryV3.m; sourceTree = "<group>"; };
+		A7B5209C13892876000FEE61 /* UIColor+GithubAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIColor+GithubAPI.h"; path = "../iGithub/UIColor+GithubAPI.h"; sourceTree = "<group>"; };
+		A7B5209D13892876000FEE61 /* UIColor+GithubAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIColor+GithubAPI.m"; path = "../iGithub/UIColor+GithubAPI.m"; sourceTree = "<group>"; };
+		A7B5209F13892BEF000FEE61 /* GHLabelTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GHLabelTableViewCell.h; path = ../iGithub/GHLabelTableViewCell.h; sourceTree = "<group>"; };
+		A7B520A013892BEF000FEE61 /* GHLabelTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GHLabelTableViewCell.m; path = ../iGithub/GHLabelTableViewCell.m; sourceTree = "<group>"; };
+		A7B520A313896164000FEE61 /* GHViewLabelViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GHViewLabelViewController.h; path = ../iGithub/GHViewLabelViewController.h; sourceTree = "<group>"; };
+		A7B520A413896164000FEE61 /* GHViewLabelViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GHViewLabelViewController.m; path = ../iGithub/GHViewLabelViewController.m; sourceTree = "<group>"; };
 		A7BC6777134CCAF00083F906 /* GHPublicRepositoryIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GHPublicRepositoryIcon.png; sourceTree = "<group>"; };
 		A7BC6778134CCAF00083F906 /* GHPublicRepositoryIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GHPublicRepositoryIcon@2x.png"; sourceTree = "<group>"; };
 		A7BC677C134CCD1A0083F906 /* GHPrivateRepositoryIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GHPrivateRepositoryIcon@2x.png"; sourceTree = "<group>"; };
@@ -711,6 +726,8 @@
 				A7F6260E134B3938006487CA /* UITableViewCellWithLinearGradientBackgroundView.m */,
 				A708952A134A2F83000DD6CE /* UICollapsingAndSpinningTableViewCell.h */,
 				A708952B134A2F83000DD6CE /* UICollapsingAndSpinningTableViewCell.m */,
+				A7B5209F13892BEF000FEE61 /* GHLabelTableViewCell.h */,
+				A7B520A013892BEF000FEE61 /* GHLabelTableViewCell.m */,
 			);
 			name = UITableViewCell;
 			sourceTree = "<group>";
@@ -927,6 +944,7 @@
 		A73E29B11348744300E85282 /* Foundation & Class Additions */ = {
 			isa = PBXGroup;
 			children = (
+				A7B5209B1389285B000FEE61 /* UIColor */,
 				A7F7CA5E134DA1B1005509D0 /* NSError */,
 				A7BC6781134CCF890083F906 /* ASI-HTTP */,
 				A7F62623134B89CA006487CA /* NSDate */,
@@ -1036,6 +1054,7 @@
 		A750573F1343422200514A82 /* UserInterface */ = {
 			isa = PBXGroup;
 			children = (
+				A7B520A21389614D000FEE61 /* GHViewLabelViewController */,
 				A7B5208F13890B45000FEE61 /* GHViewMilestoneViewController */,
 				A7F92B8A137318B1000EBC5E /* GHGistViewController */,
 				A7837EA2136CADAB00B13B95 /* PDColoredProgressView */,
@@ -1128,6 +1147,8 @@
 		A79F37F813883B650028F492 /* v3 */ = {
 			isa = PBXGroup;
 			children = (
+				A7B5209713892439000FEE61 /* GHAPIRepositoryV3 */,
+				A7B5209313892322000FEE61 /* GHAPILabelV3 */,
 				A79F380213884CCD0028F492 /* GHAPIUserPlanV3 */,
 				A79F37FB13883C0B0028F492 /* GHAPIUserV3 */,
 				A79F38031388581A0028F492 /* GHAPIIssueCommentV3 */,
@@ -1208,6 +1229,42 @@
 				A7B5209113890B68000FEE61 /* GHViewMilestoneViewController.m */,
 			);
 			name = GHViewMilestoneViewController;
+			sourceTree = "<group>";
+		};
+		A7B5209313892322000FEE61 /* GHAPILabelV3 */ = {
+			isa = PBXGroup;
+			children = (
+				A7B5209413892338000FEE61 /* GHAPILabelV3.h */,
+				A7B5209513892338000FEE61 /* GHAPILabelV3.m */,
+			);
+			name = GHAPILabelV3;
+			sourceTree = "<group>";
+		};
+		A7B5209713892439000FEE61 /* GHAPIRepositoryV3 */ = {
+			isa = PBXGroup;
+			children = (
+				A7B5209813892450000FEE61 /* GHAPIRepositoryV3.h */,
+				A7B5209913892450000FEE61 /* GHAPIRepositoryV3.m */,
+			);
+			name = GHAPIRepositoryV3;
+			sourceTree = "<group>";
+		};
+		A7B5209B1389285B000FEE61 /* UIColor */ = {
+			isa = PBXGroup;
+			children = (
+				A7B5209C13892876000FEE61 /* UIColor+GithubAPI.h */,
+				A7B5209D13892876000FEE61 /* UIColor+GithubAPI.m */,
+			);
+			name = UIColor;
+			sourceTree = "<group>";
+		};
+		A7B520A21389614D000FEE61 /* GHViewLabelViewController */ = {
+			isa = PBXGroup;
+			children = (
+				A7B520A313896164000FEE61 /* GHViewLabelViewController.h */,
+				A7B520A413896164000FEE61 /* GHViewLabelViewController.m */,
+			);
+			name = GHViewLabelViewController;
 			sourceTree = "<group>";
 		};
 		A7BC6780134CCED40083F906 /* PullToRefreshTableViewController */ = {
@@ -1948,6 +2005,11 @@
 				A79F380113883F740028F492 /* GHAPIUserPlanV3.m in Sources */,
 				A7B5208E1388648D000FEE61 /* GHAPIIssueEventV3.m in Sources */,
 				A7B5209213890B68000FEE61 /* GHViewMilestoneViewController.m in Sources */,
+				A7B5209613892338000FEE61 /* GHAPILabelV3.m in Sources */,
+				A7B5209A13892450000FEE61 /* GHAPIRepositoryV3.m in Sources */,
+				A7B5209E13892876000FEE61 /* UIColor+GithubAPI.m in Sources */,
+				A7B520A113892BEF000FEE61 /* GHLabelTableViewCell.m in Sources */,
+				A7B520A513896164000FEE61 /* GHViewLabelViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

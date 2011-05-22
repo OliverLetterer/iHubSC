@@ -95,6 +95,7 @@
 
 + (void)issuesOnRepository:(NSString *)repository 
                  milestone:(NSNumber *)milestone 
+                    labels:(NSArray *)labels
                      state:(NSString *)state 
                       page:(NSInteger)page
          completionHandler:(void (^)(NSArray *issues, NSInteger nextPage, NSError *))handler;

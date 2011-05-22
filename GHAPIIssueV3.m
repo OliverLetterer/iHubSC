@@ -30,7 +30,6 @@
         self.comments = [rawDictionay objectForKeyOrNilOnNullObject:@"comments"];
         self.createdAt = [rawDictionay objectForKeyOrNilOnNullObject:@"created_at"];
         self.HTMLURL = [rawDictionay objectForKeyOrNilOnNullObject:@"html_url"];
-        self.labels = [rawDictionay objectForKeyOrNilOnNullObject:@"labels"];
         self.number = [rawDictionay objectForKeyOrNilOnNullObject:@"number"];
         self.state = [rawDictionay objectForKeyOrNilOnNullObject:@"state"];
         self.title = [rawDictionay objectForKeyOrNilOnNullObject:@"title"];
@@ -41,6 +40,13 @@
         self.milestone = [[[GHAPIMilestoneV3 alloc] initWithRawDictionary:[rawDictionay objectForKeyOrNilOnNullObject:@"milestone"] ] autorelease];
         NSString *htmlURL = [[rawDictionay objectForKeyOrNilOnNullObject:@"pull_request"] objectForKeyOrNilOnNullObject:@"html_url"];
         self.pullRequestID = [[htmlURL componentsSeparatedByString:@"/"] lastObject];
+        
+        NSArray *rawArray = [rawDictionay objectForKeyOrNilOnNullObject:@"labels"];
+        NSMutableArray *finalArray = [NSMutableArray arrayWithCapacity:rawArray.count];
+        [rawArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+            [finalArray addObject:[[[GHAPILabelV3 alloc] initWithRawDictionary:obj] autorelease] ];
+        }];
+        self.labels = finalArray;
     }
     return self;
 }
@@ -168,6 +174,7 @@
                                                     [jsonDictionary setObject:assignee forKey:@"assignee"];
                                                 }
                                                 if (milestone) {
+                                                    DLog(@"setting milestone to: %@", milestone);
                                                     [jsonDictionary setObject:milestone forKey:@"milestone"];
                                                 }
                                                 NSString *jsonString = [jsonDictionary JSONString];
@@ -347,6 +354,7 @@
 
 + (void)issuesOnRepository:(NSString *)repository 
                  milestone:(NSNumber *)milestone 
+                    labels:(NSArray *)labels 
                      state:(NSString *)state 
                       page:(NSInteger)page
          completionHandler:(void (^)(NSArray *issues, NSInteger nextPage, NSError *))handler {
@@ -362,8 +370,18 @@
     if (state) {
         [URLString appendFormat:@"&state=%@", [state stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] ];
     }
+    if (labels.count > 0) {
+        [URLString appendFormat:@"&labels=%@", [[labels objectAtIndex:0] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] ];
+        [labels enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+            if (idx > 0) {
+                [URLString appendFormat:@",%@", [obj stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] ];
+            }
+        }];
+    }
     
     NSURL *URL = [NSURL URLWithString:URLString];
+    
+    DLog(@"%@", URL);
     
     [[GHBackgroundQueue sharedInstance] sendRequestToURL:URL setupHandler:nil completionHandler:^(id object, NSError *error, ASIFormDataRequest *request) {
         if (error) {

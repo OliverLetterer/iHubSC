@@ -25,10 +25,6 @@ support all these events
 [X]: Implemented
 [-]: clickable (include in navigation hierarchie)
 
-V1.4
-- View Label of an Issue
-- Browse content of a Label
-
 Future Features:
 - Network graph for recent activity (see Network API)
 - ipad Interface

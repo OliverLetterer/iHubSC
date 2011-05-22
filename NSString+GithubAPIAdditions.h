@@ -17,8 +17,18 @@
 
 @end
 
+
+
 @interface NSString (GHAPIHTTPParsing)
 
 @property (nonatomic, readonly) NSUInteger nextPage;
+
+@end
+
+
+
+@interface NSString (GHAPIColorParsing)
+
+@property (nonatomic, readonly) UIColor *colorFromAPIColorString;
 
 @end

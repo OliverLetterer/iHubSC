@@ -8,6 +8,7 @@
 
 #import "NSString+GithubAPIAdditions.h"
 #import "NSDate+GithubAPIAdditions.h"
+#import "UIColor+GithubAPI.h"
 
 @implementation NSString (GHAPIDateFormatting)
 
@@ -78,3 +79,12 @@
 
 @end
 
+
+
+@implementation NSString (GHAPIColorParsing)
+
+- (UIColor *)colorFromAPIColorString {
+    return [UIColor colorFromAPIHexColorString:self];
+}
+
+@end
