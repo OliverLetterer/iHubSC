@@ -47,6 +47,9 @@ Updated Issue and Pull Request:
 - view attached Commits
 - View Event-History
 
+Milestones
+- Browse Milstone with current status, Open Issues, Closed Issues
+
 iTunes Changelog:
 
 V1.3

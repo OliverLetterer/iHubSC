@@ -71,4 +71,24 @@
     [super dealloc];
 }
 
+#pragma mark - downloading
+
++ (void)milestoneOnRepository:(NSString *)repository number:(NSNumber *)number 
+            completionHandler:(void(^)(GHAPIMilestoneV3 *milestone, NSError *error))handler {
+    
+    // v3: GET /repos/:user/:repo/milestones/:id
+    
+    NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.github.com/repos/%@/milestones/%@",
+                                       [repository stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
+                                       number]];
+    
+    [[GHBackgroundQueue sharedInstance] sendRequestToURL:URL setupHandler:nil completionHandler:^(id object, NSError *error, ASIFormDataRequest *request) {
+        if (error) {
+            handler(nil, error);
+        } else {
+            handler([[[GHAPIMilestoneV3 alloc] initWithRawDictionary:object] autorelease], nil);
+        }
+    }];
+}
+
 @end

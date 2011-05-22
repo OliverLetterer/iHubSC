@@ -40,4 +40,7 @@
 
 - (id)initWithRawDictionary:(NSDictionary *)rawDictionay;
 
++ (void)milestoneOnRepository:(NSString *)repository number:(NSNumber *)number 
+            completionHandler:(void(^)(GHAPIMilestoneV3 *milestone, NSError *error))handler;
+
 @end

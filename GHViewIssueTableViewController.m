@@ -19,6 +19,7 @@
 #import "GHSingleRepositoryViewController.h"
 #import "GHAPIMilestoneV3TableViewCell.h"
 #import "GHViewCommitViewController.h"
+#import "GHViewMilestoneViewController.h"
 
 #define kUITableViewSectionData             0
 #define kUITableViewSectionCommits          1
@@ -424,7 +425,6 @@
                 GHAPIMilestoneV3TableViewCell *cell = (GHAPIMilestoneV3TableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
                 if (!cell) {
                     cell = [[[GHAPIMilestoneV3TableViewCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:CellIdentifier] autorelease];
-                    cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 }
                 
                 GHAPIMilestoneV3 *milestone = self.issue.milestone;
@@ -438,6 +438,8 @@
                 } else {
                     [cell.progressView setTintColor:[UIColor redColor] ];
                 }
+                
+                cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
                 
                 return cell;
             } else {
@@ -742,6 +744,10 @@
         } else if (indexPath.row == 2 && self.issue.assignee.login) {
             GHUserViewController *userViewController = [[[GHUserViewController alloc] initWithUsername:self.issue.assignee.login] autorelease];
             [self.navigationController pushViewController:userViewController animated:YES];
+        } else if (indexPath.row == 3 && self.issue.milestone.title) {
+            GHAPIMilestoneV3 *milestone = self.issue.milestone;
+            GHViewMilestoneViewController *milestoneViewController = [[[GHViewMilestoneViewController alloc] initWithRepository:self.repository milestoneNumber:milestone.number] autorelease];
+            [self.navigationController pushViewController:milestoneViewController animated:YES];
         }
     } else if (indexPath.section == kUITableViewSectionHistory && indexPath.row > 0 && indexPath.row < [self.history count]+1) {
         

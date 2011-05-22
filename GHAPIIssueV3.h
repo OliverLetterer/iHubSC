@@ -93,4 +93,10 @@
 + (void)historyForIssueWithID:(NSNumber *)issueID onRepository:(NSString *)repository 
             completionHandler:(void (^)(NSArray *history, NSError *error))handler;
 
++ (void)issuesOnRepository:(NSString *)repository 
+                 milestone:(NSNumber *)milestone 
+                     state:(NSString *)state 
+                      page:(NSInteger)page
+         completionHandler:(void (^)(NSArray *issues, NSInteger nextPage, NSError *))handler;
+
 @end

@@ -18,6 +18,7 @@
 #import "GHRecentCommitsViewController.h"
 #import "GHViewRootDirectoryViewController.h"
 #import "GHAPIMilestoneV3TableViewCell.h"
+#import "GHViewMilestoneViewController.h"
 
 #define kUITableViewSectionUserData         0
 #define kUITableViewSectionIssues           1
@@ -563,7 +564,9 @@
         GHAPIMilestoneV3TableViewCell *cell = (GHAPIMilestoneV3TableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         if (!cell) {
             cell = [[[GHAPIMilestoneV3TableViewCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:CellIdentifier] autorelease];
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            
+            cell.selectionStyle = UITableViewCellSelectionStyleBlue;
+            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         }
         
         GHAPIMilestoneV3 *milestone = [self.milestones objectAtIndex:indexPath.row - 1];
@@ -772,6 +775,13 @@
                                                                                                                           hash:branch.hash]
                                                                  autorelease];
         [self.navigationController pushViewController:rootViewController animated:YES];
+    } else if (indexPath.section == kUITableViewSectionMilestones && indexPath.row > 0) {
+        GHAPIMilestoneV3 *milestone = [self.milestones objectAtIndex:indexPath.row - 1];
+        
+        GHViewMilestoneViewController *milestoneViewController = [[[GHViewMilestoneViewController alloc] initWithRepository:self.repositoryString
+                                                                                                            milestoneNumber:milestone.number]
+                                                                  autorelease];
+        [self.navigationController pushViewController:milestoneViewController animated:YES];
     } else {
         [self.tableView deselectRowAtIndexPath:indexPath animated:NO];
     }

@@ -26,8 +26,8 @@ support all these events
 [-]: clickable (include in navigation hierarchie)
 
 V1.4
-- view milestone with all completed and opened issues
-- remove GHViewPullRequestViewController
+- View Label of an Issue
+- Browse content of a Label
 
 Future Features:
 - Network graph for recent activity (see Network API)

@@ -345,4 +345,43 @@
                      }];
 }
 
++ (void)issuesOnRepository:(NSString *)repository 
+                 milestone:(NSNumber *)milestone 
+                     state:(NSString *)state 
+                      page:(NSInteger)page
+         completionHandler:(void (^)(NSArray *issues, NSInteger nextPage, NSError *))handler {
+    
+    // v3: GET /repos/:user/:repo/issues
+    
+    NSMutableString *URLString = [NSMutableString stringWithFormat:@"https://api.github.com/repos/%@/issues?page=%d&per_page=100",
+                                  [repository stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding], page ];
+    
+    if (milestone) {
+        [URLString appendFormat:@"&milestone=%@", milestone];
+    }
+    if (state) {
+        [URLString appendFormat:@"&state=%@", [state stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] ];
+    }
+    
+    NSURL *URL = [NSURL URLWithString:URLString];
+    
+    [[GHBackgroundQueue sharedInstance] sendRequestToURL:URL setupHandler:nil completionHandler:^(id object, NSError *error, ASIFormDataRequest *request) {
+        if (error) {
+            handler(nil, 0, error);
+        } else {
+            NSArray *rawArray = object;
+            
+            NSMutableArray *finalArray = [NSMutableArray arrayWithCapacity:rawArray.count];
+            for (NSDictionary *rawDictionary in rawArray) {
+                [finalArray addObject:[[[GHAPIIssueV3 alloc] initWithRawDictionary:rawDictionary] autorelease] ];
+            }
+            
+            NSString *linkHeader = [[request responseHeaders] objectForKey:@"Link"];
+            
+            handler(finalArray, linkHeader.nextPage, nil);
+        }
+    }];
+    
+}
+
 @end
