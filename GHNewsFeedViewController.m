@@ -13,7 +13,6 @@
 #import "GHPushFeedItemTableViewCell.h"
 #import "GHFollowEventTableViewCell.h"
 #import "GHViewIssueTableViewController.h"
-#import "GHViewPullRequestViewController.h"
 #import "GHPushPayloadViewController.h"
 #import "GHSingleRepositoryViewController.h"
 #import "GHUserViewController.h"
@@ -665,7 +664,7 @@
         [self.navigationController pushViewController:viewIssueViewController animated:YES];
     } else if (item.payload.type == GHPayloadPullRequestEvent) {
         GHPullRequestPayload *payload = (GHPullRequestPayload *)item.payload;
-        GHViewPullRequestViewController *viewIssueViewController = [[[GHViewPullRequestViewController alloc] initWithRepository:payload.repo issueNumber:payload.number] autorelease];
+        GHViewIssueTableViewController *viewIssueViewController = [[[GHViewIssueTableViewController alloc] initWithRepository:payload.repo issueNumber:payload.number] autorelease];
         [self.navigationController pushViewController:viewIssueViewController animated:YES];
     } else if (item.payload.type == GHPayloadPushEvent) {
         GHPushPayloadViewController *pushViewController = [[[GHPushPayloadViewController alloc] initWithPayload:(GHPushPayload *)item.payload] autorelease];
@@ -696,7 +695,7 @@
 #warning not supported right now
 //        GHIssuesCommentPayload *payload = (GHIssuesCommentPayload *)item.payload;
 //        
-//        GHViewPullRequestViewController *viewIssueViewController = [[[GHViewPullRequestViewController alloc] initWithRepository:payload.repo issueNumber:payload.commentID] autorelease];
+//        GHViewIssueTableViewController *viewIssueViewController = [[[GHViewIssueTableViewController alloc] initWithRepository:payload.repo issueNumber:payload.commentID] autorelease];
 //        [self.navigationController pushViewController:viewIssueViewController animated:YES];
     } else if (item.payload.type == GHPayloadPublicEvent) {
         GHPublicEventPayload *payload = (GHPublicEventPayload *)item.payload;

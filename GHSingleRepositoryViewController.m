@@ -15,7 +15,6 @@
 #import "GHViewIssueTableViewController.h"
 #import "GHNewsFeedItemTableViewCell.h"
 #import "GHUserViewController.h"
-#import "GHViewPullRequestViewController.h"
 #import "GHRecentCommitsViewController.h"
 #import "GHViewRootDirectoryViewController.h"
 #import "GHAPIMilestoneV3TableViewCell.h"
@@ -755,7 +754,7 @@
         
         NSString *repo = [NSString stringWithFormat:@"%@/%@", discussion.base.repository.owner, discussion.base.repository.name];
         
-        GHViewPullRequestViewController *viewIssueViewController = [[[GHViewPullRequestViewController alloc] initWithRepository:repo issueNumber:discussion.number] autorelease];
+        GHViewIssueTableViewController *viewIssueViewController = [[[GHViewIssueTableViewController alloc] initWithRepository:repo issueNumber:discussion.number] autorelease];
         [self.navigationController pushViewController:viewIssueViewController animated:YES];
     } else if (indexPath.section == kUITableViewSectionRecentCommits) {
         GHBranch *branch = [self.branches objectAtIndex:indexPath.row - 1];

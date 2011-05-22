@@ -18,7 +18,6 @@
 #import "GHUserViewController.h"
 #import "GHSingleRepositoryViewController.h"
 #import "GHAPIMilestoneV3TableViewCell.h"
-#import "GHViewPullRequestViewController.h"
 #import "GHViewCommitViewController.h"
 
 #define kUITableViewSectionData             0

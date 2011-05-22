@@ -175,7 +175,6 @@
 		A7D14F761356F17600E1B980 /* GHCreateIssueTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7D14F751356F17500E1B980 /* GHCreateIssueTableViewController.m */; };
 		A7D14F7A1356FACF00E1B980 /* GHCreateIssueTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A7D14F781356FACD00E1B980 /* GHCreateIssueTableViewCell.m */; };
 		A7D14F7B1356FACF00E1B980 /* GHCreateIssueTableViewCellContentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A7D14F791356FACE00E1B980 /* GHCreateIssueTableViewCellContentView.xib */; };
-		A7D14FAC1357579000E1B980 /* GHViewPullRequestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7D14FAB1357578C00E1B980 /* GHViewPullRequestViewController.m */; };
 		A7D14FC113576DA300E1B980 /* GHPushPayloadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7D14FC013576DA000E1B980 /* GHPushPayloadViewController.m */; };
 		A7D14FC513582E9500E1B980 /* GHCommit.m in Sources */ = {isa = PBXBuildFile; fileRef = A7D14FC413582E9500E1B980 /* GHCommit.m */; };
 		A7D14FC81358316200E1B980 /* GHViewCommitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7D14FC71358315600E1B980 /* GHViewCommitViewController.m */; };
@@ -495,8 +494,6 @@
 		A7D14F771356FACB00E1B980 /* GHCreateIssueTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHCreateIssueTableViewCell.h; sourceTree = "<group>"; };
 		A7D14F781356FACD00E1B980 /* GHCreateIssueTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHCreateIssueTableViewCell.m; sourceTree = "<group>"; };
 		A7D14F791356FACE00E1B980 /* GHCreateIssueTableViewCellContentView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GHCreateIssueTableViewCellContentView.xib; sourceTree = "<group>"; };
-		A7D14FAA1357578900E1B980 /* GHViewPullRequestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHViewPullRequestViewController.h; sourceTree = "<group>"; };
-		A7D14FAB1357578C00E1B980 /* GHViewPullRequestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHViewPullRequestViewController.m; sourceTree = "<group>"; };
 		A7D14FBF13576D9B00E1B980 /* GHPushPayloadViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPushPayloadViewController.h; sourceTree = "<group>"; };
 		A7D14FC013576DA000E1B980 /* GHPushPayloadViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPushPayloadViewController.m; sourceTree = "<group>"; };
 		A7D14FC313582E9500E1B980 /* GHCommit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHCommit.h; sourceTree = "<group>"; };
@@ -1041,7 +1038,6 @@
 				A709F747136876A500B0CDE7 /* GHOrganizationViewController */,
 				A712B7ED135E0B5E0009B7A7 /* DDProgressView */,
 				A712B7C7135CB58C0009B7A7 /* Browse content */,
-				A7D41B09135AFDA400CD3A5C /* GHViewPullRequestViewController */,
 				A76FC9A81352D27E004C642E /* UIExpandableTableView */,
 				A7BC6780134CCED40083F906 /* PullToRefreshTableViewController */,
 				A7F62627134C45AE006487CA /* GHTableViewController */,
@@ -1585,15 +1581,6 @@
 			name = GHCommit;
 			sourceTree = "<group>";
 		};
-		A7D41B09135AFDA400CD3A5C /* GHViewPullRequestViewController */ = {
-			isa = PBXGroup;
-			children = (
-				A7D14FAA1357578900E1B980 /* GHViewPullRequestViewController.h */,
-				A7D14FAB1357578C00E1B980 /* GHViewPullRequestViewController.m */,
-			);
-			name = GHViewPullRequestViewController;
-			sourceTree = "<group>";
-		};
 		A7D41B0A135AFDCE00CD3A5C /* GHSingleRepositoryViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -1901,7 +1888,6 @@
 				A7D14F7213563BBB00E1B980 /* GHPublicEventPayload.m in Sources */,
 				A7D14F761356F17600E1B980 /* GHCreateIssueTableViewController.m in Sources */,
 				A7D14F7A1356FACF00E1B980 /* GHCreateIssueTableViewCell.m in Sources */,
-				A7D14FAC1357579000E1B980 /* GHViewPullRequestViewController.m in Sources */,
 				A7D14FC113576DA300E1B980 /* GHPushPayloadViewController.m in Sources */,
 				A7D14FC513582E9500E1B980 /* GHCommit.m in Sources */,
 				A7D14FC81358316200E1B980 /* GHViewCommitViewController.m in Sources */,
