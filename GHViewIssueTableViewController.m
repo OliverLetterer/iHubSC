@@ -545,7 +545,15 @@
             
             switch (event.type) {
                 case GHAPIIssueEventTypeV3Closed:
-                    cell.titleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ closed this %@", @""), event.actor.login, self.issueName];
+                    ;
+                    NSString *description = nil;
+                    if (event.commitID) {
+                        description = [NSString stringWithFormat:NSLocalizedString(@"%@ closed this %@ in", @""), event.actor.login, self.issueName];
+                    } else {
+                        description = [NSString stringWithFormat:NSLocalizedString(@"%@ closed this %@", @""), event.actor.login, self.issueName];
+                    }
+                    cell.titleLabel.text = description;
+                    cell.descriptionLabel.text = event.commitID;
                     break;
                     
                 case GHAPIIssueEventTypeV3Reopened:
@@ -787,7 +795,11 @@
             
             switch (event.type) {
                 case GHAPIIssueEventTypeV3Closed:
-                    nextViewController = [[[GHUserViewController alloc] initWithUsername:event.actor.login] autorelease];
+                    if (event.commitID) {
+                        nextViewController = [[[GHViewCommitViewController alloc] initWithRepository:self.repository commitID:event.commitID] autorelease];
+                    } else {
+                        nextViewController = [[[GHUserViewController alloc] initWithUsername:event.actor.login] autorelease];
+                    }
                     break;
                     
                 case GHAPIIssueEventTypeV3Reopened:
