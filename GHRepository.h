@@ -54,6 +54,8 @@
 @property (nonatomic, copy) NSString *URL;
 @property (nonatomic, copy) NSNumber *watchers;
 
+@property (nonatomic, readonly) BOOL isHomepageAvailable;
+
 - (id)initWithRawDictionary:(NSDictionary *)rawDictionary;
 
 + (void)collaboratorsForRepository:(NSString *)repository 

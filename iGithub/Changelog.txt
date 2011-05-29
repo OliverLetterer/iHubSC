@@ -50,6 +50,7 @@ Updated Issue and Pull Request:
 
 V1.4.1
 - showing commit, if an Issue was closed in a commit.
+- fixed wrong displaying of homepage in repository.
 
 Milestones
 - Browse Milstone with current status, Open Issues, Closed Issues

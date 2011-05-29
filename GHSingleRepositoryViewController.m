@@ -440,7 +440,7 @@
             }
             
             cell.textLabel.text = NSLocalizedString(@"Homepage", @"");
-            if ([self.repository.homePage isEqualToString:@""]) {
+            if (!self.repository.isHomepageAvailable) {
                 cell.detailTextLabel.text = @"-";
                 cell.accessoryType = UITableViewCellAccessoryNone;
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -691,7 +691,7 @@
         if (indexPath.row == 1) {
             GHUserViewController *userViewController = [[[GHUserViewController alloc] initWithUsername:self.repository.owner] autorelease];
             [self.navigationController pushViewController:userViewController animated:YES];
-        } else if (indexPath.row == 5 && ![self.repository.homePage isEqualToString:@""]) {
+        } else if (indexPath.row == 5 && self.repository.isHomepageAvailable) {
             NSURL *URL = [NSURL URLWithString:self.repository.homePage];
             
             GHWebViewViewController *webViewController = [[[GHWebViewViewController alloc] initWithURL:URL] autorelease];

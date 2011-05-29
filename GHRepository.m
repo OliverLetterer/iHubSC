@@ -14,6 +14,10 @@
 
 @synthesize creationDate=_creationDate, desctiptionRepo=_desctiptionRepo, fork=_fork, forks=_forks, hasDownloads=_hasDownloads, hasIssues=_hasIssues, hasWiki=_hasWiki, homePage=_homePage, integrateBranch=_integrateBranch, language=_language, name=_name, openIssues=_openIssues, owner=_owner, parent=_parent, private=_private, pushedAt=_pushedAt, size=_size, source=_source, URL=_URL, watchers=_watchers;
 
+- (BOOL)isHomepageAvailable {
+    return ![self.homePage isEqualToString:@""] && self.homePage;
+}
+
 #pragma mark - class methods
 
 + (void)collaboratorsForRepository:(NSString *)repository 
@@ -487,6 +491,7 @@
 
 - (id)initWithRawDictionary:(NSDictionary *)rawDictionary {
     if ((self = [super init])) {
+        DLog(@"%@", rawDictionary);
         // Initialization code
         self.creationDate = [rawDictionary objectForKeyOrNilOnNullObject:@"created_at"];
         self.desctiptionRepo = [rawDictionary objectForKeyOrNilOnNullObject:@"description"];
