@@ -491,7 +491,6 @@
 
 - (id)initWithRawDictionary:(NSDictionary *)rawDictionary {
     if ((self = [super init])) {
-        DLog(@"%@", rawDictionary);
         // Initialization code
         self.creationDate = [rawDictionary objectForKeyOrNilOnNullObject:@"created_at"];
         self.desctiptionRepo = [rawDictionary objectForKeyOrNilOnNullObject:@"description"];
