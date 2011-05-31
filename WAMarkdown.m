@@ -12,20 +12,8 @@
 @implementation NSString (WAMarkdown)
 
 - (NSString*)HTMLFromMarkdown {
-	return [[[WAHTMLMarkdownFormatter alloc] init] HTMLForMarkdown:self];
-}
-
-@end
-
-
-@implementation WAMarkdown
-
-+ (NSString*)HTMLFromMarkdownFileNamed:(NSString*)name {
-	NSString *path = [[NSBundle mainBundle] pathForResource:name ofType:@"markdown"];
-	if(!path) return nil;
-	NSString *markdown = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:NULL];
-	if(!markdown) return nil;
-	return [[[WAHTMLMarkdownFormatter alloc] init] HTMLForMarkdown:markdown];
+    WAHTMLMarkdownFormatter *formatter = [[[WAHTMLMarkdownFormatter alloc] init] autorelease];
+	return [formatter HTMLForMarkdown:self];
 }
 
 @end

@@ -9,7 +9,3 @@
 @interface NSString (WAMarkdown)
 - (NSString*)HTMLFromMarkdown;
 @end
-
-@interface WAMarkdown : NSObject {}
-+ (NSString*)HTMLFromMarkdownFileNamed:(NSString*)name;
-@end

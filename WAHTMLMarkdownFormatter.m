@@ -78,7 +78,7 @@
 
 
 - (NSString*)HTMLForMarkdown:(NSString*)markdown {
-	WAMarkdownParser *parser = [[WAMarkdownParser alloc] initWithSource:markdown formatter:self];
+	WAMarkdownParser *parser = [[[WAMarkdownParser alloc] initWithSource:markdown formatter:self] autorelease];
 	return parser.formattedString;
 }
 

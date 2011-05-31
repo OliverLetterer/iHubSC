@@ -11,7 +11,7 @@
 
 static NSString *StringFromBuf(struct buf *buf) {
 	if(!buf) return nil;
-	return [[NSString alloc] initWithBytes:buf->data length:buf->size encoding:NSUTF8StringEncoding];
+	return [[[NSString alloc] initWithBytes:buf->data length:buf->size encoding:NSUTF8StringEncoding] autorelease];
 }
 
 static void BufPutString(struct buf *buf, NSString *string) {
@@ -144,7 +144,9 @@ static int WAMD_linebreak(struct buf *ob, void *opaque) {
 	struct buf *ob = bufnew(10);
 	
 	markdown(ob, &input, &renderer);
-	return StringFromBuf(ob);
+    NSString *string = StringFromBuf(ob);
+    bufrelease(ob);
+	return string;
 }
 
 
