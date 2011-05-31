@@ -7,12 +7,12 @@
 //
 
 #import "GHViewCloudFileViewController.h"
-
+#import "WAHTMLMarkdownFormatter.h"
 
 @implementation GHViewCloudFileViewController
 
 @synthesize repository=_repository, tree=_tree, filename=_filename, relativeURL=_relativeURL;
-@synthesize metadata=_metadata, contentString=_contentString, contentImage=_contentImage;
+@synthesize metadata=_metadata, contentString=_contentString, markdownString=_markdownString, contentImage=_contentImage;
 @synthesize request=_request;
 @synthesize scrollView=_scrollView, backgroundGradientLayer=_backgroundGradientLayer, loadingLabel=_loadingLabel, activityIndicatorView=_activityIndicatorView, progressView=_progressView, imageView=_imageView;
 
@@ -32,8 +32,22 @@
                     NSString *fileString = [[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] autorelease];
                     
                     if (fileString) {
-                        self.contentString = fileString;
-                        [self updateViewToShowPlainTextFile];
+                        if ([self.filename hasSuffix:@".md"] || [self.filename hasSuffix:@".markdown"]) {
+#warning parse markdown
+                            NSString *formatFilePath = [[NSBundle mainBundle] pathForResource:@"MarkdownStyle" ofType:nil];
+                            NSString *style = [NSString stringWithContentsOfFile:formatFilePath 
+                                                                        encoding:NSUTF8StringEncoding 
+                                                                           error:NULL];
+                            NSMutableString *parsedString = [NSMutableString stringWithFormat:@"%@", style];
+                            
+                            WAHTMLMarkdownFormatter *formatter = [[[WAHTMLMarkdownFormatter alloc] init] autorelease];
+                            [parsedString appendFormat:@"%@", [formatter HTMLForMarkdown:fileString]];
+                            self.markdownString = parsedString;
+                            [self updateViewToShowMarkdownFile];
+                        } else {
+                            self.contentString = fileString;
+                            [self updateViewToShowPlainTextFile];
+                        }
                     } else {
                         UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", @"") 
                                                                          message:NSLocalizedString(@"Unable to show file!", @"") 
@@ -112,6 +126,8 @@
     [_activityIndicatorView release];
     [_progressView release];
     [_imageView release];
+    [_markdownString release];
+    [_contentString release];
     
     [_request clearDelegatesAndCancel];
     [_request release];
@@ -168,6 +184,8 @@
     
     if (self.contentString) {
         [self updateViewToShowPlainTextFile];
+    } else if (self.markdownString) {
+        [self updateViewToShowMarkdownFile];
     } else if (self.contentImage) {
         [self updateViewForImageContent];
     } else if (self.request) {
@@ -204,6 +222,22 @@
     textView.font = [UIFont systemFontOfSize:16.0];
     textView.alwaysBounceVertical = YES;
     [self.view addSubview:textView];
+}
+
+- (void)updateViewToShowMarkdownFile {
+    if (![self isViewLoaded]) {
+        return;
+    }
+    
+    [self.scrollView removeFromSuperview];
+    self.scrollView = nil;
+    
+    CGRect frame = CGRectMake(0.0, 0.0, 320.0, 367.0f);
+    
+    UIWebView *webView = [[[UIWebView alloc] initWithFrame:frame] autorelease];
+    [webView loadHTMLString:self.markdownString baseURL:nil];
+    webView.scalesPageToFit = YES;
+    [self.view addSubview:webView];
 }
 
 - (void)updateViewForImageDownload {

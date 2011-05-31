@@ -21,6 +21,7 @@
     
     GHFileMetaData *_metadata;
     NSString *_contentString;
+    NSString *_markdownString;
     UIImage *_contentImage;
     BOOL _isMimeTypeUnkonw;
     
@@ -41,6 +42,7 @@
 
 @property (nonatomic, retain) GHFileMetaData *metadata;
 @property (nonatomic, copy) NSString *contentString;
+@property (nonatomic, copy) NSString *markdownString;
 @property (nonatomic, retain) UIImage *contentImage;
 
 @property (nonatomic, retain) ASIHTTPRequest *request;
@@ -56,6 +58,7 @@
 - (id)initWithFile:(NSString *)filename contentsOfFile:(NSString *)content;
 
 - (void)updateViewToShowPlainTextFile;
+- (void)updateViewToShowMarkdownFile;
 - (void)updateViewForImageDownload;
 - (void)updateViewForImageContent;
 - (void)updateViewForUnkownMimeType;
