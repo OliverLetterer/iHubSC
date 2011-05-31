@@ -111,6 +111,14 @@
 		A76FC9A61352D231004C642E /* 145-persondot.png in Resources */ = {isa = PBXBuildFile; fileRef = A76FC9A41352D231004C642E /* 145-persondot.png */; };
 		A76FC9A71352D231004C642E /* 145-persondot@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A76FC9A51352D231004C642E /* 145-persondot@2x.png */; };
 		A76FC9BE13534755004C642E /* UIExpandableTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = A76FC9BD13534755004C642E /* UIExpandableTableView.m */; };
+		A77654C91395556000787420 /* array.c in Sources */ = {isa = PBXBuildFile; fileRef = A77654C11395556000787420 /* array.c */; };
+		A77654CA1395556000787420 /* buffer.c in Sources */ = {isa = PBXBuildFile; fileRef = A77654C31395556000787420 /* buffer.c */; };
+		A77654CB1395556000787420 /* markdown.c in Sources */ = {isa = PBXBuildFile; fileRef = A77654C51395556000787420 /* markdown.c */; };
+		A77654CC1395556000787420 /* renderers.c in Sources */ = {isa = PBXBuildFile; fileRef = A77654C71395556000787420 /* renderers.c */; };
+		A77654D51395556A00787420 /* WAFoundationExtras.m in Sources */ = {isa = PBXBuildFile; fileRef = A77654CE1395556A00787420 /* WAFoundationExtras.m */; };
+		A77654D61395556A00787420 /* WAHTMLMarkdownFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = A77654D01395556A00787420 /* WAHTMLMarkdownFormatter.m */; };
+		A77654D71395556A00787420 /* WAMarkdown.m in Sources */ = {isa = PBXBuildFile; fileRef = A77654D21395556A00787420 /* WAMarkdown.m */; };
+		A77654D81395556A00787420 /* WAMarkdownParser.m in Sources */ = {isa = PBXBuildFile; fileRef = A77654D41395556A00787420 /* WAMarkdownParser.m */; };
 		A7837E95136C905200B13B95 /* GHAPIIssueV3.m in Sources */ = {isa = PBXBuildFile; fileRef = A7837E94136C905100B13B95 /* GHAPIIssueV3.m */; };
 		A7837E9A136C93FC00B13B95 /* GHAPIMilestoneV3.m in Sources */ = {isa = PBXBuildFile; fileRef = A7837E99136C93FC00B13B95 /* GHAPIMilestoneV3.m */; };
 		A7837EA1136CADA500B13B95 /* PDColoredProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = A7837EA0136CADA400B13B95 /* PDColoredProgressView.m */; };
@@ -388,6 +396,22 @@
 		A76FC9A51352D231004C642E /* 145-persondot@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "145-persondot@2x.png"; sourceTree = "<group>"; };
 		A76FC9BC13534755004C642E /* UIExpandableTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UIExpandableTableView.h; path = UIExpandableTableView/UIExpandableTableView.h; sourceTree = "<group>"; };
 		A76FC9BD13534755004C642E /* UIExpandableTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UIExpandableTableView.m; path = UIExpandableTableView/UIExpandableTableView.m; sourceTree = "<group>"; };
+		A77654C11395556000787420 /* array.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = array.c; sourceTree = "<group>"; };
+		A77654C21395556000787420 /* array.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = array.h; sourceTree = "<group>"; };
+		A77654C31395556000787420 /* buffer.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = buffer.c; sourceTree = "<group>"; };
+		A77654C41395556000787420 /* buffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = buffer.h; sourceTree = "<group>"; };
+		A77654C51395556000787420 /* markdown.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = markdown.c; sourceTree = "<group>"; };
+		A77654C61395556000787420 /* markdown.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = markdown.h; sourceTree = "<group>"; };
+		A77654C71395556000787420 /* renderers.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = renderers.c; sourceTree = "<group>"; };
+		A77654C81395556000787420 /* renderers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = renderers.h; sourceTree = "<group>"; };
+		A77654CD1395556A00787420 /* WAFoundationExtras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WAFoundationExtras.h; sourceTree = "<group>"; };
+		A77654CE1395556A00787420 /* WAFoundationExtras.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WAFoundationExtras.m; sourceTree = "<group>"; };
+		A77654CF1395556A00787420 /* WAHTMLMarkdownFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WAHTMLMarkdownFormatter.h; sourceTree = "<group>"; };
+		A77654D01395556A00787420 /* WAHTMLMarkdownFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WAHTMLMarkdownFormatter.m; sourceTree = "<group>"; };
+		A77654D11395556A00787420 /* WAMarkdown.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WAMarkdown.h; sourceTree = "<group>"; };
+		A77654D21395556A00787420 /* WAMarkdown.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WAMarkdown.m; sourceTree = "<group>"; };
+		A77654D31395556A00787420 /* WAMarkdownParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WAMarkdownParser.h; sourceTree = "<group>"; };
+		A77654D41395556A00787420 /* WAMarkdownParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WAMarkdownParser.m; sourceTree = "<group>"; };
 		A7837E93136C905100B13B95 /* GHAPIIssueV3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHAPIIssueV3.h; sourceTree = "<group>"; };
 		A7837E94136C905100B13B95 /* GHAPIIssueV3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHAPIIssueV3.m; sourceTree = "<group>"; };
 		A7837E98136C93FC00B13B95 /* GHAPIMilestoneV3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHAPIMilestoneV3.h; sourceTree = "<group>"; };
@@ -1126,6 +1150,29 @@
 			name = UIExpandableTableView;
 			sourceTree = "<group>";
 		};
+		A77654BF1395555500787420 /* Markdown */ = {
+			isa = PBXGroup;
+			children = (
+				A77654CD1395556A00787420 /* WAFoundationExtras.h */,
+				A77654CE1395556A00787420 /* WAFoundationExtras.m */,
+				A77654CF1395556A00787420 /* WAHTMLMarkdownFormatter.h */,
+				A77654D01395556A00787420 /* WAHTMLMarkdownFormatter.m */,
+				A77654D11395556A00787420 /* WAMarkdown.h */,
+				A77654D21395556A00787420 /* WAMarkdown.m */,
+				A77654D31395556A00787420 /* WAMarkdownParser.h */,
+				A77654D41395556A00787420 /* WAMarkdownParser.m */,
+				A77654C11395556000787420 /* array.c */,
+				A77654C21395556000787420 /* array.h */,
+				A77654C31395556000787420 /* buffer.c */,
+				A77654C41395556000787420 /* buffer.h */,
+				A77654C51395556000787420 /* markdown.c */,
+				A77654C61395556000787420 /* markdown.h */,
+				A77654C71395556000787420 /* renderers.c */,
+				A77654C81395556000787420 /* renderers.h */,
+			);
+			name = Markdown;
+			sourceTree = "<group>";
+		};
 		A7837E97136C93E500B13B95 /* GHAPIMilestoneV3 */ = {
 			isa = PBXGroup;
 			children = (
@@ -1414,6 +1461,7 @@
 		A7BF14321342159B001AE50D /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				A77654BF1395555500787420 /* Markdown */,
 				A7677150137078B1006D70D6 /* Appirater */,
 				A7089529134A2F69000DD6CE /* UITableViewCell */,
 				A7089518134A0C49000DD6CE /* Foundation Additions */,
@@ -2010,6 +2058,14 @@
 				A7B5209E13892876000FEE61 /* UIColor+GithubAPI.m in Sources */,
 				A7B520A113892BEF000FEE61 /* GHLabelTableViewCell.m in Sources */,
 				A7B520A513896164000FEE61 /* GHViewLabelViewController.m in Sources */,
+				A77654C91395556000787420 /* array.c in Sources */,
+				A77654CA1395556000787420 /* buffer.c in Sources */,
+				A77654CB1395556000787420 /* markdown.c in Sources */,
+				A77654CC1395556000787420 /* renderers.c in Sources */,
+				A77654D51395556A00787420 /* WAFoundationExtras.m in Sources */,
+				A77654D61395556A00787420 /* WAHTMLMarkdownFormatter.m in Sources */,
+				A77654D71395556A00787420 /* WAMarkdown.m in Sources */,
+				A77654D81395556A00787420 /* WAMarkdownParser.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
