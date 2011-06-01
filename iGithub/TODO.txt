@@ -25,6 +25,12 @@ support all these events
 [X]: Implemented
 [-]: clickable (include in navigation hierarchie)
 
+V1.5
+- Some kind of icons for folders and filetypes when browsing source trees would be nice. (currently none)
+- Every single page is formatted a vertical list. Occasionally this is appropriate, but most of the time it ends up taking up WAY too much vertical space. Don't make me scroll every time I go to a new page. 
+- No access to Wiki pages. 
+- Basically, you can access almost everything (but no wikis is a big deal!), but it's kind of clunky to do so. This app shows promise, but right now I would recommend against buying it. Keep your eye on this one, however, because if the developer gets active and improves the UI this could be amazing some day.
+
 Future Features:
 - Network graph for recent activity (see Network API)
 - ipad Interface

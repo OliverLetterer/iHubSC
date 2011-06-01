@@ -127,9 +127,9 @@
                                  ]
                                 ];
         
-        cell.repositoryLabel.text = payload.repo;
+        cell.repositoryLabel.text = item.repository.fullName;
         
-        GHIssue *issue = [GHIssue issueFromDatabaseOnRepository:[NSString stringWithFormat:@"%@/%@", item.repository.owner, item.repository.name] withNumber:payload.number];
+        GHIssue *issue = [GHIssue issueFromDatabaseOnRepository:item.repository.fullName withNumber:payload.number];
         
         if (issue) {            
             cell.descriptionLabel.text = issue.title;
@@ -166,7 +166,7 @@
                       withGravatarID:item.actorAttributes.gravatarID];
         NSUInteger numberOfCommits = [payload.commits count];
         cell.titleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ pushed to %@ (%d)", @""), item.actor, payload.branch, numberOfCommits];
-        cell.repositoryLabel.text = payload.repo;
+        cell.repositoryLabel.text = item.repository.fullName;
         
         if (numberOfCommits > 0) {
             GHCommitMessage *commit = [payload.commits objectAtIndex:0];
@@ -190,13 +190,11 @@
             cell = [[[GHNewsFeedItemTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
         }
         
-        GHCommitEventPayload *payload = (GHCommitEventPayload *)item.payload;
-        
         [self updateImageViewForCell:cell 
                          atIndexPath:indexPath 
                       withGravatarID:item.actorAttributes.gravatarID];
         cell.titleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ commented on a commit", @""), item.actor];
-        cell.repositoryLabel.text = payload.repo;
+        cell.repositoryLabel.text = item.repository.fullName;
         
         return cell;
     } else if (item.payload.type == GHPayloadFollowEvent) {
@@ -248,7 +246,7 @@
                          atIndexPath:indexPath 
                       withGravatarID:item.actorAttributes.gravatarID];
         cell.titleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ %@ watching", @""), item.actor, payload.action];
-        cell.repositoryLabel.text = payload.repo;
+        cell.repositoryLabel.text = item.repository.fullName;
         
         return cell;
     } else if (item.payload.type == GHPayloadCreateEvent) {
@@ -267,13 +265,13 @@
         
         if (payload.objectType == GHCreateEventObjectRepository) {
             cell.titleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ created repository", @""), item.actor];
-            cell.repositoryLabel.text = payload.name;
+            cell.repositoryLabel.text = payload.ref;
         } else if (payload.objectType == GHCreateEventObjectBranch) {
-            cell.titleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ created branch %@", @""), item.actor, payload.objectName];
-            cell.repositoryLabel.text = [NSString stringWithFormat:@"%@/%@", item.actor,payload.name];
+            cell.titleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ created branch %@", @""), item.actor, payload.ref];
+            cell.repositoryLabel.text = item.repository.fullName;
         } else if (payload.objectType == GHCreateEventObjectTag) {
-            cell.titleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ created tag %@", @""), item.actor, payload.objectName];
-            cell.repositoryLabel.text = [NSString stringWithFormat:@"%@/%@", item.actor,payload.name];
+            cell.titleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ created tag %@", @""), item.actor, payload.ref];
+            cell.repositoryLabel.text = item.repository.fullName;
         } else {
             cell.titleLabel.text = @"__UNKNWON_CREATE_EVENT__";
             cell.repositoryLabel.text = nil;
@@ -288,14 +286,12 @@
             cell = [[[GHNewsFeedItemTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
         }
         
-        GHForkEventPayload *payload = (GHForkEventPayload *)item.payload;
-        
         [self updateImageViewForCell:cell 
                          atIndexPath:indexPath 
                       withGravatarID:item.actorAttributes.gravatarID];
         
         cell.titleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ forked repository", @""), item.actor];
-        cell.repositoryLabel.text = payload.repo;
+        cell.repositoryLabel.text = item.repository.fullName;
         
         return cell;
     } else if (item.payload.type == GHPayloadDeleteEvent) {
@@ -339,7 +335,7 @@
                       withGravatarID:item.actorAttributes.gravatarID];
         
         cell.titleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ %@ %@ in wiki", @""), item.actor, payload.action, payload.pageName];
-        cell.repositoryLabel.text = payload.repo;
+        cell.repositoryLabel.text = item.repository.fullName;
         
         return cell;
     } else if (item.payload.type == GHPayloadGistEvent) {
@@ -382,7 +378,7 @@
                          atIndexPath:indexPath 
                       withGravatarID:item.actorAttributes.gravatarID];
         
-        cell.repositoryLabel.text = [NSString stringWithFormat:@"%@/%@", item.repository.owner, item.repository.name];
+        cell.repositoryLabel.text = item.repository.fullName;
         cell.titleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ uploaded a file", @""), item.actor];
         cell.descriptionLabel.text = [payload.URL lastPathComponent];
         
@@ -411,7 +407,7 @@
                          atIndexPath:indexPath 
                       withGravatarID:item.actorAttributes.gravatarID];
         
-        cell.repositoryLabel.text = payload.repo;
+        cell.repositoryLabel.text = item.repository.fullName;
         cell.descriptionLabel.text = description;
         cell.titleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ %@ pull request %@", @""), item.actor, payload.action, payload.number];
         
@@ -428,10 +424,10 @@
         
         [self updateImageViewForCell:cell 
                          atIndexPath:indexPath 
-                      withGravatarID:item.actorAttributes.gravatarID];
+                      withGravatarID:payload.member.gravatarID];
         
-        cell.repositoryLabel.text = payload.repo;
-        cell.titleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ %@ %@", @""), payload.actor, payload.action, payload.member];
+        cell.repositoryLabel.text = item.repository.fullName;
+        cell.titleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ %@ %@", @""), item.actor, payload.action, payload.member.login];
         
         return cell;
     } else if (item.payload.type == GHPayloadIssueCommentEvent) {
@@ -448,10 +444,10 @@
                          atIndexPath:indexPath 
                       withGravatarID:item.actorAttributes.gravatarID];
         
-        cell.repositoryLabel.text = payload.repo;
+        cell.repositoryLabel.text = item.repository.fullName;
         
-        cell.titleLabel.text = payload.actor;
-        cell.descriptionLabel.text = NSLocalizedString(@"commented on an Issue", @"");
+        cell.titleLabel.text = item.actor;
+        cell.descriptionLabel.text = [NSString stringWithFormat:NSLocalizedString(@"commented on Issue %@", @""), payload.issueID];
         
         return cell;
     } else if (item.payload.type == GHPayloadForkApplyEvent) {
@@ -468,8 +464,8 @@
                          atIndexPath:indexPath 
                       withGravatarID:item.actorAttributes.gravatarID];
         
-        cell.repositoryLabel.text = payload.repo;
-        cell.titleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ applied fork commits", @""), payload.actor];
+        cell.repositoryLabel.text = item.repository.fullName;
+        cell.titleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ applied fork commits", @""), item.actor];
         
         cell.descriptionLabel.text = payload.commit;
         
@@ -482,14 +478,12 @@
             cell = [[[GHNewsFeedItemTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
         }
         
-        GHPublicEventPayload *payload = (GHPublicEventPayload *)item.payload;
-        
         [self updateImageViewForCell:cell 
                          atIndexPath:indexPath 
                       withGravatarID:item.actorAttributes.gravatarID];
         
-        cell.repositoryLabel.text = payload.repo;
-        cell.titleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ open sourced", @""), payload.actor];
+        cell.repositoryLabel.text = item.repository.fullName;
+        cell.titleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ open sourced", @""), item.actor];
         
         return cell;
     }
@@ -545,8 +539,9 @@
             // this is the height for an issue cell, we will display the whole issue
             GHIssuePayload *payload = (GHIssuePayload *)item.payload;
             
-            if ([GHIssue isIssueAvailableForRepository:payload.repo withNumber:payload.number]) {
-                GHIssue *issue = [GHIssue issueFromDatabaseOnRepository:payload.repo withNumber:payload.number];
+            if ([GHIssue isIssueAvailableForRepository:item.repository.fullName withNumber:payload.number]) {
+                GHIssue *issue = [GHIssue issueFromDatabaseOnRepository:item.repository.fullName 
+                                                             withNumber:payload.number];
                 
                 NSString *description = issue.title;
                 height = [self heightForDescription:description] + 20.0 + 30.0; // X + top offset of status label + 30 px white space on the bottom
@@ -660,19 +655,19 @@
     
     if (item.payload.type == GHPayloadIssuesEvent) {
         GHIssuePayload *payload = (GHIssuePayload *)item.payload;
-        GHViewIssueTableViewController *viewIssueViewController = [[[GHViewIssueTableViewController alloc] initWithRepository:payload.repo issueNumber:payload.number] autorelease];
+        GHViewIssueTableViewController *viewIssueViewController = [[[GHViewIssueTableViewController alloc] 
+                                                                    initWithRepository:item.repository.fullName 
+                                                                    issueNumber:payload.number] autorelease];
         [self.navigationController pushViewController:viewIssueViewController animated:YES];
     } else if (item.payload.type == GHPayloadPullRequestEvent) {
         GHPullRequestPayload *payload = (GHPullRequestPayload *)item.payload;
-        GHViewIssueTableViewController *viewIssueViewController = [[[GHViewIssueTableViewController alloc] initWithRepository:payload.repo issueNumber:payload.number] autorelease];
+        GHViewIssueTableViewController *viewIssueViewController = [[[GHViewIssueTableViewController alloc] initWithRepository:item.repository.fullName issueNumber:payload.number] autorelease];
         [self.navigationController pushViewController:viewIssueViewController animated:YES];
     } else if (item.payload.type == GHPayloadPushEvent) {
-        GHPushPayloadViewController *pushViewController = [[[GHPushPayloadViewController alloc] initWithPayload:(GHPushPayload *)item.payload] autorelease];
+        GHPushPayloadViewController *pushViewController = [[[GHPushPayloadViewController alloc] initWithPayload:(GHPushPayload *)item.payload onRepository:item.repository.fullName] autorelease];
         [self.navigationController pushViewController:pushViewController animated:YES];
     } else if (item.payload.type == GHPayloadWatchEvent) {
-        GHWatchEventPayload *payload = (GHWatchEventPayload *)item.payload;
-        
-        GHSingleRepositoryViewController *repoViewController = [[[GHSingleRepositoryViewController alloc] initWithRepositoryString:payload.repo] autorelease];
+        GHSingleRepositoryViewController *repoViewController = [[[GHSingleRepositoryViewController alloc] initWithRepositoryString:item.repository.fullName] autorelease];
         [self.navigationController pushViewController:repoViewController animated:YES];
     } else if (item.payload.type == GHPayloadFollowEvent) {
         GHFollowEventPayload *payload = (GHFollowEventPayload *)item.payload;
@@ -680,32 +675,20 @@
         GHUserViewController *userViewController = [[[GHUserViewController alloc] initWithUsername:payload.target.login] autorelease];
         [self.navigationController pushViewController:userViewController animated:YES];
     } else if (item.payload.type == GHPayloadCreateEvent) {
-        GHCreateEventPayload *payload = (GHCreateEventPayload *)item.payload;
-
-        NSString *repo = [NSString stringWithFormat:@"%@/%@", item.actor,payload.name];;
+        NSString *repo = item.repository.fullName;
         
         GHSingleRepositoryViewController *repoViewController = [[[GHSingleRepositoryViewController alloc] initWithRepositoryString:repo] autorelease];
         [self.navigationController pushViewController:repoViewController animated:YES];
     } else if (item.payload.type == GHPayloadIssueCommentEvent) {
-        GHSingleRepositoryViewController *repoViewController = [[[GHSingleRepositoryViewController alloc] initWithRepositoryString:
-                                                                 [NSString stringWithFormat:@"%@/%@", item.repository.owner, item.repository.name] ] autorelease];
+        GHIssuesCommentPayload *payload = (GHIssuesCommentPayload *)item.payload;
         
-        [self.navigationController pushViewController:repoViewController animated:YES];
-        return;
-#warning not supported right now
-//        GHIssuesCommentPayload *payload = (GHIssuesCommentPayload *)item.payload;
-//        
-//        GHViewIssueTableViewController *viewIssueViewController = [[[GHViewIssueTableViewController alloc] initWithRepository:payload.repo issueNumber:payload.commentID] autorelease];
-//        [self.navigationController pushViewController:viewIssueViewController animated:YES];
+        GHViewIssueTableViewController *viewIssueViewController = [[[GHViewIssueTableViewController alloc] initWithRepository:item.repository.fullName issueNumber:payload.issueID] autorelease];
+        [self.navigationController pushViewController:viewIssueViewController animated:YES];
     } else if (item.payload.type == GHPayloadPublicEvent) {
-        GHPublicEventPayload *payload = (GHPublicEventPayload *)item.payload;
-        
-        GHSingleRepositoryViewController *repoViewController = [[[GHSingleRepositoryViewController alloc] initWithRepositoryString:payload.repo] autorelease];
+        GHSingleRepositoryViewController *repoViewController = [[[GHSingleRepositoryViewController alloc] initWithRepositoryString:item.repository.fullName] autorelease];
         [self.navigationController pushViewController:repoViewController animated:YES];
     } else if (item.payload.type == GHPayloadCommitCommentEvent) {
-        GHCommitEventPayload *payload = (GHCommitEventPayload *)item.payload;
-        
-        GHSingleRepositoryViewController *repoViewController = [[[GHSingleRepositoryViewController alloc] initWithRepositoryString:payload.repo] autorelease];
+        GHSingleRepositoryViewController *repoViewController = [[[GHSingleRepositoryViewController alloc] initWithRepositoryString:item.repository.fullName] autorelease];
         [self.navigationController pushViewController:repoViewController animated:YES];
     } else if (item.payload.type == GHPayloadDeleteEvent) {
         GHSingleRepositoryViewController *repoViewController = [[[GHSingleRepositoryViewController alloc] initWithRepositoryString:
@@ -724,15 +707,13 @@
                                                                  [NSString stringWithFormat:@"%@/%@", item.repository.owner, item.repository.name] ] autorelease];
         [self.navigationController pushViewController:repoViewController animated:YES];
     } else if (item.payload.type == GHPayloadForkEvent) {
-        GHForkEventPayload *payload = (GHForkEventPayload *)item.payload;
-        
         GHSingleRepositoryViewController *repoViewController = [[[GHSingleRepositoryViewController alloc] initWithRepositoryString:
-                                                                 payload.repo ] autorelease];
+                                                                 item.repository.fullName ] autorelease];
         [self.navigationController pushViewController:repoViewController animated:YES];
     } else if (item.payload.type == GHPayloadMemberEvent) {
         GHMemberEventPayload *payload = (GHMemberEventPayload *)item.payload;
         
-        GHUserViewController *userViewController = [[[GHUserViewController alloc] initWithUsername:payload.member] autorelease];
+        GHUserViewController *userViewController = [[[GHUserViewController alloc] initWithUsername:payload.member.login] autorelease];
         [self.navigationController pushViewController:userViewController animated:YES];
     } else if (item.payload.type == GHPayloadGistEvent) {
         GHGistEventPayload *payload = (GHGistEventPayload *)item.payload;

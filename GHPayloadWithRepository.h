@@ -9,10 +9,13 @@
 #import <Foundation/Foundation.h>
 #import "GHPayloadWithActor.h"
 
+@class GHRepository;
+
 @interface GHPayloadWithRepository : GHPayloadWithActor {
-    NSString *_repo;
+    GHRepository *_repository;
 }
 
-@property (nonatomic, copy) NSString *repo;
+@property (nonatomic, retain) GHRepository *repository;
+@property (nonatomic, readonly) NSString *repo;
 
 @end

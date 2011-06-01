@@ -18,6 +18,10 @@
     return ![self.homePage isEqualToString:@""] && self.homePage;
 }
 
+- (NSString *)fullName {
+    return [NSString stringWithFormat:@"%@/%@", self.owner, self.name];
+}
+
 #pragma mark - class methods
 
 + (void)collaboratorsForRepository:(NSString *)repository 

@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "GHPayloadWithRepository.h"
 
-@interface GHPublicEventPayload : GHPayloadWithRepository {
+@interface GHPublicEventPayload : GHPayload {
 @private
     
 }

@@ -13,11 +13,13 @@
 @interface GHPushPayloadViewController : GHTableViewController {
 @private
     GHPushPayload *_payload;
+    NSString *_repository;
 }
 
 @property (nonatomic, retain) GHPushPayload *payload;
+@property (nonatomic, copy) NSString *repository;
 
-- (id)initWithPayload:(GHPushPayload *)payload;
+- (id)initWithPayload:(GHPushPayload *)payload onRepository:(NSString *)repository;
 
 - (void)cachePayloadHeights;
 

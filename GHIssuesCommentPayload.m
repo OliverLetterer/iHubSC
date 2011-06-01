@@ -19,11 +19,15 @@
 
 #pragma mark - Initialization
 
-- (id)initWithRawDictionary:(NSDictionary *)rawDictionary {
+- (id)initWithRawDictionary:(NSDictionary *)rawDictionary URL:(NSString *)URL {
     if ((self = [super initWithRawDictionary:rawDictionary])) {
         // Initialization code
         self.commentID = [rawDictionary objectForKeyOrNilOnNullObject:@"comment_id"];
         self.issueID = [rawDictionary objectForKeyOrNilOnNullObject:@"issue_id"];
+        
+        NSString *commentIDString = [URL substringBetweenLeftBounds:@"issues/" andRightBounds:@"#"];
+        int ID = [commentIDString intValue];
+        self.issueID = [NSNumber numberWithInt:ID];
     }
     return self;
 }

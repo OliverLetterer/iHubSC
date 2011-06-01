@@ -9,7 +9,8 @@
 #import <Foundation/Foundation.h>
 #import "GHPayloadWithRepository.h"
 
-@interface GHPushPayload : GHPayloadWithRepository {
+// someone pushed changes to repo
+@interface GHPushPayload : GHPayload {
     NSString *_head;
     NSString *_ref;
     NSArray *_commits;

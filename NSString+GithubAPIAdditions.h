@@ -32,3 +32,11 @@
 @property (nonatomic, readonly) UIColor *colorFromAPIColorString;
 
 @end
+
+
+
+@interface NSString (Parsing)
+
+- (NSString *)substringBetweenLeftBounds:(NSString *)leftBounds andRightBounds:(NSString *)rightBounds;
+
+@end

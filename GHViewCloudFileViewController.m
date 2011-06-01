@@ -33,7 +33,6 @@
                     
                     if (fileString) {
                         if ([self.filename hasSuffix:@".md"] || [self.filename hasSuffix:@".markdown"]) {
-#warning parse markdown
                             NSString *formatFilePath = [[NSBundle mainBundle] pathForResource:@"MarkdownStyle" ofType:nil];
                             NSString *style = [NSString stringWithContentsOfFile:formatFilePath 
                                                                         encoding:NSUTF8StringEncoding 

@@ -56,7 +56,7 @@
         } else if ([self.type isEqualToString:@"MemberEvent"]) {
             self.payload = [[[GHMemberEventPayload alloc] initWithRawDictionary:rawPayload] autorelease];
         } else if ([self.type isEqualToString:@"IssueCommentEvent"]) {
-            self.payload = [[[GHIssuesCommentPayload alloc] initWithRawDictionary:rawPayload] autorelease];
+            self.payload = [[[GHIssuesCommentPayload alloc] initWithRawDictionary:rawPayload URL:self.URL] autorelease];
         } else if ([self.type isEqualToString:@"ForkApplyEvent"]) {
             self.payload = [[[GHForkApplyEventPayload alloc] initWithRawDictionary:rawPayload] autorelease];
         } else if ([self.type isEqualToString:@"PublicEvent"]) {

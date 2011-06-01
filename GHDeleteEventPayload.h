@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "GHPayload.h"
 
+// :user deleted :refType
 @interface GHDeleteEventPayload : GHPayload {
     NSString *_ref;
     NSString *_refType;

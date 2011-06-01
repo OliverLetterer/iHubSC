@@ -15,7 +15,7 @@
 
 - (NSString *)dueFormattedString {
     if (!self.dueOn) {
-        return @"";
+        return NSLocalizedString(@"No due date", @"");
     }
     
     NSDate *pastDate = self.dueOn.dateFromGithubAPIDateString;
@@ -32,7 +32,7 @@
 - (BOOL)dueInTime {
     NSDate *pastDate = self.dueOn.dateFromGithubAPIDateString;
     
-    return [pastDate timeIntervalSinceNow] > 0;
+    return [pastDate timeIntervalSinceNow] > 0 || !self.dueOn;
 }
 
 #pragma mark - Initialization

@@ -9,7 +9,8 @@
 #import <Foundation/Foundation.h>
 #import "GHPayloadWithRepository.h"
 
-@interface GHIssuePayload : GHPayloadWithRepository {
+// someone closed/opened an Issue
+@interface GHIssuePayload : GHPayload {
     NSString *_action;
     NSNumber *_issue;
     NSNumber *_number;

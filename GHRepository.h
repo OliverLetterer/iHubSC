@@ -55,6 +55,7 @@
 @property (nonatomic, copy) NSNumber *watchers;
 
 @property (nonatomic, readonly) BOOL isHomepageAvailable;
+@property (nonatomic, readonly) NSString *fullName;
 
 - (id)initWithRawDictionary:(NSDictionary *)rawDictionary;
 

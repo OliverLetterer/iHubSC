@@ -9,7 +9,8 @@
 #import <Foundation/Foundation.h>
 #import "GHPayloadWithRepository.h"
 
-@interface GHGollumEventPayload : GHPayloadWithRepository {
+// :user created/deleted :pageName in Wiki
+@interface GHGollumEventPayload : GHPayload {
     NSString *_action;
     NSString *_pageName;
     NSString *_sha;

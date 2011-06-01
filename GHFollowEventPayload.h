@@ -10,6 +10,7 @@
 #import "GHPayload.h"
 #import "GHTarget.h"
 
+// X started following Y
 @interface GHFollowEventPayload : GHPayload {
     GHTarget *_target;
 }

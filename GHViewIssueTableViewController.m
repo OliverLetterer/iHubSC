@@ -438,6 +438,7 @@
                 
                 cell.textLabel.text = milestone.title;
                 cell.detailTextLabel.text = milestone.dueFormattedString;
+                
                 cell.progressView.progress = [milestone.closedIssues floatValue] / ([milestone.closedIssues floatValue] + [milestone.openIssues floatValue]);
                 
                 if (milestone.dueInTime) {

@@ -11,14 +11,18 @@
 
 @implementation GHPayloadWithRepository
 
-@synthesize repo=_repo;
+@synthesize repository=_repository;
+
+- (NSString *)repo {
+    return self.repository.fullName;
+}
 
 #pragma mark - Initialization
 
 - (id)initWithRawDictionary:(NSDictionary *)rawDictionary {
     if ((self = [super initWithRawDictionary:rawDictionary])) {
         // Initialization code
-        self.repo = [rawDictionary objectForKeyOrNilOnNullObject:@"repo"];
+        self.repository = [[[GHRepository alloc] initWithRawDictionary:[rawDictionary objectForKeyOrNilOnNullObject:@"repository"]] autorelease];
     }
     return self;
 }
@@ -26,7 +30,7 @@
 #pragma mark - Memory management
 
 - (void)dealloc {
-    [_repo release];
+    [_repository release];
     [super dealloc];
 }
 

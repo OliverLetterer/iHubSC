@@ -9,7 +9,8 @@
 #import <Foundation/Foundation.h>
 #import "GHPayloadWithRepository.h"
 
-@interface GHForkApplyEventPayload : GHPayloadWithRepository {
+// :user applied fork commits
+@interface GHForkApplyEventPayload : GHPayload {
 @private
     NSString *_commit;
     NSString *_head;

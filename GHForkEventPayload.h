@@ -9,7 +9,8 @@
 #import <Foundation/Foundation.h>
 #import "GHPayloadWithRepository.h"
 
-@interface GHForkEventPayload : GHPayloadWithRepository {
+// :user forked a repository
+@interface GHForkEventPayload : GHPayload {
     
 }
 

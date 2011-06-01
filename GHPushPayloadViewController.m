@@ -12,7 +12,7 @@
 
 @implementation GHPushPayloadViewController
 
-@synthesize payload=_payload;
+@synthesize payload=_payload, repository=_repository;
 
 #pragma mark - setters and getters
 
@@ -27,10 +27,11 @@
 
 #pragma mark - Initialization
 
-- (id)initWithPayload:(GHPushPayload *)payload {
+- (id)initWithPayload:(GHPushPayload *)payload onRepository:(NSString *)repository {
     if ((self = [super initWithStyle:UITableViewStylePlain])) {
         // Custom initialization
         self.payload = payload;
+        self.repository = repository;
         self.title = NSLocalizedString(@"Push", @"");
     }
     return self;
@@ -40,6 +41,7 @@
 
 - (void)dealloc {
     [_payload release];
+    [_repository release];
     [super dealloc];
 }
 
@@ -175,7 +177,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     GHCommitMessage *message = [self.payload.commits objectAtIndex:indexPath.row];
     
-    GHViewCommitViewController *commitViewController = [[[GHViewCommitViewController alloc] initWithRepository:self.payload.repo
+    GHViewCommitViewController *commitViewController = [[[GHViewCommitViewController alloc] initWithRepository:self.repository
                                                                                                       commitID:message.head]
                                                         autorelease];
     commitViewController.branchHash = self.payload.head;

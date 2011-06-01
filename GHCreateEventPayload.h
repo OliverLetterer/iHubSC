@@ -16,15 +16,18 @@ typedef enum {
     GHCreateEventObjectTag
 } GHCreateEventObject;
 
+// :user created/deleted repository/branch/tag
 @interface GHCreateEventPayload : GHPayload {
-    NSString *_name;
-    NSString *_object;
-    NSString *_objectName;
+    NSString *_description;
+    NSString *_masterBranch;
+    NSString *_ref;
+    NSString *_refType;
 }
 
-@property (nonatomic, copy) NSString *name;
-@property (nonatomic, copy) NSString *object;
-@property (nonatomic, copy) NSString *objectName;
+@property (nonatomic, copy) NSString *description;
+@property (nonatomic, copy) NSString *masterBranch;
+@property (nonatomic, copy) NSString *ref;
+@property (nonatomic, copy) NSString *refType;
 
 @property (nonatomic, readonly) GHCreateEventObject objectType;
 

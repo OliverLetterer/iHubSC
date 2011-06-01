@@ -9,7 +9,8 @@
 #import <Foundation/Foundation.h>
 #import "GHPayloadWithActor.h"
 
-@interface GHGistEventPayload : GHPayloadWithActor {
+// :user created/deleted a gist
+@interface GHGistEventPayload : GHPayload {
     NSString *_action;
     NSString *_descriptionGist;
     NSString *_name;

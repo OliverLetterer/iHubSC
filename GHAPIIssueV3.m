@@ -174,7 +174,6 @@
                                                     [jsonDictionary setObject:assignee forKey:@"assignee"];
                                                 }
                                                 if (milestone) {
-                                                    DLog(@"setting milestone to: %@", milestone);
                                                     [jsonDictionary setObject:milestone forKey:@"milestone"];
                                                 }
                                                 NSString *jsonString = [jsonDictionary JSONString];
@@ -380,8 +379,6 @@
     }
     
     NSURL *URL = [NSURL URLWithString:URLString];
-    
-    DLog(@"%@", URL);
     
     [[GHBackgroundQueue sharedInstance] sendRequestToURL:URL setupHandler:nil completionHandler:^(id object, NSError *error, ASIFormDataRequest *request) {
         if (error) {

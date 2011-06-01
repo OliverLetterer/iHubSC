@@ -9,7 +9,8 @@
 #import <Foundation/Foundation.h>
 #import "GHPayloadWithRepository.h"
 
-@interface GHWatchEventPayload : GHPayloadWithRepository {
+// :user started/stoped watching :repository
+@interface GHWatchEventPayload : GHPayload {
     NSString *_action;
 }
 

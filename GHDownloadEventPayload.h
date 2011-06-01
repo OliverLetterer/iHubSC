@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "GHPayload.h"
 
+// :user added a Download File to a repository
 @interface GHDownloadEventPayload : GHPayload {
     NSNumber *_ID;
     NSString *_URL;

@@ -11,18 +11,18 @@
 
 @implementation GHCreateEventPayload
 
-@synthesize name=_name, object=_object, objectName=_objectName;
+@synthesize description = _description, masterBranch = _masterBranch, ref = _ref, refType = _refType;
 
 - (GHPayloadEvent)type {
     return GHPayloadCreateEvent;
 }
 
 - (GHCreateEventObject)objectType {
-    if ([self.object isEqualToString:@"repository"]) {
+    if ([self.refType isEqualToString:@"repository"]) {
         return GHCreateEventObjectRepository;
-    } else if ([self.object isEqualToString:@"branch"]) {
+    } else if ([self.refType isEqualToString:@"branch"]) {
         return GHCreateEventObjectBranch;
-    } else if ([self.object isEqualToString:@"tag"]) {
+    } else if ([self.refType isEqualToString:@"tag"]) {
         return GHCreateEventObjectTag;
     }
     
@@ -34,9 +34,10 @@
 - (id)initWithRawDictionary:(NSDictionary *)rawDictionary {
     if ((self = [super initWithRawDictionary:rawDictionary])) {
         // Initialization code
-        self.name = [rawDictionary objectForKeyOrNilOnNullObject:@"name"];
-        self.object = [rawDictionary objectForKeyOrNilOnNullObject:@"object"];
-        self.objectName = [rawDictionary objectForKeyOrNilOnNullObject:@"object_name"];
+        self.description = [rawDictionary objectForKeyOrNilOnNullObject:@"description"];
+        self.masterBranch = [rawDictionary objectForKeyOrNilOnNullObject:@"master_branch"];
+        self.ref = [rawDictionary objectForKeyOrNilOnNullObject:@"ref"];
+        self.refType = [rawDictionary objectForKeyOrNilOnNullObject:@"ref_type"];
         
         if (self.objectType == GHCreateEventObjectUnknown) {
             DLog(@"%@", rawDictionary);
@@ -49,9 +50,11 @@
 #pragma mark - Memory management
 
 - (void)dealloc {
-    [_name release];
-    [_object release];
-    [_objectName release];
+    [_description release];
+    [_masterBranch release];
+    [_ref release];
+    [_refType release];
+    
     [super dealloc];
 }
 

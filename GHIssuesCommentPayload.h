@@ -9,10 +9,12 @@
 #import <Foundation/Foundation.h>
 #import "GHPayloadWithRepository.h"
 
-@interface GHIssuesCommentPayload : GHPayloadWithRepository {
+@interface GHIssuesCommentPayload : GHPayload {
     NSNumber *_commentID;
     NSNumber *_issueID;
 }
+
+- (id)initWithRawDictionary:(NSDictionary *)rawDictionary URL:(NSString *)URL;
 
 @property (nonatomic, copy) NSNumber *commentID;
 @property (nonatomic, copy) NSNumber *issueID;

@@ -23,7 +23,7 @@
     if ((self = [super initWithRawDictionary:rawDictionary])) {
         // Initialization code
         self.action = [rawDictionary objectForKeyOrNilOnNullObject:@"action"];
-        self.member = [rawDictionary objectForKeyOrNilOnNullObject:@"member"];
+        self.member = [[[GHActorAttributes alloc] initWithRawDictionary:[rawDictionary objectForKeyOrNilOnNullObject:@"member"]] autorelease];
     }
     return self;
 }

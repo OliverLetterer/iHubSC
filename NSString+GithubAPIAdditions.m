@@ -88,3 +88,31 @@
 }
 
 @end
+
+
+
+@implementation NSString (Parsing)
+
+- (NSString *)substringBetweenLeftBounds:(NSString *)leftBounds andRightBounds:(NSString *)rightBounds {
+	NSString *result = nil;
+	
+	@try {
+		NSRange beforeRange = NSMakeRange(0, 0);
+		beforeRange = [self rangeOfString:leftBounds];
+		if (beforeRange.location != NSNotFound) {
+			// found before
+			NSRange rightAfterRange = NSMakeRange(0, 0);
+			NSRange searchRange = NSMakeRange(beforeRange.length + beforeRange.location, [self length] - beforeRange.length - beforeRange.location);
+			rightAfterRange = [self rangeOfString:rightBounds options:NSLiteralSearch range:searchRange];
+			if (rightAfterRange.location != NSNotFound) {
+				NSRange foundRange = NSMakeRange(beforeRange.length + beforeRange.location, rightAfterRange.location - (beforeRange.length + beforeRange.location));
+				result = [self substringWithRange:foundRange];
+			}
+		}
+	}
+	@catch (NSException *e) {}
+	
+	return result;
+}
+
+@end

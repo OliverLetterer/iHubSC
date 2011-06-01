@@ -10,7 +10,8 @@
 #import "GHPayloadWithRepository.h"
 #import "GHPullRequest.h"
 
-@interface GHPullRequestPayload : GHPayloadWithRepository {
+// someone opened/closed a Pull Request
+@interface GHPullRequestPayload : GHPayload {
     NSNumber *_number;
     NSString *_action;
     GHPullRequest *_pullRequest;

@@ -55,6 +55,17 @@ V1.4.1
 Milestones
 - Browse Milstone with current status, Open Issues, Closed Issues
 
+V1.5
+- You are now able to view fully formatted .md and .markdown files (like README.md) on any Repository
+- adopted new JSON-NewsFeed
+- if someone commented on an Issue in a NewsFeed, you are now able to view this issue directly
+
+
+
+
+
+
+
 iTunes Changelog:
 
 V1.3

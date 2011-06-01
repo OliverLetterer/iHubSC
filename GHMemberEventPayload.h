@@ -9,12 +9,15 @@
 #import <Foundation/Foundation.h>
 #import "GHPayloadWithRepository.h"
 
-@interface GHMemberEventPayload : GHPayloadWithRepository {
+@class GHActorAttributes;
+
+// when a user was added to a repository: "kabuki added to kabuki/escort-mission"
+@interface GHMemberEventPayload : GHPayload {
     NSString *_action;
-    NSString *_member;
+    GHActorAttributes *_member;
 }
 
 @property (nonatomic, copy) NSString *action;
-@property (nonatomic, copy) NSString *member;
+@property (nonatomic, retain) GHActorAttributes *member;
 
 @end
