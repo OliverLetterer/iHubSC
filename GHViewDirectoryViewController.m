@@ -127,9 +127,11 @@
         // dir
         GHDirectory *directory = [self.directory.directories objectAtIndex:indexPath.row];
         cell.textLabel.text = [NSString stringWithFormat:@"%@/", directory.lastNameComponent];
+//        cell.imageView.image = [UIImage imageNamed:@"GHFolder.png"];
     } else if (indexPath.section == 1) {
         GHFile *file = [self.directory.files objectAtIndex:indexPath.row];
         cell.textLabel.text = file.name;
+//        cell.imageView.image = nil;
     }
     
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
@@ -173,6 +175,10 @@
 */
 
 #pragma mark - Table view delegate
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 44.0f;
+}
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
