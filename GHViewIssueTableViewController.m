@@ -24,12 +24,14 @@
 #import "GHViewLabelViewController.h"
 
 #define kUITableViewSectionData             0
-#define kUITableViewSectionCommits          1
-#define kUITableViewSectionLabels           2
-#define kUITableViewSectionHistory          3
-#define kUITableViewSectionAdministration   4
+#define kUITableViewSectionAssignee         1
+#define kUITableViewSectionMilestone        2
+#define kUITableViewSectionCommits          3
+#define kUITableViewSectionLabels           4
+#define kUITableViewSectionHistory          5
+#define kUITableViewSectionAdministration   6
 
-#define kUITableViesNumberOfSections        5
+#define kUITableViesNumberOfSections        7
 
 @implementation GHViewIssueTableViewController
 
@@ -229,7 +231,7 @@
     if (_isDownloadingIssueData) {
         return NO;
     }
-    return section != kUITableViewSectionData;
+    return section != kUITableViewSectionData && section != kUITableViewSectionMilestone && section != kUITableViewSectionAssignee;
 }
 
 - (BOOL)tableView:(UIExpandableTableView *)tableView needsToDownloadDataForExpandableSection:(NSInteger)section {
@@ -316,11 +318,17 @@
     } else {
         if (section == kUITableViewSectionData) {
             // the issue itself
-            // title, description, number of votes
-            // assigned to
-            // milestone
-            result = 4;
-        }else if (section == kUITableViewSectionAdministration) {
+            // repository
+            result = 2;
+        } else if (section == kUITableViewSectionAssignee) {
+            if (self.issue.hasAssignee) {
+                return 1;
+            }
+        } else if (section == kUITableViewSectionMilestone) {
+            if (self.issue.hasMilestone) {
+                return 1;
+            }
+        } else if (section == kUITableViewSectionAdministration) {
             // first will be administrate
             if (!_canUserAdministrateIssue) {
                 return 0;
@@ -331,6 +339,9 @@
         } else if (section == kUITableViewSectionCommits) {
             return self.issue.isPullRequest ? [self.discussion.commits count] + 1 : 0;
         } else if (section == kUITableViewSectionLabels) {
+            if (self.issue.labels.count == 0) {
+                return 0;
+            }
             return self.issue.labels.count + 1;
         }
     }
@@ -401,74 +412,51 @@
             cell.textLabel.text = NSLocalizedString(@"Repository", @"");
             
             return cell;
-        } else if (indexPath.row == 2) {
+        }
+    } else if (indexPath.section == kUITableViewSectionAssignee) {
+        if (indexPath.row == 0) {
             NSString *CellIdentifier = @"DetailsTableViewCell";
             
             UITableViewCellWithLinearGradientBackgroundView *cell = (UITableViewCellWithLinearGradientBackgroundView *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
             if (!cell) {
                 cell = [[[UITableViewCellWithLinearGradientBackgroundView alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:CellIdentifier] autorelease];
-                cell.selectionStyle = UITableViewCellSelectionStyleNone;
             }
             
-            if (self.issue.assignee.login) {
-                cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-                cell.selectionStyle = UITableViewCellSelectionStyleBlue;
-                
-                cell.detailTextLabel.text = self.issue.assignee.login;
-            } else {
-                cell.accessoryType = UITableViewCellAccessoryNone;
-                cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                
-                cell.detailTextLabel.text = @"No one is assigned";
-            }
+            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+            cell.selectionStyle = UITableViewCellSelectionStyleBlue;
+            
+            cell.detailTextLabel.text = self.issue.assignee.login;
             
             cell.textLabel.text = NSLocalizedString(@"Assigned to", @"");
             
             return cell;
-        } else if (indexPath.row == 3) {
-            if (self.issue.milestone.title) {
-                NSString *CellIdentifier = @"MilestoneCell";
-                
-                GHAPIMilestoneV3TableViewCell *cell = (GHAPIMilestoneV3TableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-                if (!cell) {
-                    cell = [[[GHAPIMilestoneV3TableViewCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:CellIdentifier] autorelease];
-                }
-                
-                GHAPIMilestoneV3 *milestone = self.issue.milestone;
-                
-                cell.textLabel.text = milestone.title;
-                cell.detailTextLabel.text = milestone.dueFormattedString;
-                
-                cell.progressView.progress = [milestone.closedIssues floatValue] / ([milestone.closedIssues floatValue] + [milestone.openIssues floatValue]);
-                
-                if (milestone.dueInTime) {
-                    [cell.progressView setTintColor:[UIColor greenColor] ];
-                } else {
-                    [cell.progressView setTintColor:[UIColor redColor] ];
-                }
-                
-                cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-                
-                return cell;
-            } else {
-                NSString *CellIdentifier = @"DetailsTableViewCell";
-                
-                UITableViewCellWithLinearGradientBackgroundView *cell = (UITableViewCellWithLinearGradientBackgroundView *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-                if (!cell) {
-                    cell = [[[UITableViewCellWithLinearGradientBackgroundView alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:CellIdentifier] autorelease];
-                    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                }
-                
-                cell.accessoryType = UITableViewCellAccessoryNone;
-                cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                
-                cell.textLabel.text = NSLocalizedString(@"Milestone", @"");
-                cell.detailTextLabel.text = @"No milestone";
-                
-                return cell;
-            }
         }
-
+    } else if (indexPath.section == kUITableViewSectionMilestone) {
+        if (indexPath.row == 0) {
+            NSString *CellIdentifier = @"MilestoneCell";
+            
+            GHAPIMilestoneV3TableViewCell *cell = (GHAPIMilestoneV3TableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+            if (!cell) {
+                cell = [[[GHAPIMilestoneV3TableViewCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:CellIdentifier] autorelease];
+            }
+            
+            GHAPIMilestoneV3 *milestone = self.issue.milestone;
+            
+            cell.textLabel.text = milestone.title;
+            cell.detailTextLabel.text = milestone.dueFormattedString;
+            
+            cell.progressView.progress = [milestone.closedIssues floatValue] / ([milestone.closedIssues floatValue] + [milestone.openIssues floatValue]);
+            
+            if (milestone.dueInTime) {
+                [cell.progressView setTintColor:[UIColor greenColor] ];
+            } else {
+                [cell.progressView setTintColor:[UIColor redColor] ];
+            }
+            
+            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+            
+            return cell;
+        }
     } else if (indexPath.section == kUITableViewSectionAdministration) {
         // administrate
         if (indexPath.row == 1) {
