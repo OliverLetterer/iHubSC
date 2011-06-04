@@ -19,6 +19,14 @@
     return self.pullRequestID != nil;
 }
 
+- (BOOL)hasAssignee {
+    return self.assignee.login != nil;
+}
+
+- (BOOL)hasMilestone {
+    return self.milestone.number != nil;
+}
+
 #pragma mark - Initialization
 
 - (id)initWithRawDictionary:(NSDictionary *)rawDictionay {

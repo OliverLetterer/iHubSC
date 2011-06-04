@@ -46,6 +46,8 @@
 @property (nonatomic, retain) GHAPIUserV3 *user;
 
 @property (nonatomic, readonly) BOOL isPullRequest;
+@property (nonatomic, readonly) BOOL hasAssignee;
+@property (nonatomic, readonly) BOOL hasMilestone;
 
 - (id)initWithRawDictionary:(NSDictionary *)rawDictionay;
 
