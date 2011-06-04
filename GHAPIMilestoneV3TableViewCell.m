@@ -18,9 +18,7 @@
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if ((self = [super initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:reuseIdentifier])) {
         // Initialization code
-        _progressView = [[PDColoredProgressView alloc] initWithProgressViewStyle:UIProgressViewStyleDefault];
-        [_progressView setTintColor:[UIColor greenColor] ];
-        [_progressView setProgress:0.5f animated:NO];
+        _progressView = [[INProgressView alloc] initWithFrame:CGRectMake(0.0, 0.0, 0.0, 10.0)];
         self.detailTextLabel.text = @" ";
         [self.contentView addSubview:_progressView];
     }
