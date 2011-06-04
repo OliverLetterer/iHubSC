@@ -11,6 +11,7 @@
 #import "GHNewsFeedItemTableViewCell.h"
 #import "GHAuthenticationViewController.h"
 #import "GHTableViewController+private.h"
+#import "UIColor+GithubUI.h"
 
 @implementation GHTableViewController
 
@@ -178,7 +179,7 @@
     
     self.tableView.contentInset = UIEdgeInsetsMake(-22, 0, -22, 0);
     self.defaultEdgeInset = self.tableView.contentInset;
-    self.tableView.backgroundView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"backgroundimage.png"]] autorelease];
+    self.tableView.backgroundView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"GHDefaultTableViewBackgroundImage.png"]] autorelease];
 }
 
 - (void)viewDidLoad {
@@ -237,7 +238,7 @@
         
         self.tableView.backgroundView = view;
     }
-    self.navigationController.navigationBar.tintColor = [UIColor colorWithRed:22.0/255.0f green:70.0/255.0f blue:110.0/255.0f alpha:1.0];
+    self.navigationController.navigationBar.tintColor = [UIColor defaultNavigationBarTintColor];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
