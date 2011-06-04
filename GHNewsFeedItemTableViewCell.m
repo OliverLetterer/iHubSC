@@ -49,6 +49,7 @@
         self.repositoryLabel.backgroundColor = [UIColor clearColor];
         
         self.imageView.contentMode = UIViewContentModeScaleAspectFit;
+        self.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
     return self;
 }

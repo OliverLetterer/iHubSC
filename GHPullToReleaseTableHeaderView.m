@@ -95,9 +95,9 @@
                                  autorelease];
 		self.lastUpdateLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth;
 		self.lastUpdateLabel.font = [UIFont systemFontOfSize:12.0f];
-		self.lastUpdateLabel.textColor = [UIColor colorWithWhite:0.25f alpha:1.0];
-		self.lastUpdateLabel.shadowColor = [UIColor whiteColor];
-		self.lastUpdateLabel.shadowOffset = CGSizeMake(0.0f, 1.0f);
+		self.lastUpdateLabel.textColor = [UIColor colorWithWhite:0.95f alpha:1.0];
+		self.lastUpdateLabel.shadowColor = [UIColor grayColor];
+		self.lastUpdateLabel.shadowOffset = CGSizeMake(-1.0f, 1.0f);
 		self.lastUpdateLabel.backgroundColor = [UIColor clearColor];
 		self.lastUpdateLabel.textAlignment = UITextAlignmentCenter;
 		[self addSubview:self.lastUpdateLabel];
@@ -106,9 +106,9 @@
                             autorelease];
 		self.statusLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth;
 		self.statusLabel.font = [UIFont boldSystemFontOfSize:13.0f];
-		self.statusLabel.textColor = [UIColor colorWithWhite:0.25f alpha:1.0];
-		self.statusLabel.shadowColor = [UIColor whiteColor];
-		self.statusLabel.shadowOffset = CGSizeMake(0.0f, 1.0f);
+		self.statusLabel.textColor = [UIColor colorWithWhite:0.95f alpha:1.0];
+		self.statusLabel.shadowColor = [UIColor grayColor];
+		self.statusLabel.shadowOffset = CGSizeMake(-1.0f, 1.0f);
 		self.statusLabel.backgroundColor = [UIColor clearColor];
 		self.statusLabel.textAlignment = UITextAlignmentCenter;
         self.statusLabel.text = NSLocalizedString(@"Pull down to refresh...", @"Pull down to refresh status");
@@ -121,7 +121,7 @@
 		self.arrowImageLayer.contentsScale = [[UIScreen mainScreen] scale];
 		[self.layer addSublayer:self.arrowImageLayer];
 		
-        self.activityIndicatorView = [[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray] autorelease];
+        self.activityIndicatorView = [[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite] autorelease];
 		self.activityIndicatorView.frame = CGRectMake(25.0f, frame.size.height - 38.0f, 20.0f, 20.0f);
         self.activityIndicatorView.hidesWhenStopped = YES;
 		[self addSubview:self.activityIndicatorView];

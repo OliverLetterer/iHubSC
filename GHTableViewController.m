@@ -157,7 +157,7 @@
 	gradientLayer = [CAGradientLayer layer];
 	gradientLayer.frame = CGRectMake(0, 0, 480, 22);
 	gradientLayer.colors = [NSArray arrayWithObjects:
-							(id)[UIColor colorWithWhite:1.0 alpha:0.0].CGColor,
+							(id)[UIColor colorWithWhite:0.0/*1.0*/ alpha:0.0].CGColor,
 							(id)[UIColor colorWithWhite:0.0 alpha:0.3].CGColor,
 							nil];
     gradientLayer.actions = newActions;
@@ -170,7 +170,7 @@
 	gradientLayer.frame = CGRectMake(0, 0, 480, 22);
 	gradientLayer.colors = [NSArray arrayWithObjects:
 							(id)[UIColor colorWithWhite:0.0 alpha:0.3].CGColor,
-							(id)[UIColor colorWithWhite:1.0 alpha:0.0].CGColor,
+							(id)[UIColor colorWithWhite:0.0 alpha:0.0].CGColor,
 							nil];
     gradientLayer.actions = newActions;
 	[view.layer addSublayer:gradientLayer];
@@ -178,15 +178,18 @@
     
     self.tableView.contentInset = UIEdgeInsetsMake(-22, 0, -22, 0);
     self.defaultEdgeInset = self.tableView.contentInset;
+    self.tableView.backgroundView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"backgroundimage.png"]] autorelease];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     self.tableView.scrollsToTop = YES;
-    self.tableView.backgroundColor = [UIColor colorWithRed:245.0/255.0 green:245.0/255.0 blue:245.0/255.0 alpha:1.0];
-    self.tableView.backgroundColor = [UIColor colorWithRed:235.0/255.0 green:235.0/255.0 blue:235.0/255.0 alpha:1.0];
+//    self.tableView.backgroundColor = [UIColor colorWithRed:245.0/255.0 green:245.0/255.0 blue:245.0/255.0 alpha:1.0];
+//    self.tableView.backgroundColor = [UIColor colorWithRed:235.0/255.0 green:235.0/255.0 blue:235.0/255.0 alpha:1.0];
     self.tableView.rowHeight = 71.0;
+//    self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLineEtched;
+    self.tableView.separatorColor = [UIColor colorWithRed:186.0f/255.0f green:186.0f/255.0f blue:186.0f/255.0f alpha:1.0f];
 }
 
 - (void)viewDidUnload {
@@ -234,6 +237,7 @@
         
         self.tableView.backgroundView = view;
     }
+    self.navigationController.navigationBar.tintColor = [UIColor colorWithRed:22.0/255.0f green:70.0/255.0f blue:110.0/255.0f alpha:1.0];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
