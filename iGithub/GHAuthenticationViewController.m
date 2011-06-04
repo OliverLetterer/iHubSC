@@ -9,11 +9,12 @@
 #import "GHAuthenticationViewController.h"
 #import "GHSettingsHelper.h"
 #import "GithubAPI.h"
+#import "UIColor+GithubUI.h"
 #import <QuartzCore/QuartzCore.h>
 
 #define UsernameCellTag 13374
 #define PasswordCellTag 13375
-#define TokenCellTag 13376
+#define TokenCellTag    13376
 
 static const CGFloat kUIKeyboardPortraitHeight = 216.0f;
 static const CGFloat kUIKeyboardAnimationDuration = 0.3f;
@@ -147,6 +148,8 @@ NSString *const GHAuthenticationViewControllerDidAuthenticateUserNotification = 
     _glossImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"GHGlossTopBorder.png"] ];
     _glossImageView.frame = CGRectMake(100.0f, -4.0f - inset.top, 118.0f, 119.0f);
     [_tableView addSubview:_glossImageView];
+    
+    _tableView.backgroundView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"GHDefaultTableViewBackgroundImage.png"]] autorelease];
 }
 
 - (void)viewDidLoad {
@@ -178,6 +181,7 @@ NSString *const GHAuthenticationViewControllerDidAuthenticateUserNotification = 
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    self.navigationController.navigationBar.tintColor = [UIColor defaultNavigationBarTintColor];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -200,6 +204,33 @@ NSString *const GHAuthenticationViewControllerDidAuthenticateUserNotification = 
 }
 
 #pragma mark - Table view data source
+
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
+    NSString *string = [self tableView:tableView titleForFooterInSection:section];
+    
+    UILabel *label = [[[UILabel alloc] initWithFrame:CGRectMake(20.0f, 0.0f, 280.0f, 0.0f)] autorelease];
+    label.text = string;
+    label.font = [UIFont systemFontOfSize:16.0f];
+    label.textColor = [UIColor whiteColor];
+    label.backgroundColor = [UIColor clearColor];
+    label.numberOfLines = 0;
+    label.lineBreakMode = UILineBreakModeWordWrap;
+    label.textAlignment = UITextAlignmentCenter;
+    label.shadowColor = [UIColor grayColor];
+    label.shadowOffset = CGSizeMake(-1.0f, 1.0f);
+    
+    return label;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    NSString *string = [self tableView:tableView titleForFooterInSection:section];
+    
+    CGSize size = [string sizeWithFont:[UIFont systemFontOfSize:16.0f] 
+                     constrainedToSize:CGSizeMake(280.0f, CGFLOAT_MAX) 
+                         lineBreakMode:UILineBreakModeWordWrap];
+    
+    return size.height;
+}
 
 - (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {
     return NSLocalizedString(@"Please provide your GitHub Username and Password here. Your Password will be stored in the keychain safely.", @"");
