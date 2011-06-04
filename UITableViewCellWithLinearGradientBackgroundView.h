@@ -9,11 +9,13 @@
 #import <UIKit/UIKit.h>
 #import <QuartzCore/QuartzCore.h>
 
+@class GHLinearGradientBackgroundView;
+
 @interface UITableViewCellWithLinearGradientBackgroundView : UITableViewCell {
 @private
-    CAGradientLayer *_backgroundGradientLayer;
+    GHLinearGradientBackgroundView *_linearBackgroundView;
 }
 
-@property (nonatomic, retain) CAGradientLayer *backgroundGradientLayer;
+@property (nonatomic, retain, readonly) GHLinearGradientBackgroundView *linearBackgroundView;
 
 @end

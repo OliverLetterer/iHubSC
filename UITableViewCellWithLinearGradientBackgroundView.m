@@ -8,34 +8,25 @@
 
 #import "UITableViewCellWithLinearGradientBackgroundView.h"
 #import "UITableViewCell+Background.h"
+#import "GHLinearGradientBackgroundView.h"
 
 @implementation UITableViewCellWithLinearGradientBackgroundView
 
-@synthesize backgroundGradientLayer=_backgroundGradientLayer;
+@synthesize linearBackgroundView=_linearBackgroundView;
 
 #pragma mark - Initialization
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if ((self = [super initWithStyle:style reuseIdentifier:reuseIdentifier])) {
         // Initialization code
-        self.backgroundGradientLayer = [CAGradientLayer layer];
-        self.backgroundGradientLayer.colors = [NSArray arrayWithObjects:
-                                               (id)[UIColor whiteColor].CGColor, 
-                                               (id)[UIColor colorWithRed:245.0/255.0 green:245.0/255.0 blue:245.0/255.0 alpha:1.0].CGColor,
-                                               nil];
-        self.backgroundGradientLayer.locations = [NSArray arrayWithObjects:[NSNumber numberWithFloat:0.0], [NSNumber numberWithFloat:1.0], nil];
         
-        NSDictionary *newActions = [NSDictionary dictionaryWithObjectsAndKeys:[NSNull null], @"onOrderIn",
-                                    [NSNull null], @"onOrderOut",
-                                    [NSNull null], @"sublayers",
-                                    [NSNull null], @"contents",
-                                    [NSNull null], @"bounds",
-                                    nil];
-        
-        self.backgroundGradientLayer.actions = newActions;
-        self.backgroundView = [[[UIView alloc] init] autorelease];
-        self.backgroundView.backgroundColor = [UIColor whiteColor];
-        [self.backgroundView.layer addSublayer:self.backgroundGradientLayer];
+        GHLinearGradientBackgroundView *backgroundView = [[[GHLinearGradientBackgroundView alloc] initWithFrame:self.bounds] autorelease];
+        backgroundView.colors = [NSArray arrayWithObjects:
+                                 (id)[UIColor colorWithRed:240.0/255.0 green:240.0/255.0 blue:240.0/255.0 alpha:1.0].CGColor, 
+                                 (id)[UIColor colorWithRed:192.0/255.0 green:192.0/255.0 blue:192.0/255.0 alpha:1.0].CGColor,
+                                 nil];
+        self.backgroundView = backgroundView;
+        _linearBackgroundView = [backgroundView retain];
         
         self.textLabel.backgroundColor = [UIColor clearColor];
         self.detailTextLabel.backgroundColor = [UIColor clearColor];
@@ -57,8 +48,6 @@
 
 - (void)layoutSubviews {
     [super layoutSubviews];
-    
-    self.backgroundGradientLayer.frame = self.backgroundView.bounds;
 }
 
 - (void)prepareForReuse {
@@ -69,7 +58,7 @@
 #pragma mark - Memory management
 
 - (void)dealloc {
-    [_backgroundGradientLayer release];
+    [_linearBackgroundView release];
     [super dealloc];
 }
 
