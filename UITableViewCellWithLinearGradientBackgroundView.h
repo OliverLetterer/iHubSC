@@ -18,4 +18,10 @@
 
 @property (nonatomic, retain, readonly) GHLinearGradientBackgroundView *linearBackgroundView;
 
+@property (nonatomic, readonly) UIColor *defaultShadowColor;
+@property (nonatomic, readonly) CGSize defaultShadowOffset;
+
+- (UIColor *)shadowColorForView:(UIView *)view;
+- (CGSize)shadowOffsetForView:(UIView *)view;
+
 @end
