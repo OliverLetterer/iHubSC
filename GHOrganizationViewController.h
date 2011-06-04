@@ -10,6 +10,8 @@
 #import "GHTableViewController.h"
 #import "GithubAPI.h"
 
+#warning Don't display empty cells
+
 @interface GHOrganizationViewController : GHTableViewController {
 @private
     NSString *_organizationLogin;

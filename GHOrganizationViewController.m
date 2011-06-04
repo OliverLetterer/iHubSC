@@ -232,6 +232,7 @@
             if (cell == nil) {
                 cell = [[[GHFeedItemWithDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
                 cell.selectionStyle = UITableViewCellEditingStyleNone;
+                cell.accessoryType = UITableViewCellAccessoryNone;
             }
             
             
