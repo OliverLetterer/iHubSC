@@ -8,6 +8,7 @@
 
 #import "GHViewCloudFileViewController.h"
 #import "WAHTMLMarkdownFormatter.h"
+#import "GHLinearGradientBackgroundView.h"
 
 @implementation GHViewCloudFileViewController
 
@@ -144,17 +145,19 @@
 #pragma mark - View lifecycle
 
 - (void)loadView {
-    [super loadView];
-    self.view.backgroundColor = [UIColor whiteColor];
+//    [super loadView];
+//    self.view.backgroundColor = [UIColor whiteColor];
+//    
+//    self.backgroundGradientLayer = [CAGradientLayer layer];
+//    self.backgroundGradientLayer.colors = [NSArray arrayWithObjects:
+//                                           (id)[UIColor whiteColor].CGColor, 
+//                                           (id)[UIColor colorWithRed:245.0/255.0 green:245.0/255.0 blue:245.0/255.0 alpha:1.0].CGColor,
+//                                           nil];
+//    self.backgroundGradientLayer.locations = [NSArray arrayWithObjects:[NSNumber numberWithFloat:0.0], [NSNumber numberWithFloat:1.0], nil];
+//    self.backgroundGradientLayer.frame = self.view.bounds;
+//    [self.view.layer addSublayer:self.backgroundGradientLayer];
     
-    self.backgroundGradientLayer = [CAGradientLayer layer];
-    self.backgroundGradientLayer.colors = [NSArray arrayWithObjects:
-                                           (id)[UIColor whiteColor].CGColor, 
-                                           (id)[UIColor colorWithRed:245.0/255.0 green:245.0/255.0 blue:245.0/255.0 alpha:1.0].CGColor,
-                                           nil];
-    self.backgroundGradientLayer.locations = [NSArray arrayWithObjects:[NSNumber numberWithFloat:0.0], [NSNumber numberWithFloat:1.0], nil];
-    self.backgroundGradientLayer.frame = self.view.bounds;
-    [self.view.layer addSublayer:self.backgroundGradientLayer];
+    self.view = [[[GHLinearGradientBackgroundView alloc] initWithFrame:CGRectZero] autorelease];
     
     self.scrollView = [[[UIScrollView alloc] initWithFrame:self.view.bounds] autorelease];
     self.scrollView.backgroundColor = [UIColor clearColor];
@@ -212,6 +215,11 @@
     
     [self.scrollView removeFromSuperview];
     self.scrollView = nil;
+    [self.loadingLabel removeFromSuperview];
+    self.loadingLabel = nil;
+    [self.activityIndicatorView removeFromSuperview];
+    self.activityIndicatorView = nil;
+    
     
     CGRect frame = CGRectMake(0.0, 0.0, 320.0, 367.0f);
     
@@ -220,6 +228,7 @@
     textView.editable = NO;
     textView.font = [UIFont systemFontOfSize:16.0];
     textView.alwaysBounceVertical = YES;
+    textView.backgroundColor = [UIColor clearColor];
     [self.view addSubview:textView];
 }
 
