@@ -61,7 +61,8 @@ V1.5
 - if someone commented on an Issue in a NewsFeed, you are now able to view this issue directly
 
 
-
+V1.6
+- added remaining API calls.
 
 
 

@@ -16,6 +16,8 @@ dispatch_queue_t GHAPIBackgroundQueue() {
 
 @implementation GHBackgroundQueue
 
+@synthesize remainingAPICalls=_remainingAPICalls;
+
 - (dispatch_queue_t)backgroundQueue {
     if (!_backgroundQueue) {
         _backgroundQueue = dispatch_queue_create("de.olettere.GHAPI.backgroundQueue", NULL);
@@ -27,7 +29,7 @@ dispatch_queue_t GHAPIBackgroundQueue() {
 
 - (id)init {
     if ((self = [super init])) {
-        
+        _remainingAPICalls = 5000;
     }
     return self;
 }
@@ -54,6 +56,9 @@ dispatch_queue_t GHAPIBackgroundQueue() {
             setupHandler(request);
         }
         [request startSynchronous];
+        
+        NSString *XRatelimitRemaing = [[request responseHeaders] objectForKey:@"X-Ratelimit-Remaining"];
+        _remainingAPICalls = [XRatelimitRemaing integerValue];
         
         myError = [request error];
         

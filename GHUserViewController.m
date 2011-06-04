@@ -107,7 +107,7 @@
 
 - (void)accountButtonClicked:(UIBarButtonItem *)button {
     UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Account", @"") 
-                                                     message:[NSString stringWithFormat:NSLocalizedString(@"You are logged in as: %@", @""), [GHAuthenticationManager sharedInstance].username]
+                                                     message:[NSString stringWithFormat:NSLocalizedString(@"You are logged in as: %@\nRemaining API calls for today: %d", @""), [GHAuthenticationManager sharedInstance].username, [GHBackgroundQueue sharedInstance].remainingAPICalls ]
                                                     delegate:self 
                                            cancelButtonTitle:NSLocalizedString(@"Cancel", @"") 
                                            otherButtonTitles:NSLocalizedString(@"Logout", @""), nil]
