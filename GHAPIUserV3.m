@@ -163,7 +163,9 @@
     
     [[GHBackgroundQueue sharedInstance] sendRequestToURL:URL setupHandler:nil
                                        completionHandler:^(id object, NSError *error, ASIFormDataRequest *request) {
-                                           if (error) {
+                                           if ([request responseStatusCode] == 404) {
+                                               handler(NO, nil);
+                                           } else if (error) {
                                                handler(NO, error);
                                            } else {
                                                handler([request responseStatusCode] == 204, nil);
