@@ -9,10 +9,13 @@
 #import "GHSearchViewController.h"
 #import "GHSearchRepositoryViewController.h"
 #import "GHSearchUserViewController.h"
+#import "UIColor+GithubUI.h"
+#import "GHLinearGradientBackgroundView.h"
+#import "UITableViewCellWithLinearGradientBackgroundView.h"
 
 @implementation GHSearchViewController
 
-@synthesize searchBar=_searchBar, searchString=_searchString, backgroundGradientLayer=_backgroundGradientLayer;
+@synthesize searchBar=_searchBar, searchString=_searchString;
 
 #pragma mark - Initialization
 
@@ -30,7 +33,6 @@
 - (void)dealloc {
     [_searchBar release];
     [_mySearchDisplayController release];
-    [_backgroundGradientLayer release];
     [_searchString release];
     
     [super dealloc];
@@ -46,16 +48,10 @@
 #pragma mark - View lifecycle
 
 - (void)loadView {
-    [super loadView];
+    self.view = [[[GHLinearGradientBackgroundView alloc] initWithFrame:CGRectZero] autorelease];
     
-    self.backgroundGradientLayer = [CAGradientLayer layer];
-    self.backgroundGradientLayer.colors = [NSArray arrayWithObjects:
-                                           (id)[UIColor whiteColor].CGColor, 
-                                           (id)[UIColor colorWithRed:245.0/255.0 green:245.0/255.0 blue:245.0/255.0 alpha:1.0].CGColor,
-                                           nil];
-    self.backgroundGradientLayer.locations = [NSArray arrayWithObjects:[NSNumber numberWithFloat:0.0], [NSNumber numberWithFloat:1.0], nil];
-    self.backgroundGradientLayer.frame = self.view.bounds;
-    [self.view.layer addSublayer:self.backgroundGradientLayer];
+    UIImageView *imageView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"GHDefaultTableViewBackgroundImage.png"] ] autorelease];
+    [self.view addSubview:imageView];
     
     self.searchBar = [[[UISearchBar alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0, 44.0)] autorelease];
     self.searchBar.delegate = self;
@@ -64,6 +60,7 @@
     _mySearchDisplayController = [[UISearchDisplayController alloc] initWithSearchBar:self.searchBar contentsController:self];
     _mySearchDisplayController.searchResultsDataSource = self;
     _mySearchDisplayController.searchResultsDelegate = self;
+    _mySearchDisplayController.delegate = self;
 }
 
 - (void)viewDidLoad {
@@ -81,8 +78,6 @@
     
     [_searchBar release];
     _searchBar = nil;
-    [_backgroundGradientLayer release];
-    _backgroundGradientLayer = nil;
     
     [_mySearchDisplayController release];
     _mySearchDisplayController = nil;
@@ -90,6 +85,8 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    
+    self.navigationController.navigationBar.tintColor = [UIColor defaultNavigationBarTintColor];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -124,9 +121,9 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *CellIdentifier = @"Cell";
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    UITableViewCellWithLinearGradientBackgroundView *cell = (UITableViewCellWithLinearGradientBackgroundView *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[[UITableViewCellWithLinearGradientBackgroundView alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
     }
     
     if (indexPath.row == 0) {
@@ -174,6 +171,13 @@
     return YES;
 }
 */
+
+#pragma mark - UISearchDisplayDelegate
+
+- (void)searchDisplayController:(UISearchDisplayController *)controller didLoadSearchResultsTableView:(UITableView *)tableView {
+    tableView.backgroundView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"GHDefaultTableViewBackgroundImage.png"] ] autorelease];
+    tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+}
 
 #pragma mark - Table view delegate
 

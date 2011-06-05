@@ -9,17 +9,15 @@
 #import <UIKit/UIKit.h>
 #import <QuartzCore/QuartzCore.h>
 
-@interface GHSearchViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate> {
+@interface GHSearchViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, UISearchDisplayDelegate> {
 @private
     UISearchBar *_searchBar;
     UISearchDisplayController *_mySearchDisplayController;
-    CAGradientLayer *_backgroundGradientLayer;
     
     NSString *_searchString;
 }
 
 @property (nonatomic, retain) UISearchBar *searchBar;
-@property (nonatomic, retain) CAGradientLayer *backgroundGradientLayer;
 @property (nonatomic, copy) NSString *searchString;
 
 @end
