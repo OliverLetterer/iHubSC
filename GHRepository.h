@@ -57,6 +57,10 @@
 @property (nonatomic, readonly) BOOL isHomepageAvailable;
 @property (nonatomic, readonly) NSString *fullName;
 
+@property (nonatomic, readonly) BOOL hasLanguage;
+@property (nonatomic, readonly) BOOL hasHomepage;
+@property (nonatomic, readonly) BOOL isForked;
+
 - (id)initWithRawDictionary:(NSDictionary *)rawDictionary;
 
 + (void)collaboratorsForRepository:(NSString *)repository 

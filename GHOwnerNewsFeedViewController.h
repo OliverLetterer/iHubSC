@@ -9,8 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "GHNewsFeedViewController.h"
 
-#warning if organization count == 1, auto select organization
-
 @interface GHOwnerNewsFeedViewController : GHNewsFeedViewController <UIActionSheetDelegate> {
 @private
     UISegmentedControl *_segmentControl;
@@ -29,5 +27,7 @@
 
 - (void)segmentControlValueChanged:(UISegmentedControl *)segmentControl;
 - (void)loadDataBasedOnSegmentControl;
+
+- (void)displayOrganizationAtIndex:(NSUInteger)index;
 
 @end

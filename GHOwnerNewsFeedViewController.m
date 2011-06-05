@@ -228,23 +228,27 @@
                                   self.organizations = organizations;
                                   
                                   if (self.organizations.count > 0) {
-                                      UIActionSheet *sheet = [[[UIActionSheet alloc] init] autorelease];
-                                      
-                                      [sheet setTitle:NSLocalizedString(@"Select an Organization", @"")];
-                                      
-                                      for (GHOrganization *organization in organizations) {
-                                          [sheet addButtonWithTitle:organization.login];
+                                      if (self.organizations.count == 1) {
+                                          // we only have one organization, act as if user select this only organization
+                                          [self displayOrganizationAtIndex:0];
+                                      } else {
+                                          UIActionSheet *sheet = [[[UIActionSheet alloc] init] autorelease];
+                                          
+                                          [sheet setTitle:NSLocalizedString(@"Select an Organization", @"")];
+                                          
+                                          for (GHOrganization *organization in organizations) {
+                                              [sheet addButtonWithTitle:organization.login];
+                                          }
+                                          
+                                          [sheet addButtonWithTitle:NSLocalizedString(@"Cancel", @"")];
+                                          sheet.cancelButtonIndex = sheet.numberOfButtons-1;
+                                          
+                                          sheet.actionSheetStyle = UIActionSheetStyleBlackTranslucent;
+                                          
+                                          sheet.delegate = self;
+                                          
+                                          [sheet showInView:self.tabBarController.view];
                                       }
-                                      
-                                      [sheet addButtonWithTitle:NSLocalizedString(@"Cancel", @"")];
-                                      sheet.cancelButtonIndex = sheet.numberOfButtons-1;
-                                      
-                                      sheet.actionSheetStyle = UIActionSheetStyleBlackTranslucent;
-                                      
-                                      sheet.delegate = self;
-                                      
-                                      [sheet showInView:self.tabBarController.view];
-                                      
                                   } else {
                                       self.segmentControl.selectedSegmentIndex = 0;
                                       UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Organization Error", @"") 
@@ -260,24 +264,28 @@
     }
 }
 
+- (void)displayOrganizationAtIndex:(NSUInteger)index {
+    GHOrganization *organization = [self.organizations objectAtIndex:index];
+    
+    self.defaultOrganizationName = organization.login;
+    
+    [GHNewsFeed newsFeedForUserNamed:self.defaultOrganizationName completionHandler:^(GHNewsFeed *feed, NSError *error) {
+        if (error) {
+            [self handleError:error];
+        } else {
+            self.newsFeed = feed;
+            self.segmentControl.userInteractionEnabled = YES;
+            self.segmentControl.alpha = 1.0;
+        }
+        [self pullToReleaseTableViewDidReloadData];
+    }];
+}
+
 #pragma mark - UIActionSheetDelegate
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
     if (buttonIndex < actionSheet.numberOfButtons - 1) {
-        GHOrganization *organization = [self.organizations objectAtIndex:buttonIndex];
-        
-        self.defaultOrganizationName = organization.login;
-        
-        [GHNewsFeed newsFeedForUserNamed:self.defaultOrganizationName completionHandler:^(GHNewsFeed *feed, NSError *error) {
-            if (error) {
-                [self handleError:error];
-            } else {
-                self.newsFeed = feed;
-                self.segmentControl.userInteractionEnabled = YES;
-                self.segmentControl.alpha = 1.0;
-            }
-            [self pullToReleaseTableViewDidReloadData];
-        }];
+        [self displayOrganizationAtIndex:buttonIndex];
     } else {
         [self.segmentControl setSelectedSegmentIndex:0];
     }

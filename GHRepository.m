@@ -18,6 +18,18 @@
     return ![self.homePage isEqualToString:@""] && self.homePage;
 }
 
+- (BOOL)hasLanguage {
+    return self.language != nil;
+}
+
+- (BOOL)hasHomepage {
+    return ![self.homePage isEqualToString:@""] && self.homePage;
+}
+
+- (BOOL)isForked {
+    return self.source != nil;
+}
+
 - (NSString *)fullName {
     return [NSString stringWithFormat:@"%@/%@", self.owner, self.name];
 }
