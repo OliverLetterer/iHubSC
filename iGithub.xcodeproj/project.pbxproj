@@ -26,6 +26,8 @@
 		A706C0C5139AC4D9008A6184 /* PullToRefreshArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A706C0C4139AC4D8008A6184 /* PullToRefreshArrow@2x.png */; };
 		A706C0C7139AC552008A6184 /* PullToRefreshArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = A706C0C6139AC552008A6184 /* PullToRefreshArrow.png */; };
 		A706C0CC139AD15C008A6184 /* UIColor+GithubUI.m in Sources */ = {isa = PBXBuildFile; fileRef = A706C0CB139AD15C008A6184 /* UIColor+GithubUI.m */; };
+		A706C0D5139B904B008A6184 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A706C0D4139B904B008A6184 /* Default@2x.png */; };
+		A706C0D7139B91AA008A6184 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = A706C0D6139B91A8008A6184 /* Default.png */; };
 		A708950E1349FB82000DD6CE /* GHIssueTitleTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A708950D1349FB82000DD6CE /* GHIssueTitleTableViewCell.m */; };
 		A70895121349FE0C000DD6CE /* GHIssueDescriptionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A70895101349FE0C000DD6CE /* GHIssueDescriptionTableViewCell.m */; };
 		A70895131349FE0C000DD6CE /* GHIssueDescriptionTableViewCellContentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A70895111349FE0C000DD6CE /* GHIssueDescriptionTableViewCellContentView.xib */; };
@@ -60,8 +62,6 @@
 		A723F14B137E664400F7649B /* GHBackgroundImage@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A723F149137E664400F7649B /* GHBackgroundImage@2x.png */; };
 		A723F16A137ED1E000F7649B /* GHPullToReleaseTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A723F169137ED1E000F7649B /* GHPullToReleaseTableViewController.m */; };
 		A723F16D137ED1FC00F7649B /* GHPullToReleaseTableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = A723F16C137ED1FC00F7649B /* GHPullToReleaseTableHeaderView.m */; };
-		A723F174137EF88600F7649B /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A723F172137EF88600F7649B /* Default@2x.png */; };
-		A723F175137EF88600F7649B /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = A723F173137EF88600F7649B /* Default.png */; };
 		A723F181137F0DCE00F7649B /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = A723F17A137F0DCE00F7649B /* Icon-72.png */; };
 		A723F182137F0DCE00F7649B /* Icon-Small-50.png in Resources */ = {isa = PBXBuildFile; fileRef = A723F17B137F0DCE00F7649B /* Icon-Small-50.png */; };
 		A723F183137F0DCE00F7649B /* Icon-Small.png in Resources */ = {isa = PBXBuildFile; fileRef = A723F17C137F0DCE00F7649B /* Icon-Small.png */; };
@@ -256,6 +256,8 @@
 		A706C0C6139AC552008A6184 /* PullToRefreshArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PullToRefreshArrow.png; sourceTree = "<group>"; };
 		A706C0CA139AD15C008A6184 /* UIColor+GithubUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+GithubUI.h"; sourceTree = "<group>"; };
 		A706C0CB139AD15C008A6184 /* UIColor+GithubUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+GithubUI.m"; sourceTree = "<group>"; };
+		A706C0D4139B904B008A6184 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		A706C0D6139B91A8008A6184 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		A708950C1349FB82000DD6CE /* GHIssueTitleTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHIssueTitleTableViewCell.h; sourceTree = "<group>"; };
 		A708950D1349FB82000DD6CE /* GHIssueTitleTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHIssueTitleTableViewCell.m; sourceTree = "<group>"; };
 		A708950F1349FE0C000DD6CE /* GHIssueDescriptionTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHIssueDescriptionTableViewCell.h; sourceTree = "<group>"; };
@@ -318,8 +320,6 @@
 		A723F169137ED1E000F7649B /* GHPullToReleaseTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPullToReleaseTableViewController.m; sourceTree = "<group>"; };
 		A723F16B137ED1FC00F7649B /* GHPullToReleaseTableHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPullToReleaseTableHeaderView.h; sourceTree = "<group>"; };
 		A723F16C137ED1FC00F7649B /* GHPullToReleaseTableHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPullToReleaseTableHeaderView.m; sourceTree = "<group>"; };
-		A723F172137EF88600F7649B /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
-		A723F173137EF88600F7649B /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		A723F17A137F0DCE00F7649B /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72.png"; sourceTree = "<group>"; };
 		A723F17B137F0DCE00F7649B /* Icon-Small-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small-50.png"; sourceTree = "<group>"; };
 		A723F17C137F0DCE00F7649B /* Icon-Small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small.png"; sourceTree = "<group>"; };
@@ -1553,8 +1553,8 @@
 		A7BF143713421862001AE50D /* Ressources */ = {
 			isa = PBXGroup;
 			children = (
-				A723F172137EF88600F7649B /* Default@2x.png */,
-				A723F173137EF88600F7649B /* Default.png */,
+				A706C0D6139B91A8008A6184 /* Default.png */,
+				A706C0D4139B904B008A6184 /* Default@2x.png */,
 				A723F148137E664400F7649B /* GHBackgroundImage.png */,
 				A723F149137E664400F7649B /* GHBackgroundImage@2x.png */,
 				A7384D68136BFCE200DD1BE5 /* iHub - Icon Template.psd */,
@@ -1964,8 +1964,6 @@
 				A76771691370A5B2006D70D6 /* GHClipBoardPrivate@2x.png in Resources */,
 				A723F14A137E664400F7649B /* GHBackgroundImage.png in Resources */,
 				A723F14B137E664400F7649B /* GHBackgroundImage@2x.png in Resources */,
-				A723F174137EF88600F7649B /* Default@2x.png in Resources */,
-				A723F175137EF88600F7649B /* Default.png in Resources */,
 				A723F181137F0DCE00F7649B /* Icon-72.png in Resources */,
 				A723F182137F0DCE00F7649B /* Icon-Small-50.png in Resources */,
 				A723F183137F0DCE00F7649B /* Icon-Small.png in Resources */,
@@ -1979,6 +1977,8 @@
 				A706C0A4139A9888008A6184 /* GHDefaultTableViewBackgroundImage@2x.png in Resources */,
 				A706C0C5139AC4D9008A6184 /* PullToRefreshArrow@2x.png in Resources */,
 				A706C0C7139AC552008A6184 /* PullToRefreshArrow.png in Resources */,
+				A706C0D5139B904B008A6184 /* Default@2x.png in Resources */,
+				A706C0D7139B91AA008A6184 /* Default.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
