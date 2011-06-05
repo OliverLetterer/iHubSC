@@ -58,8 +58,6 @@
 		A712B7F2135EBC990009B7A7 /* GHSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A712B7F1135EBC940009B7A7 /* GHSearchViewController.m */; };
 		A712B7F5135F09D90009B7A7 /* GHSearchRepositoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A712B7F4135F09D10009B7A7 /* GHSearchRepositoryViewController.m */; };
 		A712B7F8135F20BB0009B7A7 /* GHSearchUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A712B7F7135F20B40009B7A7 /* GHSearchUserViewController.m */; };
-		A723F14A137E664400F7649B /* GHBackgroundImage.png in Resources */ = {isa = PBXBuildFile; fileRef = A723F148137E664400F7649B /* GHBackgroundImage.png */; };
-		A723F14B137E664400F7649B /* GHBackgroundImage@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A723F149137E664400F7649B /* GHBackgroundImage@2x.png */; };
 		A723F16A137ED1E000F7649B /* GHPullToReleaseTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A723F169137ED1E000F7649B /* GHPullToReleaseTableViewController.m */; };
 		A723F16D137ED1FC00F7649B /* GHPullToReleaseTableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = A723F16C137ED1FC00F7649B /* GHPullToReleaseTableHeaderView.m */; };
 		A723F181137F0DCE00F7649B /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = A723F17A137F0DCE00F7649B /* Icon-72.png */; };
@@ -314,8 +312,6 @@
 		A712B7F4135F09D10009B7A7 /* GHSearchRepositoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHSearchRepositoryViewController.m; sourceTree = "<group>"; };
 		A712B7F6135F20B00009B7A7 /* GHSearchUserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHSearchUserViewController.h; sourceTree = "<group>"; };
 		A712B7F7135F20B40009B7A7 /* GHSearchUserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHSearchUserViewController.m; sourceTree = "<group>"; };
-		A723F148137E664400F7649B /* GHBackgroundImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GHBackgroundImage.png; sourceTree = "<group>"; };
-		A723F149137E664400F7649B /* GHBackgroundImage@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GHBackgroundImage@2x.png"; sourceTree = "<group>"; };
 		A723F168137ED1E000F7649B /* GHPullToReleaseTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPullToReleaseTableViewController.h; sourceTree = "<group>"; };
 		A723F169137ED1E000F7649B /* GHPullToReleaseTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPullToReleaseTableViewController.m; sourceTree = "<group>"; };
 		A723F16B137ED1FC00F7649B /* GHPullToReleaseTableHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPullToReleaseTableHeaderView.h; sourceTree = "<group>"; };
@@ -1064,6 +1060,90 @@
 			name = GHViewIssueTableViewController;
 			sourceTree = "<group>";
 		};
+		A745D096139B97CC00FF8FB1 /* Defaults */ = {
+			isa = PBXGroup;
+			children = (
+				A706C0D6139B91A8008A6184 /* Default.png */,
+				A706C0D4139B904B008A6184 /* Default@2x.png */,
+			);
+			name = Defaults;
+			sourceTree = "<group>";
+		};
+		A745D098139B97F200FF8FB1 /* TabBarIcons */ = {
+			isa = PBXGroup;
+			children = (
+				A76FC9A41352D231004C642E /* 145-persondot.png */,
+				A76FC9A51352D231004C642E /* 145-persondot@2x.png */,
+				A73AE5A8134EFDF300E9EBA4 /* 56-feed.png */,
+				A73AE5A9134EFDF300E9EBA4 /* 56-feed@2x.png */,
+			);
+			name = TabBarIcons;
+			sourceTree = "<group>";
+		};
+		A745D099139B980900FF8FB1 /* Gists */ = {
+			isa = PBXGroup;
+			children = (
+				A76771661370A5B1006D70D6 /* GHClipBoardPrivate.png */,
+				A76771671370A5B1006D70D6 /* GHClipBoardPrivate@2x.png */,
+				A76771621370A34E006D70D6 /* GHClipBoard.png */,
+				A76771631370A34E006D70D6 /* GHClipBoard@2x.png */,
+			);
+			name = Gists;
+			sourceTree = "<group>";
+		};
+		A745D09A139B982500FF8FB1 /* Repository */ = {
+			isa = PBXGroup;
+			children = (
+				A7BC677C134CCD1A0083F906 /* GHPrivateRepositoryIcon@2x.png */,
+				A7BC677D134CCD1A0083F906 /* GHPrivateRepositoryIcon.png */,
+				A7BC6777134CCAF00083F906 /* GHPublicRepositoryIcon.png */,
+				A7BC6778134CCAF00083F906 /* GHPublicRepositoryIcon@2x.png */,
+			);
+			name = Repository;
+			sourceTree = "<group>";
+		};
+		A745D09B139B984C00FF8FB1 /* GHTableViewController */ = {
+			isa = PBXGroup;
+			children = (
+				A706C0C6139AC552008A6184 /* PullToRefreshArrow.png */,
+				A706C0C4139AC4D8008A6184 /* PullToRefreshArrow@2x.png */,
+				A706C098139A90E5008A6184 /* GHDefaultTableViewBackgroundImage.png */,
+				A706C0A3139A9888008A6184 /* GHDefaultTableViewBackgroundImage@2x.png */,
+			);
+			name = GHTableViewController;
+			sourceTree = "<group>";
+		};
+		A745D09C139B986100FF8FB1 /* Authentication */ = {
+			isa = PBXGroup;
+			children = (
+				A75057321343033200514A82 /* GHGlossTopBorder@2x.png */,
+				A75057331343033200514A82 /* GHGlossBottomBorder@2x.png */,
+				A75057341343033200514A82 /* GHGlossTopBorder.png */,
+				A75057351343033200514A82 /* GHGlossBottomBorder.png */,
+			);
+			name = Authentication;
+			sourceTree = "<group>";
+		};
+		A745D09D139B986D00FF8FB1 /* DefaultUserImage */ = {
+			isa = PBXGroup;
+			children = (
+				A7BF14381342188E001AE50D /* DefaultUserImage.png */,
+				A7BF14391342188E001AE50D /* DefaultUserImage@2x.png */,
+			);
+			name = DefaultUserImage;
+			sourceTree = "<group>";
+		};
+		A745D09E139B987900FF8FB1 /* CollapsingTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				A7089521134A2F23000DD6CE /* UITableViewCellAccessoryDisclosureIndicatorSelected.PNG */,
+				A7089522134A2F23000DD6CE /* UITableViewCellAccessoryDisclosureIndicator.PNG */,
+				A7089523134A2F23000DD6CE /* UITableViewCellAccessoryDisclosureIndicatorSelected@2x.PNG */,
+				A7089524134A2F23000DD6CE /* UITableViewCellAccessoryDisclosureIndicator@2x.PNG */,
+			);
+			name = CollapsingTableViewCell;
+			sourceTree = "<group>";
+		};
 		A750570013427F9E00514A82 /* ASI-HTTP */ = {
 			isa = PBXGroup;
 			children = (
@@ -1553,39 +1633,17 @@
 		A7BF143713421862001AE50D /* Ressources */ = {
 			isa = PBXGroup;
 			children = (
-				A706C0D6139B91A8008A6184 /* Default.png */,
-				A706C0D4139B904B008A6184 /* Default@2x.png */,
-				A723F148137E664400F7649B /* GHBackgroundImage.png */,
-				A723F149137E664400F7649B /* GHBackgroundImage@2x.png */,
 				A7384D68136BFCE200DD1BE5 /* iHub - Icon Template.psd */,
-				A7D41B1D135B899100CD3A5C /* Icons */,
-				A76FC9A41352D231004C642E /* 145-persondot.png */,
-				A76FC9A51352D231004C642E /* 145-persondot@2x.png */,
-				A73AE5A8134EFDF300E9EBA4 /* 56-feed.png */,
-				A73AE5A9134EFDF300E9EBA4 /* 56-feed@2x.png */,
-				A7BC677C134CCD1A0083F906 /* GHPrivateRepositoryIcon@2x.png */,
-				A7BC677D134CCD1A0083F906 /* GHPrivateRepositoryIcon.png */,
-				A76771621370A34E006D70D6 /* GHClipBoard.png */,
-				A76771631370A34E006D70D6 /* GHClipBoard@2x.png */,
-				A706C0C6139AC552008A6184 /* PullToRefreshArrow.png */,
-				A706C0C4139AC4D8008A6184 /* PullToRefreshArrow@2x.png */,
-				A76771661370A5B1006D70D6 /* GHClipBoardPrivate.png */,
-				A76771671370A5B1006D70D6 /* GHClipBoardPrivate@2x.png */,
-				A7BC6777134CCAF00083F906 /* GHPublicRepositoryIcon.png */,
-				A7BC6778134CCAF00083F906 /* GHPublicRepositoryIcon@2x.png */,
 				A7CE1B801346335D00169F94 /* GHDatabase.xcdatamodel */,
-				A75057321343033200514A82 /* GHGlossTopBorder@2x.png */,
-				A75057331343033200514A82 /* GHGlossBottomBorder@2x.png */,
-				A75057341343033200514A82 /* GHGlossTopBorder.png */,
-				A75057351343033200514A82 /* GHGlossBottomBorder.png */,
-				A7BF14381342188E001AE50D /* DefaultUserImage.png */,
-				A7BF14391342188E001AE50D /* DefaultUserImage@2x.png */,
-				A7089521134A2F23000DD6CE /* UITableViewCellAccessoryDisclosureIndicatorSelected.PNG */,
-				A7089522134A2F23000DD6CE /* UITableViewCellAccessoryDisclosureIndicator.PNG */,
-				A7089523134A2F23000DD6CE /* UITableViewCellAccessoryDisclosureIndicatorSelected@2x.PNG */,
-				A7089524134A2F23000DD6CE /* UITableViewCellAccessoryDisclosureIndicator@2x.PNG */,
-				A706C098139A90E5008A6184 /* GHDefaultTableViewBackgroundImage.png */,
-				A706C0A3139A9888008A6184 /* GHDefaultTableViewBackgroundImage@2x.png */,
+				A745D096139B97CC00FF8FB1 /* Defaults */,
+				A7D41B1D135B899100CD3A5C /* Icons */,
+				A745D098139B97F200FF8FB1 /* TabBarIcons */,
+				A745D09A139B982500FF8FB1 /* Repository */,
+				A745D099139B980900FF8FB1 /* Gists */,
+				A745D09B139B984C00FF8FB1 /* GHTableViewController */,
+				A745D09C139B986100FF8FB1 /* Authentication */,
+				A745D09D139B986D00FF8FB1 /* DefaultUserImage */,
+				A745D09E139B987900FF8FB1 /* CollapsingTableViewCell */,
 				A703B94813476FB20014235D /* TODO.txt */,
 				A709F740136733A300B0CDE7 /* Changelog.txt */,
 			);
@@ -1962,8 +2020,6 @@
 				A76771651370A34F006D70D6 /* GHClipBoard@2x.png in Resources */,
 				A76771681370A5B2006D70D6 /* GHClipBoardPrivate.png in Resources */,
 				A76771691370A5B2006D70D6 /* GHClipBoardPrivate@2x.png in Resources */,
-				A723F14A137E664400F7649B /* GHBackgroundImage.png in Resources */,
-				A723F14B137E664400F7649B /* GHBackgroundImage@2x.png in Resources */,
 				A723F181137F0DCE00F7649B /* Icon-72.png in Resources */,
 				A723F182137F0DCE00F7649B /* Icon-Small-50.png in Resources */,
 				A723F183137F0DCE00F7649B /* Icon-Small.png in Resources */,
