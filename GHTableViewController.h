@@ -23,6 +23,8 @@
     BOOL _reloadDataOnApplicationWillEnterForeground;
     
     GHTableViewControllerAlertViewProxy *_alertProxy;
+    
+    BOOL _hasGradientBackgrounds;
 }
 
 @property (nonatomic, retain) UIExpandableTableView *tableView;

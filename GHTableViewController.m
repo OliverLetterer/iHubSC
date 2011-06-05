@@ -153,19 +153,19 @@
     CAGradientLayer *gradientLayer = nil;
     UIView *view = nil;
     
-    view = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, 480, 22)] autorelease];
+    view = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, 320.0, 22)] autorelease];
 	view.backgroundColor = [UIColor clearColor];
 	gradientLayer = [CAGradientLayer layer];
 	gradientLayer.frame = CGRectMake(0, 0, 480, 22);
 	gradientLayer.colors = [NSArray arrayWithObjects:
-							(id)[UIColor colorWithWhite:0.0/*1.0*/ alpha:0.0].CGColor,
+							(id)[UIColor colorWithWhite:0.0 alpha:0.0].CGColor,
 							(id)[UIColor colorWithWhite:0.0 alpha:0.3].CGColor,
 							nil];
     gradientLayer.actions = newActions;
 	[view.layer addSublayer:gradientLayer];
 	self.tableView.tableHeaderView = view;
 	
-	view = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, 480, 22)] autorelease];
+	view = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, 320.0, 22)] autorelease];
 	view.backgroundColor = [UIColor clearColor];
 	gradientLayer = [CAGradientLayer layer];
 	gradientLayer.frame = CGRectMake(0, 0, 480, 22);
@@ -186,15 +186,13 @@
     [super viewDidLoad];
     
     self.tableView.scrollsToTop = YES;
-//    self.tableView.backgroundColor = [UIColor colorWithRed:245.0/255.0 green:245.0/255.0 blue:245.0/255.0 alpha:1.0];
-//    self.tableView.backgroundColor = [UIColor colorWithRed:235.0/255.0 green:235.0/255.0 blue:235.0/255.0 alpha:1.0];
     self.tableView.rowHeight = 71.0;
-//    self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLineEtched;
     self.tableView.separatorColor = [UIColor colorWithRed:186.0f/255.0f green:186.0f/255.0f blue:186.0f/255.0f alpha:1.0f];
 }
 
 - (void)viewDidUnload {
     [super viewDidUnload];
+    _hasGradientBackgrounds = NO;
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
 }
@@ -202,7 +200,7 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    if (!self.tableView.backgroundView) {
+    if (!_hasGradientBackgrounds) {
         NSDictionary *newActions = [NSDictionary dictionaryWithObjectsAndKeys:[NSNull null], @"onOrderIn",
                                     [NSNull null], @"onOrderOut",
                                     [NSNull null], @"sublayers",
@@ -210,33 +208,27 @@
                                     [NSNull null], @"bounds",
                                     nil];
         
-        UIView *view = nil;
+        UIView *view = self.tableView.backgroundView;
         CAGradientLayer *gradientLayer = nil;
         
-        view = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"GHBackgroundImage.png"] ] autorelease];
-        
         gradientLayer = [CAGradientLayer layer];
-        gradientLayer.frame = CGRectMake(0.0f, 0.0f, 480.0f, 22.0f);
+        gradientLayer.frame = CGRectMake(0.0f, 0.0f, 320.0f, 22.0f);
         gradientLayer.colors = [NSArray arrayWithObjects:
                                 (id)[UIColor colorWithWhite:0.0 alpha:0.3].CGColor,
-                                (id)[UIColor colorWithWhite:1.0 alpha:0.0].CGColor,
-                                nil];
-        gradientLayer.actions = newActions;
-        view.layer.actions = newActions;
-        view.autoresizingMask = UIViewAutoresizingNone;
-        [view.layer addSublayer:gradientLayer];
-        
-        gradientLayer = [CAGradientLayer layer];
-        gradientLayer.frame = CGRectMake(0.0f, self.view.bounds.size.height - 22.0f, 480.0f, 22.0f);
-        gradientLayer.colors = [NSArray arrayWithObjects:
-                                (id)[UIColor colorWithWhite:1.0 alpha:0.0].CGColor,
-                                (id)[UIColor colorWithWhite:0.0 alpha:0.3].CGColor,
+                                (id)[UIColor colorWithWhite:0.0 alpha:0.0].CGColor,
                                 nil];
         gradientLayer.actions = newActions;
         [view.layer addSublayer:gradientLayer];
         
-        
-        self.tableView.backgroundView = view;
+        gradientLayer = [CAGradientLayer layer];
+        gradientLayer.frame = CGRectMake(0.0f, self.view.bounds.size.height - 22.0f, 320.0f, 22.0f);
+        gradientLayer.colors = [NSArray arrayWithObjects:
+                                (id)[UIColor colorWithWhite:0.0 alpha:0.0].CGColor,
+                                (id)[UIColor colorWithWhite:0.0 alpha:0.3].CGColor,
+                                nil];
+        gradientLayer.actions = newActions;
+        [view.layer addSublayer:gradientLayer];
+        _hasGradientBackgrounds = YES;
     }
     self.navigationController.navigationBar.tintColor = [UIColor defaultNavigationBarTintColor];
 }
