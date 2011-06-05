@@ -13,6 +13,24 @@
 
 @synthesize login=_login, ID=_ID, gravatarID=_gravatarID, URL=_URL, name=_name, company=_company, blog=_blog, location=_location, EMail=_EMail, hireable=_hireable, bio=_bio, publicRepos=_publicRepos, publicGists=_publicGists, followers=_followers, following=_following, htmlURL=_htmlURL, createdAt=_createdAt, type=_type, totalPrivateRepos=_totalPrivateRepos, ownedPrivateRepos=_ownedPrivateRepos, privateGists=_privateGists, diskUsage=_diskUsage, collaborators=_collaborators, plan=_plan;
 
+#pragma mark - setters and getters
+
+- (BOOL)hasEMail {
+    return self.EMail != nil;
+}
+
+- (BOOL)hasLocation {
+    return self.location != nil;
+}
+
+- (BOOL)hasCompany {
+    return self.company != nil;
+}
+
+- (BOOL)hasBlog {
+    return self.blog != nil;
+}
+
 #pragma mark - Initialization
 
 - (id)initWithRawDictionary:(NSDictionary *)rawDictionay {

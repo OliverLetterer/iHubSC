@@ -63,6 +63,11 @@
 @property (nonatomic, copy) NSNumber *collaborators;
 @property (nonatomic, retain) GHAPIUserPlanV3 *plan;
 
+@property (nonatomic, readonly) BOOL hasEMail;
+@property (nonatomic, readonly) BOOL hasLocation;
+@property (nonatomic, readonly) BOOL hasCompany;
+@property (nonatomic, readonly) BOOL hasBlog;
+
 - (id)initWithRawDictionary:(NSDictionary *)rawDictionay;
 
 
