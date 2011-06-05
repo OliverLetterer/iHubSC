@@ -15,7 +15,6 @@
     NSString *_diffString;
     GHTextView *_diffView;
     UIScrollView *_scrollView;
-    CAGradientLayer *_backgroundGradientLayer;
     UILabel *_loadingLabel;
     UIActivityIndicatorView *_activityIndicatorView;
 }
@@ -23,7 +22,6 @@
 @property (nonatomic, copy) NSString *diffString;
 @property (nonatomic, retain) GHTextView *diffView;
 @property (nonatomic, retain) UIScrollView *scrollView;
-@property (nonatomic, retain) CAGradientLayer *backgroundGradientLayer;
 @property (nonatomic, retain) UILabel *loadingLabel;
 @property (nonatomic, retain) UIActivityIndicatorView *activityIndicatorView;
 

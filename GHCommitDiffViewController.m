@@ -8,11 +8,12 @@
 
 #import "GHCommitDiffViewController.h"
 #import "UITableViewCellWithLinearGradientBackgroundView.h"
+#import "GHLinearGradientBackgroundView.h"
 
 @implementation GHCommitDiffViewController
 
 @synthesize diffString=_diffString;
-@synthesize diffView=_diffView, scrollView=_scrollView, backgroundGradientLayer=_backgroundGradientLayer, loadingLabel=_loadingLabel, activityIndicatorView=_activityIndicatorView;
+@synthesize diffView=_diffView, scrollView=_scrollView, loadingLabel=_loadingLabel, activityIndicatorView=_activityIndicatorView;
 
 #pragma mark - Initialization
 
@@ -29,7 +30,6 @@
     [_diffString release];
     [_diffView release];
     [_scrollView release];
-    [_backgroundGradientLayer release];
     [_loadingLabel release];
     [_activityIndicatorView release];
     [super dealloc];
@@ -46,16 +46,7 @@
 
 - (void)loadView {
     [super loadView];
-    self.view.backgroundColor = [UIColor whiteColor];
-    
-    self.backgroundGradientLayer = [CAGradientLayer layer];
-    self.backgroundGradientLayer.colors = [NSArray arrayWithObjects:
-                                           (id)[UIColor whiteColor].CGColor, 
-                                           (id)[UIColor colorWithRed:245.0/255.0 green:245.0/255.0 blue:245.0/255.0 alpha:1.0].CGColor,
-                                           nil];
-    self.backgroundGradientLayer.locations = [NSArray arrayWithObjects:[NSNumber numberWithFloat:0.0], [NSNumber numberWithFloat:1.0], nil];
-    self.backgroundGradientLayer.frame = self.view.bounds;
-    [self.view.layer addSublayer:self.backgroundGradientLayer];
+    self.view = [[[GHLinearGradientBackgroundView alloc] initWithFrame:CGRectZero] autorelease];
     
     self.scrollView = [[[UIScrollView alloc] initWithFrame:self.view.bounds] autorelease];
     self.scrollView.backgroundColor = [UIColor clearColor];
@@ -105,8 +96,6 @@
     _diffView = nil;
     [_scrollView release];
     _scrollView = nil;
-    [_backgroundGradientLayer release];
-    _backgroundGradientLayer = nil;
     [_loadingLabel release];
     _loadingLabel = nil;
     [_activityIndicatorView release];
@@ -156,7 +145,7 @@
     if ([line hasPrefix:@"---"] || [line hasPrefix:@"-"]) {
         textColor = [UIColor redColor].CGColor;
     } else if ([line hasPrefix:@"+++"] || [line hasPrefix:@"+"]) {
-        textColor = [UIColor greenColor].CGColor;
+        textColor = [UIColor colorWithRed:27.0/255.0 green:143.0/255.0 blue:11.0/255.0 alpha:1.0].CGColor;
     } else if ([line hasPrefix:@"@@"]) {
         textColor = [UIColor grayColor].CGColor;
     }
