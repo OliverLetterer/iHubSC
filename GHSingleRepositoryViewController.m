@@ -23,16 +23,22 @@
 #import "GHViewLabelViewController.h"
 
 #define kUITableViewSectionUserData         0
-#define kUITableViewSectionIssues           1
-#define kUITableViewSectionMilestones       2
-#define kUITableViewSectionLabels           3
-#define kUITableViewSectionWatchingUsers    4
-#define kUITableViewSectionPullRequests     5
-#define kUITableViewSectionRecentCommits    6
-#define kUITableViewSectionBrowseBranches   7
-#define kUITableViewSectionAdministration   8
+#define kUITableViewSectionOwner            1
+#define kUITableViewSectionLanguage         2
+#define kUITableViewSectionCreatedAt        3
+#define kUITableViewSectionSize             4
+#define kUITableViewSectionHomepage         5
+#define kUITableViewSectionForkedFrom       6
+#define kUITableViewSectionIssues           7
+#define kUITableViewSectionMilestones       8
+#define kUITableViewSectionLabels           9
+#define kUITableViewSectionWatchingUsers    10
+#define kUITableViewSectionPullRequests     11
+#define kUITableViewSectionRecentCommits    12
+#define kUITableViewSectionBrowseBranches   13
+#define kUITableViewSectionAdministration   14
 
-#define kUITableViewNumberOfSections        9
+#define kUITableViewNumberOfSections        15
 
 @implementation GHSingleRepositoryViewController
 
@@ -153,7 +159,7 @@
 #pragma mark - UIExpandableTableViewDatasource
 
 - (BOOL)tableView:(UIExpandableTableView *)tableView canExpandSection:(NSInteger)section {
-    return section != kUITableViewSectionUserData;
+    return section != kUITableViewSectionUserData && section != kUITableViewSectionOwner && section != kUITableViewSectionLanguage && section != kUITableViewSectionCreatedAt && section != kUITableViewSectionSize && section != kUITableViewSectionHomepage && section != kUITableViewSectionForkedFrom;
 }
 - (BOOL)tableView:(UIExpandableTableView *)tableView needsToDownloadDataForExpandableSection:(NSInteger)section {
     if (section == kUITableViewSectionIssues) {
@@ -323,13 +329,15 @@
     // Return the number of rows in the section.
     if (section == kUITableViewSectionUserData) {
         // title + description
-        // + details (Created, Language, Size, Owner, Homepage, forked)
-        return 7;
+        return 1;
     } else if (section == kUITableViewSectionIssues) {
         // issues
         // title, issues, create new issue
         return [self.issuesArray count] + 2;
     } else if (section == kUITableViewSectionWatchingUsers) {
+        if ([self.repository.watchers intValue] == 0) {
+            return 0;
+        }
         return [self.watchedUsersArray count] + 1;
     } else if (section == kUITableViewSectionAdministration) {
         return 2;
@@ -341,6 +349,24 @@
         return self.milestones.count + 1;
     } else if (section == kUITableViewSectionLabels) {
         return self.labels.count + 1;
+    } else if (section == kUITableViewSectionOwner) {
+        return 1;
+    } else if (section == kUITableViewSectionLanguage) {
+        if (self.repository.hasLanguage) {
+            return 1;
+        }
+    } else if (section == kUITableViewSectionCreatedAt) {
+        return 1;
+    } else if (section == kUITableViewSectionSize) {
+        return 1;
+    } else if (section == kUITableViewSectionHomepage) {
+        if (self.repository.hasHomepage) {
+            return 1;
+        }
+    } else if (section == kUITableViewSectionForkedFrom) {
+        if (self.repository.isForked) {
+            return 1;
+        }
     }
     
     return 0;
@@ -359,6 +385,7 @@
             }
             
             cell.selectionStyle = UITableViewCellEditingStyleNone;
+            cell.accessoryType = UITableViewCellAccessoryNone;
             
             if (self.repository.source) {
                 cell.titleLabel.text = [NSString stringWithFormat:@"%@/%@", self.repository.owner, self.repository.name];
@@ -377,7 +404,39 @@
             }
             
             return cell;
-        } else if (indexPath.row == 3) {
+        }
+    } else if (indexPath.section == kUITableViewSectionOwner) {
+        if (indexPath.row == 0) {
+            NSString *CellIdentifier = @"DetailsOwnerTableViewCell";
+            
+            UITableViewCellWithLinearGradientBackgroundView *cell = (UITableViewCellWithLinearGradientBackgroundView *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+            if (!cell) {
+                cell = [[[UITableViewCellWithLinearGradientBackgroundView alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:CellIdentifier] autorelease];
+            }
+            
+            cell.textLabel.text = NSLocalizedString(@"Owner", @"");
+            cell.detailTextLabel.text = self.repository.owner;
+            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+            
+            return cell;
+        }
+    } else if (indexPath.section == kUITableViewSectionLanguage) {
+        if (indexPath.row == 0) {
+            NSString *CellIdentifier = @"DetailsTableViewCell";
+            
+            UITableViewCellWithLinearGradientBackgroundView *cell = (UITableViewCellWithLinearGradientBackgroundView *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+            if (!cell) {
+                cell = [[[UITableViewCellWithLinearGradientBackgroundView alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:CellIdentifier] autorelease];
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            }
+            
+            cell.textLabel.text = NSLocalizedString(@"Language", @"");
+            cell.detailTextLabel.text = self.repository.language;
+            
+            return cell;
+        }
+    } else if (indexPath.section == kUITableViewSectionCreatedAt) {
+        if (indexPath.row == 0) {
             NSString *CellIdentifier = @"DetailsTableViewCell";
             
             UITableViewCellWithLinearGradientBackgroundView *cell = (UITableViewCellWithLinearGradientBackgroundView *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
@@ -391,21 +450,9 @@
             
             
             return cell;
-        } else if (indexPath.row == 2) {
-            NSString *CellIdentifier = @"DetailsTableViewCell";
-            
-            UITableViewCellWithLinearGradientBackgroundView *cell = (UITableViewCellWithLinearGradientBackgroundView *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-            if (!cell) {
-                cell = [[[UITableViewCellWithLinearGradientBackgroundView alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:CellIdentifier] autorelease];
-                cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            }
-            
-            cell.textLabel.text = NSLocalizedString(@"Language", @"");
-            cell.detailTextLabel.text = self.repository.language;
-            
-            
-            return cell;
-        } else if (indexPath.row == 4) {
+        }
+    } else if (indexPath.section == kUITableViewSectionSize) {
+        if (indexPath.row == 0) {
             NSString *CellIdentifier = @"DetailsTableViewCell";
             
             UITableViewCellWithLinearGradientBackgroundView *cell = (UITableViewCellWithLinearGradientBackgroundView *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
@@ -418,20 +465,9 @@
             cell.detailTextLabel.text = [NSString stringFormFileSize:[self.repository.size longLongValue] ];
             
             return cell;
-        } else if (indexPath.row == 1) {
-            NSString *CellIdentifier = @"DetailsOwnerTableViewCell";
-            
-            UITableViewCellWithLinearGradientBackgroundView *cell = (UITableViewCellWithLinearGradientBackgroundView *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-            if (!cell) {
-                cell = [[[UITableViewCellWithLinearGradientBackgroundView alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:CellIdentifier] autorelease];
-            }
-            
-            cell.textLabel.text = NSLocalizedString(@"Owner", @"");
-            cell.detailTextLabel.text = self.repository.owner;
-            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-            
-            return cell;
-        } else if (indexPath.row == 5) {
+        }
+    } else if (indexPath.section == kUITableViewSectionHomepage) {
+        if (indexPath.row == 0) {
             NSString *CellIdentifier = @"DetailsHomePageTableViewCell";
             
             UITableViewCellWithLinearGradientBackgroundView *cell = (UITableViewCellWithLinearGradientBackgroundView *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
@@ -440,19 +476,14 @@
             }
             
             cell.textLabel.text = NSLocalizedString(@"Homepage", @"");
-            if (!self.repository.isHomepageAvailable) {
-                cell.detailTextLabel.text = @"-";
-                cell.accessoryType = UITableViewCellAccessoryNone;
-                cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            } else {
-                cell.detailTextLabel.text = self.repository.homePage;
-                cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-                cell.selectionStyle = UITableViewCellSelectionStyleBlue;
-                
-            }
+            cell.detailTextLabel.text = self.repository.homePage;
+            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+            cell.selectionStyle = UITableViewCellSelectionStyleBlue;
             
             return cell;
-        } else if (indexPath.row == 6) {
+        }
+    } else if (indexPath.section == kUITableViewSectionForkedFrom) {
+        if (indexPath.row == 0) {
             NSString *CellIdentifier = @"DetailsHomePageTableViewCell";
             
             UITableViewCellWithLinearGradientBackgroundView *cell = (UITableViewCellWithLinearGradientBackgroundView *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
@@ -461,16 +492,9 @@
             }
             
             cell.textLabel.text = NSLocalizedString(@"Forked from", @"");
-            if (!self.repository.source) {
-                cell.detailTextLabel.text = @"-";
-                cell.accessoryType = UITableViewCellAccessoryNone;
-                cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            } else {
-                cell.detailTextLabel.text = self.repository.source;
-                cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-                cell.selectionStyle = UITableViewCellSelectionStyleBlue;
-                
-            }
+            cell.detailTextLabel.text = self.repository.source;
+            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+            cell.selectionStyle = UITableViewCellSelectionStyleBlue;
             
             return cell;
         }
@@ -687,22 +711,18 @@
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == kUITableViewSectionUserData) {
-        if (indexPath.row == 1) {
-            GHUserViewController *userViewController = [[[GHUserViewController alloc] initWithUsername:self.repository.owner] autorelease];
-            [self.navigationController pushViewController:userViewController animated:YES];
-        } else if (indexPath.row == 5 && self.repository.isHomepageAvailable) {
-            NSURL *URL = [NSURL URLWithString:self.repository.homePage];
-            
-            GHWebViewViewController *webViewController = [[[GHWebViewViewController alloc] initWithURL:URL] autorelease];
-            [self.navigationController pushViewController:webViewController animated:YES];
-        } else if (indexPath.row == 6 && self.repository.source) {
-            GHSingleRepositoryViewController *repoViewController = [[[GHSingleRepositoryViewController alloc] initWithRepositoryString:self.repository.source] autorelease];
-            repoViewController.delegate = self;
-            [self.navigationController pushViewController:repoViewController animated:YES];
-        } else {
-            [self.tableView deselectRowAtIndexPath:indexPath animated:NO];
-        }
+    if (indexPath.section == kUITableViewSectionForkedFrom && indexPath.row == 0) {
+        GHSingleRepositoryViewController *repoViewController = [[[GHSingleRepositoryViewController alloc] initWithRepositoryString:self.repository.source] autorelease];
+        repoViewController.delegate = self;
+        [self.navigationController pushViewController:repoViewController animated:YES];
+    } else if (indexPath.section == kUITableViewSectionOwner && indexPath.row == 0) {
+        GHUserViewController *userViewController = [[[GHUserViewController alloc] initWithUsername:self.repository.owner] autorelease];
+        [self.navigationController pushViewController:userViewController animated:YES];
+    } else if (indexPath.section == kUITableViewSectionHomepage && indexPath.row == 0) {
+        NSURL *URL = [NSURL URLWithString:self.repository.homePage];
+        
+        GHWebViewViewController *webViewController = [[[GHWebViewViewController alloc] initWithURL:URL] autorelease];
+        [self.navigationController pushViewController:webViewController animated:YES];
     } else if (indexPath.section == kUITableViewSectionIssues) {
         if (indexPath.row > 0 && indexPath.row <= [self.issuesArray count]) {
             GHAPIIssueV3 *issue = [self.issuesArray objectAtIndex:indexPath.row-1];

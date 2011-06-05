@@ -22,7 +22,6 @@
 
 
 
-
 @interface GHSingleRepositoryViewController : GHTableViewController <UIAlertViewDelegate, GHSingleRepositoryViewControllerDelegate, GHCreateIssueTableViewControllerDelegate> {
 @private
     NSString *_repositoryString;
