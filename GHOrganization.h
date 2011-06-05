@@ -28,6 +28,10 @@
     NSString *_EMail;
 }
 
+@property (nonatomic, readonly) BOOL hasEMail;
+@property (nonatomic, readonly) BOOL hasLocation;
+@property (nonatomic, readonly) BOOL hasBlog;
+
 @property (nonatomic, copy) NSString *name;
 //id _company;
 @property (nonatomic, copy) NSString *gravatarID;

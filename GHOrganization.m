@@ -13,6 +13,20 @@
 
 @synthesize name=_name, gravatarID=_gravatarID, location=_location, createdAt=_createdAt, blog=_blog, publicGistCount=_publicGistCount, publicRepoCount=_publicRepoCount, followingCount=_followingCount, ID=_ID, type=_type, followersCount=_followersCount, login=_login, EMail=_EMail;
 
+#pragma mark - setters and getters
+
+- (BOOL)hasEMail {
+    return self.EMail != nil;
+}
+
+- (BOOL)hasLocation {
+    return self.location != nil;
+}
+
+- (BOOL)hasBlog {
+    return self.blog != nil;
+}
+
 #pragma mark - Initialization
 
 - (id)initWithRawDictionary:(NSDictionary *)rawDictionary {
