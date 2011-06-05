@@ -21,7 +21,6 @@
 @end
 
 
-
 @interface GHCreateRepositoryViewController : GHTableViewController <UITextFieldDelegate> {
 @private
     id<GHCreateRepositoryViewControllerDelegate> _delegate;

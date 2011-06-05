@@ -22,12 +22,14 @@
         self.titleTextField.font = [UIFont boldSystemFontOfSize:12.0];
         self.titleTextField.placeholder = NSLocalizedString(@"Repository title", @"");
         self.titleTextField.borderStyle = UITextBorderStyleBezel;
+        self.titleTextField.textColor = [UIColor blackColor];
         [self.contentView addSubview:self.titleTextField];
         
         self.descriptionTextField = [[[UITextField alloc] init] autorelease];
         self.descriptionTextField.font = [UIFont boldSystemFontOfSize:12.0];
         self.descriptionTextField.placeholder = NSLocalizedString(@"Repository description", @"");
         self.descriptionTextField.borderStyle = UITextBorderStyleBezel;
+        self.descriptionTextField.textColor = [UIColor blackColor];
         [self.contentView addSubview:self.descriptionTextField];
         
         self.publicSwitch = [[[UISwitch alloc] init] autorelease];
@@ -40,6 +42,7 @@
         [self.contentView addSubview:self.publicLabel];
         
         self.selectionStyle = UITableViewCellSelectionStyleNone;
+        self.accessoryType = UITableViewCellAccessoryNone;
     }
     return self;
 }
