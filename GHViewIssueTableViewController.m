@@ -761,14 +761,14 @@
         } else if (indexPath.row == 1) {
             GHSingleRepositoryViewController *repoViewController = [[[GHSingleRepositoryViewController alloc] initWithRepositoryString:self.repository] autorelease];
             [self.navigationController pushViewController:repoViewController animated:YES];
-        } else if (indexPath.row == 2 && self.issue.assignee.login) {
-            GHUserViewController *userViewController = [[[GHUserViewController alloc] initWithUsername:self.issue.assignee.login] autorelease];
-            [self.navigationController pushViewController:userViewController animated:YES];
-        } else if (indexPath.row == 3 && self.issue.milestone.title) {
-            GHAPIMilestoneV3 *milestone = self.issue.milestone;
-            GHViewMilestoneViewController *milestoneViewController = [[[GHViewMilestoneViewController alloc] initWithRepository:self.repository milestoneNumber:milestone.number] autorelease];
-            [self.navigationController pushViewController:milestoneViewController animated:YES];
         }
+    } else if (indexPath.section == kUITableViewSectionAssignee && indexPath.row == 0) {
+        GHUserViewController *userViewController = [[[GHUserViewController alloc] initWithUsername:self.issue.assignee.login] autorelease];
+        [self.navigationController pushViewController:userViewController animated:YES];
+    } else if (indexPath.section == kUITableViewSectionMilestone && indexPath.row == 0) {
+        GHAPIMilestoneV3 *milestone = self.issue.milestone;
+        GHViewMilestoneViewController *milestoneViewController = [[[GHViewMilestoneViewController alloc] initWithRepository:self.repository milestoneNumber:milestone.number] autorelease];
+        [self.navigationController pushViewController:milestoneViewController animated:YES];
     } else if (indexPath.section == kUITableViewSectionHistory && indexPath.row > 0 && indexPath.row < [self.history count]+1) {
         
         NSObject *object = [self.history objectAtIndex:indexPath.row - 1];
