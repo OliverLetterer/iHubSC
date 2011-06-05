@@ -65,7 +65,7 @@ V1.6
 - added remaining API calls for today. Click Account under My Profile
 - auto selecting Organization, if user is only a member in one organization
 - new design
-
+- minor bugfixes
 
 
 
