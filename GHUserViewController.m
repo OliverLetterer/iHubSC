@@ -497,44 +497,6 @@
             [self updateImageViewForCell:cell atIndexPath:indexPath withGravatarID:self.user.gravatarID];
             
             return cell;
-        } else {
-            NSString *CellIdentifier = @"DetailsTableViewCell";
-            
-            UITableViewCellWithLinearGradientBackgroundView *cell = (UITableViewCellWithLinearGradientBackgroundView *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-            if (!cell) {
-                cell = [[[UITableViewCellWithLinearGradientBackgroundView alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:CellIdentifier] autorelease];
-                cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            }
-            
-            cell.accessoryType = UITableViewCellAccessoryNone;
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            
-            if (indexPath.row == 1) {
-                cell.textLabel.text = NSLocalizedString(@"E-Mail", @"");
-                cell.detailTextLabel.text = self.user.EMail ? self.user.EMail : @"-";
-            } else if (indexPath.row == 2) {
-                cell.textLabel.text = NSLocalizedString(@"Location", @"");
-                cell.detailTextLabel.text = self.user.location ? self.user.location : @"-";
-            } else if (indexPath.row == 3) {
-                cell.textLabel.text = NSLocalizedString(@"Company", @"");
-                cell.detailTextLabel.text = self.user.company ? self.user.company : @"-";
-            } else if (indexPath.row == 4) {
-                cell.textLabel.text = NSLocalizedString(@"Blog", @"");
-                cell.detailTextLabel.text = self.user.blog ? self.user.blog : @"-";
-                if (self.user.blog) {
-                    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-                    cell.selectionStyle = UITableViewCellSelectionStyleBlue;
-                }
-            } else if (indexPath.row == 5) {
-                cell.textLabel.text = NSLocalizedString(@"Public", @"");
-                cell.detailTextLabel.text = NSLocalizedString(@"Activity", @"");
-                cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-                cell.selectionStyle = UITableViewCellSelectionStyleBlue;
-            } else {
-                cell.textLabel.text = NSLocalizedString(@"XXX", @"");
-                cell.detailTextLabel.text = @"-";
-            }
-            return cell;
         }
     } else if (indexPath.section == kUITableViewSectionEMail) {
         if (indexPath.row == 0) {

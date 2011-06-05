@@ -15,10 +15,16 @@
 #import "GHTeamViewController.h"
 #import "GHRecentActivityViewController.h"
 
-#define kUITableViewSectionInfo 0
-#define kUITableViewSectionPublicRepositories 1
-#define kUITableViewSectionPublicMembers 2
-#define kUITableViewSectionTeams 3
+#define kUITableViewSectionInfo                 0
+#define kUITableViewSectionEMail                1
+#define kUITableViewSectionLocation             2
+#define kUITableViewSectionBlog                 3
+#define kUITableViewSectionPublicActivity       4
+#define kUITableViewSectionPublicRepositories   5
+#define kUITableViewSectionPublicMembers        6
+#define kUITableViewSectionTeams                7
+
+#define kUITableViewNumberOfSections            8
 
 @implementation GHOrganizationViewController
 
@@ -205,12 +211,26 @@
         return 0;
     }
     // Return the number of sections.
-    return 4;
+    return kUITableViewNumberOfSections;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (section == kUITableViewSectionInfo) {
-        return 5;
+        return 1;
+    } else if (section == kUITableViewSectionEMail) {
+        if (self.organization.hasEMail) {
+            return 1;
+        }
+    } else if (section == kUITableViewSectionLocation) {
+        if (self.organization.hasLocation) {
+            return 1;
+        }
+    } else if (section == kUITableViewSectionBlog) {
+        if (self.organization.hasBlog) {
+            return 1;
+        }
+    } else if (section == kUITableViewSectionPublicActivity) {
+        return 1;
     } else if (section == kUITableViewSectionPublicRepositories) {
         return self.publicRepositories.count + 1;
     } else if (section == kUITableViewSectionPublicMembers) {
@@ -235,15 +255,16 @@
                 cell.accessoryType = UITableViewCellAccessoryNone;
             }
             
-            
-            
-            cell.titleLabel.text = self.organization.name ? self.organization.name : self.organization.login;
-            cell.descriptionLabel.text = self.organization.type;
+            cell.titleLabel.text = self.organization.login;
+            cell.descriptionLabel.text = nil;
+            cell.repositoryLabel.text = nil;
             
             [self updateImageViewForCell:cell atIndexPath:indexPath withGravatarID:self.organization.gravatarID];
             
             return cell;
-        } else {
+        }
+    } else if (indexPath.section == kUITableViewSectionEMail) {
+        if (indexPath.row == 0) {
             NSString *CellIdentifier = @"DetailsTableViewCell";
             
             UITableViewCellWithLinearGradientBackgroundView *cell = (UITableViewCellWithLinearGradientBackgroundView *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
@@ -255,28 +276,61 @@
             cell.accessoryType = UITableViewCellAccessoryNone;
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             
-            if (indexPath.row == 1) {
-                cell.textLabel.text = NSLocalizedString(@"Location", @"");
-                cell.detailTextLabel.text = self.organization.location ? self.organization.location : @"-";
-            } else if (indexPath.row == 2) {
-                cell.textLabel.text = NSLocalizedString(@"E-Mail", @"");
-                cell.detailTextLabel.text = self.organization.EMail ? self.organization.EMail : @"-";
-            } else if (indexPath.row == 3) {
-                cell.textLabel.text = NSLocalizedString(@"Blog", @"");
-                cell.detailTextLabel.text = self.organization.blog ? self.organization.blog : @"-";
-                if (self.organization.blog) {
-                    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-                    cell.selectionStyle = UITableViewCellSelectionStyleBlue;
-                }
-            } else if (indexPath.row == 4) {
-                cell.textLabel.text = NSLocalizedString(@"Public", @"");
-                cell.detailTextLabel.text = NSLocalizedString(@"Activity", @"");
-                cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-                cell.selectionStyle = UITableViewCellSelectionStyleBlue;
-            } else {
-                cell.textLabel.text = NSLocalizedString(@"XXX", @"");
-                cell.detailTextLabel.text = @"-";
+            cell.textLabel.text = NSLocalizedString(@"E-Mail", @"");
+            cell.detailTextLabel.text = self.organization.EMail;
+            
+            return cell;
+        }
+    } else if (indexPath.section == kUITableViewSectionLocation) {
+        if (indexPath.row == 0) {
+            NSString *CellIdentifier = @"DetailsTableViewCell";
+            
+            UITableViewCellWithLinearGradientBackgroundView *cell = (UITableViewCellWithLinearGradientBackgroundView *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+            if (!cell) {
+                cell = [[[UITableViewCellWithLinearGradientBackgroundView alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:CellIdentifier] autorelease];
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
             }
+            
+            cell.accessoryType = UITableViewCellAccessoryNone;
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            
+            cell.textLabel.text = NSLocalizedString(@"Location", @"");
+            cell.detailTextLabel.text = self.organization.location;
+            
+            return cell;
+        }
+    } else if (indexPath.section == kUITableViewSectionBlog) {
+        if (indexPath.row == 0) {
+            NSString *CellIdentifier = @"DetailsTableViewCell";
+            
+            UITableViewCellWithLinearGradientBackgroundView *cell = (UITableViewCellWithLinearGradientBackgroundView *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+            if (!cell) {
+                cell = [[[UITableViewCellWithLinearGradientBackgroundView alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:CellIdentifier] autorelease];
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            }
+            
+            cell.textLabel.text = NSLocalizedString(@"Blog", @"");
+            cell.detailTextLabel.text = self.organization.blog;
+            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+            cell.selectionStyle = UITableViewCellSelectionStyleBlue;
+            
+            return cell;
+        }
+    } else if (indexPath.section == kUITableViewSectionPublicActivity) {
+        if (indexPath.row == 0) {
+            NSString *CellIdentifier = @"DetailsTableViewCell";
+            
+            UITableViewCellWithLinearGradientBackgroundView *cell = (UITableViewCellWithLinearGradientBackgroundView *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+            if (!cell) {
+                cell = [[[UITableViewCellWithLinearGradientBackgroundView alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:CellIdentifier] autorelease];
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            }
+            
+            cell.textLabel.text = NSLocalizedString(@"Public", @"");
+            cell.detailTextLabel.text = NSLocalizedString(@"Activity", @"");
+            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+            cell.selectionStyle = UITableViewCellSelectionStyleBlue;
+            
             return cell;
         }
     } else if (indexPath.section == kUITableViewSectionPublicRepositories) {
@@ -394,14 +448,13 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == kUITableViewSectionInfo && indexPath.row == 3 && self.organization.blog) {
+    if (indexPath.section == kUITableViewSectionBlog && indexPath.row == 0) {
         NSURL *URL = [NSURL URLWithString:self.organization.blog];
         GHWebViewViewController *web = [[[GHWebViewViewController alloc] initWithURL:URL] autorelease];
         [self.navigationController pushViewController:web animated:YES];
-    } else if (indexPath.section == kUITableViewSectionInfo && indexPath.row == 4) {
-        GHRecentActivityViewController *recentViewController = [[[GHRecentActivityViewController alloc] initWithUsername:self.organizationLogin] autorelease];
+    } else if (indexPath.section == kUITableViewSectionPublicActivity && indexPath.row == 0) {
+        GHRecentActivityViewController *recentViewController = [[[GHRecentActivityViewController alloc] initWithUsername:self.organization.login] autorelease];
         [self.navigationController pushViewController:recentViewController animated:YES];
-        
     } else if (indexPath.section == kUITableViewSectionPublicRepositories) {
         GHRepository *repo = [self.publicRepositories objectAtIndex:indexPath.row-1];
         
