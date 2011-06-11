@@ -18,6 +18,7 @@
 
 @interface GHTableViewController : GHPullToReleaseTableViewController <GHAuthenticationViewControllerDelegate, UIExpandableTableViewDatasource, UIExpandableTableViewDelegate> {
 @private
+    NSMutableDictionary *_nextPageForSectionsDictionary;
     NSMutableDictionary *_cachedHeightsDictionary;
     BOOL _reloadDataIfNewUserGotAuthenticated;
     BOOL _reloadDataOnApplicationWillEnterForeground;
@@ -29,6 +30,7 @@
 
 @property (nonatomic, retain) UIExpandableTableView *tableView;
 
+@property (nonatomic, retain) NSMutableDictionary *nextPageForSectionsDictionary;
 @property (nonatomic, retain) NSMutableDictionary *cachedHeightsDictionary;
 @property (nonatomic, readonly) UITableViewCell *dummyCell;
 
@@ -44,6 +46,13 @@
 
 - (void)authenticationViewControllerdidAuthenticateUserCallback:(NSNotification *)notification;
 - (void)applicationWillEnterForegroundCallback:(NSNotification *)notification;
+
+- (id)keyForSection:(NSUInteger)section;
+- (void)setNextPage:(NSUInteger)nextPage forSection:(NSUInteger)section;
+- (BOOL)needsToDownloadNextDataInSection:(NSUInteger)section;
+- (NSUInteger)nextPageForSection:(NSUInteger)section;
+
+- (void)downloadDataForPage:(NSUInteger)page inSection:(NSUInteger)section;
 
 @end
 

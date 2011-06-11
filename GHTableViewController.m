@@ -15,7 +15,7 @@
 
 @implementation GHTableViewController
 
-@synthesize cachedHeightsDictionary=_cachedHeightsDictionary;
+@synthesize nextPageForSectionsDictionary=_nextPageForSectionsDictionary, cachedHeightsDictionary=_cachedHeightsDictionary;
 @synthesize reloadDataIfNewUserGotAuthenticated=_reloadDataIfNewUserGotAuthenticated, reloadDataOnApplicationWillEnterForeground=_reloadDataOnApplicationWillEnterForeground;
 
 #pragma mark - setters and getters
@@ -98,6 +98,33 @@
     }
 }
 
+#pragma mark - pagination
+
+- (id)keyForSection:(NSUInteger)section {
+    return [NSNumber numberWithUnsignedInteger:section];
+}
+
+- (void)setNextPage:(NSUInteger)nextPage forSection:(NSUInteger)section {
+    id key = [self keyForSection:section];
+    
+    [self.nextPageForSectionsDictionary setObject:[NSNumber numberWithUnsignedInteger:nextPage] forKey:key];
+}
+
+- (BOOL)needsToDownloadNextDataInSection:(NSUInteger)section {
+    NSNumber *object = [self.nextPageForSectionsDictionary objectForKey:[self keyForSection:section] ];
+    
+    return [object unsignedIntegerValue] > 1;
+}
+
+- (NSUInteger)nextPageForSection:(NSUInteger)section {
+    return [[self.nextPageForSectionsDictionary objectForKey:[self keyForSection:section] ] unsignedIntegerValue];
+}
+
+- (void)downloadDataForPage:(NSUInteger)page inSection:(NSUInteger)section {
+    DLog(@"Now Downloading Data for next page");
+    [self.nextPageForSectionsDictionary removeObjectForKey:[self keyForSection:section] ];
+}
+
 #pragma mark - Initialization
 
 - (id)initWithStyle:(UITableViewStyle)style {
@@ -115,6 +142,7 @@
                                                    object:nil];
         
         self.reloadDataOnApplicationWillEnterForeground = YES;
+        self.nextPageForSectionsDictionary = [NSMutableDictionary dictionary];
     }
     return self;
 }
@@ -126,6 +154,7 @@
     [_cachedHeightsDictionary release];
     _alertProxy.delegate = nil;
     [_alertProxy release];
+    [_nextPageForSectionsDictionary release];
     
     [super dealloc];
 }
@@ -192,9 +221,8 @@
 
 - (void)viewDidUnload {
     [super viewDidUnload];
+    
     _hasGradientBackgrounds = NO;
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -263,6 +291,14 @@
 
 - (void)tableView:(UIExpandableTableView *)tableView downloadDataForExpandableSection:(NSInteger)section {
     
+}
+
+#pragma mark - UITableViewDelegate
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if ([self needsToDownloadNextDataInSection:indexPath.section] && indexPath.row != 0 && indexPath.row == [tableView numberOfRowsInSection:indexPath.section] - 1) {
+        [self downloadDataForPage:[self nextPageForSection:indexPath.section] inSection:indexPath.section];
+    }
 }
 
 #pragma mark - super implementation
