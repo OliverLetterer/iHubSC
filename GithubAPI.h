@@ -25,7 +25,7 @@
 #import "GHPullRequestDiscussion.h"
 #import "GHPullRequestRepositoryInformation.h"
 #import "GHRepository.h"
-#import "GHBranch.h"
+//#import "GHBranch.h"
 #import "GHFileSystemItem.h"
 #import "GHFile.h"
 #import "GHDirectory.h"
@@ -45,6 +45,7 @@
 #import "GHAPIUserPlanV3.h"
 #import "GHAPIIssueEventV3.h"
 #import "GHAPILabelV3.h"
+#import "GHAPIRepositoryBranchV3.h"
 #import "GHAPIRepositoryV3.h"
 
 #import "GHPayload.h"

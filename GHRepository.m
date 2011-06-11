@@ -349,42 +349,42 @@
     });
 }
 
-+ (void)branchesOnRepository:(NSString *)repository completionHandler:(void (^)(NSArray *, NSError *))handler {
-    
-    dispatch_async(GHAPIBackgroundQueue(), ^(void) {
-        
-        // repos/show/:user/:repo/branches
-        
-        NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://github.com/api/v2/json/repos/show/%@/branches",
-                                           [repository stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] ] ];
-        
-        NSError *myError = nil;
-        
-        ASIFormDataRequest *request = [ASIFormDataRequest authenticatedFormDataRequestWithURL:URL];
-        [request startSynchronous];
-        
-        myError = [request error];
-        
-        if (!myError) {
-            myError = [NSError errorFromRawDictionary:[[request responseString] objectFromJSONString] ];
-        }
-        
-        dispatch_async(dispatch_get_main_queue(), ^(void) {
-            if (myError) {
-                handler(nil, myError);
-            } else {
-                NSDictionary *dictionary = [[[request responseString] objectFromJSONString] objectForKeyOrNilOnNullObject:@"branches"];
-                
-                NSMutableArray *branches = [NSMutableArray array];
-                for (NSString *branch in [dictionary allKeys]) {
-                    NSString *hash = [dictionary objectForKey:branch];
-                    [branches addObject:[[[GHBranch alloc] initWithName:branch hash:hash] autorelease] ];
-                }
-                handler(branches, nil);
-            }
-        });
-    });
-}
+//+ (void)branchesOnRepository:(NSString *)repository completionHandler:(void (^)(NSArray *, NSError *))handler {
+//    
+//    dispatch_async(GHAPIBackgroundQueue(), ^(void) {
+//        
+//        // repos/show/:user/:repo/branches
+//        
+//        NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://github.com/api/v2/json/repos/show/%@/branches",
+//                                           [repository stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] ] ];
+//        
+//        NSError *myError = nil;
+//        
+//        ASIFormDataRequest *request = [ASIFormDataRequest authenticatedFormDataRequestWithURL:URL];
+//        [request startSynchronous];
+//        
+//        myError = [request error];
+//        
+//        if (!myError) {
+//            myError = [NSError errorFromRawDictionary:[[request responseString] objectFromJSONString] ];
+//        }
+//        
+//        dispatch_async(dispatch_get_main_queue(), ^(void) {
+//            if (myError) {
+//                handler(nil, myError);
+//            } else {
+//                NSDictionary *dictionary = [[[request responseString] objectFromJSONString] objectForKeyOrNilOnNullObject:@"branches"];
+//                
+//                NSMutableArray *branches = [NSMutableArray array];
+//                for (NSString *branch in [dictionary allKeys]) {
+//                    NSString *hash = [dictionary objectForKey:branch];
+//                    [branches addObject:[[[GHBranch alloc] initWithName:branch hash:hash] autorelease] ];
+//                }
+//                handler(branches, nil);
+//            }
+//        });
+//    });
+//}
 
 + (void)recentCommitsOnRepository:(NSString *)repository 
                            branch:(NSString *)branch 

@@ -70,6 +70,11 @@
 
 + (void)labelOnRepository:(NSString *)repository completionHandler:(void(^)(NSArray *labels, NSError *error))handler;
 
-+ (void)repositoryNamed:(NSString *)repositoryName withCompletionHandler:(void (^)(GHAPIRepositoryV3 *repository, NSError *error))handler;
++ (void)repositoryNamed:(NSString *)repositoryName 
+  withCompletionHandler:(void (^)(GHAPIRepositoryV3 *repository, NSError *error))handler;
+
+// will contain GHAPIRepositoryBranchV3
++ (void)branchesOnRepository:(NSString *)repository 
+           completionHandler:(void (^)(NSArray *array, NSError *error))handler;
 
 @end

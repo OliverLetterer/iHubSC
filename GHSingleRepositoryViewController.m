@@ -277,16 +277,16 @@
                                   }
                               }];
     } else if (section == kUITableViewSectionRecentCommits || section == kUITableViewSectionBrowseBranches) {
-        [GHRepository branchesOnRepository:self.repositoryString 
-                         completionHandler:^(NSArray *array, NSError *error) {
-                             if (error) {
-                                 [self handleError:error];
-                                 [tableView cancelDownloadInSection:section];
-                             } else {
-                                 self.branches = array;
-                                 [tableView expandSection:section animated:YES];
-                             }
-                         }];
+        [GHAPIRepositoryV3 branchesOnRepository:self.repositoryString 
+                              completionHandler:^(NSArray *array, NSError *error) {
+                                  if (error) {
+                                      [self handleError:error];
+                                      [tableView cancelDownloadInSection:section];
+                                  } else {
+                                      self.branches = array;
+                                      [tableView expandSection:section animated:YES];
+                                  }
+                              }];
     } else if (section == kUITableViewSectionMilestones) {
         [GHAPIIssueV3 milestonesForIssueOnRepository:self.repositoryString 
                                        withNumber:nil 
@@ -599,7 +599,7 @@
                 cell = [[[UITableViewCellWithLinearGradientBackgroundView alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
             }
             
-            GHBranch *branch = [self.branches objectAtIndex:indexPath.row - 1];
+            GHAPIRepositoryBranchV3 *branch = [self.branches objectAtIndex:indexPath.row - 1];
             
             cell.textLabel.text = branch.name;
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
@@ -822,19 +822,19 @@
         GHViewIssueTableViewController *viewIssueViewController = [[[GHViewIssueTableViewController alloc] initWithRepository:repo issueNumber:discussion.number] autorelease];
         [self.navigationController pushViewController:viewIssueViewController animated:YES];
     } else if (indexPath.section == kUITableViewSectionRecentCommits) {
-        GHBranch *branch = [self.branches objectAtIndex:indexPath.row - 1];
+        GHAPIRepositoryBranchV3 *branch = [self.branches objectAtIndex:indexPath.row - 1];
         
         GHRecentCommitsViewController *recentViewController = [[[GHRecentCommitsViewController alloc] initWithRepository:self.repositoryString 
                                                                                                                   branch:branch.name]
                                                                autorelease];
-        recentViewController.branchHash = branch.hash;
+        recentViewController.branchHash = branch.ID;
         [self.navigationController pushViewController:recentViewController animated:YES];
     } else if (indexPath.section == kUITableViewSectionBrowseBranches) {
-        GHBranch *branch = [self.branches objectAtIndex:indexPath.row - 1];
+        GHAPIRepositoryBranchV3 *branch = [self.branches objectAtIndex:indexPath.row - 1];
         
         GHViewRootDirectoryViewController *rootViewController = [[[GHViewRootDirectoryViewController alloc] initWithRepository:self.repositoryString
                                                                                                                         branch:branch.name
-                                                                                                                          hash:branch.hash]
+                                                                                                                          hash:branch.ID]
                                                                  autorelease];
         [self.navigationController pushViewController:rootViewController animated:YES];
     } else if (indexPath.section == kUITableViewSectionMilestones && indexPath.row > 0) {

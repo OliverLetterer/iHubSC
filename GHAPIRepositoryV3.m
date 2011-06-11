@@ -154,4 +154,27 @@
                                        }];
 }
 
++ (void)branchesOnRepository:(NSString *)repository completionHandler:(void (^)(NSArray *, NSError *))handler {
+    // v3: GET /repos/:user/:repo/branches
+    
+    NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.github.com/repos/%@/branches",
+                                       [repository stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] ] ];
+    
+    [[GHBackgroundQueue sharedInstance] sendRequestToURL:URL setupHandler:nil
+                                       completionHandler:^(id object, NSError *error, ASIFormDataRequest *request) {
+                                           if (error) {
+                                               handler(nil, error);
+                                           } else {
+                                               NSDictionary *rawDictionary = object;
+                                               
+                                               NSMutableArray *finalArray = [NSMutableArray arrayWithCapacity:[rawDictionary allKeys].count];
+                                               [rawDictionary enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+                                                   [finalArray addObject:[[[GHAPIRepositoryBranchV3 alloc] initWithName:key ID:obj] autorelease] ];
+                                               }];
+                                               
+                                               handler(finalArray, nil);
+                                           }
+                                       }];
+}
+
 @end

@@ -206,6 +206,7 @@
 		A7D41AF71359F8CC00CD3A5C /* GHPullRequestRepositoryInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = A7D41AF61359F8CC00CD3A5C /* GHPullRequestRepositoryInformation.m */; };
 		A7D41AFD135ADA4600CD3A5C /* GHBranch.m in Sources */ = {isa = PBXBuildFile; fileRef = A7D41AFC135ADA3C00CD3A5C /* GHBranch.m */; };
 		A7D41B08135AE71B00CD3A5C /* GHRecentCommitsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7D41B07135AE71600CD3A5C /* GHRecentCommitsViewController.m */; };
+		A7DCDD9413A366DF00089CCD /* GHAPIRepositoryBranchV3.m in Sources */ = {isa = PBXBuildFile; fileRef = A7DCDD9313A366DF00089CCD /* GHAPIRepositoryBranchV3.m */; };
 		A7EE1120136F3FFB00A1E693 /* GHAPIIssueCommentV3.m in Sources */ = {isa = PBXBuildFile; fileRef = A7EE111F136F3FFA00A1E693 /* GHAPIIssueCommentV3.m */; };
 		A7EE1123136F481500A1E693 /* Appirater.m in Sources */ = {isa = PBXBuildFile; fileRef = A7EE1122136F481100A1E693 /* Appirater.m */; };
 		A7F6260F134B3938006487CA /* UITableViewCellWithLinearGradientBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = A7F6260E134B3938006487CA /* UITableViewCellWithLinearGradientBackgroundView.m */; };
@@ -573,6 +574,8 @@
 		A7D41AFC135ADA3C00CD3A5C /* GHBranch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHBranch.m; sourceTree = "<group>"; };
 		A7D41B06135AE71300CD3A5C /* GHRecentCommitsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHRecentCommitsViewController.h; sourceTree = "<group>"; };
 		A7D41B07135AE71600CD3A5C /* GHRecentCommitsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHRecentCommitsViewController.m; sourceTree = "<group>"; };
+		A7DCDD9213A366DF00089CCD /* GHAPIRepositoryBranchV3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHAPIRepositoryBranchV3.h; sourceTree = "<group>"; };
+		A7DCDD9313A366DF00089CCD /* GHAPIRepositoryBranchV3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHAPIRepositoryBranchV3.m; sourceTree = "<group>"; };
 		A7EE111E136F3FFA00A1E693 /* GHAPIIssueCommentV3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHAPIIssueCommentV3.h; sourceTree = "<group>"; };
 		A7EE111F136F3FFA00A1E693 /* GHAPIIssueCommentV3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHAPIIssueCommentV3.m; sourceTree = "<group>"; };
 		A7EE1121136F480D00A1E693 /* Appirater.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Appirater.h; path = appirater/Appirater.h; sourceTree = "<group>"; };
@@ -1340,6 +1343,7 @@
 		A79F37F813883B650028F492 /* v3 */ = {
 			isa = PBXGroup;
 			children = (
+				A7DCDD9013A366BE00089CCD /* GHAPIRepositoryBranchV3 */,
 				A7B5209713892439000FEE61 /* GHAPIRepositoryV3 */,
 				A7B5209313892322000FEE61 /* GHAPILabelV3 */,
 				A79F380213884CCD0028F492 /* GHAPIUserPlanV3 */,
@@ -1891,6 +1895,15 @@
 			name = Icons;
 			sourceTree = "<group>";
 		};
+		A7DCDD9013A366BE00089CCD /* GHAPIRepositoryBranchV3 */ = {
+			isa = PBXGroup;
+			children = (
+				A7DCDD9213A366DF00089CCD /* GHAPIRepositoryBranchV3.h */,
+				A7DCDD9313A366DF00089CCD /* GHAPIRepositoryBranchV3.m */,
+			);
+			name = GHAPIRepositoryBranchV3;
+			sourceTree = "<group>";
+		};
 		A7F6261F134B8886006487CA /* NSString */ = {
 			isa = PBXGroup;
 			children = (
@@ -2198,6 +2211,7 @@
 				A706C0AE139AC22D008A6184 /* INProgressView.m in Sources */,
 				A706C0C3139AC408008A6184 /* CGCommon.m in Sources */,
 				A706C0CC139AD15C008A6184 /* UIColor+GithubUI.m in Sources */,
+				A7DCDD9413A366DF00089CCD /* GHAPIRepositoryBranchV3.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
