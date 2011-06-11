@@ -12,6 +12,16 @@
 
 dispatch_queue_t GHAPIBackgroundQueue();
 
+typedef void(^GHAPIPaginationHandler)(NSArray *array, NSUInteger nextPage, NSError *error);
+
+enum {
+    GHAPIPaginationNextPageNotFound = 0
+};
+
+enum {
+    GHAPIDefaultPaginationCount = 30
+};
+
 @interface GHBackgroundQueue : NSObject {
     dispatch_queue_t _backgroundQueue;
     NSUInteger _remainingAPICalls;
@@ -21,6 +31,9 @@ dispatch_queue_t GHAPIBackgroundQueue();
 @property (nonatomic, readonly) NSUInteger remainingAPICalls;
 
 - (void)sendRequestToURL:(NSURL *)URL setupHandler:(void(^)(ASIFormDataRequest *request))setupHandler completionHandler:(void(^)(id object, NSError *error, ASIFormDataRequest *request))completionHandler;
+
+- (void)sendRequestToURL:(NSURL *)URL page:(NSUInteger)page setupHandler:(void(^)(ASIFormDataRequest *request))setupHandler 
+    completionPaginationHandler:(void(^)(id object, NSError *error, ASIFormDataRequest *request, NSUInteger nextPage))completionHandler;
 
 @end
 

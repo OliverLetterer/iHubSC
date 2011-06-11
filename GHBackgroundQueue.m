@@ -78,6 +78,25 @@ dispatch_queue_t GHAPIBackgroundQueue() {
     
 }
 
+- (void)sendRequestToURL:(NSURL *)URL page:(NSUInteger)page setupHandler:(void (^)(ASIFormDataRequest *))setupHandler completionPaginationHandler:(void (^)(id, NSError *, ASIFormDataRequest *, NSUInteger))completionHandler {
+    
+    NSString *urlString = [URL absoluteString];
+    if ([urlString rangeOfString:@"?"].location == NSNotFound) {
+        urlString = [urlString stringByAppendingString:@"?"];
+    } else if ([urlString hasSuffix:@"&"]) {
+        urlString = [urlString stringByAppendingString:@"&"];
+    }
+    urlString = [urlString stringByAppendingFormat:@"page=%d&per_page=%d", page, GHAPIDefaultPaginationCount];
+    URL = [NSURL URLWithString:urlString];
+    
+    [self sendRequestToURL:URL 
+              setupHandler:setupHandler 
+         completionHandler:^(id object, NSError *error, ASIFormDataRequest *request) {
+             NSString *linkHeader = [[request responseHeaders] objectForKey:@"Link"];
+             completionHandler(object, error, request, linkHeader.nextPage);
+         }];
+}
+
 @end
 
 

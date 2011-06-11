@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "GHBackgroundQueue.h"
 
 @class GHAPIUserPlanV3;
 
@@ -86,6 +87,6 @@
 + (void)followUser:(NSString *)username completionHandler:(void(^)(NSError *error))handler;
 + (void)unfollowUser:(NSString *)username completionHandler:(void(^)(NSError *error))handler;
 
-+ (void)gistsOfUser:(NSString *)username page:(NSInteger)page completionHandler:(void (^)(NSArray *gists, NSInteger nextPage, NSError *error))handler;
++ (void)gistsOfUser:(NSString *)username page:(NSInteger)page completionHandler:(GHAPIPaginationHandler)handler;
 
 @end
