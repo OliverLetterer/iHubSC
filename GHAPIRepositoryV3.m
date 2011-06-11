@@ -207,4 +207,28 @@
                                        }];
 }
 
++ (void)repositoriesThatUserIsWatching:(NSString *)username 
+                     completionHandler:(void (^)(NSArray *array, NSError *error))handler {
+    // v3: GET /users/:user/watched
+    
+    NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.github.com/users/%@/watched",
+                                       [username stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] ] ];
+    
+    [[GHBackgroundQueue sharedInstance] sendRequestToURL:URL setupHandler:nil
+                                       completionHandler:^(id object, NSError *error, ASIFormDataRequest *request) {
+                                           if (error) {
+                                               handler(nil, error);
+                                           } else {
+                                               NSArray *rawArray = object;
+                                               
+                                               NSMutableArray *finalArray = [NSMutableArray arrayWithCapacity:rawArray.count];
+                                               [rawArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+                                                   [finalArray addObject:[[[GHAPIRepositoryV3 alloc] initWithRawDictionary:obj] autorelease] ];
+                                               }];
+                                               
+                                               handler(finalArray, nil);
+                                           }
+                                       }];
+}
+
 @end

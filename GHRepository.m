@@ -136,46 +136,46 @@
     });
 }
 
-+ (void)watchedRepositoriesOfUser:(NSString *)username 
-                completionHandler:(void (^)(NSArray *array, NSError *error))handler {
-    
-    dispatch_async(GHAPIBackgroundQueue(), ^(void) {
-        
-        // /repos/watched/:user
-        
-        NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://github.com/api/v2/json/repos/watched/%@", [username stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] ]];
-        NSError *myError = nil;
-        
-        ASIFormDataRequest *request = [ASIFormDataRequest authenticatedFormDataRequestWithURL:URL];
-        
-        [request startSynchronous];
-        
-        myError = [request error];
-        
-        if (!myError) {
-            myError = [NSError errorFromRawDictionary:[[request responseString] objectFromJSONString] ];
-        }
-        
-        NSString *jsonString = [request responseString];
-        
-        dispatch_async(dispatch_get_main_queue(), ^(void) {
-            if (myError) {
-                handler(nil, myError);
-            } else {
-                NSDictionary *dictionary = [jsonString objectFromJSONString];
-                NSArray *allReposArray = [dictionary objectForKey:@"repositories"];
-                
-                NSMutableArray *repos = [NSMutableArray arrayWithCapacity:[allReposArray count]];
-                
-                for (NSDictionary *rawDictionary in allReposArray) {
-                    [repos addObject:[[[GHRepository alloc] initWithRawDictionary:rawDictionary] autorelease] ];
-                }
-                
-                handler(repos, nil);
-            }
-        });
-    });
-}
+//+ (void)watchedRepositoriesOfUser:(NSString *)username 
+//                completionHandler:(void (^)(NSArray *array, NSError *error))handler {
+//    
+//    dispatch_async(GHAPIBackgroundQueue(), ^(void) {
+//        
+//        // /repos/watched/:user
+//        
+//        NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://github.com/api/v2/json/repos/watched/%@", [username stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] ]];
+//        NSError *myError = nil;
+//        
+//        ASIFormDataRequest *request = [ASIFormDataRequest authenticatedFormDataRequestWithURL:URL];
+//        
+//        [request startSynchronous];
+//        
+//        myError = [request error];
+//        
+//        if (!myError) {
+//            myError = [NSError errorFromRawDictionary:[[request responseString] objectFromJSONString] ];
+//        }
+//        
+//        NSString *jsonString = [request responseString];
+//        
+//        dispatch_async(dispatch_get_main_queue(), ^(void) {
+//            if (myError) {
+//                handler(nil, myError);
+//            } else {
+//                NSDictionary *dictionary = [jsonString objectFromJSONString];
+//                NSArray *allReposArray = [dictionary objectForKey:@"repositories"];
+//                
+//                NSMutableArray *repos = [NSMutableArray arrayWithCapacity:[allReposArray count]];
+//                
+//                for (NSDictionary *rawDictionary in allReposArray) {
+//                    [repos addObject:[[[GHRepository alloc] initWithRawDictionary:rawDictionary] autorelease] ];
+//                }
+//                
+//                handler(repos, nil);
+//            }
+//        });
+//    });
+//}
 
 //+ (void)repository:(NSString *)repository withCompletionHandler:(void (^)(GHRepository *repository, NSError *error))handler {
 //    

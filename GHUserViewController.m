@@ -182,8 +182,8 @@
 
 - (void)cacheHeightForWatchedRepositories {
     NSInteger i = 0;
-    for (GHRepository *repo in self.watchedRepositoriesArray) {
-        CGFloat height = [self heightForDescription:repo.desctiptionRepo] + 50.0;
+    for (GHAPIRepositoryV3 *repo in self.watchedRepositoriesArray) {
+        CGFloat height = [self heightForDescription:repo.description] + 50.0;
         
         if (height < 71.0) {
             height = 71.0;
@@ -333,17 +333,17 @@
                                       }
                                   }];
     } else if (section == kUITableViewSectionWatchedRepositories) {
-        [GHRepository watchedRepositoriesOfUser:self.username 
-                              completionHandler:^(NSArray *array, NSError *error) {
-                                  if (error) {
-                                      [self handleError:error];
-                                      [tableView cancelDownloadInSection:section];
-                                  } else {
-                                      self.watchedRepositoriesArray = array;
-                                      [self cacheHeightForWatchedRepositories];
-                                      [self.tableView expandSection:section animated:YES];
-                                  }
-                              }];
+        [GHAPIRepositoryV3 repositoriesThatUserIsWatching:self.username 
+                                        completionHandler:^(NSArray *array, NSError *error) {
+                                            if (error) {
+                                                [self handleError:error];
+                                                [tableView cancelDownloadInSection:section];
+                                            } else {
+                                                self.watchedRepositoriesArray = array;
+                                                [self cacheHeightForWatchedRepositories];
+                                                [self.tableView expandSection:section animated:YES];
+                                            }
+                                        }];
     } else if (section == kUITableViewFollowingUsers) {
         [GHAPIUserV3 usersThatUsernameIsFollowing:self.username 
                         completionHandler:^(NSArray *users, NSError *error) {
@@ -617,11 +617,11 @@
                 cell = [[[GHFeedItemWithDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
             }
             
-            GHRepository *repository = [self.watchedRepositoriesArray objectAtIndex:indexPath.row-1];
+            GHAPIRepositoryV3 *repository = [self.watchedRepositoriesArray objectAtIndex:indexPath.row-1];
             
-            cell.titleLabel.text = [NSString stringWithFormat:@"%@/%@", repository.owner, repository.name];
+            cell.titleLabel.text = [NSString stringWithFormat:@"%@/%@", repository.owner.login, repository.name];
             
-            cell.descriptionLabel.text = repository.desctiptionRepo;
+            cell.descriptionLabel.text = repository.description;
             
             if ([repository.private boolValue]) {
                 cell.imageView.image = [UIImage imageNamed:@"GHPrivateRepositoryIcon.png"];
@@ -814,9 +814,9 @@
         [self.navigationController pushViewController:viewController animated:YES];
         
     } else if (indexPath.section == kUITableViewSectionWatchedRepositories) {
-        GHRepository *repo = [self.watchedRepositoriesArray objectAtIndex:indexPath.row-1];
+        GHAPIRepositoryV3 *repo = [self.watchedRepositoriesArray objectAtIndex:indexPath.row-1];
         
-        GHSingleRepositoryViewController *viewController = [[[GHSingleRepositoryViewController alloc] initWithRepositoryString:[NSString stringWithFormat:@"%@/%@", repo.owner, repo.name] ] autorelease];
+        GHSingleRepositoryViewController *viewController = [[[GHSingleRepositoryViewController alloc] initWithRepositoryString:[NSString stringWithFormat:@"%@/%@", repo.owner.login, repo.name] ] autorelease];
         viewController.delegate = self;
         self.lastIndexPathForSingleRepositoryViewController = indexPath;
         [self.navigationController pushViewController:viewController animated:YES];

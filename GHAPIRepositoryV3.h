@@ -76,6 +76,9 @@
 + (void)repositoriesForUserNamed:(NSString *)username 
                completionHandler:(void (^)(NSArray *array, NSError *error))handler;
 
++ (void)repositoriesThatUserIsWatching:(NSString *)username 
+                completionHandler:(void (^)(NSArray *array, NSError *error))handler;
+
 // will contain GHAPIRepositoryBranchV3
 + (void)branchesOnRepository:(NSString *)repository 
            completionHandler:(void (^)(NSArray *array, NSError *error))handler;
