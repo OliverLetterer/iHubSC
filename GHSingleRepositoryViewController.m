@@ -54,7 +54,7 @@
 }
 
 - (BOOL)canDeleteRepository {
-    return [self.repository.owner isEqualToString:[GHAuthenticationManager sharedInstance].username ];
+    return [self.repository.owner.login isEqualToString:[GHAuthenticationManager sharedInstance].username ];
 }
 
 - (BOOL)isFollowingRepository {
@@ -82,16 +82,16 @@
 
 - (void)pullToReleaseTableViewReloadData {
     [super pullToReleaseTableViewReloadData];
-    [GHRepository repository:self.repositoryString 
-       withCompletionHandler:^(GHRepository *repository, NSError *error) {
-           if (error) {
-               [self handleError:error];
-           } else {
-               self.repository = repository;
-               [self.tableView reloadData];
-           }
-           [self pullToReleaseTableViewDidReloadData];
-       }];
+    [GHAPIRepositoryV3 repositoryNamed:self.repositoryString 
+                 withCompletionHandler:^(GHAPIRepositoryV3 *repository, NSError *error) {
+                     if (error) {
+                         [self handleError:error];
+                     } else {
+                         self.repository = repository;
+                         [self.tableView reloadData];
+                     }
+                     [self pullToReleaseTableViewDidReloadData];
+                 }];
 }
 
 #pragma mark - Memory management
@@ -387,14 +387,14 @@
             cell.selectionStyle = UITableViewCellEditingStyleNone;
             cell.accessoryType = UITableViewCellAccessoryNone;
             
-            if (self.repository.source) {
-                cell.titleLabel.text = [NSString stringWithFormat:@"%@/%@", self.repository.owner, self.repository.name];
-                cell.descriptionLabel.text = self.repository.desctiptionRepo;
-                cell.repositoryLabel.text = [NSString stringWithFormat:NSLocalizedString(@"forked from %@", @""), self.repository.source];
+            if (self.repository.isForked) {
+                cell.titleLabel.text = [NSString stringWithFormat:@"%@/%@", self.repository.owner.login, self.repository.name];
+                cell.descriptionLabel.text = self.repository.description;
+                cell.repositoryLabel.text = [NSString stringWithFormat:NSLocalizedString(@"forked from %@", @""), [NSString stringWithFormat:@"%@/%@", self.repository.parent.owner.login, self.repository.parent.name]];
             } else {
                 cell.titleLabel.text = self.repository.name;
-                cell.descriptionLabel.text = self.repository.desctiptionRepo;
-                cell.repositoryLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Created by %@", @""), self.repository.owner];
+                cell.descriptionLabel.text = self.repository.description;
+                cell.repositoryLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Created by %@", @""), self.repository.owner.login];
             }
             
             if ([self.repository.private boolValue]) {
@@ -415,7 +415,7 @@
             }
             
             cell.textLabel.text = NSLocalizedString(@"Owner", @"");
-            cell.detailTextLabel.text = self.repository.owner;
+            cell.detailTextLabel.text = self.repository.owner.login;
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             
             return cell;
@@ -446,7 +446,7 @@
             }
             
             cell.textLabel.text = NSLocalizedString(@"Created", @"");
-            cell.detailTextLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ ago", @""), self.repository.creationDate.prettyTimeIntervalSinceNow];
+            cell.detailTextLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ ago", @""), self.repository.createdAt.prettyTimeIntervalSinceNow];
             
             
             return cell;
@@ -476,7 +476,7 @@
             }
             
             cell.textLabel.text = NSLocalizedString(@"Homepage", @"");
-            cell.detailTextLabel.text = self.repository.homePage;
+            cell.detailTextLabel.text = self.repository.homepage;
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             cell.selectionStyle = UITableViewCellSelectionStyleBlue;
             
@@ -492,7 +492,7 @@
             }
             
             cell.textLabel.text = NSLocalizedString(@"Forked from", @"");
-            cell.detailTextLabel.text = self.repository.source;
+            cell.detailTextLabel.text = [NSString stringWithFormat:@"%@/%@", self.repository.parent.owner.login, self.repository.parent.name];
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             cell.selectionStyle = UITableViewCellSelectionStyleBlue;
             
@@ -692,7 +692,7 @@
     if (indexPath.section == kUITableViewSectionUserData && indexPath.row == 0) {
         // title + description
         if (![self isHeightCachedForRowAtIndexPath:indexPath]) {
-            [self cacheHeight:[self heightForDescription:self.repository.desctiptionRepo] + 50.0 
+            [self cacheHeight:[self heightForDescription:self.repository.description] + 50.0 
             forRowAtIndexPath:indexPath];
         }
         
@@ -712,14 +712,14 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == kUITableViewSectionForkedFrom && indexPath.row == 0) {
-        GHSingleRepositoryViewController *repoViewController = [[[GHSingleRepositoryViewController alloc] initWithRepositoryString:self.repository.source] autorelease];
+        GHSingleRepositoryViewController *repoViewController = [[[GHSingleRepositoryViewController alloc] initWithRepositoryString:[NSString stringWithFormat:@"%@/%@", self.repository.parent.owner.login, self.repository.parent.name] ] autorelease];
         repoViewController.delegate = self;
         [self.navigationController pushViewController:repoViewController animated:YES];
     } else if (indexPath.section == kUITableViewSectionOwner && indexPath.row == 0) {
-        GHUserViewController *userViewController = [[[GHUserViewController alloc] initWithUsername:self.repository.owner] autorelease];
+        GHUserViewController *userViewController = [[[GHUserViewController alloc] initWithUsername:self.repository.owner.login] autorelease];
         [self.navigationController pushViewController:userViewController animated:YES];
     } else if (indexPath.section == kUITableViewSectionHomepage && indexPath.row == 0) {
-        NSURL *URL = [NSURL URLWithString:self.repository.homePage];
+        NSURL *URL = [NSURL URLWithString:self.repository.homepage];
         
         GHWebViewViewController *webViewController = [[[GHWebViewViewController alloc] initWithURL:URL] autorelease];
         [self.navigationController pushViewController:webViewController animated:YES];

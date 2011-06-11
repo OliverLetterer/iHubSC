@@ -177,37 +177,37 @@
     });
 }
 
-+ (void)repository:(NSString *)repository withCompletionHandler:(void (^)(GHRepository *repository, NSError *error))handler {
-    
-    dispatch_async(GHAPIBackgroundQueue(), ^(void) {
-        
-        // repos/show/:user/:repo
-        
-        NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://github.com/api/v2/json/repos/show/%@", [repository stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] ]];
-        NSError *myError = nil;
-        
-        ASIFormDataRequest *request = [ASIFormDataRequest authenticatedFormDataRequestWithURL:URL];
-        
-        [request startSynchronous];
-        
-        myError = [request error];
-        
-        if (!myError) {
-            myError = [NSError errorFromRawDictionary:[[request responseString] objectFromJSONString] ];
-        }
-        
-        NSString *jsonString = [request responseString];
-        
-        dispatch_async(dispatch_get_main_queue(), ^(void) {
-            if (myError) {
-                handler(nil, myError);
-            } else {
-                NSDictionary *rawDictionary = [jsonString objectFromJSONString];
-                handler([[[GHRepository alloc] initWithRawDictionary:[rawDictionary objectForKey:@"repository"] ] autorelease], nil);
-            }
-        });
-    });
-}
+//+ (void)repository:(NSString *)repository withCompletionHandler:(void (^)(GHRepository *repository, NSError *error))handler {
+//    
+//    dispatch_async(GHAPIBackgroundQueue(), ^(void) {
+//        
+//        // repos/show/:user/:repo
+//        
+//        NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://github.com/api/v2/json/repos/show/%@", [repository stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] ]];
+//        NSError *myError = nil;
+//        
+//        ASIFormDataRequest *request = [ASIFormDataRequest authenticatedFormDataRequestWithURL:URL];
+//        
+//        [request startSynchronous];
+//        
+//        myError = [request error];
+//        
+//        if (!myError) {
+//            myError = [NSError errorFromRawDictionary:[[request responseString] objectFromJSONString] ];
+//        }
+//        
+//        NSString *jsonString = [request responseString];
+//        
+//        dispatch_async(dispatch_get_main_queue(), ^(void) {
+//            if (myError) {
+//                handler(nil, myError);
+//            } else {
+//                NSDictionary *rawDictionary = [jsonString objectFromJSONString];
+//                handler([[[GHRepository alloc] initWithRawDictionary:[rawDictionary objectForKey:@"repository"] ] autorelease], nil);
+//            }
+//        });
+//    });
+//}
 
 + (void)watchingUserOfRepository:(NSString *)repository 
            withCompletionHandler:(void (^)(NSArray *watchingUsers, NSError *error))handler {

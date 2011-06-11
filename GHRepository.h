@@ -77,7 +77,7 @@
 + (void)watchedRepositoriesOfUser:(NSString *)username 
                 completionHandler:(void (^)(NSArray *array, NSError *error))handler;
 
-+ (void)repository:(NSString *)repository withCompletionHandler:(void (^)(GHRepository *repository, NSError *error))handler;
+//+ (void)repository:(NSString *)repository withCompletionHandler:(void (^)(GHRepository *repository, NSError *error))handler;
 
 + (void)watchingUserOfRepository:(NSString *)repository 
           withCompletionHandler:(void (^)(NSArray *watchingUsers, NSError *error))handler;

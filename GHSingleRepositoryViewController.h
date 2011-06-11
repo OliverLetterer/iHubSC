@@ -25,7 +25,7 @@
 @interface GHSingleRepositoryViewController : GHTableViewController <UIAlertViewDelegate, GHSingleRepositoryViewControllerDelegate, GHCreateIssueTableViewControllerDelegate> {
 @private
     NSString *_repositoryString;
-    GHRepository *_repository;
+    GHAPIRepositoryV3 *_repository;
     
     NSArray *_issuesArray;
     NSInteger _issuesNextPage;
@@ -48,7 +48,7 @@
 @property (nonatomic, readonly) BOOL canDeleteRepository;
 
 @property (nonatomic, copy) NSString *repositoryString;
-@property (nonatomic, retain) GHRepository *repository;
+@property (nonatomic, retain) GHAPIRepositoryV3 *repository;
 
 @property (nonatomic, retain) NSArray *issuesArray;
 - (void)cacheHeightForIssuesArray;
