@@ -10,3 +10,4 @@
 
 typedef void(^GHAPIPaginationHandler)(NSMutableArray *array, NSUInteger nextPage, NSError *error);
 typedef void(^GHAPIErrorHandler)(NSError *error);
+typedef void(^GHAPIStateHandler)(BOOL state, NSError *error);

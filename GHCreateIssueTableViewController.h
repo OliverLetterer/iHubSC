@@ -19,7 +19,7 @@
 
 @end
 
-
+#warning only display Milestone if user is a collaborator
 
 @interface GHCreateIssueTableViewController : GHTableViewController {
 @private
@@ -29,7 +29,7 @@
     UITextView *_textView;
     UIToolbar *_textViewToolBar;
     
-    NSArray *_collaborators;
+    NSMutableArray *_collaborators;
     NSUInteger _assignIndex;
     
     NSMutableArray *_milestones;
@@ -42,7 +42,7 @@
 @property (nonatomic, retain) UITextView *textView;
 @property (nonatomic, retain) UIToolbar *textViewToolBar;
 
-@property (nonatomic, retain) NSArray *collaborators;
+@property (nonatomic, retain) NSMutableArray *collaborators;
 @property (nonatomic, retain) NSMutableArray *milestones;
 
 - (void)cancelButtonClicked:(UIBarButtonItem *)sender;

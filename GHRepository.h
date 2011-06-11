@@ -63,8 +63,8 @@
 
 - (id)initWithRawDictionary:(NSDictionary *)rawDictionary;
 
-+ (void)collaboratorsForRepository:(NSString *)repository 
-                 completionHandler:(void (^)(NSArray *array, NSError *error))handler;
+//+ (void)collaboratorsForRepository:(NSString *)repository 
+//                 completionHandler:(void (^)(NSArray *array, NSError *error))handler;
 
 //+ (void)repositoriesForUserNamed:(NSString *)username 
 //               completionHandler:(void (^)(NSArray *array, NSError *error))handler;

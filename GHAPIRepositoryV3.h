@@ -88,4 +88,7 @@
 + (void)watchRepository:(NSString *)repository completionHandler:(GHAPIErrorHandler)handler;
 + (void)unwatchRepository:(NSString *)repository completionHandler:(GHAPIErrorHandler)handler;
 
++ (void)collaboratorsForRepository:(NSString *)repository page:(NSUInteger)page completionHandler:(GHAPIPaginationHandler)handler;
++ (void)isUser:(NSString *)username collaboratorOnRepository:(NSString *)repository completionHandler:(GHAPIStateHandler)handler;
+
 @end

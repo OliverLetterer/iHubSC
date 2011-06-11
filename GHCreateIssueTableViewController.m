@@ -206,15 +206,17 @@
 
 - (void)tableView:(UIExpandableTableView *)tableView downloadDataForExpandableSection:(NSInteger)section {
     if (section == kUITableViewSectionAssigned) {
-        [GHRepository collaboratorsForRepository:self.repository completionHandler:^(NSArray *array, NSError *error) {
-            if (error) {
-                [tableView cancelDownloadInSection:section];
-                [self handleError:error];
-            } else {
-                self.collaborators = array;
-                [tableView expandSection:section animated:YES];
-            }
-        }];
+        [GHAPIRepositoryV3 collaboratorsForRepository:self.repository page:1 
+                                    completionHandler:^(NSMutableArray *array, NSUInteger nextPage, NSError *error) {
+                                        if (error) {
+                                            [self handleError:error];
+                                            [tableView cancelDownloadInSection:section];
+                                        } else {
+                                            self.collaborators = array;
+                                            [self setNextPage:nextPage forSection:section];
+                                            [tableView expandSection:section animated:YES];
+                                        }
+                                    }];
     } else if (section == kUITableViewSectionMilestones) {
         [GHAPIIssueV3 milestonesForIssueOnRepository:self.repository withNumber:nil page:1 
                                    completionHandler:^(NSMutableArray *array, NSUInteger nextPage, NSError *error) {
@@ -245,6 +247,18 @@
                                                          withRowAnimation:UITableViewScrollPositionBottom];
                                        }
                                    }];
+    } else if (section == kUITableViewSectionAssigned) {
+        [GHAPIRepositoryV3 collaboratorsForRepository:self.repository page:page 
+                                    completionHandler:^(NSMutableArray *array, NSUInteger nextPage, NSError *error) {
+                                        if (error) {
+                                            [self handleError:error];
+                                        } else {
+                                            [self.collaborators addObjectsFromArray:array];
+                                            [self setNextPage:nextPage forSection:section];
+                                            [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:section] 
+                                                          withRowAnimation:UITableViewScrollPositionBottom];
+                                        }
+                                    }];
     }
 }
 

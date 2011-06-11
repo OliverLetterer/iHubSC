@@ -36,36 +36,36 @@
 
 #pragma mark - class methods
 
-+ (void)collaboratorsForRepository:(NSString *)repository 
-                 completionHandler:(void (^)(NSArray *, NSError *))handler {
-    
-    dispatch_async(GHAPIBackgroundQueue(), ^(void) {
-        
-        NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://github.com/api/v2/json/repos/show/%@/collaborators",
-                                           [repository stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]
-                                           ]];
-        NSError *myError = nil;
-        
-        ASIHTTPRequest *request = [ASIHTTPRequest authenticatedFormDataRequestWithURL:URL];
-        [request startSynchronous];
-        
-        myError = [request error];
-        
-        NSData *jsonData = [request responseData];
-        NSString *jsonString = [[[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding] autorelease];
-        
-        dispatch_async(dispatch_get_main_queue(), ^(void) {
-            if (myError) {
-                handler(nil, myError);
-            } else {
-                NSDictionary *info = [jsonString objectFromJSONString];
-                NSArray *collaborators = [info objectForKey:@"collaborators"];
-                handler(collaborators, nil);
-            }
-        });
-    });
-    
-}
+//+ (void)collaboratorsForRepository:(NSString *)repository 
+//                 completionHandler:(void (^)(NSArray *, NSError *))handler {
+//    
+//    dispatch_async(GHAPIBackgroundQueue(), ^(void) {
+//        
+//        NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://github.com/api/v2/json/repos/show/%@/collaborators",
+//                                           [repository stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]
+//                                           ]];
+//        NSError *myError = nil;
+//        
+//        ASIHTTPRequest *request = [ASIHTTPRequest authenticatedFormDataRequestWithURL:URL];
+//        [request startSynchronous];
+//        
+//        myError = [request error];
+//        
+//        NSData *jsonData = [request responseData];
+//        NSString *jsonString = [[[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding] autorelease];
+//        
+//        dispatch_async(dispatch_get_main_queue(), ^(void) {
+//            if (myError) {
+//                handler(nil, myError);
+//            } else {
+//                NSDictionary *info = [jsonString objectFromJSONString];
+//                NSArray *collaborators = [info objectForKey:@"collaborators"];
+//                handler(collaborators, nil);
+//            }
+//        });
+//    });
+//    
+//}
 
 //+ (void)repositoriesForUserNamed:(NSString *)username 
 //               completionHandler:(void (^)(NSArray *array, NSError *error))handler {

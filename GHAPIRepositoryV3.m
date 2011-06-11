@@ -303,4 +303,48 @@
                                             }];
 }
 
++ (void)collaboratorsForRepository:(NSString *)repository page:(NSUInteger)page completionHandler:(GHAPIPaginationHandler)handler {
+    // v3: GET /repos/:user/:repo/collaborators
+    
+    NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.github.com/repos/%@/collaborators",
+                                       [repository stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] ] ];
+    
+    [[GHBackgroundQueue sharedInstance] sendRequestToURL:URL page:page setupHandler:nil 
+                             completionPaginationHandler:^(id object, NSError *error, ASIFormDataRequest *request, NSUInteger nextPage) {
+                                 if (error) {
+                                     handler(nil, GHAPIPaginationNextPageNotFound, error);
+                                 } else {
+                                     NSArray *rawArray = object;
+                                     
+                                     NSMutableArray *finalArray = [NSMutableArray arrayWithCapacity:rawArray.count];
+                                     [rawArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+                                         [finalArray addObject:[[[GHAPIUserV3 alloc] initWithRawDictionary:obj] autorelease] ];
+                                     }];
+                                     
+                                     handler(finalArray, nextPage, nil);
+                                 }
+                             }];
+}
+
++ (void)isUser:(NSString *)username collaboratorOnRepository:(NSString *)repository completionHandler:(GHAPIStateHandler)handler {
+    // v3: GET /repos/:user/:repo/collaborators/:user
+    
+    NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.github.com/repos/%@/collaborators/%@",
+                                       [repository stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
+                                       [username stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] 
+                                       ] ];
+    
+    [[GHBackgroundQueue sharedInstance] sendRequestToURL:URL 
+                                            setupHandler:nil 
+                                       completionHandler:^(id object, NSError *error, ASIFormDataRequest *request) {
+                                           if ([request responseStatusCode] == 404) {
+                                               handler(NO, nil);
+                                           } else if (error) {
+                                               handler(NO, error);
+                                           } else {
+                                               handler([request responseStatusCode] == 204, nil);
+                                           }
+                                       }];
+}
+
 @end

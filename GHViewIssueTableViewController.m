@@ -59,21 +59,17 @@
         self.number = number;
         self.title = [NSString stringWithFormat:NSLocalizedString(@"Issue %@", @""), self.number];
         _isDownloadingIssueData = YES;
-        [GHRepository collaboratorsForRepository:self.repository 
-                               completionHandler:^(NSArray *collaborators, NSError *error) {
-                                   if (!error) {
-                                       NSString *myUsername = [GHSettingsHelper username];
-                                       for (NSString *collaborator in collaborators) {
-                                           if ([collaborator isEqualToString:myUsername]) {
-                                               _canUserAdministrateIssue = YES;
-                                               break;
-                                           }
-                                       }
-                                       [self downloadIssueData];
-                                   } else {
-                                       [self handleError:error];
-                                   }
-                               }];
+        
+        [GHAPIRepositoryV3 isUser:[GHSettingsHelper username] 
+         collaboratorOnRepository:self.repository 
+                completionHandler:^(BOOL state, NSError *error) {
+                    if (error) {
+                        [self handleError:error];
+                    } else {
+                        _canUserAdministrateIssue = state;
+                        [self downloadIssueData];
+                    }
+                }];
     }
     return self;
 }
