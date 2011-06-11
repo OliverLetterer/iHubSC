@@ -107,7 +107,7 @@
     
 }
 
-+ (void)usersThatUsernameIsFollowing:(NSString *)username page:(NSInteger)page completionHandler:(GHAPIPaginationHandler)handler {
++ (void)usersThatUsernameIsFollowing:(NSString *)username page:(NSUInteger)page completionHandler:(GHAPIPaginationHandler)handler {
     // v3: GET /users/:user/following
     
     NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.github.com/users/%@/following",
@@ -206,7 +206,7 @@
                                        }];
 }
 
-+ (void)gistsOfUser:(NSString *)username page:(NSInteger)page completionHandler:(GHAPIPaginationHandler)handler {
++ (void)gistsOfUser:(NSString *)username page:(NSUInteger)page completionHandler:(GHAPIPaginationHandler)handler {
     
     // v3: GET /users/:user/gists
     
