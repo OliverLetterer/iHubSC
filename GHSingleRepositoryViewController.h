@@ -19,7 +19,7 @@
 
 @end
 
-
+#warning manage collaborators on a repository (delete and add)
 
 
 @interface GHSingleRepositoryViewController : GHTableViewController <UIAlertViewDelegate, GHSingleRepositoryViewControllerDelegate, GHCreateIssueTableViewControllerDelegate> {

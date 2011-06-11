@@ -63,37 +63,12 @@
 
 - (id)initWithRawDictionary:(NSDictionary *)rawDictionary;
 
-//+ (void)collaboratorsForRepository:(NSString *)repository 
-//                 completionHandler:(void (^)(NSArray *array, NSError *error))handler;
-
-//+ (void)repositoriesForUserNamed:(NSString *)username 
-//               completionHandler:(void (^)(NSArray *array, NSError *error))handler;
-
-+ (void)createRepositoryWithTitle:(NSString *)title 
-                      description:(NSString *)description 
-                           public:(BOOL)public 
-                completionHandler:(void (^)(GHRepository *repository, NSError *error))handler;
-
-//+ (void)watchedRepositoriesOfUser:(NSString *)username 
-//                completionHandler:(void (^)(NSArray *array, NSError *error))handler;
-
-//+ (void)repository:(NSString *)repository withCompletionHandler:(void (^)(GHRepository *repository, NSError *error))handler;
-
-//+ (void)watchingUserOfRepository:(NSString *)repository 
-//          withCompletionHandler:(void (^)(NSArray *watchingUsers, NSError *error))handler;
-
 + (void)deleteTokenForRepository:(NSString *)repository 
            withCompletionHandler:(void (^)(NSString *deleteToken, NSError *error))handler;
 
 + (void)deleteRepository:(NSString *)repository 
                withToken:(NSString *)token 
        completionHandler:(void (^)(NSError *error))handler;
-
-//+ (void)followRepositorie:(NSString *)repository completionHandler:(void (^)(NSError *error))handler;
-//+ (void)unfollowRepositorie:(NSString *)repository completionHandler:(void (^)(NSError *error))handler;
-
-//+ (void)branchesOnRepository:(NSString *)repository 
-//           completionHandler:(void (^)(NSArray *array, NSError *error))handler;
 
 + (void)recentCommitsOnRepository:(NSString *)repository 
                            branch:(NSString *)branch

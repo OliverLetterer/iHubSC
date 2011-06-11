@@ -347,4 +347,38 @@
                                        }];
 }
 
++ (void)createRepositoryWithName:(NSString *)name description:(NSString *)description 
+                          public:(BOOL)public completionHandler:(void (^)(GHAPIRepositoryV3 *repository, NSError *error))handler {
+    // v3: POST /user/repos
+    
+    NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.github.com/user/repos"]];
+    
+    [[GHBackgroundQueue sharedInstance] sendRequestToURL:URL 
+                                            setupHandler:^(ASIFormDataRequest *request) {
+                                                [request setRequestMethod:@"POST"];
+                                                
+                                                NSMutableDictionary *jsonDictionary = [NSMutableDictionary dictionaryWithCapacity:4];
+                                                
+                                                if (name) {
+                                                    [jsonDictionary setObject:name forKey:@"name"];
+                                                }
+                                                if (description) {
+                                                    [jsonDictionary setObject:description forKey:@"description"];
+                                                }
+                                                [jsonDictionary setObject:[NSNumber numberWithBool:public] forKey:@"public"];
+                                                
+                                                NSString *jsonString = [jsonDictionary JSONString];
+                                                NSMutableData *jsonData = [[[jsonString dataUsingEncoding:NSUTF8StringEncoding] mutableCopy] autorelease];
+                                                [request setPostBody:jsonData];
+                                                [request setPostLength:[jsonString length] ];
+                                                
+                                            } completionHandler:^(id object, NSError *error, ASIFormDataRequest *request) {
+                                                if (error) {
+                                                    handler(nil, error);
+                                                } else {
+                                                    handler([[[GHAPIRepositoryV3 alloc] initWithRawDictionary:object] autorelease], nil);
+                                                }
+                                            }];
+}
+
 @end

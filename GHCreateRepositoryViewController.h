@@ -9,12 +9,12 @@
 #import <UIKit/UIKit.h>
 #import "GHTableViewController.h"
 
-@class GHCreateRepositoryViewController, GHRepository, GHCreateRepositoryTableViewCell;
+@class GHCreateRepositoryViewController, GHAPIRepositoryV3, GHCreateRepositoryTableViewCell;
 
 @protocol GHCreateRepositoryViewControllerDelegate <NSObject>
 
 - (void)createRepositoryViewController:(GHCreateRepositoryViewController *)createRepositoryViewController 
-                   didCreateRepository:(GHRepository *)repository;
+                   didCreateRepository:(GHAPIRepositoryV3 *)repository;
 
 - (void)createRepositoryViewControllerDidCancel:(GHCreateRepositoryViewController *)createRepositoryViewController;
 

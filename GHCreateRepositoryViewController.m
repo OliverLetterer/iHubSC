@@ -106,16 +106,16 @@
 #pragma mark - instance methods
 
 - (void)createRepository {
-    [GHRepository createRepositoryWithTitle:self.createCell.titleTextField.text
-                                description:self.createCell.descriptionTextField.text
-                                     public:self.createCell.publicSwitch.isOn
-                          completionHandler:^(GHRepository *repository, NSError *error) {
-                              if (error) {
-                                  [self handleError:error];
-                              } else {
-                                  [self.delegate createRepositoryViewController:self didCreateRepository:repository];
-                              }
-                          }];
+    [GHAPIRepositoryV3 createRepositoryWithName:self.createCell.titleTextField.text 
+                                    description:self.createCell.descriptionTextField.text 
+                                         public:self.createCell.publicSwitch.isOn 
+                              completionHandler:^(GHAPIRepositoryV3 *repository, NSError *error) {
+                                  if (error) {
+                                      [self handleError:error];
+                                  } else {
+                                      [self.delegate createRepositoryViewController:self didCreateRepository:repository];
+                                  }
+                              }];
 }
 
 #pragma mark - Table view data source

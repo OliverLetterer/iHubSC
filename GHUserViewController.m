@@ -988,9 +988,13 @@
 #pragma mark - GHCreateRepositoryViewControllerDelegate
 
 - (void)createRepositoryViewController:(GHCreateRepositoryViewController *)createRepositoryViewController 
-                   didCreateRepository:(GHRepository *)repository {
+                   didCreateRepository:(GHAPIRepositoryV3 *)repository {
     [self dismissModalViewControllerAnimated:YES];
-    [self downloadRepositories];
+    [self.repositoriesArray addObject:repository];
+    
+    [self cacheHeightForTableView];
+    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:kUITableViewSectionRepositories] 
+                  withRowAnimation:kUITableViewSectionRepositories];
 }
 
 - (void)createRepositoryViewControllerDidCancel:(GHCreateRepositoryViewController *)createRepositoryViewController {
