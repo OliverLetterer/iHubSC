@@ -67,6 +67,8 @@ V1.6
 - new design
 - minor bugfixes
 
+V1.6
+- fixed starring Gists Issue
 
 
 iTunes Changelog:

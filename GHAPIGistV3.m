@@ -106,7 +106,7 @@
     
     [[GHBackgroundQueue sharedInstance] sendRequestToURL:URL 
                                             setupHandler:^(ASIFormDataRequest *request) {
-                                                [request setRequestMethod:@"POST"];
+                                                [request setRequestMethod:@"PUT"];
                                             } 
                                        completionHandler:^(id object, NSError *error, ASIFormDataRequest *request) {
                                            handler(error);
