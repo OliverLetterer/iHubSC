@@ -66,8 +66,8 @@
 + (void)collaboratorsForRepository:(NSString *)repository 
                  completionHandler:(void (^)(NSArray *array, NSError *error))handler;
 
-+ (void)repositoriesForUserNamed:(NSString *)username 
-               completionHandler:(void (^)(NSArray *array, NSError *error))handler;
+//+ (void)repositoriesForUserNamed:(NSString *)username 
+//               completionHandler:(void (^)(NSArray *array, NSError *error))handler;
 
 + (void)createRepositoryWithTitle:(NSString *)title 
                       description:(NSString *)description 

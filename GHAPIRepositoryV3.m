@@ -44,7 +44,6 @@
 
 - (id)initWithRawDictionary:(NSDictionary *)rawDictionary parseChildren:(BOOL)parse {
     if ((self = [super init])) {
-        DLog(@"%@", rawDictionary);
         // Initialization code
         self.URL = [rawDictionary objectForKeyOrNilOnNullObject:@"url"];
         self.HTMLURL = [rawDictionary objectForKeyOrNilOnNullObject:@"html_url"];
@@ -150,6 +149,37 @@
                                                handler(nil, error);
                                            } else {
                                                handler([[[GHAPIRepositoryV3 alloc] initWithRawDictionary:object] autorelease], nil);
+                                           }
+                                       }];
+}
+
++ (void)repositoriesForUserNamed:(NSString *)username 
+               completionHandler:(void (^)(NSArray *array, NSError *error))handler {
+    NSURL *URL = nil;
+    
+    if ([username isEqualToString:[GHAuthenticationManager sharedInstance].username]) {
+        // authenticated user
+        // v3: GET /user/repos
+        URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.github.com/user/repos"] ];
+    } else {
+        // v3: GET /users/:user/repos
+        URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.github.com/users/%@/repos",
+                                    [username stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] ] ];
+    }
+    
+    [[GHBackgroundQueue sharedInstance] sendRequestToURL:URL setupHandler:nil
+                                       completionHandler:^(id object, NSError *error, ASIFormDataRequest *request) {
+                                           if (error) {
+                                               handler(nil, error);
+                                           } else {
+                                               NSArray *rawArray = object;
+                                               
+                                               NSMutableArray *finalArray = [NSMutableArray arrayWithCapacity:rawArray.count];
+                                               for (NSDictionary *rawDictionary in rawArray) {
+                                                   [finalArray addObject:[[[GHAPIRepositoryV3 alloc] initWithRawDictionary:rawDictionary] autorelease] ];
+                                               }
+                                               
+                                               handler(finalArray, nil);
                                            }
                                        }];
 }

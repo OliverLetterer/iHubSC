@@ -140,16 +140,16 @@
 }
 
 - (void)downloadRepositories {
-    [GHRepository repositoriesForUserNamed:self.username 
-                         completionHandler:^(NSArray *array, NSError *error) {
-                             if (error) {
-                                 [self handleError:error];
-                             } else {
-                                 self.repositoriesArray = array;
-                             }
-                             [self cacheHeightForTableView];
-                             [self.tableView reloadData];
-                         }];
+    [GHAPIRepositoryV3 repositoriesForUserNamed:self.username 
+                              completionHandler:^(NSArray *array, NSError *error) {
+                                  if (error) {
+                                      [self handleError:error];
+                                  } else {
+                                      self.repositoriesArray = array;
+                                  }
+                                  [self cacheHeightForTableView];
+                                  [self.tableView reloadData];
+                              }];
 }
 
 - (void)pullToReleaseTableViewReloadData {
@@ -167,8 +167,8 @@
 
 - (void)cacheHeightForTableView {
     NSInteger i = 0;
-    for (GHRepository *repo in self.repositoriesArray) {
-        CGFloat height = [self heightForDescription:repo.desctiptionRepo] + 50.0;
+    for (GHAPIRepositoryV3 *repo in self.repositoriesArray) {
+        CGFloat height = [self heightForDescription:repo.description] + 50.0;
         
         if (height < 71.0) {
             height = 71.0;
@@ -321,17 +321,17 @@
 
 - (void)tableView:(UIExpandableTableView *)tableView downloadDataForExpandableSection:(NSInteger)section {
     if (section == kUITableViewSectionRepositories) {
-        [GHRepository repositoriesForUserNamed:self.username 
-                             completionHandler:^(NSArray *array, NSError *error) {
-                                 if (error) {
-                                     [self handleError:error];
-                                     [tableView cancelDownloadInSection:section];
-                                 } else {
-                                     self.repositoriesArray = array;
-                                     [self cacheHeightForTableView];
-                                     [self.tableView expandSection:section animated:YES];
-                                 }
-                             }];
+        [GHAPIRepositoryV3 repositoriesForUserNamed:self.username 
+                                  completionHandler:^(NSArray *array, NSError *error) {
+                                      if (error) {
+                                          [self handleError:error];
+                                          [tableView cancelDownloadInSection:section];
+                                      } else {
+                                          self.repositoriesArray = array;
+                                          [self cacheHeightForTableView];
+                                          [self.tableView expandSection:section animated:YES];
+                                      }
+                                  }];
     } else if (section == kUITableViewSectionWatchedRepositories) {
         [GHRepository watchedRepositoriesOfUser:self.username 
                               completionHandler:^(NSArray *array, NSError *error) {
@@ -595,10 +595,10 @@
             cell = [[[GHFeedItemWithDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
         }
         
-        GHRepository *repository = [self.repositoriesArray objectAtIndex:indexPath.row-1];
+        GHAPIRepositoryV3 *repository = [self.repositoriesArray objectAtIndex:indexPath.row-1];
         
         cell.titleLabel.text = repository.name;
-        cell.descriptionLabel.text = repository.desctiptionRepo;
+        cell.descriptionLabel.text = repository.description;
         
         if ([repository.private boolValue]) {
             cell.imageView.image = [UIImage imageNamed:@"GHPrivateRepositoryIcon.png"];
@@ -806,9 +806,9 @@
         GHRecentActivityViewController *recentViewController = [[[GHRecentActivityViewController alloc] initWithUsername:self.username] autorelease];
         [self.navigationController pushViewController:recentViewController animated:YES];
     } else if (indexPath.section == kUITableViewSectionRepositories) {
-        GHRepository *repo = [self.repositoriesArray objectAtIndex:indexPath.row-1];
+        GHAPIRepositoryV3 *repo = [self.repositoriesArray objectAtIndex:indexPath.row-1];
         
-        GHSingleRepositoryViewController *viewController = [[[GHSingleRepositoryViewController alloc] initWithRepositoryString:[NSString stringWithFormat:@"%@/%@", repo.owner, repo.name] ] autorelease];
+        GHSingleRepositoryViewController *viewController = [[[GHSingleRepositoryViewController alloc] initWithRepositoryString:[NSString stringWithFormat:@"%@/%@", repo.owner.login, repo.name] ] autorelease];
         viewController.delegate = self;
         self.lastIndexPathForSingleRepositoryViewController = indexPath;
         [self.navigationController pushViewController:viewController animated:YES];
