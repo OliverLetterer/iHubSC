@@ -17,11 +17,8 @@
     NSString *_repository;
     NSNumber *_milestoneNumber;
     
-    NSArray *_openIssues;
-    NSInteger _openIssuesNextPage;
-    
-    NSArray *_closedIssues;
-    NSInteger _closedIssuesNextPage;
+    NSMutableArray *_openIssues;
+    NSMutableArray *_closedIssues;
 }
 
 @property (nonatomic, retain) GHAPIMilestoneV3 *milestone;
@@ -29,8 +26,8 @@
 @property (nonatomic, copy) NSString *repository;
 @property (nonatomic, copy) NSNumber *milestoneNumber;
 
-@property (nonatomic, retain) NSArray *openIssues;
-@property (nonatomic, retain) NSArray *closedIssues;
+@property (nonatomic, retain) NSMutableArray *openIssues;
+@property (nonatomic, retain) NSMutableArray *closedIssues;
 
 - (id)initWithRepository:(NSString *)repository milestoneNumber:(NSNumber *)milestoneNumber;
 

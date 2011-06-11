@@ -83,7 +83,7 @@ dispatch_queue_t GHAPIBackgroundQueue() {
     NSString *urlString = [URL absoluteString];
     if ([urlString rangeOfString:@"?"].location == NSNotFound) {
         urlString = [urlString stringByAppendingString:@"?"];
-    } else if ([urlString hasSuffix:@"&"]) {
+    } else if (![urlString hasSuffix:@"&"]) {
         urlString = [urlString stringByAppendingString:@"&"];
     }
     urlString = [urlString stringByAppendingFormat:@"page=%d&per_page=%d", page, GHAPIDefaultPaginationCount];

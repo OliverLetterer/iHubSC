@@ -216,18 +216,35 @@
             }
         }];
     } else if (section == kUITableViewSectionMilestones) {
-        [GHAPIIssueV3 milestonesForIssueOnRepository:self.repository withNumber:nil 
-                                             page:1 
-                                completionHandler:^(NSArray *milestones, NSInteger nextPage, NSError *error) {
-                                    if (error) {
-                                        [tableView cancelDownloadInSection:section];
-                                        [self handleError:error];
-                                    } else {
-                                        _milestonesNextPage = nextPage;
-                                        self.milestones = milestones;
-                                        [tableView expandSection:section animated:YES];
-                                    }
-        }];
+        [GHAPIIssueV3 milestonesForIssueOnRepository:self.repository withNumber:nil page:1 
+                                   completionHandler:^(NSMutableArray *array, NSUInteger nextPage, NSError *error) {
+                                       if (error) {
+                                           [self handleError:error];
+                                           [tableView cancelDownloadInSection:section];
+                                       } else {
+                                           self.milestones = array;
+                                           [self setNextPage:nextPage forSection:section];
+                                           [tableView expandSection:section animated:YES];
+                                       }
+                                   }];
+    }
+}
+
+#pragma mark - pagination
+
+- (void)downloadDataForPage:(NSUInteger)page inSection:(NSUInteger)section {
+    if (section == kUITableViewSectionMilestones) {
+        [GHAPIIssueV3 milestonesForIssueOnRepository:self.repository withNumber:nil page:page 
+                                   completionHandler:^(NSMutableArray *array, NSUInteger nextPage, NSError *error) {
+                                       if (error) {
+                                           [self handleError:error];
+                                       } else {
+                                           [self.milestones addObjectsFromArray:array];
+                                           [self setNextPage:nextPage forSection:section];
+                                           [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:section] 
+                                                         withRowAnimation:UITableViewScrollPositionBottom];
+                                       }
+                                   }];
     }
 }
 
@@ -347,27 +364,6 @@
 */
 
 #pragma mark - Table view delegate
-
-- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == kUITableViewSectionMilestones && indexPath.row == [self.milestones count] && indexPath.row != 0 && _milestonesNextPage > 1) {
-        
-        [GHAPIIssueV3 milestonesForIssueOnRepository:self.repository withNumber:nil page:_milestonesNextPage 
-                                completionHandler:^(NSArray *milestones, NSInteger nextPage, NSError *error) {
-                                    
-                                    if (error) {
-                                        [self handleError:error];
-                                    } else {
-                                        _milestonesNextPage = nextPage;
-                                        NSMutableArray *mutablCopy = [[self.milestones mutableCopy] autorelease];
-                                        [mutablCopy addObjectsFromArray:milestones];
-                                        self.milestones = mutablCopy;
-                                        [tableView reloadSections:[NSIndexSet indexSetWithIndex:kUITableViewSectionMilestones] 
-                                                 withRowAnimation:UITableViewRowAnimationNone];
-                                    }
-                                }];
-        
-    }
-}
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == kUITableViewSectionTitle) {

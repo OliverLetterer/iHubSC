@@ -140,15 +140,20 @@
 }
 
 - (void)downloadRepositories {
-    [GHAPIRepositoryV3 repositoriesForUserNamed:self.username 
-                              completionHandler:^(NSArray *array, NSError *error) {
+    [self.tableView collapseSection:kUITableViewSectionRepositories animated:YES];
+    self.repositoriesArray = nil;
+    [self.tableView reloadData];
+    
+    [GHAPIRepositoryV3 repositoriesForUserNamed:self.username page:1 
+                              completionHandler:^(NSMutableArray *array, NSUInteger nextPage, NSError *error) {
                                   if (error) {
                                       [self handleError:error];
                                   } else {
                                       self.repositoriesArray = array;
+                                      [self setNextPage:nextPage forSection:kUITableViewSectionRepositories];
+                                      [self cacheHeightForTableView];
+                                      [self.tableView expandSection:kUITableViewSectionRepositories animated:YES];
                                   }
-                                  [self cacheHeightForTableView];
-                                  [self.tableView reloadData];
                               }];
 }
 
@@ -255,54 +260,6 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
-#pragma mark - pagination
-
-- (void)downloadDataForPage:(NSUInteger)page inSection:(NSUInteger)section {
-    [super downloadDataForPage:page inSection:section];
-    
-    if (section == kUITableViewGists) {
-        [GHAPIUserV3 gistsOfUser:self.username 
-                            page:page 
-               completionHandler:^(NSMutableArray *array, NSUInteger nextPage, NSError *error) {
-                   if (error) {
-                       [self handleError:error];
-                   } else {
-                       [self setNextPage:nextPage forSection:section];
-                       [self.gists addObjectsFromArray:array];
-                       [self cacheGistsHeight];
-                       [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:section] 
-                                     withRowAnimation:UITableViewScrollPositionBottom];
-                   }
-               }];
-    } else if (section == kUITableViewFollowingUsers) {
-        [GHAPIUserV3 usersThatUsernameIsFollowing:self.username 
-                                             page:page
-                                completionHandler:^(NSMutableArray *array, NSUInteger nextPage, NSError *error) {
-                                    if (error) {
-                                        [self handleError:error];
-                                    } else {
-                                        [self.followingUsers addObjectsFromArray:array];
-                                        [self setNextPage:nextPage forSection:section];
-                                        [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:section] 
-                                                      withRowAnimation:UITableViewScrollPositionBottom];
-                                    }
-                                }];
-    } else if (section == kUITableViewFollowedUsers) {
-        [GHAPIUserV3 usersThatAreFollowingUserNamed:self.username 
-                                               page:page 
-                                  completionHandler:^(NSMutableArray *array, NSUInteger nextPage, NSError *error) {
-                                      if (error) {
-                                          [self handleError:error];
-                                      } else {
-                                          [self.followedUsers addObjectsFromArray:array];
-                                          [self setNextPage:nextPage forSection:section];
-                                          [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:section] 
-                                                        withRowAnimation:UITableViewScrollPositionBottom];
-                                      }
-                                  }];
-    }
-}
-
 #pragma mark - UIExpandableTableViewDatasource
 
 - (BOOL)tableView:(UIExpandableTableView *)tableView canExpandSection:(NSInteger)section {
@@ -365,29 +322,94 @@
     return cell;
 }
 
+#pragma mark - pagination
+
+- (void)downloadDataForPage:(NSUInteger)page inSection:(NSUInteger)section {
+    [super downloadDataForPage:page inSection:section];
+    
+    if (section == kUITableViewGists) {
+        [GHAPIUserV3 gistsOfUser:self.username 
+                            page:page 
+               completionHandler:^(NSMutableArray *array, NSUInteger nextPage, NSError *error) {
+                   if (error) {
+                       [self handleError:error];
+                   } else {
+                       [self setNextPage:nextPage forSection:section];
+                       [self.gists addObjectsFromArray:array];
+                       [self cacheGistsHeight];
+                       [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:section] 
+                                     withRowAnimation:UITableViewScrollPositionBottom];
+                   }
+               }];
+    } else if (section == kUITableViewFollowingUsers) {
+        [GHAPIUserV3 usersThatUsernameIsFollowing:self.username 
+                                             page:page
+                                completionHandler:^(NSMutableArray *array, NSUInteger nextPage, NSError *error) {
+                                    if (error) {
+                                        [self handleError:error];
+                                    } else {
+                                        [self.followingUsers addObjectsFromArray:array];
+                                        [self setNextPage:nextPage forSection:section];
+                                        [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:section] 
+                                                      withRowAnimation:UITableViewScrollPositionBottom];
+                                    }
+                                }];
+    } else if (section == kUITableViewFollowedUsers) {
+        [GHAPIUserV3 usersThatAreFollowingUserNamed:self.username 
+                                               page:page 
+                                  completionHandler:^(NSMutableArray *array, NSUInteger nextPage, NSError *error) {
+                                      if (error) {
+                                          [self handleError:error];
+                                      } else {
+                                          [self.followedUsers addObjectsFromArray:array];
+                                          [self setNextPage:nextPage forSection:section];
+                                          [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:section] 
+                                                        withRowAnimation:UITableViewScrollPositionBottom];
+                                      }
+                                  }];
+    } else if (section == kUITableViewSectionRepositories) {
+        [GHAPIRepositoryV3 repositoriesForUserNamed:self.username page:page 
+                                  completionHandler:^(NSMutableArray *array, NSUInteger nextPage, NSError *error) {
+                                      if (error) {
+                                          [self handleError:error];
+                                      } else {
+                                          [self.repositoriesArray addObjectsFromArray:array];
+                                          [self setNextPage:nextPage forSection:section];
+                                          [self cacheHeightForTableView];
+                                          [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:section] 
+                                                        withRowAnimation:UITableViewScrollPositionBottom];
+                                      }
+                                  }];
+    } else if (section == kUITableViewSectionWatchedRepositories) {
+        [GHAPIRepositoryV3 repositoriesThatUserIsWatching:self.username page:page 
+                                        completionHandler:^(NSMutableArray *array, NSUInteger nextPage, NSError *error) {
+                                            if (error) {
+                                                [self handleError:error];
+                                            } else {
+                                                [self.watchedRepositoriesArray addObjectsFromArray:array];
+                                                [self setNextPage:nextPage forSection:section];
+                                                [self cacheHeightForWatchedRepositories];
+                                                [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:section] 
+                                                              withRowAnimation:UITableViewScrollPositionBottom];
+                                            }
+                                        }];
+    }
+}
+
 #pragma mark - UIExpandableTableViewDelegate
 
 - (void)tableView:(UIExpandableTableView *)tableView downloadDataForExpandableSection:(NSInteger)section {
     if (section == kUITableViewSectionRepositories) {
-        [GHAPIRepositoryV3 repositoriesForUserNamed:self.username 
-                                  completionHandler:^(NSArray *array, NSError *error) {
-                                      if (error) {
-                                          [self handleError:error];
-                                          [tableView cancelDownloadInSection:section];
-                                      } else {
-                                          self.repositoriesArray = array;
-                                          [self cacheHeightForTableView];
-                                          [self.tableView expandSection:section animated:YES];
-                                      }
-                                  }];
+        [self downloadRepositories];
     } else if (section == kUITableViewSectionWatchedRepositories) {
-        [GHAPIRepositoryV3 repositoriesThatUserIsWatching:self.username 
-                                        completionHandler:^(NSArray *array, NSError *error) {
+        [GHAPIRepositoryV3 repositoriesThatUserIsWatching:self.username page:1 
+                                        completionHandler:^(NSMutableArray *array, NSUInteger nextPage, NSError *error) {
                                             if (error) {
                                                 [self handleError:error];
                                                 [tableView cancelDownloadInSection:section];
                                             } else {
                                                 self.watchedRepositoriesArray = array;
+                                                [self setNextPage:nextPage forSection:section];
                                                 [self cacheHeightForWatchedRepositories];
                                                 [self.tableView expandSection:section animated:YES];
                                             }
@@ -651,7 +673,7 @@
         
         GHAPIRepositoryV3 *repository = [self.repositoriesArray objectAtIndex:indexPath.row-1];
         
-        cell.titleLabel.text = repository.name;
+        cell.titleLabel.text = [NSString stringWithFormat:@"%@/%@", repository.owner.login, repository.name];
         cell.descriptionLabel.text = repository.description;
         
         if ([repository.private boolValue]) {

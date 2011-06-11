@@ -32,9 +32,8 @@
     NSArray *_collaborators;
     NSUInteger _assignIndex;
     
-    NSArray *_milestones;
+    NSMutableArray *_milestones;
     NSUInteger _assignesMilestoneIndex;
-    NSInteger _milestonesNextPage;
 }
 
 @property (nonatomic, assign) id<GHCreateIssueTableViewControllerDelegate> delegate;
@@ -44,7 +43,7 @@
 @property (nonatomic, retain) UIToolbar *textViewToolBar;
 
 @property (nonatomic, retain) NSArray *collaborators;
-@property (nonatomic, retain) NSArray *milestones;
+@property (nonatomic, retain) NSMutableArray *milestones;
 
 - (void)cancelButtonClicked:(UIBarButtonItem *)sender;
 - (void)saveButtonClicked:(UIBarButtonItem *)sender;

@@ -36,9 +36,10 @@
 #define kUITableViewSectionPullRequests     11
 #define kUITableViewSectionRecentCommits    12
 #define kUITableViewSectionBrowseBranches   13
-#define kUITableViewSectionAdministration   14
+#define kUITableViewSectionNetwork          14
+#define kUITableViewSectionAdministration   15
 
-#define kUITableViewNumberOfSections        15
+#define kUITableViewNumberOfSections        16
 
 @implementation GHSingleRepositoryViewController
 
@@ -167,9 +168,9 @@
     } else if (section == kUITableViewSectionWatchingUsers) {
         return self.watchedUsersArray == nil;
     } else if (section == kUITableViewSectionAdministration) {
-        if (!self.canDeleteRepository) {
-            return self.watchedUsersArray == nil;
-        }
+        return NO;
+    } else if (section == kUITableViewSectionNetwork) {
+        return !_hasWatchingData;
     } else if (section == kUITableViewSectionPullRequests) {
         return self.pullRequests == nil;
     } else if (section == kUITableViewSectionRecentCommits) {
@@ -198,7 +199,9 @@
     } else if (section == kUITableViewSectionWatchingUsers) {
         cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Watching Users (%@)", @""), self.repository.watchers];
     } else if (section == kUITableViewSectionAdministration) {
-        cell.textLabel.text = self.canDeleteRepository ? NSLocalizedString(@"Administration", @"") : NSLocalizedString(@"Network", @"");
+        cell.textLabel.text = NSLocalizedString(@"Administration", @"");
+    } else if (section == kUITableViewSectionNetwork) {
+        cell.textLabel.text = NSLocalizedString(@"Network", @"");
     } else if (section == kUITableViewSectionPullRequests) {
         cell.textLabel.text = NSLocalizedString(@"Pull Requests", @"");
     } else if (section == kUITableViewSectionRecentCommits) {
@@ -218,42 +221,42 @@
 
 - (void)tableView:(UIExpandableTableView *)tableView downloadDataForExpandableSection:(NSInteger)section {
     if (section == kUITableViewSectionIssues) {
-        [GHAPIIssueV3 openedIssuesOnRepository:self.repositoryString 
-                                       page:1
-                          completionHandler:^(NSArray *issues, NSInteger nextPage, NSError *error) {
-                              if (error) {
-                                  _issuesNextPage = 0;
-                                  [tableView cancelDownloadInSection:section];
-                                  [self handleError:error];
-                              } else {
-                                  _issuesNextPage = nextPage;
-                                  self.issuesArray = issues;
-                                  [self cacheHeightForIssuesArray];
-                                  [tableView expandSection:section animated:YES];
-                              }
-                          }];
+        [GHAPIIssueV3 openedIssuesOnRepository:self.repositoryString page:1 
+                             completionHandler:^(NSMutableArray *array, NSUInteger nextPage, NSError *error) {
+                                 if (error) {
+                                     [self handleError:error];
+                                     [tableView cancelDownloadInSection:section];
+                                 } else {
+                                     self.issuesArray = array;
+                                     [self setNextPage:nextPage forSection:section];
+                                     [self cacheHeightForIssuesArray];
+                                     [tableView expandSection:section animated:YES];
+                                 }
+                             }];
     } else if (section == kUITableViewSectionWatchingUsers) {
-        [GHRepository watchingUserOfRepository:self.repositoryString 
-                         withCompletionHandler:^(NSArray *watchingUsers, NSError *error) {
-                             if (error) {
-                                 [tableView cancelDownloadInSection:section];
-                                 [self handleError:error];
-                             } else {
-                                 self.watchedUsersArray = [[watchingUsers mutableCopy] autorelease];
-                                 [tableView expandSection:section animated:YES];
-                             }
-                         }];
-    } else if (section == kUITableViewSectionAdministration) {
-        [GHRepository watchingUserOfRepository:self.repositoryString 
-                         withCompletionHandler:^(NSArray *watchingUsers, NSError *error) {
-                             if (error) {
-                                 [tableView cancelDownloadInSection:section];
-                                 [self handleError:error];
-                             } else {
-                                 self.watchedUsersArray = [[watchingUsers mutableCopy] autorelease];
-                                 [tableView expandSection:section animated:YES];
-                             }
-                         }];
+        [GHAPIRepositoryV3 watchersOfRepository:self.repositoryString page:1 
+                              completionHandler:^(NSMutableArray *array, NSUInteger nextPage, NSError *error) {
+                                  if (error) {
+                                      [tableView cancelDownloadInSection:section];
+                                      [self handleError:error];
+                                  } else {
+                                      self.watchedUsersArray = array;
+                                      [self setNextPage:nextPage forSection:section];
+                                      [tableView expandSection:section animated:YES];
+                                  }
+                              }];
+    } else if (section == kUITableViewSectionNetwork) {
+        [GHAPIRepositoryV3 isWatchingRepository:self.repositoryString 
+                              completionHandler:^(BOOL watching, NSError *error) {
+                                  if (error) {
+                                      [self handleError:error];
+                                      [tableView cancelDownloadInSection:section];
+                                  } else {
+                                      _hasWatchingData = YES;
+                                      _isWatchingRepository = watching;
+                                      [tableView expandSection:section animated:YES];
+                                  }
+                              }];
     } else if (section == kUITableViewSectionPullRequests) {
         [GHPullRequest pullRequestsOnRepository:self.repositoryString 
                               completionHandler:^(NSArray *requests, NSError *error) {
@@ -277,40 +280,98 @@
                                   }
                               }];
     } else if (section == kUITableViewSectionRecentCommits || section == kUITableViewSectionBrowseBranches) {
-        [GHAPIRepositoryV3 branchesOnRepository:self.repositoryString 
-                              completionHandler:^(NSArray *array, NSError *error) {
+        [GHAPIRepositoryV3 branchesOnRepository:self.repositoryString page:1 
+                              completionHandler:^(NSMutableArray *array, NSUInteger nextPage, NSError *error) {
                                   if (error) {
                                       [self handleError:error];
                                       [tableView cancelDownloadInSection:section];
                                   } else {
                                       self.branches = array;
+                                      [self setNextPage:nextPage forSection:section];
                                       [tableView expandSection:section animated:YES];
                                   }
                               }];
     } else if (section == kUITableViewSectionMilestones) {
-        [GHAPIIssueV3 milestonesForIssueOnRepository:self.repositoryString 
-                                       withNumber:nil 
-                                             page:1 
-                                completionHandler:^(NSArray *milestones, NSInteger nextPage, NSError *error) {
-                                    if (error) {
-                                        [tableView cancelDownloadInSection:section];
-                                        [self handleError:error];
-                                    } else {
-                                        self.milestones = milestones;
-                                        [tableView expandSection:section animated:YES];
-                                    }
-                                }];
+        [GHAPIIssueV3 milestonesForIssueOnRepository:self.repositoryString withNumber:nil page:1 
+                                   completionHandler:^(NSMutableArray *array, NSUInteger nextPage, NSError *error) {
+                                       if (error) {
+                                           [self handleError:error];
+                                           [tableView cancelDownloadInSection:section];
+                                       } else {
+                                           self.milestones = array;
+                                           [self setNextPage:nextPage forSection:section];
+                                           [tableView expandSection:section animated:YES];
+                                       }
+                                   }];
     } else if (section == kUITableViewSectionLabels) {
-        [GHAPIRepositoryV3 labelOnRepository:self.repositoryString 
-                           completionHandler:^(NSArray *labels, NSError *error) {
-                               if (error) {
-                                   [tableView cancelDownloadInSection:section];
-                                   [self handleError:error];
-                               } else {
-                                   self.labels = labels;
-                                   [tableView expandSection:section animated:YES];
-                               }
-                           }];
+        [GHAPIRepositoryV3 labelsOnRepository:self.repositoryString 
+                                         page:1 
+                            completionHandler:^(NSMutableArray *array, NSUInteger nextPage, NSError *error) {
+                                if (error) {
+                                    [tableView cancelDownloadInSection:section];
+                                    [self handleError:error];
+                                } else {
+                                    self.labels = array;
+                                    [self setNextPage:nextPage forSection:section];
+                                    [tableView expandSection:section animated:YES];
+                                }
+                            }];
+    }
+}
+
+#pragma mark - pagination
+
+- (void)downloadDataForPage:(NSUInteger)page inSection:(NSUInteger)section {
+    if (section == kUITableViewSectionLabels) {
+        [GHAPIRepositoryV3 labelsOnRepository:self.repositoryString 
+                                         page:page 
+                            completionHandler:^(NSMutableArray *array, NSUInteger nextPage, NSError *error) {
+                                if (error) {
+                                    [self handleError:error];
+                                } else {
+                                    [self setNextPage:nextPage forSection:section];
+                                    [self.labels addObjectsFromArray:array];
+                                    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:section]
+                                                  withRowAnimation:UITableViewScrollPositionBottom];
+                                }
+                            }];
+    } else if (section == kUITableViewSectionRecentCommits || section == kUITableViewSectionBrowseBranches) {
+        [GHAPIRepositoryV3 branchesOnRepository:self.repositoryString page:page 
+                              completionHandler:^(NSMutableArray *array, NSUInteger nextPage, NSError *error) {
+                                  if (error) {
+                                      [self handleError:error];
+                                  } else {
+                                      [self.branches addObjectsFromArray:array];
+                                      [self setNextPage:nextPage forSection:section];
+                                      [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:section]
+                                                    withRowAnimation:UITableViewScrollPositionBottom];
+                                  }
+                              }];
+    } else if (section == kUITableViewSectionIssues) {
+        [GHAPIIssueV3 openedIssuesOnRepository:self.repositoryString page:page 
+                             completionHandler:^(NSMutableArray *array, NSUInteger nextPage, NSError *error) {
+                                 if (error) {
+                                     [self handleError:error];
+                                 } else {
+                                     [self.issuesArray addObjectsFromArray:array];
+                                     [self setNextPage:nextPage forSection:section];
+                                     [self cacheHeightForIssuesArray];
+                                     [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:section] 
+                                                   withRowAnimation:UITableViewScrollPositionBottom];
+                                 }
+                             }];
+    } else if (section == kUITableViewSectionMilestones) {
+        [GHAPIIssueV3 milestonesForIssueOnRepository:self.repositoryString withNumber:nil page:1 
+                                   completionHandler:^(NSMutableArray *array, NSUInteger nextPage, NSError *error) {
+                                       if (error) {
+                                           [self handleError:error];
+                                       } else {
+                                           [self.milestones addObjectsFromArray:array];
+                                           [self setNextPage:nextPage forSection:section];
+                                           [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:section] 
+                                                         withRowAnimation:UITableViewScrollPositionBottom];
+                                       }
+                                   }];
     }
 }
 
@@ -340,7 +401,13 @@
         }
         return [self.watchedUsersArray count] + 1;
     } else if (section == kUITableViewSectionAdministration) {
-        return 2;
+        if (self.canDeleteRepository) {
+            return 2;
+        }
+    } else if (section == kUITableViewSectionNetwork) {
+        if (!self.canDeleteRepository) {
+            return 2;
+        }
     } else if (section == kUITableViewSectionPullRequests) {
         return [self.pullRequests count] + 1;
     } else if (section == kUITableViewSectionRecentCommits || section == kUITableViewSectionBrowseBranches) {
@@ -560,14 +627,21 @@
                 cell = [[[UITableViewCellWithLinearGradientBackgroundView alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
             }
             
-            if (self.canDeleteRepository) {
-                cell.textLabel.text = NSLocalizedString(@"Delete this Repository", @"");
-            } else {
-                cell.textLabel.text = self.isFollowingRepository ? NSLocalizedString(@"Unfollow", @"") : NSLocalizedString(@"Follow", @"") ;
-            }
+            cell.textLabel.text = NSLocalizedString(@"Delete this Repository", @"");
             
             return cell;
         }
+    } else if (indexPath.section == kUITableViewSectionNetwork) {
+        NSString *CellIdentifier = @"UITableViewCellWithLinearGradientBackgroundViewAdmin";
+        
+        UITableViewCellWithLinearGradientBackgroundView *cell = (UITableViewCellWithLinearGradientBackgroundView *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        if (!cell) {
+            cell = [[[UITableViewCellWithLinearGradientBackgroundView alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        }
+        
+        cell.textLabel.text = _isWatchingRepository ? NSLocalizedString(@"Unwatch", @"") : NSLocalizedString(@"Watch", @"") ;
+        
+        return cell;
     } else if (indexPath.section == kUITableViewSectionPullRequests) {
         NSString *CellIdentifier = @"GHFeedItemWithDescriptionTableViewCell";
         
@@ -745,74 +819,53 @@
         GHUserViewController *userViewController = [[[GHUserViewController alloc] initWithUsername:user] autorelease];
         [self.navigationController pushViewController:userViewController animated:YES];
         
+    } else if (indexPath.section == kUITableViewSectionNetwork) {
+        if (_isWatchingRepository) {
+            [GHAPIRepositoryV3 unwatchRepository:self.repositoryString 
+                               completionHandler:^(NSError *error) {
+                                   if (error) {
+                                       [self handleError:error];
+                                   } else {
+                                       _isWatchingRepository = NO;
+                                       NSMutableIndexSet *set = [NSMutableIndexSet indexSet];
+                                       [set addIndex:kUITableViewSectionNetwork];
+                                       [self.tableView reloadSections:set 
+                                                     withRowAnimation:UITableViewRowAnimationNone];
+                                   }                               }];
+        } else {
+            [GHAPIRepositoryV3 watchRepository:self.repositoryString 
+                             completionHandler:^(NSError *error) {
+                                 if (error) {
+                                     [self handleError:error];
+                                 } else {
+                                     _isWatchingRepository = YES;
+                                     NSMutableIndexSet *set = [NSMutableIndexSet indexSet];
+                                     [set addIndex:kUITableViewSectionNetwork];
+                                     [self.tableView reloadSections:set 
+                                                   withRowAnimation:UITableViewRowAnimationNone];
+                                 }
+                             }];
+        }
+        [self.tableView deselectRowAtIndexPath:indexPath animated:NO];
     } else if (indexPath.section == kUITableViewSectionAdministration) {
         if (indexPath.row == 1) {
-            if (self.canDeleteRepository) {
-                [GHRepository deleteTokenForRepository:self.repositoryString 
-                                 withCompletionHandler:^(NSString *deleteToken, NSError *error) {
-                                     [self.tableView deselectRowAtIndexPath:indexPath animated:NO];
-                                     if (error) {
-                                         [self handleError:error];
-                                     } else {
-                                         self.deleteToken = deleteToken;
-                                         
-                                         UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:NSLocalizedString(@"Delete %@", @""), self.repositoryString] 
-                                                                                          message:[NSString stringWithFormat:NSLocalizedString(@"Are you absolutely sure that you want to delete %@? This action can't be undone!", @""), self.repositoryString] 
-                                                                                         delegate:self 
-                                                                                cancelButtonTitle:NSLocalizedString(@"Cancel", @"") 
-                                                                                otherButtonTitles:NSLocalizedString(@"Delete", @""), nil]
-                                                               autorelease];
-                                         [alert show];
-                                     }
-                                 }];
-            } else {
-                if (self.isFollowingRepository) {
-                    [GHRepository unfollowRepositorie:self.repositoryString completionHandler:^(NSError *error) {
-                        if (error) {
-                            [self handleError:error];
-                        } else {
-                            NSUInteger index = [self.watchedUsersArray indexOfObjectPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {
-                                if ([[GHAuthenticationManager sharedInstance].username isEqualToString:obj]) {
-                                    *stop = YES;
-                                    return YES;
-                                }
-                                return NO;
-                            }];
-                            if (index != NSNotFound) {
-                                [self.watchedUsersArray removeObjectAtIndex:index];
-                                NSMutableIndexSet *set = [NSMutableIndexSet indexSet];
-                                [set addIndex:kUITableViewSectionWatchingUsers];
-                                [set addIndex:kUITableViewSectionAdministration];
-                                [self.tableView reloadSections:set 
-                                              withRowAnimation:UITableViewRowAnimationNone];
-                            }
-                        }
-                    }];
-                } else {
-                    [GHRepository followRepositorie:self.repositoryString completionHandler:^(NSError *error) {
-                        if (error) {
-                            [self handleError:error];
-                        } else {
-                            NSUInteger index = [self.watchedUsersArray indexOfObjectPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {
-                                if ([[GHAuthenticationManager sharedInstance].username isEqualToString:obj]) {
-                                    *stop = YES;
-                                    return YES;
-                                }
-                                return NO;
-                            }];
-                            if (index == NSNotFound) {
-                                [self.watchedUsersArray addObject:[GHAuthenticationManager sharedInstance].username ];
-                                NSMutableIndexSet *set = [NSMutableIndexSet indexSet];
-                                [set addIndex:kUITableViewSectionWatchingUsers];
-                                [set addIndex:kUITableViewSectionAdministration];
-                                [self.tableView reloadSections:set 
-                                              withRowAnimation:UITableViewRowAnimationNone];
-                            }
-                        }
-                    }];
-                }
-                [self.tableView deselectRowAtIndexPath:indexPath animated:NO];
-            }
+            [GHRepository deleteTokenForRepository:self.repositoryString 
+                             withCompletionHandler:^(NSString *deleteToken, NSError *error) {
+                                 [self.tableView deselectRowAtIndexPath:indexPath animated:NO];
+                                 if (error) {
+                                     [self handleError:error];
+                                 } else {
+                                     self.deleteToken = deleteToken;
+                                     
+                                     UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:NSLocalizedString(@"Delete %@", @""), self.repositoryString] 
+                                                                                      message:[NSString stringWithFormat:NSLocalizedString(@"Are you absolutely sure that you want to delete %@? This action can't be undone!", @""), self.repositoryString] 
+                                                                                     delegate:self 
+                                                                            cancelButtonTitle:NSLocalizedString(@"Cancel", @"") 
+                                                                            otherButtonTitles:NSLocalizedString(@"Delete", @""), nil]
+                                                           autorelease];
+                                     [alert show];
+                                 }
+                             }];
         }
     } else if (indexPath.section == kUITableViewSectionPullRequests) {
         GHPullRequestDiscussion *discussion = [self.pullRequests objectAtIndex:indexPath.row-1];
@@ -853,40 +906,6 @@
         [self.navigationController pushViewController:labelViewController animated:YES];
     } else {
         [self.tableView deselectRowAtIndexPath:indexPath animated:NO];
-    }
-}
-
-- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == kUITableViewSectionIssues && indexPath.row == [self.issuesArray count] && indexPath.row != 0 && _issuesNextPage > 1) {
-        [GHAPIIssueV3 openedIssuesOnRepository:self.repositoryString page:_issuesNextPage completionHandler:^(NSArray *issues, NSInteger nextPage, NSError *error) {
-            if (error) {
-                [self handleError:error];
-            } else {
-                _issuesNextPage = nextPage;
-                NSMutableArray *mutablCopy = [[self.issuesArray mutableCopy] autorelease];
-                [mutablCopy addObjectsFromArray:issues];
-                self.issuesArray = mutablCopy;
-                [self cacheHeightForIssuesArray];
-                [tableView reloadSections:[NSIndexSet indexSetWithIndex:kUITableViewSectionIssues] withRowAnimation:UITableViewRowAnimationNone];
-            }
-        }];
-    } else if (indexPath.section == kUITableViewSectionMilestones && indexPath.row == [self.milestones count] && indexPath.row != 0 && _milstonesNextPage > 1) {
-        
-        [GHAPIIssueV3 milestonesForIssueOnRepository:self.repositoryString withNumber:nil page:_milstonesNextPage 
-                                completionHandler:^(NSArray *milestones, NSInteger nextPage, NSError *error) {
-                                    
-                                    if (error) {
-                                        [self handleError:error];
-                                    } else {
-                                        _milstonesNextPage = nextPage;
-                                        NSMutableArray *mutablCopy = [[self.milestones mutableCopy] autorelease];
-                                        [mutablCopy addObjectsFromArray:milestones];
-                                        self.milestones = mutablCopy;
-                                        [tableView reloadSections:[NSIndexSet indexSetWithIndex:kUITableViewSectionMilestones] 
-                                                 withRowAnimation:UITableViewRowAnimationNone];
-                                    }
-                                }];
-        
     }
 }
 

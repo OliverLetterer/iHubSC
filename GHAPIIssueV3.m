@@ -9,6 +9,9 @@
 #import "GHAPIIssueV3.h"
 #import "GithubAPI.h"
 
+NSString *const kGHAPIIssueStateV3Open = @"open";
+NSString *const kGHAPIIssueStateV3Closed = @"closed";
+
 @implementation GHAPIIssueV3
 
 @synthesize assignee=_assignee, body=_body, closedAt=_closedAt, comments=_comments, createdAt=_createdAt, HTMLURL=_HTMLURL, labels=_labels, milestone=_milestone, number=_number, pullRequestID=_pullRequestID, state=_state, title=_title, updatedAt=_updatedAt, URL=_URL, user=_user;
@@ -83,31 +86,28 @@
 
 #pragma mark - class methods
 
-+ (void)openedIssuesOnRepository:(NSString *)repository 
-                            page:(NSInteger)page
-               completionHandler:(void (^)(NSArray *issues, NSInteger nextPage, NSError *error))handler {
++ (void)openedIssuesOnRepository:(NSString *)repository page:(NSInteger)page completionHandler:(GHAPIPaginationHandler)handler {
     
     // v3: GET /repos/:user/:repo/issues
     
-    NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.github.com/repos/%@/issues?page=%d&per_page=100",
+    NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.github.com/repos/%@/issues",
                                        [repository stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding], page ] ];
     
-    [[GHBackgroundQueue sharedInstance] sendRequestToURL:URL setupHandler:nil completionHandler:^(id object, NSError *error, ASIFormDataRequest *request) {
-        if (error) {
-            handler(nil, 0, error);
-        } else {
-            NSArray *rawArray = object;
-            
-            NSMutableArray *finalArray = [NSMutableArray arrayWithCapacity:rawArray.count];
-            for (NSDictionary *rawDictionary in rawArray) {
-                [finalArray addObject:[[[GHAPIIssueV3 alloc] initWithRawDictionary:rawDictionary] autorelease] ];
-            }
-            
-            NSString *linkHeader = [[request responseHeaders] objectForKey:@"Link"];
-            
-            handler(finalArray, linkHeader.nextPage, nil);
-        }
-    }];
+    [[GHBackgroundQueue sharedInstance] sendRequestToURL:URL page:page setupHandler:nil 
+                             completionPaginationHandler:^(id object, NSError *error, ASIFormDataRequest *request, NSUInteger nextPage) {
+                                 if (error) {
+                                     handler(nil, GHAPIPaginationNextPageNotFound, error);
+                                 } else {
+                                     NSArray *rawArray = object;
+                                     
+                                     NSMutableArray *finalArray = [NSMutableArray arrayWithCapacity:rawArray.count];
+                                     for (NSDictionary *rawDictionary in rawArray) {
+                                         [finalArray addObject:[[[GHAPIIssueV3 alloc] initWithRawDictionary:rawDictionary] autorelease] ];
+                                     }
+                                     
+                                     handler(finalArray, nextPage, nil);
+                                 }
+                             }];
 }
 
 + (void)issueOnRepository:(NSString *)repository 
@@ -132,29 +132,27 @@
 + (void)milestonesForIssueOnRepository:(NSString *)repository 
                             withNumber:(NSNumber *)number 
                                   page:(NSInteger)page
-                     completionHandler:(void (^)(NSArray *milestones, NSInteger nextPage, NSError *error))handler {
-    
+                     completionHandler:(GHAPIPaginationHandler)handler {
     // v3: /repos/:user/:repo/milestones
     
-    NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.github.com/repos/%@/milestones?page=%d&per_page=100",
-                                       [repository stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding], page ] ];
+    NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.github.com/repos/%@/milestones",
+                                       [repository stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] ] ];
     
-    [[GHBackgroundQueue sharedInstance] sendRequestToURL:URL setupHandler:nil completionHandler:^(id object, NSError *error, ASIFormDataRequest *request) {
-        if (error) {
-            handler(nil, 0, error);
-        } else {
-            NSArray *rawArray = object;
-            
-            NSMutableArray *finalArray = [NSMutableArray arrayWithCapacity:rawArray.count];
-            for (NSDictionary *rawDictionary in rawArray) {
-                [finalArray addObject:[[[GHAPIMilestoneV3 alloc] initWithRawDictionary:rawDictionary] autorelease] ];
-            }
-            
-            NSString *linkHeader = [[request responseHeaders] objectForKey:@"Link"];
-            
-            handler(finalArray, linkHeader.nextPage, nil);
-        }
-    }];
+    [[GHBackgroundQueue sharedInstance] sendRequestToURL:URL page:page setupHandler:nil 
+                             completionPaginationHandler:^(id object, NSError *error, ASIFormDataRequest *request, NSUInteger nextPage) {
+                                 if (error) {
+                                     handler(nil, GHAPIPaginationNextPageNotFound, error);
+                                 } else {
+                                     NSArray *rawArray = object;
+                                     
+                                     NSMutableArray *finalArray = [NSMutableArray arrayWithCapacity:rawArray.count];
+                                     for (NSDictionary *rawDictionary in rawArray) {
+                                         [finalArray addObject:[[[GHAPIMilestoneV3 alloc] initWithRawDictionary:rawDictionary] autorelease] ];
+                                     }
+                                     
+                                     handler(finalArray, nextPage, nil);
+                                 }
+                             }];
 }
 
 + (void)createIssueOnRepository:(NSString *)repository 
@@ -364,46 +362,52 @@
                     labels:(NSArray *)labels 
                      state:(NSString *)state 
                       page:(NSInteger)page
-         completionHandler:(void (^)(NSArray *issues, NSInteger nextPage, NSError *))handler {
+         completionHandler:(GHAPIPaginationHandler)handler {
     
     // v3: GET /repos/:user/:repo/issues
     
-    NSMutableString *URLString = [NSMutableString stringWithFormat:@"https://api.github.com/repos/%@/issues?page=%d&per_page=100",
+    NSMutableString *URLString = [NSMutableString stringWithFormat:@"https://api.github.com/repos/%@/issues?",
                                   [repository stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding], page ];
     
+    DLog(@"%@", state);
+    
+    BOOL needsAnd = NO;
+    
     if (milestone) {
-        [URLString appendFormat:@"&milestone=%@", milestone];
+        [URLString appendFormat:@"%@milestone=%@", needsAnd?@"&":@"", milestone];
+        needsAnd = YES;
     }
     if (state) {
-        [URLString appendFormat:@"&state=%@", [state stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] ];
+        [URLString appendFormat:@"%@state=%@", needsAnd?@"&":@"", [state stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] ];
+        needsAnd = YES;
     }
     if (labels.count > 0) {
-        [URLString appendFormat:@"&labels=%@", [[labels objectAtIndex:0] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] ];
+        [URLString appendFormat:@"%@labels=%@", needsAnd?@"&":@"", [[labels objectAtIndex:0] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] ];
         [labels enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
             if (idx > 0) {
                 [URLString appendFormat:@",%@", [obj stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] ];
             }
         }];
+        needsAnd = YES;
     }
     
     NSURL *URL = [NSURL URLWithString:URLString];
     
-    [[GHBackgroundQueue sharedInstance] sendRequestToURL:URL setupHandler:nil completionHandler:^(id object, NSError *error, ASIFormDataRequest *request) {
-        if (error) {
-            handler(nil, 0, error);
-        } else {
-            NSArray *rawArray = object;
-            
-            NSMutableArray *finalArray = [NSMutableArray arrayWithCapacity:rawArray.count];
-            for (NSDictionary *rawDictionary in rawArray) {
-                [finalArray addObject:[[[GHAPIIssueV3 alloc] initWithRawDictionary:rawDictionary] autorelease] ];
-            }
-            
-            NSString *linkHeader = [[request responseHeaders] objectForKey:@"Link"];
-            
-            handler(finalArray, linkHeader.nextPage, nil);
-        }
-    }];
+    [[GHBackgroundQueue sharedInstance] sendRequestToURL:URL page:page setupHandler:nil 
+                             completionPaginationHandler:^(id object, NSError *error, ASIFormDataRequest *request, NSUInteger nextPage) {
+                                 if (error) {
+                                     handler(nil, GHAPIPaginationNextPageNotFound, error);
+                                 } else {
+                                     NSArray *rawArray = object;
+                                     
+                                     NSMutableArray *finalArray = [NSMutableArray arrayWithCapacity:rawArray.count];
+                                     for (NSDictionary *rawDictionary in rawArray) {
+                                         [finalArray addObject:[[[GHAPIIssueV3 alloc] initWithRawDictionary:rawDictionary] autorelease] ];
+                                     }
+                                     
+                                     handler(finalArray, nextPage, nil);
+                                 }
+                             }];
     
 }
 

@@ -133,36 +133,72 @@
     return cell;
 }
 
+#pragma mark - pagination
+
+- (void)downloadDataForPage:(NSUInteger)page inSection:(NSUInteger)section {
+    if (section == kUITableViewControllerSectionInfoOpenIssues) {
+        [GHAPIIssueV3 issuesOnRepository:self.repositoryString milestone:nil 
+                                  labels:[NSArray arrayWithObject:self.label.name] 
+                                   state:kGHAPIIssueStateV3Open page:page 
+                       completionHandler:^(NSMutableArray *array, NSUInteger nextPage, NSError *error) {
+                           if (error) {
+                               [self handleError:error];
+                           } else {
+                               [self.openIssues addObjectsFromArray:array];
+                               [self cacheHeightForOpenIssuesArray];
+                               [self setNextPage:nextPage forSection:section];
+                               [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:section] 
+                                             withRowAnimation:UITableViewScrollPositionBottom];
+                           }
+                       }];
+    } else if (section == kUITableViewControllerSectionInfoClosedIssues) {
+        [GHAPIIssueV3 issuesOnRepository:self.repositoryString milestone:nil 
+                                  labels:[NSArray arrayWithObject:self.label.name] 
+                                   state:kGHAPIIssueStateV3Closed page:page 
+                       completionHandler:^(NSMutableArray *array, NSUInteger nextPage, NSError *error) {
+                           if (error) {
+                               [self handleError:error];
+                           } else {
+                               [self.closedIssues addObjectsFromArray:array];
+                               [self cacheHeightForClosedIssuesArray];
+                               [self setNextPage:nextPage forSection:section];
+                               [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:section] 
+                                             withRowAnimation:UITableViewScrollPositionBottom];
+                           }
+                       }];
+    }
+}
+
 #pragma mark - UIExpandableTableViewDelegate
 
 - (void)tableView:(UIExpandableTableView *)tableView downloadDataForExpandableSection:(NSInteger)section {
     if (section == kUITableViewControllerSectionInfoOpenIssues) {
         [GHAPIIssueV3 issuesOnRepository:self.repositoryString milestone:nil 
-                                  labels:[NSArray arrayWithObject:self.label.name] state:@"open" page:1 
-                       completionHandler:^(NSArray *issues, NSInteger nextPage, NSError *error) {
+                                  labels:[NSArray arrayWithObject:self.label.name] 
+                                   state:kGHAPIIssueStateV3Open page:1 
+                       completionHandler:^(NSMutableArray *array, NSUInteger nextPage, NSError *error) {
                            if (error) {
-                               _openIssuesNextPage = 0;
-                               [tableView cancelDownloadInSection:section];
                                [self handleError:error];
+                               [tableView cancelDownloadInSection:section];
                            } else {
-                               _openIssuesNextPage = nextPage;
-                               self.openIssues = issues;
+                               self.openIssues = array;
                                [self cacheHeightForOpenIssuesArray];
+                               [self setNextPage:nextPage forSection:section];
                                [tableView expandSection:section animated:YES];
                            }
                        }];
     } else if (section == kUITableViewControllerSectionInfoClosedIssues) {
         [GHAPIIssueV3 issuesOnRepository:self.repositoryString milestone:nil 
-                                  labels:[NSArray arrayWithObject:self.label.name] state:@"closed" page:1 
-                       completionHandler:^(NSArray *issues, NSInteger nextPage, NSError *error) {
+                                  labels:[NSArray arrayWithObject:self.label.name] 
+                                   state:kGHAPIIssueStateV3Closed page:1 
+                       completionHandler:^(NSMutableArray *array, NSUInteger nextPage, NSError *error) {
                            if (error) {
-                               _closedIssuesNextPage = 0;
-                               [tableView cancelDownloadInSection:section];
                                [self handleError:error];
+                               [tableView cancelDownloadInSection:section];
                            } else {
-                               _closedIssuesNextPage = nextPage;
-                               self.closedIssues = issues;
+                               self.closedIssues = array;
                                [self cacheHeightForClosedIssuesArray];
+                               [self setNextPage:nextPage forSection:section];
                                [tableView expandSection:section animated:YES];
                            }
                        }];
@@ -298,42 +334,6 @@
 */
 
 #pragma mark - Table view delegate
-
-- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == kUITableViewControllerSectionInfoOpenIssues && indexPath.row == [self.openIssues count] && indexPath.row != 0 && _openIssuesNextPage > 1) {
-        [GHAPIIssueV3 issuesOnRepository:self.repositoryString milestone:nil 
-                                  labels:[NSArray arrayWithObject:self.label.name] state:@"open" page:_openIssuesNextPage 
-                       completionHandler:^(NSArray *issues, NSInteger nextPage, NSError *error) {
-                           if (error) {
-                               [self handleError:error];
-                           } else {
-                               _openIssuesNextPage = nextPage;
-                               NSMutableArray *mutablCopy = [[self.openIssues mutableCopy] autorelease];
-                               [mutablCopy addObjectsFromArray:issues];
-                               self.openIssues = mutablCopy;
-                               [self cacheHeightForOpenIssuesArray];
-                               [tableView reloadSections:[NSIndexSet indexSetWithIndex:kUITableViewControllerSectionInfoOpenIssues] 
-                                        withRowAnimation:UITableViewRowAnimationNone];
-                           }
-                       }];
-    } else if (indexPath.section == kUITableViewControllerSectionInfoClosedIssues && indexPath.row == [self.closedIssues count] && indexPath.row != 0 && _closedIssuesNextPage > 1) {
-        [GHAPIIssueV3 issuesOnRepository:self.repositoryString milestone:nil 
-                                  labels:[NSArray arrayWithObject:self.label.name] state:@"closed" page:_closedIssuesNextPage 
-                       completionHandler:^(NSArray *issues, NSInteger nextPage, NSError *error) {
-                           if (error) {
-                               [self handleError:error];
-                           } else {
-                               _closedIssuesNextPage = nextPage;
-                               NSMutableArray *mutablCopy = [[self.closedIssues mutableCopy] autorelease];
-                               [mutablCopy addObjectsFromArray:issues];
-                               self.closedIssues = mutablCopy;
-                               [self cacheHeightForClosedIssuesArray];
-                               [tableView reloadSections:[NSIndexSet indexSetWithIndex:kUITableViewControllerSectionInfoClosedIssues] 
-                                        withRowAnimation:UITableViewRowAnimationNone];
-                           }
-                       }];
-    }
-}
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == kUITableViewControllerSectionInfoOpenIssues && indexPath.row > 0) {

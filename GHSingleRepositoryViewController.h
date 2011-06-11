@@ -27,21 +27,22 @@
     NSString *_repositoryString;
     GHAPIRepositoryV3 *_repository;
     
-    NSArray *_issuesArray;
-    NSInteger _issuesNextPage;
+    NSMutableArray *_issuesArray;
     
     NSMutableArray *_watchedUsersArray;
+    
+    BOOL _hasWatchingData;
+    BOOL _isWatchingRepository;
     
     NSString *_deleteToken;
     
     id<GHSingleRepositoryViewControllerDelegate> _delegate;
     
     NSArray *_pullRequests;
-    NSArray *_branches;
-    NSArray *_labels;
+    NSMutableArray *_branches;
+    NSMutableArray *_labels;
     
-    NSArray *_milestones;
-    NSInteger _milstonesNextPage;
+    NSMutableArray *_milestones;
 }
 
 @property (nonatomic, readonly) BOOL isFollowingRepository;
@@ -50,10 +51,10 @@
 @property (nonatomic, copy) NSString *repositoryString;
 @property (nonatomic, retain) GHAPIRepositoryV3 *repository;
 
-@property (nonatomic, retain) NSArray *issuesArray;
+@property (nonatomic, retain) NSMutableArray *issuesArray;
 - (void)cacheHeightForIssuesArray;
 
-@property (nonatomic, retain) NSArray *milestones;
+@property (nonatomic, retain) NSMutableArray *milestones;
 
 @property (nonatomic, retain) NSMutableArray *watchedUsersArray;
 
@@ -63,8 +64,8 @@
 @property (nonatomic, retain) NSArray *pullRequests;
 - (void)cacheHeightForPullRequests;
 
-@property (nonatomic, retain) NSArray *branches;
-@property (nonatomic, retain) NSArray *labels;
+@property (nonatomic, retain) NSMutableArray *branches;
+@property (nonatomic, retain) NSMutableArray *labels;
 
 - (id)initWithRepositoryString:(NSString *)repositoryString;
 

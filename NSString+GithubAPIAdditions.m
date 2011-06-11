@@ -9,6 +9,7 @@
 #import "NSString+GithubAPIAdditions.h"
 #import "NSDate+GithubAPIAdditions.h"
 #import "UIColor+GithubAPI.h"
+#import "GithubAPI.h"
 
 @implementation NSString (GHAPIDateFormatting)
 
@@ -57,24 +58,27 @@
 @implementation NSString (GHAPIHTTPParsing)
 
 - (NSUInteger)nextPage {
+    __block NSUInteger nextPage = GHAPIPaginationNextPageNotFound;
+    
     NSArray *basicLinksArray = [self componentsSeparatedByString:@","];
     
     for (NSString *basicLinkString in basicLinksArray) {
-        if ([basicLinkString rangeOfString:@"rel=\"next\""].length > 0) {
-            NSArray *furtherComponents = [basicLinkString componentsSeparatedByString:@"?page="];
+        if ([basicLinkString rangeOfString:@"rel=\"next\""].location != NSNotFound) {
             
-            NSString *lastObject = [furtherComponents lastObject];
+            NSRegularExpression *expression = [[[NSRegularExpression alloc] initWithPattern:@"page=(0|1|2|3|4|5|6|7|8|9)+" options:NSRegularExpressionCaseInsensitive error:NULL] autorelease];
             
-            NSArray *lastComponents = [lastObject componentsSeparatedByString:@">"];
             
-            if (lastComponents.count > 0) {
-                NSString *nextPageNumber = [lastComponents objectAtIndex:0];
-                return [nextPageNumber intValue];
-            }
+            
+            [expression enumerateMatchesInString:basicLinkString options:0 range:NSMakeRange(0, basicLinkString.length) 
+                                      usingBlock:^(NSTextCheckingResult *result, NSMatchingFlags flags, BOOL *stop) {
+                                          NSRange range = NSMakeRange(result.range.location+5, result.range.length-5);
+                                          NSString *pageNumberString = [self substringWithRange:range];
+                                          nextPage = [pageNumberString integerValue];
+                                      }];
         }
     }
     
-    return 0;
+    return nextPage;
 }
 
 @end

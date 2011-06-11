@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "GHBackgroundQueue.h"
+#import "GHAPIConnectionHandlersV3.h"
 
 @class GHAPIUserPlanV3;
 

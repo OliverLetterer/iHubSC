@@ -7,8 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "GHAPIConnectionHandlersV3.h"
 
 @class GHAPIUserV3, GHAPIMilestoneV3, GHAPIIssueCommentV3;
+
+extern NSString *const kGHAPIIssueStateV3Open;
+extern NSString *const kGHAPIIssueStateV3Closed;
 
 @interface GHAPIIssueV3 : NSObject {
 @private
@@ -51,10 +55,7 @@
 
 - (id)initWithRawDictionary:(NSDictionary *)rawDictionay;
 
-
-+ (void)openedIssuesOnRepository:(NSString *)repository 
-                            page:(NSInteger)page
-               completionHandler:(void (^)(NSArray *issues, NSInteger nextPage, NSError *error))handler;
++ (void)openedIssuesOnRepository:(NSString *)repository page:(NSInteger)page completionHandler:(GHAPIPaginationHandler)handler;
 
 + (void)issueOnRepository:(NSString *)repository 
                withNumber:(NSNumber *)number 
@@ -63,7 +64,7 @@
 + (void)milestonesForIssueOnRepository:(NSString *)repository 
                             withNumber:(NSNumber *)number 
                                   page:(NSInteger)page
-                     completionHandler:(void (^)(NSArray *milestones, NSInteger nextPage, NSError *error))handler;
+                     completionHandler:(GHAPIPaginationHandler)handler;
 
 + (void)createIssueOnRepository:(NSString *)repository 
                           title:(NSString *)title 
@@ -100,6 +101,6 @@
                     labels:(NSArray *)labels
                      state:(NSString *)state 
                       page:(NSInteger)page
-         completionHandler:(void (^)(NSArray *issues, NSInteger nextPage, NSError *))handler;
+         completionHandler:(GHAPIPaginationHandler)handler;
 
 @end

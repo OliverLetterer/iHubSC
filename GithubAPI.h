@@ -34,6 +34,7 @@
 #import "GHTeam.h"
 
 // V3
+#import "GHAPIConnectionHandlersV3.h"
 #import "GHAPIIssueCommentV3.h"
 #import "GHAPIIssueV3.h"
 #import "GHAPIMilestoneV3.h"

@@ -439,6 +439,7 @@
 		A7837EA0136CADA400B13B95 /* PDColoredProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PDColoredProgressView.m; path = PDColoredProgressview/PDColoredProgressView.m; sourceTree = "<group>"; };
 		A7837EA3136CADD400B13B95 /* GHAPIMilestoneV3TableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHAPIMilestoneV3TableViewCell.h; sourceTree = "<group>"; };
 		A7837EA4136CADD400B13B95 /* GHAPIMilestoneV3TableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHAPIMilestoneV3TableViewCell.m; sourceTree = "<group>"; };
+		A792A92713A3FD3200BB0E1A /* GHAPIConnectionHandlersV3.h */ = {isa = PBXFileReference; fileEncoding = 4; path = GHAPIConnectionHandlersV3.h; sourceTree = "<group>"; };
 		A79F37FC13883C2C0028F492 /* GHAPIUserV3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHAPIUserV3.h; sourceTree = "<group>"; };
 		A79F37FD13883C2C0028F492 /* GHAPIUserV3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHAPIUserV3.m; sourceTree = "<group>"; };
 		A79F37FF13883F740028F492 /* GHAPIUserPlanV3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHAPIUserPlanV3.h; sourceTree = "<group>"; };
@@ -1011,6 +1012,7 @@
 				A7F62623134B89CA006487CA /* NSDate */,
 				A7F6261F134B8886006487CA /* NSString */,
 				A73E29B21348745800E85282 /* NSDictionary */,
+				A792A92713A3FD3200BB0E1A /* GHAPIConnectionHandlersV3.h */,
 			);
 			name = "Foundation & Class Additions";
 			sourceTree = "<group>";

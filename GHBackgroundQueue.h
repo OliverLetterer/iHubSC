@@ -12,8 +12,6 @@
 
 dispatch_queue_t GHAPIBackgroundQueue();
 
-typedef void(^GHAPIPaginationHandler)(NSArray *array, NSUInteger nextPage, NSError *error);
-
 enum {
     GHAPIPaginationNextPageNotFound = 0
 };

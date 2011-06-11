@@ -19,8 +19,8 @@
     BOOL _isDownloadingUserData;
     GHAPIUserV3 *_user;
     
-    NSArray *_repositoriesArray;
-    NSArray *_watchedRepositoriesArray;
+    NSMutableArray *_repositoriesArray;
+    NSMutableArray *_watchedRepositoriesArray;
     NSMutableArray *_followingUsers;
     NSArray *_organizations;
     NSMutableArray *_followedUsers;
@@ -34,9 +34,9 @@
 
 @property (nonatomic, retain) GHAPIUserV3 *user;
 
-@property (nonatomic, retain) NSArray *repositoriesArray;
+@property (nonatomic, retain) NSMutableArray *repositoriesArray;
 @property (nonatomic, copy) NSString *username;
-@property (nonatomic, retain) NSArray *watchedRepositoriesArray;
+@property (nonatomic, retain) NSMutableArray *watchedRepositoriesArray;
 @property (nonatomic, retain) NSMutableArray *followingUsers;
 @property (nonatomic, retain) NSArray *organizations;
 @property (nonatomic, retain) NSMutableArray *followedUsers;

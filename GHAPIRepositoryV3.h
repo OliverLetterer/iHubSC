@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "GHAPIConnectionHandlersV3.h"
 
 @class GHAPIUserV3;
 
@@ -68,19 +69,23 @@
 
 - (id)initWithRawDictionary:(NSDictionary *)rawDictionary;
 
-+ (void)labelOnRepository:(NSString *)repository completionHandler:(void(^)(NSArray *labels, NSError *error))handler;
++ (void)labelsOnRepository:(NSString *)repository page:(NSUInteger)page completionHandler:(GHAPIPaginationHandler)handler;
 
 + (void)repositoryNamed:(NSString *)repositoryName 
   withCompletionHandler:(void (^)(GHAPIRepositoryV3 *repository, NSError *error))handler;
 
-+ (void)repositoriesForUserNamed:(NSString *)username 
-               completionHandler:(void (^)(NSArray *array, NSError *error))handler;
++ (void)repositoriesForUserNamed:(NSString *)username page:(NSUInteger)page completionHandler:(GHAPIPaginationHandler)handler;
 
-+ (void)repositoriesThatUserIsWatching:(NSString *)username 
-                completionHandler:(void (^)(NSArray *array, NSError *error))handler;
++ (void)repositoriesThatUserIsWatching:(NSString *)username page:(NSUInteger)page completionHandler:(GHAPIPaginationHandler)handler;
+
++ (void)watchersOfRepository:(NSString *)repository page:(NSUInteger)page completionHandler:(GHAPIPaginationHandler)handler;
+
++ (void)isWatchingRepository:(NSString *)repository completionHandler:(void (^)(BOOL watching, NSError *error))handler;
 
 // will contain GHAPIRepositoryBranchV3
-+ (void)branchesOnRepository:(NSString *)repository 
-           completionHandler:(void (^)(NSArray *array, NSError *error))handler;
++ (void)branchesOnRepository:(NSString *)repository page:(NSUInteger)page completionHandler:(GHAPIPaginationHandler)handler;
+
++ (void)watchRepository:(NSString *)repository completionHandler:(GHAPIErrorHandler)handler;
++ (void)unwatchRepository:(NSString *)repository completionHandler:(GHAPIErrorHandler)handler;
 
 @end

@@ -15,18 +15,15 @@
     NSString *_repositoryString;
     GHAPILabelV3 *_label;
     
-    NSArray *_openIssues;
-    NSInteger _openIssuesNextPage;
-    
-    NSArray *_closedIssues;
-    NSInteger _closedIssuesNextPage;
+    NSMutableArray *_openIssues;
+    NSMutableArray *_closedIssues;
 }
 
 @property (nonatomic, copy) NSString *repositoryString;
 @property (nonatomic, retain) GHAPILabelV3 *label;
 
-@property (nonatomic, retain) NSArray *openIssues;
-@property (nonatomic, retain) NSArray *closedIssues;
+@property (nonatomic, retain) NSMutableArray *openIssues;
+@property (nonatomic, retain) NSMutableArray *closedIssues;
 
 - (id)initWithRepository:(NSString *)repository label:(GHAPILabelV3 *)label;
 

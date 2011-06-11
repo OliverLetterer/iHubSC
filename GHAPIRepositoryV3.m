@@ -113,27 +113,29 @@
 
 #pragma mark - downloading
 
-+ (void)labelOnRepository:(NSString *)repository completionHandler:(void(^)(NSArray *labels, NSError *error))handler {
++ (void)labelsOnRepository:(NSString *)repository page:(NSUInteger)page completionHandler:(GHAPIPaginationHandler)handler {
     // v3: GET /repos/:user/:repo/labels
     
     NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.github.com/repos/%@/labels",
                                        [repository stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] ] ];
     
-    [[GHBackgroundQueue sharedInstance] sendRequestToURL:URL setupHandler:nil
-                                       completionHandler:^(id object, NSError *error, ASIFormDataRequest *request) {
-                                           if (error) {
-                                               handler(nil, error);
-                                           } else {
-                                               NSArray *rawArray = object;
-                                               
-                                               NSMutableArray *finalArray = [NSMutableArray arrayWithCapacity:rawArray.count];
-                                               for (NSDictionary *rawDictionary in rawArray) {
-                                                   [finalArray addObject:[[[GHAPILabelV3 alloc] initWithRawDictionary:rawDictionary] autorelease] ];
-                                               }
-                                               
-                                               handler(finalArray, nil);
-                                           }
-                                       }];
+    [[GHBackgroundQueue sharedInstance] sendRequestToURL:URL 
+                                                    page:page 
+                                            setupHandler:nil 
+                             completionPaginationHandler:^(id object, NSError *error, ASIFormDataRequest *request, NSUInteger nextPage) {
+                                 if (error) {
+                                     handler(nil, GHAPIPaginationNextPageNotFound, error);
+                                 } else {
+                                     NSArray *rawArray = object;
+                                     
+                                     NSMutableArray *finalArray = [NSMutableArray arrayWithCapacity:rawArray.count];
+                                     [rawArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+                                         [finalArray addObject:[[[GHAPILabelV3 alloc] initWithRawDictionary:obj] autorelease] ];
+                                     }];
+                                     
+                                     handler(finalArray, nextPage, nil);
+                                 }
+                             }];
 }
 
 + (void)repositoryNamed:(NSString *)repositoryName 
@@ -153,8 +155,7 @@
                                        }];
 }
 
-+ (void)repositoriesForUserNamed:(NSString *)username 
-               completionHandler:(void (^)(NSArray *array, NSError *error))handler {
++ (void)repositoriesForUserNamed:(NSString *)username page:(NSUInteger)page completionHandler:(GHAPIPaginationHandler)handler {
     NSURL *URL = nil;
     
     if ([username isEqualToString:[GHAuthenticationManager sharedInstance].username]) {
@@ -167,68 +168,139 @@
                                     [username stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] ] ];
     }
     
-    [[GHBackgroundQueue sharedInstance] sendRequestToURL:URL setupHandler:nil
-                                       completionHandler:^(id object, NSError *error, ASIFormDataRequest *request) {
-                                           if (error) {
-                                               handler(nil, error);
-                                           } else {
-                                               NSArray *rawArray = object;
-                                               
-                                               NSMutableArray *finalArray = [NSMutableArray arrayWithCapacity:rawArray.count];
-                                               for (NSDictionary *rawDictionary in rawArray) {
-                                                   [finalArray addObject:[[[GHAPIRepositoryV3 alloc] initWithRawDictionary:rawDictionary] autorelease] ];
-                                               }
-                                               
-                                               handler(finalArray, nil);
-                                           }
-                                       }];
+    [[GHBackgroundQueue sharedInstance] sendRequestToURL:URL 
+                                                    page:page 
+                                            setupHandler:nil 
+                             completionPaginationHandler:^(id object, NSError *error, ASIFormDataRequest *request, NSUInteger nextPage) {
+                                 if (error) {
+                                     handler(nil, GHAPIPaginationNextPageNotFound, error);
+                                 } else {
+                                     NSArray *rawArray = object;
+                                     
+                                     NSMutableArray *finalArray = [NSMutableArray arrayWithCapacity:rawArray.count];
+                                     for (NSDictionary *rawDictionary in rawArray) {
+                                         [finalArray addObject:[[[GHAPIRepositoryV3 alloc] initWithRawDictionary:rawDictionary] autorelease] ];
+                                     }
+                                     
+                                     handler(finalArray, nextPage, nil);
+                                 }
+                             }];
 }
 
-+ (void)branchesOnRepository:(NSString *)repository completionHandler:(void (^)(NSArray *, NSError *))handler {
++ (void)branchesOnRepository:(NSString *)repository page:(NSUInteger)page completionHandler:(GHAPIPaginationHandler)handler {
     // v3: GET /repos/:user/:repo/branches
     
     NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.github.com/repos/%@/branches",
                                        [repository stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] ] ];
     
-    [[GHBackgroundQueue sharedInstance] sendRequestToURL:URL setupHandler:nil
-                                       completionHandler:^(id object, NSError *error, ASIFormDataRequest *request) {
-                                           if (error) {
-                                               handler(nil, error);
-                                           } else {
-                                               NSDictionary *rawDictionary = object;
-                                               
-                                               NSMutableArray *finalArray = [NSMutableArray arrayWithCapacity:[rawDictionary allKeys].count];
-                                               [rawDictionary enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
-                                                   [finalArray addObject:[[[GHAPIRepositoryBranchV3 alloc] initWithName:key ID:obj] autorelease] ];
-                                               }];
-                                               
-                                               handler(finalArray, nil);
-                                           }
-                                       }];
+    [[GHBackgroundQueue sharedInstance] sendRequestToURL:URL page:page setupHandler:nil 
+                             completionPaginationHandler:^(id object, NSError *error, ASIFormDataRequest *request, NSUInteger nextPage) {
+                                 if (error) {
+                                     handler(nil, GHAPIPaginationNextPageNotFound, error);
+                                 } else {
+                                     NSDictionary *rawDictionary = object;
+                                     
+                                     NSMutableArray *finalArray = [NSMutableArray arrayWithCapacity:[rawDictionary allKeys].count];
+                                     [rawDictionary enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+                                         [finalArray addObject:[[[GHAPIRepositoryBranchV3 alloc] initWithName:key ID:obj] autorelease] ];
+                                     }];
+                                     
+                                     handler(finalArray, nextPage, nil);
+                                 }
+                             }];
 }
 
-+ (void)repositoriesThatUserIsWatching:(NSString *)username 
-                     completionHandler:(void (^)(NSArray *array, NSError *error))handler {
++ (void)repositoriesThatUserIsWatching:(NSString *)username page:(NSUInteger)page completionHandler:(GHAPIPaginationHandler)handler {
     // v3: GET /users/:user/watched
     
     NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.github.com/users/%@/watched",
                                        [username stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] ] ];
     
-    [[GHBackgroundQueue sharedInstance] sendRequestToURL:URL setupHandler:nil
+    [[GHBackgroundQueue sharedInstance] sendRequestToURL:URL page:page setupHandler:nil 
+                             completionPaginationHandler:^(id object, NSError *error, ASIFormDataRequest *request, NSUInteger nextPage) {
+                                 if (error) {
+                                     handler(nil, GHAPIPaginationNextPageNotFound, error);
+                                 } else {
+                                     NSArray *rawArray = object;
+                                     
+                                     NSMutableArray *finalArray = [NSMutableArray arrayWithCapacity:rawArray.count];
+                                     [rawArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+                                         [finalArray addObject:[[[GHAPIRepositoryV3 alloc] initWithRawDictionary:obj] autorelease] ];
+                                     }];
+                                     
+                                     handler(finalArray, nextPage, nil);
+                                 }
+                             }];
+}
+
++ (void)watchersOfRepository:(NSString *)repository page:(NSUInteger)page completionHandler:(GHAPIPaginationHandler)handler {
+    // v3: GET /repos/:user/:repo/watchers
+    
+    NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.github.com/repos/%@/watchers",
+                                       [repository stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] ] ];
+    
+    [[GHBackgroundQueue sharedInstance] sendRequestToURL:URL page:page setupHandler:nil 
+                             completionPaginationHandler:^(id object, NSError *error, ASIFormDataRequest *request, NSUInteger nextPage) {
+                                 if (error) {
+                                     handler(nil, GHAPIPaginationNextPageNotFound, error);
+                                 } else {
+                                     NSArray *rawArray = object;
+                                     
+                                     NSMutableArray *finalArray = [NSMutableArray arrayWithCapacity:rawArray.count];
+                                     [rawArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+                                         [finalArray addObject:[[[GHAPIUserV3 alloc] initWithRawDictionary:obj] autorelease] ];
+                                     }];
+                                     
+                                     handler(finalArray, nextPage, nil);
+                                 }
+                             }];
+}
+
++ (void)isWatchingRepository:(NSString *)repository completionHandler:(void (^)(BOOL watching, NSError *error))handler {
+    // v3: GET /user/watched/:user/:repo
+    
+    NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.github.com/user/watched/%@",
+                                       [repository stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] ] ];
+    
+    [[GHBackgroundQueue sharedInstance] sendRequestToURL:URL 
+                                            setupHandler:nil 
                                        completionHandler:^(id object, NSError *error, ASIFormDataRequest *request) {
-                                           if (error) {
-                                               handler(nil, error);
+                                           if ([request responseStatusCode] == 404) {
+                                               handler(NO, nil);
+                                           } else if (error) {
+                                               handler(NO, error);
                                            } else {
-                                               NSArray *rawArray = object;
-                                               
-                                               NSMutableArray *finalArray = [NSMutableArray arrayWithCapacity:rawArray.count];
-                                               [rawArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-                                                   [finalArray addObject:[[[GHAPIRepositoryV3 alloc] initWithRawDictionary:obj] autorelease] ];
-                                               }];
-                                               
-                                               handler(finalArray, nil);
+                                               handler([request responseStatusCode] == 204, nil);
                                            }
                                        }];
+}
+
++ (void)watchRepository:(NSString *)repository completionHandler:(GHAPIErrorHandler)handler {
+    // v3: PUT /user/watched/:user/:repo
+    
+    NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.github.com/user/watched/%@",
+                                       [repository stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] ] ];
+    
+    [[GHBackgroundQueue sharedInstance] sendRequestToURL:URL 
+                                            setupHandler:^(ASIFormDataRequest *request) {
+                                                [request setRequestMethod:@"PUT"];
+                                            } completionHandler:^(id object, NSError *error, ASIFormDataRequest *request) {
+                                                handler(error);
+                                            }];
+}
+
++ (void)unwatchRepository:(NSString *)repository completionHandler:(GHAPIErrorHandler)handler {
+    // v3: PUT /user/watched/:user/:repo
+    
+    NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.github.com/user/watched/%@",
+                                       [repository stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] ] ];
+    
+    [[GHBackgroundQueue sharedInstance] sendRequestToURL:URL 
+                                            setupHandler:^(ASIFormDataRequest *request) {
+                                                [request setRequestMethod:@"DELETE"];
+                                            } completionHandler:^(id object, NSError *error, ASIFormDataRequest *request) {
+                                                handler(error);
+                                            }];
 }
 
 @end
