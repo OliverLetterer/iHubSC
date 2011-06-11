@@ -25,7 +25,6 @@
     NSArray *_organizations;
     NSMutableArray *_followedUsers;
     NSMutableArray *_gists;
-    NSUInteger _gistsNextPage;
     
     BOOL _hasFollowingData;
     BOOL _isFollowingUser;

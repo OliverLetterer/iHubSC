@@ -255,6 +255,29 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
+#pragma mark - pagination
+
+- (void)downloadDataForPage:(NSUInteger)page inSection:(NSUInteger)section {
+    [super downloadDataForPage:page inSection:section];
+    
+    if (section == kUITableViewGists) {
+        [GHAPIUserV3 gistsOfUser:self.username page:page completionHandler:^(NSArray *gists, NSInteger nextPage, NSError *error) {
+            if (error) {
+                [self handleError:error];
+            } else {
+                [self setNextPage:nextPage forSection:section];
+                
+                NSMutableArray *mutablCopy = [[self.gists mutableCopy] autorelease];
+                [mutablCopy addObjectsFromArray:gists];
+                self.gists = mutablCopy;
+                [self cacheGistsHeight];
+                [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:kUITableViewGists] 
+                              withRowAnimation:UITableViewRowAnimationNone];
+            }
+        }];
+    }
+}
+
 #pragma mark - UIExpandableTableViewDatasource
 
 - (BOOL)tableView:(UIExpandableTableView *)tableView canExpandSection:(NSInteger)section {
@@ -406,7 +429,7 @@
                 [tableView cancelDownloadInSection:section];
             } else {
                 self.gists = [[gists mutableCopy] autorelease];
-                _gistsNextPage = nextPage;
+                [self setNextPage:nextPage forSection:section];
                 [self cacheGistsHeight];
                 [tableView expandSection:section animated:YES];
             }
@@ -876,23 +899,6 @@
         [self.navigationController pushViewController:gistViewController animated:YES];
     } else {
         [self.tableView deselectRowAtIndexPath:indexPath animated:NO];
-    }
-}
-
-- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == kUITableViewGists && indexPath.row == [self.gists count] && indexPath.row != 0 && _gistsNextPage > 1) {
-        [GHAPIUserV3 gistsOfUser:self.username page:_gistsNextPage completionHandler:^(NSArray *gists, NSInteger nextPage, NSError *error) {
-            if (error) {
-                [self handleError:error];
-            } else {
-                _gistsNextPage = nextPage;
-                NSMutableArray *mutablCopy = [[self.gists mutableCopy] autorelease];
-                [mutablCopy addObjectsFromArray:gists];
-                self.gists = mutablCopy;
-                [self cacheGistsHeight];
-                [tableView reloadSections:[NSIndexSet indexSetWithIndex:kUITableViewGists] withRowAnimation:UITableViewRowAnimationNone];
-            }
-        }];
     }
 }
 
