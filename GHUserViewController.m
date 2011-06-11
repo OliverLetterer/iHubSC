@@ -261,20 +261,45 @@
     [super downloadDataForPage:page inSection:section];
     
     if (section == kUITableViewGists) {
-        [GHAPIUserV3 gistsOfUser:self.username page:page completionHandler:^(NSArray *gists, NSInteger nextPage, NSError *error) {
-            if (error) {
-                [self handleError:error];
-            } else {
-                [self setNextPage:nextPage forSection:section];
-                
-                NSMutableArray *mutablCopy = [[self.gists mutableCopy] autorelease];
-                [mutablCopy addObjectsFromArray:gists];
-                self.gists = mutablCopy;
-                [self cacheGistsHeight];
-                [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:kUITableViewGists] 
-                              withRowAnimation:UITableViewRowAnimationNone];
-            }
-        }];
+        [GHAPIUserV3 gistsOfUser:self.username 
+                            page:page 
+               completionHandler:^(NSMutableArray *array, NSUInteger nextPage, NSError *error) {
+                   if (error) {
+                       [self handleError:error];
+                   } else {
+                       [self setNextPage:nextPage forSection:section];
+                       [self.gists addObjectsFromArray:array];
+                       [self cacheGistsHeight];
+                       [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:section] 
+                                     withRowAnimation:UITableViewScrollPositionBottom];
+                   }
+               }];
+    } else if (section == kUITableViewFollowingUsers) {
+        [GHAPIUserV3 usersThatUsernameIsFollowing:self.username 
+                                             page:page
+                                completionHandler:^(NSMutableArray *array, NSUInteger nextPage, NSError *error) {
+                                    if (error) {
+                                        [self handleError:error];
+                                    } else {
+                                        [self.followingUsers addObjectsFromArray:array];
+                                        [self setNextPage:nextPage forSection:section];
+                                        [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:section] 
+                                                      withRowAnimation:UITableViewScrollPositionBottom];
+                                    }
+                                }];
+    } else if (section == kUITableViewFollowedUsers) {
+        [GHAPIUserV3 usersThatAreFollowingUserNamed:self.username 
+                                               page:page 
+                                  completionHandler:^(NSMutableArray *array, NSUInteger nextPage, NSError *error) {
+                                      if (error) {
+                                          [self handleError:error];
+                                      } else {
+                                          [self.followedUsers addObjectsFromArray:array];
+                                          [self setNextPage:nextPage forSection:section];
+                                          [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:section] 
+                                                        withRowAnimation:UITableViewScrollPositionBottom];
+                                      }
+                                  }];
     }
 }
 
@@ -369,26 +394,30 @@
                                         }];
     } else if (section == kUITableViewFollowingUsers) {
         [GHAPIUserV3 usersThatUsernameIsFollowing:self.username 
-                        completionHandler:^(NSArray *users, NSError *error) {
-                            if (error) {
-                                [self handleError:error];
-                                [tableView cancelDownloadInSection:section];
-                            } else {
-                                self.followingUsers = users;
-                                [tableView expandSection:section animated:YES];
-                            }
-                        }];
+                                             page:1 
+                                completionHandler:^(NSMutableArray *array, NSUInteger nextPage, NSError *error) {
+                                    if (error) {
+                                        [self handleError:error];
+                                        [tableView cancelDownloadInSection:section];
+                                    } else {
+                                        self.followingUsers = array;
+                                        [self setNextPage:nextPage forSection:section];
+                                        [tableView expandSection:section animated:YES];
+                                    }
+                                }];
     } else if (section == kUITableViewFollowedUsers) {
-        [GHAPIUserV3 userThatAreFollowingUserNamed:self.username 
-                       completionHandler:^(NSArray *users, NSError *error) {
-                           if (error) {
-                               [self handleError:error];
-                               [tableView cancelDownloadInSection:section];
-                           } else {
-                               self.followedUsers = [[users mutableCopy] autorelease];
-                               [tableView expandSection:section animated:YES];
-                           }
-                       }];
+        [GHAPIUserV3 usersThatAreFollowingUserNamed:self.username 
+                                               page:1 
+                                  completionHandler:^(NSMutableArray *array, NSUInteger nextPage, NSError *error) {
+                                      if (error) {
+                                          [self handleError:error];
+                                          [tableView cancelDownloadInSection:section];
+                                      } else {
+                                          self.followedUsers = array;
+                                          [self setNextPage:nextPage forSection:section];
+                                          [tableView expandSection:section animated:YES];
+                                      }
+                                  }];
     } else if (section == kUITableViewNetwork) {
         [GHAPIUserV3 isFollowingUserNamed:self.username 
                      completionHandler:^(BOOL following, NSError *error) {
@@ -423,17 +452,19 @@
                               }
                           }];
     } else if (section == kUITableViewGists) {
-        [GHAPIUserV3 gistsOfUser:self.username page:1 completionHandler:^(NSArray *gists, NSInteger nextPage, NSError *error) {
-            if (error) {
-                [self handleError:error];
-                [tableView cancelDownloadInSection:section];
-            } else {
-                self.gists = [[gists mutableCopy] autorelease];
-                [self setNextPage:nextPage forSection:section];
-                [self cacheGistsHeight];
-                [tableView expandSection:section animated:YES];
-            }
-        }];
+        [GHAPIUserV3 gistsOfUser:self.username 
+                            page:1 
+               completionHandler:^(NSMutableArray *array, NSUInteger nextPage, NSError *error) {
+                   if (error) {
+                       [self handleError:error];
+                       [tableView cancelDownloadInSection:section];
+                   } else {
+                       self.gists = array;
+                       [self setNextPage:nextPage forSection:section];
+                       [self cacheGistsHeight];
+                       [tableView expandSection:section animated:YES];
+                   }
+               }];
     }
 }
 

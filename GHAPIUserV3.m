@@ -107,51 +107,54 @@
     
 }
 
-+ (void)usersThatUsernameIsFollowing:(NSString *)username completionHandler:(void(^)(NSArray *users, NSError *error))handler {
++ (void)usersThatUsernameIsFollowing:(NSString *)username page:(NSInteger)page completionHandler:(GHAPIPaginationHandler)handler {
     // v3: GET /users/:user/following
     
     NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.github.com/users/%@/following",
                                        [username stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] ] ];
     
-    [[GHBackgroundQueue sharedInstance] sendRequestToURL:URL setupHandler:nil
-                                       completionHandler:^(id object, NSError *error, ASIFormDataRequest *request) {
-                                           if (error) {
-                                               handler(nil, error);
-                                           } else {
-                                               NSArray *rawArray = object;
-                                               
-                                               NSMutableArray *finalArray = [NSMutableArray arrayWithCapacity:rawArray.count];
-                                               for (NSDictionary *rawDictionary in rawArray) {
-                                                   [finalArray addObject:[[[GHAPIUserV3 alloc] initWithRawDictionary:rawDictionary] autorelease] ];
-                                               }
-                                               
-                                               handler(finalArray, nil);
-                                           }
-                                       }];
+    [[GHBackgroundQueue sharedInstance] sendRequestToURL:URL 
+                                                    page:page 
+                                            setupHandler:nil 
+                             completionPaginationHandler:^(id object, NSError *error, ASIFormDataRequest *request, NSUInteger nextPage) {
+                                 if (error) {
+                                     handler(nil, GHAPIPaginationNextPageNotFound, error);
+                                 } else {
+                                     NSArray *rawArray = object;
+                                     
+                                     NSMutableArray *finalArray = [NSMutableArray arrayWithCapacity:rawArray.count];
+                                     for (NSDictionary *rawDictionary in rawArray) {
+                                         [finalArray addObject:[[[GHAPIUserV3 alloc] initWithRawDictionary:rawDictionary] autorelease] ];
+                                     }
+                                     
+                                     handler(finalArray, nextPage, nil);
+                                 }
+                             }];
 }
 
-+ (void)userThatAreFollowingUserNamed:(NSString *)username completionHandler:(void(^)(NSArray *users, NSError *error))handler {
-    
++ (void)usersThatAreFollowingUserNamed:(NSString *)username page:(NSUInteger)page completionHandler:(GHAPIPaginationHandler)handler {
     // v3: GET /users/:user/followers
     
     NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.github.com/users/%@/followers",
                                        [username stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] ] ];
     
-    [[GHBackgroundQueue sharedInstance] sendRequestToURL:URL setupHandler:nil
-                                       completionHandler:^(id object, NSError *error, ASIFormDataRequest *request) {
-                                           if (error) {
-                                               handler(nil, error);
-                                           } else {
-                                               NSArray *rawArray = object;
-                                               
-                                               NSMutableArray *finalArray = [NSMutableArray arrayWithCapacity:rawArray.count];
-                                               for (NSDictionary *rawDictionary in rawArray) {
-                                                   [finalArray addObject:[[[GHAPIUserV3 alloc] initWithRawDictionary:rawDictionary] autorelease] ];
-                                               }
-                                               
-                                               handler(finalArray, nil);
-                                           }
-                                       }];
+    [[GHBackgroundQueue sharedInstance] sendRequestToURL:URL 
+                                                    page:page 
+                                            setupHandler:nil 
+                             completionPaginationHandler:^(id object, NSError *error, ASIFormDataRequest *request, NSUInteger nextPage) {
+                                 if (error) {
+                                     handler(nil, GHAPIPaginationNextPageNotFound, error);
+                                 } else {
+                                     NSArray *rawArray = object;
+                                     
+                                     NSMutableArray *finalArray = [NSMutableArray arrayWithCapacity:rawArray.count];
+                                     for (NSDictionary *rawDictionary in rawArray) {
+                                         [finalArray addObject:[[[GHAPIUserV3 alloc] initWithRawDictionary:rawDictionary] autorelease] ];
+                                     }
+                                     
+                                     handler(finalArray, nextPage, nil);
+                                 }
+                             }];
 }
 
 + (void)isFollowingUserNamed:(NSString *)username completionHandler:(void(^)(BOOL following, NSError *error))handler {

@@ -21,7 +21,7 @@
     
     NSArray *_repositoriesArray;
     NSArray *_watchedRepositoriesArray;
-    NSArray *_followingUsers;
+    NSMutableArray *_followingUsers;
     NSArray *_organizations;
     NSMutableArray *_followedUsers;
     NSMutableArray *_gists;
@@ -37,7 +37,7 @@
 @property (nonatomic, retain) NSArray *repositoriesArray;
 @property (nonatomic, copy) NSString *username;
 @property (nonatomic, retain) NSArray *watchedRepositoriesArray;
-@property (nonatomic, retain) NSArray *followingUsers;
+@property (nonatomic, retain) NSMutableArray *followingUsers;
 @property (nonatomic, retain) NSArray *organizations;
 @property (nonatomic, retain) NSMutableArray *followedUsers;
 @property (nonatomic, retain) NSMutableArray *gists;

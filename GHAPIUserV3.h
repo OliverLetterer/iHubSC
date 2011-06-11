@@ -78,9 +78,9 @@
                              password:(NSString *)password 
                     completionHandler:(void(^)(GHAPIUserV3 *user, NSError *error))handler;
 
-+ (void)usersThatUsernameIsFollowing:(NSString *)username completionHandler:(void(^)(NSArray *users, NSError *error))handler;
++ (void)usersThatUsernameIsFollowing:(NSString *)username page:(NSInteger)page completionHandler:(GHAPIPaginationHandler)handler;
 
-+ (void)userThatAreFollowingUserNamed:(NSString *)username completionHandler:(void(^)(NSArray *users, NSError *error))handler;
++ (void)usersThatAreFollowingUserNamed:(NSString *)username page:(NSUInteger)page completionHandler:(GHAPIPaginationHandler)handler;
 
 + (void)isFollowingUserNamed:(NSString *)username completionHandler:(void(^)(BOOL following, NSError *error))handler;
 
