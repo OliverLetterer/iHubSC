@@ -48,8 +48,17 @@
 @property (nonatomic, copy) NSString *createdAt;
 @property (nonatomic, copy) NSString *type;
 
+@property (nonatomic, readonly) BOOL hasEMail;
+@property (nonatomic, readonly) BOOL hasLocation;
+@property (nonatomic, readonly) BOOL hasBlog;
+
 - (id)initWithRawDictionary:(NSDictionary *)rawDictionary;
 
 + (void)organizationsOfUser:(NSString *)username page:(NSUInteger)page completionHandler:(GHAPIPaginationHandler)handler;
++ (void)organizationByName:(NSString *)organizationName completionHandler:(void (^)(GHAPIOrganizationV3 *organization, NSError *error))handler;
+
++ (void)repositoriesOfOrganizationNamed:(NSString *)organizationName page:(NSUInteger)page completionHandler:(GHAPIPaginationHandler)handler;
++ (void)membersOfOrganizationNamed:(NSString *)organizationName page:(NSUInteger)page completionHandler:(GHAPIPaginationHandler)handler;
++ (void)teamsOfOrganizationNamed:(NSString *)organizationName page:(NSUInteger)page completionHandler:(GHAPIPaginationHandler)handler;
 
 @end

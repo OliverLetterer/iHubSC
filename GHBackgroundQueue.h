@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <dispatch/dispatch.h>
 #import "ASIFormDataRequest.h"
+#import "GHAPIConnectionHandlersV3.h"
 
 dispatch_queue_t GHAPIBackgroundQueue();
 

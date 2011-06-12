@@ -7,6 +7,7 @@
 //
 
 #import "GHTeamViewController.h"
+#import "GithubAPI.h"
 #import "UICollapsingAndSpinningTableViewCell.h"
 #import "GHUserViewController.h"
 #import "GHFeedItemWithDescriptionTableViewCell.h"
@@ -16,15 +17,32 @@
 
 @implementation GHTeamViewController
 
-@synthesize team=_team, members=_members, repositories=_repositories;
+@synthesize team=_team, teamID=_teamID, members=_members, repositories=_repositories;
+
+- (void)setTeamID:(NSNumber *)teamID {
+    [_teamID release];
+    _teamID = [teamID copy];
+    
+    [GHAPITeamV3 teamByID:_teamID 
+        completionHandler:^(GHAPITeamV3 *team, NSError *error) {
+            if (error) {
+                [self handleError:error];
+            } else {
+                self.team = team;
+                self.title = self.team.name;
+                if (self.isViewLoaded) {
+                    [self.tableView reloadData];
+                }
+            }
+        }];
+}
 
 #pragma mark - Initialization
 
-- (id)initWithTeam:(GHTeam *)team {
+- (id)initWithTeamID:(NSNumber *)teamID {
     if ((self = [super initWithStyle:UITableViewStylePlain])) {
         // Custom initialization
-        self.team = team;
-        self.title = self.team.name;
+        self.teamID = teamID;
     }
     return self;
 }
@@ -33,6 +51,7 @@
 
 - (void)dealloc {
     [_team release];
+    [_teamID release];
     [_members release];
     [_repositories release];
     
@@ -124,35 +143,72 @@
     return cell;
 }
 
+#pragma mark - pagination
+
+- (void)downloadDataForPage:(NSUInteger)page inSection:(NSUInteger)section {
+    if (section == kUITableViewSectionMembers) {
+        [GHAPITeamV3 membersOfTeamByID:self.teamID page:1 
+                     completionHandler:^(NSMutableArray *array, NSUInteger nextPage, NSError *error) {
+                         if (error) {
+                             [self handleError:error];
+                         } else {
+                             [self.members addObjectsFromArray:array];
+                             [self setNextPage:nextPage forSection:section];
+                             [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:section] 
+                                           withRowAnimation:UITableViewScrollPositionBottom];
+                         }
+                     }];
+    } else if (section == kUITableViewSectionRepositories) {
+        [GHAPITeamV3 repositoriesOfTeamByID:self.teamID page:page 
+                          completionHandler:^(NSMutableArray *array, NSUInteger nextPage, NSError *error) {
+                              if (error) {
+                                  [self handleError:error];
+                              } else {
+                                  [self.repositories addObjectsFromArray:array];
+                                  [self setNextPage:nextPage forSection:section];
+                                  [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:section] 
+                                                withRowAnimation:UITableViewScrollPositionBottom];
+                              }
+                          }];
+    }
+}
+
 #pragma mark - UIExpandableTableViewDelegate
 
 - (void)tableView:(UIExpandableTableView *)tableView downloadDataForExpandableSection:(NSInteger)section {
     if (section == kUITableViewSectionMembers) {
-        [self.team membersWithCompletionHandler:^(NSArray *members, NSError *error) {
-            if (error) {
-                [self handleError:error];
-                [tableView cancelDownloadInSection:section];
-            } else {
-                self.members = [[members mutableCopy] autorelease];
-                [tableView expandSection:section animated:YES];
-            }
-        }];
+        [GHAPITeamV3 membersOfTeamByID:self.teamID page:1 
+                     completionHandler:^(NSMutableArray *array, NSUInteger nextPage, NSError *error) {
+                         if (error) {
+                             [self handleError:error];
+                             [tableView cancelDownloadInSection:section];
+                         } else {
+                             self.members = array;
+                             [self setNextPage:nextPage forSection:section];
+                             [tableView expandSection:section animated:YES];
+                         }
+                     }];
     } else if (section == kUITableViewSectionRepositories) {
-        [self.team repositoriesWithCompletionHandler:^(NSArray *repos, NSError *error) {
-            if (error) {
-                [self handleError:error];
-                [tableView cancelDownloadInSection:section];
-            } else {
-                self.repositories = [[repos mutableCopy] autorelease];
-                [tableView expandSection:section animated:YES];
-            }
-        }];
+        [GHAPITeamV3 repositoriesOfTeamByID:self.teamID page:1 
+                          completionHandler:^(NSMutableArray *array, NSUInteger nextPage, NSError *error) {
+                              if (error) {
+                                  [self handleError:error];
+                                  [tableView cancelDownloadInSection:section];
+                              } else {
+                                  self.repositories = array;
+                                  [self setNextPage:nextPage forSection:section];
+                                  [tableView expandSection:section animated:YES];
+                              }
+                          }];
     }
 }
 
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    if (!self.team) {
+        return 0;
+    }
     // Return the number of sections.
     return 2;
 }
@@ -177,7 +233,7 @@
         }
         
         
-        GHUser *user = [self.members objectAtIndex:indexPath.row - 1];
+        GHAPIUserV3 *user = [self.members objectAtIndex:indexPath.row - 1];
         
         cell.textLabel.text = user.login;
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
@@ -191,10 +247,10 @@
             cell = [[[GHFeedItemWithDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
         }
         
-        GHRepository *repository = [self.repositories objectAtIndex:indexPath.row-1];
+        GHAPIRepositoryV3 *repository = [self.repositories objectAtIndex:indexPath.row-1];
         
         cell.titleLabel.text = repository.name;
-        cell.descriptionLabel.text = repository.desctiptionRepo;
+        cell.descriptionLabel.text = repository.description;
         
         if ([repository.private boolValue]) {
             cell.imageView.image = [UIImage imageNamed:@"GHPrivateRepositoryIcon.png"];
@@ -227,9 +283,9 @@
         // Delete the row from the data source
         
         if (indexPath.section == kUITableViewSectionMembers) {
-            GHUser *user = [self.members objectAtIndex:indexPath.row - 1];
+            GHAPIUserV3 *user = [self.members objectAtIndex:indexPath.row - 1];
             
-            [self.team deleteMember:user.login withCompletionHandler:^(NSError *error) {
+            [GHAPITeamV3 teamByID:self.teamID deleteUserNamed:user.login completionHandler:^(NSError *error) {
                 if (error) {
                     [self handleError:error];
                     [tableView reloadRowAtIndexPath:indexPath withRowAnimation:UITableViewRowAnimationNone];
@@ -239,19 +295,20 @@
                 }
             }];
         } else if (indexPath.section == kUITableViewSectionRepositories) {
-            GHRepository *repo = [self.repositories objectAtIndex:indexPath.row-1];
+            GHAPIRepositoryV3 *repo = [self.repositories objectAtIndex:indexPath.row-1];
             
-            NSString *repoName = [NSString stringWithFormat:@"%@/%@", repo.owner, repo.name];
+            NSString *repoName = [NSString stringWithFormat:@"%@/%@", repo.owner.login, repo.name];
             
-            [self.team deleteRepository:repoName withCompletionHandler:^(NSError *error) {
-                if (error) {
-                    [self handleError:error];
-                    [tableView reloadRowAtIndexPath:indexPath withRowAnimation:UITableViewRowAnimationNone];
-                } else {
-                    [self.repositories removeObjectAtIndex:indexPath.row - 1];
-                    [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
-                }
-            }];
+            [GHAPITeamV3 teamByID:self.teamID deleteRepositoryNamed:repoName 
+                completionHandler:^(NSError *error) {
+                    if (error) {
+                        [self handleError:error];
+                        [tableView reloadRowAtIndexPath:indexPath withRowAnimation:UITableViewRowAnimationNone];
+                    } else {
+                        [self.repositories removeObjectAtIndex:indexPath.row - 1];
+                        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+                    }
+                }];
         }
     }
 }
@@ -282,7 +339,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == kUITableViewSectionMembers && indexPath.row > 0) {
-        GHUser *user = [self.members objectAtIndex:indexPath.row - 1];
+        GHAPIUserV3 *user = [self.members objectAtIndex:indexPath.row - 1];
         
         GHUserViewController *userViewController = [[[GHUserViewController alloc] initWithUsername:user.login] autorelease];
         [self.navigationController pushViewController:userViewController animated:YES];

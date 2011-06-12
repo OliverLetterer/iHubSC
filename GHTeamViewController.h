@@ -12,16 +12,18 @@
 
 @interface GHTeamViewController : GHTableViewController {
 @private
-    GHTeam *_team;
+    GHAPITeamV3 *_team;
+    NSNumber *_teamID;
     
     NSMutableArray *_members;
     NSMutableArray *_repositories;
 }
 
-@property (nonatomic, retain) GHTeam *team;
+@property (nonatomic, retain) GHAPITeamV3 *team;
+@property (nonatomic, copy) NSNumber *teamID;
 @property (nonatomic, retain) NSMutableArray *members;
 @property (nonatomic, retain) NSMutableArray *repositories;
 
-- (id)initWithTeam:(GHTeam *)team;
+- (id)initWithTeamID:(NSNumber *)teamID;
 
 @end

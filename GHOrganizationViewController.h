@@ -14,16 +14,16 @@
 @private
     NSString *_organizationLogin;
     
-    GHOrganization *_organization;
-    NSArray *_publicRepositories;
-    NSArray *_publicMembers;
+    GHAPIOrganizationV3 *_organization;
+    NSMutableArray *_publicRepositories;
+    NSMutableArray *_publicMembers;
     NSMutableArray *_teams;
 }
 
 @property (nonatomic, copy) NSString *organizationLogin;
-@property (nonatomic, retain) GHOrganization *organization;
-@property (nonatomic, retain) NSArray *publicRepositories;
-@property (nonatomic, retain) NSArray *publicMembers;
+@property (nonatomic, retain) GHAPIOrganizationV3 *organization;
+@property (nonatomic, retain) NSMutableArray *publicRepositories;
+@property (nonatomic, retain) NSMutableArray *publicMembers;
 @property (nonatomic, retain) NSMutableArray *teams;
 
 - (id)initWithOrganizationLogin:(NSString *)organizationLogin;;

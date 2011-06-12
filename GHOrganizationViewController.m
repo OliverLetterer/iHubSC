@@ -36,15 +36,18 @@
     [_organizationLogin release];
     _organizationLogin = [organizationLogin copy];
     
-    [GHOrganization organizationsNamed:_organizationLogin completionHandler:^(GHOrganization *organization, NSError *error) {
-        if (error) {
-            [self handleError:error];
-        } else {
-            self.organization = organization;
-            [self.tableView reloadData];
-            self.title = self.organization.name ? self.organization.name : self.organization.login;
-        }
-    }];
+    [GHAPIOrganizationV3 organizationByName:_organizationLogin 
+                          completionHandler:^(GHAPIOrganizationV3 *organization, NSError *error) {
+                              if (error) {
+                                  [self handleError:error];
+                              } else {
+                                  self.organization = organization;
+                                  if ([self isViewLoaded]) {
+                                      [self.tableView reloadData];
+                                  }
+                                  self.title = self.organization.name ? self.organization.name : self.organization.login;
+                              }
+                          }];
 }
 
 #pragma mark - Initialization
@@ -158,49 +161,97 @@
     return cell;
 }
 
+#pragma mark - pagination
+
+- (void)downloadDataForPage:(NSUInteger)page inSection:(NSUInteger)section {
+    if (section == kUITableViewSectionPublicRepositories) {
+        [GHAPIOrganizationV3 repositoriesOfOrganizationNamed:self.organization.login page:page 
+                                            completionHandler:^(NSMutableArray *array, NSUInteger nextPage, NSError *error) {
+                                                if (error) {
+                                                    [self handleError:error];
+                                                } else {
+                                                    [self.publicRepositories addObjectsFromArray:array];
+                                                    [self setNextPage:nextPage forSection:section];
+                                                    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:section] 
+                                                                  withRowAnimation:UITableViewScrollPositionBottom];
+                                                }
+                                            }];
+    } else if (section == kUITableViewSectionPublicMembers) {
+        [GHAPIOrganizationV3 membersOfOrganizationNamed:self.organization.login page:1 
+                                      completionHandler:^(NSMutableArray *array, NSUInteger nextPage, NSError *error) {
+                                          if (error) {
+                                              [self handleError:error];
+                                          } else {
+                                              [self.publicMembers addObjectsFromArray:array];
+                                              [self setNextPage:nextPage forSection:section];
+                                              [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:section] 
+                                                            withRowAnimation:UITableViewScrollPositionBottom];
+                                          }
+                                      }];
+    } else if (section == kUITableViewSectionTeams) {
+        [GHAPIOrganizationV3 teamsOfOrganizationNamed:self.organization.login page:page 
+                                    completionHandler:^(NSMutableArray *array, NSUInteger nextPage, NSError *error) {
+                                        if (error) {
+                                            [self handleError:error];
+                                        } else {
+                                            [self.teams addObjectsFromArray:array];
+                                            [self setNextPage:nextPage forSection:section];
+                                            [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:section] 
+                                                          withRowAnimation:UITableViewScrollPositionBottom];
+                                        }
+                                    }];
+    }
+}
+
 #pragma mark - UIExpandableTableViewDelegate
 
 - (void)tableView:(UIExpandableTableView *)tableView downloadDataForExpandableSection:(NSInteger)section {
     if (section == kUITableViewSectionPublicRepositories) {
-        [self.organization publicRepositoriesWithCompletionHandler:^(NSArray *repositories, NSError *error) {
-            if (error) {
-                [self handleError:error];
-                [tableView cancelDownloadInSection:section];
-            } else {
-                self.publicRepositories = repositories;
-                [tableView expandSection:section animated:YES];
-            }
-        }];
+        [GHAPIOrganizationV3 repositoriesOfOrganizationNamed:self.organization.login page:1 
+                                           completionHandler:^(NSMutableArray *array, NSUInteger nextPage, NSError *error) {
+                                                if (error) {
+                                                    [self handleError:error];
+                                                    [tableView cancelDownloadInSection:section];
+                                                } else {
+                                                    self.publicRepositories = array;
+                                                    [self setNextPage:nextPage forSection:section];
+                                                    [tableView expandSection:section animated:YES];
+                                                }
+                                            }];
     } else if (section == kUITableViewSectionPublicMembers) {
-        [self.organization publicMembersWithCompletionHandler:^(NSArray *members, NSError *error) {
-            if (error) {
-                [self handleError:error];
-                [tableView cancelDownloadInSection:section];
-            } else {
-                self.publicMembers = members;
-                [tableView expandSection:section animated:YES];
-            }
-        }];
+        [GHAPIOrganizationV3 membersOfOrganizationNamed:self.organization.login page:1 
+                                      completionHandler:^(NSMutableArray *array, NSUInteger nextPage, NSError *error) {
+                                          if (error) {
+                                              [self handleError:error];
+                                              [tableView cancelDownloadInSection:section];
+                                          } else {
+                                              self.publicMembers = array;
+                                              [self setNextPage:nextPage forSection:section];
+                                              [tableView expandSection:section animated:YES];
+                                          }
+                                      }];
     } else if (section == kUITableViewSectionTeams) {
-        [self.organization teamsWithCompletionHandler:^(NSArray *teams, NSError *error) {
-            if (error) {
-                [self handleError:error];
-                [tableView cancelDownloadInSection:section];
-            } else {
-                self.teams = [[teams mutableCopy] autorelease];
-                [tableView expandSection:section animated:YES];
-                
-                if (self.teams.count == 0) {
-                    UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Teams", @"") 
-                                                                     message:NSLocalizedString(@"There are no Teams available for this Organization", @"")
-                                                                    delegate:nil 
-                                                           cancelButtonTitle:NSLocalizedString(@"OK", @"") 
-                                                           otherButtonTitles:nil]
-                                          autorelease];
-                    [alert show];
-                }
-            }
-        }];
+        [GHAPIOrganizationV3 teamsOfOrganizationNamed:self.organization.login page:1 
+                                    completionHandler:^(NSMutableArray *array, NSUInteger nextPage, NSError *error) {
+                                        if (error) {
+                                            [self handleError:error];
+                                            [tableView cancelDownloadInSection:section];
+                                        } else {
+                                            self.teams = array;
+                                            [self setNextPage:nextPage forSection:section];
+                                            [tableView expandSection:section animated:YES];
+                                            
+                                            if (self.teams.count == 0) {
+                                                UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Teams", @"") 
+                                                                                                 message:NSLocalizedString(@"There are no Teams available for this Organization", @"")
+                                                                                                delegate:nil 
+                                                                                       cancelButtonTitle:NSLocalizedString(@"OK", @"") 
+                                                                                       otherButtonTitles:nil]
+                                                                      autorelease];
+                                                [alert show];
+                                            }
+                                        }
+                                    }];
     }
 }
 
@@ -341,11 +392,11 @@
             cell = [[[GHFeedItemWithDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
         }
         
-        GHRepository *repository = [self.publicRepositories objectAtIndex:indexPath.row-1];
+        GHAPIRepositoryV3 *repository = [self.publicRepositories objectAtIndex:indexPath.row-1];
         
-        cell.titleLabel.text = [NSString stringWithFormat:@"%@/%@", repository.owner, repository.name];
+        cell.titleLabel.text = [NSString stringWithFormat:@"%@/%@", repository.owner.login, repository.name];
         
-        cell.descriptionLabel.text = repository.desctiptionRepo;
+        cell.descriptionLabel.text = repository.description;
         
         if ([repository.private boolValue]) {
             cell.imageView.image = [UIImage imageNamed:@"GHPrivateRepositoryIcon.png"];
@@ -365,7 +416,7 @@
         }
         
         
-        GHUser *user = [self.publicMembers objectAtIndex:indexPath.row - 1];
+        GHAPIUserV3 *user = [self.publicMembers objectAtIndex:indexPath.row - 1];
         
         cell.textLabel.text = user.login;
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
@@ -380,7 +431,7 @@
         }
         
         
-        GHTeam *team = [self.teams objectAtIndex:indexPath.row - 1];
+        GHAPITeamV3 *team = [self.teams objectAtIndex:indexPath.row - 1];
         
         cell.textLabel.text = team.name;
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
@@ -401,9 +452,9 @@
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         // Delete the row from the data source
-        GHTeam *team = [[[self.teams objectAtIndex:indexPath.row - 1] retain] autorelease];
+        GHAPITeamV3 *team = [self.teams objectAtIndex:indexPath.row - 1];
         
-        [team deleteWithCompletionHandler:^(NSError *error) {
+        [GHAPITeamV3 deleteTeamWithID:team.ID completionHandler:^(NSError *error) {
             if (error) {
                 [self handleError:error];
                 [tableView reloadRowAtIndexPath:indexPath withRowAnimation:UITableViewRowAnimationNone];
@@ -456,19 +507,19 @@
         GHRecentActivityViewController *recentViewController = [[[GHRecentActivityViewController alloc] initWithUsername:self.organization.login] autorelease];
         [self.navigationController pushViewController:recentViewController animated:YES];
     } else if (indexPath.section == kUITableViewSectionPublicRepositories) {
-        GHRepository *repo = [self.publicRepositories objectAtIndex:indexPath.row-1];
+        GHAPIRepositoryV3 *repo = [self.publicRepositories objectAtIndex:indexPath.row-1];
         
-        GHSingleRepositoryViewController *viewController = [[[GHSingleRepositoryViewController alloc] initWithRepositoryString:[NSString stringWithFormat:@"%@/%@", repo.owner, repo.name] ] autorelease];
+        GHSingleRepositoryViewController *viewController = [[[GHSingleRepositoryViewController alloc] initWithRepositoryString:[NSString stringWithFormat:@"%@/%@", repo.owner.login, repo.name] ] autorelease];
         [self.navigationController pushViewController:viewController animated:YES];
     } else if (indexPath.section == kUITableViewSectionPublicMembers) {
-        GHUser *user = [self.publicMembers objectAtIndex:indexPath.row - 1];
+        GHAPIUserV3 *user = [self.publicMembers objectAtIndex:indexPath.row - 1];
         
         GHUserViewController *userViewController = [[[GHUserViewController alloc] initWithUsername:user.login] autorelease];
         [self.navigationController pushViewController:userViewController animated:YES];
     } else if (indexPath.section == kUITableViewSectionTeams) {
-        GHTeam *team = [self.teams objectAtIndex:indexPath.row - 1];
+        GHAPITeamV3 *team = [self.teams objectAtIndex:indexPath.row - 1];
         
-        GHTeamViewController *teamViewController = [[[GHTeamViewController alloc] initWithTeam:team] autorelease];
+        GHTeamViewController *teamViewController = [[[GHTeamViewController alloc] initWithTeamID:team.ID] autorelease];
         [self.navigationController pushViewController:teamViewController animated:YES];
     } else {
         [tableView deselectRowAtIndexPath:indexPath animated:NO];

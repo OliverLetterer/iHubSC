@@ -87,152 +87,152 @@
 //    });
 //}
 
-+ (void)organizationsNamed:(NSString *)name completionHandler:(void (^)(GHOrganization *, NSError *))handler {
-    dispatch_async(GHAPIBackgroundQueue(), ^(void) {
-        
-        // /organizations/:org
-        
-        NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://github.com/api/v2/json/organizations/%@",
-                                           [name stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] ] ];
-        
-        NSError *myError = nil;
-        
-        ASIFormDataRequest *request = [ASIFormDataRequest authenticatedFormDataRequestWithURL:URL];
-        [request startSynchronous];
-        
-        myError = [request error];
-        
-        if (!myError) {
-            myError = [NSError errorFromRawDictionary:[[request responseString] objectFromJSONString] ];
-        }
-        
-        dispatch_async(dispatch_get_main_queue(), ^(void) {
-            if (myError) {
-                handler(nil, myError);
-            } else {
-                NSDictionary *dictionary = [[request responseString] objectFromJSONString];
-                
-                NSDictionary *rawDictionary = [dictionary objectForKeyOrNilOnNullObject:@"organization"];
-                
-                handler([[[GHOrganization alloc] initWithRawDictionary:rawDictionary] autorelease], nil);
-            }
-        });
-    });
-}
+//+ (void)organizationsNamed:(NSString *)name completionHandler:(void (^)(GHOrganization *, NSError *))handler {
+//    dispatch_async(GHAPIBackgroundQueue(), ^(void) {
+//        
+//        // /organizations/:org
+//        
+//        NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://github.com/api/v2/json/organizations/%@",
+//                                           [name stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] ] ];
+//        
+//        NSError *myError = nil;
+//        
+//        ASIFormDataRequest *request = [ASIFormDataRequest authenticatedFormDataRequestWithURL:URL];
+//        [request startSynchronous];
+//        
+//        myError = [request error];
+//        
+//        if (!myError) {
+//            myError = [NSError errorFromRawDictionary:[[request responseString] objectFromJSONString] ];
+//        }
+//        
+//        dispatch_async(dispatch_get_main_queue(), ^(void) {
+//            if (myError) {
+//                handler(nil, myError);
+//            } else {
+//                NSDictionary *dictionary = [[request responseString] objectFromJSONString];
+//                
+//                NSDictionary *rawDictionary = [dictionary objectForKeyOrNilOnNullObject:@"organization"];
+//                
+//                handler([[[GHOrganization alloc] initWithRawDictionary:rawDictionary] autorelease], nil);
+//            }
+//        });
+//    });
+//}
 
-- (void)publicRepositoriesWithCompletionHandler:(void (^)(NSArray *, NSError *))handler {
-    dispatch_async(GHAPIBackgroundQueue(), ^(void) {
-        
-        // /organizations/:org/public_repositories
-        
-        NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://github.com/api/v2/json/organizations/%@/public_repositories",
-                                           [self.login stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] ] ];
-        
-        NSError *myError = nil;
-        
-        ASIFormDataRequest *request = [ASIFormDataRequest authenticatedFormDataRequestWithURL:URL];
-        [request startSynchronous];
-        
-        myError = [request error];
-        
-        if (!myError) {
-            myError = [NSError errorFromRawDictionary:[[request responseString] objectFromJSONString] ];
-        }
-        
-        dispatch_async(dispatch_get_main_queue(), ^(void) {
-            if (myError) {
-                handler(nil, myError);
-            } else {
-                NSDictionary *dictionary = [[request responseString] objectFromJSONString];
-                
-                NSArray *rawReposArray = [dictionary objectForKeyOrNilOnNullObject:@"repositories"];
-                NSMutableArray *repos = [NSMutableArray arrayWithCapacity:rawReposArray.count];
-                
-                for (NSDictionary *rawDictionary in rawReposArray) {
-                    [repos addObject:[[[GHRepository alloc] initWithRawDictionary:rawDictionary] autorelease] ];
-                }
-                
-                handler(repos, nil);
-            }
-        });
-    });
-}
-
-- (void)publicMembersWithCompletionHandler:(void(^)(NSArray *members, NSError *error))handler {
-    dispatch_async(GHAPIBackgroundQueue(), ^(void) {
-        
-        // /organizations/:org/public_members
-        
-        NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://github.com/api/v2/json/organizations/%@/public_members",
-                                           [self.login stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] ] ];
-        
-        NSError *myError = nil;
-        
-        ASIFormDataRequest *request = [ASIFormDataRequest authenticatedFormDataRequestWithURL:URL];
-        [request startSynchronous];
-        
-        myError = [request error];
-        
-        if (!myError) {
-            myError = [NSError errorFromRawDictionary:[[request responseString] objectFromJSONString] ];
-        }
-        
-        dispatch_async(dispatch_get_main_queue(), ^(void) {
-            if (myError) {
-                handler(nil, myError);
-            } else {
-                NSDictionary *dictionary = [[request responseString] objectFromJSONString];
-                
-                NSArray *rawMembersArray = [dictionary objectForKeyOrNilOnNullObject:@"users"];
-                NSMutableArray *members = [NSMutableArray arrayWithCapacity:rawMembersArray.count];
-                
-                for (NSDictionary *rawDictionary in rawMembersArray) {
-                    [members addObject:[[[GHUser alloc] initWithRawDictionary:rawDictionary] autorelease] ];
-                }
-                
-                handler(members, nil);
-            }
-        });
-    });
-}
-
-- (void)teamsWithCompletionHandler:(void(^)(NSArray *teams, NSError *error))handler {
-    dispatch_async(GHAPIBackgroundQueue(), ^(void) {
-        
-        // /organizations/:org/teams
-        
-        NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://github.com/api/v2/json/organizations/%@/teams",
-                                           [self.login stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] ] ];
-        
-        NSError *myError = nil;
-        
-        ASIFormDataRequest *request = [ASIFormDataRequest authenticatedFormDataRequestWithURL:URL];
-        [request startSynchronous];
-        
-        myError = [request error];
-        
-        if (!myError) {
-            myError = [NSError errorFromRawDictionary:[[request responseString] objectFromJSONString] ];
-        }
-        
-        dispatch_async(dispatch_get_main_queue(), ^(void) {
-            if (myError) {
-                handler(nil, myError);
-            } else {
-                NSDictionary *dictionary = [[request responseString] objectFromJSONString];
-                
-                NSArray *rawArray = [dictionary objectForKeyOrNilOnNullObject:@"teams"];
-                NSMutableArray *finalArray = [NSMutableArray arrayWithCapacity:rawArray.count];
-                
-                for (NSDictionary *rawDictionary in rawArray) {
-                    [finalArray addObject:[[[GHTeam alloc] initWithRawDictionary:rawDictionary] autorelease] ];
-                }
-                
-                handler(finalArray, nil);
-            }
-        });
-    });
-}
+//- (void)publicRepositoriesWithCompletionHandler:(void (^)(NSArray *, NSError *))handler {
+//    dispatch_async(GHAPIBackgroundQueue(), ^(void) {
+//        
+//        // /organizations/:org/public_repositories
+//        
+//        NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://github.com/api/v2/json/organizations/%@/public_repositories",
+//                                           [self.login stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] ] ];
+//        
+//        NSError *myError = nil;
+//        
+//        ASIFormDataRequest *request = [ASIFormDataRequest authenticatedFormDataRequestWithURL:URL];
+//        [request startSynchronous];
+//        
+//        myError = [request error];
+//        
+//        if (!myError) {
+//            myError = [NSError errorFromRawDictionary:[[request responseString] objectFromJSONString] ];
+//        }
+//        
+//        dispatch_async(dispatch_get_main_queue(), ^(void) {
+//            if (myError) {
+//                handler(nil, myError);
+//            } else {
+//                NSDictionary *dictionary = [[request responseString] objectFromJSONString];
+//                
+//                NSArray *rawReposArray = [dictionary objectForKeyOrNilOnNullObject:@"repositories"];
+//                NSMutableArray *repos = [NSMutableArray arrayWithCapacity:rawReposArray.count];
+//                
+//                for (NSDictionary *rawDictionary in rawReposArray) {
+//                    [repos addObject:[[[GHRepository alloc] initWithRawDictionary:rawDictionary] autorelease] ];
+//                }
+//                
+//                handler(repos, nil);
+//            }
+//        });
+//    });
+//}
+//
+//- (void)publicMembersWithCompletionHandler:(void(^)(NSArray *members, NSError *error))handler {
+//    dispatch_async(GHAPIBackgroundQueue(), ^(void) {
+//        
+//        // /organizations/:org/public_members
+//        
+//        NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://github.com/api/v2/json/organizations/%@/public_members",
+//                                           [self.login stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] ] ];
+//        
+//        NSError *myError = nil;
+//        
+//        ASIFormDataRequest *request = [ASIFormDataRequest authenticatedFormDataRequestWithURL:URL];
+//        [request startSynchronous];
+//        
+//        myError = [request error];
+//        
+//        if (!myError) {
+//            myError = [NSError errorFromRawDictionary:[[request responseString] objectFromJSONString] ];
+//        }
+//        
+//        dispatch_async(dispatch_get_main_queue(), ^(void) {
+//            if (myError) {
+//                handler(nil, myError);
+//            } else {
+//                NSDictionary *dictionary = [[request responseString] objectFromJSONString];
+//                
+//                NSArray *rawMembersArray = [dictionary objectForKeyOrNilOnNullObject:@"users"];
+//                NSMutableArray *members = [NSMutableArray arrayWithCapacity:rawMembersArray.count];
+//                
+//                for (NSDictionary *rawDictionary in rawMembersArray) {
+//                    [members addObject:[[[GHUser alloc] initWithRawDictionary:rawDictionary] autorelease] ];
+//                }
+//                
+//                handler(members, nil);
+//            }
+//        });
+//    });
+//}
+//
+//- (void)teamsWithCompletionHandler:(void(^)(NSArray *teams, NSError *error))handler {
+//    dispatch_async(GHAPIBackgroundQueue(), ^(void) {
+//        
+//        // /organizations/:org/teams
+//        
+//        NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://github.com/api/v2/json/organizations/%@/teams",
+//                                           [self.login stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] ] ];
+//        
+//        NSError *myError = nil;
+//        
+//        ASIFormDataRequest *request = [ASIFormDataRequest authenticatedFormDataRequestWithURL:URL];
+//        [request startSynchronous];
+//        
+//        myError = [request error];
+//        
+//        if (!myError) {
+//            myError = [NSError errorFromRawDictionary:[[request responseString] objectFromJSONString] ];
+//        }
+//        
+//        dispatch_async(dispatch_get_main_queue(), ^(void) {
+//            if (myError) {
+//                handler(nil, myError);
+//            } else {
+//                NSDictionary *dictionary = [[request responseString] objectFromJSONString];
+//                
+//                NSArray *rawArray = [dictionary objectForKeyOrNilOnNullObject:@"teams"];
+//                NSMutableArray *finalArray = [NSMutableArray arrayWithCapacity:rawArray.count];
+//                
+//                for (NSDictionary *rawDictionary in rawArray) {
+//                    [finalArray addObject:[[[GHTeam alloc] initWithRawDictionary:rawDictionary] autorelease] ];
+//                }
+//                
+//                handler(finalArray, nil);
+//            }
+//        });
+//    });
+//}
 
 #pragma mark - Memory management
 

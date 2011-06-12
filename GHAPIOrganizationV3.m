@@ -13,6 +13,20 @@
 
 @synthesize login = _login, ID = _ID, URL = _URL, avatarURL = _avatarURL, gravatarID = _gravatarID, name = _name, company = _company, blog = _blog, location = _location, EMail = _EMail, publicRepos = _publicRepos, publicGists = _publicGists, follower = _follower, following = _following, HTMLURL = _HTMLURL, createdAt = _createdAt, type = _type;
 
+#pragma mark - setters and getters
+
+- (BOOL)hasBlog {
+    return self.blog != nil;
+}
+
+- (BOOL)hasLocation {
+    return self.location != nil;
+}
+
+- (BOOL)hasEMail {
+    return self.EMail != nil;
+}
+
 #pragma mark - Initialization
 
 - (id)initWithRawDictionary:(NSDictionary *)rawDictionary {
@@ -88,6 +102,91 @@
                                      NSMutableArray *finalArray = [NSMutableArray arrayWithCapacity:rawArray.count];
                                      [rawArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
                                          [finalArray addObject:[[[GHAPIOrganizationV3 alloc] initWithRawDictionary:obj] autorelease] ];
+                                     }];
+                                     
+                                     handler(finalArray, nextPage, nil);
+                                 }
+                             }];
+}
+
++ (void)organizationByName:(NSString *)organizationName completionHandler:(void (^)(GHAPIOrganizationV3 *organization, NSError *error))handler {
+    // v3: GET /orgs/:org
+    
+    NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.github.com/orgs/%@",
+                                       [organizationName stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] ]];
+    
+    [[GHBackgroundQueue sharedInstance] sendRequestToURL:URL setupHandler:nil 
+                                       completionHandler:^(id object, NSError *error, ASIFormDataRequest *request) {
+                                           if (error) {
+                                               handler(nil, error);
+                                           } else {
+                                               handler([[[GHAPIOrganizationV3 alloc] initWithRawDictionary:object] autorelease], nil);
+                                           }
+                                       }];
+}
+
++ (void)repositoriesOfOrganizationNamed:(NSString *)organizationName page:(NSUInteger)page completionHandler:(GHAPIPaginationHandler)handler {
+    // v3: GET /orgs/:org/repos
+    
+    NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.github.com/orgs/%@/repos",
+                                       [organizationName stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] ]];
+    
+    [[GHBackgroundQueue sharedInstance] sendRequestToURL:URL page:page setupHandler:nil 
+                             completionPaginationHandler:^(id object, NSError *error, ASIFormDataRequest *request, NSUInteger nextPage) {
+                                 if (error) {
+                                     handler(nil, GHAPIPaginationNextPageNotFound, error);
+                                 } else {
+                                     NSArray *rawArray = object;
+                                     
+                                     NSMutableArray *finalArray = [NSMutableArray arrayWithCapacity:rawArray.count];
+                                     [rawArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+                                         [finalArray addObject:[[[GHAPIRepositoryV3 alloc] initWithRawDictionary:obj] autorelease] ];
+                                     }];
+                                     
+                                     handler(finalArray, nextPage, nil);
+                                 }
+                             }];
+}
+
++ (void)membersOfOrganizationNamed:(NSString *)organizationName page:(NSUInteger)page completionHandler:(GHAPIPaginationHandler)handler {
+    // v3: GET /orgs/:org/members
+    
+    NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.github.com/orgs/%@/members",
+                                       [organizationName stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] ]];
+    
+    [[GHBackgroundQueue sharedInstance] sendRequestToURL:URL page:page setupHandler:nil 
+                             completionPaginationHandler:^(id object, NSError *error, ASIFormDataRequest *request, NSUInteger nextPage) {
+                                 if (error) {
+                                     handler(nil, GHAPIPaginationNextPageNotFound, error);
+                                 } else {
+                                     NSArray *rawArray = object;
+                                     
+                                     NSMutableArray *finalArray = [NSMutableArray arrayWithCapacity:rawArray.count];
+                                     [rawArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+                                         [finalArray addObject:[[[GHAPIUserV3 alloc] initWithRawDictionary:obj] autorelease] ];
+                                     }];
+                                     
+                                     handler(finalArray, nextPage, nil);
+                                 }
+                             }];
+}
+
++ (void)teamsOfOrganizationNamed:(NSString *)organizationName page:(NSUInteger)page completionHandler:(GHAPIPaginationHandler)handler {
+    // v3: GET /orgs/:org/teams
+    
+    NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.github.com/orgs/%@/teams",
+                                       [organizationName stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] ]];
+    
+    [[GHBackgroundQueue sharedInstance] sendRequestToURL:URL page:page setupHandler:nil 
+                             completionPaginationHandler:^(id object, NSError *error, ASIFormDataRequest *request, NSUInteger nextPage) {
+                                 if (error) {
+                                     handler(nil, GHAPIPaginationNextPageNotFound, error);
+                                 } else {
+                                     NSArray *rawArray = object;
+                                     
+                                     NSMutableArray *finalArray = [NSMutableArray arrayWithCapacity:rawArray.count];
+                                     [rawArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+                                         [finalArray addObject:[[[GHAPITeamV3 alloc] initWithRawDictionary:obj] autorelease] ];
                                      }];
                                      
                                      handler(finalArray, nextPage, nil);

@@ -22,10 +22,10 @@
 
 - (id)initWithRawDictionary:(NSDictionary *)dictionary;
 
-- (void)deleteWithCompletionHandler:(void(^)(NSError *error))handler;
-- (void)membersWithCompletionHandler:(void(^)(NSArray *members, NSError *error))handler;
-- (void)deleteMember:(NSString *)login withCompletionHandler:(void(^)(NSError *error))handler;
-- (void)repositoriesWithCompletionHandler:(void(^)(NSArray *repos, NSError *error))handler;
-- (void)deleteRepository:(NSString *)repo withCompletionHandler:(void(^)(NSError *error))handler;
+//- (void)deleteWithCompletionHandler:(void(^)(NSError *error))handler;
+//- (void)membersWithCompletionHandler:(void(^)(NSArray *members, NSError *error))handler;
+//- (void)deleteMember:(NSString *)login withCompletionHandler:(void(^)(NSError *error))handler;
+//- (void)repositoriesWithCompletionHandler:(void(^)(NSArray *repos, NSError *error))handler;
+//- (void)deleteRepository:(NSString *)repo withCompletionHandler:(void(^)(NSError *error))handler;
 
 @end

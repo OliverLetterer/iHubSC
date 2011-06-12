@@ -33,6 +33,8 @@
 #import "GHOrganization.h"
 #import "GHTeam.h"
 
+#warning make pagination in implemetation more genertic
+
 // V3
 #import "GHAPIConnectionHandlersV3.h"
 #import "GHAPIIssueCommentV3.h"
@@ -49,6 +51,7 @@
 #import "GHAPIRepositoryBranchV3.h"
 #import "GHAPIRepositoryV3.h"
 #import "GHAPIOrganizationV3.h"
+#import "GHAPITeamV3.h"
 
 #import "GHPayload.h"
 #import "GHIssuePayload.h"

@@ -46,6 +46,7 @@
 		A709F7571368A0DC00B0CDE7 /* GHTeam.m in Sources */ = {isa = PBXBuildFile; fileRef = A709F7561368A0DC00B0CDE7 /* GHTeam.m */; };
 		A709F75A1368B7E900B0CDE7 /* GHTeamViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A709F7591368B7E800B0CDE7 /* GHTeamViewController.m */; };
 		A70DA3D813A4B7F700235C76 /* GHAPIOrganizationV3.m in Sources */ = {isa = PBXBuildFile; fileRef = A70DA3D713A4B7F700235C76 /* GHAPIOrganizationV3.m */; };
+		A70DA3DC13A4E2D100235C76 /* GHAPITeamV3.m in Sources */ = {isa = PBXBuildFile; fileRef = A70DA3DB13A4E2D100235C76 /* GHAPITeamV3.m */; };
 		A712B7C0135C9A5D0009B7A7 /* GHFileSystemItem.m in Sources */ = {isa = PBXBuildFile; fileRef = A712B7BF135C9A5D0009B7A7 /* GHFileSystemItem.m */; };
 		A712B7C3135C9ACB0009B7A7 /* GHFile.m in Sources */ = {isa = PBXBuildFile; fileRef = A712B7C2135C9ACA0009B7A7 /* GHFile.m */; };
 		A712B7C6135C9AF10009B7A7 /* GHDirectory.m in Sources */ = {isa = PBXBuildFile; fileRef = A712B7C5135C9AF10009B7A7 /* GHDirectory.m */; };
@@ -290,6 +291,8 @@
 		A709F7591368B7E800B0CDE7 /* GHTeamViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHTeamViewController.m; sourceTree = "<group>"; };
 		A70DA3D613A4B7F700235C76 /* GHAPIOrganizationV3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHAPIOrganizationV3.h; sourceTree = "<group>"; };
 		A70DA3D713A4B7F700235C76 /* GHAPIOrganizationV3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHAPIOrganizationV3.m; sourceTree = "<group>"; };
+		A70DA3DA13A4E2D100235C76 /* GHAPITeamV3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHAPITeamV3.h; sourceTree = "<group>"; };
+		A70DA3DB13A4E2D100235C76 /* GHAPITeamV3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHAPITeamV3.m; sourceTree = "<group>"; };
 		A712B7BE135C9A5D0009B7A7 /* GHFileSystemItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHFileSystemItem.h; sourceTree = "<group>"; };
 		A712B7BF135C9A5D0009B7A7 /* GHFileSystemItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHFileSystemItem.m; sourceTree = "<group>"; };
 		A712B7C1135C9ACA0009B7A7 /* GHFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHFile.h; sourceTree = "<group>"; };
@@ -842,6 +845,15 @@
 			name = GHAPIOrganizationV3;
 			sourceTree = "<group>";
 		};
+		A70DA3D913A4E2BE00235C76 /* GHAPITeamV3 */ = {
+			isa = PBXGroup;
+			children = (
+				A70DA3DA13A4E2D100235C76 /* GHAPITeamV3.h */,
+				A70DA3DB13A4E2D100235C76 /* GHAPITeamV3.m */,
+			);
+			name = GHAPITeamV3;
+			sourceTree = "<group>";
+		};
 		A712B7BC135C9A450009B7A7 /* GHFileSystem */ = {
 			isa = PBXGroup;
 			children = (
@@ -1357,6 +1369,7 @@
 		A79F37F813883B650028F492 /* v3 */ = {
 			isa = PBXGroup;
 			children = (
+				A70DA3D913A4E2BE00235C76 /* GHAPITeamV3 */,
 				A70DA3D413A4B7DE00235C76 /* GHAPIOrganizationV3 */,
 				A7DCDD9013A366BE00089CCD /* GHAPIRepositoryBranchV3 */,
 				A7B5209713892439000FEE61 /* GHAPIRepositoryV3 */,
@@ -2228,6 +2241,7 @@
 				A706C0CC139AD15C008A6184 /* UIColor+GithubUI.m in Sources */,
 				A7DCDD9413A366DF00089CCD /* GHAPIRepositoryBranchV3.m in Sources */,
 				A70DA3D813A4B7F700235C76 /* GHAPIOrganizationV3.m in Sources */,
+				A70DA3DC13A4E2D100235C76 /* GHAPITeamV3.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

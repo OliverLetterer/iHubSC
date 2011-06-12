@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "GHAPIConnectionHandlersV3.h"
 
-@class GHAPIUserV3;
+@class GHAPIUserV3, GHAPIOrganizationV3;
 
 @interface GHAPIRepositoryV3 : NSObject {
 @private
@@ -28,7 +28,7 @@
     NSNumber *_openIssues;
     NSString *_pushedAt;
     NSString *_createdAt;
-    id _organization;
+    GHAPIOrganizationV3 *_organization;
     GHAPIRepositoryV3 *_parent;
     GHAPIRepositoryV3 *_source;
     NSString *_integralBranch;
@@ -53,8 +53,7 @@
 @property (nonatomic, copy) NSNumber *openIssues;
 @property (nonatomic, copy) NSString *pushedAt;
 @property (nonatomic, copy) NSString *createdAt;
-#warning implement organization
-@property (nonatomic, retain) id organization;
+@property (nonatomic, retain) GHAPIOrganizationV3 *organization;
 @property (nonatomic, retain) GHAPIRepositoryV3 *parent;
 @property (nonatomic, retain) GHAPIRepositoryV3 *source;
 @property (nonatomic, copy) NSString *integralBranch;
