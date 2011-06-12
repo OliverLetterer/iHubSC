@@ -393,6 +393,18 @@
                                                               withRowAnimation:UITableViewScrollPositionBottom];
                                             }
                                         }];
+    } else if (section == kUITableViewOrganizations) {
+        [GHAPIOrganizationV3 organizationsOfUser:self.username page:page 
+                               completionHandler:^(NSMutableArray *array, NSUInteger nextPage, NSError *error) {
+                                   if (error) {
+                                       [self handleError:error];
+                                   } else {
+                                       [self.organizations addObjectsFromArray:array];
+                                       [self setNextPage:nextPage forSection:section];
+                                       [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:section] 
+                                                     withRowAnimation:UITableViewScrollPositionBottom];
+                                   }
+                               }];
     }
 }
 
@@ -453,26 +465,27 @@
                          }
                      }];
     } else if (section == kUITableViewOrganizations) {
-        [GHOrganization organizationsOfUser:self.username 
-                          completionHandler:^(NSArray *organizations, NSError *error) {
-                              if (error) {
-                                  [self handleError:error];
-                                  [tableView cancelDownloadInSection:section];
-                              } else {
-                                  self.organizations = organizations;
-                                  [tableView expandSection:section animated:YES];
-                                  
-                                  if ([self.organizations count] == 0) {
-                                      UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Organizations", @"") 
-                                                                                       message:[NSString stringWithFormat:NSLocalizedString(@"%@ is not a part of any Organization.", @""), self.username]
-                                                                                      delegate:nil 
-                                                                             cancelButtonTitle:NSLocalizedString(@"OK", @"") 
-                                                                             otherButtonTitles:nil]
-                                                            autorelease];
-                                      [alert show];
-                                  }
-                              }
-                          }];
+        [GHAPIOrganizationV3 organizationsOfUser:self.username page:1 
+                               completionHandler:^(NSMutableArray *array, NSUInteger nextPage, NSError *error) {
+                                   if (error) {
+                                       [self handleError:error];
+                                       [tableView cancelDownloadInSection:section];
+                                   } else {
+                                       self.organizations = array;
+                                       [self setNextPage:nextPage forSection:section];
+                                       [tableView expandSection:section animated:YES];
+                                       
+                                       if ([self.organizations count] == 0) {
+                                           UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Organizations", @"") 
+                                                                                            message:[NSString stringWithFormat:NSLocalizedString(@"%@ is not a part of any Organization.", @""), self.username]
+                                                                                           delegate:nil 
+                                                                                  cancelButtonTitle:NSLocalizedString(@"OK", @"") 
+                                                                                  otherButtonTitles:nil]
+                                                                 autorelease];
+                                           [alert show];
+                                       }
+                                   }
+                               }];
     } else if (section == kUITableViewGists) {
         [GHAPIUserV3 gistsOfUser:self.username 
                             page:1 
@@ -787,7 +800,7 @@
             cell = [[[GHFeedItemWithDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
         }
         
-        GHOrganization *organization = [self.organizations objectAtIndex:indexPath.row-1];
+        GHAPIOrganizationV3 *organization = [self.organizations objectAtIndex:indexPath.row-1];
         
         cell.titleLabel.text = organization.name ? organization.name : organization.login;
         
@@ -941,7 +954,7 @@
                }];
         }
     } else if (indexPath.section == kUITableViewOrganizations) {
-        GHOrganization *organization = [self.organizations objectAtIndex:indexPath.row - 1];
+        GHAPIOrganizationV3 *organization = [self.organizations objectAtIndex:indexPath.row - 1];
         GHOrganizationViewController *organizationViewController = [[[GHOrganizationViewController alloc] initWithOrganizationLogin:organization.login] autorelease];
         
         [self.navigationController pushViewController:organizationViewController animated:YES];

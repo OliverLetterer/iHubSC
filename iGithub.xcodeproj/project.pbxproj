@@ -45,6 +45,7 @@
 		A709F75313689C9900B0CDE7 /* GHTableViewControllerAlertViewProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = A709F75213689C9800B0CDE7 /* GHTableViewControllerAlertViewProxy.m */; };
 		A709F7571368A0DC00B0CDE7 /* GHTeam.m in Sources */ = {isa = PBXBuildFile; fileRef = A709F7561368A0DC00B0CDE7 /* GHTeam.m */; };
 		A709F75A1368B7E900B0CDE7 /* GHTeamViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A709F7591368B7E800B0CDE7 /* GHTeamViewController.m */; };
+		A70DA3D813A4B7F700235C76 /* GHAPIOrganizationV3.m in Sources */ = {isa = PBXBuildFile; fileRef = A70DA3D713A4B7F700235C76 /* GHAPIOrganizationV3.m */; };
 		A712B7C0135C9A5D0009B7A7 /* GHFileSystemItem.m in Sources */ = {isa = PBXBuildFile; fileRef = A712B7BF135C9A5D0009B7A7 /* GHFileSystemItem.m */; };
 		A712B7C3135C9ACB0009B7A7 /* GHFile.m in Sources */ = {isa = PBXBuildFile; fileRef = A712B7C2135C9ACA0009B7A7 /* GHFile.m */; };
 		A712B7C6135C9AF10009B7A7 /* GHDirectory.m in Sources */ = {isa = PBXBuildFile; fileRef = A712B7C5135C9AF10009B7A7 /* GHDirectory.m */; };
@@ -287,6 +288,8 @@
 		A709F7561368A0DC00B0CDE7 /* GHTeam.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHTeam.m; sourceTree = "<group>"; };
 		A709F7581368B7E800B0CDE7 /* GHTeamViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHTeamViewController.h; sourceTree = "<group>"; };
 		A709F7591368B7E800B0CDE7 /* GHTeamViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHTeamViewController.m; sourceTree = "<group>"; };
+		A70DA3D613A4B7F700235C76 /* GHAPIOrganizationV3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHAPIOrganizationV3.h; sourceTree = "<group>"; };
+		A70DA3D713A4B7F700235C76 /* GHAPIOrganizationV3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHAPIOrganizationV3.m; sourceTree = "<group>"; };
 		A712B7BE135C9A5D0009B7A7 /* GHFileSystemItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHFileSystemItem.h; sourceTree = "<group>"; };
 		A712B7BF135C9A5D0009B7A7 /* GHFileSystemItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHFileSystemItem.m; sourceTree = "<group>"; };
 		A712B7C1135C9ACA0009B7A7 /* GHFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHFile.h; sourceTree = "<group>"; };
@@ -439,7 +442,7 @@
 		A7837EA0136CADA400B13B95 /* PDColoredProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PDColoredProgressView.m; path = PDColoredProgressview/PDColoredProgressView.m; sourceTree = "<group>"; };
 		A7837EA3136CADD400B13B95 /* GHAPIMilestoneV3TableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHAPIMilestoneV3TableViewCell.h; sourceTree = "<group>"; };
 		A7837EA4136CADD400B13B95 /* GHAPIMilestoneV3TableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHAPIMilestoneV3TableViewCell.m; sourceTree = "<group>"; };
-		A792A92713A3FD3200BB0E1A /* GHAPIConnectionHandlersV3.h */ = {isa = PBXFileReference; fileEncoding = 4; path = GHAPIConnectionHandlersV3.h; sourceTree = "<group>"; };
+		A792A92713A3FD3200BB0E1A /* GHAPIConnectionHandlersV3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHAPIConnectionHandlersV3.h; sourceTree = "<group>"; };
 		A79F37FC13883C2C0028F492 /* GHAPIUserV3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHAPIUserV3.h; sourceTree = "<group>"; };
 		A79F37FD13883C2C0028F492 /* GHAPIUserV3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHAPIUserV3.m; sourceTree = "<group>"; };
 		A79F37FF13883F740028F492 /* GHAPIUserPlanV3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHAPIUserPlanV3.h; sourceTree = "<group>"; };
@@ -828,6 +831,15 @@
 				A709F7561368A0DC00B0CDE7 /* GHTeam.m */,
 			);
 			name = GHTeam;
+			sourceTree = "<group>";
+		};
+		A70DA3D413A4B7DE00235C76 /* GHAPIOrganizationV3 */ = {
+			isa = PBXGroup;
+			children = (
+				A70DA3D613A4B7F700235C76 /* GHAPIOrganizationV3.h */,
+				A70DA3D713A4B7F700235C76 /* GHAPIOrganizationV3.m */,
+			);
+			name = GHAPIOrganizationV3;
 			sourceTree = "<group>";
 		};
 		A712B7BC135C9A450009B7A7 /* GHFileSystem */ = {
@@ -1345,6 +1357,7 @@
 		A79F37F813883B650028F492 /* v3 */ = {
 			isa = PBXGroup;
 			children = (
+				A70DA3D413A4B7DE00235C76 /* GHAPIOrganizationV3 */,
 				A7DCDD9013A366BE00089CCD /* GHAPIRepositoryBranchV3 */,
 				A7B5209713892439000FEE61 /* GHAPIRepositoryV3 */,
 				A7B5209313892322000FEE61 /* GHAPILabelV3 */,
@@ -2214,6 +2227,7 @@
 				A706C0C3139AC408008A6184 /* CGCommon.m in Sources */,
 				A706C0CC139AD15C008A6184 /* UIColor+GithubUI.m in Sources */,
 				A7DCDD9413A366DF00089CCD /* GHAPIRepositoryBranchV3.m in Sources */,
+				A70DA3D813A4B7F700235C76 /* GHAPIOrganizationV3.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

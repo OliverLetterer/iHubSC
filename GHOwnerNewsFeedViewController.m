@@ -222,44 +222,44 @@
                 [self pullToReleaseTableViewDidReloadData];
             }];
         } else {
-            [GHOrganization organizationsOfUser:[GHSettingsHelper username] 
-                              completionHandler:^(NSArray *organizations, NSError *error) {
-                                  
-                                  self.organizations = organizations;
-                                  
-                                  if (self.organizations.count > 0) {
-                                      if (self.organizations.count == 1) {
-                                          // we only have one organization, act as if user select this only organization
-                                          [self displayOrganizationAtIndex:0];
-                                      } else {
-                                          UIActionSheet *sheet = [[[UIActionSheet alloc] init] autorelease];
-                                          
-                                          [sheet setTitle:NSLocalizedString(@"Select an Organization", @"")];
-                                          
-                                          for (GHOrganization *organization in organizations) {
-                                              [sheet addButtonWithTitle:organization.login];
-                                          }
-                                          
-                                          [sheet addButtonWithTitle:NSLocalizedString(@"Cancel", @"")];
-                                          sheet.cancelButtonIndex = sheet.numberOfButtons-1;
-                                          
-                                          sheet.actionSheetStyle = UIActionSheetStyleBlackTranslucent;
-                                          
-                                          sheet.delegate = self;
-                                          
-                                          [sheet showInView:self.tabBarController.view];
-                                      }
-                                  } else {
-                                      self.segmentControl.selectedSegmentIndex = 0;
-                                      UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Organization Error", @"") 
-                                                                                       message:NSLocalizedString(@"You are not part of any Organization!", @"") 
-                                                                                      delegate:nil 
-                                                                             cancelButtonTitle:NSLocalizedString(@"OK", @"") 
-                                                                             otherButtonTitles:nil]
-                                                            autorelease];
-                                      [alert show];
-                                  }
-                              }];
+            [GHAPIOrganizationV3 organizationsOfUser:[GHAuthenticationManager sharedInstance].username 
+                                                page:1 
+                                   completionHandler:^(NSMutableArray *array, NSUInteger nextPage, NSError *error) {
+                                       self.organizations = array;
+                                       
+                                       if (self.organizations.count > 0) {
+                                           if (self.organizations.count == 1) {
+                                               // we only have one organization, act as if user select this only organization
+                                               [self displayOrganizationAtIndex:0];
+                                           } else {
+                                               UIActionSheet *sheet = [[[UIActionSheet alloc] init] autorelease];
+                                               
+                                               [sheet setTitle:NSLocalizedString(@"Select an Organization", @"")];
+                                               
+                                               for (GHAPIOrganizationV3 *organization in self.organizations) {
+                                                   [sheet addButtonWithTitle:organization.login];
+                                               }
+                                               
+                                               [sheet addButtonWithTitle:NSLocalizedString(@"Cancel", @"")];
+                                               sheet.cancelButtonIndex = sheet.numberOfButtons-1;
+                                               
+                                               sheet.actionSheetStyle = UIActionSheetStyleBlackTranslucent;
+                                               
+                                               sheet.delegate = self;
+                                               
+                                               [sheet showInView:self.tabBarController.view];
+                                           }
+                                       } else {
+                                           self.segmentControl.selectedSegmentIndex = 0;
+                                           UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Organization Error", @"") 
+                                                                                            message:NSLocalizedString(@"You are not part of any Organization!", @"") 
+                                                                                           delegate:nil 
+                                                                                  cancelButtonTitle:NSLocalizedString(@"OK", @"") 
+                                                                                  otherButtonTitles:nil]
+                                                                 autorelease];
+                                           [alert show];
+                                       }
+                                   }];
         }
     }
 }

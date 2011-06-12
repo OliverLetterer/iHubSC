@@ -48,6 +48,7 @@
 #import "GHAPILabelV3.h"
 #import "GHAPIRepositoryBranchV3.h"
 #import "GHAPIRepositoryV3.h"
+#import "GHAPIOrganizationV3.h"
 
 #import "GHPayload.h"
 #import "GHIssuePayload.h"

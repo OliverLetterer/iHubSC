@@ -50,7 +50,7 @@
 
 - (id)initWithRawDictionary:(NSDictionary *)dictionary;
 
-+ (void)organizationsOfUser:(NSString *)username completionHandler:(void(^)(NSArray *organizations, NSError *error))handler;
+//+ (void)organizationsOfUser:(NSString *)username completionHandler:(void(^)(NSArray *organizations, NSError *error))handler;
 + (void)organizationsNamed:(NSString *)name completionHandler:(void(^)(GHOrganization *organization, NSError *error))handler;
 
 - (void)publicRepositoriesWithCompletionHandler:(void(^)(NSArray *repositories, NSError *error))handler;

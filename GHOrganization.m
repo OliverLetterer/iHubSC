@@ -49,43 +49,43 @@
     return self;
 }
 
-+ (void)organizationsOfUser:(NSString *)username completionHandler:(void (^)(NSArray *, NSError *))handler {
-    dispatch_async(GHAPIBackgroundQueue(), ^(void) {
-        
-        // /user/show/:user/organizations
-        
-        NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://github.com/api/v2/json/user/show/%@/organizations",
-                                           [username stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] ] ];
-        
-        NSError *myError = nil;
-        
-        ASIFormDataRequest *request = [ASIFormDataRequest authenticatedFormDataRequestWithURL:URL];
-        [request startSynchronous];
-        
-        myError = [request error];
-        
-        if (!myError) {
-            myError = [NSError errorFromRawDictionary:[[request responseString] objectFromJSONString] ];
-        }
-        
-        dispatch_async(dispatch_get_main_queue(), ^(void) {
-            if (myError) {
-                handler(nil, myError);
-            } else {
-                NSDictionary *dictionary = [[request responseString] objectFromJSONString];
-                
-                NSArray *rawOrganizations = [dictionary objectForKeyOrNilOnNullObject:@"organizations"];
-                NSMutableArray *organizations = [NSMutableArray arrayWithCapacity:rawOrganizations.count];
-                
-                for (NSDictionary *rawDictionary in rawOrganizations) {
-                    [organizations addObject:[[[GHOrganization alloc] initWithRawDictionary:rawDictionary] autorelease] ];
-                }
-                
-                handler(organizations, nil);
-            }
-        });
-    });
-}
+//+ (void)organizationsOfUser:(NSString *)username completionHandler:(void (^)(NSArray *, NSError *))handler {
+//    dispatch_async(GHAPIBackgroundQueue(), ^(void) {
+//        
+//        // /user/show/:user/organizations
+//        
+//        NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://github.com/api/v2/json/user/show/%@/organizations",
+//                                           [username stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] ] ];
+//        
+//        NSError *myError = nil;
+//        
+//        ASIFormDataRequest *request = [ASIFormDataRequest authenticatedFormDataRequestWithURL:URL];
+//        [request startSynchronous];
+//        
+//        myError = [request error];
+//        
+//        if (!myError) {
+//            myError = [NSError errorFromRawDictionary:[[request responseString] objectFromJSONString] ];
+//        }
+//        
+//        dispatch_async(dispatch_get_main_queue(), ^(void) {
+//            if (myError) {
+//                handler(nil, myError);
+//            } else {
+//                NSDictionary *dictionary = [[request responseString] objectFromJSONString];
+//                
+//                NSArray *rawOrganizations = [dictionary objectForKeyOrNilOnNullObject:@"organizations"];
+//                NSMutableArray *organizations = [NSMutableArray arrayWithCapacity:rawOrganizations.count];
+//                
+//                for (NSDictionary *rawDictionary in rawOrganizations) {
+//                    [organizations addObject:[[[GHOrganization alloc] initWithRawDictionary:rawDictionary] autorelease] ];
+//                }
+//                
+//                handler(organizations, nil);
+//            }
+//        });
+//    });
+//}
 
 + (void)organizationsNamed:(NSString *)name completionHandler:(void (^)(GHOrganization *, NSError *))handler {
     dispatch_async(GHAPIBackgroundQueue(), ^(void) {
