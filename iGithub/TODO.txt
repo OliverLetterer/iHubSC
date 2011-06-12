@@ -36,7 +36,7 @@ V1.7
 Future Features:
 - Network graph for recent activity (see Network API)
 - ipad Interface
+- 
 
 Old APIv2 Calls:
 - search for a user
-- view commits in a pull request

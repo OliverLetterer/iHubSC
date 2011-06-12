@@ -568,14 +568,26 @@
         }
     } else if (indexPath.section == kUITableViewSectionIssues) {
         // issues
-        if (indexPath.row > 0 && indexPath.row <= [self.issuesArray count]) {
+        if (indexPath.row == 1) {
+            // new issue
+            NSString *CellIdentifier = @"UITableViewCellWithLinearGradientBackgroundView";
+            
+            UITableViewCellWithLinearGradientBackgroundView *cell = (UITableViewCellWithLinearGradientBackgroundView *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+            if (!cell) {
+                cell = [[[UITableViewCellWithLinearGradientBackgroundView alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+            }
+            
+            cell.textLabel.text = NSLocalizedString(@"Create a new Issue", @"");
+            
+            return cell;
+        } else {
             NSString *CellIdentifier = @"GHIssueTitleTableViewCell";
             GHIssueTitleTableViewCell *cell = (GHIssueTitleTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
             if (!cell) {
                 cell = [[[GHIssueTitleTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
             }
             
-            GHAPIIssueV3 *issue = [self.issuesArray objectAtIndex:indexPath.row - 1];
+            GHAPIIssueV3 *issue = [self.issuesArray objectAtIndex:indexPath.row - 2];
             
             cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Issue %@", @""), issue.number];
             
@@ -587,18 +599,6 @@
             ;
             
             cell.descriptionLabel.text = issue.title;
-            
-            return cell;
-        } else if (indexPath.row == [self.issuesArray count] + 1) {
-            // new issue
-            NSString *CellIdentifier = @"UITableViewCellWithLinearGradientBackgroundView";
-            
-            UITableViewCellWithLinearGradientBackgroundView *cell = (UITableViewCellWithLinearGradientBackgroundView *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-            if (!cell) {
-                cell = [[[UITableViewCellWithLinearGradientBackgroundView alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
-            }
-            
-            cell.textLabel.text = NSLocalizedString(@"Create a new Issue", @"");
             
             return cell;
         }
@@ -779,7 +779,7 @@
         }
         
         return [self cachedHeightForRowAtIndexPath:indexPath];
-    } else if (indexPath.section == kUITableViewSectionIssues && indexPath.row > 0 && indexPath.row <= [self.issuesArray count]) {
+    } else if (indexPath.section == kUITableViewSectionIssues && indexPath.row > 1 && indexPath.row <= [self.issuesArray count]+1) {
         return [self cachedHeightForRowAtIndexPath:indexPath];
     } else if (indexPath.section == kUITableViewSectionPullRequests && indexPath.row > 0 && indexPath.row <= [self.pullRequests count]) {
         return [self cachedHeightForRowAtIndexPath:indexPath];
@@ -806,20 +806,20 @@
         GHWebViewViewController *webViewController = [[[GHWebViewViewController alloc] initWithURL:URL] autorelease];
         [self.navigationController pushViewController:webViewController animated:YES];
     } else if (indexPath.section == kUITableViewSectionIssues) {
-        if (indexPath.row > 0 && indexPath.row <= [self.issuesArray count]) {
-            GHAPIIssueV3 *issue = [self.issuesArray objectAtIndex:indexPath.row-1];
-            GHViewIssueTableViewController *issueViewController = [[[GHViewIssueTableViewController alloc] 
-                                                                    initWithRepository:self.repositoryString 
-                                                                    issueNumber:issue.number]
-                                                                   autorelease];
-            [self.navigationController pushViewController:issueViewController animated:YES];
-        } else {
+        if (indexPath.row == 1) {
             GHCreateIssueTableViewController *createViewController = [[[GHCreateIssueTableViewController alloc] initWithRepository:self.repositoryString] autorelease];
             createViewController.delegate = self;
             
             UINavigationController *navController = [[[UINavigationController alloc] initWithRootViewController:createViewController] autorelease];
             
             [self presentModalViewController:navController animated:YES];
+        } else {
+            GHAPIIssueV3 *issue = [self.issuesArray objectAtIndex:indexPath.row-2];
+            GHViewIssueTableViewController *issueViewController = [[[GHViewIssueTableViewController alloc] 
+                                                                    initWithRepository:self.repositoryString 
+                                                                    issueNumber:issue.number]
+                                                                   autorelease];
+            [self.navigationController pushViewController:issueViewController animated:YES];
         }
     } else if (indexPath.section == kUITableViewSectionWatchingUsers) {
         // watched user
@@ -995,7 +995,7 @@
 #pragma mark - height caching
 
 - (void)cacheHeightForIssuesArray {
-    NSInteger i = 1;
+    NSInteger i = 2;
     for (GHAPIIssueV3 *issue in self.issuesArray) {
         [self cacheHeight:[self heightForDescription:issue.title]+50.0f forRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:kUITableViewSectionIssues] ];
         i++;

@@ -9,8 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "GHTableViewController.h"
 
-#warning move "Create a new Issue" to the top of the section
-
 @class GHAPIIssueV3, GHNewsFeedItemTableViewCell, GHIssueComment, GHPullRequestDiscussion;
 
 @interface GHViewIssueTableViewController : GHTableViewController {
