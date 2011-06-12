@@ -265,7 +265,7 @@
 }
 
 - (void)displayOrganizationAtIndex:(NSUInteger)index {
-    GHOrganization *organization = [self.organizations objectAtIndex:index];
+    GHAPIOrganizationV3 *organization = [self.organizations objectAtIndex:index];
     
     self.defaultOrganizationName = organization.login;
     

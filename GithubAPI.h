@@ -30,8 +30,6 @@
 #import "GHFile.h"
 #import "GHDirectory.h"
 #import "GHFileMetaData.h"
-#import "GHOrganization.h"
-#import "GHTeam.h"
 
 #warning make pagination in implemetation more genertic
 
