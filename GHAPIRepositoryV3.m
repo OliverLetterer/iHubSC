@@ -60,7 +60,7 @@
         self.openIssues = [rawDictionary objectForKeyOrNilOnNullObject:@"open_issues"];
         self.pushedAt = [rawDictionary objectForKeyOrNilOnNullObject:@"pushed_at"];
         self.createdAt = [rawDictionary objectForKeyOrNilOnNullObject:@"created_at"];
-//        self.organization = [rawDictionary objectForKeyOrNilOnNullObject:@"organization"];
+        self.organization = [[[GHAPIOrganizationV3 alloc] initWithRawDictionary:[rawDictionary objectForKeyOrNilOnNullObject:@"organization"]] autorelease];
         if (parse) {
             self.parent = [[[GHAPIRepositoryV3 alloc] initWithRawDictionary:[rawDictionary objectForKeyOrNilOnNullObject:@"parent"] parseChildren:NO] autorelease];
             self.source = [[[GHAPIRepositoryV3 alloc] initWithRawDictionary:[rawDictionary objectForKeyOrNilOnNullObject:@"source"] parseChildren:NO] autorelease];
