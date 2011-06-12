@@ -60,7 +60,7 @@
 - (void)saveButtonClicked:(UIBarButtonItem *)sender {
     GHCreateIssueTableViewCell *cell = (GHCreateIssueTableViewCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:kUITableViewSectionTitle] ];
     
-    NSString *assignee = nil;
+    GHAPIUserV3 *assignee = nil;
     NSNumber *milestoneNumber = nil;
     
     if (_assignIndex > 0) {
@@ -72,7 +72,7 @@
     }
     
     [GHAPIIssueV3 createIssueOnRepository:self.repository title:cell.titleTextField.text 
-                                  body:cell.descriptionTextField.text assignee:assignee milestone:milestoneNumber 
+                                  body:cell.descriptionTextField.text assignee:assignee.login milestone:milestoneNumber 
                      completionHandler:^(GHAPIIssueV3 *issue, NSError *error) {
                          if (error) {
                              [self handleError:error];
@@ -170,7 +170,7 @@
     if (section == kUITableViewSectionAssigned) {
         return self.collaborators == nil;
     } else if (section == kUITableViewSectionMilestones) {
-        return self.milestones == nil;
+        return self.milestones == nil && !_hasCollaboratorState;
     }
     return NO;
 }
@@ -218,17 +218,40 @@
                                         }
                                     }];
     } else if (section == kUITableViewSectionMilestones) {
-        [GHAPIIssueV3 milestonesForIssueOnRepository:self.repository withNumber:nil page:1 
-                                   completionHandler:^(NSMutableArray *array, NSUInteger nextPage, NSError *error) {
-                                       if (error) {
-                                           [self handleError:error];
-                                           [tableView cancelDownloadInSection:section];
-                                       } else {
-                                           self.milestones = array;
-                                           [self setNextPage:nextPage forSection:section];
-                                           [tableView expandSection:section animated:YES];
-                                       }
-                                   }];
+        [GHAPIRepositoryV3 isUser:[GHAuthenticationManager sharedInstance].username 
+         collaboratorOnRepository:self.repository 
+                completionHandler:^(BOOL state, NSError *error) {
+                    if (error) {
+                        [self handleError:error];
+                        [tableView cancelDownloadInSection:section];
+                    } else {
+                        _hasCollaboratorState = YES;
+                        _isCollaborator = state;
+                        
+                        if (_isCollaborator || [self.repository hasPrefix:[GHAuthenticationManager sharedInstance].username ]) {
+                            [GHAPIIssueV3 milestonesForIssueOnRepository:self.repository withNumber:nil page:1 
+                                                       completionHandler:^(NSMutableArray *array, NSUInteger nextPage, NSError *error) {
+                                                           if (error) {
+                                                               [self handleError:error];
+                                                               [tableView cancelDownloadInSection:section];
+                                                           } else {
+                                                               self.milestones = array;
+                                                               [self setNextPage:nextPage forSection:section];
+                                                               [tableView expandSection:section animated:YES];
+                                                           }
+                                                       }];
+                        } else {
+                            [tableView cancelDownloadInSection:section];
+                            UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", @"") 
+                                                                             message:NSLocalizedString(@"You are not a Collaborator on this Repository. You don't have permission to assign a Milestone!", @"") 
+                                                                            delegate:nil 
+                                                                   cancelButtonTitle:NSLocalizedString(@"OK", @"") 
+                                                                   otherButtonTitles:nil]
+                                                  autorelease];
+                            [alert show];
+                        }
+                    }
+                }];
     }
 }
 
@@ -307,7 +330,7 @@
             cell = [[[UITableViewCellWithLinearGradientBackgroundView alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
         }
         
-        NSString *user = [self.collaborators objectAtIndex:indexPath.row - 1];
+        GHAPIUserV3 *user = [self.collaborators objectAtIndex:indexPath.row - 1];
         
         if (indexPath.row == _assignIndex) {
             cell.accessoryType = UITableViewCellAccessoryCheckmark;
@@ -315,7 +338,7 @@
             cell.accessoryType = UITableViewCellAccessoryNone;
         }
         
-        cell.textLabel.text = user;
+        cell.textLabel.text = user.login;
         
         return cell;
     } else if (indexPath.section == kUITableViewSectionMilestones) {

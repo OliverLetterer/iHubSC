@@ -71,6 +71,7 @@ V1.7
 - fixed starring Gists Issue
 - migrated Repository and Organization to API v3
 - fork any Repository to your Account or to any of your Organizations
+- only letting user select a Milestone on a Repository, if the user is a collaborator
 
 iTunes Changelog:
 

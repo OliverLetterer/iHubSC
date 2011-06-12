@@ -19,8 +19,6 @@
 
 @end
 
-#warning only display Milestone if user is a collaborator
-
 @interface GHCreateIssueTableViewController : GHTableViewController {
 @private
     id<GHCreateIssueTableViewControllerDelegate> _delegate;
@@ -32,6 +30,8 @@
     NSMutableArray *_collaborators;
     NSUInteger _assignIndex;
     
+    BOOL _hasCollaboratorState;
+    BOOL _isCollaborator;
     NSMutableArray *_milestones;
     NSUInteger _assignesMilestoneIndex;
 }
