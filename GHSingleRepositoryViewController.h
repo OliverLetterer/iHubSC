@@ -20,10 +20,9 @@
 @end
 
 #warning manage collaborators on a repository (delete and add)
-#warning Network -> fork Repository to self/ Organization
 
 
-@interface GHSingleRepositoryViewController : GHTableViewController <UIAlertViewDelegate, GHSingleRepositoryViewControllerDelegate, GHCreateIssueTableViewControllerDelegate> {
+@interface GHSingleRepositoryViewController : GHTableViewController <UIAlertViewDelegate, GHSingleRepositoryViewControllerDelegate, GHCreateIssueTableViewControllerDelegate, UIActionSheetDelegate> {
 @private
     NSString *_repositoryString;
     GHAPIRepositoryV3 *_repository;
@@ -44,6 +43,8 @@
     NSMutableArray *_labels;
     
     NSMutableArray *_milestones;
+    
+    NSMutableArray *_organizations;
 }
 
 @property (nonatomic, readonly) BOOL isFollowingRepository;
@@ -67,7 +68,10 @@
 
 @property (nonatomic, retain) NSMutableArray *branches;
 @property (nonatomic, retain) NSMutableArray *labels;
+@property (nonatomic, retain) NSMutableArray *organizations;
 
 - (id)initWithRepositoryString:(NSString *)repositoryString;
+
+- (void)organizationsActionSheetDidSelectOrganizationAtIndex:(NSUInteger)index;
 
 @end

@@ -93,4 +93,9 @@
 + (void)createRepositoryWithName:(NSString *)name description:(NSString *)description 
                           public:(BOOL)public completionHandler:(void (^)(GHAPIRepositoryV3 *repository, NSError *error))handler;
 
+// organization may be nil
++ (void)forkRepository:(NSString *)repository 
+        toOrganization:(NSString *)organization 
+     completionHandler:(void (^)(GHAPIRepositoryV3 *repository, NSError *error))handler;
+
 @end

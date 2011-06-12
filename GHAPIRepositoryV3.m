@@ -111,7 +111,7 @@
     [super dealloc];
 }
 
-#pragma mark - downloading
+#pragma mark - API calls
 
 + (void)labelsOnRepository:(NSString *)repository page:(NSUInteger)page completionHandler:(GHAPIPaginationHandler)handler {
     // v3: GET /repos/:user/:repo/labels
@@ -379,6 +379,32 @@
                                                     handler([[[GHAPIRepositoryV3 alloc] initWithRawDictionary:object] autorelease], nil);
                                                 }
                                             }];
+}
+
++ (void)forkRepository:(NSString *)repository 
+        toOrganization:(NSString *)organization completionHandler:(void (^)(GHAPIRepositoryV3 *repository, NSError *error))handler {
+    // POST /repos/:user/:repo/forks?org=organization
+    
+    NSString *URLString = [NSString stringWithFormat:@"https://api.github.com/repos/%@/forks", 
+                           [repository stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    
+    if (organization) {
+        URLString = [URLString stringByAppendingFormat:@"?org=%@", [organization stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    }
+    
+    NSURL *URL = [NSURL URLWithString:URLString];
+    
+    [[GHBackgroundQueue sharedInstance] sendRequestToURL:URL 
+                                            setupHandler:^(ASIFormDataRequest *request) {
+                                                [request setRequestMethod:@"POST"];
+                                            } 
+                                       completionHandler:^(id object, NSError *error, ASIFormDataRequest *request) {
+                                           if (error) {
+                                               handler(nil, error);
+                                           } else {
+                                               handler([[[GHAPIRepositoryV3 alloc] initWithRawDictionary:object] autorelease], nil);
+                                           }
+                                       }];
 }
 
 @end

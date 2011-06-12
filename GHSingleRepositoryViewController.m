@@ -44,7 +44,7 @@
 @implementation GHSingleRepositoryViewController
 
 @synthesize repositoryString=_repositoryString, repository=_repository, issuesArray=_issuesArray, watchedUsersArray=_watchedUsersArray, deleteToken=_deleteToken, delegate=_delegate;
-@synthesize pullRequests=_pullRequests, branches=_branches, milestones=_milestones, labels=_labels;
+@synthesize pullRequests=_pullRequests, branches=_branches, milestones=_milestones, labels=_labels, organizations=_organizations;
 
 #pragma mark - setters and getters
 
@@ -107,6 +107,7 @@
     [_branches release];
     [_labels release];
     [_milestones release];
+    [_organizations release];
     
     [super dealloc];
 }
@@ -406,7 +407,7 @@
         }
     } else if (section == kUITableViewSectionNetwork) {
         if (!self.canDeleteRepository) {
-            return 2;
+            return 4;
         }
     } else if (section == kUITableViewSectionPullRequests) {
         return [self.pullRequests count] + 1;
@@ -639,9 +640,16 @@
             cell = [[[UITableViewCellWithLinearGradientBackgroundView alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
         }
         
-        cell.textLabel.text = _isWatchingRepository ? NSLocalizedString(@"Unwatch", @"") : NSLocalizedString(@"Watch", @"") ;
+        if (indexPath.row == 1) {
+            cell.textLabel.text = _isWatchingRepository ? NSLocalizedString(@"Unwatch", @"") : NSLocalizedString(@"Watch", @"") ;
+        } else if (indexPath.row == 2) {
+            cell.textLabel.text = NSLocalizedString(@"Fork to my Account", @"");
+        } else if (indexPath.row == 3) {
+            cell.textLabel.text = NSLocalizedString(@"Fork to an Organization", @"");
+        }
         
         return cell;
+        
     } else if (indexPath.section == kUITableViewSectionPullRequests) {
         NSString *CellIdentifier = @"GHFeedItemWithDescriptionTableViewCell";
         
@@ -820,31 +828,89 @@
         [self.navigationController pushViewController:userViewController animated:YES];
         
     } else if (indexPath.section == kUITableViewSectionNetwork) {
-        if (_isWatchingRepository) {
-            [GHAPIRepositoryV3 unwatchRepository:self.repositoryString 
-                               completionHandler:^(NSError *error) {
-                                   if (error) {
-                                       [self handleError:error];
-                                   } else {
-                                       _isWatchingRepository = NO;
-                                       NSMutableIndexSet *set = [NSMutableIndexSet indexSet];
-                                       [set addIndex:kUITableViewSectionNetwork];
-                                       [self.tableView reloadSections:set 
-                                                     withRowAnimation:UITableViewRowAnimationNone];
-                                   }                               }];
-        } else {
-            [GHAPIRepositoryV3 watchRepository:self.repositoryString 
-                             completionHandler:^(NSError *error) {
-                                 if (error) {
-                                     [self handleError:error];
-                                 } else {
-                                     _isWatchingRepository = YES;
-                                     NSMutableIndexSet *set = [NSMutableIndexSet indexSet];
-                                     [set addIndex:kUITableViewSectionNetwork];
-                                     [self.tableView reloadSections:set 
-                                                   withRowAnimation:UITableViewRowAnimationNone];
-                                 }
-                             }];
+        if (indexPath.row == 1) {
+            // watch/unwatch
+            if (_isWatchingRepository) {
+                [GHAPIRepositoryV3 unwatchRepository:self.repositoryString 
+                                   completionHandler:^(NSError *error) {
+                                       if (error) {
+                                           [self handleError:error];
+                                       } else {
+                                           _isWatchingRepository = NO;
+                                           NSMutableIndexSet *set = [NSMutableIndexSet indexSet];
+                                           [set addIndex:kUITableViewSectionNetwork];
+                                           [self.tableView reloadSections:set 
+                                                         withRowAnimation:UITableViewRowAnimationNone];
+                                       }                               }];
+            } else {
+                [GHAPIRepositoryV3 watchRepository:self.repositoryString 
+                                 completionHandler:^(NSError *error) {
+                                     if (error) {
+                                         [self handleError:error];
+                                     } else {
+                                         _isWatchingRepository = YES;
+                                         NSMutableIndexSet *set = [NSMutableIndexSet indexSet];
+                                         [set addIndex:kUITableViewSectionNetwork];
+                                         [self.tableView reloadSections:set 
+                                                       withRowAnimation:UITableViewRowAnimationNone];
+                                     }
+                                 }];
+            }
+        } else if (indexPath.row == 2) {
+            [GHAPIRepositoryV3 forkRepository:self.repositoryString 
+                               toOrganization:nil 
+                            completionHandler:^(GHAPIRepositoryV3 *repository, NSError *error) {
+                                if (error) {
+                                    [self handleError:error];
+                                } else {
+                                    UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:NSLocalizedString(@"Forked %@", @""), self.repositoryString] 
+                                                                                     message:NSLocalizedString(@"You have successfully forked this Repository", @"") 
+                                                                                    delegate:nil 
+                                                                           cancelButtonTitle:nil 
+                                                                           otherButtonTitles:NSLocalizedString(@"OK", @""), nil]
+                                                          autorelease];
+                                    [alert show];
+                                }
+                            }];
+        } else if (indexPath.row == 3) {
+            [GHAPIOrganizationV3 organizationsOfUser:[GHAuthenticationManager sharedInstance].username page:1 
+                                   completionHandler:^(NSMutableArray *array, NSUInteger nextPage, NSError *error) {
+                                       
+                                       self.organizations = array;
+                                       
+                                       if (self.organizations.count > 0) {
+                                           if (self.organizations.count == 1) {
+                                               // we only have one organization, act as if user select this only organization
+                                               [self organizationsActionSheetDidSelectOrganizationAtIndex:0];
+                                           } else {
+                                               UIActionSheet *sheet = [[[UIActionSheet alloc] init] autorelease];
+                                               
+                                               [sheet setTitle:NSLocalizedString(@"Select an Organization", @"")];
+                                               
+                                               for (GHAPIOrganizationV3 *organization in self.organizations) {
+                                                   [sheet addButtonWithTitle:organization.login];
+                                               }
+                                               
+                                               [sheet addButtonWithTitle:NSLocalizedString(@"Cancel", @"")];
+                                               sheet.cancelButtonIndex = sheet.numberOfButtons-1;
+                                               
+                                               sheet.actionSheetStyle = UIActionSheetStyleBlackTranslucent;
+                                               
+                                               sheet.delegate = self;
+                                               
+                                               [sheet showInView:self.tabBarController.view];
+                                           }
+                                       } else {
+                                           UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Organization Error", @"") 
+                                                                                            message:NSLocalizedString(@"You are not part of any Organization!", @"") 
+                                                                                           delegate:nil 
+                                                                                  cancelButtonTitle:NSLocalizedString(@"OK", @"") 
+                                                                                  otherButtonTitles:nil]
+                                                                 autorelease];
+                                           [alert show];
+                                       }
+                                       
+                                   }];
         }
         [self.tableView deselectRowAtIndexPath:indexPath animated:NO];
     } else if (indexPath.section == kUITableViewSectionAdministration) {
@@ -962,6 +1028,34 @@
     [self.tableView reloadData];
     [self.tableView expandSection:kUITableViewSectionIssues animated:YES];
     [self dismissModalViewControllerAnimated:YES];
+}
+
+#pragma mark - UIActionSheetDelegate
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (buttonIndex < actionSheet.numberOfButtons - 1) {
+        [self organizationsActionSheetDidSelectOrganizationAtIndex:buttonIndex];
+    }
+}
+
+- (void)organizationsActionSheetDidSelectOrganizationAtIndex:(NSUInteger)index {
+    GHAPIOrganizationV3 *organization = [self.organizations objectAtIndex:index];
+    
+    [GHAPIRepositoryV3 forkRepository:self.repositoryString 
+                       toOrganization:organization.login 
+                    completionHandler:^(GHAPIRepositoryV3 *repository, NSError *error) {
+                        if (error) {
+                            [self handleError:error];
+                        } else {
+                            UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:NSLocalizedString(@"Forked %@", @""), self.repositoryString] 
+                                                                             message:[NSString stringWithFormat:NSLocalizedString(@"You have successfully forked this Repository to Organization %@", @""), organization.login] 
+                                                                            delegate:nil 
+                                                                   cancelButtonTitle:nil 
+                                                                   otherButtonTitles:NSLocalizedString(@"OK", @""), nil]
+                                                  autorelease];
+                            [alert show];
+                        }
+                    }];
 }
 
 @end

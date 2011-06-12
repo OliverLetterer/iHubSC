@@ -67,9 +67,10 @@ V1.6
 - new design
 - minor bugfixes
 
-V1.6
+V1.7
 - fixed starring Gists Issue
-
+- migrated Repository and Organization to API v3
+- fork any Repository to your Account or to any of your Organizations
 
 iTunes Changelog:
 
