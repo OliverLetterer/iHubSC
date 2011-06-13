@@ -31,8 +31,6 @@
 #import "GHDirectory.h"
 #import "GHFileMetaData.h"
 
-#warning make pagination in implemetation more genertic
-
 // V3
 #import "GHAPIConnectionHandlersV3.h"
 #import "GHAPIIssueCommentV3.h"
