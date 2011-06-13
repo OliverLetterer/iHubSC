@@ -72,6 +72,10 @@ V1.7
 - migrated Repository and Organization to API v3
 - fork any Repository to your Account or to any of your Organizations
 - only letting user select a Milestone on a Repository, if the user is a collaborator
+- view/delete/add collaborators an a Repository you own
+
+
+
 
 iTunes Changelog:
 

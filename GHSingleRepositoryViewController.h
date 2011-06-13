@@ -26,10 +26,6 @@
     NSString *_repositoryString;
     GHAPIRepositoryV3 *_repository;
     
-    NSMutableArray *_issuesArray;
-    
-    NSMutableArray *_watchedUsersArray;
-    
     BOOL _hasWatchingData;
     BOOL _isWatchingRepository;
     
@@ -38,12 +34,14 @@
     id<GHSingleRepositoryViewControllerDelegate> _delegate;
     
     NSArray *_pullRequests;
+    
     NSMutableArray *_branches;
     NSMutableArray *_labels;
-    
     NSMutableArray *_milestones;
-    
     NSMutableArray *_organizations;
+    NSMutableArray *_issuesArray;
+    NSMutableArray *_watchedUsersArray;
+    NSMutableArray *_collaborators;
 }
 
 @property (nonatomic, readonly) BOOL isFollowingRepository;
@@ -68,6 +66,7 @@
 @property (nonatomic, retain) NSMutableArray *branches;
 @property (nonatomic, retain) NSMutableArray *labels;
 @property (nonatomic, retain) NSMutableArray *organizations;
+@property (nonatomic, retain) NSMutableArray *collaborators;
 
 - (id)initWithRepositoryString:(NSString *)repositoryString;
 

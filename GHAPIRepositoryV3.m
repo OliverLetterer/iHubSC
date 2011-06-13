@@ -407,4 +407,34 @@
                                        }];
 }
 
++ (void)deleteCollaboratorNamed:(NSString *)collaborator onRepository:(NSString *)repository completionHandler:(GHAPIErrorHandler)handler {
+    // v3: DELETE /repos/:user/:repo/collaborators/:user
+    
+    NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.github.com/repos/%@/collaborators/%@",
+                                       [repository stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
+                                       [collaborator stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] ] ];
+    
+    [[GHBackgroundQueue sharedInstance] sendRequestToURL:URL 
+                                            setupHandler:^(ASIFormDataRequest *request) {
+                                                [request setRequestMethod:@"DELETE"];
+                                            } completionHandler:^(id object, NSError *error, ASIFormDataRequest *request) {
+                                                handler(error);
+                                            }];
+}
+
++ (void)addCollaboratorNamed:(NSString *)collaborator onRepository:(NSString *)repository completionHandler:(GHAPIErrorHandler)handler {
+    // v3: PUT /repos/:user/:repo/collaborators/:user
+    
+    NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.github.com/repos/%@/collaborators/%@",
+                                       [repository stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
+                                       [collaborator stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] ] ];
+    
+    [[GHBackgroundQueue sharedInstance] sendRequestToURL:URL 
+                                            setupHandler:^(ASIFormDataRequest *request) {
+                                                [request setRequestMethod:@"PUT"];
+                                            } completionHandler:^(id object, NSError *error, ASIFormDataRequest *request) {
+                                                handler(error);
+                                            }];
+}
+
 @end

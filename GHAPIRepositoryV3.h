@@ -89,6 +89,8 @@
 
 + (void)collaboratorsForRepository:(NSString *)repository page:(NSUInteger)page completionHandler:(GHAPIPaginationHandler)handler;
 + (void)isUser:(NSString *)username collaboratorOnRepository:(NSString *)repository completionHandler:(GHAPIStateHandler)handler;
++ (void)deleteCollaboratorNamed:(NSString *)collaborator onRepository:(NSString *)repository completionHandler:(GHAPIErrorHandler)handler;
++ (void)addCollaboratorNamed:(NSString *)collaborator onRepository:(NSString *)repository completionHandler:(GHAPIErrorHandler)handler;
 
 + (void)createRepositoryWithName:(NSString *)name description:(NSString *)description 
                           public:(BOOL)public completionHandler:(void (^)(GHAPIRepositoryV3 *repository, NSError *error))handler;

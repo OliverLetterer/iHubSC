@@ -21,6 +21,7 @@
 #import "GHViewMilestoneViewController.h"
 #import "GHLabelTableViewCell.h"
 #import "GHViewLabelViewController.h"
+#import "OCPromptView.h"
 
 #define kUITableViewSectionUserData         0
 #define kUITableViewSectionOwner            1
@@ -36,15 +37,18 @@
 #define kUITableViewSectionPullRequests     11
 #define kUITableViewSectionRecentCommits    12
 #define kUITableViewSectionBrowseBranches   13
-#define kUITableViewSectionNetwork          14
-#define kUITableViewSectionAdministration   15
+#define kUITableViewSectionCollaborators    14
+#define kUITableViewSectionNetwork          15
+#define kUITableViewSectionAdministration   16
 
-#define kUITableViewNumberOfSections        16
+#define kUITableViewNumberOfSections        17
+
+#define kUIAlertViewAddCollaboratorTag      1337
 
 @implementation GHSingleRepositoryViewController
 
 @synthesize repositoryString=_repositoryString, repository=_repository, issuesArray=_issuesArray, watchedUsersArray=_watchedUsersArray, deleteToken=_deleteToken, delegate=_delegate;
-@synthesize pullRequests=_pullRequests, branches=_branches, milestones=_milestones, labels=_labels, organizations=_organizations;
+@synthesize pullRequests=_pullRequests, branches=_branches, milestones=_milestones, labels=_labels, organizations=_organizations, collaborators=_collaborators;
 
 #pragma mark - setters and getters
 
@@ -108,6 +112,7 @@
     [_labels release];
     [_milestones release];
     [_organizations release];
+    [_collaborators release];
     
     [super dealloc];
 }
@@ -182,6 +187,8 @@
         return self.milestones == nil;
     } else if (section == kUITableViewSectionLabels) {
         return self.labels == nil;
+    } else if (section == kUITableViewSectionCollaborators) {
+        return self.collaborators == nil;
     }
     return NO;
 }
@@ -213,6 +220,8 @@
         cell.textLabel.text = NSLocalizedString(@"Milestones", @"");
     } else if (section == kUITableViewSectionLabels) {
         cell.textLabel.text = NSLocalizedString(@"Labels", @"");
+    } else if (section == kUITableViewSectionCollaborators) {
+        cell.textLabel.text = NSLocalizedString(@"Collaborators", @"");
     }
     
     return cell;
@@ -317,6 +326,18 @@
                                     [tableView expandSection:section animated:YES];
                                 }
                             }];
+    } else if (section == kUITableViewSectionCollaborators) {
+        [GHAPIRepositoryV3 collaboratorsForRepository:self.repositoryString page:1 
+                                    completionHandler:^(NSMutableArray *array, NSUInteger nextPage, NSError *error) {
+                                        if (error) {
+                                            [tableView cancelDownloadInSection:section];
+                                            [self handleError:error];
+                                        } else {
+                                            self.collaborators = array;
+                                            [self setNextPage:nextPage forSection:section];
+                                            [tableView expandSection:section animated:YES];
+                                        }
+                                    }];
     }
 }
 
@@ -373,6 +394,18 @@
                                                          withRowAnimation:UITableViewScrollPositionBottom];
                                        }
                                    }];
+    } else if (section == kUITableViewSectionCollaborators) {
+        [GHAPIRepositoryV3 collaboratorsForRepository:self.repositoryString page:page 
+                                    completionHandler:^(NSMutableArray *array, NSUInteger nextPage, NSError *error) {
+                                        if (error) {
+                                            [self handleError:error];
+                                        } else {
+                                            [self.collaborators addObjectsFromArray:array];
+                                            [self setNextPage:nextPage forSection:section];
+                                            [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:section] 
+                                                          withRowAnimation:UITableViewScrollPositionBottom];
+                                        }
+                                    }];
     }
 }
 
@@ -395,6 +428,9 @@
     } else if (section == kUITableViewSectionIssues) {
         // issues
         // title, issues, create new issue
+        if ([self.repository.openIssues unsignedIntValue] == 0) {
+            return 0;
+        }
         return [self.issuesArray count] + 2;
     } else if (section == kUITableViewSectionWatchingUsers) {
         if ([self.repository.watchers intValue] == 0) {
@@ -435,6 +471,11 @@
         if (self.repository.isForked) {
             return 1;
         }
+    } else if (section == kUITableViewSectionCollaborators) {
+        if (!self.canDeleteRepository) {
+            return 0;
+        }
+        return self.collaborators.count + 2;
     }
     
     return 0;
@@ -602,6 +643,34 @@
             
             return cell;
         }
+    } else if (indexPath.section == kUITableViewSectionCollaborators) {
+        if (indexPath.row == 1) {
+            // new Collaborator
+            NSString *CellIdentifier = @"UITableViewCellWithLinearGradientBackgroundView";
+            
+            UITableViewCellWithLinearGradientBackgroundView *cell = (UITableViewCellWithLinearGradientBackgroundView *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+            if (!cell) {
+                cell = [[[UITableViewCellWithLinearGradientBackgroundView alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+            }
+            
+            cell.textLabel.text = NSLocalizedString(@"Add new Collaborator", @"");
+            
+            return cell;
+        } else {
+            NSString *CellIdentifier = @"UITableViewCellWithLinearGradientBackgroundViewCollaborator";
+            
+            UITableViewCellWithLinearGradientBackgroundView *cell = (UITableViewCellWithLinearGradientBackgroundView *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+            if (!cell) {
+                cell = [[[UITableViewCellWithLinearGradientBackgroundView alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+            }
+            
+            GHAPIUserV3 *user = [self.collaborators objectAtIndex:indexPath.row - 2];
+            
+            cell.textLabel.text = user.login;
+            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+            
+            return cell;
+        }
     } else if (indexPath.section == kUITableViewSectionWatchingUsers) {
         // watching users
         if (indexPath.row > 0 && indexPath.row <= [self.watchedUsersArray count]) {
@@ -612,7 +681,9 @@
                 cell = [[[UITableViewCellWithLinearGradientBackgroundView alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
             }
             
-            cell.textLabel.text = [self.watchedUsersArray objectAtIndex:indexPath.row - 1];
+            GHAPIUserV3 *user = [self.watchedUsersArray objectAtIndex:indexPath.row - 1];
+            
+            cell.textLabel.text = user.login;
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             
             return cell;
@@ -734,26 +805,32 @@
     return self.dummyCell;
 }
 
-/*
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
     // Return NO if you do not want the specified item to be editable.
-    return YES;
+    return indexPath.section == kUITableViewSectionCollaborators && indexPath.row > 1;
 }
-*/
 
-/*
 // Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        GHAPIUserV3 *user = [self.collaborators objectAtIndex:indexPath.row - 2];
+        
+        [GHAPIRepositoryV3 deleteCollaboratorNamed:user.login onRepository:self.repositoryString 
+                                 completionHandler:^(NSError *error) {
+                                     if (error) {
+                                         [self handleError:error];
+                                     } else {
+                                         [self.collaborators removeObjectAtIndex:indexPath.row - 2];
+                                         [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+                                     }
+                                 }];
     }   
     else if (editingStyle == UITableViewCellEditingStyleInsert) {
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
     }   
 }
-*/
 
 /*
 // Override to support rearranging the table view.
@@ -823,8 +900,8 @@
         }
     } else if (indexPath.section == kUITableViewSectionWatchingUsers) {
         // watched user
-        NSString *user = [self.watchedUsersArray objectAtIndex:indexPath.row-1];
-        GHUserViewController *userViewController = [[[GHUserViewController alloc] initWithUsername:user] autorelease];
+        GHAPIUserV3 *user = [self.watchedUsersArray objectAtIndex:indexPath.row-1];
+        GHUserViewController *userViewController = [[[GHUserViewController alloc] initWithUsername:user.login] autorelease];
         [self.navigationController pushViewController:userViewController animated:YES];
         
     } else if (indexPath.section == kUITableViewSectionNetwork) {
@@ -970,6 +1047,24 @@
                                                                                                           label:label]
                                                           autorelease];
         [self.navigationController pushViewController:labelViewController animated:YES];
+    } else if (indexPath.section == kUITableViewSectionCollaborators) {
+        if (indexPath.row == 1) {
+            // new collaborator
+            
+            OCPromptView *alert = [[[OCPromptView alloc] initWithPrompt:NSLocalizedString(@"Enter Username", @"") 
+                                                               delegate:self 
+                                                      cancelButtonTitle:NSLocalizedString(@"Cancel", @"") 
+                                                      acceptButtonTitle:NSLocalizedString(@"OK", @"")]
+                                   autorelease];
+            alert.tag = kUIAlertViewAddCollaboratorTag;
+            [alert show];
+            [tableView deselectRowAtIndexPath:indexPath animated:NO];
+        } else {
+            GHAPIUserV3 *user = [self.collaborators objectAtIndex:indexPath.row - 2];
+            
+            GHUserViewController *userViewController = [[[GHUserViewController alloc] initWithUsername:user.login] autorelease];
+            [self.navigationController pushViewController:userViewController animated:YES];
+        }
     } else {
         [self.tableView deselectRowAtIndexPath:indexPath animated:NO];
     }
@@ -978,17 +1073,43 @@
 #pragma mark - UIAlertViewDelegate
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-    if (buttonIndex == 1) {
-        self.view.userInteractionEnabled = NO;
-        [GHRepository deleteRepository:self.repositoryString 
-                             withToken:self.deleteToken 
-                     completionHandler:^(NSError *error) {
-                         if (error) {
-                             [self handleError:error];
-                         } else {
-                             [self.delegate singleRepositoryViewControllerDidDeleteRepository:self];
-                         }
-                     }];
+    if (alertView.tag == kUIAlertViewAddCollaboratorTag) {
+        // new collaborator
+        if (buttonIndex == 1) {
+            // OK clicked
+            OCPromptView *alert = (OCPromptView *)alertView;
+            NSString *username = [alert enteredText];
+            [GHAPIRepositoryV3 addCollaboratorNamed:username onRepository:self.repositoryString 
+                                  completionHandler:^(NSError *error) {
+                                      if (error) {
+                                          [self handleError:error];
+                                      } else {
+                                          [self.tableView collapseSection:kUITableViewSectionCollaborators animated:NO];
+                                          self.collaborators = nil;
+                                          [self.tableView expandSection:kUITableViewSectionCollaborators animated:NO];
+                                          UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Added Collaborator", @"") 
+                                                                                           message:[NSString stringWithFormat:NSLocalizedString(@"You have successfully added %@ as a Collaborator", @""), username] 
+                                                                                          delegate:nil 
+                                                                                 cancelButtonTitle:nil 
+                                                                                 otherButtonTitles:NSLocalizedString(@"OK", @""), nil]
+                                                                autorelease];
+                                          [alert show];
+                                      }
+                                  }];
+        }
+    } else {
+        if (buttonIndex == 1) {
+            self.view.userInteractionEnabled = NO;
+            [GHRepository deleteRepository:self.repositoryString 
+                                 withToken:self.deleteToken 
+                         completionHandler:^(NSError *error) {
+                             if (error) {
+                                 [self handleError:error];
+                             } else {
+                                 [self.delegate singleRepositoryViewControllerDidDeleteRepository:self];
+                             }
+                         }];
+        }
     }
 }
 
