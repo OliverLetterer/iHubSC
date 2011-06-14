@@ -31,7 +31,9 @@
 @end
 
 
+extern NSString *const kGHNSStringMarkdownStyleFull;
 
 @interface NSString (GHMarkdownParsing)
 @property (nonatomic, readonly) NSString *HTMLMarkdownFormattedString;
+- (NSString *)stringFromMarkdownStyle:(NSString *)markdownStyle;
 @end

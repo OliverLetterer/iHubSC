@@ -125,9 +125,16 @@
 
 
 
+NSString *const kGHNSStringMarkdownStyleFull = @"MarkdownStyle";
+
+
 @implementation NSString (GHMarkdownParsing)
 - (NSString *)HTMLMarkdownFormattedString {
-    NSString *formatFilePath = [[NSBundle mainBundle] pathForResource:@"MarkdownStyle" ofType:nil];
+    return [self stringFromMarkdownStyle:kGHNSStringMarkdownStyleFull];
+}
+
+- (NSString *)stringFromMarkdownStyle:(NSString *)markdownStyle {
+    NSString *formatFilePath = [[NSBundle mainBundle] pathForResource:markdownStyle ofType:nil];
     NSString *style = [NSString stringWithContentsOfFile:formatFilePath 
                                                 encoding:NSUTF8StringEncoding 
                                                    error:NULL];
@@ -137,4 +144,5 @@
     [parsedString appendFormat:@"%@", [formatter HTMLForMarkdown:self]];
     return parsedString;
 }
+
 @end
