@@ -13,6 +13,7 @@
 #import "GHPushFeedItemTableViewCell.h"
 #import "GHFollowEventTableViewCell.h"
 #import "GHViewIssueTableViewController.h"
+#import "MTStatusBarOverlay.h"
 
 #define GHOwnerNewsFeedViewControllerDefaultOrganizationNameKey @"GHOwnerNewsFeedViewControllerDefaultOrganizationName"
 #define GHOwnerNewsFeedViewControllerLastCreationDateKey @"GHOwnerNewsFeedViewControllerLastCreationDate"
@@ -77,6 +78,11 @@
             GHNewsFeedItem *item = [newsFeed.items objectAtIndex:0];
             self.lastCreationDate = item.creationDate;
         }
+        
+        if (index == NSNotFound) {
+            index = 0;
+        }
+        [self didRefreshNewsFeed:[NSString stringWithFormat:NSLocalizedString(@"%d new Messages", @""), index] ];
     }
 }
 
@@ -183,9 +189,18 @@
     [self loadDataBasedOnSegmentControl];
 }
 
+- (void)showLoadingInformation:(NSString *)infoString {
+    [[MTStatusBarOverlay sharedOverlay] postMessage:infoString];
+}
+
+- (void)didRefreshNewsFeed:(NSString *)infoString {
+    [[MTStatusBarOverlay sharedOverlay] postFinishMessage:infoString duration:1.0f animated:NO];
+}
+
 - (void)loadDataBasedOnSegmentControl {
     if (self.segmentControl.selectedSegmentIndex == 0) {
         // News Feed
+        [self showLoadingInformation:NSLocalizedString(@"Fetching private News Feed", @"")];
         [GHNewsFeed privateNewsWithCompletionHandler:^(GHNewsFeed *feed, NSError *error) {
             if (error) {
                 [self handleError:error];
@@ -198,6 +213,7 @@
         }];
     } else if (self.segmentControl.selectedSegmentIndex == 1) {
         // My Actions
+        [self showLoadingInformation:NSLocalizedString(@"Fetching My Actions", @"")];
         [GHNewsFeed newsFeedForUserNamed:[GHSettingsHelper username] 
                        completionHandler:^(GHNewsFeed *feed, NSError *error) {
                            if (error) {
@@ -211,6 +227,7 @@
                        }];
     } else if (self.segmentControl.selectedSegmentIndex == 2) {
         if (self.defaultOrganizationName) {
+            [self showLoadingInformation:[NSString stringWithFormat:NSLocalizedString(@"Fetching %@ News Feed", @""), self.defaultOrganizationName] ];
             [GHNewsFeed newsFeedForUserNamed:self.defaultOrganizationName completionHandler:^(GHNewsFeed *feed, NSError *error) {
                 if (error) {
                     [self handleError:error];
@@ -222,6 +239,7 @@
                 [self pullToReleaseTableViewDidReloadData];
             }];
         } else {
+            [self showLoadingInformation:NSLocalizedString(@"Fetching Organizations", @"")];
             [GHAPIOrganizationV3 organizationsOfUser:[GHAuthenticationManager sharedInstance].username 
                                                 page:1 
                                    completionHandler:^(NSMutableArray *array, NSUInteger nextPage, NSError *error) {
@@ -268,6 +286,8 @@
     GHAPIOrganizationV3 *organization = [self.organizations objectAtIndex:index];
     
     self.defaultOrganizationName = organization.login;
+    
+    [self showLoadingInformation:[NSString stringWithFormat:NSLocalizedString(@"Download %@ News Feed", @""), self.defaultOrganizationName] ];
     
     [GHNewsFeed newsFeedForUserNamed:self.defaultOrganizationName completionHandler:^(GHNewsFeed *feed, NSError *error) {
         if (error) {

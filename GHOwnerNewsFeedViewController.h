@@ -29,5 +29,7 @@
 - (void)loadDataBasedOnSegmentControl;
 
 - (void)displayOrganizationAtIndex:(NSUInteger)index;
+- (void)showLoadingInformation:(NSString *)infoString;
+- (void)didRefreshNewsFeed:(NSString *)infoString;
 
 @end
