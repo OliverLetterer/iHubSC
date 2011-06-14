@@ -10,33 +10,28 @@
 
 
 @interface NSString (GHAPIDateFormatting)
-
 @property (nonatomic, readonly) NSDate *dateFromGithubAPIDateString;
 @property (nonatomic, readonly) NSString *gravarID;
 @property (nonatomic, readonly) NSString *prettyTimeIntervalSinceNow;
-
 @end
-
 
 
 @interface NSString (GHAPIHTTPParsing)
-
 @property (nonatomic, readonly) NSUInteger nextPage;
-
 @end
-
 
 
 @interface NSString (GHAPIColorParsing)
-
 @property (nonatomic, readonly) UIColor *colorFromAPIColorString;
+@end
 
+
+@interface NSString (Parsing)
+- (NSString *)substringBetweenLeftBounds:(NSString *)leftBounds andRightBounds:(NSString *)rightBounds;
 @end
 
 
 
-@interface NSString (Parsing)
-
-- (NSString *)substringBetweenLeftBounds:(NSString *)leftBounds andRightBounds:(NSString *)rightBounds;
-
+@interface NSString (GHMarkdownParsing)
+@property (nonatomic, readonly) NSString *HTMLMarkdownFormattedString;
 @end

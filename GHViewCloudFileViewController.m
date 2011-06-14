@@ -34,15 +34,7 @@
                     
                     if (fileString) {
                         if ([self.filename hasSuffix:@".md"] || [self.filename hasSuffix:@".markdown"] || [self.filename hasSuffix:@".mdown"]) {
-                            NSString *formatFilePath = [[NSBundle mainBundle] pathForResource:@"MarkdownStyle" ofType:nil];
-                            NSString *style = [NSString stringWithContentsOfFile:formatFilePath 
-                                                                        encoding:NSUTF8StringEncoding 
-                                                                           error:NULL];
-                            NSMutableString *parsedString = [NSMutableString stringWithFormat:@"%@", style];
-                            
-                            WAHTMLMarkdownFormatter *formatter = [[[WAHTMLMarkdownFormatter alloc] init] autorelease];
-                            [parsedString appendFormat:@"%@", [formatter HTMLForMarkdown:fileString]];
-                            self.markdownString = parsedString;
+                            self.markdownString = fileString.HTMLMarkdownFormattedString;
                             [self updateViewToShowMarkdownFile];
                         } else {
                             self.contentString = fileString;

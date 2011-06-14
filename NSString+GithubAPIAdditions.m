@@ -10,6 +10,7 @@
 #import "NSDate+GithubAPIAdditions.h"
 #import "UIColor+GithubAPI.h"
 #import "GithubAPI.h"
+#import "WAHTMLMarkdownFormatter.h"
 
 @implementation NSString (GHAPIDateFormatting)
 
@@ -119,4 +120,21 @@
 	return result;
 }
 
+@end
+
+
+
+
+@implementation NSString (GHMarkdownParsing)
+- (NSString *)HTMLMarkdownFormattedString {
+    NSString *formatFilePath = [[NSBundle mainBundle] pathForResource:@"MarkdownStyle" ofType:nil];
+    NSString *style = [NSString stringWithContentsOfFile:formatFilePath 
+                                                encoding:NSUTF8StringEncoding 
+                                                   error:NULL];
+    NSMutableString *parsedString = [NSMutableString stringWithFormat:@"%@", style];
+    
+    WAHTMLMarkdownFormatter *formatter = [[[WAHTMLMarkdownFormatter alloc] init] autorelease];
+    [parsedString appendFormat:@"%@", [formatter HTMLForMarkdown:self]];
+    return parsedString;
+}
 @end

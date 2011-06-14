@@ -1624,7 +1624,6 @@
 		A7BF14321342159B001AE50D /* Shared */ = {
 			isa = PBXGroup;
 			children = (
-				A77654BF1395555500787420 /* Markdown */,
 				A7089518134A0C49000DD6CE /* Foundation Additions */,
 				A7677150137078B1006D70D6 /* Appirater */,
 				A7089529134A2F69000DD6CE /* UITableViewCell */,
@@ -1679,6 +1678,7 @@
 			isa = PBXGroup;
 			children = (
 				A7BF146F13426EF5001AE50D /* GithubAPI.h */,
+				A77654BF1395555500787420 /* Markdown */,
 				A73E29B11348744300E85282 /* Foundation & Class Additions */,
 				A750570013427F9E00514A82 /* ASI-HTTP */,
 				A7BF147C13427309001AE50D /* JSONKit */,
