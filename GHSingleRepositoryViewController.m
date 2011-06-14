@@ -919,7 +919,9 @@
                                            [set addIndex:kUITableViewSectionNetwork];
                                            [self.tableView reloadSections:set 
                                                          withRowAnimation:UITableViewRowAnimationNone];
-                                       }                               }];
+                                       }
+                                       [[MTStatusBarOverlay sharedOverlay] postFinishMessage:[NSString stringWithFormat:NSLocalizedString(@"Stopped watching %@", @""), self.repositoryString] duration:2.0f];
+                                   }];
             } else {
                 [GHAPIRepositoryV3 watchRepository:self.repositoryString 
                                  completionHandler:^(NSError *error) {
@@ -931,6 +933,7 @@
                                          [set addIndex:kUITableViewSectionNetwork];
                                          [self.tableView reloadSections:set 
                                                        withRowAnimation:UITableViewRowAnimationNone];
+                                         [[MTStatusBarOverlay sharedOverlay] postFinishMessage:[NSString stringWithFormat:NSLocalizedString(@"Now watching %@", @""), self.repositoryString] duration:2.0f];
                                      }
                                  }];
             }
