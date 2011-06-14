@@ -22,6 +22,7 @@
 #import "GHLabelTableViewCell.h"
 #import "GHViewLabelViewController.h"
 #import "OCPromptView.h"
+#import "MTStatusBarOverlay.h"
 
 #define kUITableViewSectionUserData         0
 #define kUITableViewSectionOwner            1
@@ -940,13 +941,7 @@
                                 if (error) {
                                     [self handleError:error];
                                 } else {
-                                    UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:NSLocalizedString(@"Forked %@", @""), self.repositoryString] 
-                                                                                     message:NSLocalizedString(@"You have successfully forked this Repository", @"") 
-                                                                                    delegate:nil 
-                                                                           cancelButtonTitle:nil 
-                                                                           otherButtonTitles:NSLocalizedString(@"OK", @""), nil]
-                                                          autorelease];
-                                    [alert show];
+                                    [[MTStatusBarOverlay sharedOverlay] postFinishMessage:NSLocalizedString(@"You have successfully forked this Repository", @"") duration:1.5f];
                                 }
                             }];
         } else if (indexPath.row == 3) {
@@ -1086,14 +1081,9 @@
                                       } else {
                                           [self.tableView collapseSection:kUITableViewSectionCollaborators animated:NO];
                                           self.collaborators = nil;
+                                          
+                                          [[MTStatusBarOverlay sharedOverlay] postFinishMessage:[NSString stringWithFormat:NSLocalizedString(@"Added %@ as a Collaborator", @""), username] duration:1.5f];
                                           [self.tableView expandSection:kUITableViewSectionCollaborators animated:NO];
-                                          UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Added Collaborator", @"") 
-                                                                                           message:[NSString stringWithFormat:NSLocalizedString(@"You have successfully added %@ as a Collaborator", @""), username] 
-                                                                                          delegate:nil 
-                                                                                 cancelButtonTitle:nil 
-                                                                                 otherButtonTitles:NSLocalizedString(@"OK", @""), nil]
-                                                                autorelease];
-                                          [alert show];
                                       }
                                   }];
         }
@@ -1168,13 +1158,7 @@
                         if (error) {
                             [self handleError:error];
                         } else {
-                            UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:NSLocalizedString(@"Forked %@", @""), self.repositoryString] 
-                                                                             message:[NSString stringWithFormat:NSLocalizedString(@"You have successfully forked this Repository to Organization %@", @""), organization.login] 
-                                                                            delegate:nil 
-                                                                   cancelButtonTitle:nil 
-                                                                   otherButtonTitles:NSLocalizedString(@"OK", @""), nil]
-                                                  autorelease];
-                            [alert show];
+                            [[MTStatusBarOverlay sharedOverlay] postFinishMessage:[NSString stringWithFormat:NSLocalizedString(@"Forked Repository to %@", @""), organization.login] duration:1.5f];
                         }
                     }];
 }
