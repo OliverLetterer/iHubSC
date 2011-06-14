@@ -231,6 +231,10 @@
     
     [self.scrollView removeFromSuperview];
     self.scrollView = nil;
+    [self.activityIndicatorView removeFromSuperview];
+    self.activityIndicatorView = nil;
+    [self.loadingLabel removeFromSuperview];
+    self.loadingLabel = nil;
     
     CGRect frame = CGRectMake(0.0, 0.0, 320.0, 367.0f);
     
