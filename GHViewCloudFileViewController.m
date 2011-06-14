@@ -33,7 +33,7 @@
                     NSString *fileString = [[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] autorelease];
                     
                     if (fileString) {
-                        if ([self.filename hasSuffix:@".md"] || [self.filename hasSuffix:@".markdown"]) {
+                        if ([self.filename hasSuffix:@".md"] || [self.filename hasSuffix:@".markdown"] || [self.filename hasSuffix:@".mdown"]) {
                             NSString *formatFilePath = [[NSBundle mainBundle] pathForResource:@"MarkdownStyle" ofType:nil];
                             NSString *style = [NSString stringWithContentsOfFile:formatFilePath 
                                                                         encoding:NSUTF8StringEncoding 

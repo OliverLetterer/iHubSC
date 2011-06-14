@@ -74,7 +74,7 @@ V1.7
 - only letting user select a Milestone on a Repository, if the user is a collaborator
 - view/delete/add collaborators an a Repository you own
 - statusbar now shows, how many new messages you have in your News Feed
-
+- .mdown files are now recognized as Markdown files
 
 
 iTunes Changelog:
