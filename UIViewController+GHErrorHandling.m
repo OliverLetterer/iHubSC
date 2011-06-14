@@ -28,9 +28,8 @@
     if (error != nil) {
         DLog(@"%@", error);
         
-        [[MTStatusBarOverlay sharedOverlay] postErrorMessage:NSLocalizedString(@"Error", @"") duration:1.0f];
-        
         if (![GHAuthenticationManager sharedInstance].username || [[GHAuthenticationManager sharedInstance].username isEqualToString:@""]) {
+            [[MTStatusBarOverlay sharedOverlay] postErrorMessage:NSLocalizedString(@"Authentication required", @"") duration:1.0f];
             [self invalidadUserData];
             GHAuthenticationViewController *authViewController = [[[GHAuthenticationViewController alloc] init] autorelease];
             authViewController.delegate = self;
@@ -45,6 +44,7 @@
             // authentication needed
             if (![GHAuthenticationViewController isOneAuthenticationViewControllerActive]) {
                 [self invalidadUserData];
+                [[MTStatusBarOverlay sharedOverlay] postErrorMessage:NSLocalizedString(@"Authentication required", @"") duration:1.0f];
                 GHAuthenticationViewController *authViewController = [[[GHAuthenticationViewController alloc] init] autorelease];
                 authViewController.delegate = self;
                 
