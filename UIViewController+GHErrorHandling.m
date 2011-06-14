@@ -9,6 +9,7 @@
 #import "UIViewController+GHErrorHandling.h"
 #import "GHAuthenticationManager.h"
 #import "GHSettingsHelper.h"
+#import "MTStatusBarOverlay.h"
 
 @implementation UIViewController (GHViewControllerErrorhandling)
 
@@ -26,6 +27,8 @@
 - (void)handleError:(NSError *)error {
     if (error != nil) {
         DLog(@"%@", error);
+        
+        [[MTStatusBarOverlay sharedOverlay] postErrorMessage:NSLocalizedString(@"Error", @"") duration:1.0f];
         
         if (![GHAuthenticationManager sharedInstance].username || [[GHAuthenticationManager sharedInstance].username isEqualToString:@""]) {
             [self invalidadUserData];

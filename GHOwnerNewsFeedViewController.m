@@ -194,7 +194,7 @@
 }
 
 - (void)didRefreshNewsFeed:(NSString *)infoString {
-    [[MTStatusBarOverlay sharedOverlay] postFinishMessage:infoString duration:1.0f animated:NO];
+    [[MTStatusBarOverlay sharedOverlay] postFinishMessage:infoString duration:1.0f animated:YES];
 }
 
 - (void)loadDataBasedOnSegmentControl {
