@@ -26,17 +26,25 @@
     NSMutableString *HTMLString = [NSMutableString stringWithString:@""];
     [HTMLString appendString:@"<body style=\"background: -webkit-gradient(linear, left top, left bottom, from(#f0f0f0), to(#c0c0c0));\"><pre>"];
     [_diffString enumerateLinesUsingBlock:^(NSString *line, BOOL *stop) {
+        NSMutableString *result = [NSMutableString stringWithString:line];
+        
+        [result replaceOccurrencesOfString:@"&" withString:@"&amp;" options:NSLiteralSearch range:NSMakeRange(0, [result length])];
+        [result replaceOccurrencesOfString:@"<" withString:@"&lt;" options:NSLiteralSearch range:NSMakeRange(0, [result length])];
+        [result replaceOccurrencesOfString:@">" withString:@"&gt;" options:NSLiteralSearch range:NSMakeRange(0, [result length])];
+        [result replaceOccurrencesOfString:@"\"" withString:@"&quot;" options:NSLiteralSearch range:NSMakeRange(0, [result length])];
+        [result replaceOccurrencesOfString:@"'" withString:@"&#39;" options:NSLiteralSearch range:NSMakeRange(0, [result length])];
+        
         NSString *textColor = @"black";
         
-        if ([line hasPrefix:@"---"] || [line hasPrefix:@"-"]) {
+        if ([result hasPrefix:@"---"] || [result hasPrefix:@"-"]) {
             textColor = @"red";
-        } else if ([line hasPrefix:@"+++"] || [line hasPrefix:@"+"]) {
+        } else if ([result hasPrefix:@"+++"] || [result hasPrefix:@"+"]) {
             textColor = @"\"#1b860b\"";
-        } else if ([line hasPrefix:@"@@"]) {
+        } else if ([result hasPrefix:@"@@"]) {
             textColor = @"gray";
         }
         
-        [HTMLString appendFormat:@"<font color=%@ face=\"Verdana\">%@</font><br>", textColor, line];
+        [HTMLString appendFormat:@"<font color=%@ face=\"Verdana\">%@</font><br>", textColor, result];
     }];
     [HTMLString appendString:@"</pre></body>"];
     
