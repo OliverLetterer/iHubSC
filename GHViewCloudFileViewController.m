@@ -24,37 +24,7 @@
         [_metadata release];
         _metadata = [metadata retain];
         
-        if ([_metadata.mimeType rangeOfString:@"text"].location != NSNotFound) {
-            // now we need to download the text data
-            [_metadata contentOfFileWithCompletionHandler:^(NSData *data, NSError *error) {
-                if (error) {
-                    [self handleError:error];
-                } else {
-                    NSString *fileString = [[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] autorelease];
-                    
-                    if (fileString) {
-                        if ([self.filename hasSuffix:@".md"] || [self.filename hasSuffix:@".markdown"] || [self.filename hasSuffix:@".mdown"]) {
-                            self.markdownString = fileString.HTMLMarkdownFormattedString;
-                            [self updateViewToShowMarkdownFile];
-                        } else {
-                            self.contentString = fileString;
-                            [self updateViewToShowPlainTextFile];
-                        }
-                    } else {
-                        UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", @"") 
-                                                                         message:NSLocalizedString(@"Unable to show file!", @"") 
-                                                                        delegate:nil 
-                                                               cancelButtonTitle:NSLocalizedString(@"OK", @"") 
-                                                               otherButtonTitles:nil]
-                                              autorelease];
-                        [alert show];
-                        [self.activityIndicatorView removeFromSuperview];
-                        self.activityIndicatorView = nil;
-                        self.loadingLabel.text = NSLocalizedString(@"Unable to show file", @"");
-                    }
-                }
-            }];
-        } else if ([_metadata.mimeType rangeOfString:@"image"].location != NSNotFound) {
+        if ([_metadata.mimeType rangeOfString:@"image"].location != NSNotFound) {
             [self updateViewForImageDownload];
             self.request = [self.metadata requestForContent];
             self.request.delegate = self;
@@ -68,8 +38,26 @@
             
             [self.request startAsynchronous];
         } else {
-            _isMimeTypeUnkonw = YES;
-            [self updateViewForUnkownMimeType];
+            [_metadata contentOfFileWithCompletionHandler:^(NSData *data, NSError *error) {
+                if (error) {
+                    [self handleError:error];
+                } else {
+                    NSString *fileString = [[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] autorelease];
+                    
+                    if (fileString) {
+                        if ([self.filename hasSuffix:@".md"] || [self.filename hasSuffix:@".markdown"] || [self.filename hasSuffix:@".mdown"]) {
+                            self.markdownString = fileString.HTMLMarkdownFormattedString;
+                            [self updateViewToShowMarkdownFile];
+                        } else {
+                            self.contentString = [self HTMLPageStringFromFileContent:fileString];
+                            [self updateViewToShowPlainTextFile];
+                        }
+                    } else {
+                        _isMimeTypeUnkonw = YES;
+                        [self updateViewForUnkownMimeType];
+                    }
+                }
+            }];
         }
     }
 }
@@ -102,6 +90,79 @@
         self.title = filename;
     }
     return self;
+}
+
+#pragma mark - HTML parsing
+
+- (NSString *)HTMLPageStringFromFileContent:(NSString *)fileContent {
+    NSMutableDictionary *brushesForFileExtensionsDictionary = [NSMutableDictionary dictionary];
+    [brushesForFileExtensionsDictionary setObject:@"javascript" forKey:@".js"];
+    [brushesForFileExtensionsDictionary setObject:@"ruby" forKey:@".rb"];
+    [brushesForFileExtensionsDictionary setObject:@"python" forKey:@".py"];
+    
+    [brushesForFileExtensionsDictionary setObject:@"c" forKey:@".h"];
+    [brushesForFileExtensionsDictionary setObject:@"c" forKey:@".mm"];
+    [brushesForFileExtensionsDictionary setObject:@"c" forKey:@".m"];
+    [brushesForFileExtensionsDictionary setObject:@"c" forKey:@".c"];
+    [brushesForFileExtensionsDictionary setObject:@"c" forKey:@".cpp"];
+    [brushesForFileExtensionsDictionary setObject:@"c" forKey:@".c++"];
+    [brushesForFileExtensionsDictionary setObject:@"c" forKey:@".hpp"];
+    [brushesForFileExtensionsDictionary setObject:@"c" forKey:@".h++"];
+    
+    [brushesForFileExtensionsDictionary setObject:@"php" forKey:@".php"];
+    [brushesForFileExtensionsDictionary setObject:@"bash" forKey:@".sh"];
+    [brushesForFileExtensionsDictionary setObject:@"perl" forKey:@".pl"];
+    [brushesForFileExtensionsDictionary setObject:@"java" forKey:@".java"];
+    
+    
+    NSMutableString *HTMLString = [NSMutableString stringWithString:@"<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">\
+                                   <html xmlns=\"http://www.w3.org/1999/xhtml\" xml:lang=\"en\" lang=\"en\">\
+                                   <head>\
+                                   <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\" />\
+                                   <script type=\"text/javascript\" src=\"scripts/shCore.js\"></script>\
+                                   <script type=\"text/javascript\" src=\"scripts/shBrushJScript.js\"></script>\
+                                   <script type=\"text/javascript\" src=\"scripts/shBrushRuby.js\"></script>\
+                                   <script type=\"text/javascript\" src=\"scripts/shBrushPython.js\"></script>\
+                                   <script type=\"text/javascript\" src=\"scripts/shBrushPhp.js\"></script>\
+                                   <script type=\"text/javascript\" src=\"scripts/shBrushBash.js\"></script>\
+                                   <script type=\"text/javascript\" src=\"scripts/shBrushPerl.js\"></script>\
+                                   <script type=\"text/javascript\" src=\"scripts/shBrushJava.js\"></script>\
+                                   \
+                                   <script type=\"text/javascript\" src=\"scripts/shBrushCpp.js\"></script>\
+                                   <link type=\"text/css\" rel=\"stylesheet\" href=\"styles/shCoreDefault.css\"/>\
+                                   <script type=\"text/javascript\">SyntaxHighlighter.all();</script>\
+                                   </head>\
+                                   \
+                                   <body style=\"background: white; font-family: Helvetica\">"];
+//    [HTMLString appendString:@"<body style=\"background: -webkit-gradient(linear, left top, left bottom, from(#f0f0f0), to(#c0c0c0));\"><pre>"];
+    
+    NSMutableString *brushType = [NSMutableString stringWithString:@""];
+    
+    [brushesForFileExtensionsDictionary enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+        NSString *theKey = key;
+        NSString *theObject = obj;
+        
+        if ([self.filename rangeOfString:theKey].location != NSNotFound) {
+            *stop = YES;
+            [brushType appendString:theObject];
+        }
+    }];
+    
+    [HTMLString appendFormat:@"<pre class=\"brush: %@;\" width=\"320px\">", brushType];
+    
+    NSMutableString *result = [NSMutableString stringWithString:fileContent];
+    
+    [result replaceOccurrencesOfString:@"&" withString:@"&amp;" options:NSLiteralSearch range:NSMakeRange(0, [result length])];
+    [result replaceOccurrencesOfString:@"<" withString:@"&lt;" options:NSLiteralSearch range:NSMakeRange(0, [result length])];
+    [result replaceOccurrencesOfString:@">" withString:@"&gt;" options:NSLiteralSearch range:NSMakeRange(0, [result length])];
+    [result replaceOccurrencesOfString:@"\"" withString:@"&quot;" options:NSLiteralSearch range:NSMakeRange(0, [result length])];
+    [result replaceOccurrencesOfString:@"'" withString:@"&#39;" options:NSLiteralSearch range:NSMakeRange(0, [result length])];
+    
+    [HTMLString appendString:result];
+    
+    [HTMLString appendString:@"</pre></body>"];
+    
+    return HTMLString;
 }
 
 #pragma mark - Memory management
@@ -137,18 +198,6 @@
 #pragma mark - View lifecycle
 
 - (void)loadView {
-//    [super loadView];
-//    self.view.backgroundColor = [UIColor whiteColor];
-//    
-//    self.backgroundGradientLayer = [CAGradientLayer layer];
-//    self.backgroundGradientLayer.colors = [NSArray arrayWithObjects:
-//                                           (id)[UIColor whiteColor].CGColor, 
-//                                           (id)[UIColor colorWithRed:245.0/255.0 green:245.0/255.0 blue:245.0/255.0 alpha:1.0].CGColor,
-//                                           nil];
-//    self.backgroundGradientLayer.locations = [NSArray arrayWithObjects:[NSNumber numberWithFloat:0.0], [NSNumber numberWithFloat:1.0], nil];
-//    self.backgroundGradientLayer.frame = self.view.bounds;
-//    [self.view.layer addSublayer:self.backgroundGradientLayer];
-    
     self.view = [[[GHLinearGradientBackgroundView alloc] initWithFrame:CGRectZero] autorelease];
     
     self.scrollView = [[[UIScrollView alloc] initWithFrame:self.view.bounds] autorelease];
@@ -215,13 +264,11 @@
     
     CGRect frame = CGRectMake(0.0, 0.0, 320.0, 367.0f);
     
-    UITextView *textView = [[[UITextView alloc] initWithFrame:frame] autorelease];
-    textView.text = self.contentString;
-    textView.editable = NO;
-    textView.font = [UIFont systemFontOfSize:16.0];
-    textView.alwaysBounceVertical = YES;
-    textView.backgroundColor = [UIColor clearColor];
-    [self.view addSubview:textView];
+    UIWebView *webView = [[[UIWebView alloc] initWithFrame:frame] autorelease];
+    [webView loadHTMLString:self.contentString baseURL:[[NSBundle mainBundle] URLForResource:@"" withExtension:nil]];
+    webView.scalesPageToFit = YES;
+    
+    [self.view addSubview:webView];
 }
 
 - (void)updateViewToShowMarkdownFile {

@@ -78,6 +78,7 @@ V1.7
 
 V1.8
 - viewing diffs in a commit is now much more memory efficent
+- support for syntax highlighting in top 10 github languages
 
 iTunes Changelog:
 

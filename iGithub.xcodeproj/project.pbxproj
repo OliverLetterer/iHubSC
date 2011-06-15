@@ -67,6 +67,10 @@
 		A723F185137F0DCE00F7649B /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = A723F17E137F0DCE00F7649B /* Icon.png */; };
 		A723F186137F0DCE00F7649B /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A723F17F137F0DCE00F7649B /* Icon@2x.png */; };
 		A7288A6913A8F21600170D57 /* BGPlainWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = A7288A6813A8F21600170D57 /* BGPlainWebView.m */; };
+		A7288A7013A9094300170D57 /* compass in Resources */ = {isa = PBXBuildFile; fileRef = A7288A6C13A9094300170D57 /* compass */; };
+		A7288A7113A9094300170D57 /* scripts in Resources */ = {isa = PBXBuildFile; fileRef = A7288A6D13A9094300170D57 /* scripts */; };
+		A7288A7213A9094300170D57 /* src in Resources */ = {isa = PBXBuildFile; fileRef = A7288A6E13A9094300170D57 /* src */; };
+		A7288A7313A9094300170D57 /* styles in Resources */ = {isa = PBXBuildFile; fileRef = A7288A6F13A9094300170D57 /* styles */; };
 		A73AE5A7134EF4F100E9EBA4 /* UITableView+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = A73AE5A6134EF4F100E9EBA4 /* UITableView+Additions.m */; };
 		A73AE5AC134EFDF400E9EBA4 /* 56-feed.png in Resources */ = {isa = PBXBuildFile; fileRef = A73AE5A8134EFDF300E9EBA4 /* 56-feed.png */; };
 		A73AE5AD134EFDF400E9EBA4 /* 56-feed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A73AE5A9134EFDF300E9EBA4 /* 56-feed@2x.png */; };
@@ -325,6 +329,10 @@
 		A723F180137F0DCE00F7649B /* iTunesArtwork.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iTunesArtwork.png; sourceTree = "<group>"; };
 		A7288A6713A8F21600170D57 /* BGPlainWebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BGPlainWebView.h; sourceTree = "<group>"; };
 		A7288A6813A8F21600170D57 /* BGPlainWebView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BGPlainWebView.m; sourceTree = "<group>"; };
+		A7288A6C13A9094300170D57 /* compass */ = {isa = PBXFileReference; lastKnownFileType = folder; path = compass; sourceTree = "<group>"; };
+		A7288A6D13A9094300170D57 /* scripts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = scripts; sourceTree = "<group>"; };
+		A7288A6E13A9094300170D57 /* src */ = {isa = PBXFileReference; lastKnownFileType = folder; path = src; sourceTree = "<group>"; };
+		A7288A6F13A9094300170D57 /* styles */ = {isa = PBXFileReference; lastKnownFileType = folder; path = styles; sourceTree = "<group>"; };
 		A7384D68136BFCE200DD1BE5 /* iHub - Icon Template.psd */ = {isa = PBXFileReference; lastKnownFileType = file; path = "iHub - Icon Template.psd"; sourceTree = "<group>"; };
 		A73AE5A5134EF4F100E9EBA4 /* UITableView+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+Additions.h"; sourceTree = "<group>"; };
 		A73AE5A6134EF4F100E9EBA4 /* UITableView+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+Additions.m"; sourceTree = "<group>"; };
@@ -898,6 +906,17 @@
 			name = "GHSearchViewController's";
 			sourceTree = "<group>";
 		};
+		A7288A6B13A9091500170D57 /* SyntaxHighlighting */ = {
+			isa = PBXGroup;
+			children = (
+				A7288A6C13A9094300170D57 /* compass */,
+				A7288A6D13A9094300170D57 /* scripts */,
+				A7288A6E13A9094300170D57 /* src */,
+				A7288A6F13A9094300170D57 /* styles */,
+			);
+			name = SyntaxHighlighting;
+			sourceTree = "<group>";
+		};
 		A73AE5A4134EF4C900E9EBA4 /* UITableView+Additions */ = {
 			isa = PBXGroup;
 			children = (
@@ -1199,6 +1218,7 @@
 		A750573F1343422200514A82 /* UserInterface */ = {
 			isa = PBXGroup;
 			children = (
+				A7288A6B13A9091500170D57 /* SyntaxHighlighting */,
 				A74AFBDA13A7CFFF002A03F3 /* MTStatusBarOverlay.h */,
 				A74AFBDB13A7CFFF002A03F3 /* MTStatusBarOverlay.m */,
 				A70DA3DD13A61BBD00235C76 /* OCPromptView.h */,
@@ -2048,6 +2068,10 @@
 				A706C0C7139AC552008A6184 /* PullToRefreshArrow.png in Resources */,
 				A706C0D5139B904B008A6184 /* Default@2x.png in Resources */,
 				A706C0D7139B91AA008A6184 /* Default.png in Resources */,
+				A7288A7013A9094300170D57 /* compass in Resources */,
+				A7288A7113A9094300170D57 /* scripts in Resources */,
+				A7288A7213A9094300170D57 /* src in Resources */,
+				A7288A7313A9094300170D57 /* styles in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -63,4 +63,6 @@
 - (void)updateViewForImageContent;
 - (void)updateViewForUnkownMimeType;
 
+- (NSString *)HTMLPageStringFromFileContent:(NSString *)fileContent;
+
 @end
