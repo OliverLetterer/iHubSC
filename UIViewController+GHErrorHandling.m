@@ -53,6 +53,7 @@
                 [self presentModalViewController:navController animated:YES];
             }
         } else {
+            [[MTStatusBarOverlay sharedOverlay] postErrorMessage:NSLocalizedString(@"Error", @"") duration:1.0f];
             UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", @"") 
                                                              message:[error localizedDescription] 
                                                             delegate:nil 
