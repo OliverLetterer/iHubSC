@@ -9,11 +9,39 @@
 #import "GHCommitDiffViewController.h"
 #import "UITableViewCellWithLinearGradientBackgroundView.h"
 #import "GHLinearGradientBackgroundView.h"
+#import "BGPlainWebView.h"
 
 @implementation GHCommitDiffViewController
 
-@synthesize diffString=_diffString;
-@synthesize diffView=_diffView, scrollView=_scrollView, loadingLabel=_loadingLabel, activityIndicatorView=_activityIndicatorView;
+@synthesize diffString=_diffString, HTMLString=_HTMLString;
+@synthesize webView=_webView, topOverlayView=_topOverlayView;
+
+#pragma mark - setters and getters
+
+- (void)setDiffString:(NSString *)diffString {
+    [_diffString release];
+    _diffString = [diffString copy];
+    
+    // Now do the HTML magic
+    NSMutableString *HTMLString = [NSMutableString stringWithString:@""];
+    [HTMLString appendString:@"<body style=\"background: -webkit-gradient(linear, left top, left bottom, from(#f0f0f0), to(#c0c0c0));\"><pre>"];
+    [_diffString enumerateLinesUsingBlock:^(NSString *line, BOOL *stop) {
+        NSString *textColor = @"black";
+        
+        if ([line hasPrefix:@"---"] || [line hasPrefix:@"-"]) {
+            textColor = @"red";
+        } else if ([line hasPrefix:@"+++"] || [line hasPrefix:@"+"]) {
+            textColor = @"\"#1b860b\"";
+        } else if ([line hasPrefix:@"@@"]) {
+            textColor = @"gray";
+        }
+        
+        [HTMLString appendFormat:@"<font color=%@ face=\"Verdana\">%@</font><br>", textColor, line];
+    }];
+    [HTMLString appendString:@"</pre></body>"];
+    
+    self.HTMLString = HTMLString;
+}
 
 #pragma mark - Initialization
 
@@ -28,10 +56,10 @@
 
 - (void)dealloc {
     [_diffString release];
-    [_diffView release];
-    [_scrollView release];
-    [_loadingLabel release];
-    [_activityIndicatorView release];
+    [_HTMLString release];
+    [_webView release];
+    [_topOverlayView release];
+    
     [super dealloc];
 }
 
@@ -48,35 +76,15 @@
     [super loadView];
     self.view = [[[GHLinearGradientBackgroundView alloc] initWithFrame:CGRectZero] autorelease];
     
-    self.scrollView = [[[UIScrollView alloc] initWithFrame:self.view.bounds] autorelease];
-    self.scrollView.backgroundColor = [UIColor clearColor];
-    self.scrollView.alwaysBounceVertical = YES;
-    self.scrollView.indicatorStyle = UIScrollViewIndicatorStyleBlack;
-    self.scrollView.showsVerticalScrollIndicator = YES;
-    self.scrollView.showsHorizontalScrollIndicator = YES;
-    self.scrollView.contentInset = UIEdgeInsetsMake(5.0, 5.0, 5.0, 5.0);
-    self.scrollView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-    self.scrollView.delegate = self;
-    [self.view addSubview:self.scrollView];
+    self.topOverlayView = [[[UIView alloc] initWithFrame:CGRectZero] autorelease];
+    self.topOverlayView.backgroundColor = [UIColor colorWithRed:240.0/255.0 green:240.0/255.0 blue:240.0/255.0 alpha:1.0];
+    [self.view addSubview:self.topOverlayView];
     
-    self.diffView = [[[GHTextView alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0, 300.0) 
-                                            text:self.diffString 
-                                              delegate:self] 
-                     autorelease];
-    [self.scrollView addSubview:self.diffView];
-    
-    self.loadingLabel = [[[UILabel alloc] initWithFrame:CGRectMake(0.0, 170.0, 320.0, 20.0)] autorelease];
-    self.loadingLabel.backgroundColor = [UIColor clearColor];
-    self.loadingLabel.textColor = [UIColor blackColor];
-    self.loadingLabel.textAlignment = UITextAlignmentCenter;
-    self.loadingLabel.text = NSLocalizedString(@"Parsing ...", @"");
-    self.loadingLabel.font = [UIFont systemFontOfSize:17.0];
-    [self.view addSubview:self.loadingLabel];
-    
-    self.activityIndicatorView = [[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray] autorelease];
-    self.activityIndicatorView.center = CGPointMake(100.0, 180.0);
-    [self.activityIndicatorView startAnimating];
-    [self.view addSubview:self.activityIndicatorView];
+    self.webView = [[[BGPlainWebView alloc] initWithFrame:self.view.bounds] autorelease];
+    self.webView.backgroundColor = [UIColor clearColor];
+    self.webView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    [self.webView loadHTMLString:self.HTMLString baseURL:nil];
+    [self.view addSubview:self.webView];
 }
 
 - (void)viewDidLoad {
@@ -92,18 +100,13 @@
 - (void)viewDidUnload {
     [super viewDidUnload];
     
-    [_diffView release];
-    _diffView = nil;
-    [_scrollView release];
-    _scrollView = nil;
-    [_loadingLabel release];
-    _loadingLabel = nil;
-    [_activityIndicatorView release];
-    _activityIndicatorView = nil;
+    [_webView release];
+    _webView = nil;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    self.topOverlayView.frame = CGRectMake(0.0f, 0.0f, CGRectGetWidth(self.view.bounds), CGRectGetHeight(self.view.bounds)/2.0f);
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -121,44 +124,6 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
-}
-
-#pragma mark - GHCommitDiffViewDelegate
-
-- (void)textViewDidParseText:(GHTextView *)textView {
-    [self.activityIndicatorView removeFromSuperview];
-    self.activityIndicatorView = nil;
-    [self.loadingLabel removeFromSuperview];
-    self.loadingLabel = nil;
-    [self.diffView sizeToFit];
-    
-    self.scrollView.contentSize = self.diffView.frame.size;
-    self.scrollView.minimumZoomScale = self.scrollView.bounds.size.width / self.diffView.frame.size.width;
-}
-
-- (NSAttributedString *)textView:(GHTextView *)textView formattedLineFromText:(NSString *)line {
-    
-    NSMutableAttributedString *string = [[[NSMutableAttributedString alloc] initWithString:line] autorelease];
-    
-    CGColorRef textColor = [UIColor blackColor].CGColor;
-    
-    if ([line hasPrefix:@"---"] || [line hasPrefix:@"-"]) {
-        textColor = [UIColor redColor].CGColor;
-    } else if ([line hasPrefix:@"+++"] || [line hasPrefix:@"+"]) {
-        textColor = [UIColor colorWithRed:27.0/255.0 green:143.0/255.0 blue:11.0/255.0 alpha:1.0].CGColor;
-    } else if ([line hasPrefix:@"@@"]) {
-        textColor = [UIColor grayColor].CGColor;
-    }
-    
-    [string addAttribute:(NSString *)kCTForegroundColorAttributeName 
-                   value:(id)textColor 
-                   range:NSMakeRange(0, [line length])];
-    
-    return string;
-}
-
-- (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView {
-    return self.diffView;
 }
 
 @end

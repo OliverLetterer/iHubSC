@@ -76,6 +76,8 @@ V1.7
 - statusbar now shows, how many new messages you have in your News Feed
 - .mdown files are now recognized as Markdown files
 
+V1.8
+- viewing diffs in a commit is now much more memory efficent
 
 iTunes Changelog:
 
