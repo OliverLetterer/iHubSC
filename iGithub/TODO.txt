@@ -25,17 +25,13 @@ support all these events
 [X]: Implemented
 [-]: clickable (include in navigation hierarchie)
 
-V1.7
-- Some kind of icons for folders and filetypes when browsing source trees would be nice. (currently none)
-- No access to Wiki pages.
-- Basically, you can access almost everything (but no wikis is a big deal!), but it's kind of clunky to do so. This app shows promise, but right now I would recommend against buying it. Keep your eye on this one, however, because if the developer gets active and improves the UI this could be amazing some day.
-- syntax highlighting
-- webview for diffs (red/green)
-
-Future Features:
+TODO:
 - Network graph for recent activity (see Network API)
 - ipad Interface
 - markdown support for Comments
+- Some kind of icons for folders and filetypes when browsing source trees would be nice. (currently none)
+- No access to Wiki pages.
+- Basically, you can access almost everything (but no wikis is a big deal!), but it's kind of clunky to do so. This app shows promise, but right now I would recommend against buying it. Keep your eye on this one, however, because if the developer gets active and improves the UI this could be amazing some day.
 
 Old APIv2 Calls:
 - search for a user
