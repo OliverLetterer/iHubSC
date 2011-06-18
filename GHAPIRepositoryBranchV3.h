@@ -19,5 +19,6 @@
 @property (nonatomic, copy) NSString *ID;
 
 - (id)initWithName:(NSString *)name ID:(NSString *)ID;
+- (id)initWithRawDictionary:(NSDictionary *)rawDictionary;
 
 @end

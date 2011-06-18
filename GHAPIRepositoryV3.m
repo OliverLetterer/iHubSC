@@ -198,11 +198,11 @@
                                  if (error) {
                                      handler(nil, GHAPIPaginationNextPageNotFound, error);
                                  } else {
-                                     NSDictionary *rawDictionary = object;
+                                     NSArray *rawArray = object;
                                      
-                                     NSMutableArray *finalArray = [NSMutableArray arrayWithCapacity:[rawDictionary allKeys].count];
-                                     [rawDictionary enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
-                                         [finalArray addObject:[[[GHAPIRepositoryBranchV3 alloc] initWithName:key ID:obj] autorelease] ];
+                                     NSMutableArray *finalArray = [NSMutableArray arrayWithCapacity:rawArray.count];
+                                     [rawArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+                                         [finalArray addObject:[[[GHAPIRepositoryBranchV3 alloc] initWithRawDictionary:obj] autorelease] ];
                                      }];
                                      
                                      handler(finalArray, nextPage, nil);

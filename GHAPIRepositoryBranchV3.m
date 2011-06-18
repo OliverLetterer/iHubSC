@@ -24,6 +24,19 @@
     return self;
 }
 
+- (id)initWithRawDictionary:(NSDictionary *)rawDictionary {
+    if ((self = [super init])) {
+        self.name = [rawDictionary objectForKeyOrNilOnNullObject:@"name"];
+        self.ID = [rawDictionary objectForKeyOrNilOnNullObject:@"sha"];
+        
+        if (!self.ID) {
+            NSDictionary *commitDictionary = [rawDictionary objectForKeyOrNilOnNullObject:@"commit"];
+            self.ID = [commitDictionary objectForKeyOrNilOnNullObject:@"sha"];
+        }
+    }
+    return self;
+}
+
 #pragma mark - Memory management
 
 - (void)dealloc {
