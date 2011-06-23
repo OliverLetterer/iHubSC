@@ -435,4 +435,38 @@
                                             }];
 }
 
++ (void)commitsOnRepository:(NSString *)repository 
+                  branchSHA:(NSString *)branchSHA 
+                       page:(NSUInteger)page 
+          completionHandler:(GHAPIPaginationHandler)handler {
+    // v3: GET /repos/:user/:repo/commits
+    
+    NSMutableString *URLString = [NSMutableString stringWithFormat:@"https://api.github.com/repos/%@/commits",
+                                  [repository stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    
+    if (branchSHA) {
+        [URLString appendFormat:@"?sha=%@", [branchSHA stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    }
+    
+    NSURL *URL = [NSURL URLWithString:URLString];
+    
+    [[GHBackgroundQueue sharedInstance] sendRequestToURL:URL 
+                                                    page:page 
+                                            setupHandler:nil 
+                             completionPaginationHandler:^(id object, NSError *error, ASIFormDataRequest *request, NSUInteger nextPage) {
+                                 if (error) {
+                                     handler(nil, GHAPIPaginationNextPageNotFound, error);
+                                 } else {
+                                     NSArray *rawArray = object;
+                                     
+                                     NSMutableArray *finalArray = [NSMutableArray arrayWithCapacity:rawArray.count];
+                                     [rawArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+                                         [finalArray addObject:[[[GHAPICommitV3 alloc] initWithRawDictionary:obj] autorelease] ];
+                                     }];
+                                     
+                                     handler(finalArray, nextPage, nil);
+                                 }
+                             }];
+}
+
 @end

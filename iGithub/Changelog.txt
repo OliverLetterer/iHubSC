@@ -82,7 +82,8 @@ V1.8
 - fixed crash that was caused by changed branch API
 - new Notification System
 
-
+V1.9
+- further API V3 adoption
 
 
 iTunes Changelog:

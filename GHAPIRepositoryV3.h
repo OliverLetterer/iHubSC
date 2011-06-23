@@ -98,4 +98,9 @@
         toOrganization:(NSString *)organization 
      completionHandler:(void (^)(GHAPIRepositoryV3 *repository, NSError *error))handler;
 
++ (void)commitsOnRepository:(NSString *)repository 
+                  branchSHA:(NSString *)branchSHA 
+                       page:(NSUInteger)page 
+          completionHandler:(GHAPIPaginationHandler)handler;
+
 @end

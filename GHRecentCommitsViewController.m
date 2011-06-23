@@ -91,23 +91,42 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
+#pragma mark - pagination
+
+- (void)downloadDataForPage:(NSUInteger)page inSection:(NSUInteger)section {
+    [GHAPIRepositoryV3 commitsOnRepository:self.repository branchSHA:self.branchHash page:page 
+                         completionHandler:^(NSMutableArray *array, NSUInteger nextPage, NSError *error) {
+                             if (error) {
+                                 [self handleError:error];
+                             } else {
+                                 [self setNextPage:nextPage forSection:0];
+                                 [self.commits addObjectsFromArray:array];
+                                 [self cacheHeightsForCommits];
+                                 [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:section] 
+                                               withRowAnimation:UITableViewScrollPositionBottom];
+                             }
+                         }];
+}
+
 #pragma mark - downloading data
 
 - (void)downloadCommitData {
-    [GHRepository recentCommitsOnRepository:self.repository branch:self.branch completionHandler:^(NSArray *array, NSError *error) {
-        if (error) {
-            [self handleError:error];
-        } else {
-            self.commits = array;
-            [self cacheHeightsForCommits];
-            [self.tableView reloadData];
-        }
-    }];
+    [GHAPIRepositoryV3 commitsOnRepository:self.repository branchSHA:self.branchHash page:1 
+                         completionHandler:^(NSMutableArray *array, NSUInteger nextPage, NSError *error) {
+                             if (error) {
+                                 [self handleError:error];
+                             } else {
+                                 [self setNextPage:nextPage forSection:0];
+                                 self.commits = array;
+                                 [self cacheHeightsForCommits];
+                                 [self.tableView reloadData];
+                             }
+                         }];
 }
 
 - (void)cacheHeightsForCommits {
     NSInteger i = 0;
-    for (GHCommit *commit in self.commits) {
+    for (GHAPICommitV3 *commit in self.commits) {
         CGFloat height = [self heightForDescription:commit.message] + 50.0;
         if (height < 71.05) {
             height = 71.0f;
@@ -140,11 +159,11 @@
         cell = [[[GHFeedItemWithDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
     }
     
-    GHCommit *commit = [self.commits objectAtIndex:indexPath.row];
+    GHAPICommitV3 *commit = [self.commits objectAtIndex:indexPath.row];
     
-    cell.imageView.image = [UIImage imageNamed:@"DefaultUserImage.png"];
+    [self updateImageViewForCell:cell atIndexPath:indexPath withGravatarID:commit.author.gravatarID];
     
-    cell.titleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ committed %@", @""), commit.author.login, commit.ID];
+    cell.titleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ committed %@", @""), commit.author.login, commit.SHA];
     cell.descriptionLabel.text = commit.message;
     
     return cell;
@@ -192,10 +211,10 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    GHCommit *commit = [self.commits objectAtIndex:indexPath.row];
+    GHAPICommitV3 *commit = [self.commits objectAtIndex:indexPath.row];
     
     GHViewCommitViewController *commitViewController = [[[GHViewCommitViewController alloc] initWithRepository:self.repository 
-                                                                                                      commitID:commit.ID]
+                                                                                                      commitID:commit.SHA]
                                                         autorelease];
     commitViewController.branchHash = self.branchHash;
     [self.navigationController pushViewController:commitViewController animated:YES];

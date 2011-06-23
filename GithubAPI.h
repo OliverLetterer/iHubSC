@@ -25,13 +25,14 @@
 #import "GHPullRequestDiscussion.h"
 #import "GHPullRequestRepositoryInformation.h"
 #import "GHRepository.h"
-//#import "GHBranch.h"
 #import "GHFileSystemItem.h"
 #import "GHFile.h"
 #import "GHDirectory.h"
 #import "GHFileMetaData.h"
 
 // V3
+#import "GHAPICommitV3.h"
+#import "GHAPITreeInfoV3.h"
 #import "GHAPIConnectionHandlersV3.h"
 #import "GHAPIIssueCommentV3.h"
 #import "GHAPIIssueV3.h"

@@ -126,6 +126,8 @@
 		A76FC9A61352D231004C642E /* 145-persondot.png in Resources */ = {isa = PBXBuildFile; fileRef = A76FC9A41352D231004C642E /* 145-persondot.png */; };
 		A76FC9A71352D231004C642E /* 145-persondot@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A76FC9A51352D231004C642E /* 145-persondot@2x.png */; };
 		A76FC9BE13534755004C642E /* UIExpandableTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = A76FC9BD13534755004C642E /* UIExpandableTableView.m */; };
+		A773023213B38C4B0075235E /* GHAPICommitV3.m in Sources */ = {isa = PBXBuildFile; fileRef = A773023113B38C4B0075235E /* GHAPICommitV3.m */; };
+		A773023713B38D200075235E /* GHAPITreeInfoV3.m in Sources */ = {isa = PBXBuildFile; fileRef = A773023613B38D200075235E /* GHAPITreeInfoV3.m */; };
 		A77654C91395556000787420 /* array.c in Sources */ = {isa = PBXBuildFile; fileRef = A77654C11395556000787420 /* array.c */; };
 		A77654CA1395556000787420 /* buffer.c in Sources */ = {isa = PBXBuildFile; fileRef = A77654C31395556000787420 /* buffer.c */; };
 		A77654CB1395556000787420 /* markdown.c in Sources */ = {isa = PBXBuildFile; fileRef = A77654C51395556000787420 /* markdown.c */; };
@@ -433,6 +435,10 @@
 		A76FC9A51352D231004C642E /* 145-persondot@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "145-persondot@2x.png"; sourceTree = "<group>"; };
 		A76FC9BC13534755004C642E /* UIExpandableTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UIExpandableTableView.h; path = UIExpandableTableView/UIExpandableTableView.h; sourceTree = "<group>"; };
 		A76FC9BD13534755004C642E /* UIExpandableTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UIExpandableTableView.m; path = UIExpandableTableView/UIExpandableTableView.m; sourceTree = "<group>"; };
+		A773023013B38C4B0075235E /* GHAPICommitV3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHAPICommitV3.h; sourceTree = "<group>"; };
+		A773023113B38C4B0075235E /* GHAPICommitV3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHAPICommitV3.m; sourceTree = "<group>"; };
+		A773023513B38D200075235E /* GHAPITreeInfoV3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHAPITreeInfoV3.h; sourceTree = "<group>"; };
+		A773023613B38D200075235E /* GHAPITreeInfoV3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHAPITreeInfoV3.m; sourceTree = "<group>"; };
 		A77654C11395556000787420 /* array.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = array.c; sourceTree = "<group>"; };
 		A77654C21395556000787420 /* array.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = array.h; sourceTree = "<group>"; };
 		A77654C31395556000787420 /* buffer.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = buffer.c; sourceTree = "<group>"; };
@@ -1333,6 +1339,17 @@
 			name = UIExpandableTableView;
 			sourceTree = "<group>";
 		};
+		A773023313B38C520075235E /* GHAPICommitV3 */ = {
+			isa = PBXGroup;
+			children = (
+				A773023013B38C4B0075235E /* GHAPICommitV3.h */,
+				A773023113B38C4B0075235E /* GHAPICommitV3.m */,
+				A773023513B38D200075235E /* GHAPITreeInfoV3.h */,
+				A773023613B38D200075235E /* GHAPITreeInfoV3.m */,
+			);
+			name = GHAPICommitV3;
+			sourceTree = "<group>";
+		};
 		A77654BF1395555500787420 /* Markdown */ = {
 			isa = PBXGroup;
 			children = (
@@ -1378,6 +1395,7 @@
 		A79F37F813883B650028F492 /* v3 */ = {
 			isa = PBXGroup;
 			children = (
+				A773023313B38C520075235E /* GHAPICommitV3 */,
 				A70DA3D913A4E2BE00235C76 /* GHAPITeamV3 */,
 				A70DA3D413A4B7DE00235C76 /* GHAPIOrganizationV3 */,
 				A7DCDD9013A366BE00089CCD /* GHAPIRepositoryBranchV3 */,
@@ -2248,6 +2266,8 @@
 				A75C3EAF13B363E300D64681 /* INNotificationQueue.m in Sources */,
 				A75C3EB013B363E300D64681 /* INNotificationQueueItem.m in Sources */,
 				A75C3EB113B363E300D64681 /* INNotificationQueue+Private.m in Sources */,
+				A773023213B38C4B0075235E /* GHAPICommitV3.m in Sources */,
+				A773023713B38D200075235E /* GHAPITreeInfoV3.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
