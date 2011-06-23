@@ -210,7 +210,6 @@
 		A7D41ACC1358B7D300CD3A5C /* GHCommitDiffViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7D41ACB1358B7D300CD3A5C /* GHCommitDiffViewController.m */; };
 		A7D41AF41359DE4400CD3A5C /* GHPullRequestDiscussion.m in Sources */ = {isa = PBXBuildFile; fileRef = A7D41AF31359DE4300CD3A5C /* GHPullRequestDiscussion.m */; };
 		A7D41AF71359F8CC00CD3A5C /* GHPullRequestRepositoryInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = A7D41AF61359F8CC00CD3A5C /* GHPullRequestRepositoryInformation.m */; };
-		A7D41AFD135ADA4600CD3A5C /* GHBranch.m in Sources */ = {isa = PBXBuildFile; fileRef = A7D41AFC135ADA3C00CD3A5C /* GHBranch.m */; };
 		A7D41B08135AE71B00CD3A5C /* GHRecentCommitsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7D41B07135AE71600CD3A5C /* GHRecentCommitsViewController.m */; };
 		A7DCDD9413A366DF00089CCD /* GHAPIRepositoryBranchV3.m in Sources */ = {isa = PBXBuildFile; fileRef = A7DCDD9313A366DF00089CCD /* GHAPIRepositoryBranchV3.m */; };
 		A7EE1120136F3FFB00A1E693 /* GHAPIIssueCommentV3.m in Sources */ = {isa = PBXBuildFile; fileRef = A7EE111F136F3FFA00A1E693 /* GHAPIIssueCommentV3.m */; };
@@ -587,8 +586,6 @@
 		A7D41AF31359DE4300CD3A5C /* GHPullRequestDiscussion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPullRequestDiscussion.m; sourceTree = "<group>"; };
 		A7D41AF51359F8CB00CD3A5C /* GHPullRequestRepositoryInformation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPullRequestRepositoryInformation.h; sourceTree = "<group>"; };
 		A7D41AF61359F8CC00CD3A5C /* GHPullRequestRepositoryInformation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPullRequestRepositoryInformation.m; sourceTree = "<group>"; };
-		A7D41AFB135ADA3400CD3A5C /* GHBranch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHBranch.h; sourceTree = "<group>"; };
-		A7D41AFC135ADA3C00CD3A5C /* GHBranch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHBranch.m; sourceTree = "<group>"; };
 		A7D41B06135AE71300CD3A5C /* GHRecentCommitsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHRecentCommitsViewController.h; sourceTree = "<group>"; };
 		A7D41B07135AE71600CD3A5C /* GHRecentCommitsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHRecentCommitsViewController.m; sourceTree = "<group>"; };
 		A7DCDD9213A366DF00089CCD /* GHAPIRepositoryBranchV3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHAPIRepositoryBranchV3.h; sourceTree = "<group>"; };
@@ -891,15 +888,6 @@
 				A712B7D5135CC2130009B7A7 /* UIViewController+GHErrorHandling.m */,
 			);
 			name = "UIViewController+GHViewControllerErrorhandling";
-			sourceTree = "<group>";
-		};
-		A712B7EF135E0D160009B7A7 /* GHBranch */ = {
-			isa = PBXGroup;
-			children = (
-				A7D41AFB135ADA3400CD3A5C /* GHBranch.h */,
-				A7D41AFC135ADA3C00CD3A5C /* GHBranch.m */,
-			);
-			name = GHBranch;
 			sourceTree = "<group>";
 		};
 		A712B7F9135F24C10009B7A7 /* GHSearchViewController's */ = {
@@ -1461,7 +1449,6 @@
 				A750573B1343203F00514A82 /* GHNewsFeed */,
 				A750573A13431FFD00514A82 /* GHUser */,
 				A7CE1B231345C31800169F94 /* GHCommitMessage */,
-				A712B7EF135E0D160009B7A7 /* GHBranch */,
 			);
 			name = V2;
 			sourceTree = "<group>";
@@ -2201,7 +2188,6 @@
 				A7D41ACC1358B7D300CD3A5C /* GHCommitDiffViewController.m in Sources */,
 				A7D41AF41359DE4400CD3A5C /* GHPullRequestDiscussion.m in Sources */,
 				A7D41AF71359F8CC00CD3A5C /* GHPullRequestRepositoryInformation.m in Sources */,
-				A7D41AFD135ADA4600CD3A5C /* GHBranch.m in Sources */,
 				A7D41B08135AE71B00CD3A5C /* GHRecentCommitsViewController.m in Sources */,
 				A712B7C0135C9A5D0009B7A7 /* GHFileSystemItem.m in Sources */,
 				A712B7C3135C9ACB0009B7A7 /* GHFile.m in Sources */,
