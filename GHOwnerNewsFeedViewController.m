@@ -7,19 +7,24 @@
 //
 
 #import "GHOwnerNewsFeedViewController.h"
+#import "GHOwnerNewsFeedViewController+Private.h"
 #import "GithubAPI.h"
 #import "GHSettingsHelper.h"
 #import "GHFeedItemWithDescriptionTableViewCell.h"
 #import "GHPushFeedItemTableViewCell.h"
 #import "GHFollowEventTableViewCell.h"
 #import "GHViewIssueTableViewController.h"
+#import <QuartzCore/QuartzCore.h>
+#import "UIColor+GithubUI.h"
 
 #define GHOwnerNewsFeedViewControllerDefaultOrganizationNameKey @"GHOwnerNewsFeedViewControllerDefaultOrganizationName"
 #define GHOwnerNewsFeedViewControllerLastCreationDateKey @"GHOwnerNewsFeedViewControllerLastCreationDate"
 
 @implementation GHOwnerNewsFeedViewController
 
-@synthesize segmentControl=_segmentControl, organizations=_organizations, defaultOrganizationName=_defaultOrganizationName, lastCreationDate=_lastCreationDate;
+@synthesize segmentControl=_segmentControl, stateSegmentControl=_stateSegmentControl;
+@synthesize organizations=_organizations, defaultOrganizationName=_defaultOrganizationName, lastCreationDate=_lastCreationDate;
+@synthesize pendingStateStringsArray=_pendingStateStringsArray, lastStateUpdateDate=_lastStateUpdateDate;
 
 - (void)setDefaultOrganizationName:(NSString *)defaultOrganizationName {
     [_defaultOrganizationName release];
@@ -97,6 +102,7 @@
                            autorelease];
         
         self.reloadDataIfNewUserGotAuthenticated = YES;
+        self.pendingStateStringsArray = [NSMutableArray array];
     }
     return self;
 }
@@ -104,10 +110,13 @@
 #pragma mark - Memory management
 
 - (void)dealloc {
+    [_stateSegmentControl release];
     [_segmentControl release];
     [_organizations release];
     [_defaultOrganizationName release];
     [_lastCreationDate release];
+    [_pendingStateStringsArray release];
+    [_lastStateUpdateDate release];
     
     [super dealloc];
 }
@@ -189,11 +198,13 @@
 }
 
 - (void)showLoadingInformation:(NSString *)infoString {
-#warning use titleView to display the current refreshing state
+    [self detachNewStateString:infoString removeAfterDisplayed:NO];
 }
 
+#define kFinishedText		@"‚úî"
+
 - (void)didRefreshNewsFeed:(NSString *)infoString {
-#warning use titleView to display the current refreshing state
+    [self detachNewStateString:[NSString stringWithFormat:@"%C \t %@", 10004, infoString] removeAfterDisplayed:YES];
 }
 
 - (void)loadDataBasedOnSegmentControl {

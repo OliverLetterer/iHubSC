@@ -16,6 +16,7 @@
 #import "GHRecentActivityViewController.h"
 #import "GHOrganizationViewController.h"
 #import "GHGistViewController.h"
+#import "INNotificationQueue.h"
 
 #define kUITableViewSectionUserData             0
 #define kUITableViewSectionEMail                1
@@ -935,7 +936,7 @@
                          [self.tableView collapseSection:kUITableViewFollowedUsers animated:YES];
                          self.followedUsers = nil;
                          [self.tableView reloadSections:set withRowAnimation:UITableViewRowAnimationNone];
-#warning notification Stopped following %@", @""), self.username
+                         [[INNotificationQueue sharedQueue] detachSmallNotificationWithTitle:NSLocalizedString(@"Stopped following", @"") andSubtitle:self.username removeStyle:INNotificationQueueItemRemoveByFadingOut];
                      }
                  }];
         } else {
@@ -951,7 +952,7 @@
                        [self.tableView collapseSection:kUITableViewFollowedUsers animated:YES];
                        self.followedUsers = nil;
                        [self.tableView reloadSections:set withRowAnimation:UITableViewRowAnimationNone];
-#warning notification Now following %@", @""), self.username
+                       [[INNotificationQueue sharedQueue] detachSmallNotificationWithTitle:NSLocalizedString(@"Now following", @"") andSubtitle:self.username removeStyle:INNotificationQueueItemRemoveByFadingOut];
                    }
                }];
         }

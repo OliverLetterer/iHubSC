@@ -81,6 +81,8 @@ V1.8
 - support for syntax highlighting in top 10 github languages
 - fixed crash that was caused by changed branch API
 
+V1.9
+- new Notification System
 
 
 

@@ -22,6 +22,7 @@
 #import "GHLabelTableViewCell.h"
 #import "GHViewLabelViewController.h"
 #import "OCPromptView.h"
+#import "INNotificationQueue.h"
 
 #define kUITableViewSectionUserData         0
 #define kUITableViewSectionOwner            1
@@ -919,7 +920,7 @@
                                            [self.tableView reloadSections:set 
                                                          withRowAnimation:UITableViewRowAnimationNone];
                                        }
-#warning use different notification system to display the watching status "Stopped watching"
+                                       [[INNotificationQueue sharedQueue] detachSmallNotificationWithTitle:NSLocalizedString(@"Stopped watching", @"") andSubtitle:self.repositoryString removeStyle:INNotificationQueueItemRemoveByFadingOut];
                                    }];
             } else {
                 [GHAPIRepositoryV3 watchRepository:self.repositoryString 
@@ -932,7 +933,7 @@
                                          [set addIndex:kUITableViewSectionNetwork];
                                          [self.tableView reloadSections:set 
                                                        withRowAnimation:UITableViewRowAnimationNone];
-#warning use different notification system to display the watching status "Now watching"
+                                         [[INNotificationQueue sharedQueue] detachSmallNotificationWithTitle:NSLocalizedString(@"Now watching", @"") andSubtitle:self.repositoryString removeStyle:INNotificationQueueItemRemoveByFadingOut];
                                      }
                                  }];
             }
@@ -943,7 +944,7 @@
                                 if (error) {
                                     [self handleError:error];
                                 } else {
-#warning use different notification system to display the watching status "You have successfully forked this Repository"
+                                    [[INNotificationQueue sharedQueue] detachSmallNotificationWithTitle:NSLocalizedString(@"Successfully forked", @"") andSubtitle:self.repositoryString removeStyle:INNotificationQueueItemRemoveByFadingOut];
                                 }
                             }];
         } else if (indexPath.row == 3) {
@@ -1083,7 +1084,7 @@
                                       } else {
                                           [self.tableView collapseSection:kUITableViewSectionCollaborators animated:NO];
                                           self.collaborators = nil;
-#warning notification for "Added %@ as a Collaborator"
+                                          [[INNotificationQueue sharedQueue] detachSmallNotificationWithTitle:NSLocalizedString(@"Added Collaborator", @"") andSubtitle:username removeStyle:INNotificationQueueItemRemoveByFadingOut];
                                           [self.tableView expandSection:kUITableViewSectionCollaborators animated:NO];
                                       }
                                   }];
@@ -1159,7 +1160,7 @@
                         if (error) {
                             [self handleError:error];
                         } else {
-#warning notification Forked Repository to %@, organization.login
+                            [[INNotificationQueue sharedQueue] detachSmallNotificationWithTitle:NSLocalizedString(@"Forked Repository to", @"") andSubtitle:organization.login removeStyle:INNotificationQueueItemRemoveByFadingOut];
                         }
                     }];
 }

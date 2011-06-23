@@ -9,6 +9,7 @@
 #import "iGithubAppDelegate_iPhone.h"
 #import "GHSettingsHelper.h"
 #import "GithubAPI.h"
+#import "INNotificationQueue.h"
 
 @implementation iGithubAppDelegate_iPhone
 
@@ -48,6 +49,8 @@
                                                  name:@"GHUnknownPayloadEventType" 
                                                object:nil];
     
+    [INNotificationQueue sharedQueue].notificationCenterPoint = CGPointMake(self.window.frame.size.width/2, self.window.frame.size.height/3);
+	[INNotificationQueue sharedQueue].notificationView = self.window;
     
 #if DEBUG
     [GHSettingsHelper setUsername:@"docmorelli"];

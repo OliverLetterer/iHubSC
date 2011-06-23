@@ -113,6 +113,10 @@
 		A75057431343426300514A82 /* GHNewsFeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A75057421343426300514A82 /* GHNewsFeedViewController.m */; };
 		A759E0671396E0E7003C275E /* GHFolder.png in Resources */ = {isa = PBXBuildFile; fileRef = A759E0651396E0E3003C275E /* GHFolder.png */; };
 		A759E0681396E0E7003C275E /* GHFolder@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A759E0661396E0E4003C275E /* GHFolder@2x.png */; };
+		A75C3EA813B35B5300D64681 /* GHOwnerNewsFeedViewController+Private.m in Sources */ = {isa = PBXBuildFile; fileRef = A75C3EA713B35B5200D64681 /* GHOwnerNewsFeedViewController+Private.m */; };
+		A75C3EAF13B363E300D64681 /* INNotificationQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = A75C3EAA13B363E100D64681 /* INNotificationQueue.m */; };
+		A75C3EB013B363E300D64681 /* INNotificationQueueItem.m in Sources */ = {isa = PBXBuildFile; fileRef = A75C3EAC13B363E100D64681 /* INNotificationQueueItem.m */; };
+		A75C3EB113B363E300D64681 /* INNotificationQueue+Private.m in Sources */ = {isa = PBXBuildFile; fileRef = A75C3EAE13B363E300D64681 /* INNotificationQueue+Private.m */; };
 		A767715E13707A88006D70D6 /* GHAPIGistV3.m in Sources */ = {isa = PBXBuildFile; fileRef = A767715D13707A88006D70D6 /* GHAPIGistV3.m */; };
 		A767716113707C6F006D70D6 /* GHAPIGistFileV3.m in Sources */ = {isa = PBXBuildFile; fileRef = A767716013707C6F006D70D6 /* GHAPIGistFileV3.m */; };
 		A76771641370A34F006D70D6 /* GHClipBoard.png in Resources */ = {isa = PBXBuildFile; fileRef = A76771621370A34E006D70D6 /* GHClipBoard.png */; };
@@ -410,6 +414,14 @@
 		A75057421343426300514A82 /* GHNewsFeedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHNewsFeedViewController.m; sourceTree = "<group>"; };
 		A759E0651396E0E3003C275E /* GHFolder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GHFolder.png; sourceTree = "<group>"; };
 		A759E0661396E0E4003C275E /* GHFolder@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GHFolder@2x.png"; sourceTree = "<group>"; };
+		A75C3EA613B35B5200D64681 /* GHOwnerNewsFeedViewController+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GHOwnerNewsFeedViewController+Private.h"; sourceTree = "<group>"; };
+		A75C3EA713B35B5200D64681 /* GHOwnerNewsFeedViewController+Private.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "GHOwnerNewsFeedViewController+Private.m"; sourceTree = "<group>"; };
+		A75C3EA913B363E000D64681 /* INNotificationQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INNotificationQueue.h; sourceTree = "<group>"; };
+		A75C3EAA13B363E100D64681 /* INNotificationQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INNotificationQueue.m; sourceTree = "<group>"; };
+		A75C3EAB13B363E100D64681 /* INNotificationQueueItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INNotificationQueueItem.h; sourceTree = "<group>"; };
+		A75C3EAC13B363E100D64681 /* INNotificationQueueItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INNotificationQueueItem.m; sourceTree = "<group>"; };
+		A75C3EAD13B363E200D64681 /* INNotificationQueue+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "INNotificationQueue+Private.h"; sourceTree = "<group>"; };
+		A75C3EAE13B363E300D64681 /* INNotificationQueue+Private.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "INNotificationQueue+Private.m"; sourceTree = "<group>"; };
 		A767715C13707A88006D70D6 /* GHAPIGistV3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHAPIGistV3.h; sourceTree = "<group>"; };
 		A767715D13707A88006D70D6 /* GHAPIGistV3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHAPIGistV3.m; sourceTree = "<group>"; };
 		A767715F13707C6F006D70D6 /* GHAPIGistFileV3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHAPIGistFileV3.h; sourceTree = "<group>"; };
@@ -1215,6 +1227,7 @@
 		A750573F1343422200514A82 /* UserInterface */ = {
 			isa = PBXGroup;
 			children = (
+				A75C3EB213B363EF00D64681 /* INNotificationQueue */,
 				A7288A6B13A9091500170D57 /* SyntaxHighlighting */,
 				A70DA3DD13A61BBD00235C76 /* OCPromptView.h */,
 				A70DA3DE13A61BC000235C76 /* OCPromptView.m */,
@@ -1251,10 +1264,25 @@
 				A75057421343426300514A82 /* GHNewsFeedViewController.m */,
 				A7D14F3E1354DB8600E1B980 /* GHOwnerNewsFeedViewController.h */,
 				A7D14F3F1354DB8600E1B980 /* GHOwnerNewsFeedViewController.m */,
+				A75C3EA613B35B5200D64681 /* GHOwnerNewsFeedViewController+Private.h */,
+				A75C3EA713B35B5200D64681 /* GHOwnerNewsFeedViewController+Private.m */,
 				A7D14F411354DD5C00E1B980 /* GHRecentActivityViewController.h */,
 				A7D14F421354DD5D00E1B980 /* GHRecentActivityViewController.m */,
 			);
 			name = GHNewsFeedViewController;
+			sourceTree = "<group>";
+		};
+		A75C3EB213B363EF00D64681 /* INNotificationQueue */ = {
+			isa = PBXGroup;
+			children = (
+				A75C3EA913B363E000D64681 /* INNotificationQueue.h */,
+				A75C3EAA13B363E100D64681 /* INNotificationQueue.m */,
+				A75C3EAB13B363E100D64681 /* INNotificationQueueItem.h */,
+				A75C3EAC13B363E100D64681 /* INNotificationQueueItem.m */,
+				A75C3EAD13B363E200D64681 /* INNotificationQueue+Private.h */,
+				A75C3EAE13B363E300D64681 /* INNotificationQueue+Private.m */,
+			);
+			name = INNotificationQueue;
 			sourceTree = "<group>";
 		};
 		A75E924E139612F2000A6C7F /* GHIssuesCommentPayload */ = {
@@ -2230,6 +2258,10 @@
 				A70DA3DC13A4E2D100235C76 /* GHAPITeamV3.m in Sources */,
 				A70DA3DF13A61BC200235C76 /* OCPromptView.m in Sources */,
 				A7288A6913A8F21600170D57 /* BGPlainWebView.m in Sources */,
+				A75C3EA813B35B5300D64681 /* GHOwnerNewsFeedViewController+Private.m in Sources */,
+				A75C3EAF13B363E300D64681 /* INNotificationQueue.m in Sources */,
+				A75C3EB013B363E300D64681 /* INNotificationQueueItem.m in Sources */,
+				A75C3EB113B363E300D64681 /* INNotificationQueue+Private.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

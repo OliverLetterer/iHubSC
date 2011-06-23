@@ -9,6 +9,7 @@
 #import "UIViewController+GHErrorHandling.h"
 #import "GHAuthenticationManager.h"
 #import "GHSettingsHelper.h"
+#import "INNotificationQueue.h"
 
 @implementation UIViewController (GHViewControllerErrorhandling)
 
@@ -28,7 +29,8 @@
         DLog(@"%@", error);
         
         if (![GHAuthenticationManager sharedInstance].username || [[GHAuthenticationManager sharedInstance].username isEqualToString:@""]) {
-#warning notification Authentication required
+            [[INNotificationQueue sharedQueue] detachSmallNotificationWithTitle:NSLocalizedString(@"Error", @"") andSubtitle:NSLocalizedString(@"Authentication required", @"") removeStyle:INNotificationQueueItemRemoveByFadingOut];
+            
             [self invalidadUserData];
             GHAuthenticationViewController *authViewController = [[[GHAuthenticationViewController alloc] init] autorelease];
             authViewController.delegate = self;
@@ -43,7 +45,8 @@
             // authentication needed
             if (![GHAuthenticationViewController isOneAuthenticationViewControllerActive]) {
                 [self invalidadUserData];
-#warning notification Authentication required
+                [[INNotificationQueue sharedQueue] detachSmallNotificationWithTitle:NSLocalizedString(@"Error", @"") andSubtitle:NSLocalizedString(@"Authentication required", @"") removeStyle:INNotificationQueueItemRemoveByFadingOut];
+                
                 GHAuthenticationViewController *authViewController = [[[GHAuthenticationViewController alloc] init] autorelease];
                 authViewController.delegate = self;
                 

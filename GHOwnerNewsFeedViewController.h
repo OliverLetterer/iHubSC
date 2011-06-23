@@ -12,18 +12,23 @@
 @interface GHOwnerNewsFeedViewController : GHNewsFeedViewController <UIActionSheetDelegate> {
 @private
     UISegmentedControl *_segmentControl;
+    UISegmentedControl *_stateSegmentControl;
     
     NSArray *_organizations;
-    
     NSString *_defaultOrganizationName;
-    
     NSString *_lastCreationDate;
+    
+    NSMutableArray *_pendingStateStringsArray;
+    NSDate *_lastStateUpdateDate;
 }
 
 @property (nonatomic, retain) UISegmentedControl *segmentControl;
+@property (nonatomic, retain) UISegmentedControl *stateSegmentControl;
 @property (nonatomic, retain) NSArray *organizations;
 @property (nonatomic, retain) NSString *defaultOrganizationName;
 @property (nonatomic, copy) NSString *lastCreationDate;
+@property (nonatomic, retain) NSMutableArray *pendingStateStringsArray;
+@property (nonatomic, retain) NSDate *lastStateUpdateDate;
 
 - (void)segmentControlValueChanged:(UISegmentedControl *)segmentControl;
 - (void)loadDataBasedOnSegmentControl;
