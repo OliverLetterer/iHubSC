@@ -16,6 +16,3 @@
 [submodule "appirater"]
 	path = appirater
 	url = https://github.com/arashpayan/appirater.git
-[submodule "MTStatusBarOverlay"]
-	path = MTStatusBarOverlay
-	url = https://github.com/myell0w/MTStatusBarOverlay.git

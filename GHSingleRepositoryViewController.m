@@ -22,7 +22,6 @@
 #import "GHLabelTableViewCell.h"
 #import "GHViewLabelViewController.h"
 #import "OCPromptView.h"
-#import "MTStatusBarOverlay.h"
 
 #define kUITableViewSectionUserData         0
 #define kUITableViewSectionOwner            1
@@ -920,7 +919,7 @@
                                            [self.tableView reloadSections:set 
                                                          withRowAnimation:UITableViewRowAnimationNone];
                                        }
-                                       [[MTStatusBarOverlay sharedOverlay] postFinishMessage:[NSString stringWithFormat:NSLocalizedString(@"Stopped watching %@", @""), self.repositoryString] duration:2.0f];
+#warning use different notification system to display the watching status "Stopped watching"
                                    }];
             } else {
                 [GHAPIRepositoryV3 watchRepository:self.repositoryString 
@@ -933,7 +932,7 @@
                                          [set addIndex:kUITableViewSectionNetwork];
                                          [self.tableView reloadSections:set 
                                                        withRowAnimation:UITableViewRowAnimationNone];
-                                         [[MTStatusBarOverlay sharedOverlay] postFinishMessage:[NSString stringWithFormat:NSLocalizedString(@"Now watching %@", @""), self.repositoryString] duration:2.0f];
+#warning use different notification system to display the watching status "Now watching"
                                      }
                                  }];
             }
@@ -944,7 +943,7 @@
                                 if (error) {
                                     [self handleError:error];
                                 } else {
-                                    [[MTStatusBarOverlay sharedOverlay] postFinishMessage:NSLocalizedString(@"You have successfully forked this Repository", @"") duration:1.5f];
+#warning use different notification system to display the watching status "You have successfully forked this Repository"
                                 }
                             }];
         } else if (indexPath.row == 3) {
@@ -1084,8 +1083,7 @@
                                       } else {
                                           [self.tableView collapseSection:kUITableViewSectionCollaborators animated:NO];
                                           self.collaborators = nil;
-                                          
-                                          [[MTStatusBarOverlay sharedOverlay] postFinishMessage:[NSString stringWithFormat:NSLocalizedString(@"Added %@ as a Collaborator", @""), username] duration:1.5f];
+#warning notification for "Added %@ as a Collaborator"
                                           [self.tableView expandSection:kUITableViewSectionCollaborators animated:NO];
                                       }
                                   }];
@@ -1161,7 +1159,7 @@
                         if (error) {
                             [self handleError:error];
                         } else {
-                            [[MTStatusBarOverlay sharedOverlay] postFinishMessage:[NSString stringWithFormat:NSLocalizedString(@"Forked Repository to %@", @""), organization.login] duration:1.5f];
+#warning notification Forked Repository to %@, organization.login
                         }
                     }];
 }

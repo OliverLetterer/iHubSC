@@ -13,7 +13,6 @@
 #import "GHPushFeedItemTableViewCell.h"
 #import "GHFollowEventTableViewCell.h"
 #import "GHViewIssueTableViewController.h"
-#import "MTStatusBarOverlay.h"
 
 #define GHOwnerNewsFeedViewControllerDefaultOrganizationNameKey @"GHOwnerNewsFeedViewControllerDefaultOrganizationName"
 #define GHOwnerNewsFeedViewControllerLastCreationDateKey @"GHOwnerNewsFeedViewControllerLastCreationDate"
@@ -190,11 +189,11 @@
 }
 
 - (void)showLoadingInformation:(NSString *)infoString {
-    [[MTStatusBarOverlay sharedOverlay] postMessage:infoString];
+#warning use titleView to display the current refreshing state
 }
 
 - (void)didRefreshNewsFeed:(NSString *)infoString {
-    [[MTStatusBarOverlay sharedOverlay] postFinishMessage:infoString duration:1.0f animated:YES];
+#warning use titleView to display the current refreshing state
 }
 
 - (void)loadDataBasedOnSegmentControl {

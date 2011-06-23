@@ -92,7 +92,6 @@
 		A73E29B9134882E200E85282 /* GHDownloadEventPayload.m in Sources */ = {isa = PBXBuildFile; fileRef = A73E29B8134882DF00E85282 /* GHDownloadEventPayload.m */; };
 		A73E29BE1348D4DF00E85282 /* GHMemberEventPayload.m in Sources */ = {isa = PBXBuildFile; fileRef = A73E29BD1348D4D900E85282 /* GHMemberEventPayload.m */; };
 		A73E29C21348E12400E85282 /* GHViewIssueTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A73E29C11348E12200E85282 /* GHViewIssueTableViewController.m */; };
-		A74AFBDC13A7CFFF002A03F3 /* MTStatusBarOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = A74AFBDB13A7CFFF002A03F3 /* MTStatusBarOverlay.m */; };
 		A750571613427FB400514A82 /* ASIAuthenticationDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = A750570313427FB400514A82 /* ASIAuthenticationDialog.m */; };
 		A750571713427FB400514A82 /* ASIDataCompressor.m in Sources */ = {isa = PBXBuildFile; fileRef = A750570613427FB400514A82 /* ASIDataCompressor.m */; };
 		A750571813427FB400514A82 /* ASIDataDecompressor.m in Sources */ = {isa = PBXBuildFile; fileRef = A750570813427FB400514A82 /* ASIDataDecompressor.m */; };
@@ -374,8 +373,6 @@
 		A73E29BD1348D4D900E85282 /* GHMemberEventPayload.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHMemberEventPayload.m; sourceTree = "<group>"; };
 		A73E29C01348E12100E85282 /* GHViewIssueTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHViewIssueTableViewController.h; sourceTree = "<group>"; };
 		A73E29C11348E12200E85282 /* GHViewIssueTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHViewIssueTableViewController.m; sourceTree = "<group>"; };
-		A74AFBDA13A7CFFF002A03F3 /* MTStatusBarOverlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MTStatusBarOverlay.h; path = MTStatusBarOverlay/MTStatusBarOverlay.h; sourceTree = "<group>"; };
-		A74AFBDB13A7CFFF002A03F3 /* MTStatusBarOverlay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MTStatusBarOverlay.m; path = MTStatusBarOverlay/MTStatusBarOverlay.m; sourceTree = "<group>"; };
 		A750570213427FB400514A82 /* ASIAuthenticationDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASIAuthenticationDialog.h; path = "asi-http-request/Classes/ASIAuthenticationDialog.h"; sourceTree = SOURCE_ROOT; };
 		A750570313427FB400514A82 /* ASIAuthenticationDialog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ASIAuthenticationDialog.m; path = "asi-http-request/Classes/ASIAuthenticationDialog.m"; sourceTree = SOURCE_ROOT; };
 		A750570413427FB400514A82 /* ASICacheDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASICacheDelegate.h; path = "asi-http-request/Classes/ASICacheDelegate.h"; sourceTree = SOURCE_ROOT; };
@@ -1219,8 +1216,6 @@
 			isa = PBXGroup;
 			children = (
 				A7288A6B13A9091500170D57 /* SyntaxHighlighting */,
-				A74AFBDA13A7CFFF002A03F3 /* MTStatusBarOverlay.h */,
-				A74AFBDB13A7CFFF002A03F3 /* MTStatusBarOverlay.m */,
 				A70DA3DD13A61BBD00235C76 /* OCPromptView.h */,
 				A70DA3DE13A61BC000235C76 /* OCPromptView.m */,
 				A7B520A21389614D000FEE61 /* GHViewLabelViewController */,
@@ -2234,7 +2229,6 @@
 				A70DA3D813A4B7F700235C76 /* GHAPIOrganizationV3.m in Sources */,
 				A70DA3DC13A4E2D100235C76 /* GHAPITeamV3.m in Sources */,
 				A70DA3DF13A61BC200235C76 /* OCPromptView.m in Sources */,
-				A74AFBDC13A7CFFF002A03F3 /* MTStatusBarOverlay.m in Sources */,
 				A7288A6913A8F21600170D57 /* BGPlainWebView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

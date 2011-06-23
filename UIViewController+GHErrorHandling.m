@@ -9,7 +9,6 @@
 #import "UIViewController+GHErrorHandling.h"
 #import "GHAuthenticationManager.h"
 #import "GHSettingsHelper.h"
-#import "MTStatusBarOverlay.h"
 
 @implementation UIViewController (GHViewControllerErrorhandling)
 
@@ -29,7 +28,7 @@
         DLog(@"%@", error);
         
         if (![GHAuthenticationManager sharedInstance].username || [[GHAuthenticationManager sharedInstance].username isEqualToString:@""]) {
-            [[MTStatusBarOverlay sharedOverlay] postErrorMessage:NSLocalizedString(@"Authentication required", @"") duration:1.0f];
+#warning notification Authentication required
             [self invalidadUserData];
             GHAuthenticationViewController *authViewController = [[[GHAuthenticationViewController alloc] init] autorelease];
             authViewController.delegate = self;
@@ -44,7 +43,7 @@
             // authentication needed
             if (![GHAuthenticationViewController isOneAuthenticationViewControllerActive]) {
                 [self invalidadUserData];
-                [[MTStatusBarOverlay sharedOverlay] postErrorMessage:NSLocalizedString(@"Authentication required", @"") duration:1.0f];
+#warning notification Authentication required
                 GHAuthenticationViewController *authViewController = [[[GHAuthenticationViewController alloc] init] autorelease];
                 authViewController.delegate = self;
                 
@@ -53,7 +52,6 @@
                 [self presentModalViewController:navController animated:YES];
             }
         } else {
-            [[MTStatusBarOverlay sharedOverlay] postErrorMessage:NSLocalizedString(@"Error", @"") duration:1.0f];
             UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", @"") 
                                                              message:[error localizedDescription] 
                                                             delegate:nil 

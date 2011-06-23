@@ -8,7 +8,6 @@
 
 #import "iGithubAppDelegate.h"
 #import "Appirater.h"
-#import "MTStatusBarOverlay.h"
 
 @implementation iGithubAppDelegate
 
@@ -17,15 +16,7 @@
 
 @synthesize managedObjectContext=_managedObjectContext, managedObjectModel=_managedObjectModel, persistentStoreCoordinator=_persistentStoreCoordinator;
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
-{
-    MTStatusBarOverlay *overlay = [MTStatusBarOverlay sharedInstance];
-    overlay.animation = MTStatusBarOverlayAnimationFallDown;  // MTStatusBarOverlayAnimationShrink
-    overlay.detailViewMode = MTDetailViewModeCustom;
-    overlay.historyEnabled = NO;
-//    overlay.hidesActivity = YES;
-    
-    
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     [self.window makeKeyAndVisible];
     [Appirater appLaunched:YES];

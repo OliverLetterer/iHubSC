@@ -16,7 +16,6 @@
 #import "GHRecentActivityViewController.h"
 #import "GHOrganizationViewController.h"
 #import "GHGistViewController.h"
-#import "MTStatusBarOverlay.h"
 
 #define kUITableViewSectionUserData             0
 #define kUITableViewSectionEMail                1
@@ -936,7 +935,7 @@
                          [self.tableView collapseSection:kUITableViewFollowedUsers animated:YES];
                          self.followedUsers = nil;
                          [self.tableView reloadSections:set withRowAnimation:UITableViewRowAnimationNone];
-                         [[MTStatusBarOverlay sharedOverlay] postFinishMessage:[NSString stringWithFormat:NSLocalizedString(@"Stopped following %@", @""), self.username] duration:2.0f];
+#warning notification Stopped following %@", @""), self.username
                      }
                  }];
         } else {
@@ -952,7 +951,7 @@
                        [self.tableView collapseSection:kUITableViewFollowedUsers animated:YES];
                        self.followedUsers = nil;
                        [self.tableView reloadSections:set withRowAnimation:UITableViewRowAnimationNone];
-                       [[MTStatusBarOverlay sharedOverlay] postFinishMessage:[NSString stringWithFormat:NSLocalizedString(@"Now following %@", @""), self.username] duration:2.0f];
+#warning notification Now following %@", @""), self.username
                    }
                }];
         }
