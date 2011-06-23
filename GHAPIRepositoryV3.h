@@ -31,7 +31,6 @@
     GHAPIOrganizationV3 *_organization;
     GHAPIRepositoryV3 *_parent;
     GHAPIRepositoryV3 *_source;
-    NSString *_integralBranch;
     NSString *_masterBranch;
     NSNumber *_hasIssues;
     NSNumber *_hasWiki;
@@ -56,7 +55,6 @@
 @property (nonatomic, retain) GHAPIOrganizationV3 *organization;
 @property (nonatomic, retain) GHAPIRepositoryV3 *parent;
 @property (nonatomic, retain) GHAPIRepositoryV3 *source;
-@property (nonatomic, copy) NSString *integralBranch;
 @property (nonatomic, copy) NSString *masterBranch;
 @property (nonatomic, copy) NSNumber *hasIssues;
 @property (nonatomic, copy) NSNumber *hasWiki;

@@ -17,7 +17,7 @@
 
 @implementation GHAPIRepositoryV3
 
-@synthesize URL = _URL, HTMLURL = _HTMLURL, owner = _owner, name = _name, description = _description, homepage = _homepage, language = _language, private = _private, fork = _fork, forks = _forks, watchers = _watchers, size = _size, openIssues = _openIssues, pushedAt = _pushedAt, createdAt = _createdAt, organization = _organization, parent = _parent, source = _source, integralBranch = _integralBranch, masterBranch = _masterBranch, hasIssues = _hasIssues, hasWiki = _hasWiki, hasDownloads = _hasDownloads;
+@synthesize URL = _URL, HTMLURL = _HTMLURL, owner = _owner, name = _name, description = _description, homepage = _homepage, language = _language, private = _private, fork = _fork, forks = _forks, watchers = _watchers, size = _size, openIssues = _openIssues, pushedAt = _pushedAt, createdAt = _createdAt, organization = _organization, parent = _parent, source = _source, masterBranch = _masterBranch, hasIssues = _hasIssues, hasWiki = _hasWiki, hasDownloads = _hasDownloads;
 
 #pragma mark - setters and getters
 
@@ -65,7 +65,6 @@
             self.parent = [[[GHAPIRepositoryV3 alloc] initWithRawDictionary:[rawDictionary objectForKeyOrNilOnNullObject:@"parent"] parseChildren:NO] autorelease];
             self.source = [[[GHAPIRepositoryV3 alloc] initWithRawDictionary:[rawDictionary objectForKeyOrNilOnNullObject:@"source"] parseChildren:NO] autorelease];
         }
-        self.integralBranch = [rawDictionary objectForKeyOrNilOnNullObject:@"integrate_branch"];
         self.masterBranch = [rawDictionary objectForKeyOrNilOnNullObject:@"master_branch"];
         self.hasIssues = [rawDictionary objectForKeyOrNilOnNullObject:@"has_issues"];
         self.hasWiki = [rawDictionary objectForKeyOrNilOnNullObject:@"has_wiki"];
@@ -102,7 +101,6 @@
     [_organization release];
     [_parent release];
     [_source release];
-    [_integralBranch release];
     [_masterBranch release];
     [_hasIssues release];
     [_hasWiki release];
