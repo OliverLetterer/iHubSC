@@ -80,8 +80,6 @@ V1.8
 - viewing diffs in a commit is now much more memory efficent
 - support for syntax highlighting in top 10 github languages
 - fixed crash that was caused by changed branch API
-
-V1.9
 - new Notification System
 
 
