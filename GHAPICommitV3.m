@@ -43,6 +43,28 @@
     return self;
 }
 
+#pragma mark - Network
+
++ (void)singleCommitOnRepository:(NSString *)repository branchSHA:(NSString *)branchSHA completionHandler:(void (^)(GHAPICommitV3 *commit, NSError *error))handler {
+    //v3: GET /repos/:user/:repo/commits/:sha
+    
+    NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.github.com/repos/%@/commits/%@",
+                                       [repository stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
+                                       [branchSHA stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]] ];
+    
+    [[GHBackgroundQueue sharedInstance] sendRequestToURL:URL setupHandler:nil
+                                       completionHandler:^(id object, NSError *error, ASIFormDataRequest *request) {
+                                           DLog(@"%@", [request responseString]);
+                                           if (error) {
+                                               DLog(@"%@", [error localizedDescription]);
+                                               handler(nil, error);
+                                           } else {
+                                               DLog(@"%@", object);
+                                               handler([[[GHAPICommitV3 alloc] initWithRawDictionary:object] autorelease], nil);
+                                           }
+                                       }];
+}
+
 #pragma mark - Memory management
 
 - (void)dealloc {

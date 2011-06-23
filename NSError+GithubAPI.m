@@ -19,9 +19,9 @@
     
     NSString *errorString = [rawDictionary objectForKeyOrNilOnNullObject:@"error"];
     
-    if (!errorString) {
-        errorString = [rawDictionary objectForKeyOrNilOnNullObject:@"message"];
-    }
+//    if (!errorString) {
+//        errorString = [rawDictionary objectForKeyOrNilOnNullObject:@"message"];
+//    }
     
     if (errorString) {
         NSMutableDictionary *userInfo = [NSMutableDictionary dictionary];

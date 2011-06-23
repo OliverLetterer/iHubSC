@@ -31,4 +31,7 @@
 
 - (id)initWithRawDictionary:(NSDictionary *)rawDictionary;
 
+#warning commit API only displays that files are modified, no way to tell if they where added or removed
++ (void)singleCommitOnRepository:(NSString *)repository branchSHA:(NSString *)branchSHA completionHandler:(void (^)(GHAPICommitV3 *commit, NSError *error))handler;
+
 @end
