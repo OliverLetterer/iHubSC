@@ -13,10 +13,13 @@
 #import "GithubAPI.h"
 #import "GHSettingsHelper.h"
 #import "UIImage+Resize.h"
+#import "UIImage+GHTabBar.h"
+#import "TestViewController.h"
+#import "ANAdvancedNavigationController.h"
 
 @implementation GHPLeftNavigationController
 
-@synthesize lineView=_lineView;
+@synthesize lineView=_lineView, controllerView=_controllerView;
 
 - (id)initWithStyle:(UITableViewStyle)style {
     self = [super initWithStyle:UITableViewStylePlain];
@@ -36,6 +39,18 @@
     }
 }
 
+#pragma mark - instance methods
+
+- (void)gearButtonClicked:(UIButton *)button {
+    UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Account", @"") 
+                                                     message:[NSString stringWithFormat:NSLocalizedString(@"You are logged in as: %@\nRemaining API calls for today: %d", @""), [GHAuthenticationManager sharedInstance].username, [GHBackgroundQueue sharedInstance].remainingAPICalls ]
+                                                    delegate:self 
+                                           cancelButtonTitle:NSLocalizedString(@"Cancel", @"") 
+                                           otherButtonTitles:NSLocalizedString(@"Logout", @""), nil]
+                          autorelease];
+    [alert show];
+}
+
 #pragma mark - View lifecycle
 
 - (void)viewDidLoad {
@@ -47,6 +62,7 @@
     self.tableView.tableFooterView = nil;
     self.tableView.tableHeaderView = nil;
     self.tableView.contentInset = UIEdgeInsetsZero;
+//    self.tableView.frame = CGRectMake(0.0f, 0.0f, 320.0f, 200.0f);
     
     CGRect frame = CGRectMake(CGRectGetWidth(self.view.bounds)-2.0f, 0.0f, 2.0f, CGRectGetHeight(self.view.bounds));
     GHPEdgedLineView *lineView = [[[GHPEdgedLineView alloc] initWithFrame:frame] autorelease];
@@ -54,12 +70,59 @@
     [self.view addSubview:lineView];
     
     self.lineView = lineView;
+    
+    // wrapper view
+    UIView *wrapperView = [[[UIView alloc] initWithFrame:CGRectMake(0.0f, CGRectGetHeight(self.tableView.bounds)-44.0f, 300.0f, 44.0f)] autorelease];
+    wrapperView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
+    wrapperView.backgroundColor = [UIColor clearColor];
+    
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    UIImage *gear = [UIImage imageNamed:@"19-gear.png"];
+    [button setImage:[gear tabBarStyledImageWithSize:gear.size style:NO] forState:UIControlStateNormal];
+    [button setImage:[gear tabBarStyledImageWithSize:gear.size style:YES] forState:UIControlStateHighlighted];
+    [button setImage:[gear tabBarStyledImageWithSize:gear.size style:YES] forState:UIControlStateSelected];
+    [button addTarget:self action:@selector(gearButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+    button.frame = CGRectMake(0.0f, 0.0f, CGRectGetHeight(wrapperView.bounds), CGRectGetHeight(wrapperView.bounds));
+    [wrapperView addSubview:button];
+    
+    lineView = [[[GHPEdgedLineView alloc] initWithFrame:CGRectZero] autorelease];
+    lineView.transform = CGAffineTransformMakeRotation(M_PI / 2.0f);
+    lineView.frame = CGRectMake(0.0f, 0.0f, CGRectGetWidth(wrapperView.bounds), 2.0f);
+    lineView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+    [wrapperView addSubview:lineView];
+    
+    NSDictionary *newActions = [NSDictionary dictionaryWithObjectsAndKeys:[NSNull null], @"onOrderIn",
+                                [NSNull null], @"onOrderOut",
+                                [NSNull null], @"sublayers",
+                                [NSNull null], @"contents",
+                                [NSNull null], @"bounds",
+                                nil];
+    
+    CAGradientLayer *gradientLayer = nil;
+    UIView *gradientView = nil;
+    
+    gradientView = [[[UIView alloc] initWithFrame:CGRectMake(0, -22.0f, CGRectGetWidth(wrapperView.bounds), 22.0f)] autorelease];
+	gradientView.backgroundColor = [UIColor clearColor];
+	gradientLayer = [CAGradientLayer layer];
+	gradientLayer.frame = CGRectMake(0.0f, 0.0f, 480.0f, 22.0f);
+	gradientLayer.colors = [NSArray arrayWithObjects:
+							(id)[UIColor colorWithWhite:0.0f alpha:0.0f].CGColor,
+							(id)[UIColor colorWithWhite:0.0f alpha:0.2f].CGColor,
+							nil];
+    gradientLayer.actions = newActions;
+	[gradientView.layer addSublayer:gradientLayer];
+    gradientView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+    [wrapperView addSubview:gradientView];
+    self.controllerView = wrapperView;
+    
+    [self.tableView addSubview:wrapperView];
 }
 
 - (void)viewDidUnload
 {
     [super viewDidUnload];
     self.lineView = nil;
+    self.controllerView = nil;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -200,11 +263,18 @@
 }
 */
 
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
+    [self scrollViewDidScroll:self.tableView];
+}
+
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row == 0) {
         [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    } else {
+        TestViewController *tVC = [[[TestViewController alloc] initWithStyle:UITableViewStyleGrouped] autorelease];
+        [self.advancedNavigationController pushRootViewController:tVC];
     }
 }
 
@@ -221,6 +291,10 @@
     CGRect frame = self.lineView.frame;
     frame.origin.y = scrollView.bounds.origin.y;
     self.lineView.frame = frame;
+    
+    frame = self.controllerView.frame;
+    frame.origin.y = scrollView.bounds.origin.y + CGRectGetHeight(scrollView.bounds) - 44.0f;
+    self.controllerView.frame = frame;
 }
 
 #pragma mark - memory management
@@ -234,7 +308,18 @@
 
 - (void)dealloc {
     [_lineView release];
+    [_controllerView release];
     [super dealloc];
+}
+
+#pragma mark - UIAlertViewDelegate
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (buttonIndex == 1) {
+        // Logout clicked
+        [self invalidadUserData];
+        [self handleError:[NSError errorWithDomain:@"" code:3 userInfo:nil] ];
+    }
 }
 
 @end

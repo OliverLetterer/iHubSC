@@ -10,10 +10,14 @@
 #import "GHTableViewController.h"
 #import "GHPEdgedLineView.h"
 
-@interface GHPLeftNavigationController : GHTableViewController {
+@interface GHPLeftNavigationController : GHTableViewController <UIAlertViewDelegate> {
     GHPEdgedLineView *_lineView;
+    UIView *_controllerView;
 }
 
 @property (nonatomic, retain) GHPEdgedLineView *lineView;
+@property (nonatomic, retain) UIView *controllerView;
+
+- (void)gearButtonClicked:(UIButton *)button;
 
 @end

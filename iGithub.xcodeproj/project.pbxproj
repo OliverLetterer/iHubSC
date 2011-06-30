@@ -97,6 +97,8 @@
 		A73E29BE1348D4DF00E85282 /* GHMemberEventPayload.m in Sources */ = {isa = PBXBuildFile; fileRef = A73E29BD1348D4D900E85282 /* GHMemberEventPayload.m */; };
 		A73E29C21348E12400E85282 /* GHViewIssueTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A73E29C11348E12200E85282 /* GHViewIssueTableViewController.m */; };
 		A747C8C413BCCC0B00659504 /* libz.1.2.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A747C8C313BCCC0B00659504 /* libz.1.2.5.dylib */; };
+		A74A65F813BD0A7B0098106E /* 19-gear.png in Resources */ = {isa = PBXBuildFile; fileRef = A74A65F613BD0A7B0098106E /* 19-gear.png */; };
+		A74A65F913BD0A7B0098106E /* 19-gear@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A74A65F713BD0A7B0098106E /* 19-gear@2x.png */; };
 		A750571613427FB400514A82 /* ASIAuthenticationDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = A750570313427FB400514A82 /* ASIAuthenticationDialog.m */; };
 		A750571713427FB400514A82 /* ASIDataCompressor.m in Sources */ = {isa = PBXBuildFile; fileRef = A750570613427FB400514A82 /* ASIDataCompressor.m */; };
 		A750571813427FB400514A82 /* ASIDataDecompressor.m in Sources */ = {isa = PBXBuildFile; fileRef = A750570813427FB400514A82 /* ASIDataDecompressor.m */; };
@@ -406,6 +408,8 @@
 		A73E29C01348E12100E85282 /* GHViewIssueTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHViewIssueTableViewController.h; sourceTree = "<group>"; };
 		A73E29C11348E12200E85282 /* GHViewIssueTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHViewIssueTableViewController.m; sourceTree = "<group>"; };
 		A747C8C313BCCC0B00659504 /* libz.1.2.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.5.dylib; path = usr/lib/libz.1.2.5.dylib; sourceTree = SDKROOT; };
+		A74A65F613BD0A7B0098106E /* 19-gear.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "19-gear.png"; sourceTree = "<group>"; };
+		A74A65F713BD0A7B0098106E /* 19-gear@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "19-gear@2x.png"; sourceTree = "<group>"; };
 		A750570213427FB400514A82 /* ASIAuthenticationDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASIAuthenticationDialog.h; path = "asi-http-request/Classes/ASIAuthenticationDialog.h"; sourceTree = SOURCE_ROOT; };
 		A750570313427FB400514A82 /* ASIAuthenticationDialog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ASIAuthenticationDialog.m; path = "asi-http-request/Classes/ASIAuthenticationDialog.m"; sourceTree = SOURCE_ROOT; };
 		A750570413427FB400514A82 /* ASICacheDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASICacheDelegate.h; path = "asi-http-request/Classes/ASICacheDelegate.h"; sourceTree = SOURCE_ROOT; };
@@ -2046,6 +2050,8 @@
 		A7F334AF13BCD01100DB922D /* GHPLeftNavigationController */ = {
 			isa = PBXGroup;
 			children = (
+				A74A65F613BD0A7B0098106E /* 19-gear.png */,
+				A74A65F713BD0A7B0098106E /* 19-gear@2x.png */,
 				A78B70E513BCF75300F4CE5E /* Lupe@2x.png */,
 				A78B70E613BCF75400F4CE5E /* Lupe.PNG */,
 				A78B70DE13BCE88600F4CE5E /* ANBackgroundImage.png */,
@@ -2216,6 +2222,8 @@
 				A78B70DF13BCE88600F4CE5E /* ANBackgroundImage.png in Resources */,
 				A78B70E713BCF75400F4CE5E /* Lupe@2x.png in Resources */,
 				A78B70E813BCF75400F4CE5E /* Lupe.PNG in Resources */,
+				A74A65F813BD0A7B0098106E /* 19-gear.png in Resources */,
+				A74A65F913BD0A7B0098106E /* 19-gear@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

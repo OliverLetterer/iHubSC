@@ -37,7 +37,12 @@
             
             UINavigationController *navController = [[[UINavigationController alloc] initWithRootViewController:authViewController] autorelease];
             
+            if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+                navController.modalPresentationStyle = UIModalPresentationFormSheet;
+            }
+            
             [self presentModalViewController:navController animated:YES];
+            
             return;
         }
         
