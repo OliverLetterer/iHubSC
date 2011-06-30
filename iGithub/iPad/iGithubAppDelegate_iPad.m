@@ -8,13 +8,18 @@
 
 #import "iGithubAppDelegate_iPad.h"
 #import "GHPTableViewController.h"
+#import "TestViewController.h"
+#import "ANAdvancedNavigationController.h"
 
 @implementation iGithubAppDelegate_iPad
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    GHPTableViewController *tVC = [[[GHPTableViewController alloc] initWithStyle:UITableViewStyleGrouped] autorelease];
-    self.window.rootViewController = tVC;
+    TestViewController *testVC = [[[TestViewController alloc] initWithStyle:UITableViewStyleGrouped] autorelease];
     
+    ANAdvancedNavigationController *controller = [[[ANAdvancedNavigationController alloc] initWithLeftViewController:testVC] autorelease];
+    
+    self.window.rootViewController = controller;
+
     return [super application:application didFinishLaunchingWithOptions:launchOptions];
 }
 
