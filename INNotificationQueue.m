@@ -31,7 +31,7 @@ static INNotificationQueue *singletonINNotificationQueue = nil;
 	return self;
 }
 
-- (void)release { }
+- (oneway void)release { }
 
 - (id)autorelease {
 	return self;

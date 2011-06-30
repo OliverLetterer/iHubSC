@@ -148,7 +148,7 @@
                                [self cacheHeightForOpenIssuesArray];
                                [self setNextPage:nextPage forSection:section];
                                [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:section] 
-                                             withRowAnimation:UITableViewScrollPositionBottom];
+                                             withRowAnimation:UITableViewRowAnimationAutomatic];
                            }
                        }];
     } else if (section == kUITableViewControllerSectionInfoClosedIssues) {
@@ -163,7 +163,7 @@
                                [self cacheHeightForClosedIssuesArray];
                                [self setNextPage:nextPage forSection:section];
                                [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:section] 
-                                             withRowAnimation:UITableViewScrollPositionBottom];
+                                             withRowAnimation:UITableViewRowAnimationAutomatic];
                            }
                        }];
     }

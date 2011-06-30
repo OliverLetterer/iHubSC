@@ -76,7 +76,7 @@
               
               [self.tableView beginUpdates];
               
-              [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:[self.comments count]+1 inSection:kUITableViewSectionComments]] withRowAnimation:UITableViewScrollPositionBottom];
+              [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:[self.comments count]+1 inSection:kUITableViewSectionComments]] withRowAnimation:UITableViewRowAnimationFade];
               [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:[self.comments count] inSection:kUITableViewSectionComments]] withRowAnimation:UITableViewRowAnimationFade];
               
               [self.tableView endUpdates];

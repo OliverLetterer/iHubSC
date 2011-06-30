@@ -23,7 +23,7 @@
         self.textView.font = [UIFont systemFontOfSize:12.0];
         self.textView.layer.borderColor = [UIColor colorWithRed:245.0/255.0 green:245.0/255.0 blue:245.0/255.0 alpha:1.0].CGColor;
         self.textView.layer.borderWidth = 1.0;
-        self.selectionStyle = UITableViewCellEditingStyleNone;
+        self.selectionStyle = UITableViewCellSelectionStyleNone;
         self.accessoryType = UITableViewCellAccessoryNone;
         [self.contentView addSubview:self.textView];
     }

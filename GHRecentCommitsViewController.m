@@ -103,7 +103,7 @@
                                  [self.commits addObjectsFromArray:array];
                                  [self cacheHeightsForCommits];
                                  [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:section] 
-                                               withRowAnimation:UITableViewScrollPositionBottom];
+                                               withRowAnimation:UITableViewRowAnimationAutomatic];
                              }
                          }];
 }

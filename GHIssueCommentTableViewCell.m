@@ -34,7 +34,7 @@
         self.timeDetailsLabel.backgroundColor = [UIColor clearColor];
         [self.contentView addSubview:self.timeDetailsLabel];
         
-        self.selectionStyle = UITableViewCellEditingStyleNone;
+        self.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     return self;
 }

@@ -267,7 +267,7 @@
                                            [self.milestones addObjectsFromArray:array];
                                            [self setNextPage:nextPage forSection:section];
                                            [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:section] 
-                                                         withRowAnimation:UITableViewScrollPositionBottom];
+                                                         withRowAnimation:UITableViewRowAnimationAutomatic];
                                        }
                                    }];
     } else if (section == kUITableViewSectionAssigned) {
@@ -279,7 +279,7 @@
                                             [self.collaborators addObjectsFromArray:array];
                                             [self setNextPage:nextPage forSection:section];
                                             [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:section] 
-                                                          withRowAnimation:UITableViewScrollPositionBottom];
+                                                          withRowAnimation:UITableViewRowAnimationAutomatic];
                                         }
                                     }];
     }
@@ -312,7 +312,7 @@
             GHCreateIssueTableViewCell *cell = (GHCreateIssueTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
             if (cell == nil) {
                 cell = [[[GHCreateIssueTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
-                cell.selectionStyle = UITableViewCellEditingStyleNone;
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
             }
             
             [self updateImageViewForCell:cell atIndexPath:indexPath withGravatarID:[GHSettingsHelper gravatarID] ];

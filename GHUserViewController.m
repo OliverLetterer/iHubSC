@@ -339,7 +339,7 @@
                        [self.gists addObjectsFromArray:array];
                        [self cacheGistsHeight];
                        [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:section] 
-                                     withRowAnimation:UITableViewScrollPositionBottom];
+                                     withRowAnimation:UITableViewRowAnimationBottom];
                    }
                }];
     } else if (section == kUITableViewFollowingUsers) {
@@ -352,7 +352,7 @@
                                         [self.followingUsers addObjectsFromArray:array];
                                         [self setNextPage:nextPage forSection:section];
                                         [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:section] 
-                                                      withRowAnimation:UITableViewScrollPositionBottom];
+                                                      withRowAnimation:UITableViewRowAnimationAutomatic];
                                     }
                                 }];
     } else if (section == kUITableViewFollowedUsers) {
@@ -365,7 +365,7 @@
                                           [self.followedUsers addObjectsFromArray:array];
                                           [self setNextPage:nextPage forSection:section];
                                           [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:section] 
-                                                        withRowAnimation:UITableViewScrollPositionBottom];
+                                                        withRowAnimation:UITableViewRowAnimationAutomatic];
                                       }
                                   }];
     } else if (section == kUITableViewSectionRepositories) {
@@ -378,7 +378,7 @@
                                           [self setNextPage:nextPage forSection:section];
                                           [self cacheHeightForTableView];
                                           [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:section] 
-                                                        withRowAnimation:UITableViewScrollPositionBottom];
+                                                        withRowAnimation:UITableViewRowAnimationAutomatic];
                                       }
                                   }];
     } else if (section == kUITableViewSectionWatchedRepositories) {
@@ -391,7 +391,7 @@
                                                 [self setNextPage:nextPage forSection:section];
                                                 [self cacheHeightForWatchedRepositories];
                                                 [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:section] 
-                                                              withRowAnimation:UITableViewScrollPositionBottom];
+                                                              withRowAnimation:UITableViewRowAnimationAutomatic];
                                             }
                                         }];
     } else if (section == kUITableViewOrganizations) {
@@ -403,7 +403,7 @@
                                        [self.organizations addObjectsFromArray:array];
                                        [self setNextPage:nextPage forSection:section];
                                        [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:section] 
-                                                     withRowAnimation:UITableViewScrollPositionBottom];
+                                                     withRowAnimation:UITableViewRowAnimationAutomatic];
                                    }
                                }];
     }
@@ -576,7 +576,7 @@
             GHFeedItemWithDescriptionTableViewCell *cell = (GHFeedItemWithDescriptionTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
             if (cell == nil) {
                 cell = [[[GHFeedItemWithDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
-                cell.selectionStyle = UITableViewCellEditingStyleNone;
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 cell.accessoryType = UITableViewCellAccessoryNone;
             }
             

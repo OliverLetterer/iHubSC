@@ -295,6 +295,14 @@
 
 #pragma mark - UITableViewDelegate
 
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    return 0.0f;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return 0.0f;
+}
+
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     if ([self needsToDownloadNextDataInSection:indexPath.section] && indexPath.row != 0 && indexPath.row == [tableView numberOfRowsInSection:indexPath.section] - 1) {
         [self downloadDataForPage:[self nextPageForSection:indexPath.section] inSection:indexPath.section];

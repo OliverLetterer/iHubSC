@@ -355,7 +355,7 @@
                                     [self setNextPage:nextPage forSection:section];
                                     [self.labels addObjectsFromArray:array];
                                     [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:section]
-                                                  withRowAnimation:UITableViewScrollPositionBottom];
+                                                  withRowAnimation:UITableViewRowAnimationAutomatic];
                                 }
                             }];
     } else if (section == kUITableViewSectionRecentCommits || section == kUITableViewSectionBrowseBranches) {
@@ -367,7 +367,7 @@
                                       [self.branches addObjectsFromArray:array];
                                       [self setNextPage:nextPage forSection:section];
                                       [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:section]
-                                                    withRowAnimation:UITableViewScrollPositionBottom];
+                                                    withRowAnimation:UITableViewRowAnimationAutomatic];
                                   }
                               }];
     } else if (section == kUITableViewSectionIssues) {
@@ -380,7 +380,7 @@
                                      [self setNextPage:nextPage forSection:section];
                                      [self cacheHeightForIssuesArray];
                                      [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:section] 
-                                                   withRowAnimation:UITableViewScrollPositionBottom];
+                                                   withRowAnimation:UITableViewRowAnimationAutomatic];
                                  }
                              }];
     } else if (section == kUITableViewSectionMilestones) {
@@ -392,7 +392,7 @@
                                            [self.milestones addObjectsFromArray:array];
                                            [self setNextPage:nextPage forSection:section];
                                            [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:section] 
-                                                         withRowAnimation:UITableViewScrollPositionBottom];
+                                                         withRowAnimation:UITableViewRowAnimationAutomatic];
                                        }
                                    }];
     } else if (section == kUITableViewSectionCollaborators) {
@@ -404,7 +404,7 @@
                                             [self.collaborators addObjectsFromArray:array];
                                             [self setNextPage:nextPage forSection:section];
                                             [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:section] 
-                                                          withRowAnimation:UITableViewScrollPositionBottom];
+                                                          withRowAnimation:UITableViewRowAnimationAutomatic];
                                         }
                                     }];
     }
@@ -494,7 +494,7 @@
                 cell = [[[GHFeedItemWithDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
             }
             
-            cell.selectionStyle = UITableViewCellEditingStyleNone;
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.accessoryType = UITableViewCellAccessoryNone;
             
             if (self.repository.isForked) {

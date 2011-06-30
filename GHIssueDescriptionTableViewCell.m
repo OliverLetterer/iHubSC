@@ -21,7 +21,7 @@
         self.textLabel.numberOfLines = 0;
         self.textLabel.adjustsFontSizeToFitWidth = NO;
         
-        self.selectionStyle = UITableViewCellEditingStyleNone;
+        self.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     return self;
 }
