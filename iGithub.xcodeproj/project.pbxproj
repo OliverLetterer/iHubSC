@@ -145,6 +145,12 @@
 		A7837E9A136C93FC00B13B95 /* GHAPIMilestoneV3.m in Sources */ = {isa = PBXBuildFile; fileRef = A7837E99136C93FC00B13B95 /* GHAPIMilestoneV3.m */; };
 		A7837EA1136CADA500B13B95 /* PDColoredProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = A7837EA0136CADA400B13B95 /* PDColoredProgressView.m */; };
 		A7837EA5136CADD400B13B95 /* GHAPIMilestoneV3TableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A7837EA4136CADD400B13B95 /* GHAPIMilestoneV3TableViewCell.m */; };
+		A78B70DB13BCE08900F4CE5E /* TabBarItemSelectedBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = A78B70D913BCE08900F4CE5E /* TabBarItemSelectedBackground.png */; };
+		A78B70DC13BCE08900F4CE5E /* TabBarItemSelectedBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A78B70DA13BCE08900F4CE5E /* TabBarItemSelectedBackground@2x.png */; };
+		A78B70DF13BCE88600F4CE5E /* ANBackgroundImage.png in Resources */ = {isa = PBXBuildFile; fileRef = A78B70DE13BCE88600F4CE5E /* ANBackgroundImage.png */; };
+		A78B70E213BCE95E00F4CE5E /* UIImage+GHTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = A78B70E113BCE95D00F4CE5E /* UIImage+GHTabBar.m */; };
+		A78B70E713BCF75400F4CE5E /* Lupe@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A78B70E513BCF75300F4CE5E /* Lupe@2x.png */; };
+		A78B70E813BCF75400F4CE5E /* Lupe.PNG in Resources */ = {isa = PBXBuildFile; fileRef = A78B70E613BCF75400F4CE5E /* Lupe.PNG */; };
 		A79F37FE13883C2C0028F492 /* GHAPIUserV3.m in Sources */ = {isa = PBXBuildFile; fileRef = A79F37FD13883C2C0028F492 /* GHAPIUserV3.m */; };
 		A79F380113883F740028F492 /* GHAPIUserPlanV3.m in Sources */ = {isa = PBXBuildFile; fileRef = A79F380013883F740028F492 /* GHAPIUserPlanV3.m */; };
 		A7B5208E1388648D000FEE61 /* GHAPIIssueEventV3.m in Sources */ = {isa = PBXBuildFile; fileRef = A7B5208D1388648D000FEE61 /* GHAPIIssueEventV3.m */; };
@@ -154,6 +160,7 @@
 		A7B5209E13892876000FEE61 /* UIColor+GithubAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = A7B5209D13892876000FEE61 /* UIColor+GithubAPI.m */; };
 		A7B520A113892BEF000FEE61 /* GHLabelTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A7B520A013892BEF000FEE61 /* GHLabelTableViewCell.m */; };
 		A7B520A513896164000FEE61 /* GHViewLabelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7B520A413896164000FEE61 /* GHViewLabelViewController.m */; };
+		A7B567A413BCFB2800047485 /* GHPEdgedLineView.m in Sources */ = {isa = PBXBuildFile; fileRef = A7B567A313BCFB2800047485 /* GHPEdgedLineView.m */; };
 		A7BC6779134CCAF00083F906 /* GHPublicRepositoryIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = A7BC6777134CCAF00083F906 /* GHPublicRepositoryIcon.png */; };
 		A7BC677A134CCAF00083F906 /* GHPublicRepositoryIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A7BC6778134CCAF00083F906 /* GHPublicRepositoryIcon@2x.png */; };
 		A7BC677E134CCD1A0083F906 /* GHPrivateRepositoryIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A7BC677C134CCD1A0083F906 /* GHPrivateRepositoryIcon@2x.png */; };
@@ -226,6 +233,8 @@
 		A7F334A813BCCF0100DB922D /* ANRectangleView.m in Sources */ = {isa = PBXBuildFile; fileRef = A7F334A213BCCF0100DB922D /* ANRectangleView.m */; };
 		A7F334A913BCCF0100DB922D /* ANRemoveRectangleIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = A7F334A413BCCF0100DB922D /* ANRemoveRectangleIndicatorView.m */; };
 		A7F334AE13BCCF2800DB922D /* TestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7F334AD13BCCF2800DB922D /* TestViewController.m */; };
+		A7F334B213BCD02700DB922D /* GHPLeftNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7F334B113BCD02700DB922D /* GHPLeftNavigationController.m */; };
+		A7F334B513BCD29400DB922D /* GHPLeftNavigationControllerTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A7F334B413BCD29300DB922D /* GHPLeftNavigationControllerTableViewCell.m */; };
 		A7F6260F134B3938006487CA /* UITableViewCellWithLinearGradientBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = A7F6260E134B3938006487CA /* UITableViewCellWithLinearGradientBackgroundView.m */; };
 		A7F62616134B7CD2006487CA /* GHNewCommentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A7F62615134B7CD2006487CA /* GHNewCommentTableViewCell.m */; };
 		A7F62622134B88B8006487CA /* NSString+GithubAPIAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = A7F62621134B88B8006487CA /* NSString+GithubAPIAdditions.m */; };
@@ -482,6 +491,13 @@
 		A7837EA0136CADA400B13B95 /* PDColoredProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PDColoredProgressView.m; path = PDColoredProgressview/PDColoredProgressView.m; sourceTree = "<group>"; };
 		A7837EA3136CADD400B13B95 /* GHAPIMilestoneV3TableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHAPIMilestoneV3TableViewCell.h; sourceTree = "<group>"; };
 		A7837EA4136CADD400B13B95 /* GHAPIMilestoneV3TableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHAPIMilestoneV3TableViewCell.m; sourceTree = "<group>"; };
+		A78B70D913BCE08900F4CE5E /* TabBarItemSelectedBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TabBarItemSelectedBackground.png; sourceTree = "<group>"; };
+		A78B70DA13BCE08900F4CE5E /* TabBarItemSelectedBackground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TabBarItemSelectedBackground@2x.png"; sourceTree = "<group>"; };
+		A78B70DE13BCE88600F4CE5E /* ANBackgroundImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ANBackgroundImage.png; sourceTree = "<group>"; };
+		A78B70E013BCE95D00F4CE5E /* UIImage+GHTabBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+GHTabBar.h"; sourceTree = "<group>"; };
+		A78B70E113BCE95D00F4CE5E /* UIImage+GHTabBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+GHTabBar.m"; sourceTree = "<group>"; };
+		A78B70E513BCF75300F4CE5E /* Lupe@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Lupe@2x.png"; sourceTree = "<group>"; };
+		A78B70E613BCF75400F4CE5E /* Lupe.PNG */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Lupe.PNG; sourceTree = "<group>"; };
 		A792A92713A3FD3200BB0E1A /* GHAPIConnectionHandlersV3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHAPIConnectionHandlersV3.h; sourceTree = "<group>"; };
 		A79F37FC13883C2C0028F492 /* GHAPIUserV3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHAPIUserV3.h; sourceTree = "<group>"; };
 		A79F37FD13883C2C0028F492 /* GHAPIUserV3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHAPIUserV3.m; sourceTree = "<group>"; };
@@ -501,6 +517,8 @@
 		A7B520A013892BEF000FEE61 /* GHLabelTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHLabelTableViewCell.m; sourceTree = "<group>"; };
 		A7B520A313896164000FEE61 /* GHViewLabelViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GHViewLabelViewController.h; path = ../iGithub/GHViewLabelViewController.h; sourceTree = "<group>"; };
 		A7B520A413896164000FEE61 /* GHViewLabelViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GHViewLabelViewController.m; path = ../iGithub/GHViewLabelViewController.m; sourceTree = "<group>"; };
+		A7B567A213BCFB2800047485 /* GHPEdgedLineView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPEdgedLineView.h; sourceTree = "<group>"; };
+		A7B567A313BCFB2800047485 /* GHPEdgedLineView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPEdgedLineView.m; sourceTree = "<group>"; };
 		A7BC6777134CCAF00083F906 /* GHPublicRepositoryIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GHPublicRepositoryIcon.png; sourceTree = "<group>"; };
 		A7BC6778134CCAF00083F906 /* GHPublicRepositoryIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GHPublicRepositoryIcon@2x.png"; sourceTree = "<group>"; };
 		A7BC677C134CCD1A0083F906 /* GHPrivateRepositoryIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GHPrivateRepositoryIcon@2x.png"; sourceTree = "<group>"; };
@@ -631,6 +649,10 @@
 		A7F334A413BCCF0100DB922D /* ANRemoveRectangleIndicatorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANRemoveRectangleIndicatorView.m; sourceTree = "<group>"; };
 		A7F334AC13BCCF2800DB922D /* TestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestViewController.h; sourceTree = "<group>"; };
 		A7F334AD13BCCF2800DB922D /* TestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestViewController.m; sourceTree = "<group>"; };
+		A7F334B013BCD02700DB922D /* GHPLeftNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPLeftNavigationController.h; sourceTree = "<group>"; };
+		A7F334B113BCD02700DB922D /* GHPLeftNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPLeftNavigationController.m; sourceTree = "<group>"; };
+		A7F334B313BCD29300DB922D /* GHPLeftNavigationControllerTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPLeftNavigationControllerTableViewCell.h; sourceTree = "<group>"; };
+		A7F334B413BCD29300DB922D /* GHPLeftNavigationControllerTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPLeftNavigationControllerTableViewCell.m; sourceTree = "<group>"; };
 		A7F6260D134B3938006487CA /* UITableViewCellWithLinearGradientBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UITableViewCellWithLinearGradientBackgroundView.h; sourceTree = "<group>"; };
 		A7F6260E134B3938006487CA /* UITableViewCellWithLinearGradientBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UITableViewCellWithLinearGradientBackgroundView.m; sourceTree = "<group>"; };
 		A7F62614134B7CD1006487CA /* GHNewCommentTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHNewCommentTableViewCell.h; sourceTree = "<group>"; };
@@ -882,6 +904,7 @@
 		A70DAE0713B49FC500DE4279 /* UserInterface */ = {
 			isa = PBXGroup;
 			children = (
+				A7F334AF13BCD01100DB922D /* GHPLeftNavigationController */,
 				A70DAE0813B49FEA00DE4279 /* GHPTableViewController.h */,
 				A70DAE0913B49FEA00DE4279 /* GHPTableViewController.m */,
 				A70DAE0B13B4A0D900DE4279 /* GHPDefaultTableViewCell.h */,
@@ -2020,6 +2043,26 @@
 			name = ANAdvancedNavigationController;
 			sourceTree = "<group>";
 		};
+		A7F334AF13BCD01100DB922D /* GHPLeftNavigationController */ = {
+			isa = PBXGroup;
+			children = (
+				A78B70E513BCF75300F4CE5E /* Lupe@2x.png */,
+				A78B70E613BCF75400F4CE5E /* Lupe.PNG */,
+				A78B70DE13BCE88600F4CE5E /* ANBackgroundImage.png */,
+				A78B70D913BCE08900F4CE5E /* TabBarItemSelectedBackground.png */,
+				A78B70DA13BCE08900F4CE5E /* TabBarItemSelectedBackground@2x.png */,
+				A7F334B013BCD02700DB922D /* GHPLeftNavigationController.h */,
+				A7F334B113BCD02700DB922D /* GHPLeftNavigationController.m */,
+				A7F334B313BCD29300DB922D /* GHPLeftNavigationControllerTableViewCell.h */,
+				A7F334B413BCD29300DB922D /* GHPLeftNavigationControllerTableViewCell.m */,
+				A78B70E013BCE95D00F4CE5E /* UIImage+GHTabBar.h */,
+				A78B70E113BCE95D00F4CE5E /* UIImage+GHTabBar.m */,
+				A7B567A213BCFB2800047485 /* GHPEdgedLineView.h */,
+				A7B567A313BCFB2800047485 /* GHPEdgedLineView.m */,
+			);
+			name = GHPLeftNavigationController;
+			sourceTree = "<group>";
+		};
 		A7F6261F134B8886006487CA /* NSString */ = {
 			isa = PBXGroup;
 			children = (
@@ -2168,6 +2211,11 @@
 				A7288A7113A9094300170D57 /* scripts in Resources */,
 				A7288A7213A9094300170D57 /* src in Resources */,
 				A7288A7313A9094300170D57 /* styles in Resources */,
+				A78B70DB13BCE08900F4CE5E /* TabBarItemSelectedBackground.png in Resources */,
+				A78B70DC13BCE08900F4CE5E /* TabBarItemSelectedBackground@2x.png in Resources */,
+				A78B70DF13BCE88600F4CE5E /* ANBackgroundImage.png in Resources */,
+				A78B70E713BCF75400F4CE5E /* Lupe@2x.png in Resources */,
+				A78B70E813BCF75400F4CE5E /* Lupe.PNG in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2346,6 +2394,10 @@
 				A7F334A813BCCF0100DB922D /* ANRectangleView.m in Sources */,
 				A7F334A913BCCF0100DB922D /* ANRemoveRectangleIndicatorView.m in Sources */,
 				A7F334AE13BCCF2800DB922D /* TestViewController.m in Sources */,
+				A7F334B213BCD02700DB922D /* GHPLeftNavigationController.m in Sources */,
+				A7F334B513BCD29400DB922D /* GHPLeftNavigationControllerTableViewCell.m in Sources */,
+				A78B70E213BCE95E00F4CE5E /* UIImage+GHTabBar.m in Sources */,
+				A7B567A413BCFB2800047485 /* GHPEdgedLineView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

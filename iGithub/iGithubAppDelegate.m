@@ -8,6 +8,8 @@
 
 #import "iGithubAppDelegate.h"
 #import "Appirater.h"
+#import "GHSettingsHelper.h"
+#import "GHAuthenticationManager.h"
 
 @implementation iGithubAppDelegate
 
@@ -17,7 +19,22 @@
 @synthesize managedObjectContext=_managedObjectContext, managedObjectModel=_managedObjectModel, persistentStoreCoordinator=_persistentStoreCoordinator;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+    
+#if DEBUG
+    [GHSettingsHelper setUsername:@"docmorelli"];
+    [GHSettingsHelper setPassword:@"1337-l0g1n"];
+    
+    //    [GHSettingsHelper setUsername:@"iTunesTestAccount"];
+    //    [GHSettingsHelper setPassword:@"iTunes1"];
+    
+    [GHSettingsHelper setGravatarID:@"534296d28e4a7118d2e75e84d04d571e"];
+    [GHAuthenticationManager sharedInstance].username = [GHSettingsHelper username];
+    [GHAuthenticationManager sharedInstance].password = [GHSettingsHelper password];
+#else
+    [GHAuthenticationManager sharedInstance].username = [GHSettingsHelper username];
+    [GHAuthenticationManager sharedInstance].password = [GHSettingsHelper password];
+#endif
+    
     [self.window makeKeyAndVisible];
     [Appirater appLaunched:YES];
     return YES;

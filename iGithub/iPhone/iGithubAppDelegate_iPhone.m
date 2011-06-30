@@ -52,20 +52,20 @@
     [INNotificationQueue sharedQueue].notificationCenterPoint = CGPointMake(self.window.frame.size.width/2, self.window.frame.size.height/3);
 	[INNotificationQueue sharedQueue].notificationView = self.window;
     
-#if DEBUG
-    [GHSettingsHelper setUsername:@"docmorelli"];
-    [GHSettingsHelper setPassword:@"1337-l0g1n"];
-    
-//    [GHSettingsHelper setUsername:@"iTunesTestAccount"];
-//    [GHSettingsHelper setPassword:@"iTunes1"];
-    
-    [GHSettingsHelper setGravatarID:@"534296d28e4a7118d2e75e84d04d571e"];
-    [GHAuthenticationManager sharedInstance].username = [GHSettingsHelper username];
-    [GHAuthenticationManager sharedInstance].password = [GHSettingsHelper password];
-#else
-    [GHAuthenticationManager sharedInstance].username = [GHSettingsHelper username];
-    [GHAuthenticationManager sharedInstance].password = [GHSettingsHelper password];
-#endif
+//#if DEBUG
+//    [GHSettingsHelper setUsername:@"docmorelli"];
+//    [GHSettingsHelper setPassword:@"1337-l0g1n"];
+//    
+////    [GHSettingsHelper setUsername:@"iTunesTestAccount"];
+////    [GHSettingsHelper setPassword:@"iTunes1"];
+//    
+//    [GHSettingsHelper setGravatarID:@"534296d28e4a7118d2e75e84d04d571e"];
+//    [GHAuthenticationManager sharedInstance].username = [GHSettingsHelper username];
+//    [GHAuthenticationManager sharedInstance].password = [GHSettingsHelper password];
+//#else
+//    [GHAuthenticationManager sharedInstance].username = [GHSettingsHelper username];
+//    [GHAuthenticationManager sharedInstance].password = [GHSettingsHelper password];
+//#endif
     
     NSMutableArray *tabBarItems = [NSMutableArray array];
     

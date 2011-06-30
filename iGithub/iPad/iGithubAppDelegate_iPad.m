@@ -8,15 +8,17 @@
 
 #import "iGithubAppDelegate_iPad.h"
 #import "GHPTableViewController.h"
-#import "TestViewController.h"
+#import "GHPLeftNavigationController.h"
 #import "ANAdvancedNavigationController.h"
 
 @implementation iGithubAppDelegate_iPad
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    TestViewController *testVC = [[[TestViewController alloc] initWithStyle:UITableViewStyleGrouped] autorelease];
-    
+    GHPLeftNavigationController *testVC = [[[GHPLeftNavigationController alloc] initWithStyle:UITableViewStyleGrouped] autorelease];
+        
     ANAdvancedNavigationController *controller = [[[ANAdvancedNavigationController alloc] initWithLeftViewController:testVC] autorelease];
+    controller.backgroundView = [[[UIView alloc] initWithFrame:CGRectZero] autorelease];
+    controller.backgroundView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"ANBackgroundImage.png"] ];
     
     self.window.rootViewController = controller;
 
