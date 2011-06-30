@@ -26,6 +26,7 @@ support all these events
 [-]: clickable (include in navigation hierarchie)
 
 TODO:
+- !!!!!!!!!!!!!!!! umlaute are displayed wrong (-> see optikfluffel user profile)
 - Network graph for recent activity (see Network API)
 - ipad Interface
 - markdown support for Comments
