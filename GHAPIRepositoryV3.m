@@ -40,6 +40,10 @@
     return _description;
 }
 
+- (NSString *)fullRepositoryName {
+    return [NSString stringWithFormat:@"%@/%@", self.owner.login, self.name];
+}
+
 #pragma mark - Initialization
 
 - (id)initWithRawDictionary:(NSDictionary *)rawDictionary parseChildren:(BOOL)parse {

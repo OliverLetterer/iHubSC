@@ -9,6 +9,8 @@
 #import "GHPUserViewController.h"
 #import "GHPUserInfoTableViewCell.h"
 #import "GHSettingsHelper.h"
+#import "GHPOwnedRepositoriesOfUserViewController.h"
+#import "GHPWatchedRepositoriesViewController.h"
 
 #define kUITableViewSectionUserInfo         0
 #define kUITableViewSectionUserContent      1
@@ -297,6 +299,20 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section == kUITableViewSectionUserContent) {
+        if (indexPath.row == 0) {
+            // Repositories
+            GHPOwnedRepositoriesOfUserViewController *repoViewController = [[[GHPOwnedRepositoriesOfUserViewController alloc] initWithUsername:self.username] autorelease];
+            [self.advancedNavigationController pushViewController:repoViewController afterViewController:self];
+        } else if (indexPath.row == 1) {
+            GHPWatchedRepositoriesViewController *repoViewController = [[[GHPWatchedRepositoriesViewController alloc] initWithUsername:self.username] autorelease];
+            [self.advancedNavigationController pushViewController:repoViewController afterViewController:self];
+        } else {
+            [tableView deselectRowAtIndexPath:indexPath animated:NO];
+        }
+    } else {
+        [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    }
 }
 
 #pragma mark - memory management

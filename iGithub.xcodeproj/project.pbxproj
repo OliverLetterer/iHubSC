@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A703A63313BE017C003A4585 /* GHPRepositoriesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A703A63213BE017C003A4585 /* GHPRepositoriesViewController.m */; };
+		A703A63613BE0308003A4585 /* GHPOwnedRepositoriesOfUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A703A63513BE0308003A4585 /* GHPOwnedRepositoriesOfUserViewController.m */; };
 		A703B92F134675EC0014235D /* UIImage+Alpha.m in Sources */ = {isa = PBXBuildFile; fileRef = A703B92A134675EC0014235D /* UIImage+Alpha.m */; };
 		A703B930134675EC0014235D /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = A703B92C134675EC0014235D /* UIImage+Resize.m */; };
 		A703B931134675EC0014235D /* UIImage+RoundedCorner.m in Sources */ = {isa = PBXBuildFile; fileRef = A703B92E134675EC0014235D /* UIImage+RoundedCorner.m */; };
@@ -100,6 +102,7 @@
 		A74A660213BDA9040098106E /* GHPUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A74A660113BDA9040098106E /* GHPUserViewController.m */; };
 		A74A660413BDAF490098106E /* UITableViewCellAccessoryDisclosureIndicatorOriginal.png in Resources */ = {isa = PBXBuildFile; fileRef = A74A660313BDAF490098106E /* UITableViewCellAccessoryDisclosureIndicatorOriginal.png */; };
 		A74A660813BDB0380098106E /* GHPUserInfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A74A660613BDB0380098106E /* GHPUserInfoTableViewCell.m */; };
+		A74F2A2B13BE0E8200E57818 /* GHPRepositoryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A74F2A2A13BE0E8200E57818 /* GHPRepositoryTableViewCell.m */; };
 		A750571613427FB400514A82 /* ASIAuthenticationDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = A750570313427FB400514A82 /* ASIAuthenticationDialog.m */; };
 		A750571713427FB400514A82 /* ASIDataCompressor.m in Sources */ = {isa = PBXBuildFile; fileRef = A750570613427FB400514A82 /* ASIDataCompressor.m */; };
 		A750571813427FB400514A82 /* ASIDataDecompressor.m in Sources */ = {isa = PBXBuildFile; fileRef = A750570813427FB400514A82 /* ASIDataDecompressor.m */; };
@@ -156,6 +159,7 @@
 		A78B70E813BCF75400F4CE5E /* Lupe.PNG in Resources */ = {isa = PBXBuildFile; fileRef = A78B70E613BCF75400F4CE5E /* Lupe.PNG */; };
 		A79F37FE13883C2C0028F492 /* GHAPIUserV3.m in Sources */ = {isa = PBXBuildFile; fileRef = A79F37FD13883C2C0028F492 /* GHAPIUserV3.m */; };
 		A79F380113883F740028F492 /* GHAPIUserPlanV3.m in Sources */ = {isa = PBXBuildFile; fileRef = A79F380013883F740028F492 /* GHAPIUserPlanV3.m */; };
+		A7ABB5F613BE0C5300313E10 /* GHPWatchedRepositoriesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7ABB5F513BE0C5300313E10 /* GHPWatchedRepositoriesViewController.m */; };
 		A7B5208E1388648D000FEE61 /* GHAPIIssueEventV3.m in Sources */ = {isa = PBXBuildFile; fileRef = A7B5208D1388648D000FEE61 /* GHAPIIssueEventV3.m */; };
 		A7B5209213890B68000FEE61 /* GHViewMilestoneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7B5209113890B68000FEE61 /* GHViewMilestoneViewController.m */; };
 		A7B5209613892338000FEE61 /* GHAPILabelV3.m in Sources */ = {isa = PBXBuildFile; fileRef = A7B5209513892338000FEE61 /* GHAPILabelV3.m */; };
@@ -250,6 +254,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A703A63113BE017C003A4585 /* GHPRepositoriesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPRepositoriesViewController.h; sourceTree = "<group>"; };
+		A703A63213BE017C003A4585 /* GHPRepositoriesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPRepositoriesViewController.m; sourceTree = "<group>"; };
+		A703A63413BE0308003A4585 /* GHPOwnedRepositoriesOfUserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPOwnedRepositoriesOfUserViewController.h; sourceTree = "<group>"; };
+		A703A63513BE0308003A4585 /* GHPOwnedRepositoriesOfUserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPOwnedRepositoriesOfUserViewController.m; sourceTree = "<group>"; };
 		A703B929134675EC0014235D /* UIImage+Alpha.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Alpha.h"; sourceTree = "<group>"; };
 		A703B92A134675EC0014235D /* UIImage+Alpha.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Alpha.m"; sourceTree = "<group>"; };
 		A703B92B134675EC0014235D /* UIImage+Resize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Resize.h"; sourceTree = "<group>"; };
@@ -412,6 +420,8 @@
 		A74A660313BDAF490098106E /* UITableViewCellAccessoryDisclosureIndicatorOriginal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UITableViewCellAccessoryDisclosureIndicatorOriginal.png; sourceTree = "<group>"; };
 		A74A660513BDB0380098106E /* GHPUserInfoTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPUserInfoTableViewCell.h; sourceTree = "<group>"; };
 		A74A660613BDB0380098106E /* GHPUserInfoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPUserInfoTableViewCell.m; sourceTree = "<group>"; };
+		A74F2A2913BE0E8200E57818 /* GHPRepositoryTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPRepositoryTableViewCell.h; sourceTree = "<group>"; };
+		A74F2A2A13BE0E8200E57818 /* GHPRepositoryTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPRepositoryTableViewCell.m; sourceTree = "<group>"; };
 		A750570213427FB400514A82 /* ASIAuthenticationDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASIAuthenticationDialog.h; path = "asi-http-request/Classes/ASIAuthenticationDialog.h"; sourceTree = SOURCE_ROOT; };
 		A750570313427FB400514A82 /* ASIAuthenticationDialog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ASIAuthenticationDialog.m; path = "asi-http-request/Classes/ASIAuthenticationDialog.m"; sourceTree = SOURCE_ROOT; };
 		A750570413427FB400514A82 /* ASICacheDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASICacheDelegate.h; path = "asi-http-request/Classes/ASICacheDelegate.h"; sourceTree = SOURCE_ROOT; };
@@ -509,6 +519,8 @@
 		A79F37FD13883C2C0028F492 /* GHAPIUserV3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHAPIUserV3.m; sourceTree = "<group>"; };
 		A79F37FF13883F740028F492 /* GHAPIUserPlanV3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHAPIUserPlanV3.h; sourceTree = "<group>"; };
 		A79F380013883F740028F492 /* GHAPIUserPlanV3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHAPIUserPlanV3.m; sourceTree = "<group>"; };
+		A7ABB5F413BE0C5300313E10 /* GHPWatchedRepositoriesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPWatchedRepositoriesViewController.h; sourceTree = "<group>"; };
+		A7ABB5F513BE0C5300313E10 /* GHPWatchedRepositoriesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPWatchedRepositoriesViewController.m; sourceTree = "<group>"; };
 		A7B5208C1388648D000FEE61 /* GHAPIIssueEventV3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GHAPIIssueEventV3.h; path = ../iGithub/GHAPIIssueEventV3.h; sourceTree = "<group>"; };
 		A7B5208D1388648D000FEE61 /* GHAPIIssueEventV3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GHAPIIssueEventV3.m; path = ../iGithub/GHAPIIssueEventV3.m; sourceTree = "<group>"; };
 		A7B5209013890B68000FEE61 /* GHViewMilestoneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GHViewMilestoneViewController.h; path = ../iGithub/GHViewMilestoneViewController.h; sourceTree = "<group>"; };
@@ -700,6 +712,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A703A62F13BE0163003A4585 /* GHPRepositoriesViewController */ = {
+			isa = PBXGroup;
+			children = (
+				A703A63113BE017C003A4585 /* GHPRepositoriesViewController.h */,
+				A703A63213BE017C003A4585 /* GHPRepositoriesViewController.m */,
+				A703A63413BE0308003A4585 /* GHPOwnedRepositoriesOfUserViewController.h */,
+				A703A63513BE0308003A4585 /* GHPOwnedRepositoriesOfUserViewController.m */,
+				A7ABB5F413BE0C5300313E10 /* GHPWatchedRepositoriesViewController.h */,
+				A7ABB5F513BE0C5300313E10 /* GHPWatchedRepositoriesViewController.m */,
+				A74F2A2913BE0E8200E57818 /* GHPRepositoryTableViewCell.h */,
+				A74F2A2A13BE0E8200E57818 /* GHPRepositoryTableViewCell.m */,
+			);
+			name = GHPRepositoriesViewController;
+			sourceTree = "<group>";
+		};
 		A703B927134675D90014235D /* UIImage+Additions */ = {
 			isa = PBXGroup;
 			children = (
@@ -909,6 +936,7 @@
 		A70DAE0713B49FC500DE4279 /* UserInterface */ = {
 			isa = PBXGroup;
 			children = (
+				A703A62F13BE0163003A4585 /* GHPRepositoriesViewController */,
 				A74A65FF13BDA8ED0098106E /* GHPUserViewController */,
 				A7F334AF13BCD01100DB922D /* GHPLeftNavigationController */,
 				A70DAE0B13B4A0D900DE4279 /* GHPDefaultTableViewCell.h */,
@@ -2416,6 +2444,10 @@
 				A7B567A413BCFB2800047485 /* GHPEdgedLineView.m in Sources */,
 				A74A660213BDA9040098106E /* GHPUserViewController.m in Sources */,
 				A74A660813BDB0380098106E /* GHPUserInfoTableViewCell.m in Sources */,
+				A703A63313BE017C003A4585 /* GHPRepositoriesViewController.m in Sources */,
+				A703A63613BE0308003A4585 /* GHPOwnedRepositoriesOfUserViewController.m in Sources */,
+				A7ABB5F613BE0C5300313E10 /* GHPWatchedRepositoriesViewController.m in Sources */,
+				A74F2A2B13BE0E8200E57818 /* GHPRepositoryTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -53,6 +53,12 @@
         self.textLabel.highlightedTextColor = [UIColor blackColor];
         self.textLabel.shadowColor = [UIColor whiteColor];
         self.textLabel.shadowOffset = CGSizeMake(0.0f, 1.0f);
+        
+        self.detailTextLabel.backgroundColor = [UIColor clearColor];
+        self.detailTextLabel.highlightedTextColor = self.detailTextLabel.textColor;
+        self.detailTextLabel.font = [UIFont systemFontOfSize:14.0f];
+        self.detailTextLabel.shadowColor = [UIColor whiteColor];
+        self.detailTextLabel.shadowOffset = CGSizeMake(0.0f, 1.0f);
     }
     return self;
 }

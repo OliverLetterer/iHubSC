@@ -76,7 +76,6 @@
     if ((self = [super initWithStyle:UITableViewStylePlain])) {
         // Custom initialization
         self.username = username;
-        DLog(@"%@", self.username);
         self.pullToReleaseEnabled = self.hasAdministrationRights;
     }
     return self;

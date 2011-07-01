@@ -17,6 +17,7 @@
 #import "GHAuthenticationManager.h"
 #import "GithubAPI.h"
 #import "INNotificationQueue.h"
+#import "ANAdvancedNavigationController.h"
 
 @class GHNewsFeedItemTableViewCell;
 

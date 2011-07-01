@@ -369,8 +369,6 @@ NSString *const kGHAPIIssueStateV3Closed = @"closed";
     NSMutableString *URLString = [NSMutableString stringWithFormat:@"https://api.github.com/repos/%@/issues?",
                                   [repository stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding], page ];
     
-    DLog(@"%@", state);
-    
     BOOL needsAnd = NO;
     
     if (milestone) {
