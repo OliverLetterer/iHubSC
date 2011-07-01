@@ -274,6 +274,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row == 4) {
         GHPUserViewController *userViewController = [[[GHPUserViewController alloc] initWithUsername:[GHAuthenticationManager sharedInstance].username ] autorelease];
+        userViewController = [[[GHPUserViewController alloc] initWithUsername:@"pokeb" ] autorelease];
         [self.advancedNavigationController pushRootViewController:userViewController];
     } else {
         [tableView deselectRowAtIndexPath:indexPath animated:NO];

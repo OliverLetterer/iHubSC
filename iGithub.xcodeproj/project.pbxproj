@@ -213,6 +213,7 @@
 		A7CE1B831346349200169F94 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7CE1B821346349000169F94 /* CoreData.framework */; };
 		A7CE1B871346355100169F94 /* GHManagedObjectContext.m in Sources */ = {isa = PBXBuildFile; fileRef = A7CE1B861346355100169F94 /* GHManagedObjectContext.m */; };
 		A7CE1B8A13463A6E00169F94 /* GHIssue.m in Sources */ = {isa = PBXBuildFile; fileRef = A7CE1B8913463A6600169F94 /* GHIssue.m */; };
+		A7D0523A13BDC20C00B3D239 /* UIBarButtonSystemItemAction.png in Resources */ = {isa = PBXBuildFile; fileRef = A7D0523913BDC20B00B3D239 /* UIBarButtonSystemItemAction.png */; };
 		A7D14F401354DB8600E1B980 /* GHOwnerNewsFeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7D14F3F1354DB8600E1B980 /* GHOwnerNewsFeedViewController.m */; };
 		A7D14F431354DD5D00E1B980 /* GHRecentActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7D14F421354DD5D00E1B980 /* GHRecentActivityViewController.m */; };
 		A7D14F451354E5A700E1B980 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7D14F441354E5A600E1B980 /* MessageUI.framework */; };
@@ -611,6 +612,7 @@
 		A7CE1B861346355100169F94 /* GHManagedObjectContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHManagedObjectContext.m; sourceTree = "<group>"; };
 		A7CE1B8813463A6100169F94 /* GHIssue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHIssue.h; sourceTree = "<group>"; };
 		A7CE1B8913463A6600169F94 /* GHIssue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHIssue.m; sourceTree = "<group>"; };
+		A7D0523913BDC20B00B3D239 /* UIBarButtonSystemItemAction.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UIBarButtonSystemItemAction.png; sourceTree = "<group>"; };
 		A7D14F3E1354DB8600E1B980 /* GHOwnerNewsFeedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHOwnerNewsFeedViewController.h; sourceTree = "<group>"; };
 		A7D14F3F1354DB8600E1B980 /* GHOwnerNewsFeedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHOwnerNewsFeedViewController.m; sourceTree = "<group>"; };
 		A7D14F411354DD5C00E1B980 /* GHRecentActivityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHRecentActivityViewController.h; sourceTree = "<group>"; };
@@ -690,8 +692,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A747C8C413BCCC0B00659504 /* libz.1.2.5.dylib in Frameworks */,
 				A7D14F451354E5A700E1B980 /* MessageUI.framework in Frameworks */,
+				A747C8C413BCCC0B00659504 /* libz.1.2.5.dylib in Frameworks */,
 				A703B9471347562B0014235D /* QuartzCore.framework in Frameworks */,
 				A7BF14001342149C001AE50D /* CoreGraphics.framework in Frameworks */,
 				A7CE1B831346349200169F94 /* CoreData.framework in Frameworks */,
@@ -1255,6 +1257,7 @@
 		A74A65FF13BDA8ED0098106E /* GHPUserViewController */ = {
 			isa = PBXGroup;
 			children = (
+				A7D0523913BDC20B00B3D239 /* UIBarButtonSystemItemAction.png */,
 				A74A660013BDA9040098106E /* GHPUserViewController.h */,
 				A74A660113BDA9040098106E /* GHPUserViewController.m */,
 				A74A660513BDB0380098106E /* GHPUserInfoTableViewCell.h */,
@@ -2246,6 +2249,7 @@
 				A74A65F813BD0A7B0098106E /* 19-gear.png in Resources */,
 				A74A65F913BD0A7B0098106E /* 19-gear@2x.png in Resources */,
 				A74A660413BDAF490098106E /* UITableViewCellAccessoryDisclosureIndicatorOriginal.png in Resources */,
+				A7D0523A13BDC20C00B3D239 /* UIBarButtonSystemItemAction.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

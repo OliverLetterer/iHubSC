@@ -21,6 +21,7 @@
 - (id)initWithStyle:(INNotificationQueueItemStyle)style {
 	if ((self = [super init])) {
 		_style = style;
+        self.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
 		switch (style) {
 			case INNotificationQueueItemStyleSmallWithText:
 				// normal style

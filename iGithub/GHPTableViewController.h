@@ -12,6 +12,7 @@
 #import "ANAdvancedNavigationController.h"
 #import "GithubAPI.h"
 #import "UIViewController+GHErrorHandling.h"
+#import "INNotificationQueue.h"
 
 @interface GHPTableViewController : UITableViewController {
 @private

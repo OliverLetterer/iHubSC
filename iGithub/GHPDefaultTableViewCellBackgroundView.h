@@ -12,7 +12,7 @@
 @interface GHPDefaultTableViewCellBackgroundView : UIView {
 @private
     GHPDefaultTableViewCellStyle _customStyle;
-    id _borderPath; // CGPathRef
+    UIBezierPath *_borderPath;
     
     NSArray *_colors;
     CGGradientRef _gradient;
@@ -20,7 +20,7 @@
 }
 
 @property (nonatomic, assign) GHPDefaultTableViewCellStyle customStyle;
-@property (nonatomic, retain) id borderPath;
+@property (nonatomic, retain) UIBezierPath *borderPath;
 
 @property (nonatomic, retain) NSArray *colors;
 

@@ -92,7 +92,7 @@
     }
     
     UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:self.bounds byRoundingCorners:corners cornerRadii:CGSizeMake(10.0f, 10.0f)];
-    self.borderPath = CFMakeCollectable(path.CGPath);
+    self.borderPath = path;
 }
 
 // Only override drawRect: if you perform custom drawing.
@@ -106,9 +106,8 @@
     [self.backgroundColor setFill];
     CGContextFillRect(ctx, self.bounds);
     
-    
     CGContextSaveGState(ctx);
-    CGPathRef borderPath = (CGPathRef)self.borderPath;
+    CGPathRef borderPath = self.borderPath.CGPath;
     CGContextAddPath(ctx, borderPath);
     
     CGContextClip(ctx);

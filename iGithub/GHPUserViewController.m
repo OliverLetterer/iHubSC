@@ -17,9 +17,28 @@
 
 @implementation GHPUserViewController
 
-@synthesize user=_user, username=_username;
+@synthesize user=_user, username=_username, userInfoCell=_userInfoCell;
 
 #pragma mark - setters and getters
+
+- (BOOL)isAdminsitrativeUser {
+    return [[GHAuthenticationManager sharedInstance].username isEqualToString:self.username];
+}
+
+- (BOOL)canDisplayActionButton {
+    NSUInteger numberOfButtons = 0;
+    if (!self.isAdminsitrativeUser) {
+        numberOfButtons++;
+    }
+    
+    if (self.user.hasBlog) {
+        numberOfButtons++;
+    }
+    if (self.user.hasEMail && [MFMailComposeViewController canSendMail]) {
+        numberOfButtons++;
+    }
+    return numberOfButtons > 0;
+}
 
 - (void)setUsername:(NSString *)username {
     [_username release];
@@ -36,6 +55,31 @@
                     }
                 }
             }];
+}
+
+- (UIActionSheet *)actionButtonActionSheet {
+    UIActionSheet *sheet = [[[UIActionSheet alloc] init] autorelease];
+    
+    if (!self.isAdminsitrativeUser) {
+        if (!_isFollowingUser) {
+            [sheet addButtonWithTitle:NSLocalizedString(@"Follow", @"")];
+        } else {
+            [sheet addButtonWithTitle:NSLocalizedString(@"Unfollow", @"")];
+        }
+    }
+    
+    if (self.user.hasBlog) {
+        [sheet addButtonWithTitle:NSLocalizedString(@"View Blog is Safari", @"")];
+    }
+    if (self.user.hasEMail && [MFMailComposeViewController canSendMail]) {
+        [sheet addButtonWithTitle:NSLocalizedString(@"E-Mail", @"")];
+    }
+    
+    if (sheet.numberOfButtons == 0) {
+        return nil;
+    }
+    sheet.delegate = self;
+    return sheet;
 }
 
 - (NSString *)userDetailInfoString {
@@ -93,6 +137,7 @@
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
+    [_userInfoCell release], _userInfoCell = nil;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -185,6 +230,12 @@
                        }];
             }
             
+            if (!self.canDisplayActionButton) {
+                [cell.actionButton removeFromSuperview];
+            }
+            cell.delegate = self;
+            
+            self.userInfoCell = cell;
             
             return cell;
         }
@@ -236,10 +287,10 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == kUITableViewSectionUserInfo) {
-        CGSize size = [self.userDetailInfoString sizeWithFont:[UIFont systemFontOfSize:16.0f]
-                                            constrainedToSize:CGSizeZero 
+        CGSize size = [self.userDetailInfoString sizeWithFont:[UIFont systemFontOfSize:14.0f]
+                                            constrainedToSize:CGSizeMake(CGFLOAT_MAX, CGFLOAT_MAX) 
                                                 lineBreakMode:UILineBreakModeWordWrap];
-        return size.height + 64.0f + 20.0f;
+        return size.height + 64.0f;
     } else {
         return UITableViewAutomaticDimension;
     }
@@ -253,8 +304,94 @@
 - (void)dealloc {
     [_user release];
     [_username release];
+    [_userInfoCell release];
     
     [super dealloc];
+}
+
+#pragma mark - UIActionSheetDelegate
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    NSString *title = nil;
+    @try {
+        title = [actionSheet buttonTitleAtIndex:buttonIndex];
+    }
+    @catch (NSException *exception) { }
+    
+    if ([title isEqualToString:NSLocalizedString(@"Follow", @"")]) {
+        self.userInfoCell.actionButton.alpha = 0.0f;
+        [self.userInfoCell.activityIndicatorView startAnimating];
+        [GHAPIUserV3 followUser:self.username 
+              completionHandler:^(NSError *error) {
+                  self.userInfoCell.actionButton.alpha = 1.0f;
+                  [self.userInfoCell.activityIndicatorView stopAnimating];
+                  if (error) {
+                      [self handleError:error];
+                  } else {
+                      [[INNotificationQueue sharedQueue] detachSmallNotificationWithTitle:NSLocalizedString(@"Now following", @"") andSubtitle:self.username removeStyle:INNotificationQueueItemRemoveByFadingOut];
+                      _isFollowingUser = YES;
+                  }
+              }];
+    } else if ([title isEqualToString:NSLocalizedString(@"Unfollow", @"")]) {
+        self.userInfoCell.actionButton.alpha = 0.0f;
+        [self.userInfoCell.activityIndicatorView startAnimating];
+        [GHAPIUserV3 unfollowUser:self.username 
+              completionHandler:^(NSError *error) {
+                  self.userInfoCell.actionButton.alpha = 1.0f;
+                  [self.userInfoCell.activityIndicatorView stopAnimating];
+                  if (error) {
+                      [self handleError:error];
+                  } else {
+                      [[INNotificationQueue sharedQueue] detachSmallNotificationWithTitle:NSLocalizedString(@"Stopped following", @"") andSubtitle:self.username removeStyle:INNotificationQueueItemRemoveByFadingOut];
+                      _isFollowingUser = NO;
+                  }
+              }];
+    } else if ([title isEqualToString:NSLocalizedString(@"View Blog is Safari", @"")]) {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:self.user.blog] ];
+    } else if ([title isEqualToString:NSLocalizedString(@"E-Mail", @"")]) {
+        MFMailComposeViewController *mailViewController = [[[MFMailComposeViewController alloc] init] autorelease];
+        mailViewController.mailComposeDelegate = self;
+        [mailViewController setToRecipients:[NSArray arrayWithObject:self.user.EMail]];
+        
+        [self presentViewController:mailViewController animated:YES completion:nil];
+    }
+}
+
+#pragma mark - GHPUserInfoTableViewCellDelegate
+
+- (void)userInfoTableViewCellActionButtonClicked:(GHPUserInfoTableViewCell *)cell {
+    if (!self.isAdminsitrativeUser && !_hasFollowingData) {
+        cell.actionButton.alpha = 0.0f;
+        [cell.activityIndicatorView startAnimating];
+        [GHAPIUserV3 isFollowingUserNamed:self.username 
+                        completionHandler:^(BOOL following, NSError *error) {
+                            cell.actionButton.alpha = 1.0f;
+                            [cell.activityIndicatorView stopAnimating];
+                            if (error) {
+                                [self handleError:error];
+                            } else {
+                                _hasFollowingData = YES;
+                                _isFollowingUser = following;
+                                UIActionSheet *sheet = self.actionButtonActionSheet;
+                                
+                                [sheet showFromRect:[cell.actionButton convertRect:cell.actionButton.bounds toView:self.view] 
+                                             inView:self.view 
+                                           animated:YES];
+                            }
+                        }];
+    } else {
+        UIActionSheet *sheet = self.actionButtonActionSheet;
+        
+        [sheet showFromRect:[cell.actionButton convertRect:cell.actionButton.bounds toView:self.view] 
+                     inView:self.view 
+                   animated:YES];
+    }
+}
+
+#pragma mark - MFMailComposeViewControllerDelegate
+
+- (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error {
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

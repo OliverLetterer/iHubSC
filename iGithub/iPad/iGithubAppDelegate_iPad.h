@@ -13,4 +13,6 @@
     
 }
 
+- (void)deviceOrientationDidChangeNotificationCallback:(NSNotification *)notification;
+
 @end

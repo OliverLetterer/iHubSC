@@ -7,9 +7,16 @@
 //
 
 #import "GHPUserInfoTableViewCell.h"
-
+#import "UIImage+GHTabBar.m"
+#import "UIImage+Resize.h"
 
 @implementation GHPUserInfoTableViewCell
+
+@synthesize actionButton=_actionButton, activityIndicatorView=_activityIndicatorView, delegate=_delegate;
+
+- (void)actionButtonClicked:(UIButton *)button {
+    [self.delegate userInfoTableViewCellActionButtonClicked:self];
+}
 
 #pragma mark - Initialization
 
@@ -30,6 +37,19 @@
         self.detailTextLabel.contentMode = UIViewContentModeTop;
         self.detailTextLabel.shadowColor = [UIColor whiteColor];
         self.detailTextLabel.shadowOffset = CGSizeMake(0.0f, 1.0f);
+        
+        self.actionButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        CGSize size = CGSizeMake(37.0f, 25.0f);
+        UIImage *image = [[UIImage imageNamed:@"UIBarButtonSystemItemAction.png"] resizedImage:size 
+                                                                          interpolationQuality:kCGInterpolationHigh];
+        [self.actionButton setImage:image forState:UIControlStateNormal];
+        [self.actionButton addTarget:self action:@selector(actionButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+        [self.contentView addSubview:self.actionButton];
+        
+        self.activityIndicatorView = [[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray] autorelease];
+        self.activityIndicatorView.hidesWhenStopped = YES;
+        [self.activityIndicatorView stopAnimating];
+        [self.contentView addSubview:self.activityIndicatorView];
     }
     return self;
 }
@@ -52,8 +72,10 @@
     
     self.imageView.frame = CGRectMake(0.0f, 0.0f, 56.0f, 56.0f);
     self.textLabel.frame = CGRectMake(64.0f, 0.0f, CGRectGetWidth(self.contentView.bounds)-64.0f, 21.0f);
+    self.detailTextLabel.frame = CGRectMake(64.0f, 29.0f, CGRectGetWidth(self.contentView.bounds)-64.0f, CGRectGetHeight(self.contentView.bounds)-29.0f);
     [self.detailTextLabel sizeToFit];
-    self.detailTextLabel.frame = CGRectMake(64.0f, 29.0f, CGRectGetWidth(self.detailTextLabel.bounds), CGRectGetHeight(self.detailTextLabel.bounds));
+    self.actionButton.frame = CGRectMake(CGRectGetWidth(self.contentView.bounds)-37.0f, 0.0f, 37.0f, 25.0f);
+    self.activityIndicatorView.center = self.actionButton.center;
 }
 
 - (void)prepareForReuse {
@@ -64,6 +86,9 @@
 #pragma mark - Memory management
 
 - (void)dealloc {
+    [_actionButton release];
+    [_activityIndicatorView release];
+    
     [super dealloc];
 }
 
