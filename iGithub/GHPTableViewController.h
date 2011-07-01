@@ -9,11 +9,18 @@
 #import <UIKit/UIKit.h>
 #import "GHPDefaultTableViewCellBackgroundView.h"
 #import "GHPDefaultTableViewCell.h"
+#import "ANAdvancedNavigationController.h"
+#import "GithubAPI.h"
+#import "UIViewController+GHErrorHandling.h"
 
 @interface GHPTableViewController : UITableViewController {
 @private
     
 }
+
+@property (nonatomic, readonly) UITableViewCell *dummyCell;
+
+- (void)setupDefaultTableViewCell:(GHPDefaultTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath;
 
 - (GHPDefaultTableViewCell *)defaultTableViewCellForRowAtIndexPath:(NSIndexPath *)indexPath withReuseIdentifier:(NSString *)CellIdentifier;
 

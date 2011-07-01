@@ -99,6 +99,9 @@
 		A747C8C413BCCC0B00659504 /* libz.1.2.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A747C8C313BCCC0B00659504 /* libz.1.2.5.dylib */; };
 		A74A65F813BD0A7B0098106E /* 19-gear.png in Resources */ = {isa = PBXBuildFile; fileRef = A74A65F613BD0A7B0098106E /* 19-gear.png */; };
 		A74A65F913BD0A7B0098106E /* 19-gear@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A74A65F713BD0A7B0098106E /* 19-gear@2x.png */; };
+		A74A660213BDA9040098106E /* GHPUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A74A660113BDA9040098106E /* GHPUserViewController.m */; };
+		A74A660413BDAF490098106E /* UITableViewCellAccessoryDisclosureIndicatorOriginal.png in Resources */ = {isa = PBXBuildFile; fileRef = A74A660313BDAF490098106E /* UITableViewCellAccessoryDisclosureIndicatorOriginal.png */; };
+		A74A660813BDB0380098106E /* GHPUserInfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A74A660613BDB0380098106E /* GHPUserInfoTableViewCell.m */; };
 		A750571613427FB400514A82 /* ASIAuthenticationDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = A750570313427FB400514A82 /* ASIAuthenticationDialog.m */; };
 		A750571713427FB400514A82 /* ASIDataCompressor.m in Sources */ = {isa = PBXBuildFile; fileRef = A750570613427FB400514A82 /* ASIDataCompressor.m */; };
 		A750571813427FB400514A82 /* ASIDataDecompressor.m in Sources */ = {isa = PBXBuildFile; fileRef = A750570813427FB400514A82 /* ASIDataDecompressor.m */; };
@@ -410,6 +413,11 @@
 		A747C8C313BCCC0B00659504 /* libz.1.2.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.5.dylib; path = usr/lib/libz.1.2.5.dylib; sourceTree = SDKROOT; };
 		A74A65F613BD0A7B0098106E /* 19-gear.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "19-gear.png"; sourceTree = "<group>"; };
 		A74A65F713BD0A7B0098106E /* 19-gear@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "19-gear@2x.png"; sourceTree = "<group>"; };
+		A74A660013BDA9040098106E /* GHPUserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPUserViewController.h; sourceTree = "<group>"; };
+		A74A660113BDA9040098106E /* GHPUserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPUserViewController.m; sourceTree = "<group>"; };
+		A74A660313BDAF490098106E /* UITableViewCellAccessoryDisclosureIndicatorOriginal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UITableViewCellAccessoryDisclosureIndicatorOriginal.png; sourceTree = "<group>"; };
+		A74A660513BDB0380098106E /* GHPUserInfoTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPUserInfoTableViewCell.h; sourceTree = "<group>"; };
+		A74A660613BDB0380098106E /* GHPUserInfoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPUserInfoTableViewCell.m; sourceTree = "<group>"; };
 		A750570213427FB400514A82 /* ASIAuthenticationDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASIAuthenticationDialog.h; path = "asi-http-request/Classes/ASIAuthenticationDialog.h"; sourceTree = SOURCE_ROOT; };
 		A750570313427FB400514A82 /* ASIAuthenticationDialog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ASIAuthenticationDialog.m; path = "asi-http-request/Classes/ASIAuthenticationDialog.m"; sourceTree = SOURCE_ROOT; };
 		A750570413427FB400514A82 /* ASICacheDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASICacheDelegate.h; path = "asi-http-request/Classes/ASICacheDelegate.h"; sourceTree = SOURCE_ROOT; };
@@ -908,6 +916,7 @@
 		A70DAE0713B49FC500DE4279 /* UserInterface */ = {
 			isa = PBXGroup;
 			children = (
+				A74A65FF13BDA8ED0098106E /* GHPUserViewController */,
 				A7F334AF13BCD01100DB922D /* GHPLeftNavigationController */,
 				A70DAE0813B49FEA00DE4279 /* GHPTableViewController.h */,
 				A70DAE0913B49FEA00DE4279 /* GHPTableViewController.m */,
@@ -1234,12 +1243,24 @@
 		A745D09E139B987900FF8FB1 /* CollapsingTableViewCell */ = {
 			isa = PBXGroup;
 			children = (
+				A74A660313BDAF490098106E /* UITableViewCellAccessoryDisclosureIndicatorOriginal.png */,
 				A7089521134A2F23000DD6CE /* UITableViewCellAccessoryDisclosureIndicatorSelected.PNG */,
 				A7089522134A2F23000DD6CE /* UITableViewCellAccessoryDisclosureIndicator.PNG */,
 				A7089523134A2F23000DD6CE /* UITableViewCellAccessoryDisclosureIndicatorSelected@2x.PNG */,
 				A7089524134A2F23000DD6CE /* UITableViewCellAccessoryDisclosureIndicator@2x.PNG */,
 			);
 			name = CollapsingTableViewCell;
+			sourceTree = "<group>";
+		};
+		A74A65FF13BDA8ED0098106E /* GHPUserViewController */ = {
+			isa = PBXGroup;
+			children = (
+				A74A660013BDA9040098106E /* GHPUserViewController.h */,
+				A74A660113BDA9040098106E /* GHPUserViewController.m */,
+				A74A660513BDB0380098106E /* GHPUserInfoTableViewCell.h */,
+				A74A660613BDB0380098106E /* GHPUserInfoTableViewCell.m */,
+			);
+			name = GHPUserViewController;
 			sourceTree = "<group>";
 		};
 		A750570013427F9E00514A82 /* ASI-HTTP */ = {
@@ -2224,6 +2245,7 @@
 				A78B70E813BCF75400F4CE5E /* Lupe.PNG in Resources */,
 				A74A65F813BD0A7B0098106E /* 19-gear.png in Resources */,
 				A74A65F913BD0A7B0098106E /* 19-gear@2x.png in Resources */,
+				A74A660413BDAF490098106E /* UITableViewCellAccessoryDisclosureIndicatorOriginal.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2406,6 +2428,8 @@
 				A7F334B513BCD29400DB922D /* GHPLeftNavigationControllerTableViewCell.m in Sources */,
 				A78B70E213BCE95E00F4CE5E /* UIImage+GHTabBar.m in Sources */,
 				A7B567A413BCFB2800047485 /* GHPEdgedLineView.m in Sources */,
+				A74A660213BDA9040098106E /* GHPUserViewController.m in Sources */,
+				A74A660813BDB0380098106E /* GHPUserInfoTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

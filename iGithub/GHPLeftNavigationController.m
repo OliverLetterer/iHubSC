@@ -14,8 +14,10 @@
 #import "GHSettingsHelper.h"
 #import "UIImage+Resize.h"
 #import "UIImage+GHTabBar.h"
-#import "TestViewController.h"
 #import "ANAdvancedNavigationController.h"
+#import "GHPTableViewController.h"
+
+#import "GHPUserViewController.h"
 
 @implementation GHPLeftNavigationController
 
@@ -270,11 +272,11 @@
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row == 0) {
-        [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    if (indexPath.row == 4) {
+        GHPUserViewController *userViewController = [[[GHPUserViewController alloc] initWithUsername:[GHAuthenticationManager sharedInstance].username ] autorelease];
+        [self.advancedNavigationController pushRootViewController:userViewController];
     } else {
-        TestViewController *tVC = [[[TestViewController alloc] initWithStyle:UITableViewStyleGrouped] autorelease];
-        [self.advancedNavigationController pushRootViewController:tVC];
+        [tableView deselectRowAtIndexPath:indexPath animated:NO];
     }
 }
 

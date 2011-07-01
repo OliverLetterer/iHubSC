@@ -23,6 +23,17 @@
     }
 }
 
+- (void)setAccessoryType:(UITableViewCellAccessoryType)accessoryType {
+    if (accessoryType != self.accessoryType) {
+        [super setAccessoryType:accessoryType];
+        if (accessoryType == UITableViewCellAccessoryDisclosureIndicator) {
+            UIImageView *imageView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"UITableViewCellAccessoryDisclosureIndicatorOriginal.png"] ] autorelease];
+            imageView.contentMode = UIViewContentModeCenter;
+            self.accessoryView = imageView;
+        }
+    }
+}
+
 #pragma mark - Initialization
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
@@ -37,6 +48,11 @@
                                                 (id)[UIColor colorWithRed:241.0f/255.0f green:242.0f/255.0f blue:222.0f/255.0f alpha:1.0].CGColor,
                                                 nil];
         self.selectedBackgroundView = self.mySelectedBackgroundView;
+        
+        self.textLabel.backgroundColor = [UIColor clearColor];
+        self.textLabel.highlightedTextColor = [UIColor blackColor];
+        self.textLabel.shadowColor = [UIColor whiteColor];
+        self.textLabel.shadowOffset = CGSizeMake(0.0f, 1.0f);
     }
     return self;
 }
