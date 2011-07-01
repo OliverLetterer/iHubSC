@@ -129,6 +129,8 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    
+    [self scrollViewDidScroll:self.tableView];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -274,7 +276,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row == 4) {
         GHPUserViewController *userViewController = [[[GHPUserViewController alloc] initWithUsername:[GHAuthenticationManager sharedInstance].username ] autorelease];
-        userViewController = [[[GHPUserViewController alloc] initWithUsername:@"pokeb" ] autorelease];
+//        userViewController = [[[GHPUserViewController alloc] initWithUsername:@"pokeb" ] autorelease];
         [self.advancedNavigationController pushRootViewController:userViewController];
     } else {
         [tableView deselectRowAtIndexPath:indexPath animated:NO];
@@ -291,8 +293,6 @@
 #pragma mark - UIScrollViewDelegate
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    [super scrollViewDidScroll:scrollView];
-    
     CGRect frame = self.lineView.frame;
     frame.origin.y = scrollView.bounds.origin.y;
     self.lineView.frame = frame;

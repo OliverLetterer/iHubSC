@@ -141,7 +141,12 @@
                                                      name:UIApplicationWillEnterForegroundNotification 
                                                    object:nil];
         
-        self.reloadDataOnApplicationWillEnterForeground = YES;
+        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+            self.reloadDataOnApplicationWillEnterForeground = NO;
+            self.pullToReleaseEnabled = NO;
+        } else {
+            self.reloadDataOnApplicationWillEnterForeground = YES;
+        }
         self.nextPageForSectionsDictionary = [NSMutableDictionary dictionary];
     }
     return self;
