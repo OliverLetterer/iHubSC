@@ -13,8 +13,9 @@
 #import "GithubAPI.h"
 #import "UIViewController+GHErrorHandling.h"
 #import "INNotificationQueue.h"
+#import "GHPullToReleaseTableViewController.h"
 
-@interface GHPTableViewController : UITableViewController {
+@interface GHPTableViewController : GHPullToReleaseTableViewController {
 @private
     
 }
