@@ -15,7 +15,6 @@
 #import "UIImage+Resize.h"
 #import "UIImage+GHTabBar.h"
 #import "ANAdvancedNavigationController.h"
-#import "GHPTableViewController.h"
 
 #import "GHPUserViewController.h"
 
@@ -64,7 +63,6 @@
     self.tableView.tableFooterView = nil;
     self.tableView.tableHeaderView = nil;
     self.tableView.contentInset = UIEdgeInsetsZero;
-//    self.tableView.frame = CGRectMake(0.0f, 0.0f, 320.0f, 200.0f);
     
     CGRect frame = CGRectMake(CGRectGetWidth(self.view.bounds)-2.0f, 0.0f, 2.0f, CGRectGetHeight(self.view.bounds));
     GHPEdgedLineView *lineView = [[[GHPEdgedLineView alloc] initWithFrame:frame] autorelease];
@@ -118,6 +116,8 @@
     self.controllerView = wrapperView;
     
     [self.tableView addSubview:wrapperView];
+    
+    [self scrollViewDidScroll:self.tableView];
 }
 
 - (void)viewDidUnload
@@ -291,6 +291,8 @@
 #pragma mark - UIScrollViewDelegate
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    [super scrollViewDidScroll:scrollView];
+    
     CGRect frame = self.lineView.frame;
     frame.origin.y = scrollView.bounds.origin.y;
     self.lineView.frame = frame;

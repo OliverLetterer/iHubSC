@@ -7,7 +7,6 @@
 //
 
 #import "iGithubAppDelegate_iPad.h"
-#import "GHPTableViewController.h"
 #import "GHPLeftNavigationController.h"
 #import "ANAdvancedNavigationController.h"
 #import "INNotificationQueue.h"

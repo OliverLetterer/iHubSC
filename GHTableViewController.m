@@ -121,7 +121,6 @@
 }
 
 - (void)downloadDataForPage:(NSUInteger)page inSection:(NSUInteger)section {
-    DLog(@"Now Downloading Data for next page");
     [self.nextPageForSectionsDictionary removeObjectForKey:[self keyForSection:section] ];
 }
 
@@ -129,6 +128,7 @@
 
 - (id)initWithStyle:(UITableViewStyle)style {
     if ((self = [super initWithStyle:style])) {
+        _myTableViewStyle = style;
         // Custom initialization
         self.cachedHeightsDictionary = [NSMutableDictionary dictionary];
         [[NSNotificationCenter defaultCenter] addObserver:self 
@@ -169,54 +169,63 @@
 #pragma mark - View lifecycle
 
 - (void)loadView {
-    self.tableView = [[[UIExpandableTableView alloc] initWithFrame:CGRectMake(0.0, 0.0, 10.0, 10.0) style:UITableViewStylePlain] autorelease];
+    self.tableView = [[[UIExpandableTableView alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0f, 480.0f) style:_myTableViewStyle] autorelease];
     self.tableView.maximumRowCountToStillUseAnimationWhileExpanding = 100;
     
-    NSDictionary *newActions = [NSDictionary dictionaryWithObjectsAndKeys:[NSNull null], @"onOrderIn",
-                                       [NSNull null], @"onOrderOut",
-                                       [NSNull null], @"sublayers",
-                                       [NSNull null], @"contents",
-                                       [NSNull null], @"bounds",
-                                       nil];
-    
-    CAGradientLayer *gradientLayer = nil;
-    UIView *view = nil;
-    
-    view = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, 320.0, 22)] autorelease];
-	view.backgroundColor = [UIColor clearColor];
-	gradientLayer = [CAGradientLayer layer];
-	gradientLayer.frame = CGRectMake(0, 0, 480, 22);
-	gradientLayer.colors = [NSArray arrayWithObjects:
-							(id)[UIColor colorWithWhite:0.0 alpha:0.0].CGColor,
-							(id)[UIColor colorWithWhite:0.0 alpha:0.3].CGColor,
-							nil];
-    gradientLayer.actions = newActions;
-	[view.layer addSublayer:gradientLayer];
-	self.tableView.tableHeaderView = view;
-	
-	view = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, 320.0, 22)] autorelease];
-	view.backgroundColor = [UIColor clearColor];
-	gradientLayer = [CAGradientLayer layer];
-	gradientLayer.frame = CGRectMake(0, 0, 480, 22);
-	gradientLayer.colors = [NSArray arrayWithObjects:
-							(id)[UIColor colorWithWhite:0.0 alpha:0.3].CGColor,
-							(id)[UIColor colorWithWhite:0.0 alpha:0.0].CGColor,
-							nil];
-    gradientLayer.actions = newActions;
-	[view.layer addSublayer:gradientLayer];
-	self.tableView.tableFooterView = view;
-    
-    self.tableView.contentInset = UIEdgeInsetsMake(-22, 0, -22, 0);
-    self.defaultEdgeInset = self.tableView.contentInset;
-    self.tableView.backgroundView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"GHDefaultTableViewBackgroundImage.png"]] autorelease];
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+        NSDictionary *newActions = [NSDictionary dictionaryWithObjectsAndKeys:[NSNull null], @"onOrderIn",
+                                    [NSNull null], @"onOrderOut",
+                                    [NSNull null], @"sublayers",
+                                    [NSNull null], @"contents",
+                                    [NSNull null], @"bounds",
+                                    nil];
+        
+        CAGradientLayer *gradientLayer = nil;
+        UIView *view = nil;
+        
+        view = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, 320.0, 22)] autorelease];
+        view.backgroundColor = [UIColor clearColor];
+        gradientLayer = [CAGradientLayer layer];
+        gradientLayer.frame = CGRectMake(0, 0, 480, 22);
+        gradientLayer.colors = [NSArray arrayWithObjects:
+                                (id)[UIColor colorWithWhite:0.0 alpha:0.0].CGColor,
+                                (id)[UIColor colorWithWhite:0.0 alpha:0.3].CGColor,
+                                nil];
+        gradientLayer.actions = newActions;
+        [view.layer addSublayer:gradientLayer];
+        self.tableView.tableHeaderView = view;
+        
+        view = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, 320.0, 22)] autorelease];
+        view.backgroundColor = [UIColor clearColor];
+        gradientLayer = [CAGradientLayer layer];
+        gradientLayer.frame = CGRectMake(0, 0, 480, 22);
+        gradientLayer.colors = [NSArray arrayWithObjects:
+                                (id)[UIColor colorWithWhite:0.0 alpha:0.3].CGColor,
+                                (id)[UIColor colorWithWhite:0.0 alpha:0.0].CGColor,
+                                nil];
+        gradientLayer.actions = newActions;
+        [view.layer addSublayer:gradientLayer];
+        self.tableView.tableFooterView = view;
+        
+        self.tableView.contentInset = UIEdgeInsetsMake(-22, 0, -22, 0);
+        self.defaultEdgeInset = self.tableView.contentInset;
+        self.tableView.backgroundView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"GHDefaultTableViewBackgroundImage.png"]] autorelease];
+    }
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.tableView.scrollsToTop = YES;
-    self.tableView.rowHeight = 71.0;
-    self.tableView.separatorColor = [UIColor colorWithRed:186.0f/255.0f green:186.0f/255.0f blue:186.0f/255.0f alpha:1.0f];
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        self.tableView.backgroundColor = [UIColor colorWithRed:219.0f/255.0f green:219.0f/255.0f blue:219.0f/255.0f alpha:1.0f];
+        self.tableView.backgroundView = nil;
+        self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLineEtched;
+        self.tableView.separatorColor = [UIColor clearColor];
+    } else {
+        self.tableView.scrollsToTop = YES;
+        self.tableView.rowHeight = 71.0;
+        self.tableView.separatorColor = [UIColor colorWithRed:186.0f/255.0f green:186.0f/255.0f blue:186.0f/255.0f alpha:1.0f];
+    }
 }
 
 - (void)viewDidUnload {
@@ -228,37 +237,39 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    if (!_hasGradientBackgrounds) {
-        NSDictionary *newActions = [NSDictionary dictionaryWithObjectsAndKeys:[NSNull null], @"onOrderIn",
-                                    [NSNull null], @"onOrderOut",
-                                    [NSNull null], @"sublayers",
-                                    [NSNull null], @"contents",
-                                    [NSNull null], @"bounds",
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+        if (!_hasGradientBackgrounds) {
+            NSDictionary *newActions = [NSDictionary dictionaryWithObjectsAndKeys:[NSNull null], @"onOrderIn",
+                                        [NSNull null], @"onOrderOut",
+                                        [NSNull null], @"sublayers",
+                                        [NSNull null], @"contents",
+                                        [NSNull null], @"bounds",
+                                        nil];
+            
+            UIView *view = self.tableView.backgroundView;
+            CAGradientLayer *gradientLayer = nil;
+            
+            gradientLayer = [CAGradientLayer layer];
+            gradientLayer.frame = CGRectMake(0.0f, 0.0f, 320.0f, 22.0f);
+            gradientLayer.colors = [NSArray arrayWithObjects:
+                                    (id)[UIColor colorWithWhite:0.0 alpha:0.3].CGColor,
+                                    (id)[UIColor colorWithWhite:0.0 alpha:0.0].CGColor,
                                     nil];
-        
-        UIView *view = self.tableView.backgroundView;
-        CAGradientLayer *gradientLayer = nil;
-        
-        gradientLayer = [CAGradientLayer layer];
-        gradientLayer.frame = CGRectMake(0.0f, 0.0f, 320.0f, 22.0f);
-        gradientLayer.colors = [NSArray arrayWithObjects:
-                                (id)[UIColor colorWithWhite:0.0 alpha:0.3].CGColor,
-                                (id)[UIColor colorWithWhite:0.0 alpha:0.0].CGColor,
-                                nil];
-        gradientLayer.actions = newActions;
-        [view.layer addSublayer:gradientLayer];
-        
-        gradientLayer = [CAGradientLayer layer];
-        gradientLayer.frame = CGRectMake(0.0f, self.view.bounds.size.height - 22.0f, 320.0f, 22.0f);
-        gradientLayer.colors = [NSArray arrayWithObjects:
-                                (id)[UIColor colorWithWhite:0.0 alpha:0.0].CGColor,
-                                (id)[UIColor colorWithWhite:0.0 alpha:0.3].CGColor,
-                                nil];
-        gradientLayer.actions = newActions;
-        [view.layer addSublayer:gradientLayer];
-        _hasGradientBackgrounds = YES;
+            gradientLayer.actions = newActions;
+            [view.layer addSublayer:gradientLayer];
+            
+            gradientLayer = [CAGradientLayer layer];
+            gradientLayer.frame = CGRectMake(0.0f, self.view.bounds.size.height - 22.0f, 320.0f, 22.0f);
+            gradientLayer.colors = [NSArray arrayWithObjects:
+                                    (id)[UIColor colorWithWhite:0.0 alpha:0.0].CGColor,
+                                    (id)[UIColor colorWithWhite:0.0 alpha:0.3].CGColor,
+                                    nil];
+            gradientLayer.actions = newActions;
+            [view.layer addSublayer:gradientLayer];
+            _hasGradientBackgrounds = YES;
+        }
+        self.navigationController.navigationBar.tintColor = [UIColor defaultNavigationBarTintColor];
     }
-    self.navigationController.navigationBar.tintColor = [UIColor defaultNavigationBarTintColor];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -271,6 +282,14 @@
 
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
+}
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
+    // Return YES for supported orientations
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        return YES;
+    }
+	return interfaceOrientation == UIInterfaceOrientationPortrait;
 }
 
 #pragma mark - UIExpandableTableViewDatasource
@@ -345,6 +364,38 @@
 }
 
 @end
+
+
+
+@implementation GHTableViewController (iPad)
+
+- (void)setupDefaultTableViewCell:(GHPDefaultTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.row == 0 && indexPath.row == [self.tableView numberOfRowsInSection:indexPath.section]-1) {
+        cell.customStyle = GHPDefaultTableViewCellStyleTopAndBottom;
+    } else if (indexPath.row == 0) {
+        cell.customStyle = GHPDefaultTableViewCellStyleTop;
+    } else if (indexPath.row == [self.tableView numberOfRowsInSection:indexPath.section]-1) {
+        cell.customStyle = GHPDefaultTableViewCellStyleBottom;
+    } else {
+        cell.customStyle = GHPDefaultTableViewCellStyleCenter;
+    }
+}
+
+- (GHPDefaultTableViewCell *)defaultTableViewCellForRowAtIndexPath:(NSIndexPath *)indexPath withReuseIdentifier:(NSString *)CellIdentifier {
+    GHPDefaultTableViewCell *cell = (GHPDefaultTableViewCell *)[self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (cell == nil) {
+        cell = [[[GHPDefaultTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+    }
+    
+    [self setupDefaultTableViewCell:cell forRowAtIndexPath:indexPath];
+    
+    return cell;
+}
+
+@end
+
+
+
 
 
 

@@ -13,6 +13,10 @@
 #import "UIViewController+GHErrorHandling.h"
 #import "GHTableViewControllerAlertViewProxy.h"
 #import "GHPullToReleaseTableViewController.h"
+#import "GHPDefaultTableViewCell.h"
+#import "GHAuthenticationManager.h"
+#import "GithubAPI.h"
+#import "INNotificationQueue.h"
 
 @class GHNewsFeedItemTableViewCell;
 
@@ -26,6 +30,8 @@
     GHTableViewControllerAlertViewProxy *_alertProxy;
     
     BOOL _hasGradientBackgrounds;
+    
+    UITableViewStyle _myTableViewStyle;
 }
 
 @property (nonatomic, retain) UIExpandableTableView *tableView;
@@ -56,6 +62,14 @@
 
 @end
 
+
+
+@interface GHTableViewController (iPad)
+
+- (void)setupDefaultTableViewCell:(GHPDefaultTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath;
+- (GHPDefaultTableViewCell *)defaultTableViewCellForRowAtIndexPath:(NSIndexPath *)indexPath withReuseIdentifier:(NSString *)CellIdentifier;
+
+@end
 
 
 

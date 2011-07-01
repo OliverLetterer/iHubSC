@@ -46,10 +46,8 @@
 		A70DA3D813A4B7F700235C76 /* GHAPIOrganizationV3.m in Sources */ = {isa = PBXBuildFile; fileRef = A70DA3D713A4B7F700235C76 /* GHAPIOrganizationV3.m */; };
 		A70DA3DC13A4E2D100235C76 /* GHAPITeamV3.m in Sources */ = {isa = PBXBuildFile; fileRef = A70DA3DB13A4E2D100235C76 /* GHAPITeamV3.m */; };
 		A70DA3DF13A61BC200235C76 /* OCPromptView.m in Sources */ = {isa = PBXBuildFile; fileRef = A70DA3DE13A61BC000235C76 /* OCPromptView.m */; };
-		A70DAE0A13B49FEA00DE4279 /* GHPTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A70DAE0913B49FEA00DE4279 /* GHPTableViewController.m */; };
 		A70DAE0D13B4A0D900DE4279 /* GHPDefaultTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A70DAE0C13B4A0D900DE4279 /* GHPDefaultTableViewCell.m */; };
 		A70DAE1013B4A1DE00DE4279 /* GHPDefaultTableViewCellBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = A70DAE0F13B4A1DE00DE4279 /* GHPDefaultTableViewCellBackgroundView.m */; };
-		A70DAE1313B4B48900DE4279 /* GHPNewsFeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A70DAE1213B4B48800DE4279 /* GHPNewsFeedViewController.m */; };
 		A712B7C0135C9A5D0009B7A7 /* GHFileSystemItem.m in Sources */ = {isa = PBXBuildFile; fileRef = A712B7BF135C9A5D0009B7A7 /* GHFileSystemItem.m */; };
 		A712B7C3135C9ACB0009B7A7 /* GHFile.m in Sources */ = {isa = PBXBuildFile; fileRef = A712B7C2135C9ACA0009B7A7 /* GHFile.m */; };
 		A712B7C6135C9AF10009B7A7 /* GHDirectory.m in Sources */ = {isa = PBXBuildFile; fileRef = A712B7C5135C9AF10009B7A7 /* GHDirectory.m */; };
@@ -238,7 +236,6 @@
 		A7F334A713BCCF0100DB922D /* ANAdvancedNavigationController+MovingRightViewControllers.m in Sources */ = {isa = PBXBuildFile; fileRef = A7F3349F13BCCF0100DB922D /* ANAdvancedNavigationController+MovingRightViewControllers.m */; };
 		A7F334A813BCCF0100DB922D /* ANRectangleView.m in Sources */ = {isa = PBXBuildFile; fileRef = A7F334A213BCCF0100DB922D /* ANRectangleView.m */; };
 		A7F334A913BCCF0100DB922D /* ANRemoveRectangleIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = A7F334A413BCCF0100DB922D /* ANRemoveRectangleIndicatorView.m */; };
-		A7F334AE13BCCF2800DB922D /* TestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7F334AD13BCCF2800DB922D /* TestViewController.m */; };
 		A7F334B213BCD02700DB922D /* GHPLeftNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7F334B113BCD02700DB922D /* GHPLeftNavigationController.m */; };
 		A7F334B513BCD29400DB922D /* GHPLeftNavigationControllerTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A7F334B413BCD29300DB922D /* GHPLeftNavigationControllerTableViewCell.m */; };
 		A7F6260F134B3938006487CA /* UITableViewCellWithLinearGradientBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = A7F6260E134B3938006487CA /* UITableViewCellWithLinearGradientBackgroundView.m */; };
@@ -321,14 +318,10 @@
 		A70DA3DB13A4E2D100235C76 /* GHAPITeamV3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHAPITeamV3.m; sourceTree = "<group>"; };
 		A70DA3DD13A61BBD00235C76 /* OCPromptView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCPromptView.h; sourceTree = "<group>"; };
 		A70DA3DE13A61BC000235C76 /* OCPromptView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OCPromptView.m; sourceTree = "<group>"; };
-		A70DAE0813B49FEA00DE4279 /* GHPTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPTableViewController.h; sourceTree = "<group>"; };
-		A70DAE0913B49FEA00DE4279 /* GHPTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPTableViewController.m; sourceTree = "<group>"; };
 		A70DAE0B13B4A0D900DE4279 /* GHPDefaultTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPDefaultTableViewCell.h; sourceTree = "<group>"; };
 		A70DAE0C13B4A0D900DE4279 /* GHPDefaultTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPDefaultTableViewCell.m; sourceTree = "<group>"; };
 		A70DAE0E13B4A1DE00DE4279 /* GHPDefaultTableViewCellBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPDefaultTableViewCellBackgroundView.h; sourceTree = "<group>"; };
 		A70DAE0F13B4A1DE00DE4279 /* GHPDefaultTableViewCellBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPDefaultTableViewCellBackgroundView.m; sourceTree = "<group>"; };
-		A70DAE1113B4B48800DE4279 /* GHPNewsFeedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPNewsFeedViewController.h; sourceTree = "<group>"; };
-		A70DAE1213B4B48800DE4279 /* GHPNewsFeedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPNewsFeedViewController.m; sourceTree = "<group>"; };
 		A712B7BE135C9A5D0009B7A7 /* GHFileSystemItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHFileSystemItem.h; sourceTree = "<group>"; };
 		A712B7BF135C9A5D0009B7A7 /* GHFileSystemItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHFileSystemItem.m; sourceTree = "<group>"; };
 		A712B7C1135C9ACA0009B7A7 /* GHFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHFile.h; sourceTree = "<group>"; };
@@ -661,8 +654,6 @@
 		A7F334A213BCCF0100DB922D /* ANRectangleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANRectangleView.m; sourceTree = "<group>"; };
 		A7F334A313BCCF0100DB922D /* ANRemoveRectangleIndicatorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANRemoveRectangleIndicatorView.h; sourceTree = "<group>"; };
 		A7F334A413BCCF0100DB922D /* ANRemoveRectangleIndicatorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANRemoveRectangleIndicatorView.m; sourceTree = "<group>"; };
-		A7F334AC13BCCF2800DB922D /* TestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestViewController.h; sourceTree = "<group>"; };
-		A7F334AD13BCCF2800DB922D /* TestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestViewController.m; sourceTree = "<group>"; };
 		A7F334B013BCD02700DB922D /* GHPLeftNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPLeftNavigationController.h; sourceTree = "<group>"; };
 		A7F334B113BCD02700DB922D /* GHPLeftNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPLeftNavigationController.m; sourceTree = "<group>"; };
 		A7F334B313BCD29300DB922D /* GHPLeftNavigationControllerTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPLeftNavigationControllerTableViewCell.h; sourceTree = "<group>"; };
@@ -920,14 +911,10 @@
 			children = (
 				A74A65FF13BDA8ED0098106E /* GHPUserViewController */,
 				A7F334AF13BCD01100DB922D /* GHPLeftNavigationController */,
-				A70DAE0813B49FEA00DE4279 /* GHPTableViewController.h */,
-				A70DAE0913B49FEA00DE4279 /* GHPTableViewController.m */,
 				A70DAE0B13B4A0D900DE4279 /* GHPDefaultTableViewCell.h */,
 				A70DAE0C13B4A0D900DE4279 /* GHPDefaultTableViewCell.m */,
 				A70DAE0E13B4A1DE00DE4279 /* GHPDefaultTableViewCellBackgroundView.h */,
 				A70DAE0F13B4A1DE00DE4279 /* GHPDefaultTableViewCellBackgroundView.m */,
-				A70DAE1113B4B48800DE4279 /* GHPNewsFeedViewController.h */,
-				A70DAE1213B4B48800DE4279 /* GHPNewsFeedViewController.m */,
 			);
 			name = UserInterface;
 			sourceTree = "<group>";
@@ -1729,8 +1716,6 @@
 		A7BF14141342149C001AE50D /* iPad */ = {
 			isa = PBXGroup;
 			children = (
-				A7F334AC13BCCF2800DB922D /* TestViewController.h */,
-				A7F334AD13BCCF2800DB922D /* TestViewController.m */,
 				A7F334AB13BCCF0800DB922D /* ANAdvancedNavigationController */,
 				A70DAE0713B49FC500DE4279 /* UserInterface */,
 				A7BF14151342149C001AE50D /* iGithubAppDelegate_iPad.h */,
@@ -2418,16 +2403,13 @@
 				A75C3EB113B363E300D64681 /* INNotificationQueue+Private.m in Sources */,
 				A773023213B38C4B0075235E /* GHAPICommitV3.m in Sources */,
 				A773023713B38D200075235E /* GHAPITreeInfoV3.m in Sources */,
-				A70DAE0A13B49FEA00DE4279 /* GHPTableViewController.m in Sources */,
 				A70DAE0D13B4A0D900DE4279 /* GHPDefaultTableViewCell.m in Sources */,
 				A70DAE1013B4A1DE00DE4279 /* GHPDefaultTableViewCellBackgroundView.m in Sources */,
-				A70DAE1313B4B48900DE4279 /* GHPNewsFeedViewController.m in Sources */,
 				A7F334A513BCCF0100DB922D /* ANAdvancedNavigationController.m in Sources */,
 				A7F334A613BCCF0100DB922D /* ANAdvancedNavigationController+LeftViewController.m in Sources */,
 				A7F334A713BCCF0100DB922D /* ANAdvancedNavigationController+MovingRightViewControllers.m in Sources */,
 				A7F334A813BCCF0100DB922D /* ANRectangleView.m in Sources */,
 				A7F334A913BCCF0100DB922D /* ANRemoveRectangleIndicatorView.m in Sources */,
-				A7F334AE13BCCF2800DB922D /* TestViewController.m in Sources */,
 				A7F334B213BCD02700DB922D /* GHPLeftNavigationController.m in Sources */,
 				A7F334B513BCD29400DB922D /* GHPLeftNavigationControllerTableViewCell.m in Sources */,
 				A78B70E213BCE95E00F4CE5E /* UIImage+GHTabBar.m in Sources */,

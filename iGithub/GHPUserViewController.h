@@ -7,11 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "GHPTableViewController.h"
+#import "GHTableViewController.h"
 #import "GHPUserInfoTableViewCell.h"
 #import <MessageUI/MessageUI.h>
 
-@interface GHPUserViewController : GHPTableViewController <GHPUserInfoTableViewCellDelegate, UIActionSheetDelegate, MFMailComposeViewControllerDelegate> {
+@interface GHPUserViewController : GHTableViewController <GHPUserInfoTableViewCellDelegate, UIActionSheetDelegate, MFMailComposeViewControllerDelegate> {
     GHAPIUserV3 *_user;
     NSString *_username;
     
