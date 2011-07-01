@@ -193,6 +193,7 @@
 }
 
 - (void)removeRightViewControllerView:(UIViewController *)rightViewController animated:(BOOL)animated {
+    [rightViewController viewWillDisappear:animated];
     UIView *view = [self viewForExistingRightViewController:rightViewController];
     if (animated) {
         [UIView animateWithDuration:ANAdvancedNavigationControllerDefaultAnimationDuration 
@@ -203,9 +204,11 @@
                          } 
                          completion:^(BOOL finished) {
                              [view removeFromSuperview];
+                             [rightViewController viewDidDisappear:animated];
                          }];
     } else {
         [view removeFromSuperview];
+        [rightViewController viewDidDisappear:animated];
     }
     
     [self numberOfRightViewControllersChanged];
