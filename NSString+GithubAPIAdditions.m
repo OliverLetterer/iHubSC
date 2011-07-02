@@ -59,7 +59,6 @@
 @implementation NSString (GHAPIHTTPParsing)
 
 - (NSUInteger)nextPage {
-    DLog(@"%@", self);
     __block NSUInteger nextPage = GHAPIPaginationNextPageNotFound;
     
     NSArray *basicLinksArray = [self componentsSeparatedByString:@","];
@@ -68,8 +67,6 @@
         if ([basicLinkString rangeOfString:@"rel=\"next\""].location != NSNotFound) {
             
             NSRegularExpression *expression = [[[NSRegularExpression alloc] initWithPattern:@"page=(0|1|2|3|4|5|6|7|8|9)+&" options:NSRegularExpressionCaseInsensitive error:NULL] autorelease];
-            
-#warning supply fix in V1.9
             
             [expression enumerateMatchesInString:basicLinkString options:0 range:NSMakeRange(0, basicLinkString.length) 
                                       usingBlock:^(NSTextCheckingResult *result, NSMatchingFlags flags, BOOL *stop) {
@@ -80,7 +77,6 @@
         }
     }
     
-    DLog(@"%d", nextPage);
     return nextPage;
 }
 
