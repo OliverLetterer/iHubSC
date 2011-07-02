@@ -71,7 +71,7 @@
     }
     
     if (self.user.hasBlog) {
-        [sheet addButtonWithTitle:NSLocalizedString(@"View Blog is Safari", @"")];
+        [sheet addButtonWithTitle:NSLocalizedString(@"View Blog in Safari", @"")];
     }
     if (self.user.hasEMail && [MFMailComposeViewController canSendMail]) {
         [sheet addButtonWithTitle:NSLocalizedString(@"E-Mail", @"")];
@@ -179,7 +179,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (section == kUITableViewSectionUserContent) {
-        return 6;
+        return 7;
     } else if (section == kUITableViewSectionUserInfo) {
         return 1;
     }
@@ -202,6 +202,8 @@
             cell.textLabel.text = NSLocalizedString(@"Gists", @"");
         } else if (indexPath.row == 5) {
             cell.textLabel.text = NSLocalizedString(@"Organizations", @"");
+        } else if (indexPath.row == 6) {
+            cell.textLabel.text = NSLocalizedString(@"Public Activity", @"");
         } else {
             cell.textLabel.text = nil;
         }
@@ -290,9 +292,9 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == kUITableViewSectionUserInfo) {
         CGSize size = [self.userDetailInfoString sizeWithFont:[UIFont systemFontOfSize:14.0f]
-                                            constrainedToSize:CGSizeMake(CGFLOAT_MAX, CGFLOAT_MAX) 
+                                            constrainedToSize:CGSizeMake(349.0f, CGFLOAT_MAX) 
                                                 lineBreakMode:UILineBreakModeWordWrap];
-        return size.height + 64.0f;
+        return size.height + 29.0f;
     } else {
         return UITableViewAutomaticDimension;
     }
@@ -362,7 +364,7 @@
                       _isFollowingUser = NO;
                   }
               }];
-    } else if ([title isEqualToString:NSLocalizedString(@"View Blog is Safari", @"")]) {
+    } else if ([title isEqualToString:NSLocalizedString(@"View Blog in Safari", @"")]) {
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:self.user.blog] ];
     } else if ([title isEqualToString:NSLocalizedString(@"E-Mail", @"")]) {
         MFMailComposeViewController *mailViewController = [[[MFMailComposeViewController alloc] init] autorelease];

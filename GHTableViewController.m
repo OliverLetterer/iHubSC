@@ -86,6 +86,26 @@
     }
 }
 
+- (void)updateImageView:(UIImageView *)imageView 
+            atIndexPath:(NSIndexPath *)indexPath 
+         withGravatarID:(NSString *)gravatarID {
+    
+    UIImage *gravatarImage = [UIImage cachedImageFromGravatarID:gravatarID];
+    
+    if (gravatarImage) {
+        imageView.image = gravatarImage;
+    } else {
+#warning display placeholder
+        [UIImage imageFromGravatarID:gravatarID 
+               withCompletionHandler:^(UIImage *image, NSError *error, BOOL didDownload) {
+                   if (indexPath && [self.tableView containsIndexPath:indexPath]) {
+                       [self.tableView reloadRowAtIndexPath:indexPath withRowAnimation:UITableViewRowAnimationNone];
+                   }
+               }];
+    }
+    
+}
+
 - (void)authenticationViewControllerdidAuthenticateUserCallback:(NSNotification *)notification {
     if (self.reloadDataIfNewUserGotAuthenticated) {
         [self pullToReleaseTableViewReloadData];

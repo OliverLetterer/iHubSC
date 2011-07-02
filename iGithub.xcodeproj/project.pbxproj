@@ -50,6 +50,7 @@
 		A70DA3DF13A61BC200235C76 /* OCPromptView.m in Sources */ = {isa = PBXBuildFile; fileRef = A70DA3DE13A61BC000235C76 /* OCPromptView.m */; };
 		A70DAE0D13B4A0D900DE4279 /* GHPDefaultTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A70DAE0C13B4A0D900DE4279 /* GHPDefaultTableViewCell.m */; };
 		A70DAE1013B4A1DE00DE4279 /* GHPDefaultTableViewCellBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = A70DAE0F13B4A1DE00DE4279 /* GHPDefaultTableViewCellBackgroundView.m */; };
+		A70FF3A413BF6A560082E2EC /* GHPCollapsingAndSpinningTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A70FF3A313BF6A560082E2EC /* GHPCollapsingAndSpinningTableViewCell.m */; };
 		A712B7C0135C9A5D0009B7A7 /* GHFileSystemItem.m in Sources */ = {isa = PBXBuildFile; fileRef = A712B7BF135C9A5D0009B7A7 /* GHFileSystemItem.m */; };
 		A712B7C3135C9ACB0009B7A7 /* GHFile.m in Sources */ = {isa = PBXBuildFile; fileRef = A712B7C2135C9ACA0009B7A7 /* GHFile.m */; };
 		A712B7C6135C9AF10009B7A7 /* GHDirectory.m in Sources */ = {isa = PBXBuildFile; fileRef = A712B7C5135C9AF10009B7A7 /* GHDirectory.m */; };
@@ -103,6 +104,12 @@
 		A74A660413BDAF490098106E /* UITableViewCellAccessoryDisclosureIndicatorOriginal.png in Resources */ = {isa = PBXBuildFile; fileRef = A74A660313BDAF490098106E /* UITableViewCellAccessoryDisclosureIndicatorOriginal.png */; };
 		A74A660813BDB0380098106E /* GHPUserInfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A74A660613BDB0380098106E /* GHPUserInfoTableViewCell.m */; };
 		A74F2A2B13BE0E8200E57818 /* GHPRepositoryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A74F2A2A13BE0E8200E57818 /* GHPRepositoryTableViewCell.m */; };
+		A74F2A3013BE1AEA00E57818 /* GHPRepositoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A74F2A2F13BE1AEA00E57818 /* GHPRepositoryViewController.m */; };
+		A74F2A3313BE524D00E57818 /* GHPRepositoryInfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A74F2A3213BE524D00E57818 /* GHPRepositoryInfoTableViewCell.m */; };
+		A74F2A3713BE60E600E57818 /* GHPUserTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A74F2A3613BE60E600E57818 /* GHPUserTableViewCell.m */; };
+		A74F2A3D13BF465E00E57818 /* GHPCreateIssueViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A74F2A3C13BF465E00E57818 /* GHPCreateIssueViewController.m */; };
+		A74F2A4113BF481200E57818 /* GHPCreateIssueTitleAndDescriptionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A74F2A3F13BF481000E57818 /* GHPCreateIssueTitleAndDescriptionTableViewCell.m */; };
+		A74F2A4213BF481200E57818 /* GHPCreateIssueTitleAndDescriptionTableViewCellContentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A74F2A4013BF481100E57818 /* GHPCreateIssueTitleAndDescriptionTableViewCellContentView.xib */; };
 		A750571613427FB400514A82 /* ASIAuthenticationDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = A750570313427FB400514A82 /* ASIAuthenticationDialog.m */; };
 		A750571713427FB400514A82 /* ASIDataCompressor.m in Sources */ = {isa = PBXBuildFile; fileRef = A750570613427FB400514A82 /* ASIDataCompressor.m */; };
 		A750571813427FB400514A82 /* ASIDataDecompressor.m in Sources */ = {isa = PBXBuildFile; fileRef = A750570813427FB400514A82 /* ASIDataDecompressor.m */; };
@@ -330,6 +337,8 @@
 		A70DAE0C13B4A0D900DE4279 /* GHPDefaultTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPDefaultTableViewCell.m; sourceTree = "<group>"; };
 		A70DAE0E13B4A1DE00DE4279 /* GHPDefaultTableViewCellBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPDefaultTableViewCellBackgroundView.h; sourceTree = "<group>"; };
 		A70DAE0F13B4A1DE00DE4279 /* GHPDefaultTableViewCellBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPDefaultTableViewCellBackgroundView.m; sourceTree = "<group>"; };
+		A70FF3A213BF6A560082E2EC /* GHPCollapsingAndSpinningTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPCollapsingAndSpinningTableViewCell.h; sourceTree = "<group>"; };
+		A70FF3A313BF6A560082E2EC /* GHPCollapsingAndSpinningTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPCollapsingAndSpinningTableViewCell.m; sourceTree = "<group>"; };
 		A712B7BE135C9A5D0009B7A7 /* GHFileSystemItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHFileSystemItem.h; sourceTree = "<group>"; };
 		A712B7BF135C9A5D0009B7A7 /* GHFileSystemItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHFileSystemItem.m; sourceTree = "<group>"; };
 		A712B7C1135C9ACA0009B7A7 /* GHFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHFile.h; sourceTree = "<group>"; };
@@ -422,6 +431,17 @@
 		A74A660613BDB0380098106E /* GHPUserInfoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPUserInfoTableViewCell.m; sourceTree = "<group>"; };
 		A74F2A2913BE0E8200E57818 /* GHPRepositoryTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPRepositoryTableViewCell.h; sourceTree = "<group>"; };
 		A74F2A2A13BE0E8200E57818 /* GHPRepositoryTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPRepositoryTableViewCell.m; sourceTree = "<group>"; };
+		A74F2A2E13BE1AEA00E57818 /* GHPRepositoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPRepositoryViewController.h; sourceTree = "<group>"; };
+		A74F2A2F13BE1AEA00E57818 /* GHPRepositoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPRepositoryViewController.m; sourceTree = "<group>"; };
+		A74F2A3113BE524C00E57818 /* GHPRepositoryInfoTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPRepositoryInfoTableViewCell.h; sourceTree = "<group>"; };
+		A74F2A3213BE524D00E57818 /* GHPRepositoryInfoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPRepositoryInfoTableViewCell.m; sourceTree = "<group>"; };
+		A74F2A3513BE60E600E57818 /* GHPUserTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPUserTableViewCell.h; sourceTree = "<group>"; };
+		A74F2A3613BE60E600E57818 /* GHPUserTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPUserTableViewCell.m; sourceTree = "<group>"; };
+		A74F2A3B13BF465D00E57818 /* GHPCreateIssueViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPCreateIssueViewController.h; sourceTree = "<group>"; };
+		A74F2A3C13BF465E00E57818 /* GHPCreateIssueViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPCreateIssueViewController.m; sourceTree = "<group>"; };
+		A74F2A3E13BF481000E57818 /* GHPCreateIssueTitleAndDescriptionTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPCreateIssueTitleAndDescriptionTableViewCell.h; sourceTree = "<group>"; };
+		A74F2A3F13BF481000E57818 /* GHPCreateIssueTitleAndDescriptionTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPCreateIssueTitleAndDescriptionTableViewCell.m; sourceTree = "<group>"; };
+		A74F2A4013BF481100E57818 /* GHPCreateIssueTitleAndDescriptionTableViewCellContentView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GHPCreateIssueTitleAndDescriptionTableViewCellContentView.xib; sourceTree = "<group>"; };
 		A750570213427FB400514A82 /* ASIAuthenticationDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASIAuthenticationDialog.h; path = "asi-http-request/Classes/ASIAuthenticationDialog.h"; sourceTree = SOURCE_ROOT; };
 		A750570313427FB400514A82 /* ASIAuthenticationDialog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ASIAuthenticationDialog.m; path = "asi-http-request/Classes/ASIAuthenticationDialog.m"; sourceTree = SOURCE_ROOT; };
 		A750570413427FB400514A82 /* ASICacheDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASICacheDelegate.h; path = "asi-http-request/Classes/ASICacheDelegate.h"; sourceTree = SOURCE_ROOT; };
@@ -936,6 +956,8 @@
 		A70DAE0713B49FC500DE4279 /* UserInterface */ = {
 			isa = PBXGroup;
 			children = (
+				A74F2A3413BE60CB00E57818 /* GHPUsersViewController */,
+				A74F2A2D13BE1ACE00E57818 /* GHPRepositoryViewController */,
 				A703A62F13BE0163003A4585 /* GHPRepositoriesViewController */,
 				A74A65FF13BDA8ED0098106E /* GHPUserViewController */,
 				A7F334AF13BCD01100DB922D /* GHPLeftNavigationController */,
@@ -945,6 +967,15 @@
 				A70DAE0F13B4A1DE00DE4279 /* GHPDefaultTableViewCellBackgroundView.m */,
 			);
 			name = UserInterface;
+			sourceTree = "<group>";
+		};
+		A70FF3A013BF6A320082E2EC /* GHPCollapsingAndSpinningTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				A70FF3A213BF6A560082E2EC /* GHPCollapsingAndSpinningTableViewCell.h */,
+				A70FF3A313BF6A560082E2EC /* GHPCollapsingAndSpinningTableViewCell.m */,
+			);
+			name = GHPCollapsingAndSpinningTableViewCell;
 			sourceTree = "<group>";
 		};
 		A712B7BC135C9A450009B7A7 /* GHFileSystem */ = {
@@ -1279,6 +1310,31 @@
 				A74A660613BDB0380098106E /* GHPUserInfoTableViewCell.m */,
 			);
 			name = GHPUserViewController;
+			sourceTree = "<group>";
+		};
+		A74F2A2D13BE1ACE00E57818 /* GHPRepositoryViewController */ = {
+			isa = PBXGroup;
+			children = (
+				A74F2A2E13BE1AEA00E57818 /* GHPRepositoryViewController.h */,
+				A74F2A2F13BE1AEA00E57818 /* GHPRepositoryViewController.m */,
+				A74F2A3113BE524C00E57818 /* GHPRepositoryInfoTableViewCell.h */,
+				A74F2A3213BE524D00E57818 /* GHPRepositoryInfoTableViewCell.m */,
+				A74F2A3B13BF465D00E57818 /* GHPCreateIssueViewController.h */,
+				A74F2A3C13BF465E00E57818 /* GHPCreateIssueViewController.m */,
+				A74F2A3E13BF481000E57818 /* GHPCreateIssueTitleAndDescriptionTableViewCell.h */,
+				A74F2A3F13BF481000E57818 /* GHPCreateIssueTitleAndDescriptionTableViewCell.m */,
+				A74F2A4013BF481100E57818 /* GHPCreateIssueTitleAndDescriptionTableViewCellContentView.xib */,
+			);
+			name = GHPRepositoryViewController;
+			sourceTree = "<group>";
+		};
+		A74F2A3413BE60CB00E57818 /* GHPUsersViewController */ = {
+			isa = PBXGroup;
+			children = (
+				A74F2A3513BE60E600E57818 /* GHPUserTableViewCell.h */,
+				A74F2A3613BE60E600E57818 /* GHPUserTableViewCell.m */,
+			);
+			name = GHPUsersViewController;
 			sourceTree = "<group>";
 		};
 		A750570013427F9E00514A82 /* ASI-HTTP */ = {
@@ -1744,6 +1800,7 @@
 		A7BF14141342149C001AE50D /* iPad */ = {
 			isa = PBXGroup;
 			children = (
+				A70FF3A013BF6A320082E2EC /* GHPCollapsingAndSpinningTableViewCell */,
 				A7F334AB13BCCF0800DB922D /* ANAdvancedNavigationController */,
 				A70DAE0713B49FC500DE4279 /* UserInterface */,
 				A7BF14151342149C001AE50D /* iGithubAppDelegate_iPad.h */,
@@ -2263,6 +2320,7 @@
 				A74A65F913BD0A7B0098106E /* 19-gear@2x.png in Resources */,
 				A74A660413BDAF490098106E /* UITableViewCellAccessoryDisclosureIndicatorOriginal.png in Resources */,
 				A7D0523A13BDC20C00B3D239 /* UIBarButtonSystemItemAction.png in Resources */,
+				A74F2A4213BF481200E57818 /* GHPCreateIssueTitleAndDescriptionTableViewCellContentView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2448,6 +2506,12 @@
 				A703A63613BE0308003A4585 /* GHPOwnedRepositoriesOfUserViewController.m in Sources */,
 				A7ABB5F613BE0C5300313E10 /* GHPWatchedRepositoriesViewController.m in Sources */,
 				A74F2A2B13BE0E8200E57818 /* GHPRepositoryTableViewCell.m in Sources */,
+				A74F2A3013BE1AEA00E57818 /* GHPRepositoryViewController.m in Sources */,
+				A74F2A3313BE524D00E57818 /* GHPRepositoryInfoTableViewCell.m in Sources */,
+				A74F2A3713BE60E600E57818 /* GHPUserTableViewCell.m in Sources */,
+				A74F2A3D13BF465E00E57818 /* GHPCreateIssueViewController.m in Sources */,
+				A74F2A4113BF481200E57818 /* GHPCreateIssueTitleAndDescriptionTableViewCell.m in Sources */,
+				A70FF3A413BF6A560082E2EC /* GHPCollapsingAndSpinningTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

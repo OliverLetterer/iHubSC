@@ -51,6 +51,10 @@
                    atIndexPath:(NSIndexPath *)indexPath 
                 withGravatarID:(NSString *)gravatarID;
 
+- (void)updateImageView:(UIImageView *)imageView 
+            atIndexPath:(NSIndexPath *)indexPath 
+         withGravatarID:(NSString *)gravatarID;
+
 - (void)authenticationViewControllerdidAuthenticateUserCallback:(NSNotification *)notification;
 - (void)applicationWillEnterForegroundCallback:(NSNotification *)notification;
 

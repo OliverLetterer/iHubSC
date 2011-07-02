@@ -199,7 +199,7 @@
         [UIView animateWithDuration:ANAdvancedNavigationControllerDefaultAnimationDuration 
                          animations:^(void) {
                              CGPoint center = view.center;
-                             center.x = CGRectGetWidth(self.view.bounds) + ANAdvancedNavigationControllerDefaultLeftViewControllerWidth/2.0f;
+                             center.x = CGRectGetWidth(self.view.bounds) + ANAdvancedNavigationControllerDefaultLeftViewControllerWidth;
                              view.center = center;
                          } 
                          completion:^(BOOL finished) {

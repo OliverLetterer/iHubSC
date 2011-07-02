@@ -8,6 +8,7 @@
 
 #import "GHPRepositoriesViewController.h"
 #import "GHPRepositoryTableViewCell.h"
+#import "GHPRepositoryViewController.h"
 
 @implementation GHPRepositoriesViewController
 
@@ -176,14 +177,9 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     [detailViewController release];
-     */
+    GHAPIRepositoryV3 *repository = [self.repositories objectAtIndex:indexPath.row];
+    GHPRepositoryViewController *repoViewController = [[[GHPRepositoryViewController alloc] initWithRepositoryString:repository.fullRepositoryName] autorelease];
+    [self.advancedNavigationController pushViewController:repoViewController afterViewController:self];
 }
 
 #pragma mark - caching height
@@ -192,7 +188,7 @@
     [self.repositories enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         GHAPIRepositoryV3 *repository = obj;
         CGSize size = [repository.description sizeWithFont:[UIFont systemFontOfSize:14.0f]
-                                                  constrainedToSize:CGSizeMake(331.0f, CGFLOAT_MAX) 
+                                                  constrainedToSize:CGSizeMake(311.0f, CGFLOAT_MAX) 
                                              lineBreakMode:UILineBreakModeWordWrap];
         
         CGFloat height = size.height + 41.0f;

@@ -1,20 +1,21 @@
 //
-//  GHPUserInfoTableViewCell.m
+//  GHPRepositoryInfoTableViewCell.m
 //  iGithub
 //
 //  Created by Oliver Letterer on 01.07.11.
 //  Copyright 2011 Home. All rights reserved.
 //
 
-#import "GHPUserInfoTableViewCell.h"
+#import "GHPRepositoryInfoTableViewCell.h"
 #import "UIImage+Resize.h"
 
-@implementation GHPUserInfoTableViewCell
+
+@implementation GHPRepositoryInfoTableViewCell
 
 @synthesize actionButton=_actionButton, activityIndicatorView=_activityIndicatorView, delegate=_delegate;
 
 - (void)actionButtonClicked:(UIButton *)button {
-    [self.delegate userInfoTableViewCellActionButtonClicked:self];
+    [self.delegate repositoryInfoTableViewCellActionButtonClicked:self];
 }
 
 #pragma mark - Initialization

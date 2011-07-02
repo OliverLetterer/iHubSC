@@ -1,25 +1,21 @@
 //
-//  GHPRepositoryTableViewCell.m
+//  GHPUserTableViewCell.m
 //  iGithub
 //
 //  Created by Oliver Letterer on 01.07.11.
 //  Copyright 2011 Home. All rights reserved.
 //
 
-#import "GHPRepositoryTableViewCell.h"
+#import "GHPUserTableViewCell.h"
 
 
-@implementation GHPRepositoryTableViewCell
+@implementation GHPUserTableViewCell
 
 #pragma mark - Initialization
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if ((self = [super initWithStyle:style reuseIdentifier:reuseIdentifier])) {
         // Initialization code
-        self.detailTextLabel.numberOfLines = 0;
-        self.detailTextLabel.lineBreakMode = UILineBreakModeWordWrap;
-        
-        self.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
     return self;
 }
@@ -39,10 +35,7 @@
 - (void)layoutSubviews {
     [super layoutSubviews];
     
-    self.imageView.frame = CGRectMake(10.0f, 10.0f, 64.0f, 63.0f);
-    self.textLabel.frame = CGRectMake(82.0f, 10.0f, CGRectGetWidth(self.contentView.bounds) - 82.0f, 21.0f);
-    self.detailTextLabel.frame = CGRectMake(82.0f, 31.0f, CGRectGetWidth(self.contentView.bounds) - 82.0f, 10.0f);
-    [self.detailTextLabel sizeToFit];
+    self.imageView.frame = CGRectMake(5.0f, 5.0f, 56.0f, 56.0f);
 }
 
 - (void)prepareForReuse {
