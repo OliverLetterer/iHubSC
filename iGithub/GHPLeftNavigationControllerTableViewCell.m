@@ -9,6 +9,7 @@
 #import "GHPLeftNavigationControllerTableViewCell.h"
 #import "UIImage+GHTabBar.h"
 #import "GHPEdgedLineView.h"
+#import "ANAdvancedNavigationController.h"
 
 @implementation GHPLeftNavigationControllerTableViewCell
 
@@ -59,8 +60,8 @@
     [super layoutSubviews];
     
     self.lineView.frame = CGRectMake(0.0f, 0.0f, CGRectGetWidth(self.backgroundView.bounds), 2.0f);
-    self.imageView.center = CGPointMake(32.0f, CGRectGetHeight(self.contentView.bounds) / 2.0f);
-    self.textLabel.frame = CGRectMake(60.0f, 0.0f, CGRectGetWidth(self.contentView.bounds) - 60.0f, CGRectGetHeight(self.contentView.bounds));
+    self.imageView.center = CGPointMake(ANAdvancedNavigationControllerDefaultLeftPanningOffset/2.0f, CGRectGetHeight(self.contentView.bounds) / 2.0f);
+    self.textLabel.frame = CGRectMake(ANAdvancedNavigationControllerDefaultLeftPanningOffset, 0.0f, CGRectGetWidth(self.contentView.bounds) - ANAdvancedNavigationControllerDefaultLeftPanningOffset, CGRectGetHeight(self.contentView.bounds));
 }
 
 - (void)prepareForReuse {
