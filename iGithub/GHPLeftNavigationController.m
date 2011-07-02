@@ -180,20 +180,8 @@
         }
         
         cell.textLabel.text = [GHAuthenticationManager sharedInstance].username;
-        NSString *gravatarID = [GHSettingsHelper gravatarID];
-        UIImage *gravatarImage = [[UIImage cachedImageFromGravatarID:gravatarID] resizedImage:CGSizeMake(48.0f, 48.0f) 
-                                                                         interpolationQuality:kCGInterpolationHigh];
         
-        if (gravatarImage) {
-            cell.imageView.image = gravatarImage;
-        } else {
-            [UIImage imageFromGravatarID:gravatarID 
-                   withCompletionHandler:^(UIImage *image, NSError *error, BOOL didDownload) {
-                       if ([self.tableView containsIndexPath:indexPath]) {
-                           [self.tableView reloadRowAtIndexPath:indexPath withRowAnimation:UITableViewRowAnimationNone];
-                       }
-                   }];
-        }
+        [self updateImageView:cell.imageView atIndexPath:indexPath withGravatarID:[GHSettingsHelper gravatarID]];
         
         return cell;
     } else {

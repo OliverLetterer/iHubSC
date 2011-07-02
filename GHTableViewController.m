@@ -13,6 +13,8 @@
 #import "GHTableViewController+private.h"
 #import "UIColor+GithubUI.h"
 
+#define kUIActivityIndicatorImageViewTag        1236453
+
 @implementation GHTableViewController
 
 @synthesize nextPageForSectionsDictionary=_nextPageForSectionsDictionary, cachedHeightsDictionary=_cachedHeightsDictionary;
@@ -142,9 +144,19 @@ static CGFloat wrapperViewHeight = 21.0f;
     UIImage *gravatarImage = [UIImage cachedImageFromGravatarID:gravatarID];
     
     if (gravatarImage) {
+        [[imageView viewWithTag:kUIActivityIndicatorImageViewTag] removeFromSuperview];
         imageView.image = gravatarImage;
     } else {
-#warning display placeholder and activity indicator view
+        imageView.image = [UIImage imageNamed:@"DefaultUserImage.png"];
+        [[imageView viewWithTag:kUIActivityIndicatorImageViewTag] removeFromSuperview];
+        
+        UIActivityIndicatorView *activityIndicatorView = [[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray] autorelease];
+        activityIndicatorView.center = CGPointMake(CGRectGetWidth(imageView.bounds)/2.0f, CGRectGetHeight(imageView.bounds)/2.0f);
+        activityIndicatorView.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin;
+        [activityIndicatorView startAnimating];
+        activityIndicatorView.tag = kUIActivityIndicatorImageViewTag;
+        [imageView addSubview:activityIndicatorView];
+        
         [UIImage imageFromGravatarID:gravatarID 
                withCompletionHandler:^(UIImage *image, NSError *error, BOOL didDownload) {
                    if (indexPath && [self.tableView containsIndexPath:indexPath]) {

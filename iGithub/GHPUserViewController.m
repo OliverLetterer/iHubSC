@@ -11,6 +11,8 @@
 #import "GHSettingsHelper.h"
 #import "GHPOwnedRepositoriesOfUserViewController.h"
 #import "GHPWatchedRepositoriesViewController.h"
+#import "GHPFollwingUsersViewController.h"
+#import "GHPFollowedUsersViewController.h"
 
 #define kUITableViewSectionUserInfo         0
 #define kUITableViewSectionUserContent      1
@@ -224,17 +226,7 @@
             cell.textLabel.text = self.user.login;
             cell.detailTextLabel.text = self.userDetailInfoString;
             
-            NSString *gravatarID = self.user.gravatarID;
-            UIImage *gravatarImage = [UIImage cachedImageFromGravatarID:gravatarID];
-            
-            if (gravatarImage) {
-                cell.imageView.image = gravatarImage;
-            } else {
-                [UIImage imageFromGravatarID:gravatarID 
-                       withCompletionHandler:^(UIImage *image, NSError *error, BOOL didDownload) {
-                           [self.tableView reloadData];
-                       }];
-            }
+            [self updateImageView:cell.imageView atIndexPath:indexPath withGravatarID:self.user.gravatarID];
             
             if (!self.canDisplayActionButton) {
                 [cell.actionButton removeFromSuperview];
@@ -304,13 +296,20 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == kUITableViewSectionUserContent) {
+        UIViewController *viewController = nil;
         if (indexPath.row == 0) {
             // Repositories
-            GHPOwnedRepositoriesOfUserViewController *repoViewController = [[[GHPOwnedRepositoriesOfUserViewController alloc] initWithUsername:self.username] autorelease];
-            [self.advancedNavigationController pushViewController:repoViewController afterViewController:self];
+            viewController = [[[GHPOwnedRepositoriesOfUserViewController alloc] initWithUsername:self.username] autorelease];
         } else if (indexPath.row == 1) {
-            GHPWatchedRepositoriesViewController *repoViewController = [[[GHPWatchedRepositoriesViewController alloc] initWithUsername:self.username] autorelease];
-            [self.advancedNavigationController pushViewController:repoViewController afterViewController:self];
+            viewController = [[[GHPWatchedRepositoriesViewController alloc] initWithUsername:self.username] autorelease];
+        } else if (indexPath.row == 2) {
+            viewController = [[[GHPFollwingUsersViewController alloc] initWithUsername:self.username] autorelease];
+        } else if (indexPath.row == 3) {
+            viewController = [[[GHPFollowedUsersViewController alloc] initWithUsername:self.username] autorelease];
+        }
+        
+        if (viewController) {
+            [self.advancedNavigationController pushViewController:viewController afterViewController:self];
         } else {
             [tableView deselectRowAtIndexPath:indexPath animated:NO];
         }
