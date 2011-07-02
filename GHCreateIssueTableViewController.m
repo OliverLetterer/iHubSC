@@ -186,7 +186,8 @@
     
     if (section == kUITableViewSectionAssigned) {
         if (_assignIndex != 0) {
-            cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Assigned to %@", @""), [self.collaborators objectAtIndex:_assignIndex-1]];
+            GHAPIUserV3 *user = [self.collaborators objectAtIndex:_assignIndex-1];
+            cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Assigned to %@", @""), user.login];
         } else {
             cell.textLabel.text = NSLocalizedString(@"Assign to", @"");
         }
