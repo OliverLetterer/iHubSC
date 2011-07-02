@@ -83,6 +83,17 @@
     
 }
 
++ (CGFloat)heightWithContent:(NSString *)content {
+    if (!content) {
+        return UITableViewAutomaticDimension;
+    }
+    CGSize size = [content sizeWithFont:[UIFont systemFontOfSize:14.0f]
+                      constrainedToSize:CGSizeMake(349.0f, CGFLOAT_MAX) 
+                          lineBreakMode:UILineBreakModeWordWrap];
+    
+    return size.height + 29.0f;
+}
+
 #pragma mark - Memory management
 
 - (void)dealloc {

@@ -187,16 +187,9 @@
 - (void)cacheRepositoriesHeights {
     [self.repositories enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         GHAPIRepositoryV3 *repository = obj;
-        CGSize size = [repository.description sizeWithFont:[UIFont systemFontOfSize:14.0f]
-                                                  constrainedToSize:CGSizeMake(311.0f, CGFLOAT_MAX) 
-                                             lineBreakMode:UILineBreakModeWordWrap];
         
-        CGFloat height = size.height + 41.0f;
-        if (height < 80.0f) {
-            height = 80.0f;
-        }
-        
-        [self cacheHeight:height forRowAtIndexPath:[NSIndexPath indexPathForRow:idx inSection:0] ];
+        [self cacheHeight:[GHPRepositoryTableViewCell heightWithContent:repository.description] 
+        forRowAtIndexPath:[NSIndexPath indexPathForRow:idx inSection:0] ];
     }];
 }
 

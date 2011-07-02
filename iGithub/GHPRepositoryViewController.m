@@ -13,8 +13,9 @@
 #import "GHPLabelTableViewCell.h"
 #import "GHPWatchingRepositoryUsersViewController.h"
 #import "GHPCollaboratorsViewController.h"
+#import "GHPCommitsViewController.h"
 
-#warning section for Recent Commits and Browse Content
+#warning section Browse Content
 
 #define kUIAlertViewTagDeleteRepository     1337
 #define kUIAlertViewTagAddCollaborator      1338
@@ -25,15 +26,16 @@
 #define kUITableViewSectionInfo             0
 #define kUITableViewSectionOwner            1
 #define kUITableViewSectionFurtherContent   2
-#define kUITableViewSectionLabels           3
+#define kUITableViewSectionRecentCommits    3
+#define kUITableViewSectionLabels           4
 
-#define kUITableViewNumberOfSections        4
+#define kUITableViewNumberOfSections        5
 
 @implementation GHPRepositoryViewController
 
 @synthesize repositoryString=_repositoryString, repository=_repository, deleteToken=_deleteToken, organizations=_organizations;
 @synthesize infoCell=_infoCell;
-@synthesize labels=_labels;
+@synthesize labels=_labels, branches=_branches;
 
 #pragma mark - setters and getters
 
@@ -127,6 +129,7 @@
     [_deleteToken release];
     [_organizations release];
     [_labels release];
+    [_branches release];
     
     [super dealloc];
 }
@@ -185,12 +188,14 @@
 #pragma mark - UIExpandableTableViewDatasource
 
 - (BOOL)tableView:(UIExpandableTableView *)tableView canExpandSection:(NSInteger)section {
-    return section == kUITableViewSectionLabels;
+    return section == kUITableViewSectionLabels || section == kUITableViewSectionRecentCommits;
 }
 
 - (BOOL)tableView:(UIExpandableTableView *)tableView needsToDownloadDataForExpandableSection:(NSInteger)section {
     if (section == kUITableViewSectionLabels) {
         return self.labels == nil;
+    } else if (section == kUITableViewSectionRecentCommits) {
+        return self.branches == nil;
     }
     return NO;
 }
@@ -201,6 +206,8 @@
     
     if (section == kUITableViewSectionLabels) {
         cell.textLabel.text = NSLocalizedString(@"Labels", @"");
+    } else if (section == kUITableViewSectionRecentCommits) {
+        cell.textLabel.text = NSLocalizedString(@"Recent Commits", @"");
     }
     
     return cell;
@@ -221,6 +228,18 @@
                                     [tableView expandSection:section animated:YES];
                                 }
                             }];
+    } else if (section == kUITableViewSectionRecentCommits) {
+        [GHAPIRepositoryV3 branchesOnRepository:self.repositoryString page:1 
+                              completionHandler:^(NSMutableArray *array, NSUInteger nextPage, NSError *error) {
+                                  if (error) {
+                                      [self handleError:error];
+                                      [tableView cancelDownloadInSection:section];
+                                  } else {
+                                      self.branches = array;
+                                      [self setNextPage:nextPage forSection:section];
+                                      [tableView expandSection:section animated:YES];
+                                  }
+                              }];
     }
 }
 
@@ -239,6 +258,18 @@
                                                   withRowAnimation:UITableViewRowAnimationAutomatic];
                                 }
                             }];
+    } else if (section == kUITableViewSectionRecentCommits) {
+        [GHAPIRepositoryV3 branchesOnRepository:self.repositoryString page:1 
+                              completionHandler:^(NSMutableArray *array, NSUInteger nextPage, NSError *error) {
+                                  if (error) {
+                                      [self handleError:error];
+                                  } else {
+                                      [self.branches addObjectsFromArray:array];
+                                      [self setNextPage:nextPage forSection:section];
+                                      [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:section] 
+                                                    withRowAnimation:UITableViewRowAnimationAutomatic];
+                                  }
+                              }];
     }
 }
 
@@ -255,11 +286,13 @@
     if (section == kUITableViewSectionInfo) {
         return 2;
     } else if (section == kUITableViewSectionFurtherContent) {
-        return 7;
+        return 6;
     } else if (section == kUITableViewSectionOwner) {
         return 1;
     } else if (section == kUITableViewSectionLabels) {
         return self.labels.count + 1;
+    } else if (section == kUITableViewSectionRecentCommits) {
+        return self.branches.count + 1;
     }
     // Return the number of rows in the section.
     return 0;
@@ -321,8 +354,6 @@
         } else if (indexPath.row == 4) {
             cell.textLabel.text = NSLocalizedString(@"Pull Requests", @"");
         } else if (indexPath.row == 5) {
-            cell.textLabel.text = NSLocalizedString(@"Recent Commits", @"");
-        } else if (indexPath.row == 6) {
             cell.textLabel.text = NSLocalizedString(@"Browse Content", @"");
         } else {
             cell.textLabel.text = nil;
@@ -363,6 +394,14 @@
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         
         cell.colorView.backgroundColor = label.colorString.colorFromAPIColorString;
+        
+        return cell;
+    } else if (indexPath.section == kUITableViewSectionRecentCommits) {
+        GHPDefaultTableViewCell *cell = [self defaultTableViewCellForRowAtIndexPath:indexPath withReuseIdentifier:@"GHPDefaultTableViewCell"];
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        
+        GHAPIRepositoryBranchV3 *branch = [self.branches objectAtIndex:indexPath.row - 1];
+        cell.textLabel.text = branch.name;
         
         return cell;
     }
@@ -410,15 +449,9 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == kUITableViewSectionInfo) {
         if (indexPath.row == 0) {
-            CGSize size = [self.repository.description sizeWithFont:[UIFont systemFontOfSize:14.0f]
-                                                  constrainedToSize:CGSizeMake(349.0f, CGFLOAT_MAX) 
-                                                      lineBreakMode:UILineBreakModeWordWrap];
-            return size.height + 29.0f;
+            return [GHPRepositoryInfoTableViewCell heightWithContent:self.repository.description];
         } else if (indexPath.row == 1) {
-            CGSize size = [self.metaInformationString sizeWithFont:[UIFont systemFontOfSize:14.0f]
-                                                 constrainedToSize:CGSizeMake(349.0f, CGFLOAT_MAX) 
-                                                     lineBreakMode:UILineBreakModeWordWrap];
-            return size.height + 29.0f;
+            return [GHPRepositoryInfoTableViewCell heightWithContent:self.metaInformationString];
         }
     } else if (indexPath.section == kUITableViewSectionOwner) {
         if (indexPath.row == 0) {
@@ -450,6 +483,13 @@
         } else {
             [tableView deselectRowAtIndexPath:indexPath animated:NO];
         }
+    } else if (indexPath.section == kUITableViewSectionRecentCommits) {
+        GHAPIRepositoryBranchV3 *branch = [self.branches objectAtIndex:indexPath.row - 1];
+        
+        GHPCommitsViewController *commitViewController = [[[GHPCommitsViewController alloc] initWithRepository:self.repositoryString 
+                                                                                                    branchHash:branch.ID]
+                                                          autorelease];
+        [self.advancedNavigationController pushViewController:commitViewController afterViewController:self];
     }
 }
 

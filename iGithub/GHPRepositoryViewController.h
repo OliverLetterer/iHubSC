@@ -24,6 +24,7 @@
     GHPRepositoryInfoTableViewCell *_infoCell;
     
     NSMutableArray *_labels;
+    NSMutableArray *_branches;
 }
 
 @property (nonatomic, copy) NSString *repositoryString;
@@ -32,6 +33,7 @@
 @property (nonatomic, readonly) NSString *metaInformationString;
 @property (nonatomic, retain) NSMutableArray *organizations;
 @property (nonatomic, retain) NSMutableArray *labels;
+@property (nonatomic, retain) NSMutableArray *branches;
 
 @property (nonatomic, retain) GHPRepositoryInfoTableViewCell *infoCell;
 

@@ -285,10 +285,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == kUITableViewSectionUserInfo) {
-        CGSize size = [self.userDetailInfoString sizeWithFont:[UIFont systemFontOfSize:14.0f]
-                                            constrainedToSize:CGSizeMake(349.0f, CGFLOAT_MAX) 
-                                                lineBreakMode:UILineBreakModeWordWrap];
-        return size.height + 29.0f;
+        return [GHPUserInfoTableViewCell heightWithContent:self.userDetailInfoString];
     } else {
         return UITableViewAutomaticDimension;
     }
