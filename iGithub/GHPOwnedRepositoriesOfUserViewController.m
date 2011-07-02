@@ -17,8 +17,10 @@
     [super setUsername:username];
     
 #warning this returns an error "Server Error" for the authenticated user, maybe iOS 5 bug, maybe GitHub
+    self.isDownloadingEssentialData = YES;
     [GHAPIRepositoryV3 repositoriesForUserNamed:username page:0 
                               completionHandler:^(NSMutableArray *array, NSUInteger nextPage, NSError *error) {
+                                  self.isDownloadingEssentialData = NO;
                                   if (error) {
                                       [self handleError:error];
                                   } else {

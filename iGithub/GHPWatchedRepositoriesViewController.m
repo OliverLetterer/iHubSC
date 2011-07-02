@@ -16,8 +16,10 @@
 - (void)setUsername:(NSString *)username {
     [super setUsername:username];
     
+    self.isDownloadingEssentialData = YES;
     [GHAPIRepositoryV3 repositoriesThatUserIsWatching:username page:0 
                                     completionHandler:^(NSMutableArray *array, NSUInteger nextPage, NSError *error) {
+                                        self.isDownloadingEssentialData = NO;
                                         if (error) {
                                             [self handleError:error];
                                         } else {

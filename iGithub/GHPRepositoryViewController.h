@@ -22,6 +22,8 @@
     BOOL _isWatchingRepository;
     
     GHPRepositoryInfoTableViewCell *_infoCell;
+    
+    NSMutableArray *_labels;
 }
 
 @property (nonatomic, copy) NSString *repositoryString;
@@ -29,6 +31,7 @@
 @property (nonatomic, copy) NSString *deleteToken;
 @property (nonatomic, readonly) NSString *metaInformationString;
 @property (nonatomic, retain) NSMutableArray *organizations;
+@property (nonatomic, retain) NSMutableArray *labels;
 
 @property (nonatomic, retain) GHPRepositoryInfoTableViewCell *infoCell;
 

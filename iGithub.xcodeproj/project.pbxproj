@@ -45,6 +45,7 @@
 		A709F74D13689C3900B0CDE7 /* GHTableViewController+private.m in Sources */ = {isa = PBXBuildFile; fileRef = A709F74C13689C3900B0CDE7 /* GHTableViewController+private.m */; };
 		A709F75313689C9900B0CDE7 /* GHTableViewControllerAlertViewProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = A709F75213689C9800B0CDE7 /* GHTableViewControllerAlertViewProxy.m */; };
 		A709F75A1368B7E900B0CDE7 /* GHTeamViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A709F7591368B7E800B0CDE7 /* GHTeamViewController.m */; };
+		A70ABE9713BF77C60000D189 /* GHPLabelTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A70ABE9613BF77C60000D189 /* GHPLabelTableViewCell.m */; };
 		A70DA3D813A4B7F700235C76 /* GHAPIOrganizationV3.m in Sources */ = {isa = PBXBuildFile; fileRef = A70DA3D713A4B7F700235C76 /* GHAPIOrganizationV3.m */; };
 		A70DA3DC13A4E2D100235C76 /* GHAPITeamV3.m in Sources */ = {isa = PBXBuildFile; fileRef = A70DA3DB13A4E2D100235C76 /* GHAPITeamV3.m */; };
 		A70DA3DF13A61BC200235C76 /* OCPromptView.m in Sources */ = {isa = PBXBuildFile; fileRef = A70DA3DE13A61BC000235C76 /* OCPromptView.m */; };
@@ -326,6 +327,8 @@
 		A709F75213689C9800B0CDE7 /* GHTableViewControllerAlertViewProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHTableViewControllerAlertViewProxy.m; sourceTree = "<group>"; };
 		A709F7581368B7E800B0CDE7 /* GHTeamViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHTeamViewController.h; sourceTree = "<group>"; };
 		A709F7591368B7E800B0CDE7 /* GHTeamViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHTeamViewController.m; sourceTree = "<group>"; };
+		A70ABE9513BF77C50000D189 /* GHPLabelTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPLabelTableViewCell.h; sourceTree = "<group>"; };
+		A70ABE9613BF77C60000D189 /* GHPLabelTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPLabelTableViewCell.m; sourceTree = "<group>"; };
 		A70DA3D613A4B7F700235C76 /* GHAPIOrganizationV3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHAPIOrganizationV3.h; sourceTree = "<group>"; };
 		A70DA3D713A4B7F700235C76 /* GHAPIOrganizationV3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHAPIOrganizationV3.m; sourceTree = "<group>"; };
 		A70DA3DA13A4E2D100235C76 /* GHAPITeamV3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHAPITeamV3.h; sourceTree = "<group>"; };
@@ -1321,6 +1324,8 @@
 				A74F2A3C13BF465E00E57818 /* GHPCreateIssueViewController.m */,
 				A74F2A3E13BF481000E57818 /* GHPCreateIssueTitleAndDescriptionTableViewCell.h */,
 				A74F2A3F13BF481000E57818 /* GHPCreateIssueTitleAndDescriptionTableViewCell.m */,
+				A70ABE9513BF77C50000D189 /* GHPLabelTableViewCell.h */,
+				A70ABE9613BF77C60000D189 /* GHPLabelTableViewCell.m */,
 			);
 			name = GHPRepositoryViewController;
 			sourceTree = "<group>";
@@ -2508,6 +2513,7 @@
 				A74F2A3D13BF465E00E57818 /* GHPCreateIssueViewController.m in Sources */,
 				A74F2A4113BF481200E57818 /* GHPCreateIssueTitleAndDescriptionTableViewCell.m in Sources */,
 				A70FF3A413BF6A560082E2EC /* GHPCollapsingAndSpinningTableViewCell.m in Sources */,
+				A70ABE9713BF77C60000D189 /* GHPLabelTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

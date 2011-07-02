@@ -46,8 +46,10 @@
     [_username release];
     _username = [username copy];
     
+    self.isDownloadingEssentialData = YES;
     [GHAPIUserV3 userWithName:_username 
             completionHandler:^(GHAPIUserV3 *user, NSError *error) {
+                self.isDownloadingEssentialData = NO;
                 if (error) {
                     [self handleError:error];
                 } else {

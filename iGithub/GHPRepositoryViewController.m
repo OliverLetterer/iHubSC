@@ -10,9 +10,9 @@
 #import "NSString+Additions.h"
 #import "GHPUserTableViewCell.h"
 #import "GHPUserViewController.h"
+#import "GHPLabelTableViewCell.h"
 
-#warning add section for Labels
-#warning add row for Collaborators
+#warning section for Recent Commits and Browse Content
 
 #define kUIAlertViewTagDeleteRepository     1337
 #define kUIAlertViewTagAddCollaborator      1338
@@ -23,21 +23,25 @@
 #define kUITableViewSectionInfo             0
 #define kUITableViewSectionOwner            1
 #define kUITableViewSectionFurtherContent   2
+#define kUITableViewSectionLabels           3
 
-#define kUITableViewNumberOfSections        3
+#define kUITableViewNumberOfSections        4
 
 @implementation GHPRepositoryViewController
 
 @synthesize repositoryString=_repositoryString, repository=_repository, deleteToken=_deleteToken, organizations=_organizations;
 @synthesize infoCell=_infoCell;
+@synthesize labels=_labels;
 
 #pragma mark - setters and getters
 
 - (void)setRepositoryString:(NSString *)repositoryString {
     [_repositoryString release];
     _repositoryString = [repositoryString copy];
+    self.isDownloadingEssentialData = YES;
     [GHAPIRepositoryV3 repositoryNamed:_repositoryString 
                  withCompletionHandler:^(GHAPIRepositoryV3 *repository, NSError *error) {
+                     self.isDownloadingEssentialData = NO;
                      if (error) {
                          [self handleError:error];
                      } else {
@@ -120,6 +124,7 @@
     [_infoCell release];
     [_deleteToken release];
     [_organizations release];
+    [_labels release];
     
     [super dealloc];
 }
@@ -175,6 +180,66 @@
 	return YES;
 }
 
+#pragma mark - UIExpandableTableViewDatasource
+
+- (BOOL)tableView:(UIExpandableTableView *)tableView canExpandSection:(NSInteger)section {
+    return section == kUITableViewSectionLabels;
+}
+
+- (BOOL)tableView:(UIExpandableTableView *)tableView needsToDownloadDataForExpandableSection:(NSInteger)section {
+    if (section == kUITableViewSectionLabels) {
+        return self.labels == nil;
+    }
+    return NO;
+}
+
+- (UITableViewCell<UIExpandingTableViewCell> *)tableView:(UIExpandableTableView *)tableView expandingCellForSection:(NSInteger)section {
+    
+    GHPCollapsingAndSpinningTableViewCell *cell = [self defaultPadCollapsingAndSpinningTableViewCellForSection:section];
+    
+    if (section == kUITableViewSectionLabels) {
+        cell.textLabel.text = NSLocalizedString(@"Labels", @"");
+    }
+    
+    return cell;
+}
+
+#pragma mark - UIExpandableTableViewDelegate
+
+- (void)tableView:(UIExpandableTableView *)tableView downloadDataForExpandableSection:(NSInteger)section {
+    if (section == kUITableViewSectionLabels) {
+        [GHAPIRepositoryV3 labelsOnRepository:self.repositoryString page:1 
+                            completionHandler:^(NSMutableArray *array, NSUInteger nextPage, NSError *error) {
+                                if (error) {
+                                    [self handleError:error];
+                                    [tableView cancelDownloadInSection:section];
+                                } else {
+                                    self.labels = array;
+                                    [self setNextPage:nextPage forSection:section];
+                                    [tableView expandSection:section animated:YES];
+                                }
+                            }];
+    }
+}
+
+#pragma mark - pagination
+
+- (void)downloadDataForPage:(NSUInteger)page inSection:(NSUInteger)section {
+    if (section == kUITableViewSectionLabels) {
+        [GHAPIRepositoryV3 labelsOnRepository:self.repositoryString page:page 
+                            completionHandler:^(NSMutableArray *array, NSUInteger nextPage, NSError *error) {
+                                if (error) {
+                                    [self handleError:error];
+                                } else {
+                                    [self.labels addObjectsFromArray:array];
+                                    [self setNextPage:nextPage forSection:section];
+                                    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:section] 
+                                                  withRowAnimation:UITableViewRowAnimationAutomatic];
+                                }
+                            }];
+    }
+}
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -191,6 +256,8 @@
         return 7;
     } else if (section == kUITableViewSectionOwner) {
         return 1;
+    } else if (section == kUITableViewSectionLabels) {
+        return self.labels.count + 1;
     }
     // Return the number of rows in the section.
     return 0;
@@ -246,7 +313,7 @@
         } else if (indexPath.row == 1) {
             cell.textLabel.text = NSLocalizedString(@"Milestones", @"");
         } else if (indexPath.row == 2) {
-            cell.textLabel.text = NSLocalizedString(@"Labels", @"");
+            cell.textLabel.text = NSLocalizedString(@"Collaborators", @"");
         } else if (indexPath.row == 3) {
             cell.textLabel.text = NSLocalizedString(@"Watching Users", @"");
         } else if (indexPath.row == 4) {
@@ -279,6 +346,23 @@
             
             return cell;
         }
+    } else if (indexPath.section == kUITableViewSectionLabels) {
+        NSString *CellIdentifier = @"GHLabelTableViewCell";
+        
+        GHPLabelTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        if (!cell) {
+            cell = [[[GHPLabelTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        }
+        [self setupDefaultTableViewCell:cell forRowAtIndexPath:indexPath];
+        
+        GHAPILabelV3 *label = [self.labels objectAtIndex:indexPath.row - 1];
+        
+        cell.textLabel.text = label.name;
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        
+        cell.colorView.backgroundColor = label.colorString.colorFromAPIColorString;
+        
+        return cell;
     }
     
     return self.dummyCell;

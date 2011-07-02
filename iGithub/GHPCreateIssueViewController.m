@@ -142,13 +142,7 @@
 
 - (UITableViewCell<UIExpandingTableViewCell> *)tableView:(UIExpandableTableView *)tableView expandingCellForSection:(NSInteger)section {
     
-    NSString *CellIdentifier = @"UICollapsingAndSpinningTableViewCell";
-    
-    GHPCollapsingAndSpinningTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
-        cell = [[[GHPCollapsingAndSpinningTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
-    }
-    [self setupDefaultTableViewCell:cell forRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:section]];
+    GHPCollapsingAndSpinningTableViewCell *cell = [self defaultPadCollapsingAndSpinningTableViewCellForSection:section];
     
     if (section == kUITableViewSectionAssigned) {
         if (_assignIndex != 0) {
