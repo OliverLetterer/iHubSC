@@ -17,8 +17,22 @@
 
 @synthesize nextPageForSectionsDictionary=_nextPageForSectionsDictionary, cachedHeightsDictionary=_cachedHeightsDictionary;
 @synthesize reloadDataIfNewUserGotAuthenticated=_reloadDataIfNewUserGotAuthenticated, reloadDataOnApplicationWillEnterForeground=_reloadDataOnApplicationWillEnterForeground;
+@synthesize isDownloadingEssentialData=_isDownloadingEssentialData, downloadingEssentialDataView=_downloadingEssentialDataView;
 
 #pragma mark - setters and getters
+
+- (void)setIsDownloadingEssentialData:(BOOL)isDownloadingEssentialData {
+    if (isDownloadingEssentialData != _isDownloadingEssentialData) {
+        _isDownloadingEssentialData = isDownloadingEssentialData;
+        
+        if (_isDownloadingEssentialData) {
+            [self loadAndDisplayDownloadingEssentialDataView];
+        } else {
+            [self.downloadingEssentialDataView removeFromSuperview];
+            self.downloadingEssentialDataView = nil;
+        }
+    }
+}
 
 - (void)setTableView:(UIExpandableTableView *)tableView {
     [super setTableView:tableView];
@@ -43,6 +57,41 @@
 }
 
 #pragma mark - instance methods
+
+static CGFloat wrapperViewHeight = 21.0f;
+
+- (void)loadAndDisplayDownloadingEssentialDataView {
+    if (!self.downloadingEssentialDataView && self.isViewLoaded) {
+        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+            UIView *wrapperView = [[[UIView alloc] initWithFrame:CGRectMake(0.0f, CGRectGetHeight(self.view.bounds)/2.0f - wrapperViewHeight/2.0f, CGRectGetWidth(self.view.bounds), wrapperViewHeight)] autorelease];
+            wrapperView.backgroundColor = self.view.backgroundColor;
+            wrapperView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
+            
+            UILabel *label = [[[UILabel alloc] initWithFrame:CGRectZero] autorelease];
+            label.font = [UIFont systemFontOfSize:16.0f];
+            label.shadowColor = [UIColor whiteColor];
+            label.shadowOffset = CGSizeMake(0.0f, 1.0f);
+            label.textColor = [UIColor darkGrayColor];
+            label.backgroundColor = self.view.backgroundColor;
+            label.text = NSLocalizedString(@"Loading", @"");
+            [label sizeToFit];
+            label.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
+            label.center = CGPointMake(CGRectGetWidth(wrapperView.bounds)/2.0f, wrapperViewHeight/2.0f);
+            [wrapperView addSubview:label];
+            
+            UIActivityIndicatorView *activityIndicatorView = [[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray] autorelease];
+            [activityIndicatorView startAnimating];
+            activityIndicatorView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
+            activityIndicatorView.center = CGPointMake(label.frame.origin.x - 10.0f, label.center.y);
+            [wrapperView addSubview:activityIndicatorView];
+            
+            self.downloadingEssentialDataView = wrapperView;
+            [self.view addSubview:wrapperView];
+        } else {
+            [NSException raise:NSInternalInconsistencyException format:@"isDownloadingEssentialData is not supported on Phone right now"];
+        }
+    }
+}
 
 - (UITableViewCell *)dummyCellWithText:(NSString *)text {
     NSString *CellIdentifier = @"DummyCell";
@@ -95,7 +144,7 @@
     if (gravatarImage) {
         imageView.image = gravatarImage;
     } else {
-#warning display placeholder
+#warning display placeholder and activity indicator view
         [UIImage imageFromGravatarID:gravatarID 
                withCompletionHandler:^(UIImage *image, NSError *error, BOOL didDownload) {
                    if (indexPath && [self.tableView containsIndexPath:indexPath]) {
@@ -180,6 +229,7 @@
     _alertProxy.delegate = nil;
     [_alertProxy release];
     [_nextPageForSectionsDictionary release];
+    [_downloadingEssentialDataView release];
     
     [super dealloc];
 }
@@ -236,6 +286,10 @@
         self.defaultEdgeInset = self.tableView.contentInset;
         self.tableView.backgroundView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"GHDefaultTableViewBackgroundImage.png"]] autorelease];
     }
+    
+    if (_isDownloadingEssentialData) {
+        [self loadAndDisplayDownloadingEssentialDataView];
+    }
 }
 
 - (void)viewDidLoad {
@@ -257,6 +311,7 @@
     [super viewDidUnload];
     
     _hasGradientBackgrounds = NO;
+    [_downloadingEssentialDataView release], _downloadingEssentialDataView = nil;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -393,6 +448,18 @@
 
 
 @implementation GHTableViewController (iPad)
+
+- (GHPCollapsingAndSpinningTableViewCell *)defaultPadCollapsingAndSpinningTableViewCellForSection:(NSUInteger)section {
+    NSString *CellIdentifier = @"GHPCollapsingAndSpinningTableViewCell";
+    
+    GHPCollapsingAndSpinningTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (cell == nil) {
+        cell = [[[GHPCollapsingAndSpinningTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+    }
+    [self setupDefaultTableViewCell:cell forRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:section]];
+    
+    return cell;
+}
 
 - (void)setupDefaultTableViewCell:(GHPDefaultTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row == 0 && indexPath.row == [self.tableView numberOfRowsInSection:indexPath.section]-1) {

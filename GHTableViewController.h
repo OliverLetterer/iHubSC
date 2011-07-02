@@ -18,6 +18,7 @@
 #import "GithubAPI.h"
 #import "INNotificationQueue.h"
 #import "ANAdvancedNavigationController.h"
+#import "GHPCollapsingAndSpinningTableViewCell.h"
 
 @class GHNewsFeedItemTableViewCell;
 
@@ -33,6 +34,9 @@
     BOOL _hasGradientBackgrounds;
     
     UITableViewStyle _myTableViewStyle;
+    
+    BOOL _isDownloadingEssentialData;
+    UIView *_downloadingEssentialDataView;
 }
 
 @property (nonatomic, retain) UIExpandableTableView *tableView;
@@ -43,6 +47,10 @@
 
 @property (nonatomic, assign) BOOL reloadDataIfNewUserGotAuthenticated;
 @property (nonatomic, assign) BOOL reloadDataOnApplicationWillEnterForeground;  // default: YES
+
+@property (nonatomic, assign) BOOL isDownloadingEssentialData;
+@property (nonatomic, retain) UIView *downloadingEssentialDataView;
+- (void)loadAndDisplayDownloadingEssentialDataView;
 
 - (UITableViewCell *)dummyCellWithText:(NSString *)text;
 - (CGFloat)heightForDescription:(NSString *)description;
@@ -73,6 +81,7 @@
 
 - (void)setupDefaultTableViewCell:(GHPDefaultTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath;
 - (GHPDefaultTableViewCell *)defaultTableViewCellForRowAtIndexPath:(NSIndexPath *)indexPath withReuseIdentifier:(NSString *)CellIdentifier;
+- (GHPCollapsingAndSpinningTableViewCell *)defaultPadCollapsingAndSpinningTableViewCellForSection:(NSUInteger)section;
 
 @end
 
