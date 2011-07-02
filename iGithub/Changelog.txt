@@ -84,7 +84,7 @@ V1.8
 
 V1.9
 - further API V3 adoption
-
+- bug fixes
 
 iTunes Changelog:
 
