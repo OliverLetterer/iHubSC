@@ -56,7 +56,30 @@
 }
 
 - (void)saveButtonClicked:(UIBarButtonItem *)sender {
-#warning create the new issue here
+    GHPCreateIssueTitleAndDescriptionTableViewCell *cell = (GHPCreateIssueTitleAndDescriptionTableViewCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:kUITableViewSectionTitleAndDescription] ];
+    
+    GHAPIUserV3 *assignee = nil;
+    NSNumber *milestoneNumber = nil;
+    
+    if (_assignIndex > 0) {
+        assignee = [self.collaborators objectAtIndex:_assignIndex - 1];
+    }
+    if (_assignesMilestoneIndex > 0) {
+        GHAPIMilestoneV3 *milestone = [self.milestones objectAtIndex:_assignesMilestoneIndex - 1];
+        milestoneNumber = milestone.number;
+    }
+    
+    [GHAPIIssueV3 createIssueOnRepository:self.repository 
+                                    title:cell.textField.text 
+                                     body:cell.textView.text 
+                                 assignee:assignee.login milestone:milestoneNumber 
+                        completionHandler:^(GHAPIIssueV3 *issue, NSError *error) {
+                            if (error) {
+                                [self handleError:error];
+                            } else {
+                                [self.delegate createIssueViewController:self didCreateIssue:issue];
+                            }
+                        }];
 }
 
 #pragma mark - View lifecycle
@@ -129,7 +152,8 @@
     
     if (section == kUITableViewSectionAssigned) {
         if (_assignIndex != 0) {
-            cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Assigned to %@", @""), [self.collaborators objectAtIndex:_assignIndex-1]];
+            GHAPIUserV3 *user = [self.collaborators objectAtIndex:_assignIndex-1];
+            cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Assigned to %@", @""), user.login];
         } else {
             cell.textLabel.text = NSLocalizedString(@"Assign to", @"");
         }

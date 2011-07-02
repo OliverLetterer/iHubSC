@@ -13,7 +13,6 @@
 
 #warning add section for Labels
 #warning add row for Collaborators
-#warning create new issue
 
 #define kUIAlertViewTagDeleteRepository     1337
 #define kUIAlertViewTagAddCollaborator      1338
@@ -585,6 +584,13 @@
 #pragma mark - GHPCreateIssueViewControllerDelegate
 
 - (void)createIssueViewControllerIsDone:(GHPCreateIssueViewController *)createIssueViewController {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)createIssueViewController:(GHPCreateIssueViewController *)createIssueViewController didCreateIssue:(GHAPIIssueV3 *)issue {
+    [[INNotificationQueue sharedQueue] detachSmallNotificationWithTitle:NSLocalizedString(@"Created Issue", @"") 
+                                                            andSubtitle:issue.title 
+                                                            removeStyle:INNotificationQueueItemRemoveByFadingOut];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 

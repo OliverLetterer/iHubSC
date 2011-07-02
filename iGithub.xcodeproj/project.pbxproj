@@ -109,7 +109,6 @@
 		A74F2A3713BE60E600E57818 /* GHPUserTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A74F2A3613BE60E600E57818 /* GHPUserTableViewCell.m */; };
 		A74F2A3D13BF465E00E57818 /* GHPCreateIssueViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A74F2A3C13BF465E00E57818 /* GHPCreateIssueViewController.m */; };
 		A74F2A4113BF481200E57818 /* GHPCreateIssueTitleAndDescriptionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A74F2A3F13BF481000E57818 /* GHPCreateIssueTitleAndDescriptionTableViewCell.m */; };
-		A74F2A4213BF481200E57818 /* GHPCreateIssueTitleAndDescriptionTableViewCellContentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A74F2A4013BF481100E57818 /* GHPCreateIssueTitleAndDescriptionTableViewCellContentView.xib */; };
 		A750571613427FB400514A82 /* ASIAuthenticationDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = A750570313427FB400514A82 /* ASIAuthenticationDialog.m */; };
 		A750571713427FB400514A82 /* ASIDataCompressor.m in Sources */ = {isa = PBXBuildFile; fileRef = A750570613427FB400514A82 /* ASIDataCompressor.m */; };
 		A750571813427FB400514A82 /* ASIDataDecompressor.m in Sources */ = {isa = PBXBuildFile; fileRef = A750570813427FB400514A82 /* ASIDataDecompressor.m */; };
@@ -441,7 +440,6 @@
 		A74F2A3C13BF465E00E57818 /* GHPCreateIssueViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPCreateIssueViewController.m; sourceTree = "<group>"; };
 		A74F2A3E13BF481000E57818 /* GHPCreateIssueTitleAndDescriptionTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPCreateIssueTitleAndDescriptionTableViewCell.h; sourceTree = "<group>"; };
 		A74F2A3F13BF481000E57818 /* GHPCreateIssueTitleAndDescriptionTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPCreateIssueTitleAndDescriptionTableViewCell.m; sourceTree = "<group>"; };
-		A74F2A4013BF481100E57818 /* GHPCreateIssueTitleAndDescriptionTableViewCellContentView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GHPCreateIssueTitleAndDescriptionTableViewCellContentView.xib; sourceTree = "<group>"; };
 		A750570213427FB400514A82 /* ASIAuthenticationDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASIAuthenticationDialog.h; path = "asi-http-request/Classes/ASIAuthenticationDialog.h"; sourceTree = SOURCE_ROOT; };
 		A750570313427FB400514A82 /* ASIAuthenticationDialog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ASIAuthenticationDialog.m; path = "asi-http-request/Classes/ASIAuthenticationDialog.m"; sourceTree = SOURCE_ROOT; };
 		A750570413427FB400514A82 /* ASICacheDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASICacheDelegate.h; path = "asi-http-request/Classes/ASICacheDelegate.h"; sourceTree = SOURCE_ROOT; };
@@ -1323,7 +1321,6 @@
 				A74F2A3C13BF465E00E57818 /* GHPCreateIssueViewController.m */,
 				A74F2A3E13BF481000E57818 /* GHPCreateIssueTitleAndDescriptionTableViewCell.h */,
 				A74F2A3F13BF481000E57818 /* GHPCreateIssueTitleAndDescriptionTableViewCell.m */,
-				A74F2A4013BF481100E57818 /* GHPCreateIssueTitleAndDescriptionTableViewCellContentView.xib */,
 			);
 			name = GHPRepositoryViewController;
 			sourceTree = "<group>";
@@ -2320,7 +2317,6 @@
 				A74A65F913BD0A7B0098106E /* 19-gear@2x.png in Resources */,
 				A74A660413BDAF490098106E /* UITableViewCellAccessoryDisclosureIndicatorOriginal.png in Resources */,
 				A7D0523A13BDC20C00B3D239 /* UIBarButtonSystemItemAction.png in Resources */,
-				A74F2A4213BF481200E57818 /* GHPCreateIssueTitleAndDescriptionTableViewCellContentView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

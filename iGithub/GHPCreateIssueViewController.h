@@ -14,6 +14,7 @@
 @protocol GHPCreateIssueViewControllerDelegate <NSObject>
 
 - (void)createIssueViewControllerIsDone:(GHPCreateIssueViewController *)createIssueViewController;
+- (void)createIssueViewController:(GHPCreateIssueViewController *)createIssueViewController didCreateIssue:(GHAPIIssueV3 *)issue;
 
 @end
 

@@ -71,7 +71,7 @@
     [super layoutSubviews];
     
     self.imageView.frame = CGRectMake(0.0f, 0.0f, 56.0f, 56.0f);
-    self.textLabel.frame = CGRectMake(64.0f, 0.0f, CGRectGetWidth(self.contentView.bounds)-64.0f, 21.0f);
+    self.textLabel.frame = CGRectMake(64.0f, 0.0f, CGRectGetWidth(self.contentView.bounds)-64.0f - 37.0f, 21.0f);
     self.detailTextLabel.frame = CGRectMake(64.0f, 29.0f, CGRectGetWidth(self.contentView.bounds)-64.0f, CGRectGetHeight(self.contentView.bounds)-29.0f);
     [self.detailTextLabel sizeToFit];
     self.actionButton.frame = CGRectMake(CGRectGetWidth(self.contentView.bounds)-37.0f, 0.0f, 37.0f, 25.0f);
