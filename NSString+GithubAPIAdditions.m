@@ -66,7 +66,7 @@
     for (NSString *basicLinkString in basicLinksArray) {
         if ([basicLinkString rangeOfString:@"rel=\"next\""].location != NSNotFound) {
             
-            NSRegularExpression *expression = [[[NSRegularExpression alloc] initWithPattern:@"page=(0|1|2|3|4|5|6|7|8|9)+" options:NSRegularExpressionCaseInsensitive error:NULL] autorelease];
+            NSRegularExpression *expression = [[[NSRegularExpression alloc] initWithPattern:@"page=(0|1|2|3|4|5|6|7|8|9)+&" options:NSRegularExpressionCaseInsensitive error:NULL] autorelease];
             
             
             
