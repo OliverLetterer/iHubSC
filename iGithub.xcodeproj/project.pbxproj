@@ -50,6 +50,9 @@
 		A70ABEA613BF92160000D189 /* GHPUsersFromUsernameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A70ABEA513BF92150000D189 /* GHPUsersFromUsernameViewController.m */; };
 		A70ABEAF13BF93050000D189 /* GHPFollwingUsersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A70ABEAE13BF93040000D189 /* GHPFollwingUsersViewController.m */; };
 		A70ABEB213BF95AB0000D189 /* GHPFollowedUsersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A70ABEB113BF95AA0000D189 /* GHPFollowedUsersViewController.m */; };
+		A70ABEC113BF9D960000D189 /* GHPUsersFromRepositoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A70ABEC013BF9D950000D189 /* GHPUsersFromRepositoryViewController.m */; };
+		A70ABEC513BF9E260000D189 /* GHPWatchingRepositoryUsersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A70ABEC413BF9E250000D189 /* GHPWatchingRepositoryUsersViewController.m */; };
+		A70ABEC813BF9FBA0000D189 /* GHPCollaboratorsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A70ABEC713BF9FB80000D189 /* GHPCollaboratorsViewController.m */; };
 		A70DA3D813A4B7F700235C76 /* GHAPIOrganizationV3.m in Sources */ = {isa = PBXBuildFile; fileRef = A70DA3D713A4B7F700235C76 /* GHAPIOrganizationV3.m */; };
 		A70DA3DC13A4E2D100235C76 /* GHAPITeamV3.m in Sources */ = {isa = PBXBuildFile; fileRef = A70DA3DB13A4E2D100235C76 /* GHAPITeamV3.m */; };
 		A70DA3DF13A61BC200235C76 /* OCPromptView.m in Sources */ = {isa = PBXBuildFile; fileRef = A70DA3DE13A61BC000235C76 /* OCPromptView.m */; };
@@ -341,6 +344,12 @@
 		A70ABEAE13BF93040000D189 /* GHPFollwingUsersViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPFollwingUsersViewController.m; sourceTree = "<group>"; };
 		A70ABEB013BF95A70000D189 /* GHPFollowedUsersViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPFollowedUsersViewController.h; sourceTree = "<group>"; };
 		A70ABEB113BF95AA0000D189 /* GHPFollowedUsersViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPFollowedUsersViewController.m; sourceTree = "<group>"; };
+		A70ABEBF13BF9D950000D189 /* GHPUsersFromRepositoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPUsersFromRepositoryViewController.h; sourceTree = "<group>"; };
+		A70ABEC013BF9D950000D189 /* GHPUsersFromRepositoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPUsersFromRepositoryViewController.m; sourceTree = "<group>"; };
+		A70ABEC313BF9E230000D189 /* GHPWatchingRepositoryUsersViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPWatchingRepositoryUsersViewController.h; sourceTree = "<group>"; };
+		A70ABEC413BF9E250000D189 /* GHPWatchingRepositoryUsersViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPWatchingRepositoryUsersViewController.m; sourceTree = "<group>"; };
+		A70ABEC613BF9FB60000D189 /* GHPCollaboratorsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPCollaboratorsViewController.h; sourceTree = "<group>"; };
+		A70ABEC713BF9FB80000D189 /* GHPCollaboratorsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPCollaboratorsViewController.m; sourceTree = "<group>"; };
 		A70DA3D613A4B7F700235C76 /* GHAPIOrganizationV3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHAPIOrganizationV3.h; sourceTree = "<group>"; };
 		A70DA3D713A4B7F700235C76 /* GHAPIOrganizationV3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHAPIOrganizationV3.m; sourceTree = "<group>"; };
 		A70DA3DA13A4E2D100235C76 /* GHAPITeamV3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHAPITeamV3.h; sourceTree = "<group>"; };
@@ -1355,6 +1364,12 @@
 				A70ABEAE13BF93040000D189 /* GHPFollwingUsersViewController.m */,
 				A70ABEB013BF95A70000D189 /* GHPFollowedUsersViewController.h */,
 				A70ABEB113BF95AA0000D189 /* GHPFollowedUsersViewController.m */,
+				A70ABEBF13BF9D950000D189 /* GHPUsersFromRepositoryViewController.h */,
+				A70ABEC013BF9D950000D189 /* GHPUsersFromRepositoryViewController.m */,
+				A70ABEC313BF9E230000D189 /* GHPWatchingRepositoryUsersViewController.h */,
+				A70ABEC413BF9E250000D189 /* GHPWatchingRepositoryUsersViewController.m */,
+				A70ABEC613BF9FB60000D189 /* GHPCollaboratorsViewController.h */,
+				A70ABEC713BF9FB80000D189 /* GHPCollaboratorsViewController.m */,
 			);
 			name = GHPUsersViewController;
 			sourceTree = "<group>";
@@ -2538,6 +2553,9 @@
 				A70ABEA613BF92160000D189 /* GHPUsersFromUsernameViewController.m in Sources */,
 				A70ABEAF13BF93050000D189 /* GHPFollwingUsersViewController.m in Sources */,
 				A70ABEB213BF95AB0000D189 /* GHPFollowedUsersViewController.m in Sources */,
+				A70ABEC113BF9D960000D189 /* GHPUsersFromRepositoryViewController.m in Sources */,
+				A70ABEC513BF9E260000D189 /* GHPWatchingRepositoryUsersViewController.m in Sources */,
+				A70ABEC813BF9FBA0000D189 /* GHPCollaboratorsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

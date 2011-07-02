@@ -11,6 +11,8 @@
 #import "GHPUserTableViewCell.h"
 #import "GHPUserViewController.h"
 #import "GHPLabelTableViewCell.h"
+#import "GHPWatchingRepositoryUsersViewController.h"
+#import "GHPCollaboratorsViewController.h"
 
 #warning section for Recent Commits and Browse Content
 
@@ -433,6 +435,20 @@
         if (indexPath.row == 0) {
             GHPUserViewController *userViewController = [[[GHPUserViewController alloc] initWithUsername:self.repository.owner.login ] autorelease];
             [self.advancedNavigationController pushViewController:userViewController afterViewController:self];
+        }
+    } else if (indexPath.section == kUITableViewSectionFurtherContent) {
+        UIViewController *viewController = nil;
+        
+        if (indexPath.row == 3) {
+            viewController = [[[GHPWatchingRepositoryUsersViewController alloc] initWithRepository:self.repositoryString] autorelease];
+        } else if (indexPath.row == 2) {
+            viewController = [[[GHPCollaboratorsViewController alloc] initWithRepository:self.repositoryString] autorelease];
+        }
+        
+        if (viewController) {
+            [self.advancedNavigationController pushViewController:viewController afterViewController:self];
+        } else {
+            [tableView deselectRowAtIndexPath:indexPath animated:NO];
         }
     }
 }

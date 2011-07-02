@@ -30,6 +30,8 @@
                             }];
 }
 
+#pragma mark - Pagination
+
 - (void)downloadDataForPage:(NSUInteger)page inSection:(NSUInteger)section {
     [GHAPIUserV3 usersThatUsernameIsFollowing:self.username page:page 
                             completionHandler:^(NSMutableArray *array, NSUInteger nextPage, NSError *error) {
