@@ -31,7 +31,6 @@
 }
 
 - (void)downloadDataForPage:(NSUInteger)page inSection:(NSUInteger)section {
-    DLog(@"%d", page);
     [GHAPIUserV3 usersThatAreFollowingUserNamed:self.username page:page 
                             completionHandler:^(NSMutableArray *array, NSUInteger nextPage, NSError *error) {
                                 if (error) {
