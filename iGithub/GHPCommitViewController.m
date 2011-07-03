@@ -9,6 +9,7 @@
 #import "GHPCommitViewController.h"
 #import "GHPCollapsingAndSpinningTableViewCell.h"
 #import "GHPDiffViewTableViewCell.h"
+#import "GHViewCloudFileViewController.h"
 
 @implementation GHPCommitViewController
 
@@ -185,7 +186,7 @@
         
         GHPDefaultTableViewCell *cell = [self defaultTableViewCellForRowAtIndexPath:indexPath withReuseIdentifier:@"GHPDefaultTableViewCell"];
         cell.textLabel.text = [self.commit.removed objectAtIndex:indexPath.row];
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        cell.accessoryType = UITableViewCellAccessoryNone;
         
         return cell;
     } else if (indexPath.section >= 0 && indexPath.section <= self.commit.modified.count-1) {
@@ -287,14 +288,19 @@
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     [detailViewController release];
-     */
+    if (indexPath.section == self.commit.modified.count && self.commit.added.count > 0) {
+        NSString *filename = [self.commit.added objectAtIndex:indexPath.row];
+        
+        NSString *URL = [filename stringByDeletingLastPathComponent];
+        NSString *base = [filename lastPathComponent];
+        
+        GHViewCloudFileViewController *fileViewController = [[[GHViewCloudFileViewController alloc] initWithRepository:self.repository 
+                                                                                                                  tree:self.commitID 
+                                                                                                              filename:base 
+                                                                                                           relativeURL:URL]
+                                                             autorelease];
+        [self.advancedNavigationController pushViewController:fileViewController afterViewController:self];
+    }
 }
 
 @end

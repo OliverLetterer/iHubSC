@@ -123,12 +123,6 @@
     return MAX(oldSize.height, newSize.height)+10.0f;
 }
 
-//+ (CGFloat)heightWithContent:(NSString *)content {
-//    CGFloat height = [GHPDiffViewLineNumbersView oldNewHeight];
-//    
-//    
-//}
-
 #pragma mark - Memory management
 
 - (void)dealloc {

@@ -198,7 +198,7 @@
 #pragma mark - View lifecycle
 
 - (void)loadView {
-    self.view = [[[GHLinearGradientBackgroundView alloc] initWithFrame:CGRectZero] autorelease];
+    self.view = [[[GHLinearGradientBackgroundView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 320.0f, 480.0f)] autorelease];
     
     self.scrollView = [[[UIScrollView alloc] initWithFrame:self.view.bounds] autorelease];
     self.scrollView.backgroundColor = [UIColor clearColor];
@@ -218,10 +218,14 @@
     self.loadingLabel.textAlignment = UITextAlignmentCenter;
     self.loadingLabel.text = NSLocalizedString(@"Downloading ...", @"");
     self.loadingLabel.font = [UIFont systemFontOfSize:17.0];
+    [self.loadingLabel sizeToFit];
+    self.loadingLabel.center = CGPointMake(CGRectGetWidth(self.view.bounds)/2.0f, CGRectGetHeight(self.view.bounds)/2.0f);
+    self.loadingLabel.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
     [self.view addSubview:self.loadingLabel];
     
     self.activityIndicatorView = [[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray] autorelease];
-    self.activityIndicatorView.center = CGPointMake(75.0, 180.0);
+    self.activityIndicatorView.center = CGPointMake(self.loadingLabel.frame.origin.x - 10.0f, CGRectGetHeight(self.view.bounds)/2.0f);
+    self.activityIndicatorView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
     [self.activityIndicatorView startAnimating];
     [self.view addSubview:self.activityIndicatorView];
     
@@ -247,6 +251,8 @@
     self.activityIndicatorView = nil;
     
     self.loadingLabel.text = NSLocalizedString(@"Unable to display MIME-Type", @"");
+    [self.loadingLabel sizeToFit];
+    self.loadingLabel.center = CGPointMake(CGRectGetWidth(self.view.bounds)/2.0f, CGRectGetHeight(self.view.bounds)/2.0f);
 }
 
 - (void)updateViewToShowPlainTextFile {
@@ -254,21 +260,21 @@
         return;
     }
     
-    [self.scrollView removeFromSuperview];
-    self.scrollView = nil;
     [self.loadingLabel removeFromSuperview];
     self.loadingLabel = nil;
     [self.activityIndicatorView removeFromSuperview];
     self.activityIndicatorView = nil;
     
     
-    CGRect frame = CGRectMake(0.0, 0.0, 320.0, 367.0f);
+    CGRect frame = self.view.bounds;
     
     UIWebView *webView = [[[UIWebView alloc] initWithFrame:frame] autorelease];
+    webView.scrollView.scrollEnabled = NO;
     [webView loadHTMLString:self.contentString baseURL:[[NSBundle mainBundle] URLForResource:@"" withExtension:nil]];
     webView.scalesPageToFit = YES;
-    
-    [self.view addSubview:webView];
+    [webView sizeToFit];
+    [self.scrollView addSubview:webView];
+    self.scrollView.contentSize = webView.frame.size;
 }
 
 - (void)updateViewToShowMarkdownFile {
@@ -303,8 +309,9 @@
     [self.loadingLabel removeFromSuperview];
     self.loadingLabel = nil;
     
-    self.progressView = [[[DDProgressView alloc] initWithFrame:CGRectMake(20.0, 170.0, 280.0, 0.0)] autorelease];
+    self.progressView = [[[DDProgressView alloc] initWithFrame:CGRectMake(20.0, CGRectGetHeight(self.view.bounds)-10.0f, CGRectGetWidth(self.view.bounds) - 40.0f, 20.0f)] autorelease];
     self.progressView.alpha = 0.0;
+    self.progressView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
     [self.view addSubview:self.progressView];
     [UIView animateWithDuration:0.3 animations:^(void) {
         self.view.backgroundColor = [UIColor blackColor];

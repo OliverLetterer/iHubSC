@@ -32,6 +32,5 @@
 @property (nonatomic, retain) UIColor *linesTextColor;
 
 + (CGFloat)oldNewHeight;
-+ (CGFloat)heightWithContent:(NSString *)content;
 
 @end
