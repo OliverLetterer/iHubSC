@@ -14,3 +14,7 @@
 + (NSString *)stringFormFileSize:(long long)fileSize;
 
 @end
+
+@interface NSString (CWAddition)
+- (NSString *)stringBetweenString:(NSString *)start andString:(NSString *)end;
+@end

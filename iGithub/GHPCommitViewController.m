@@ -8,6 +8,7 @@
 
 #import "GHPCommitViewController.h"
 #import "GHPCollapsingAndSpinningTableViewCell.h"
+#import "GHPDiffViewTableViewCell.h"
 
 @implementation GHPCommitViewController
 
@@ -187,6 +188,22 @@
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         
         return cell;
+    } else if (indexPath.section >= 0 && indexPath.section <= self.commit.modified.count-1) {
+        // modified file
+        static NSString *CellIdentifier = @"GHPDiffViewTableViewCell";
+        
+        GHPDiffViewTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        if (cell == nil) {
+            cell = [[[GHPDiffViewTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        }
+        
+        GHCommitFileInformation *fileInfo = [self.commit.modified objectAtIndex:indexPath.section];
+        
+        cell.diffView.diffString = fileInfo.diff;
+        
+        // Configure the cell...
+        
+        return cell;
     }
     
     static NSString *CellIdentifier = @"Cell";
@@ -256,6 +273,15 @@
         return NSLocalizedString(@"Modified Files", @"");
     }
     return nil;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section >= 0 && indexPath.section <= self.commit.modified.count-1 && indexPath.row == 1) {
+        GHCommitFileInformation *fileInfo = [self.commit.modified objectAtIndex:indexPath.section];
+        
+        return [GHPDiffViewTableViewCell heightWithContent:fileInfo.diff];
+    }
+    return UITableViewAutomaticDimension;
 }
 
 #pragma mark - Table view delegate

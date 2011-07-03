@@ -57,6 +57,10 @@
 		A70ABECF13BFAED10000D189 /* GHPCommitTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A70ABECE13BFAED10000D189 /* GHPCommitTableViewCell.m */; };
 		A70ABED213BFB3FA0000D189 /* GHPCommitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A70ABED113BFB3F90000D189 /* GHPCommitViewController.m */; };
 		A70ABED913BFBEF70000D189 /* UITableViewCell+GHHeight.m in Sources */ = {isa = PBXBuildFile; fileRef = A70ABED813BFBEF10000D189 /* UITableViewCell+GHHeight.m */; };
+		A70ABEDD13C051130000D189 /* GHPDiffView.m in Sources */ = {isa = PBXBuildFile; fileRef = A70ABEDC13C051120000D189 /* GHPDiffView.m */; };
+		A70ABEE413C051E90000D189 /* GHPDiffViewTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A70ABEE313C051E80000D189 /* GHPDiffViewTableViewCell.m */; };
+		A70ABEEC13C05CFD0000D189 /* GHPDiffViewLineNumbersView.m in Sources */ = {isa = PBXBuildFile; fileRef = A70ABEEB13C05CFB0000D189 /* GHPDiffViewLineNumbersView.m */; };
+		A70ABEF313C070410000D189 /* GHPDiffViewContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = A70ABEF213C0703F0000D189 /* GHPDiffViewContentView.m */; };
 		A70DA3D813A4B7F700235C76 /* GHAPIOrganizationV3.m in Sources */ = {isa = PBXBuildFile; fileRef = A70DA3D713A4B7F700235C76 /* GHAPIOrganizationV3.m */; };
 		A70DA3DC13A4E2D100235C76 /* GHAPITeamV3.m in Sources */ = {isa = PBXBuildFile; fileRef = A70DA3DB13A4E2D100235C76 /* GHAPITeamV3.m */; };
 		A70DA3DF13A61BC200235C76 /* OCPromptView.m in Sources */ = {isa = PBXBuildFile; fileRef = A70DA3DE13A61BC000235C76 /* OCPromptView.m */; };
@@ -362,6 +366,14 @@
 		A70ABED113BFB3F90000D189 /* GHPCommitViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPCommitViewController.m; sourceTree = "<group>"; };
 		A70ABED713BFBEEC0000D189 /* UITableViewCell+GHHeight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableViewCell+GHHeight.h"; sourceTree = "<group>"; };
 		A70ABED813BFBEF10000D189 /* UITableViewCell+GHHeight.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableViewCell+GHHeight.m"; sourceTree = "<group>"; };
+		A70ABEDB13C051100000D189 /* GHPDiffView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPDiffView.h; sourceTree = "<group>"; };
+		A70ABEDC13C051120000D189 /* GHPDiffView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPDiffView.m; sourceTree = "<group>"; };
+		A70ABEE213C051E70000D189 /* GHPDiffViewTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPDiffViewTableViewCell.h; sourceTree = "<group>"; };
+		A70ABEE313C051E80000D189 /* GHPDiffViewTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPDiffViewTableViewCell.m; sourceTree = "<group>"; };
+		A70ABEEA13C05CF90000D189 /* GHPDiffViewLineNumbersView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPDiffViewLineNumbersView.h; sourceTree = "<group>"; };
+		A70ABEEB13C05CFB0000D189 /* GHPDiffViewLineNumbersView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPDiffViewLineNumbersView.m; sourceTree = "<group>"; };
+		A70ABEF113C070390000D189 /* GHPDiffViewContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPDiffViewContentView.h; sourceTree = "<group>"; };
+		A70ABEF213C0703F0000D189 /* GHPDiffViewContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPDiffViewContentView.m; sourceTree = "<group>"; };
 		A70DA3D613A4B7F700235C76 /* GHAPIOrganizationV3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHAPIOrganizationV3.h; sourceTree = "<group>"; };
 		A70DA3D713A4B7F700235C76 /* GHAPIOrganizationV3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHAPIOrganizationV3.m; sourceTree = "<group>"; };
 		A70DA3DA13A4E2D100235C76 /* GHAPITeamV3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHAPITeamV3.h; sourceTree = "<group>"; };
@@ -978,6 +990,14 @@
 				A70ABECE13BFAED10000D189 /* GHPCommitTableViewCell.m */,
 				A70ABED013BFB3F80000D189 /* GHPCommitViewController.h */,
 				A70ABED113BFB3F90000D189 /* GHPCommitViewController.m */,
+				A70ABEDB13C051100000D189 /* GHPDiffView.h */,
+				A70ABEDC13C051120000D189 /* GHPDiffView.m */,
+				A70ABEE213C051E70000D189 /* GHPDiffViewTableViewCell.h */,
+				A70ABEE313C051E80000D189 /* GHPDiffViewTableViewCell.m */,
+				A70ABEEA13C05CF90000D189 /* GHPDiffViewLineNumbersView.h */,
+				A70ABEEB13C05CFB0000D189 /* GHPDiffViewLineNumbersView.m */,
+				A70ABEF113C070390000D189 /* GHPDiffViewContentView.h */,
+				A70ABEF213C0703F0000D189 /* GHPDiffViewContentView.m */,
 			);
 			name = GHPCommitsViewController;
 			sourceTree = "<group>";
@@ -2588,6 +2608,10 @@
 				A70ABECF13BFAED10000D189 /* GHPCommitTableViewCell.m in Sources */,
 				A70ABED213BFB3FA0000D189 /* GHPCommitViewController.m in Sources */,
 				A70ABED913BFBEF70000D189 /* UITableViewCell+GHHeight.m in Sources */,
+				A70ABEDD13C051130000D189 /* GHPDiffView.m in Sources */,
+				A70ABEE413C051E90000D189 /* GHPDiffViewTableViewCell.m in Sources */,
+				A70ABEEC13C05CFD0000D189 /* GHPDiffViewLineNumbersView.m in Sources */,
+				A70ABEF313C070410000D189 /* GHPDiffViewContentView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
