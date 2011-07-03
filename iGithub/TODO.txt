@@ -29,6 +29,7 @@ support all these events
 - Remaining API calls is 0
 - changed pull request API "repo/" is now "repos/"
 - authenticationViewController not working on iPad
+- close owned issues
 
 
 TODO:
