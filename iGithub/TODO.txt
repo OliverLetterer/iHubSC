@@ -28,6 +28,7 @@ support all these events
 ##WARNING##
 - Remaining API calls is 0
 - changed pull request API "repo/" is now "repos/"
+- close owned issues
 
 
 TODO:
