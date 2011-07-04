@@ -34,8 +34,6 @@ UIFont *GHPDiffViewBoldFont(void) {
     [tmpString appendString:@"\n"];
     _diffString = [[NSString alloc] initWithString:tmpString];
     
-    DLog(@"%@", _diffString);
-    
     __block BOOL firstInfoLine = YES;
     NSMutableString *oldLinesString = [NSMutableString string];
     NSMutableString *newLinesString = [NSMutableString string];
