@@ -14,6 +14,7 @@
 #import "GHPWatchingRepositoryUsersViewController.h"
 #import "GHPCollaboratorsViewController.h"
 #import "GHPCommitsViewController.h"
+#import "GHPOpenIssuesOnRepositoryViewController.h"
 
 #warning section Browse Content
 
@@ -476,6 +477,8 @@
             viewController = [[[GHPWatchingRepositoryUsersViewController alloc] initWithRepository:self.repositoryString] autorelease];
         } else if (indexPath.row == 2) {
             viewController = [[[GHPCollaboratorsViewController alloc] initWithRepository:self.repositoryString] autorelease];
+        } else if (indexPath.row == 0) {
+            viewController = [[[GHPOpenIssuesOnRepositoryViewController alloc] initWithRepository:self.repositoryString] autorelease];
         }
         
         if (viewController) {

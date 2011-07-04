@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "GHPDefaultTableViewCell.h"
 
+#warning rename GHPCommitTableViewCell, because its also used for issues
+
 @interface GHPCommitTableViewCell : GHPDefaultTableViewCell {
 @private
     
