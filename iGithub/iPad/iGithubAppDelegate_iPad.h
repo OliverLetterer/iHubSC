@@ -13,6 +13,13 @@
     
 }
 
+#warning User->Gists are missing
+#warning User->Organizations missing
+#warning NewsFeeds are missing
+
+#warning Repository->Pull Requests are missing
+#warning Repository->BrowseContent is missing
+
 - (void)deviceOrientationDidChangeNotificationCallback:(NSNotification *)notification;
 
 @end
