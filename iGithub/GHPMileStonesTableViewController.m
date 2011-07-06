@@ -8,6 +8,7 @@
 
 #import "GHPMileStonesTableViewController.h"
 #import "GHPMileStoneTableViewCell.h"
+#import "GHPMilestoneViewController.h"
 
 @implementation GHPMileStonesTableViewController
 
@@ -191,14 +192,11 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     [detailViewController release];
-     */
+    GHAPIMilestoneV3 *milestone = [self.milestones objectAtIndex:indexPath.row];
+    
+    GHPMilestoneViewController *viewController = [[[GHPMilestoneViewController alloc] initWithRepository:self.repository milestoneNumber:milestone.number] autorelease];
+    
+    [self.advancedNavigationController pushViewController:viewController afterViewController:self];
 }
 
 @end

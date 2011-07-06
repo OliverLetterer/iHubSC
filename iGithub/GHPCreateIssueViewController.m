@@ -275,6 +275,7 @@
                 cell = [[[GHPCreateIssueTitleAndDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
             }
             [self setupDefaultTableViewCell:cell forRowAtIndexPath:indexPath];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
             
             // Configure the cell...
             

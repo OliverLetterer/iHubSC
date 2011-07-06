@@ -53,6 +53,7 @@
 		A70A11A713C38BFB00685749 /* GHPNewCommentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A70A11A613C38BFB00685749 /* GHPNewCommentTableViewCell.m */; };
 		A70A11AB13C3B35400685749 /* GHAPIPullRequestV3.m in Sources */ = {isa = PBXBuildFile; fileRef = A70A11AA13C3B35400685749 /* GHAPIPullRequestV3.m */; };
 		A70A11AE13C3B36F00685749 /* GHAPIPullRequestMergeStateV3.m in Sources */ = {isa = PBXBuildFile; fileRef = A70A11AD13C3B36E00685749 /* GHAPIPullRequestMergeStateV3.m */; };
+		A70A11B213C4E69E00685749 /* GHPMilestoneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A70A11B113C4E69E00685749 /* GHPMilestoneViewController.m */; };
 		A70ABE9713BF77C60000D189 /* GHPLabelTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A70ABE9613BF77C60000D189 /* GHPLabelTableViewCell.m */; };
 		A70ABE9E13BF904D0000D189 /* GHPUsersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A70ABE9D13BF904D0000D189 /* GHPUsersViewController.m */; };
 		A70ABEA613BF92160000D189 /* GHPUsersFromUsernameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A70ABEA513BF92150000D189 /* GHPUsersFromUsernameViewController.m */; };
@@ -367,8 +368,10 @@
 		A70A11A613C38BFB00685749 /* GHPNewCommentTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPNewCommentTableViewCell.m; sourceTree = "<group>"; };
 		A70A11A913C3B35400685749 /* GHAPIPullRequestV3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHAPIPullRequestV3.h; sourceTree = "<group>"; };
 		A70A11AA13C3B35400685749 /* GHAPIPullRequestV3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHAPIPullRequestV3.m; sourceTree = "<group>"; };
-		A70A11AC13C3B36E00685749 /* GHAPIPullRequestMergeStateV3.h */ = {isa = PBXFileReference; fileEncoding = 4; path = GHAPIPullRequestMergeStateV3.h; sourceTree = "<group>"; };
+		A70A11AC13C3B36E00685749 /* GHAPIPullRequestMergeStateV3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHAPIPullRequestMergeStateV3.h; sourceTree = "<group>"; };
 		A70A11AD13C3B36E00685749 /* GHAPIPullRequestMergeStateV3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHAPIPullRequestMergeStateV3.m; sourceTree = "<group>"; };
+		A70A11B013C4E69E00685749 /* GHPMilestoneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPMilestoneViewController.h; sourceTree = "<group>"; };
+		A70A11B113C4E69E00685749 /* GHPMilestoneViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPMilestoneViewController.m; sourceTree = "<group>"; };
 		A70ABE9513BF77C50000D189 /* GHPLabelTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPLabelTableViewCell.h; sourceTree = "<group>"; };
 		A70ABE9613BF77C60000D189 /* GHPLabelTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPLabelTableViewCell.m; sourceTree = "<group>"; };
 		A70ABE9C13BF904D0000D189 /* GHPUsersViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPUsersViewController.h; sourceTree = "<group>"; };
@@ -1050,6 +1053,15 @@
 			name = GHAPIPullRequestV3;
 			sourceTree = "<group>";
 		};
+		A70A11AF13C4E67600685749 /* GHPMilestoneViewController */ = {
+			isa = PBXGroup;
+			children = (
+				A70A11B013C4E69E00685749 /* GHPMilestoneViewController.h */,
+				A70A11B113C4E69E00685749 /* GHPMilestoneViewController.m */,
+			);
+			name = GHPMilestoneViewController;
+			sourceTree = "<group>";
+		};
 		A70ABEC913BFAB5E0000D189 /* GHPCommitsViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -1092,6 +1104,7 @@
 		A70DAE0713B49FC500DE4279 /* UserInterface */ = {
 			isa = PBXGroup;
 			children = (
+				A70A11AF13C4E67600685749 /* GHPMilestoneViewController */,
 				A70A118F13C368F400685749 /* GHPMilestonesViewController */,
 				A7DA5EAA13C2578E00288937 /* GHPIssueViewController */,
 				A7DA5E9F13C2508800288937 /* GHPIssuesViewController */,
@@ -2718,6 +2731,7 @@
 				A70A11A713C38BFB00685749 /* GHPNewCommentTableViewCell.m in Sources */,
 				A70A11AB13C3B35400685749 /* GHAPIPullRequestV3.m in Sources */,
 				A70A11AE13C3B36F00685749 /* GHAPIPullRequestMergeStateV3.m in Sources */,
+				A70A11B213C4E69E00685749 /* GHPMilestoneViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

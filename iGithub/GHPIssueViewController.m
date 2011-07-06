@@ -17,6 +17,7 @@
 #import "GHPCommitViewController.h"
 #import "GHPNewCommentTableViewCell.h"
 #import "GHSettingsHelper.h"
+#import "GHPMilestoneViewController.h"
 
 #define kUITableViewSectionInfo             0
 #define kUITableViewSectionDetails          1
@@ -664,6 +665,12 @@
         } else if (indexPath.row == 1) {
             if (self.issue.hasAssignee) {
                 viewController = [[[GHPUserViewController alloc] initWithUsername:self.issue.assignee.login] autorelease];
+            } else if (self.issue.hasMilestone) {
+                viewController = [[[GHPMilestoneViewController alloc] initWithRepository:self.repositoryString milestoneNumber:self.issue.milestone.number] autorelease];
+            }
+        } else if (indexPath.row == 2) {
+            if (self.issue.hasMilestone) {
+                viewController = [[[GHPMilestoneViewController alloc] initWithRepository:self.repositoryString milestoneNumber:self.issue.milestone.number] autorelease];
             }
         }
         
