@@ -21,7 +21,7 @@
         [_users release];
         _users = [users retain];
         
-        if (_users.count == 0) {
+        if (_users.count == 0 && _users) {
             UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", @"") 
                                                              message:NSLocalizedString(@"No Users available", @"") 
                                                             delegate:nil 
@@ -178,7 +178,7 @@
 #pragma mark - Table view delegate
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 66.0f;
+    return GHPUserTableViewCellHeight;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {

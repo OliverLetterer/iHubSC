@@ -1,29 +1,28 @@
 //
-//  GHPRepositoriesViewController.m
+//  GHPMileStonesTableViewController.m
 //  iGithub
 //
-//  Created by Oliver Letterer on 01.07.11.
+//  Created by Oliver Letterer on 05.07.11.
 //  Copyright 2011 Home. All rights reserved.
 //
 
-#import "GHPRepositoriesViewController.h"
-#import "GHPRepositoryTableViewCell.h"
-#import "GHPRepositoryViewController.h"
+#import "GHPMileStonesTableViewController.h"
+#import "GHPMileStoneTableViewCell.h"
 
-@implementation GHPRepositoriesViewController
+@implementation GHPMileStonesTableViewController
 
-@synthesize repositories=_repositories, username=_username;
+@synthesize milestones=_milestones;
+@synthesize repository=_repository;
 
 #pragma mark - setters and getters
 
-- (void)setRepositories:(NSMutableArray *)repositories {
-    if (repositories != _repositories) {
-        [_repositories release];
-        _repositories = [repositories retain];
+- (void)setMilestones:(NSMutableArray *)milestones {
+    if (milestones != _milestones) {
+        [_milestones release], _milestones = [milestones retain];
         
-        if (repositories != nil && repositories.count == 0) {
+        if (milestones != nil && milestones.count == 0) {
             UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", @"") 
-                                                             message:NSLocalizedString(@"No Repositories available", @"") 
+                                                             message:NSLocalizedString(@"No Milestones available", @"") 
                                                             delegate:nil 
                                                    cancelButtonTitle:NSLocalizedString(@"OK", @"") 
                                                    otherButtonTitles:nil]
@@ -40,10 +39,10 @@
 
 #pragma mark - Initialization
 
-- (id)initWithUsername:(NSString *)username {
+- (id)initWithRepository:(NSString *)repository {
     if ((self = [super initWithStyle:UITableViewStyleGrouped])) {
         // Custom initialization
-        self.username = username;
+        self.repository = repository;
     }
     return self;
 }
@@ -51,8 +50,8 @@
 #pragma mark - Memory management
 
 - (void)dealloc {
-    [_repositories release];
-    [_username release];
+    [_milestones release];
+    [_repository release];
     
     [super dealloc];
 }
@@ -112,36 +111,40 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    if (!self.milestones) {
+        return 0;
+    }
     // Return the number of sections.
     return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    return self.repositories.count;
+    return self.milestones.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *CellIdentifier = @"Cell";
+    static NSString *CellIdentifier = @"GHPMileStoneTableViewCell";
     
-    GHPRepositoryTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    
+    GHPMileStoneTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[GHPRepositoryTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
-    }
-    
-    GHAPIRepositoryV3 *repository = [self.repositories objectAtIndex:indexPath.row];
-    
-    cell.textLabel.text = repository.fullRepositoryName;
-    cell.detailTextLabel.text = repository.description;
-    
-    if ([repository.private boolValue]) {
-        cell.imageView.image = [UIImage imageNamed:@"GHPrivateRepositoryIcon.png"];
-    } else {
-        cell.imageView.image = [UIImage imageNamed:@"GHPublicRepositoryIcon.png"];
+        cell = [[[GHPMileStoneTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
     }
     
     [self setupDefaultTableViewCell:cell forRowAtIndexPath:indexPath];
+    
+    GHAPIMilestoneV3 *milestone = [self.milestones objectAtIndex:indexPath.row];
+    
+    cell.progressView.progress = milestone.progress;
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Milestone %@", @""), milestone.title];
+    cell.detailTextLabel.text = milestone.dueFormattedString;
+    
+    if (milestone.dueInTime) {
+        [cell.progressView setTintColor:[UIColor greenColor] ];
+    } else {
+        [cell.progressView setTintColor:[UIColor redColor] ];
+    }
     
     return cell;
 }
@@ -184,24 +187,18 @@
 #pragma mark - Table view delegate
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return [self cachedHeightForRowAtIndexPath:indexPath];
+    return GHPMileStoneTableViewCellHeight;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    GHAPIRepositoryV3 *repository = [self.repositories objectAtIndex:indexPath.row];
-    GHPRepositoryViewController *repoViewController = [[[GHPRepositoryViewController alloc] initWithRepositoryString:repository.fullRepositoryName] autorelease];
-    [self.advancedNavigationController pushViewController:repoViewController afterViewController:self];
-}
-
-#pragma mark - caching height
-
-- (void)cacheRepositoriesHeights {
-    [self.repositories enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        GHAPIRepositoryV3 *repository = obj;
-        
-        [self cacheHeight:[GHPRepositoryTableViewCell heightWithContent:repository.description] 
-        forRowAtIndexPath:[NSIndexPath indexPathForRow:idx inSection:0] ];
-    }];
+    // Navigation logic may go here. Create and push another view controller.
+    /*
+     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
+     // ...
+     // Pass the selected object to the new view controller.
+     [self.navigationController pushViewController:detailViewController animated:YES];
+     [detailViewController release];
+     */
 }
 
 @end

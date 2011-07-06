@@ -8,10 +8,12 @@
 
 #import "GHPIssuesViewController.h"
 #import "GHPCommitTableViewCell.h"
+#import "GHPIssueViewController.h"
 
 @implementation GHPIssuesViewController
 
 @synthesize issues=_issues;
+@synthesize repository=_repository;
 
 #pragma mark - setters and getters
 
@@ -22,6 +24,17 @@
         
         [self cacheIssuesHeight];
         
+        if (issues != nil && issues.count == 0) {
+            UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", @"") 
+                                                             message:NSLocalizedString(@"No Issues available", @"") 
+                                                            delegate:nil 
+                                                   cancelButtonTitle:NSLocalizedString(@"OK", @"") 
+                                                   otherButtonTitles:nil]
+                                  autorelease];
+            [alert show];
+            [self.advancedNavigationController popViewController:self];
+        }
+        
         if (self.isViewLoaded) {
             [self.tableView reloadData];
         }
@@ -30,9 +43,9 @@
 
 #pragma mark - Initialization
 
-- (id)initWithStyle:(UITableViewStyle)style {
-    if ((self = [super initWithStyle:style])) {
-        // Custom initialization
+- (id)initWithRepository:(NSString *)repository {
+    if (self = [super initWithStyle:UITableViewStyleGrouped]) {
+        self.repository = repository;
     }
     return self;
 }
@@ -41,6 +54,7 @@
 
 - (void)dealloc {
     [_issues release];
+    [_repository release];
     
     [super dealloc];
 }
@@ -174,7 +188,11 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    GHAPIIssueV3 *issue = [self.issues objectAtIndex:indexPath.row];
     
+    GHPIssueViewController *viewController = [[[GHPIssueViewController alloc] initWithIssueNumber:issue.number onRepository:self.repository] autorelease];
+    
+    [self.advancedNavigationController pushViewController:viewController afterViewController:self];
 }
 
 #pragma mark - height caching

@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "UITableViewCell+GHHeight.h"
 
+#warning rename GHPRepositoryInfoTableViewCell because its also used for info section for an issue
+
 @class GHPRepositoryInfoTableViewCell;
 
 @protocol GHPRepositoryInfoTableViewCellDelegate <NSObject>

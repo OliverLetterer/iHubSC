@@ -30,6 +30,8 @@
             UIImageView *imageView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"UITableViewCellAccessoryDisclosureIndicatorOriginal.png"] ] autorelease];
             imageView.contentMode = UIViewContentModeCenter;
             self.accessoryView = imageView;
+        } else {
+            self.accessoryView = nil;
         }
     }
 }

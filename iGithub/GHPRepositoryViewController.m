@@ -15,6 +15,8 @@
 #import "GHPCollaboratorsViewController.h"
 #import "GHPCommitsViewController.h"
 #import "GHPOpenIssuesOnRepositoryViewController.h"
+#import "GHPMileStonesOnRepositoryViewController.h"
+#import "GHPRepositoryTableViewCell.h"
 
 #warning section Browse Content
 
@@ -289,6 +291,9 @@
     } else if (section == kUITableViewSectionFurtherContent) {
         return 6;
     } else if (section == kUITableViewSectionOwner) {
+        if (self.repository.isForked) {
+            return 2;
+        }
         return 1;
     } else if (section == kUITableViewSectionLabels) {
         return self.labels.count + 1;
@@ -302,7 +307,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == kUITableViewSectionInfo) {
         if (indexPath.row == 0) {
-            NSString *CellIdentifier = @"GHPUserInfoTableViewCell";
+            NSString *CellIdentifier = @"GHPRepositoryInfoTableViewCell";
             GHPRepositoryInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
             if (!cell) {
                 cell = [[[GHPRepositoryInfoTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault 
@@ -325,7 +330,7 @@
             
             return cell;
         } else if (indexPath.row == 1) {
-            NSString *CellIdentifier = @"GHPUserInfoTableViewCellInfo";
+            NSString *CellIdentifier = @"GHPRepositoryInfoTableViewCell";
             GHPRepositoryInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
             if (!cell) {
                 cell = [[[GHPRepositoryInfoTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault 
@@ -377,6 +382,30 @@
             
             [self updateImageView:cell.imageView atIndexPath:indexPath withGravatarID:self.repository.owner.gravatarID];
             cell.textLabel.text = self.repository.owner.login;
+            
+            return cell;
+        } else if (indexPath.row == 1) {
+            // is forked
+            static NSString *CellIdentifier = @"GHPRepositoryTableViewCell";
+            
+            GHPRepositoryTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+            
+            if (cell == nil) {
+                cell = [[[GHPRepositoryTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
+            }
+            
+            GHAPIRepositoryV3 *repository = self.repository.source;
+            
+            cell.textLabel.text = repository.fullRepositoryName;
+            cell.detailTextLabel.text = repository.description;
+            
+            if ([repository.private boolValue]) {
+                cell.imageView.image = [UIImage imageNamed:@"GHPrivateRepositoryIcon.png"];
+            } else {
+                cell.imageView.image = [UIImage imageNamed:@"GHPublicRepositoryIcon.png"];
+            }
+            
+            [self setupDefaultTableViewCell:cell forRowAtIndexPath:indexPath];
             
             return cell;
         }
@@ -457,8 +486,8 @@
     } else if (indexPath.section == kUITableViewSectionOwner) {
         if (indexPath.row == 0) {
             return 66.0f;
-        } else {
-            return UITableViewAutomaticDimension;
+        } else if (indexPath.row == 1) {
+            return [GHPRepositoryTableViewCell heightWithContent:self.repository.source.description];
         }
     }
     return UITableViewAutomaticDimension;
@@ -466,9 +495,18 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == kUITableViewSectionOwner) {
+        UIViewController *viewController = nil;
+        
         if (indexPath.row == 0) {
-            GHPUserViewController *userViewController = [[[GHPUserViewController alloc] initWithUsername:self.repository.owner.login ] autorelease];
-            [self.advancedNavigationController pushViewController:userViewController afterViewController:self];
+            viewController = [[[GHPUserViewController alloc] initWithUsername:self.repository.owner.login ] autorelease];
+        } else if (indexPath.row == 1) {
+            viewController = [[[GHPRepositoryViewController alloc] initWithRepositoryString:self.repository.source.fullRepositoryName] autorelease];
+        }
+        
+        if (viewController) {
+            [self.advancedNavigationController pushViewController:viewController afterViewController:self];
+        } else {
+            [tableView deselectRowAtIndexPath:indexPath animated:NO];
         }
     } else if (indexPath.section == kUITableViewSectionFurtherContent) {
         UIViewController *viewController = nil;
@@ -479,6 +517,8 @@
             viewController = [[[GHPCollaboratorsViewController alloc] initWithRepository:self.repositoryString] autorelease];
         } else if (indexPath.row == 0) {
             viewController = [[[GHPOpenIssuesOnRepositoryViewController alloc] initWithRepository:self.repositoryString] autorelease];
+        } else if (indexPath.row == 1) {
+            viewController = [[[GHPMileStonesOnRepositoryViewController alloc] initWithRepository:self.repositoryString] autorelease];
         }
         
         if (viewController) {

@@ -39,6 +39,8 @@
 
 @property (nonatomic, readonly) BOOL canAdministrateRepository;
 
+@property (nonatomic, readonly) UIActionSheet *actionButtonActionSheet;
+
 - (id)initWithRepositoryString:(NSString *)repositoryString;
 
 - (void)organizationsActionSheetDidSelectOrganizationAtIndex:(NSUInteger)index;

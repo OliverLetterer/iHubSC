@@ -16,3 +16,6 @@
 [submodule "appirater"]
 	path = appirater
 	url = https://github.com/arashpayan/appirater.git
+[submodule "uicolor-utilities"]
+	path = uicolor-utilities
+	url = https://github.com/ars/uicolor-utilities.git

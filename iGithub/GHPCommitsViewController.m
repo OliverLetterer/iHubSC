@@ -23,6 +23,17 @@
         _commits = [commits retain];
         [self cacheCommitsHeights];
         
+        if (commits != nil && commits.count == 0) {
+            UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", @"") 
+                                                             message:NSLocalizedString(@"No Commits available", @"") 
+                                                            delegate:nil 
+                                                   cancelButtonTitle:NSLocalizedString(@"OK", @"") 
+                                                   otherButtonTitles:nil]
+                                  autorelease];
+            [alert show];
+            [self.advancedNavigationController popViewController:self];
+        }
+        
         if (self.isViewLoaded) {
             [self.tableView reloadData];
         }

@@ -29,6 +29,8 @@
     UIToolbar *_textViewToolBar;
 }
 
+#warning add ability to close an issue and merge a pull request
+
 @property (nonatomic, retain) GHAPIIssueV3 *issue;
 @property (nonatomic, copy) NSString *repository;
 @property (nonatomic, copy) NSNumber *number;

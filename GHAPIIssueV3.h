@@ -94,7 +94,7 @@ extern NSString *const kGHAPIIssueStateV3Closed;
 
 // history will contain GHAPIIssueEventV3's and GHAPIIssueCommentV3's
 + (void)historyForIssueWithID:(NSNumber *)issueID onRepository:(NSString *)repository 
-            completionHandler:(void (^)(NSArray *history, NSError *error))handler;
+            completionHandler:(void (^)(NSMutableArray *history, NSError *error))handler;
 
 + (void)issuesOnRepository:(NSString *)repository 
                  milestone:(NSNumber *)milestone 

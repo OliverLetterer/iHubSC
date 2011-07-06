@@ -441,7 +441,7 @@
             cell.textLabel.text = milestone.title;
             cell.detailTextLabel.text = milestone.dueFormattedString;
             
-            cell.progressView.progress = [milestone.closedIssues floatValue] / ([milestone.closedIssues floatValue] + [milestone.openIssues floatValue]);
+            cell.progressView.progress = milestone.progress;
             
             if (milestone.dueInTime) {
                 [cell.progressView setTintColor:[UIColor greenColor] ];

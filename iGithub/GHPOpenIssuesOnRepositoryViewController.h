@@ -11,11 +11,7 @@
 
 @interface GHPOpenIssuesOnRepositoryViewController : GHPIssuesViewController {
 @private
-    NSString *_repository;
+    
 }
-
-@property (nonatomic, copy) NSString *repository;
-
-- (id)initWithRepository:(NSString *)repository;
 
 @end

@@ -331,7 +331,7 @@ NSString *const kGHAPIIssueStateV3Closed = @"closed";
 }
 
 + (void)historyForIssueWithID:(NSNumber *)issueID onRepository:(NSString *)repository 
-            completionHandler:(void (^)(NSArray *history, NSError *error))handler {
+            completionHandler:(void (^)(NSMutableArray *history, NSError *error))handler {
     
     [self commentsForIssueOnRepository:repository withNumber:issueID 
                      completionHandler:^(NSArray *comments, NSError *error) {

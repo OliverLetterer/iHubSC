@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "GHPDefaultTableViewCell.h"
 
+extern CGFloat const GHPUserTableViewCellHeight;
+
 @interface GHPUserTableViewCell : GHPDefaultTableViewCell {
 @private
     

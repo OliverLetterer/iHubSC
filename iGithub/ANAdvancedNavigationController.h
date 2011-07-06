@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+#warning poping a view controller, that is not the most right one causes a crash (fork repo -> go to repo -> issues, then delete repo)
+
 extern const CGFloat ANAdvancedNavigationControllerDefaultLeftViewControllerWidth;
 extern const CGFloat ANAdvancedNavigationControllerDefaultViewControllerWidth;
 extern const CGFloat ANAdvancedNavigationControllerDefaultLeftPanningOffset;

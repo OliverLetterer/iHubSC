@@ -45,6 +45,14 @@
 		A709F74D13689C3900B0CDE7 /* GHTableViewController+private.m in Sources */ = {isa = PBXBuildFile; fileRef = A709F74C13689C3900B0CDE7 /* GHTableViewController+private.m */; };
 		A709F75313689C9900B0CDE7 /* GHTableViewControllerAlertViewProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = A709F75213689C9800B0CDE7 /* GHTableViewControllerAlertViewProxy.m */; };
 		A709F75A1368B7E900B0CDE7 /* GHTeamViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A709F7591368B7E800B0CDE7 /* GHTeamViewController.m */; };
+		A70A119213C3690A00685749 /* GHPMileStoneTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A70A119113C3690A00685749 /* GHPMileStoneTableViewCell.m */; };
+		A70A119513C36BA900685749 /* GHPieChartProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = A70A119413C36BA900685749 /* GHPieChartProgressView.m */; };
+		A70A119913C374C300685749 /* UIColor-Expanded.m in Sources */ = {isa = PBXBuildFile; fileRef = A70A119813C374C300685749 /* UIColor-Expanded.m */; };
+		A70A119C13C37BB100685749 /* GHPMileStonesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A70A119B13C37BB100685749 /* GHPMileStonesTableViewController.m */; };
+		A70A11A313C37CB300685749 /* GHPMileStonesOnRepositoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A70A11A213C37CB300685749 /* GHPMileStonesOnRepositoryViewController.m */; };
+		A70A11A713C38BFB00685749 /* GHPNewCommentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A70A11A613C38BFB00685749 /* GHPNewCommentTableViewCell.m */; };
+		A70A11AB13C3B35400685749 /* GHAPIPullRequestV3.m in Sources */ = {isa = PBXBuildFile; fileRef = A70A11AA13C3B35400685749 /* GHAPIPullRequestV3.m */; };
+		A70A11AE13C3B36F00685749 /* GHAPIPullRequestMergeStateV3.m in Sources */ = {isa = PBXBuildFile; fileRef = A70A11AD13C3B36E00685749 /* GHAPIPullRequestMergeStateV3.m */; };
 		A70ABE9713BF77C60000D189 /* GHPLabelTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A70ABE9613BF77C60000D189 /* GHPLabelTableViewCell.m */; };
 		A70ABE9E13BF904D0000D189 /* GHPUsersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A70ABE9D13BF904D0000D189 /* GHPUsersViewController.m */; };
 		A70ABEA613BF92160000D189 /* GHPUsersFromUsernameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A70ABEA513BF92150000D189 /* GHPUsersFromUsernameViewController.m */; };
@@ -256,6 +264,7 @@
 		A7D41B08135AE71B00CD3A5C /* GHRecentCommitsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7D41B07135AE71600CD3A5C /* GHRecentCommitsViewController.m */; };
 		A7DA5EA313C250A900288937 /* GHPIssuesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7DA5EA213C250A900288937 /* GHPIssuesViewController.m */; };
 		A7DA5EA613C2534C00288937 /* GHPOpenIssuesOnRepositoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7DA5EA513C2534C00288937 /* GHPOpenIssuesOnRepositoryViewController.m */; };
+		A7DA5EA913C2578600288937 /* GHPIssueViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7DA5EA813C2578600288937 /* GHPIssueViewController.m */; };
 		A7DCDD9413A366DF00089CCD /* GHAPIRepositoryBranchV3.m in Sources */ = {isa = PBXBuildFile; fileRef = A7DCDD9313A366DF00089CCD /* GHAPIRepositoryBranchV3.m */; };
 		A7EE1120136F3FFB00A1E693 /* GHAPIIssueCommentV3.m in Sources */ = {isa = PBXBuildFile; fileRef = A7EE111F136F3FFA00A1E693 /* GHAPIIssueCommentV3.m */; };
 		A7EE1123136F481500A1E693 /* Appirater.m in Sources */ = {isa = PBXBuildFile; fileRef = A7EE1122136F481100A1E693 /* Appirater.m */; };
@@ -344,6 +353,22 @@
 		A709F75213689C9800B0CDE7 /* GHTableViewControllerAlertViewProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHTableViewControllerAlertViewProxy.m; sourceTree = "<group>"; };
 		A709F7581368B7E800B0CDE7 /* GHTeamViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHTeamViewController.h; sourceTree = "<group>"; };
 		A709F7591368B7E800B0CDE7 /* GHTeamViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHTeamViewController.m; sourceTree = "<group>"; };
+		A70A119013C3690A00685749 /* GHPMileStoneTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPMileStoneTableViewCell.h; sourceTree = "<group>"; };
+		A70A119113C3690A00685749 /* GHPMileStoneTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPMileStoneTableViewCell.m; sourceTree = "<group>"; };
+		A70A119313C36BA900685749 /* GHPieChartProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPieChartProgressView.h; sourceTree = "<group>"; };
+		A70A119413C36BA900685749 /* GHPieChartProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPieChartProgressView.m; sourceTree = "<group>"; };
+		A70A119713C374C300685749 /* UIColor-Expanded.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIColor-Expanded.h"; path = "uicolor-utilities/UIColor-Expanded.h"; sourceTree = "<group>"; };
+		A70A119813C374C300685749 /* UIColor-Expanded.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIColor-Expanded.m"; path = "uicolor-utilities/UIColor-Expanded.m"; sourceTree = "<group>"; };
+		A70A119A13C37BB100685749 /* GHPMileStonesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPMileStonesTableViewController.h; sourceTree = "<group>"; };
+		A70A119B13C37BB100685749 /* GHPMileStonesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPMileStonesTableViewController.m; sourceTree = "<group>"; };
+		A70A11A113C37CB300685749 /* GHPMileStonesOnRepositoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPMileStonesOnRepositoryViewController.h; sourceTree = "<group>"; };
+		A70A11A213C37CB300685749 /* GHPMileStonesOnRepositoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPMileStonesOnRepositoryViewController.m; sourceTree = "<group>"; };
+		A70A11A513C38BFA00685749 /* GHPNewCommentTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPNewCommentTableViewCell.h; sourceTree = "<group>"; };
+		A70A11A613C38BFB00685749 /* GHPNewCommentTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPNewCommentTableViewCell.m; sourceTree = "<group>"; };
+		A70A11A913C3B35400685749 /* GHAPIPullRequestV3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHAPIPullRequestV3.h; sourceTree = "<group>"; };
+		A70A11AA13C3B35400685749 /* GHAPIPullRequestV3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHAPIPullRequestV3.m; sourceTree = "<group>"; };
+		A70A11AC13C3B36E00685749 /* GHAPIPullRequestMergeStateV3.h */ = {isa = PBXFileReference; fileEncoding = 4; path = GHAPIPullRequestMergeStateV3.h; sourceTree = "<group>"; };
+		A70A11AD13C3B36E00685749 /* GHAPIPullRequestMergeStateV3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHAPIPullRequestMergeStateV3.m; sourceTree = "<group>"; };
 		A70ABE9513BF77C50000D189 /* GHPLabelTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPLabelTableViewCell.h; sourceTree = "<group>"; };
 		A70ABE9613BF77C60000D189 /* GHPLabelTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPLabelTableViewCell.m; sourceTree = "<group>"; };
 		A70ABE9C13BF904D0000D189 /* GHPUsersViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPUsersViewController.h; sourceTree = "<group>"; };
@@ -721,6 +746,8 @@
 		A7DA5EA213C250A900288937 /* GHPIssuesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPIssuesViewController.m; sourceTree = "<group>"; };
 		A7DA5EA413C2534C00288937 /* GHPOpenIssuesOnRepositoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPOpenIssuesOnRepositoryViewController.h; sourceTree = "<group>"; };
 		A7DA5EA513C2534C00288937 /* GHPOpenIssuesOnRepositoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPOpenIssuesOnRepositoryViewController.m; sourceTree = "<group>"; };
+		A7DA5EA713C2578400288937 /* GHPIssueViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPIssueViewController.h; sourceTree = "<group>"; };
+		A7DA5EA813C2578600288937 /* GHPIssueViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPIssueViewController.m; sourceTree = "<group>"; };
 		A7DCDD9213A366DF00089CCD /* GHAPIRepositoryBranchV3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHAPIRepositoryBranchV3.h; sourceTree = "<group>"; };
 		A7DCDD9313A366DF00089CCD /* GHAPIRepositoryBranchV3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHAPIRepositoryBranchV3.m; sourceTree = "<group>"; };
 		A7EE111E136F3FFA00A1E693 /* GHAPIIssueCommentV3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHAPIIssueCommentV3.h; sourceTree = "<group>"; };
@@ -944,6 +971,7 @@
 		A7089518134A0C49000DD6CE /* Foundation Additions */ = {
 			isa = PBXGroup;
 			children = (
+				A70A119613C374B200685749 /* UIColor-Util */,
 				A706C0C9139AD139008A6184 /* UIColor+Github */,
 				A73AE5EF1350FB0200E9EBA4 /* NSString+Additions */,
 				A73AE5A4134EF4C900E9EBA4 /* UITableView+Additions */,
@@ -985,6 +1013,41 @@
 				A709F7591368B7E800B0CDE7 /* GHTeamViewController.m */,
 			);
 			name = GHOrganizationViewController;
+			sourceTree = "<group>";
+		};
+		A70A118F13C368F400685749 /* GHPMilestonesViewController */ = {
+			isa = PBXGroup;
+			children = (
+				A70A119013C3690A00685749 /* GHPMileStoneTableViewCell.h */,
+				A70A119113C3690A00685749 /* GHPMileStoneTableViewCell.m */,
+				A70A119313C36BA900685749 /* GHPieChartProgressView.h */,
+				A70A119413C36BA900685749 /* GHPieChartProgressView.m */,
+				A70A119A13C37BB100685749 /* GHPMileStonesTableViewController.h */,
+				A70A119B13C37BB100685749 /* GHPMileStonesTableViewController.m */,
+				A70A11A113C37CB300685749 /* GHPMileStonesOnRepositoryViewController.h */,
+				A70A11A213C37CB300685749 /* GHPMileStonesOnRepositoryViewController.m */,
+			);
+			name = GHPMilestonesViewController;
+			sourceTree = "<group>";
+		};
+		A70A119613C374B200685749 /* UIColor-Util */ = {
+			isa = PBXGroup;
+			children = (
+				A70A119713C374C300685749 /* UIColor-Expanded.h */,
+				A70A119813C374C300685749 /* UIColor-Expanded.m */,
+			);
+			name = "UIColor-Util";
+			sourceTree = "<group>";
+		};
+		A70A11A813C3B33B00685749 /* GHAPIPullRequestV3 */ = {
+			isa = PBXGroup;
+			children = (
+				A70A11A913C3B35400685749 /* GHAPIPullRequestV3.h */,
+				A70A11AA13C3B35400685749 /* GHAPIPullRequestV3.m */,
+				A70A11AC13C3B36E00685749 /* GHAPIPullRequestMergeStateV3.h */,
+				A70A11AD13C3B36E00685749 /* GHAPIPullRequestMergeStateV3.m */,
+			);
+			name = GHAPIPullRequestV3;
 			sourceTree = "<group>";
 		};
 		A70ABEC913BFAB5E0000D189 /* GHPCommitsViewController */ = {
@@ -1029,6 +1092,8 @@
 		A70DAE0713B49FC500DE4279 /* UserInterface */ = {
 			isa = PBXGroup;
 			children = (
+				A70A118F13C368F400685749 /* GHPMilestonesViewController */,
+				A7DA5EAA13C2578E00288937 /* GHPIssueViewController */,
 				A7DA5E9F13C2508800288937 /* GHPIssuesViewController */,
 				A70ABEC913BFAB5E0000D189 /* GHPCommitsViewController */,
 				A74F2A3413BE60CB00E57818 /* GHPUsersViewController */,
@@ -1655,6 +1720,7 @@
 		A79F37F813883B650028F492 /* v3 */ = {
 			isa = PBXGroup;
 			children = (
+				A70A11A813C3B33B00685749 /* GHAPIPullRequestV3 */,
 				A773023313B38C520075235E /* GHAPICommitV3 */,
 				A70DA3D913A4E2BE00235C76 /* GHAPITeamV3 */,
 				A70DA3D413A4B7DE00235C76 /* GHAPIOrganizationV3 */,
@@ -2217,6 +2283,17 @@
 			name = GHPIssuesViewController;
 			sourceTree = "<group>";
 		};
+		A7DA5EAA13C2578E00288937 /* GHPIssueViewController */ = {
+			isa = PBXGroup;
+			children = (
+				A7DA5EA713C2578400288937 /* GHPIssueViewController.h */,
+				A7DA5EA813C2578600288937 /* GHPIssueViewController.m */,
+				A70A11A513C38BFA00685749 /* GHPNewCommentTableViewCell.h */,
+				A70A11A613C38BFB00685749 /* GHPNewCommentTableViewCell.m */,
+			);
+			name = GHPIssueViewController;
+			sourceTree = "<group>";
+		};
 		A7DCDD9013A366BE00089CCD /* GHAPIRepositoryBranchV3 */ = {
 			isa = PBXGroup;
 			children = (
@@ -2632,6 +2709,15 @@
 				A70ABEF313C070410000D189 /* GHPDiffViewContentView.m in Sources */,
 				A7DA5EA313C250A900288937 /* GHPIssuesViewController.m in Sources */,
 				A7DA5EA613C2534C00288937 /* GHPOpenIssuesOnRepositoryViewController.m in Sources */,
+				A7DA5EA913C2578600288937 /* GHPIssueViewController.m in Sources */,
+				A70A119213C3690A00685749 /* GHPMileStoneTableViewCell.m in Sources */,
+				A70A119513C36BA900685749 /* GHPieChartProgressView.m in Sources */,
+				A70A119913C374C300685749 /* UIColor-Expanded.m in Sources */,
+				A70A119C13C37BB100685749 /* GHPMileStonesTableViewController.m in Sources */,
+				A70A11A313C37CB300685749 /* GHPMileStonesOnRepositoryViewController.m in Sources */,
+				A70A11A713C38BFB00685749 /* GHPNewCommentTableViewCell.m in Sources */,
+				A70A11AB13C3B35400685749 /* GHAPIPullRequestV3.m in Sources */,
+				A70A11AE13C3B36F00685749 /* GHAPIPullRequestMergeStateV3.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

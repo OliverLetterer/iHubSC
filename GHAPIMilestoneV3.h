@@ -38,6 +38,8 @@
 @property (nonatomic, readonly) NSString *dueFormattedString;
 @property (nonatomic, readonly) BOOL dueInTime;
 
+@property (nonatomic, readonly) CGFloat progress;
+
 - (id)initWithRawDictionary:(NSDictionary *)rawDictionay;
 
 + (void)milestoneOnRepository:(NSString *)repository number:(NSNumber *)number 

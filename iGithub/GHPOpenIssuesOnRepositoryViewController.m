@@ -11,16 +11,13 @@
 
 @implementation GHPOpenIssuesOnRepositoryViewController
 
-@synthesize repository=_repository;
-
 #pragma mark - setters and getters
 
 - (void)setRepository:(NSString *)repository {
-    [_repository release];
-    _repository = [repository copy];
+    [super setRepository:repository];
     
     self.isDownloadingEssentialData = YES;
-    [GHAPIIssueV3 openedIssuesOnRepository:_repository page:1 
+    [GHAPIIssueV3 openedIssuesOnRepository:self.repository page:1 
                          completionHandler:^(NSMutableArray *array, NSUInteger nextPage, NSError *error) {
                              self.isDownloadingEssentialData = NO;
                              if (error) {
@@ -35,7 +32,7 @@
 #pragma mark - Pagination
 
 - (void)downloadDataForPage:(NSUInteger)page inSection:(NSUInteger)section {
-    [GHAPIIssueV3 openedIssuesOnRepository:_repository page:page 
+    [GHAPIIssueV3 openedIssuesOnRepository:self.repository page:page 
                          completionHandler:^(NSMutableArray *array, NSUInteger nextPage, NSError *error) {
                              if (error) {
                                  [self handleError:error];
@@ -46,23 +43,6 @@
                                  [self.tableView reloadData];
                              }
                          }];
-}
-
-#pragma mark - initialization
-
-- (id)initWithRepository:(NSString *)repository {
-    if (self = [super initWithStyle:UITableViewStyleGrouped]) {
-        self.repository = repository;
-    }
-    return self;
-}
-
-#pragma mark - Memory management
-
-- (void)dealloc {
-    [_repository release];
-    
-    [super dealloc];
 }
 
 @end
