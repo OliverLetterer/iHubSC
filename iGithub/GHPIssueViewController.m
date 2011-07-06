@@ -93,7 +93,7 @@
         [sheet addButtonWithTitle:[NSString stringWithFormat:NSLocalizedString(@"Reopen this %@", @""), self.issueName]];
     }
     
-    if (self.issue.isPullRequest && _isCollaborator) {
+    if (self.issue.isPullRequest && _isCollaborator && [self.issue.state isEqualToString:kGHAPIIssueStateV3Open]) {
         [sheet addButtonWithTitle:NSLocalizedString(@"Merge this Pull Request", @"")];
     }
     
