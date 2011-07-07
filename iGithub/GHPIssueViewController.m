@@ -557,7 +557,7 @@
                 [self updateImageView:cell.imageView atIndexPath:indexPath withGravatarID:comment.user.gravatarID];
                 
                 cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ (%@ ago)", @""), comment.user.login, comment.updatedAt.prettyTimeIntervalSinceNow];
-                cell.detailTextLabel.text = comment.body;;
+                cell.detailTextLabel.text = comment.body;
                 
             } else if ([object isKindOfClass:[GHAPIIssueEventV3 class] ]) {
                 GHAPIIssueEventV3 *event = (GHAPIIssueEventV3 *)object;

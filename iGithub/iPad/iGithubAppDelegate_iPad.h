@@ -13,7 +13,6 @@
     
 }
 
-#warning User->Gists are missing
 #warning User->Organizations missing
 #warning NewsFeeds are missing
 

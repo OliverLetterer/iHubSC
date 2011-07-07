@@ -86,6 +86,7 @@
 
 - (id)initWithFile:(NSString *)filename contentsOfFile:(NSString *)content {
     if (self == [super init]) {
+        self.filename = filename;
         self.contentString = content;
         self.title = filename;
     }
@@ -260,21 +261,24 @@
         return;
     }
     
+    DLog(@"wow");
+    
     [self.loadingLabel removeFromSuperview];
     self.loadingLabel = nil;
     [self.activityIndicatorView removeFromSuperview];
     self.activityIndicatorView = nil;
-    
+    [self.scrollView removeFromSuperview];
+    self.scrollView = nil;
     
     CGRect frame = self.view.bounds;
     
     UIWebView *webView = [[[UIWebView alloc] initWithFrame:frame] autorelease];
-    webView.scrollView.scrollEnabled = NO;
     [webView loadHTMLString:self.contentString baseURL:[[NSBundle mainBundle] URLForResource:@"" withExtension:nil]];
     webView.scalesPageToFit = YES;
-    [webView sizeToFit];
-    [self.scrollView addSubview:webView];
-    self.scrollView.contentSize = webView.frame.size;
+    webView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    webView.scrollView.backgroundColor = [UIColor clearColor];
+    webView.backgroundColor = [UIColor clearColor];
+    [self.view addSubview:webView];
 }
 
 - (void)updateViewToShowMarkdownFile {

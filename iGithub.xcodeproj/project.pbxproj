@@ -246,6 +246,9 @@
 		A7CE1B831346349200169F94 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7CE1B821346349000169F94 /* CoreData.framework */; };
 		A7CE1B871346355100169F94 /* GHManagedObjectContext.m in Sources */ = {isa = PBXBuildFile; fileRef = A7CE1B861346355100169F94 /* GHManagedObjectContext.m */; };
 		A7CE1B8A13463A6E00169F94 /* GHIssue.m in Sources */ = {isa = PBXBuildFile; fileRef = A7CE1B8913463A6600169F94 /* GHIssue.m */; };
+		A7CFD6DB13C6161A00F90791 /* GHPGistsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7CFD6DA13C6161A00F90791 /* GHPGistsViewController.m */; };
+		A7CFD6DE13C6186C00F90791 /* GHPGistsOfUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7CFD6DD13C6186C00F90791 /* GHPGistsOfUserViewController.m */; };
+		A7CFD6E213C61BBF00F90791 /* GHPGistViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7CFD6E113C61BBF00F90791 /* GHPGistViewController.m */; };
 		A7D0523A13BDC20C00B3D239 /* UIBarButtonSystemItemAction.png in Resources */ = {isa = PBXBuildFile; fileRef = A7D0523913BDC20B00B3D239 /* UIBarButtonSystemItemAction.png */; };
 		A7D14F401354DB8600E1B980 /* GHOwnerNewsFeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7D14F3F1354DB8600E1B980 /* GHOwnerNewsFeedViewController.m */; };
 		A7D14F431354DD5D00E1B980 /* GHRecentActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7D14F421354DD5D00E1B980 /* GHRecentActivityViewController.m */; };
@@ -713,6 +716,12 @@
 		A7CE1B861346355100169F94 /* GHManagedObjectContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHManagedObjectContext.m; sourceTree = "<group>"; };
 		A7CE1B8813463A6100169F94 /* GHIssue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHIssue.h; sourceTree = "<group>"; };
 		A7CE1B8913463A6600169F94 /* GHIssue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHIssue.m; sourceTree = "<group>"; };
+		A7CFD6D913C6161A00F90791 /* GHPGistsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPGistsViewController.h; sourceTree = "<group>"; };
+		A7CFD6DA13C6161A00F90791 /* GHPGistsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPGistsViewController.m; sourceTree = "<group>"; };
+		A7CFD6DC13C6186C00F90791 /* GHPGistsOfUserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPGistsOfUserViewController.h; sourceTree = "<group>"; };
+		A7CFD6DD13C6186C00F90791 /* GHPGistsOfUserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPGistsOfUserViewController.m; sourceTree = "<group>"; };
+		A7CFD6E013C61BBF00F90791 /* GHPGistViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPGistViewController.h; sourceTree = "<group>"; };
+		A7CFD6E113C61BBF00F90791 /* GHPGistViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPGistViewController.m; sourceTree = "<group>"; };
 		A7D0523913BDC20B00B3D239 /* UIBarButtonSystemItemAction.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UIBarButtonSystemItemAction.png; sourceTree = "<group>"; };
 		A7D14F3E1354DB8600E1B980 /* GHOwnerNewsFeedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHOwnerNewsFeedViewController.h; sourceTree = "<group>"; };
 		A7D14F3F1354DB8600E1B980 /* GHOwnerNewsFeedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHOwnerNewsFeedViewController.m; sourceTree = "<group>"; };
@@ -1104,6 +1113,8 @@
 		A70DAE0713B49FC500DE4279 /* UserInterface */ = {
 			isa = PBXGroup;
 			children = (
+				A7CFD6DF13C61BAB00F90791 /* GHPGistViewController */,
+				A7CFD6D713C6160200F90791 /* GHPGistsViewController */,
 				A70A11AF13C4E67600685749 /* GHPMilestoneViewController */,
 				A70A118F13C368F400685749 /* GHPMilestonesViewController */,
 				A7DA5EAA13C2578E00288937 /* GHPIssueViewController */,
@@ -2201,6 +2212,26 @@
 			name = GHManagedObjectContext;
 			sourceTree = "<group>";
 		};
+		A7CFD6D713C6160200F90791 /* GHPGistsViewController */ = {
+			isa = PBXGroup;
+			children = (
+				A7CFD6D913C6161A00F90791 /* GHPGistsViewController.h */,
+				A7CFD6DA13C6161A00F90791 /* GHPGistsViewController.m */,
+				A7CFD6DC13C6186C00F90791 /* GHPGistsOfUserViewController.h */,
+				A7CFD6DD13C6186C00F90791 /* GHPGistsOfUserViewController.m */,
+			);
+			name = GHPGistsViewController;
+			sourceTree = "<group>";
+		};
+		A7CFD6DF13C61BAB00F90791 /* GHPGistViewController */ = {
+			isa = PBXGroup;
+			children = (
+				A7CFD6E013C61BBF00F90791 /* GHPGistViewController.h */,
+				A7CFD6E113C61BBF00F90791 /* GHPGistViewController.m */,
+			);
+			name = GHPGistViewController;
+			sourceTree = "<group>";
+		};
 		A7D14FBE13576D4200E1B980 /* GHWebViewViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -2732,6 +2763,9 @@
 				A70A11AB13C3B35400685749 /* GHAPIPullRequestV3.m in Sources */,
 				A70A11AE13C3B36F00685749 /* GHAPIPullRequestMergeStateV3.m in Sources */,
 				A70A11B213C4E69E00685749 /* GHPMilestoneViewController.m in Sources */,
+				A7CFD6DB13C6161A00F90791 /* GHPGistsViewController.m in Sources */,
+				A7CFD6DE13C6186C00F90791 /* GHPGistsOfUserViewController.m in Sources */,
+				A7CFD6E213C61BBF00F90791 /* GHPGistViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

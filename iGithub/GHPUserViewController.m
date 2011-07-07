@@ -13,6 +13,7 @@
 #import "GHPWatchedRepositoriesViewController.h"
 #import "GHPFollwingUsersViewController.h"
 #import "GHPFollowedUsersViewController.h"
+#import "GHPGistsOfUserViewController.h"
 
 #define kUITableViewSectionUserInfo         0
 #define kUITableViewSectionUserContent      1
@@ -303,6 +304,8 @@
             viewController = [[[GHPFollwingUsersViewController alloc] initWithUsername:self.username] autorelease];
         } else if (indexPath.row == 3) {
             viewController = [[[GHPFollowedUsersViewController alloc] initWithUsername:self.username] autorelease];
+        } else if (indexPath.row == 4) {
+            viewController = [[[GHPGistsOfUserViewController alloc] initWithUsername:self.username] autorelease];
         }
         
         if (viewController) {

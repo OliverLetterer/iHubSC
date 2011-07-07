@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "GHPDefaultTableViewCell.h"
 
+#warning rename GHPRepositoryTableViewCell because its also used for gists
+
 @interface GHPRepositoryTableViewCell : GHPDefaultTableViewCell {
 @private
     
