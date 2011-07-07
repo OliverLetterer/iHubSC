@@ -8,10 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "GHTableViewController.h"
-#import "GHPRepositoryInfoTableViewCell.h"
+#import "GHPInfoTableViewCell.h"
 #import "GHPCreateIssueViewController.h"
 
-@interface GHPRepositoryViewController : GHTableViewController <GHPRepositoryInfoTableViewCellDelegate, UIActionSheetDelegate, GHPCreateIssueViewControllerDelegate> {
+@interface GHPRepositoryViewController : GHTableViewController <GHPInfoTableViewCellDelegate, UIActionSheetDelegate, GHPCreateIssueViewControllerDelegate> {
 @private
     NSString *_repositoryString;
     GHAPIRepositoryV3 *_repository;
@@ -21,7 +21,7 @@
     BOOL _hasWatchingData;
     BOOL _isWatchingRepository;
     
-    GHPRepositoryInfoTableViewCell *_infoCell;
+    GHPInfoTableViewCell *_infoCell;
     
     NSMutableArray *_labels;
     NSMutableArray *_branches;
@@ -35,7 +35,7 @@
 @property (nonatomic, retain) NSMutableArray *labels;
 @property (nonatomic, retain) NSMutableArray *branches;
 
-@property (nonatomic, retain) GHPRepositoryInfoTableViewCell *infoCell;
+@property (nonatomic, retain) GHPInfoTableViewCell *infoCell;
 
 @property (nonatomic, readonly) BOOL canAdministrateRepository;
 

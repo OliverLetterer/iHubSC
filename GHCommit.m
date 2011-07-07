@@ -43,7 +43,7 @@
             [self.added addObject:fileInfo ];
         }
         
-#warning parents is not implemented yet
+        // Not impemented
         /*
          parents looks like this in rawDictionary
          

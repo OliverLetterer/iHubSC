@@ -8,9 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "GHTableViewController.h"
-#import "GHPRepositoryInfoTableViewCell.h"
+#import "GHPInfoTableViewCell.h"
 
-@interface GHPGistViewController : GHTableViewController <GHPRepositoryInfoTableViewCellDelegate, UIActionSheetDelegate> {
+@interface GHPGistViewController : GHTableViewController <GHPInfoTableViewCellDelegate, UIActionSheetDelegate> {
 @private
     NSString *_gistID;
     GHAPIGistV3 *_gist;
@@ -23,7 +23,7 @@
     BOOL _hasStarredData;
     BOOL _isGistStarred;
     
-    GHPRepositoryInfoTableViewCell *_infoCell;
+    GHPInfoTableViewCell *_infoCell;
 }
 
 @property (nonatomic, copy) NSString *gistID;
@@ -38,6 +38,6 @@
 
 @property (nonatomic, readonly) UIActionSheet *actionButtonActionSheet;
 
-@property (nonatomic, retain) GHPRepositoryInfoTableViewCell *infoCell;
+@property (nonatomic, retain) GHPInfoTableViewCell *infoCell;
 
 @end

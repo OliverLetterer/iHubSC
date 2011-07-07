@@ -7,7 +7,6 @@
 //
 
 #import "GHPIssueViewController.h"
-#import "GHPRepositoryInfoTableViewCell.h"
 #import "GHPRepositoryTableViewCell.h"
 #import "GHPUserTableViewCell.h"
 #import "GHPMileStoneTableViewCell.h"
@@ -370,9 +369,9 @@
     if (indexPath.section == kUITableViewSectionInfo) {
         if (indexPath.row == 0) {
             NSString *CellIdentifier = @"GHPUserInfoTableViewCell";
-            GHPRepositoryInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+            GHPInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
             if (!cell) {
-                cell = [[[GHPRepositoryInfoTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault 
+                cell = [[[GHPInfoTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault 
                                                               reuseIdentifier:CellIdentifier]
                         autorelease];
             }
@@ -389,9 +388,9 @@
             return cell;
         } else if (indexPath.row == 1) {
             NSString *CellIdentifier = @"GHPUserInfoTableViewCellInfo";
-            GHPRepositoryInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+            GHPInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
             if (!cell) {
-                cell = [[[GHPRepositoryInfoTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault 
+                cell = [[[GHPInfoTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault 
                                                               reuseIdentifier:CellIdentifier]
                         autorelease];
             }
@@ -616,9 +615,9 @@
     if (indexPath.section == kUITableViewSectionInfo) {
         if (indexPath.row == 0) {
             NSString *content = [NSString stringWithFormat:NSLocalizedString(@"Issue %@ - %@", @""), self.issue.number, self.issue.title];
-            return [GHPRepositoryInfoTableViewCell heightWithContent:content];
+            return [GHPInfoTableViewCell heightWithContent:content];
         } else if (indexPath.row == 1) {
-            return [GHPRepositoryInfoTableViewCell heightWithContent:self.issue.body];
+            return [GHPInfoTableViewCell heightWithContent:self.issue.body];
         }
     } else if (indexPath.section == kUITableViewSectionDetails) {
         if (indexPath.row == 0) {
@@ -748,9 +747,9 @@
     }
 }
 
-#pragma mark - GHPRepositoryInfoTableViewCellDelegate
+#pragma mark - GHPInfoTableViewCellDelegateDelegate
 
-- (void)repositoryInfoTableViewCellActionButtonClicked:(GHPRepositoryInfoTableViewCell *)cell {
+- (void)infoTableViewCellActionButtonClicked:(GHPInfoTableViewCell *)cell {
     if (!_hasCollaboratorData) {
         cell.actionButton.alpha = 0.0f;
         [cell.activityIndicatorView startAnimating];

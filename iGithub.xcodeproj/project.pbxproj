@@ -130,7 +130,7 @@
 		A74A660813BDB0380098106E /* GHPUserInfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A74A660613BDB0380098106E /* GHPUserInfoTableViewCell.m */; };
 		A74F2A2B13BE0E8200E57818 /* GHPRepositoryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A74F2A2A13BE0E8200E57818 /* GHPRepositoryTableViewCell.m */; };
 		A74F2A3013BE1AEA00E57818 /* GHPRepositoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A74F2A2F13BE1AEA00E57818 /* GHPRepositoryViewController.m */; };
-		A74F2A3313BE524D00E57818 /* GHPRepositoryInfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A74F2A3213BE524D00E57818 /* GHPRepositoryInfoTableViewCell.m */; };
+		A74F2A3313BE524D00E57818 /* GHPInfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A74F2A3213BE524D00E57818 /* GHPInfoTableViewCell.m */; };
 		A74F2A3713BE60E600E57818 /* GHPUserTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A74F2A3613BE60E600E57818 /* GHPUserTableViewCell.m */; };
 		A74F2A3D13BF465E00E57818 /* GHPCreateIssueViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A74F2A3C13BF465E00E57818 /* GHPCreateIssueViewController.m */; };
 		A74F2A4113BF481200E57818 /* GHPCreateIssueTitleAndDescriptionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A74F2A3F13BF481000E57818 /* GHPCreateIssueTitleAndDescriptionTableViewCell.m */; };
@@ -516,8 +516,8 @@
 		A74F2A2A13BE0E8200E57818 /* GHPRepositoryTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPRepositoryTableViewCell.m; sourceTree = "<group>"; };
 		A74F2A2E13BE1AEA00E57818 /* GHPRepositoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPRepositoryViewController.h; sourceTree = "<group>"; };
 		A74F2A2F13BE1AEA00E57818 /* GHPRepositoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPRepositoryViewController.m; sourceTree = "<group>"; };
-		A74F2A3113BE524C00E57818 /* GHPRepositoryInfoTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPRepositoryInfoTableViewCell.h; sourceTree = "<group>"; };
-		A74F2A3213BE524D00E57818 /* GHPRepositoryInfoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPRepositoryInfoTableViewCell.m; sourceTree = "<group>"; };
+		A74F2A3113BE524C00E57818 /* GHPInfoTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPInfoTableViewCell.h; sourceTree = "<group>"; };
+		A74F2A3213BE524D00E57818 /* GHPInfoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPInfoTableViewCell.m; sourceTree = "<group>"; };
 		A74F2A3513BE60E600E57818 /* GHPUserTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPUserTableViewCell.h; sourceTree = "<group>"; };
 		A74F2A3613BE60E600E57818 /* GHPUserTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPUserTableViewCell.m; sourceTree = "<group>"; };
 		A74F2A3B13BF465D00E57818 /* GHPCreateIssueViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPCreateIssueViewController.h; sourceTree = "<group>"; };
@@ -959,6 +959,24 @@
 			name = GHPDefaultTableViewCell;
 			sourceTree = "<group>";
 		};
+		A703CB2113C64949002767EB /* UITableViewCell - Generic Subclasses */ = {
+			isa = PBXGroup;
+			children = (
+				A703CB1F13C648AF002767EB /* GHPDefaultTableViewCell */,
+				A703CB2213C64970002767EB /* GHPInfoTableViewCell */,
+			);
+			name = "UITableViewCell - Generic Subclasses";
+			sourceTree = "<group>";
+		};
+		A703CB2213C64970002767EB /* GHPInfoTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				A74F2A3113BE524C00E57818 /* GHPInfoTableViewCell.h */,
+				A74F2A3213BE524D00E57818 /* GHPInfoTableViewCell.m */,
+			);
+			name = GHPInfoTableViewCell;
+			sourceTree = "<group>";
+		};
 		A706C0C9139AD139008A6184 /* UIColor+Github */ = {
 			isa = PBXGroup;
 			children = (
@@ -1135,6 +1153,7 @@
 		A70DAE0713B49FC500DE4279 /* UserInterface */ = {
 			isa = PBXGroup;
 			children = (
+				A703CB2113C64949002767EB /* UITableViewCell - Generic Subclasses */,
 				A7CFD6EC13C63D3300F90791 /* GHPDataArrayViewController */,
 				A7CFD6E713C639AE00F90791 /* GHPPullRequestsViewController */,
 				A7CFD6DF13C61BAB00F90791 /* GHPGistViewController */,
@@ -1149,7 +1168,6 @@
 				A703A62F13BE0163003A4585 /* GHPRepositoriesViewController */,
 				A74A65FF13BDA8ED0098106E /* GHPUserViewController */,
 				A7F334AF13BCD01100DB922D /* GHPLeftNavigationController */,
-				A703CB1F13C648AF002767EB /* GHPDefaultTableViewCell */,
 			);
 			name = UserInterface;
 			sourceTree = "<group>";
@@ -1502,8 +1520,6 @@
 			children = (
 				A74F2A2E13BE1AEA00E57818 /* GHPRepositoryViewController.h */,
 				A74F2A2F13BE1AEA00E57818 /* GHPRepositoryViewController.m */,
-				A74F2A3113BE524C00E57818 /* GHPRepositoryInfoTableViewCell.h */,
-				A74F2A3213BE524D00E57818 /* GHPRepositoryInfoTableViewCell.m */,
 				A74F2A3B13BF465D00E57818 /* GHPCreateIssueViewController.h */,
 				A74F2A3C13BF465E00E57818 /* GHPCreateIssueViewController.m */,
 				A74F2A3E13BF481000E57818 /* GHPCreateIssueTitleAndDescriptionTableViewCell.h */,
@@ -2769,7 +2785,7 @@
 				A7ABB5F613BE0C5300313E10 /* GHPWatchedRepositoriesViewController.m in Sources */,
 				A74F2A2B13BE0E8200E57818 /* GHPRepositoryTableViewCell.m in Sources */,
 				A74F2A3013BE1AEA00E57818 /* GHPRepositoryViewController.m in Sources */,
-				A74F2A3313BE524D00E57818 /* GHPRepositoryInfoTableViewCell.m in Sources */,
+				A74F2A3313BE524D00E57818 /* GHPInfoTableViewCell.m in Sources */,
 				A74F2A3713BE60E600E57818 /* GHPUserTableViewCell.m in Sources */,
 				A74F2A3D13BF465E00E57818 /* GHPCreateIssueViewController.m in Sources */,
 				A74F2A4113BF481200E57818 /* GHPCreateIssueTitleAndDescriptionTableViewCell.m in Sources */,

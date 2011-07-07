@@ -8,9 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "GHTableViewController.h"
-#import "GHPRepositoryInfoTableViewCell.h"
+#import "GHPInfoTableViewCell.h"
 
-@interface GHPIssueViewController : GHTableViewController <GHPRepositoryInfoTableViewCellDelegate, UIActionSheetDelegate, UIAlertViewDelegate> {
+@interface GHPIssueViewController : GHTableViewController <GHPInfoTableViewCellDelegate, UIActionSheetDelegate, UIAlertViewDelegate> {
 @private
     NSString *_repositoryString;
     NSNumber *_issueNumber;
@@ -27,7 +27,7 @@
     BOOL _hasCollaboratorData;
     BOOL _isCollaborator;
     
-    GHPRepositoryInfoTableViewCell *_infoCell;
+    GHPInfoTableViewCell *_infoCell;
 }
 
 @property (nonatomic, retain) GHAPIIssueV3 *issue;
@@ -43,7 +43,7 @@
 
 @property (nonatomic, readonly) UIActionSheet *actionButtonActionSheet;
 
-@property (nonatomic, retain) GHPRepositoryInfoTableViewCell *infoCell;
+@property (nonatomic, retain) GHPInfoTableViewCell *infoCell;
 
 @property (nonatomic, copy, readonly) NSString *repositoryString;
 @property (nonatomic, copy, readonly) NSNumber *issueNumber;

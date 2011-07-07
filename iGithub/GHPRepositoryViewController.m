@@ -308,10 +308,10 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == kUITableViewSectionInfo) {
         if (indexPath.row == 0) {
-            NSString *CellIdentifier = @"GHPRepositoryInfoTableViewCell";
-            GHPRepositoryInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+            NSString *CellIdentifier = @"GHPInfoTableViewCellDelegate";
+            GHPInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
             if (!cell) {
-                cell = [[[GHPRepositoryInfoTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault 
+                cell = [[[GHPInfoTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault 
                                                               reuseIdentifier:CellIdentifier]
                         autorelease];
             }
@@ -331,10 +331,10 @@
             
             return cell;
         } else if (indexPath.row == 1) {
-            NSString *CellIdentifier = @"GHPRepositoryInfoTableViewCell";
-            GHPRepositoryInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+            NSString *CellIdentifier = @"GHPInfoTableViewCellDelegate";
+            GHPInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
             if (!cell) {
-                cell = [[[GHPRepositoryInfoTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault 
+                cell = [[[GHPInfoTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault 
                                                               reuseIdentifier:CellIdentifier]
                         autorelease];
             }
@@ -480,9 +480,9 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == kUITableViewSectionInfo) {
         if (indexPath.row == 0) {
-            return [GHPRepositoryInfoTableViewCell heightWithContent:self.repository.description];
+            return [GHPInfoTableViewCell heightWithContent:self.repository.description];
         } else if (indexPath.row == 1) {
-            return [GHPRepositoryInfoTableViewCell heightWithContent:self.metaInformationString];
+            return [GHPInfoTableViewCell heightWithContent:self.metaInformationString];
         }
     } else if (indexPath.section == kUITableViewSectionOwner) {
         if (indexPath.row == 0) {
@@ -736,9 +736,9 @@
     }
 }
 
-#pragma mark - GHPRepositoryInfoTableViewCellDelegate
+#pragma mark - GHPInfoTableViewCellDelegateDelegate
 
-- (void)repositoryInfoTableViewCellActionButtonClicked:(GHPRepositoryInfoTableViewCell *)cell {
+- (void)infoTableViewCellActionButtonClicked:(GHPInfoTableViewCell *)cell {
     if (!self.canAdministrateRepository && !_hasWatchingData) {
         cell.actionButton.alpha = 0.0f;
         [cell.activityIndicatorView startAnimating];

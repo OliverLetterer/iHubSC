@@ -7,7 +7,6 @@
 //
 
 #import "GHPGistViewController.h"
-#import "GHPRepositoryInfoTableViewCell.h"
 #import "GHPUserTableViewCell.h"
 #import "GHPUserViewController.h"
 #import "GHPNewCommentTableViewCell.h"
@@ -266,10 +265,10 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == kUITableViewSectionInfo) {
         if (indexPath.row == 0) {
-            static NSString *CellIdentifier = @"GHPRepositoryInfoTableViewCell";
-            GHPRepositoryInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+            static NSString *CellIdentifier = @"GHPInfoTableViewCellDelegate";
+            GHPInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
             if (!cell) {
-                cell = [[[GHPRepositoryInfoTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault 
+                cell = [[[GHPInfoTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault 
                                                               reuseIdentifier:CellIdentifier]
                         autorelease];
             }
@@ -412,7 +411,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == kUITableViewSectionInfo) {
         if (indexPath.row == 0) {
-            return [GHPRepositoryInfoTableViewCell heightWithContent:self.gist.description];
+            return [GHPInfoTableViewCell heightWithContent:self.gist.description];
         }
     } else if (indexPath.section == kUITableViewSectionOwner) {
         if (indexPath.row == 0) {
@@ -453,9 +452,9 @@
     }
 }
 
-#pragma mark - GHPRepositoryInfoTableViewCellDelegate
+#pragma mark - GHPInfoTableViewCellDelegateDelegate
 
-- (void)repositoryInfoTableViewCellActionButtonClicked:(GHPRepositoryInfoTableViewCell *)cell {
+- (void)infoTableViewCellActionButtonClicked:(GHPInfoTableViewCell *)cell {
     if (!_hasStarredData) {
         cell.actionButton.alpha = 0.0f;
         [cell.activityIndicatorView startAnimating];
