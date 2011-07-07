@@ -946,6 +946,19 @@
 			name = GHTarget;
 			sourceTree = "<group>";
 		};
+		A703CB1F13C648AF002767EB /* GHPDefaultTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				A70DAE0B13B4A0D900DE4279 /* GHPDefaultTableViewCell.h */,
+				A70DAE0C13B4A0D900DE4279 /* GHPDefaultTableViewCell.m */,
+				A70DAE0E13B4A1DE00DE4279 /* GHPDefaultTableViewCellBackgroundView.h */,
+				A70DAE0F13B4A1DE00DE4279 /* GHPDefaultTableViewCellBackgroundView.m */,
+				A70ABED713BFBEEC0000D189 /* UITableViewCell+GHHeight.h */,
+				A70ABED813BFBEF10000D189 /* UITableViewCell+GHHeight.m */,
+			);
+			name = GHPDefaultTableViewCell;
+			sourceTree = "<group>";
+		};
 		A706C0C9139AD139008A6184 /* UIColor+Github */ = {
 			isa = PBXGroup;
 			children = (
@@ -1136,12 +1149,7 @@
 				A703A62F13BE0163003A4585 /* GHPRepositoriesViewController */,
 				A74A65FF13BDA8ED0098106E /* GHPUserViewController */,
 				A7F334AF13BCD01100DB922D /* GHPLeftNavigationController */,
-				A70DAE0B13B4A0D900DE4279 /* GHPDefaultTableViewCell.h */,
-				A70DAE0C13B4A0D900DE4279 /* GHPDefaultTableViewCell.m */,
-				A70DAE0E13B4A1DE00DE4279 /* GHPDefaultTableViewCellBackgroundView.h */,
-				A70DAE0F13B4A1DE00DE4279 /* GHPDefaultTableViewCellBackgroundView.m */,
-				A70ABED713BFBEEC0000D189 /* UITableViewCell+GHHeight.h */,
-				A70ABED813BFBEF10000D189 /* UITableViewCell+GHHeight.m */,
+				A703CB1F13C648AF002767EB /* GHPDefaultTableViewCell */,
 			);
 			name = UserInterface;
 			sourceTree = "<group>";
