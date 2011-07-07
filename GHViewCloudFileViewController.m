@@ -261,8 +261,6 @@
         return;
     }
     
-    DLog(@"wow");
-    
     [self.loadingLabel removeFromSuperview];
     self.loadingLabel = nil;
     [self.activityIndicatorView removeFromSuperview];
