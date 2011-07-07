@@ -21,6 +21,18 @@
         [_gists release], _gists = [gists retain];
         
         [self cacheGistsHeights];
+        
+        if (gists != nil && gists.count == 0) {
+            UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", @"") 
+                                                             message:NSLocalizedString(@"No Gists available", @"") 
+                                                            delegate:nil 
+                                                   cancelButtonTitle:NSLocalizedString(@"OK", @"") 
+                                                   otherButtonTitles:nil]
+                                  autorelease];
+            [alert show];
+            [self.advancedNavigationController popViewController:self];
+        }
+        
         if (self.isViewLoaded) {
             [self.tableView reloadData];
         }

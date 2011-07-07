@@ -249,6 +249,9 @@
 		A7CFD6DB13C6161A00F90791 /* GHPGistsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7CFD6DA13C6161A00F90791 /* GHPGistsViewController.m */; };
 		A7CFD6DE13C6186C00F90791 /* GHPGistsOfUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7CFD6DD13C6186C00F90791 /* GHPGistsOfUserViewController.m */; };
 		A7CFD6E213C61BBF00F90791 /* GHPGistViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7CFD6E113C61BBF00F90791 /* GHPGistViewController.m */; };
+		A7CFD6EB13C639C600F90791 /* GHPPullRequestsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7CFD6EA13C639C600F90791 /* GHPPullRequestsViewController.m */; };
+		A7CFD6EF13C63D4900F90791 /* GHPDataArrayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7CFD6EE13C63D4900F90791 /* GHPDataArrayViewController.m */; };
+		A7CFD6F213C6414E00F90791 /* GHPPullRequestsOnRepositoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7CFD6F113C6414E00F90791 /* GHPPullRequestsOnRepositoryViewController.m */; };
 		A7D0523A13BDC20C00B3D239 /* UIBarButtonSystemItemAction.png in Resources */ = {isa = PBXBuildFile; fileRef = A7D0523913BDC20B00B3D239 /* UIBarButtonSystemItemAction.png */; };
 		A7D14F401354DB8600E1B980 /* GHOwnerNewsFeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7D14F3F1354DB8600E1B980 /* GHOwnerNewsFeedViewController.m */; };
 		A7D14F431354DD5D00E1B980 /* GHRecentActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7D14F421354DD5D00E1B980 /* GHRecentActivityViewController.m */; };
@@ -722,6 +725,12 @@
 		A7CFD6DD13C6186C00F90791 /* GHPGistsOfUserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPGistsOfUserViewController.m; sourceTree = "<group>"; };
 		A7CFD6E013C61BBF00F90791 /* GHPGistViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPGistViewController.h; sourceTree = "<group>"; };
 		A7CFD6E113C61BBF00F90791 /* GHPGistViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPGistViewController.m; sourceTree = "<group>"; };
+		A7CFD6E913C639C600F90791 /* GHPPullRequestsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPPullRequestsViewController.h; sourceTree = "<group>"; };
+		A7CFD6EA13C639C600F90791 /* GHPPullRequestsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPPullRequestsViewController.m; sourceTree = "<group>"; };
+		A7CFD6ED13C63D4900F90791 /* GHPDataArrayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPDataArrayViewController.h; sourceTree = "<group>"; };
+		A7CFD6EE13C63D4900F90791 /* GHPDataArrayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPDataArrayViewController.m; sourceTree = "<group>"; };
+		A7CFD6F013C6414E00F90791 /* GHPPullRequestsOnRepositoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPPullRequestsOnRepositoryViewController.h; sourceTree = "<group>"; };
+		A7CFD6F113C6414E00F90791 /* GHPPullRequestsOnRepositoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPPullRequestsOnRepositoryViewController.m; sourceTree = "<group>"; };
 		A7D0523913BDC20B00B3D239 /* UIBarButtonSystemItemAction.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UIBarButtonSystemItemAction.png; sourceTree = "<group>"; };
 		A7D14F3E1354DB8600E1B980 /* GHOwnerNewsFeedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHOwnerNewsFeedViewController.h; sourceTree = "<group>"; };
 		A7D14F3F1354DB8600E1B980 /* GHOwnerNewsFeedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHOwnerNewsFeedViewController.m; sourceTree = "<group>"; };
@@ -1113,6 +1122,8 @@
 		A70DAE0713B49FC500DE4279 /* UserInterface */ = {
 			isa = PBXGroup;
 			children = (
+				A7CFD6EC13C63D3300F90791 /* GHPDataArrayViewController */,
+				A7CFD6E713C639AE00F90791 /* GHPPullRequestsViewController */,
 				A7CFD6DF13C61BAB00F90791 /* GHPGistViewController */,
 				A7CFD6D713C6160200F90791 /* GHPGistsViewController */,
 				A70A11AF13C4E67600685749 /* GHPMilestoneViewController */,
@@ -2232,6 +2243,26 @@
 			name = GHPGistViewController;
 			sourceTree = "<group>";
 		};
+		A7CFD6E713C639AE00F90791 /* GHPPullRequestsViewController */ = {
+			isa = PBXGroup;
+			children = (
+				A7CFD6E913C639C600F90791 /* GHPPullRequestsViewController.h */,
+				A7CFD6EA13C639C600F90791 /* GHPPullRequestsViewController.m */,
+				A7CFD6F013C6414E00F90791 /* GHPPullRequestsOnRepositoryViewController.h */,
+				A7CFD6F113C6414E00F90791 /* GHPPullRequestsOnRepositoryViewController.m */,
+			);
+			name = GHPPullRequestsViewController;
+			sourceTree = "<group>";
+		};
+		A7CFD6EC13C63D3300F90791 /* GHPDataArrayViewController */ = {
+			isa = PBXGroup;
+			children = (
+				A7CFD6ED13C63D4900F90791 /* GHPDataArrayViewController.h */,
+				A7CFD6EE13C63D4900F90791 /* GHPDataArrayViewController.m */,
+			);
+			name = GHPDataArrayViewController;
+			sourceTree = "<group>";
+		};
 		A7D14FBE13576D4200E1B980 /* GHWebViewViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -2766,6 +2797,9 @@
 				A7CFD6DB13C6161A00F90791 /* GHPGistsViewController.m in Sources */,
 				A7CFD6DE13C6186C00F90791 /* GHPGistsOfUserViewController.m in Sources */,
 				A7CFD6E213C61BBF00F90791 /* GHPGistViewController.m in Sources */,
+				A7CFD6EB13C639C600F90791 /* GHPPullRequestsViewController.m in Sources */,
+				A7CFD6EF13C63D4900F90791 /* GHPDataArrayViewController.m in Sources */,
+				A7CFD6F213C6414E00F90791 /* GHPPullRequestsOnRepositoryViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

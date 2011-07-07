@@ -17,6 +17,7 @@
 #import "GHPOpenIssuesOnRepositoryViewController.h"
 #import "GHPMileStonesOnRepositoryViewController.h"
 #import "GHPRepositoryTableViewCell.h"
+#import "GHPPullRequestsOnRepositoryViewController.h"
 
 #warning section Browse Content
 
@@ -519,6 +520,8 @@
             viewController = [[[GHPOpenIssuesOnRepositoryViewController alloc] initWithRepository:self.repositoryString] autorelease];
         } else if (indexPath.row == 1) {
             viewController = [[[GHPMileStonesOnRepositoryViewController alloc] initWithRepository:self.repositoryString] autorelease];
+        } else if (indexPath.row == 4) {
+            viewController = [[[GHPPullRequestsOnRepositoryViewController alloc] initWithRepository:self.repositoryString] autorelease];
         }
         
         if (viewController) {
