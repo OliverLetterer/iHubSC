@@ -333,11 +333,11 @@
             
             return cell;
         } else {
-            NSString *CellIdentifier = @"GHPCommitTableViewCell";
-            GHPCommitTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+            NSString *CellIdentifier = @"GHPImageDetailTableViewCell";
+            GHPImageDetailTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
             
             if (!cell) {
-                cell = [[[GHPCommitTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
+                cell = [[[GHPImageDetailTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
             }
             [self setupDefaultTableViewCell:cell forRowAtIndexPath:indexPath];
             
@@ -423,7 +423,7 @@
         } else {
             GHAPIGistCommentV3 *comment = [self.comments objectAtIndex:indexPath.row - 1];
             
-            return [GHPCommitTableViewCell heightWithContent:comment.body];
+            return [GHPImageDetailTableViewCell heightWithContent:comment.body];
         }
     }
     return UITableViewAutomaticDimension;

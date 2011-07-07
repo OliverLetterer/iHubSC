@@ -63,7 +63,7 @@
 		A70ABEC513BF9E260000D189 /* GHPWatchingRepositoryUsersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A70ABEC413BF9E250000D189 /* GHPWatchingRepositoryUsersViewController.m */; };
 		A70ABEC813BF9FBA0000D189 /* GHPCollaboratorsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A70ABEC713BF9FB80000D189 /* GHPCollaboratorsViewController.m */; };
 		A70ABECC13BFAB740000D189 /* GHPCommitsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A70ABECB13BFAB740000D189 /* GHPCommitsViewController.m */; };
-		A70ABECF13BFAED10000D189 /* GHPCommitTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A70ABECE13BFAED10000D189 /* GHPCommitTableViewCell.m */; };
+		A70ABECF13BFAED10000D189 /* GHPImageDetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A70ABECE13BFAED10000D189 /* GHPImageDetailTableViewCell.m */; };
 		A70ABED213BFB3FA0000D189 /* GHPCommitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A70ABED113BFB3F90000D189 /* GHPCommitViewController.m */; };
 		A70ABED913BFBEF70000D189 /* UITableViewCell+GHHeight.m in Sources */ = {isa = PBXBuildFile; fileRef = A70ABED813BFBEF10000D189 /* UITableViewCell+GHHeight.m */; };
 		A70ABEDD13C051130000D189 /* GHPDiffView.m in Sources */ = {isa = PBXBuildFile; fileRef = A70ABEDC13C051120000D189 /* GHPDiffView.m */; };
@@ -396,8 +396,8 @@
 		A70ABEC713BF9FB80000D189 /* GHPCollaboratorsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPCollaboratorsViewController.m; sourceTree = "<group>"; };
 		A70ABECA13BFAB740000D189 /* GHPCommitsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPCommitsViewController.h; sourceTree = "<group>"; };
 		A70ABECB13BFAB740000D189 /* GHPCommitsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPCommitsViewController.m; sourceTree = "<group>"; };
-		A70ABECD13BFAED00000D189 /* GHPCommitTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPCommitTableViewCell.h; sourceTree = "<group>"; };
-		A70ABECE13BFAED10000D189 /* GHPCommitTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPCommitTableViewCell.m; sourceTree = "<group>"; };
+		A70ABECD13BFAED00000D189 /* GHPImageDetailTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPImageDetailTableViewCell.h; sourceTree = "<group>"; };
+		A70ABECE13BFAED10000D189 /* GHPImageDetailTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPImageDetailTableViewCell.m; sourceTree = "<group>"; };
 		A70ABED013BFB3F80000D189 /* GHPCommitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPCommitViewController.h; sourceTree = "<group>"; };
 		A70ABED113BFB3F90000D189 /* GHPCommitViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPCommitViewController.m; sourceTree = "<group>"; };
 		A70ABED713BFBEEC0000D189 /* UITableViewCell+GHHeight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableViewCell+GHHeight.h"; sourceTree = "<group>"; };
@@ -962,6 +962,7 @@
 		A703CB2113C64949002767EB /* UITableViewCell - Generic Subclasses */ = {
 			isa = PBXGroup;
 			children = (
+				A703CB2813C64B3A002767EB /* GHPImageDetailTableViewCell */,
 				A703CB1F13C648AF002767EB /* GHPDefaultTableViewCell */,
 				A703CB2213C64970002767EB /* GHPInfoTableViewCell */,
 			);
@@ -975,6 +976,15 @@
 				A74F2A3213BE524D00E57818 /* GHPInfoTableViewCell.m */,
 			);
 			name = GHPInfoTableViewCell;
+			sourceTree = "<group>";
+		};
+		A703CB2813C64B3A002767EB /* GHPImageDetailTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				A70ABECD13BFAED00000D189 /* GHPImageDetailTableViewCell.h */,
+				A70ABECE13BFAED10000D189 /* GHPImageDetailTableViewCell.m */,
+			);
+			name = GHPImageDetailTableViewCell;
 			sourceTree = "<group>";
 		};
 		A706C0C9139AD139008A6184 /* UIColor+Github */ = {
@@ -1116,8 +1126,6 @@
 			children = (
 				A70ABECA13BFAB740000D189 /* GHPCommitsViewController.h */,
 				A70ABECB13BFAB740000D189 /* GHPCommitsViewController.m */,
-				A70ABECD13BFAED00000D189 /* GHPCommitTableViewCell.h */,
-				A70ABECE13BFAED10000D189 /* GHPCommitTableViewCell.m */,
 				A70ABED013BFB3F80000D189 /* GHPCommitViewController.h */,
 				A70ABED113BFB3F90000D189 /* GHPCommitViewController.m */,
 				A70ABEDB13C051100000D189 /* GHPDiffView.h */,
@@ -2799,7 +2807,7 @@
 				A70ABEC513BF9E260000D189 /* GHPWatchingRepositoryUsersViewController.m in Sources */,
 				A70ABEC813BF9FBA0000D189 /* GHPCollaboratorsViewController.m in Sources */,
 				A70ABECC13BFAB740000D189 /* GHPCommitsViewController.m in Sources */,
-				A70ABECF13BFAED10000D189 /* GHPCommitTableViewCell.m in Sources */,
+				A70ABECF13BFAED10000D189 /* GHPImageDetailTableViewCell.m in Sources */,
 				A70ABED213BFB3FA0000D189 /* GHPCommitViewController.m in Sources */,
 				A70ABED913BFBEF70000D189 /* UITableViewCell+GHHeight.m in Sources */,
 				A70ABEDD13C051130000D189 /* GHPDiffView.m in Sources */,

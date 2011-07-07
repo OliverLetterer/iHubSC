@@ -7,7 +7,7 @@
 //
 
 #import "GHPIssuesViewController.h"
-#import "GHPCommitTableViewCell.h"
+#import "GHPImageDetailTableViewCell.h"
 #import "GHPIssueViewController.h"
 
 @implementation GHPIssuesViewController
@@ -40,11 +40,11 @@
 #pragma mark - Table view data source
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *CellIdentifier = @"GHPCommitTableViewCell";
+    static NSString *CellIdentifier = @"GHPImageDetailTableViewCell";
     
-    GHPCommitTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    GHPImageDetailTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[GHPCommitTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[[GHPImageDetailTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
     }
     [self setupDefaultTableViewCell:cell forRowAtIndexPath:indexPath];
     
@@ -110,7 +110,7 @@
     [self.dataArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         GHAPIIssueV3 *issue = obj;
         NSString *content = [NSString stringWithFormat:NSLocalizedString(@"Issue %@ - %@", @""), issue.number, issue.title];
-        [self cacheHeight:[GHPCommitTableViewCell heightWithContent:content] forRowAtIndexPath:[NSIndexPath indexPathForRow:idx inSection:0] ];
+        [self cacheHeight:[GHPImageDetailTableViewCell heightWithContent:content] forRowAtIndexPath:[NSIndexPath indexPathForRow:idx inSection:0] ];
     }];
 }
 

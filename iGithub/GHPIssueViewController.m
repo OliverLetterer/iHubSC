@@ -12,7 +12,7 @@
 #import "GHPMileStoneTableViewCell.h"
 #import "GHPRepositoryViewController.h"
 #import "GHPUserViewController.h"
-#import "GHPCommitTableViewCell.h"
+#import "GHPImageDetailTableViewCell.h"
 #import "GHPCommitViewController.h"
 #import "GHPNewCommentTableViewCell.h"
 #import "GHSettingsHelper.h"
@@ -497,11 +497,11 @@
             return cell;
         }
     } else if (indexPath.section == kUITableViewSectionCommits) {
-        NSString *CellIdentifier = @"GHPCommitTableViewCell";
+        NSString *CellIdentifier = @"GHPImageDetailTableViewCell";
         
-        GHPCommitTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        GHPImageDetailTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         if (cell == nil) {
-            cell = [[[GHPCommitTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
+            cell = [[[GHPImageDetailTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
         }
         
         [self setupDefaultTableViewCell:cell forRowAtIndexPath:indexPath];
@@ -541,11 +541,11 @@
         } else {
             NSObject *object = [self.history objectAtIndex:indexPath.row - 1];
             
-            NSString *CellIdentifier = @"GHPCommitTableViewCell";
-            GHPCommitTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+            NSString *CellIdentifier = @"GHPImageDetailTableViewCell";
+            GHPImageDetailTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
             
             if (!cell) {
-                cell = [[[GHPCommitTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
+                cell = [[[GHPImageDetailTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
             }
             [self setupDefaultTableViewCell:cell forRowAtIndexPath:indexPath];
             
@@ -634,7 +634,7 @@
     } else if (indexPath.section == kUITableViewSectionCommits && indexPath.row > 0) {
         GHCommit *commit = [self.discussion.commits objectAtIndex:indexPath.row - 1];
         
-        return [GHPCommitTableViewCell heightWithContent:commit.message];
+        return [GHPImageDetailTableViewCell heightWithContent:commit.message];
     } else if (indexPath.section == kUITableViewSectionHistory && indexPath.row > 0) {
         if (indexPath.row == [self.history count] + 1) {
             return GHPNewCommentTableViewCellHeight;
@@ -645,10 +645,10 @@
                 // display a comment
                 GHAPIIssueCommentV3 *comment = (GHAPIIssueCommentV3 *)object;
                 
-                return [GHPCommitTableViewCell heightWithContent:comment.body];
+                return [GHPImageDetailTableViewCell heightWithContent:comment.body];
             } else if ([object isKindOfClass:[GHAPIIssueEventV3 class] ]) {
                 GHAPIIssueEventV3 *event = (GHAPIIssueEventV3 *)object;
-                return [GHPCommitTableViewCell heightWithContent:[self descriptionForIssueEvent:event]];
+                return [GHPImageDetailTableViewCell heightWithContent:[self descriptionForIssueEvent:event]];
             }
         }
     }

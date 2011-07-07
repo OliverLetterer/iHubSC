@@ -7,11 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "GHPCommitTableViewCell.h"
+#import "GHPImageDetailTableViewCell.h"
 
 extern CGFloat const GHPNewCommentTableViewCellHeight;
 
-@interface GHPNewCommentTableViewCell : GHPCommitTableViewCell {
+@interface GHPNewCommentTableViewCell : GHPImageDetailTableViewCell {
 @private
     UITextView *_textView;
 }

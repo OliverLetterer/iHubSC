@@ -8,7 +8,7 @@
 
 #import "GHPMilestoneViewController.h"
 #import "GHPCollapsingAndSpinningTableViewCell.h"
-#import "GHPCommitTableViewCell.h"
+#import "GHPImageDetailTableViewCell.h"
 #import "GHPIssueViewController.h"
 
 #define kUITableViewControllerSectionInfoOpenIssues     0
@@ -233,11 +233,11 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == kUITableViewControllerSectionInfoOpenIssues) {
         if (indexPath.row > 0 && indexPath.row <= [self.openIssues count]) {
-            static NSString *CellIdentifier = @"GHPCommitTableViewCell";
+            static NSString *CellIdentifier = @"GHPImageDetailTableViewCell";
             
-            GHPCommitTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+            GHPImageDetailTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
             if (cell == nil) {
-                cell = [[[GHPCommitTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
+                cell = [[[GHPImageDetailTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
             }
             [self setupDefaultTableViewCell:cell forRowAtIndexPath:indexPath];
             
@@ -253,11 +253,11 @@
         }
     } else if (indexPath.section == kUITableViewControllerSectionInfoClosedIssues) {
         if (indexPath.row > 0 && indexPath.row <= [self.closedIssues count]) {
-            static NSString *CellIdentifier = @"GHPCommitTableViewCell";
+            static NSString *CellIdentifier = @"GHPImageDetailTableViewCell";
             
-            GHPCommitTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+            GHPImageDetailTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
             if (cell == nil) {
-                cell = [[[GHPCommitTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
+                cell = [[[GHPImageDetailTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
             }
             [self setupDefaultTableViewCell:cell forRowAtIndexPath:indexPath];
             
@@ -341,14 +341,14 @@
 - (void)cacheHeightForOpenIssuesArray {
     [self.openIssues enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         GHAPIIssueV3 *issue = obj;
-        [self cacheHeight:[GHPCommitTableViewCell heightWithContent:[NSString stringWithFormat:NSLocalizedString(@"Issue %@ - %@", @""), issue.number, issue.title]] forRowAtIndexPath:[NSIndexPath indexPathForRow:idx+1 inSection:kUITableViewControllerSectionInfoOpenIssues]];
+        [self cacheHeight:[GHPImageDetailTableViewCell heightWithContent:[NSString stringWithFormat:NSLocalizedString(@"Issue %@ - %@", @""), issue.number, issue.title]] forRowAtIndexPath:[NSIndexPath indexPathForRow:idx+1 inSection:kUITableViewControllerSectionInfoOpenIssues]];
     }];
 }
 
 - (void)cacheHeightForClosedIssuesArray {
     [self.closedIssues enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         GHAPIIssueV3 *issue = obj;
-        [self cacheHeight:[GHPCommitTableViewCell heightWithContent:[NSString stringWithFormat:NSLocalizedString(@"Issue %@ - %@", @""), issue.number, issue.title]] forRowAtIndexPath:[NSIndexPath indexPathForRow:idx+1 inSection:kUITableViewControllerSectionInfoClosedIssues]];
+        [self cacheHeight:[GHPImageDetailTableViewCell heightWithContent:[NSString stringWithFormat:NSLocalizedString(@"Issue %@ - %@", @""), issue.number, issue.title]] forRowAtIndexPath:[NSIndexPath indexPathForRow:idx+1 inSection:kUITableViewControllerSectionInfoClosedIssues]];
     }];
 }
 

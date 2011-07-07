@@ -7,7 +7,7 @@
 //
 
 #import "GHPCommitsViewController.h"
-#import "GHPCommitTableViewCell.h"
+#import "GHPImageDetailTableViewCell.h"
 #import "GHPCommitViewController.h"
 
 @implementation GHPCommitsViewController
@@ -70,11 +70,11 @@
 #pragma mark - Table view data source
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSString *CellIdentifier = @"GHPCommitTableViewCell";
+    NSString *CellIdentifier = @"GHPImageDetailTableViewCell";
     
-    GHPCommitTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    GHPImageDetailTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[GHPCommitTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[[GHPImageDetailTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
     }
     
     [self setupDefaultTableViewCell:cell forRowAtIndexPath:indexPath];
@@ -142,7 +142,7 @@
     [self.dataArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         GHAPICommitV3 *commit = obj;
         
-        [self cacheHeight:[GHPCommitTableViewCell heightWithContent:commit.message] forRowAtIndexPath:[NSIndexPath indexPathForRow:idx inSection:0] ];
+        [self cacheHeight:[GHPImageDetailTableViewCell heightWithContent:commit.message] forRowAtIndexPath:[NSIndexPath indexPathForRow:idx inSection:0] ];
     }];
 }
 
