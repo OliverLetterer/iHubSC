@@ -293,11 +293,14 @@
     [self.loadingLabel removeFromSuperview];
     self.loadingLabel = nil;
     
-    CGRect frame = CGRectMake(0.0, 0.0, 320.0, 367.0f);
+    CGRect frame = self.view.bounds;
     
     UIWebView *webView = [[[UIWebView alloc] initWithFrame:frame] autorelease];
     [webView loadHTMLString:self.markdownString baseURL:nil];
     webView.scalesPageToFit = YES;
+    webView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    webView.scrollView.backgroundColor = [UIColor clearColor];
+    webView.backgroundColor = [UIColor clearColor];
     [self.view addSubview:webView];
 }
 

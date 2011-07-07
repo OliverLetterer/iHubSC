@@ -18,8 +18,7 @@
 #import "GHPMileStonesOnRepositoryViewController.h"
 #import "GHPRepositoryTableViewCell.h"
 #import "GHPPullRequestsOnRepositoryViewController.h"
-
-#warning section Browse Content
+#import "GHPRootDirectoryViewController.h"
 
 #define kUIAlertViewTagDeleteRepository     1337
 #define kUIAlertViewTagAddCollaborator      1338
@@ -31,9 +30,10 @@
 #define kUITableViewSectionOwner            1
 #define kUITableViewSectionFurtherContent   2
 #define kUITableViewSectionRecentCommits    3
-#define kUITableViewSectionLabels           4
+#define kUITableViewSectionBrowseContent    4
+#define kUITableViewSectionLabels           5
 
-#define kUITableViewNumberOfSections        5
+#define kUITableViewNumberOfSections        6
 
 @implementation GHPRepositoryViewController
 
@@ -192,13 +192,13 @@
 #pragma mark - UIExpandableTableViewDatasource
 
 - (BOOL)tableView:(UIExpandableTableView *)tableView canExpandSection:(NSInteger)section {
-    return section == kUITableViewSectionLabels || section == kUITableViewSectionRecentCommits;
+    return section == kUITableViewSectionLabels || section == kUITableViewSectionRecentCommits || section == kUITableViewSectionBrowseContent;
 }
 
 - (BOOL)tableView:(UIExpandableTableView *)tableView needsToDownloadDataForExpandableSection:(NSInteger)section {
     if (section == kUITableViewSectionLabels) {
         return self.labels == nil;
-    } else if (section == kUITableViewSectionRecentCommits) {
+    } else if (section == kUITableViewSectionRecentCommits || section == kUITableViewSectionBrowseContent) {
         return self.branches == nil;
     }
     return NO;
@@ -212,6 +212,8 @@
         cell.textLabel.text = NSLocalizedString(@"Labels", @"");
     } else if (section == kUITableViewSectionRecentCommits) {
         cell.textLabel.text = NSLocalizedString(@"Recent Commits", @"");
+    } else if (section == kUITableViewSectionBrowseContent) {
+        cell.textLabel.text = NSLocalizedString(@"Browse Content", @"");
     }
     
     return cell;
@@ -232,7 +234,7 @@
                                     [tableView expandSection:section animated:YES];
                                 }
                             }];
-    } else if (section == kUITableViewSectionRecentCommits) {
+    } else if (section == kUITableViewSectionRecentCommits || section == kUITableViewSectionBrowseContent) {
         [GHAPIRepositoryV3 branchesOnRepository:self.repositoryString page:1 
                               completionHandler:^(NSMutableArray *array, NSUInteger nextPage, NSError *error) {
                                   if (error) {
@@ -262,8 +264,8 @@
                                                   withRowAnimation:UITableViewRowAnimationAutomatic];
                                 }
                             }];
-    } else if (section == kUITableViewSectionRecentCommits) {
-        [GHAPIRepositoryV3 branchesOnRepository:self.repositoryString page:1 
+    } else if (section == kUITableViewSectionRecentCommits || section == kUITableViewSectionBrowseContent) {
+        [GHAPIRepositoryV3 branchesOnRepository:self.repositoryString page:page 
                               completionHandler:^(NSMutableArray *array, NSUInteger nextPage, NSError *error) {
                                   if (error) {
                                       [self handleError:error];
@@ -290,7 +292,7 @@
     if (section == kUITableViewSectionInfo) {
         return 2;
     } else if (section == kUITableViewSectionFurtherContent) {
-        return 6;
+        return 5;
     } else if (section == kUITableViewSectionOwner) {
         if (self.repository.isForked) {
             return 2;
@@ -298,7 +300,7 @@
         return 1;
     } else if (section == kUITableViewSectionLabels) {
         return self.labels.count + 1;
-    } else if (section == kUITableViewSectionRecentCommits) {
+    } else if (section == kUITableViewSectionRecentCommits || section == kUITableViewSectionBrowseContent) {
         return self.branches.count + 1;
     }
     // Return the number of rows in the section.
@@ -360,8 +362,6 @@
             cell.textLabel.text = NSLocalizedString(@"Watching Users", @"");
         } else if (indexPath.row == 4) {
             cell.textLabel.text = NSLocalizedString(@"Pull Requests", @"");
-        } else if (indexPath.row == 5) {
-            cell.textLabel.text = NSLocalizedString(@"Browse Content", @"");
         } else {
             cell.textLabel.text = nil;
         }
@@ -427,7 +427,7 @@
         cell.colorView.backgroundColor = label.colorString.colorFromAPIColorString;
         
         return cell;
-    } else if (indexPath.section == kUITableViewSectionRecentCommits) {
+    } else if (indexPath.section == kUITableViewSectionRecentCommits || indexPath.section == kUITableViewSectionBrowseContent) {
         GHPDefaultTableViewCell *cell = [self defaultTableViewCellForRowAtIndexPath:indexPath withReuseIdentifier:@"GHPDefaultTableViewCell"];
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         
@@ -532,10 +532,18 @@
     } else if (indexPath.section == kUITableViewSectionRecentCommits) {
         GHAPIRepositoryBranchV3 *branch = [self.branches objectAtIndex:indexPath.row - 1];
         
-        GHPCommitsViewController *commitViewController = [[[GHPCommitsViewController alloc] initWithRepository:self.repositoryString 
+        GHPCommitsViewController *viewController = [[[GHPCommitsViewController alloc] initWithRepository:self.repositoryString 
                                                                                                     branchHash:branch.ID]
                                                           autorelease];
-        [self.advancedNavigationController pushViewController:commitViewController afterViewController:self];
+        [self.advancedNavigationController pushViewController:viewController afterViewController:self];
+    } else if (indexPath.section == kUITableViewSectionBrowseContent) {
+        GHAPIRepositoryBranchV3 *branch = [self.branches objectAtIndex:indexPath.row - 1];
+        
+        GHPRootDirectoryViewController *viewController = [[[GHPRootDirectoryViewController alloc] initWithRepository:self.repositoryString 
+                                                                                                              branch:branch.name 
+                                                                                                                hash:branch.ID]
+                                                          autorelease];
+        [self.advancedNavigationController pushViewController:viewController afterViewController:self];
     }
 }
 

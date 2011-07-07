@@ -16,7 +16,7 @@
 #warning User->Organizations missing
 #warning NewsFeeds are missing
 
-#warning Repository->BrowseContent is missing
+#warning Repository->Labels is missing
 
 - (void)deviceOrientationDidChangeNotificationCallback:(NSNotification *)notification;
 

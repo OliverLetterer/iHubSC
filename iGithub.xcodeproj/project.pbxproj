@@ -128,6 +128,8 @@
 		A74A660213BDA9040098106E /* GHPUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A74A660113BDA9040098106E /* GHPUserViewController.m */; };
 		A74A660413BDAF490098106E /* UITableViewCellAccessoryDisclosureIndicatorOriginal.png in Resources */ = {isa = PBXBuildFile; fileRef = A74A660313BDAF490098106E /* UITableViewCellAccessoryDisclosureIndicatorOriginal.png */; };
 		A74A660813BDB0380098106E /* GHPUserInfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A74A660613BDB0380098106E /* GHPUserInfoTableViewCell.m */; };
+		A74DD7A813C64E9700570C94 /* GHPDirectoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A74DD7A713C64E9700570C94 /* GHPDirectoryViewController.m */; };
+		A74DD7AB13C64F6A00570C94 /* GHPRootDirectoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A74DD7AA13C64F6900570C94 /* GHPRootDirectoryViewController.m */; };
 		A74F2A2B13BE0E8200E57818 /* GHPRepositoryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A74F2A2A13BE0E8200E57818 /* GHPRepositoryTableViewCell.m */; };
 		A74F2A3013BE1AEA00E57818 /* GHPRepositoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A74F2A2F13BE1AEA00E57818 /* GHPRepositoryViewController.m */; };
 		A74F2A3313BE524D00E57818 /* GHPInfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A74F2A3213BE524D00E57818 /* GHPInfoTableViewCell.m */; };
@@ -512,6 +514,10 @@
 		A74A660313BDAF490098106E /* UITableViewCellAccessoryDisclosureIndicatorOriginal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UITableViewCellAccessoryDisclosureIndicatorOriginal.png; sourceTree = "<group>"; };
 		A74A660513BDB0380098106E /* GHPUserInfoTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPUserInfoTableViewCell.h; sourceTree = "<group>"; };
 		A74A660613BDB0380098106E /* GHPUserInfoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPUserInfoTableViewCell.m; sourceTree = "<group>"; };
+		A74DD7A613C64E9700570C94 /* GHPDirectoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPDirectoryViewController.h; sourceTree = "<group>"; };
+		A74DD7A713C64E9700570C94 /* GHPDirectoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPDirectoryViewController.m; sourceTree = "<group>"; };
+		A74DD7A913C64F6900570C94 /* GHPRootDirectoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPRootDirectoryViewController.h; sourceTree = "<group>"; };
+		A74DD7AA13C64F6900570C94 /* GHPRootDirectoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPRootDirectoryViewController.m; sourceTree = "<group>"; };
 		A74F2A2913BE0E8200E57818 /* GHPRepositoryTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPRepositoryTableViewCell.h; sourceTree = "<group>"; };
 		A74F2A2A13BE0E8200E57818 /* GHPRepositoryTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPRepositoryTableViewCell.m; sourceTree = "<group>"; };
 		A74F2A2E13BE1AEA00E57818 /* GHPRepositoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPRepositoryViewController.h; sourceTree = "<group>"; };
@@ -962,6 +968,7 @@
 		A703CB2113C64949002767EB /* UITableViewCell - Generic Subclasses */ = {
 			isa = PBXGroup;
 			children = (
+				A70FF3A013BF6A320082E2EC /* GHPCollapsingAndSpinningTableViewCell */,
 				A703CB2813C64B3A002767EB /* GHPImageDetailTableViewCell */,
 				A703CB1F13C648AF002767EB /* GHPDefaultTableViewCell */,
 				A703CB2213C64970002767EB /* GHPInfoTableViewCell */,
@@ -1161,6 +1168,7 @@
 		A70DAE0713B49FC500DE4279 /* UserInterface */ = {
 			isa = PBXGroup;
 			children = (
+				A74DD7A513C64E7A00570C94 /* GHPDirectoryViewController */,
 				A703CB2113C64949002767EB /* UITableViewCell - Generic Subclasses */,
 				A7CFD6EC13C63D3300F90791 /* GHPDataArrayViewController */,
 				A7CFD6E713C639AE00F90791 /* GHPPullRequestsViewController */,
@@ -1521,6 +1529,17 @@
 				A74A660613BDB0380098106E /* GHPUserInfoTableViewCell.m */,
 			);
 			name = GHPUserViewController;
+			sourceTree = "<group>";
+		};
+		A74DD7A513C64E7A00570C94 /* GHPDirectoryViewController */ = {
+			isa = PBXGroup;
+			children = (
+				A74DD7A613C64E9700570C94 /* GHPDirectoryViewController.h */,
+				A74DD7A713C64E9700570C94 /* GHPDirectoryViewController.m */,
+				A74DD7A913C64F6900570C94 /* GHPRootDirectoryViewController.h */,
+				A74DD7AA13C64F6900570C94 /* GHPRootDirectoryViewController.m */,
+			);
+			name = GHPDirectoryViewController;
 			sourceTree = "<group>";
 		};
 		A74F2A2D13BE1ACE00E57818 /* GHPRepositoryViewController */ = {
@@ -2025,7 +2044,6 @@
 		A7BF14141342149C001AE50D /* iPad */ = {
 			isa = PBXGroup;
 			children = (
-				A70FF3A013BF6A320082E2EC /* GHPCollapsingAndSpinningTableViewCell */,
 				A7F334AB13BCCF0800DB922D /* ANAdvancedNavigationController */,
 				A70DAE0713B49FC500DE4279 /* UserInterface */,
 				A7BF14151342149C001AE50D /* iGithubAppDelegate_iPad.h */,
@@ -2832,6 +2850,8 @@
 				A7CFD6EB13C639C600F90791 /* GHPPullRequestsViewController.m in Sources */,
 				A7CFD6EF13C63D4900F90791 /* GHPDataArrayViewController.m in Sources */,
 				A7CFD6F213C6414E00F90791 /* GHPPullRequestsOnRepositoryViewController.m in Sources */,
+				A74DD7A813C64E9700570C94 /* GHPDirectoryViewController.m in Sources */,
+				A74DD7AB13C64F6A00570C94 /* GHPRootDirectoryViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
