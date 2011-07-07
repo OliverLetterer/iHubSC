@@ -7,19 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "GHTableViewController.h"
+#import "GHPDataArrayViewController.h"
 
-@interface GHPRepositoriesViewController : GHTableViewController {
+@interface GHPRepositoriesViewController : GHPDataArrayViewController {
 @private
-    NSMutableArray *_repositories;
     NSString *_username;
 }
 
-@property (nonatomic, retain) NSMutableArray *repositories;
 @property (nonatomic, copy) NSString *username;
 
 - (id)initWithUsername:(NSString *)username;
-
-- (void)cacheRepositoriesHeights;
 
 @end

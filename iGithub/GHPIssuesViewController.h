@@ -7,18 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "GHTableViewController.h"
+#import "GHPDataArrayViewController.h"
 
-@interface GHPIssuesViewController : GHTableViewController {
+@interface GHPIssuesViewController : GHPDataArrayViewController {
 @private
-    NSMutableArray *_issues;
-    
     NSString *_repository;
 }
-
-@property (nonatomic, retain) NSMutableArray *issues;
-
-- (void)cacheIssuesHeight;
 
 @property (nonatomic, copy) NSString *repository;
 

@@ -7,13 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "GHTableViewController.h"
+#import "GHPDataArrayViewController.h"
 
-@interface GHPUsersViewController : GHTableViewController {
+@interface GHPUsersViewController : GHPDataArrayViewController {
 @private
-    NSMutableArray *_users;
+    
 }
-
-@property (nonatomic, retain) NSMutableArray *users;
 
 @end

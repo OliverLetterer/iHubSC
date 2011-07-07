@@ -13,49 +13,24 @@
 @implementation GHPCommitsViewController
 
 @synthesize repository=_repository, branchHash=_branchHash;
-@synthesize commits=_commits;
 
 #pragma mark - setters and getters
 
-- (void)setCommits:(NSMutableArray *)commits {
-    if (commits != _commits) {
-        [_commits release];
-        _commits = [commits retain];
-        [self cacheCommitsHeights];
-        
-        if (commits != nil && commits.count == 0) {
-            UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", @"") 
-                                                             message:NSLocalizedString(@"No Commits available", @"") 
-                                                            delegate:nil 
-                                                   cancelButtonTitle:NSLocalizedString(@"OK", @"") 
-                                                   otherButtonTitles:nil]
-                                  autorelease];
-            [alert show];
-            [self.advancedNavigationController popViewController:self];
-        }
-        
-        if (self.isViewLoaded) {
-            [self.tableView reloadData];
-        }
-    }
+- (NSString *)emptyArrayErrorMessage {
+    return NSLocalizedString(@"No Commits available", @"");
 }
 
 - (void)setRepository:(NSString *)repository branchHash:(NSString *)branchHash {
-    [_repository release];
-    [_branchHash release];
+    [_repository release], _repository = [repository copy];
+    [_branchHash release], _branchHash = [branchHash copy];
     
-    _repository = [repository copy];
-    _branchHash = [branchHash copy];
-    self.commits = nil;
-    self.isDownloadingEssentialData = YES;
     [GHAPIRepositoryV3 commitsOnRepository:self.repository branchSHA:self.branchHash page:1 
                          completionHandler:^(NSMutableArray *array, NSUInteger nextPage, NSError *error) {
                              self.isDownloadingEssentialData = NO;
                              if (error) {
                                  [self handleError:error];
                              } else {
-                                 self.commits = array;
-                                 [self setNextPage:nextPage forSection:0];
+                                 [self setDataArray:array nextPage:nextPage];
                              }
                          }];
 }
@@ -68,10 +43,7 @@
                              if (error) {
                                  [self handleError:error];
                              } else {
-                                 [self setNextPage:nextPage forSection:section];
-                                 [self.commits addObjectsFromArray:array];
-                                 [self cacheCommitsHeights];
-                                 [self.tableView reloadData];
+                                 [self appendDataFromArray:array nextPage:nextPage];
                              }
                          }];
 }
@@ -95,69 +67,7 @@
     [super dealloc];
 }
 
-- (void)didReceiveMemoryWarning {
-    // Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
-    
-    // Release any cached data, images, etc that aren't in use.
-}
-
-#pragma mark - View lifecycle
-
-/*
- - (void)loadView {
- 
- }
- */
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-}
-
-- (void)viewDidUnload {
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-}
-
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-}
-
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-}
-
-- (void)viewDidDisappear:(BOOL)animated {
-    [super viewDidDisappear:animated];
-}
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    // Return YES for supported orientations
-	return YES;
-}
-
 #pragma mark - Table view data source
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    // Return the number of sections.
-    return 1;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    // Return the number of rows in the section.
-    return self.commits.count;
-}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     NSString *CellIdentifier = @"GHPCommitTableViewCell";
@@ -169,7 +79,7 @@
     
     [self setupDefaultTableViewCell:cell forRowAtIndexPath:indexPath];
     
-    GHAPICommitV3 *commit = [self.commits objectAtIndex:indexPath.row];
+    GHAPICommitV3 *commit = [self.dataArray objectAtIndex:indexPath.row];
     
     [self updateImageView:cell.imageView atIndexPath:indexPath withGravatarID:commit.committer.gravatarID];
     cell.textLabel.text = [NSString stringWithFormat:@"%@ - %@", commit.committer.login, commit.SHA];
@@ -217,12 +127,8 @@
 
 #pragma mark - Table view delegate
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return [self cachedHeightForRowAtIndexPath:indexPath];
-}
-
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    GHAPICommitV3 *commit = [self.commits objectAtIndex:indexPath.row];
+    GHAPICommitV3 *commit = [self.dataArray objectAtIndex:indexPath.row];
     
     GHPCommitViewController *commitViewController = [[[GHPCommitViewController alloc] initWithRepository:self.repository 
                                                                                                 commitID:commit.SHA]
@@ -232,8 +138,8 @@
 
 #pragma mark - height caching
 
-- (void)cacheCommitsHeights {
-    [self.commits enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+- (void)cacheDataArrayHeights {
+    [self.dataArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         GHAPICommitV3 *commit = obj;
         
         [self cacheHeight:[GHPCommitTableViewCell heightWithContent:commit.message] forRowAtIndexPath:[NSIndexPath indexPathForRow:idx inSection:0] ];

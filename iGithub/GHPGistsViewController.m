@@ -12,116 +12,13 @@
 
 @implementation GHPGistsViewController
 
-@synthesize gists=_gists;
-
 #pragma mark - setters and getters
 
-- (void)setGists:(NSMutableArray *)gists {
-    if (gists != _gists) {
-        [_gists release], _gists = [gists retain];
-        
-        [self cacheGistsHeights];
-        
-        if (gists != nil && gists.count == 0) {
-            UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", @"") 
-                                                             message:NSLocalizedString(@"No Gists available", @"") 
-                                                            delegate:nil 
-                                                   cancelButtonTitle:NSLocalizedString(@"OK", @"") 
-                                                   otherButtonTitles:nil]
-                                  autorelease];
-            [alert show];
-            [self.advancedNavigationController popViewController:self];
-        }
-        
-        if (self.isViewLoaded) {
-            [self.tableView reloadData];
-        }
-    }
-}
-
-#pragma mark - Initialization
-
-- (id)initWithStyle:(UITableViewStyle)style {
-    if ((self = [super initWithStyle:style])) {
-        // Custom initialization
-    }
-    return self;
-}
-
-#pragma mark - Memory management
-
-- (void)dealloc {
-    [_gists release];
-    
-    [super dealloc];
-}
-
-- (void)didReceiveMemoryWarning {
-    // Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
-    
-    // Release any cached data, images, etc that aren't in use.
-}
-
-#pragma mark - View lifecycle
-
-/*
- - (void)loadView {
- 
- }
- */
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-}
-
-- (void)viewDidUnload {
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-}
-
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-}
-
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-}
-
-- (void)viewDidDisappear:(BOOL)animated {
-    [super viewDidDisappear:animated];
-}
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    // Return YES for supported orientations
-	return YES;
+- (NSString *)emptyArrayErrorMessage {
+    return NSLocalizedString(@"No Gists available", @"");
 }
 
 #pragma mark - Table view data source
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    if (!self.gists) {
-        return 0;
-    }
-    // Return the number of sections.
-    return 1;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    // Return the number of rows in the section.
-    return self.gists.count;
-}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *CellIdentifier = @"GHPRepositoryTableViewCell";
@@ -132,7 +29,7 @@
     }
     [self setupDefaultTableViewCell:cell forRowAtIndexPath:indexPath];
     
-    GHAPIGistV3 *gist = [self.gists objectAtIndex:indexPath.row];
+    GHAPIGistV3 *gist = [self.dataArray objectAtIndex:indexPath.row];
     
     cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Gist: %@ (created %@ ago)", @""), gist.ID, gist.createdAt.prettyTimeIntervalSinceNow];
     
@@ -184,12 +81,8 @@
 
 #pragma mark - Table view delegate
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return [self cachedHeightForRowAtIndexPath:indexPath];
-}
-
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    GHAPIGistV3 *gist = [self.gists objectAtIndex:indexPath.row];
+    GHAPIGistV3 *gist = [self.dataArray objectAtIndex:indexPath.row];
     GHPGistViewController *viewController = [[[GHPGistViewController alloc] initWithGistID:gist.ID] autorelease];
     
     [self.advancedNavigationController pushViewController:viewController afterViewController:self];
@@ -197,8 +90,8 @@
 
 #pragma mark - Height caching
 
-- (void)cacheGistsHeights {
-    [self.gists enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+- (void)cacheDataArrayHeights {
+    [self.dataArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         GHAPIGistV3 *gist = obj;
         
         [self cacheHeight:[GHPRepositoryTableViewCell heightWithContent:gist.description] 

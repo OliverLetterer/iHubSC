@@ -16,15 +16,12 @@
 - (void)setRepository:(NSString *)repository {
     [super setRepository:repository];
     
-    self.isDownloadingEssentialData = YES;
     [GHAPIIssueV3 milestonesForIssueOnRepository:self.repository withNumber:nil page:1 
                                completionHandler:^(NSMutableArray *array, NSUInteger nextPage, NSError *error) {
                                    if (error) {
                                        [self handleError:error];
                                    } else {
-                                       self.isDownloadingEssentialData = NO;
-                                       self.milestones = array;
-                                       [self setNextPage:nextPage forSection:0];
+                                       [self setDataArray:array nextPage:nextPage];
                                    }
                                }];
 }
@@ -37,9 +34,7 @@
                                    if (error) {
                                        [self handleError:error];
                                    } else {
-                                       [self setNextPage:nextPage forSection:section];
-                                       [self.milestones addObjectsFromArray:array];
-                                       [self.tableView reloadData];
+                                       [self appendDataFromArray:array nextPage:nextPage];
                                    }
                                }];
 }

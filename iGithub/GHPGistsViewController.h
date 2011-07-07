@@ -7,15 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "GHTableViewController.h"
+#import "GHPDataArrayViewController.h"
 
-@interface GHPGistsViewController : GHTableViewController {
+@interface GHPGistsViewController : GHPDataArrayViewController {
 @private
-    NSMutableArray *_gists;
+    
 }
-
-@property (nonatomic, retain) NSMutableArray *gists;
-
-- (void)cacheGistsHeights;
 
 @end

@@ -18,15 +18,12 @@
 - (void)setUsername:(NSString *)username {
     [_username release], _username = [username copy];
     
-    self.isDownloadingEssentialData = YES;
     [GHAPIUserV3 gistsOfUser:username page:1 
            completionHandler:^(NSMutableArray *array, NSUInteger nextPage, NSError *error) {
-               self.isDownloadingEssentialData = NO;
                if (error) {
                    [self handleError:error];
                } else {
-                   [self setNextPage:nextPage forSection:0];
-                   self.gists = array;
+                   [self setDataArray:array nextPage:nextPage];
                }
            }];
 }
@@ -39,10 +36,7 @@
                              if (error) {
                                  [self handleError:error];
                              } else {
-                                 [self setNextPage:nextPage forSection:section];
-                                 [self.gists addObjectsFromArray:array];
-                                 [self cacheGistsHeights];
-                                 [self.tableView reloadData];
+                                 [self appendDataFromArray:array nextPage:nextPage];
                              }
                          }];
 }

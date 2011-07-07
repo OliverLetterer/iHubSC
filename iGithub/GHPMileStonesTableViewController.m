@@ -12,30 +12,12 @@
 
 @implementation GHPMileStonesTableViewController
 
-@synthesize milestones=_milestones;
 @synthesize repository=_repository;
 
 #pragma mark - setters and getters
 
-- (void)setMilestones:(NSMutableArray *)milestones {
-    if (milestones != _milestones) {
-        [_milestones release], _milestones = [milestones retain];
-        
-        if (milestones != nil && milestones.count == 0) {
-            UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", @"") 
-                                                             message:NSLocalizedString(@"No Milestones available", @"") 
-                                                            delegate:nil 
-                                                   cancelButtonTitle:NSLocalizedString(@"OK", @"") 
-                                                   otherButtonTitles:nil]
-                                  autorelease];
-            [alert show];
-            [self.advancedNavigationController popViewController:self];
-        }
-        
-        if (self.isViewLoaded) {
-            [self.tableView reloadData];
-        }
-    }
+- (NSString *)emptyArrayErrorMessage {
+    return NSLocalizedString(@"No Milestones available", @"");
 }
 
 #pragma mark - Initialization
@@ -51,78 +33,12 @@
 #pragma mark - Memory management
 
 - (void)dealloc {
-    [_milestones release];
     [_repository release];
     
     [super dealloc];
 }
 
-- (void)didReceiveMemoryWarning {
-    // Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
-    
-    // Release any cached data, images, etc that aren't in use.
-}
-
-#pragma mark - View lifecycle
-
-/*
- - (void)loadView {
- 
- }
- */
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-}
-
-- (void)viewDidUnload {
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-}
-
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-}
-
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-}
-
-- (void)viewDidDisappear:(BOOL)animated {
-    [super viewDidDisappear:animated];
-}
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    // Return YES for supported orientations
-	return YES;
-}
-
 #pragma mark - Table view data source
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    if (!self.milestones) {
-        return 0;
-    }
-    // Return the number of sections.
-    return 1;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    // Return the number of rows in the section.
-    return self.milestones.count;
-}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *CellIdentifier = @"GHPMileStoneTableViewCell";
@@ -134,7 +50,7 @@
     
     [self setupDefaultTableViewCell:cell forRowAtIndexPath:indexPath];
     
-    GHAPIMilestoneV3 *milestone = [self.milestones objectAtIndex:indexPath.row];
+    GHAPIMilestoneV3 *milestone = [self.dataArray objectAtIndex:indexPath.row];
     
     cell.progressView.progress = milestone.progress;
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
@@ -192,7 +108,7 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    GHAPIMilestoneV3 *milestone = [self.milestones objectAtIndex:indexPath.row];
+    GHAPIMilestoneV3 *milestone = [self.dataArray objectAtIndex:indexPath.row];
     
     GHPMilestoneViewController *viewController = [[[GHPMilestoneViewController alloc] initWithRepository:self.repository milestoneNumber:milestone.number] autorelease];
     

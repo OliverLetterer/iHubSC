@@ -7,17 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "GHTableViewController.h"
+#import "GHPDataArrayViewController.h"
 
 
-@interface GHPMileStonesTableViewController : GHTableViewController {
+@interface GHPMileStonesTableViewController : GHPDataArrayViewController {
 @private
-    NSMutableArray *_milestones;
-    
     NSString *_repository;
 }
-
-@property (nonatomic, retain) NSMutableArray *milestones;
 
 @property (nonatomic, copy) NSString *repository;
 
