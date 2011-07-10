@@ -13,11 +13,9 @@
     
 }
 
+#warning authentication not working
 #warning User->Organizations missing
 #warning NewsFeeds are missing
-#warning Search is missing
-
-#warning Repository->Labels is missing
 
 - (void)deviceOrientationDidChangeNotificationCallback:(NSNotification *)notification;
 

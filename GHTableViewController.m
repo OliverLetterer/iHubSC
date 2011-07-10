@@ -138,9 +138,9 @@ static CGFloat wrapperViewHeight = 21.0f;
 }
 
 - (void)updateImageView:(UIImageView *)imageView 
+            inTableView:(UITableView *)tableView 
             atIndexPath:(NSIndexPath *)indexPath 
          withGravatarID:(NSString *)gravatarID {
-    
     UIImage *gravatarImage = [UIImage cachedImageFromGravatarID:gravatarID];
     
     if (gravatarImage) {
@@ -159,12 +159,18 @@ static CGFloat wrapperViewHeight = 21.0f;
         
         [UIImage imageFromGravatarID:gravatarID 
                withCompletionHandler:^(UIImage *image, NSError *error, BOOL didDownload) {
-                   if (indexPath && [self.tableView containsIndexPath:indexPath]) {
-                       [self.tableView reloadRowAtIndexPath:indexPath withRowAnimation:UITableViewRowAnimationNone];
+                   if (indexPath && [tableView containsIndexPath:indexPath]) {
+                       [tableView reloadRowAtIndexPath:indexPath withRowAnimation:UITableViewRowAnimationNone];
                    }
                }];
     }
+}
+
+- (void)updateImageView:(UIImageView *)imageView 
+            atIndexPath:(NSIndexPath *)indexPath 
+         withGravatarID:(NSString *)gravatarID {
     
+    [self updateImageView:imageView inTableView:self.tableView atIndexPath:indexPath withGravatarID:gravatarID];
 }
 
 - (void)authenticationViewControllerdidAuthenticateUserCallback:(NSNotification *)notification {

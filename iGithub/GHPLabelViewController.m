@@ -1,30 +1,39 @@
 //
-//  GHViewLabelViewController.m
+//  GHPLabelViewController.m
 //  iGithub
 //
-//  Created by Oliver Letterer on 22.05.11.
+//  Created by Oliver Letterer on 09.07.11.
 //  Copyright 2011 Home. All rights reserved.
 //
 
-#import "GHViewLabelViewController.h"
-#import "GHLabelTableViewCell.h"
-#import "UICollapsingAndSpinningTableViewCell.h"
-#import "GHIssueTitleTableViewCell.h"
-#import "GHViewIssueTableViewController.h"
+#import "GHPLabelViewController.h"
+#import "GHPImageDetailTableViewCell.h"
+#import "GHPIssueViewController.h"
 
-#define kUITableViewSectionInfo                         0
-#define kUITableViewControllerSectionInfoOpenIssues     1
-#define kUITableViewControllerSectionInfoClosedIssues   2
+#define kUITableViewControllerSectionInfoOpenIssues     0
+#define kUITableViewControllerSectionInfoClosedIssues   1
 
-#define kUITableViewNumberOfSections                    3
+#define kUITableViewNumberOfSections                    2
 
-@implementation GHViewLabelViewController
+@implementation GHPLabelViewController
 
 #pragma mark - View lifecycle
 
+- (id)initWithRepository:(NSString *)repository label:(GHAPILabelV3 *)label {
+    if (self = [super initWithStyle:UITableViewStyleGrouped]) {
+        self.repositoryString = repository;
+        self.label = label;
+    }
+    return self;
+}
+
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     // Return YES for supported orientations
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+	return YES;
+}
+
+- (NSString *)contentForIssue:(GHAPIIssueV3 *)issue {
+    return [NSString stringWithFormat:NSLocalizedString(@"Issue %@ - %@", @""), issue.number, issue.title];
 }
 
 #pragma mark - UIExpandableTableViewDatasource
@@ -43,13 +52,7 @@
 }
 
 - (UITableViewCell<UIExpandingTableViewCell> *)tableView:(UIExpandableTableView *)tableView expandingCellForSection:(NSInteger)section {
-    
-    NSString *CellIdentifier = @"UICollapsingAndSpinningTableViewCell";
-    
-    UICollapsingAndSpinningTableViewCell *cell = (UICollapsingAndSpinningTableViewCell *)[self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
-        cell = [[[UICollapsingAndSpinningTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
-    }
+    GHPCollapsingAndSpinningTableViewCell *cell = [self defaultPadCollapsingAndSpinningTableViewCellForSection:section];
     
     if (section == kUITableViewControllerSectionInfoOpenIssues) {
         cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Open Issues", @"")];
@@ -142,87 +145,42 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if (section == kUITableViewSectionInfo) {
-        return 1;
-    } else if (section == kUITableViewControllerSectionInfoOpenIssues) {
+    if (section == kUITableViewControllerSectionInfoOpenIssues) {
         return self.openIssues.count + 1;
     } else if (section == kUITableViewControllerSectionInfoClosedIssues) {
         return self.closedIssues.count + 1;
     }
-
+    
     // Return the number of rows in the section.
     return 0;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == kUITableViewSectionInfo) {
-        if (indexPath.row == 0) {
-            NSString *CellIdentifier = @"GHLabelTableViewCell";
-            
-            GHLabelTableViewCell *cell = (GHLabelTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-            if (!cell) {
-                cell = [[[GHLabelTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
-            }
-            
-            GHAPILabelV3 *label = self.label;
-            
-            cell.accessoryType = UITableViewCellAccessoryNone;
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            
-            cell.textLabel.text = label.name;
-            cell.colorView.backgroundColor = label.colorString.colorFromAPIColorString;
-            
-            return cell;
-        }
-    } else if (indexPath.section == kUITableViewControllerSectionInfoOpenIssues) {
+    static NSString *CellIdentifier = @"GHPImageDetailTableViewCell";
+    
+    GHPImageDetailTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (cell == nil) {
+        cell = [[[GHPImageDetailTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
+    }
+    [self setupDefaultTableViewCell:cell forRowAtIndexPath:indexPath];
+    
+    GHAPIIssueV3 *issue = nil;
+    
+    if (indexPath.section == kUITableViewControllerSectionInfoOpenIssues) {
         if (indexPath.row > 0 && indexPath.row <= [self.openIssues count]) {
-            NSString *CellIdentifier = @"GHIssueTitleTableViewCell";
-            GHIssueTitleTableViewCell *cell = (GHIssueTitleTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-            if (!cell) {
-                cell = [[[GHIssueTitleTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
-            }
-            
-            GHAPIIssueV3 *issue = [self.openIssues objectAtIndex:indexPath.row - 1];
-            
-            cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Issue %@", @""), issue.number];
-            
-            [self updateImageViewForCell:cell 
-                             atIndexPath:indexPath 
-                          withGravatarID:issue.user.gravatarID];
-            
-            cell.detailTextLabel.text = [NSString stringWithFormat:@"by %@ %@", issue.user.login, [NSString stringWithFormat:NSLocalizedString(@"%@ ago", @""), issue.createdAt.prettyTimeIntervalSinceNow]];
-            ;
-            
-            cell.descriptionLabel.text = issue.title;
-            
-            return cell;
+            issue = [self.openIssues objectAtIndex:indexPath.row - 1];
         }
     } else if (indexPath.section == kUITableViewControllerSectionInfoClosedIssues) {
         if (indexPath.row > 0 && indexPath.row <= [self.closedIssues count]) {
-            NSString *CellIdentifier = @"GHIssueTitleTableViewCell";
-            GHIssueTitleTableViewCell *cell = (GHIssueTitleTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-            if (!cell) {
-                cell = [[[GHIssueTitleTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
-            }
-            
-            GHAPIIssueV3 *issue = [self.closedIssues objectAtIndex:indexPath.row - 1];
-            
-            cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Issue %@", @""), issue.number];
-            
-            [self updateImageViewForCell:cell 
-                             atIndexPath:indexPath 
-                          withGravatarID:issue.user.gravatarID];
-            
-            cell.detailTextLabel.text = [NSString stringWithFormat:@"by %@ %@", issue.user.login, [NSString stringWithFormat:NSLocalizedString(@"%@ ago", @""), issue.createdAt.prettyTimeIntervalSinceNow]];
-            ;
-            
-            cell.descriptionLabel.text = issue.title;
-            
-            return cell;
+            issue = [self.closedIssues objectAtIndex:indexPath.row - 1];
         }
     }
     
-    return self.dummyCell;
+    [self updateImageView:cell.imageView atIndexPath:indexPath withGravatarID:issue.user.gravatarID];
+    cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ (%@ ago)", @""), issue.user.login, issue.createdAt.prettyTimeIntervalSinceNow];
+    cell.detailTextLabel.text = [self contentForIssue:issue];
+    
+    return cell;
 }
 
 #pragma mark - Table view delegate
@@ -233,26 +191,22 @@
     } else if (indexPath.section == kUITableViewControllerSectionInfoClosedIssues && indexPath.row > 0) {
         return [self cachedHeightForRowAtIndexPath:indexPath];
     }
-    return 44.0f;
+    return UITableViewAutomaticDimension;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    UIViewController *viewController = nil;
+    
     if (indexPath.section == kUITableViewControllerSectionInfoOpenIssues && indexPath.row > 0) {
         GHAPIIssueV3 *issue = [self.openIssues objectAtIndex:indexPath.row - 1];
-        
-        GHViewIssueTableViewController *issueViewController = [[[GHViewIssueTableViewController alloc] initWithRepository:self.repositoryString 
-                                                                                                              issueNumber:issue.number]
-                                                               autorelease];
-        [self.navigationController pushViewController:issueViewController animated:YES];
-        
+        viewController = [[[GHPIssueViewController alloc] initWithIssueNumber:issue.number onRepository:self.repositoryString] autorelease];
     } else if (indexPath.section == kUITableViewControllerSectionInfoClosedIssues && indexPath.row > 0) {
         GHAPIIssueV3 *issue = [self.closedIssues objectAtIndex:indexPath.row - 1];
-        
-        GHViewIssueTableViewController *issueViewController = [[[GHViewIssueTableViewController alloc] initWithRepository:self.repositoryString 
-                                                                                                              issueNumber:issue.number]
-                                                               autorelease];
-        [self.navigationController pushViewController:issueViewController animated:YES];
-        
+        viewController = [[[GHPIssueViewController alloc] initWithIssueNumber:issue.number onRepository:self.repositoryString] autorelease];
+    }
+    
+    if (viewController) {
+        [self.advancedNavigationController pushViewController:viewController afterViewController:self];
     } else {
         [tableView deselectRowAtIndexPath:indexPath animated:NO];
     }
@@ -263,7 +217,8 @@
 - (void)cacheHeightForOpenIssuesArray {
     NSInteger i = 1;
     for (GHAPIIssueV3 *issue in self.openIssues) {
-        [self cacheHeight:[self heightForDescription:issue.title]+50.0f forRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:kUITableViewControllerSectionInfoOpenIssues] ];
+        [self cacheHeight:[GHPImageDetailTableViewCell heightWithContent:[self contentForIssue:issue]] 
+        forRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:kUITableViewControllerSectionInfoOpenIssues] ];
         i++;
     }
 }
@@ -271,9 +226,9 @@
 - (void)cacheHeightForClosedIssuesArray {
     NSInteger i = 1;
     for (GHAPIIssueV3 *issue in self.closedIssues) {
-        [self cacheHeight:[self heightForDescription:issue.title]+50.0f forRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:kUITableViewControllerSectionInfoClosedIssues] ];
+        [self cacheHeight:[GHPImageDetailTableViewCell heightWithContent:[self contentForIssue:issue]] 
+        forRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:kUITableViewControllerSectionInfoClosedIssues] ];
         i++;
     }
 }
-
 @end

@@ -24,4 +24,6 @@
 - (void)saveContext;
 - (NSURL *)applicationDocumentsDirectory;
 
+- (void)setupAppearences;
+
 @end

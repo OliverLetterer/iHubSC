@@ -12,10 +12,28 @@
 #import "INNotificationQueue.h"
 #import "GHSettingsHelper.h"
 #import "GHAuthenticationManager.h"
+#import "GHPSearchScopeTableViewCell.h"
 
 @implementation iGithubAppDelegate_iPad
 
+- (void)setupAppearences {
+    // Buttons in GHPSearchScopeTableViewCell
+    
+    id proxy = [UIButton appearanceWhenContainedIn:[GHPSearchScopeTableViewCell class], nil];
+    
+    [proxy setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
+    [proxy setTitleShadowColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [proxy setBackgroundImage:[[UIImage imageNamed:@"GHPSelectedBackgroundImage.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(10.0f, 10.0f, 10.0f, 10.0f)] forState:UIControlStateHighlighted];
+    [proxy setBackgroundImage:[[UIImage imageNamed:@"GHPSelectedBackgroundImage.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(10.0f, 10.0f, 10.0f, 10.0f)] forState:UIControlStateSelected];
+    
+//    // UILabel in UIButton in GHPSearchScopeTableViewCell
+//    proxy = [UILabel appearanceWhenContainedIn:[UIButton class], [GHPSearchScopeTableViewCell class], nil];
+//    [proxy setFont:[UIFont boldSystemFontOfSize:16.0f]];
+//    [proxy setShadowOffset:CGSizeMake(0.0f, 1.0f)];
+}
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    [self setupAppearences];
 #if DEBUG
     [GHSettingsHelper setUsername:@"docmorelli"];
     [GHSettingsHelper setPassword:@"1337-l0g1n"];
@@ -30,7 +48,6 @@
     [GHAuthenticationManager sharedInstance].username = [GHSettingsHelper username];
     [GHAuthenticationManager sharedInstance].password = [GHSettingsHelper password];
 #endif
-    
     
     GHPLeftNavigationController *testVC = [[[GHPLeftNavigationController alloc] initWithStyle:UITableViewStyleGrouped] autorelease];
         

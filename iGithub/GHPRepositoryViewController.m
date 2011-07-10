@@ -19,6 +19,7 @@
 #import "GHPRepositoryTableViewCell.h"
 #import "GHPPullRequestsOnRepositoryViewController.h"
 #import "GHPRootDirectoryViewController.h"
+#import "GHPLabelViewController.h"
 
 #define kUIAlertViewTagDeleteRepository     1337
 #define kUIAlertViewTagAddCollaborator      1338
@@ -543,6 +544,12 @@
                                                                                                               branch:branch.name 
                                                                                                                 hash:branch.ID]
                                                           autorelease];
+        [self.advancedNavigationController pushViewController:viewController afterViewController:self];
+    } else if (indexPath.section == kUITableViewSectionLabels) {
+        GHAPILabelV3 *label = [self.labels objectAtIndex:indexPath.row-1];
+        GHPLabelViewController *viewController = [[[GHPLabelViewController alloc] initWithRepository:self.repositoryString 
+                                                                                               label:label]
+                                                  autorelease];
         [self.advancedNavigationController pushViewController:viewController afterViewController:self];
     }
 }

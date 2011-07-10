@@ -192,6 +192,12 @@
 		A78B70E813BCF75400F4CE5E /* Lupe.PNG in Resources */ = {isa = PBXBuildFile; fileRef = A78B70E613BCF75400F4CE5E /* Lupe.PNG */; };
 		A79F37FE13883C2C0028F492 /* GHAPIUserV3.m in Sources */ = {isa = PBXBuildFile; fileRef = A79F37FD13883C2C0028F492 /* GHAPIUserV3.m */; };
 		A79F380113883F740028F492 /* GHAPIUserPlanV3.m in Sources */ = {isa = PBXBuildFile; fileRef = A79F380013883F740028F492 /* GHAPIUserPlanV3.m */; };
+		A7A6CB6213C8C89D00C1641F /* GHPLabelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7A6CB6113C8C89D00C1641F /* GHPLabelViewController.m */; };
+		A7A6CB6513C8C8F900C1641F /* GHALabelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7A6CB6413C8C8F800C1641F /* GHALabelViewController.m */; };
+		A7A6CB6913C8D49A00C1641F /* GHPSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7A6CB6813C8D49A00C1641F /* GHPSearchViewController.m */; };
+		A7A6CB7113C8D70700C1641F /* GHPSearchBarTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A7A6CB7013C8D70700C1641F /* GHPSearchBarTableViewCell.m */; };
+		A7A6CB7813C99A4F00C1641F /* GHPSearchScopeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A7A6CB7713C99A4F00C1641F /* GHPSearchScopeTableViewCell.m */; };
+		A7A6CB7B13C9A23000C1641F /* GHPSelectedBackgroundImage.png in Resources */ = {isa = PBXBuildFile; fileRef = A7A6CB7A13C9A22F00C1641F /* GHPSelectedBackgroundImage.png */; };
 		A7ABB5F613BE0C5300313E10 /* GHPWatchedRepositoriesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7ABB5F513BE0C5300313E10 /* GHPWatchedRepositoriesViewController.m */; };
 		A7B5208E1388648D000FEE61 /* GHAPIIssueEventV3.m in Sources */ = {isa = PBXBuildFile; fileRef = A7B5208D1388648D000FEE61 /* GHAPIIssueEventV3.m */; };
 		A7B5209213890B68000FEE61 /* GHViewMilestoneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7B5209113890B68000FEE61 /* GHViewMilestoneViewController.m */; };
@@ -627,6 +633,17 @@
 		A79F37FD13883C2C0028F492 /* GHAPIUserV3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHAPIUserV3.m; sourceTree = "<group>"; };
 		A79F37FF13883F740028F492 /* GHAPIUserPlanV3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHAPIUserPlanV3.h; sourceTree = "<group>"; };
 		A79F380013883F740028F492 /* GHAPIUserPlanV3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHAPIUserPlanV3.m; sourceTree = "<group>"; };
+		A7A6CB6013C8C89D00C1641F /* GHPLabelViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPLabelViewController.h; sourceTree = "<group>"; };
+		A7A6CB6113C8C89D00C1641F /* GHPLabelViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPLabelViewController.m; sourceTree = "<group>"; };
+		A7A6CB6313C8C8F800C1641F /* GHALabelViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHALabelViewController.h; sourceTree = "<group>"; };
+		A7A6CB6413C8C8F800C1641F /* GHALabelViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHALabelViewController.m; sourceTree = "<group>"; };
+		A7A6CB6713C8D49A00C1641F /* GHPSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPSearchViewController.h; sourceTree = "<group>"; };
+		A7A6CB6813C8D49A00C1641F /* GHPSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPSearchViewController.m; sourceTree = "<group>"; };
+		A7A6CB6F13C8D70700C1641F /* GHPSearchBarTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPSearchBarTableViewCell.h; sourceTree = "<group>"; };
+		A7A6CB7013C8D70700C1641F /* GHPSearchBarTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPSearchBarTableViewCell.m; sourceTree = "<group>"; };
+		A7A6CB7613C99A4E00C1641F /* GHPSearchScopeTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPSearchScopeTableViewCell.h; sourceTree = "<group>"; };
+		A7A6CB7713C99A4F00C1641F /* GHPSearchScopeTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPSearchScopeTableViewCell.m; sourceTree = "<group>"; };
+		A7A6CB7A13C9A22F00C1641F /* GHPSelectedBackgroundImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GHPSelectedBackgroundImage.png; sourceTree = "<group>"; };
 		A7ABB5F413BE0C5300313E10 /* GHPWatchedRepositoriesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPWatchedRepositoriesViewController.h; sourceTree = "<group>"; };
 		A7ABB5F513BE0C5300313E10 /* GHPWatchedRepositoriesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPWatchedRepositoriesViewController.m; sourceTree = "<group>"; };
 		A7B5208C1388648D000FEE61 /* GHAPIIssueEventV3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GHAPIIssueEventV3.h; path = ../iGithub/GHAPIIssueEventV3.h; sourceTree = "<group>"; };
@@ -1168,6 +1185,8 @@
 		A70DAE0713B49FC500DE4279 /* UserInterface */ = {
 			isa = PBXGroup;
 			children = (
+				A7A6CB6613C8D48500C1641F /* GHPSearchViewController */,
+				A7A6CB5E13C8C88600C1641F /* GHPLabelViewController */,
 				A74DD7A513C64E7A00570C94 /* GHPDirectoryViewController */,
 				A703CB2113C64949002767EB /* UITableViewCell - Generic Subclasses */,
 				A7CFD6EC13C63D3300F90791 /* GHPDataArrayViewController */,
@@ -1861,6 +1880,29 @@
 			name = GHAPIIssueCommentV3;
 			sourceTree = "<group>";
 		};
+		A7A6CB5E13C8C88600C1641F /* GHPLabelViewController */ = {
+			isa = PBXGroup;
+			children = (
+				A7A6CB6013C8C89D00C1641F /* GHPLabelViewController.h */,
+				A7A6CB6113C8C89D00C1641F /* GHPLabelViewController.m */,
+			);
+			name = GHPLabelViewController;
+			sourceTree = "<group>";
+		};
+		A7A6CB6613C8D48500C1641F /* GHPSearchViewController */ = {
+			isa = PBXGroup;
+			children = (
+				A7A6CB7A13C9A22F00C1641F /* GHPSelectedBackgroundImage.png */,
+				A7A6CB6713C8D49A00C1641F /* GHPSearchViewController.h */,
+				A7A6CB6813C8D49A00C1641F /* GHPSearchViewController.m */,
+				A7A6CB6F13C8D70700C1641F /* GHPSearchBarTableViewCell.h */,
+				A7A6CB7013C8D70700C1641F /* GHPSearchBarTableViewCell.m */,
+				A7A6CB7613C99A4E00C1641F /* GHPSearchScopeTableViewCell.h */,
+				A7A6CB7713C99A4F00C1641F /* GHPSearchScopeTableViewCell.m */,
+			);
+			name = GHPSearchViewController;
+			sourceTree = "<group>";
+		};
 		A7B5208B13885E2C000FEE61 /* V2 */ = {
 			isa = PBXGroup;
 			children = (
@@ -1926,6 +1968,8 @@
 				A7B520A013892BEF000FEE61 /* GHLabelTableViewCell.m */,
 				A7B520A313896164000FEE61 /* GHViewLabelViewController.h */,
 				A7B520A413896164000FEE61 /* GHViewLabelViewController.m */,
+				A7A6CB6313C8C8F800C1641F /* GHALabelViewController.h */,
+				A7A6CB6413C8C8F800C1641F /* GHALabelViewController.m */,
 			);
 			name = GHViewLabelViewController;
 			sourceTree = "<group>";
@@ -2625,6 +2669,7 @@
 				A74A65F913BD0A7B0098106E /* 19-gear@2x.png in Resources */,
 				A74A660413BDAF490098106E /* UITableViewCellAccessoryDisclosureIndicatorOriginal.png in Resources */,
 				A7D0523A13BDC20C00B3D239 /* UIBarButtonSystemItemAction.png in Resources */,
+				A7A6CB7B13C9A23000C1641F /* GHPSelectedBackgroundImage.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2852,6 +2897,11 @@
 				A7CFD6F213C6414E00F90791 /* GHPPullRequestsOnRepositoryViewController.m in Sources */,
 				A74DD7A813C64E9700570C94 /* GHPDirectoryViewController.m in Sources */,
 				A74DD7AB13C64F6A00570C94 /* GHPRootDirectoryViewController.m in Sources */,
+				A7A6CB6213C8C89D00C1641F /* GHPLabelViewController.m in Sources */,
+				A7A6CB6513C8C8F900C1641F /* GHALabelViewController.m in Sources */,
+				A7A6CB6913C8D49A00C1641F /* GHPSearchViewController.m in Sources */,
+				A7A6CB7113C8D70700C1641F /* GHPSearchBarTableViewCell.m in Sources */,
+				A7A6CB7813C99A4F00C1641F /* GHPSearchScopeTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

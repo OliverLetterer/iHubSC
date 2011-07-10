@@ -18,6 +18,10 @@
 
 @synthesize managedObjectContext=_managedObjectContext, managedObjectModel=_managedObjectModel, persistentStoreCoordinator=_persistentStoreCoordinator;
 
+- (void)setupAppearences {
+    
+}
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     [self.window makeKeyAndVisible];
     [Appirater appLaunched:YES];

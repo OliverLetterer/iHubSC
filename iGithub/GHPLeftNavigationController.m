@@ -15,6 +15,7 @@
 #import "UIImage+Resize.h"
 #import "UIImage+GHTabBar.h"
 #import "ANAdvancedNavigationController.h"
+#import "GHPSearchViewController.h"
 
 #import "GHPUserViewController.h"
 
@@ -262,10 +263,15 @@
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    UIViewController *viewController = nil;
     if (indexPath.row == 4) {
-        GHPUserViewController *userViewController = [[[GHPUserViewController alloc] initWithUsername:[GHAuthenticationManager sharedInstance].username ] autorelease];
-//        userViewController = [[[GHPUserViewController alloc] initWithUsername:@"pokeb" ] autorelease];
-        [self.advancedNavigationController pushRootViewController:userViewController];
+        viewController = [[[GHPUserViewController alloc] initWithUsername:[GHAuthenticationManager sharedInstance].username ] autorelease];
+    } else if (indexPath.row == 5) {
+        viewController = [[[GHPSearchViewController alloc] init] autorelease];
+    }
+    
+    if (viewController) {
+        [self.advancedNavigationController pushRootViewController:viewController];
     } else {
         [tableView deselectRowAtIndexPath:indexPath animated:NO];
     }

@@ -7,27 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "GHTableViewController.h"
-#import "GithubAPI.h"
+#import "GHALabelViewController.h"
 
-@interface GHViewLabelViewController : GHTableViewController {
+@interface GHViewLabelViewController : GHALabelViewController {
 @private
-    NSString *_repositoryString;
-    GHAPILabelV3 *_label;
     
-    NSMutableArray *_openIssues;
-    NSMutableArray *_closedIssues;
 }
-
-@property (nonatomic, copy) NSString *repositoryString;
-@property (nonatomic, retain) GHAPILabelV3 *label;
-
-@property (nonatomic, retain) NSMutableArray *openIssues;
-@property (nonatomic, retain) NSMutableArray *closedIssues;
-
-- (id)initWithRepository:(NSString *)repository label:(GHAPILabelV3 *)label;
-
-- (void)cacheHeightForOpenIssuesArray;
-- (void)cacheHeightForClosedIssuesArray;
 
 @end

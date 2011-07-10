@@ -60,6 +60,11 @@
                 withGravatarID:(NSString *)gravatarID;
 
 - (void)updateImageView:(UIImageView *)imageView 
+            inTableView:(UITableView *)tableView 
+            atIndexPath:(NSIndexPath *)indexPath 
+         withGravatarID:(NSString *)gravatarID;
+
+- (void)updateImageView:(UIImageView *)imageView 
             atIndexPath:(NSIndexPath *)indexPath 
          withGravatarID:(NSString *)gravatarID;
 
