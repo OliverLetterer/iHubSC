@@ -18,6 +18,7 @@
     
     [GHAPIIssueV3 openedIssuesOnRepository:self.repository page:1 
                          completionHandler:^(NSMutableArray *array, NSUInteger nextPage, NSError *error) {
+                             self.isDownloadingEssentialData = NO;
                              if (error) {
                                  [self handleError:error];
                              } else {

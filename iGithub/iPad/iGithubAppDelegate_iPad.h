@@ -16,7 +16,6 @@
 #warning adopt GHPInfoSectionTableViewController
 #warning new TweetBot like Notifications
 #warning adopt avatarURL instead of gravatarID
-#warning error does not set self.isDownloadingEssentialData = NO for GHPDataArrayViewController
 
 - (void)deviceOrientationDidChangeNotificationCallback:(NSNotification *)notification;
 
