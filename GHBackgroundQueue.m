@@ -57,7 +57,7 @@ dispatch_queue_t GHAPIBackgroundQueue() {
         }
         [request startSynchronous];
         
-        NSString *XRatelimitRemaing = [[request responseHeaders] objectForKey:@"X-Ratelimit-Remaining"];
+        NSString *XRatelimitRemaing = [[request responseHeaders] objectForKey:@"X-RateLimit-Remaining"];
         _remainingAPICalls = [XRatelimitRemaing integerValue];
         
         myError = [request error];
