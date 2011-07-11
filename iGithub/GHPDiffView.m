@@ -116,7 +116,11 @@ UIFont *GHPDiffViewBoldFont(void) {
     CGFloat linesWidth = self.lineNumbersView.width;
     self.lineNumbersView.frame = CGRectMake(0.0f, 0.0f, linesWidth, CGRectGetHeight(self.bounds));
     self.scrollView.frame = CGRectMake(linesWidth, 0.0f, CGRectGetWidth(self.bounds)-linesWidth-1.0f, CGRectGetHeight(self.bounds));
-    self.contentDiffView.frame = CGRectMake(0.0f, 0.0f, self.contentDiffView.width, CGRectGetHeight(self.bounds));
+    CGFloat contentDiffViewWidth = self.contentDiffView.width;
+    if (contentDiffViewWidth < CGRectGetWidth(self.scrollView.bounds)) {
+        contentDiffViewWidth = CGRectGetWidth(self.scrollView.bounds);
+    }
+    self.contentDiffView.frame = CGRectMake(0.0f, 0.0f, contentDiffViewWidth, CGRectGetHeight(self.bounds));
     self.scrollView.contentSize = self.contentDiffView.frame.size;
 }
 

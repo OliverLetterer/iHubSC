@@ -889,6 +889,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A7023DE413CB8B4B0079D1D0 /* GHPCommitViewController */ = {
+			isa = PBXGroup;
+			children = (
+				A7023DE513CB8B6E0079D1D0 /* UITableViewCells */,
+				A70ABED013BFB3F80000D189 /* GHPCommitViewController.h */,
+				A70ABED113BFB3F90000D189 /* GHPCommitViewController.m */,
+			);
+			name = GHPCommitViewController;
+			sourceTree = "<group>";
+		};
+		A7023DE513CB8B6E0079D1D0 /* UITableViewCells */ = {
+			isa = PBXGroup;
+			children = (
+				A70ABEDB13C051100000D189 /* GHPDiffView.h */,
+				A70ABEDC13C051120000D189 /* GHPDiffView.m */,
+				A70ABEE213C051E70000D189 /* GHPDiffViewTableViewCell.h */,
+				A70ABEE313C051E80000D189 /* GHPDiffViewTableViewCell.m */,
+				A70ABEEA13C05CF90000D189 /* GHPDiffViewLineNumbersView.h */,
+				A70ABEEB13C05CFB0000D189 /* GHPDiffViewLineNumbersView.m */,
+				A70ABEF113C070390000D189 /* GHPDiffViewContentView.h */,
+				A70ABEF213C0703F0000D189 /* GHPDiffViewContentView.m */,
+			);
+			name = UITableViewCells;
+			sourceTree = "<group>";
+		};
 		A703A62F13BE0163003A4585 /* GHPRepositoriesViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -1187,16 +1212,6 @@
 			children = (
 				A70ABECA13BFAB740000D189 /* GHPCommitsViewController.h */,
 				A70ABECB13BFAB740000D189 /* GHPCommitsViewController.m */,
-				A70ABED013BFB3F80000D189 /* GHPCommitViewController.h */,
-				A70ABED113BFB3F90000D189 /* GHPCommitViewController.m */,
-				A70ABEDB13C051100000D189 /* GHPDiffView.h */,
-				A70ABEDC13C051120000D189 /* GHPDiffView.m */,
-				A70ABEE213C051E70000D189 /* GHPDiffViewTableViewCell.h */,
-				A70ABEE313C051E80000D189 /* GHPDiffViewTableViewCell.m */,
-				A70ABEEA13C05CF90000D189 /* GHPDiffViewLineNumbersView.h */,
-				A70ABEEB13C05CFB0000D189 /* GHPDiffViewLineNumbersView.m */,
-				A70ABEF113C070390000D189 /* GHPDiffViewContentView.h */,
-				A70ABEF213C0703F0000D189 /* GHPDiffViewContentView.m */,
 			);
 			name = GHPCommitsViewController;
 			sourceTree = "<group>";
@@ -1239,6 +1254,7 @@
 				A70A118F13C368F400685749 /* GHPMilestonesViewController */,
 				A7DA5EAA13C2578E00288937 /* GHPIssueViewController */,
 				A7DA5E9F13C2508800288937 /* GHPIssuesViewController */,
+				A7023DE413CB8B4B0079D1D0 /* GHPCommitViewController */,
 				A70ABEC913BFAB5E0000D189 /* GHPCommitsViewController */,
 				A74F2A3413BE60CB00E57818 /* GHPUsersViewController */,
 				A74F2A2D13BE1ACE00E57818 /* GHPRepositoryViewController */,
