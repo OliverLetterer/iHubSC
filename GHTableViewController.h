@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import "UITableView+Additions.h"
-#import "GHAuthenticationViewController.h"
 #import "UIExpandableTableView.h"
 #import "UIViewController+GHErrorHandling.h"
 #import "GHTableViewControllerAlertViewProxy.h"
@@ -22,7 +21,7 @@
 
 @class GHNewsFeedItemTableViewCell;
 
-@interface GHTableViewController : GHPullToReleaseTableViewController <GHAuthenticationViewControllerDelegate, UIExpandableTableViewDatasource, UIExpandableTableViewDelegate> {
+@interface GHTableViewController : GHPullToReleaseTableViewController <UIExpandableTableViewDatasource, UIExpandableTableViewDelegate> {
 @private
     NSMutableDictionary *_nextPageForSectionsDictionary;
     NSMutableDictionary *_cachedHeightsDictionary;
@@ -68,7 +67,7 @@
             atIndexPath:(NSIndexPath *)indexPath 
          withGravatarID:(NSString *)gravatarID;
 
-- (void)authenticationViewControllerdidAuthenticateUserCallback:(NSNotification *)notification;
+- (void)authenticationManagerDidAuthenticateUserCallback:(NSNotification *)notification;
 - (void)applicationWillEnterForegroundCallback:(NSNotification *)notification;
 
 - (id)keyForSection:(NSUInteger)section;

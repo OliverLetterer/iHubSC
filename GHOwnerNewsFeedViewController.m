@@ -187,9 +187,9 @@
 
 #pragma mark - instance methods
 
-- (void)authenticationViewControllerdidAuthenticateUserCallback:(NSNotification *)notification {
+- (void)authenticationManagerDidAuthenticateUserCallback:(NSNotification *)notification {
     self.segmentControl.selectedSegmentIndex = 0;
-    [super authenticationViewControllerdidAuthenticateUserCallback:notification];
+    [super authenticationManagerDidAuthenticateUserCallback:notification];
 }
 
 - (void)pullToReleaseTableViewReloadData {

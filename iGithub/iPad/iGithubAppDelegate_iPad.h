@@ -13,8 +13,9 @@
     
 }
 
-#warning authentication not working
 #warning User->Organizations missing
+
+#warning new TweetBot like Notifications
 
 - (void)deviceOrientationDidChangeNotificationCallback:(NSNotification *)notification;
 

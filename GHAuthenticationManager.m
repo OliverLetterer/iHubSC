@@ -8,6 +8,8 @@
 
 #import "GHAuthenticationManager.h"
 
+NSString *const GHAuthenticationManagerDidAuthenticateNewUserNotification = @"GHAuthenticationManagerDidAuthenticateNewUserNotification";
+
 @implementation GHAuthenticationManager
 
 @synthesize username=_username, password=_password;
@@ -19,6 +21,15 @@
         
     }
     return self;
+}
+
+#pragma mark - Instance methods
+
+- (void)saveAuthenticatedUserWithName:(NSString *)username password:(NSString *)password {
+    self.username = username;
+    self.password = password;
+    
+    [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:GHAuthenticationManagerDidAuthenticateNewUserNotification object:nil] ];
 }
 
 #pragma mark - Memory management

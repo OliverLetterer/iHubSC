@@ -7,9 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "GHAuthenticationViewController.h"
 
-@interface UIViewController (GHViewControllerErrorhandling) <GHAuthenticationViewControllerDelegate>
+@interface UIViewController (GHViewControllerErrorhandling)
 
 - (void)handleError:(NSError *)error;
 - (void)invalidadUserData;

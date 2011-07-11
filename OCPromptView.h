@@ -7,6 +7,8 @@
 
 #import <UIKit/UIKit.h>
 
+#warning remove OCPromtView
+
 @interface OCPromptView : UIAlertView {
 	UITextField *textField;
 }

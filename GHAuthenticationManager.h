@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
+extern NSString *const GHAuthenticationManagerDidAuthenticateNewUserNotification;
 
 @interface GHAuthenticationManager : NSObject {
 @private
@@ -17,6 +18,8 @@
 
 @property (nonatomic, copy) NSString *username;
 @property (nonatomic, copy) NSString *password;
+
+- (void)saveAuthenticatedUserWithName:(NSString *)username password:(NSString *)password;
 
 @end
 

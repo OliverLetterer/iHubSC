@@ -235,9 +235,6 @@
 		A7BF1435134215C5001AE50D /* GHSettingsHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = A7BF1434134215C5001AE50D /* GHSettingsHelper.m */; };
 		A7BF143A1342188E001AE50D /* DefaultUserImage.png in Resources */ = {isa = PBXBuildFile; fileRef = A7BF14381342188E001AE50D /* DefaultUserImage.png */; };
 		A7BF143B1342188E001AE50D /* DefaultUserImage@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A7BF14391342188E001AE50D /* DefaultUserImage@2x.png */; };
-		A7BF1452134222CD001AE50D /* GHAuthenticationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7BF1450134222CD001AE50D /* GHAuthenticationViewController.m */; };
-		A7BF1453134222CD001AE50D /* ___GHAuthenticationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A7BF1451134222CD001AE50D /* ___GHAuthenticationViewController.xib */; };
-		A7BF146313422514001AE50D /* UITableViewCellWithTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = A7BF146213422514001AE50D /* UITableViewCellWithTextField.m */; };
 		A7BF146D13426DC2001AE50D /* GHBackgroundQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = A7BF146C13426DC2001AE50D /* GHBackgroundQueue.m */; };
 		A7BF147213426F27001AE50D /* GHUser.m in Sources */ = {isa = PBXBuildFile; fileRef = A7BF147113426F27001AE50D /* GHUser.m */; };
 		A7BF147B13427305001AE50D /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = A7BF147A13427304001AE50D /* JSONKit.m */; };
@@ -282,6 +279,7 @@
 		A7D41AF41359DE4400CD3A5C /* GHPullRequestDiscussion.m in Sources */ = {isa = PBXBuildFile; fileRef = A7D41AF31359DE4300CD3A5C /* GHPullRequestDiscussion.m */; };
 		A7D41AF71359F8CC00CD3A5C /* GHPullRequestRepositoryInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = A7D41AF61359F8CC00CD3A5C /* GHPullRequestRepositoryInformation.m */; };
 		A7D41B08135AE71B00CD3A5C /* GHRecentCommitsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7D41B07135AE71600CD3A5C /* GHRecentCommitsViewController.m */; };
+		A7D5546113CB213600358610 /* GHAuthenticationAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = A7D5546013CB213600358610 /* GHAuthenticationAlertView.m */; };
 		A7DA5EA313C250A900288937 /* GHPIssuesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7DA5EA213C250A900288937 /* GHPIssuesViewController.m */; };
 		A7DA5EA613C2534C00288937 /* GHPOpenIssuesOnRepositoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7DA5EA513C2534C00288937 /* GHPOpenIssuesOnRepositoryViewController.m */; };
 		A7DA5EA913C2578600288937 /* GHPIssueViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7DA5EA813C2578600288937 /* GHPIssueViewController.m */; };
@@ -712,11 +710,6 @@
 		A7BF1434134215C5001AE50D /* GHSettingsHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHSettingsHelper.m; sourceTree = "<group>"; };
 		A7BF14381342188E001AE50D /* DefaultUserImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DefaultUserImage.png; sourceTree = "<group>"; };
 		A7BF14391342188E001AE50D /* DefaultUserImage@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "DefaultUserImage@2x.png"; sourceTree = "<group>"; };
-		A7BF144F134222CD001AE50D /* GHAuthenticationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHAuthenticationViewController.h; sourceTree = "<group>"; };
-		A7BF1450134222CD001AE50D /* GHAuthenticationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHAuthenticationViewController.m; sourceTree = "<group>"; };
-		A7BF1451134222CD001AE50D /* ___GHAuthenticationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "___GHAuthenticationViewController.xib"; sourceTree = "<group>"; };
-		A7BF146113422514001AE50D /* UITableViewCellWithTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UITableViewCellWithTextField.h; sourceTree = "<group>"; };
-		A7BF146213422514001AE50D /* UITableViewCellWithTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UITableViewCellWithTextField.m; sourceTree = "<group>"; };
 		A7BF146B13426DC2001AE50D /* GHBackgroundQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHBackgroundQueue.h; sourceTree = "<group>"; };
 		A7BF146C13426DC2001AE50D /* GHBackgroundQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHBackgroundQueue.m; sourceTree = "<group>"; };
 		A7BF146F13426EF5001AE50D /* GithubAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GithubAPI.h; sourceTree = "<group>"; };
@@ -801,6 +794,8 @@
 		A7D41AF61359F8CC00CD3A5C /* GHPullRequestRepositoryInformation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPullRequestRepositoryInformation.m; sourceTree = "<group>"; };
 		A7D41B06135AE71300CD3A5C /* GHRecentCommitsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHRecentCommitsViewController.h; sourceTree = "<group>"; };
 		A7D41B07135AE71600CD3A5C /* GHRecentCommitsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHRecentCommitsViewController.m; sourceTree = "<group>"; };
+		A7D5545F13CB213600358610 /* GHAuthenticationAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHAuthenticationAlertView.h; sourceTree = "<group>"; };
+		A7D5546013CB213600358610 /* GHAuthenticationAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHAuthenticationAlertView.m; sourceTree = "<group>"; };
 		A7DA5EA113C250A900288937 /* GHPIssuesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPIssuesViewController.h; sourceTree = "<group>"; };
 		A7DA5EA213C250A900288937 /* GHPIssuesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPIssuesViewController.m; sourceTree = "<group>"; };
 		A7DA5EA413C2534C00288937 /* GHPOpenIssuesOnRepositoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPOpenIssuesOnRepositoryViewController.h; sourceTree = "<group>"; };
@@ -1083,7 +1078,7 @@
 			name = "Foundation Additions";
 			sourceTree = "<group>";
 		};
-		A7089529134A2F69000DD6CE /* UITableViewCell */ = {
+		A7089529134A2F69000DD6CE /* UITableViewCell - Generic Subclasses */ = {
 			isa = PBXGroup;
 			children = (
 				A7F6260D134B3938006487CA /* UITableViewCellWithLinearGradientBackgroundView.h */,
@@ -1093,7 +1088,8 @@
 				A706C0A9139AAAA2008A6184 /* GHLinearGradientBackgroundView.h */,
 				A706C0AA139AAAA2008A6184 /* GHLinearGradientBackgroundView.m */,
 			);
-			name = UITableViewCell;
+			name = "UITableViewCell - Generic Subclasses";
+			path = ..;
 			sourceTree = "<group>";
 		};
 		A708952D134A3D98000DD6CE /* GHIssueComment */ = {
@@ -1114,6 +1110,7 @@
 				A709F7591368B7E800B0CDE7 /* GHTeamViewController.m */,
 			);
 			name = GHOrganizationViewController;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		A70A118F13C368F400685749 /* GHPMilestonesViewController */ = {
@@ -1269,6 +1266,7 @@
 				A712B7EB135DEF920009B7A7 /* DDProgressView.m */,
 			);
 			name = DDProgressView;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		A712B7EE135E0CF50009B7A7 /* UIViewController+GHViewControllerErrorhandling */ = {
@@ -1276,6 +1274,8 @@
 			children = (
 				A712B7D4135CC2130009B7A7 /* UIViewController+GHErrorHandling.h */,
 				A712B7D5135CC2130009B7A7 /* UIViewController+GHErrorHandling.m */,
+				A7D5545F13CB213600358610 /* GHAuthenticationAlertView.h */,
+				A7D5546013CB213600358610 /* GHAuthenticationAlertView.m */,
 			);
 			name = "UIViewController+GHViewControllerErrorhandling";
 			sourceTree = "<group>";
@@ -1291,6 +1291,7 @@
 				A712B7F7135F20B40009B7A7 /* GHSearchUserViewController.m */,
 			);
 			name = "GHSearchViewController's";
+			path = ..;
 			sourceTree = "<group>";
 		};
 		A7288A6B13A9091500170D57 /* SyntaxHighlighting */ = {
@@ -1467,6 +1468,7 @@
 				A7D14F751356F17500E1B980 /* GHCreateIssueTableViewController.m */,
 			);
 			name = GHViewIssueTableViewController;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		A745D096139B97CC00FF8FB1 /* Defaults */ = {
@@ -1671,27 +1673,10 @@
 				A7288A6B13A9091500170D57 /* SyntaxHighlighting */,
 				A70DA3DD13A61BBD00235C76 /* OCPromptView.h */,
 				A70DA3DE13A61BC000235C76 /* OCPromptView.m */,
-				A7B520A21389614D000FEE61 /* GHViewLabelViewController */,
-				A7B5208F13890B45000FEE61 /* GHViewMilestoneViewController */,
-				A7F92B8A137318B1000EBC5E /* GHGistViewController */,
-				A7837EA2136CADAB00B13B95 /* PDColoredProgressView */,
-				A709F747136876A500B0CDE7 /* GHOrganizationViewController */,
-				A712B7ED135E0B5E0009B7A7 /* DDProgressView */,
 				A712B7C7135CB58C0009B7A7 /* Browse content */,
 				A76FC9A81352D27E004C642E /* UIExpandableTableView */,
 				A7BC6780134CCED40083F906 /* PullToRefreshTableViewController */,
 				A7F62627134C45AE006487CA /* GHTableViewController */,
-				A75057401343424100514A82 /* GHNewsFeedViewController */,
-				A7BF1423134214E7001AE50D /* GHAuthenticationViewController */,
-				A73E29C31348E12C00E85282 /* GHViewIssueTableViewController */,
-				A7D41B0A135AFDCE00CD3A5C /* GHSingleRepositoryViewController */,
-				A7BC6788134D94020083F906 /* GHUserViewController */,
-				A7D14FBE13576D4200E1B980 /* GHWebViewViewController */,
-				A7D41B0E135AFE3500CD3A5C /* GHRecentCommitsViewController */,
-				A7D41B0D135AFE2400CD3A5C /* GHPushPayloadViewController */,
-				A7D41B0C135AFE1300CD3A5C /* GHViewCommitViewController */,
-				A7D41B0B135AFDF500CD3A5C /* GHCommitDiffViewController */,
-				A712B7F9135F24C10009B7A7 /* GHSearchViewController's */,
 			);
 			name = UserInterface;
 			sourceTree = "<group>";
@@ -1710,6 +1695,7 @@
 				A7D14F421354DD5D00E1B980 /* GHRecentActivityViewController.m */,
 			);
 			name = GHNewsFeedViewController;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		A75C3EB213B363EF00D64681 /* INNotificationQueue */ = {
@@ -1836,6 +1822,7 @@
 				A7837EA0136CADA400B13B95 /* PDColoredProgressView.m */,
 			);
 			name = PDColoredProgressView;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		A79F37F813883B650028F492 /* v3 */ = {
@@ -1944,6 +1931,37 @@
 			name = "UITableViewCells - News Feed";
 			sourceTree = "<group>";
 		};
+		A7A6CB9213CB1CE000C1641F /* ANNotificationQueue */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = ANNotificationQueue;
+			sourceTree = "<group>";
+		};
+		A7A6CB9313CB1DD700C1641F /* UserInterface */ = {
+			isa = PBXGroup;
+			children = (
+				A7089529134A2F69000DD6CE /* UITableViewCell - Generic Subclasses */,
+				A7B520A21389614D000FEE61 /* GHViewLabelViewController */,
+				A7B5208F13890B45000FEE61 /* GHViewMilestoneViewController */,
+				A7F92B8A137318B1000EBC5E /* GHGistViewController */,
+				A7837EA2136CADAB00B13B95 /* PDColoredProgressView */,
+				A709F747136876A500B0CDE7 /* GHOrganizationViewController */,
+				A712B7ED135E0B5E0009B7A7 /* DDProgressView */,
+				A75057401343424100514A82 /* GHNewsFeedViewController */,
+				A73E29C31348E12C00E85282 /* GHViewIssueTableViewController */,
+				A7D41B0A135AFDCE00CD3A5C /* GHSingleRepositoryViewController */,
+				A7BC6788134D94020083F906 /* GHUserViewController */,
+				A7D14FBE13576D4200E1B980 /* GHWebViewViewController */,
+				A7D41B0E135AFE3500CD3A5C /* GHRecentCommitsViewController */,
+				A7D41B0D135AFE2400CD3A5C /* GHPushPayloadViewController */,
+				A7D41B0C135AFE1300CD3A5C /* GHViewCommitViewController */,
+				A7D41B0B135AFDF500CD3A5C /* GHCommitDiffViewController */,
+				A712B7F9135F24C10009B7A7 /* GHSearchViewController's */,
+			);
+			name = UserInterface;
+			sourceTree = "<group>";
+		};
 		A7B5208B13885E2C000FEE61 /* V2 */ = {
 			isa = PBXGroup;
 			children = (
@@ -1973,6 +1991,7 @@
 				A7B5209113890B68000FEE61 /* GHViewMilestoneViewController.m */,
 			);
 			name = GHViewMilestoneViewController;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		A7B5209313892322000FEE61 /* GHAPILabelV3 */ = {
@@ -2013,6 +2032,7 @@
 				A7A6CB6413C8C8F800C1641F /* GHALabelViewController.m */,
 			);
 			name = GHViewLabelViewController;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		A7BC6780134CCED40083F906 /* PullToRefreshTableViewController */ = {
@@ -2042,6 +2062,7 @@
 				A7BC6786134CE7E00083F906 /* GHUserViewController.m */,
 			);
 			name = GHUserViewController;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		A7BC678C134D96C30083F906 /* UITableViewCells */ = {
@@ -2119,6 +2140,7 @@
 		A7BF140D1342149C001AE50D /* iPhone */ = {
 			isa = PBXGroup;
 			children = (
+				A7A6CB9313CB1DD700C1641F /* UserInterface */,
 				A7BF140E1342149C001AE50D /* iGithubAppDelegate_iPhone.h */,
 				A7BF140F1342149C001AE50D /* iGithubAppDelegate_iPhone.m */,
 				A7BF14111342149C001AE50D /* MainWindow_iPhone.xib */,
@@ -2129,6 +2151,7 @@
 		A7BF14141342149C001AE50D /* iPad */ = {
 			isa = PBXGroup;
 			children = (
+				A7A6CB9213CB1CE000C1641F /* ANNotificationQueue */,
 				A7F334AB13BCCF0800DB922D /* ANAdvancedNavigationController */,
 				A70DAE0713B49FC500DE4279 /* UserInterface */,
 				A7BF14151342149C001AE50D /* iGithubAppDelegate_iPad.h */,
@@ -2136,18 +2159,6 @@
 				A7BF14181342149C001AE50D /* MainWindow_iPad.xib */,
 			);
 			name = iPad;
-			sourceTree = "<group>";
-		};
-		A7BF1423134214E7001AE50D /* GHAuthenticationViewController */ = {
-			isa = PBXGroup;
-			children = (
-				A7BF14411342196C001AE50D /* UITableViewCells */,
-				A7BF144F134222CD001AE50D /* GHAuthenticationViewController.h */,
-				A7BF1450134222CD001AE50D /* GHAuthenticationViewController.m */,
-				A7BF1451134222CD001AE50D /* ___GHAuthenticationViewController.xib */,
-			);
-			name = GHAuthenticationViewController;
-			path = iGithub;
 			sourceTree = "<group>";
 		};
 		A7BF142F1342154C001AE50D /* Keychain */ = {
@@ -2165,7 +2176,6 @@
 			children = (
 				A7089518134A0C49000DD6CE /* Foundation Additions */,
 				A7677150137078B1006D70D6 /* Appirater */,
-				A7089529134A2F69000DD6CE /* UITableViewCell */,
 				A750573F1343422200514A82 /* UserInterface */,
 				A7BF146413426D85001AE50D /* Github API */,
 				A7BF1436134216EB001AE50D /* GHSettingsHelper */,
@@ -2202,15 +2212,6 @@
 				A709F740136733A300B0CDE7 /* Changelog.txt */,
 			);
 			name = Ressources;
-			sourceTree = "<group>";
-		};
-		A7BF14411342196C001AE50D /* UITableViewCells */ = {
-			isa = PBXGroup;
-			children = (
-				A7BF146113422514001AE50D /* UITableViewCellWithTextField.h */,
-				A7BF146213422514001AE50D /* UITableViewCellWithTextField.m */,
-			);
-			name = UITableViewCells;
 			sourceTree = "<group>";
 		};
 		A7BF146413426D85001AE50D /* Github API */ = {
@@ -2405,6 +2406,7 @@
 				A73AE6141351953E00E9EBA4 /* GHWebViewViewController.m */,
 			);
 			name = GHWebViewViewController;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		A7D14FC213582E7900E1B980 /* GHCommit */ = {
@@ -2428,6 +2430,7 @@
 				A73AE5E51350B27A00E9EBA4 /* GHSingleRepositoryViewController.m */,
 			);
 			name = GHSingleRepositoryViewController;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		A7D41B0B135AFDF500CD3A5C /* GHCommitDiffViewController */ = {
@@ -2439,6 +2442,7 @@
 				A7288A6813A8F21600170D57 /* BGPlainWebView.m */,
 			);
 			name = GHCommitDiffViewController;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		A7D41B0C135AFE1300CD3A5C /* GHViewCommitViewController */ = {
@@ -2448,6 +2452,7 @@
 				A7D14FC71358315600E1B980 /* GHViewCommitViewController.m */,
 			);
 			name = GHViewCommitViewController;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		A7D41B0D135AFE2400CD3A5C /* GHPushPayloadViewController */ = {
@@ -2457,6 +2462,7 @@
 				A7D14FC013576DA000E1B980 /* GHPushPayloadViewController.m */,
 			);
 			name = GHPushPayloadViewController;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		A7D41B0E135AFE3500CD3A5C /* GHRecentCommitsViewController */ = {
@@ -2466,6 +2472,7 @@
 				A7D41B07135AE71600CD3A5C /* GHRecentCommitsViewController.m */,
 			);
 			name = GHRecentCommitsViewController;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		A7D41B1D135B899100CD3A5C /* Icons */ = {
@@ -2600,6 +2607,7 @@
 				A7F92B8C137318C3000EBC5E /* GHGistViewController.m */,
 			);
 			name = GHGistViewController;
+			path = ..;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -2657,7 +2665,6 @@
 				A7BF141A1342149C001AE50D /* MainWindow_iPad.xib in Resources */,
 				A7BF143A1342188E001AE50D /* DefaultUserImage.png in Resources */,
 				A7BF143B1342188E001AE50D /* DefaultUserImage@2x.png in Resources */,
-				A7BF1453134222CD001AE50D /* ___GHAuthenticationViewController.xib in Resources */,
 				A75057361343033200514A82 /* GHGlossTopBorder@2x.png in Resources */,
 				A75057371343033200514A82 /* GHGlossBottomBorder@2x.png in Resources */,
 				A75057381343033200514A82 /* GHGlossTopBorder.png in Resources */,
@@ -2727,8 +2734,6 @@
 				A7BF14171342149C001AE50D /* iGithubAppDelegate_iPad.m in Sources */,
 				A7BF142E13421546001AE50D /* SFHFKeychainUtils.m in Sources */,
 				A7BF1435134215C5001AE50D /* GHSettingsHelper.m in Sources */,
-				A7BF1452134222CD001AE50D /* GHAuthenticationViewController.m in Sources */,
-				A7BF146313422514001AE50D /* UITableViewCellWithTextField.m in Sources */,
 				A7BF146D13426DC2001AE50D /* GHBackgroundQueue.m in Sources */,
 				A7BF147213426F27001AE50D /* GHUser.m in Sources */,
 				A7BF147B13427305001AE50D /* JSONKit.m in Sources */,
@@ -2948,6 +2953,7 @@
 				A7A6CB8B13CA2B2700C1641F /* GHPDefaultNewsFeedTableViewCell.m in Sources */,
 				A7A6CB8E13CAE4D100C1641F /* GHPUsersNewsFeedViewController.m in Sources */,
 				A7A6CB9113CAE80D00C1641F /* GHPNewsFeedSecondUserTableViewCell.m in Sources */,
+				A7D5546113CB213600358610 /* GHAuthenticationAlertView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

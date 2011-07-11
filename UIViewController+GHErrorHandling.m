@@ -10,6 +10,7 @@
 #import "GHAuthenticationManager.h"
 #import "GHSettingsHelper.h"
 #import "INNotificationQueue.h"
+#import "GHAuthenticationAlertView.h"
 
 @implementation UIViewController (GHViewControllerErrorhandling)
 
@@ -29,36 +30,16 @@
         DLog(@"%@", error);
         
         if (![GHAuthenticationManager sharedInstance].username || [[GHAuthenticationManager sharedInstance].username isEqualToString:@""]) {
-            [[INNotificationQueue sharedQueue] detachSmallNotificationWithTitle:NSLocalizedString(@"Error", @"") andSubtitle:NSLocalizedString(@"Authentication required", @"") removeStyle:INNotificationQueueItemRemoveByFadingOut];
-            
-            [self invalidadUserData];
-            GHAuthenticationViewController *authViewController = [[[GHAuthenticationViewController alloc] init] autorelease];
-            authViewController.delegate = self;
-            
-            UINavigationController *navController = [[[UINavigationController alloc] initWithRootViewController:authViewController] autorelease];
-            
-            if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-                navController.modalPresentationStyle = UIModalPresentationFormSheet;
-            }
-            
-            [self presentModalViewController:navController animated:YES];
-            
+            GHAuthenticationAlertView *alert = [[[GHAuthenticationAlertView alloc] initWithDelegate:nil] autorelease];
+            [alert show];
             return;
         }
         
         if (error.code == 3) {
             // authentication needed
-            if (![GHAuthenticationViewController isOneAuthenticationViewControllerActive]) {
-                [self invalidadUserData];
-                [[INNotificationQueue sharedQueue] detachSmallNotificationWithTitle:NSLocalizedString(@"Error", @"") andSubtitle:NSLocalizedString(@"Authentication required", @"") removeStyle:INNotificationQueueItemRemoveByFadingOut];
-                
-                GHAuthenticationViewController *authViewController = [[[GHAuthenticationViewController alloc] init] autorelease];
-                authViewController.delegate = self;
-                
-                UINavigationController *navController = [[[UINavigationController alloc] initWithRootViewController:authViewController] autorelease];
-                
-                [self presentModalViewController:navController animated:YES];
-            }
+            [self invalidadUserData];
+            GHAuthenticationAlertView *alert = [[[GHAuthenticationAlertView alloc] initWithDelegate:nil] autorelease];
+            [alert show];
         } else {
             UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", @"") 
                                                              message:[error localizedDescription] 
@@ -69,12 +50,6 @@
             [alert show];
         }
     }
-}
-
-#pragma mark - GHAuthenticationViewControllerDelegate
-
-- (void)authenticationViewController:(GHAuthenticationViewController *)authenticationViewController didAuthenticateUser:(GHAPIUserV3 *)user {
-    [self dismissModalViewControllerAnimated:YES];
 }
 
 @end

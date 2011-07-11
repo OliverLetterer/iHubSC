@@ -9,7 +9,6 @@
 #import "GHTableViewController.h"
 #import "GithubAPI.h"
 #import "GHNewsFeedItemTableViewCell.h"
-#import "GHAuthenticationViewController.h"
 #import "GHTableViewController+private.h"
 #import "UIColor+GithubUI.h"
 
@@ -173,7 +172,7 @@ static CGFloat wrapperViewHeight = 21.0f;
     [self updateImageView:imageView inTableView:self.tableView atIndexPath:indexPath withGravatarID:gravatarID];
 }
 
-- (void)authenticationViewControllerdidAuthenticateUserCallback:(NSNotification *)notification {
+- (void)authenticationManagerDidAuthenticateUserCallback:(NSNotification *)notification {
     if (self.reloadDataIfNewUserGotAuthenticated) {
         [self pullToReleaseTableViewReloadData];
     }
@@ -219,8 +218,8 @@ static CGFloat wrapperViewHeight = 21.0f;
         // Custom initialization
         self.cachedHeightsDictionary = [NSMutableDictionary dictionary];
         [[NSNotificationCenter defaultCenter] addObserver:self 
-                                                 selector:@selector(authenticationViewControllerdidAuthenticateUserCallback:) 
-                                                     name:GHAuthenticationViewControllerDidAuthenticateUserNotification 
+                                                 selector:@selector(authenticationManagerDidAuthenticateUserCallback:) 
+                                                     name:GHAuthenticationManagerDidAuthenticateNewUserNotification 
                                                    object:nil];
         
         [[NSNotificationCenter defaultCenter] addObserver:self 

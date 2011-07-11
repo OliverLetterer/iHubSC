@@ -15,7 +15,7 @@
 
 @synthesize tabBarController=_tabBarController, newsFeedViewController=_newsFeedViewController, profileViewController=_profileViewController, searchViewController=_searchViewController;
 
-- (void)authenticationViewControllerdidAuthenticateUserCallback:(NSNotification *)notification {
+- (void)authenticationManagerDidAuthenticateUserCallback:(NSNotification *)notification {
     self.profileViewController.username = [GHSettingsHelper username];
     
     self.profileViewController.tabBarItem = [[[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"My Profile", @"") 
@@ -40,8 +40,8 @@
     // build userInterface here
     
     [[NSNotificationCenter defaultCenter] addObserver:self 
-                                             selector:@selector(authenticationViewControllerdidAuthenticateUserCallback:) 
-                                                 name:GHAuthenticationViewControllerDidAuthenticateUserNotification 
+                                             selector:@selector(authenticationManagerDidAuthenticateUserCallback:) 
+                                                 name:GHAuthenticationManagerDidAuthenticateNewUserNotification 
                                                object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self 

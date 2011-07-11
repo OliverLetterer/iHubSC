@@ -36,8 +36,8 @@
 
 #pragma mark - authentication
 
-- (void)authenticationViewControllerdidAuthenticateUserCallback:(NSNotification *)notification {
-    [super authenticationViewControllerdidAuthenticateUserCallback:notification];
+- (void)authenticationManagerDidAuthenticateUserCallback:(NSNotification *)notification {
+    [super authenticationManagerDidAuthenticateUserCallback:notification];
     
     if (self.isViewLoaded) {
         [self.tableView reloadData];
