@@ -12,9 +12,12 @@
 #import "GHPMembersOfOrganizationViewController.h"
 #import "GHPTeamsOfOrganizationViewController.h"
 
-#define kUITableViewSectionContent              0
+#define kUIAlertViewTagCreateTeam               12637
 
-#define kUITableViewNumberOfSections            1
+#define kUITableViewSectionInfo                 0
+#define kUITableViewSectionContent              1
+
+#define kUITableViewNumberOfSections            2
 
 @implementation GHPOrganizationViewController
 @synthesize organizationName=_organizationName, organization=_organization;
@@ -38,6 +41,21 @@
                                   }
                               }
                           }];
+}
+
+- (NSString *)infoDetailsString {
+    NSMutableString *string = [NSMutableString stringWithCapacity:500];
+    
+    [string appendFormat:NSLocalizedString(@"Since: %@\n", @""), self.organization.createdAt.prettyTimeIntervalSinceNow];
+    [string appendFormat:NSLocalizedString(@"Repositories: %d\n", @""), self.organization.publicRepos.intValue];
+    if (self.organization.hasEMail) {
+        [string appendFormat:NSLocalizedString(@"E-Mail: %@\n", @""), self.organization.EMail];
+    }
+    if (self.organization.hasLocation) {
+        [string appendFormat:NSLocalizedString(@"Location: %@\n", @""), self.organization.location];
+    }
+    
+    return string;
 }
 
 #pragma mark - Initialization
@@ -83,6 +101,8 @@
         // Public Members
         // Public Teams
         return 4;
+    } else if (section == kUITableViewSectionInfo) {
+        return 1;
     }
     // Return the number of rows in the section.
     return 0;
@@ -103,6 +123,14 @@
         } else if (indexPath.row == 3) {
             cell.textLabel.text = NSLocalizedString(@"Teams", @"");
         }
+        
+        return cell;
+    } else if (indexPath.section == kUITableViewSectionInfo) {
+        GHPInfoTableViewCell *cell = self.infoCell;   
+        
+        cell.textLabel.text = self.organization.login;
+        cell.detailTextLabel.text = self.infoDetailsString;
+        [self updateImageView:cell.imageView atIndexPath:indexPath withGravatarID:self.organization.gravatarID];
         
         return cell;
     }
@@ -147,6 +175,15 @@
 
 #pragma mark - Table view delegate
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section == kUITableViewSectionInfo) {
+        if (indexPath.row == 0) {
+            return [GHPInfoTableViewCell heightWithContent:self.infoDetailsString];
+        }
+    }
+    return UITableViewAutomaticDimension;
+}
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     UIViewController *viewController = nil;
     
@@ -167,6 +204,73 @@
     } else {
         [tableView deselectRowAtIndexPath:indexPath animated:NO];
     }
+}
+
+#pragma mark - UIActionSheetDelegate
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    NSString *title = nil;
+    @try {
+        title = [actionSheet buttonTitleAtIndex:buttonIndex];
+    }
+    @catch (NSException *exception) { }
+    
+    if ([title isEqualToString:NSLocalizedString(@"View Blog in Safari", @"")]) {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:self.organization.blog] ];
+    } else if ([title isEqualToString:NSLocalizedString(@"E-Mail", @"")]) {
+        MFMailComposeViewController *mailViewController = [[[MFMailComposeViewController alloc] init] autorelease];
+        mailViewController.mailComposeDelegate = self;
+        [mailViewController setToRecipients:[NSArray arrayWithObject:self.organization.EMail]];
+        
+        [self presentViewController:mailViewController animated:YES completion:nil];
+    } else if ([title isEqualToString:NSLocalizedString(@"Create a new Team", @"")]) {
+        UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Create a new Team", @"") 
+                                                         message:nil 
+                                                        delegate:self 
+                                               cancelButtonTitle:NSLocalizedString(@"Cancel", @"") 
+                                               otherButtonTitles:NSLocalizedString(@"Create", @""), nil]
+                              autorelease];
+        alert.tag = kUIAlertViewTagCreateTeam;
+        alert.alertViewStyle = UIAlertViewStylePlainTextInput;
+        [alert show];
+    }
+}
+
+#pragma mark - UIAlertViewDelegate 
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    
+}
+
+#pragma mark - ActionMenu
+
+- (UIActionSheet *)actionButtonActionSheet {
+    UIActionSheet *sheet = [[[UIActionSheet alloc] init] autorelease];
+    
+//    [sheet addButtonWithTitle:NSLocalizedString(@"Create a new Team", @"")];
+    
+    if (self.organization.hasBlog) {
+        [sheet addButtonWithTitle:NSLocalizedString(@"View Blog in Safari", @"")];
+    }
+    if (self.organization.hasEMail && [MFMailComposeViewController canSendMail]) {
+        [sheet addButtonWithTitle:NSLocalizedString(@"E-Mail", @"")];
+    }
+    
+    if (sheet.numberOfButtons == 0) {
+        return nil;
+    }
+    sheet.delegate = self;
+    return sheet;
+}
+
+- (BOOL)canDisplayActionButton {
+    return self.actionButtonActionSheet != nil;
+}
+
+#pragma mark - MFMailComposeViewControllerDelegate
+
+- (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error {
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

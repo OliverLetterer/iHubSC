@@ -18,13 +18,13 @@
 @property (nonatomic, readonly) GHPInfoTableViewCell *infoCell;
 
 // action Button
-@property (nonatomic, readonly) UIActionSheet *actionButtonActionSheet;
-@property (nonatomic, readonly) BOOL canDisplayActionButtonActionSheet;
-@property (nonatomic, readonly) BOOL canDisplayActionButton;
+@property (nonatomic, readonly) UIActionSheet *actionButtonActionSheet;     // overwrite
+@property (nonatomic, readonly) BOOL canDisplayActionButtonActionSheet;     // overwrite
+@property (nonatomic, readonly) BOOL canDisplayActionButton;                // overwrite
 
 @property (nonatomic, assign, getter = isActionButtonActive) BOOL actionButtonActive;
 
-- (void)downloadDataToDisplayActionButton;
+- (void)downloadDataToDisplayActionButton;      // overwrite
 - (void)didDownloadDataToDisplayActionButton;
 - (void)failedToDownloadDataToDisplayActionButtonWithError:(NSError *)error;
 

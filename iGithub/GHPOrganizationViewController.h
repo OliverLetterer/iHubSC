@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "GHTableViewController.h"
+#import "GHPInfoSectionTableViewController.h"
+#import <MessageUI/MessageUI.h>
 
-@interface GHPOrganizationViewController : GHTableViewController {
+@interface GHPOrganizationViewController : GHPInfoSectionTableViewController <MFMailComposeViewControllerDelegate, UIAlertViewDelegate> {
 @private
     NSString *_organizationName;
     GHAPIOrganizationV3 *_organization;
@@ -17,6 +18,8 @@
 
 @property (nonatomic, copy) NSString *organizationName;
 @property (nonatomic, retain) GHAPIOrganizationV3 *organization;
+
+@property (nonatomic, readonly) NSString *infoDetailsString;
 
 - (id)initWithOrganizationName:(NSString *)organizationName;
 

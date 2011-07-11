@@ -288,6 +288,7 @@
 		A7D5548713CB4F3300358610 /* GHPTeamsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7D5548613CB4F3300358610 /* GHPTeamsViewController.m */; };
 		A7D5548E13CB4FE600358610 /* GHPTeamsOfOrganizationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7D5548D13CB4FE500358610 /* GHPTeamsOfOrganizationViewController.m */; };
 		A7D5549313CB562900358610 /* GHPInfoSectionTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7D5549213CB562900358610 /* GHPInfoSectionTableViewController.m */; };
+		A7D5549713CB665500358610 /* GHPTeamViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7D5549613CB665500358610 /* GHPTeamViewController.m */; };
 		A7DA5EA313C250A900288937 /* GHPIssuesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7DA5EA213C250A900288937 /* GHPIssuesViewController.m */; };
 		A7DA5EA613C2534C00288937 /* GHPOpenIssuesOnRepositoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7DA5EA513C2534C00288937 /* GHPOpenIssuesOnRepositoryViewController.m */; };
 		A7DA5EA913C2578600288937 /* GHPIssueViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7DA5EA813C2578600288937 /* GHPIssueViewController.m */; };
@@ -820,6 +821,8 @@
 		A7D5548D13CB4FE500358610 /* GHPTeamsOfOrganizationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPTeamsOfOrganizationViewController.m; sourceTree = "<group>"; };
 		A7D5549113CB562900358610 /* GHPInfoSectionTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPInfoSectionTableViewController.h; sourceTree = "<group>"; };
 		A7D5549213CB562900358610 /* GHPInfoSectionTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPInfoSectionTableViewController.m; sourceTree = "<group>"; };
+		A7D5549513CB665500358610 /* GHPTeamViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPTeamViewController.h; sourceTree = "<group>"; };
+		A7D5549613CB665500358610 /* GHPTeamViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPTeamViewController.m; sourceTree = "<group>"; };
 		A7DA5EA113C250A900288937 /* GHPIssuesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPIssuesViewController.h; sourceTree = "<group>"; };
 		A7DA5EA213C250A900288937 /* GHPIssuesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPIssuesViewController.m; sourceTree = "<group>"; };
 		A7DA5EA413C2534C00288937 /* GHPOpenIssuesOnRepositoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPOpenIssuesOnRepositoryViewController.h; sourceTree = "<group>"; };
@@ -1222,7 +1225,7 @@
 		A70DAE0713B49FC500DE4279 /* UserInterface */ = {
 			isa = PBXGroup;
 			children = (
-				A7D5549013CB55E800358610 /* GHPInfoSectionTableViewController */,
+				A7D5549413CB662400358610 /* GHPTeamViewController */,
 				A7D5548413CB4F0E00358610 /* GHPTeamsViewController */,
 				A7D5547313CB462300358610 /* GHPOrganizationViewController */,
 				A7D5546613CB439E00358610 /* GHPOrganizationsViewController */,
@@ -2174,6 +2177,7 @@
 		A7BF14141342149C001AE50D /* iPad */ = {
 			isa = PBXGroup;
 			children = (
+				A7D5549013CB55E800358610 /* GHPInfoSectionTableViewController */,
 				A7F334AB13BCCF0800DB922D /* ANAdvancedNavigationController */,
 				A70DAE0713B49FC500DE4279 /* UserInterface */,
 				A7BF14151342149C001AE50D /* iGithubAppDelegate_iPad.h */,
@@ -2567,6 +2571,15 @@
 				A7D5549213CB562900358610 /* GHPInfoSectionTableViewController.m */,
 			);
 			name = GHPInfoSectionTableViewController;
+			sourceTree = "<group>";
+		};
+		A7D5549413CB662400358610 /* GHPTeamViewController */ = {
+			isa = PBXGroup;
+			children = (
+				A7D5549513CB665500358610 /* GHPTeamViewController.h */,
+				A7D5549613CB665500358610 /* GHPTeamViewController.m */,
+			);
+			name = GHPTeamViewController;
 			sourceTree = "<group>";
 		};
 		A7DA5E9F13C2508800288937 /* GHPIssuesViewController */ = {
@@ -3042,6 +3055,7 @@
 				A7D5548713CB4F3300358610 /* GHPTeamsViewController.m in Sources */,
 				A7D5548E13CB4FE600358610 /* GHPTeamsOfOrganizationViewController.m in Sources */,
 				A7D5549313CB562900358610 /* GHPInfoSectionTableViewController.m in Sources */,
+				A7D5549713CB665500358610 /* GHPTeamViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

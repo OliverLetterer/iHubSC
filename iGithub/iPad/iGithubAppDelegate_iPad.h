@@ -13,8 +13,7 @@
     
 }
 
-#warning User->Organizations missing
-
+#warning adopt GHPInfoSectionTableViewController
 #warning DiffView should always fill bounds
 #warning new TweetBot like Notifications
 #warning adopt avatarURL instead of gravatarID

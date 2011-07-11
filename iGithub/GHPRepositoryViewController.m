@@ -39,7 +39,6 @@
 @implementation GHPRepositoryViewController
 
 @synthesize repositoryString=_repositoryString, repository=_repository, deleteToken=_deleteToken, organizations=_organizations;
-@synthesize infoCell=_infoCell;
 @synthesize labels=_labels, branches=_branches;
 
 #pragma mark - setters and getters
@@ -78,43 +77,6 @@
     return [self.repository.owner.login isEqualToString:[GHAuthenticationManager sharedInstance].username ];
 }
 
-- (UIActionSheet *)actionButtonActionSheet {
-    UIActionSheet *sheet = [[[UIActionSheet alloc] init] autorelease];
-    
-    NSUInteger index = 0;
-    
-    if (!self.canAdministrateRepository) {
-        if (!_isWatchingRepository) {
-            [sheet addButtonWithTitle:NSLocalizedString(@"Watch", @"")];
-            index++;
-        } else {
-            index++;
-            [sheet addButtonWithTitle:NSLocalizedString(@"Unwatch", @"")];
-        }
-    }
-    index++;
-    [sheet addButtonWithTitle:NSLocalizedString(@"New Issue", @"")];
-    if (self.repository.hasHomepage) {
-        index++;
-        [sheet addButtonWithTitle:NSLocalizedString(@"View Homepage in Safari", @"")];
-    }
-    if (self.canAdministrateRepository) {
-        index++;
-        [sheet addButtonWithTitle:NSLocalizedString(@"Add Collaborator", @"")];
-        [sheet addButtonWithTitle:NSLocalizedString(@"Delete Repository", @"")];
-        [sheet setDestructiveButtonIndex:index];
-    } else {
-        [sheet addButtonWithTitle:NSLocalizedString(@"Fork to my Account", @"")];
-        [sheet addButtonWithTitle:NSLocalizedString(@"Fork to an Organization", @"")];
-    }
-    if (sheet.numberOfButtons == 0) {
-        return nil;
-    }
-    sheet.delegate = self;
-    sheet.tag = kUIActionSheetTagAction;
-    return sheet;
-}
-
 #pragma mark - Initialization
 
 - (id)initWithRepositoryString:(NSString *)repositoryString {
@@ -130,7 +92,6 @@
 - (void)dealloc {
     [_repositoryString release];
     [_repository release];
-    [_infoCell release];
     [_deleteToken release];
     [_organizations release];
     [_labels release];
@@ -139,51 +100,7 @@
     [super dealloc];
 }
 
-- (void)didReceiveMemoryWarning {
-    // Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
-    
-    // Release any cached data, images, etc that aren't in use.
-}
-
 #pragma mark - View lifecycle
-
-/*
- - (void)loadView {
- 
- }
- */
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-}
-
-- (void)viewDidUnload {
-    [super viewDidUnload];
-    [_infoCell release], _infoCell = nil;
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-}
-
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-}
-
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-}
-
-- (void)viewDidDisappear:(BOOL)animated {
-    [super viewDidDisappear:animated];
-}
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     // Return YES for supported orientations
@@ -311,13 +228,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == kUITableViewSectionInfo) {
         if (indexPath.row == 0) {
-            static NSString *CellIdentifier = @"GHPInfoTableViewCell";
-            GHPInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-            if (!cell) {
-                cell = [[[GHPInfoTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault 
-                                                              reuseIdentifier:CellIdentifier]
-                        autorelease];
-            }
+            GHPInfoTableViewCell *cell = self.infoCell;   
             
             cell.textLabel.text = self.repository.fullRepositoryName;
             cell.detailTextLabel.text = self.repository.description;
@@ -327,10 +238,6 @@
             } else {
                 cell.imageView.image = [UIImage imageNamed:@"GHPublicRepositoryIcon.png"];
             }
-            
-            cell.delegate = self;
-            
-            self.infoCell = cell;
             
             return cell;
         } else if (indexPath.row == 1) {
@@ -718,8 +625,7 @@
             [GHRepository deleteRepository:self.repositoryString 
                                  withToken:self.deleteToken 
                          completionHandler:^(NSError *error) {
-                             self.infoCell.actionButton.alpha = 1.0f;
-                             [self.infoCell.activityIndicatorView stopAnimating];
+                             self.actionButtonActive = NO;
                              if (error) {
                                  [self handleError:error];
                              } else {
@@ -727,8 +633,7 @@
                              }
                          }];
         } else {
-            self.infoCell.actionButton.alpha = 1.0f;
-            [self.infoCell.activityIndicatorView stopAnimating];
+            self.actionButtonActive = NO;
         }
     } else if (alertView.tag == kUIAlertViewTagAddCollaborator) {
         if (buttonIndex == 1) {
@@ -736,8 +641,7 @@
             [GHAPIRepositoryV3 addCollaboratorNamed:username 
                                        onRepository:self.repositoryString 
                                   completionHandler:^(NSError *error) {
-                                      self.infoCell.actionButton.alpha = 1.0f;
-                                      [self.infoCell.activityIndicatorView stopAnimating];
+                                      self.actionButtonActive = NO;
                                       if (error) {
                                           [self handleError:error];
                                       } else {
@@ -745,40 +649,8 @@
                                       }
                                   }];
         } else {
-            self.infoCell.actionButton.alpha = 1.0f;
-            [self.infoCell.activityIndicatorView stopAnimating];
+            self.actionButtonActive = NO;
         }
-    }
-}
-
-#pragma mark - GHPInfoTableViewCellDelegateDelegate
-
-- (void)infoTableViewCellActionButtonClicked:(GHPInfoTableViewCell *)cell {
-    if (!self.canAdministrateRepository && !_hasWatchingData) {
-        cell.actionButton.alpha = 0.0f;
-        [cell.activityIndicatorView startAnimating];
-        [GHAPIRepositoryV3 isWatchingRepository:self.repositoryString 
-                              completionHandler:^(BOOL watching, NSError *error) {
-                                  cell.actionButton.alpha = 1.0f;
-                                  [cell.activityIndicatorView stopAnimating];
-                                  if (error) {
-                                      [self handleError:error];
-                                  } else {
-                                      _hasWatchingData = YES;
-                                      _isWatchingRepository = watching;
-                                      UIActionSheet *sheet = self.actionButtonActionSheet;
-                                      
-                                      [sheet showFromRect:[cell.actionButton convertRect:cell.actionButton.bounds toView:self.view] 
-                                                   inView:self.view 
-                                                 animated:YES];
-                                  }
-                              }];
-    } else {
-        UIActionSheet *sheet = self.actionButtonActionSheet;
-        
-        [sheet showFromRect:[cell.actionButton convertRect:cell.actionButton.bounds toView:self.view] 
-                     inView:self.view 
-                   animated:YES];
     }
 }
 
@@ -793,6 +665,66 @@
                                                             andSubtitle:issue.title 
                                                             removeStyle:INNotificationQueueItemRemoveByFadingOut];
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+#pragma mark - ActionMenu
+
+- (void)downloadDataToDisplayActionButton {
+    [GHAPIRepositoryV3 isWatchingRepository:self.repositoryString 
+                          completionHandler:^(BOOL watching, NSError *error) {
+                              if (error) {
+                                  [self failedToDownloadDataToDisplayActionButtonWithError:error];
+                              } else {
+                                  _hasWatchingData = YES;
+                                  _isWatchingRepository = watching;
+                                  [self didDownloadDataToDisplayActionButton];
+                              }
+                          }];
+}
+
+- (UIActionSheet *)actionButtonActionSheet {
+    UIActionSheet *sheet = [[[UIActionSheet alloc] init] autorelease];
+    
+    NSUInteger index = 0;
+    
+    if (!self.canAdministrateRepository) {
+        if (!_isWatchingRepository) {
+            [sheet addButtonWithTitle:NSLocalizedString(@"Watch", @"")];
+            index++;
+        } else {
+            index++;
+            [sheet addButtonWithTitle:NSLocalizedString(@"Unwatch", @"")];
+        }
+    }
+    index++;
+    [sheet addButtonWithTitle:NSLocalizedString(@"New Issue", @"")];
+    if (self.repository.hasHomepage) {
+        index++;
+        [sheet addButtonWithTitle:NSLocalizedString(@"View Homepage in Safari", @"")];
+    }
+    if (self.canAdministrateRepository) {
+        index++;
+        [sheet addButtonWithTitle:NSLocalizedString(@"Add Collaborator", @"")];
+        [sheet addButtonWithTitle:NSLocalizedString(@"Delete Repository", @"")];
+        [sheet setDestructiveButtonIndex:index];
+    } else {
+        [sheet addButtonWithTitle:NSLocalizedString(@"Fork to my Account", @"")];
+        [sheet addButtonWithTitle:NSLocalizedString(@"Fork to an Organization", @"")];
+    }
+    if (sheet.numberOfButtons == 0) {
+        return nil;
+    }
+    sheet.delegate = self;
+    sheet.tag = kUIActionSheetTagAction;
+    return sheet;
+}
+
+- (BOOL)canDisplayActionButton {
+    return YES;
+}
+
+- (BOOL)canDisplayActionButtonActionSheet {
+    return _hasWatchingData;
 }
 
 @end
