@@ -21,15 +21,24 @@
 
 #import "GHPUserViewController.h"
 
+#define kUITableViewSectionUsername         0
+#define kUITableViewSectionNewsFeed         1
+#define kUITableViewSectionOrganizations    2
+#define kUITableViewSectionBottom           3
+
+#define kUITableViewNumberOfSections        4
+
 @implementation GHPLeftNavigationController
 
 @synthesize lineView=_lineView, controllerView=_controllerView;
 @synthesize lastSelectedIndexPath=_lastSelectedIndexPath;
+@synthesize organizations=_organizations;
 
 - (id)initWithStyle:(UITableViewStyle)style {
     self = [super initWithStyle:UITableViewStylePlain];
     if (self) {
         // Custom initialization
+        [self downloadOrganizations];
     }
     return self;
 }
@@ -38,6 +47,7 @@
 
 - (void)authenticationManagerDidAuthenticateUserCallback:(NSNotification *)notification {
     [super authenticationManagerDidAuthenticateUserCallback:notification];
+    [self downloadOrganizations];
     
     if (self.isViewLoaded) {
         [self.tableView reloadData];
@@ -45,6 +55,23 @@
 }
 
 #pragma mark - instance methods
+
+- (void)downloadOrganizations {
+    self.organizations = nil;
+    [GHAPIOrganizationV3 organizationsOfUser:[GHAuthenticationManager sharedInstance].username 
+                                        page:1 
+                           completionHandler:^(NSMutableArray *array, NSUInteger nextPage, NSError *error) {
+                               if (error) {
+                                   [self handleError:error];
+                               } else {
+                                   self.organizations = array;
+                                   if (self.isViewLoaded) {
+                                       [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:kUITableViewSectionOrganizations]
+                                                     withRowAnimation:UITableViewRowAnimationFade];
+                                   }
+                               }
+                           }];
+}
 
 - (void)gearButtonClicked:(UIButton *)button {
     UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Account", @"") 
@@ -147,22 +174,28 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     // Return the number of sections.
-    return 1;
+    return kUITableViewNumberOfSections;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    // Return the number of rows in the section.
-    // Username
-    // News Feed, My Actions, Organizations
-    // My Profile
-    // Search
-    return 6;
+    if (section == kUITableViewSectionUsername) {
+        return 1;
+    } else if (section == kUITableViewSectionNewsFeed) {
+        // News Feed + Your Actions
+        return 2;
+    } else if (section == kUITableViewSectionBottom) {
+        // My Profile + Search
+        return 2;
+    } else if (section == kUITableViewSectionOrganizations) {
+        // My Profile + Search
+        return self.organizations.count;
+    }
+    return 0;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (indexPath.row == 0) {
-        NSString *CellIdentifier = @"GHPLeftNavigationControllerTableViewCellUser";
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section == kUITableViewSectionUsername) {
+        static NSString *CellIdentifier = @"GHPLeftNavigationControllerTableViewCellUser";
         
         GHPLeftNavigationControllerTableViewCell *cell = (GHPLeftNavigationControllerTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         if (cell == nil) {
@@ -178,7 +211,7 @@
         
         return cell;
     } else {
-        NSString *CellIdentifier = @"GHPLeftNavigationControllerTableViewCell";
+        static NSString *CellIdentifier = @"GHPLeftNavigationControllerTableViewCell";
         
         GHPLeftNavigationControllerTableViewCell *cell = (GHPLeftNavigationControllerTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         if (cell == nil) {
@@ -187,66 +220,35 @@
                     autorelease];
         }
         
-        if (indexPath.row == 1) {
-            cell.textLabel.text = NSLocalizedString(@"News Feed", @"");
-            [cell setItemImage:[UIImage imageNamed:@"56-feed.png"] ];
-        } else if (indexPath.row == 2) {
-            cell.textLabel.text = NSLocalizedString(@"My Actions", @"");
+        if (indexPath.section == kUITableViewSectionNewsFeed) {
+            if (indexPath.row == 0) {
+                cell.textLabel.text = NSLocalizedString(@"News Feed", @"");
+                [cell setItemImage:[UIImage imageNamed:@"56-feed.png"] ];
+            } else if (indexPath.row == 1) {
+                cell.textLabel.text = NSLocalizedString(@"My Actions", @"");
+                [cell setItemImage:nil ];
+            }
+        } else if (indexPath.section == kUITableViewSectionBottom) {
+            if (indexPath.row == 0) {
+                cell.textLabel.text = NSLocalizedString(@"My Profile", @"");
+                [cell setItemImage:[UIImage imageNamed:@"145-persondot.png"] ];
+            } else if (indexPath.row == 1) {
+                cell.textLabel.text = NSLocalizedString(@"Search", @"");
+                [cell setItemImage:[UIImage imageNamed:@"Lupe.PNG"] ];
+            }
+        } else if (indexPath.section == kUITableViewSectionOrganizations) {
+            // My Profile + Search
+            GHAPIOrganizationV3 *organization = [self.organizations objectAtIndex:indexPath.row];
+            cell.textLabel.text = organization.login;
             [cell setItemImage:nil ];
-        } else if (indexPath.row == 3) {
-            cell.textLabel.text = NSLocalizedString(@"Organizations", @"");
-            [cell setItemImage:nil ];
-        } else if (indexPath.row == 4) {
-            cell.textLabel.text = NSLocalizedString(@"My Profile", @"");
-            [cell setItemImage:[UIImage imageNamed:@"145-persondot.png"] ];
-        } else if (indexPath.row == 5) {
-            cell.textLabel.text = NSLocalizedString(@"Search", @"");
-            [cell setItemImage:[UIImage imageNamed:@"Lupe.PNG"] ];
         }
         
         return cell;
     }
     
+    
+    
 }
-
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
 
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
     [self scrollViewDidScroll:self.tableView];
@@ -256,14 +258,24 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     UIViewController *viewController = nil;
-    if (indexPath.row == 4) {
-        viewController = [[[GHPUserViewController alloc] initWithUsername:[GHAuthenticationManager sharedInstance].username ] autorelease];
-    } else if (indexPath.row == 5) {
-        viewController = [[[GHPSearchViewController alloc] init] autorelease];
-    } else if (indexPath.row == 1) {
-        viewController = [[[GHPOwnersNewsFeedViewController alloc] init] autorelease];
-    } else if (indexPath.row == 2) {
-        viewController = [[[GHPUsersNewsFeedViewController alloc] initWithUsername:[GHAuthenticationManager sharedInstance].username ] autorelease];
+    
+    if (indexPath.section == kUITableViewSectionNewsFeed) {
+        if (indexPath.row == 0) {
+            viewController = [[[GHPOwnersNewsFeedViewController alloc] init] autorelease];
+        } else if (indexPath.row == 1) {
+            viewController = [[[GHPUsersNewsFeedViewController alloc] initWithUsername:[GHAuthenticationManager sharedInstance].username ] autorelease];
+        }
+    } else if (indexPath.section == kUITableViewSectionBottom) {
+        if (indexPath.row == 0) {
+            viewController = [[[GHPUserViewController alloc] initWithUsername:[GHAuthenticationManager sharedInstance].username ] autorelease];
+            [(GHPUserViewController *)viewController setReloadDataIfNewUserGotAuthenticated:YES];
+        } else if (indexPath.row == 1) {
+            viewController = [[[GHPSearchViewController alloc] init] autorelease];
+        }
+    } else if (indexPath.section == kUITableViewSectionOrganizations) {
+        // My Profile + Search
+        GHAPIOrganizationV3 *organization = [self.organizations objectAtIndex:indexPath.row];
+        viewController = [[[GHPUsersNewsFeedViewController alloc] initWithUsername:organization.login ] autorelease];
     }
     
     if (viewController) {
@@ -276,7 +288,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row == 0) {
+    if (indexPath.section == kUITableViewSectionUsername) {
         return 60.0f;
     }
     return 44.0f;
@@ -300,6 +312,7 @@
     [_lineView release];
     [_controllerView release];
     [_lastSelectedIndexPath release];
+    [_organizations release];
     
     [super dealloc];
 }

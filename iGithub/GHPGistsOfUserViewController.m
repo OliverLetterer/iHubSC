@@ -10,7 +10,6 @@
 
 
 @implementation GHPGistsOfUserViewController
-
 @synthesize username=_username;
 
 #pragma mark - setters and getters

@@ -11,6 +11,8 @@
 #import "GHPUserInfoTableViewCell.h"
 #import <MessageUI/MessageUI.h>
 
+#warning remove GHPUserInfoTableViewCell
+
 @interface GHPUserViewController : GHTableViewController <GHPUserInfoTableViewCellDelegate, UIActionSheetDelegate, MFMailComposeViewControllerDelegate> {
     GHAPIUserV3 *_user;
     NSString *_username;

@@ -25,11 +25,6 @@
     [proxy setTitleShadowColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [proxy setBackgroundImage:[[UIImage imageNamed:@"GHPSelectedBackgroundImage.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(10.0f, 10.0f, 10.0f, 10.0f)] forState:UIControlStateHighlighted];
     [proxy setBackgroundImage:[[UIImage imageNamed:@"GHPSelectedBackgroundImage.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(10.0f, 10.0f, 10.0f, 10.0f)] forState:UIControlStateSelected];
-    
-//    // UILabel in UIButton in GHPSearchScopeTableViewCell
-//    proxy = [UILabel appearanceWhenContainedIn:[UIButton class], [GHPSearchScopeTableViewCell class], nil];
-//    [proxy setFont:[UIFont boldSystemFontOfSize:16.0f]];
-//    [proxy setShadowOffset:CGSizeMake(0.0f, 1.0f)];
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
@@ -38,8 +33,8 @@
     [GHSettingsHelper setUsername:@"docmorelli"];
     [GHSettingsHelper setPassword:@"1337-l0g1n"];
     
-//    [GHSettingsHelper setUsername:@"iTunesTestAccount"];
-//    [GHSettingsHelper setPassword:@"iTunes1"];
+    [GHSettingsHelper setUsername:@"iTunesTestAccount"];
+    [GHSettingsHelper setPassword:@"iTunes1"];
     
     [GHSettingsHelper setGravatarID:@"534296d28e4a7118d2e75e84d04d571e"];
     [GHAuthenticationManager sharedInstance].username = [GHSettingsHelper username];

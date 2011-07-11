@@ -18,15 +18,6 @@
     return NSLocalizedString(@"No Users available", @"");
 }
 
-#pragma mark - Initialization
-
-- (id)initWithStyle:(UITableViewStyle)style {
-    if ((self = [super initWithStyle:style])) {
-        // Custom initialization
-    }
-    return self;
-}
-
 #pragma mark - Table view data source
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {

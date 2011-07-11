@@ -15,7 +15,9 @@
 
 #warning User->Organizations missing
 
+#warning DiffView should always fill bounds
 #warning new TweetBot like Notifications
+#warning adopt avatarURL instead of gravatarID
 
 - (void)deviceOrientationDidChangeNotificationCallback:(NSNotification *)notification;
 

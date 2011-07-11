@@ -311,7 +311,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == kUITableViewSectionInfo) {
         if (indexPath.row == 0) {
-            NSString *CellIdentifier = @"GHPInfoTableViewCellDelegate";
+            static NSString *CellIdentifier = @"GHPInfoTableViewCell";
             GHPInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
             if (!cell) {
                 cell = [[[GHPInfoTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault 

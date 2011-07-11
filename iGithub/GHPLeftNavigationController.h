@@ -15,6 +15,8 @@
     UIView *_controllerView;
     
     NSIndexPath *_lastSelectedIndexPath;
+    
+    NSArray *_organizations;
 }
 
 @property (nonatomic, retain) GHPEdgedLineView *lineView;
@@ -22,6 +24,10 @@
 
 @property (nonatomic, copy) NSIndexPath *lastSelectedIndexPath;
 
+@property (nonatomic, retain) NSArray *organizations;
+
 - (void)gearButtonClicked:(UIButton *)button;
+
+- (void)downloadOrganizations;
 
 @end

@@ -16,7 +16,7 @@
 - (void)setUsername:(NSString *)username {
     [super setUsername:username];
     
-    [GHAPIRepositoryV3 repositoriesForUserNamed:username page:0 
+    [GHAPIRepositoryV3 repositoriesForUserNamed:self.username page:1 
                               completionHandler:^(NSMutableArray *array, NSUInteger nextPage, NSError *error) {
                                   if (error) {
                                       [self handleError:error];
@@ -29,8 +29,7 @@
 #pragma mark - Pagination
 
 - (void)downloadDataForPage:(NSUInteger)page inSection:(NSUInteger)section {
-    [GHAPIRepositoryV3 repositoriesForUserNamed:self.username 
-                                           page:page 
+    [GHAPIRepositoryV3 repositoriesForUserNamed:self.username page:page 
                               completionHandler:^(NSMutableArray *array, NSUInteger nextPage, NSError *error) {
                                   if (error) {
                                       [self handleError:error];

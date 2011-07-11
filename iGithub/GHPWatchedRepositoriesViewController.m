@@ -16,7 +16,7 @@
 - (void)setUsername:(NSString *)username {
     [super setUsername:username];
     
-    [GHAPIRepositoryV3 repositoriesThatUserIsWatching:username page:0 
+    [GHAPIRepositoryV3 repositoriesThatUserIsWatching:self.username page:1 
                                     completionHandler:^(NSMutableArray *array, NSUInteger nextPage, NSError *error) {
                                         if (error) {
                                             [self handleError:error];
@@ -38,4 +38,5 @@
                                         }
                                     }];
 }
+
 @end
