@@ -229,7 +229,7 @@
             cell.textLabel.text = self.user.login;
             cell.detailTextLabel.text = self.userDetailInfoString;
             
-            [self updateImageView:cell.imageView atIndexPath:indexPath withGravatarID:self.user.gravatarID];
+            [self updateImageView:cell.imageView atIndexPath:indexPath withAvatarURLString:self.user.avatarURL];
             
             if (!self.canDisplayActionButton) {
                 [cell.actionButton removeFromSuperview];

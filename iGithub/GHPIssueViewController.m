@@ -379,7 +379,7 @@
             cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ (%@ ago)", @""), self.issue.user.login, self.issue.createdAt.prettyTimeIntervalSinceNow];
             cell.detailTextLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Issue %@ - %@", @""), self.issue.number, self.issue.title];
             
-            [self updateImageView:cell.imageView atIndexPath:indexPath withGravatarID:self.issue.user.gravatarID];
+            [self updateImageView:cell.imageView atIndexPath:indexPath withAvatarURLString:self.issue.user.avatarURL];
 
             cell.delegate = self;
             
@@ -439,7 +439,7 @@
                 
                 GHAPIUserV3 *user = self.issue.assignee;
                 
-                [self updateImageView:cell.imageView atIndexPath:indexPath withGravatarID:user.gravatarID];
+                [self updateImageView:cell.imageView atIndexPath:indexPath withAvatarURLString:user.avatarURL];
                 [self setupDefaultTableViewCell:cell forRowAtIndexPath:indexPath];
                 cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Assigned to %@", @""), user.login];
                 cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
@@ -527,7 +527,7 @@
             
             [self setupDefaultTableViewCell:cell forRowAtIndexPath:indexPath];
             
-            [self updateImageView:cell.imageView atIndexPath:indexPath withGravatarID:[GHSettingsHelper gravatarID]];
+            [self updateImageView:cell.imageView atIndexPath:indexPath withAvatarURLString:[GHSettingsHelper avatarURL]];
             
             cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ (right now)", @""), [GHSettingsHelper username]];
             cell.accessoryType = UITableViewCellAccessoryNone;
@@ -553,7 +553,7 @@
                 // display a comment
                 GHAPIIssueCommentV3 *comment = (GHAPIIssueCommentV3 *)object;
                 
-                [self updateImageView:cell.imageView atIndexPath:indexPath withGravatarID:comment.user.gravatarID];
+                [self updateImageView:cell.imageView atIndexPath:indexPath withAvatarURLString:comment.user.avatarURL];
                 
                 cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ (%@ ago)", @""), comment.user.login, comment.updatedAt.prettyTimeIntervalSinceNow];
                 cell.detailTextLabel.text = comment.body;
@@ -561,7 +561,7 @@
             } else if ([object isKindOfClass:[GHAPIIssueEventV3 class] ]) {
                 GHAPIIssueEventV3 *event = (GHAPIIssueEventV3 *)object;
                 
-                [self updateImageView:cell.imageView atIndexPath:indexPath withGravatarID:event.actor.gravatarID];
+                [self updateImageView:cell.imageView atIndexPath:indexPath withAvatarURLString:event.actor.avatarURL];
                 
                 cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ (%@ ago)", @""), event.actor.login, event.createdAt.prettyTimeIntervalSinceNow];
                 cell.detailTextLabel.text = [self descriptionForIssueEvent:event];

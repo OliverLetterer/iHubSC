@@ -130,7 +130,7 @@
         
         cell.textLabel.text = self.organization.login;
         cell.detailTextLabel.text = self.infoDetailsString;
-        [self updateImageView:cell.imageView atIndexPath:indexPath withGravatarID:self.organization.gravatarID];
+        [self updateImageView:cell.imageView atIndexPath:indexPath withAvatarURLString:self.organization.avatarURL];
         
         return cell;
     }

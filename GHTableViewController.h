@@ -67,6 +67,15 @@
             atIndexPath:(NSIndexPath *)indexPath 
          withGravatarID:(NSString *)gravatarID;
 
+- (void)updateImageView:(UIImageView *)imageView 
+            inTableView:(UITableView *)tableView 
+            atIndexPath:(NSIndexPath *)indexPath 
+         withAvatarURLString:(NSString *)avatarURLString;
+
+- (void)updateImageView:(UIImageView *)imageView 
+            atIndexPath:(NSIndexPath *)indexPath 
+         withAvatarURLString:(NSString *)avatarURLString;
+
 - (void)authenticationManagerDidAuthenticateUserCallback:(NSNotification *)notification;
 - (void)applicationWillEnterForegroundCallback:(NSNotification *)notification;
 

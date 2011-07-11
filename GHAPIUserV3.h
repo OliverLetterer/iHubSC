@@ -15,6 +15,7 @@
 @private
     NSString *_login;
     NSNumber *_ID;
+    NSString *_avatarURL;
     NSString *_gravatarID;
     NSString *_URL;
     NSString *_name;
@@ -41,6 +42,7 @@
 
 @property (nonatomic, copy) NSString *login;
 @property (nonatomic, copy) NSNumber *ID;
+@property (nonatomic, copy) NSString *avatarURL;
 @property (nonatomic, copy) NSString *gravatarID;
 @property (nonatomic, copy) NSString *URL;
 @property (nonatomic, copy) NSString *name;

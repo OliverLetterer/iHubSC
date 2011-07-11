@@ -172,6 +172,42 @@ static CGFloat wrapperViewHeight = 21.0f;
     [self updateImageView:imageView inTableView:self.tableView atIndexPath:indexPath withGravatarID:gravatarID];
 }
 
+
+- (void)updateImageView:(UIImageView *)imageView 
+            inTableView:(UITableView *)tableView 
+            atIndexPath:(NSIndexPath *)indexPath 
+    withAvatarURLString:(NSString *)avatarURLString {
+    UIImage *avatarImage = [UIImage cachedImageFromAvatarURLString:avatarURLString];
+    
+    if (avatarImage) {
+        [[imageView viewWithTag:kUIActivityIndicatorImageViewTag] removeFromSuperview];
+        imageView.image = avatarImage;
+    } else {
+        imageView.image = [UIImage imageNamed:@"DefaultUserImage.png"];
+        [[imageView viewWithTag:kUIActivityIndicatorImageViewTag] removeFromSuperview];
+        
+        UIActivityIndicatorView *activityIndicatorView = [[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray] autorelease];
+        activityIndicatorView.center = CGPointMake(CGRectGetWidth(imageView.bounds)/2.0f, CGRectGetHeight(imageView.bounds)/2.0f);
+        activityIndicatorView.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin;
+        [activityIndicatorView startAnimating];
+        activityIndicatorView.tag = kUIActivityIndicatorImageViewTag;
+        [imageView addSubview:activityIndicatorView];
+        
+        [UIImage imageFromAvatarURLString:avatarURLString 
+                    withCompletionHandler:^(UIImage *image, NSError *error, BOOL didDownload) {
+                        if (indexPath && [tableView containsIndexPath:indexPath]) {
+                            [tableView reloadRowAtIndexPath:indexPath withRowAnimation:UITableViewRowAnimationNone];
+                        }
+                    }];
+    }
+}
+
+- (void)updateImageView:(UIImageView *)imageView 
+            atIndexPath:(NSIndexPath *)indexPath 
+    withAvatarURLString:(NSString *)avatarURLString {
+    [self updateImageView:imageView inTableView:self.tableView atIndexPath:indexPath withAvatarURLString:avatarURLString];
+}
+
 - (void)authenticationManagerDidAuthenticateUserCallback:(NSNotification *)notification {
     if (self.reloadDataIfNewUserGotAuthenticated) {
         [self pullToReleaseTableViewReloadData];

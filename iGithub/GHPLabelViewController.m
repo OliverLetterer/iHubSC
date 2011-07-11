@@ -176,7 +176,7 @@
         }
     }
     
-    [self updateImageView:cell.imageView atIndexPath:indexPath withGravatarID:issue.user.gravatarID];
+    [self updateImageView:cell.imageView atIndexPath:indexPath withAvatarURLString:issue.user.avatarURL];
     cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ (%@ ago)", @""), issue.user.login, issue.createdAt.prettyTimeIntervalSinceNow];
     cell.detailTextLabel.text = [self contentForIssue:issue];
     

@@ -207,7 +207,7 @@
         
         cell.textLabel.text = [GHAuthenticationManager sharedInstance].username;
         
-        [self updateImageView:cell.imageView atIndexPath:indexPath withGravatarID:[GHSettingsHelper gravatarID]];
+        [self updateImageView:cell.imageView atIndexPath:indexPath withAvatarURLString:[GHSettingsHelper avatarURL]];
         
         return cell;
     } else {

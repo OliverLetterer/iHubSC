@@ -11,6 +11,7 @@
 
 #define GHSettingsUsernameKey @"GHSettingsUsernameKey"
 #define GHSettingsGravatarIDKey @"GHSettingsGravatarIDKey"
+#define GHSettingsAvatarIDKey @"GHSettingsAvatarIDKey"
 #define GHSettingsKeychainService @"de.olettere.iGithub"
 
 @implementation GHSettingsHelper
@@ -43,6 +44,14 @@
 
 + (void)setGravatarID:(NSString *)gravatarID {
     [[NSUserDefaults standardUserDefaults] setObject:gravatarID forKey:GHSettingsGravatarIDKey];
+}
+
++ (NSString *)avatarURL {
+    return [[NSUserDefaults standardUserDefaults] objectForKey:GHSettingsAvatarIDKey];
+}
+
++ (void)setAvatarURL:(NSString *)avatarURL {
+    [[NSUserDefaults standardUserDefaults] setObject:avatarURL forKey:GHSettingsAvatarIDKey];
 }
 
 + (BOOL)isUserAuthenticated {

@@ -289,7 +289,7 @@
             
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             
-            [self updateImageView:cell.imageView atIndexPath:indexPath withGravatarID:self.repository.owner.gravatarID];
+            [self updateImageView:cell.imageView atIndexPath:indexPath withAvatarURLString:self.repository.owner.avatarURL];
             cell.textLabel.text = self.repository.owner.login;
             
             return cell;

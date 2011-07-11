@@ -177,7 +177,7 @@
         
         cell.textLabel.text = user.login;
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-        [self updateImageView:cell.imageView atIndexPath:indexPath withGravatarID:user.gravatarID];
+        [self updateImageView:cell.imageView atIndexPath:indexPath withAvatarURLString:user.avatarURL];
         
         return cell;
     } else if (indexPath.section == kUITableViewSectionRepositories) {

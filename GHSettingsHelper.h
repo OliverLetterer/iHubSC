@@ -22,6 +22,9 @@
 + (NSString *)gravatarID;
 + (void)setGravatarID:(NSString *)gravatarID;
 
++ (NSString *)avatarURL;
++ (void)setAvatarURL:(NSString *)avatarURL;
+
 + (BOOL)isUserAuthenticated;
 
 @end

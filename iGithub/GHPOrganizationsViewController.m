@@ -33,7 +33,7 @@
     
     cell.textLabel.text = organization.login;
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    [self updateImageView:cell.imageView atIndexPath:indexPath withGravatarID:organization.gravatarID];
+    [self updateImageView:cell.imageView atIndexPath:indexPath withAvatarURLString:organization.avatarURL];
     
     return cell;
 }

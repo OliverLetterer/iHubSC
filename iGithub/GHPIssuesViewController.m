@@ -50,7 +50,7 @@
     
     GHAPIIssueV3 *issue = [self.dataArray objectAtIndex:indexPath.row];
     
-    [self updateImageView:cell.imageView atIndexPath:indexPath withGravatarID:issue.user.gravatarID];
+    [self updateImageView:cell.imageView atIndexPath:indexPath withAvatarURLString:issue.user.avatarURL];
     cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ (%@ ago)", @""), issue.user.login, issue.createdAt.prettyTimeIntervalSinceNow];
     cell.detailTextLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Issue %@ - %@", @""), issue.number, issue.title];
     

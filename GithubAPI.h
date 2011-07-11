@@ -51,6 +51,8 @@
 #import "GHAPITeamV3.h"
 #import "GHAPIPullRequestV3.h"
 #import "GHAPIPullRequestMergeStateV3.h"
+#import "GHAPIImageCacheV3.h"
+#import "UIImage+GHAPIImageCacheV3.h"
 
 #import "GHPayload.h"
 #import "GHIssuePayload.h"

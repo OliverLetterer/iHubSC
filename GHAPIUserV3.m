@@ -11,7 +11,7 @@
 
 @implementation GHAPIUserV3
 
-@synthesize login=_login, ID=_ID, gravatarID=_gravatarID, URL=_URL, name=_name, company=_company, blog=_blog, location=_location, EMail=_EMail, hireable=_hireable, bio=_bio, publicRepos=_publicRepos, publicGists=_publicGists, followers=_followers, following=_following, htmlURL=_htmlURL, createdAt=_createdAt, type=_type, totalPrivateRepos=_totalPrivateRepos, ownedPrivateRepos=_ownedPrivateRepos, privateGists=_privateGists, diskUsage=_diskUsage, collaborators=_collaborators, plan=_plan;
+@synthesize login=_login, ID=_ID, avatarURL=_avatarURL, gravatarID=_gravatarID, URL=_URL, name=_name, company=_company, blog=_blog, location=_location, EMail=_EMail, hireable=_hireable, bio=_bio, publicRepos=_publicRepos, publicGists=_publicGists, followers=_followers, following=_following, htmlURL=_htmlURL, createdAt=_createdAt, type=_type, totalPrivateRepos=_totalPrivateRepos, ownedPrivateRepos=_ownedPrivateRepos, privateGists=_privateGists, diskUsage=_diskUsage, collaborators=_collaborators, plan=_plan;
 
 #pragma mark - setters and getters
 
@@ -38,6 +38,7 @@
         // Initialization code
         self.login = [rawDictionay objectForKeyOrNilOnNullObject:@"login"];
         self.ID = [rawDictionay objectForKeyOrNilOnNullObject:@"id"];
+        self.avatarURL = [rawDictionay objectForKeyOrNilOnNullObject:@"avatar_url"];
         self.gravatarID = [[rawDictionay objectForKeyOrNilOnNullObject:@"avatar_url"] gravarID];
         self.URL = [rawDictionay objectForKeyOrNilOnNullObject:@"url"];
         self.name = [rawDictionay objectForKeyOrNilOnNullObject:@"name"];
@@ -237,6 +238,7 @@
 - (void)dealloc {
     [_login release];
     [_ID release];
+    [_avatarURL release];
     [_gravatarID release];
     [_URL release];
     [_name release];

@@ -110,7 +110,7 @@
         
         GHAPICommitV3 *commit = [self.dataArray objectAtIndex:indexPath.row];
         
-        [self updateImageView:cell.imageView atIndexPath:indexPath withGravatarID:commit.committer.gravatarID];
+        [self updateImageView:cell.imageView atIndexPath:indexPath withAvatarURLString:commit.committer.avatarURL];
         cell.textLabel.text = [NSString stringWithFormat:@"%@ - %@", commit.committer.login, commit.SHA];
         cell.detailTextLabel.text = commit.message;
         

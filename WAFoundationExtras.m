@@ -23,7 +23,7 @@
 }
 
 - (NSString*)URIEscape {
-	return NSMakeCollectable(CFURLCreateStringByAddingPercentEscapes(NULL, (CFStringRef)self, NULL, CFSTR(":/?#[]@!$&’()*+,;="), kCFStringEncodingUTF8));
+	return [NSMakeCollectable(CFURLCreateStringByAddingPercentEscapes(NULL, (CFStringRef)self, NULL, CFSTR(":/?#[]@!$&’()*+,;="), kCFStringEncodingUTF8)) autorelease];
 }
 
 - (NSString*)stringByEnforcingCharacterSet:(NSCharacterSet*)set {

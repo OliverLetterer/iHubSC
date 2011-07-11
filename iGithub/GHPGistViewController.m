@@ -305,7 +305,7 @@
             
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             
-            [self updateImageView:cell.imageView atIndexPath:indexPath withGravatarID:self.gist.user.gravatarID];
+            [self updateImageView:cell.imageView atIndexPath:indexPath withAvatarURLString:self.gist.user.avatarURL];
             cell.textLabel.text = self.gist.user.login;
             
             return cell;
@@ -321,7 +321,7 @@
             }
             [self setupDefaultTableViewCell:cell forRowAtIndexPath:indexPath];
             
-            [self updateImageView:cell.imageView atIndexPath:indexPath withGravatarID:[GHSettingsHelper gravatarID]];
+            [self updateImageView:cell.imageView atIndexPath:indexPath withAvatarURLString:[GHSettingsHelper avatarURL]];
             
             cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ (right now)", @""), [GHSettingsHelper username]];
             cell.accessoryType = UITableViewCellAccessoryNone;
@@ -343,7 +343,7 @@
             
             GHAPIGistCommentV3 *comment = [self.comments objectAtIndex:indexPath.row - 1];
             
-            [self updateImageView:cell.imageView atIndexPath:indexPath withGravatarID:comment.user.gravatarID];
+            [self updateImageView:cell.imageView atIndexPath:indexPath withAvatarURLString:comment.user.avatarURL];
             
             cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ (%@ ago)", @""), comment.user.login, comment.createdAt.prettyTimeIntervalSinceNow];
             cell.detailTextLabel.text = comment.body;
