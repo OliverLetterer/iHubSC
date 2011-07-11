@@ -17,6 +17,8 @@
 #warning DiffView should always fill bounds
 #warning new TweetBot like Notifications
 #warning adopt avatarURL instead of gravatarID
+#warning remaining API calls not working
+#warning error does not set self.isDownloadingEssentialData = NO for GHPDataArrayViewController
 
 - (void)deviceOrientationDidChangeNotificationCallback:(NSNotification *)notification;
 

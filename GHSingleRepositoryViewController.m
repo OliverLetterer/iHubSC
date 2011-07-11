@@ -21,7 +21,6 @@
 #import "GHViewMilestoneViewController.h"
 #import "GHLabelTableViewCell.h"
 #import "GHViewLabelViewController.h"
-#import "OCPromptView.h"
 #import "INNotificationQueue.h"
 
 #define kUITableViewSectionUserData         0
@@ -1049,11 +1048,13 @@
         if (indexPath.row == 1) {
             // new collaborator
             
-            OCPromptView *alert = [[[OCPromptView alloc] initWithPrompt:NSLocalizedString(@"Enter Username", @"") 
-                                                               delegate:self 
-                                                      cancelButtonTitle:NSLocalizedString(@"Cancel", @"") 
-                                                      acceptButtonTitle:NSLocalizedString(@"OK", @"")]
-                                   autorelease];
+            UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Enter Username", @"") 
+                                                             message:nil 
+                                                            delegate:self 
+                                                   cancelButtonTitle:NSLocalizedString(@"Cancel", @"") 
+                                                   otherButtonTitles:NSLocalizedString(@"OK", @""), nil]
+                                  autorelease];
+            alert.alertViewStyle = UIAlertViewStylePlainTextInput;
             alert.tag = kUIAlertViewAddCollaboratorTag;
             [alert show];
             [tableView deselectRowAtIndexPath:indexPath animated:NO];
@@ -1075,8 +1076,7 @@
         // new collaborator
         if (buttonIndex == 1) {
             // OK clicked
-            OCPromptView *alert = (OCPromptView *)alertView;
-            NSString *username = [alert enteredText];
+            NSString *username = [alertView textFieldAtIndex:0].text;
             [GHAPIRepositoryV3 addCollaboratorNamed:username onRepository:self.repositoryString 
                                   completionHandler:^(NSError *error) {
                                       if (error) {

@@ -72,7 +72,6 @@
 		A70ABEF313C070410000D189 /* GHPDiffViewContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = A70ABEF213C0703F0000D189 /* GHPDiffViewContentView.m */; };
 		A70DA3D813A4B7F700235C76 /* GHAPIOrganizationV3.m in Sources */ = {isa = PBXBuildFile; fileRef = A70DA3D713A4B7F700235C76 /* GHAPIOrganizationV3.m */; };
 		A70DA3DC13A4E2D100235C76 /* GHAPITeamV3.m in Sources */ = {isa = PBXBuildFile; fileRef = A70DA3DB13A4E2D100235C76 /* GHAPITeamV3.m */; };
-		A70DA3DF13A61BC200235C76 /* OCPromptView.m in Sources */ = {isa = PBXBuildFile; fileRef = A70DA3DE13A61BC000235C76 /* OCPromptView.m */; };
 		A70DAE0D13B4A0D900DE4279 /* GHPDefaultTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A70DAE0C13B4A0D900DE4279 /* GHPDefaultTableViewCell.m */; };
 		A70DAE1013B4A1DE00DE4279 /* GHPDefaultTableViewCellBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = A70DAE0F13B4A1DE00DE4279 /* GHPDefaultTableViewCellBackgroundView.m */; };
 		A70FF3A413BF6A560082E2EC /* GHPCollapsingAndSpinningTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A70FF3A313BF6A560082E2EC /* GHPCollapsingAndSpinningTableViewCell.m */; };
@@ -434,8 +433,6 @@
 		A70DA3D713A4B7F700235C76 /* GHAPIOrganizationV3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHAPIOrganizationV3.m; sourceTree = "<group>"; };
 		A70DA3DA13A4E2D100235C76 /* GHAPITeamV3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHAPITeamV3.h; sourceTree = "<group>"; };
 		A70DA3DB13A4E2D100235C76 /* GHAPITeamV3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHAPITeamV3.m; sourceTree = "<group>"; };
-		A70DA3DD13A61BBD00235C76 /* OCPromptView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCPromptView.h; sourceTree = "<group>"; };
-		A70DA3DE13A61BC000235C76 /* OCPromptView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OCPromptView.m; sourceTree = "<group>"; };
 		A70DAE0B13B4A0D900DE4279 /* GHPDefaultTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPDefaultTableViewCell.h; sourceTree = "<group>"; };
 		A70DAE0C13B4A0D900DE4279 /* GHPDefaultTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPDefaultTableViewCell.m; sourceTree = "<group>"; };
 		A70DAE0E13B4A1DE00DE4279 /* GHPDefaultTableViewCellBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPDefaultTableViewCellBackgroundView.h; sourceTree = "<group>"; };
@@ -1704,8 +1701,6 @@
 			children = (
 				A75C3EB213B363EF00D64681 /* INNotificationQueue */,
 				A7288A6B13A9091500170D57 /* SyntaxHighlighting */,
-				A70DA3DD13A61BBD00235C76 /* OCPromptView.h */,
-				A70DA3DE13A61BC000235C76 /* OCPromptView.m */,
 				A712B7C7135CB58C0009B7A7 /* Browse content */,
 				A76FC9A81352D27E004C642E /* UIExpandableTableView */,
 				A7BC6780134CCED40083F906 /* PullToRefreshTableViewController */,
@@ -2969,7 +2964,6 @@
 				A7DCDD9413A366DF00089CCD /* GHAPIRepositoryBranchV3.m in Sources */,
 				A70DA3D813A4B7F700235C76 /* GHAPIOrganizationV3.m in Sources */,
 				A70DA3DC13A4E2D100235C76 /* GHAPITeamV3.m in Sources */,
-				A70DA3DF13A61BC200235C76 /* OCPromptView.m in Sources */,
 				A7288A6913A8F21600170D57 /* BGPlainWebView.m in Sources */,
 				A75C3EA813B35B5300D64681 /* GHOwnerNewsFeedViewController+Private.m in Sources */,
 				A75C3EAF13B363E300D64681 /* INNotificationQueue.m in Sources */,
