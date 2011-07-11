@@ -15,7 +15,6 @@
 
 #warning authentication not working
 #warning User->Organizations missing
-#warning NewsFeeds are missing
 
 - (void)deviceOrientationDidChangeNotificationCallback:(NSNotification *)notification;
 

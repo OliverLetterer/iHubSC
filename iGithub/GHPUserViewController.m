@@ -14,6 +14,7 @@
 #import "GHPFollwingUsersViewController.h"
 #import "GHPFollowedUsersViewController.h"
 #import "GHPGistsOfUserViewController.h"
+#import "GHPUsersNewsFeedViewController.h"
 
 #define kUITableViewSectionUserInfo         0
 #define kUITableViewSectionUserContent      1
@@ -306,6 +307,8 @@
             viewController = [[[GHPFollowedUsersViewController alloc] initWithUsername:self.username] autorelease];
         } else if (indexPath.row == 4) {
             viewController = [[[GHPGistsOfUserViewController alloc] initWithUsername:self.username] autorelease];
+        }else if (indexPath.row == 6) {
+            viewController = [[[GHPUsersNewsFeedViewController alloc] initWithUsername:self.username] autorelease];
         }
         
         if (viewController) {

@@ -13,10 +13,14 @@
 @interface GHPLeftNavigationController : GHTableViewController <UIAlertViewDelegate> {
     GHPEdgedLineView *_lineView;
     UIView *_controllerView;
+    
+    NSIndexPath *_lastSelectedIndexPath;
 }
 
 @property (nonatomic, retain) GHPEdgedLineView *lineView;
 @property (nonatomic, retain) UIView *controllerView;
+
+@property (nonatomic, copy) NSIndexPath *lastSelectedIndexPath;
 
 - (void)gearButtonClicked:(UIButton *)button;
 

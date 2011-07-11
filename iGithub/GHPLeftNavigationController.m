@@ -16,12 +16,15 @@
 #import "UIImage+GHTabBar.h"
 #import "ANAdvancedNavigationController.h"
 #import "GHPSearchViewController.h"
+#import "GHPOwnersNewsFeedViewController.h"
+#import "GHPUsersNewsFeedViewController.h"
 
 #import "GHPUserViewController.h"
 
 @implementation GHPLeftNavigationController
 
 @synthesize lineView=_lineView, controllerView=_controllerView;
+@synthesize lastSelectedIndexPath=_lastSelectedIndexPath;
 
 - (id)initWithStyle:(UITableViewStyle)style {
     self = [super initWithStyle:UITableViewStylePlain];
@@ -126,24 +129,13 @@
     [super viewDidUnload];
     self.lineView = nil;
     self.controllerView = nil;
+    self.lastSelectedIndexPath = nil;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
     [self scrollViewDidScroll:self.tableView];
-}
-
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-}
-
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-}
-
-- (void)viewDidDisappear:(BOOL)animated {
-    [super viewDidDisappear:animated];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
@@ -268,12 +260,18 @@
         viewController = [[[GHPUserViewController alloc] initWithUsername:[GHAuthenticationManager sharedInstance].username ] autorelease];
     } else if (indexPath.row == 5) {
         viewController = [[[GHPSearchViewController alloc] init] autorelease];
+    } else if (indexPath.row == 1) {
+        viewController = [[[GHPOwnersNewsFeedViewController alloc] init] autorelease];
+    } else if (indexPath.row == 2) {
+        viewController = [[[GHPUsersNewsFeedViewController alloc] initWithUsername:[GHAuthenticationManager sharedInstance].username ] autorelease];
     }
     
     if (viewController) {
+        self.lastSelectedIndexPath = indexPath;
         [self.advancedNavigationController pushRootViewController:viewController];
     } else {
         [tableView deselectRowAtIndexPath:indexPath animated:NO];
+        [tableView selectRowAtIndexPath:self.lastSelectedIndexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
     }
 }
 
@@ -298,16 +296,11 @@
 
 #pragma mark - memory management
 
-- (void)didReceiveMemoryWarning {
-    // Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
-    
-    // Release any cached data, images, etc that aren't in use.
-}
-
 - (void)dealloc {
     [_lineView release];
     [_controllerView release];
+    [_lastSelectedIndexPath release];
+    
     [super dealloc];
 }
 
