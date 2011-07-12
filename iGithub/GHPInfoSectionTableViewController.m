@@ -107,9 +107,11 @@
         [self setActionButtonActive:NO];
         UIActionSheet *sheet = self.actionButtonActionSheet;
         
-        [sheet showFromRect:[cell.actionButton convertRect:cell.actionButton.bounds toView:self.view] 
-                     inView:self.view 
-                   animated:YES];
+        if (self.isViewLoaded) {
+            [sheet showFromRect:[cell.actionButton convertRect:cell.actionButton.bounds toView:self.view] 
+                         inView:self.view 
+                       animated:YES];
+        }
     }
 
 }

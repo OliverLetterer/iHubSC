@@ -130,17 +130,11 @@ const CGFloat ANAdvancedNavigationControllerDefaultDraggingDistance         = 47
         [NSException raise:NSInternalInconsistencyException format:@"viewController (%@) is not part of the viewController Hierarchy", viewController];
     }
     
-    NSInteger index = [self.viewControllers indexOfObject:viewController];
-    [self.viewControllers enumerateObjectsAtIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(index, self.viewControllers.count-index)] 
-                                            options:NSEnumerationConcurrent 
-                                         usingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-                                             UIViewController *rightViewController = obj;
-                                             [self removeRightViewController:rightViewController];
-                                             [self removeRightViewControllerView:rightViewController animated:YES];
-                                         }];
-    index--;
+    NSInteger index = [self.viewControllers indexOfObject:viewController]-1;
+    
     if (index >= 0) {
-        [self moveRightViewControllerToRightAnchorPoint:[self.viewControllers objectAtIndex:index] animated:YES];
+        viewController = [self.viewControllers objectAtIndex:index];
+        [self popViewControllersToViewController:viewController];
     }
 }
 
