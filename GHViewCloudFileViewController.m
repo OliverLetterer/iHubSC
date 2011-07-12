@@ -85,7 +85,7 @@
 }
 
 - (id)initWithFile:(NSString *)filename contentsOfFile:(NSString *)content {
-    if (self == [super init]) {
+    if (self = [super init]) {
         self.filename = filename;
         self.contentString = content;
         self.title = filename;

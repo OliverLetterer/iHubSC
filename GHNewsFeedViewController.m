@@ -116,9 +116,7 @@
         
         GHIssuePayload *payload = (GHIssuePayload *)item.payload;
         
-        [self updateImageViewForCell:cell 
-                         atIndexPath:indexPath 
-                      withGravatarID:item.actorAttributes.gravatarID];
+        [self updateImageView:cell.imageView atIndexPath:indexPath withGravatarID:item.actorAttributes.gravatarID];
         cell.titleLabel.text = [NSString stringWithFormat:@"%@ %@", 
                                 item.actor, 
                                 [NSString stringWithFormat:NSLocalizedString(@"%@ Issue %@", @""), 
@@ -161,9 +159,7 @@
         
         GHPushPayload *payload = (GHPushPayload *)item.payload;
         
-        [self updateImageViewForCell:cell 
-                         atIndexPath:indexPath 
-                      withGravatarID:item.actorAttributes.gravatarID];
+        [self updateImageView:cell.imageView atIndexPath:indexPath withGravatarID:item.actorAttributes.gravatarID];
         NSUInteger numberOfCommits = [payload.commits count];
         cell.titleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ pushed to %@ (%d)", @""), item.actor, payload.branch, numberOfCommits];
         cell.repositoryLabel.text = item.repository.fullName;
@@ -190,9 +186,7 @@
             cell = [[[GHNewsFeedItemTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
         }
         
-        [self updateImageViewForCell:cell 
-                         atIndexPath:indexPath 
-                      withGravatarID:item.actorAttributes.gravatarID];
+        [self updateImageView:cell.imageView atIndexPath:indexPath withGravatarID:item.actorAttributes.gravatarID];
         cell.titleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ commented on a commit", @""), item.actor];
         cell.repositoryLabel.text = item.repository.fullName;
         
@@ -207,9 +201,7 @@
         
         GHFollowEventPayload *payload = (GHFollowEventPayload *)item.payload;
         
-        [self updateImageViewForCell:cell 
-                         atIndexPath:indexPath 
-                      withGravatarID:item.actorAttributes.gravatarID];
+        [self updateImageView:cell.imageView atIndexPath:indexPath withGravatarID:item.actorAttributes.gravatarID];
         cell.titleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ started following", @""), item.actor];
         cell.targetNameLabel.text = payload.target.login;
         
@@ -242,9 +234,7 @@
         
         GHWatchEventPayload *payload = (GHWatchEventPayload *)item.payload;
         
-        [self updateImageViewForCell:cell 
-                         atIndexPath:indexPath 
-                      withGravatarID:item.actorAttributes.gravatarID];
+        [self updateImageView:cell.imageView atIndexPath:indexPath withGravatarID:item.actorAttributes.gravatarID];
         cell.titleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ %@ watching", @""), item.actor, payload.action];
         cell.repositoryLabel.text = item.repository.fullName;
         
@@ -259,9 +249,7 @@
         
         GHCreateEventPayload *payload = (GHCreateEventPayload *)item.payload;
         
-        [self updateImageViewForCell:cell 
-                         atIndexPath:indexPath 
-                      withGravatarID:item.actorAttributes.gravatarID];
+        [self updateImageView:cell.imageView atIndexPath:indexPath withGravatarID:item.actorAttributes.gravatarID];
         
         if (payload.objectType == GHCreateEventObjectRepository) {
             cell.titleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ created repository", @""), item.actor];
@@ -286,9 +274,7 @@
             cell = [[[GHNewsFeedItemTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
         }
         
-        [self updateImageViewForCell:cell 
-                         atIndexPath:indexPath 
-                      withGravatarID:item.actorAttributes.gravatarID];
+        [self updateImageView:cell.imageView atIndexPath:indexPath withGravatarID:item.actorAttributes.gravatarID];
         
         cell.titleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ forked repository", @""), item.actor];
         cell.repositoryLabel.text = item.repository.fullName;
@@ -304,9 +290,7 @@
         
         GHDeleteEventPayload *payload = (GHDeleteEventPayload *)item.payload;
         
-        [self updateImageViewForCell:cell 
-                         atIndexPath:indexPath 
-                      withGravatarID:item.actorAttributes.gravatarID];
+        [self updateImageView:cell.imageView atIndexPath:indexPath withGravatarID:item.actorAttributes.gravatarID];
         
         cell.titleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ deleted %@ %@", @""), item.actor, payload.refType, payload.ref];
         
@@ -330,9 +314,7 @@
         
         GHGollumEventPayload *payload = (GHGollumEventPayload *)item.payload;
         
-        [self updateImageViewForCell:cell 
-                         atIndexPath:indexPath 
-                      withGravatarID:item.actorAttributes.gravatarID];
+        [self updateImageView:cell.imageView atIndexPath:indexPath withGravatarID:item.actorAttributes.gravatarID];
         
         cell.titleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ %@ %@ in wiki", @""), item.actor, payload.action, payload.pageName];
         cell.repositoryLabel.text = item.repository.fullName;
@@ -355,10 +337,7 @@
             action = [action stringByAppendingString:@"ed"];
         }
         
-        [self updateImageViewForCell:cell 
-                         atIndexPath:indexPath 
-                      withGravatarID:item.actorAttributes.gravatarID];
-        
+        [self updateImageView:cell.imageView atIndexPath:indexPath withGravatarID:item.actorAttributes.gravatarID];
         cell.repositoryLabel.text = nil;
         cell.titleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ %@ %@", @""), item.actor, action, payload.name];
         cell.descriptionLabel.text = payload.descriptionGist ? payload.descriptionGist : payload.snippet;
@@ -374,9 +353,7 @@
         
         GHDownloadEventPayload *payload = (GHDownloadEventPayload *)item.payload;
         
-        [self updateImageViewForCell:cell 
-                         atIndexPath:indexPath 
-                      withGravatarID:item.actorAttributes.gravatarID];
+        [self updateImageView:cell.imageView atIndexPath:indexPath withGravatarID:item.actorAttributes.gravatarID];
         
         cell.repositoryLabel.text = item.repository.fullName;
         cell.titleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ uploaded a file", @""), item.actor];
@@ -403,9 +380,7 @@
             description = [NSString stringWithFormat:NSLocalizedString(@"%@ with %@ and %@", @""), commitsString, additionsString, deletionsString];
         }
         
-        [self updateImageViewForCell:cell 
-                         atIndexPath:indexPath 
-                      withGravatarID:item.actorAttributes.gravatarID];
+        [self updateImageView:cell.imageView atIndexPath:indexPath withGravatarID:item.actorAttributes.gravatarID];
         
         cell.repositoryLabel.text = item.repository.fullName;
         cell.descriptionLabel.text = description;
@@ -422,9 +397,7 @@
         
         GHMemberEventPayload *payload = (GHMemberEventPayload *)item.payload;
         
-        [self updateImageViewForCell:cell 
-                         atIndexPath:indexPath 
-                      withGravatarID:payload.member.gravatarID];
+        [self updateImageView:cell.imageView atIndexPath:indexPath withGravatarID:item.actorAttributes.gravatarID];
         
         cell.repositoryLabel.text = item.repository.fullName;
         cell.titleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ %@ %@", @""), item.actor, payload.action, payload.member.login];
@@ -439,10 +412,7 @@
         }
         
         GHIssuesCommentPayload *payload = (GHIssuesCommentPayload *)item.payload;
-        
-        [self updateImageViewForCell:cell 
-                         atIndexPath:indexPath 
-                      withGravatarID:item.actorAttributes.gravatarID];
+        [self updateImageView:cell.imageView atIndexPath:indexPath withGravatarID:item.actorAttributes.gravatarID];
         
         cell.repositoryLabel.text = item.repository.fullName;
         
@@ -460,10 +430,7 @@
         
         GHForkApplyEventPayload *payload = (GHForkApplyEventPayload *)item.payload;
         
-        [self updateImageViewForCell:cell 
-                         atIndexPath:indexPath 
-                      withGravatarID:item.actorAttributes.gravatarID];
-        
+        [self updateImageView:cell.imageView atIndexPath:indexPath withGravatarID:item.actorAttributes.gravatarID];
         cell.repositoryLabel.text = item.repository.fullName;
         cell.titleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ applied fork commits", @""), item.actor];
         
@@ -478,9 +445,7 @@
             cell = [[[GHNewsFeedItemTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
         }
         
-        [self updateImageViewForCell:cell 
-                         atIndexPath:indexPath 
-                      withGravatarID:item.actorAttributes.gravatarID];
+        [self updateImageView:cell.imageView atIndexPath:indexPath withGravatarID:item.actorAttributes.gravatarID];
         
         cell.repositoryLabel.text = item.repository.fullName;
         cell.titleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ open sourced", @""), item.actor];

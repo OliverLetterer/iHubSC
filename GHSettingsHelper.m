@@ -10,7 +10,6 @@
 #import "SFHFKeychainUtils.h"
 
 #define GHSettingsUsernameKey @"GHSettingsUsernameKey"
-#define GHSettingsGravatarIDKey @"GHSettingsGravatarIDKey"
 #define GHSettingsAvatarIDKey @"GHSettingsAvatarIDKey"
 #define GHSettingsKeychainService @"de.olettere.iGithub"
 
@@ -36,14 +35,6 @@
                       forServiceName:GHSettingsKeychainService 
                       updateExisting:YES 
                                error:NULL];
-}
-
-+ (NSString *)gravatarID {
-    return [[NSUserDefaults standardUserDefaults] objectForKey:GHSettingsGravatarIDKey];
-}
-
-+ (void)setGravatarID:(NSString *)gravatarID {
-    [[NSUserDefaults standardUserDefaults] setObject:gravatarID forKey:GHSettingsGravatarIDKey];
 }
 
 + (NSString *)avatarURL {

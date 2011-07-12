@@ -115,27 +115,6 @@ static CGFloat wrapperViewHeight = 21.0f;
     return newSize.height < 21.0f ? 21.0f : newSize.height;
 }
 
-- (void)updateImageViewForCell:(GHNewsFeedItemTableViewCell *)cell 
-                   atIndexPath:(NSIndexPath *)indexPath 
-                withGravatarID:(NSString *)gravatarID {
-    
-    UIImage *gravatarImage = [UIImage cachedImageFromGravatarID:gravatarID];
-    
-    if (gravatarImage) {
-        cell.imageView.image = gravatarImage;
-        [cell.activityIndicatorView stopAnimating];
-    } else {
-        [cell.activityIndicatorView startAnimating];
-        
-        [UIImage imageFromGravatarID:gravatarID 
-               withCompletionHandler:^(UIImage *image, NSError *error, BOOL didDownload) {
-                   if ([self.tableView containsIndexPath:indexPath]) {
-                       [self.tableView reloadRowAtIndexPath:indexPath withRowAnimation:UITableViewRowAnimationNone];
-                   }
-               }];
-    }
-}
-
 - (void)updateImageView:(UIImageView *)imageView 
             inTableView:(UITableView *)tableView 
             atIndexPath:(NSIndexPath *)indexPath 

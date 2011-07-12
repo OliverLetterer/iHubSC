@@ -920,15 +920,13 @@
 			name = UITableViewCells;
 			sourceTree = "<group>";
 		};
-		A7023DE613CB8F9F0079D1D0 /* GHAPIImageQueueV3 */ = {
+		A7023DE613CB8F9F0079D1D0 /* GHAPIImageCacheV3 */ = {
 			isa = PBXGroup;
 			children = (
 				A7023DEA13CB904B0079D1D0 /* GHAPIImageCacheV3.h */,
 				A7023DEB13CB904B0079D1D0 /* GHAPIImageCacheV3.m */,
-				A7023DF113CB92EF0079D1D0 /* UIImage+GHAPIImageCacheV3.h */,
-				A7023DF213CB92F00079D1D0 /* UIImage+GHAPIImageCacheV3.m */,
 			);
-			name = GHAPIImageQueueV3;
+			name = GHAPIImageCacheV3;
 			sourceTree = "<group>";
 		};
 		A703A62F13BE0163003A4585 /* GHPRepositoriesViewController */ = {
@@ -1473,6 +1471,7 @@
 		A73E29B11348744300E85282 /* Foundation & Class Additions */ = {
 			isa = PBXGroup;
 			children = (
+				A79AE38D13CC54320008E900 /* UIImage */,
 				A7B5209B1389285B000FEE61 /* UIColor */,
 				A7F7CA5E134DA1B1005509D0 /* NSError */,
 				A7BC6781134CCF890083F906 /* ASI-HTTP */,
@@ -1886,10 +1885,19 @@
 			path = ..;
 			sourceTree = "<group>";
 		};
+		A79AE38D13CC54320008E900 /* UIImage */ = {
+			isa = PBXGroup;
+			children = (
+				A7023DF113CB92EF0079D1D0 /* UIImage+GHAPIImageCacheV3.h */,
+				A7023DF213CB92F00079D1D0 /* UIImage+GHAPIImageCacheV3.m */,
+			);
+			name = UIImage;
+			sourceTree = "<group>";
+		};
 		A79F37F813883B650028F492 /* v3 */ = {
 			isa = PBXGroup;
 			children = (
-				A7023DE613CB8F9F0079D1D0 /* GHAPIImageQueueV3 */,
+				A7023DE613CB8F9F0079D1D0 /* GHAPIImageCacheV3 */,
 				A70A11A813C3B33B00685749 /* GHAPIPullRequestV3 */,
 				A773023313B38C520075235E /* GHAPICommitV3 */,
 				A70DA3D913A4E2BE00235C76 /* GHAPITeamV3 */,

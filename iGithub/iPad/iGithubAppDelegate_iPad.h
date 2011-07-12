@@ -15,7 +15,6 @@
 
 #warning adopt GHPInfoSectionTableViewController
 #warning new TweetBot like Notifications
-#warning adopt avatarURL instead of gravatarID
 
 - (void)deviceOrientationDidChangeNotificationCallback:(NSNotification *)notification;
 

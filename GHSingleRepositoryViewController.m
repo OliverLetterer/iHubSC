@@ -632,9 +632,7 @@
             
             cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Issue %@", @""), issue.number];
             
-            [self updateImageViewForCell:cell 
-                             atIndexPath:indexPath 
-                          withGravatarID:issue.user.gravatarID];
+            [self updateImageView:cell.imageView atIndexPath:indexPath withAvatarURLString:issue.user.avatarURL];
             
             cell.detailTextLabel.text = [NSString stringWithFormat:@"by %@ %@", issue.user.login, [NSString stringWithFormat:NSLocalizedString(@"%@ ago", @""), issue.createdAt.prettyTimeIntervalSinceNow]];
             ;
@@ -738,9 +736,7 @@
         
         cell.repositoryLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ ago", @""), discussion.createdAt.prettyTimeIntervalSinceNow];
         
-        [self updateImageViewForCell:cell 
-                         atIndexPath:indexPath 
-                      withGravatarID:discussion.user.gravatarID];
+        [self updateImageView:cell.imageView atIndexPath:indexPath withGravatarID:discussion.user.gravatarID];
         
         return cell;
     } else if (indexPath.section == kUITableViewSectionRecentCommits || indexPath.section == kUITableViewSectionBrowseBranches) {

@@ -382,9 +382,7 @@
             
             cell.textLabel.text = self.issue.title;
             
-            [self updateImageViewForCell:cell 
-                             atIndexPath:indexPath 
-                          withGravatarID:self.issue.user.gravatarID];
+            [self updateImageView:cell.imageView atIndexPath:indexPath withAvatarURLString:self.issue.user.avatarURL];
             
             cell.detailTextLabel.text = [NSString stringWithFormat:@"by %@ %@", self.issue.user.login, [NSString stringWithFormat:NSLocalizedString(@"%@ ago", @""), self.issue.createdAt.prettyTimeIntervalSinceNow] ];
             ;
@@ -483,9 +481,7 @@
                 cell = [[[GHNewCommentTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
             }
             
-            [self updateImageViewForCell:cell 
-                             atIndexPath:indexPath 
-                          withGravatarID:[GHSettingsHelper gravatarID]];
+            [self updateImageView:cell.imageView atIndexPath:indexPath withAvatarURLString:[GHSettingsHelper avatarURL]];
             
             cell.titleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ (right now)", @""), [GHSettingsHelper username]];
             
@@ -508,10 +504,9 @@
         if ([object isKindOfClass:[GHAPIIssueCommentV3 class] ]) {
             // display a comment
             GHAPIIssueCommentV3 *comment = (GHAPIIssueCommentV3 *)object;
+
             
-            [self updateImageViewForCell:cell 
-                             atIndexPath:indexPath 
-                          withGravatarID:comment.user.gravatarID];
+            [self updateImageView:cell.imageView atIndexPath:indexPath withAvatarURLString:comment.user.avatarURL];
             
             cell.titleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ commented on this %@", @""), comment.user.login, self.issueName];
             cell.descriptionLabel.text = comment.body;
@@ -521,7 +516,7 @@
         } else if ([object isKindOfClass:[GHAPIIssueEventV3 class] ]) {
             GHAPIIssueEventV3 *event = (GHAPIIssueEventV3 *)object;
             
-            [self updateImageViewForCell:cell atIndexPath:indexPath withGravatarID:event.actor.gravatarID];
+            [self updateImageView:cell.imageView atIndexPath:indexPath withAvatarURLString:event.actor.avatarURL];
             
             cell.repositoryLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ ago", @""), event.createdAt.prettyTimeIntervalSinceNow];
             
@@ -589,9 +584,7 @@
         
         GHCommit *commit = [self.discussion.commits objectAtIndex:indexPath.row-1];
         
-        [self updateImageViewForCell:cell 
-                         atIndexPath:indexPath 
-                      withGravatarID:commit.user.gravatarID];
+        [self updateImageView:cell.imageView atIndexPath:indexPath withGravatarID:commit.user.gravatarID];
         
         cell.titleLabel.text = commit.ID;
         cell.descriptionLabel.text = commit.message;

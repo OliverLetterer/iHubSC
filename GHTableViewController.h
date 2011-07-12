@@ -54,10 +54,6 @@
 - (UITableViewCell *)dummyCellWithText:(NSString *)text;
 - (CGFloat)heightForDescription:(NSString *)description;
 
-- (void)updateImageViewForCell:(GHNewsFeedItemTableViewCell *)cell 
-                   atIndexPath:(NSIndexPath *)indexPath 
-                withGravatarID:(NSString *)gravatarID;
-
 - (void)updateImageView:(UIImageView *)imageView 
             inTableView:(UITableView *)tableView 
             atIndexPath:(NSIndexPath *)indexPath 

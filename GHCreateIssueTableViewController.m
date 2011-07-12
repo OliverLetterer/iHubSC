@@ -316,7 +316,7 @@
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
             }
             
-            [self updateImageViewForCell:cell atIndexPath:indexPath withGravatarID:[GHSettingsHelper gravatarID] ];
+            [self updateImageView:cell.imageView atIndexPath:indexPath withAvatarURLString:[GHSettingsHelper avatarURL]];
             
             cell.descriptionTextField.inputAccessoryView = self.textViewToolBar;
             self.textView = cell.descriptionTextField;

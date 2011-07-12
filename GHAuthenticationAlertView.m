@@ -45,7 +45,6 @@
                                          
                                          [GHSettingsHelper setUsername:user.login];
                                          [GHSettingsHelper setPassword:password];
-                                         [GHSettingsHelper setGravatarID:user.gravatarID];
                                          [GHSettingsHelper setAvatarURL:user.avatarURL];
                                          
                                          [[GHAuthenticationManager sharedInstance] saveAuthenticatedUserWithName:user.login 

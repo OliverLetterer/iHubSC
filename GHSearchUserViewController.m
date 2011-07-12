@@ -148,7 +148,7 @@
     
     cell.repositoryLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Since %@", @""), user.createdAt.prettyTimeIntervalSinceNow];
     
-    [self updateImageViewForCell:cell atIndexPath:indexPath withGravatarID:user.gravatarID];
+    [self updateImageView:cell.imageView atIndexPath:indexPath withGravatarID:user.gravatarID];
     
     // Configure the cell...
     

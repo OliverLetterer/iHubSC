@@ -161,7 +161,7 @@
     
     GHAPICommitV3 *commit = [self.commits objectAtIndex:indexPath.row];
     
-    [self updateImageViewForCell:cell atIndexPath:indexPath withGravatarID:commit.author.gravatarID];
+    [self updateImageView:cell.imageView atIndexPath:indexPath withAvatarURLString:commit.author.avatarURL];
     
     cell.titleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ committed %@", @""), commit.author.login, commit.SHA];
     cell.descriptionLabel.text = commit.message;

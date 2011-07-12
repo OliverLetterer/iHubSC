@@ -391,9 +391,7 @@
             
             GHAPIGistCommentV3 *comment = [self.comments objectAtIndex:indexPath.row - 1];
             
-            [self updateImageViewForCell:cell 
-                             atIndexPath:indexPath 
-                          withGravatarID:comment.user.gravatarID];
+            [self updateImageView:cell.imageView atIndexPath:indexPath withAvatarURLString:comment.user.avatarURL];
             
             cell.titleLabel.text = comment.user.login;
             cell.descriptionLabel.text = comment.body;
@@ -409,9 +407,7 @@
                 cell = [[[GHNewCommentTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
             }
             
-            [self updateImageViewForCell:cell 
-                             atIndexPath:indexPath 
-                          withGravatarID:[GHSettingsHelper gravatarID]];
+            [self updateImageView:cell.imageView atIndexPath:indexPath withAvatarURLString:[GHSettingsHelper avatarURL]];
             
             cell.titleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ (right now)", @""), [GHSettingsHelper username]];
             

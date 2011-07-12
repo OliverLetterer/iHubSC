@@ -584,7 +584,7 @@
             cell.descriptionLabel.text = nil;
             cell.repositoryLabel.text = nil;
             
-            [self updateImageViewForCell:cell atIndexPath:indexPath withGravatarID:self.user.gravatarID];
+            [self updateImageView:cell.imageView atIndexPath:indexPath withAvatarURLString:self.user.avatarURL];
             
             return cell;
         }
@@ -807,7 +807,7 @@
         
         cell.descriptionLabel.text = organization.type;
         
-        [self updateImageViewForCell:cell atIndexPath:indexPath withGravatarID:organization.gravatarID];
+        [self updateImageView:cell.imageView atIndexPath:indexPath withAvatarURLString:organization.avatarURL];
         
         // Configure the cell...
         

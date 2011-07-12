@@ -264,7 +264,7 @@
             cell.descriptionLabel.text = nil;
             cell.repositoryLabel.text = nil;
             
-            [self updateImageViewForCell:cell atIndexPath:indexPath withGravatarID:self.organization.gravatarID];
+            [self updateImageView:cell.imageView atIndexPath:indexPath withAvatarURLString:self.organization.avatarURL];
             
             return cell;
         }

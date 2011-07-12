@@ -19,9 +19,6 @@
 + (NSString *)password;
 + (void)setPassword:(NSString *)password;
 
-+ (NSString *)gravatarID;
-+ (void)setGravatarID:(NSString *)gravatarID;
-
 + (NSString *)avatarURL;
 + (void)setAvatarURL:(NSString *)avatarURL;
 

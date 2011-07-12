@@ -37,3 +37,7 @@ extern NSString *const kGHNSStringMarkdownStyleFull;
 @property (nonatomic, readonly) NSString *HTMLMarkdownFormattedString;
 - (NSString *)stringFromMarkdownStyle:(NSString *)markdownStyle;
 @end
+
+@interface NSString (GHAPIHasing)
+- (NSString *)stringFromMD5Hash;
+@end

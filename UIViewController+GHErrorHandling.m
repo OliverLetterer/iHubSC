@@ -16,7 +16,7 @@
 
 - (void)invalidadUserData {
     [GHSettingsHelper setPassword:nil];
-    [GHSettingsHelper setGravatarID:nil];
+    [GHSettingsHelper setAvatarURL:nil];
     [GHSettingsHelper setUsername:nil];
     
     [[NSUserDefaults standardUserDefaults] synchronize];

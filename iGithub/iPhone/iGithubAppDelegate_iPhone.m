@@ -59,7 +59,7 @@
 //    [GHSettingsHelper setUsername:@"iTunesTestAccount"];
 //    [GHSettingsHelper setPassword:@"iTunes1"];
     
-    [GHSettingsHelper setGravatarID:@"534296d28e4a7118d2e75e84d04d571e"];
+    [GHSettingsHelper setAvatarURL:@"https://secure.gravatar.com/avatar/534296d28e4a7118d2e75e84d04d571e?s=140&d=https://gs1.wac.edgecastcdn.net/80460E/assets%2Fimages%2Fgravatars%2Fgravatar-140.png"];
     [GHAuthenticationManager sharedInstance].username = [GHSettingsHelper username];
     [GHAuthenticationManager sharedInstance].password = [GHSettingsHelper password];
 #else

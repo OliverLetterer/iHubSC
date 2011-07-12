@@ -7,6 +7,7 @@
 //
 
 #import "GHAPIImageCacheV3.h"
+#import "GithubAPI.h"
 
 NSString *GHAPIGravatarImageCacheDirectoryV3() {
     NSString *cachesDirectory = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) objectAtIndex:0];
@@ -46,6 +47,7 @@ NSString *GHAPIGravatarImageCacheDirectoryV3() {
 #pragma mark - Instance methods
 
 - (void)cacheImage:(UIImage *)image forURL:(NSString *)imageURLString {
+    imageURLString = imageURLString.stringFromMD5Hash;
     if (!imageURLString) {
         return;
     }
@@ -58,9 +60,11 @@ NSString *GHAPIGravatarImageCacheDirectoryV3() {
 }
 
 - (UIImage *)cachedImageFromURL:(NSString *)imageURLString {
+    imageURLString = imageURLString.stringFromMD5Hash;
     if (!imageURLString) {
         return [UIImage imageNamed:@"DefaultUserImage.png"];
     }
+    
     
     UIImage *inMemoryCachedImage = [self.imagesCache objectForKey:imageURLString];
     if (inMemoryCachedImage) {
