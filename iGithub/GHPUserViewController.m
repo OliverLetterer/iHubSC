@@ -7,7 +7,6 @@
 //
 
 #import "GHPUserViewController.h"
-#import "GHPUserInfoTableViewCell.h"
 #import "GHSettingsHelper.h"
 #import "GHPOwnedRepositoriesOfUserViewController.h"
 #import "GHPWatchedRepositoriesViewController.h"
@@ -24,27 +23,12 @@
 
 @implementation GHPUserViewController
 
-@synthesize user=_user, username=_username, userInfoCell=_userInfoCell;
+@synthesize user=_user, username=_username;
 
 #pragma mark - setters and getters
 
 - (BOOL)isAdminsitrativeUser {
     return [[GHAuthenticationManager sharedInstance].username isEqualToString:self.username];
-}
-
-- (BOOL)canDisplayActionButton {
-    NSUInteger numberOfButtons = 0;
-    if (!self.isAdminsitrativeUser) {
-        numberOfButtons++;
-    }
-    
-    if (self.user.hasBlog) {
-        numberOfButtons++;
-    }
-    if (self.user.hasEMail && [MFMailComposeViewController canSendMail]) {
-        numberOfButtons++;
-    }
-    return numberOfButtons > 0;
 }
 
 - (void)setUsername:(NSString *)username {
@@ -64,31 +48,6 @@
                     }
                 }
             }];
-}
-
-- (UIActionSheet *)actionButtonActionSheet {
-    UIActionSheet *sheet = [[[UIActionSheet alloc] init] autorelease];
-    
-    if (!self.isAdminsitrativeUser) {
-        if (!_isFollowingUser) {
-            [sheet addButtonWithTitle:NSLocalizedString(@"Follow", @"")];
-        } else {
-            [sheet addButtonWithTitle:NSLocalizedString(@"Unfollow", @"")];
-        }
-    }
-    
-    if (self.user.hasBlog) {
-        [sheet addButtonWithTitle:NSLocalizedString(@"View Blog in Safari", @"")];
-    }
-    if (self.user.hasEMail && [MFMailComposeViewController canSendMail]) {
-        [sheet addButtonWithTitle:NSLocalizedString(@"E-Mail", @"")];
-    }
-    
-    if (sheet.numberOfButtons == 0) {
-        return nil;
-    }
-    sheet.delegate = self;
-    return sheet;
 }
 
 - (NSString *)userDetailInfoString {
@@ -146,7 +105,6 @@
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
-    [_userInfoCell release], _userInfoCell = nil;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -218,13 +176,7 @@
         return cell;
     } else if (indexPath.section == kUITableViewSectionUserInfo) {
         if (indexPath.row == 0) {
-            NSString *CellIdentifier = @"GHPUserInfoTableViewCell";
-            GHPUserInfoTableViewCell *cell = (GHPUserInfoTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-            if (!cell) {
-                cell = [[[GHPUserInfoTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault 
-                                                        reuseIdentifier:CellIdentifier]
-                        autorelease];
-            }
+            GHPInfoTableViewCell *cell = self.infoCell;
             
             cell.textLabel.text = self.user.login;
             cell.detailTextLabel.text = self.userDetailInfoString;
@@ -234,9 +186,6 @@
             if (!self.canDisplayActionButton) {
                 [cell.actionButton removeFromSuperview];
             }
-            cell.delegate = self;
-            
-            self.userInfoCell = cell;
             
             return cell;
         }
@@ -245,50 +194,11 @@
     return self.dummyCell;
 }
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
 #pragma mark - Table view delegate
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == kUITableViewSectionUserInfo) {
-        return [GHPUserInfoTableViewCell heightWithContent:self.userDetailInfoString];
+        return [GHPInfoTableViewCell heightWithContent:self.userDetailInfoString];
     } else {
         return UITableViewAutomaticDimension;
     }
@@ -329,7 +239,6 @@
 - (void)dealloc {
     [_user release];
     [_username release];
-    [_userInfoCell release];
     
     [super dealloc];
 }
@@ -344,12 +253,10 @@
     @catch (NSException *exception) { }
     
     if ([title isEqualToString:NSLocalizedString(@"Follow", @"")]) {
-        self.userInfoCell.actionButton.alpha = 0.0f;
-        [self.userInfoCell.activityIndicatorView startAnimating];
+        [self setActionButtonActive:YES];
         [GHAPIUserV3 followUser:self.username 
               completionHandler:^(NSError *error) {
-                  self.userInfoCell.actionButton.alpha = 1.0f;
-                  [self.userInfoCell.activityIndicatorView stopAnimating];
+                  [self setActionButtonActive:NO];
                   if (error) {
                       [self handleError:error];
                   } else {
@@ -358,12 +265,10 @@
                   }
               }];
     } else if ([title isEqualToString:NSLocalizedString(@"Unfollow", @"")]) {
-        self.userInfoCell.actionButton.alpha = 0.0f;
-        [self.userInfoCell.activityIndicatorView startAnimating];
+        [self setActionButtonActive:YES];
         [GHAPIUserV3 unfollowUser:self.username 
               completionHandler:^(NSError *error) {
-                  self.userInfoCell.actionButton.alpha = 1.0f;
-                  [self.userInfoCell.activityIndicatorView stopAnimating];
+                  [self setActionButtonActive:NO];
                   if (error) {
                       [self handleError:error];
                   } else {
@@ -382,41 +287,60 @@
     }
 }
 
-#pragma mark - GHPUserInfoTableViewCellDelegate
-
-- (void)userInfoTableViewCellActionButtonClicked:(GHPUserInfoTableViewCell *)cell {
-    if (!self.isAdminsitrativeUser && !_hasFollowingData) {
-        cell.actionButton.alpha = 0.0f;
-        [cell.activityIndicatorView startAnimating];
-        [GHAPIUserV3 isFollowingUserNamed:self.username 
-                        completionHandler:^(BOOL following, NSError *error) {
-                            cell.actionButton.alpha = 1.0f;
-                            [cell.activityIndicatorView stopAnimating];
-                            if (error) {
-                                [self handleError:error];
-                            } else {
-                                _hasFollowingData = YES;
-                                _isFollowingUser = following;
-                                UIActionSheet *sheet = self.actionButtonActionSheet;
-                                
-                                [sheet showFromRect:[cell.actionButton convertRect:cell.actionButton.bounds toView:self.view] 
-                                             inView:self.view 
-                                           animated:YES];
-                            }
-                        }];
-    } else {
-        UIActionSheet *sheet = self.actionButtonActionSheet;
-        
-        [sheet showFromRect:[cell.actionButton convertRect:cell.actionButton.bounds toView:self.view] 
-                     inView:self.view 
-                   animated:YES];
-    }
-}
-
 #pragma mark - MFMailComposeViewControllerDelegate
 
 - (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
+
+#pragma mark - ActionMenu
+
+- (void)downloadDataToDisplayActionButton {
+    [GHAPIUserV3 isFollowingUserNamed:self.username 
+                    completionHandler:^(BOOL following, NSError *error) {
+                        if (error) {
+                            [self failedToDownloadDataToDisplayActionButtonWithError:error];
+                        } else {
+                            _hasFollowingData = YES;
+                            _isFollowingUser = following;
+                            
+                            [self didDownloadDataToDisplayActionButton];
+                        }
+                    }];
+}
+
+- (UIActionSheet *)actionButtonActionSheet {
+    UIActionSheet *sheet = [[[UIActionSheet alloc] init] autorelease];
+    
+    if (!self.isAdminsitrativeUser) {
+        if (!_isFollowingUser) {
+            [sheet addButtonWithTitle:NSLocalizedString(@"Follow", @"")];
+        } else {
+            [sheet addButtonWithTitle:NSLocalizedString(@"Unfollow", @"")];
+        }
+    }
+    
+    if (self.user.hasBlog) {
+        [sheet addButtonWithTitle:NSLocalizedString(@"View Blog in Safari", @"")];
+    }
+    if (self.user.hasEMail && [MFMailComposeViewController canSendMail]) {
+        [sheet addButtonWithTitle:NSLocalizedString(@"E-Mail", @"")];
+    }
+    
+    if (sheet.numberOfButtons == 0) {
+        return nil;
+    }
+    sheet.delegate = self;
+    return sheet;
+}
+
+- (BOOL)canDisplayActionButton {
+    return !self.isAdminsitrativeUser;
+}
+
+- (BOOL)canDisplayActionButtonActionSheet {
+    return _hasFollowingData;
+}
+
 
 @end

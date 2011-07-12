@@ -13,7 +13,6 @@
     
 }
 
-#warning adopt GHPInfoSectionTableViewController
 #warning new TweetBot like Notifications
 
 - (void)deviceOrientationDidChangeNotificationCallback:(NSNotification *)notification;

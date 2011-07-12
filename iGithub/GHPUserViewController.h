@@ -8,16 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "GHTableViewController.h"
-#import "GHPUserInfoTableViewCell.h"
 #import <MessageUI/MessageUI.h>
+#import "GHPInfoSectionTableViewController.h"
 
-#warning remove GHPUserInfoTableViewCell
-
-@interface GHPUserViewController : GHTableViewController <GHPUserInfoTableViewCellDelegate, UIActionSheetDelegate, MFMailComposeViewControllerDelegate> {
+@interface GHPUserViewController : GHPInfoSectionTableViewController <MFMailComposeViewControllerDelegate> {
     GHAPIUserV3 *_user;
     NSString *_username;
-    
-    GHPUserInfoTableViewCell *_userInfoCell;
     
     BOOL _hasFollowingData;
     BOOL _isFollowingUser;
@@ -29,11 +25,6 @@
 @property (nonatomic, readonly) NSString *userDetailInfoString;
 
 @property (nonatomic, readonly) BOOL isAdminsitrativeUser;
-@property (nonatomic, readonly) BOOL canDisplayActionButton;
-
-@property (nonatomic, retain) GHPUserInfoTableViewCell *userInfoCell;
-
-@property (nonatomic, readonly) UIActionSheet *actionButtonActionSheet;
 
 - (id)initWithUsername:(NSString *)username;
 
