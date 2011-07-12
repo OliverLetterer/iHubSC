@@ -34,7 +34,6 @@
 @synthesize repository=_repository, discussion=_discussion, history=_history;
 @synthesize issue=_issue;
 @synthesize textView=_textView, textViewToolBar=_textViewToolBar;
-@synthesize infoCell=_infoCell;
 
 #pragma mark - setters and getters
 
@@ -73,36 +72,6 @@
                   }];
 }
 
-- (UIActionSheet *)actionButtonActionSheet {
-    if (!_isCollaborator && ![[GHAuthenticationManager sharedInstance].username isEqualToString:self.issue.user.login]) {
-        UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", @"") 
-                                                         message:[NSString stringWithFormat:NSLocalizedString(@"You are not allowed to administrate this %@", @""), self.issueName] 
-                                                        delegate:nil 
-                                               cancelButtonTitle:NSLocalizedString(@"OK", @"") 
-                                               otherButtonTitles:nil]
-                              autorelease];
-        [alert show];
-        return nil;
-    }
-    
-    UIActionSheet *sheet = [[[UIActionSheet alloc] init] autorelease];
-    
-    if ([self.issue.state isEqualToString:kGHAPIIssueStateV3Open]) {
-        [sheet addButtonWithTitle:[NSString stringWithFormat:NSLocalizedString(@"Close this %@", @""), self.issueName]];
-    } else {
-        [sheet addButtonWithTitle:[NSString stringWithFormat:NSLocalizedString(@"Reopen this %@", @""), self.issueName]];
-    }
-    
-    if (self.issue.isPullRequest && _isCollaborator && [self.issue.state isEqualToString:kGHAPIIssueStateV3Open]) {
-        [sheet addButtonWithTitle:NSLocalizedString(@"Merge this Pull Request", @"")];
-    }
-    
-    sheet.delegate = self;
-    sheet.tag = kUIActionSheetTagAction;
-    
-    return sheet;
-}
-
 #pragma mark - Initialization
 
 - (id)initWithIssueNumber:(NSNumber *)issueNumber onRepository:(NSString *)repository {
@@ -122,7 +91,6 @@
     [_issue release];
     [_history release];
     [_discussion release];
-    [_infoCell release];
     
     [super dealloc];
 }
@@ -210,7 +178,6 @@
     
     self.textView = nil;
     self.textViewToolBar = nil;
-    self.infoCell = nil;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -368,22 +335,12 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == kUITableViewSectionInfo) {
         if (indexPath.row == 0) {
-            NSString *CellIdentifier = @"GHPUserInfoTableViewCell";
-            GHPInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-            if (!cell) {
-                cell = [[[GHPInfoTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault 
-                                                              reuseIdentifier:CellIdentifier]
-                        autorelease];
-            }
-            
+            GHPInfoTableViewCell *cell = self.infoCell;
+                        
             cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ (%@ ago)", @""), self.issue.user.login, self.issue.createdAt.prettyTimeIntervalSinceNow];
             cell.detailTextLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Issue %@ - %@", @""), self.issue.number, self.issue.title];
             
             [self updateImageView:cell.imageView atIndexPath:indexPath withAvatarURLString:self.issue.user.avatarURL];
-
-            cell.delegate = self;
-            
-            self.infoCell = cell;
             
             return cell;
         } else if (indexPath.row == 1) {
@@ -747,39 +704,6 @@
     }
 }
 
-#pragma mark - GHPInfoTableViewCellDelegateDelegate
-
-- (void)infoTableViewCellActionButtonClicked:(GHPInfoTableViewCell *)cell {
-    if (!_hasCollaboratorData) {
-        cell.actionButton.alpha = 0.0f;
-        [cell.activityIndicatorView startAnimating];
-        [GHAPIRepositoryV3 isUser:[GHAuthenticationManager sharedInstance].username 
-         collaboratorOnRepository:self.repositoryString 
-                completionHandler:^(BOOL state, NSError *error) {
-                    cell.actionButton.alpha = 1.0f;
-                    [cell.activityIndicatorView stopAnimating];
-                    if (error) {
-                        [self handleError:error];
-                    } else {
-                        _hasCollaboratorData = YES;
-                        _isCollaborator = state || [self.repositoryString hasPrefix:[GHAuthenticationManager sharedInstance].username];
-                        
-                        UIActionSheet *sheet = self.actionButtonActionSheet;
-                        
-                        [sheet showFromRect:[cell.actionButton convertRect:cell.actionButton.bounds toView:self.view] 
-                                     inView:self.view 
-                                   animated:YES];
-                    }
-                }];
-    } else {
-        UIActionSheet *sheet = self.actionButtonActionSheet;
-        
-        [sheet showFromRect:[cell.actionButton convertRect:cell.actionButton.bounds toView:self.view] 
-                     inView:self.view 
-                   animated:YES];
-    }
-}
-
 #pragma mark - UIActionSheetDelegate
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
@@ -863,6 +787,61 @@
                                       }];
 
     }
+}
+
+#pragma mark - ActionMenu
+
+- (void)downloadDataToDisplayActionButton {
+    [GHAPIRepositoryV3 isUser:[GHAuthenticationManager sharedInstance].username 
+     collaboratorOnRepository:self.repositoryString 
+            completionHandler:^(BOOL state, NSError *error) {
+                if (error) {
+                    [self failedToDownloadDataToDisplayActionButtonWithError:error];
+                } else {
+                    _hasCollaboratorData = YES;
+                    _isCollaborator = state || [self.repositoryString hasPrefix:[GHAuthenticationManager sharedInstance].username];
+                    
+                    [self didDownloadDataToDisplayActionButton];
+                }
+            }];
+}
+
+- (UIActionSheet *)actionButtonActionSheet {
+    if (!_isCollaborator && ![[GHAuthenticationManager sharedInstance].username isEqualToString:self.issue.user.login]) {
+        UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", @"") 
+                                                         message:[NSString stringWithFormat:NSLocalizedString(@"You are not allowed to administrate this %@", @""), self.issueName] 
+                                                        delegate:nil 
+                                               cancelButtonTitle:NSLocalizedString(@"OK", @"") 
+                                               otherButtonTitles:nil]
+                              autorelease];
+        [alert show];
+        return nil;
+    }
+    
+    UIActionSheet *sheet = [[[UIActionSheet alloc] init] autorelease];
+    
+    if ([self.issue.state isEqualToString:kGHAPIIssueStateV3Open]) {
+        [sheet addButtonWithTitle:[NSString stringWithFormat:NSLocalizedString(@"Close this %@", @""), self.issueName]];
+    } else {
+        [sheet addButtonWithTitle:[NSString stringWithFormat:NSLocalizedString(@"Reopen this %@", @""), self.issueName]];
+    }
+    
+    if (self.issue.isPullRequest && _isCollaborator && [self.issue.state isEqualToString:kGHAPIIssueStateV3Open]) {
+        [sheet addButtonWithTitle:NSLocalizedString(@"Merge this Pull Request", @"")];
+    }
+    
+    sheet.delegate = self;
+    sheet.tag = kUIActionSheetTagAction;
+    
+    return sheet;
+}
+
+- (BOOL)canDisplayActionButton {
+    return YES;
+}
+
+- (BOOL)canDisplayActionButtonActionSheet {
+    return _hasCollaboratorData;
 }
 
 @end
