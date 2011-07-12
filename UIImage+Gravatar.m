@@ -43,7 +43,7 @@
             if (theImage) {
                 CGSize imageSize = CGSizeMake(56.0 * [UIScreen mainScreen].scale, 56.0 * [UIScreen mainScreen].scale);
                 
-                theImage = [theImage resizedImage:imageSize interpolationQuality:kCGInterpolationHigh];
+                theImage = [theImage resizedImageToSize:imageSize];
                 [GHGravatarImageCache cacheGravatarImage:theImage forGravatarID:gravatarID];
             }
             

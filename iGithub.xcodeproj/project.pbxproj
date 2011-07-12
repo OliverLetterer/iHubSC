@@ -11,9 +11,6 @@
 		A7023DF313CB92F00079D1D0 /* UIImage+GHAPIImageCacheV3.m in Sources */ = {isa = PBXBuildFile; fileRef = A7023DF213CB92F00079D1D0 /* UIImage+GHAPIImageCacheV3.m */; };
 		A703A63313BE017C003A4585 /* GHPRepositoriesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A703A63213BE017C003A4585 /* GHPRepositoriesViewController.m */; };
 		A703A63613BE0308003A4585 /* GHPOwnedRepositoriesOfUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A703A63513BE0308003A4585 /* GHPOwnedRepositoriesOfUserViewController.m */; };
-		A703B92F134675EC0014235D /* UIImage+Alpha.m in Sources */ = {isa = PBXBuildFile; fileRef = A703B92A134675EC0014235D /* UIImage+Alpha.m */; };
-		A703B930134675EC0014235D /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = A703B92C134675EC0014235D /* UIImage+Resize.m */; };
-		A703B931134675EC0014235D /* UIImage+RoundedCorner.m in Sources */ = {isa = PBXBuildFile; fileRef = A703B92E134675EC0014235D /* UIImage+RoundedCorner.m */; };
 		A703B9361347315B0014235D /* GHPushFeedItemTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A703B9341347315A0014235D /* GHPushFeedItemTableViewCell.m */; };
 		A703B9371347315B0014235D /* GHPushFeedItemTableViewCellContentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A703B9351347315B0014235D /* GHPushFeedItemTableViewCellContentView.xib */; };
 		A703B944134754FC0014235D /* UITableViewCell+Background.m in Sources */ = {isa = PBXBuildFile; fileRef = A703B943134754FC0014235D /* UITableViewCell+Background.m */; };
@@ -299,6 +296,7 @@
 		A7DE2DF813CCB07D005B810B /* ANNotificationSuccessImage@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A7DE2DF713CCB07C005B810B /* ANNotificationSuccessImage@2x.png */; };
 		A7DE2DFC13CCB80F005B810B /* ANNotificationSuccessImage.png in Resources */ = {isa = PBXBuildFile; fileRef = A7DE2DFA13CCB80D005B810B /* ANNotificationSuccessImage.png */; };
 		A7DE2DFD13CCB80F005B810B /* ANNotificationErrorImage.png in Resources */ = {isa = PBXBuildFile; fileRef = A7DE2DFB13CCB80E005B810B /* ANNotificationErrorImage.png */; };
+		A7DE2E0013CCBE7E005B810B /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = A7DE2DFF13CCBE7E005B810B /* UIImage+Resize.m */; };
 		A7EE1120136F3FFB00A1E693 /* GHAPIIssueCommentV3.m in Sources */ = {isa = PBXBuildFile; fileRef = A7EE111F136F3FFA00A1E693 /* GHAPIIssueCommentV3.m */; };
 		A7EE1123136F481500A1E693 /* Appirater.m in Sources */ = {isa = PBXBuildFile; fileRef = A7EE1122136F481100A1E693 /* Appirater.m */; };
 		A7F334A513BCCF0100DB922D /* ANAdvancedNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7F3349B13BCCF0100DB922D /* ANAdvancedNavigationController.m */; };
@@ -328,12 +326,6 @@
 		A703A63213BE017C003A4585 /* GHPRepositoriesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPRepositoriesViewController.m; sourceTree = "<group>"; };
 		A703A63413BE0308003A4585 /* GHPOwnedRepositoriesOfUserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPOwnedRepositoriesOfUserViewController.h; sourceTree = "<group>"; };
 		A703A63513BE0308003A4585 /* GHPOwnedRepositoriesOfUserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPOwnedRepositoriesOfUserViewController.m; sourceTree = "<group>"; };
-		A703B929134675EC0014235D /* UIImage+Alpha.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Alpha.h"; sourceTree = "<group>"; };
-		A703B92A134675EC0014235D /* UIImage+Alpha.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Alpha.m"; sourceTree = "<group>"; };
-		A703B92B134675EC0014235D /* UIImage+Resize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Resize.h"; sourceTree = "<group>"; };
-		A703B92C134675EC0014235D /* UIImage+Resize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Resize.m"; sourceTree = "<group>"; };
-		A703B92D134675EC0014235D /* UIImage+RoundedCorner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+RoundedCorner.h"; sourceTree = "<group>"; };
-		A703B92E134675EC0014235D /* UIImage+RoundedCorner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+RoundedCorner.m"; sourceTree = "<group>"; };
 		A703B9331347315A0014235D /* GHPushFeedItemTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPushFeedItemTableViewCell.h; sourceTree = "<group>"; };
 		A703B9341347315A0014235D /* GHPushFeedItemTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPushFeedItemTableViewCell.m; sourceTree = "<group>"; };
 		A703B9351347315B0014235D /* GHPushFeedItemTableViewCellContentView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GHPushFeedItemTableViewCellContentView.xib; sourceTree = "<group>"; };
@@ -845,6 +837,8 @@
 		A7DE2DF713CCB07C005B810B /* ANNotificationSuccessImage@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ANNotificationSuccessImage@2x.png"; sourceTree = "<group>"; };
 		A7DE2DFA13CCB80D005B810B /* ANNotificationSuccessImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ANNotificationSuccessImage.png; sourceTree = "<group>"; };
 		A7DE2DFB13CCB80E005B810B /* ANNotificationErrorImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ANNotificationErrorImage.png; sourceTree = "<group>"; };
+		A7DE2DFE13CCBE7E005B810B /* UIImage+Resize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Resize.h"; sourceTree = "<group>"; };
+		A7DE2DFF13CCBE7E005B810B /* UIImage+Resize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Resize.m"; sourceTree = "<group>"; };
 		A7EE111E136F3FFA00A1E693 /* GHAPIIssueCommentV3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHAPIIssueCommentV3.h; sourceTree = "<group>"; };
 		A7EE111F136F3FFA00A1E693 /* GHAPIIssueCommentV3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHAPIIssueCommentV3.m; sourceTree = "<group>"; };
 		A7EE1121136F480D00A1E693 /* Appirater.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Appirater.h; path = appirater/Appirater.h; sourceTree = "<group>"; };
@@ -959,12 +953,8 @@
 		A703B927134675D90014235D /* UIImage+Additions */ = {
 			isa = PBXGroup;
 			children = (
-				A703B929134675EC0014235D /* UIImage+Alpha.h */,
-				A703B92A134675EC0014235D /* UIImage+Alpha.m */,
-				A703B92B134675EC0014235D /* UIImage+Resize.h */,
-				A703B92C134675EC0014235D /* UIImage+Resize.m */,
-				A703B92D134675EC0014235D /* UIImage+RoundedCorner.h */,
-				A703B92E134675EC0014235D /* UIImage+RoundedCorner.m */,
+				A7DE2DFE13CCBE7E005B810B /* UIImage+Resize.h */,
+				A7DE2DFF13CCBE7E005B810B /* UIImage+Resize.m */,
 			);
 			name = "UIImage+Additions";
 			sourceTree = "<group>";
@@ -2923,9 +2913,6 @@
 				A7CE1B811346335D00169F94 /* GHDatabase.xcdatamodel in Sources */,
 				A7CE1B871346355100169F94 /* GHManagedObjectContext.m in Sources */,
 				A7CE1B8A13463A6E00169F94 /* GHIssue.m in Sources */,
-				A703B92F134675EC0014235D /* UIImage+Alpha.m in Sources */,
-				A703B930134675EC0014235D /* UIImage+Resize.m in Sources */,
-				A703B931134675EC0014235D /* UIImage+RoundedCorner.m in Sources */,
 				A703B9361347315B0014235D /* GHPushFeedItemTableViewCell.m in Sources */,
 				A703B944134754FC0014235D /* UITableViewCell+Background.m in Sources */,
 				A703B94D1347713B0014235D /* GHNewsFeedItemTableViewCell.m in Sources */,
@@ -3124,6 +3111,7 @@
 				A79AE39813CC9C300008E900 /* ANNotificationViewBackgroundView.m in Sources */,
 				A7DE2DEA13CCAE7A005B810B /* ANNotificationErrorView.m in Sources */,
 				A7DE2DF113CCAF99005B810B /* ANNotificationSuccessView.m in Sources */,
+				A7DE2E0013CCBE7E005B810B /* UIImage+Resize.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

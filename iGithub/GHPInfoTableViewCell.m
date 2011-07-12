@@ -40,8 +40,7 @@
         
         self.actionButton = [UIButton buttonWithType:UIButtonTypeCustom];
         CGSize size = CGSizeMake(37.0f, 25.0f);
-        UIImage *image = [[UIImage imageNamed:@"UIBarButtonSystemItemAction.png"] resizedImage:size 
-                                                                          interpolationQuality:kCGInterpolationHigh];
+        UIImage *image = [[UIImage imageNamed:@"UIBarButtonSystemItemAction.png"] resizedImageToSize:size];
         [self.actionButton setImage:image forState:UIControlStateNormal];
         [self.actionButton addTarget:self action:@selector(actionButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
         [self.contentView addSubview:self.actionButton];

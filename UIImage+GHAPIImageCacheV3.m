@@ -44,7 +44,10 @@
             if (theImage) {
                 CGSize imageSize = CGSizeMake(56.0f * [UIScreen mainScreen].scale, 56.0f * [UIScreen mainScreen].scale);
                 
-                theImage = [theImage resizedImage:imageSize interpolationQuality:kCGInterpolationHigh];
+                theImage = [theImage resizedImageToSize:imageSize];
+                if (!theImage) {
+                    theImage = [UIImage imageNamed:@"DefaultUserImage.png"];
+                }
                 [[GHAPIImageCacheV3 sharedInstance] cacheImage:theImage forURL:avatarURLString];
             }
             
