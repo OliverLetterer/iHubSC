@@ -14,13 +14,14 @@
 - (void)mainPanGestureRecognizedDidRecognizePanGesture:(UIPanGestureRecognizer *)panGestureRecognizer;
 - (void)prepareViewForPanning;
 
-- (void)removeRightViewControllerView:(UIViewController *)rightViewController animated:(BOOL)animated;
-- (void)updateViewControllersWithTranslation:(CGFloat)translation;
-
 - (UIView *)viewForRightViewController:(UIViewController *)rightViewController;
 - (UIView *)viewForExistingRightViewController:(UIViewController *)rightViewController;
 
+- (void)_removeRightViewController:(UIViewController *)rightViewController animated:(BOOL)animated;
+
 - (void)removeRightViewController:(UIViewController *)rightViewController;
+- (void)removeRightViewControllerView:(UIViewController *)rightViewController animated:(BOOL)animated;
+- (void)updateViewControllersWithTranslation:(CGFloat)translation;
 - (void)addRightViewController:(UIViewController *)rightViewController;
 
 - (void)loadRightViewControllers;

@@ -75,9 +75,7 @@ const CGFloat ANAdvancedNavigationControllerDefaultDraggingDistance         = 47
     NSArray *oldArray = [[self.viewControllers copy] autorelease];
     
     [oldArray enumerateObjectsUsingBlock:^(__strong id obj, NSUInteger idx, BOOL *stop) {
-        UIViewController *viewController = obj;
-        [self removeRightViewController:viewController];
-        [self removeRightViewControllerView:viewController animated:YES];
+        [self _removeRightViewController:obj animated:YES];
     }];
     
     [self addRightViewController:rootViewController];
@@ -107,9 +105,7 @@ const CGFloat ANAdvancedNavigationControllerDefaultDraggingDistance         = 47
     
     // remove all viewControllers, that come after afterViewController
     [oldViewControllers enumerateObjectsUsingBlock:^(__strong id obj, NSUInteger idx, BOOL *stop) {
-        UIViewController *viewController = obj;
-        [self removeRightViewController:viewController];
-        [self removeRightViewControllerView:viewController animated:YES];
+        [self _removeRightViewController:obj animated:YES];
     }];
     
     // insert viewController in data structure
@@ -147,9 +143,7 @@ const CGFloat ANAdvancedNavigationControllerDefaultDraggingDistance         = 47
     [self.viewControllers enumerateObjectsAtIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(index, self.viewControllers.count-index)] 
                                             options:NSEnumerationConcurrent 
                                          usingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-                                             UIViewController *rightViewController = obj;
-                                             [self removeRightViewControllerView:rightViewController animated:YES];
-                                             [self removeRightViewController:rightViewController];
+                                             [self _removeRightViewController:obj animated:YES];
                                          }];
     
     [self moveRightViewControllerToRightAnchorPoint:viewController animated:YES];

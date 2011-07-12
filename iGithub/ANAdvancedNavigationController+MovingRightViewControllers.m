@@ -192,28 +192,6 @@
     return rightViewController.view.superview;
 }
 
-- (void)removeRightViewControllerView:(UIViewController *)rightViewController animated:(BOOL)animated {
-    [rightViewController viewWillDisappear:animated];
-    UIView *view = [self viewForExistingRightViewController:rightViewController];
-    if (animated) {
-        [UIView animateWithDuration:ANAdvancedNavigationControllerDefaultAnimationDuration 
-                         animations:^(void) {
-                             CGPoint center = view.center;
-                             center.x = CGRectGetWidth(self.view.bounds) + ANAdvancedNavigationControllerDefaultLeftViewControllerWidth;
-                             view.center = center;
-                         } 
-                         completion:^(BOOL finished) {
-                             [view removeFromSuperview];
-                             [rightViewController viewDidDisappear:animated];
-                         }];
-    } else {
-        [view removeFromSuperview];
-        [rightViewController viewDidDisappear:animated];
-    }
-    
-    [self numberOfRightViewControllersChanged];
-}
-
 #pragma mark - updating view hierachies
 
 - (void)popViewControllersExceptFirst {
@@ -222,8 +200,7 @@
     [oldArray enumerateObjectsUsingBlock:^(__strong id obj, NSUInteger idx, BOOL *stop) {
         if (idx > 0) {
             UIViewController *viewController = obj;
-            [self removeRightViewController:viewController];
-            [self removeRightViewControllerView:viewController animated:NO];
+            [self _removeRightViewController:viewController animated:NO];
         }
     }];
     
@@ -336,12 +313,6 @@
     [self numberOfRightViewControllersChanged];
 }
 
-- (void)removeRightViewController:(UIViewController *)rightViewController {
-    [rightViewController removeFromParentViewController];
-    [self.viewControllers removeObject:rightViewController];
-    [self numberOfRightViewControllersChanged];
-}
-
 - (void)updateViewControllersWithTranslation:(CGFloat)translation {
     NSUInteger count = self.viewControllers.count;
     
@@ -376,6 +347,42 @@
                                                    }
                                                }
                                            }];
+}
+
+#pragma mark - Removing ViewControllers
+
+- (void)removeRightViewControllerView:(UIViewController *)rightViewController animated:(BOOL)animated {
+    [rightViewController viewWillDisappear:animated];
+    UIView *view = [self viewForExistingRightViewController:rightViewController];
+    if (animated) {
+        [UIView animateWithDuration:ANAdvancedNavigationControllerDefaultAnimationDuration 
+                         animations:^(void) {
+                             CGPoint center = view.center;
+                             center.x = CGRectGetWidth(self.view.bounds) + ANAdvancedNavigationControllerDefaultLeftViewControllerWidth;
+                             view.center = center;
+                         } 
+                         completion:^(BOOL finished) {
+                             [view removeFromSuperview];
+                             [rightViewController viewDidDisappear:animated];
+                             [rightViewController removeFromParentViewController];
+                         }];
+    } else {
+        [view removeFromSuperview];
+        [rightViewController viewDidDisappear:animated];
+        [rightViewController removeFromParentViewController];
+    }
+    
+    [self numberOfRightViewControllersChanged];
+}
+
+- (void)removeRightViewController:(UIViewController *)rightViewController {
+    [self.viewControllers removeObject:rightViewController];
+    [self numberOfRightViewControllersChanged];
+}
+
+- (void)_removeRightViewController:(UIViewController *)rightViewController animated:(BOOL)animated {
+    [self removeRightViewController:rightViewController];
+    [self removeRightViewControllerView:rightViewController animated:animated];
 }
 
 @end
