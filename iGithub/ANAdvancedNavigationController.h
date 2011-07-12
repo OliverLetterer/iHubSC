@@ -24,6 +24,7 @@ extern const CGFloat ANAdvancedNavigationControllerDefaultLeftPanningOffset;
 - (void)pushRootViewController:(UIViewController *)rootViewController;
 - (void)pushViewController:(UIViewController *)viewController afterViewController:(UIViewController *)afterViewController;
 - (void)popViewController:(UIViewController *)viewController;
+- (void)popViewControllersToViewController:(UIViewController *)viewController;
 
 @end
 

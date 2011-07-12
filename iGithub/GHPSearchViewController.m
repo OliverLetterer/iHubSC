@@ -276,7 +276,8 @@
 }
 
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
-#warning pop viewControllers that are on the right
+    [self setDataArray:nil withDataType:GHPSearchViewControllerDataTypeNone];
+    [self.advancedNavigationController popViewControllersToViewController:self];
 }
 
 #pragma mark - UISearchDisplayDelegate

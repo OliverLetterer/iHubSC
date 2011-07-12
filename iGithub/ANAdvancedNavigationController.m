@@ -144,6 +144,23 @@ const CGFloat ANAdvancedNavigationControllerDefaultDraggingDistance         = 47
     }
 }
 
+- (void)popViewControllersToViewController:(UIViewController *)viewController {
+    if (![self.viewControllers containsObject:viewController]) {
+        [NSException raise:NSInternalInconsistencyException format:@"viewController (%@) is not part of the viewController Hierarchy", viewController];
+    }
+    
+    NSInteger index = [self.viewControllers indexOfObject:viewController]+1;
+    [self.viewControllers enumerateObjectsAtIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(index, self.viewControllers.count-index)] 
+                                            options:NSEnumerationConcurrent 
+                                         usingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+                                             UIViewController *rightViewController = obj;
+                                             [self removeRightViewControllerView:rightViewController animated:YES];
+                                             [self removeRightViewController:rightViewController];
+                                         }];
+    
+    [self moveRightViewControllerToRightAnchorPoint:viewController animated:YES];
+}
+
 #pragma mark - memory management
 
 - (void)didReceiveMemoryWarning {
