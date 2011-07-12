@@ -39,8 +39,13 @@
     if (self) {
         // Custom initialization
         [self downloadOrganizations];
+        self.reloadDataOnApplicationWillEnterForeground = YES;
     }
     return self;
+}
+
+- (void)pullToReleaseTableViewReloadData {
+    [self downloadOrganizations];
 }
 
 #pragma mark - authentication
