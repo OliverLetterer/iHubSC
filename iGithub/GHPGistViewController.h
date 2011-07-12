@@ -9,8 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "GHTableViewController.h"
 #import "GHPInfoTableViewCell.h"
+#import "GHPInfoSectionTableViewController.h"
 
-@interface GHPGistViewController : GHTableViewController <GHPInfoTableViewCellDelegate, UIActionSheetDelegate> {
+@interface GHPGistViewController : GHPInfoSectionTableViewController {
 @private
     NSString *_gistID;
     GHAPIGistV3 *_gist;
@@ -22,8 +23,6 @@
     
     BOOL _hasStarredData;
     BOOL _isGistStarred;
-    
-    GHPInfoTableViewCell *_infoCell;
 }
 
 @property (nonatomic, copy) NSString *gistID;
@@ -35,9 +34,5 @@
 
 @property (nonatomic, retain) UITextView *textView;
 @property (nonatomic, retain) UIToolbar *textViewToolBar;
-
-@property (nonatomic, readonly) UIActionSheet *actionButtonActionSheet;
-
-@property (nonatomic, retain) GHPInfoTableViewCell *infoCell;
 
 @end

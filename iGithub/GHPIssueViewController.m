@@ -715,8 +715,7 @@
         @catch (NSException *exception) {
         }
         
-        self.infoCell.actionButton.alpha = 0.0f;
-        [self.infoCell.activityIndicatorView startAnimating];
+        [self setActionButtonActive:YES];
         
         if ([title isEqualToString:NSLocalizedString(@"Merge this Pull Request", @"")]) {
             UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Merge this Pull Request", @"") 
@@ -731,8 +730,7 @@
         } else if ([title isEqualToString:[NSString stringWithFormat:NSLocalizedString(@"Reopen this %@", @""), self.issueName]]) {
             [GHAPIIssueV3 reopenIssueOnRepository:self.repositoryString withNumber:self.issueNumber 
                                 completionHandler:^(NSError *error) {
-                                    self.infoCell.actionButton.alpha = 1.0f;
-                                    [self.infoCell.activityIndicatorView stopAnimating];
+                                    [self setActionButtonActive:NO];
                                     if (error) {
                                         [self handleError:error];
                                     } else {
@@ -742,8 +740,7 @@
         } else if ([title isEqualToString:[NSString stringWithFormat:NSLocalizedString(@"Close this %@", @""), self.issueName]]) {
             [GHAPIIssueV3 closeIssueOnRepository:self.repositoryString withNumber:self.issueNumber 
                                completionHandler:^(NSError *error) {
-                                   self.infoCell.actionButton.alpha = 1.0f;
-                                   [self.infoCell.activityIndicatorView stopAnimating];
+                                   [self setActionButtonActive:NO];
                                    if (error) {
                                        [self handleError:error];
                                    } else {
@@ -751,8 +748,7 @@
                                    }
                                }];
         } else {
-            self.infoCell.actionButton.alpha = 1.0f;
-            [self.infoCell.activityIndicatorView stopAnimating];
+            [self setActionButtonActive:NO];
         }
     }
 }
@@ -766,8 +762,7 @@
         NSString *commitMessage = [alertView textFieldAtIndex:0].text;
         [GHAPIPullRequestV3 mergPullRequestOnRepository:self.repositoryString withNumber:self.issueNumber commitMessage:commitMessage 
                                       completionHandler:^(GHAPIPullRequestMergeStateV3 *state, NSError *error) {
-                                          self.infoCell.actionButton.alpha = 1.0f;
-                                          [self.infoCell.activityIndicatorView stopAnimating];
+                                          [self setActionButtonActive:NO];
                                           if (error) {
                                               [self handleError:error];
                                           } else {

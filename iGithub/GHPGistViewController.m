@@ -28,7 +28,6 @@
 @synthesize gistID=_gistID, gist=_gist;
 @synthesize comments=_comments;
 @synthesize textView=_textView, textViewToolBar=_textViewToolBar;
-@synthesize infoCell=_infoCell;
 
 #pragma mark - setters and getters
 
@@ -50,21 +49,6 @@
           }];
 }
 
-- (UIActionSheet *)actionButtonActionSheet {
-    UIActionSheet *sheet = [[[UIActionSheet alloc] init] autorelease];
-    
-    if (_isGistStarred) {
-        [sheet addButtonWithTitle:NSLocalizedString(@"Unstar", @"")];
-    } else {
-        [sheet addButtonWithTitle:NSLocalizedString(@"Star", @"")];
-    }
-    
-    sheet.delegate = self;
-    sheet.tag = kUIActionSheetTagAction;
-    
-    return sheet;
-}
-
 #pragma mark - Initialization
 
 - (id)initWithGistID:(NSString *)gistID {
@@ -81,7 +65,6 @@
     [_gistID release];
     [_gist release];
     [_comments release];
-    [_infoCell release];
     
     [super dealloc];
 }
@@ -138,7 +121,6 @@
     
     self.textView = nil;
     self.textViewToolBar = nil;
-    self.infoCell = nil;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -265,13 +247,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == kUITableViewSectionInfo) {
         if (indexPath.row == 0) {
-            static NSString *CellIdentifier = @"GHPInfoTableViewCellDelegate";
-            GHPInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-            if (!cell) {
-                cell = [[[GHPInfoTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault 
-                                                              reuseIdentifier:CellIdentifier]
-                        autorelease];
-            }
+            GHPInfoTableViewCell *cell = self.infoCell;
             
             GHAPIGistV3 *gist = self.gist;
             
@@ -284,10 +260,6 @@
             } else {
                 cell.imageView.image = [UIImage imageNamed:@"GHClipBoardPrivate.png"];
             }
-            
-            cell.delegate = self;
-            
-            self.infoCell = cell;
             
             return cell;
         }
@@ -452,38 +424,6 @@
     }
 }
 
-#pragma mark - GHPInfoTableViewCellDelegateDelegate
-
-- (void)infoTableViewCellActionButtonClicked:(GHPInfoTableViewCell *)cell {
-    if (!_hasStarredData) {
-        cell.actionButton.alpha = 0.0f;
-        [cell.activityIndicatorView startAnimating];
-        [GHAPIGistV3 isGistStarredWithID:self.gistID 
-                       completionHandler:^(BOOL starred, NSError *error) {
-                           cell.actionButton.alpha = 1.0f;
-                           [cell.activityIndicatorView stopAnimating];
-                           if (error) {
-                               [self handleError:error];
-                           } else {
-                               _hasStarredData = YES;
-                               _isGistStarred = starred;
-                               
-                               UIActionSheet *sheet = self.actionButtonActionSheet;
-                               
-                               [sheet showFromRect:[cell.actionButton convertRect:cell.actionButton.bounds toView:self.view] 
-                                            inView:self.view 
-                                          animated:YES];
-                           }
-                       }];
-    } else {
-        UIActionSheet *sheet = self.actionButtonActionSheet;
-        
-        [sheet showFromRect:[cell.actionButton convertRect:cell.actionButton.bounds toView:self.view] 
-                     inView:self.view 
-                   animated:YES];
-    }
-}
-
 #pragma mark - UIActionSheetDelegate
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
@@ -495,14 +435,12 @@
         @catch (NSException *exception) {
         }
         
-        self.infoCell.actionButton.alpha = 0.0f;
-        [self.infoCell.activityIndicatorView startAnimating];
+        [self setActionButtonActive:YES];
         
         if ([title isEqualToString:NSLocalizedString(@"Unstar", @"")]) {
             [GHAPIGistV3 unstarGistWithID:self.gistID 
                         completionHandler:^(NSError *error) {
-                            self.infoCell.actionButton.alpha = 1.0f;
-                            [self.infoCell.activityIndicatorView stopAnimating];
+                            [self setActionButtonActive:NO];
                             if (error) {
                                 [self handleError:error];
                             } else {
@@ -512,8 +450,7 @@
         } else if ([title isEqualToString:NSLocalizedString(@"Star", @"")]) {
             [GHAPIGistV3 starGistWithID:self.gistID 
                       completionHandler:^(NSError *error) {
-                          self.infoCell.actionButton.alpha = 1.0f;
-                          [self.infoCell.activityIndicatorView stopAnimating];
+                          [self setActionButtonActive:NO];
                           if (error) {
                               [self handleError:error];
                           } else {
@@ -521,10 +458,48 @@
                           }
                       }];
         } else {
-            self.infoCell.actionButton.alpha = 1.0f;
-            [self.infoCell.activityIndicatorView stopAnimating];
+            [self setActionButtonActive:NO];
         }
     }
+}
+
+#pragma mark - ActionMenu
+
+- (void)downloadDataToDisplayActionButton {
+    [GHAPIGistV3 isGistStarredWithID:self.gistID 
+                   completionHandler:^(BOOL starred, NSError *error) {
+                       if (error) {
+                           [self failedToDownloadDataToDisplayActionButtonWithError:error];
+                       } else {
+                           _hasStarredData = YES;
+                           _isGistStarred = starred;
+                           
+                           [self didDownloadDataToDisplayActionButton];
+                       }
+                   }];
+}
+
+- (UIActionSheet *)actionButtonActionSheet {
+    UIActionSheet *sheet = [[[UIActionSheet alloc] init] autorelease];
+    
+    if (_isGistStarred) {
+        [sheet addButtonWithTitle:NSLocalizedString(@"Unstar", @"")];
+    } else {
+        [sheet addButtonWithTitle:NSLocalizedString(@"Star", @"")];
+    }
+    
+    sheet.delegate = self;
+    sheet.tag = kUIActionSheetTagAction;
+    
+    return sheet;
+}
+
+- (BOOL)canDisplayActionButton {
+    return YES;
+}
+
+- (BOOL)canDisplayActionButtonActionSheet {
+    return _hasStarredData;
 }
 
 @end
