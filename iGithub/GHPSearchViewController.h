@@ -20,7 +20,6 @@ typedef enum {
 @private
     GHPSearchViewControllerDataType _dataType;
     NSMutableArray *_dataArray;
-    GHPSearchViewControllerDataType _currentSearchDataType;
     
     GHPSearchViewControllerDataType _nextSearchType;
     

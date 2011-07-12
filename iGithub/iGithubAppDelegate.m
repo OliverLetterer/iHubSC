@@ -10,6 +10,7 @@
 #import "Appirater.h"
 #import "GHSettingsHelper.h"
 #import "GHAuthenticationManager.h"
+#import "ASIHTTPRequest.h"
 
 @implementation iGithubAppDelegate
 
@@ -23,6 +24,7 @@
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    [ASIHTTPRequest setDefaultTimeOutSeconds:20.0];
     [self.window makeKeyAndVisible];
     [Appirater appLaunched:YES];
     return YES;

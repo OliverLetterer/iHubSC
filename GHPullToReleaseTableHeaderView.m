@@ -144,7 +144,7 @@
 
 - (void)dealloc {
     [_lastUpdateLabel release];
-    [self.statusLabel release];
+    [_statusLabel release];
     [_arrowImageLayer release];
     [_activityIndicatorView release];
     
