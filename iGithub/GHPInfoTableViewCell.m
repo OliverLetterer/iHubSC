@@ -90,7 +90,12 @@
                       constrainedToSize:CGSizeMake(349.0f, CGFLOAT_MAX) 
                           lineBreakMode:UILineBreakModeWordWrap];
     
-    return size.height + 29.0f;
+    size.height+=29.0f;
+    
+    if (size.height < 70.0f) {
+        size.height = 70.0f;
+    }
+    return size.height;
 }
 
 #pragma mark - Memory management
