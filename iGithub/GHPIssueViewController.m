@@ -17,6 +17,7 @@
 #import "GHPNewCommentTableViewCell.h"
 #import "GHSettingsHelper.h"
 #import "GHPMilestoneViewController.h"
+#import "ANNotificationQueue.h"
 
 #define kUITableViewSectionInfo             0
 #define kUITableViewSectionDetails          1
@@ -768,7 +769,7 @@
                                           } else {
                                               if ([state.merged boolValue]) {
                                                   // success
-                                                  [[INNotificationQueue sharedQueue] detachSmallNotificationWithTitle:NSLocalizedString(@"Successfully merged", @"") andSubtitle:[NSString stringWithFormat:NSLocalizedString(@"Pull Request %@", @""), self.issueNumber] removeStyle:INNotificationQueueItemRemoveByFadingOut];
+                                                  [[ANNotificationQueue sharedInstance] detatchSuccesNotificationWithTitle:NSLocalizedString(@"Successfully merged", @"") message:[NSString stringWithFormat:NSLocalizedString(@"Pull Request %@", @""), self.issueNumber]];
                                               } else {
                                                   UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", @"") 
                                                                                                    message:state.message 

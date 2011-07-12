@@ -21,7 +21,7 @@
 #import "GHViewMilestoneViewController.h"
 #import "GHLabelTableViewCell.h"
 #import "GHViewLabelViewController.h"
-#import "INNotificationQueue.h"
+#import "ANNotificationQueue.h"
 
 #define kUITableViewSectionUserData         0
 #define kUITableViewSectionOwner            1
@@ -915,7 +915,7 @@
                                            [self.tableView reloadSections:set 
                                                          withRowAnimation:UITableViewRowAnimationNone];
                                        }
-                                       [[INNotificationQueue sharedQueue] detachSmallNotificationWithTitle:NSLocalizedString(@"Stopped watching", @"") andSubtitle:self.repositoryString removeStyle:INNotificationQueueItemRemoveByFadingOut];
+                                       [[ANNotificationQueue sharedInstance] detatchSuccesNotificationWithTitle:NSLocalizedString(@"Stopped watching", @"") message:self.repositoryString];
                                    }];
             } else {
                 [GHAPIRepositoryV3 watchRepository:self.repositoryString 
@@ -928,7 +928,7 @@
                                          [set addIndex:kUITableViewSectionNetwork];
                                          [self.tableView reloadSections:set 
                                                        withRowAnimation:UITableViewRowAnimationNone];
-                                         [[INNotificationQueue sharedQueue] detachSmallNotificationWithTitle:NSLocalizedString(@"Now watching", @"") andSubtitle:self.repositoryString removeStyle:INNotificationQueueItemRemoveByFadingOut];
+                                         [[ANNotificationQueue sharedInstance] detatchSuccesNotificationWithTitle:NSLocalizedString(@"Now watching", @"") message:self.repositoryString];
                                      }
                                  }];
             }
@@ -939,7 +939,7 @@
                                 if (error) {
                                     [self handleError:error];
                                 } else {
-                                    [[INNotificationQueue sharedQueue] detachSmallNotificationWithTitle:NSLocalizedString(@"Successfully forked", @"") andSubtitle:self.repositoryString removeStyle:INNotificationQueueItemRemoveByFadingOut];
+                                    [[ANNotificationQueue sharedInstance] detatchSuccesNotificationWithTitle:NSLocalizedString(@"Successfully forked", @"") message:self.repositoryString];
                                 }
                             }];
         } else if (indexPath.row == 3) {
@@ -1080,7 +1080,7 @@
                                       } else {
                                           [self.tableView collapseSection:kUITableViewSectionCollaborators animated:NO];
                                           self.collaborators = nil;
-                                          [[INNotificationQueue sharedQueue] detachSmallNotificationWithTitle:NSLocalizedString(@"Added Collaborator", @"") andSubtitle:username removeStyle:INNotificationQueueItemRemoveByFadingOut];
+                                          [[ANNotificationQueue sharedInstance] detatchSuccesNotificationWithTitle:NSLocalizedString(@"Added Collaborator", @"") message:username];
                                           [self.tableView expandSection:kUITableViewSectionCollaborators animated:NO];
                                       }
                                   }];
@@ -1156,7 +1156,7 @@
                         if (error) {
                             [self handleError:error];
                         } else {
-                            [[INNotificationQueue sharedQueue] detachSmallNotificationWithTitle:NSLocalizedString(@"Forked Repository to", @"") andSubtitle:organization.login removeStyle:INNotificationQueueItemRemoveByFadingOut];
+                            [[ANNotificationQueue sharedInstance] detatchSuccesNotificationWithTitle:NSLocalizedString(@"Forked Repository to", @"") message:organization.login];
                         }
                     }];
 }

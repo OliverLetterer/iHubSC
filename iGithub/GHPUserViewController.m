@@ -15,6 +15,7 @@
 #import "GHPGistsOfUserViewController.h"
 #import "GHPUsersNewsFeedViewController.h"
 #import "GHPOrganizationsOfUserViewController.h"
+#import "ANNotificationQueue.h"
 
 #define kUITableViewSectionUserInfo         0
 #define kUITableViewSectionUserContent      1
@@ -260,7 +261,7 @@
                   if (error) {
                       [self handleError:error];
                   } else {
-                      [[INNotificationQueue sharedQueue] detachSmallNotificationWithTitle:NSLocalizedString(@"Now following", @"") andSubtitle:self.username removeStyle:INNotificationQueueItemRemoveByFadingOut];
+                      [[ANNotificationQueue sharedInstance] detatchSuccesNotificationWithTitle:NSLocalizedString(@"Now following", @"") message:self.username];
                       _isFollowingUser = YES;
                   }
               }];
@@ -272,7 +273,7 @@
                   if (error) {
                       [self handleError:error];
                   } else {
-                      [[INNotificationQueue sharedQueue] detachSmallNotificationWithTitle:NSLocalizedString(@"Stopped following", @"") andSubtitle:self.username removeStyle:INNotificationQueueItemRemoveByFadingOut];
+                      [[ANNotificationQueue sharedInstance] detatchSuccesNotificationWithTitle:NSLocalizedString(@"Stopped following", @"") message:self.username];
                       _isFollowingUser = NO;
                   }
               }];

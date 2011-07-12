@@ -13,8 +13,4 @@
     
 }
 
-#warning new TweetBot like Notifications
-
-- (void)deviceOrientationDidChangeNotificationCallback:(NSNotification *)notification;
-
 @end

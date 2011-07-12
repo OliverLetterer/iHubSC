@@ -7,7 +7,7 @@
 //
 
 #import "GHPDataArrayViewController.h"
-
+#import "ANNotificationQueue.h"
 
 @implementation GHPDataArrayViewController
 
@@ -29,13 +29,7 @@
         [self setNextPage:nextPage forSection:0];
         
         if (dataArray != nil && dataArray.count == 0) {
-            UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", @"") 
-                                                                                  message:self.emptyArrayErrorMessage 
-                                                                                 delegate:nil 
-                                                                        cancelButtonTitle:NSLocalizedString(@"OK", @"") 
-                                                                        otherButtonTitles:nil]
-                                                       autorelease];
-            [alert show];
+            [[ANNotificationQueue sharedInstance] detatchErrorNotificationWithTitle:NSLocalizedString(@"Error", @"") errorMessage:self.emptyArrayErrorMessage];
             [self.advancedNavigationController popViewController:self];
         }
         

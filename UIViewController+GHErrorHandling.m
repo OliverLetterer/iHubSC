@@ -9,8 +9,8 @@
 #import "UIViewController+GHErrorHandling.h"
 #import "GHAuthenticationManager.h"
 #import "GHSettingsHelper.h"
-#import "INNotificationQueue.h"
 #import "GHAuthenticationAlertView.h"
+#import "ANNotificationQueue.h"
 
 @implementation UIViewController (GHViewControllerErrorhandling)
 
@@ -41,13 +41,8 @@
             GHAuthenticationAlertView *alert = [[[GHAuthenticationAlertView alloc] initWithDelegate:nil] autorelease];
             [alert show];
         } else {
-            UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", @"") 
-                                                             message:[error localizedDescription] 
-                                                            delegate:nil 
-                                                   cancelButtonTitle:NSLocalizedString(@"OK", @"") 
-                                                   otherButtonTitles:nil]
-                                  autorelease];
-            [alert show];
+            [[ANNotificationQueue sharedInstance] detatchErrorNotificationWithTitle:NSLocalizedString(@"Error", @"") 
+                                                                       errorMessage:[error localizedDescription]];
         }
     }
 }

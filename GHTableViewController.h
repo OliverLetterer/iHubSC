@@ -15,7 +15,6 @@
 #import "GHPDefaultTableViewCell.h"
 #import "GHAuthenticationManager.h"
 #import "GithubAPI.h"
-#import "INNotificationQueue.h"
 #import "ANAdvancedNavigationController.h"
 #import "GHPCollapsingAndSpinningTableViewCell.h"
 

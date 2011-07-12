@@ -9,7 +9,6 @@
 #import "iGithubAppDelegate_iPhone.h"
 #import "GHSettingsHelper.h"
 #import "GithubAPI.h"
-#import "INNotificationQueue.h"
 
 @implementation iGithubAppDelegate_iPhone
 
@@ -49,9 +48,6 @@
                                                  name:@"GHUnknownPayloadEventType" 
                                                object:nil];
     
-    [INNotificationQueue sharedQueue].notificationCenterPoint = CGPointMake(self.window.frame.size.width/2, self.window.frame.size.height/3);
-	[INNotificationQueue sharedQueue].notificationView = self.window;
-    
 #if DEBUG
     [GHSettingsHelper setUsername:@"docmorelli"];
     [GHSettingsHelper setPassword:@"1337-l0g1n"];
@@ -70,7 +66,7 @@
     NSMutableArray *tabBarItems = [NSMutableArray array];
     
     self.tabBarController = [[[UITabBarController alloc] init] autorelease];
-    [self.window addSubview:self.tabBarController.view];
+    self.window.rootViewController = self.tabBarController;
     
     self.newsFeedViewController = [[[GHOwnerNewsFeedViewController alloc] init] autorelease];
     [tabBarItems addObject:[[[UINavigationController alloc] initWithRootViewController:self.newsFeedViewController] autorelease] ];

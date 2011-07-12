@@ -20,6 +20,7 @@
 #import "GHPPullRequestsOnRepositoryViewController.h"
 #import "GHPRootDirectoryViewController.h"
 #import "GHPLabelViewController.h"
+#import "ANNotificationQueue.h"
 
 #define kUIAlertViewTagDeleteRepository     1337
 #define kUIAlertViewTagAddCollaborator      1338
@@ -480,7 +481,7 @@
                 if (error) {
                     [self handleError:error];
                 } else {
-                    [[INNotificationQueue sharedQueue] detachSmallNotificationWithTitle:NSLocalizedString(@"Now watching", @"") andSubtitle:self.repositoryString removeStyle:INNotificationQueueItemRemoveByFadingOut];
+                    [[ANNotificationQueue sharedInstance] detatchSuccesNotificationWithTitle:NSLocalizedString(@"Now watching", @"") message:self.repositoryString];
                     _isWatchingRepository = YES;
                 }
             }];
@@ -493,7 +494,7 @@
                 if (error) {
                     [self handleError:error];
                 } else {
-                    [[INNotificationQueue sharedQueue] detachSmallNotificationWithTitle:NSLocalizedString(@"Stopped watching", @"") andSubtitle:self.repositoryString removeStyle:INNotificationQueueItemRemoveByFadingOut];
+                    [[ANNotificationQueue sharedInstance] detatchSuccesNotificationWithTitle:NSLocalizedString(@"Stopped watching", @"") message:self.repositoryString];
                     _isWatchingRepository = NO;
                 }
             }];
@@ -542,7 +543,7 @@
                                 if (error) {
                                     [self handleError:error];
                                 } else {
-                                    [[INNotificationQueue sharedQueue] detachSmallNotificationWithTitle:NSLocalizedString(@"Successfully forked", @"") andSubtitle:self.repositoryString removeStyle:INNotificationQueueItemRemoveByFadingOut];
+                                    [[ANNotificationQueue sharedInstance] detatchSuccesNotificationWithTitle:NSLocalizedString(@"Successfully forked", @"") message:self.repositoryString];
                                 }
                             }];
         } else if ([title isEqualToString:NSLocalizedString(@"Fork to an Organization", @"")]) {
@@ -612,7 +613,7 @@
                         if (error) {
                             [self handleError:error];
                         } else {
-                            [[INNotificationQueue sharedQueue] detachSmallNotificationWithTitle:NSLocalizedString(@"Forked Repository to", @"") andSubtitle:organization.login removeStyle:INNotificationQueueItemRemoveByFadingOut];
+                            [[ANNotificationQueue sharedInstance] detatchSuccesNotificationWithTitle:NSLocalizedString(@"Forked Repository to", @"") message:organization.login];
                         }
                     }];
 }
@@ -645,7 +646,7 @@
                                       if (error) {
                                           [self handleError:error];
                                       } else {
-                                          [[INNotificationQueue sharedQueue] detachSmallNotificationWithTitle:NSLocalizedString(@"Added Collaborator", @"") andSubtitle:username removeStyle:INNotificationQueueItemRemoveByFadingOut];
+                                          [[ANNotificationQueue sharedInstance] detatchSuccesNotificationWithTitle:NSLocalizedString(@"Added Collaborator", @"") message:username];
                                       }
                                   }];
         } else {
@@ -661,9 +662,7 @@
 }
 
 - (void)createIssueViewController:(GHPCreateIssueViewController *)createIssueViewController didCreateIssue:(GHAPIIssueV3 *)issue {
-    [[INNotificationQueue sharedQueue] detachSmallNotificationWithTitle:NSLocalizedString(@"Created Issue", @"") 
-                                                            andSubtitle:issue.title 
-                                                            removeStyle:INNotificationQueueItemRemoveByFadingOut];
+    [[ANNotificationQueue sharedInstance] detatchSuccesNotificationWithTitle:NSLocalizedString(@"Created Issue", @"") message:issue.title];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
