@@ -170,6 +170,16 @@
     [self scrollViewDidScroll:self.tableView];
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:kUITableViewSectionNewsFeed];
+    [self.tableView selectRowAtIndexPath:indexPath 
+                                animated:NO 
+                          scrollPosition:UITableViewScrollPositionNone];
+    [self tableView:self.tableView didSelectRowAtIndexPath:indexPath];
+}
+
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     // Return YES for supported orientations
 	return YES;
