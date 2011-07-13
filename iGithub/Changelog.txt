@@ -86,6 +86,7 @@ V1.9
 - further API V3 adoption
 - bug fixes
 - fixed bug that caused the message indicator to be displayed in wrong places
+- fixed bug that caused the pull to release indicator to disappear to early
 
 iTunes Changelog:
 

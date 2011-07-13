@@ -185,8 +185,6 @@
                              [self.tableView setContentOffset:CGPointMake(0.0f, dragDistance) animated:YES];
                          }
                      }];
-    
-    [self performSelector:@selector(pullToReleaseTableViewDidReloadData) withObject:nil afterDelay:1.0];
 }
 
 - (void)pullToReleaseTableViewDidReloadData {
