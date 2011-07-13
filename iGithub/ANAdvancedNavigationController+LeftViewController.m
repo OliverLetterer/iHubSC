@@ -14,7 +14,9 @@
 - (void)replaceLeftViewControllerWithViewController:(UIViewController *)leftViewController {
     if (self.isViewLoaded) {
         // view is Loaded, need to exchange views
+        [_leftViewController viewWillDisappear:NO];
         [_leftViewController.view removeFromSuperview];
+        [_leftViewController viewDidDisappear:NO];
         [_leftViewController removeFromParentViewController];
         
         [self loadAndPrepareLeftViewController:leftViewController];

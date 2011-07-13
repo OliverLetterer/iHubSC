@@ -29,7 +29,7 @@ const CGFloat ANAdvancedNavigationControllerDefaultDraggingDistance         = 47
 - (void)setLeftViewController:(UIViewController *)leftViewController {
     if (_leftViewController != leftViewController) {
         [self replaceLeftViewControllerWithViewController:leftViewController];
-        _leftViewController = leftViewController;
+        [_leftViewController release], _leftViewController = [leftViewController retain];
     }
 }
 
@@ -193,7 +193,6 @@ const CGFloat ANAdvancedNavigationControllerDefaultDraggingDistance         = 47
 #pragma mark - memory management
 
 - (void)dealloc {
-    
     [_leftViewController release];
     [_backgroundView release];
     [_viewControllers release];
