@@ -22,8 +22,7 @@
 #import "GHViewMilestoneViewController.h"
 #import "GHLabelTableViewCell.h"
 #import "GHViewLabelViewController.h"
-#import "OCPromptView.h"
-#import "INNotificationQueue.h"
+#import "ANNotificationQueue.h"
 
 #define kUITableViewSectionData             0
 #define kUITableViewSectionAssignee         1
@@ -721,9 +720,7 @@
                                            [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:kUITableViewSectionAdministration]
                                                          withRowAnimation:UITableViewRowAnimationFade];
                                            
-                                           [[INNotificationQueue sharedQueue] detachSmallNotificationWithTitle:NSLocalizedString(@"Successfully", @"") 
-                                                                                                   andSubtitle:[NSString stringWithFormat:NSLocalizedString(@"Closed this %@", @""), self.issueName] 
-                                                                                                   removeStyle:INNotificationQueueItemRemoveByFadingOut];
+                                           [[ANNotificationQueue sharedInstance] detatchSuccesNotificationWithTitle:NSLocalizedString(@"Successfully", @"") message:[NSString stringWithFormat:NSLocalizedString(@"Closed this %@", @""), self.issueName]];
                                        }
                                    }];
             } else {
@@ -736,19 +733,19 @@
                                             [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:kUITableViewSectionAdministration]
                                                           withRowAnimation:UITableViewRowAnimationFade];
                                             
-                                            [[INNotificationQueue sharedQueue] detachSmallNotificationWithTitle:NSLocalizedString(@"Successfully", @"") 
-                                                                                                    andSubtitle:[NSString stringWithFormat:NSLocalizedString(@"Reoped this %@", @""), self.issueName] 
-                                                                                                    removeStyle:INNotificationQueueItemRemoveByFadingOut];
+                                            [[ANNotificationQueue sharedInstance] detatchSuccesNotificationWithTitle:NSLocalizedString(@"Successfully", @"") message:[NSString stringWithFormat:NSLocalizedString(@"Reoped this %@", @""), self.issueName] ];
                                         }
                                     }];
             }
         } else if (indexPath.row == 2) {
             // Pull Request
-            OCPromptView *alert = [[[OCPromptView alloc] initWithPrompt:NSLocalizedString(@"Merge message", @"") 
-                                                               delegate:self 
-                                                      cancelButtonTitle:NSLocalizedString(@"Cancel", @"") 
-                                                      acceptButtonTitle:NSLocalizedString(@"Merge", @"")]
-                                   autorelease];
+            UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Merge message", @"") 
+                                                             message:nil 
+                                                            delegate:self 
+                                                   cancelButtonTitle:NSLocalizedString(@"Cancel", @"") 
+                                                   otherButtonTitles:NSLocalizedString(@"Merge", @""), nil]
+                                  autorelease];
+            alert.alertViewStyle = UIAlertViewStylePlainTextInput;
             [alert show];
         }
     } else if (indexPath.section == kUITableViewSectionData) {
@@ -848,17 +845,14 @@
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     if (buttonIndex == 1) {
-        OCPromptView *promtAlert = (OCPromptView *)alertView;
         [GHAPIPullRequestV3 mergPullRequestOnRepository:self.repository withNumber:self.number 
-                                          commitMessage:promtAlert.textField.text 
+                                          commitMessage:[alertView textFieldAtIndex:0].text 
                                       completionHandler:^(GHAPIPullRequestMergeStateV3 *state, NSError *error) {
                                           if (error) {
                                               [self handleError:error];
                                           } else {
                                               if (state.merged.boolValue) {
-                                                  [[INNotificationQueue sharedQueue] detachSmallNotificationWithTitle:NSLocalizedString(@"Merge successful", @"") 
-                                                                                                          andSubtitle:state.message 
-                                                                                                          removeStyle:INNotificationQueueItemRemoveByFadingOut];
+                                                  [[ANNotificationQueue sharedInstance] detatchSuccesNotificationWithTitle:NSLocalizedString(@"Merge successful", @"") message:state.message];
                                                   self.issue.state = kGHAPIIssueStateV3Closed;
                                               } else {
                                                   UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Merge failed", @"") 
@@ -875,37 +869,5 @@
                                       }];
     }
 }
-
-//
-//- (UIActionSheet *)actionButtonActionSheet {
-//    if (!_isCollaborator && ![[GHAuthenticationManager sharedInstance].username isEqualToString:self.issue.user.login]) {
-//        UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", @"") 
-//                                                         message:[NSString stringWithFormat:NSLocalizedString(@"You are not allowed to administrate this %@", @""), self.issueName] 
-//                                                        delegate:nil 
-//                                               cancelButtonTitle:NSLocalizedString(@"OK", @"") 
-//                                               otherButtonTitles:nil]
-//                              autorelease];
-//        [alert show];
-//        return nil;
-//    }
-//    
-//    UIActionSheet *sheet = [[[UIActionSheet alloc] init] autorelease];
-//    
-//    if ([self.issue.state isEqualToString:kGHAPIIssueStateV3Open]) {
-//        [sheet addButtonWithTitle:[NSString stringWithFormat:NSLocalizedString(@"Close this %@", @""), self.issueName]];
-//    } else {
-//        [sheet addButtonWithTitle:[NSString stringWithFormat:NSLocalizedString(@"Reopen this %@", @""), self.issueName]];
-//    }
-//    
-//    if (self.issue.isPullRequest && _isCollaborator && [self.issue.state isEqualToString:kGHAPIIssueStateV3Open]) {
-//        [sheet addButtonWithTitle:NSLocalizedString(@"Merge this Pull Request", @"")];
-//    }
-//    
-//    sheet.delegate = self;
-//    sheet.tag = kUIActionSheetTagAction;
-//    
-//    return sheet;
-//}
-
 
 @end
