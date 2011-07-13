@@ -15,6 +15,8 @@
     return self.stateSegmentControl != nil;
 }
 
+#warning improve this x new messages notification
+
 - (void)loadStateSegmentControl {
     CAKeyframeAnimation *animation = [CAKeyframeAnimation animationWithKeyPath:@"transform"];
     animation.calculationMode = kCAAnimationCubic;

@@ -192,6 +192,8 @@
     [super authenticationViewControllerdidAuthenticateUserCallback:notification];
 }
 
+#warning pulltorelease is not working perfectly
+
 - (void)pullToReleaseTableViewReloadData {
     [super pullToReleaseTableViewReloadData];
     [self loadDataBasedOnSegmentControl];

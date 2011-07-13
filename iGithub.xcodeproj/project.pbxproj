@@ -103,7 +103,6 @@
 		A750571F13427FE800514A82 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A750571E13427FE800514A82 /* CFNetwork.framework */; };
 		A750572113427FEF00514A82 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A750572013427FEF00514A82 /* SystemConfiguration.framework */; };
 		A750572313427FF600514A82 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A750572213427FF600514A82 /* MobileCoreServices.framework */; };
-		A75057261342801300514A82 /* libz.1.2.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A75057251342801300514A82 /* libz.1.2.3.dylib */; };
 		A7505729134280E900514A82 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = A7505728134280E900514A82 /* Reachability.m */; };
 		A75057361343033200514A82 /* GHGlossTopBorder@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A75057321343033200514A82 /* GHGlossTopBorder@2x.png */; };
 		A75057371343033200514A82 /* GHGlossBottomBorder@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A75057331343033200514A82 /* GHGlossBottomBorder@2x.png */; };
@@ -143,6 +142,7 @@
 		A7837EA5136CADD400B13B95 /* GHAPIMilestoneV3TableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A7837EA4136CADD400B13B95 /* GHAPIMilestoneV3TableViewCell.m */; };
 		A79F37FE13883C2C0028F492 /* GHAPIUserV3.m in Sources */ = {isa = PBXBuildFile; fileRef = A79F37FD13883C2C0028F492 /* GHAPIUserV3.m */; };
 		A79F380113883F740028F492 /* GHAPIUserPlanV3.m in Sources */ = {isa = PBXBuildFile; fileRef = A79F380013883F740028F492 /* GHAPIUserPlanV3.m */; };
+		A7AE5B8A13CE06E9001F1875 /* libz.1.2.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A7AE5B8913CE06E9001F1875 /* libz.1.2.5.dylib */; };
 		A7B5208E1388648D000FEE61 /* GHAPIIssueEventV3.m in Sources */ = {isa = PBXBuildFile; fileRef = A7B5208D1388648D000FEE61 /* GHAPIIssueEventV3.m */; };
 		A7B5209213890B68000FEE61 /* GHViewMilestoneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7B5209113890B68000FEE61 /* GHViewMilestoneViewController.m */; };
 		A7B5209613892338000FEE61 /* GHAPILabelV3.m in Sources */ = {isa = PBXBuildFile; fileRef = A7B5209513892338000FEE61 /* GHAPILabelV3.m */; };
@@ -402,7 +402,6 @@
 		A750572013427FEF00514A82 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		A750572213427FF600514A82 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		A750572413427FFF00514A82 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		A75057251342801300514A82 /* libz.1.2.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.3.dylib; path = usr/lib/libz.1.2.3.dylib; sourceTree = SDKROOT; };
 		A7505727134280E900514A82 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Reachability.h; path = "asi-http-request/External/Reachability/Reachability.h"; sourceTree = "<group>"; };
 		A7505728134280E900514A82 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Reachability.m; path = "asi-http-request/External/Reachability/Reachability.m"; sourceTree = "<group>"; };
 		A75057321343033200514A82 /* GHGlossTopBorder@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GHGlossTopBorder@2x.png"; sourceTree = "<group>"; };
@@ -469,6 +468,7 @@
 		A79F37FD13883C2C0028F492 /* GHAPIUserV3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHAPIUserV3.m; sourceTree = "<group>"; };
 		A79F37FF13883F740028F492 /* GHAPIUserPlanV3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHAPIUserPlanV3.h; sourceTree = "<group>"; };
 		A79F380013883F740028F492 /* GHAPIUserPlanV3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHAPIUserPlanV3.m; sourceTree = "<group>"; };
+		A7AE5B8913CE06E9001F1875 /* libz.1.2.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.5.dylib; path = usr/lib/libz.1.2.5.dylib; sourceTree = SDKROOT; };
 		A7B5208C1388648D000FEE61 /* GHAPIIssueEventV3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GHAPIIssueEventV3.h; path = ../iGithub/GHAPIIssueEventV3.h; sourceTree = "<group>"; };
 		A7B5208D1388648D000FEE61 /* GHAPIIssueEventV3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GHAPIIssueEventV3.m; path = ../iGithub/GHAPIIssueEventV3.m; sourceTree = "<group>"; };
 		A7B5209013890B68000FEE61 /* GHViewMilestoneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GHViewMilestoneViewController.h; path = ../iGithub/GHViewMilestoneViewController.h; sourceTree = "<group>"; };
@@ -625,11 +625,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A7AE5B8A13CE06E9001F1875 /* libz.1.2.5.dylib in Frameworks */,
 				A7D14F451354E5A700E1B980 /* MessageUI.framework in Frameworks */,
 				A703B9471347562B0014235D /* QuartzCore.framework in Frameworks */,
 				A7BF14001342149C001AE50D /* CoreGraphics.framework in Frameworks */,
 				A7CE1B831346349200169F94 /* CoreData.framework in Frameworks */,
-				A75057261342801300514A82 /* libz.1.2.3.dylib in Frameworks */,
 				A750572313427FF600514A82 /* MobileCoreServices.framework in Frameworks */,
 				A750572113427FEF00514A82 /* SystemConfiguration.framework in Frameworks */,
 				A750571F13427FE800514A82 /* CFNetwork.framework in Frameworks */,
@@ -1576,12 +1576,12 @@
 		A7BF13FA1342149C001AE50D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A7AE5B8913CE06E9001F1875 /* libz.1.2.5.dylib */,
 				A7D41AC41358B6B500CD3A5C /* CoreText.framework */,
 				A7D14F441354E5A600E1B980 /* MessageUI.framework */,
 				A703B9461347562B0014235D /* QuartzCore.framework */,
 				A703B9451347560F0014235D /* CoreGraphics.framework */,
 				A7CE1B821346349000169F94 /* CoreData.framework */,
-				A75057251342801300514A82 /* libz.1.2.3.dylib */,
 				A750572413427FFF00514A82 /* CoreGraphics.framework */,
 				A750572213427FF600514A82 /* MobileCoreServices.framework */,
 				A750572013427FEF00514A82 /* SystemConfiguration.framework */,
