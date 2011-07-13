@@ -769,6 +769,7 @@
                                           } else {
                                               if ([state.merged boolValue]) {
                                                   // success
+                                                  self.issue.state = kGHAPIIssueStateV3Closed;
                                                   [[ANNotificationQueue sharedInstance] detatchSuccesNotificationWithTitle:NSLocalizedString(@"Successfully merged", @"") message:[NSString stringWithFormat:NSLocalizedString(@"Pull Request %@", @""), self.issueNumber]];
                                               } else {
                                                   UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", @"") 
