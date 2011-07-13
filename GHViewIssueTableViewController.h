@@ -20,13 +20,14 @@
     
     BOOL _isDownloadingIssueData;
     
-    BOOL _canUserAdministrateIssue;
-    
     NSArray *_history;
     GHPullRequestDiscussion *_discussion;
     
     UITextView *_textView;
     UIToolbar *_textViewToolBar;
+    
+    BOOL _hasCollaboratorData;
+    BOOL _isCollaborator;
 }
 
 #warning add ability to close an issue and merge a pull request
@@ -49,6 +50,5 @@
 
 - (void)toolbarCancelButtonClicked:(UIBarButtonItem *)barButton;
 - (void)toolbarDoneButtonClicked:(UIBarButtonItem *)barButton;
-- (void)titleTableViewCellLongPressRecognized:(UILongPressGestureRecognizer *)recognizer;
 
 @end

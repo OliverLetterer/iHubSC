@@ -22,6 +22,7 @@
 #import "GHViewMilestoneViewController.h"
 #import "GHLabelTableViewCell.h"
 #import "GHViewLabelViewController.h"
+#import "OCPromptView.h"
 
 #define kUITableViewSectionData             0
 #define kUITableViewSectionAssignee         1
@@ -59,17 +60,7 @@
         self.number = number;
         self.title = [NSString stringWithFormat:NSLocalizedString(@"Issue %@", @""), self.number];
         _isDownloadingIssueData = YES;
-        
-        [GHAPIRepositoryV3 isUser:[GHSettingsHelper username] 
-         collaboratorOnRepository:self.repository 
-                completionHandler:^(BOOL state, NSError *error) {
-                    if (error) {
-                        [self handleError:error];
-                    } else {
-                        _canUserAdministrateIssue = state;
-                        [self downloadIssueData];
-                    }
-                }];
+        [self downloadIssueData];
     }
     return self;
 }
@@ -135,7 +126,7 @@
                  
                  [self.tableView beginUpdates];
                  
-                 [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:[self.history count]+1 inSection:kUITableViewSectionHistory]] withRowAnimation:UITableViewScrollPositionBottom];
+                 [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:[self.history count]+1 inSection:kUITableViewSectionHistory]] withRowAnimation:UITableViewRowAnimationBottom];
                  [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:[self.history count] inSection:kUITableViewSectionHistory]] withRowAnimation:UITableViewRowAnimationFade];
                  
                  [self.tableView endUpdates];
@@ -143,20 +134,6 @@
                  self.textView.text = nil;
              }
          }];
-}
-
-- (void)titleTableViewCellLongPressRecognized:(UILongPressGestureRecognizer *)recognizer {
-    // TODO: support editing here in the future
-//    if (recognizer.state == UIGestureRecognizerStateBegan) {
-//        UIActionSheet *sheet = [[[UIActionSheet alloc] initWithTitle:NSLocalizedString(@"Edit this Issue", @"") 
-//                                                            delegate:self 
-//                                                   cancelButtonTitle:NSLocalizedString(@"Cancel", @"") 
-//                                              destructiveButtonTitle:nil 
-//                                                   otherButtonTitles:NSLocalizedString(@"Edit", @""), nil]
-//                                autorelease];
-//        sheet.actionSheetStyle = UIActionSheetStyleBlackTranslucent;
-//        [sheet showInView:self.tabBarController.view];
-//    }
 }
 
 #pragma mark - View lifecycle
@@ -235,6 +212,8 @@
         return self.history == nil;
     } else if (section == kUITableViewSectionCommits) {
         return self.discussion == nil;
+    } else if (section == kUITableViewSectionAdministration) {
+        return !_hasCollaboratorData;
     }
     return NO;
 }
@@ -287,6 +266,19 @@
                                                [tableView expandSection:section animated:YES];
                                            }
                                        }];
+    } else if (section == kUITableViewSectionAdministration) {
+        [GHAPIRepositoryV3 isUser:[GHAuthenticationManager sharedInstance].username 
+         collaboratorOnRepository:self.repository 
+                completionHandler:^(BOOL state, NSError *error) {
+                    if (error) {
+                        [self handleError:error];
+                        [tableView cancelDownloadInSection:section];
+                    } else {
+                        _hasCollaboratorData = YES;
+                        _isCollaborator = state || [self.repository hasPrefix:[GHAuthenticationManager sharedInstance].username] || [self.issue.user.login isEqualToString:[GHAuthenticationManager sharedInstance].username];
+                        [tableView expandSection:section animated:YES];
+                    }
+                }];
     }
 }
 
@@ -326,10 +318,15 @@
             }
         } else if (section == kUITableViewSectionAdministration) {
             // first will be administrate
-            if (!_canUserAdministrateIssue) {
-                return 0;
+            result = 1;
+            if (_hasCollaboratorData) {
+                if (_isCollaborator) {
+                    result++;
+                }
+                if (self.issue.isPullRequest && _isCollaborator && [self.issue.state isEqualToString:kGHAPIIssueStateV3Open] && ![self.issue.user.login isEqualToString:[GHAuthenticationManager sharedInstance].username]) {
+                    result++;
+                }
             }
-            result = 2;
         } else if (section == kUITableViewSectionHistory) {
             return self.history.count + 2;
         } else if (section == kUITableViewSectionCommits) {
@@ -371,13 +368,6 @@
             GHIssueTitleTableViewCell *cell = (GHIssueTitleTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
             if (!cell) {
                 cell = [[[GHIssueTitleTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
-                
-                if (_canUserAdministrateIssue) {
-                    UILongPressGestureRecognizer *recognizer = [[[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(titleTableViewCellLongPressRecognized:)] autorelease];
-                    recognizer.minimumPressDuration = 1.0;
-                    
-                    [cell addGestureRecognizer:recognizer];
-                }
             }
             
             cell.textLabel.text = self.issue.title;
@@ -455,24 +445,25 @@
         }
     } else if (indexPath.section == kUITableViewSectionAdministration) {
         // administrate
+        NSString *CellIdentifier = @"UITableViewCellWithLinearGradientBackgroundView";
+        
+        UITableViewCellWithLinearGradientBackgroundView *cell = (UITableViewCellWithLinearGradientBackgroundView *)[self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        if (cell == nil) {
+            cell = [[[UITableViewCellWithLinearGradientBackgroundView alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        }
+        
         if (indexPath.row == 1) {
             // open/ close
             
-            NSString *CellIdentifier = @"UITableViewCellWithLinearGradientBackgroundView";
-            
-            UITableViewCellWithLinearGradientBackgroundView *cell = (UITableViewCellWithLinearGradientBackgroundView *)[self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-            if (cell == nil) {
-                cell = [[[UITableViewCellWithLinearGradientBackgroundView alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
-            }
-            
-            if ([self.issue.state isEqualToString:@"open"]) {
-                cell.textLabel.text = NSLocalizedString(@"Close this Issue", @"");
+            if ([self.issue.state isEqualToString:kGHAPIIssueStateV3Open]) {
+                cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Close this %@", @""), self.issueName];
             } else {
-                cell.textLabel.text = NSLocalizedString(@"Reopen this Issue", @"");
+                cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Reopen this %@", @""), self.issueName];
             }
-            
-            return cell;
+        } else if (indexPath.row == 2) {
+            cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Merge this %@", @""), self.issueName];
         }
+        return cell;
     } else if (indexPath.section == kUITableViewSectionHistory) {
         if (indexPath.row == [self.history count] + 1) {
             // this is the new comment button
@@ -725,16 +716,16 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == kUITableViewSectionAdministration) {
         if (indexPath.row == 1) {
-            if ([self.issue.state isEqualToString:@"open"]) {
+            if ([self.issue.state isEqualToString:kGHAPIIssueStateV3Open]) {
                 [GHAPIIssueV3 closeIssueOnRepository:self.repository 
                                           withNumber:self.number
                                    completionHandler:^(NSError *error) {
                                        if (error) {
                                            [self handleError:error];
                                        } else {
-                                           self.issue.state = @"closed";
+                                           self.issue.state = kGHAPIIssueStateV3Closed;
                                            [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:1 inSection:kUITableViewSectionAdministration]] 
-                                                                 withRowAnimation:UITableViewRowAnimationFade];
+                                                                 withRowAnimation:UITableViewRowAnimationNone];
                                        }
                                    }];
             } else {
@@ -743,12 +734,15 @@
                                         if (error) {
                                             [self handleError:error];
                                         } else {
-                                            self.issue.state = @"open";
+                                            self.issue.state = kGHAPIIssueStateV3Open;
                                             [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:1 inSection:kUITableViewSectionAdministration]] 
-                                                                  withRowAnimation:UITableViewRowAnimationFade];
+                                                                  withRowAnimation:UITableViewRowAnimationNone];
                                         }
                                     }];
             }
+        } else if (indexPath.row == 2) {
+            // Pull Request
+#error display alert to enter the merge string, then merge the request
         }
     } else if (indexPath.section == kUITableViewSectionData) {
         if (indexPath.row == 0) {
@@ -842,5 +836,37 @@
         [self.tableView deselectRowAtIndexPath:indexPath animated:NO];
     }
 }
+
+//
+//- (UIActionSheet *)actionButtonActionSheet {
+//    if (!_isCollaborator && ![[GHAuthenticationManager sharedInstance].username isEqualToString:self.issue.user.login]) {
+//        UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", @"") 
+//                                                         message:[NSString stringWithFormat:NSLocalizedString(@"You are not allowed to administrate this %@", @""), self.issueName] 
+//                                                        delegate:nil 
+//                                               cancelButtonTitle:NSLocalizedString(@"OK", @"") 
+//                                               otherButtonTitles:nil]
+//                              autorelease];
+//        [alert show];
+//        return nil;
+//    }
+//    
+//    UIActionSheet *sheet = [[[UIActionSheet alloc] init] autorelease];
+//    
+//    if ([self.issue.state isEqualToString:kGHAPIIssueStateV3Open]) {
+//        [sheet addButtonWithTitle:[NSString stringWithFormat:NSLocalizedString(@"Close this %@", @""), self.issueName]];
+//    } else {
+//        [sheet addButtonWithTitle:[NSString stringWithFormat:NSLocalizedString(@"Reopen this %@", @""), self.issueName]];
+//    }
+//    
+//    if (self.issue.isPullRequest && _isCollaborator && [self.issue.state isEqualToString:kGHAPIIssueStateV3Open]) {
+//        [sheet addButtonWithTitle:NSLocalizedString(@"Merge this Pull Request", @"")];
+//    }
+//    
+//    sheet.delegate = self;
+//    sheet.tag = kUIActionSheetTagAction;
+//    
+//    return sheet;
+//}
+
 
 @end
