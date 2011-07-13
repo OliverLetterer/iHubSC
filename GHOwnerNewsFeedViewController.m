@@ -133,6 +133,7 @@
 - (void)loadView {
     [super loadView];
     
+    UIView *wrapperView = [[[UIView alloc] initWithFrame:CGRectMake(17.0f, 6.0f, 286.0f, 32.0f)] autorelease];
     self.segmentControl = [[[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:
                                                                       NSLocalizedString(@"News Feed", @""), 
                                                                       NSLocalizedString(@"My Actions", @""), 
@@ -140,9 +141,11 @@
                                                                       nil]] 
                            autorelease];
     self.segmentControl.segmentedControlStyle = UISegmentedControlStyleBar;
-    self.navigationItem.titleView = self.segmentControl;
+    [wrapperView addSubview:self.segmentControl];
+    self.navigationItem.titleView = wrapperView;
     self.segmentControl.userInteractionEnabled = NO;
     self.segmentControl.alpha = 0.5;
+    self.segmentControl.tintColor = [UIColor defaultNavigationBarTintColor];
     if (self.defaultOrganizationName) {
         self.segmentControl.selectedSegmentIndex = 2;
     } else {
