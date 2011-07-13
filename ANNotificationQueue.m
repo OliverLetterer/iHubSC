@@ -102,8 +102,6 @@ CGFloat const ANNotificationQueueAnimationDuration = 0.35f;
     }
 }
 
-#warning new animation for Notifications, let the view fall down from top and fall further down to disappear
-
 - (void)_displayNextNotification {
     if ([self.notifications count] == 0) {
 		return;
@@ -113,41 +111,49 @@ CGFloat const ANNotificationQueueAnimationDuration = 0.35f;
     notificationView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
     
     UIView *containerView = [[UIApplication sharedApplication].delegate window].rootViewController.view;
+    
     CGPoint centerPoint = CGPointMake(CGRectGetWidth(containerView.bounds)/2.0f, CGRectGetHeight(containerView.bounds)/2.0f);
+    CGPoint startPoint = CGPointMake(centerPoint.x, -CGRectGetHeight(notificationView.bounds));
+    CGPoint m1 = CGPointMake(centerPoint.x, centerPoint.y / 1.25f);
+    CGPoint m2 = CGPointMake(centerPoint.x, centerPoint.y / 1.1f);
     
     notificationView.center = centerPoint;
 	[containerView addSubview:notificationView];
 	
-	CAKeyframeAnimation *bounceAnimation = [CAKeyframeAnimation animationWithKeyPath:@"transform"];
+	CAKeyframeAnimation *bounceAnimation = [CAKeyframeAnimation animationWithKeyPath:@"position"];
 	bounceAnimation.calculationMode = kCAAnimationCubic;
 	
-	bounceAnimation.values = [NSArray arrayWithObjects:[NSValue valueWithCATransform3D:CATransform3DMakeScale(0.1, 0.1, 1.0)],
-                              [NSValue valueWithCATransform3D:CATransform3DMakeScale(1.5, 1.5, 1.0)],
-                              [NSValue valueWithCATransform3D:CATransform3DMakeScale(1.0, 1.0, 1.0)],
+	bounceAnimation.values = [NSArray arrayWithObjects:[NSValue valueWithCGPoint:startPoint],
+                              [NSValue valueWithCGPoint:centerPoint],
+                              [NSValue valueWithCGPoint:m1],
+                              [NSValue valueWithCGPoint:centerPoint],
+                              [NSValue valueWithCGPoint:m2],
+                              [NSValue valueWithCGPoint:centerPoint],
                               nil
                               ];
 	
 	bounceAnimation.duration = ANNotificationQueueAnimationDuration;
 	
-	[notificationView.layer addAnimation:bounceAnimation forKey:@"transform"];
+	[notificationView.layer addAnimation:bounceAnimation forKey:@"position"];
 	
     double delayInSeconds = notificationView.displayTime + ANNotificationQueueAnimationDuration;
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void) {
-        // displaying the notification is done, now remove it animated
-        CAKeyframeAnimation *sizeAnimation = [CAKeyframeAnimation animationWithKeyPath:@"transform"];
-        sizeAnimation.calculationMode = kCAAnimationCubic;
+        CGPoint endPoint = CGPointMake(centerPoint.x, CGRectGetHeight(containerView.bounds) + CGRectGetHeight(notificationView.bounds));
         
-        sizeAnimation.values = [NSArray arrayWithObjects:[NSValue valueWithCATransform3D:CATransform3DMakeScale(1.0, 1.0, 1.0)],
-                                [NSValue valueWithCATransform3D:CATransform3DMakeScale(1.2, 1.2, 1.0)],
-                                [NSValue valueWithCATransform3D:CATransform3DMakeScale(0.01, 0.01, 1.0)],
+        // displaying the notification is done, now remove it animated
+        CAKeyframeAnimation *sizeAnimation = [CAKeyframeAnimation animationWithKeyPath:@"position"];
+        sizeAnimation.calculationMode = kCAAnimationCubicPaced;
+        
+        sizeAnimation.values = [NSArray arrayWithObjects:[NSValue valueWithCGPoint:centerPoint],
+                                [NSValue valueWithCGPoint:endPoint],
                                 nil];
         
-        sizeAnimation.duration = 0.35f;
+        sizeAnimation.duration = ANNotificationQueueAnimationDuration;
         
-        [notificationView.layer addAnimation:sizeAnimation forKey:@"transform"];
+        [notificationView.layer addAnimation:sizeAnimation forKey:@"position"];
         
-        notificationView.layer.transform = CATransform3DMakeScale(0.0, 0.0, 0.0);
+        notificationView.center = endPoint;
         
         double delayInSeconds = ANNotificationQueueAnimationDuration;
         dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
