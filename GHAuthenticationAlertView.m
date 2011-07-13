@@ -10,7 +10,16 @@
 #import "GithubAPI.h"
 #import "GHSettingsHelper.h"
 
+static BOOL _isAutheticationAlertViewVisible = NO;
+
 @implementation GHAuthenticationAlertView
+
++ (id)allocWithZone:(NSZone *)zone {
+    if (!_isAutheticationAlertViewVisible) {
+        return [super allocWithZone:zone];
+    }
+    return nil;
+}
 
 - (id)initWithDelegate:(id)delegate {
     if (self = [super initWithTitle:NSLocalizedString(@"Login to GitHub", @"") message:nil delegate:delegate cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"Login", @""), nil]) {
@@ -55,7 +64,13 @@
                                  }];
     } else {
         [super dismissWithClickedButtonIndex:buttonIndex animated:animated];
+        _isAutheticationAlertViewVisible = NO;
     }
+}
+
+- (void)show {
+    _isAutheticationAlertViewVisible = YES;
+    [super show];
 }
 
 @end
