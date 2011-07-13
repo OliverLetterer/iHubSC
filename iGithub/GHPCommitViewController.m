@@ -121,7 +121,7 @@
 #pragma mark - UIExpandableTableViewDatasource
 
 - (BOOL)tableView:(UIExpandableTableView *)tableView canExpandSection:(NSInteger)section {
-    return (section >= 0 && section <= self.commit.modified.count-1);
+    return ((section >= 0) && (section <= (self.commit.modified.count-1)) && self.commit.modified.count > 0);
 }
 
 - (BOOL)tableView:(UIExpandableTableView *)tableView needsToDownloadDataForExpandableSection:(NSInteger)section {
@@ -158,7 +158,7 @@
 // removed      self.commit.modified.count + (self.commit.added.count > 0)
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if (section >= 0 && section <= self.commit.modified.count-1) {
+    if (section >= 0 && section <= self.commit.modified.count-1 && self.commit.modified.count>0) {
         // modified:    filename + diff
         return 2;
     } else if (section == self.commit.modified.count && self.commit.added.count > 0) {
@@ -219,40 +219,7 @@
     return cell;
 }
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
+#pragma mark - UITableViewDelegate
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     if (section == self.commit.modified.count && self.commit.added.count > 0) {
@@ -277,7 +244,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section >= 0 && indexPath.section <= self.commit.modified.count-1 && indexPath.row == 1) {
+    if (indexPath.section >= 0 && indexPath.section <= self.commit.modified.count-1 && indexPath.row == 1 && self.commit.modified.count > 0) {
         GHCommitFileInformation *fileInfo = [self.commit.modified objectAtIndex:indexPath.section];
         
         return [GHPDiffViewTableViewCell heightWithContent:fileInfo.diff];
@@ -300,6 +267,8 @@
                                                                                                            relativeURL:URL]
                                                              autorelease];
         [self.advancedNavigationController pushViewController:fileViewController afterViewController:self];
+    } else {
+        [tableView deselectRowAtIndexPath:indexPath animated:NO];
     }
 }
 
