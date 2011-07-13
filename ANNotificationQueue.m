@@ -102,6 +102,8 @@ CGFloat const ANNotificationQueueAnimationDuration = 0.35f;
     }
 }
 
+#warning new animation for Notifications, let the view fall down from top and fall further down to disappear
+
 - (void)_displayNextNotification {
     if ([self.notifications count] == 0) {
 		return;

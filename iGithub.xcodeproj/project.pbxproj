@@ -1064,7 +1064,6 @@
 				A70FF3A013BF6A320082E2EC /* GHPCollapsingAndSpinningTableViewCell */,
 				A703CB2813C64B3A002767EB /* GHPImageDetailTableViewCell */,
 				A703CB1F13C648AF002767EB /* GHPDefaultTableViewCell */,
-				A703CB2213C64970002767EB /* GHPInfoTableViewCell */,
 			);
 			name = "UITableViewCell - Generic Subclasses";
 			sourceTree = "<group>";
@@ -1253,6 +1252,7 @@
 		A70DAE0713B49FC500DE4279 /* UserInterface */ = {
 			isa = PBXGroup;
 			children = (
+				A703CB2113C64949002767EB /* UITableViewCell - Generic Subclasses */,
 				A7D5549413CB662400358610 /* GHPTeamViewController */,
 				A7D5548413CB4F0E00358610 /* GHPTeamsViewController */,
 				A7D5547313CB462300358610 /* GHPOrganizationViewController */,
@@ -1261,7 +1261,6 @@
 				A7A6CB6613C8D48500C1641F /* GHPSearchViewController */,
 				A7A6CB5E13C8C88600C1641F /* GHPLabelViewController */,
 				A74DD7A513C64E7A00570C94 /* GHPDirectoryViewController */,
-				A703CB2113C64949002767EB /* UITableViewCell - Generic Subclasses */,
 				A7CFD6EC13C63D3300F90791 /* GHPDataArrayViewController */,
 				A7CFD6E713C639AE00F90791 /* GHPPullRequestsViewController */,
 				A7CFD6DF13C61BAB00F90791 /* GHPGistViewController */,
@@ -2619,6 +2618,7 @@
 		A7D5549013CB55E800358610 /* GHPInfoSectionTableViewController */ = {
 			isa = PBXGroup;
 			children = (
+				A703CB2213C64970002767EB /* GHPInfoTableViewCell */,
 				A7D5549113CB562900358610 /* GHPInfoSectionTableViewController.h */,
 				A7D5549213CB562900358610 /* GHPInfoSectionTableViewController.m */,
 			);
