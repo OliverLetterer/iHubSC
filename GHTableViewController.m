@@ -187,6 +187,8 @@ static CGFloat wrapperViewHeight = 21.0f;
     [self updateImageView:imageView inTableView:self.tableView atIndexPath:indexPath withAvatarURLString:avatarURLString];
 }
 
+#pragma mark - Target actions
+
 - (void)authenticationManagerDidAuthenticateUserCallback:(NSNotification *)notification {
     if (self.reloadDataIfNewUserGotAuthenticated) {
         [self pullToReleaseTableViewReloadData];
@@ -194,9 +196,14 @@ static CGFloat wrapperViewHeight = 21.0f;
 }
 
 - (void)applicationWillEnterForegroundCallback:(NSNotification *)notification {
+    _isInBackgroundMode = NO;
     if (self.reloadDataOnApplicationWillEnterForeground) {
         [self pullToReleaseTableViewReloadData];
     }
+}
+
+- (void)applicationDidEnterBackgroundCallback:(NSNotification *)notification {
+    _isInBackgroundMode = YES;
 }
 
 #pragma mark - pagination
@@ -240,6 +247,11 @@ static CGFloat wrapperViewHeight = 21.0f;
         [[NSNotificationCenter defaultCenter] addObserver:self 
                                                  selector:@selector(applicationWillEnterForegroundCallback:) 
                                                      name:UIApplicationWillEnterForegroundNotification 
+                                                   object:nil];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self 
+                                                 selector:@selector(applicationDidEnterBackgroundCallback:) 
+                                                     name:UIApplicationDidEnterBackgroundNotification 
                                                    object:nil];
         
         if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
@@ -443,6 +455,9 @@ static CGFloat wrapperViewHeight = 21.0f;
 #pragma mark - super implementation
 
 - (void)handleError:(NSError *)error {
+    if (_isInBackgroundMode) {
+        return;
+    }
     if ([error code] == 3) {
         // authentication problem
         if (![GHAuthenticationManager sharedInstance].username) {

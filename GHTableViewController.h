@@ -35,6 +35,8 @@
     
     BOOL _isDownloadingEssentialData;
     UIView *_downloadingEssentialDataView;
+    
+    BOOL _isInBackgroundMode;
 }
 
 @property (nonatomic, retain) UIExpandableTableView *tableView;
@@ -73,6 +75,7 @@
 
 - (void)authenticationManagerDidAuthenticateUserCallback:(NSNotification *)notification;
 - (void)applicationWillEnterForegroundCallback:(NSNotification *)notification;
+- (void)applicationDidEnterBackgroundCallback:(NSNotification *)notification;
 
 - (id)keyForSection:(NSUInteger)section;
 - (void)setNextPage:(NSUInteger)nextPage forSection:(NSUInteger)section;
