@@ -11,7 +11,7 @@
 
 @class GHAPIIssueV3, GHNewsFeedItemTableViewCell, GHIssueComment, GHPullRequestDiscussion;
 
-@interface GHViewIssueTableViewController : GHTableViewController {
+@interface GHViewIssueTableViewController : GHTableViewController <UIAlertViewDelegate> {
 @private
     GHAPIIssueV3 *_issue;
     
@@ -29,8 +29,6 @@
     BOOL _hasCollaboratorData;
     BOOL _isCollaborator;
 }
-
-#warning add ability to close an issue and merge a pull request
 
 @property (nonatomic, retain) GHAPIIssueV3 *issue;
 @property (nonatomic, copy) NSString *repository;

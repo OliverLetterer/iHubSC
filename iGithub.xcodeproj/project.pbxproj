@@ -143,6 +143,8 @@
 		A79F37FE13883C2C0028F492 /* GHAPIUserV3.m in Sources */ = {isa = PBXBuildFile; fileRef = A79F37FD13883C2C0028F492 /* GHAPIUserV3.m */; };
 		A79F380113883F740028F492 /* GHAPIUserPlanV3.m in Sources */ = {isa = PBXBuildFile; fileRef = A79F380013883F740028F492 /* GHAPIUserPlanV3.m */; };
 		A7AE5B8A13CE06E9001F1875 /* libz.1.2.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A7AE5B8913CE06E9001F1875 /* libz.1.2.5.dylib */; };
+		A7AE5BA713CE2498001F1875 /* GHAPIPullRequestMergeStateV3.m in Sources */ = {isa = PBXBuildFile; fileRef = A7AE5BA413CE2498001F1875 /* GHAPIPullRequestMergeStateV3.m */; };
+		A7AE5BA813CE2498001F1875 /* GHAPIPullRequestV3.m in Sources */ = {isa = PBXBuildFile; fileRef = A7AE5BA613CE2498001F1875 /* GHAPIPullRequestV3.m */; };
 		A7B5208E1388648D000FEE61 /* GHAPIIssueEventV3.m in Sources */ = {isa = PBXBuildFile; fileRef = A7B5208D1388648D000FEE61 /* GHAPIIssueEventV3.m */; };
 		A7B5209213890B68000FEE61 /* GHViewMilestoneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7B5209113890B68000FEE61 /* GHViewMilestoneViewController.m */; };
 		A7B5209613892338000FEE61 /* GHAPILabelV3.m in Sources */ = {isa = PBXBuildFile; fileRef = A7B5209513892338000FEE61 /* GHAPILabelV3.m */; };
@@ -469,6 +471,10 @@
 		A79F37FF13883F740028F492 /* GHAPIUserPlanV3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHAPIUserPlanV3.h; sourceTree = "<group>"; };
 		A79F380013883F740028F492 /* GHAPIUserPlanV3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHAPIUserPlanV3.m; sourceTree = "<group>"; };
 		A7AE5B8913CE06E9001F1875 /* libz.1.2.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.5.dylib; path = usr/lib/libz.1.2.5.dylib; sourceTree = SDKROOT; };
+		A7AE5BA313CE2498001F1875 /* GHAPIPullRequestMergeStateV3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHAPIPullRequestMergeStateV3.h; sourceTree = "<group>"; };
+		A7AE5BA413CE2498001F1875 /* GHAPIPullRequestMergeStateV3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHAPIPullRequestMergeStateV3.m; sourceTree = "<group>"; };
+		A7AE5BA513CE2498001F1875 /* GHAPIPullRequestV3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHAPIPullRequestV3.h; sourceTree = "<group>"; };
+		A7AE5BA613CE2498001F1875 /* GHAPIPullRequestV3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHAPIPullRequestV3.m; sourceTree = "<group>"; };
 		A7B5208C1388648D000FEE61 /* GHAPIIssueEventV3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GHAPIIssueEventV3.h; path = ../iGithub/GHAPIIssueEventV3.h; sourceTree = "<group>"; };
 		A7B5208D1388648D000FEE61 /* GHAPIIssueEventV3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GHAPIIssueEventV3.m; path = ../iGithub/GHAPIIssueEventV3.m; sourceTree = "<group>"; };
 		A7B5209013890B68000FEE61 /* GHViewMilestoneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GHViewMilestoneViewController.h; path = ../iGithub/GHViewMilestoneViewController.h; sourceTree = "<group>"; };
@@ -1395,6 +1401,7 @@
 		A79F37F813883B650028F492 /* v3 */ = {
 			isa = PBXGroup;
 			children = (
+				A7AE5BAA13CE249E001F1875 /* GHAPIPullRequestV3 */,
 				A773023313B38C520075235E /* GHAPICommitV3 */,
 				A70DA3D913A4E2BE00235C76 /* GHAPITeamV3 */,
 				A70DA3D413A4B7DE00235C76 /* GHAPIOrganizationV3 */,
@@ -1447,6 +1454,17 @@
 				A7EE111F136F3FFA00A1E693 /* GHAPIIssueCommentV3.m */,
 			);
 			name = GHAPIIssueCommentV3;
+			sourceTree = "<group>";
+		};
+		A7AE5BAA13CE249E001F1875 /* GHAPIPullRequestV3 */ = {
+			isa = PBXGroup;
+			children = (
+				A7AE5BA313CE2498001F1875 /* GHAPIPullRequestMergeStateV3.h */,
+				A7AE5BA413CE2498001F1875 /* GHAPIPullRequestMergeStateV3.m */,
+				A7AE5BA513CE2498001F1875 /* GHAPIPullRequestV3.h */,
+				A7AE5BA613CE2498001F1875 /* GHAPIPullRequestV3.m */,
+			);
+			name = GHAPIPullRequestV3;
 			sourceTree = "<group>";
 		};
 		A7B5208B13885E2C000FEE61 /* V2 */ = {
@@ -2268,6 +2286,8 @@
 				A75C3EB113B363E300D64681 /* INNotificationQueue+Private.m in Sources */,
 				A773023213B38C4B0075235E /* GHAPICommitV3.m in Sources */,
 				A773023713B38D200075235E /* GHAPITreeInfoV3.m in Sources */,
+				A7AE5BA713CE2498001F1875 /* GHAPIPullRequestMergeStateV3.m in Sources */,
+				A7AE5BA813CE2498001F1875 /* GHAPIPullRequestV3.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -23,6 +23,7 @@
 #import "GHLabelTableViewCell.h"
 #import "GHViewLabelViewController.h"
 #import "OCPromptView.h"
+#import "INNotificationQueue.h"
 
 #define kUITableViewSectionData             0
 #define kUITableViewSectionAssignee         1
@@ -724,8 +725,12 @@
                                            [self handleError:error];
                                        } else {
                                            self.issue.state = kGHAPIIssueStateV3Closed;
-                                           [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:1 inSection:kUITableViewSectionAdministration]] 
-                                                                 withRowAnimation:UITableViewRowAnimationNone];
+                                           [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:kUITableViewSectionAdministration]
+                                                         withRowAnimation:UITableViewRowAnimationFade];
+                                           
+                                           [[INNotificationQueue sharedQueue] detachSmallNotificationWithTitle:NSLocalizedString(@"Successfully", @"") 
+                                                                                                   andSubtitle:[NSString stringWithFormat:NSLocalizedString(@"Closed this %@", @""), self.issueName] 
+                                                                                                   removeStyle:INNotificationQueueItemRemoveByFadingOut];
                                        }
                                    }];
             } else {
@@ -735,14 +740,23 @@
                                             [self handleError:error];
                                         } else {
                                             self.issue.state = kGHAPIIssueStateV3Open;
-                                            [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:1 inSection:kUITableViewSectionAdministration]] 
-                                                                  withRowAnimation:UITableViewRowAnimationNone];
+                                            [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:kUITableViewSectionAdministration]
+                                                          withRowAnimation:UITableViewRowAnimationFade];
+                                            
+                                            [[INNotificationQueue sharedQueue] detachSmallNotificationWithTitle:NSLocalizedString(@"Successfully", @"") 
+                                                                                                    andSubtitle:[NSString stringWithFormat:NSLocalizedString(@"Reoped this %@", @""), self.issueName] 
+                                                                                                    removeStyle:INNotificationQueueItemRemoveByFadingOut];
                                         }
                                     }];
             }
         } else if (indexPath.row == 2) {
             // Pull Request
-#error display alert to enter the merge string, then merge the request
+            OCPromptView *alert = [[[OCPromptView alloc] initWithPrompt:NSLocalizedString(@"Merge message", @"") 
+                                                               delegate:self 
+                                                      cancelButtonTitle:NSLocalizedString(@"Cancel", @"") 
+                                                      acceptButtonTitle:NSLocalizedString(@"Merge", @"")]
+                                   autorelease];
+            [alert show];
         }
     } else if (indexPath.section == kUITableViewSectionData) {
         if (indexPath.row == 0) {
@@ -834,6 +848,38 @@
         [self.navigationController pushViewController:labelViewController animated:YES];
     } else {
         [self.tableView deselectRowAtIndexPath:indexPath animated:NO];
+    }
+}
+
+#pragma mark - UIAlertViewDelegate
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (buttonIndex == 1) {
+        OCPromptView *promtAlert = (OCPromptView *)alertView;
+        [GHAPIPullRequestV3 mergPullRequestOnRepository:self.repository withNumber:self.number 
+                                          commitMessage:promtAlert.textField.text 
+                                      completionHandler:^(GHAPIPullRequestMergeStateV3 *state, NSError *error) {
+                                          if (error) {
+                                              [self handleError:error];
+                                          } else {
+                                              if (state.merged.boolValue) {
+                                                  [[INNotificationQueue sharedQueue] detachSmallNotificationWithTitle:NSLocalizedString(@"Merge successful", @"") 
+                                                                                                          andSubtitle:state.message 
+                                                                                                          removeStyle:INNotificationQueueItemRemoveByFadingOut];
+                                                  self.issue.state = kGHAPIIssueStateV3Closed;
+                                              } else {
+                                                  UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Merge failed", @"") 
+                                                                                                   message:state.message 
+                                                                                                  delegate:nil 
+                                                                                         cancelButtonTitle:NSLocalizedString(@"OK", @"") 
+                                                                                         otherButtonTitles:nil]
+                                                                        autorelease];
+                                                  [alert show];
+                                              }
+                                              
+                                              [self.tableView reloadDataAndResetExpansionStates:NO];
+                                          }
+                                      }];
     }
 }
 

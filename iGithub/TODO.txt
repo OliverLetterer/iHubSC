@@ -25,11 +25,6 @@ support all these events
 [X]: Implemented
 [-]: clickable (include in navigation hierarchie)
 
-##WARNING##
-- Remaining API calls is 0
-- changed pull request API "repo/" is now "repos/"
-- close owned issues
-
 
 TODO:
 - Network graph for recent activity (see Network API)
