@@ -15,8 +15,6 @@
     return self.stateSegmentControl != nil;
 }
 
-#warning improve this x new messages notification
-
 - (void)loadStateSegmentControl {
     CAKeyframeAnimation *animation = [CAKeyframeAnimation animationWithKeyPath:@"transform"];
     animation.calculationMode = kCAAnimationCubic;
@@ -32,10 +30,11 @@
     UISegmentedControl *segmentControl = [[[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:@"", nil]] autorelease];
     segmentControl.segmentedControlStyle = UISegmentedControlStyleBar;
     segmentControl.tintColor = [UIColor defaultNavigationBarTintColor];
-    segmentControl.frame = CGRectMake(17.0f, 6.0f, 286.0f, 32.0f);
+    segmentControl.frame = CGRectMake(0.0f, 0.0f, 286.0f, 32.0f);
     segmentControl.userInteractionEnabled = NO;
     
-    [self.navigationController.navigationBar addSubview:segmentControl];
+    [self.navigationItem.titleView addSubview:segmentControl];
+    [self.segmentControl bringSubviewToFront:segmentControl];
     [segmentControl.layer addAnimation:animation forKey:@"transform"];
     
     self.stateSegmentControl = segmentControl;

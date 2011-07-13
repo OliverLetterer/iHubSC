@@ -85,6 +85,7 @@ V1.8
 V1.9
 - further API V3 adoption
 - bug fixes
+- fixed bug that caused the message indicator to be displayed in wrong places
 
 iTunes Changelog:
 
