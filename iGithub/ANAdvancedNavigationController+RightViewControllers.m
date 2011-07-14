@@ -199,6 +199,11 @@
     if (!self.isViewLoaded) {
         return nil;
     }
+    if (rightViewController.isViewLoaded) {
+        if (rightViewController.view.superview) {
+            return rightViewController.view.superview;
+        }
+    }
     UIView *wrapperView = [[[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, ANAdvancedNavigationControllerDefaultViewControllerWidth, CGRectGetHeight(self.view.bounds))] autorelease];
     wrapperView.backgroundColor = [UIColor blackColor];
     
