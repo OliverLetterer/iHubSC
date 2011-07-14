@@ -122,6 +122,7 @@
 		A76771651370A34F006D70D6 /* GHClipBoard@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A76771631370A34E006D70D6 /* GHClipBoard@2x.png */; };
 		A76771681370A5B2006D70D6 /* GHClipBoardPrivate.png in Resources */ = {isa = PBXBuildFile; fileRef = A76771661370A5B1006D70D6 /* GHClipBoardPrivate.png */; };
 		A76771691370A5B2006D70D6 /* GHClipBoardPrivate@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A76771671370A5B1006D70D6 /* GHClipBoardPrivate@2x.png */; };
+		A76AA09713CE3EFD00D10962 /* libz.1.2.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A76AA09613CE3EFD00D10962 /* libz.1.2.3.dylib */; };
 		A76FC9A61352D231004C642E /* 145-persondot.png in Resources */ = {isa = PBXBuildFile; fileRef = A76FC9A41352D231004C642E /* 145-persondot.png */; };
 		A76FC9A71352D231004C642E /* 145-persondot@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A76FC9A51352D231004C642E /* 145-persondot@2x.png */; };
 		A76FC9BE13534755004C642E /* UIExpandableTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = A76FC9BD13534755004C642E /* UIExpandableTableView.m */; };
@@ -142,7 +143,6 @@
 		A7837EA5136CADD400B13B95 /* GHAPIMilestoneV3TableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A7837EA4136CADD400B13B95 /* GHAPIMilestoneV3TableViewCell.m */; };
 		A79F37FE13883C2C0028F492 /* GHAPIUserV3.m in Sources */ = {isa = PBXBuildFile; fileRef = A79F37FD13883C2C0028F492 /* GHAPIUserV3.m */; };
 		A79F380113883F740028F492 /* GHAPIUserPlanV3.m in Sources */ = {isa = PBXBuildFile; fileRef = A79F380013883F740028F492 /* GHAPIUserPlanV3.m */; };
-		A7AE5B8A13CE06E9001F1875 /* libz.1.2.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A7AE5B8913CE06E9001F1875 /* libz.1.2.5.dylib */; };
 		A7AE5BA713CE2498001F1875 /* GHAPIPullRequestMergeStateV3.m in Sources */ = {isa = PBXBuildFile; fileRef = A7AE5BA413CE2498001F1875 /* GHAPIPullRequestMergeStateV3.m */; };
 		A7AE5BA813CE2498001F1875 /* GHAPIPullRequestV3.m in Sources */ = {isa = PBXBuildFile; fileRef = A7AE5BA613CE2498001F1875 /* GHAPIPullRequestV3.m */; };
 		A7B5208E1388648D000FEE61 /* GHAPIIssueEventV3.m in Sources */ = {isa = PBXBuildFile; fileRef = A7B5208D1388648D000FEE61 /* GHAPIIssueEventV3.m */; };
@@ -432,6 +432,7 @@
 		A76771631370A34E006D70D6 /* GHClipBoard@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GHClipBoard@2x.png"; sourceTree = "<group>"; };
 		A76771661370A5B1006D70D6 /* GHClipBoardPrivate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GHClipBoardPrivate.png; sourceTree = "<group>"; };
 		A76771671370A5B1006D70D6 /* GHClipBoardPrivate@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GHClipBoardPrivate@2x.png"; sourceTree = "<group>"; };
+		A76AA09613CE3EFD00D10962 /* libz.1.2.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.3.dylib; path = usr/lib/libz.1.2.3.dylib; sourceTree = SDKROOT; };
 		A76FC9A41352D231004C642E /* 145-persondot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "145-persondot.png"; sourceTree = "<group>"; };
 		A76FC9A51352D231004C642E /* 145-persondot@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "145-persondot@2x.png"; sourceTree = "<group>"; };
 		A76FC9BC13534755004C642E /* UIExpandableTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UIExpandableTableView.h; path = UIExpandableTableView/UIExpandableTableView.h; sourceTree = "<group>"; };
@@ -470,7 +471,6 @@
 		A79F37FD13883C2C0028F492 /* GHAPIUserV3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHAPIUserV3.m; sourceTree = "<group>"; };
 		A79F37FF13883F740028F492 /* GHAPIUserPlanV3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHAPIUserPlanV3.h; sourceTree = "<group>"; };
 		A79F380013883F740028F492 /* GHAPIUserPlanV3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHAPIUserPlanV3.m; sourceTree = "<group>"; };
-		A7AE5B8913CE06E9001F1875 /* libz.1.2.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.5.dylib; path = usr/lib/libz.1.2.5.dylib; sourceTree = SDKROOT; };
 		A7AE5BA313CE2498001F1875 /* GHAPIPullRequestMergeStateV3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHAPIPullRequestMergeStateV3.h; sourceTree = "<group>"; };
 		A7AE5BA413CE2498001F1875 /* GHAPIPullRequestMergeStateV3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHAPIPullRequestMergeStateV3.m; sourceTree = "<group>"; };
 		A7AE5BA513CE2498001F1875 /* GHAPIPullRequestV3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHAPIPullRequestV3.h; sourceTree = "<group>"; };
@@ -631,7 +631,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A7AE5B8A13CE06E9001F1875 /* libz.1.2.5.dylib in Frameworks */,
+				A76AA09713CE3EFD00D10962 /* libz.1.2.3.dylib in Frameworks */,
 				A7D14F451354E5A700E1B980 /* MessageUI.framework in Frameworks */,
 				A703B9471347562B0014235D /* QuartzCore.framework in Frameworks */,
 				A7BF14001342149C001AE50D /* CoreGraphics.framework in Frameworks */,
@@ -1594,7 +1594,7 @@
 		A7BF13FA1342149C001AE50D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				A7AE5B8913CE06E9001F1875 /* libz.1.2.5.dylib */,
+				A76AA09613CE3EFD00D10962 /* libz.1.2.3.dylib */,
 				A7D41AC41358B6B500CD3A5C /* CoreText.framework */,
 				A7D14F441354E5A600E1B980 /* MessageUI.framework */,
 				A703B9461347562B0014235D /* QuartzCore.framework */,
