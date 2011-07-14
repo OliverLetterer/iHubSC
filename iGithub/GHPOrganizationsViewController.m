@@ -44,7 +44,7 @@
     GHAPIOrganizationV3 *organization = [self.dataArray objectAtIndex:indexPath.row];
     
     GHPOrganizationViewController *viewController = [[[GHPOrganizationViewController alloc] initWithOrganizationName:organization.login] autorelease];
-    [self.advancedNavigationController pushViewController:viewController afterViewController:self];
+    [self.advancedNavigationController pushViewController:viewController afterViewController:self animated:YES];
 }
 
 #pragma mark - Height caching

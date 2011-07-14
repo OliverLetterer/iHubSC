@@ -101,7 +101,7 @@
     
     GHPIssueViewController *viewController = [[[GHPIssueViewController alloc] initWithIssueNumber:issue.number onRepository:self.repository] autorelease];
     
-    [self.advancedNavigationController pushViewController:viewController afterViewController:self];
+    [self.advancedNavigationController pushViewController:viewController afterViewController:self animated:YES];
 }
 
 #pragma mark - height caching

@@ -119,26 +119,32 @@
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    UIViewController *viewController = nil;
+    
     if (indexPath.section == 0) {
         // wow, another directory
         GHDirectory *directory = [self.directory.directories objectAtIndex:indexPath.row];
         
-        GHPDirectoryViewController *viewController = [[[GHPDirectoryViewController alloc] initWithDirectory:directory 
-                                                                                                          repository:self.repository 
-                                                                                                              branch:self.branch
-                                                                                                                hash:self.hash]
-                                                            autorelease];
-        [self.advancedNavigationController pushViewController:viewController afterViewController:self];
+        viewController = [[[GHPDirectoryViewController alloc] initWithDirectory:directory 
+                                                                     repository:self.repository 
+                                                                         branch:self.branch
+                                                                           hash:self.hash]
+                          autorelease];
     } else if (indexPath.section == 1) {
         // wow a file, show this baby
         GHFile *file = [self.directory.files objectAtIndex:indexPath.row];
         
-        GHViewCloudFileViewController *viewController = [[[GHViewCloudFileViewController alloc] initWithRepository:self.repository 
-                                                                                                                  tree:self.hash 
-                                                                                                              filename:file.name 
-                                                                                                           relativeURL:self.directory.name]
-                                                             autorelease];
-        [self.advancedNavigationController pushViewController:viewController afterViewController:self];
+        viewController = [[[GHViewCloudFileViewController alloc] initWithRepository:self.repository 
+                                                                               tree:self.hash 
+                                                                           filename:file.name 
+                                                                        relativeURL:self.directory.name]
+                          autorelease];
+    }
+    
+    if (viewController) {
+        [self.advancedNavigationController pushViewController:viewController afterViewController:self animated:YES];
+    } else {
+        [tableView deselectRowAtIndexPath:indexPath animated:NO];
     }
 }
 

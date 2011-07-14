@@ -112,7 +112,7 @@
     
     GHPMilestoneViewController *viewController = [[[GHPMilestoneViewController alloc] initWithRepository:self.repository milestoneNumber:milestone.number] autorelease];
     
-    [self.advancedNavigationController pushViewController:viewController afterViewController:self];
+    [self.advancedNavigationController pushViewController:viewController afterViewController:self animated:YES];
 }
 
 @end

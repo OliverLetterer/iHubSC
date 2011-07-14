@@ -261,7 +261,7 @@
     }
     
     if (viewController) {
-        [self.advancedNavigationController pushViewController:viewController afterViewController:self];
+        [self.advancedNavigationController pushViewController:viewController afterViewController:self animated:YES];
     } else {
         [tableView deselectRowAtIndexPath:indexPath animated:NO];
     }
@@ -277,7 +277,7 @@
 
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
     [self setDataArray:nil withDataType:GHPSearchViewControllerDataTypeNone];
-    [self.advancedNavigationController popViewControllersToViewController:self];
+    [self.advancedNavigationController popViewControllersToViewController:self animated:YES];
 }
 
 #pragma mark - UISearchDisplayDelegate

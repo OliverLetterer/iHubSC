@@ -368,23 +368,26 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    UIViewController *viewController = nil;
+    
     if (indexPath.section == kUITableViewSectionOwner) {
         if (indexPath.row == 0) {
-            GHPUserViewController *viewController = [[[GHPUserViewController alloc] initWithUsername:self.gist.user.login] autorelease];
-            [self.advancedNavigationController pushViewController:viewController afterViewController:self];
+            viewController = [[[GHPUserViewController alloc] initWithUsername:self.gist.user.login] autorelease];
         }
     } else if (indexPath.section == kUITableViewSectionComments && indexPath.row <= self.comments.count) {
         GHAPIGistCommentV3 *comment = [self.comments objectAtIndex:indexPath.row -1];
         
-        GHPUserViewController *viewController = [[[GHPUserViewController alloc] initWithUsername:comment.user.login] autorelease];
-        [self.advancedNavigationController pushViewController:viewController afterViewController:self];
+        viewController = [[[GHPUserViewController alloc] initWithUsername:comment.user.login] autorelease];
     } else if (indexPath.section == kUITableViewSectionFiles) {
         GHAPIGistFileV3 *file = [self.gist.files objectAtIndex:indexPath.row - 1];
         
-        GHViewCloudFileViewController *viewController = [[[GHViewCloudFileViewController alloc] initWithFile:file.filename 
-                                                                                              contentsOfFile:file.content] 
-                                                         autorelease];
-        [self.advancedNavigationController pushViewController:viewController afterViewController:self];
+        viewController = [[[GHViewCloudFileViewController alloc] initWithFile:file.filename 
+                                                               contentsOfFile:file.content] 
+                          autorelease];
+    }
+    
+    if (viewController) {
+        [self.advancedNavigationController pushViewController:viewController afterViewController:self animated:YES];
     } else {
         [tableView deselectRowAtIndexPath:indexPath animated:NO];
     }

@@ -17,14 +17,16 @@ extern const CGFloat ANAdvancedNavigationControllerDefaultLeftPanningOffset;
 @interface ANAdvancedNavigationController : UIViewController
 
 @property (nonatomic, retain) UIView *backgroundView;
+@property (nonatomic, retain) UIViewController *leftViewController;
+@property (nonatomic, readonly, copy) NSArray *rightViewControllers;
 
 - (id)initWithLeftViewController:(UIViewController *)leftViewController;
 - (id)initWithLeftViewController:(UIViewController *)leftViewController rightViewControllers:(NSArray *)rightViewControllers;
 
-- (void)pushRootViewController:(UIViewController *)rootViewController;
-- (void)pushViewController:(UIViewController *)viewController afterViewController:(UIViewController *)afterViewController;
-- (void)popViewController:(UIViewController *)viewController;
-- (void)popViewControllersToViewController:(UIViewController *)viewController;
+- (void)popViewController:(UIViewController *)viewController animated:(BOOL)animated;
+- (void)popViewControllersToViewController:(UIViewController *)viewController animated:(BOOL)animated;
+
+- (void)pushViewController:(UIViewController *)viewController afterViewController:(UIViewController *)afterViewController animated:(BOOL)animated;
 
 @end
 

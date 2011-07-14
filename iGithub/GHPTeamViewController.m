@@ -281,18 +281,21 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    UIViewController *viewController = nil;
+    
     if (indexPath.section == kUITableViewSectionMembers && indexPath.row > 0) {
         GHAPIUserV3 *user = [self.members objectAtIndex:indexPath.row - 1];
         
-        GHPUserViewController *viewController = [[[GHPUserViewController alloc] initWithUsername:user.login] autorelease];
-        [self.advancedNavigationController pushViewController:viewController afterViewController:self];
+        viewController = [[[GHPUserViewController alloc] initWithUsername:user.login] autorelease];
     } else if (indexPath.section == kUITableViewSectionRepositories && indexPath.row > 0) {
         
         GHAPIRepositoryV3 *repo = [self.repositories objectAtIndex:indexPath.row-1];
         
-        GHPRepositoryViewController *viewController = [[[GHPRepositoryViewController alloc] initWithRepositoryString:repo.fullRepositoryName] autorelease];
-        [self.advancedNavigationController pushViewController:viewController afterViewController:self];
-        
+        viewController = [[[GHPRepositoryViewController alloc] initWithRepositoryString:repo.fullRepositoryName] autorelease];
+    }
+    
+    if (viewController) {
+        [self.advancedNavigationController pushViewController:viewController afterViewController:self animated:YES];
     } else {
         [tableView deselectRowAtIndexPath:indexPath animated:NO];
     }

@@ -30,7 +30,7 @@
         
         if (dataArray != nil && dataArray.count == 0) {
             [[ANNotificationQueue sharedInstance] detatchErrorNotificationWithTitle:NSLocalizedString(@"Error", @"") errorMessage:self.emptyArrayErrorMessage];
-            [self.advancedNavigationController popViewController:self];
+            [self.advancedNavigationController popViewController:self animated:YES];
         }
         
         if (self.isViewLoaded) {

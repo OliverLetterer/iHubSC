@@ -82,7 +82,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     GHAPIUserV3 *user = [self.dataArray objectAtIndex:indexPath.row];
     GHPUserViewController *userViewController = [[[GHPUserViewController alloc] initWithUsername:user.login] autorelease];
-    [self.advancedNavigationController pushViewController:userViewController afterViewController:self];
+    [self.advancedNavigationController pushViewController:userViewController afterViewController:self animated:YES];
 }
 
 @end

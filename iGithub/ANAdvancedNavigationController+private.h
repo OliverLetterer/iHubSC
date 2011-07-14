@@ -27,7 +27,6 @@ extern const CGFloat ANAdvancedNavigationControllerDefaultDraggingDistance;
 
 - (void)updateBackgroundView;
 
-@property (nonatomic, retain) UIViewController *leftViewController;
 @property (nonatomic, retain) NSMutableArray *viewControllers;
 
 @property (nonatomic, retain) ANRemoveRectangleIndicatorView *removeRectangleIndicatorView;

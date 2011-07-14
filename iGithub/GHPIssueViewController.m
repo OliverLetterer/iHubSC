@@ -614,8 +614,9 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    UIViewController *viewController = nil;
+    
     if (indexPath.section == kUITableViewSectionDetails) {
-        UIViewController *viewController = nil;
         if (indexPath.row == 0) {
             // repository
             viewController = [[[GHPRepositoryViewController alloc] initWithRepositoryString:self.repositoryString] autorelease];
@@ -630,32 +631,21 @@
                 viewController = [[[GHPMilestoneViewController alloc] initWithRepository:self.repositoryString milestoneNumber:self.issue.milestone.number] autorelease];
             }
         }
-        
-        if (viewController) {
-            [self.advancedNavigationController pushViewController:viewController afterViewController:self];
-        } else {
-            [tableView deselectRowAtIndexPath:indexPath animated:YES];
-        }
     } else if (indexPath.section == kUITableViewSectionCommits && indexPath.row > 0) {
         GHCommit *commit = [self.discussion.commits objectAtIndex:indexPath.row-1];
         
-        GHPCommitViewController *viewController = [[[GHPCommitViewController alloc] initWithRepository:self.repositoryString 
-                                                                                              commitID:commit.ID]
-                                                   autorelease];
-        
-        [self.advancedNavigationController pushViewController:viewController afterViewController:self];
+        viewController = [[[GHPCommitViewController alloc] initWithRepository:self.repositoryString 
+                                                                     commitID:commit.ID]
+                          autorelease];
     } else if (indexPath.section == kUITableViewSectionHistory && indexPath.row > 0 && indexPath.row < [self.history count]+1) {
         
         NSObject *object = [self.history objectAtIndex:indexPath.row - 1];
         
         if ([object isKindOfClass:[GHAPIIssueCommentV3 class] ]) {
             GHAPIIssueCommentV3 *comment = (GHAPIIssueCommentV3 *)object;
-            GHPUserViewController *userViewController = [[[GHPUserViewController alloc] initWithUsername:comment.user.login] autorelease];
-            [self.advancedNavigationController pushViewController:userViewController afterViewController:self];
+            viewController = [[[GHPUserViewController alloc] initWithUsername:comment.user.login] autorelease];
         } else if ([object isKindOfClass:[GHAPIIssueEventV3 class] ]) {
             GHAPIIssueEventV3 *event = (GHAPIIssueEventV3 *)object;
-            
-            UIViewController *viewController = nil;
             
             switch (event.type) {
                 case GHAPIIssueEventTypeV3Closed:
@@ -693,15 +683,13 @@
                 default:
                     break;
             }
-            
-            if (viewController) {
-                [self.advancedNavigationController pushViewController:viewController afterViewController:self];
-            } else {
-                [tableView deselectRowAtIndexPath:indexPath animated:NO];
-            }
         }
-        
-        
+    }
+    
+    if (viewController) {
+        [self.advancedNavigationController pushViewController:viewController afterViewController:self animated:YES];
+    } else {
+        [tableView deselectRowAtIndexPath:indexPath animated:YES];
     }
 }
 

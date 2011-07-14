@@ -295,7 +295,7 @@
     
     if (viewController) {
         self.lastSelectedIndexPath = indexPath;
-        [self.advancedNavigationController pushRootViewController:viewController];
+        [self.advancedNavigationController pushViewController:viewController afterViewController:nil animated:self.advancedNavigationController.rightViewControllers.count > 1];
     } else {
         [tableView deselectRowAtIndexPath:indexPath animated:NO];
         [tableView selectRowAtIndexPath:self.lastSelectedIndexPath animated:NO scrollPosition:UITableViewScrollPositionNone];

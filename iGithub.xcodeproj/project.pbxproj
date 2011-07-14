@@ -184,6 +184,8 @@
 		A78B70E213BCE95E00F4CE5E /* UIImage+GHTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = A78B70E113BCE95D00F4CE5E /* UIImage+GHTabBar.m */; };
 		A78B70E713BCF75400F4CE5E /* Lupe@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A78B70E513BCF75300F4CE5E /* Lupe@2x.png */; };
 		A78B70E813BCF75400F4CE5E /* Lupe.PNG in Resources */ = {isa = PBXBuildFile; fileRef = A78B70E613BCF75400F4CE5E /* Lupe.PNG */; };
+		A78F372513CF20D200C22A2D /* ANAdvancedNavigationController+RightViewControllers.m in Sources */ = {isa = PBXBuildFile; fileRef = A78F372413CF20D200C22A2D /* ANAdvancedNavigationController+RightViewControllers.m */; };
+		A78F372A13CF294100C22A2D /* ANAdvancedNavigationController+RightViewControllers+Anchors.m in Sources */ = {isa = PBXBuildFile; fileRef = A78F372913CF294100C22A2D /* ANAdvancedNavigationController+RightViewControllers+Anchors.m */; };
 		A79AE39113CC96E70008E900 /* ANNotificationQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = A79AE39013CC96E70008E900 /* ANNotificationQueue.m */; };
 		A79AE39413CC979D0008E900 /* ANNotificationView.m in Sources */ = {isa = PBXBuildFile; fileRef = A79AE39313CC979D0008E900 /* ANNotificationView.m */; };
 		A79AE39813CC9C300008E900 /* ANNotificationViewBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = A79AE39713CC9C300008E900 /* ANNotificationViewBackgroundView.m */; };
@@ -632,6 +634,10 @@
 		A78B70E113BCE95D00F4CE5E /* UIImage+GHTabBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+GHTabBar.m"; sourceTree = "<group>"; };
 		A78B70E513BCF75300F4CE5E /* Lupe@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Lupe@2x.png"; sourceTree = "<group>"; };
 		A78B70E613BCF75400F4CE5E /* Lupe.PNG */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Lupe.PNG; sourceTree = "<group>"; };
+		A78F372313CF20D200C22A2D /* ANAdvancedNavigationController+RightViewControllers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ANAdvancedNavigationController+RightViewControllers.h"; sourceTree = "<group>"; };
+		A78F372413CF20D200C22A2D /* ANAdvancedNavigationController+RightViewControllers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ANAdvancedNavigationController+RightViewControllers.m"; sourceTree = "<group>"; };
+		A78F372813CF294100C22A2D /* ANAdvancedNavigationController+RightViewControllers+Anchors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ANAdvancedNavigationController+RightViewControllers+Anchors.h"; sourceTree = "<group>"; };
+		A78F372913CF294100C22A2D /* ANAdvancedNavigationController+RightViewControllers+Anchors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ANAdvancedNavigationController+RightViewControllers+Anchors.m"; sourceTree = "<group>"; };
 		A792A92713A3FD3200BB0E1A /* GHAPIConnectionHandlersV3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHAPIConnectionHandlersV3.h; sourceTree = "<group>"; };
 		A79AE38F13CC96E70008E900 /* ANNotificationQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANNotificationQueue.h; sourceTree = "<group>"; };
 		A79AE39013CC96E70008E900 /* ANNotificationQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANNotificationQueue.m; sourceTree = "<group>"; };
@@ -1851,6 +1857,36 @@
 			path = ..;
 			sourceTree = "<group>";
 		};
+		A78F372113CF209800C22A2D /* Private */ = {
+			isa = PBXGroup;
+			children = (
+				A7F334A013BCCF0100DB922D /* ANAdvancedNavigationController+private.h */,
+				A78F372613CF28F100C22A2D /* LeftViewController */,
+				A78F372713CF290800C22A2D /* RightViewControllers */,
+			);
+			name = Private;
+			sourceTree = "<group>";
+		};
+		A78F372613CF28F100C22A2D /* LeftViewController */ = {
+			isa = PBXGroup;
+			children = (
+				A7F3349D13BCCF0100DB922D /* ANAdvancedNavigationController+LeftViewController.m */,
+				A7F3349C13BCCF0100DB922D /* ANAdvancedNavigationController+LeftViewController.h */,
+			);
+			name = LeftViewController;
+			sourceTree = "<group>";
+		};
+		A78F372713CF290800C22A2D /* RightViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				A78F372813CF294100C22A2D /* ANAdvancedNavigationController+RightViewControllers+Anchors.h */,
+				A78F372913CF294100C22A2D /* ANAdvancedNavigationController+RightViewControllers+Anchors.m */,
+				A78F372313CF20D200C22A2D /* ANAdvancedNavigationController+RightViewControllers.h */,
+				A78F372413CF20D200C22A2D /* ANAdvancedNavigationController+RightViewControllers.m */,
+			);
+			name = RightViewControllers;
+			sourceTree = "<group>";
+		};
 		A79AE38D13CC54320008E900 /* UIImage */ = {
 			isa = PBXGroup;
 			children = (
@@ -2740,13 +2776,11 @@
 		A7F334AB13BCCF0800DB922D /* ANAdvancedNavigationController */ = {
 			isa = PBXGroup;
 			children = (
+				A78F372113CF209800C22A2D /* Private */,
 				A7F3349A13BCCF0100DB922D /* ANAdvancedNavigationController.h */,
 				A7F3349B13BCCF0100DB922D /* ANAdvancedNavigationController.m */,
-				A7F3349C13BCCF0100DB922D /* ANAdvancedNavigationController+LeftViewController.h */,
-				A7F3349D13BCCF0100DB922D /* ANAdvancedNavigationController+LeftViewController.m */,
 				A7F3349E13BCCF0100DB922D /* ANAdvancedNavigationController+MovingRightViewControllers.h */,
 				A7F3349F13BCCF0100DB922D /* ANAdvancedNavigationController+MovingRightViewControllers.m */,
-				A7F334A013BCCF0100DB922D /* ANAdvancedNavigationController+private.h */,
 				A7F334A113BCCF0100DB922D /* ANRectangleView.h */,
 				A7F334A213BCCF0100DB922D /* ANRectangleView.m */,
 				A7F334A313BCCF0100DB922D /* ANRemoveRectangleIndicatorView.h */,
@@ -3184,6 +3218,8 @@
 				A7DE2DEA13CCAE7A005B810B /* ANNotificationErrorView.m in Sources */,
 				A7DE2DF113CCAF99005B810B /* ANNotificationSuccessView.m in Sources */,
 				A7DE2E0013CCBE7E005B810B /* UIImage+Resize.m in Sources */,
+				A78F372513CF20D200C22A2D /* ANAdvancedNavigationController+RightViewControllers.m in Sources */,
+				A78F372A13CF294100C22A2D /* ANAdvancedNavigationController+RightViewControllers+Anchors.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

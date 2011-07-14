@@ -105,7 +105,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     GHAPIRepositoryV3 *repository = [self.dataArray objectAtIndex:indexPath.row];
     GHPRepositoryViewController *repoViewController = [[[GHPRepositoryViewController alloc] initWithRepositoryString:repository.fullRepositoryName] autorelease];
-    [self.advancedNavigationController pushViewController:repoViewController afterViewController:self];
+    [self.advancedNavigationController pushViewController:repoViewController afterViewController:self animated:YES];
 }
 
 #pragma mark - caching height

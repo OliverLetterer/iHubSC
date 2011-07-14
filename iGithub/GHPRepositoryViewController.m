@@ -404,23 +404,15 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    UIViewController *viewController = nil;
+    
     if (indexPath.section == kUITableViewSectionOwner) {
-        UIViewController *viewController = nil;
-        
         if (indexPath.row == 0) {
             viewController = [[[GHPUserViewController alloc] initWithUsername:self.repository.owner.login ] autorelease];
         } else if (indexPath.row == 1) {
             viewController = [[[GHPRepositoryViewController alloc] initWithRepositoryString:self.repository.source.fullRepositoryName] autorelease];
         }
-        
-        if (viewController) {
-            [self.advancedNavigationController pushViewController:viewController afterViewController:self];
-        } else {
-            [tableView deselectRowAtIndexPath:indexPath animated:NO];
-        }
     } else if (indexPath.section == kUITableViewSectionFurtherContent) {
-        UIViewController *viewController = nil;
-        
         if (indexPath.row == 3) {
             viewController = [[[GHPWatchingRepositoryUsersViewController alloc] initWithRepository:self.repositoryString] autorelease];
         } else if (indexPath.row == 2) {
@@ -432,33 +424,30 @@
         } else if (indexPath.row == 4) {
             viewController = [[[GHPPullRequestsOnRepositoryViewController alloc] initWithRepository:self.repositoryString] autorelease];
         }
-        
-        if (viewController) {
-            [self.advancedNavigationController pushViewController:viewController afterViewController:self];
-        } else {
-            [tableView deselectRowAtIndexPath:indexPath animated:NO];
-        }
     } else if (indexPath.section == kUITableViewSectionRecentCommits) {
         GHAPIRepositoryBranchV3 *branch = [self.branches objectAtIndex:indexPath.row - 1];
         
-        GHPCommitsViewController *viewController = [[[GHPCommitsViewController alloc] initWithRepository:self.repositoryString 
-                                                                                                    branchHash:branch.ID]
-                                                          autorelease];
-        [self.advancedNavigationController pushViewController:viewController afterViewController:self];
+        viewController = [[[GHPCommitsViewController alloc] initWithRepository:self.repositoryString 
+                                                                    branchHash:branch.ID]
+                          autorelease];
     } else if (indexPath.section == kUITableViewSectionBrowseContent) {
         GHAPIRepositoryBranchV3 *branch = [self.branches objectAtIndex:indexPath.row - 1];
         
-        GHPRootDirectoryViewController *viewController = [[[GHPRootDirectoryViewController alloc] initWithRepository:self.repositoryString 
-                                                                                                              branch:branch.name 
-                                                                                                                hash:branch.ID]
-                                                          autorelease];
-        [self.advancedNavigationController pushViewController:viewController afterViewController:self];
+        viewController = [[[GHPRootDirectoryViewController alloc] initWithRepository:self.repositoryString 
+                                                                              branch:branch.name 
+                                                                                hash:branch.ID]
+                          autorelease];
     } else if (indexPath.section == kUITableViewSectionLabels) {
         GHAPILabelV3 *label = [self.labels objectAtIndex:indexPath.row-1];
-        GHPLabelViewController *viewController = [[[GHPLabelViewController alloc] initWithRepository:self.repositoryString 
-                                                                                               label:label]
-                                                  autorelease];
-        [self.advancedNavigationController pushViewController:viewController afterViewController:self];
+        viewController = [[[GHPLabelViewController alloc] initWithRepository:self.repositoryString 
+                                                                       label:label]
+                          autorelease];
+    }
+    
+    if (viewController) {
+        [self.advancedNavigationController pushViewController:viewController afterViewController:self animated:YES];
+    } else {
+        [tableView deselectRowAtIndexPath:indexPath animated:NO];
     }
 }
 
@@ -630,7 +619,7 @@
                              if (error) {
                                  [self handleError:error];
                              } else {
-                                 [self.advancedNavigationController popViewController:self];
+                                 [self.advancedNavigationController popViewController:self animated:YES];
                              }
                          }];
         } else {

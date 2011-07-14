@@ -266,7 +266,7 @@
                                                                                                               filename:base 
                                                                                                            relativeURL:URL]
                                                              autorelease];
-        [self.advancedNavigationController pushViewController:fileViewController afterViewController:self];
+        [self.advancedNavigationController pushViewController:fileViewController afterViewController:self animated:YES];
     } else {
         [tableView deselectRowAtIndexPath:indexPath animated:NO];
     }

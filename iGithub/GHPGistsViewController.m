@@ -50,7 +50,7 @@
     GHAPIGistV3 *gist = [self.dataArray objectAtIndex:indexPath.row];
     GHPGistViewController *viewController = [[[GHPGistViewController alloc] initWithGistID:gist.ID] autorelease];
     
-    [self.advancedNavigationController pushViewController:viewController afterViewController:self];
+    [self.advancedNavigationController pushViewController:viewController afterViewController:self animated:YES];
 }
 
 #pragma mark - Height caching

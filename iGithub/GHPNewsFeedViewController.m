@@ -560,7 +560,7 @@
     }
     
     if (viewController) {
-        [self.advancedNavigationController pushViewController:viewController afterViewController:self];
+        [self.advancedNavigationController pushViewController:viewController afterViewController:self animated:YES];
     } else {
         [self.tableView deselectRowAtIndexPath:indexPath animated:NO];
     }

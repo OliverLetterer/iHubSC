@@ -9,6 +9,7 @@
 #import "ANAdvancedNavigationController.h"
 #import "ANAdvancedNavigationController+private.h"
 #import "ANAdvancedNavigationController+LeftViewController.h"
+#import "ANAdvancedNavigationController+RightViewControllers.h"
 #import "ANAdvancedNavigationController+MovingRightViewControllers.h"
 #import <QuartzCore/QuartzCore.h>
 
@@ -40,6 +41,10 @@ const CGFloat ANAdvancedNavigationControllerDefaultDraggingDistance         = 47
     }
 }
 
+- (NSArray *)rightViewControllers {
+    return [[_viewControllers copy] autorelease];
+}
+
 #pragma mark - initialization
 
 - (id)init {
@@ -62,65 +67,15 @@ const CGFloat ANAdvancedNavigationControllerDefaultDraggingDistance         = 47
 - (id)initWithLeftViewController:(UIViewController *)leftViewController rightViewControllers:(NSArray *)rightViewControllers {
     if (self = [self initWithLeftViewController:leftViewController]) {
         [rightViewControllers enumerateObjectsUsingBlock:^(__strong id obj, NSUInteger idx, BOOL *stop) {
-            [self addRightViewController:obj];
+            [self _insertRightViewController:obj];
         }];
     }
     return self;
 }
 
-#pragma mark - instance methods
+#pragma mark - Pushing and Poping
 
-- (void)pushRootViewController:(UIViewController *)rootViewController {
-    NSArray *oldArray = [[self.viewControllers copy] autorelease];
-    
-    [oldArray enumerateObjectsUsingBlock:^(__strong id obj, NSUInteger idx, BOOL *stop) {
-        [self _removeRightViewController:obj animated:YES];
-    }];
-    
-    [self addRightViewController:rootViewController];
-    
-    // now display the new rootViewController, if the view is loaded
-    UIView *newView = self.isViewLoaded ? [self viewForRightViewController:rootViewController] : nil;
-    
-    if (newView) {
-        [self.view addSubview:newView];
-        newView.center = CGPointMake(CGRectGetWidth(self.view.bounds) + ANAdvancedNavigationControllerDefaultViewControllerWidth/2.0f, CGRectGetHeight(self.view.bounds)/2.0f);
-        [self moveRightViewControllerToRightAnchorPoint:rootViewController animated:YES];
-    }
-}
-
-- (void)pushViewController:(UIViewController *)viewController afterViewController:(UIViewController *)afterViewController {
-    if ([self.viewControllers containsObject:viewController]) {
-        [NSException raise:NSInternalInconsistencyException format:@"viewController (%@) is already part of the viewController Hierarchy", viewController];
-    }
-    if (![self.viewControllers containsObject:afterViewController]) {
-        [NSException raise:NSInternalInconsistencyException format:@"afterViewController (%@) is not part of the viewController Hierarchy", afterViewController];
-    }
-    
-    NSUInteger afterIndex = [self.viewControllers indexOfObject:afterViewController]+1;
-    NSIndexSet *deleteIndexSet = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(afterIndex, self.viewControllers.count - afterIndex)];
-    
-    NSArray *oldViewControllers = [self.viewControllers objectsAtIndexes:deleteIndexSet];
-    
-    // remove all viewControllers, that come after afterViewController
-    [oldViewControllers enumerateObjectsUsingBlock:^(__strong id obj, NSUInteger idx, BOOL *stop) {
-        [self _removeRightViewController:obj animated:YES];
-    }];
-    
-    // insert viewController in data structure
-    [self addRightViewController:viewController];
-    
-    UIView *newView = self.isViewLoaded ? [self viewForRightViewController:viewController] : nil;
-    
-    if (newView) {
-        [self.view addSubview:newView];
-        newView.center = CGPointMake(CGRectGetWidth(self.view.bounds)+ANAdvancedNavigationControllerDefaultViewControllerWidth/2.0f, CGRectGetHeight(self.view.bounds)/2.0f);
-        // now insert the new view into our view hirarchy
-        [self moveRightViewControllerToRightAnchorPoint:viewController animated:YES];
-    }
-}
-
-- (void)popViewController:(UIViewController *)viewController {
+- (void)popViewController:(UIViewController *)viewController animated:(BOOL)animated {
     if (![self.viewControllers containsObject:viewController]) {
         [NSException raise:NSInternalInconsistencyException format:@"viewController (%@) is not part of the viewController Hierarchy", viewController];
     }
@@ -129,30 +84,16 @@ const CGFloat ANAdvancedNavigationControllerDefaultDraggingDistance         = 47
     
     if (index >= 0) {
         viewController = [self.viewControllers objectAtIndex:index];
-        [self popViewControllersToViewController:viewController];
+        [self _popViewControllersToViewController:viewController animated:animated];
     }
 }
 
-- (void)popViewControllersToViewController:(UIViewController *)viewController {
-    if (![self.viewControllers containsObject:viewController]) {
-        [NSException raise:NSInternalInconsistencyException format:@"viewController (%@) is not part of the viewController Hierarchy", viewController];
-    }
-    
-    NSInteger index = [self.viewControllers indexOfObject:viewController]+1;
-    [self.viewControllers enumerateObjectsAtIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(index, self.viewControllers.count-index)] 
-                                            options:NSEnumerationConcurrent 
-                                         usingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-                                             [self _removeRightViewController:obj animated:YES];
-                                         }];
-    
-    [self moveRightViewControllerToRightAnchorPoint:viewController animated:YES];
+- (void)popViewControllersToViewController:(UIViewController *)viewController animated:(BOOL)animated {
+    [self _popViewControllersToViewController:viewController animated:animated];
 }
 
-#pragma mark - memory management
-
-- (void)didReceiveMemoryWarning {
-    // Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
+- (void)pushViewController:(UIViewController *)viewController afterViewController:(UIViewController *)afterViewController animated:(BOOL)animated {
+    [self _pushViewController:viewController afterViewController:afterViewController animated:animated];
 }
 
 #pragma mark - View lifecycle
@@ -169,8 +110,8 @@ const CGFloat ANAdvancedNavigationControllerDefaultDraggingDistance         = 47
     self.view.backgroundColor = [UIColor darkGrayColor];
     [self updateBackgroundView];
     [self _insertLeftViewControllerView];
-    [self prepareViewForPanning];
-    [self loadRightViewControllers];
+    [self _prepareViewForPanning];
+    [self _insertRightViewControllerViews];
 }
 
 - (void)viewDidUnload {
@@ -208,12 +149,7 @@ const CGFloat ANAdvancedNavigationControllerDefaultDraggingDistance         = 47
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
     [super willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
     
-    [self.viewControllers enumerateObjectsUsingBlock:^(__strong id obj, NSUInteger idx, BOOL *stop) {
-        [self updateViewControllersShadow:obj];
-    }];
-    if (self.viewControllers.count > _draggingRightAnchorViewControllerIndex) {
-        [self moveRightViewControllerToRightAnchorPoint:[self.viewControllers objectAtIndex:_draggingRightAnchorViewControllerIndex] animated:NO];
-    }
+    [self _willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
 }
 
 #pragma mark - private implementation
