@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-#warning removing rightViewControllers may still cause crashes while network traffic occours
+//#warning removing rightViewControllers may still cause crashes while network traffic occours
 
 extern const CGFloat ANAdvancedNavigationControllerDefaultLeftViewControllerWidth;
 extern const CGFloat ANAdvancedNavigationControllerDefaultViewControllerWidth;

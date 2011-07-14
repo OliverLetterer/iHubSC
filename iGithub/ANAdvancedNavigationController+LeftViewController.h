@@ -11,7 +11,10 @@
 
 @interface ANAdvancedNavigationController (ANAdvancedNavigationController_LeftViewController)
 
-- (void)replaceLeftViewControllerWithViewController:(UIViewController *)leftViewController;
-- (void)loadAndPrepareLeftViewController:(UIViewController *)leftViewController;
+- (void)_removeLeftViewControllerView;
+- (void)_removeLeftViewController;
+
+- (void)_setLeftViewController:(UIViewController *)leftViewController;
+- (void)_insertLeftViewControllerView;
 
 @end
