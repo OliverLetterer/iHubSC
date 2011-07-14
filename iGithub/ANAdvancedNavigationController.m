@@ -101,14 +101,18 @@ const CGFloat ANAdvancedNavigationControllerDefaultDraggingDistance         = 47
 
 #pragma mark - View lifecycle
 
-// Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
-- (void)viewDidLoad {
-    [super viewDidLoad];
+- (void)loadView {
+    [super loadView];
     
     CGFloat removeHeight = 75.0f;
     self.removeRectangleIndicatorView = [[[ANRemoveRectangleIndicatorView alloc] initWithFrame:CGRectMake(ANAdvancedNavigationControllerDefaultLeftViewControllerWidth + 5.0f, CGRectGetHeight(self.view.bounds)/2.0f-removeHeight, 175.0f, removeHeight*2.0f)] autorelease];
     self.removeRectangleIndicatorView.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
     [self.view insertSubview:self.removeRectangleIndicatorView atIndex:0];
+}
+
+// Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
+- (void)viewDidLoad {
+    [super viewDidLoad];
     
     self.view.backgroundColor = [UIColor darkGrayColor];
     [self updateBackgroundView];

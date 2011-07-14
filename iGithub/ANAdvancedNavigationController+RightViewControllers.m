@@ -26,6 +26,7 @@
 // managing rightViewControllers views
 - (UIView *)__loadViewForNewRightViewController:(UIViewController *)rightViewController;
 - (UIView *)__viewForRightViewController:(UIViewController *)rightViewController;
+- (BOOL)__isRightViewControllerAlreayInViewHierarchy:(UIViewController *)rightViewController;
 
 // panning
 - (UIViewController *)__bestRightAnchorPointViewControllerWithIndex:(NSInteger *)index;
@@ -196,6 +197,7 @@
 #pragma mark - rightViewControllers views
 
 - (UIView *)__loadViewForNewRightViewController:(UIViewController *)rightViewController {
+    DLog(@"%@", rightViewController);
     if (!self.isViewLoaded) {
         return nil;
     }
@@ -224,7 +226,14 @@
 }
 
 - (UIView *)__viewForRightViewController:(UIViewController *)rightViewController {
+    if (!rightViewController.isViewLoaded) {
+        return nil;
+    }
     return rightViewController.view.superview;
+}
+
+- (BOOL)__isRightViewControllerAlreayInViewHierarchy:(UIViewController *)rightViewController {
+    return [self __viewForRightViewController:rightViewController].superview == self.view;
 }
 
 #pragma mark - Panning
@@ -450,12 +459,14 @@
 - (void)_insertRightViewControllerViews {
     NSUInteger lastIndex = self.viewControllers.count-1;
     [self.viewControllers enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        UIViewController *viewController = obj;
-        UIView *view = [self __loadViewForNewRightViewController:viewController];
-        [viewController viewWillAppear:NO];
-        [self.view addSubview:view];
-        view.center = [self __centerPointForRightViewController:viewController withIndexOfCurrentViewControllerAtRightAnchor:lastIndex];
-        [viewController viewDidAppear:NO];
+        if (![self __isRightViewControllerAlreayInViewHierarchy:obj]) {
+            UIViewController *viewController = obj;
+            UIView *view = [self __loadViewForNewRightViewController:viewController];
+            [viewController viewWillAppear:NO];
+            [self.view addSubview:view];
+            view.center = [self __centerPointForRightViewController:viewController withIndexOfCurrentViewControllerAtRightAnchor:lastIndex];
+            [viewController viewDidAppear:NO];
+        }
     }];
 }
 
