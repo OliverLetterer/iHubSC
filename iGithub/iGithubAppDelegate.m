@@ -14,6 +14,8 @@
 
 @implementation iGithubAppDelegate
 
+#warning add my Issues
+#warning add Starred Gists
 
 @synthesize window=_window;
 
