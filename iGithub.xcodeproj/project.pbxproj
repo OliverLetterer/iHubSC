@@ -1867,8 +1867,8 @@
 		A78F372613CF28F100C22A2D /* LeftViewController */ = {
 			isa = PBXGroup;
 			children = (
-				A7F3349D13BCCF0100DB922D /* ANAdvancedNavigationController+LeftViewController.m */,
 				A7F3349C13BCCF0100DB922D /* ANAdvancedNavigationController+LeftViewController.h */,
+				A7F3349D13BCCF0100DB922D /* ANAdvancedNavigationController+LeftViewController.m */,
 			);
 			name = LeftViewController;
 			sourceTree = "<group>";

@@ -75,12 +75,6 @@
     [_infoCell release], _infoCell = nil;
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    // Return YES for supported orientations
-	return YES;
-}
-
 #pragma Action Button Downloading
 
 - (void)downloadDataToDisplayActionButton {

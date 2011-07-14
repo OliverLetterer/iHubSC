@@ -268,6 +268,10 @@ static CGFloat wrapperViewHeight = 21.0f;
 #pragma mark - Memory management
 
 - (void)dealloc {
+    if (self.isViewLoaded) {
+        self.tableView.delegate = nil;
+        self.tableView.dataSource = nil;
+    }
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     [_cachedHeightsDictionary release];
     _alertProxy.delegate = nil;
@@ -406,6 +410,10 @@ static CGFloat wrapperViewHeight = 21.0f;
 
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
+}
+
+- (void)viewWillUnload {
+    [super viewWillUnload];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {

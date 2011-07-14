@@ -44,6 +44,10 @@ const CGFloat ANAdvancedNavigationControllerDefaultDraggingDistance         = 47
     return [[_viewControllers copy] autorelease];
 }
 
+- (BOOL)automaticallyForwardAppearanceAndRotationMethodsToChildViewControllers {
+    return NO;
+}
+
 #pragma mark - initialization
 
 - (id)init {
@@ -149,6 +153,20 @@ const CGFloat ANAdvancedNavigationControllerDefaultDraggingDistance         = 47
     [super willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
     
     [self _willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
+}
+
+- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
+    [super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
+    
+    for (UIViewController *viewController in self.childViewControllers) {
+        [viewController willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
+    }
+}
+
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
+    for (UIViewController *viewController in self.childViewControllers) {
+        [viewController didRotateFromInterfaceOrientation:fromInterfaceOrientation];
+    }
 }
 
 #pragma mark - private implementation

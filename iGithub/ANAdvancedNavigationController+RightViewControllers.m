@@ -54,6 +54,7 @@
     // now display the new rootViewController, if the view is loaded
     UIView *newView = [self __loadViewForNewRightViewController:rootViewController];
     
+    [rootViewController viewWillAppear:animated];
     if (newView) {
         newView.center = CGPointMake(CGRectGetWidth(self.view.bounds) + ANAdvancedNavigationControllerDefaultViewControllerWidth/2.0f, CGRectGetHeight(self.view.bounds)/2.0f);
         [self.view addSubview:newView];
@@ -64,10 +65,12 @@
                                  newView.center = nextCenterPoint;
                              } 
                              completion:^(BOOL finished) {
+                                 [rootViewController viewDidAppear:animated];
                                  [rootViewController didMoveToParentViewController:self];
                              }];
         } else {
             newView.center = nextCenterPoint;
+            [rootViewController viewDidAppear:animated];
             [rootViewController didMoveToParentViewController:self];
         }
     }
@@ -98,6 +101,7 @@
     
     UIView *newView = [self __loadViewForNewRightViewController:viewController];
     
+    [viewController viewWillAppear:animated];
     if (newView) {
         [self.view addSubview:newView];
         newView.center = CGPointMake(CGRectGetWidth(self.view.bounds)+ANAdvancedNavigationControllerDefaultViewControllerWidth/2.0f, CGRectGetHeight(self.view.bounds)/2.0f);
@@ -112,6 +116,7 @@
                                  }];
                              } 
                              completion:^(BOOL finished) {
+                                 [viewController viewDidAppear:animated];
                                  [viewController didMoveToParentViewController:self];
                              }];
         } else {
@@ -120,6 +125,7 @@
                 view.center = [self __centerPointForRightViewController:obj 
                           withIndexOfCurrentViewControllerAtRightAnchor:self.viewControllers.count-1];
             }];
+            [viewController viewDidAppear:animated];
             [viewController didMoveToParentViewController:self];
         }
     }
@@ -137,7 +143,7 @@
     [self.viewControllers removeObject:rightViewController];
     [self __numberOfRightViewControllersDidChanged];
     
-//    [rightViewController viewWillDisappear:animated];
+    [rightViewController viewWillDisappear:animated];
     UIView *view = [self __viewForRightViewController:rightViewController];
     if (animated) {
         [UIView animateWithDuration:ANAdvancedNavigationControllerDefaultAnimationDuration 
@@ -148,12 +154,12 @@
                          } 
                          completion:^(BOOL finished) {
                              [view removeFromSuperview];
-//                             [rightViewController viewDidDisappear:animated];
+                             [rightViewController viewDidDisappear:animated];
                              [rightViewController removeFromParentViewController];
                          }];
     } else {
         [view removeFromSuperview];
-//        [rightViewController viewDidDisappear:animated];
+        [rightViewController viewDidDisappear:animated];
         [rightViewController removeFromParentViewController];
     }
 }
@@ -420,6 +426,9 @@
 }
 
 - (void)_willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
+    for (UIViewController *viewController in self.childViewControllers) {
+        [viewController willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
+    }
     [self _updateViewControllerShadows];
     
     if (self.viewControllers.count > _draggingRightAnchorViewControllerIndex) {
@@ -436,8 +445,12 @@
 - (void)_insertRightViewControllerViews {
     NSUInteger lastIndex = self.viewControllers.count-1;
     [self.viewControllers enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        UIView *view = [self __viewForRightViewController:obj];
-        view.center = [self __centerPointForRightViewController:obj withIndexOfCurrentViewControllerAtRightAnchor:lastIndex];
+        UIViewController *viewController = obj;
+        UIView *view = [self __loadViewForNewRightViewController:viewController];
+        [viewController viewWillAppear:NO];
+        [self.view addSubview:view];
+        view.center = [self __centerPointForRightViewController:viewController withIndexOfCurrentViewControllerAtRightAnchor:lastIndex];
+        [viewController viewDidAppear:NO];
     }];
 }
 

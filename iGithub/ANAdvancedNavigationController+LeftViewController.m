@@ -54,7 +54,9 @@
     if (self.isViewLoaded) {
         _leftViewController.view.frame = CGRectMake(0.0f, 0.0f, ANAdvancedNavigationControllerDefaultLeftViewControllerWidth, CGRectGetHeight(self.view.bounds));
         _leftViewController.view.autoresizingMask = UIViewAutoresizingFlexibleHeight;
+        [_leftViewController viewWillAppear:NO];
         [self.view addSubview:_leftViewController.view];
+        [_leftViewController viewDidAppear:NO];
     }
 }
 
