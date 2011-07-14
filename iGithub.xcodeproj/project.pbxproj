@@ -303,7 +303,6 @@
 		A7EE1123136F481500A1E693 /* Appirater.m in Sources */ = {isa = PBXBuildFile; fileRef = A7EE1122136F481100A1E693 /* Appirater.m */; };
 		A7F334A513BCCF0100DB922D /* ANAdvancedNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7F3349B13BCCF0100DB922D /* ANAdvancedNavigationController.m */; };
 		A7F334A613BCCF0100DB922D /* ANAdvancedNavigationController+LeftViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7F3349D13BCCF0100DB922D /* ANAdvancedNavigationController+LeftViewController.m */; };
-		A7F334A713BCCF0100DB922D /* ANAdvancedNavigationController+MovingRightViewControllers.m in Sources */ = {isa = PBXBuildFile; fileRef = A7F3349F13BCCF0100DB922D /* ANAdvancedNavigationController+MovingRightViewControllers.m */; };
 		A7F334A813BCCF0100DB922D /* ANRectangleView.m in Sources */ = {isa = PBXBuildFile; fileRef = A7F334A213BCCF0100DB922D /* ANRectangleView.m */; };
 		A7F334A913BCCF0100DB922D /* ANRemoveRectangleIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = A7F334A413BCCF0100DB922D /* ANRemoveRectangleIndicatorView.m */; };
 		A7F334B213BCD02700DB922D /* GHPLeftNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7F334B113BCD02700DB922D /* GHPLeftNavigationController.m */; };
@@ -853,8 +852,6 @@
 		A7F3349B13BCCF0100DB922D /* ANAdvancedNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANAdvancedNavigationController.m; sourceTree = "<group>"; };
 		A7F3349C13BCCF0100DB922D /* ANAdvancedNavigationController+LeftViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ANAdvancedNavigationController+LeftViewController.h"; sourceTree = "<group>"; };
 		A7F3349D13BCCF0100DB922D /* ANAdvancedNavigationController+LeftViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ANAdvancedNavigationController+LeftViewController.m"; sourceTree = "<group>"; };
-		A7F3349E13BCCF0100DB922D /* ANAdvancedNavigationController+MovingRightViewControllers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ANAdvancedNavigationController+MovingRightViewControllers.h"; sourceTree = "<group>"; };
-		A7F3349F13BCCF0100DB922D /* ANAdvancedNavigationController+MovingRightViewControllers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ANAdvancedNavigationController+MovingRightViewControllers.m"; sourceTree = "<group>"; };
 		A7F334A013BCCF0100DB922D /* ANAdvancedNavigationController+private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ANAdvancedNavigationController+private.h"; sourceTree = "<group>"; };
 		A7F334A113BCCF0100DB922D /* ANRectangleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANRectangleView.h; sourceTree = "<group>"; };
 		A7F334A213BCCF0100DB922D /* ANRectangleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANRectangleView.m; sourceTree = "<group>"; };
@@ -2779,8 +2776,6 @@
 				A78F372113CF209800C22A2D /* Private */,
 				A7F3349A13BCCF0100DB922D /* ANAdvancedNavigationController.h */,
 				A7F3349B13BCCF0100DB922D /* ANAdvancedNavigationController.m */,
-				A7F3349E13BCCF0100DB922D /* ANAdvancedNavigationController+MovingRightViewControllers.h */,
-				A7F3349F13BCCF0100DB922D /* ANAdvancedNavigationController+MovingRightViewControllers.m */,
 				A7F334A113BCCF0100DB922D /* ANRectangleView.h */,
 				A7F334A213BCCF0100DB922D /* ANRectangleView.m */,
 				A7F334A313BCCF0100DB922D /* ANRemoveRectangleIndicatorView.h */,
@@ -3136,7 +3131,6 @@
 				A70DAE1013B4A1DE00DE4279 /* GHPDefaultTableViewCellBackgroundView.m in Sources */,
 				A7F334A513BCCF0100DB922D /* ANAdvancedNavigationController.m in Sources */,
 				A7F334A613BCCF0100DB922D /* ANAdvancedNavigationController+LeftViewController.m in Sources */,
-				A7F334A713BCCF0100DB922D /* ANAdvancedNavigationController+MovingRightViewControllers.m in Sources */,
 				A7F334A813BCCF0100DB922D /* ANRectangleView.m in Sources */,
 				A7F334A913BCCF0100DB922D /* ANRemoveRectangleIndicatorView.m in Sources */,
 				A7F334B213BCD02700DB922D /* GHPLeftNavigationController.m in Sources */,

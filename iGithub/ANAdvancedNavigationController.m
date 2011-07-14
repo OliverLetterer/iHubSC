@@ -10,7 +10,6 @@
 #import "ANAdvancedNavigationController+private.h"
 #import "ANAdvancedNavigationController+LeftViewController.h"
 #import "ANAdvancedNavigationController+RightViewControllers.h"
-#import "ANAdvancedNavigationController+MovingRightViewControllers.h"
 #import <QuartzCore/QuartzCore.h>
 
 const CGFloat ANAdvancedNavigationControllerDefaultLeftViewControllerWidth  = 291.0f;
