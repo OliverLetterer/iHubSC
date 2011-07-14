@@ -99,6 +99,7 @@
 		A7288A7113A9094300170D57 /* scripts in Resources */ = {isa = PBXBuildFile; fileRef = A7288A6D13A9094300170D57 /* scripts */; };
 		A7288A7213A9094300170D57 /* src in Resources */ = {isa = PBXBuildFile; fileRef = A7288A6E13A9094300170D57 /* src */; };
 		A7288A7313A9094300170D57 /* styles in Resources */ = {isa = PBXBuildFile; fileRef = A7288A6F13A9094300170D57 /* styles */; };
+		A72FB17B13CF763100D2BE07 /* GHPIssuesOfAuthenticatedUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A72FB17A13CF763100D2BE07 /* GHPIssuesOfAuthenticatedUserViewController.m */; };
 		A73AE5A7134EF4F100E9EBA4 /* UITableView+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = A73AE5A6134EF4F100E9EBA4 /* UITableView+Additions.m */; };
 		A73AE5AC134EFDF400E9EBA4 /* 56-feed.png in Resources */ = {isa = PBXBuildFile; fileRef = A73AE5A8134EFDF300E9EBA4 /* 56-feed.png */; };
 		A73AE5AD134EFDF400E9EBA4 /* 56-feed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A73AE5A9134EFDF300E9EBA4 /* 56-feed@2x.png */; };
@@ -484,6 +485,8 @@
 		A7288A6D13A9094300170D57 /* scripts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = scripts; sourceTree = "<group>"; };
 		A7288A6E13A9094300170D57 /* src */ = {isa = PBXFileReference; lastKnownFileType = folder; path = src; sourceTree = "<group>"; };
 		A7288A6F13A9094300170D57 /* styles */ = {isa = PBXFileReference; lastKnownFileType = folder; path = styles; sourceTree = "<group>"; };
+		A72FB17913CF763100D2BE07 /* GHPIssuesOfAuthenticatedUserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; path = GHPIssuesOfAuthenticatedUserViewController.h; sourceTree = "<group>"; };
+		A72FB17A13CF763100D2BE07 /* GHPIssuesOfAuthenticatedUserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPIssuesOfAuthenticatedUserViewController.m; sourceTree = "<group>"; };
 		A7384D68136BFCE200DD1BE5 /* iHub - Icon Template.psd */ = {isa = PBXFileReference; lastKnownFileType = file; path = "iHub - Icon Template.psd"; sourceTree = "<group>"; };
 		A73AE5A5134EF4F100E9EBA4 /* UITableView+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+Additions.h"; sourceTree = "<group>"; };
 		A73AE5A6134EF4F100E9EBA4 /* UITableView+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+Additions.m"; sourceTree = "<group>"; };
@@ -2654,6 +2657,8 @@
 				A7DA5EA213C250A900288937 /* GHPIssuesViewController.m */,
 				A7DA5EA413C2534C00288937 /* GHPOpenIssuesOnRepositoryViewController.h */,
 				A7DA5EA513C2534C00288937 /* GHPOpenIssuesOnRepositoryViewController.m */,
+				A72FB17913CF763100D2BE07 /* GHPIssuesOfAuthenticatedUserViewController.h */,
+				A72FB17A13CF763100D2BE07 /* GHPIssuesOfAuthenticatedUserViewController.m */,
 			);
 			name = GHPIssuesViewController;
 			sourceTree = "<group>";
@@ -3214,6 +3219,7 @@
 				A7DE2E0013CCBE7E005B810B /* UIImage+Resize.m in Sources */,
 				A78F372513CF20D200C22A2D /* ANAdvancedNavigationController+RightViewControllers.m in Sources */,
 				A78F372A13CF294100C22A2D /* ANAdvancedNavigationController+RightViewControllers+Anchors.m in Sources */,
+				A72FB17B13CF763100D2BE07 /* GHPIssuesOfAuthenticatedUserViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

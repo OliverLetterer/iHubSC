@@ -12,12 +12,16 @@
 
 @implementation GHPIssuesViewController
 
-@synthesize repository=_repository;
+@synthesize repository=_repository, username=_username;
 
 #pragma mark - setters and getters
 
 - (NSString *)emptyArrayErrorMessage {
     return NSLocalizedString(@"No Issues available", @"");
+}
+
+- (NSString *)descriptionStringForIssue:(GHAPIIssueV3 *)issue {
+    return [NSString stringWithFormat:NSLocalizedString(@"Issue %@ - %@", @""), issue.number, issue.title];
 }
 
 #pragma mark - Initialization
@@ -29,10 +33,18 @@
     return self;
 }
 
+- (id)initWithUsername:(NSString *)username {
+    if (self = [super initWithStyle:UITableViewStyleGrouped]) {
+        self.username = username;
+    }
+    return self;
+}
+
 #pragma mark - Memory management
 
 - (void)dealloc {
     [_repository release];
+    [_username release];
     
     [super dealloc];
 }
@@ -52,54 +64,19 @@
     
     [self updateImageView:cell.imageView atIndexPath:indexPath withAvatarURLString:issue.user.avatarURL];
     cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ (%@ ago)", @""), issue.user.login, issue.createdAt.prettyTimeIntervalSinceNow];
-    cell.detailTextLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Issue %@ - %@", @""), issue.number, issue.title];
+    cell.detailTextLabel.text = [self descriptionStringForIssue:issue];
     
     // Configure the cell...
     
     return cell;
 }
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     GHAPIIssueV3 *issue = [self.dataArray objectAtIndex:indexPath.row];
     
-    GHPIssueViewController *viewController = [[[GHPIssueViewController alloc] initWithIssueNumber:issue.number onRepository:self.repository] autorelease];
+    GHPIssueViewController *viewController = [[[GHPIssueViewController alloc] initWithIssueNumber:issue.number onRepository:issue.repository] autorelease];
     
     [self.advancedNavigationController pushViewController:viewController afterViewController:self animated:YES];
 }
@@ -109,7 +86,7 @@
 - (void)cacheDataArrayHeights {
     [self.dataArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         GHAPIIssueV3 *issue = obj;
-        NSString *content = [NSString stringWithFormat:NSLocalizedString(@"Issue %@ - %@", @""), issue.number, issue.title];
+        NSString *content = [self descriptionStringForIssue:issue];
         [self cacheHeight:[GHPImageDetailTableViewCell heightWithContent:content] forRowAtIndexPath:[NSIndexPath indexPathForRow:idx inSection:0] ];
     }];
 }

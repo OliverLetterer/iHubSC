@@ -31,6 +31,8 @@ extern NSString *const kGHAPIIssueStateV3Closed;
     NSString *_updatedAt;
     NSString *_URL;
     GHAPIUserV3 *_user;
+    
+    NSString *_repository;
 }
 
 @property (nonatomic, retain) GHAPIUserV3 *assignee;
@@ -48,6 +50,7 @@ extern NSString *const kGHAPIIssueStateV3Closed;
 @property (nonatomic, copy) NSString *updatedAt;
 @property (nonatomic, copy) NSString *URL;
 @property (nonatomic, retain) GHAPIUserV3 *user;
+@property (nonatomic, copy) NSString *repository;
 
 @property (nonatomic, readonly) BOOL isPullRequest;
 @property (nonatomic, readonly) BOOL hasAssignee;
@@ -102,5 +105,7 @@ extern NSString *const kGHAPIIssueStateV3Closed;
                      state:(NSString *)state 
                       page:(NSInteger)page
          completionHandler:(GHAPIPaginationHandler)handler;
+
++ (void)issuesOfAuthenticatedUserOnPage:(NSInteger)page completionHandler:(GHAPIPaginationHandler)handler;
 
 @end

@@ -7,7 +7,6 @@
 //
 
 #import "GHPUserViewController.h"
-#import "GHSettingsHelper.h"
 #import "GHPOwnedRepositoriesOfUserViewController.h"
 #import "GHPWatchedRepositoriesViewController.h"
 #import "GHPFollwingUsersViewController.h"
@@ -15,12 +14,16 @@
 #import "GHPGistsOfUserViewController.h"
 #import "GHPUsersNewsFeedViewController.h"
 #import "GHPOrganizationsOfUserViewController.h"
+#import "GHPIssuesOfAuthenticatedUserViewController.h"
+
+#import "GHSettingsHelper.h"
 #import "ANNotificationQueue.h"
 
 #define kUITableViewSectionUserInfo         0
 #define kUITableViewSectionUserContent      1
+#define kUITableViewSectionAUContent        2
 
-#define kUITableViewNumberOfSections        2
+#define kUITableViewNumberOfSections        3
 
 @implementation GHPUserViewController
 
@@ -81,57 +84,13 @@
     return self;
 }
 
-- (void)didReceiveMemoryWarning
-{
-    // Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
+#pragma mark - memory management
+
+- (void)dealloc {
+    [_user release];
+    [_username release];
     
-    // Release any cached data, images, etc that aren't in use.
-}
-
-#pragma mark - View lifecycle
-
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-}
-
-- (void)viewDidUnload {
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-}
-
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-}
-
-- (void)viewWillDisappear:(BOOL)animated
-{
-    [super viewWillDisappear:animated];
-}
-
-- (void)viewDidDisappear:(BOOL)animated
-{
-    [super viewDidDisappear:animated];
-}
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    // Return YES for supported orientations
-	return YES;
+    [super dealloc];
 }
 
 #pragma mark - Table view data source
@@ -148,6 +107,10 @@
         return 7;
     } else if (section == kUITableViewSectionUserInfo) {
         return 1;
+    } else if (section == kUITableViewSectionAUContent) {
+        if ([self.username isEqualToString:[GHAuthenticationManager sharedInstance].username]) {
+            return 2;
+        }
     }
     return 0;
 }
@@ -190,6 +153,18 @@
             
             return cell;
         }
+    } else if (indexPath.section == kUITableViewSectionAUContent) {
+        GHPDefaultTableViewCell *cell = [self defaultTableViewCellForRowAtIndexPath:indexPath withReuseIdentifier:@"GHPDefaultTableViewCell"];
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        if (indexPath.row == 0) {
+            cell.textLabel.text = NSLocalizedString(@"Issues assigned to me", @"");
+        } else if (indexPath.row == 1) {
+            cell.textLabel.text = NSLocalizedString(@"Starred Gists", @"");
+        } else {
+            cell.textLabel.text = nil;
+        }
+        
+        return cell;
     }
 
     return self.dummyCell;
@@ -206,8 +181,9 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    UIViewController *viewController = nil;
+    
     if (indexPath.section == kUITableViewSectionUserContent) {
-        UIViewController *viewController = nil;
         if (indexPath.row == 0) {
             // Repositories
             viewController = [[[GHPOwnedRepositoriesOfUserViewController alloc] initWithUsername:self.username] autorelease];
@@ -224,24 +200,19 @@
         } else if (indexPath.row == 5) {
             viewController = [[[GHPOrganizationsOfUserViewController alloc] initWithUsername:self.username] autorelease];
         }
-        
-        if (viewController) {
-            [self.advancedNavigationController pushViewController:viewController afterViewController:self animated:YES];
-        } else {
-            [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    } else if (indexPath.section == kUITableViewSectionAUContent) {
+        if (indexPath.row == 0) {
+            viewController = [[[GHPIssuesOfAuthenticatedUserViewController alloc] initWithUsername:self.username] autorelease];
+        } else if (indexPath.row == 1) {
+//            cell.textLabel.text = NSLocalizedString(@"Starred Gists", @"");
         }
+    }
+    
+    if (viewController) {
+        [self.advancedNavigationController pushViewController:viewController afterViewController:self animated:YES];
     } else {
         [tableView deselectRowAtIndexPath:indexPath animated:NO];
     }
-}
-
-#pragma mark - memory management
-
-- (void)dealloc {
-    [_user release];
-    [_username release];
-    
-    [super dealloc];
 }
 
 #pragma mark - UIActionSheetDelegate

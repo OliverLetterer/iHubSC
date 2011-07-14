@@ -12,11 +12,15 @@
 @interface GHPIssuesViewController : GHPDataArrayViewController {
 @private
     NSString *_repository;
+    NSString *_username;
 }
 
 @property (nonatomic, copy) NSString *repository;
+@property (nonatomic, copy) NSString *username;
 
 - (id)initWithRepository:(NSString *)repository;
+- (id)initWithUsername:(NSString *)username;
 
+- (NSString *)descriptionStringForIssue:(GHAPIIssueV3 *)issue;
 
 @end

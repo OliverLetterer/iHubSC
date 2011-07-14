@@ -14,7 +14,7 @@ NSString *const kGHAPIIssueStateV3Closed = @"closed";
 
 @implementation GHAPIIssueV3
 
-@synthesize assignee=_assignee, body=_body, closedAt=_closedAt, comments=_comments, createdAt=_createdAt, HTMLURL=_HTMLURL, labels=_labels, milestone=_milestone, number=_number, pullRequestID=_pullRequestID, state=_state, title=_title, updatedAt=_updatedAt, URL=_URL, user=_user;
+@synthesize assignee=_assignee, body=_body, closedAt=_closedAt, comments=_comments, createdAt=_createdAt, HTMLURL=_HTMLURL, labels=_labels, milestone=_milestone, number=_number, pullRequestID=_pullRequestID, state=_state, title=_title, updatedAt=_updatedAt, URL=_URL, user=_user, repository=_repository;
 
 #pragma mark - setters and getters
 
@@ -47,6 +47,7 @@ NSString *const kGHAPIIssueStateV3Closed = @"closed";
         self.updatedAt = [rawDictionay objectForKeyOrNilOnNullObject:@"updated_at"];
         self.URL = [rawDictionay objectForKeyOrNilOnNullObject:@"url"];
         self.user = [[[GHAPIUserV3 alloc] initWithRawDictionary:[rawDictionay objectForKeyOrNilOnNullObject:@"user"] ] autorelease];
+        self.repository = [self.URL substringBetweenLeftBounds:@"repos/" andRightBounds:@"/issues"];
         
         self.milestone = [[[GHAPIMilestoneV3 alloc] initWithRawDictionary:[rawDictionay objectForKeyOrNilOnNullObject:@"milestone"] ] autorelease];
         NSString *htmlURL = [[rawDictionay objectForKeyOrNilOnNullObject:@"pull_request"] objectForKeyOrNilOnNullObject:@"html_url"];
@@ -80,6 +81,7 @@ NSString *const kGHAPIIssueStateV3Closed = @"closed";
     [_updatedAt release];
     [_URL release];
     [_user release];
+    [_repository release];
     
     [super dealloc];
 }
@@ -406,7 +408,28 @@ NSString *const kGHAPIIssueStateV3Closed = @"closed";
                                      handler(finalArray, nextPage, nil);
                                  }
                              }];
+}
+
++ (void)issuesOfAuthenticatedUserOnPage:(NSInteger)page completionHandler:(GHAPIPaginationHandler)handler {
+    // v3: GET /issues
     
+    NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.github.com/issues"]];
+    
+    [[GHBackgroundQueue sharedInstance] sendRequestToURL:URL page:page setupHandler:nil 
+                             completionPaginationHandler:^(id object, NSError *error, ASIFormDataRequest *request, NSUInteger nextPage) {
+                                 if (error) {
+                                     handler(nil, GHAPIPaginationNextPageNotFound, error);
+                                 } else {
+                                     NSArray *rawArray = object;
+                                     
+                                     NSMutableArray *finalArray = [NSMutableArray arrayWithCapacity:rawArray.count];
+                                     for (NSDictionary *rawDictionary in rawArray) {
+                                         [finalArray addObject:[[[GHAPIIssueV3 alloc] initWithRawDictionary:rawDictionary] autorelease] ];
+                                     }
+                                     
+                                     handler(finalArray, nextPage, nil);
+                                 }
+                             }];
 }
 
 @end
