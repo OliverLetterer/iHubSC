@@ -25,6 +25,7 @@
     NSMutableArray *_organizations;
     NSMutableArray *_followedUsers;
     NSMutableArray *_gists;
+    NSMutableArray *_assignedIssues;
     
     BOOL _hasFollowingData;
     BOOL _isFollowingUser;
@@ -41,6 +42,7 @@
 @property (nonatomic, retain) NSMutableArray *organizations;
 @property (nonatomic, retain) NSMutableArray *followedUsers;
 @property (nonatomic, retain) NSMutableArray *gists;
+@property (nonatomic, retain) NSMutableArray *assignedIssues;
 
 @property (nonatomic, readonly) BOOL canFollowUser;
 @property (nonatomic, readonly) BOOL hasAdministrationRights;
@@ -57,5 +59,7 @@
 - (void)cacheHeightForTableView;
 - (void)cacheHeightForWatchedRepositories;
 - (void)cacheGistsHeight;
+- (void)cacheAssignedIssuesHeight;
+- (NSString *)descriptionForAssignedIssue:(GHAPIIssueV3 *)issue;
 
 @end

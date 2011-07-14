@@ -14,9 +14,6 @@
 
 @implementation iGithubAppDelegate
 
-#warning add my Issues
-#warning add Starred Gists
-
 @synthesize window=_window;
 
 @synthesize managedObjectContext=_managedObjectContext, managedObjectModel=_managedObjectModel, persistentStoreCoordinator=_persistentStoreCoordinator;

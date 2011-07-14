@@ -17,6 +17,8 @@
 #import "GHOrganizationViewController.h"
 #import "GHGistViewController.h"
 #import "ANNotificationQueue.h"
+#import "GHIssueTitleTableViewCell.h"
+#import "GHViewIssueTableViewController.h"
 
 #define kUITableViewSectionUserData             0
 #define kUITableViewSectionEMail                1
@@ -26,20 +28,21 @@
 #define kUITableViewSectionPublicActivity       5
 #define kUITableViewSectionRepositories         6
 #define kUITableViewSectionWatchedRepositories  7
-#define kUITableViewFollowingUsers              8
-#define kUITableViewFollowedUsers               9
-#define kUITableViewGists                       10
-#define kUITableViewOrganizations               11
-#define kUITableViewSectionPlan                 12
-#define kUITableViewNetwork                     13
+#define kUITableViewSectionAssignedIssues       8
+#define kUITableViewFollowingUsers              9
+#define kUITableViewFollowedUsers               10
+#define kUITableViewGists                       11
+#define kUITableViewOrganizations               12
+#define kUITableViewSectionPlan                 13
+#define kUITableViewNetwork                     14
 
-#define kUITableViewNumberOfSections            14
+#define kUITableViewNumberOfSections            15
 
 @implementation GHUserViewController
 
 @synthesize repositoriesArray=_repositoriesArray;
 @synthesize username=_username, user=_user;
-@synthesize watchedRepositoriesArray=_watchedRepositoriesArray, followingUsers=_followingUsers, followedUsers=_followedUsers, organizations=_organizations, gists=_gists;
+@synthesize watchedRepositoriesArray=_watchedRepositoriesArray, followingUsers=_followingUsers, followedUsers=_followedUsers, organizations=_organizations, gists=_gists, assignedIssues=_assignedIssues;
 @synthesize lastIndexPathForSingleRepositoryViewController=_lastIndexPathForSingleRepositoryViewController;
 
 #pragma mark - setters and getters
@@ -93,6 +96,8 @@
     [_organizations release];
     [_user release];
     [_gists release];
+    [_assignedIssues release];
+    
     [super dealloc];
 }
 
@@ -167,6 +172,7 @@
     self.followedUsers = nil;
     self.organizations = nil;
     self.gists = nil;
+    self.assignedIssues = nil;
     [self.tableView reloadData];
     [self downloadUserData];
 }
@@ -215,6 +221,18 @@
     }];
 }
 
+- (NSString *)descriptionForAssignedIssue:(GHAPIIssueV3 *)issue {
+    return [NSString stringWithFormat:NSLocalizedString(@"on %@\n\n%@", @""), issue.repository, issue.title];
+}
+
+- (void)cacheAssignedIssuesHeight {
+    [self.assignedIssues enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        GHAPIIssueV3 *issue = obj;
+        
+        [self cacheHeight:[self heightForDescription:[self descriptionForAssignedIssue:issue]]+50.0f forRowAtIndexPath:[NSIndexPath indexPathForRow:idx+1 inSection:kUITableViewSectionAssignedIssues] ];
+    }];
+}
+
 #pragma mark - View lifecycle
 
 - (void)viewDidLoad {
@@ -254,7 +272,8 @@
             section == kUITableViewFollowedUsers ||
             section == kUITableViewNetwork || 
             section == kUITableViewOrganizations ||
-            section == kUITableViewGists;
+            section == kUITableViewGists ||
+            section == kUITableViewSectionAssignedIssues;
 }
 
 - (BOOL)tableView:(UIExpandableTableView *)tableView needsToDownloadDataForExpandableSection:(NSInteger)section {
@@ -272,6 +291,8 @@
         return self.organizations == nil;
     } else if (section == kUITableViewGists) {
         return self.gists == nil;
+    } else if (section == kUITableViewSectionAssignedIssues) {
+        return self.assignedIssues == nil;
     }
     return NO;
 }
@@ -301,6 +322,8 @@
         cell.textLabel.text = NSLocalizedString(@"Organizations", @"");
     } else if (section == kUITableViewGists) {
         cell.textLabel.text = NSLocalizedString(@"Gists", @"");
+    } else if (section == kUITableViewSectionAssignedIssues) {
+        cell.textLabel.text = NSLocalizedString(@"Issues assigned to me", @"");
     }
     
     return cell;
@@ -389,6 +412,19 @@
                                                      withRowAnimation:UITableViewRowAnimationAutomatic];
                                    }
                                }];
+    } else if (section == kUITableViewSectionAssignedIssues) {
+        [GHAPIIssueV3 issuesOfAuthenticatedUserOnPage:page 
+                                    completionHandler:^(NSMutableArray *array, NSUInteger nextPage, NSError *error) {
+                                        if (error) {
+                                            [self handleError:error];
+                                        } else {
+                                            [self.assignedIssues addObjectsFromArray:array];
+                                            [self cacheAssignedIssuesHeight];
+                                            [self setNextPage:nextPage forSection:section];
+                                            [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:section] 
+                                                          withRowAnimation:UITableViewRowAnimationAutomatic];
+                                        }
+                                    }];
     }
 }
 
@@ -484,6 +520,18 @@
                        [tableView expandSection:section animated:YES];
                    }
                }];
+    } else if (section == kUITableViewSectionAssignedIssues) {
+        [GHAPIIssueV3 issuesOfAuthenticatedUserOnPage:1 
+                                    completionHandler:^(NSMutableArray *array, NSUInteger nextPage, NSError *error) {
+                                        if (error) {
+                                            [self handleError:error];
+                                        } else {
+                                            self.assignedIssues = array;
+                                            [self cacheAssignedIssuesHeight];
+                                            [self setNextPage:nextPage forSection:section];
+                                            [tableView expandSection:section animated:YES];
+                                        }
+                                    }];
     }
 }
 
@@ -547,6 +595,12 @@
         return [self.organizations count] + 1;
     } else if (section == kUITableViewGists) {
         return self.gists.count + 1;
+    } else if (section == kUITableViewSectionAssignedIssues) {
+        if (![self.username isEqualToString:[GHAuthenticationManager sharedInstance].username]) {
+            return 0;
+        } else {
+            return self.assignedIssues.count+1;
+        }
     }
     return result;
 }
@@ -817,6 +871,25 @@
         }
         
         return cell;
+    } else if (indexPath.section == kUITableViewSectionAssignedIssues) {
+        NSString *CellIdentifier = @"GHIssueTitleTableViewCell";
+        GHIssueTitleTableViewCell *cell = (GHIssueTitleTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        if (!cell) {
+            cell = [[[GHIssueTitleTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
+        }
+        
+        GHAPIIssueV3 *issue = [self.assignedIssues objectAtIndex:indexPath.row - 1];
+        
+        cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Issue %@", @""), issue.number];
+        
+        [self updateImageView:cell.imageView atIndexPath:indexPath withAvatarURLString:issue.user.avatarURL];
+        
+        cell.detailTextLabel.text = [NSString stringWithFormat:@"by %@ %@", issue.user.login, [NSString stringWithFormat:NSLocalizedString(@"%@ ago", @""), issue.createdAt.prettyTimeIntervalSinceNow]];
+        ;
+        
+        cell.descriptionLabel.text = [self descriptionForAssignedIssue:issue];
+        
+        return cell;
     }
     
     return self.dummyCell;
@@ -949,6 +1022,12 @@
         
         GHGistViewController *gistViewController = [[[GHGistViewController alloc] initWithID:gist.ID] autorelease];
         [self.navigationController pushViewController:gistViewController animated:YES];
+    } else if (indexPath.section == kUITableViewSectionAssignedIssues) {
+        GHAPIIssueV3 *issue = [self.assignedIssues objectAtIndex:indexPath.row - 1];
+        GHViewIssueTableViewController *viewController = [[[GHViewIssueTableViewController alloc] initWithRepository:issue.repository 
+                                                                                                         issueNumber:issue.number]
+                                                          autorelease];
+        [self.navigationController pushViewController:viewController animated:YES];
     } else {
         [self.tableView deselectRowAtIndexPath:indexPath animated:NO];
     }
@@ -976,6 +1055,11 @@
         // watched repo
         return [self cachedHeightForRowAtIndexPath:indexPath];
     } else if (indexPath.section == kUITableViewGists) {
+        if (indexPath.row == 0) {
+            return 44.0f;
+        }
+        return [self cachedHeightForRowAtIndexPath:indexPath];
+    } else if (indexPath.section == kUITableViewSectionAssignedIssues) {
         if (indexPath.row == 0) {
             return 44.0f;
         }

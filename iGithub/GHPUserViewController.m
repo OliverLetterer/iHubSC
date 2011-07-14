@@ -109,7 +109,7 @@
         return 1;
     } else if (section == kUITableViewSectionAUContent) {
         if ([self.username isEqualToString:[GHAuthenticationManager sharedInstance].username]) {
-            return 2;
+            return 1;
         }
     }
     return 0;
@@ -158,8 +158,6 @@
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         if (indexPath.row == 0) {
             cell.textLabel.text = NSLocalizedString(@"Issues assigned to me", @"");
-        } else if (indexPath.row == 1) {
-            cell.textLabel.text = NSLocalizedString(@"Starred Gists", @"");
         } else {
             cell.textLabel.text = nil;
         }
@@ -203,8 +201,6 @@
     } else if (indexPath.section == kUITableViewSectionAUContent) {
         if (indexPath.row == 0) {
             viewController = [[[GHPIssuesOfAuthenticatedUserViewController alloc] initWithUsername:self.username] autorelease];
-        } else if (indexPath.row == 1) {
-//            cell.textLabel.text = NSLocalizedString(@"Starred Gists", @"");
         }
     }
     
