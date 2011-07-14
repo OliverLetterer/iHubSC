@@ -23,10 +23,12 @@ enum {
 
 @interface GHBackgroundQueue : NSObject {
     dispatch_queue_t _backgroundQueue;
+    dispatch_queue_t _imageQueue;
     NSUInteger _remainingAPICalls;
 }
 
 @property (nonatomic, readonly) dispatch_queue_t backgroundQueue;
+@property (nonatomic, readonly) dispatch_queue_t imageQueue;
 @property (nonatomic, readonly) NSUInteger remainingAPICalls;
 
 - (void)sendRequestToURL:(NSURL *)URL setupHandler:(void(^)(ASIFormDataRequest *request))setupHandler completionHandler:(void(^)(id object, NSError *error, ASIFormDataRequest *request))completionHandler;

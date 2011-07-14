@@ -12,8 +12,13 @@
 @implementation UITableView (UITableViewReloadingAdditions)
 
 - (void)reloadRowAtIndexPath:(NSIndexPath *)indexPath withRowAnimation:(UITableViewRowAnimation)animation {
-    [self reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] 
-                withRowAnimation:animation];
+    @try {
+        [self reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] 
+                    withRowAnimation:animation];
+    }
+    @catch (NSException *exception) {
+        [self reloadData];
+    }
 }
 
 - (BOOL)containsIndexPath:(NSIndexPath *)indexPath {

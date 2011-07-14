@@ -19,8 +19,10 @@
     
     UIImage *myImage = [UIImage cachedImageFromAvatarURLString:avatarURLString];
     
+    dispatch_queue_t backgroundQueue = [GHBackgroundQueue sharedInstance].imageQueue;
+    
     if (!myImage) {
-        dispatch_async(GHAPIBackgroundQueue(), ^(void) {
+        dispatch_async(backgroundQueue, ^(void) {
             UIImage *myImage = [UIImage cachedImageFromAvatarURLString:avatarURLString];
             if (myImage) {
                 dispatch_sync(dispatch_get_main_queue(), ^(void) {

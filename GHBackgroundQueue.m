@@ -20,9 +20,16 @@ dispatch_queue_t GHAPIBackgroundQueue() {
 
 - (dispatch_queue_t)backgroundQueue {
     if (!_backgroundQueue) {
-        _backgroundQueue = dispatch_queue_create("de.olettere.GHAPI.backgroundQueue", NULL);
+        _backgroundQueue = dispatch_queue_create("de.olettere.GHAPIV3.backgroundQueue", NULL);
     }
     return _backgroundQueue;
+}
+
+- (dispatch_queue_t)imageQueue {
+    if (!_imageQueue) {
+        _imageQueue = dispatch_queue_create("de.olettere.GHAPIV3.imageQueue", NULL);
+    }
+    return _imageQueue;
 }
 
 #pragma mark - Initialization
