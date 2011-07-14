@@ -702,8 +702,8 @@
 		A7BF14051342149C001AE50D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		A7BF14071342149C001AE50D /* iGithub-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "iGithub-Prefix.pch"; sourceTree = "<group>"; };
 		A7BF14081342149C001AE50D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		A7BF140A1342149C001AE50D /* iGithubAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = iGithubAppDelegate.h; sourceTree = "<group>"; };
-		A7BF140B1342149C001AE50D /* iGithubAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = iGithubAppDelegate.m; sourceTree = "<group>"; };
+		A7BF140A1342149C001AE50D /* iGithubAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = iGithubAppDelegate.h; path = iGithub/iGithubAppDelegate.h; sourceTree = "<group>"; };
+		A7BF140B1342149C001AE50D /* iGithubAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = iGithubAppDelegate.m; path = iGithub/iGithubAppDelegate.m; sourceTree = "<group>"; };
 		A7BF140E1342149C001AE50D /* iGithubAppDelegate_iPhone.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = iGithubAppDelegate_iPhone.h; path = iPhone/iGithubAppDelegate_iPhone.h; sourceTree = "<group>"; };
 		A7BF140F1342149C001AE50D /* iGithubAppDelegate_iPhone.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = iGithubAppDelegate_iPhone.m; path = iPhone/iGithubAppDelegate_iPhone.m; sourceTree = "<group>"; };
 		A7BF14121342149C001AE50D /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = iPhone/en.lproj/MainWindow_iPhone.xib; sourceTree = "<group>"; };
@@ -1252,29 +1252,10 @@
 		A70DAE0713B49FC500DE4279 /* UserInterface */ = {
 			isa = PBXGroup;
 			children = (
+				A7F1991213CEFE0300D83117 /* API */,
+				A7D5549013CB55E800358610 /* GHPInfoSectionTableViewController */,
 				A703CB2113C64949002767EB /* UITableViewCell - Generic Subclasses */,
-				A7D5549413CB662400358610 /* GHPTeamViewController */,
-				A7D5548413CB4F0E00358610 /* GHPTeamsViewController */,
-				A7D5547313CB462300358610 /* GHPOrganizationViewController */,
-				A7D5546613CB439E00358610 /* GHPOrganizationsViewController */,
-				A7A6CB7C13CA1CE100C1641F /* GHPNewsFeedViewController */,
-				A7A6CB6613C8D48500C1641F /* GHPSearchViewController */,
-				A7A6CB5E13C8C88600C1641F /* GHPLabelViewController */,
-				A74DD7A513C64E7A00570C94 /* GHPDirectoryViewController */,
 				A7CFD6EC13C63D3300F90791 /* GHPDataArrayViewController */,
-				A7CFD6E713C639AE00F90791 /* GHPPullRequestsViewController */,
-				A7CFD6DF13C61BAB00F90791 /* GHPGistViewController */,
-				A7CFD6D713C6160200F90791 /* GHPGistsViewController */,
-				A70A11AF13C4E67600685749 /* GHPMilestoneViewController */,
-				A70A118F13C368F400685749 /* GHPMilestonesViewController */,
-				A7DA5EAA13C2578E00288937 /* GHPIssueViewController */,
-				A7DA5E9F13C2508800288937 /* GHPIssuesViewController */,
-				A7023DE413CB8B4B0079D1D0 /* GHPCommitViewController */,
-				A70ABEC913BFAB5E0000D189 /* GHPCommitsViewController */,
-				A74F2A3413BE60CB00E57818 /* GHPUsersViewController */,
-				A74F2A2D13BE1ACE00E57818 /* GHPRepositoryViewController */,
-				A703A62F13BE0163003A4585 /* GHPRepositoriesViewController */,
-				A74A65FF13BDA8ED0098106E /* GHPUserViewController */,
 				A7F334AF13BCD01100DB922D /* GHPLeftNavigationController */,
 			);
 			name = UserInterface;
@@ -2194,8 +2175,6 @@
 			children = (
 				A7BF143713421862001AE50D /* Ressources */,
 				A7BF14321342159B001AE50D /* Shared */,
-				A7BF140A1342149C001AE50D /* iGithubAppDelegate.h */,
-				A7BF140B1342149C001AE50D /* iGithubAppDelegate.m */,
 				A7BF140D1342149C001AE50D /* iPhone */,
 				A7BF14141342149C001AE50D /* iPad */,
 				A7BF14021342149C001AE50D /* Supporting Files */,
@@ -2228,7 +2207,6 @@
 		A7BF14141342149C001AE50D /* iPad */ = {
 			isa = PBXGroup;
 			children = (
-				A7D5549013CB55E800358610 /* GHPInfoSectionTableViewController */,
 				A7F334AB13BCCF0800DB922D /* ANAdvancedNavigationController */,
 				A70DAE0713B49FC500DE4279 /* UserInterface */,
 				A7BF14151342149C001AE50D /* iGithubAppDelegate_iPad.h */,
@@ -2257,6 +2235,8 @@
 				A7BF146413426D85001AE50D /* Github API */,
 				A7BF1436134216EB001AE50D /* GHSettingsHelper */,
 				A7BF142F1342154C001AE50D /* Keychain */,
+				A7BF140A1342149C001AE50D /* iGithubAppDelegate.h */,
+				A7BF140B1342149C001AE50D /* iGithubAppDelegate.m */,
 			);
 			name = Shared;
 			path = ..;
@@ -2663,6 +2643,98 @@
 				A7DCDD9313A366DF00089CCD /* GHAPIRepositoryBranchV3.m */,
 			);
 			name = GHAPIRepositoryBranchV3;
+			sourceTree = "<group>";
+		};
+		A7F1990913CEFD5700D83117 /* User */ = {
+			isa = PBXGroup;
+			children = (
+				A74A65FF13BDA8ED0098106E /* GHPUserViewController */,
+				A74F2A3413BE60CB00E57818 /* GHPUsersViewController */,
+			);
+			name = User;
+			sourceTree = "<group>";
+		};
+		A7F1990B13CEFD7800D83117 /* Issue */ = {
+			isa = PBXGroup;
+			children = (
+				A7DA5EAA13C2578E00288937 /* GHPIssueViewController */,
+				A7DA5E9F13C2508800288937 /* GHPIssuesViewController */,
+				A7CFD6E713C639AE00F90791 /* GHPPullRequestsViewController */,
+			);
+			name = Issue;
+			sourceTree = "<group>";
+		};
+		A7F1990C13CEFD8800D83117 /* Team */ = {
+			isa = PBXGroup;
+			children = (
+				A7D5549413CB662400358610 /* GHPTeamViewController */,
+				A7D5548413CB4F0E00358610 /* GHPTeamsViewController */,
+			);
+			name = Team;
+			sourceTree = "<group>";
+		};
+		A7F1990D13CEFD8F00D83117 /* Organization */ = {
+			isa = PBXGroup;
+			children = (
+				A7D5547313CB462300358610 /* GHPOrganizationViewController */,
+				A7D5546613CB439E00358610 /* GHPOrganizationsViewController */,
+			);
+			name = Organization;
+			sourceTree = "<group>";
+		};
+		A7F1990E13CEFDDB00D83117 /* Gist */ = {
+			isa = PBXGroup;
+			children = (
+				A7CFD6DF13C61BAB00F90791 /* GHPGistViewController */,
+				A7CFD6D713C6160200F90791 /* GHPGistsViewController */,
+			);
+			name = Gist;
+			sourceTree = "<group>";
+		};
+		A7F1990F13CEFDE300D83117 /* Milestone */ = {
+			isa = PBXGroup;
+			children = (
+				A70A11AF13C4E67600685749 /* GHPMilestoneViewController */,
+				A70A118F13C368F400685749 /* GHPMilestonesViewController */,
+			);
+			name = Milestone;
+			sourceTree = "<group>";
+		};
+		A7F1991013CEFDEC00D83117 /* Commit */ = {
+			isa = PBXGroup;
+			children = (
+				A7023DE413CB8B4B0079D1D0 /* GHPCommitViewController */,
+				A70ABEC913BFAB5E0000D189 /* GHPCommitsViewController */,
+			);
+			name = Commit;
+			sourceTree = "<group>";
+		};
+		A7F1991113CEFDF700D83117 /* Repository */ = {
+			isa = PBXGroup;
+			children = (
+				A74F2A2D13BE1ACE00E57818 /* GHPRepositoryViewController */,
+				A703A62F13BE0163003A4585 /* GHPRepositoriesViewController */,
+			);
+			name = Repository;
+			sourceTree = "<group>";
+		};
+		A7F1991213CEFE0300D83117 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				A7F1990B13CEFD7800D83117 /* Issue */,
+				A7F1990913CEFD5700D83117 /* User */,
+				A7F1990C13CEFD8800D83117 /* Team */,
+				A7F1990D13CEFD8F00D83117 /* Organization */,
+				A7A6CB7C13CA1CE100C1641F /* GHPNewsFeedViewController */,
+				A7A6CB6613C8D48500C1641F /* GHPSearchViewController */,
+				A7A6CB5E13C8C88600C1641F /* GHPLabelViewController */,
+				A74DD7A513C64E7A00570C94 /* GHPDirectoryViewController */,
+				A7F1990E13CEFDDB00D83117 /* Gist */,
+				A7F1990F13CEFDE300D83117 /* Milestone */,
+				A7F1991013CEFDEC00D83117 /* Commit */,
+				A7F1991113CEFDF700D83117 /* Repository */,
+			);
+			name = API;
 			sourceTree = "<group>";
 		};
 		A7F334AB13BCCF0800DB922D /* ANAdvancedNavigationController */ = {
