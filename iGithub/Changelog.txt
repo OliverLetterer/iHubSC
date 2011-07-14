@@ -89,6 +89,10 @@ V1.9
 - fixed bug that caused the pull to release indicator to disappear to early
 - various other bug fixes
 
+V2.0
+- brand new iPad UI
+- view issues that are assigned to the authenticated user
+
 iTunes Changelog:
 
 V1.3

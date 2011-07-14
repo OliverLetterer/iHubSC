@@ -29,7 +29,6 @@ support all these events
 TODO:
 - !!!!!!!!!!!!!!!! umlaute are displayed wrong (-> see optikfluffel user profile)
 - Network graph for recent activity (see Network API)
-- ipad Interface
 - markdown support for Comments
 - Some kind of icons for folders and filetypes when browsing source trees would be nice. (currently none)
 - No access to Wiki pages.
