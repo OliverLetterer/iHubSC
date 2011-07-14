@@ -9,9 +9,14 @@
 #import "ANAdvancedNavigationController+LeftViewController.h"
 #import "ANAdvancedNavigationController+private.h"
 
-@implementation ANAdvancedNavigationController (ANAdvancedNavigationController_LeftViewController)
+@interface ANAdvancedNavigationController (ANAdvancedNavigationController_LeftViewControllerPrivate)
+- (void)__removeLeftViewControllerView;
+- (void)__removeLeftViewController;
+@end
 
-- (void)_removeLeftViewControllerView {
+@implementation ANAdvancedNavigationController (ANAdvancedNavigationController_LeftViewControllerPrivate)
+
+- (void)__removeLeftViewControllerView {
     if (self.isViewLoaded) {
         [_leftViewController viewWillDisappear:NO];
         [_leftViewController.view removeFromSuperview];
@@ -19,17 +24,21 @@
     }
 }
 
-- (void)_removeLeftViewController {
+- (void)__removeLeftViewController {
     [_leftViewController willMoveToParentViewController:nil];
     if (self.isViewLoaded) {
-        [self _removeLeftViewControllerView];
+        [self __removeLeftViewControllerView];
     }
     [_leftViewController removeFromParentViewController];
     [_leftViewController release], _leftViewController = nil;
 }
 
+@end
+
+@implementation ANAdvancedNavigationController (ANAdvancedNavigationController_LeftViewController)
+
 - (void)_setLeftViewController:(UIViewController *)leftViewController {
-    [self _removeLeftViewController];
+    [self __removeLeftViewController];
     
     if (leftViewController != nil) {
         _leftViewController = [leftViewController retain];
