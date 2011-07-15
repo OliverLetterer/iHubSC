@@ -197,7 +197,6 @@
 #pragma mark - rightViewControllers views
 
 - (UIView *)__loadViewForNewRightViewController:(UIViewController *)rightViewController {
-    DLog(@"%@", rightViewController);
     if (!self.isViewLoaded) {
         return nil;
     }
