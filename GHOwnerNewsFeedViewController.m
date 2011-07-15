@@ -143,8 +143,8 @@
     self.segmentControl.segmentedControlStyle = UISegmentedControlStyleBar;
     [wrapperView addSubview:self.segmentControl];
     self.navigationItem.titleView = wrapperView;
-    self.segmentControl.userInteractionEnabled = NO;
-    self.segmentControl.alpha = 0.5;
+    self.segmentControl.userInteractionEnabled = YES;
+    self.segmentControl.alpha = 1.0f;
     self.segmentControl.tintColor = [UIColor defaultNavigationBarTintColor];
     if (self.defaultOrganizationName) {
         self.segmentControl.selectedSegmentIndex = 2;
@@ -157,7 +157,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self loadDataBasedOnSegmentControl];
+    if (!self.newsFeed) {
+        [self loadDataBasedOnSegmentControl];
+    }
 }
 
 - (void)viewDidUnload {
@@ -211,6 +213,12 @@
 }
 
 - (void)loadDataBasedOnSegmentControl {
+    // disable the segment control
+    self.segmentControl.userInteractionEnabled = NO;
+    self.segmentControl.alpha = 0.5;
+    self.defaultOrganizationName = nil;
+    
+    // download new data
     if (self.segmentControl.selectedSegmentIndex == 0) {
         // News Feed
         [self showLoadingInformation:NSLocalizedString(@"Fetching private News Feed", @"")];
@@ -327,11 +335,6 @@
 #pragma mark - target actions
 
 - (void)segmentControlValueChanged:(UISegmentedControl *)segmentControl {
-    self.newsFeed = nil;
-    self.segmentControl.userInteractionEnabled = NO;
-    self.segmentControl.alpha = 0.5;
-    self.defaultOrganizationName = nil;
-    
     [self pullToReleaseTableViewReloadData];
 }
 
