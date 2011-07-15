@@ -172,7 +172,7 @@
                     NSArray *buttonTitles = [NSArray arrayWithObjects:kUIButtonTitleRepositories, kUIButtonTitleUsers, nil];
                     cell = [[[GHPSearchScopeTableViewCell alloc] initWithButtonTitles:buttonTitles reuseIdentifier:CellIdentifier] autorelease];
                 }
-                [self setupDefaultTableViewCell:cell forRowAtIndexPath:indexPath];
+                [self setupDefaultTableViewCell:cell inTableView:tableView forRowAtIndexPath:indexPath];
                 
                 self.searchScopeTableViewCell = cell;
                 cell.delegate = self;
@@ -188,7 +188,7 @@
                 if (cell == nil) {
                     cell = [[[GHPUserTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
                 }
-                [self setupDefaultTableViewCell:cell forRowAtIndexPath:indexPath];
+                [self setupDefaultTableViewCell:cell inTableView:tableView forRowAtIndexPath:indexPath];
                 
                 GHUser *user = [self.dataArray objectAtIndex:indexPath.row];
                 
@@ -205,6 +205,7 @@
                 if (cell == nil) {
                     cell = [[[GHPRepositoryTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
                 }
+                [self setupDefaultTableViewCell:cell inTableView:tableView forRowAtIndexPath:indexPath];
                 
                 GHRepository *repository = [self.dataArray objectAtIndex:indexPath.row];
                 
@@ -216,8 +217,6 @@
                 } else {
                     cell.imageView.image = [UIImage imageNamed:@"GHPublicRepositoryIcon.png"];
                 }
-                
-                [self setupDefaultTableViewCell:cell forRowAtIndexPath:indexPath];
                 
                 return cell;
             }

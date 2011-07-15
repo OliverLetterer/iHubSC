@@ -551,16 +551,20 @@ static CGFloat wrapperViewHeight = 21.0f;
     return cell;
 }
 
-- (void)setupDefaultTableViewCell:(GHPDefaultTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row == 0 && indexPath.row == [self.tableView numberOfRowsInSection:indexPath.section]-1) {
+- (void)setupDefaultTableViewCell:(GHPDefaultTableViewCell *)cell inTableView:(UITableView *)tableView forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.row == 0 && indexPath.row == [tableView numberOfRowsInSection:indexPath.section]-1) {
         cell.customStyle = GHPDefaultTableViewCellStyleTopAndBottom;
     } else if (indexPath.row == 0) {
         cell.customStyle = GHPDefaultTableViewCellStyleTop;
-    } else if (indexPath.row == [self.tableView numberOfRowsInSection:indexPath.section]-1) {
+    } else if (indexPath.row == [tableView numberOfRowsInSection:indexPath.section]-1) {
         cell.customStyle = GHPDefaultTableViewCellStyleBottom;
     } else {
         cell.customStyle = GHPDefaultTableViewCellStyleCenter;
     }
+}
+
+- (void)setupDefaultTableViewCell:(GHPDefaultTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    [self setupDefaultTableViewCell:cell inTableView:self.tableView forRowAtIndexPath:indexPath];
 }
 
 - (GHPDefaultTableViewCell *)defaultTableViewCellForRowAtIndexPath:(NSIndexPath *)indexPath withReuseIdentifier:(NSString *)CellIdentifier {
