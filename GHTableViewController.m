@@ -19,6 +19,7 @@
 @synthesize nextPageForSectionsDictionary=_nextPageForSectionsDictionary, cachedHeightsDictionary=_cachedHeightsDictionary;
 @synthesize reloadDataIfNewUserGotAuthenticated=_reloadDataIfNewUserGotAuthenticated, reloadDataOnApplicationWillEnterForeground=_reloadDataOnApplicationWillEnterForeground;
 @synthesize isDownloadingEssentialData=_isDownloadingEssentialData, downloadingEssentialDataView=_downloadingEssentialDataView;
+@synthesize lastSelectedIndexPath=_lastSelectedIndexPath;
 
 #pragma mark - setters and getters
 
@@ -278,6 +279,7 @@ static CGFloat wrapperViewHeight = 21.0f;
     [_alertProxy release];
     [_nextPageForSectionsDictionary release];
     [_downloadingEssentialDataView release];
+    [_lastSelectedIndexPath release];
     
     [super dealloc];
 }
@@ -353,6 +355,13 @@ static CGFloat wrapperViewHeight = 21.0f;
         self.tableView.rowHeight = 71.0;
         self.tableView.separatorColor = [UIColor colorWithRed:186.0f/255.0f green:186.0f/255.0f blue:186.0f/255.0f alpha:1.0f];
     }
+    
+    if (!CGPointEqualToPoint(_lastContentOffset, CGPointZero)) {
+        self.tableView.contentOffset = _lastContentOffset;
+    }
+    if (self.lastSelectedIndexPath) {
+        [self.tableView selectRowAtIndexPath:self.lastSelectedIndexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
+    }
 }
 
 - (void)viewDidUnload {
@@ -406,6 +415,9 @@ static CGFloat wrapperViewHeight = 21.0f;
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
+    
+    _lastContentOffset = self.tableView.contentOffset;
+    self.lastSelectedIndexPath = self.tableView.indexPathForSelectedRow;
 }
 
 - (void)viewDidDisappear:(BOOL)animated {

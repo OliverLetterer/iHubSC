@@ -14,15 +14,11 @@
     GHPEdgedLineView *_lineView;
     UIView *_controllerView;
     
-    NSIndexPath *_lastSelectedIndexPath;
-    
     NSArray *_organizations;
 }
 
 @property (nonatomic, retain) GHPEdgedLineView *lineView;
 @property (nonatomic, retain) UIView *controllerView;
-
-@property (nonatomic, copy) NSIndexPath *lastSelectedIndexPath;
 
 @property (nonatomic, retain) NSArray *organizations;
 

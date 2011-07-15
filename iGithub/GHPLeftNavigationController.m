@@ -31,7 +31,6 @@
 @implementation GHPLeftNavigationController
 
 @synthesize lineView=_lineView, controllerView=_controllerView;
-@synthesize lastSelectedIndexPath=_lastSelectedIndexPath;
 @synthesize organizations=_organizations;
 
 - (id)initWithStyle:(UITableViewStyle)style {
@@ -326,7 +325,6 @@
 - (void)dealloc {
     [_lineView release];
     [_controllerView release];
-    [_lastSelectedIndexPath release];
     [_organizations release];
     
     [super dealloc];

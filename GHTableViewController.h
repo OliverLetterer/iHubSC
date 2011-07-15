@@ -37,7 +37,13 @@
     UIView *_downloadingEssentialDataView;
     
     BOOL _isInBackgroundMode;
+    
+    // restoring state
+    CGPoint _lastContentOffset;
+    NSIndexPath *_lastSelectedIndexPath;
 }
+
+@property (nonatomic, copy) NSIndexPath *lastSelectedIndexPath;
 
 @property (nonatomic, retain) UIExpandableTableView *tableView;
 
