@@ -90,7 +90,30 @@ static CGFloat wrapperViewHeight = 21.0f;
             self.downloadingEssentialDataView = wrapperView;
             [self.view addSubview:wrapperView];
         } else {
-            [NSException raise:NSInternalInconsistencyException format:@"isDownloadingEssentialData is not supported on Phone right now"];
+            UIView *wrapperView = [[[UIView alloc] initWithFrame:CGRectMake(0.0f, CGRectGetHeight(self.view.bounds)/2.0f - wrapperViewHeight/2.0f, CGRectGetWidth(self.view.bounds), wrapperViewHeight)] autorelease];
+            wrapperView.backgroundColor = [UIColor clearColor];
+            wrapperView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
+            
+            UILabel *label = [[[UILabel alloc] initWithFrame:CGRectZero] autorelease];
+            label.font = [UIFont systemFontOfSize:16.0f];
+            label.shadowColor = [UIColor blackColor];
+            label.shadowOffset = CGSizeMake(0.0f, 1.0f);
+            label.textColor = [UIColor whiteColor];
+            label.backgroundColor = [UIColor clearColor];
+            label.text = NSLocalizedString(@"Loading", @"");
+            [label sizeToFit];
+            label.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
+            label.center = CGPointMake(CGRectGetWidth(wrapperView.bounds)/2.0f, wrapperViewHeight/2.0f);
+            [wrapperView addSubview:label];
+            
+            UIActivityIndicatorView *activityIndicatorView = [[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite] autorelease];
+            [activityIndicatorView startAnimating];
+            activityIndicatorView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
+            activityIndicatorView.center = CGPointMake(label.frame.origin.x - 15.0f, label.center.y);
+            [wrapperView addSubview:activityIndicatorView];
+            
+            self.downloadingEssentialDataView = wrapperView;
+            [self.view addSubview:wrapperView];
         }
     }
 }

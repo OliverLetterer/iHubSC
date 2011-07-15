@@ -15,14 +15,34 @@
 
 @synthesize searchString=_searchString, repositories=_repositories;
 
+#pragma mark - setters and getters
+
+- (void)setSearchString:(NSString *)searchString {
+    [_searchString release], _searchString = [searchString copy];
+    self.repositories = nil;
+    
+    self.isDownloadingEssentialData = YES;
+    [GHRepository searchRepositoriesWithSearchString:self.searchString 
+                                   completionHandler:^(NSArray *repos, NSError *error) {
+                                       self.isDownloadingEssentialData = NO;
+                                       if (error) {
+                                           [self handleError:error];
+                                       } else {
+                                           self.repositories = repos;
+                                           [self cacheHeightForRepositories];
+                                           if (self.isViewLoaded) {
+                                               [self.tableView reloadData];
+                                           }
+                                       }
+                                   }];
+}
+
 #pragma mark - Initialization
 
 - (id)initWithSearchString:(NSString *)searchString {
     if ((self = [super initWithStyle:UITableViewStylePlain])) {
         // Custom initialization
         self.searchString = searchString;
-        [self pullToReleaseTableViewReloadData];
-        self.pullToReleaseEnabled = NO;
         self.title = self.searchString;
     }
     return self;
@@ -37,29 +57,7 @@
     [super dealloc];
 }
 
-- (void)didReceiveMemoryWarning {
-    // Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
-    
-    // Release any cached data, images, etc that aren't in use.
-}
-
 #pragma mark - instance methods
-
-- (void)pullToReleaseTableViewReloadData {
-    [super pullToReleaseTableViewReloadData];
-    [GHRepository searchRepositoriesWithSearchString:self.searchString 
-                                   completionHandler:^(NSArray *repos, NSError *error) {
-                                       if (error) {
-                                           [self handleError:error];
-                                       } else {
-                                           self.repositories = repos;
-                                           [self cacheHeightForRepositories];
-                                           [self.tableView reloadData];
-                                       }
-                                   }];
-    [self pullToReleaseTableViewDidReloadData];
-}
 
 - (void)cacheHeightForRepositories {
     NSInteger i = 0;
@@ -79,7 +77,9 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    // Return the number of sections.
+    if (!self.repositories) {
+        return 0;
+    }
     return 1;
 }
 

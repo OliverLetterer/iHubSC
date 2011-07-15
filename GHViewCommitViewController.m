@@ -25,6 +25,7 @@
         self.repository = repository;
         self.commitID = commitID;
         self.title = NSLocalizedString(@"Commit", @"");
+        self.isDownloadingEssentialData = YES;
         [self downloadCommitData];
     }
     return self;
@@ -52,6 +53,7 @@
 
 - (void)downloadCommitData {
     [GHCommit commit:self.commitID onRepository:self.repository completionHandler:^(GHCommit *commit, NSError *error) {
+        self.isDownloadingEssentialData = NO;
         if (error) {
             [self handleError:error];
         } else {

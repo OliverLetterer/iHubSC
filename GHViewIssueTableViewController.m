@@ -59,7 +59,6 @@
         self.repository = repository;
         self.number = number;
         self.title = [NSString stringWithFormat:NSLocalizedString(@"Issue %@", @""), self.number];
-        _isDownloadingIssueData = YES;
         [self downloadIssueData];
     }
     return self;
@@ -68,14 +67,14 @@
 #pragma mark - instance methods
 
 - (void)downloadIssueData {
-    
+    self.isDownloadingEssentialData = YES;
     [GHAPIIssueV3 issueOnRepository:self.repository withNumber:self.number completionHandler:^(GHAPIIssueV3 *issue, NSError *error) {
+        self.isDownloadingEssentialData = NO;
         if (error) {
             [self handleError:error];
         } else {
             self.issue = issue;
             self.title = [NSString stringWithFormat:NSLocalizedString(@"%@ %@", @""), self.issueName, self.number];
-            _isDownloadingIssueData = NO;
             [self.tableView reloadData];
         }
     }];
@@ -180,9 +179,6 @@
 #pragma mark - UIExpandableTableViewDatasource
 
 - (BOOL)tableView:(UIExpandableTableView *)tableView canExpandSection:(NSInteger)section {
-    if (_isDownloadingIssueData) {
-        return NO;
-    }
     return section != kUITableViewSectionData && section != kUITableViewSectionMilestone && section != kUITableViewSectionAssignee;
 }
 
@@ -267,8 +263,8 @@
     // Return the number of sections.
     NSInteger result = 0;
     
-    if (_isDownloadingIssueData) {
-        result = 1;
+    if (!self.issue) {
+        result = 0;
     } else {
         return kUITableViesNumberOfSections;
     }
@@ -280,64 +276,44 @@
     // Return the number of rows in the section.
     NSInteger result = 0;
     
-    if (_isDownloadingIssueData) {
-        result = 1;
-    } else {
-        if (section == kUITableViewSectionData) {
-            // the issue itself
-            // repository
-            result = 2;
-        } else if (section == kUITableViewSectionAssignee) {
-            if (self.issue.hasAssignee) {
-                return 1;
-            }
-        } else if (section == kUITableViewSectionMilestone) {
-            if (self.issue.hasMilestone) {
-                return 1;
-            }
-        } else if (section == kUITableViewSectionAdministration) {
-            // first will be administrate
-            result = 1;
-            if (_hasCollaboratorData) {
-                if (_isCollaborator) {
-                    result++;
-                }
-                if (self.issue.isPullRequest && _isCollaborator && [self.issue.state isEqualToString:kGHAPIIssueStateV3Open] && ![self.issue.user.login isEqualToString:[GHAuthenticationManager sharedInstance].username]) {
-                    result++;
-                }
-            }
-        } else if (section == kUITableViewSectionHistory) {
-            return self.history.count + 2;
-        } else if (section == kUITableViewSectionCommits) {
-            return self.issue.isPullRequest ? [self.discussion.commits count] + 1 : 0;
-        } else if (section == kUITableViewSectionLabels) {
-            if (self.issue.labels.count == 0) {
-                return 0;
-            }
-            return self.issue.labels.count + 1;
+    if (section == kUITableViewSectionData) {
+        // the issue itself
+        // repository
+        result = 2;
+    } else if (section == kUITableViewSectionAssignee) {
+        if (self.issue.hasAssignee) {
+            return 1;
         }
+    } else if (section == kUITableViewSectionMilestone) {
+        if (self.issue.hasMilestone) {
+            return 1;
+        }
+    } else if (section == kUITableViewSectionAdministration) {
+        // first will be administrate
+        result = 1;
+        if (_hasCollaboratorData) {
+            if (_isCollaborator) {
+                result++;
+            }
+            if (self.issue.isPullRequest && _isCollaborator && [self.issue.state isEqualToString:kGHAPIIssueStateV3Open] && ![self.issue.user.login isEqualToString:[GHAuthenticationManager sharedInstance].username]) {
+                result++;
+            }
+        }
+    } else if (section == kUITableViewSectionHistory) {
+        return self.history.count + 2;
+    } else if (section == kUITableViewSectionCommits) {
+        return self.issue.isPullRequest ? [self.discussion.commits count] + 1 : 0;
+    } else if (section == kUITableViewSectionLabels) {
+        if (self.issue.labels.count == 0) {
+            return 0;
+        }
+        return self.issue.labels.count + 1;
     }
     
     return result;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    if (_isDownloadingIssueData) {
-        NSString *CellIdentifier = @"UICollapsingAndSpinningTableViewCell";
-        
-        UICollapsingAndSpinningTableViewCell *cell = (UICollapsingAndSpinningTableViewCell *)[self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-        if (cell == nil) {
-            cell = [[[UICollapsingAndSpinningTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
-        }
-        
-        // Configure the cell...
-        cell.textLabel.text = NSLocalizedString(@"Downloading Issue Data", @"");
-        
-        [cell setSpinning:YES];
-        
-        return cell;
-    }
     
     if (indexPath.section == kUITableViewSectionData) {
         // the issue itself
@@ -618,10 +594,6 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     CGFloat result = 44.0f;
-    
-    if (_isDownloadingIssueData) {
-        return result;
-    }
     
     if (indexPath.section == kUITableViewSectionData) {
         if (indexPath.row == 0) {

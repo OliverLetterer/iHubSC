@@ -35,8 +35,10 @@
 - (void)setOrganizationLogin:(NSString *)organizationLogin {
     [_organizationLogin release], _organizationLogin = [organizationLogin copy];
     
+    self.isDownloadingEssentialData = YES;
     [GHAPIOrganizationV3 organizationByName:_organizationLogin 
                           completionHandler:^(GHAPIOrganizationV3 *organization, NSError *error) {
+                              self.isDownloadingEssentialData = NO;
                               if (error) {
                                   [self handleError:error];
                               } else {

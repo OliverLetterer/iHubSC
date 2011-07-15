@@ -33,6 +33,7 @@
 - (id)init {
     if ((self = [super init])) {
         self.title = NSLocalizedString(@"Recent activity", @"");
+        self.pullToReleaseEnabled = NO;
     }
     return self;
 }
@@ -48,7 +49,11 @@
 
 - (void)pullToReleaseTableViewReloadData {
     [super pullToReleaseTableViewReloadData];
+    if (!self.newsFeed) {
+        self.isDownloadingEssentialData = YES;
+    }
     [GHNewsFeed newsFeedForUserNamed:self.username completionHandler:^(GHNewsFeed *feed, NSError *error) {
+        self.isDownloadingEssentialData = NO;
         if (error) {
             [self handleError:error];
         } else {

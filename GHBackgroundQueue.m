@@ -55,7 +55,6 @@ dispatch_queue_t GHAPIBackgroundQueue() {
        completionHandler:(void(^)(id object, NSError *error, ASIFormDataRequest *request))completionHandler {
     
     dispatch_async(self.backgroundQueue, ^(void) {
-        
         NSError *myError = nil;
         
         ASIFormDataRequest *request = [ASIFormDataRequest authenticatedFormDataRequestWithURL:URL];

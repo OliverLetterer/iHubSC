@@ -15,6 +15,29 @@
 
 @synthesize users=_users, searchString=_searchString;
 
+#pragma mark - setters and getters
+
+- (void)setSearchString:(NSString *)searchString {
+    [_searchString release], _searchString = [searchString copy];
+    
+    self.users = nil;
+    
+    self.isDownloadingEssentialData = YES;
+    [GHUser searchUsersWithSearchString:self.searchString
+                      completionHandler:^(NSArray *users, NSError *error) {
+                          self.isDownloadingEssentialData = NO;
+                          if (error) {
+                              [self handleError:error];
+                          } else {
+                              self.users = users;
+                              [self cacheHeightForRepositories];
+                              if (self.isViewLoaded) {
+                                  [self.tableView reloadData];
+                              }
+                          }
+                      }];
+}
+
 #pragma mark - Initialization
 
 - (id)initWithSearchString:(NSString *)searchString {
@@ -29,21 +52,6 @@
 }
 
 #pragma mark - instance methids
-
-- (void)pullToReleaseTableViewReloadData {
-    [super pullToReleaseTableViewReloadData];
-    [GHUser searchUsersWithSearchString:self.searchString
-                      completionHandler:^(NSArray *users, NSError *error) {
-                          if (error) {
-                              [self handleError:error];
-                          } else {
-                              self.users = users;
-                              [self cacheHeightForRepositories];
-                              [self.tableView reloadData];
-                          }
-                          [self pullToReleaseTableViewDidReloadData];
-                      }];
-}
 
 - (void)cacheHeightForRepositories {
     NSInteger i = 0;
@@ -72,7 +80,9 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    // Return the number of sections.
+    if (!self.users) {
+        return 0;
+    }
     return 1;
 }
 

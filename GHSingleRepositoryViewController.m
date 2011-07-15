@@ -53,9 +53,20 @@
 #pragma mark - setters and getters
 
 - (void)setRepositoryString:(NSString *)repositoryString {
-    [_repositoryString release];
-    _repositoryString = [repositoryString copy];
-    [self pullToReleaseTableViewReloadData];
+    [_repositoryString release], _repositoryString = [repositoryString copy];
+    
+    self.isDownloadingEssentialData = YES;
+    [GHAPIRepositoryV3 repositoryNamed:self.repositoryString 
+                 withCompletionHandler:^(GHAPIRepositoryV3 *repository, NSError *error) {
+                     self.isDownloadingEssentialData = NO;
+                     if (error) {
+                         [self handleError:error];
+                     } else {
+                         self.repository = repository;
+                         [self.tableView reloadData];
+                     }
+                     [self pullToReleaseTableViewDidReloadData];
+                 }];
 }
 
 - (BOOL)canDeleteRepository {
@@ -81,22 +92,6 @@
         self.title = [[self.repositoryString componentsSeparatedByString:@"/"] lastObject];
     }
     return self;
-}
-
-#pragma mark - instance methods
-
-- (void)pullToReleaseTableViewReloadData {
-    [super pullToReleaseTableViewReloadData];
-    [GHAPIRepositoryV3 repositoryNamed:self.repositoryString 
-                 withCompletionHandler:^(GHAPIRepositoryV3 *repository, NSError *error) {
-                     if (error) {
-                         [self handleError:error];
-                     } else {
-                         self.repository = repository;
-                         [self.tableView reloadData];
-                     }
-                     [self pullToReleaseTableViewDidReloadData];
-                 }];
 }
 
 #pragma mark - Memory management

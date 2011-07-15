@@ -23,6 +23,7 @@
         self.title = NSLocalizedString(@"Recent Commits", @"");
         self.repository = repository;
         self.branch = branch;
+        self.isDownloadingEssentialData = YES;
         [self downloadCommitData];
     }
     return self;
@@ -61,6 +62,7 @@
 - (void)downloadCommitData {
     [GHAPIRepositoryV3 commitsOnRepository:self.repository branchSHA:self.branchHash page:1 
                          completionHandler:^(NSMutableArray *array, NSUInteger nextPage, NSError *error) {
+                             self.isDownloadingEssentialData = NO;
                              if (error) {
                                  [self handleError:error];
                              } else {

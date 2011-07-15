@@ -23,8 +23,10 @@
     [_teamID release];
     _teamID = [teamID copy];
     
+    self.isDownloadingEssentialData = YES;
     [GHAPITeamV3 teamByID:_teamID 
         completionHandler:^(GHAPITeamV3 *team, NSError *error) {
+            self.isDownloadingEssentialData = NO;
             if (error) {
                 [self handleError:error];
             } else {

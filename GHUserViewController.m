@@ -56,8 +56,7 @@
 }
 
 - (void)setUsername:(NSString *)username {
-    [_username release];
-    _username = [username copy];
+    [_username release], _username = [username copy];
     self.title = self.username;
     
     self.watchedRepositoriesArray = nil;
@@ -66,11 +65,18 @@
     self.followingUsers = nil;
     self.followedUsers = nil;
     
-    [self downloadUserData];
-    
-    if ([self isViewLoaded]) {
-        [self.tableView reloadData];
-    }
+    self.isDownloadingEssentialData = YES;
+    [GHAPIUserV3 userWithName:self.username 
+            completionHandler:^(GHAPIUserV3 *user, NSError *error) {
+                self.isDownloadingEssentialData = NO;
+                if (error) {
+                    [self handleError:error];
+                } else {
+                    self.user = user;
+                    [self.tableView reloadData];
+                }
+                [self pullToReleaseTableViewDidReloadData];
+            }];
 }
 
 #pragma mark - Initialization
@@ -130,21 +136,6 @@
 
 #pragma mark - instance methods
 
-- (void)downloadUserData {
-    _isDownloadingUserData = YES;
-    [GHAPIUserV3 userWithName:self.username 
-         completionHandler:^(GHAPIUserV3 *user, NSError *error) {
-             _isDownloadingUserData = NO;
-             if (error) {
-                 [self handleError:error];
-             } else {
-                 self.user = user;
-                 [self.tableView reloadData];
-             }
-             [self pullToReleaseTableViewDidReloadData];
-         }];
-}
-
 - (void)downloadRepositories {
     [self.tableView collapseSection:kUITableViewSectionRepositories animated:YES];
     self.repositoriesArray = nil;
@@ -174,7 +165,17 @@
     self.gists = nil;
     self.assignedIssues = nil;
     [self.tableView reloadData];
-    [self downloadUserData];
+    
+    [GHAPIUserV3 userWithName:self.username 
+            completionHandler:^(GHAPIUserV3 *user, NSError *error) {
+                if (error) {
+                    [self handleError:error];
+                } else {
+                    self.user = user;
+                    [self.tableView reloadData];
+                }
+                [self pullToReleaseTableViewDidReloadData];
+            }];
 }
 
 - (void)cacheHeightForTableView {
@@ -538,7 +539,7 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    if (_isDownloadingUserData || !self.user) {
+    if (!self.user) {
         return 0;
     }
     return kUITableViewNumberOfSections;

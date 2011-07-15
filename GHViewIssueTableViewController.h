@@ -18,8 +18,6 @@
     NSString *_repository;
     NSNumber *_number;
     
-    BOOL _isDownloadingIssueData;
-    
     NSArray *_history;
     GHPullRequestDiscussion *_discussion;
     

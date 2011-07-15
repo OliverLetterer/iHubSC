@@ -218,11 +218,15 @@
     self.segmentControl.alpha = 0.5;
     self.defaultOrganizationName = nil;
     
+    if (!self.newsFeed) {
+        self.isDownloadingEssentialData = YES;
+    }
     // download new data
     if (self.segmentControl.selectedSegmentIndex == 0) {
         // News Feed
         [self showLoadingInformation:NSLocalizedString(@"Fetching private News Feed", @"")];
         [GHNewsFeed privateNewsWithCompletionHandler:^(GHNewsFeed *feed, NSError *error) {
+            self.isDownloadingEssentialData = NO;
             if (error) {
                 [self handleError:error];
             } else {
@@ -237,6 +241,7 @@
         [self showLoadingInformation:NSLocalizedString(@"Fetching My Actions", @"")];
         [GHNewsFeed newsFeedForUserNamed:[GHSettingsHelper username] 
                        completionHandler:^(GHNewsFeed *feed, NSError *error) {
+                           self.isDownloadingEssentialData = NO;
                            if (error) {
                                [self handleError:error];
                            } else {
@@ -250,6 +255,7 @@
         if (self.defaultOrganizationName) {
             [self showLoadingInformation:[NSString stringWithFormat:NSLocalizedString(@"Fetching %@ News Feed", @""), self.defaultOrganizationName] ];
             [GHNewsFeed newsFeedForUserNamed:self.defaultOrganizationName completionHandler:^(GHNewsFeed *feed, NSError *error) {
+                self.isDownloadingEssentialData = NO;
                 if (error) {
                     [self handleError:error];
                 } else {
@@ -264,6 +270,7 @@
             [GHAPIOrganizationV3 organizationsOfUser:[GHAuthenticationManager sharedInstance].username 
                                                 page:1 
                                    completionHandler:^(NSMutableArray *array, NSUInteger nextPage, NSError *error) {
+                                       self.isDownloadingEssentialData = NO;
                                        self.organizations = array;
                                        
                                        if (self.organizations.count > 0) {
@@ -336,6 +343,7 @@
 
 - (void)segmentControlValueChanged:(UISegmentedControl *)segmentControl {
     [self pullToReleaseTableViewReloadData];
+    self.newsFeed = nil;
 }
 
 @end

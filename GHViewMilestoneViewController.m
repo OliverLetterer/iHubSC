@@ -36,8 +36,10 @@
 }
 
 - (void)downloadMilestoneData {
+    self.isDownloadingEssentialData = YES;
     [GHAPIMilestoneV3 milestoneOnRepository:self.repository number:self.milestoneNumber 
                           completionHandler:^(GHAPIMilestoneV3 *milestone, NSError *error) {
+                              self.isDownloadingEssentialData = NO;
                               if (error) {
                                   [self handleError:error];
                               } else {
@@ -72,9 +74,6 @@
 #pragma mark - UIExpandableTableViewDatasource
 
 - (BOOL)tableView:(UIExpandableTableView *)tableView canExpandSection:(NSInteger)section {
-    if (!self.milestone) {
-        return NO;
-    }
     return section == kUITableViewControllerSectionInfoOpenIssues || section == kUITableViewControllerSectionInfoClosedIssues;
 }
 

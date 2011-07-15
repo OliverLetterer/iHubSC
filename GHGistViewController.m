@@ -35,7 +35,9 @@
     [_ID release];
     _ID = [ID copy];
     
+    self.isDownloadingEssentialData = YES;
     [GHAPIGistV3 gistWithID:_ID completionHandler:^(GHAPIGistV3 *gist, NSError *error) {
+        self.isDownloadingEssentialData = NO;
         if (error) {
             [self handleError:error];
         } else {

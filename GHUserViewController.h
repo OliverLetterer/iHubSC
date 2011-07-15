@@ -16,7 +16,6 @@
 @interface GHUserViewController : GHTableViewController <GHCreateRepositoryViewControllerDelegate, GHSingleRepositoryViewControllerDelegate, UIAlertViewDelegate> {
 @private
     NSString *_username;
-    BOOL _isDownloadingUserData;
     GHAPIUserV3 *_user;
     
     NSMutableArray *_repositoriesArray;
@@ -54,7 +53,6 @@
 - (void)createRepositoryButtonClicked:(UIBarButtonItem *)button;
 - (void)accountButtonClicked:(UIBarButtonItem *)button;
 
-- (void)downloadUserData;
 - (void)downloadRepositories;
 - (void)cacheHeightForTableView;
 - (void)cacheHeightForWatchedRepositories;
