@@ -95,7 +95,7 @@ NSString *const kGHAPIIssueStateV3Closed = @"closed";
     NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.github.com/repos/%@/issues",
                                        [repository stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding], page ] ];
     
-    [[GHBackgroundQueue sharedInstance] sendRequestToURL:URL page:page setupHandler:nil 
+    [[GHAPIBackgroundQueueV3 sharedInstance] sendRequestToURL:URL page:page setupHandler:nil 
                              completionPaginationHandler:^(id object, NSError *error, ASIFormDataRequest *request, NSUInteger nextPage) {
                                  if (error) {
                                      handler(nil, GHAPIPaginationNextPageNotFound, error);
@@ -122,7 +122,7 @@ NSString *const kGHAPIIssueStateV3Closed = @"closed";
                                        [repository stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
                                        number]];
     
-    [[GHBackgroundQueue sharedInstance] sendRequestToURL:URL setupHandler:nil completionHandler:^(id object, NSError *error, ASIFormDataRequest *request) {
+    [[GHAPIBackgroundQueueV3 sharedInstance] sendRequestToURL:URL setupHandler:nil completionHandler:^(id object, NSError *error, ASIFormDataRequest *request) {
         if (error) {
             handler(nil, error);
         } else {
@@ -140,7 +140,7 @@ NSString *const kGHAPIIssueStateV3Closed = @"closed";
     NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.github.com/repos/%@/milestones",
                                        [repository stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] ] ];
     
-    [[GHBackgroundQueue sharedInstance] sendRequestToURL:URL page:page setupHandler:nil 
+    [[GHAPIBackgroundQueueV3 sharedInstance] sendRequestToURL:URL page:page setupHandler:nil 
                              completionPaginationHandler:^(id object, NSError *error, ASIFormDataRequest *request, NSUInteger nextPage) {
                                  if (error) {
                                      handler(nil, GHAPIPaginationNextPageNotFound, error);
@@ -169,7 +169,7 @@ NSString *const kGHAPIIssueStateV3Closed = @"closed";
     NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.github.com/repos/%@/issues",
                                        [repository stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] ] ];
     
-    [[GHBackgroundQueue sharedInstance] sendRequestToURL:URL 
+    [[GHAPIBackgroundQueueV3 sharedInstance] sendRequestToURL:URL 
                                             setupHandler:^(ASIFormDataRequest *request) {
                                                 NSMutableDictionary *jsonDictionary = [NSMutableDictionary dictionaryWithCapacity:4];
                                                 if (title) {
@@ -209,7 +209,7 @@ NSString *const kGHAPIIssueStateV3Closed = @"closed";
                                        [repository stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding], number ] ];
     
     
-    [[GHBackgroundQueue sharedInstance] sendRequestToURL:URL setupHandler:nil completionHandler:^(id object, NSError *error, ASIFormDataRequest *request) {
+    [[GHAPIBackgroundQueueV3 sharedInstance] sendRequestToURL:URL setupHandler:nil completionHandler:^(id object, NSError *error, ASIFormDataRequest *request) {
         if (error) {
             handler(nil, error);
         } else {
@@ -235,7 +235,7 @@ NSString *const kGHAPIIssueStateV3Closed = @"closed";
                                        [repository stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding], number ] ];
     
     
-    [[GHBackgroundQueue sharedInstance] sendRequestToURL:URL 
+    [[GHAPIBackgroundQueueV3 sharedInstance] sendRequestToURL:URL 
                                             setupHandler:^(ASIFormDataRequest *request) { 
                                                 // {"body"=>"String"}
                                                 NSDictionary *jsonDictionary = [NSDictionary dictionaryWithObject:comment forKey:@"body"];
@@ -263,7 +263,7 @@ NSString *const kGHAPIIssueStateV3Closed = @"closed";
                                        [repository stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding], number ] ];
     
     
-    [[GHBackgroundQueue sharedInstance] sendRequestToURL:URL 
+    [[GHAPIBackgroundQueueV3 sharedInstance] sendRequestToURL:URL 
                                             setupHandler:^(ASIFormDataRequest *request) { 
                                                 // {"body"=>"String"}
                                                 
@@ -291,7 +291,7 @@ NSString *const kGHAPIIssueStateV3Closed = @"closed";
                                        [repository stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding], number ] ];
     
     
-    [[GHBackgroundQueue sharedInstance] sendRequestToURL:URL 
+    [[GHAPIBackgroundQueueV3 sharedInstance] sendRequestToURL:URL 
                                             setupHandler:^(ASIFormDataRequest *request) { 
                                                 // {"body"=>"String"}
                                                 
@@ -316,7 +316,7 @@ NSString *const kGHAPIIssueStateV3Closed = @"closed";
     NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.github.com/repos/%@/issues/%@/events",
                                        [repository stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding], issueID ] ];
     
-    [[GHBackgroundQueue sharedInstance] sendRequestToURL:URL setupHandler:nil completionHandler:^(id object, NSError *error, ASIFormDataRequest *request) {
+    [[GHAPIBackgroundQueueV3 sharedInstance] sendRequestToURL:URL setupHandler:nil completionHandler:^(id object, NSError *error, ASIFormDataRequest *request) {
         if (error) {
             handler(nil, error);
         } else {
@@ -393,7 +393,7 @@ NSString *const kGHAPIIssueStateV3Closed = @"closed";
     
     NSURL *URL = [NSURL URLWithString:URLString];
     
-    [[GHBackgroundQueue sharedInstance] sendRequestToURL:URL page:page setupHandler:nil 
+    [[GHAPIBackgroundQueueV3 sharedInstance] sendRequestToURL:URL page:page setupHandler:nil 
                              completionPaginationHandler:^(id object, NSError *error, ASIFormDataRequest *request, NSUInteger nextPage) {
                                  if (error) {
                                      handler(nil, GHAPIPaginationNextPageNotFound, error);
@@ -415,7 +415,7 @@ NSString *const kGHAPIIssueStateV3Closed = @"closed";
     
     NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.github.com/issues"]];
     
-    [[GHBackgroundQueue sharedInstance] sendRequestToURL:URL page:page setupHandler:nil 
+    [[GHAPIBackgroundQueueV3 sharedInstance] sendRequestToURL:URL page:page setupHandler:nil 
                              completionPaginationHandler:^(id object, NSError *error, ASIFormDataRequest *request, NSUInteger nextPage) {
                                  if (error) {
                                      handler(nil, GHAPIPaginationNextPageNotFound, error);

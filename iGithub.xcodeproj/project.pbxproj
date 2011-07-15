@@ -235,7 +235,7 @@
 		A7BF1435134215C5001AE50D /* GHSettingsHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = A7BF1434134215C5001AE50D /* GHSettingsHelper.m */; };
 		A7BF143A1342188E001AE50D /* DefaultUserImage.png in Resources */ = {isa = PBXBuildFile; fileRef = A7BF14381342188E001AE50D /* DefaultUserImage.png */; };
 		A7BF143B1342188E001AE50D /* DefaultUserImage@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A7BF14391342188E001AE50D /* DefaultUserImage@2x.png */; };
-		A7BF146D13426DC2001AE50D /* GHBackgroundQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = A7BF146C13426DC2001AE50D /* GHBackgroundQueue.m */; };
+		A7BF146D13426DC2001AE50D /* GHAPIBackgroundQueueV3.m in Sources */ = {isa = PBXBuildFile; fileRef = A7BF146C13426DC2001AE50D /* GHAPIBackgroundQueueV3.m */; };
 		A7BF147213426F27001AE50D /* GHUser.m in Sources */ = {isa = PBXBuildFile; fileRef = A7BF147113426F27001AE50D /* GHUser.m */; };
 		A7BF147B13427305001AE50D /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = A7BF147A13427304001AE50D /* JSONKit.m */; };
 		A7CE1B101345BC9300169F94 /* GHActorAttributes.m in Sources */ = {isa = PBXBuildFile; fileRef = A7CE1B0F1345BC9300169F94 /* GHActorAttributes.m */; };
@@ -725,8 +725,8 @@
 		A7BF1434134215C5001AE50D /* GHSettingsHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHSettingsHelper.m; sourceTree = "<group>"; };
 		A7BF14381342188E001AE50D /* DefaultUserImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DefaultUserImage.png; sourceTree = "<group>"; };
 		A7BF14391342188E001AE50D /* DefaultUserImage@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "DefaultUserImage@2x.png"; sourceTree = "<group>"; };
-		A7BF146B13426DC2001AE50D /* GHBackgroundQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHBackgroundQueue.h; sourceTree = "<group>"; };
-		A7BF146C13426DC2001AE50D /* GHBackgroundQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHBackgroundQueue.m; sourceTree = "<group>"; };
+		A7BF146B13426DC2001AE50D /* GHAPIBackgroundQueueV3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHAPIBackgroundQueueV3.h; sourceTree = "<group>"; };
+		A7BF146C13426DC2001AE50D /* GHAPIBackgroundQueueV3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHAPIBackgroundQueueV3.m; sourceTree = "<group>"; };
 		A7BF146F13426EF5001AE50D /* GithubAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GithubAPI.h; sourceTree = "<group>"; };
 		A7BF147013426F27001AE50D /* GHUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHUser.h; sourceTree = "<group>"; };
 		A7BF147113426F27001AE50D /* GHUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHUser.m; sourceTree = "<group>"; };
@@ -2315,20 +2315,20 @@
 				A73E29B11348744300E85282 /* Foundation & Class Additions */,
 				A750570013427F9E00514A82 /* ASI-HTTP */,
 				A7BF147C13427309001AE50D /* JSONKit */,
-				A7BF146E13426ED9001AE50D /* GHBackgroundQueue */,
+				A7BF146E13426ED9001AE50D /* GHAPIBackgroundQueueV3 */,
 				A79F37F813883B650028F492 /* v3 */,
 				A7B5208B13885E2C000FEE61 /* V2 */,
 			);
 			name = "Github API";
 			sourceTree = "<group>";
 		};
-		A7BF146E13426ED9001AE50D /* GHBackgroundQueue */ = {
+		A7BF146E13426ED9001AE50D /* GHAPIBackgroundQueueV3 */ = {
 			isa = PBXGroup;
 			children = (
-				A7BF146B13426DC2001AE50D /* GHBackgroundQueue.h */,
-				A7BF146C13426DC2001AE50D /* GHBackgroundQueue.m */,
+				A7BF146B13426DC2001AE50D /* GHAPIBackgroundQueueV3.h */,
+				A7BF146C13426DC2001AE50D /* GHAPIBackgroundQueueV3.m */,
 			);
-			name = GHBackgroundQueue;
+			name = GHAPIBackgroundQueueV3;
 			sourceTree = "<group>";
 		};
 		A7BF147C13427309001AE50D /* JSONKit */ = {
@@ -2989,7 +2989,7 @@
 				A7BF14171342149C001AE50D /* iGithubAppDelegate_iPad.m in Sources */,
 				A7BF142E13421546001AE50D /* SFHFKeychainUtils.m in Sources */,
 				A7BF1435134215C5001AE50D /* GHSettingsHelper.m in Sources */,
-				A7BF146D13426DC2001AE50D /* GHBackgroundQueue.m in Sources */,
+				A7BF146D13426DC2001AE50D /* GHAPIBackgroundQueueV3.m in Sources */,
 				A7BF147213426F27001AE50D /* GHUser.m in Sources */,
 				A7BF147B13427305001AE50D /* JSONKit.m in Sources */,
 				A750571613427FB400514A82 /* ASIAuthenticationDialog.m in Sources */,

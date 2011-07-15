@@ -86,7 +86,7 @@
                                        [repository stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
                                        number]];
     
-    [[GHBackgroundQueue sharedInstance] sendRequestToURL:URL setupHandler:nil completionHandler:^(id object, NSError *error, ASIFormDataRequest *request) {
+    [[GHAPIBackgroundQueueV3 sharedInstance] sendRequestToURL:URL setupHandler:nil completionHandler:^(id object, NSError *error, ASIFormDataRequest *request) {
         if (error) {
             handler(nil, error);
         } else {

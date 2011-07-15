@@ -121,7 +121,7 @@
     NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.github.com/repos/%@/labels",
                                        [repository stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] ] ];
     
-    [[GHBackgroundQueue sharedInstance] sendRequestToURL:URL 
+    [[GHAPIBackgroundQueueV3 sharedInstance] sendRequestToURL:URL 
                                                     page:page 
                                             setupHandler:nil 
                              completionPaginationHandler:^(id object, NSError *error, ASIFormDataRequest *request, NSUInteger nextPage) {
@@ -147,7 +147,7 @@
     NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.github.com/repos/%@",
                                        [repositoryName stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] ] ];
     
-    [[GHBackgroundQueue sharedInstance] sendRequestToURL:URL setupHandler:nil
+    [[GHAPIBackgroundQueueV3 sharedInstance] sendRequestToURL:URL setupHandler:nil
                                        completionHandler:^(id object, NSError *error, ASIFormDataRequest *request) {
                                            if (error) {
                                                handler(nil, error);
@@ -170,7 +170,7 @@
                                     [username stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] ] ];
     }
     
-    [[GHBackgroundQueue sharedInstance] sendRequestToURL:URL 
+    [[GHAPIBackgroundQueueV3 sharedInstance] sendRequestToURL:URL 
                                                     page:page 
                                             setupHandler:nil 
                              completionPaginationHandler:^(id object, NSError *error, ASIFormDataRequest *request, NSUInteger nextPage) {
@@ -195,7 +195,7 @@
     NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.github.com/repos/%@/branches",
                                        [repository stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] ] ];
     
-    [[GHBackgroundQueue sharedInstance] sendRequestToURL:URL page:page setupHandler:nil 
+    [[GHAPIBackgroundQueueV3 sharedInstance] sendRequestToURL:URL page:page setupHandler:nil 
                              completionPaginationHandler:^(id object, NSError *error, ASIFormDataRequest *request, NSUInteger nextPage) {
                                  if (error) {
                                      handler(nil, GHAPIPaginationNextPageNotFound, error);
@@ -218,7 +218,7 @@
     NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.github.com/users/%@/watched",
                                        [username stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] ] ];
     
-    [[GHBackgroundQueue sharedInstance] sendRequestToURL:URL page:page setupHandler:nil 
+    [[GHAPIBackgroundQueueV3 sharedInstance] sendRequestToURL:URL page:page setupHandler:nil 
                              completionPaginationHandler:^(id object, NSError *error, ASIFormDataRequest *request, NSUInteger nextPage) {
                                  if (error) {
                                      handler(nil, GHAPIPaginationNextPageNotFound, error);
@@ -241,7 +241,7 @@
     NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.github.com/repos/%@/watchers",
                                        [repository stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] ] ];
     
-    [[GHBackgroundQueue sharedInstance] sendRequestToURL:URL page:page setupHandler:nil 
+    [[GHAPIBackgroundQueueV3 sharedInstance] sendRequestToURL:URL page:page setupHandler:nil 
                              completionPaginationHandler:^(id object, NSError *error, ASIFormDataRequest *request, NSUInteger nextPage) {
                                  if (error) {
                                      handler(nil, GHAPIPaginationNextPageNotFound, error);
@@ -264,7 +264,7 @@
     NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.github.com/user/watched/%@",
                                        [repository stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] ] ];
     
-    [[GHBackgroundQueue sharedInstance] sendRequestToURL:URL 
+    [[GHAPIBackgroundQueueV3 sharedInstance] sendRequestToURL:URL 
                                             setupHandler:nil 
                                        completionHandler:^(id object, NSError *error, ASIFormDataRequest *request) {
                                            if ([request responseStatusCode] == 404) {
@@ -283,7 +283,7 @@
     NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.github.com/user/watched/%@",
                                        [repository stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] ] ];
     
-    [[GHBackgroundQueue sharedInstance] sendRequestToURL:URL 
+    [[GHAPIBackgroundQueueV3 sharedInstance] sendRequestToURL:URL 
                                             setupHandler:^(ASIFormDataRequest *request) {
                                                 [request setRequestMethod:@"PUT"];
                                             } completionHandler:^(id object, NSError *error, ASIFormDataRequest *request) {
@@ -297,7 +297,7 @@
     NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.github.com/user/watched/%@",
                                        [repository stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] ] ];
     
-    [[GHBackgroundQueue sharedInstance] sendRequestToURL:URL 
+    [[GHAPIBackgroundQueueV3 sharedInstance] sendRequestToURL:URL 
                                             setupHandler:^(ASIFormDataRequest *request) {
                                                 [request setRequestMethod:@"DELETE"];
                                             } completionHandler:^(id object, NSError *error, ASIFormDataRequest *request) {
@@ -311,7 +311,7 @@
     NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.github.com/repos/%@/collaborators",
                                        [repository stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] ] ];
     
-    [[GHBackgroundQueue sharedInstance] sendRequestToURL:URL page:page setupHandler:nil 
+    [[GHAPIBackgroundQueueV3 sharedInstance] sendRequestToURL:URL page:page setupHandler:nil 
                              completionPaginationHandler:^(id object, NSError *error, ASIFormDataRequest *request, NSUInteger nextPage) {
                                  if (error) {
                                      handler(nil, GHAPIPaginationNextPageNotFound, error);
@@ -336,7 +336,7 @@
                                        [username stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] 
                                        ] ];
     
-    [[GHBackgroundQueue sharedInstance] sendRequestToURL:URL 
+    [[GHAPIBackgroundQueueV3 sharedInstance] sendRequestToURL:URL 
                                             setupHandler:nil 
                                        completionHandler:^(id object, NSError *error, ASIFormDataRequest *request) {
                                            if ([request responseStatusCode] == 404) {
@@ -355,7 +355,7 @@
     
     NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.github.com/user/repos"]];
     
-    [[GHBackgroundQueue sharedInstance] sendRequestToURL:URL 
+    [[GHAPIBackgroundQueueV3 sharedInstance] sendRequestToURL:URL 
                                             setupHandler:^(ASIFormDataRequest *request) {
                                                 [request setRequestMethod:@"POST"];
                                                 
@@ -396,7 +396,7 @@
     
     NSURL *URL = [NSURL URLWithString:URLString];
     
-    [[GHBackgroundQueue sharedInstance] sendRequestToURL:URL 
+    [[GHAPIBackgroundQueueV3 sharedInstance] sendRequestToURL:URL 
                                             setupHandler:^(ASIFormDataRequest *request) {
                                                 [request setRequestMethod:@"POST"];
                                             } 
@@ -416,7 +416,7 @@
                                        [repository stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
                                        [collaborator stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] ] ];
     
-    [[GHBackgroundQueue sharedInstance] sendRequestToURL:URL 
+    [[GHAPIBackgroundQueueV3 sharedInstance] sendRequestToURL:URL 
                                             setupHandler:^(ASIFormDataRequest *request) {
                                                 [request setRequestMethod:@"DELETE"];
                                             } completionHandler:^(id object, NSError *error, ASIFormDataRequest *request) {
@@ -431,7 +431,7 @@
                                        [repository stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
                                        [collaborator stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] ] ];
     
-    [[GHBackgroundQueue sharedInstance] sendRequestToURL:URL 
+    [[GHAPIBackgroundQueueV3 sharedInstance] sendRequestToURL:URL 
                                             setupHandler:^(ASIFormDataRequest *request) {
                                                 [request setRequestMethod:@"PUT"];
                                             } completionHandler:^(id object, NSError *error, ASIFormDataRequest *request) {
@@ -454,7 +454,7 @@
     
     NSURL *URL = [NSURL URLWithString:URLString];
     
-    [[GHBackgroundQueue sharedInstance] sendRequestToURL:URL 
+    [[GHAPIBackgroundQueueV3 sharedInstance] sendRequestToURL:URL 
                                                     page:page 
                                             setupHandler:nil 
                              completionPaginationHandler:^(id object, NSError *error, ASIFormDataRequest *request, NSUInteger nextPage) {

@@ -57,7 +57,7 @@
     NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.github.com/gists/%@", 
                                        [ID stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] ] ];
     
-    [[GHBackgroundQueue sharedInstance] sendRequestToURL:URL setupHandler:nil 
+    [[GHAPIBackgroundQueueV3 sharedInstance] sendRequestToURL:URL setupHandler:nil 
                                        completionHandler:^(id object, NSError *error, ASIFormDataRequest *request) {
                                            if (error) {
                                                handler(nil, error);
@@ -75,7 +75,7 @@
     NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.github.com/gists/%@", 
                                        [ID stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] ] ];
     
-    [[GHBackgroundQueue sharedInstance] sendRequestToURL:URL 
+    [[GHAPIBackgroundQueueV3 sharedInstance] sendRequestToURL:URL 
                                             setupHandler:^(ASIFormDataRequest *request) {
                                                 [request setRequestMethod:@"DELETE"];
                                             } completionHandler:^(id object, NSError *error, ASIFormDataRequest *request) {
@@ -89,7 +89,7 @@
     NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.github.com/gists/%@/star", 
                                        [ID stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] ] ];
     
-    [[GHBackgroundQueue sharedInstance] sendRequestToURL:URL 
+    [[GHAPIBackgroundQueueV3 sharedInstance] sendRequestToURL:URL 
                                             setupHandler:nil 
                                        completionHandler:^(id object, NSError *error, ASIFormDataRequest *request) {
                                            int responseCode = [request responseStatusCode];
@@ -104,7 +104,7 @@
     NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.github.com/gists/%@/star", 
                                        [ID stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] ] ];
     
-    [[GHBackgroundQueue sharedInstance] sendRequestToURL:URL 
+    [[GHAPIBackgroundQueueV3 sharedInstance] sendRequestToURL:URL 
                                             setupHandler:^(ASIFormDataRequest *request) {
                                                 [request setRequestMethod:@"PUT"];
                                             } 
@@ -119,7 +119,7 @@
     NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.github.com/gists/%@/star", 
                                        [ID stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] ] ];
     
-    [[GHBackgroundQueue sharedInstance] sendRequestToURL:URL 
+    [[GHAPIBackgroundQueueV3 sharedInstance] sendRequestToURL:URL 
                                             setupHandler:^(ASIFormDataRequest *request) {
                                                 [request setRequestMethod:@"DELETE"];
                                             } 
@@ -134,7 +134,7 @@
     NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.github.com/gists/%@/comments", 
                                        [ID stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] ] ];
     
-    [[GHBackgroundQueue sharedInstance] sendRequestToURL:URL setupHandler:nil 
+    [[GHAPIBackgroundQueueV3 sharedInstance] sendRequestToURL:URL setupHandler:nil 
                                        completionHandler:^(id object, NSError *error, ASIFormDataRequest *request) {
                                            if (error) {
                                                handler(nil, error);
@@ -158,7 +158,7 @@
     NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.github.com/gists/%@/comments", 
                                        [ID stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] ] ];
     
-    [[GHBackgroundQueue sharedInstance] sendRequestToURL:URL 
+    [[GHAPIBackgroundQueueV3 sharedInstance] sendRequestToURL:URL 
                                             setupHandler:^(ASIFormDataRequest *request) {
                                                 NSMutableDictionary *jsonDictionary = [NSMutableDictionary dictionaryWithCapacity:4];
                                                 if (comment) {

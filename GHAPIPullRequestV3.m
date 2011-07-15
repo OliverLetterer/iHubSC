@@ -19,7 +19,7 @@
                                        [repository stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
                                        pullRequestNumber ]];
     
-    [[GHBackgroundQueue sharedInstance] sendRequestToURL:URL 
+    [[GHAPIBackgroundQueueV3 sharedInstance] sendRequestToURL:URL 
                                             setupHandler:^(ASIFormDataRequest *request) {
                                                 [request setRequestMethod:@"PUT"];
                                                 

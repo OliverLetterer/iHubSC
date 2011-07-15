@@ -74,7 +74,7 @@
     NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.github.com/users/%@", 
                                        [username stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] ] ];
     
-    [[GHBackgroundQueue sharedInstance] sendRequestToURL:URL setupHandler:nil 
+    [[GHAPIBackgroundQueueV3 sharedInstance] sendRequestToURL:URL setupHandler:nil 
                                        completionHandler:^(id object, NSError *error, ASIFormDataRequest *request) {
                                            if (error) {
                                                handler(nil, error);
@@ -93,7 +93,7 @@
     
     NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.github.com/user" ] ];
     
-    [[GHBackgroundQueue sharedInstance] sendRequestToURL:URL 
+    [[GHAPIBackgroundQueueV3 sharedInstance] sendRequestToURL:URL 
                                             setupHandler:^(ASIFormDataRequest *request) {
                                                 [request addBasicAuthenticationHeaderWithUsername:username andPassword:password];
                                             }
@@ -114,7 +114,7 @@
     NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.github.com/users/%@/following",
                                        [username stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] ] ];
     
-    [[GHBackgroundQueue sharedInstance] sendRequestToURL:URL 
+    [[GHAPIBackgroundQueueV3 sharedInstance] sendRequestToURL:URL 
                                                     page:page 
                                             setupHandler:nil 
                              completionPaginationHandler:^(id object, NSError *error, ASIFormDataRequest *request, NSUInteger nextPage) {
@@ -139,7 +139,7 @@
     NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.github.com/users/%@/followers",
                                        [username stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] ] ];
     
-    [[GHBackgroundQueue sharedInstance] sendRequestToURL:URL 
+    [[GHAPIBackgroundQueueV3 sharedInstance] sendRequestToURL:URL 
                                                     page:page 
                                             setupHandler:nil 
                              completionPaginationHandler:^(id object, NSError *error, ASIFormDataRequest *request, NSUInteger nextPage) {
@@ -165,7 +165,7 @@
     NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.github.com/user/following/%@",
                                        [username stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] ] ];
     
-    [[GHBackgroundQueue sharedInstance] sendRequestToURL:URL setupHandler:nil
+    [[GHAPIBackgroundQueueV3 sharedInstance] sendRequestToURL:URL setupHandler:nil
                                        completionHandler:^(id object, NSError *error, ASIFormDataRequest *request) {
                                            if ([request responseStatusCode] == 404) {
                                                handler(NO, nil);
@@ -183,7 +183,7 @@
     NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.github.com/user/following/%@",
                                        [username stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] ] ];
     
-    [[GHBackgroundQueue sharedInstance] sendRequestToURL:URL 
+    [[GHAPIBackgroundQueueV3 sharedInstance] sendRequestToURL:URL 
                                             setupHandler:^(ASIFormDataRequest *request) {
                                                 [request setRequestMethod:@"PUT"];
                                             }
@@ -198,7 +198,7 @@
     NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.github.com/user/following/%@",
                                        [username stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] ] ];
     
-    [[GHBackgroundQueue sharedInstance] sendRequestToURL:URL 
+    [[GHAPIBackgroundQueueV3 sharedInstance] sendRequestToURL:URL 
                                             setupHandler:^(ASIFormDataRequest *request) {
                                                 [request setRequestMethod:@"DELETE"];
                                             }
@@ -214,7 +214,7 @@
     NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.github.com/users/%@/gists", 
                                        [username stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding], page ] ];
     
-    [[GHBackgroundQueue sharedInstance] sendRequestToURL:URL 
+    [[GHAPIBackgroundQueueV3 sharedInstance] sendRequestToURL:URL 
                                                 page:page
                                             setupHandler:nil 
                              completionPaginationHandler:^(id object, NSError *error, ASIFormDataRequest *request, NSUInteger nextPage) {

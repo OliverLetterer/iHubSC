@@ -92,7 +92,7 @@
                                     [username stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] ]];
     }
     
-    [[GHBackgroundQueue sharedInstance] sendRequestToURL:URL page:page setupHandler:nil 
+    [[GHAPIBackgroundQueueV3 sharedInstance] sendRequestToURL:URL page:page setupHandler:nil 
                              completionPaginationHandler:^(id object, NSError *error, ASIFormDataRequest *request, NSUInteger nextPage) {
                                  if (error) {
                                      handler(nil, GHAPIPaginationNextPageNotFound, error);
@@ -115,7 +115,7 @@
     NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.github.com/orgs/%@",
                                        [organizationName stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] ]];
     
-    [[GHBackgroundQueue sharedInstance] sendRequestToURL:URL setupHandler:nil 
+    [[GHAPIBackgroundQueueV3 sharedInstance] sendRequestToURL:URL setupHandler:nil 
                                        completionHandler:^(id object, NSError *error, ASIFormDataRequest *request) {
                                            if (error) {
                                                handler(nil, error);
@@ -131,7 +131,7 @@
     NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.github.com/orgs/%@/repos",
                                        [organizationName stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] ]];
     
-    [[GHBackgroundQueue sharedInstance] sendRequestToURL:URL page:page setupHandler:nil 
+    [[GHAPIBackgroundQueueV3 sharedInstance] sendRequestToURL:URL page:page setupHandler:nil 
                              completionPaginationHandler:^(id object, NSError *error, ASIFormDataRequest *request, NSUInteger nextPage) {
                                  if (error) {
                                      handler(nil, GHAPIPaginationNextPageNotFound, error);
@@ -154,7 +154,7 @@
     NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.github.com/orgs/%@/members",
                                        [organizationName stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] ]];
     
-    [[GHBackgroundQueue sharedInstance] sendRequestToURL:URL page:page setupHandler:nil 
+    [[GHAPIBackgroundQueueV3 sharedInstance] sendRequestToURL:URL page:page setupHandler:nil 
                              completionPaginationHandler:^(id object, NSError *error, ASIFormDataRequest *request, NSUInteger nextPage) {
                                  if (error) {
                                      handler(nil, GHAPIPaginationNextPageNotFound, error);
@@ -177,7 +177,7 @@
     NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.github.com/orgs/%@/teams",
                                        [organizationName stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] ]];
     
-    [[GHBackgroundQueue sharedInstance] sendRequestToURL:URL page:page setupHandler:nil 
+    [[GHAPIBackgroundQueueV3 sharedInstance] sendRequestToURL:URL page:page setupHandler:nil 
                              completionPaginationHandler:^(id object, NSError *error, ASIFormDataRequest *request, NSUInteger nextPage) {
                                  if (error) {
                                      handler(nil, GHAPIPaginationNextPageNotFound, error);

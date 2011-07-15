@@ -52,7 +52,7 @@
                                        [repository stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
                                        [branchSHA stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]] ];
     
-    [[GHBackgroundQueue sharedInstance] sendRequestToURL:URL setupHandler:nil
+    [[GHAPIBackgroundQueueV3 sharedInstance] sendRequestToURL:URL setupHandler:nil
                                        completionHandler:^(id object, NSError *error, ASIFormDataRequest *request) {
                                            DLog(@"%@", [request responseString]);
                                            if (error) {

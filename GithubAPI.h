@@ -9,7 +9,7 @@
 #import "GHManagedObjectContext.h"
 #import "GHAuthenticationManager.h"
 
-#import "GHBackgroundQueue.h"
+#import "GHAPIBackgroundQueueV3.h"
 #import "GHUser.h"
 #import "GHNewsFeed.h"
 #import "GHNewsFeedItem.h"

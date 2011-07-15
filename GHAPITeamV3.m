@@ -53,7 +53,7 @@ NSString *const GHAPITeamV3PermissionAdmin = @"admin";
     NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.github.com/teams/%@",
                                        teamID ] ];
     
-    [[GHBackgroundQueue sharedInstance] sendRequestToURL:URL setupHandler:nil 
+    [[GHAPIBackgroundQueueV3 sharedInstance] sendRequestToURL:URL setupHandler:nil 
                                        completionHandler:^(id object, NSError *error, ASIFormDataRequest *request) {
                                            if (error) {
                                                handler(nil, error);
@@ -69,7 +69,7 @@ NSString *const GHAPITeamV3PermissionAdmin = @"admin";
     NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.github.com/teams/%@",
                                        teamID ] ];
     
-    [[GHBackgroundQueue sharedInstance] sendRequestToURL:URL 
+    [[GHAPIBackgroundQueueV3 sharedInstance] sendRequestToURL:URL 
                                             setupHandler:^(ASIFormDataRequest *request) {
                                                 [request setRequestMethod:@"DELETE"];
                                             } completionHandler:^(id object, NSError *error, ASIFormDataRequest *request) {
@@ -83,7 +83,7 @@ NSString *const GHAPITeamV3PermissionAdmin = @"admin";
     NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.github.com/teams/%@/members",
                                        teamID ]];
     
-    [[GHBackgroundQueue sharedInstance] sendRequestToURL:URL page:page setupHandler:nil 
+    [[GHAPIBackgroundQueueV3 sharedInstance] sendRequestToURL:URL page:page setupHandler:nil 
                              completionPaginationHandler:^(id object, NSError *error, ASIFormDataRequest *request, NSUInteger nextPage) {
                                  if (error) {
                                      handler(nil, GHAPIPaginationNextPageNotFound, error);
@@ -106,7 +106,7 @@ NSString *const GHAPITeamV3PermissionAdmin = @"admin";
     NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.github.com/teams/%@/repos",
                                        teamID ]];
     
-    [[GHBackgroundQueue sharedInstance] sendRequestToURL:URL page:page setupHandler:nil 
+    [[GHAPIBackgroundQueueV3 sharedInstance] sendRequestToURL:URL page:page setupHandler:nil 
                              completionPaginationHandler:^(id object, NSError *error, ASIFormDataRequest *request, NSUInteger nextPage) {
                                  if (error) {
                                      handler(nil, GHAPIPaginationNextPageNotFound, error);
@@ -130,7 +130,7 @@ NSString *const GHAPITeamV3PermissionAdmin = @"admin";
                                        [username stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]
                                        ] ];
     
-    [[GHBackgroundQueue sharedInstance] sendRequestToURL:URL 
+    [[GHAPIBackgroundQueueV3 sharedInstance] sendRequestToURL:URL 
                                             setupHandler:^(ASIFormDataRequest *request) {
                                                 [request setRequestMethod:@"DELETE"];
                                             } completionHandler:^(id object, NSError *error, ASIFormDataRequest *request) {
@@ -145,7 +145,7 @@ NSString *const GHAPITeamV3PermissionAdmin = @"admin";
                                        [repository stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]
                                        ] ];
     
-    [[GHBackgroundQueue sharedInstance] sendRequestToURL:URL 
+    [[GHAPIBackgroundQueueV3 sharedInstance] sendRequestToURL:URL 
                                             setupHandler:^(ASIFormDataRequest *request) {
                                                 [request setRequestMethod:@"DELETE"];
                                             } completionHandler:^(id object, NSError *error, ASIFormDataRequest *request) {
