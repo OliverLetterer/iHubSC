@@ -175,6 +175,8 @@
 		A77654D71395556A00787420 /* WAMarkdown.m in Sources */ = {isa = PBXBuildFile; fileRef = A77654D21395556A00787420 /* WAMarkdown.m */; };
 		A77654D81395556A00787420 /* WAMarkdownParser.m in Sources */ = {isa = PBXBuildFile; fileRef = A77654D41395556A00787420 /* WAMarkdownParser.m */; };
 		A77654DA13955A0100787420 /* MarkdownStyle in Resources */ = {isa = PBXBuildFile; fileRef = A77654D913955A0000787420 /* MarkdownStyle */; };
+		A77B027013D05FAE00FC0508 /* Default-Portrait~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = A77B026E13D05FAE00FC0508 /* Default-Portrait~ipad.png */; };
+		A77B027113D05FAE00FC0508 /* Default-Landscape~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = A77B026F13D05FAE00FC0508 /* Default-Landscape~ipad.png */; };
 		A7837E95136C905200B13B95 /* GHAPIIssueV3.m in Sources */ = {isa = PBXBuildFile; fileRef = A7837E94136C905100B13B95 /* GHAPIIssueV3.m */; };
 		A7837E9A136C93FC00B13B95 /* GHAPIMilestoneV3.m in Sources */ = {isa = PBXBuildFile; fileRef = A7837E99136C93FC00B13B95 /* GHAPIMilestoneV3.m */; };
 		A7837EA1136CADA500B13B95 /* PDColoredProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = A7837EA0136CADA400B13B95 /* PDColoredProgressView.m */; };
@@ -621,6 +623,8 @@
 		A77654D31395556A00787420 /* WAMarkdownParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WAMarkdownParser.h; sourceTree = "<group>"; };
 		A77654D41395556A00787420 /* WAMarkdownParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WAMarkdownParser.m; sourceTree = "<group>"; };
 		A77654D913955A0000787420 /* MarkdownStyle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MarkdownStyle; sourceTree = "<group>"; };
+		A77B026E13D05FAE00FC0508 /* Default-Portrait~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait~ipad.png"; sourceTree = "<group>"; };
+		A77B026F13D05FAE00FC0508 /* Default-Landscape~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape~ipad.png"; sourceTree = "<group>"; };
 		A7837E93136C905100B13B95 /* GHAPIIssueV3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHAPIIssueV3.h; sourceTree = "<group>"; };
 		A7837E94136C905100B13B95 /* GHAPIIssueV3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHAPIIssueV3.m; sourceTree = "<group>"; };
 		A7837E98136C93FC00B13B95 /* GHAPIMilestoneV3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHAPIMilestoneV3.h; sourceTree = "<group>"; };
@@ -1521,6 +1525,8 @@
 		A745D096139B97CC00FF8FB1 /* Defaults */ = {
 			isa = PBXGroup;
 			children = (
+				A77B026E13D05FAE00FC0508 /* Default-Portrait~ipad.png */,
+				A77B026F13D05FAE00FC0508 /* Default-Landscape~ipad.png */,
 				A706C0D6139B91A8008A6184 /* Default.png */,
 				A706C0D4139B904B008A6184 /* Default@2x.png */,
 			);
@@ -2973,6 +2979,8 @@
 				A7DE2DF813CCB07D005B810B /* ANNotificationSuccessImage@2x.png in Resources */,
 				A7DE2DFC13CCB80F005B810B /* ANNotificationSuccessImage.png in Resources */,
 				A7DE2DFD13CCB80F005B810B /* ANNotificationErrorImage.png in Resources */,
+				A77B027013D05FAE00FC0508 /* Default-Portrait~ipad.png in Resources */,
+				A77B027113D05FAE00FC0508 /* Default-Landscape~ipad.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
