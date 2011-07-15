@@ -20,6 +20,7 @@
 @interface GHPSearchScopeTableViewCell : GHPDefaultTableViewCell {
 @private
     NSMutableArray *_buttons;
+    NSUInteger _currentSelectedButtonIndex;
     
     id<GHPSearchScopeTableViewCellDelegate> _delegate;
 }

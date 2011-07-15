@@ -17,6 +17,9 @@
 
 - (void)buttonClicked:(UIButton *)button {
     NSUInteger index = [_buttons indexOfObject:button];
+    if (index == _currentSelectedButtonIndex) {
+        return;
+    }
     
     if (index != NSNotFound) {
         button.selected = YES;
@@ -27,6 +30,7 @@
             }
         }];
         
+        _currentSelectedButtonIndex = index;
         [self.delegate searchScopeTableViewCell:self didSelectButtonAtIndex:index];
     }
 }
@@ -49,7 +53,7 @@
             [self.contentView addSubview:button];
             
             if (idx == 0) {
-                [self buttonClicked:button];
+                button.selected = YES;
             }
         }];
     }
