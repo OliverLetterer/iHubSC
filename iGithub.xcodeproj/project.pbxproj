@@ -485,7 +485,7 @@
 		A7288A6D13A9094300170D57 /* scripts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = scripts; sourceTree = "<group>"; };
 		A7288A6E13A9094300170D57 /* src */ = {isa = PBXFileReference; lastKnownFileType = folder; path = src; sourceTree = "<group>"; };
 		A7288A6F13A9094300170D57 /* styles */ = {isa = PBXFileReference; lastKnownFileType = folder; path = styles; sourceTree = "<group>"; };
-		A72FB17913CF763100D2BE07 /* GHPIssuesOfAuthenticatedUserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; path = GHPIssuesOfAuthenticatedUserViewController.h; sourceTree = "<group>"; };
+		A72FB17913CF763100D2BE07 /* GHPIssuesOfAuthenticatedUserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPIssuesOfAuthenticatedUserViewController.h; sourceTree = "<group>"; };
 		A72FB17A13CF763100D2BE07 /* GHPIssuesOfAuthenticatedUserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPIssuesOfAuthenticatedUserViewController.m; sourceTree = "<group>"; };
 		A7384D68136BFCE200DD1BE5 /* iHub - Icon Template.psd */ = {isa = PBXFileReference; lastKnownFileType = file; path = "iHub - Icon Template.psd"; sourceTree = "<group>"; };
 		A73AE5A5134EF4F100E9EBA4 /* UITableView+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+Additions.h"; sourceTree = "<group>"; };
