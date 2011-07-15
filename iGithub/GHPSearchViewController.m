@@ -67,11 +67,6 @@
     [_mySearchDisplayController release], _mySearchDisplayController = nil;
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    // Return YES for supported orientations
-	return YES;
-}
-
 #pragma mark - Downloading
 
 - (void)downloadDataBasedOnSearchString {
@@ -290,6 +285,7 @@
 #pragma mark - GHPSearchScopeTableViewCellDelegate
 
 - (void)searchScopeTableViewCell:(GHPSearchScopeTableViewCell *)searchScopeTableViewCell didSelectButtonAtIndex:(NSUInteger)index {
+    [self.advancedNavigationController popViewControllersToViewController:self animated:YES];
     NSString *title = [searchScopeTableViewCell titleForButtonAtIndex:index];
     
     if ([title isEqualToString:kUIButtonTitleRepositories]) {
