@@ -131,7 +131,7 @@ CGFloat const ANNotificationQueueAnimationDuration = 0.35f;
                               [NSValue valueWithCGPoint:centerPoint],
                               nil
                               ];
-	
+    
 	bounceAnimation.duration = ANNotificationQueueAnimationDuration;
 	
 	[notificationView.layer addAnimation:bounceAnimation forKey:@"position"];
