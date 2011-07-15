@@ -1465,7 +1465,6 @@
 				A7F62623134B89CA006487CA /* NSDate */,
 				A7F6261F134B8886006487CA /* NSString */,
 				A73E29B21348745800E85282 /* NSDictionary */,
-				A792A92713A3FD3200BB0E1A /* GHAPIConnectionHandlersV3.h */,
 			);
 			name = "Foundation & Class Additions";
 			sourceTree = "<group>";
@@ -2310,6 +2309,7 @@
 		A7BF146413426D85001AE50D /* Github API */ = {
 			isa = PBXGroup;
 			children = (
+				A792A92713A3FD3200BB0E1A /* GHAPIConnectionHandlersV3.h */,
 				A7BF146F13426EF5001AE50D /* GithubAPI.h */,
 				A77654BF1395555500787420 /* Markdown */,
 				A73E29B11348744300E85282 /* Foundation & Class Additions */,
