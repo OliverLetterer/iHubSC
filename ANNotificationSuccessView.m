@@ -21,7 +21,7 @@
         } else {
             self.imageView.image = [UIImage imageNamed:@"ANNotificationSuccessImage.png"];
         }
-        self.displayTime = 1.5f;
+        self.displayTime = 1.0f;
         self.backgroundView.colors = [NSArray arrayWithObjects:
                                       (id)[UIColor colorWithRed:19.0f/255.0 green:146.0f/255.0 blue:16.0f/255.0 alpha:1.0].CGColor, 
                                       (id)[UIColor colorWithRed:16.0f/255.0 green:116.0f/255.0 blue:13.0f/255.0 alpha:1.0].CGColor,

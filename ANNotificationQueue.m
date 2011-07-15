@@ -26,10 +26,12 @@
 - (void)_detachNotification:(ANNotificationView *)notificationView;
 - (void)_displayNextNotification;
 
+-(CAAnimation *)flipAnimationWithDuration:(NSTimeInterval)aDuration forLayerBeginningOnTop:(BOOL)beginsOnTop scaleFactor:(CGFloat)scaleFactor;
+
 @end
 
 
-CGFloat const ANNotificationQueueAnimationDuration = 0.35f;
+CGFloat const ANNotificationQueueAnimationDuration = 0.35f*2.0f;
 
 
 @implementation ANNotificationQueue
@@ -110,60 +112,76 @@ CGFloat const ANNotificationQueueAnimationDuration = 0.35f;
 	ANNotificationView *notificationView = [self.notifications objectAtIndex:0];
     notificationView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
     
-    UIView *containerView = [[UIApplication sharedApplication].delegate window].rootViewController.view;
+    
+    UIView *topContainerView = [[UIApplication sharedApplication].delegate window].rootViewController.view;
+    topContainerView.userInteractionEnabled = NO;
+    
+    UIView *containerView = [[[UIView alloc] initWithFrame:topContainerView.bounds] autorelease];
+    containerView.backgroundColor = [UIColor clearColor];
+    [containerView addSubview:notificationView];
+    [topContainerView addSubview:containerView];
     
     CGPoint centerPoint = CGPointMake(CGRectGetWidth(containerView.bounds)/2.0f, CGRectGetHeight(containerView.bounds)/2.0f);
-    CGPoint startPoint = CGPointMake(centerPoint.x, -CGRectGetHeight(notificationView.bounds));
-    CGPoint m1 = CGPointMake(centerPoint.x, centerPoint.y / 1.25f);
-    CGPoint m2 = CGPointMake(centerPoint.x, centerPoint.y / 1.1f);
-    
     notificationView.center = centerPoint;
-	[containerView addSubview:notificationView];
-	
-	CAKeyframeAnimation *bounceAnimation = [CAKeyframeAnimation animationWithKeyPath:@"position"];
-	bounceAnimation.calculationMode = kCAAnimationCubic;
-	
-	bounceAnimation.values = [NSArray arrayWithObjects:[NSValue valueWithCGPoint:startPoint],
-                              [NSValue valueWithCGPoint:centerPoint],
-                              [NSValue valueWithCGPoint:m1],
-                              [NSValue valueWithCGPoint:centerPoint],
-                              [NSValue valueWithCGPoint:m2],
-                              [NSValue valueWithCGPoint:centerPoint],
-                              nil
-                              ];
     
-	bounceAnimation.duration = ANNotificationQueueAnimationDuration;
-	
-	[notificationView.layer addAnimation:bounceAnimation forKey:@"position"];
-	
+    CALayer *bottomLayer = notificationView.layer;
+    
+    CGFloat zDistance = 1500.0f;
+    CATransform3D perspective = CATransform3DIdentity; 
+    perspective.m34 = -1.0f / zDistance;
+    bottomLayer.transform = perspective;
+    
+    [bottomLayer addAnimation:[self flipAnimationWithDuration:ANNotificationQueueAnimationDuration forLayerBeginningOnTop:NO scaleFactor:2.0f] forKey:nil];
+    
     double delayInSeconds = notificationView.displayTime + ANNotificationQueueAnimationDuration;
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void) {
-        CGPoint endPoint = CGPointMake(centerPoint.x, CGRectGetHeight(containerView.bounds) + CGRectGetHeight(notificationView.bounds));
-        
-        // displaying the notification is done, now remove it animated
-        CAKeyframeAnimation *sizeAnimation = [CAKeyframeAnimation animationWithKeyPath:@"position"];
-        sizeAnimation.calculationMode = kCAAnimationCubicPaced;
-        
-        sizeAnimation.values = [NSArray arrayWithObjects:[NSValue valueWithCGPoint:centerPoint],
-                                [NSValue valueWithCGPoint:endPoint],
-                                nil];
-        
-        sizeAnimation.duration = ANNotificationQueueAnimationDuration;
-        
-        [notificationView.layer addAnimation:sizeAnimation forKey:@"position"];
-        
-        notificationView.center = endPoint;
+        [bottomLayer addAnimation:[self flipAnimationWithDuration:ANNotificationQueueAnimationDuration forLayerBeginningOnTop:YES scaleFactor:2.0f] forKey:nil];
         
         double delayInSeconds = ANNotificationQueueAnimationDuration;
         dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
         dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
             // now remove animation is done, remove notificaiton and display next
-            [notificationView removeFromSuperview];
+            topContainerView.userInteractionEnabled = YES;
+            [containerView removeFromSuperview];
             [self.notifications removeObjectAtIndex:0];
             [self _displayNextNotification];
         });
     });
+}
+
+-(CAAnimation *)flipAnimationWithDuration:(NSTimeInterval)aDuration forLayerBeginningOnTop:(BOOL)beginsOnTop scaleFactor:(CGFloat)scaleFactor {
+    // Rotating halfway (pi radians) around the Y axis gives the appearance of flipping
+    CABasicAnimation *flipAnimation = [CABasicAnimation animationWithKeyPath:@"transform.rotation.y"];
+    CGFloat startValue = beginsOnTop ? 0.0f : M_PI;
+    CGFloat endValue = beginsOnTop ? -M_PI : 0.0f;
+    flipAnimation.fromValue = [NSNumber numberWithDouble:startValue];
+    flipAnimation.toValue = [NSNumber numberWithDouble:endValue];
+    
+    // Shrinking the view makes it seem to move away from us, for a more natural effect
+    // Can also grow the view to make it move out of the screen
+    startValue = beginsOnTop ? 1.0f : 0.05f;
+    endValue = beginsOnTop ? 0.05f : 1.0f;
+    CAKeyframeAnimation *sizeAnimation = [CAKeyframeAnimation animationWithKeyPath:@"transform.scale"];
+    sizeAnimation.values = [NSArray arrayWithObjects:[NSNumber numberWithFloat:startValue], 
+                            [NSNumber numberWithFloat:scaleFactor],
+                            [NSNumber numberWithFloat:endValue],
+                            nil];
+    
+    // Combine the flipping and shrinking into one smooth animation
+    CAAnimationGroup *animationGroup = [CAAnimationGroup animation];
+    animationGroup.animations = [NSArray arrayWithObjects:flipAnimation, sizeAnimation, nil];
+    
+    // As the edge gets closer to us, it appears to move faster. Simulate this in 2D with an easing function
+    animationGroup.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+    animationGroup.duration = aDuration;
+    
+    // Hold the view in the state reached by the animation until we can fix it, or else we get an annoying flicker
+	// this really means keep the state of the object at whatever the anim ends at
+    animationGroup.fillMode = kCAFillModeForwards;
+    animationGroup.removedOnCompletion = NO;
+    
+    return animationGroup;
 }
 
 @end
