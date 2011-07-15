@@ -41,10 +41,10 @@
 	<true/>
 	<key>NSMainNibFile</key>
 	<string>MainWindow_iPhone</string>
-	<key>UIPrerenderedIcon</key>
-	<true/>
 	<key>NSMainNibFile~ipad</key>
 	<string>MainWindow_iPad</string>
+	<key>UIPrerenderedIcon</key>
+	<true/>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
