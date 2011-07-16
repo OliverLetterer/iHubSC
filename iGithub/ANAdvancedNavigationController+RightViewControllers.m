@@ -194,13 +194,22 @@
         }
     }];
     
+    UIViewController *viewController = [self.viewControllers objectAtIndex:0];
+    
+    if ([self.delegate respondsToSelector:@selector(advancedNavigationController:willPopToViewController:animated:)]) {
+        [self.delegate advancedNavigationController:self willPopToViewController:viewController animated:YES];
+    }
     self.removeRectangleIndicatorView.state = ANRemoveRectangleIndicatorViewStateFlippedToRight;
     [UIView animateWithDuration:ANAdvancedNavigationControllerDefaultAnimationDuration 
                      animations:^(void) {
                          self.removeRectangleIndicatorView.state = ANRemoveRectangleIndicatorViewStateRemovedRight;
+                         [self __moveRightViewControllerToRightAnchorPoint:viewController animated:NO];
                      } 
                      completion:^(BOOL finished) {
                          [self __numberOfRightViewControllersDidChanged];
+                         if ([self.delegate respondsToSelector:@selector(advancedNavigationController:didPopToViewController:animated:)]) {
+                             [self.delegate advancedNavigationController:self didPopToViewController:viewController animated:YES];
+                         }
                      }];
 }
 
@@ -403,15 +412,17 @@
         [self __updateViewControllersWithTranslation:translation];
     } else if (panGestureRecognizer.state == UIGestureRecognizerStateEnded) {
         // check, if we need to pop every viewController except the first one
+        BOOL didPopViewControllers = NO;
         if (self.viewControllers.count > 1) {
             UIViewController *firstViewController = [self.viewControllers objectAtIndex:0];
             UIView *view = [self __viewForRightViewController:firstViewController];
             if (view.center.x > self.__minimumDragOffsetToShowRemoveInformation) {
+                didPopViewControllers = YES;
                 [self __popViewControllersAfterDraggingFarToTheRight];
             }
         }
         
-        if (self.viewControllers.count > 0) {
+        if (self.viewControllers.count > 0 && !didPopViewControllers) {
             // find that view controller, that is the best for the right anchor position
             NSInteger index = 0;
             UIViewController *viewController = [self __bestRightAnchorPointViewControllerWithIndex:&index];
