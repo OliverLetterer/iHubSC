@@ -63,7 +63,7 @@
     [self.stateSegmentControl setTitle:stateString forSegmentAtIndex:0];
     self.lastStateUpdateDate = [NSDate date];
     if (removeFlag) {
-        [self performSelector:@selector(unloadStateSegmentControlIfPossible) withObject:nil afterDelay:2.0f];
+        [self performSelector:@selector(unloadStateSegmentControlIfPossible) withObject:nil afterDelay:2.1f];
     }
 }
 
