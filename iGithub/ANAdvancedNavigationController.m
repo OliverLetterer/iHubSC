@@ -70,7 +70,7 @@ const CGFloat ANAdvancedNavigationControllerDefaultDraggingDistance         = 47
 - (id)initWithLeftViewController:(UIViewController *)leftViewController rightViewControllers:(NSArray *)rightViewControllers {
     if (self = [self initWithLeftViewController:leftViewController]) {
         [rightViewControllers enumerateObjectsUsingBlock:^(__strong id obj, NSUInteger idx, BOOL *stop) {
-            [self _insertRightViewController:obj];
+            [self _insertRightViewControllerInDataModel:obj];
         }];
     }
     return self;

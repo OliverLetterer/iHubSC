@@ -16,13 +16,11 @@
 
 - (void)_popViewControllersToViewController:(UIViewController *)viewController animated:(BOOL)animated;
 
-- (void)_moveRightViewControllerToRightAnchorPoint:(UIViewController *)rightViewController animated:(BOOL)animated;
-
 - (void)_prepareViewForPanning;
 
 - (void)_willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration;
 
-- (void)_insertRightViewController:(UIViewController *)rightViewController;
+- (void)_insertRightViewControllerInDataModel:(UIViewController *)rightViewController;
 - (void)_insertRightViewControllerViews;
 
 @end

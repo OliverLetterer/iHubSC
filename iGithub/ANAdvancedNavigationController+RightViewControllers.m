@@ -28,6 +28,7 @@
 - (UIView *)__loadViewForNewRightViewController:(UIViewController *)rightViewController;
 - (UIView *)__viewForRightViewController:(UIViewController *)rightViewController;
 - (BOOL)__isRightViewControllerAlreayInViewHierarchy:(UIViewController *)rightViewController;
+- (void)__moveRightViewControllerToRightAnchorPoint:(UIViewController *)rightViewController animated:(BOOL)animated;
 
 // panning
 - (UIViewController *)__bestRightAnchorPointViewControllerWithIndex:(NSInteger *)index;
@@ -244,6 +245,64 @@
     return [self __viewForRightViewController:rightViewController].superview == self.view;
 }
 
+- (void)__moveRightViewControllerToRightAnchorPoint:(UIViewController *)rightViewController animated:(BOOL)animated {
+    NSUInteger rightViewControllerIndex = [self.viewControllers indexOfObject:rightViewController];
+    _draggingRightAnchorViewControllerIndex = rightViewControllerIndex;
+    
+    if (animated) {
+        UIView *rightViewControllerView = [self __viewForRightViewController:rightViewController];
+        CGPoint currentRightCenterPoint = rightViewControllerView.center;
+        CGPoint finalRightCenterPoint = [self __centerPointForRightViewController:rightViewController withIndexOfCurrentViewControllerAtRightAnchor:rightViewControllerIndex];
+        
+        CGFloat distance = (finalRightCenterPoint.x - currentRightCenterPoint.x)*0.05f;
+        
+        if (self.viewControllers.count == 1) {
+            // well, we got only one viewController, just set this one to the center with a simple UIView-animation
+            [UIView animateWithDuration:ANAdvancedNavigationControllerDefaultAnimationDuration 
+                             animations:^(void) {
+                                 [self.viewControllers enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+                                     UIView *view = [self __viewForRightViewController:obj];
+                                     view.center = [self __centerPointForRightViewController:obj withIndexOfCurrentViewControllerAtRightAnchor:rightViewControllerIndex];
+                                 }];
+                             }];
+        } else {
+            // now we got more that one viewController, we need a little bounde animation
+            
+            [self.viewControllers enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+                UIView *view = [self __viewForRightViewController:obj];
+                CGPoint finalCenterPoint = [self __centerPointForRightViewController:obj withIndexOfCurrentViewControllerAtRightAnchor:rightViewControllerIndex];
+                
+                CAKeyframeAnimation *animation = [CAKeyframeAnimation animationWithKeyPath:@"position.x"];
+                animation.calculationMode = kCAAnimationLinear;
+                
+                if (abs(idx - rightViewControllerIndex) <= 1 && finalCenterPoint.x+distance >= self.__leftAnchorForInterfaceOrientation) {
+                    animation.values = [NSArray arrayWithObjects:[NSNumber numberWithFloat:view.center.x], 
+                                        [NSNumber numberWithFloat:finalCenterPoint.x],
+                                        [NSNumber numberWithFloat:finalCenterPoint.x+distance],
+                                        [NSNumber numberWithFloat:finalCenterPoint.x],
+                                        nil];
+                } else {
+                    animation.values = [NSArray arrayWithObjects:[NSNumber numberWithFloat:view.center.x], 
+                                        [NSNumber numberWithFloat:finalCenterPoint.x],
+                                        [NSNumber numberWithFloat:finalCenterPoint.x],
+                                        [NSNumber numberWithFloat:finalCenterPoint.x],
+                                        nil];
+                }
+                
+                animation.duration = 0.5f;
+                
+                [view.layer addAnimation:animation forKey:nil];
+                view.center = finalCenterPoint;
+            }];
+        }
+    } else {
+        [self.viewControllers enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+            UIView *view = [self __viewForRightViewController:obj];
+            view.center = [self __centerPointForRightViewController:obj withIndexOfCurrentViewControllerAtRightAnchor:rightViewControllerIndex];
+        }];
+    }
+}
+
 #pragma mark - Panning
 
 - (UIViewController *)__bestRightAnchorPointViewControllerWithIndex:(NSInteger *)index {
@@ -354,7 +413,7 @@
                     }
                     viewController = [self.viewControllers objectAtIndex:index];
                 }
-                [self _moveRightViewControllerToRightAnchorPoint:viewController animated:YES];
+                [self __moveRightViewControllerToRightAnchorPoint:viewController animated:YES];
             }
         }
         
@@ -410,27 +469,10 @@
                                  [self __removeRightViewController:obj animated:YES];
                              }];
     
-    [self _moveRightViewControllerToRightAnchorPoint:viewController animated:YES];
-}
-
-- (void)_moveRightViewControllerToRightAnchorPoint:(UIViewController *)rightViewController animated:(BOOL)animated {
-    NSUInteger rightViewControllerIndex = [self.viewControllers indexOfObject:rightViewController];
-    _draggingRightAnchorViewControllerIndex = rightViewControllerIndex;
-    
-    if (animated) {
-        [UIView animateWithDuration:ANAdvancedNavigationControllerDefaultAnimationDuration 
-                         animations:^(void) {
-                             [self.viewControllers enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-                                 UIView *view = [self __viewForRightViewController:obj];
-                                 view.center = [self __centerPointForRightViewController:obj withIndexOfCurrentViewControllerAtRightAnchor:rightViewControllerIndex];
-                             }];
-                         }];
-    } else {
-        [self.viewControllers enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-            UIView *view = [self __viewForRightViewController:obj];
-            view.center = [self __centerPointForRightViewController:obj withIndexOfCurrentViewControllerAtRightAnchor:rightViewControllerIndex];
-        }];
-    }
+    [UIView animateWithDuration:ANAdvancedNavigationControllerDefaultAnimationDuration 
+                     animations:^(void) {
+                         [self __moveRightViewControllerToRightAnchorPoint:viewController animated:NO];
+                     }];
 }
 
 - (void)_prepareViewForPanning {
@@ -446,11 +488,11 @@
     [self __updateViewControllerShadows];
     
     if (self.viewControllers.count > _draggingRightAnchorViewControllerIndex) {
-        [self _moveRightViewControllerToRightAnchorPoint:[self.viewControllers objectAtIndex:_draggingRightAnchorViewControllerIndex] animated:NO];
+        [self __moveRightViewControllerToRightAnchorPoint:[self.viewControllers objectAtIndex:_draggingRightAnchorViewControllerIndex] animated:NO];
     }
 }
 
-- (void)_insertRightViewController:(UIViewController *)rightViewController {
+- (void)_insertRightViewControllerInDataModel:(UIViewController *)rightViewController {
     [self.viewControllers addObject:rightViewController];
     [self addChildViewController:rightViewController];
     [self __numberOfRightViewControllersDidChanged];
