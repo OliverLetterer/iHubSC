@@ -18,8 +18,6 @@
 
 - (void)_moveRightViewControllerToRightAnchorPoint:(UIViewController *)rightViewController animated:(BOOL)animated;
 
-- (void)_updateViewControllerShadows;
-
 - (void)_prepareViewForPanning;
 
 - (void)_willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration;

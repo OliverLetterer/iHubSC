@@ -22,6 +22,7 @@
 
 // concistency stuff
 - (void)__numberOfRightViewControllersDidChanged;
+- (void)__updateViewControllerShadows;
 
 // managing rightViewControllers views
 - (UIView *)__loadViewForNewRightViewController:(UIViewController *)rightViewController;
@@ -192,6 +193,14 @@
     } else {
         [self.removeRectangleIndicatorView setState:ANRemoveRectangleIndicatorViewStateVisible animated:YES];
     }
+}
+
+- (void)__updateViewControllerShadows {
+    [self.viewControllers enumerateObjectsUsingBlock:^(__strong id obj, NSUInteger idx, BOOL *stop) {
+        UIView *view = [self __viewForRightViewController:obj];
+        CALayer *layer = view.layer;
+        layer.shadowPath = [UIBezierPath bezierPathWithRect:view.bounds].CGPath;
+    }];
 }
 
 #pragma mark - rightViewControllers views
@@ -424,14 +433,6 @@
     }
 }
 
-- (void)_updateViewControllerShadows {
-    [self.viewControllers enumerateObjectsUsingBlock:^(__strong id obj, NSUInteger idx, BOOL *stop) {
-        UIView *view = [self __viewForRightViewController:obj];
-        CALayer *layer = view.layer;
-        layer.shadowPath = [UIBezierPath bezierPathWithRect:view.bounds].CGPath;
-    }];
-}
-
 - (void)_prepareViewForPanning {
     UIPanGestureRecognizer *recognizer = [[[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(__mainPanGestureRecognizedDidRecognizePanGesture:)] autorelease];
     recognizer.maximumNumberOfTouches = 1;
@@ -442,7 +443,7 @@
     for (UIViewController *viewController in self.childViewControllers) {
         [viewController willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
     }
-    [self _updateViewControllerShadows];
+    [self __updateViewControllerShadows];
     
     if (self.viewControllers.count > _draggingRightAnchorViewControllerIndex) {
         [self _moveRightViewControllerToRightAnchorPoint:[self.viewControllers objectAtIndex:_draggingRightAnchorViewControllerIndex] animated:NO];
