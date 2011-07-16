@@ -46,6 +46,7 @@
     GHPLeftNavigationController *testVC = [[[GHPLeftNavigationController alloc] initWithStyle:UITableViewStyleGrouped] autorelease];
         
     ANAdvancedNavigationController *controller = [[[ANAdvancedNavigationController alloc] initWithLeftViewController:testVC] autorelease];
+    controller.delegate = self;
     controller.backgroundView = [[[UIView alloc] initWithFrame:CGRectZero] autorelease];
     controller.backgroundView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"ANBackgroundImage.png"] ];
     
@@ -57,6 +58,15 @@
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 	[super dealloc];
+}
+
+#pragma mark - ANAdvancedNavigationControllerDelegate
+
+- (void)advancedNavigationController:(ANAdvancedNavigationController *)navigationController willPopToViewController:(UIViewController *)viewController animated:(BOOL)animated {
+    if ([viewController isKindOfClass:[GHTableViewController class]]) {
+        GHTableViewController *tableViewController = (GHTableViewController *)viewController;
+        [tableViewController.tableView deselectRowAtIndexPath:tableViewController.tableView.indexPathForSelectedRow animated:animated];
+    }
 }
 
 @end

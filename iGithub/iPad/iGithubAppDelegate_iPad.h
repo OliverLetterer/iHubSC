@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "iGithubAppDelegate.h"
+#import "ANAdvancedNavigationController.h"
 
-@interface iGithubAppDelegate_iPad : iGithubAppDelegate {
+@interface iGithubAppDelegate_iPad : iGithubAppDelegate <ANAdvancedNavigationControllerDelegate> {
     
 }
 
