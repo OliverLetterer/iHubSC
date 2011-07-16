@@ -14,11 +14,26 @@ extern const CGFloat ANAdvancedNavigationControllerDefaultLeftViewControllerWidt
 extern const CGFloat ANAdvancedNavigationControllerDefaultViewControllerWidth;
 extern const CGFloat ANAdvancedNavigationControllerDefaultLeftPanningOffset;
 
+@class ANAdvancedNavigationController;
+
+@protocol ANAdvancedNavigationControllerDelegate <NSObject>
+
+@optional
+- (void)advancedNavigationController:(ANAdvancedNavigationController *)navigationController willPushViewController:(UIViewController *)viewController afterViewController:(UIViewController *)afterViewController animated:(BOOL)animated;
+- (void)advancedNavigationController:(ANAdvancedNavigationController *)navigationController didPushViewController:(UIViewController *)viewController afterViewController:(UIViewController *)afterViewController animated:(BOOL)animated;
+
+- (void)advancedNavigationController:(ANAdvancedNavigationController *)navigationController willPopToViewController:(UIViewController *)viewController animated:(BOOL)animated;
+- (void)advancedNavigationController:(ANAdvancedNavigationController *)navigationController didPopToViewController:(UIViewController *)viewController animated:(BOOL)animated;
+
+@end
+
 @interface ANAdvancedNavigationController : UIViewController
 
 @property (nonatomic, retain) UIView *backgroundView;
 @property (nonatomic, retain) UIViewController *leftViewController;
 @property (nonatomic, readonly, copy) NSArray *rightViewControllers;
+
+@property (nonatomic, assign) id<ANAdvancedNavigationControllerDelegate> delegate;
 
 - (id)initWithLeftViewController:(UIViewController *)leftViewController;
 - (id)initWithLeftViewController:(UIViewController *)leftViewController rightViewControllers:(NSArray *)rightViewControllers;

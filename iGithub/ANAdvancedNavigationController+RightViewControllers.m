@@ -58,6 +58,9 @@
     UIView *newView = [self __loadViewForNewRightViewController:rootViewController];
     
     [rootViewController viewWillAppear:animated];
+    if ([self.delegate respondsToSelector:@selector(advancedNavigationController:willPushViewController:afterViewController:animated:)]) {
+        [self.delegate advancedNavigationController:self willPushViewController:rootViewController afterViewController:nil animated:animated];
+    }
     if (newView) {
         newView.center = CGPointMake(CGRectGetWidth(self.view.bounds) + ANAdvancedNavigationControllerDefaultViewControllerWidth/2.0f, CGRectGetHeight(self.view.bounds)/2.0f);
         [self.view addSubview:newView];
@@ -69,11 +72,17 @@
                              } 
                              completion:^(BOOL finished) {
                                  [rootViewController viewDidAppear:animated];
+                                 if ([self.delegate respondsToSelector:@selector(advancedNavigationController:didPushViewController:afterViewController:animated:)]) {
+                                     [self.delegate advancedNavigationController:self didPushViewController:rootViewController afterViewController:nil animated:animated];
+                                 }
                                  [rootViewController didMoveToParentViewController:self];
                              }];
         } else {
             newView.center = nextCenterPoint;
             [rootViewController viewDidAppear:animated];
+            if ([self.delegate respondsToSelector:@selector(advancedNavigationController:didPushViewController:afterViewController:animated:)]) {
+                [self.delegate advancedNavigationController:self didPushViewController:rootViewController afterViewController:nil animated:animated];
+            }
             [rootViewController didMoveToParentViewController:self];
         }
     }
@@ -105,6 +114,9 @@
     UIView *newView = [self __loadViewForNewRightViewController:viewController];
     
     [viewController viewWillAppear:animated];
+    if ([self.delegate respondsToSelector:@selector(advancedNavigationController:willPushViewController:afterViewController:animated:)]) {
+        [self.delegate advancedNavigationController:self willPushViewController:viewController afterViewController:afterViewController animated:animated];
+    }
     if (newView) {
         [self.view addSubview:newView];
         newView.center = CGPointMake(CGRectGetWidth(self.view.bounds)+ANAdvancedNavigationControllerDefaultViewControllerWidth/2.0f, CGRectGetHeight(self.view.bounds)/2.0f);
@@ -120,6 +132,9 @@
                              } 
                              completion:^(BOOL finished) {
                                  [viewController viewDidAppear:animated];
+                                 if ([self.delegate respondsToSelector:@selector(advancedNavigationController:didPushViewController:afterViewController:animated:)]) {
+                                     [self.delegate advancedNavigationController:self didPushViewController:viewController afterViewController:afterViewController animated:animated];
+                                 }
                                  [viewController didMoveToParentViewController:self];
                              }];
         } else {
@@ -129,6 +144,9 @@
                           withIndexOfCurrentViewControllerAtRightAnchor:self.viewControllers.count-1];
             }];
             [viewController viewDidAppear:animated];
+            if ([self.delegate respondsToSelector:@selector(advancedNavigationController:didPushViewController:animated:)]) {
+                [self.delegate advancedNavigationController:self didPushViewController:viewController afterViewController:afterViewController animated:animated];
+            }
             [viewController didMoveToParentViewController:self];
         }
     }
@@ -463,16 +481,35 @@
     NSArray *oldArray = [[self.viewControllers copy] autorelease];
     
     NSInteger index = [self.viewControllers indexOfObject:viewController]+1;
-    [oldArray enumerateObjectsAtIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(index, self.viewControllers.count-index)] 
-                                options:NSEnumerationConcurrent 
-                             usingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-                                 [self __removeRightViewController:obj animated:YES];
-                             }];
-    
-    [UIView animateWithDuration:ANAdvancedNavigationControllerDefaultAnimationDuration 
-                     animations:^(void) {
-                         [self __moveRightViewControllerToRightAnchorPoint:viewController animated:NO];
-                     }];
+    if ([self.delegate respondsToSelector:@selector(advancedNavigationController:willPopToViewController:animated:)]) {
+        [self.delegate advancedNavigationController:self willPopToViewController:viewController animated:animated];
+    }
+    if (animated) {
+        [UIView animateWithDuration:ANAdvancedNavigationControllerDefaultAnimationDuration 
+                         animations:^(void) {
+                             [oldArray enumerateObjectsAtIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(index, self.viewControllers.count-index)] 
+                                                         options:NSEnumerationConcurrent 
+                                                      usingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+                                                          [self __removeRightViewController:obj animated:NO];
+                                                          [self __moveRightViewControllerToRightAnchorPoint:viewController animated:NO];
+                                                      }];
+                         } 
+                         completion:^(BOOL finished) {
+                             if ([self.delegate respondsToSelector:@selector(advancedNavigationController:didPopToViewController:animated:)]) {
+                                 [self.delegate advancedNavigationController:self didPopToViewController:viewController animated:animated];
+                             }
+                         }];
+    } else {
+        [oldArray enumerateObjectsAtIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(index, self.viewControllers.count-index)] 
+                                    options:NSEnumerationConcurrent 
+                                 usingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+                                     [self __removeRightViewController:obj animated:NO];
+                                 }];
+        [self __moveRightViewControllerToRightAnchorPoint:viewController animated:NO];
+        if ([self.delegate respondsToSelector:@selector(advancedNavigationController:didPopToViewController:animated:)]) {
+            [self.delegate advancedNavigationController:self didPopToViewController:viewController animated:animated];
+        }
+    }
 }
 
 - (void)_prepareViewForPanning {

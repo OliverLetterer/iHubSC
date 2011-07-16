@@ -23,6 +23,7 @@ const CGFloat ANAdvancedNavigationControllerDefaultDraggingDistance         = 47
 
 @synthesize backgroundView=_backgroundView;
 @synthesize leftViewController=_leftViewController, viewControllers=_viewControllers, removeRectangleIndicatorView=_removeRectangleIndicatorView;
+@synthesize delegate=_delegate;
 
 #pragma mark - setters and getters
 
