@@ -14,6 +14,8 @@
 #import "GHUserViewController.h"
 #import "GHSearchViewController.h"
 
+#warning show news feed times
+
 @interface iGithubAppDelegate_iPhone : iGithubAppDelegate <MFMailComposeViewControllerDelegate> {
     UITabBarController *_tabBarController;
     GHOwnerNewsFeedViewController *_newsFeedViewController;
