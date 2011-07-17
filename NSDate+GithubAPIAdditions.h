@@ -11,6 +11,7 @@
 
 @interface NSDate (GHAPIDateFormatting)
 
+@property (nonatomic, readonly) NSString *prettyShortTimeIntervalSinceNow;
 @property (nonatomic, readonly) NSString *prettyTimeIntervalSinceNow;
 @property (nonatomic, readonly) NSString *stringInGithubAPIFormat;
 

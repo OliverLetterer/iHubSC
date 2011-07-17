@@ -13,6 +13,7 @@
 @property (nonatomic, readonly) NSDate *dateFromGithubAPIDateString;
 @property (nonatomic, readonly) NSString *gravarID;
 @property (nonatomic, readonly) NSString *prettyTimeIntervalSinceNow;
+@property (nonatomic, readonly) NSString *prettyShortTimeIntervalSinceNow;
 @end
 
 

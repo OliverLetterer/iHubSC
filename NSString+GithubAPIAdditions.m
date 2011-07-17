@@ -53,6 +53,11 @@
     return date.prettyTimeIntervalSinceNow;
 }
 
+- (NSString *)prettyShortTimeIntervalSinceNow {
+    NSDate *date = self.dateFromGithubAPIDateString;
+    return date.prettyShortTimeIntervalSinceNow;
+}
+
 @end
 
 
