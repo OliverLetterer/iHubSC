@@ -14,8 +14,10 @@ extern CGFloat const GHPDefaultNewsFeedTableViewCellHeight;
 @interface GHPDefaultNewsFeedTableViewCell : GHPImageDetailTableViewCell {
 @private
     UILabel *_repositoryLabel;
+    UILabel *_timeLabel;
 }
 
 @property (nonatomic, retain) UILabel *repositoryLabel;
+@property (nonatomic, retain) UILabel *timeLabel;
 
 @end
