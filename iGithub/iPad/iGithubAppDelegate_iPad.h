@@ -10,8 +10,6 @@
 #import "iGithubAppDelegate.h"
 #import "ANAdvancedNavigationController.h"
 
-#warning API V3 returns timestamp that does not work with local time
-
 @interface iGithubAppDelegate_iPad : iGithubAppDelegate <ANAdvancedNavigationControllerDelegate> {
     
 }
