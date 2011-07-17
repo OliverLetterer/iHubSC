@@ -428,14 +428,14 @@
 		A70ABED113BFB3F90000D189 /* GHPCommitViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPCommitViewController.m; sourceTree = "<group>"; };
 		A70ABED713BFBEEC0000D189 /* UITableViewCell+GHHeight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableViewCell+GHHeight.h"; sourceTree = "<group>"; };
 		A70ABED813BFBEF10000D189 /* UITableViewCell+GHHeight.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableViewCell+GHHeight.m"; sourceTree = "<group>"; };
-		A70ABEDB13C051100000D189 /* GHPDiffView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPDiffView.h; sourceTree = "<group>"; };
-		A70ABEDC13C051120000D189 /* GHPDiffView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPDiffView.m; sourceTree = "<group>"; };
+		A70ABEDB13C051100000D189 /* GHPDiffView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GHPDiffView.h; path = iGithub/GHPDiffView.h; sourceTree = "<group>"; };
+		A70ABEDC13C051120000D189 /* GHPDiffView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GHPDiffView.m; path = iGithub/GHPDiffView.m; sourceTree = "<group>"; };
 		A70ABEE213C051E70000D189 /* GHPDiffViewTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPDiffViewTableViewCell.h; sourceTree = "<group>"; };
 		A70ABEE313C051E80000D189 /* GHPDiffViewTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPDiffViewTableViewCell.m; sourceTree = "<group>"; };
-		A70ABEEA13C05CF90000D189 /* GHPDiffViewLineNumbersView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPDiffViewLineNumbersView.h; sourceTree = "<group>"; };
-		A70ABEEB13C05CFB0000D189 /* GHPDiffViewLineNumbersView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPDiffViewLineNumbersView.m; sourceTree = "<group>"; };
-		A70ABEF113C070390000D189 /* GHPDiffViewContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPDiffViewContentView.h; sourceTree = "<group>"; };
-		A70ABEF213C0703F0000D189 /* GHPDiffViewContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPDiffViewContentView.m; sourceTree = "<group>"; };
+		A70ABEEA13C05CF90000D189 /* GHPDiffViewLineNumbersView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GHPDiffViewLineNumbersView.h; path = iGithub/GHPDiffViewLineNumbersView.h; sourceTree = "<group>"; };
+		A70ABEEB13C05CFB0000D189 /* GHPDiffViewLineNumbersView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GHPDiffViewLineNumbersView.m; path = iGithub/GHPDiffViewLineNumbersView.m; sourceTree = "<group>"; };
+		A70ABEF113C070390000D189 /* GHPDiffViewContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GHPDiffViewContentView.h; path = iGithub/GHPDiffViewContentView.h; sourceTree = "<group>"; };
+		A70ABEF213C0703F0000D189 /* GHPDiffViewContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GHPDiffViewContentView.m; path = iGithub/GHPDiffViewContentView.m; sourceTree = "<group>"; };
 		A70DA3D613A4B7F700235C76 /* GHAPIOrganizationV3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHAPIOrganizationV3.h; sourceTree = "<group>"; };
 		A70DA3D713A4B7F700235C76 /* GHAPIOrganizationV3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHAPIOrganizationV3.m; sourceTree = "<group>"; };
 		A70DA3DA13A4E2D100235C76 /* GHAPITeamV3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHAPITeamV3.h; sourceTree = "<group>"; };
@@ -923,14 +923,8 @@
 		A7023DE513CB8B6E0079D1D0 /* UITableViewCells */ = {
 			isa = PBXGroup;
 			children = (
-				A70ABEDB13C051100000D189 /* GHPDiffView.h */,
-				A70ABEDC13C051120000D189 /* GHPDiffView.m */,
 				A70ABEE213C051E70000D189 /* GHPDiffViewTableViewCell.h */,
 				A70ABEE313C051E80000D189 /* GHPDiffViewTableViewCell.m */,
-				A70ABEEA13C05CF90000D189 /* GHPDiffViewLineNumbersView.h */,
-				A70ABEEB13C05CFB0000D189 /* GHPDiffViewLineNumbersView.m */,
-				A70ABEF113C070390000D189 /* GHPDiffViewContentView.h */,
-				A70ABEF213C0703F0000D189 /* GHPDiffViewContentView.m */,
 			);
 			name = UITableViewCells;
 			sourceTree = "<group>";
@@ -1721,6 +1715,7 @@
 		A750573F1343422200514A82 /* UserInterface */ = {
 			isa = PBXGroup;
 			children = (
+				A7D70BCB13D2C69D0063811F /* GHPDiffView */,
 				A79AE38E13CC96D20008E900 /* ANNotificationQueue */,
 				A7288A6B13A9091500170D57 /* SyntaxHighlighting */,
 				A712B7C7135CB58C0009B7A7 /* Browse content */,
@@ -2654,6 +2649,19 @@
 				A7D5549613CB665500358610 /* GHPTeamViewController.m */,
 			);
 			name = GHPTeamViewController;
+			sourceTree = "<group>";
+		};
+		A7D70BCB13D2C69D0063811F /* GHPDiffView */ = {
+			isa = PBXGroup;
+			children = (
+				A70ABEDB13C051100000D189 /* GHPDiffView.h */,
+				A70ABEDC13C051120000D189 /* GHPDiffView.m */,
+				A70ABEEA13C05CF90000D189 /* GHPDiffViewLineNumbersView.h */,
+				A70ABEEB13C05CFB0000D189 /* GHPDiffViewLineNumbersView.m */,
+				A70ABEF113C070390000D189 /* GHPDiffViewContentView.h */,
+				A70ABEF213C0703F0000D189 /* GHPDiffViewContentView.m */,
+			);
+			name = GHPDiffView;
 			sourceTree = "<group>";
 		};
 		A7DA5E9F13C2508800288937 /* GHPIssuesViewController */ = {

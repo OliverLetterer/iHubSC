@@ -10,11 +10,11 @@
 #import "UITableViewCellWithLinearGradientBackgroundView.h"
 #import "GHLinearGradientBackgroundView.h"
 #import "BGPlainWebView.h"
+#import "GHPDiffViewTableViewCell.h"
 
 @implementation GHCommitDiffViewController
 
-@synthesize diffString=_diffString, HTMLString=_HTMLString;
-@synthesize webView=_webView, topOverlayView=_topOverlayView;
+@synthesize diffString=_diffString, diffView=_diffView;
 
 #pragma mark - setters and getters
 
@@ -22,33 +22,7 @@
     [_diffString release];
     _diffString = [diffString copy];
     
-    // Now do the HTML magic
-    NSMutableString *HTMLString = [NSMutableString stringWithString:@""];
-    [HTMLString appendString:@"<body style=\"background: -webkit-gradient(linear, left top, left bottom, from(#f0f0f0), to(#c0c0c0));\"><pre>"];
-    [_diffString enumerateLinesUsingBlock:^(NSString *line, BOOL *stop) {
-        NSMutableString *result = [NSMutableString stringWithString:line];
-        
-        [result replaceOccurrencesOfString:@"&" withString:@"&amp;" options:NSLiteralSearch range:NSMakeRange(0, [result length])];
-        [result replaceOccurrencesOfString:@"<" withString:@"&lt;" options:NSLiteralSearch range:NSMakeRange(0, [result length])];
-        [result replaceOccurrencesOfString:@">" withString:@"&gt;" options:NSLiteralSearch range:NSMakeRange(0, [result length])];
-        [result replaceOccurrencesOfString:@"\"" withString:@"&quot;" options:NSLiteralSearch range:NSMakeRange(0, [result length])];
-        [result replaceOccurrencesOfString:@"'" withString:@"&#39;" options:NSLiteralSearch range:NSMakeRange(0, [result length])];
-        
-        NSString *textColor = @"black";
-        
-        if ([result hasPrefix:@"---"] || [result hasPrefix:@"-"]) {
-            textColor = @"red";
-        } else if ([result hasPrefix:@"+++"] || [result hasPrefix:@"+"]) {
-            textColor = @"\"#1b860b\"";
-        } else if ([result hasPrefix:@"@@"]) {
-            textColor = @"gray";
-        }
-        
-        [HTMLString appendFormat:@"<font color=%@ face=\"Verdana\">%@</font><br>", textColor, result];
-    }];
-    [HTMLString appendString:@"</pre></body>"];
-    
-    self.HTMLString = HTMLString;
+    self.diffView.diffString = diffString;
 }
 
 #pragma mark - Initialization
@@ -64,9 +38,7 @@
 
 - (void)dealloc {
     [_diffString release];
-    [_HTMLString release];
-    [_webView release];
-    [_topOverlayView release];
+    [_diffView release];
     
     [super dealloc];
 }
@@ -81,57 +53,28 @@
 #pragma mark - View lifecycle
 
 - (void)loadView {
-    [super loadView];
-    self.view = [[[GHLinearGradientBackgroundView alloc] initWithFrame:CGRectZero] autorelease];
+    UIScrollView *scrollView = [[[UIScrollView alloc] initWithFrame:[UIScreen mainScreen].bounds ] autorelease];
+    scrollView.backgroundColor = [UIColor whiteColor];
+    scrollView.scrollsToTop = YES;
+    self.view = scrollView;
     
-    self.topOverlayView = [[[UIView alloc] initWithFrame:CGRectZero] autorelease];
-    self.topOverlayView.backgroundColor = [UIColor colorWithRed:240.0/255.0 green:240.0/255.0 blue:240.0/255.0 alpha:1.0];
-    [self.view addSubview:self.topOverlayView];
     
-    self.webView = [[[BGPlainWebView alloc] initWithFrame:self.view.bounds] autorelease];
-    self.webView.backgroundColor = [UIColor clearColor];
-    self.webView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-    [self.webView loadHTMLString:self.HTMLString baseURL:nil];
-    [self.view addSubview:self.webView];
+    CGFloat height = [GHPDiffViewTableViewCell heightWithContent:self.diffString];
+    CGRect frame = scrollView.bounds;
+    frame.size.height = height;
+    self.diffView = [[[GHPDiffView alloc] initWithFrame:frame] autorelease];
+    self.diffView.diffString = self.diffString;
+    scrollView.contentSize = self.diffView.bounds.size;
+    [self.view addSubview:self.diffView];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
 - (void)viewDidUnload {
     [super viewDidUnload];
-    
-    [_webView release];
-    _webView = nil;
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    self.topOverlayView.frame = CGRectMake(0.0f, 0.0f, CGRectGetWidth(self.view.bounds), CGRectGetHeight(self.view.bounds)/2.0f);
-}
-
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-}
-
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-}
-
-- (void)viewDidDisappear:(BOOL)animated {
-    [super viewDidDisappear:animated];
-}
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    // Return YES for supported orientations
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+    self.diffView = nil;
 }
 
 @end

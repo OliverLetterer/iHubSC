@@ -94,6 +94,7 @@ UIFont *GHPDiffViewBoldFont(void) {
         
         self.contentDiffView = [[[GHPDiffViewContentView alloc] initWithFrame:CGRectZero] autorelease];
         self.scrollView = [[[UIScrollView alloc] initWithFrame:CGRectZero] autorelease];
+        self.scrollView.scrollsToTop = NO;
         [self.scrollView addSubview:self.contentDiffView];
         [self addSubview:self.scrollView];
     }

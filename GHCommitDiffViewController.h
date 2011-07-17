@@ -8,20 +8,18 @@
 
 #import <UIKit/UIKit.h>
 #import <QuartzCore/QuartzCore.h>
+#import "GHPDiffView.h"
 
 @interface GHCommitDiffViewController : UIViewController <UIScrollViewDelegate> {
 @private
     NSString *_diffString;
-    NSString *_HTMLString;
     
-    UIWebView *_webView;
-    UIView *_topOverlayView;
+    GHPDiffView *_diffView;
 }
 
 @property (nonatomic, copy) NSString *diffString;
-@property (nonatomic, copy) NSString *HTMLString;
-@property (nonatomic, retain) UIWebView *webView;
-@property (nonatomic, retain) UIView *topOverlayView;
+
+@property (nonatomic, retain) GHPDiffView *diffView;
 
 - (id)initWithDiffString:(NSString *)diffString;
 
