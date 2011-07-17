@@ -12,7 +12,7 @@
 @implementation NSDate (GHAPIDateFormatting)
 
 - (NSString *)prettyShortTimeIntervalSinceNow {
-    static NSString *valuesArray[] = {@"s", @"min", @"h", @"d", @"y"};
+    static NSString *valuesArray[] = {@"s", @"m", @"h", @"d", @"y"};
     static NSUInteger timeDiffs[] = {            60,        3600,    86400,  31536000};
     
     NSString *unit = nil;

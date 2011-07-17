@@ -16,7 +16,7 @@
 
 @implementation GHNewsFeedItemTableViewCell
 
-@synthesize activityIndicatorView=_activityIndicatorView;
+@synthesize timeLabel=_timeLabel;
 
 #pragma mark - setters and getters
 
@@ -32,10 +32,6 @@
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if ((self = [super initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:reuseIdentifier])) {
-        // Initialization code
-        self.activityIndicatorView = [[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray] autorelease];
-        [self.contentView addSubview:self.activityIndicatorView];
-        
         // setup my views
         self.titleLabel.font = [UIFont boldSystemFontOfSize:11.0];
         self.titleLabel.textColor = [UIColor colorWithWhite:0.25 alpha:1.0];
@@ -47,6 +43,13 @@
         self.repositoryLabel.highlightedTextColor = [UIColor whiteColor];
         self.repositoryLabel.textAlignment = UITextAlignmentRight;
         self.repositoryLabel.backgroundColor = [UIColor clearColor];
+        
+        self.timeLabel = [[[UILabel alloc] initWithFrame:CGRectZero] autorelease];
+        self.timeLabel.font = [UIFont systemFontOfSize:12.0f];
+        self.timeLabel.textColor = [UIColor colorWithWhite:0.25f alpha:1.0f];
+        self.timeLabel.highlightedTextColor = [UIColor whiteColor];
+        self.timeLabel.backgroundColor = [UIColor clearColor];
+        [self.contentView addSubview:self.timeLabel];
         
         self.imageView.contentMode = UIViewContentModeScaleAspectFit;
         self.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
@@ -68,10 +71,11 @@
     [super layoutSubviews];
     
     self.imageView.frame = CGRectMake(10.0, 8.0, 56.0, 56.0);
-    self.titleLabel.frame = CGRectMake(78.0, 4.0, 222.0, 15.0);
+    [self.timeLabel sizeToFit];
+    CGFloat width = CGRectGetWidth(self.timeLabel.bounds);
+    self.timeLabel.frame = CGRectMake(CGRectGetWidth(self.contentView.bounds)-width, 4.0f, width, CGRectGetHeight(self.timeLabel.bounds));
+    self.titleLabel.frame = CGRectMake(78.0, 4.0, CGRectGetWidth(self.contentView.bounds)-width-78.0f, 15.0);
     self.repositoryLabel.frame = CGRectMake(78.0, self.contentView.bounds.size.height - GHNewsFeedItemTableViewCellRepositoryLabelHeight - GHNewsFeedItemTableViewCellRepositoryLabelBottomOffset, 222.0, GHNewsFeedItemTableViewCellRepositoryLabelHeight);
-    
-    self.activityIndicatorView.center = self.imageView.center;
 }
 
 - (void)prepareForReuse {
@@ -80,13 +84,14 @@
     self.imageView.image = nil;
     self.titleLabel.text = nil;
     self.repositoryLabel.text = nil;
-    [self.activityIndicatorView stopAnimating];
+    self.timeLabel.text = nil;
 }
 
 #pragma mark - Memory management
 
 - (void)dealloc {
-    [_activityIndicatorView release];
+    [_timeLabel release];
+    
     [super dealloc];
 }
 

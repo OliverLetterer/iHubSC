@@ -11,11 +11,11 @@
 
 @interface GHNewsFeedItemTableViewCell : UITableViewCellWithLinearGradientBackgroundView {
 @private
-    UIActivityIndicatorView *_activityIndicatorView;
+    UILabel *_timeLabel;
 }
 
-@property (nonatomic, retain) UIActivityIndicatorView *activityIndicatorView;
 @property (nonatomic, readonly) UILabel *titleLabel;
 @property (nonatomic, readonly) UILabel *repositoryLabel;
+@property (nonatomic, retain) UILabel *timeLabel;
 
 @end

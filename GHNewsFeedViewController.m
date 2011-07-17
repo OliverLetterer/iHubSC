@@ -126,6 +126,7 @@
                                 ];
         
         cell.repositoryLabel.text = item.repository.fullName;
+        cell.timeLabel.text = item.creationDate.prettyShortTimeIntervalSinceNow;
         
         GHIssue *issue = [GHIssue issueFromDatabaseOnRepository:item.repository.fullName withNumber:payload.number];
         
@@ -176,6 +177,7 @@
         } else {
             cell.secondCommitLabel.text = nil;
         }
+        cell.timeLabel.text = item.creationDate.prettyShortTimeIntervalSinceNow;
         
         return cell;
     } else if (item.payload.type == GHPayloadCommitCommentEvent) {
@@ -189,6 +191,7 @@
         [self updateImageView:cell.imageView atIndexPath:indexPath withGravatarID:item.actorAttributes.gravatarID];
         cell.titleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ commented on a commit", @""), item.actor];
         cell.repositoryLabel.text = item.repository.fullName;
+        cell.timeLabel.text = item.creationDate.prettyShortTimeIntervalSinceNow;
         
         return cell;
     } else if (item.payload.type == GHPayloadFollowEvent) {
@@ -220,8 +223,8 @@
                            }
                        }
                    }];
-            
         }
+        cell.timeLabel.text = item.creationDate.prettyShortTimeIntervalSinceNow;
         
         return cell;
     } else if (item.payload.type == GHPayloadWatchEvent) {
@@ -237,6 +240,7 @@
         [self updateImageView:cell.imageView atIndexPath:indexPath withGravatarID:item.actorAttributes.gravatarID];
         cell.titleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ %@ watching", @""), item.actor, payload.action];
         cell.repositoryLabel.text = item.repository.fullName;
+        cell.timeLabel.text = item.creationDate.prettyShortTimeIntervalSinceNow;
         
         return cell;
     } else if (item.payload.type == GHPayloadCreateEvent) {
@@ -264,6 +268,7 @@
             cell.titleLabel.text = @"__UNKNWON_CREATE_EVENT__";
             cell.repositoryLabel.text = nil;
         }
+        cell.timeLabel.text = item.creationDate.prettyShortTimeIntervalSinceNow;
         
         return cell;
     } else if (item.payload.type == GHPayloadForkEvent) {
@@ -278,6 +283,7 @@
         
         cell.titleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ forked repository", @""), item.actor];
         cell.repositoryLabel.text = item.repository.fullName;
+        cell.timeLabel.text = item.creationDate.prettyShortTimeIntervalSinceNow;
         
         return cell;
     } else if (item.payload.type == GHPayloadDeleteEvent) {
@@ -302,6 +308,7 @@
         } else {
             cell.repositoryLabel.text = item.repository.name;
         }
+        cell.timeLabel.text = item.creationDate.prettyShortTimeIntervalSinceNow;
         
         return cell;
     } else if (item.payload.type == GHPayloadGollumEvent) {
@@ -318,6 +325,7 @@
         
         cell.titleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ %@ %@ in wiki", @""), item.actor, payload.action, payload.pageName];
         cell.repositoryLabel.text = item.repository.fullName;
+        cell.timeLabel.text = item.creationDate.prettyShortTimeIntervalSinceNow;
         
         return cell;
     } else if (item.payload.type == GHPayloadGistEvent) {
@@ -341,6 +349,7 @@
         cell.repositoryLabel.text = nil;
         cell.titleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ %@ %@", @""), item.actor, action, payload.name];
         cell.descriptionLabel.text = payload.descriptionGist ? payload.descriptionGist : payload.snippet;
+        cell.timeLabel.text = item.creationDate.prettyShortTimeIntervalSinceNow;
         
         return cell;
     } else if (item.payload.type == GHPayloadDownloadEvent) {
@@ -358,6 +367,7 @@
         cell.repositoryLabel.text = item.repository.fullName;
         cell.titleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ uploaded a file", @""), item.actor];
         cell.descriptionLabel.text = [payload.URL lastPathComponent];
+        cell.timeLabel.text = item.creationDate.prettyShortTimeIntervalSinceNow;
         
         return cell;
     } else if (item.payload.type == GHPayloadPullRequestEvent) {
@@ -385,6 +395,7 @@
         cell.repositoryLabel.text = item.repository.fullName;
         cell.descriptionLabel.text = description;
         cell.titleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ %@ pull request %@", @""), item.actor, payload.action, payload.number];
+        cell.timeLabel.text = item.creationDate.prettyShortTimeIntervalSinceNow;
         
         return cell;
     } else if (item.payload.type == GHPayloadMemberEvent) {
@@ -401,6 +412,7 @@
         
         cell.repositoryLabel.text = item.repository.fullName;
         cell.titleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ %@ %@", @""), item.actor, payload.action, payload.member.login];
+        cell.timeLabel.text = item.creationDate.prettyShortTimeIntervalSinceNow;
         
         return cell;
     } else if (item.payload.type == GHPayloadIssueCommentEvent) {
@@ -418,6 +430,7 @@
         
         cell.titleLabel.text = item.actor;
         cell.descriptionLabel.text = [NSString stringWithFormat:NSLocalizedString(@"commented on Issue %@", @""), payload.issueID];
+        cell.timeLabel.text = item.creationDate.prettyShortTimeIntervalSinceNow;
         
         return cell;
     } else if (item.payload.type == GHPayloadForkApplyEvent) {
@@ -433,8 +446,8 @@
         [self updateImageView:cell.imageView atIndexPath:indexPath withGravatarID:item.actorAttributes.gravatarID];
         cell.repositoryLabel.text = item.repository.fullName;
         cell.titleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ applied fork commits", @""), item.actor];
-        
         cell.descriptionLabel.text = payload.commit;
+        cell.timeLabel.text = item.creationDate.prettyShortTimeIntervalSinceNow;
         
         return cell;
     } else if (item.payload.type == GHPayloadPublicEvent) {
@@ -449,6 +462,7 @@
         
         cell.repositoryLabel.text = item.repository.fullName;
         cell.titleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ open sourced", @""), item.actor];
+        cell.timeLabel.text = item.creationDate.prettyShortTimeIntervalSinceNow;
         
         return cell;
     }
