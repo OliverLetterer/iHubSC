@@ -12,7 +12,7 @@
 #import "GHPIssueInfoTableViewCell.h"
 #import "GHPIssueCommentTableViewCell.h"
 
-@interface GHPIssueViewController : GHPInfoSectionTableViewController <UIAlertViewDelegate, GHPIssueInfoTableViewCellDelegate, GHPIssueCommentTableViewCellDelegate> {
+@interface GHPIssueViewController : GHPInfoSectionTableViewController <UIAlertViewDelegate, GHPIssueInfoTableViewCellDelegate, GHPIssueCommentTableViewCellDelegate, UITextViewDelegate> {
 @private
     NSString *_repositoryString;
     NSNumber *_issueNumber;
@@ -30,7 +30,13 @@
     BOOL _isCollaborator;
     
     CGFloat _bodyHeight;
+    
+    NSString *_linkText;
+    NSString *_linkURL;
 }
+
+@property (nonatomic, copy) NSString *linkText;
+@property (nonatomic, copy) NSString *linkURL;
 
 @property (nonatomic, retain) GHAPIIssueV3 *issue;
 @property (nonatomic, retain) GHAPIRepositoryV3 *repository;
@@ -53,6 +59,8 @@
 
 - (void)toolbarCancelButtonClicked:(UIBarButtonItem *)barButton;
 - (void)toolbarDoneButtonClicked:(UIBarButtonItem *)barButton;
+- (void)toolbarFormatButtonClicked:(UIBarButtonItem *)barButton;
+- (void)toolbarInsertButtonClicked:(UIBarButtonItem *)barButton;
 
 - (void)cacheHeightsForHistroy;
 

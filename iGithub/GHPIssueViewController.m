@@ -29,7 +29,12 @@
 #define kUITableViewNumberOfSections        4
 
 #define kUIActionSheetTagAction             172634
+#define kUIActionSheetTagFormat             172635
+#define kUIActionSheetTagInsert             172636
+
 #define kUIAlertViewTagCommitMessage        12983
+#define kUIAlertViewTagLinkText             12984
+#define kUIAlertViewTagLinkURL              12985
 
 @implementation GHPIssueViewController
 
@@ -37,6 +42,7 @@
 @synthesize repository=_repository, discussion=_discussion, history=_history;
 @synthesize issue=_issue;
 @synthesize textView=_textView, textViewToolBar=_textViewToolBar;
+@synthesize linkText=_linkText, linkURL=_linkURL;
 
 #pragma mark - setters and getters
 
@@ -96,6 +102,8 @@
     [_issue release];
     [_history release];
     [_discussion release];
+    [_linkText release];
+    [_linkURL release];
     
     [super dealloc];
 }
@@ -124,6 +132,9 @@
                     [self handleError:error];
                 } else {
                     [self.history addObject:comment];
+                    CGFloat height = [GHPIssueCommentTableViewCell heightWithAttributedString:comment.attributedBody 
+                                                                         inAttributedTextView:nil];
+                    [self cacheHeight:height forRowAtIndexPath:[NSIndexPath indexPathForRow:self.history.count inSection:kUITableViewSectionHistory]];
                     self.issue.comments = [NSNumber numberWithInt:[self.issue.comments intValue] + 1];
                     
                     [self.tableView beginUpdates];
@@ -138,6 +149,32 @@
             }];
 }
 
+- (void)toolbarInsertButtonClicked:(UIBarButtonItem *)barButton {
+    UIActionSheet *sheet = [[[UIActionSheet alloc] init] autorelease];
+    
+    sheet.title = NSLocalizedString(@"Insert", @"");
+    [sheet addButtonWithTitle:NSLocalizedString(@"Hyperlink", @"")];
+    sheet.delegate = self;
+    sheet.tag = kUIActionSheetTagInsert;
+    
+    [sheet showFromBarButtonItem:barButton animated:YES];
+}
+
+- (void)toolbarFormatButtonClicked:(UIBarButtonItem *)barButton {
+    UIActionSheet *sheet = [[[UIActionSheet alloc] init] autorelease];
+    
+    sheet.title = NSLocalizedString(@"Select Format", @"");
+    [sheet addButtonWithTitle:NSLocalizedString(@"*emphasized*", @"")];
+    [sheet addButtonWithTitle:NSLocalizedString(@"**strong emphasized**", @"")];
+    [sheet addButtonWithTitle:NSLocalizedString(@"First Level Header", @"")];
+    [sheet addButtonWithTitle:NSLocalizedString(@"Second Level Header", @"")];
+    [sheet addButtonWithTitle:NSLocalizedString(@"Third Level Header", @"")];
+    sheet.delegate = self;
+    sheet.tag = kUIActionSheetTagFormat;
+    
+    [sheet showFromBarButtonItem:barButton animated:YES];
+}
+
 #pragma mark - View lifecycle
 
 /*
@@ -149,13 +186,25 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-#warning show markdown button
-    
     self.textViewToolBar = [[[UIToolbar alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0, 44.0)] autorelease];
     self.textViewToolBar.barStyle = UIBarStyleBlackTranslucent;
     
     UIBarButtonItem *item = nil;
     NSMutableArray *items = [NSMutableArray array];
+    
+    item = [[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Format", @"") 
+                                             style:UIBarButtonItemStyleBordered 
+                                            target:self 
+                                            action:@selector(toolbarFormatButtonClicked:)]
+            autorelease];
+    [items addObject:item];
+    
+    item = [[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Insert", @"") 
+                                             style:UIBarButtonItemStyleBordered 
+                                            target:self 
+                                            action:@selector(toolbarInsertButtonClicked:)]
+            autorelease];
+    [items addObject:item];
     
     item = [[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Cancel", @"") 
                                              style:UIBarButtonItemStyleBordered 
@@ -502,6 +551,7 @@
             self.textView = cell.textView;
             cell.textView.inputAccessoryView = self.textViewToolBar;
             self.textView.scrollsToTop = NO;
+            cell.textView.delegate = self;
             
             return cell;
         } else {
@@ -770,6 +820,47 @@
         } else {
             [self setActionButtonActive:NO];
         }
+    } else if (actionSheet.tag == kUIActionSheetTagFormat) {
+        NSString *title = nil;
+        @try {
+            title = [actionSheet buttonTitleAtIndex:buttonIndex];
+        }
+        @catch (NSException *exception) {
+        }
+        
+        UITextRange *range = self.textView.selectedTextRange;
+        NSString *text = [self.textView textInRange:self.textView.selectedTextRange];
+        
+        if ([title isEqualToString:NSLocalizedString(@"*emphasized*", @"")]) {
+            [self.textView replaceRange:range withText:[NSString stringWithFormat:@"*%@*", text] ];
+        } else if ([title isEqualToString:NSLocalizedString(@"**strong emphasized**", @"")]) {
+            [self.textView replaceRange:range withText:[NSString stringWithFormat:@"**%@**", text] ];
+        } else if ([title isEqualToString:NSLocalizedString(@"First Level Header", @"")]) {
+            [self.textView replaceRange:range withText:[NSString stringWithFormat:@"%@\n====================", text] ];
+        } else if ([title isEqualToString:NSLocalizedString(@"Second Level Header", @"")]) {
+            [self.textView replaceRange:range withText:[NSString stringWithFormat:@"%@\n---------------------", text] ];
+        } else if ([title isEqualToString:NSLocalizedString(@"Third Level Header", @"")]) {
+            [self.textView replaceRange:range withText:[NSString stringWithFormat:@"###%@", text] ];
+        }
+    } else if (actionSheet.tag == kUIActionSheetTagInsert) {
+        NSString *title = nil;
+        @try {
+            title = [actionSheet buttonTitleAtIndex:buttonIndex];
+        }
+        @catch (NSException *exception) {
+        }
+        
+        if ([title isEqualToString:NSLocalizedString(@"Hyperlink", @"")]) {
+            UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Input Text", @"") 
+                                                             message:NSLocalizedString(@"", @"") 
+                                                            delegate:self 
+                                                   cancelButtonTitle:NSLocalizedString(@"Cancel", @"") 
+                                                   otherButtonTitles:NSLocalizedString(@"Next", @""), nil]
+                                  autorelease];
+            alert.alertViewStyle = UIAlertViewStylePlainTextInput;
+            alert.tag = kUIAlertViewTagLinkText;
+            [alert show];
+        }
     }
 }
 
@@ -802,6 +893,26 @@
                                           }
                                       }];
 
+    } else if (alertView.tag == kUIAlertViewTagLinkText) {
+        if (buttonIndex > 0) {
+            self.linkText = [alertView textFieldAtIndex:0].text;
+            UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Input URL", @"") 
+                                                             message:NSLocalizedString(@"", @"") 
+                                                            delegate:self 
+                                                   cancelButtonTitle:NSLocalizedString(@"Cancel", @"") 
+                                                   otherButtonTitles:NSLocalizedString(@"Done", @""), nil]
+                                  autorelease];
+            alert.alertViewStyle = UIAlertViewStylePlainTextInput;
+            alert.tag = kUIAlertViewTagLinkURL;
+            [alert show];
+        }
+    } else if (alertView.tag == kUIAlertViewTagLinkURL) {
+        if (buttonIndex > 0) {
+            self.linkURL = [alertView textFieldAtIndex:0].text;
+            
+            UITextRange *range = self.textView.selectedTextRange;
+            [self.textView replaceRange:range withText:[NSString stringWithFormat:@"[%@](%@)", self.linkText, self.linkURL] ];
+        }
     }
 }
 
@@ -872,6 +983,13 @@
 - (void)commentTableViewCell:(GHPIssueCommentTableViewCell *)cell receivedClickForButton:(DTLinkButton *)button {
     GHWebViewViewController *viewController = [[[GHWebViewViewController alloc] initWithURL:button.url ] autorelease];
     [self.advancedNavigationController pushViewController:viewController afterViewController:self animated:YES];
+}
+
+#pragma mark - UITextViewDelegate
+
+- (void)textViewDidChangeSelection:(UITextView *)textView {
+    UIBarButtonItem *item = [self.textViewToolBar.items objectAtIndex:0];
+    item.enabled = textView.selectedRange.length > 0;
 }
 
 @end
