@@ -7,7 +7,8 @@
 //
 
 #import "GHPOwnersNewsFeedViewController.h"
-
+#import "GHPUserViewController.h"
+#import "GHPRepositoryViewController.h"
 
 @implementation GHPOwnersNewsFeedViewController
 
@@ -31,6 +32,47 @@
             self.newsFeed = feed;
         }
     }];
+}
+
+#pragma mark - UITableViewDelegate
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    GHNewsFeedItem *item = [self.newsFeed.items objectAtIndex:indexPath.row];
+    
+    UIViewController *viewController = nil;
+    
+    if (item.payload.type == GHPayloadWatchEvent) {
+        if ([item.repository.fullName hasPrefix:[GHAuthenticationManager sharedInstance].username]) {
+            // watched my repo, show the user
+            viewController = [[[GHPUserViewController alloc] initWithUsername:item.actorAttributes.login] autorelease];
+        } else {
+            // show me the repo that he is following
+            viewController = [[[GHPRepositoryViewController alloc] initWithRepositoryString:item.repository.fullName] autorelease];
+        }
+    } else if (item.payload.type == GHPayloadFollowEvent) {
+        GHFollowEventPayload *payload = (GHFollowEventPayload *)item.payload;
+        if ([payload.target.login isEqualToString:[GHAuthenticationManager sharedInstance].username]) {
+            // started following me, show me the user
+            viewController = [[[GHPUserViewController alloc] initWithUsername:item.actorAttributes.login] autorelease];
+        } else {
+            // following someone else, show me the target
+            viewController = [[[GHPUserViewController alloc] initWithUsername:payload.target.login] autorelease];
+        }
+    } else if (item.payload.type == GHPayloadForkEvent) {
+        if ([item.repository.fullName hasPrefix:[GHAuthenticationManager sharedInstance].username]) {
+            // forked my repository, show me the user
+            viewController = [[[GHPUserViewController alloc] initWithUsername:item.actorAttributes.login] autorelease];
+        } else {
+            // didn't fork my repo, show me the repo
+            viewController = [[[GHPRepositoryViewController alloc] initWithRepositoryString:item.repository.fullName] autorelease];
+        }
+    }
+    
+    if (viewController) {
+        [self.advancedNavigationController pushViewController:viewController afterViewController:self animated:YES];
+    } else {
+        [super tableView:tableView didSelectRowAtIndexPath:indexPath];
+    }
 }
 
 @end

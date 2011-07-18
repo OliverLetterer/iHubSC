@@ -17,6 +17,9 @@
 #import <QuartzCore/QuartzCore.h>
 #import "UIColor+GithubUI.h"
 
+#import "GHUserViewController.h"
+#import "GHSingleRepositoryViewController.h"
+
 #define GHOwnerNewsFeedViewControllerDefaultOrganizationNameKey @"GHOwnerNewsFeedViewControllerDefaultOrganizationName"
 #define GHOwnerNewsFeedViewControllerLastCreationDateKey @"GHOwnerNewsFeedViewControllerLastCreationDate"
 
@@ -344,6 +347,47 @@
 - (void)segmentControlValueChanged:(UISegmentedControl *)segmentControl {
     [self pullToReleaseTableViewReloadData];
     self.newsFeed = nil;
+}
+
+#pragma mark - UITableViewDelegate
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    GHNewsFeedItem *item = [self.newsFeed.items objectAtIndex:indexPath.row];
+    
+    UIViewController *viewController = nil;
+    
+    if (item.payload.type == GHPayloadWatchEvent) {
+        if ([item.repository.fullName hasPrefix:[GHAuthenticationManager sharedInstance].username]) {
+            // watched my repo, show the user
+            viewController = [[[GHUserViewController alloc] initWithUsername:item.actorAttributes.login] autorelease];
+        } else {
+            // show me the repo that he is following
+            viewController = [[[GHSingleRepositoryViewController alloc] initWithRepositoryString:item.repository.fullName] autorelease];
+        }
+    } else if (item.payload.type == GHPayloadFollowEvent) {
+        GHFollowEventPayload *payload = (GHFollowEventPayload *)item.payload;
+        if ([payload.target.login isEqualToString:[GHAuthenticationManager sharedInstance].username]) {
+            // started following me, show me the user
+            viewController = [[[GHUserViewController alloc] initWithUsername:item.actorAttributes.login] autorelease];
+        } else {
+            // following someone else, show me the target
+            viewController = [[[GHUserViewController alloc] initWithUsername:payload.target.login] autorelease];
+        }
+    } else if (item.payload.type == GHPayloadForkEvent) {
+        if ([item.repository.fullName hasPrefix:[GHAuthenticationManager sharedInstance].username]) {
+            // forked my repository, show me the user
+            viewController = [[[GHUserViewController alloc] initWithUsername:item.actorAttributes.login] autorelease];
+        } else {
+            // didn't fork my repo, show me the repo
+            viewController = [[[GHSingleRepositoryViewController alloc] initWithRepositoryString:item.repository.fullName] autorelease];
+        }
+    }
+    
+    if (viewController) {
+        [self.navigationController pushViewController:viewController animated:YES];
+    } else {
+        [super tableView:tableView didSelectRowAtIndexPath:indexPath];
+    }
 }
 
 @end
