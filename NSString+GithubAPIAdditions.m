@@ -11,7 +11,9 @@
 #import "UIColor+GithubAPI.h"
 #import "GithubAPI.h"
 #import "WAHTMLMarkdownFormatter.h"
+#import "WAAttributesMarkdownFormatter.h"
 #import <CommonCrypto/CommonDigest.h> // Need to import for CC_MD5 access
+#import "NSAttributedString+HTML.h"
 
 @implementation NSString (GHAPIDateFormatting)
 
@@ -146,6 +148,14 @@ NSString *const kGHNSStringMarkdownStyleFull = @"MarkdownStyle";
     WAHTMLMarkdownFormatter *formatter = [[[WAHTMLMarkdownFormatter alloc] init] autorelease];
     [parsedString appendFormat:@"%@", [formatter HTMLForMarkdown:self]];
     return parsedString;
+}
+
+- (NSAttributedString *)attributesStringFromMarkdownString {
+    WAHTMLMarkdownFormatter *formatter = [[[WAAttributesMarkdownFormatter alloc] init] autorelease];
+    NSString *HTML = [formatter HTMLForMarkdown:self];
+//    HTML = [NSString stringWithFormat:@"<font face=\"Helvetica\" color=\"blue\">%@</font>", HTML];
+    NSData *HTMLData = [HTML dataUsingEncoding:NSUTF8StringEncoding];
+    return [NSAttributedString attributedStringWithHTML:HTMLData options:nil];
 }
 
 @end

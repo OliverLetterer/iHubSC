@@ -14,6 +14,7 @@
 @private
     NSString *_URL;
     NSString *_body;
+    NSAttributedString *_attributedBody;
     GHAPIUserV3 *_user;
     NSString *_createdAt;
     NSString *_updatedAt;
@@ -21,6 +22,8 @@
 
 @property (nonatomic, copy) NSString *URL;
 @property (nonatomic, copy) NSString *body;
+@property (nonatomic, retain) NSAttributedString *attributedBody;
+
 @property (nonatomic, retain) GHAPIUserV3 *user;
 @property (nonatomic, copy) NSString *createdAt;
 @property (nonatomic, copy) NSString *updatedAt;

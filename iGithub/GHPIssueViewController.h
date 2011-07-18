@@ -9,8 +9,10 @@
 #import <UIKit/UIKit.h>
 #import "GHTableViewController.h"
 #import "GHPInfoSectionTableViewController.h"
+#import "GHPIssueInfoTableViewCell.h"
+#import "GHPIssueCommentTableViewCell.h"
 
-@interface GHPIssueViewController : GHPInfoSectionTableViewController <UIAlertViewDelegate> {
+@interface GHPIssueViewController : GHPInfoSectionTableViewController <UIAlertViewDelegate, GHPIssueInfoTableViewCellDelegate, GHPIssueCommentTableViewCellDelegate> {
 @private
     NSString *_repositoryString;
     NSNumber *_issueNumber;
@@ -26,6 +28,8 @@
     
     BOOL _hasCollaboratorData;
     BOOL _isCollaborator;
+    
+    CGFloat _bodyHeight;
 }
 
 @property (nonatomic, retain) GHAPIIssueV3 *issue;
@@ -49,5 +53,7 @@
 
 - (void)toolbarCancelButtonClicked:(UIBarButtonItem *)barButton;
 - (void)toolbarDoneButtonClicked:(UIBarButtonItem *)barButton;
+
+- (void)cacheHeightsForHistroy;
 
 @end

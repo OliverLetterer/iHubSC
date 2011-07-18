@@ -18,6 +18,8 @@
 #import "GHSettingsHelper.h"
 #import "GHPMilestoneViewController.h"
 #import "ANNotificationQueue.h"
+#import "GHViewCloudFileViewController.h"
+#import "GHWebViewViewController.h"
 
 #define kUITableViewSectionInfo             0
 #define kUITableViewSectionDetails          1
@@ -62,6 +64,8 @@
                                                [self handleError:error];
                                            } else {
                                                self.issue = issue;
+                                               _bodyHeight = [GHPIssueInfoTableViewCell heightWithAttributedString:issue.attributedBody 
+                                                                                              inAttributedTextView:nil];
                                                self.repository = repository;
                                                self.isDownloadingEssentialData = NO;
                                                if (self.isViewLoaded) {
@@ -144,6 +148,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+#warning show markdown button
     
     self.textViewToolBar = [[[UIToolbar alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0, 44.0)] autorelease];
     self.textViewToolBar.barStyle = UIBarStyleBlackTranslucent;
@@ -293,6 +299,7 @@
                           completionHandler:^(NSMutableArray *history, NSError *error) {
                               if (!error) {
                                   self.history = history;
+                                  [self cacheHeightsForHistroy];
                                   [tableView expandSection:section animated:YES];
                               } else {
                                   [tableView cancelDownloadInSection:section];
@@ -345,10 +352,10 @@
             
             return cell;
         } else if (indexPath.row == 1) {
-            NSString *CellIdentifier = @"GHPUserInfoTableViewCellInfo";
-            GHPInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+            NSString *CellIdentifier = @"GHPIssueInfoTableViewCell";
+            GHPIssueInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
             if (!cell) {
-                cell = [[[GHPInfoTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault 
+                cell = [[[GHPIssueInfoTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault 
                                                               reuseIdentifier:CellIdentifier]
                         autorelease];
             }
@@ -356,8 +363,9 @@
             [cell.actionButton removeFromSuperview];
             
             cell.textLabel.text = nil;
-            cell.detailTextLabel.text = self.issue.body;
             cell.imageView.image = nil;
+            cell.buttonDelegate = self;
+            cell.attributedTextView.attributedString = self.issue.attributedBody;
             
             return cell;
         }
@@ -499,33 +507,44 @@
         } else {
             NSObject *object = [self.history objectAtIndex:indexPath.row - 1];
             
-            NSString *CellIdentifier = @"GHPImageDetailTableViewCell";
-            GHPImageDetailTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-            
-            if (!cell) {
-                cell = [[[GHPImageDetailTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
-            }
-            [self setupDefaultTableViewCell:cell forRowAtIndexPath:indexPath];
-            
             if ([object isKindOfClass:[GHAPIIssueCommentV3 class] ]) {
+                static NSString *CellIdentifier = @"GHPIssueCommentTableViewCell";
+                GHPIssueCommentTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+                
+                if (!cell) {
+                    cell = [[[GHPIssueCommentTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
+                }
+                [self setupDefaultTableViewCell:cell forRowAtIndexPath:indexPath];
+
+                
                 // display a comment
                 GHAPIIssueCommentV3 *comment = (GHAPIIssueCommentV3 *)object;
                 
                 [self updateImageView:cell.imageView atIndexPath:indexPath withAvatarURLString:comment.user.avatarURL];
                 
                 cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ (%@ ago)", @""), comment.user.login, comment.updatedAt.prettyTimeIntervalSinceNow];
-                cell.detailTextLabel.text = comment.body;
+                cell.buttonDelegate = self;
+                cell.attributedTextView.attributedString = comment.attributedBody;
                 
+                return cell;
             } else if ([object isKindOfClass:[GHAPIIssueEventV3 class] ]) {
+                static NSString *CellIdentifier = @"GHPImageDetailTableViewCell";
+                GHPImageDetailTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+                
+                if (!cell) {
+                    cell = [[[GHPImageDetailTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
+                }
+                [self setupDefaultTableViewCell:cell forRowAtIndexPath:indexPath];
+                
                 GHAPIIssueEventV3 *event = (GHAPIIssueEventV3 *)object;
                 
                 [self updateImageView:cell.imageView atIndexPath:indexPath withAvatarURLString:event.actor.avatarURL];
                 
                 cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ (%@ ago)", @""), event.actor.login, event.createdAt.prettyTimeIntervalSinceNow];
                 cell.detailTextLabel.text = [self descriptionForIssueEvent:event];
+                
+                return cell;
             }
-            
-            return cell;
         }
     }
     
@@ -575,7 +594,7 @@
             NSString *content = [NSString stringWithFormat:NSLocalizedString(@"Issue %@ - %@", @""), self.issue.number, self.issue.title];
             return [GHPInfoTableViewCell heightWithContent:content];
         } else if (indexPath.row == 1) {
-            return [GHPInfoTableViewCell heightWithContent:self.issue.body];
+            return _bodyHeight;
         }
     } else if (indexPath.section == kUITableViewSectionDetails) {
         if (indexPath.row == 0) {
@@ -597,17 +616,7 @@
         if (indexPath.row == [self.history count] + 1) {
             return GHPNewCommentTableViewCellHeight;
         } else {
-            NSObject *object = [self.history objectAtIndex:indexPath.row - 1];
-            
-            if ([object isKindOfClass:[GHAPIIssueCommentV3 class] ]) {
-                // display a comment
-                GHAPIIssueCommentV3 *comment = (GHAPIIssueCommentV3 *)object;
-                
-                return [GHPImageDetailTableViewCell heightWithContent:comment.body];
-            } else if ([object isKindOfClass:[GHAPIIssueEventV3 class] ]) {
-                GHAPIIssueEventV3 *event = (GHAPIIssueEventV3 *)object;
-                return [GHPImageDetailTableViewCell heightWithContent:[self descriptionForIssueEvent:event]];
-            }
+            return [self cachedHeightForRowAtIndexPath:indexPath];
         }
     }
     return UITableViewAutomaticDimension;
@@ -691,6 +700,28 @@
     } else {
         [tableView deselectRowAtIndexPath:indexPath animated:YES];
     }
+}
+
+#pragma mark - Height caching
+
+- (void)cacheHeightsForHistroy {
+    DTAttributedTextView *textView = [[[DTAttributedTextView alloc] initWithFrame:CGRectZero] autorelease];
+    [self.history enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        CGFloat height = UITableViewAutomaticDimension;
+        
+        if ([obj isKindOfClass:[GHAPIIssueCommentV3 class] ]) {
+            // display a comment
+            GHAPIIssueCommentV3 *comment = (GHAPIIssueCommentV3 *)obj;
+            
+            height = [GHPIssueCommentTableViewCell heightWithAttributedString:comment.attributedBody 
+                                                         inAttributedTextView:textView];
+        } else if ([obj isKindOfClass:[GHAPIIssueEventV3 class] ]) {
+            GHAPIIssueEventV3 *event = (GHAPIIssueEventV3 *)obj;
+            
+            height = [GHPImageDetailTableViewCell heightWithContent:[self descriptionForIssueEvent:event]];
+        }
+        [self cacheHeight:height forRowAtIndexPath:[NSIndexPath indexPathForRow:idx+1 inSection:kUITableViewSectionHistory]];
+    }];
 }
 
 #pragma mark - UIActionSheetDelegate
@@ -827,6 +858,20 @@
 
 - (BOOL)canDisplayActionButtonActionSheet {
     return _hasCollaboratorData;
+}
+
+#pragma mark - GHPIssueInfoTableViewCellDelegate
+
+- (void)issueInfoTableViewCell:(GHPIssueInfoTableViewCell *)cell receivedClickForButton:(DTLinkButton *)button {
+    GHWebViewViewController *viewController = [[[GHWebViewViewController alloc] initWithURL:button.url ] autorelease];
+    [self.advancedNavigationController pushViewController:viewController afterViewController:self animated:YES];
+}
+
+#pragma mark - GHPIssueCommentTableViewCellDelegate
+
+- (void)commentTableViewCell:(GHPIssueCommentTableViewCell *)cell receivedClickForButton:(DTLinkButton *)button {
+    GHWebViewViewController *viewController = [[[GHWebViewViewController alloc] initWithURL:button.url ] autorelease];
+    [self.advancedNavigationController pushViewController:viewController afterViewController:self animated:YES];
 }
 
 @end

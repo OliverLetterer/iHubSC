@@ -11,7 +11,7 @@
 
 @implementation GHAPIIssueCommentV3
 
-@synthesize URL=_URL, body=_body, user=_user, createdAt=_createdAt, updatedAt=_updatedAt;
+@synthesize URL=_URL, body=_body, attributedBody=_attributedBody, user=_user, createdAt=_createdAt, updatedAt=_updatedAt;
 
 #pragma mark - Initialization
 
@@ -19,6 +19,7 @@
     if ((self = [super init])) {
         // Initialization code
         self.body = [rawDictionary objectForKeyOrNilOnNullObject:@"body"];
+        self.attributedBody = self.body.attributesStringFromMarkdownString;
         self.createdAt = [rawDictionary objectForKeyOrNilOnNullObject:@"created_at"];
         self.updatedAt = [rawDictionary objectForKeyOrNilOnNullObject:@"updated_at"];
         self.URL = [rawDictionary objectForKeyOrNilOnNullObject:@"url"];
@@ -47,6 +48,7 @@
     [_URL release];
     [_body release];
     [_user release];
+    [_attributedBody release];
     [_createdAt release];
     [_updatedAt release];
     

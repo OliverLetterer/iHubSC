@@ -11,7 +11,7 @@
 #import "GHPInfoTableViewCell.h"
 
 @interface GHPInfoSectionTableViewController : GHTableViewController <GHPInfoTableViewCellDelegate, UIActionSheetDelegate> {
-@private
+@protected
     GHPInfoTableViewCell *_infoCell;
 }
 

@@ -14,7 +14,7 @@ NSString *const kGHAPIIssueStateV3Closed = @"closed";
 
 @implementation GHAPIIssueV3
 
-@synthesize assignee=_assignee, body=_body, closedAt=_closedAt, comments=_comments, createdAt=_createdAt, HTMLURL=_HTMLURL, labels=_labels, milestone=_milestone, number=_number, pullRequestID=_pullRequestID, state=_state, title=_title, updatedAt=_updatedAt, URL=_URL, user=_user, repository=_repository;
+@synthesize assignee=_assignee, body=_body, attributedBody=_attributedBody, closedAt=_closedAt, comments=_comments, createdAt=_createdAt, HTMLURL=_HTMLURL, labels=_labels, milestone=_milestone, number=_number, pullRequestID=_pullRequestID, state=_state, title=_title, updatedAt=_updatedAt, URL=_URL, user=_user, repository=_repository;
 
 #pragma mark - setters and getters
 
@@ -37,6 +37,7 @@ NSString *const kGHAPIIssueStateV3Closed = @"closed";
         // Initialization code
         self.assignee = [[[GHAPIUserV3 alloc] initWithRawDictionary:[rawDictionay objectForKeyOrNilOnNullObject:@"assignee"] ] autorelease];
         self.body = [rawDictionay objectForKeyOrNilOnNullObject:@"body"];
+        self.attributedBody = self.body.attributesStringFromMarkdownString;
         self.closedAt = [rawDictionay objectForKeyOrNilOnNullObject:@"closed_at"];
         self.comments = [rawDictionay objectForKeyOrNilOnNullObject:@"comments"];
         self.createdAt = [rawDictionay objectForKeyOrNilOnNullObject:@"created_at"];
@@ -68,6 +69,7 @@ NSString *const kGHAPIIssueStateV3Closed = @"closed";
 - (void)dealloc {
     [_assignee release];
     [_body release];
+    [_attributedBody release];
     [_closedAt release];
     [_comments release];
     [_createdAt release];

@@ -19,3 +19,6 @@
 [submodule "uicolor-utilities"]
 	path = uicolor-utilities
 	url = https://github.com/ars/uicolor-utilities.git
+[submodule "NSAttributedString-Additions-for-HTML"]
+	path = NSAttributedString-Additions-for-HTML
+	url = https://github.com/Cocoanetics/NSAttributedString-Additions-for-HTML.git

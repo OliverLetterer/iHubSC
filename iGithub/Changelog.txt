@@ -92,6 +92,7 @@ V1.9
 V2.0
 - brand new iPad UI
 - view issues that are assigned to the authenticated user
+- view all Issues and comments in markdown style (iPad only)
 - bugfixes
 
 iTunes Changelog:
