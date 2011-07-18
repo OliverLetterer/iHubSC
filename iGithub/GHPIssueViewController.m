@@ -31,6 +31,7 @@
 #define kUIActionSheetTagAction             172634
 #define kUIActionSheetTagFormat             172635
 #define kUIActionSheetTagInsert             172636
+#define kUIActionSheetTagLongPressedLink    172637
 
 #define kUIAlertViewTagCommitMessage        12983
 #define kUIAlertViewTagLinkText             12984
@@ -42,7 +43,7 @@
 @synthesize repository=_repository, discussion=_discussion, history=_history;
 @synthesize issue=_issue;
 @synthesize textView=_textView, textViewToolBar=_textViewToolBar;
-@synthesize linkText=_linkText, linkURL=_linkURL;
+@synthesize linkText=_linkText, linkURL=_linkURL, selectedURL=_selectedURL;
 
 #pragma mark - setters and getters
 
@@ -104,6 +105,7 @@
     [_discussion release];
     [_linkText release];
     [_linkURL release];
+    [_selectedURL release];
     
     [super dealloc];
 }
@@ -861,6 +863,17 @@
             alert.tag = kUIAlertViewTagLinkText;
             [alert show];
         }
+    } else if (actionSheet.tag == kUIActionSheetTagLongPressedLink) {
+        NSString *title = nil;
+        @try {
+            title = [actionSheet buttonTitleAtIndex:buttonIndex];
+        }
+        @catch (NSException *exception) {
+        }
+        
+        if ([title isEqualToString:NSLocalizedString(@"View in Safari", @"")]) {
+            [[UIApplication sharedApplication] openURL:self.selectedURL];
+        }
     }
 }
 
@@ -978,11 +991,35 @@
     [self.advancedNavigationController pushViewController:viewController afterViewController:self animated:YES];
 }
 
+- (void)issueInfoTableViewCell:(GHPIssueInfoTableViewCell *)cell longPressRecognizedForButton:(DTLinkButton *)button {
+    self.selectedURL = button.url;
+    UIActionSheet *sheet = [[[UIActionSheet alloc] init] autorelease];
+    
+    sheet.title = button.url.absoluteString;
+    [sheet addButtonWithTitle:NSLocalizedString(@"View in Safari", @"")];
+    sheet.delegate = self;
+    sheet.tag = kUIActionSheetTagLongPressedLink;
+    
+    [sheet showFromRect:[button convertRect:button.bounds toView:self.view] inView:self.view animated:YES];
+}
+
 #pragma mark - GHPIssueCommentTableViewCellDelegate
 
 - (void)commentTableViewCell:(GHPIssueCommentTableViewCell *)cell receivedClickForButton:(DTLinkButton *)button {
     GHWebViewViewController *viewController = [[[GHWebViewViewController alloc] initWithURL:button.url ] autorelease];
     [self.advancedNavigationController pushViewController:viewController afterViewController:self animated:YES];
+}
+
+- (void)commentTableViewCell:(GHPIssueCommentTableViewCell *)cell longPressRecognizedForButton:(DTLinkButton *)button {
+    self.selectedURL = button.url;
+    UIActionSheet *sheet = [[[UIActionSheet alloc] init] autorelease];
+    
+    sheet.title = button.url.absoluteString;
+    [sheet addButtonWithTitle:NSLocalizedString(@"View in Safari", @"")];
+    sheet.delegate = self;
+    sheet.tag = kUIActionSheetTagLongPressedLink;
+    
+    [sheet showFromRect:[button convertRect:button.bounds toView:self.view] inView:self.view animated:YES];
 }
 
 #pragma mark - UITextViewDelegate

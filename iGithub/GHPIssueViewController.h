@@ -33,10 +33,13 @@
     
     NSString *_linkText;
     NSString *_linkURL;
+    NSURL *_selectedURL;
 }
 
 @property (nonatomic, copy) NSString *linkText;
 @property (nonatomic, copy) NSString *linkURL;
+@property (nonatomic, retain) NSURL *selectedURL;
+
 
 @property (nonatomic, retain) GHAPIIssueV3 *issue;
 @property (nonatomic, retain) GHAPIRepositoryV3 *repository;

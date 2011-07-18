@@ -53,6 +53,12 @@
     [self.buttonDelegate issueInfoTableViewCell:self receivedClickForButton:sender];
 }
 
+- (void)longPressRecognized:(UILongPressGestureRecognizer *)recognizer {
+    if (recognizer.state == UIGestureRecognizerStateRecognized) {
+        [self.buttonDelegate issueInfoTableViewCell:self longPressRecognizedForButton:(DTLinkButton *)recognizer.view];
+    }
+}
+
 #pragma mark - DTAttributedTextContentViewDelegate
 
 - (UIView *)attributedTextContentView:(DTAttributedTextContentView *)attributedTextContentView viewForLink:(NSURL *)url identifier:(NSString *)identifier frame:(CGRect)frame {
@@ -65,8 +71,8 @@
 	[button addTarget:self action:@selector(linkButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
 	
 	// demonstrate combination with long press
-//	UILongPressGestureRecognizer *longPress = [[[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(linkLongPressed:)] autorelease];
-//	[button addGestureRecognizer:longPress];
+	UILongPressGestureRecognizer *longPress = [[[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressRecognized:)] autorelease];
+	[button addGestureRecognizer:longPress];
 	
 	return button;
 }

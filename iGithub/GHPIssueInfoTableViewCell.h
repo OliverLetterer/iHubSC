@@ -16,6 +16,7 @@
 @protocol GHPIssueInfoTableViewCellDelegate <NSObject>
 
 - (void)issueInfoTableViewCell:(GHPIssueInfoTableViewCell *)cell receivedClickForButton:(DTLinkButton *)button;
+- (void)issueInfoTableViewCell:(GHPIssueInfoTableViewCell *)cell longPressRecognizedForButton:(DTLinkButton *)button;
 
 @end
 
@@ -30,6 +31,7 @@
 @property (nonatomic, assign) id<GHPIssueInfoTableViewCellDelegate> buttonDelegate;
 
 - (void)linkButtonClicked:(DTLinkButton *)sender;
+- (void)longPressRecognized:(UILongPressGestureRecognizer *)recognizer;
 
 + (CGFloat)heightWithAttributedString:(NSAttributedString *)content inAttributedTextView:(DTAttributedTextView *)textView;
 
