@@ -12,8 +12,6 @@
 @synthesize attributedTextView=_attributedTextView;
 @synthesize buttonDelegate=_buttonDelegate;
 
-#warning follow event on Owners news feed should to to user and not repo
-
 #pragma mark - Initialization
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
