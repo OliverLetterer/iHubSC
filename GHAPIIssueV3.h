@@ -66,6 +66,16 @@ extern NSString *const kGHAPIIssueStateV3Closed;
                withNumber:(NSNumber *)number 
         completionHandler:(void (^)(GHAPIIssueV3 *issue, NSError *error))handler;
 
++ (void)updateIssueOnRepository:(NSString *)repository 
+                     withNumber:(NSNumber *)number 
+                          title:(NSString *)title 
+                           body:(NSString *)body 
+                       assignee:(NSString *)assignee 
+                          state:(NSString *)state 
+                      milestone:(NSNumber *)milestone 
+                         labels:(NSArray *)labels 
+              completionHandler:(void (^)(GHAPIIssueV3 *issue, NSError *error))handler;
+
 + (void)milestonesForIssueOnRepository:(NSString *)repository 
                             withNumber:(NSNumber *)number 
                                   page:(NSInteger)page

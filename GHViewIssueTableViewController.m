@@ -34,6 +34,9 @@
 
 #define kUITableViesNumberOfSections        7
 
+#define kUIAlertViewTagInputAssignee        12316
+#define kUIAlertViewTagMergePullRequest     12317
+
 @implementation GHViewIssueTableViewController
 
 @synthesize issue=_issue;
@@ -294,6 +297,7 @@
         if (_hasCollaboratorData) {
             if (_isCollaborator) {
                 result++;
+                result++;   // Update Assignee
             }
             if (self.issue.isPullRequest && _isCollaborator && [self.issue.state isEqualToString:kGHAPIIssueStateV3Open] && ![self.issue.user.login isEqualToString:[GHAuthenticationManager sharedInstance].username]) {
                 result++;
@@ -414,6 +418,9 @@
                 cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Reopen this %@", @""), self.issueName];
             }
         } else if (indexPath.row == 2) {
+            // Update Assignee
+            cell.textLabel.text = NSLocalizedString(@"Update Assignee", @"");
+        } else if (indexPath.row == 3) {
             cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Merge this %@", @""), self.issueName];
         }
         return cell;
@@ -689,6 +696,17 @@
                                     }];
             }
         } else if (indexPath.row == 2) {
+            // Update assignee
+            UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Input Assignee", @"") 
+                                                             message:NSLocalizedString(@"", @"") 
+                                                            delegate:self 
+                                                   cancelButtonTitle:NSLocalizedString(@"Cancel", @"") 
+                                                   otherButtonTitles:NSLocalizedString(@"Submit", @""), nil]
+                                  autorelease];
+            alert.tag = kUIAlertViewTagInputAssignee;
+            alert.alertViewStyle = UIAlertViewStylePlainTextInput;
+            [alert show];
+        } else if (indexPath.row == 3) {
             // Pull Request
             UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Merge message", @"") 
                                                              message:nil 
@@ -696,6 +714,7 @@
                                                    cancelButtonTitle:NSLocalizedString(@"Cancel", @"") 
                                                    otherButtonTitles:NSLocalizedString(@"Merge", @""), nil]
                                   autorelease];
+            alert.tag = kUIAlertViewTagMergePullRequest;
             alert.alertViewStyle = UIAlertViewStylePlainTextInput;
             [alert show];
         }
@@ -795,29 +814,53 @@
 #pragma mark - UIAlertViewDelegate
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-    if (buttonIndex == 1) {
-        [GHAPIPullRequestV3 mergPullRequestOnRepository:self.repository withNumber:self.number 
-                                          commitMessage:[alertView textFieldAtIndex:0].text 
-                                      completionHandler:^(GHAPIPullRequestMergeStateV3 *state, NSError *error) {
-                                          if (error) {
-                                              [self handleError:error];
-                                          } else {
-                                              if (state.merged.boolValue) {
-                                                  [[ANNotificationQueue sharedInstance] detatchSuccesNotificationWithTitle:NSLocalizedString(@"Merge successful", @"") message:state.message];
-                                                  self.issue.state = kGHAPIIssueStateV3Closed;
+    if (alertView.tag == kUIAlertViewTagInputAssignee) {
+        if (buttonIndex > 0) {
+            // submit clicked
+            NSString *assignee = [alertView textFieldAtIndex:0].text;
+            [GHAPIIssueV3 updateIssueOnRepository:self.repository 
+                                       withNumber:self.issue.number 
+                                            title:nil body:nil 
+                                         assignee:assignee 
+                                            state:nil milestone:nil labels:nil 
+                                completionHandler:^(GHAPIIssueV3 *issue, NSError *error) {
+                                    if (error) {
+                                        [self handleError:error];
+                                    } else {
+                                        self.issue = issue;
+                                        [[ANNotificationQueue sharedInstance] detatchSuccesNotificationWithTitle:NSLocalizedString(@"Successfully assigned", @"") 
+                                                                                                         message:issue.assignee.login];
+                                        if (self.isViewLoaded) {
+                                            [self.tableView reloadData];
+                                        }
+                                    }
+                                }];
+        }
+    } else if (alertView.tag == kUIAlertViewTagMergePullRequest) {
+        if (buttonIndex == 1) {
+            [GHAPIPullRequestV3 mergPullRequestOnRepository:self.repository withNumber:self.number 
+                                              commitMessage:[alertView textFieldAtIndex:0].text 
+                                          completionHandler:^(GHAPIPullRequestMergeStateV3 *state, NSError *error) {
+                                              if (error) {
+                                                  [self handleError:error];
                                               } else {
-                                                  UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Merge failed", @"") 
-                                                                                                   message:state.message 
-                                                                                                  delegate:nil 
-                                                                                         cancelButtonTitle:NSLocalizedString(@"OK", @"") 
-                                                                                         otherButtonTitles:nil]
-                                                                        autorelease];
-                                                  [alert show];
+                                                  if (state.merged.boolValue) {
+                                                      [[ANNotificationQueue sharedInstance] detatchSuccesNotificationWithTitle:NSLocalizedString(@"Merge successful", @"") message:state.message];
+                                                      self.issue.state = kGHAPIIssueStateV3Closed;
+                                                  } else {
+                                                      UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Merge failed", @"") 
+                                                                                                       message:state.message 
+                                                                                                      delegate:nil 
+                                                                                             cancelButtonTitle:NSLocalizedString(@"OK", @"") 
+                                                                                             otherButtonTitles:nil]
+                                                                            autorelease];
+                                                      [alert show];
+                                                  }
+                                                  
+                                                  [self.tableView reloadDataAndResetExpansionStates:NO];
                                               }
-                                              
-                                              [self.tableView reloadDataAndResetExpansionStates:NO];
-                                          }
-                                      }];
+                                          }];
+        }
     }
 }
 

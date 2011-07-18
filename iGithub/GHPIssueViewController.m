@@ -36,6 +36,7 @@
 #define kUIAlertViewTagCommitMessage        12983
 #define kUIAlertViewTagLinkText             12984
 #define kUIAlertViewTagLinkURL              12985
+#define kUIAlertViewTagInputAssignee        12986
 
 @implementation GHPIssueViewController
 
@@ -819,6 +820,16 @@
                                        self.issue.state = kGHAPIIssueStateV3Closed;
                                    }
                                }];
+        } else if ([title isEqualToString:NSLocalizedString(@"Update Assignee", @"")]) {
+            UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Input Assignee", @"") 
+                                                             message:NSLocalizedString(@"", @"") 
+                                                            delegate:self 
+                                                   cancelButtonTitle:NSLocalizedString(@"Cancel", @"") 
+                                                   otherButtonTitles:NSLocalizedString(@"Submit", @""), nil]
+                                  autorelease];
+            alert.tag = kUIAlertViewTagInputAssignee;
+            alert.alertViewStyle = UIAlertViewStylePlainTextInput;
+            [alert show];
         } else {
             [self setActionButtonActive:NO];
         }
@@ -926,6 +937,31 @@
             UITextRange *range = self.textView.selectedTextRange;
             [self.textView replaceRange:range withText:[NSString stringWithFormat:@"[%@](%@)", self.linkText, self.linkURL] ];
         }
+    } else if (alertView.tag == kUIAlertViewTagInputAssignee) {
+        if (buttonIndex > 0) {
+            // submit clicked
+            NSString *assignee = [alertView textFieldAtIndex:0].text;
+            [GHAPIIssueV3 updateIssueOnRepository:self.repositoryString withNumber:self.issueNumber 
+                                            title:nil body:nil 
+                                         assignee:assignee 
+                                            state:nil milestone:nil labels:nil 
+                                completionHandler:^(GHAPIIssueV3 *issue, NSError *error) {
+                                    [self setActionButtonActive:NO];
+                                    if (error) {
+                                        [self handleError:error];
+                                    } else {
+                                        [[ANNotificationQueue sharedInstance] detatchSuccesNotificationWithTitle:NSLocalizedString(@"Successfully assigned", @"") 
+                                                                                                         message:issue.assignee.login];
+                                        self.issue = issue;
+                                        if (self.isViewLoaded) {
+                                            [self.tableView reloadData];
+                                        }
+                                    }
+                                }];
+        } else {
+            // cancel clicked
+            [self setActionButtonActive:NO];
+        }
     }
 }
 
@@ -964,6 +1000,10 @@
         [sheet addButtonWithTitle:[NSString stringWithFormat:NSLocalizedString(@"Close this %@", @""), self.issueName]];
     } else {
         [sheet addButtonWithTitle:[NSString stringWithFormat:NSLocalizedString(@"Reopen this %@", @""), self.issueName]];
+    }
+    
+    if (_isCollaborator) {
+        [sheet addButtonWithTitle:NSLocalizedString(@"Update Assignee", @"")];
     }
     
     if (self.issue.isPullRequest && _isCollaborator && [self.issue.state isEqualToString:kGHAPIIssueStateV3Open]) {

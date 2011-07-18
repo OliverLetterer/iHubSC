@@ -434,4 +434,57 @@ NSString *const kGHAPIIssueStateV3Closed = @"closed";
                              }];
 }
 
++ (void)updateIssueOnRepository:(NSString *)repository 
+                     withNumber:(NSNumber *)number 
+                          title:(NSString *)title 
+                           body:(NSString *)body 
+                       assignee:(NSString *)assignee 
+                          state:(NSString *)state 
+                      milestone:(NSNumber *)milestone 
+                         labels:(NSArray *)labels 
+              completionHandler:(void (^)(GHAPIIssueV3 *issue, NSError *error))handler {
+    // PATCH /repos/:user/:repo/issues/:id
+    
+    NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.github.com/repos/%@/issues/%@",
+                                       [repository stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding], number ] ];
+    
+    
+    [[GHAPIBackgroundQueueV3 sharedInstance] sendRequestToURL:URL 
+                                                 setupHandler:^(ASIFormDataRequest *request) { 
+                                                     [request setRequestMethod:@"PATCH"];
+                                                     NSMutableDictionary *jsonDictionary = [NSMutableDictionary dictionaryWithCapacity:6];
+                                                     
+                                                     if (title) {
+                                                         [jsonDictionary setObject:title forKey:@"title"];
+                                                     }
+                                                     if (body) {
+                                                         [jsonDictionary setObject:body forKey:@"body"];
+                                                     }
+                                                     if (assignee) {
+                                                         [jsonDictionary setObject:assignee forKey:@"assignee"];
+                                                     }
+                                                     if (state) {
+                                                         [jsonDictionary setObject:state forKey:@"state"];
+                                                     }
+                                                     if (milestone) {
+                                                         [jsonDictionary setObject:milestone forKey:@"milestone"];
+                                                     }
+                                                     if (labels) {
+                                                         [jsonDictionary setObject:labels forKey:@"labels"];
+                                                     }
+                                                     NSString *jsonString = [jsonDictionary JSONString];
+                                                     NSMutableData *jsonData = [[[jsonString dataUsingEncoding:NSUTF8StringEncoding] mutableCopy] autorelease];
+                                                     
+                                                     [request setPostBody:jsonData];
+                                                     [request setPostLength:[jsonString length] ];
+                                                 } 
+                                            completionHandler:^(id object, NSError *error, ASIFormDataRequest *request) {
+                                                if (error) {
+                                                    handler(nil, error);
+                                                } else {
+                                                    handler([[[GHAPIIssueV3 alloc] initWithRawDictionary:object] autorelease], nil);
+                                                }
+                                            }];
+}
+
 @end

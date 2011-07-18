@@ -20,7 +20,7 @@
     NSString *errorString = [rawDictionary objectForKeyOrNilOnNullObject:@"error"];
     
     if (!errorString) {
-        if ([rawDictionary allKeys].count == 1) {
+        if ([rawDictionary allKeys].count == 1 || [rawDictionary objectForKey:@"errors"] != nil) {
             errorString = [rawDictionary objectForKeyOrNilOnNullObject:@"message"];
         }
     }
