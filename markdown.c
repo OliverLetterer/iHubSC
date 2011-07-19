@@ -1512,7 +1512,7 @@ markdown(struct buf *ob, struct buf *ib, const struct mkd_renderer *rndrer) {
 		bufrelease(lr[i].link);
 		bufrelease(lr[i].title); }
 	arr_free(&rndr.refs);
-	assert(rndr.work.size == 0);
+//	assert(rndr.work.size == 0);
 	for (i = 0; i < rndr.work.asize; i += 1)
 		bufrelease(rndr.work.item[i]);
 	parr_free(&rndr.work); }
