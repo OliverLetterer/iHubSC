@@ -319,7 +319,7 @@
                 animation.duration = 0.5f;
                 
                 [view.layer addAnimation:animation forKey:nil];
-                view.center = finalCenterPoint;
+                view.layer.position = finalCenterPoint;
             }];
         }
     } else {
