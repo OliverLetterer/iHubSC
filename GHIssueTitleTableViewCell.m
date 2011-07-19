@@ -10,13 +10,21 @@
 
 
 @implementation GHIssueTitleTableViewCell
+@synthesize attributedTextView=_attributedTextView;
+@synthesize buttonDelegate=_buttonDelegate;
 
 #pragma mark - Initialization
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
-    if ((self = [super initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:reuseIdentifier])) {
+    if ((self = [super initWithStyle:style reuseIdentifier:reuseIdentifier])) {
         // Initialization code
-        
+        self.descriptionLabel.text = nil;
+        self.attributedTextView = [[[DTAttributedTextView alloc] initWithFrame:CGRectZero] autorelease];
+        self.attributedTextView.backgroundColor = [UIColor clearColor];
+        self.attributedTextView.textDelegate = self;
+        self.attributedTextView.alwaysBounceVertical = NO;
+        self.attributedTextView.scrollsToTop = NO;
+        [self.contentView addSubview:self.attributedTextView];
     }
     return self;
 }
@@ -25,7 +33,7 @@
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-
+    
 }
 
 - (void)setHighlighted:(BOOL)highlighted animated:(BOOL)animated {
@@ -35,23 +43,58 @@
 
 - (void)layoutSubviews {
     [super layoutSubviews];
-    
-//    CGSize headerSize = [self.textLabel.text sizeWithFont:[UIFont boldSystemFontOfSize:16.0]
-//                                        constrainedToSize:CGSizeMake(280.0, MAXFLOAT) 
-//                                            lineBreakMode:UILineBreakModeWordWrap];
-//    self.textLabel.frame = CGRectMake(10.0, 5.0, headerSize.width, headerSize.height);
-//    self.detailTextLabel.frame = CGRectMake(10.0, self.contentView.bounds.size.height - 17.0, 
-//                                            280.0, 15.0);
+    self.attributedTextView.frame = CGRectMake(78.0, 17.0, 222.0, self.contentView.bounds.size.height - 48.0);
 }
 
 - (void)prepareForReuse {
     [super prepareForReuse];
-    
+    self.descriptionLabel.text = nil;
+}
+
+#pragma mark - Target actions
+
+- (void)linkButtonClicked:(DTLinkButton *)sender {
+    [self.buttonDelegate issueInfoTableViewCell:self receivedClickForButton:sender];
+}
+
+- (void)longPressRecognized:(UILongPressGestureRecognizer *)recognizer {
+    if (recognizer.state == UIGestureRecognizerStateRecognized) {
+        [self.buttonDelegate issueInfoTableViewCell:self longPressRecognizedForButton:(DTLinkButton *)recognizer.view];
+    }
+}
+
+#pragma mark - DTAttributedTextContentViewDelegate
+
+- (UIView *)attributedTextContentView:(DTAttributedTextContentView *)attributedTextContentView viewForLink:(NSURL *)url identifier:(NSString *)identifier frame:(CGRect)frame {
+	DTLinkButton *button = [[[DTLinkButton alloc] initWithFrame:frame] autorelease];
+	button.url = url;
+	button.minimumHitSize = CGSizeMake(25, 25); // adjusts it's bounds so that button is always large enough
+	button.guid = identifier;
+	
+	// use normal push action for opening URL
+	[button addTarget:self action:@selector(linkButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+	
+	// demonstrate combination with long press
+	UILongPressGestureRecognizer *longPress = [[[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressRecognized:)] autorelease];
+	[button addGestureRecognizer:longPress];
+	
+	return button;
+}
+
++ (CGFloat)heightWithAttributedString:(NSAttributedString *)content inAttributedTextView:(DTAttributedTextView *)textView {
+    if (!textView) {
+        textView = [[[DTAttributedTextView alloc] initWithFrame:CGRectZero] autorelease];
+    }
+    textView.attributedString = content;
+    textView.frame = CGRectMake(0.0f, 0.0f, 222.0f, 10.0f);
+    return textView.contentSize.height + 65.0f;
 }
 
 #pragma mark - Memory management
 
 - (void)dealloc {
+    [_attributedTextView release];
+    
     [super dealloc];
 }
 

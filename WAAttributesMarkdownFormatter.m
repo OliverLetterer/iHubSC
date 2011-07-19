@@ -10,9 +10,10 @@
 #import "WAFoundationExtras.h"
 
 @implementation WAAttributesMarkdownFormatter
+@synthesize defaultFontSize=_defaultFontSize, defaultFontColor=_defaultFontColor;
 
 - (NSString*)parser:(WAMarkdownParser*)parser stringForParagraph:(NSString*)content {
-	return [NSString stringWithFormat:@"<p style=\"color:rgb(127,127,127);font-family:Helvetica;font-size:14px; text-shadow:0px 0.5px #FFF\">%@</p>", content];
+	return [NSString stringWithFormat:@"<p style=\"color:%@;font-family:Helvetica;font-size:%@; text-shadow:0px 0.5px #FFF\">%@</p>", self.defaultFontColor, self.defaultFontSize, content];
 }
 
 - (NSString*)parser:(WAMarkdownParser*)parser stringForBlockQuote:(NSString*)content {
@@ -32,20 +33,20 @@
 }
 
 - (NSString*)parser:(WAMarkdownParser*)parser stringForBlockHTML:(NSString*)HTML {
-	return [NSString stringWithFormat:@"<div style=\"color:rgb(127,127,127);font-family:Helvetica;font-size:14px; text-shadow:0px 0.5px #FFF\">%@</div>", HTML];
+	return [NSString stringWithFormat:@"<div style=\"color:%@;font-family:Helvetica;font-size:%@; text-shadow:0px 0.5px #FFF\">%@</div>", self.defaultFontColor, self.defaultFontSize, HTML];
 }
 
 - (NSString*)parser:(WAMarkdownParser*)parser stringForList:(NSString*)content ordered:(BOOL)orderedList {
 	NSString *element = (orderedList ? @"ol" : @"ul");
-	return [NSString stringWithFormat:@"<%@ style=\"color:rgb(127,127,127);font-family:Helvetica;font-size:14px; text-shadow:0px 0.5px #FFF\">%@</%@>", element, content, element];
+	return [NSString stringWithFormat:@"<%@ style=\"color:%@;font-family:Helvetica;font-size:%@; text-shadow:0px 0.5px #FFF\">%@</%@>", element, self.defaultFontColor, self.defaultFontSize, content, element];
 }
 
 - (NSString*)parser:(WAMarkdownParser*)parser stringForListItem:(NSString*)content containingBlock:(BOOL)isBlock {
-	return [NSString stringWithFormat:@"<li style=\"color:rgb(127,127,127);font-family:Helvetica;font-size:14px; text-shadow:0px 0.5px #FFF\">%@</li>", content];
+	return [NSString stringWithFormat:@"<li style=\"color:%@;font-family:Helvetica;font-size:%@; text-shadow:0px 0.5px #FFF\">%@</li>", self.defaultFontColor, self.defaultFontSize, content];
 }
 
 - (NSString*)parser:(WAMarkdownParser*)parser stringForHeading:(NSString*)heading level:(NSUInteger)level {
-	return [NSString stringWithFormat:@"<h%d style=\"color:rgb(127,127,127);font-family:Helvetica;text-shadow:0px 0.5px #FFF\">%@</h%d>", (int)level, heading, (int)level];	
+	return [NSString stringWithFormat:@"<h%d style=\"color:%@;font-family:Helvetica;text-shadow:0px 0.5px #FFF\">%@</h%d>", (int)level, self.defaultFontColor, heading, (int)level];	
 }
 
 - (NSString*)stringForHorizontalRuleWithParser:(WAMarkdownParser*)parser {
@@ -72,6 +73,26 @@
 		default: 
 		case 2: return [NSString stringWithFormat:@"<strong>%@</strong>", content];
 	}
+}
+
+- (id)init {
+    if (self = [super init]) {
+        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+            self.defaultFontSize = @"14px";
+            self.defaultFontColor = @"rgb(127,127,127)";
+        } else {
+            self.defaultFontSize = @"12px";
+            self.defaultFontColor = @"rgb(64,64,64)";
+        }
+    }
+    return self;
+}
+
+- (void)dealloc {
+    [_defaultFontSize release];
+    [_defaultFontColor release];
+    
+    [super dealloc];
 }
 
 @end

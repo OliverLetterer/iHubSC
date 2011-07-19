@@ -9,6 +9,13 @@
 #import "WAMarkdownParser.h"
 #import "WAHTMLMarkdownFormatter.h"
 
-@interface WAAttributesMarkdownFormatter : WAHTMLMarkdownFormatter
+@interface WAAttributesMarkdownFormatter : WAHTMLMarkdownFormatter {
+    NSString *_defaultFontSize;
+    NSString *_defaultFontColor;
+}
+
+@property (nonatomic, copy) NSString *defaultFontSize;
+@property (nonatomic, copy) NSString *defaultFontColor;
+
 
 @end

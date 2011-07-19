@@ -23,6 +23,8 @@
 #import "GHLabelTableViewCell.h"
 #import "GHViewLabelViewController.h"
 #import "ANNotificationQueue.h"
+#import "GHWebViewViewController.h"
+#import "GHIssueCommentTableViewCell.h"
 
 #define kUITableViewSectionData             0
 #define kUITableViewSectionAssignee         1
@@ -37,12 +39,15 @@
 #define kUIAlertViewTagInputAssignee        12316
 #define kUIAlertViewTagMergePullRequest     12317
 
+#define kUIActionSheetTagLongPressedLink    97312
+
 @implementation GHViewIssueTableViewController
 
 @synthesize issue=_issue;
 @synthesize repository=_repository, number=_number;
 @synthesize history=_history, discussion=_discussion;
-@synthesize textView=_textView, textViewToolBar=_textViewToolBar;
+@synthesize textView=_textView, textViewToolBar=_textViewToolBar, attributedTextView=_attributedTextView;
+@synthesize selectedURL=_selectedURL;
 
 #pragma mark - setters and getters
 
@@ -77,6 +82,9 @@
             [self handleError:error];
         } else {
             self.issue = issue;
+            [self cacheHeight:[GHIssueTitleTableViewCell heightWithAttributedString:self.issue.attributedBody 
+                                                               inAttributedTextView:self.attributedTextView] 
+            forRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:kUITableViewSectionData] ];
             self.title = [NSString stringWithFormat:NSLocalizedString(@"%@ %@", @""), self.issueName, self.number];
             [self.tableView reloadData];
         }
@@ -93,6 +101,8 @@
     [_discussion release];
     [_textView release];
     [_textViewToolBar release];
+    [_attributedTextView release];
+    [_selectedURL release];
     
     [super dealloc];
 }
@@ -123,6 +133,7 @@
                  NSMutableArray *tmpArray = [[self.history mutableCopy] autorelease];
                  [tmpArray addObject:comment];
                  self.history = tmpArray;
+                 [self cacheHeightsForHistroy];
                  
                  self.issue.comments = [NSNumber numberWithInt:[self.issue.comments intValue] + 1];
                  
@@ -139,6 +150,11 @@
 }
 
 #pragma mark - View lifecycle
+
+- (void)loadView {
+    self.attributedTextView = [[[DTAttributedTextView alloc] initWithFrame:CGRectZero] autorelease];
+    [super loadView];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -177,6 +193,7 @@
     
     self.textView = nil;
     self.textViewToolBar = nil;
+    self.attributedTextView = nil;
 }
 
 #pragma mark - UIExpandableTableViewDatasource
@@ -226,6 +243,7 @@
                           completionHandler:^(NSArray *history, NSError *error) {
                               if (!error) {
                                   self.history = history;
+                                  [self cacheHeightsForHistroy];
                                   [tableView expandSection:section animated:YES];
                               } else {
                                   [tableView cancelDownloadInSection:section];
@@ -335,8 +353,8 @@
             
             cell.detailTextLabel.text = [NSString stringWithFormat:@"by %@ %@", self.issue.user.login, [NSString stringWithFormat:NSLocalizedString(@"%@ ago", @""), self.issue.createdAt.prettyTimeIntervalSinceNow] ];
             ;
-            
-            cell.descriptionLabel.text = self.issue.body;
+            cell.attributedTextView.attributedString = self.issue.attributedBody;
+            cell.buttonDelegate = self;
             
             return cell;
         } else if (indexPath.row == 1) {
@@ -447,26 +465,34 @@
         
         NSObject *object = [self.history objectAtIndex:indexPath.row - 1];
         
-        NSString *CellIdentifier = @"GHFeedItemWithDescriptionTableViewCell";
-        GHFeedItemWithDescriptionTableViewCell *cell = (GHFeedItemWithDescriptionTableViewCell *)[self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-        
-        if (!cell) {
-            cell = [[[GHFeedItemWithDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
-        }
-        
         if ([object isKindOfClass:[GHAPIIssueCommentV3 class] ]) {
+            static NSString *CellIdentifier = @"GHIssueCommentTableViewCell";
+            GHIssueCommentTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+            
+            if (!cell) {
+                cell = [[[GHIssueCommentTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+            }
+            
             // display a comment
             GHAPIIssueCommentV3 *comment = (GHAPIIssueCommentV3 *)object;
 
             
             [self updateImageView:cell.imageView atIndexPath:indexPath withAvatarURLString:comment.user.avatarURL];
             
+            cell.buttonDelegate = self;
             cell.titleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ commented on this %@", @""), comment.user.login, self.issueName];
-            cell.descriptionLabel.text = comment.body;
             cell.repositoryLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ ago", @""), comment.updatedAt.prettyTimeIntervalSinceNow];
+            cell.attributedTextView.attributedString = comment.attributedBody;
             
             return cell;
         } else if ([object isKindOfClass:[GHAPIIssueEventV3 class] ]) {
+            static NSString *CellIdentifier = @"GHFeedItemWithDescriptionTableViewCell";
+            GHFeedItemWithDescriptionTableViewCell *cell = (GHFeedItemWithDescriptionTableViewCell *)[self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+            
+            if (!cell) {
+                cell = [[[GHFeedItemWithDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+            }
+            
             GHAPIIssueEventV3 *event = (GHAPIIssueEventV3 *)object;
             
             [self updateImageView:cell.imageView atIndexPath:indexPath withAvatarURLString:event.actor.avatarURL];
@@ -522,7 +548,6 @@
                 default:
                     break;
             }
-            
             return cell;
         }
     } else if (indexPath.section == kUITableViewSectionCommits) {
@@ -564,58 +589,13 @@
     return self.dummyCell;
 }
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     CGFloat result = 44.0f;
     
     if (indexPath.section == kUITableViewSectionData) {
         if (indexPath.row == 0) {
             // the issues title
-            
-            CGSize bodySize = [self.issue.body sizeWithFont:[UIFont systemFontOfSize:12.0] 
-                                          constrainedToSize:CGSizeMake(222.0, MAXFLOAT) 
-                                              lineBreakMode:UILineBreakModeWordWrap];
-            
-            result = bodySize.height + 50.0;
-            
-            if (result < 71.0) {
-                result = 71.0;
-            }
-            
+            return [self cachedHeightForRowAtIndexPath:indexPath];
         } else if (indexPath.row == 1) {
             // the description
             return 44.0f;
@@ -627,26 +607,7 @@
             return 161.0f;
         }
         
-        NSObject *object = [self.history objectAtIndex:indexPath.row - 1];
-        
-        if ([object isKindOfClass:[GHAPIIssueCommentV3 class] ]) {
-            // display a comment
-            GHAPIIssueCommentV3 *comment = (GHAPIIssueCommentV3 *)object;
-            
-            CGSize size = [comment.body sizeWithFont:[UIFont systemFontOfSize:12.0] 
-                                   constrainedToSize:CGSizeMake(222.0, MAXFLOAT) 
-                                       lineBreakMode:UILineBreakModeWordWrap];
-            
-            result = size.height + 50.0;
-            
-            if (result < 71.0) {
-                result = 71.0;
-            }
-            
-            return result;
-        } else if ([object isKindOfClass:[GHAPIIssueEventV3 class] ]) {
-            return 71.0f;
-        }
+        return [self cachedHeightForRowAtIndexPath:indexPath];
     } else if (indexPath.section == kUITableViewSectionCommits && indexPath.row > 0) {
         GHCommit *commit = [self.discussion.commits objectAtIndex:indexPath.row - 1];
         
@@ -862,6 +823,93 @@
                                           }];
         }
     }
+}
+
+#pragma mark - Height caching
+
+- (void)cacheHeightsForHistroy {
+    [self.history enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:idx+1 inSection:kUITableViewSectionHistory];
+        
+        CGFloat height = 71.0f;
+        
+        if ([obj isKindOfClass:[GHAPIIssueCommentV3 class] ]) {
+            // display a comment
+            GHAPIIssueCommentV3 *comment = obj;
+            
+            CGSize size = [comment.body sizeWithFont:[UIFont systemFontOfSize:12.0] 
+                                   constrainedToSize:CGSizeMake(222.0, MAXFLOAT) 
+                                       lineBreakMode:UILineBreakModeWordWrap];
+            
+            height = size.height + 50.0;
+            
+            if (height < 71.0) {
+                height = 71.0;
+            }
+        }
+        [self cacheHeight:height forRowAtIndexPath:indexPath];
+    }];
+}
+
+#pragma mark - UIActionSheetDelegate
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (actionSheet.tag == kUIActionSheetTagLongPressedLink) {
+        NSString *title = nil;
+        @try {
+            title = [actionSheet buttonTitleAtIndex:buttonIndex];
+        }
+        @catch (NSException *exception) {
+        }
+        
+        if ([title isEqualToString:NSLocalizedString(@"View in Safari", @"")]) {
+            [[UIApplication sharedApplication] openURL:self.selectedURL];
+        }
+    }
+}
+
+#pragma mark - GHIssueTitleTableViewCellDelegate
+
+- (void)issueInfoTableViewCell:(GHIssueTitleTableViewCell *)cell receivedClickForButton:(DTLinkButton *)button {
+    GHWebViewViewController *viewController = [[[GHWebViewViewController alloc] initWithURL:button.url ] autorelease];
+    [self.navigationController pushViewController:viewController animated:YES];
+}
+
+- (void)issueInfoTableViewCell:(GHIssueTitleTableViewCell *)cell longPressRecognizedForButton:(DTLinkButton *)button {
+    self.selectedURL = button.url;
+    UIActionSheet *sheet = [[[UIActionSheet alloc] init] autorelease];
+    
+    sheet.title = button.url.absoluteString;
+    [sheet addButtonWithTitle:NSLocalizedString(@"View in Safari", @"")];
+    [sheet addButtonWithTitle:NSLocalizedString(@"Cancel", @"")];
+    sheet.cancelButtonIndex = 1;
+    sheet.delegate = self;
+    sheet.tag = kUIActionSheetTagLongPressedLink;
+    sheet.actionSheetStyle = UIActionSheetStyleBlackTranslucent;
+    
+    [sheet showInView:self.tabBarController.view];
+}
+
+#pragma mark - GHIssueCommentTableViewCellDelegate
+
+- (void)commentTableViewCell:(GHIssueCommentTableViewCell *)cell receivedClickForButton:(DTLinkButton *)button {
+    GHWebViewViewController *viewController = [[[GHWebViewViewController alloc] initWithURL:button.url ] autorelease];
+    [self.navigationController pushViewController:viewController animated:YES];
+}
+
+- (void)commentTableViewCell:(GHIssueCommentTableViewCell *)cell longPressRecognizedForButton:(DTLinkButton *)button {
+    self.selectedURL = button.url;
+    UIActionSheet *sheet = [[[UIActionSheet alloc] init] autorelease];
+    
+    sheet.title = button.url.absoluteString;
+    [sheet addButtonWithTitle:NSLocalizedString(@"View in Safari", @"")];
+    [sheet addButtonWithTitle:NSLocalizedString(@"Cancel", @"")];
+    sheet.cancelButtonIndex = 1;
+    sheet.delegate = self;
+    sheet.tag = kUIActionSheetTagLongPressedLink;
+    sheet.actionSheetStyle = UIActionSheetStyleBlackTranslucent;
+    
+    [sheet showInView:self.tabBarController.view];
 }
 
 @end

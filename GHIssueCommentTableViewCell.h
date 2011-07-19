@@ -7,13 +7,32 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GHFeedItemWithDescriptionTableViewCell.h"
+#import "DTLinkButton.h"
+#import "DTAttributedTextView.h"
 
+@class GHIssueCommentTableViewCell;
 
-@interface GHIssueCommentTableViewCell : UITableViewCell {
+@protocol GHIssueCommentTableViewCellDelegate <NSObject>
+
+- (void)commentTableViewCell:(GHIssueCommentTableViewCell *)cell receivedClickForButton:(DTLinkButton *)button;
+- (void)commentTableViewCell:(GHIssueCommentTableViewCell *)cell longPressRecognizedForButton:(DTLinkButton *)button;
+
+@end
+
+@interface GHIssueCommentTableViewCell : GHFeedItemWithDescriptionTableViewCell <DTAttributedTextContentViewDelegate> {
 @private
-    UILabel *_timeDetailsLabel;
+    DTAttributedTextView *_attributedTextView;
+    
+    id<GHIssueCommentTableViewCellDelegate> _buttonDelegate;
 }
 
-@property (nonatomic, retain) UILabel *timeDetailsLabel;
+@property (nonatomic, retain) DTAttributedTextView *attributedTextView;
+@property (nonatomic, assign) id<GHIssueCommentTableViewCellDelegate> buttonDelegate;
+
+- (void)linkButtonClicked:(DTLinkButton *)sender;
+- (void)longPressRecognized:(UILongPressGestureRecognizer *)recognizer;
+
++ (CGFloat)heightWithAttributedString:(NSAttributedString *)content inAttributedTextView:(DTAttributedTextView *)textView;
 
 @end
