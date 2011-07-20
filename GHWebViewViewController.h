@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
+#warning better NSCoding support
 
 @interface GHWebViewViewController : UIViewController <UIWebViewDelegate, UIActionSheetDelegate> {
 @private

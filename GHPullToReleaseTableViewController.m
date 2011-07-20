@@ -262,6 +262,7 @@ NSString *const NSUserDefaultLastUpdateDateKey = @"NSUserDefaultLastUpdateDateKe
     [encoder encodeBool:_pullToReleaseEnabled forKey:@"pullToReleaseEnabled"];
     [encoder encodeUIEdgeInsets:_defaultEdgeInset forKey:@"defaultEdgeInset"];
     [encoder encodeObject:_lastUpdateDate forKey:@"lastUpdateDate"];
+    [encoder encodeObject:self.title forKey:@"title"];
 }
 
 - (id)initWithCoder:(NSCoder *)decoder {
@@ -269,6 +270,7 @@ NSString *const NSUserDefaultLastUpdateDateKey = @"NSUserDefaultLastUpdateDateKe
         _pullToReleaseEnabled = [decoder decodeBoolForKey:@"pullToReleaseEnabled"];
         _defaultEdgeInset = [decoder decodeUIEdgeInsetsForKey:@"defaultEdgeInset"];
         _lastUpdateDate = [[decoder decodeObjectForKey:@"lastUpdateDate"] retain];
+        self.title = [decoder decodeObjectForKey:@"title"];
     }
     return self;
 }

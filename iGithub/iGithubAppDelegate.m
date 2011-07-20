@@ -58,14 +58,11 @@
      */
 }
 
-- (void)applicationWillTerminate:(UIApplication *)application
-{
-    /*
-     Called when the application is about to terminate.
-     Save data if appropriate.
-     See also applicationDidEnterBackground:.
-     */
+- (void)applicationWillTerminate:(UIApplication *)application {
+    
 }
+
+#pragma mark - memory management
 
 - (void)dealloc {
     [_managedObjectContext release];

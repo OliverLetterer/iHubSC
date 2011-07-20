@@ -60,7 +60,6 @@
 - (void)encodeWithCoder:(NSCoder *)encoder {
     [encoder encodeObject:_URL forKey:@"uRL"];
     [encoder encodeObject:_body forKey:@"body"];
-    [encoder encodeObject:_attributedBody forKey:@"attributedBody"];
     [encoder encodeObject:_user forKey:@"user"];
     [encoder encodeObject:_createdAt forKey:@"createdAt"];
     [encoder encodeObject:_updatedAt forKey:@"updatedAt"];
@@ -70,7 +69,7 @@
     if ((self = [super init])) {
         _URL = [[decoder decodeObjectForKey:@"uRL"] retain];
         _body = [[decoder decodeObjectForKey:@"body"] retain];
-        _attributedBody = [[decoder decodeObjectForKey:@"attributedBody"] retain];
+        self.attributedBody = _body.attributesStringFromMarkdownString;
         _user = [[decoder decodeObjectForKey:@"user"] retain];
         _createdAt = [[decoder decodeObjectForKey:@"createdAt"] retain];
         _updatedAt = [[decoder decodeObjectForKey:@"updatedAt"] retain];

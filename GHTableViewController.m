@@ -537,23 +537,26 @@ static CGFloat wrapperViewHeight = 21.0f;
 - (void)encodeWithCoder:(NSCoder *)encoder {
     [super encodeWithCoder:encoder];
     [encoder encodeObject:_nextPageForSectionsDictionary forKey:@"nextPageForSectionsDictionary"];
-    [encoder encodeObject:_cachedHeightsDictionary forKey:@"cachedHeightsDictionary"];
+    [encoder encodeObject:_cachedHeightsDictionary forKey:@"123cachedHeightsDictionary"];
+    DLog(@"%@ - %@", self, _cachedHeightsDictionary);
     [encoder encodeBool:_reloadDataIfNewUserGotAuthenticated forKey:@"reloadDataIfNewUserGotAuthenticated"];
     [encoder encodeBool:_reloadDataOnApplicationWillEnterForeground forKey:@"reloadDataOnApplicationWillEnterForeground"];
     [encoder encodeInteger:_myTableViewStyle forKey:@"myTableViewStyle"];
     [encoder encodeCGPoint:_lastContentOffset forKey:@"lastContentOffset"];
     [encoder encodeObject:_lastSelectedIndexPath forKey:@"lastSelectedIndexPath"];
+//    [encoder encodeObject:self.tableView forKey:@"tableView"];
 }
 
 - (id)initWithCoder:(NSCoder *)decoder {
     if ((self = [super initWithCoder:decoder])) {
         _nextPageForSectionsDictionary = [[decoder decodeObjectForKey:@"nextPageForSectionsDictionary"] retain];
-        _cachedHeightsDictionary = [[decoder decodeObjectForKey:@"cachedHeightsDictionary"] retain];
+        _cachedHeightsDictionary = [[decoder decodeObjectForKey:@"123cachedHeightsDictionary"] retain];
         _reloadDataIfNewUserGotAuthenticated = [decoder decodeBoolForKey:@"reloadDataIfNewUserGotAuthenticated"];
         _reloadDataOnApplicationWillEnterForeground = [decoder decodeBoolForKey:@"reloadDataOnApplicationWillEnterForeground"];
         _myTableViewStyle = [decoder decodeIntegerForKey:@"myTableViewStyle"];
         _lastContentOffset = [decoder decodeCGPointForKey:@"lastContentOffset"];
         _lastSelectedIndexPath = [[decoder decodeObjectForKey:@"lastSelectedIndexPath"] retain];
+//        self.tableView = [decoder decodeObjectForKey:@"tableView"];
     }
     return self;
 }
@@ -613,6 +616,9 @@ static CGFloat wrapperViewHeight = 21.0f;
 @implementation GHTableViewController (GHHeightCaching)
 
 - (void)cacheHeight:(CGFloat)height forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if ([indexPath isKindOfClass:NSClassFromString(@"UIMutableIndexPath")]) {
+        indexPath = [NSIndexPath indexPathForRow:indexPath.row inSection:indexPath.section];
+    }
     [self.cachedHeightsDictionary setObject:[NSNumber numberWithFloat:height] forKey:indexPath];
 }
 

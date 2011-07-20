@@ -1119,7 +1119,6 @@
     [encoder encodeBool:_hasWatchingData forKey:@"hasWatchingData"];
     [encoder encodeBool:_isWatchingRepository forKey:@"isWatchingRepository"];
     [encoder encodeObject:_deleteToken forKey:@"deleteToken"];
-    [encoder encodeObject:_delegate forKey:@"delegate"];
     [encoder encodeObject:_pullRequests forKey:@"pullRequests"];
     [encoder encodeObject:_branches forKey:@"branches"];
     [encoder encodeObject:_labels forKey:@"labels"];
@@ -1137,7 +1136,6 @@
         _hasWatchingData = [decoder decodeBoolForKey:@"hasWatchingData"];
         _isWatchingRepository = [decoder decodeBoolForKey:@"isWatchingRepository"];
         _deleteToken = [[decoder decodeObjectForKey:@"deleteToken"] retain];
-        _delegate = [[decoder decodeObjectForKey:@"delegate"] retain];
         _pullRequests = [[decoder decodeObjectForKey:@"pullRequests"] retain];
         _branches = [[decoder decodeObjectForKey:@"branches"] retain];
         _labels = [[decoder decodeObjectForKey:@"labels"] retain];

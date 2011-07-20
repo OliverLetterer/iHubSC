@@ -93,7 +93,6 @@ NSString *const kGHAPIIssueStateV3Closed = @"closed";
 - (void)encodeWithCoder:(NSCoder *)encoder {
     [encoder encodeObject:_assignee forKey:@"assignee"];
     [encoder encodeObject:_body forKey:@"body"];
-    [encoder encodeObject:_attributedBody forKey:@"attributedBody"];
     [encoder encodeObject:_closedAt forKey:@"closedAt"];
     [encoder encodeObject:_comments forKey:@"comments"];
     [encoder encodeObject:_createdAt forKey:@"createdAt"];
@@ -114,7 +113,7 @@ NSString *const kGHAPIIssueStateV3Closed = @"closed";
     if ((self = [super init])) {
         _assignee = [[decoder decodeObjectForKey:@"assignee"] retain];
         _body = [[decoder decodeObjectForKey:@"body"] retain];
-        _attributedBody = [[decoder decodeObjectForKey:@"attributedBody"] retain];
+        self.attributedBody = _body.attributesStringFromMarkdownString;
         _closedAt = [[decoder decodeObjectForKey:@"closedAt"] retain];
         _comments = [[decoder decodeObjectForKey:@"comments"] retain];
         _createdAt = [[decoder decodeObjectForKey:@"createdAt"] retain];

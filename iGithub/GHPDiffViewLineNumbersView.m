@@ -139,4 +139,35 @@
     [super dealloc];
 }
 
+#pragma mark Keyed Archiving
+
+- (void)encodeWithCoder:(NSCoder *)encoder {
+    [super encodeWithCoder:encoder];
+    [encoder encodeObject:_diffOldLinesString forKey:@"diffOldLinesString"];
+    [encoder encodeObject:_diffNewLinesString forKey:@"diffNewLinesString"];
+    [encoder encodeObject:_borderColor forKey:@"borderColor"];
+    [encoder encodeObject:_oldNewTextColor forKey:@"oldNewTextColor"];
+    [encoder encodeObject:_linesTextColor forKey:@"linesTextColor"];
+}
+
+- (id)initWithCoder:(NSCoder *)decoder {
+    if ((self = [super initWithCoder:decoder])) {
+        _diffOldLinesString = [[decoder decodeObjectForKey:@"diffOldLinesString"] retain];
+        _diffNewLinesString = [[decoder decodeObjectForKey:@"diffNewLinesString"] retain];
+        _borderColor = [[decoder decodeObjectForKey:@"borderColor"] retain];
+        _oldNewTextColor = [[decoder decodeObjectForKey:@"oldNewTextColor"] retain];
+        _linesTextColor = [[decoder decodeObjectForKey:@"linesTextColor"] retain];
+        
+        CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
+        NSArray *colors = [NSArray arrayWithObjects:
+                           (id)[UIColor colorWithRed:251.0f/255.0f green:251.0f/255.0f blue:251.0f/255.0f alpha:1.0f].CGColor,
+                           (id)[UIColor colorWithRed:229.0f/255.0f green:229.0f/255.0f blue:229.0f/255.0f alpha:1.0f].CGColor,
+                           nil];
+        CGFloat locations[] = {0.0f, 1.0f};
+        _oldNewGradient = CGGradientCreateWithColors(colorSpace, (CFArrayRef)colors, locations);
+        CGColorSpaceRelease(colorSpace);
+    }
+    return self;
+}
+
 @end

@@ -94,4 +94,20 @@
     [super dealloc];
 }
 
+#pragma mark Keyed Archiving
+
+- (void)encodeWithCoder:(NSCoder *)encoder {
+    [super encodeWithCoder:encoder];
+    [encoder encodeObject:_diffString forKey:@"diffString"];
+    [encoder encodeFloat:_width forKey:@"width"];
+}
+
+- (id)initWithCoder:(NSCoder *)decoder {
+    if ((self = [super initWithCoder:decoder])) {
+        _diffString = [[decoder decodeObjectForKey:@"diffString"] retain];
+        _width = [decoder decodeFloatForKey:@"width"];
+    }
+    return self;
+}
+
 @end

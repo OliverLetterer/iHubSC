@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 
-@interface GHPDiffViewLineNumbersView : UIView {
+@interface GHPDiffViewLineNumbersView : UIView <NSCoding> {
 @private
     NSString *_diffOldLinesString;
     NSString *_diffNewLinesString;

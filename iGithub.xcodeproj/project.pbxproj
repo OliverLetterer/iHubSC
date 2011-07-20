@@ -88,7 +88,6 @@
 		A712B7F8135F20BB0009B7A7 /* GHSearchUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A712B7F7135F20B40009B7A7 /* GHSearchUserViewController.m */; };
 		A723F16A137ED1E000F7649B /* GHPullToReleaseTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A723F169137ED1E000F7649B /* GHPullToReleaseTableViewController.m */; };
 		A723F16D137ED1FC00F7649B /* GHPullToReleaseTableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = A723F16C137ED1FC00F7649B /* GHPullToReleaseTableHeaderView.m */; };
-		A7288A6913A8F21600170D57 /* BGPlainWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = A7288A6813A8F21600170D57 /* BGPlainWebView.m */; };
 		A7288A7013A9094300170D57 /* compass in Resources */ = {isa = PBXBuildFile; fileRef = A7288A6C13A9094300170D57 /* compass */; };
 		A7288A7113A9094300170D57 /* scripts in Resources */ = {isa = PBXBuildFile; fileRef = A7288A6D13A9094300170D57 /* scripts */; };
 		A7288A7213A9094300170D57 /* src in Resources */ = {isa = PBXBuildFile; fileRef = A7288A6E13A9094300170D57 /* src */; };
@@ -508,8 +507,6 @@
 		A723F169137ED1E000F7649B /* GHPullToReleaseTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPullToReleaseTableViewController.m; sourceTree = "<group>"; };
 		A723F16B137ED1FC00F7649B /* GHPullToReleaseTableHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPullToReleaseTableHeaderView.h; sourceTree = "<group>"; };
 		A723F16C137ED1FC00F7649B /* GHPullToReleaseTableHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPullToReleaseTableHeaderView.m; sourceTree = "<group>"; };
-		A7288A6713A8F21600170D57 /* BGPlainWebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BGPlainWebView.h; sourceTree = "<group>"; };
-		A7288A6813A8F21600170D57 /* BGPlainWebView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BGPlainWebView.m; sourceTree = "<group>"; };
 		A7288A6C13A9094300170D57 /* compass */ = {isa = PBXFileReference; lastKnownFileType = folder; path = compass; sourceTree = "<group>"; };
 		A7288A6D13A9094300170D57 /* scripts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = scripts; sourceTree = "<group>"; };
 		A7288A6E13A9094300170D57 /* src */ = {isa = PBXFileReference; lastKnownFileType = folder; path = src; sourceTree = "<group>"; };
@@ -2699,8 +2696,6 @@
 			children = (
 				A7D41ACA1358B7D300CD3A5C /* GHCommitDiffViewController.h */,
 				A7D41ACB1358B7D300CD3A5C /* GHCommitDiffViewController.m */,
-				A7288A6713A8F21600170D57 /* BGPlainWebView.h */,
-				A7288A6813A8F21600170D57 /* BGPlainWebView.m */,
 			);
 			name = GHCommitDiffViewController;
 			path = ..;
@@ -3315,7 +3310,6 @@
 				A7DCDD9413A366DF00089CCD /* GHAPIRepositoryBranchV3.m in Sources */,
 				A70DA3D813A4B7F700235C76 /* GHAPIOrganizationV3.m in Sources */,
 				A70DA3DC13A4E2D100235C76 /* GHAPITeamV3.m in Sources */,
-				A7288A6913A8F21600170D57 /* BGPlainWebView.m in Sources */,
 				A75C3EA813B35B5300D64681 /* GHOwnerNewsFeedViewController+Private.m in Sources */,
 				A773023213B38C4B0075235E /* GHAPICommitV3.m in Sources */,
 				A773023713B38D200075235E /* GHAPITreeInfoV3.m in Sources */,

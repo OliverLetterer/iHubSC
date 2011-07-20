@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 
-@interface GHPDiffViewContentView : UIView {
+@interface GHPDiffViewContentView : UIView <NSCoding> {
 @private
     NSString *_diffString;
     CGFloat _width;

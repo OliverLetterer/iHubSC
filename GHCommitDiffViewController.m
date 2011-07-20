@@ -81,11 +81,13 @@
 - (void)encodeWithCoder:(NSCoder *)encoder {
     [super encodeWithCoder:encoder];
     [encoder encodeObject:_diffString forKey:@"diffString"];
+    [encoder encodeObject:_diffView forKey:@"diffView"];
 }
 
 - (id)initWithCoder:(NSCoder *)decoder {
     if ((self = [super initWithCoder:decoder])) {
         _diffString = [[decoder decodeObjectForKey:@"diffString"] retain];
+        _diffView = [[decoder decodeObjectForKey:@"diffView"] retain];
     }
     return self;
 }

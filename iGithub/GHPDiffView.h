@@ -13,7 +13,7 @@
 UIFont *GHPDiffViewFont(void);
 UIFont *GHPDiffViewBoldFont(void);
 
-@interface GHPDiffView : UIView {
+@interface GHPDiffView : UIView <NSCoding> {
 @private
     UIColor *_borderColor;
     NSString *_diffString;

@@ -10,6 +10,8 @@
 #import "GHSettingsHelper.h"
 #import "GithubAPI.h"
 
+#define kLastKnownApplicationStateFileName @"de.olettere.lastKnownApplicationState.plist"
+
 @implementation iGithubAppDelegate_iPhone
 
 @synthesize tabBarController=_tabBarController, newsFeedViewController=_newsFeedViewController, profileViewController=_profileViewController, searchViewController=_searchViewController;
@@ -63,29 +65,93 @@
     [GHAuthenticationManager sharedInstance].password = [GHSettingsHelper password];
 #endif
     
-    NSMutableArray *tabBarItems = [NSMutableArray array];
+    NSString *documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *filePath = [documentsDirectory stringByAppendingPathComponent:kLastKnownApplicationStateFileName];
     
-    self.tabBarController = [[[UITabBarController alloc] init] autorelease];
-    self.window.rootViewController = self.tabBarController;
+    NSMutableDictionary *dictionary = [NSKeyedUnarchiver unarchiveObjectWithFile:filePath];
     
-    self.newsFeedViewController = [[[GHOwnerNewsFeedViewController alloc] init] autorelease];
-    [tabBarItems addObject:[[[UINavigationController alloc] initWithRootViewController:self.newsFeedViewController] autorelease] ];
-    
-    self.profileViewController = [[[GHUserViewController alloc] initWithUsername:[GHAuthenticationManager sharedInstance].username] autorelease];
-    self.profileViewController.reloadDataIfNewUserGotAuthenticated = YES;
-    self.profileViewController.pullToReleaseEnabled = YES;
-    self.profileViewController.tabBarItem = [[[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"My Profile", @"") 
-                                                                                image:[UIImage imageNamed:@"145-persondot.png"] 
-                                                                                  tag:0]
-                                                  autorelease];
-    [tabBarItems addObject:[[[UINavigationController alloc] initWithRootViewController:self.profileViewController] autorelease] ];
-    
-    self.searchViewController = [[[GHSearchViewController alloc] init] autorelease];
-    [tabBarItems addObject:[[[UINavigationController alloc] initWithRootViewController:self.searchViewController] autorelease] ];
-    
-    self.tabBarController.viewControllers = tabBarItems;
+//    tabBarController = nil;
+    if (dictionary) {
+        self.tabBarController = [[[UITabBarController alloc] init] autorelease];
+        self.window.rootViewController = self.tabBarController;
+        
+        NSMutableArray *viewControllers = [NSMutableArray arrayWithCapacity:3];
+        
+        NSArray *viewControllers0 = [dictionary objectForKey:[NSNumber numberWithUnsignedInteger:0]];
+        NSArray *viewControllers1 = [dictionary objectForKey:[NSNumber numberWithUnsignedInteger:1]];
+        NSArray *viewControllers2 = [dictionary objectForKey:[NSNumber numberWithUnsignedInteger:2]];
+        
+        UINavigationController *navigationController = [[[UINavigationController alloc] init] autorelease];
+        [navigationController setViewControllers:viewControllers0 animated:NO];
+        [viewControllers addObject:navigationController];
+        
+        navigationController = [[[UINavigationController alloc] init] autorelease];
+        [navigationController setViewControllers:viewControllers1 animated:NO];
+        [viewControllers addObject:navigationController];
+        
+        navigationController = [[[UINavigationController alloc] init] autorelease];
+        [navigationController setViewControllers:viewControllers2 animated:NO];
+        [viewControllers addObject:navigationController];
+        
+        self.tabBarController.viewControllers = viewControllers;
+        self.tabBarController.selectedIndex = [[dictionary objectForKey:@"self.tabBarController.selectedIndex"] unsignedIntegerValue];
+        
+//        self.newsFeedViewController = [[[tabBarController.viewControllers objectAtIndex:0] viewControllers] objectAtIndex:0];
+//        self.profileViewController = [[[tabBarController.viewControllers objectAtIndex:1] viewControllers] objectAtIndex:0];
+//        self.searchViewController = [[[tabBarController.viewControllers objectAtIndex:2] viewControllers] objectAtIndex:0];
+        
+//        [[NSFileManager defaultManager] removeItemAtPath:filePath error:NULL];
+    } else {
+        NSMutableArray *tabBarItems = [NSMutableArray array];
+        
+        self.tabBarController = [[[UITabBarController alloc] init] autorelease];
+        self.window.rootViewController = self.tabBarController;
+        
+        self.newsFeedViewController = [[[GHOwnerNewsFeedViewController alloc] init] autorelease];
+        [tabBarItems addObject:[[[UINavigationController alloc] initWithRootViewController:self.newsFeedViewController] autorelease] ];
+        
+        self.profileViewController = [[[GHUserViewController alloc] initWithUsername:[GHAuthenticationManager sharedInstance].username] autorelease];
+        self.profileViewController.reloadDataIfNewUserGotAuthenticated = YES;
+        self.profileViewController.pullToReleaseEnabled = YES;
+        self.profileViewController.tabBarItem = [[[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"My Profile", @"") 
+                                                                               image:[UIImage imageNamed:@"145-persondot.png"] 
+                                                                                 tag:0]
+                                                 autorelease];
+        [tabBarItems addObject:[[[UINavigationController alloc] initWithRootViewController:self.profileViewController] autorelease] ];
+        
+        self.searchViewController = [[[GHSearchViewController alloc] init] autorelease];
+        [tabBarItems addObject:[[[UINavigationController alloc] initWithRootViewController:self.searchViewController] autorelease] ];
+        
+        self.tabBarController.viewControllers = tabBarItems;
+    }
     
     return [super application:application didFinishLaunchingWithOptions:launchOptions];
+}
+
+#pragma mark - UIApplicationDelegate
+
+//- (void)applicationWillTerminate:(UIApplication *)application {
+//    [super applicationWillTerminate:application];
+//    NSString *documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+//    NSString *filePath = [documentsDirectory stringByAppendingPathComponent:kLastKnownApplicationStateFileName];
+//    
+//    [NSKeyedArchiver archiveRootObject:self.tabBarController toFile:filePath];
+//}
+
+- (void)applicationDidEnterBackground:(UIApplication *)application {
+    [super applicationDidEnterBackground:application];
+    
+    NSString *documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *filePath = [documentsDirectory stringByAppendingPathComponent:kLastKnownApplicationStateFileName];
+    
+    NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithCapacity:4];
+    [dictionary setObject:[NSNumber numberWithUnsignedInteger:self.tabBarController.selectedIndex] forKey:@"self.tabBarController.selectedIndex"];
+    [self.tabBarController.viewControllers enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        UINavigationController *navController = obj;
+        [dictionary setObject:navController.viewControllers forKey:[NSNumber numberWithUnsignedInteger:idx]];
+    }];
+    
+    DLog(@"%d", [NSKeyedArchiver archiveRootObject:dictionary toFile:filePath]);
 }
 
 #pragma mark - memory management

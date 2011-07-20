@@ -137,4 +137,26 @@ UIFont *GHPDiffViewBoldFont(void) {
     [super dealloc];
 }
 
+#pragma mark Keyed Archiving
+
+- (void)encodeWithCoder:(NSCoder *)encoder {
+    [super encodeWithCoder:encoder];
+    [encoder encodeObject:_borderColor forKey:@"borderColor"];
+    [encoder encodeObject:_diffString forKey:@"diffString"];
+    [encoder encodeObject:_lineNumbersView forKey:@"lineNumbersView"];
+    [encoder encodeObject:_contentDiffView forKey:@"contentDiffView"];
+    [encoder encodeObject:_scrollView forKey:@"scrollView"];
+}
+
+- (id)initWithCoder:(NSCoder *)decoder {
+    if ((self = [super initWithCoder:decoder])) {
+        _borderColor = [[decoder decodeObjectForKey:@"borderColor"] retain];
+        _diffString = [[decoder decodeObjectForKey:@"diffString"] retain];
+        _lineNumbersView = [[decoder decodeObjectForKey:@"lineNumbersView"] retain];
+        _contentDiffView = [[decoder decodeObjectForKey:@"contentDiffView"] retain];
+        _scrollView = [[decoder decodeObjectForKey:@"scrollView"] retain];
+    }
+    return self;
+}
+
 @end

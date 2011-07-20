@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "GHNewsFeedViewController.h"
 
+#warning better NSCoding support (selected segement)
+
 @interface GHOwnerNewsFeedViewController : GHNewsFeedViewController <UIActionSheetDelegate> {
 @private
     UISegmentedControl *_segmentControl;
