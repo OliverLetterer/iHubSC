@@ -7,10 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GHViewController.h"
 
-#warning better NSCoding support
-
-@interface GHWebViewViewController : UIViewController <UIWebViewDelegate, UIActionSheetDelegate> {
+@interface GHWebViewViewController : GHViewController <UIWebViewDelegate, UIActionSheetDelegate> {
 @private
     NSURL *_URL;
     UIWebView *_webView;

@@ -274,6 +274,7 @@
 		A7BF146D13426DC2001AE50D /* GHAPIBackgroundQueueV3.m in Sources */ = {isa = PBXBuildFile; fileRef = A7BF146C13426DC2001AE50D /* GHAPIBackgroundQueueV3.m */; };
 		A7BF147213426F27001AE50D /* GHUser.m in Sources */ = {isa = PBXBuildFile; fileRef = A7BF147113426F27001AE50D /* GHUser.m */; };
 		A7BF147B13427305001AE50D /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = A7BF147A13427304001AE50D /* JSONKit.m */; };
+		A7C2D14413D7701E00DACDF7 /* GHViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7C2D14313D7701D00DACDF7 /* GHViewController.m */; };
 		A7CE1B101345BC9300169F94 /* GHActorAttributes.m in Sources */ = {isa = PBXBuildFile; fileRef = A7CE1B0F1345BC9300169F94 /* GHActorAttributes.m */; };
 		A7CE1B151345BDD700169F94 /* UIImage+Gravatar.m in Sources */ = {isa = PBXBuildFile; fileRef = A7CE1B141345BDD700169F94 /* UIImage+Gravatar.m */; };
 		A7CE1B191345BFD600169F94 /* GHPayload.m in Sources */ = {isa = PBXBuildFile; fileRef = A7CE1B181345BFD600169F94 /* GHPayload.m */; };
@@ -832,6 +833,8 @@
 		A7BF147113426F27001AE50D /* GHUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHUser.m; sourceTree = "<group>"; };
 		A7BF147913427304001AE50D /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JSONKit.h; path = JSONKit/JSONKit.h; sourceTree = "<group>"; };
 		A7BF147A13427304001AE50D /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JSONKit.m; path = JSONKit/JSONKit.m; sourceTree = "<group>"; };
+		A7C2D14213D7701B00DACDF7 /* GHViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHViewController.h; sourceTree = "<group>"; };
+		A7C2D14313D7701D00DACDF7 /* GHViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHViewController.m; sourceTree = "<group>"; };
 		A7CE1B0E1345BC9300169F94 /* GHActorAttributes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHActorAttributes.h; sourceTree = "<group>"; };
 		A7CE1B0F1345BC9300169F94 /* GHActorAttributes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHActorAttributes.m; sourceTree = "<group>"; };
 		A7CE1B131345BDD700169F94 /* UIImage+Gravatar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Gravatar.h"; sourceTree = "<group>"; };
@@ -1819,6 +1822,7 @@
 				A76FC9A81352D27E004C642E /* UIExpandableTableView */,
 				A7BC6780134CCED40083F906 /* PullToRefreshTableViewController */,
 				A7F62627134C45AE006487CA /* GHTableViewController */,
+				A7C2D14913D771F500DACDF7 /* GHViewController */,
 			);
 			name = UserInterface;
 			sourceTree = "<group>";
@@ -2503,6 +2507,15 @@
 				A7BF147A13427304001AE50D /* JSONKit.m */,
 			);
 			name = JSONKit;
+			sourceTree = "<group>";
+		};
+		A7C2D14913D771F500DACDF7 /* GHViewController */ = {
+			isa = PBXGroup;
+			children = (
+				A7C2D14213D7701B00DACDF7 /* GHViewController.h */,
+				A7C2D14313D7701D00DACDF7 /* GHViewController.m */,
+			);
+			name = GHViewController;
 			sourceTree = "<group>";
 		};
 		A7CE1B0C1345BC5F00169F94 /* GHActorAttributes */ = {
@@ -3432,6 +3445,7 @@
 				A75EFA5113D4325200C162F3 /* GHPIssueInfoTableViewCell.m in Sources */,
 				A75EFA5813D4382F00C162F3 /* WAAttributesMarkdownFormatter.m in Sources */,
 				A784C40F13D457B500859318 /* GHPIssueCommentTableViewCell.m in Sources */,
+				A7C2D14413D7701E00DACDF7 /* GHViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

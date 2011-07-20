@@ -96,9 +96,9 @@
         self.tabBarController.viewControllers = viewControllers;
         self.tabBarController.selectedIndex = [[dictionary objectForKey:@"self.tabBarController.selectedIndex"] unsignedIntegerValue];
         
-//        self.newsFeedViewController = [[[tabBarController.viewControllers objectAtIndex:0] viewControllers] objectAtIndex:0];
-//        self.profileViewController = [[[tabBarController.viewControllers objectAtIndex:1] viewControllers] objectAtIndex:0];
-//        self.searchViewController = [[[tabBarController.viewControllers objectAtIndex:2] viewControllers] objectAtIndex:0];
+        self.newsFeedViewController = [viewControllers0 objectAtIndex:0];
+        self.profileViewController = [viewControllers1 objectAtIndex:0];
+        self.searchViewController = [viewControllers2 objectAtIndex:0];
         
 //        [[NSFileManager defaultManager] removeItemAtPath:filePath error:NULL];
     } else {
@@ -113,10 +113,6 @@
         self.profileViewController = [[[GHUserViewController alloc] initWithUsername:[GHAuthenticationManager sharedInstance].username] autorelease];
         self.profileViewController.reloadDataIfNewUserGotAuthenticated = YES;
         self.profileViewController.pullToReleaseEnabled = YES;
-        self.profileViewController.tabBarItem = [[[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"My Profile", @"") 
-                                                                               image:[UIImage imageNamed:@"145-persondot.png"] 
-                                                                                 tag:0]
-                                                 autorelease];
         [tabBarItems addObject:[[[UINavigationController alloc] initWithRootViewController:self.profileViewController] autorelease] ];
         
         self.searchViewController = [[[GHSearchViewController alloc] init] autorelease];
@@ -124,6 +120,11 @@
         
         self.tabBarController.viewControllers = tabBarItems;
     }
+    
+    self.profileViewController.tabBarItem = [[[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"My Profile", @"") 
+                                                                           image:[UIImage imageNamed:@"145-persondot.png"] 
+                                                                             tag:0]
+                                             autorelease];
     
     return [super application:application didFinishLaunchingWithOptions:launchOptions];
 }

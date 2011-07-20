@@ -15,6 +15,7 @@
 #import "GHSearchViewController.h"
 
 #warning save expansion states
+#warning update default.pngs
 
 @interface iGithubAppDelegate_iPhone : iGithubAppDelegate <MFMailComposeViewControllerDelegate> {
     UITabBarController *_tabBarController;

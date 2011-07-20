@@ -7,7 +7,7 @@
 //
 
 #import "GHWebViewViewController.h"
-
+#import "GithubAPI.h"
 
 @implementation GHWebViewViewController
 
@@ -63,7 +63,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     [self.webView loadRequest:[NSURLRequest requestWithURL:self.URL] ];
     
     self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction 
@@ -87,6 +86,8 @@
 - (void)webViewDidFinishLoad:(UIWebView *)webView {
     [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
     self.title = [webView stringByEvaluatingJavaScriptFromString:@"document.title"];
+    
+    self.URL = webView.request.URL;
 }
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {

@@ -387,6 +387,12 @@ static CGFloat wrapperViewHeight = 21.0f;
     }
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    self.lastSelectedIndexPath = nil;
+}
+
 - (void)viewDidUnload {
     [super viewDidUnload];
     
@@ -525,11 +531,17 @@ static CGFloat wrapperViewHeight = 21.0f;
 #pragma mark - UIScrollViewDelegate
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    [super scrollViewDidScroll:scrollView];
+    if ([super respondsToSelector:@selector(scrollViewDidScroll:)]) {
+        [super scrollViewDidScroll:scrollView];
+    }
     
     CGRect frame = self.tableView.backgroundView.frame;
     frame.origin = scrollView.contentOffset;
     self.tableView.backgroundView.frame = frame;
+}
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+    _lastContentOffset = self.tableView.contentOffset;
 }
 
 #pragma mark - Keyed Archiving
