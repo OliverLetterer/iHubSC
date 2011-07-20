@@ -254,4 +254,23 @@ NSString *const NSUserDefaultLastUpdateDateKey = @"NSUserDefaultLastUpdateDateKe
     }
 }
 
+#pragma mark - Keyed Archiving
+
+- (void)encodeWithCoder:(NSCoder *)encoder {
+    [super encodeWithCoder:encoder];
+    [encoder encodeInteger:self.tableView.style forKey:@"tableViewStyle"];
+    [encoder encodeBool:_pullToReleaseEnabled forKey:@"pullToReleaseEnabled"];
+    [encoder encodeUIEdgeInsets:_defaultEdgeInset forKey:@"defaultEdgeInset"];
+    [encoder encodeObject:_lastUpdateDate forKey:@"lastUpdateDate"];
+}
+
+- (id)initWithCoder:(NSCoder *)decoder {
+    if ((self = [super initWithStyle:[decoder decodeIntegerForKey:@"tableViewStyle"]])) {
+        _pullToReleaseEnabled = [decoder decodeBoolForKey:@"pullToReleaseEnabled"];
+        _defaultEdgeInset = [decoder decodeUIEdgeInsetsForKey:@"defaultEdgeInset"];
+        _lastUpdateDate = [[decoder decodeObjectForKey:@"lastUpdateDate"] retain];
+    }
+    return self;
+}
+
 @end
