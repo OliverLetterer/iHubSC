@@ -403,7 +403,6 @@
     [encoder encodeObject:_markdownString forKey:@"markdownString"];
     [encoder encodeObject:_contentImage forKey:@"contentImage"];
     [encoder encodeBool:_isMimeTypeUnkonw forKey:@"isMimeTypeUnkonw"];
-    [encoder encodeObject:_request forKey:@"request"];
     [encoder encodeObject:_scrollView forKey:@"scrollView"];
     [encoder encodeObject:_backgroundGradientLayer forKey:@"backgroundGradientLayer"];
     [encoder encodeObject:_loadingLabel forKey:@"loadingLabel"];
@@ -423,7 +422,6 @@
         _markdownString = [[decoder decodeObjectForKey:@"markdownString"] retain];
         _contentImage = [[decoder decodeObjectForKey:@"contentImage"] retain];
         _isMimeTypeUnkonw = [decoder decodeBoolForKey:@"isMimeTypeUnkonw"];
-        _request = [[decoder decodeObjectForKey:@"request"] retain];
         _scrollView = [[decoder decodeObjectForKey:@"scrollView"] retain];
         _backgroundGradientLayer = [[decoder decodeObjectForKey:@"backgroundGradientLayer"] retain];
         _loadingLabel = [[decoder decodeObjectForKey:@"loadingLabel"] retain];

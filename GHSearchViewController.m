@@ -200,6 +200,8 @@
 - (id)initWithCoder:(NSCoder *)decoder {
     if ((self = [super initWithCoder:decoder])) {
         _searchString = [[decoder decodeObjectForKey:@"searchString"] retain];
+        self.tabBarItem = [[[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemSearch tag:0] autorelease];
+        self.title = NSLocalizedString(@"Search", @"");
     }
     return self;
 }

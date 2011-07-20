@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import <QuartzCore/QuartzCore.h>
+#import "GHViewController.h"
 
-@interface GHSearchViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, UISearchDisplayDelegate> {
+@interface GHSearchViewController : GHViewController <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, UISearchDisplayDelegate> {
 @private
     UISearchBar *_searchBar;
     UISearchDisplayController *_mySearchDisplayController;

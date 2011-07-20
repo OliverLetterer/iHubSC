@@ -11,8 +11,9 @@
 #import "GithubAPI.h"
 #import "UIViewController+GHErrorHandling.h"
 #import "DDProgressView.h"
+#import "GHViewController.h"
 
-@interface GHViewCloudFileViewController : UIViewController <UIScrollViewDelegate, ASIProgressDelegate> {
+@interface GHViewCloudFileViewController : GHViewController <UIScrollViewDelegate, ASIProgressDelegate> {
 @private
     NSString *_repository;
     NSString *_tree;
