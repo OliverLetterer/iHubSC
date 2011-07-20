@@ -46,16 +46,18 @@ NSString *GHAPIGravatarImageCacheDirectoryV3() {
 
 #pragma mark - Instance methods
 
-- (void)cacheImage:(UIImage *)image forURL:(NSString *)imageURLString {
+- (void)cacheImage:(UIImage *)image forURL:(NSString *)imageURLString storeOnDisk:(BOOL)storeOnDisk {
     imageURLString = imageURLString.stringFromMD5Hash;
     if (!imageURLString) {
         return;
     }
-    NSString *imagesCacheDirectory = GHAPIGravatarImageCacheDirectoryV3();
     
-    NSData *pngData = UIImagePNGRepresentation(image);
-    [pngData writeToFile:[imagesCacheDirectory stringByAppendingPathComponent:[imageURLString stringByAppendingString:@".png"]] 
-              atomically:YES];
+    if (storeOnDisk) {
+        NSString *imagesCacheDirectory = GHAPIGravatarImageCacheDirectoryV3();
+        NSData *pngData = UIImagePNGRepresentation(image);
+        [pngData writeToFile:[imagesCacheDirectory stringByAppendingPathComponent:[imageURLString stringByAppendingString:@".png"]] 
+                  atomically:YES];
+    }
     [self.imagesCache setObject:image forKey:imageURLString];
 }
 

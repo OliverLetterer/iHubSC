@@ -50,12 +50,13 @@
                 if (!theImage) {
                     theImage = [UIImage imageNamed:@"DefaultUserImage.png"];
                 }
-                [[GHAPIImageCacheV3 sharedInstance] cacheImage:theImage forURL:avatarURLString];
+                [[GHAPIImageCacheV3 sharedInstance] cacheImage:theImage forURL:avatarURLString storeOnDisk:YES];
             }
             
             dispatch_async(dispatch_get_main_queue(), ^(void) {
                 if (myError) {
-                    handler(nil, myError, NO);
+                    [[GHAPIImageCacheV3 sharedInstance] cacheImage:[UIImage imageNamed:@"DefaultUserImage.png"] forURL:avatarURLString storeOnDisk:NO];
+                    handler([UIImage imageNamed:@"DefaultUserImage.png"], myError, NO);
                 } else {
                     if (theImage) {
                         handler(theImage, nil, YES);

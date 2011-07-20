@@ -17,7 +17,7 @@ NSString *GHAPIGravatarImageCacheDirectoryV3();
 
 @property (nonatomic, retain)  NSCache *imagesCache;
 
-- (void)cacheImage:(UIImage *)image forURL:(NSString *)imageURLString;
+- (void)cacheImage:(UIImage *)image forURL:(NSString *)imageURLString storeOnDisk:(BOOL)storeOnDisk;
 - (UIImage *)cachedImageFromURL:(NSString *)imageURLString;
 
 @end
