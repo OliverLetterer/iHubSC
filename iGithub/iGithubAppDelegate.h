@@ -9,7 +9,6 @@
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
 
-#warning experiment with notification positions and size
 #warning serialize newsfeed
 
 @interface iGithubAppDelegate : NSObject <UIApplicationDelegate> {
