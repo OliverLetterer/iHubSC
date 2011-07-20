@@ -109,4 +109,18 @@
     }
 }
 
+#pragma mark Keyed Archiving
+
+- (void)encodeWithCoder:(NSCoder *)encoder {
+    [super encodeWithCoder:encoder];
+    [encoder encodeObject:_URL forKey:@"uRL"];
+}
+
+- (id)initWithCoder:(NSCoder *)decoder {
+    if ((self = [super initWithCoder:decoder])) {
+        _URL = [[decoder decodeObjectForKey:@"uRL"] retain];
+    }
+    return self;
+}
+
 @end

@@ -161,4 +161,20 @@
     return [self cachedHeightForRowAtIndexPath:indexPath];
 }
 
+#pragma mark Keyed Archiving
+
+- (void)encodeWithCoder:(NSCoder *)encoder {
+    [super encodeWithCoder:encoder];
+    [encoder encodeObject:_searchString forKey:@"searchString"];
+    [encoder encodeObject:_repositories forKey:@"repositories"];
+}
+
+- (id)initWithCoder:(NSCoder *)decoder {
+    if ((self = [super initWithCoder:decoder])) {
+        _searchString = [[decoder decodeObjectForKey:@"searchString"] retain];
+        _repositories = [[decoder decodeObjectForKey:@"repositories"] retain];
+    }
+    return self;
+}
+
 @end

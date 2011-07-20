@@ -224,4 +224,24 @@
     }
 }
 
+#pragma mark Keyed Archiving
+
+- (void)encodeWithCoder:(NSCoder *)encoder {
+    [super encodeWithCoder:encoder];
+    [encoder encodeObject:_repository forKey:@"repository"];
+    [encoder encodeObject:_commitID forKey:@"commitID"];
+    [encoder encodeObject:_commit forKey:@"commit"];
+    [encoder encodeObject:_branchHash forKey:@"branchHash"];
+}
+
+- (id)initWithCoder:(NSCoder *)decoder {
+    if ((self = [super initWithCoder:decoder])) {
+        _repository = [[decoder decodeObjectForKey:@"repository"] retain];
+        _commitID = [[decoder decodeObjectForKey:@"commitID"] retain];
+        _commit = [[decoder decodeObjectForKey:@"commit"] retain];
+        _branchHash = [[decoder decodeObjectForKey:@"branchHash"] retain];
+    }
+    return self;
+}
+
 @end

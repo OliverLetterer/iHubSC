@@ -423,4 +423,30 @@
     }
 }
 
+#pragma mark Keyed Archiving
+
+- (void)encodeWithCoder:(NSCoder *)encoder {
+    [super encodeWithCoder:encoder];
+    [encoder encodeObject:_repository forKey:@"repository"];
+    [encoder encodeObject:_collaborators forKey:@"collaborators"];
+    [encoder encodeInteger:_assignIndex forKey:@"assignIndex"];
+    [encoder encodeBool:_hasCollaboratorState forKey:@"hasCollaboratorState"];
+    [encoder encodeBool:_isCollaborator forKey:@"isCollaborator"];
+    [encoder encodeObject:_milestones forKey:@"milestones"];
+    [encoder encodeInteger:_assignesMilestoneIndex forKey:@"assignesMilestoneIndex"];
+}
+
+- (id)initWithCoder:(NSCoder *)decoder {
+    if ((self = [super initWithCoder:decoder])) {
+        _repository = [[decoder decodeObjectForKey:@"repository"] retain];
+        _collaborators = [[decoder decodeObjectForKey:@"collaborators"] retain];
+        _assignIndex = [decoder decodeIntegerForKey:@"assignIndex"];
+        _hasCollaboratorState = [decoder decodeBoolForKey:@"hasCollaboratorState"];
+        _isCollaborator = [decoder decodeBoolForKey:@"isCollaborator"];
+        _milestones = [[decoder decodeObjectForKey:@"milestones"] retain];
+        _assignesMilestoneIndex = [decoder decodeIntegerForKey:@"assignesMilestoneIndex"];
+    }
+    return self;
+}
+
 @end

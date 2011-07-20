@@ -49,5 +49,23 @@
     
 }
 
+#pragma mark Keyed Archiving
+
+- (void)encodeWithCoder:(NSCoder *)encoder {
+    [encoder encodeObject:_repositoryString forKey:@"repositoryString"];
+    [encoder encodeObject:_label forKey:@"label"];
+    [encoder encodeObject:_openIssues forKey:@"openIssues"];
+    [encoder encodeObject:_closedIssues forKey:@"closedIssues"];
+}
+
+- (id)initWithCoder:(NSCoder *)decoder {
+    if ((self = [super initWithCoder:decoder])) {
+        _repositoryString = [[decoder decodeObjectForKey:@"repositoryString"] retain];
+        _label = [[decoder decodeObjectForKey:@"label"] retain];
+        _openIssues = [[decoder decodeObjectForKey:@"openIssues"] retain];
+        _closedIssues = [[decoder decodeObjectForKey:@"closedIssues"] retain];
+    }
+    return self;
+}
 
 @end

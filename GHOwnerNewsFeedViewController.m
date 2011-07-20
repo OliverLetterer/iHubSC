@@ -386,6 +386,33 @@
     }
 }
 
+#pragma mark Keyed Archiving
+
+- (void)encodeWithCoder:(NSCoder *)encoder {
+    [super encodeWithCoder:encoder];
+    [encoder encodeObject:_organizations forKey:@"organizations"];
+    [encoder encodeObject:_defaultOrganizationName forKey:@"defaultOrganizationName"];
+    [encoder encodeObject:_lastCreationDate forKey:@"lastCreationDate"];
+    [encoder encodeObject:_pendingStateStringsArray forKey:@"pendingStateStringsArray"];
+    [encoder encodeObject:_lastStateUpdateDate forKey:@"lastStateUpdateDate"];
+}
+
+- (id)initWithCoder:(NSCoder *)decoder {
+    if ((self = [super initWithCoder:decoder])) {
+        _organizations = [[decoder decodeObjectForKey:@"organizations"] retain];
+        _defaultOrganizationName = [[decoder decodeObjectForKey:@"defaultOrganizationName"] retain];
+        _lastCreationDate = [[decoder decodeObjectForKey:@"lastCreationDate"] retain];
+        _pendingStateStringsArray = [[decoder decodeObjectForKey:@"pendingStateStringsArray"] retain];
+        _lastStateUpdateDate = [[decoder decodeObjectForKey:@"lastStateUpdateDate"] retain];
+        
+        self.tabBarItem = [[[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"News", @"") 
+                                                         image:[UIImage imageNamed:@"56-feed.png"] 
+                                                           tag:0]
+                           autorelease];
+    }
+    return self;
+}
+
 @end
 
 

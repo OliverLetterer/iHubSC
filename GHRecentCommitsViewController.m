@@ -170,4 +170,24 @@
     [self.navigationController pushViewController:commitViewController animated:YES];
 }
 
+#pragma mark Keyed Archiving
+
+- (void)encodeWithCoder:(NSCoder *)encoder {
+    [super encodeWithCoder:encoder];
+    [encoder encodeObject:_repository forKey:@"repository"];
+    [encoder encodeObject:_branch forKey:@"branch"];
+    [encoder encodeObject:_branchHash forKey:@"branchHash"];
+    [encoder encodeObject:_commits forKey:@"commits"];
+}
+
+- (id)initWithCoder:(NSCoder *)decoder {
+    if ((self = [super initWithCoder:decoder])) {
+        _repository = [[decoder decodeObjectForKey:@"repository"] retain];
+        _branch = [[decoder decodeObjectForKey:@"branch"] retain];
+        _branchHash = [[decoder decodeObjectForKey:@"branchHash"] retain];
+        _commits = [[decoder decodeObjectForKey:@"commits"] retain];
+    }
+    return self;
+}
+
 @end

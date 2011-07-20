@@ -190,4 +190,18 @@
     [_mySearchDisplayController.searchResultsTableView reloadData];
 }
 
+#pragma mark Keyed Archiving
+
+- (void)encodeWithCoder:(NSCoder *)encoder {
+    [super encodeWithCoder:encoder];
+    [encoder encodeObject:_searchString forKey:@"searchString"];
+}
+
+- (id)initWithCoder:(NSCoder *)decoder {
+    if ((self = [super initWithCoder:decoder])) {
+        _searchString = [[decoder decodeObjectForKey:@"searchString"] retain];
+    }
+    return self;
+}
+
 @end

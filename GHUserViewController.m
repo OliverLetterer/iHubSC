@@ -1117,4 +1117,40 @@
     }
 }
 
+#pragma mark Keyed Archiving
+
+- (void)encodeWithCoder:(NSCoder *)encoder {
+    [super encodeWithCoder:encoder];
+    [encoder encodeObject:_username forKey:@"username"];
+    [encoder encodeObject:_user forKey:@"user"];
+    [encoder encodeObject:_repositoriesArray forKey:@"repositoriesArray"];
+    [encoder encodeObject:_watchedRepositoriesArray forKey:@"watchedRepositoriesArray"];
+    [encoder encodeObject:_followingUsers forKey:@"followingUsers"];
+    [encoder encodeObject:_organizations forKey:@"organizations"];
+    [encoder encodeObject:_followedUsers forKey:@"followedUsers"];
+    [encoder encodeObject:_gists forKey:@"gists"];
+    [encoder encodeObject:_assignedIssues forKey:@"assignedIssues"];
+    [encoder encodeBool:_hasFollowingData forKey:@"hasFollowingData"];
+    [encoder encodeBool:_isFollowingUser forKey:@"isFollowingUser"];
+    [encoder encodeObject:_lastIndexPathForSingleRepositoryViewController forKey:@"lastIndexPathForSingleRepositoryViewController"];
+}
+
+- (id)initWithCoder:(NSCoder *)decoder {
+    if ((self = [super initWithCoder:decoder])) {
+        _username = [[decoder decodeObjectForKey:@"username"] retain];
+        _user = [[decoder decodeObjectForKey:@"user"] retain];
+        _repositoriesArray = [[decoder decodeObjectForKey:@"repositoriesArray"] retain];
+        _watchedRepositoriesArray = [[decoder decodeObjectForKey:@"watchedRepositoriesArray"] retain];
+        _followingUsers = [[decoder decodeObjectForKey:@"followingUsers"] retain];
+        _organizations = [[decoder decodeObjectForKey:@"organizations"] retain];
+        _followedUsers = [[decoder decodeObjectForKey:@"followedUsers"] retain];
+        _gists = [[decoder decodeObjectForKey:@"gists"] retain];
+        _assignedIssues = [[decoder decodeObjectForKey:@"assignedIssues"] retain];
+        _hasFollowingData = [decoder decodeBoolForKey:@"hasFollowingData"];
+        _isFollowingUser = [decoder decodeBoolForKey:@"isFollowingUser"];
+        _lastIndexPathForSingleRepositoryViewController = [[decoder decodeObjectForKey:@"lastIndexPathForSingleRepositoryViewController"] retain];
+    }
+    return self;
+}
+
 @end

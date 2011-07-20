@@ -912,4 +912,38 @@
     [sheet showInView:self.tabBarController.view];
 }
 
+#pragma mark Keyed Archiving
+
+- (void)encodeWithCoder:(NSCoder *)encoder {
+    [super encodeWithCoder:encoder];
+    [encoder encodeObject:_issue forKey:@"issue"];
+    [encoder encodeObject:_repository forKey:@"repository"];
+    [encoder encodeObject:_number forKey:@"number"];
+    [encoder encodeObject:_history forKey:@"history"];
+    [encoder encodeObject:_discussion forKey:@"discussion"];
+    [encoder encodeObject:_textView forKey:@"textView"];
+    [encoder encodeObject:_textViewToolBar forKey:@"textViewToolBar"];
+    [encoder encodeObject:_attributedTextView forKey:@"attributedTextView"];
+    [encoder encodeObject:_selectedURL forKey:@"selectedURL"];
+    [encoder encodeBool:_hasCollaboratorData forKey:@"hasCollaboratorData"];
+    [encoder encodeBool:_isCollaborator forKey:@"isCollaborator"];
+}
+
+- (id)initWithCoder:(NSCoder *)decoder {
+    if ((self = [super initWithCoder:decoder])) {
+        _issue = [[decoder decodeObjectForKey:@"issue"] retain];
+        _repository = [[decoder decodeObjectForKey:@"repository"] retain];
+        _number = [[decoder decodeObjectForKey:@"number"] retain];
+        _history = [[decoder decodeObjectForKey:@"history"] retain];
+        _discussion = [[decoder decodeObjectForKey:@"discussion"] retain];
+        _textView = [[decoder decodeObjectForKey:@"textView"] retain];
+        _textViewToolBar = [[decoder decodeObjectForKey:@"textViewToolBar"] retain];
+        _attributedTextView = [[decoder decodeObjectForKey:@"attributedTextView"] retain];
+        _selectedURL = [[decoder decodeObjectForKey:@"selectedURL"] retain];
+        _hasCollaboratorData = [decoder decodeBoolForKey:@"hasCollaboratorData"];
+        _isCollaborator = [decoder decodeBoolForKey:@"isCollaborator"];
+    }
+    return self;
+}
+
 @end
