@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
 
+#warning try to move rightViewControllers into a seperate transparent container View
 #warning test swipe recognizer
 #warning experiment with notification positions and size
 #warning serialize newsfeed
