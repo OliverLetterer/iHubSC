@@ -33,4 +33,19 @@
     [super dealloc];
 }
 
+#pragma mark Keyed Archiving
+
+- (void)encodeWithCoder:(NSCoder *)encoder {
+    [encoder encodeObject:_URL forKey:@"uRL"];
+    [encoder encodeObject:_SHA forKey:@"sHA"];
+}
+
+- (id)initWithCoder:(NSCoder *)decoder {
+    if ((self = [super init])) {
+        _URL = [[decoder decodeObjectForKey:@"uRL"] retain];
+        _SHA = [[decoder decodeObjectForKey:@"sHA"] retain];
+    }
+    return self;
+}
+
 @end

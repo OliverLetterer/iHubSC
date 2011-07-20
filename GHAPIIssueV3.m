@@ -88,6 +88,51 @@ NSString *const kGHAPIIssueStateV3Closed = @"closed";
     [super dealloc];
 }
 
+#pragma mark Keyed Archiving
+
+- (void)encodeWithCoder:(NSCoder *)encoder {
+    [encoder encodeObject:_assignee forKey:@"assignee"];
+    [encoder encodeObject:_body forKey:@"body"];
+    [encoder encodeObject:_attributedBody forKey:@"attributedBody"];
+    [encoder encodeObject:_closedAt forKey:@"closedAt"];
+    [encoder encodeObject:_comments forKey:@"comments"];
+    [encoder encodeObject:_createdAt forKey:@"createdAt"];
+    [encoder encodeObject:_HTMLURL forKey:@"hTMLURL"];
+    [encoder encodeObject:_labels forKey:@"labels"];
+    [encoder encodeObject:_milestone forKey:@"milestone"];
+    [encoder encodeObject:_number forKey:@"number"];
+    [encoder encodeObject:_pullRequestID forKey:@"pullRequestID"];
+    [encoder encodeObject:_state forKey:@"state"];
+    [encoder encodeObject:_title forKey:@"title"];
+    [encoder encodeObject:_updatedAt forKey:@"updatedAt"];
+    [encoder encodeObject:_URL forKey:@"uRL"];
+    [encoder encodeObject:_user forKey:@"user"];
+    [encoder encodeObject:_repository forKey:@"repository"];
+}
+
+- (id)initWithCoder:(NSCoder *)decoder {
+    if ((self = [super init])) {
+        _assignee = [[decoder decodeObjectForKey:@"assignee"] retain];
+        _body = [[decoder decodeObjectForKey:@"body"] retain];
+        _attributedBody = [[decoder decodeObjectForKey:@"attributedBody"] retain];
+        _closedAt = [[decoder decodeObjectForKey:@"closedAt"] retain];
+        _comments = [[decoder decodeObjectForKey:@"comments"] retain];
+        _createdAt = [[decoder decodeObjectForKey:@"createdAt"] retain];
+        _HTMLURL = [[decoder decodeObjectForKey:@"hTMLURL"] retain];
+        _labels = [[decoder decodeObjectForKey:@"labels"] retain];
+        _milestone = [[decoder decodeObjectForKey:@"milestone"] retain];
+        _number = [[decoder decodeObjectForKey:@"number"] retain];
+        _pullRequestID = [[decoder decodeObjectForKey:@"pullRequestID"] retain];
+        _state = [[decoder decodeObjectForKey:@"state"] retain];
+        _title = [[decoder decodeObjectForKey:@"title"] retain];
+        _updatedAt = [[decoder decodeObjectForKey:@"updatedAt"] retain];
+        _URL = [[decoder decodeObjectForKey:@"uRL"] retain];
+        _user = [[decoder decodeObjectForKey:@"user"] retain];
+        _repository = [[decoder decodeObjectForKey:@"repository"] retain];
+    }
+    return self;
+}
+
 #pragma mark - class methods
 
 + (void)openedIssuesOnRepository:(NSString *)repository page:(NSInteger)page completionHandler:(GHAPIPaginationHandler)handler {

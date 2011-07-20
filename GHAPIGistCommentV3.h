@@ -10,7 +10,7 @@
 
 @class GHAPIUserV3;
 
-@interface GHAPIGistCommentV3 : NSObject {
+@interface GHAPIGistCommentV3 : NSObject <NSCoding> {
 @private
     NSNumber *_ID;
     NSString *_URL;

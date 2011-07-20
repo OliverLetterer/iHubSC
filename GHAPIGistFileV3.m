@@ -36,4 +36,23 @@
     [super dealloc];
 }
 
+#pragma mark Keyed Archiving
+
+- (void)encodeWithCoder:(NSCoder *)encoder {
+    [encoder encodeObject:_filename forKey:@"filename"];
+    [encoder encodeObject:_size forKey:@"size"];
+    [encoder encodeObject:_URL forKey:@"uRL"];
+    [encoder encodeObject:_content forKey:@"content"];
+}
+
+- (id)initWithCoder:(NSCoder *)decoder {
+    if ((self = [super init])) {
+        _filename = [[decoder decodeObjectForKey:@"filename"] retain];
+        _size = [[decoder decodeObjectForKey:@"size"] retain];
+        _URL = [[decoder decodeObjectForKey:@"uRL"] retain];
+        _content = [[decoder decodeObjectForKey:@"content"] retain];
+    }
+    return self;
+}
+
 @end

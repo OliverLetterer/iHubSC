@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 
 
-@interface GHAPIUserPlanV3 : NSObject {
+@interface GHAPIUserPlanV3 : NSObject <NSCoding> {
 @private
     NSString *_name;
     NSNumber *_space;

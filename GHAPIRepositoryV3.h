@@ -11,7 +11,7 @@
 
 @class GHAPIUserV3, GHAPIOrganizationV3;
 
-@interface GHAPIRepositoryV3 : NSObject {
+@interface GHAPIRepositoryV3 : NSObject <NSCoding> {
 @private
     NSString *_URL;
     NSString *_HTMLURL;

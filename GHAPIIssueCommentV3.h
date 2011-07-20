@@ -10,7 +10,7 @@
 
 @class GHAPIUserV3;
 
-@interface GHAPIIssueCommentV3 : NSObject {
+@interface GHAPIIssueCommentV3 : NSObject <NSCoding> {
 @private
     NSString *_URL;
     NSString *_body;

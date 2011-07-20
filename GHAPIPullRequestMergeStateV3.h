@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 
 
-@interface GHAPIPullRequestMergeStateV3 : NSObject {
+@interface GHAPIPullRequestMergeStateV3 : NSObject <NSCoding> {
 @private
     NSString *_SHA;
     NSNumber *_merged;

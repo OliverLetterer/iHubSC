@@ -10,7 +10,7 @@
 
 @class GHAPIUserV3;
 
-@interface GHAPIMilestoneV3 : NSObject {
+@interface GHAPIMilestoneV3 : NSObject <NSCoding> {
 @private
     NSNumber *_closedIssues;
     NSString *_createdAt;

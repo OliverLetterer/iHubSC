@@ -48,6 +48,39 @@
     return self;
 }
 
+#pragma mark Keyed Archiving
+
+- (void)encodeWithCoder:(NSCoder *)encoder {
+    [encoder encodeObject:_URL forKey:@"uRL"];
+    [encoder encodeObject:_ID forKey:@"iD"];
+    [encoder encodeObject:_description forKey:@"description"];
+    [encoder encodeObject:_public forKey:@"public"];
+    [encoder encodeObject:_user forKey:@"user"];
+    [encoder encodeObject:_files forKey:@"files"];
+    [encoder encodeObject:_comments forKey:@"comments"];
+    [encoder encodeObject:_pullURL forKey:@"pullURL"];
+    [encoder encodeObject:_pushURL forKey:@"pushURL"];
+    [encoder encodeObject:_createdAt forKey:@"createdAt"];
+    [encoder encodeObject:_forks forKey:@"forks"];
+}
+
+- (id)initWithCoder:(NSCoder *)decoder {
+    if ((self = [super init])) {
+        _URL = [[decoder decodeObjectForKey:@"uRL"] retain];
+        _ID = [[decoder decodeObjectForKey:@"iD"] retain];
+        _description = [[decoder decodeObjectForKey:@"description"] retain];
+        _public = [[decoder decodeObjectForKey:@"public"] retain];
+        _user = [[decoder decodeObjectForKey:@"user"] retain];
+        _files = [[decoder decodeObjectForKey:@"files"] retain];
+        _comments = [[decoder decodeObjectForKey:@"comments"] retain];
+        _pullURL = [[decoder decodeObjectForKey:@"pullURL"] retain];
+        _pushURL = [[decoder decodeObjectForKey:@"pushURL"] retain];
+        _createdAt = [[decoder decodeObjectForKey:@"createdAt"] retain];
+        _forks = [[decoder decodeObjectForKey:@"forks"] retain];
+    }
+    return self;
+}
+
 #pragma mark - downloading
 
 + (void)gistWithID:(NSString *)ID completionHandler:(void (^)(GHAPIGistV3 *, NSError *))handler {

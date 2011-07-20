@@ -37,6 +37,21 @@
     return self;
 }
 
+#pragma mark Keyed Archiving
+
+- (void)encodeWithCoder:(NSCoder *)encoder {
+    [encoder encodeObject:_name forKey:@"name"];
+    [encoder encodeObject:_ID forKey:@"iD"];
+}
+
+- (id)initWithCoder:(NSCoder *)decoder {
+    if ((self = [super init])) {
+        _name = [[decoder decodeObjectForKey:@"name"] retain];
+        _ID = [[decoder decodeObjectForKey:@"iD"] retain];
+    }
+    return self;
+}
+
 #pragma mark - Memory management
 
 - (void)dealloc {

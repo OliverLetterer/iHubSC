@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 
 
-@interface GHAPIGistFileV3 : NSObject {
+@interface GHAPIGistFileV3 : NSObject <NSCoding> {
 @private
     NSString *_filename;
     NSNumber *_size;

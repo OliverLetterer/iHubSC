@@ -75,6 +75,37 @@
     [super dealloc];
 }
 
+#pragma mark Keyed Archiving
+
+- (void)encodeWithCoder:(NSCoder *)encoder {
+    [encoder encodeObject:_closedIssues forKey:@"closedIssues"];
+    [encoder encodeObject:_createdAt forKey:@"createdAt"];
+    [encoder encodeObject:_creator forKey:@"creator"];
+    [encoder encodeObject:_milestoneDescription forKey:@"milestoneDescription"];
+    [encoder encodeObject:_dueOn forKey:@"dueOn"];
+    [encoder encodeObject:_number forKey:@"number"];
+    [encoder encodeObject:_openIssues forKey:@"openIssues"];
+    [encoder encodeObject:_state forKey:@"state"];
+    [encoder encodeObject:_title forKey:@"title"];
+    [encoder encodeObject:_URL forKey:@"uRL"];
+}
+
+- (id)initWithCoder:(NSCoder *)decoder {
+    if ((self = [super init])) {
+        _closedIssues = [[decoder decodeObjectForKey:@"closedIssues"] retain];
+        _createdAt = [[decoder decodeObjectForKey:@"createdAt"] retain];
+        _creator = [[decoder decodeObjectForKey:@"creator"] retain];
+        _milestoneDescription = [[decoder decodeObjectForKey:@"milestoneDescription"] retain];
+        _dueOn = [[decoder decodeObjectForKey:@"dueOn"] retain];
+        _number = [[decoder decodeObjectForKey:@"number"] retain];
+        _openIssues = [[decoder decodeObjectForKey:@"openIssues"] retain];
+        _state = [[decoder decodeObjectForKey:@"state"] retain];
+        _title = [[decoder decodeObjectForKey:@"title"] retain];
+        _URL = [[decoder decodeObjectForKey:@"uRL"] retain];
+    }
+    return self;
+}
+
 #pragma mark - downloading
 
 + (void)milestoneOnRepository:(NSString *)repository number:(NSNumber *)number 

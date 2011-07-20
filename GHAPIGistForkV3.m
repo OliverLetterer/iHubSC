@@ -35,4 +35,21 @@
     [super dealloc];
 }
 
+#pragma mark Keyed Archiving
+
+- (void)encodeWithCoder:(NSCoder *)encoder {
+    [encoder encodeObject:_user forKey:@"user"];
+    [encoder encodeObject:_URL forKey:@"uRL"];
+    [encoder encodeObject:_createdAt forKey:@"createdAt"];
+}
+
+- (id)initWithCoder:(NSCoder *)decoder {
+    if ((self = [super init])) {
+        _user = [[decoder decodeObjectForKey:@"user"] retain];
+        _URL = [[decoder decodeObjectForKey:@"uRL"] retain];
+        _createdAt = [[decoder decodeObjectForKey:@"createdAt"] retain];
+    }
+    return self;
+}
+
 @end

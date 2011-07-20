@@ -35,4 +35,21 @@
     [super dealloc];
 }
 
+#pragma mark Keyed Archiving
+
+- (void)encodeWithCoder:(NSCoder *)encoder {
+    [encoder encodeObject:_SHA forKey:@"sHA"];
+    [encoder encodeObject:_merged forKey:@"merged"];
+    [encoder encodeObject:_message forKey:@"message"];
+}
+
+- (id)initWithCoder:(NSCoder *)decoder {
+    if ((self = [super init])) {
+        _SHA = [[decoder decodeObjectForKey:@"sHA"] retain];
+        _merged = [[decoder decodeObjectForKey:@"merged"] retain];
+        _message = [[decoder decodeObjectForKey:@"message"] retain];
+    }
+    return self;
+}
+
 @end

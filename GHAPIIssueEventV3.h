@@ -21,7 +21,7 @@ typedef enum {
     GHAPIIssueEventTypeV3Assigned
 } GHAPIIssueEventTypeV3;
 
-@interface GHAPIIssueEventV3 : NSObject {
+@interface GHAPIIssueEventV3 : NSObject <NSCoding> {
 @private
     NSString *_URL;
     GHAPIUserV3 *_actor;

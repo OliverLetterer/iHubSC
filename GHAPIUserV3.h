@@ -11,7 +11,7 @@
 
 @class GHAPIUserPlanV3;
 
-@interface GHAPIUserV3 : NSObject {
+@interface GHAPIUserV3 : NSObject <NSCoding> {
 @private
     NSString *_login;
     NSNumber *_ID;

@@ -10,7 +10,7 @@
 
 @class GHAPIUserV3;
 
-@interface GHAPIGistForkV3 : NSObject {
+@interface GHAPIGistForkV3 : NSObject <NSCoding> {
 @private
     GHAPIUserV3 *_user;
     NSString *_URL;

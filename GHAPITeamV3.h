@@ -13,7 +13,7 @@ extern NSString *const GHAPITeamV3PermissionPull;
 extern NSString *const GHAPITeamV3PermissionPush;
 extern NSString *const GHAPITeamV3PermissionAdmin;
 
-@interface GHAPITeamV3 : NSObject {
+@interface GHAPITeamV3 : NSObject <NSCoding> {
 @private
     NSString *_URL;
     NSString *_name;

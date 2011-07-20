@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 
 
-@interface GHAPIRepositoryBranchV3 : NSObject {
+@interface GHAPIRepositoryBranchV3 : NSObject <NSCoding> {
 @private
     NSString *_name;
     NSString *_ID;

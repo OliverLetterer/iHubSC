@@ -65,6 +65,67 @@
     return self;
 }
 
+#pragma mark Keyed Archiving
+
+- (void)encodeWithCoder:(NSCoder *)encoder {
+    [encoder encodeObject:_login forKey:@"login"];
+    [encoder encodeObject:_ID forKey:@"iD"];
+    [encoder encodeObject:_avatarURL forKey:@"avatarURL"];
+    [encoder encodeObject:_gravatarID forKey:@"gravatarID"];
+    [encoder encodeObject:_URL forKey:@"uRL"];
+    [encoder encodeObject:_name forKey:@"name"];
+    [encoder encodeObject:_company forKey:@"company"];
+    [encoder encodeObject:_blog forKey:@"blog"];
+    [encoder encodeObject:_location forKey:@"location"];
+    [encoder encodeObject:_EMail forKey:@"eMail"];
+    [encoder encodeObject:_hireable forKey:@"hireable"];
+    [encoder encodeObject:_bio forKey:@"bio"];
+    [encoder encodeObject:_publicRepos forKey:@"publicRepos"];
+    [encoder encodeObject:_publicGists forKey:@"publicGists"];
+    [encoder encodeObject:_followers forKey:@"followers"];
+    [encoder encodeObject:_following forKey:@"following"];
+    [encoder encodeObject:_htmlURL forKey:@"htmlURL"];
+    [encoder encodeObject:_createdAt forKey:@"createdAt"];
+    [encoder encodeObject:_type forKey:@"type"];
+    [encoder encodeObject:_totalPrivateRepos forKey:@"totalPrivateRepos"];
+    [encoder encodeObject:_ownedPrivateRepos forKey:@"ownedPrivateRepos"];
+    [encoder encodeObject:_privateGists forKey:@"privateGists"];
+    [encoder encodeObject:_diskUsage forKey:@"diskUsage"];
+    [encoder encodeObject:_collaborators forKey:@"collaborators"];
+    [encoder encodeObject:_plan forKey:@"plan"];
+}
+
+- (id)initWithCoder:(NSCoder *)decoder {
+    if ((self = [super init])) {
+        _login = [[decoder decodeObjectForKey:@"login"] retain];
+        _ID = [[decoder decodeObjectForKey:@"iD"] retain];
+        _avatarURL = [[decoder decodeObjectForKey:@"avatarURL"] retain];
+        _gravatarID = [[decoder decodeObjectForKey:@"gravatarID"] retain];
+        _URL = [[decoder decodeObjectForKey:@"uRL"] retain];
+        _name = [[decoder decodeObjectForKey:@"name"] retain];
+        _company = [[decoder decodeObjectForKey:@"company"] retain];
+        _blog = [[decoder decodeObjectForKey:@"blog"] retain];
+        _location = [[decoder decodeObjectForKey:@"location"] retain];
+        _EMail = [[decoder decodeObjectForKey:@"eMail"] retain];
+        _hireable = [[decoder decodeObjectForKey:@"hireable"] retain];
+        _bio = [[decoder decodeObjectForKey:@"bio"] retain];
+        _publicRepos = [[decoder decodeObjectForKey:@"publicRepos"] retain];
+        _publicGists = [[decoder decodeObjectForKey:@"publicGists"] retain];
+        _followers = [[decoder decodeObjectForKey:@"followers"] retain];
+        _following = [[decoder decodeObjectForKey:@"following"] retain];
+        _htmlURL = [[decoder decodeObjectForKey:@"htmlURL"] retain];
+        _createdAt = [[decoder decodeObjectForKey:@"createdAt"] retain];
+        _type = [[decoder decodeObjectForKey:@"type"] retain];
+        _totalPrivateRepos = [[decoder decodeObjectForKey:@"totalPrivateRepos"] retain];
+        _ownedPrivateRepos = [[decoder decodeObjectForKey:@"ownedPrivateRepos"] retain];
+        _privateGists = [[decoder decodeObjectForKey:@"privateGists"] retain];
+        _diskUsage = [[decoder decodeObjectForKey:@"diskUsage"] retain];
+        _collaborators = [[decoder decodeObjectForKey:@"collaborators"] retain];
+        _plan = [[decoder decodeObjectForKey:@"plan"] retain];
+    }
+    return self;
+}
+
 #pragma mark - Downloading
 
 + (void)userWithName:(NSString *)username completionHandler:(void(^)(GHAPIUserV3 *user, NSError *error))handler {

@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 
 
-@interface GHAPITreeInfoV3 : NSObject {
+@interface GHAPITreeInfoV3 : NSObject <NSCoding> {
 @private
     NSString *_URL;
     NSString *_SHA;

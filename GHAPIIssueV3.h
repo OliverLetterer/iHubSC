@@ -14,7 +14,7 @@
 extern NSString *const kGHAPIIssueStateV3Open;
 extern NSString *const kGHAPIIssueStateV3Closed;
 
-@interface GHAPIIssueV3 : NSObject {
+@interface GHAPIIssueV3 : NSObject <NSCoding> {
 @private
     GHAPIUserV3 *_assignee;
     NSString *_body;

@@ -10,7 +10,7 @@
 
 @class GHAPIUserV3, GHAPITreeInfoV3;
 
-@interface GHAPICommitV3 : NSObject {
+@interface GHAPICommitV3 : NSObject <NSCoding> {
 @private
     NSString *_SHA;
     NSString *_URL;

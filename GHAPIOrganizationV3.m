@@ -53,6 +53,51 @@
     return self;
 }
 
+#pragma mark Keyed Archiving
+
+- (void)encodeWithCoder:(NSCoder *)encoder {
+    [encoder encodeObject:_login forKey:@"login"];
+    [encoder encodeObject:_ID forKey:@"iD"];
+    [encoder encodeObject:_URL forKey:@"uRL"];
+    [encoder encodeObject:_avatarURL forKey:@"avatarURL"];
+    [encoder encodeObject:_gravatarID forKey:@"gravatarID"];
+    [encoder encodeObject:_name forKey:@"name"];
+    [encoder encodeObject:_company forKey:@"company"];
+    [encoder encodeObject:_blog forKey:@"blog"];
+    [encoder encodeObject:_location forKey:@"location"];
+    [encoder encodeObject:_EMail forKey:@"eMail"];
+    [encoder encodeObject:_publicRepos forKey:@"publicRepos"];
+    [encoder encodeObject:_publicGists forKey:@"publicGists"];
+    [encoder encodeObject:_follower forKey:@"follower"];
+    [encoder encodeObject:_following forKey:@"following"];
+    [encoder encodeObject:_HTMLURL forKey:@"hTMLURL"];
+    [encoder encodeObject:_createdAt forKey:@"createdAt"];
+    [encoder encodeObject:_type forKey:@"type"];
+}
+
+- (id)initWithCoder:(NSCoder *)decoder {
+    if ((self = [super init])) {
+        _login = [[decoder decodeObjectForKey:@"login"] retain];
+        _ID = [[decoder decodeObjectForKey:@"iD"] retain];
+        _URL = [[decoder decodeObjectForKey:@"uRL"] retain];
+        _avatarURL = [[decoder decodeObjectForKey:@"avatarURL"] retain];
+        _gravatarID = [[decoder decodeObjectForKey:@"gravatarID"] retain];
+        _name = [[decoder decodeObjectForKey:@"name"] retain];
+        _company = [[decoder decodeObjectForKey:@"company"] retain];
+        _blog = [[decoder decodeObjectForKey:@"blog"] retain];
+        _location = [[decoder decodeObjectForKey:@"location"] retain];
+        _EMail = [[decoder decodeObjectForKey:@"eMail"] retain];
+        _publicRepos = [[decoder decodeObjectForKey:@"publicRepos"] retain];
+        _publicGists = [[decoder decodeObjectForKey:@"publicGists"] retain];
+        _follower = [[decoder decodeObjectForKey:@"follower"] retain];
+        _following = [[decoder decodeObjectForKey:@"following"] retain];
+        _HTMLURL = [[decoder decodeObjectForKey:@"hTMLURL"] retain];
+        _createdAt = [[decoder decodeObjectForKey:@"createdAt"] retain];
+        _type = [[decoder decodeObjectForKey:@"type"] retain];
+    }
+    return self;
+}
+
 #pragma mark - Memory management
 
 - (void)dealloc {

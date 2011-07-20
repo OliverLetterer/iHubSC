@@ -84,6 +84,61 @@
     return self;
 }
 
+#pragma mark Keyed Archiving
+
+- (void)encodeWithCoder:(NSCoder *)encoder {
+    [encoder encodeObject:_URL forKey:@"uRL"];
+    [encoder encodeObject:_HTMLURL forKey:@"hTMLURL"];
+    [encoder encodeObject:_owner forKey:@"owner"];
+    [encoder encodeObject:_name forKey:@"name"];
+    [encoder encodeObject:_description forKey:@"description"];
+    [encoder encodeObject:_homepage forKey:@"homepage"];
+    [encoder encodeObject:_language forKey:@"language"];
+    [encoder encodeObject:_private forKey:@"private"];
+    [encoder encodeObject:_fork forKey:@"fork"];
+    [encoder encodeObject:_forks forKey:@"forks"];
+    [encoder encodeObject:_watchers forKey:@"watchers"];
+    [encoder encodeObject:_size forKey:@"size"];
+    [encoder encodeObject:_openIssues forKey:@"openIssues"];
+    [encoder encodeObject:_pushedAt forKey:@"pushedAt"];
+    [encoder encodeObject:_createdAt forKey:@"createdAt"];
+    [encoder encodeObject:_organization forKey:@"organization"];
+    [encoder encodeObject:_parent forKey:@"parent"];
+    [encoder encodeObject:_source forKey:@"source"];
+    [encoder encodeObject:_masterBranch forKey:@"masterBranch"];
+    [encoder encodeObject:_hasIssues forKey:@"hasIssues"];
+    [encoder encodeObject:_hasWiki forKey:@"hasWiki"];
+    [encoder encodeObject:_hasDownloads forKey:@"hasDownloads"];
+}
+
+- (id)initWithCoder:(NSCoder *)decoder {
+    if ((self = [super init])) {
+        _URL = [[decoder decodeObjectForKey:@"uRL"] retain];
+        _HTMLURL = [[decoder decodeObjectForKey:@"hTMLURL"] retain];
+        _owner = [[decoder decodeObjectForKey:@"owner"] retain];
+        _name = [[decoder decodeObjectForKey:@"name"] retain];
+        _description = [[decoder decodeObjectForKey:@"description"] retain];
+        _homepage = [[decoder decodeObjectForKey:@"homepage"] retain];
+        _language = [[decoder decodeObjectForKey:@"language"] retain];
+        _private = [[decoder decodeObjectForKey:@"private"] retain];
+        _fork = [[decoder decodeObjectForKey:@"fork"] retain];
+        _forks = [[decoder decodeObjectForKey:@"forks"] retain];
+        _watchers = [[decoder decodeObjectForKey:@"watchers"] retain];
+        _size = [[decoder decodeObjectForKey:@"size"] retain];
+        _openIssues = [[decoder decodeObjectForKey:@"openIssues"] retain];
+        _pushedAt = [[decoder decodeObjectForKey:@"pushedAt"] retain];
+        _createdAt = [[decoder decodeObjectForKey:@"createdAt"] retain];
+        _organization = [[decoder decodeObjectForKey:@"organization"] retain];
+        _parent = [[decoder decodeObjectForKey:@"parent"] retain];
+        _source = [[decoder decodeObjectForKey:@"source"] retain];
+        _masterBranch = [[decoder decodeObjectForKey:@"masterBranch"] retain];
+        _hasIssues = [[decoder decodeObjectForKey:@"hasIssues"] retain];
+        _hasWiki = [[decoder decodeObjectForKey:@"hasWiki"] retain];
+        _hasDownloads = [[decoder decodeObjectForKey:@"hasDownloads"] retain];
+    }
+    return self;
+}
+
 #pragma mark - Memory management
 
 - (void)dealloc {

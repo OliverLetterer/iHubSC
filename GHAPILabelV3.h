@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 
 
-@interface GHAPILabelV3 : NSObject {
+@interface GHAPILabelV3 : NSObject <NSCoding> {
 @private
     NSString *_URL;
     NSString *_name;

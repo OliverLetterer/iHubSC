@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "GHAPIConnectionHandlersV3.h"
 
-@interface GHAPIOrganizationV3 : NSObject {
+@interface GHAPIOrganizationV3 : NSObject <NSCoding> {
 @private
     NSString *_login;
     NSNumber *_ID;

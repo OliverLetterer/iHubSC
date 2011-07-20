@@ -45,6 +45,29 @@ NSString *const GHAPITeamV3PermissionAdmin = @"admin";
     [super dealloc];
 }
 
+#pragma mark Keyed Archiving
+
+- (void)encodeWithCoder:(NSCoder *)encoder {
+    [encoder encodeObject:_URL forKey:@"uRL"];
+    [encoder encodeObject:_name forKey:@"name"];
+    [encoder encodeObject:_ID forKey:@"iD"];
+    [encoder encodeObject:_permission forKey:@"permission"];
+    [encoder encodeObject:_membersCount forKey:@"membersCount"];
+    [encoder encodeObject:_reposCount forKey:@"reposCount"];
+}
+
+- (id)initWithCoder:(NSCoder *)decoder {
+    if ((self = [super init])) {
+        _URL = [[decoder decodeObjectForKey:@"uRL"] retain];
+        _name = [[decoder decodeObjectForKey:@"name"] retain];
+        _ID = [[decoder decodeObjectForKey:@"iD"] retain];
+        _permission = [[decoder decodeObjectForKey:@"permission"] retain];
+        _membersCount = [[decoder decodeObjectForKey:@"membersCount"] retain];
+        _reposCount = [[decoder decodeObjectForKey:@"reposCount"] retain];
+    }
+    return self;
+}
+
 #pragma mark - API calls
 
 + (void)teamByID:(NSNumber *)teamID completionHandler:(void (^)(GHAPITeamV3 *team, NSError *error))handler {

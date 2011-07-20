@@ -79,4 +79,29 @@
     [super dealloc];
 }
 
+#pragma mark Keyed Archiving
+
+- (void)encodeWithCoder:(NSCoder *)encoder {
+    [encoder encodeObject:_SHA forKey:@"sHA"];
+    [encoder encodeObject:_URL forKey:@"uRL"];
+    [encoder encodeObject:_author forKey:@"author"];
+    [encoder encodeObject:_committer forKey:@"committer"];
+    [encoder encodeObject:_message forKey:@"message"];
+    [encoder encodeObject:_tree forKey:@"tree"];
+    [encoder encodeObject:_parents forKey:@"parents"];
+}
+
+- (id)initWithCoder:(NSCoder *)decoder {
+    if ((self = [super init])) {
+        _SHA = [[decoder decodeObjectForKey:@"sHA"] retain];
+        _URL = [[decoder decodeObjectForKey:@"uRL"] retain];
+        _author = [[decoder decodeObjectForKey:@"author"] retain];
+        _committer = [[decoder decodeObjectForKey:@"committer"] retain];
+        _message = [[decoder decodeObjectForKey:@"message"] retain];
+        _tree = [[decoder decodeObjectForKey:@"tree"] retain];
+        _parents = [[decoder decodeObjectForKey:@"parents"] retain];
+    }
+    return self;
+}
+
 @end

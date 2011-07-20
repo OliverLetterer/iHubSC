@@ -37,4 +37,23 @@
     [super dealloc];
 }
 
+#pragma mark Keyed Archiving
+
+- (void)encodeWithCoder:(NSCoder *)encoder {
+    [encoder encodeObject:_name forKey:@"name"];
+    [encoder encodeObject:_space forKey:@"space"];
+    [encoder encodeObject:_collaborators forKey:@"collaborators"];
+    [encoder encodeObject:_privateRepos forKey:@"privateRepos"];
+}
+
+- (id)initWithCoder:(NSCoder *)decoder {
+    if ((self = [super init])) {
+        _name = [[decoder decodeObjectForKey:@"name"] retain];
+        _space = [[decoder decodeObjectForKey:@"space"] retain];
+        _collaborators = [[decoder decodeObjectForKey:@"collaborators"] retain];
+        _privateRepos = [[decoder decodeObjectForKey:@"privateRepos"] retain];
+    }
+    return self;
+}
+
 @end

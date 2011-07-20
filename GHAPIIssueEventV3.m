@@ -70,4 +70,27 @@
     [super dealloc];
 }
 
+#pragma mark Keyed Archiving
+
+- (void)encodeWithCoder:(NSCoder *)encoder {
+    [encoder encodeObject:_URL forKey:@"uRL"];
+    [encoder encodeObject:_actor forKey:@"actor"];
+    [encoder encodeObject:_event forKey:@"event"];
+    [encoder encodeObject:_commitID forKey:@"commitID"];
+    [encoder encodeObject:_createdAt forKey:@"createdAt"];
+    [encoder encodeInteger:_type forKey:@"type"];
+}
+
+- (id)initWithCoder:(NSCoder *)decoder {
+    if ((self = [super init])) {
+        _URL = [[decoder decodeObjectForKey:@"uRL"] retain];
+        _actor = [[decoder decodeObjectForKey:@"actor"] retain];
+        _event = [[decoder decodeObjectForKey:@"event"] retain];
+        _commitID = [[decoder decodeObjectForKey:@"commitID"] retain];
+        _createdAt = [[decoder decodeObjectForKey:@"createdAt"] retain];
+        _type = [decoder decodeIntegerForKey:@"type"];
+    }
+    return self;
+}
+
 @end
