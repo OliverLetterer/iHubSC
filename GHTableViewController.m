@@ -538,7 +538,6 @@ static CGFloat wrapperViewHeight = 21.0f;
     [super encodeWithCoder:encoder];
     [encoder encodeObject:_nextPageForSectionsDictionary forKey:@"nextPageForSectionsDictionary"];
     [encoder encodeObject:_cachedHeightsDictionary forKey:@"123cachedHeightsDictionary"];
-    DLog(@"%@ - %@", self, _cachedHeightsDictionary);
     [encoder encodeBool:_reloadDataIfNewUserGotAuthenticated forKey:@"reloadDataIfNewUserGotAuthenticated"];
     [encoder encodeBool:_reloadDataOnApplicationWillEnterForeground forKey:@"reloadDataOnApplicationWillEnterForeground"];
     [encoder encodeInteger:_myTableViewStyle forKey:@"myTableViewStyle"];
