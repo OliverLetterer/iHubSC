@@ -257,7 +257,6 @@ NSString *const NSUserDefaultLastUpdateDateKey = @"NSUserDefaultLastUpdateDateKe
 #pragma mark - Keyed Archiving
 
 - (void)encodeWithCoder:(NSCoder *)encoder {
-    [super encodeWithCoder:encoder];
     [encoder encodeInteger:self.tableView.style forKey:@"tableViewStyle"];
     [encoder encodeBool:_pullToReleaseEnabled forKey:@"pullToReleaseEnabled"];
     [encoder encodeUIEdgeInsets:_defaultEdgeInset forKey:@"defaultEdgeInset"];

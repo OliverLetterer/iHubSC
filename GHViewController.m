@@ -25,7 +25,6 @@
 }
 
 - (void)encodeWithCoder:(NSCoder *)coder {
-    [super encodeWithCoder:coder];
     [coder encodeObject:self.title forKey:@"title"];
 }
 
