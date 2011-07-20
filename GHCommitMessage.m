@@ -33,7 +33,27 @@
     [_EMail release];
     [_message release];
     [_name release];
+    
     [super dealloc];
+}
+
+#pragma mark - NSCoding
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    [aCoder encodeObject:self.head forKey:@"head"];
+    [aCoder encodeObject:self.EMail forKey:@"EMail"];
+    [aCoder encodeObject:self.message forKey:@"message"];
+    [aCoder encodeObject:self.name forKey:@"name"];
+}
+
+- (id)initWithCoder:(NSCoder *)aDecoder {
+    if (self = [super init]) {
+        self.head = [aDecoder decodeObjectForKey:@"head"];
+        self.EMail = [aDecoder decodeObjectForKey:@"EMail"];
+        self.message = [aDecoder decodeObjectForKey:@"message"];
+        self.name = [aDecoder decodeObjectForKey:@"name"];
+    }
+    return self;
 }
 
 @end

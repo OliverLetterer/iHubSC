@@ -89,4 +89,33 @@
     [super dealloc];
 }
 
+#pragma mark - NSCoding
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    [aCoder encodeObject:self.actor forKey:@"actor"];
+    [aCoder encodeObject:self.actorAttributes forKey:@"actorAttributes"];
+    [aCoder encodeObject:self.creationDate forKey:@"creationDate"];
+    [aCoder encodeObject:self.payload forKey:@"payload"];
+    [aCoder encodeObject:self.public forKey:@"public"];
+    [aCoder encodeObject:self.repository forKey:@"repository"];
+    [aCoder encodeObject:self.times forKey:@"times"];
+    [aCoder encodeObject:self.type forKey:@"type"];
+    [aCoder encodeObject:self.URL forKey:@"URL"];
+}
+
+- (id)initWithCoder:(NSCoder *)aDecoder {
+    if (self = [super init]) {
+        self.actor = [aDecoder decodeObjectForKey:@"actor"];
+        self.actorAttributes = [aDecoder decodeObjectForKey:@"actorAttributes"];
+        self.creationDate = [aDecoder decodeObjectForKey:@"creationDate"];
+        self.payload = [aDecoder decodeObjectForKey:@"payload"];
+        self.public = [aDecoder decodeObjectForKey:@"public"];
+        self.repository = [aDecoder decodeObjectForKey:@"repository"];
+        self.times = [aDecoder decodeObjectForKey:@"times"];
+        self.type = [aDecoder decodeObjectForKey:@"type"];
+        self.URL = [aDecoder decodeObjectForKey:@"URL"];
+    }
+    return self;
+}
+
 @end

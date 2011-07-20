@@ -36,4 +36,19 @@
     [super dealloc];
 }
 
+#pragma mark - NSCoding
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    [aCoder encodeObject:self.ID forKey:@"ID"];
+    [aCoder encodeObject:self.URL forKey:@"URL"];
+}
+
+- (id)initWithCoder:(NSCoder *)aDecoder {
+    if (self = [super initWithCoder:aDecoder]) {
+        self.ID = [aDecoder decodeObjectForKey:@"ID"];
+        self.URL = [aDecoder decodeObjectForKey:@"URL"];
+    }
+    return self;
+}
+
 @end

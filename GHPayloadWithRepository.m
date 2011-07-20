@@ -34,4 +34,17 @@
     [super dealloc];
 }
 
+#pragma mark - NSCoding
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    [aCoder encodeObject:self.repository forKey:@"repository"];
+}
+
+- (id)initWithCoder:(NSCoder *)aDecoder {
+    if (self = [super initWithCoder:aDecoder]) {
+        self.repository = [aDecoder decodeObjectForKey:@"repository"];
+    }
+    return self;
+}
+
 @end

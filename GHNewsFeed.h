@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 
 
-@interface GHNewsFeed : NSObject {
+@interface GHNewsFeed : NSObject <NSCoding> {
     NSArray *_items;
 }
 

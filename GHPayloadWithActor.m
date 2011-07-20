@@ -32,4 +32,19 @@
     [super dealloc];
 }
 
+#pragma mark - NSCoding
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    [aCoder encodeObject:self.actor forKey:@"actor"];
+    [aCoder encodeObject:self.gravatarID forKey:@"gravatarID"];
+}
+
+- (id)initWithCoder:(NSCoder *)aDecoder {
+    if (self = [super initWithCoder:aDecoder]) {
+        self.actor = [aDecoder decodeObjectForKey:@"actor"];
+        self.gravatarID = [aDecoder decodeObjectForKey:@"gravatarID"];
+    }
+    return self;
+}
+
 @end

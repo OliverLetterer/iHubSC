@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 
 
-@interface GHTarget : NSObject {
+@interface GHTarget : NSObject <NSCoding> {
     NSNumber *_followers;
     NSString *_gravatarID;
     NSString *_login;

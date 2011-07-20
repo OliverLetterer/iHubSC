@@ -38,3 +38,10 @@
 - (void)didRefreshNewsFeed:(NSString *)infoString;
 
 @end
+
+@interface GHOwnerNewsFeedViewController (GHOwnerNewsFeedViewControllerSerializaiton)
+
+- (void)serializeNewsFeed:(GHNewsFeed *)newsFeed;
+- (GHNewsFeed *)loadSerializedNewsFeed;
+
+@end

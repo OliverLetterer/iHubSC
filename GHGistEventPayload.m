@@ -46,4 +46,27 @@
     [super dealloc];
 }
 
+#pragma mark - NSCoding
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    [aCoder encodeObject:self.action forKey:@"action"];
+    [aCoder encodeObject:self.descriptionGist forKey:@"descriptionGist"];
+    [aCoder encodeObject:self.name forKey:@"name"];
+    [aCoder encodeObject:self.snippet forKey:@"snippet"];
+    [aCoder encodeObject:self.URL forKey:@"URL"];
+    [aCoder encodeObject:self.gistID forKey:@"gistID"];
+}
+
+- (id)initWithCoder:(NSCoder *)aDecoder {
+    if (self = [super initWithCoder:aDecoder]) {
+        self.action = [aDecoder decodeObjectForKey:@"action"];
+        self.descriptionGist = [aDecoder decodeObjectForKey:@"descriptionGist"];
+        self.name = [aDecoder decodeObjectForKey:@"name"];
+        self.snippet = [aDecoder decodeObjectForKey:@"snippet"];
+        self.URL = [aDecoder decodeObjectForKey:@"URL"];
+        self.gistID = [aDecoder decodeObjectForKey:@"gistID"];
+    }
+    return self;
+}
+
 @end

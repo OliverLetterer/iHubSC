@@ -10,7 +10,7 @@
 
 @class GHPullRequestDiscussion;
 
-@interface GHPullRequest : NSObject {
+@interface GHPullRequest : NSObject <NSCoding> {
     NSNumber *_additions;
     NSNumber *_commits;
     NSNumber *_deletions;

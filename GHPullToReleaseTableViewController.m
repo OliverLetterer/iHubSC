@@ -11,6 +11,8 @@
 
 #define kGHPullToReleaseTableViewControllerDefaultAnimationDuration 0.3f
 
+NSString *const NSUserDefaultLastUpdateDateKey = @"NSUserDefaultLastUpdateDateKey";
+
 @implementation GHPullToReleaseTableViewController
 
 @synthesize pullToReleaseHeaderView=_pullToReleaseHeaderView;
@@ -22,6 +24,21 @@
 
 - (CGFloat)dragDistance {
     return kGHPullToReleaseTableHeaderViewPreferedHeaderHeight + _defaultEdgeInset.top;
+}
+
+- (void)setLastUpdateDate:(NSDate *)lastUpdateDate {
+    if (lastUpdateDate != _lastUpdateDate) {
+        [_lastUpdateDate release], _lastUpdateDate = [lastUpdateDate retain];
+        
+        [[NSUserDefaults standardUserDefaults] setObject:_lastUpdateDate forKey:NSUserDefaultLastUpdateDateKey];
+    }
+}
+
+- (NSDate *)lastUpdateDate {
+    if (!_lastUpdateDate) {
+        _lastUpdateDate = [[[NSUserDefaults standardUserDefaults] objectForKey:NSUserDefaultLastUpdateDateKey] retain];
+    }
+    return _lastUpdateDate;
 }
 
 #pragma mark - Initialization

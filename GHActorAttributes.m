@@ -44,4 +44,31 @@
     [super dealloc];
 }
 
+#pragma mark - NSCoding
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    [aCoder encodeObject:self.blog forKey:@"blog"];
+    [aCoder encodeObject:self.company forKey:@"company"];
+    [aCoder encodeObject:self.EMail forKey:@"EMail"];
+    [aCoder encodeObject:self.gravatarID forKey:@"gravatarID"];
+    [aCoder encodeObject:self.location forKey:@"location"];
+    [aCoder encodeObject:self.login forKey:@"login"];
+    [aCoder encodeObject:self.name forKey:@"name"];
+    [aCoder encodeObject:self.type forKey:@"type"];
+}
+
+- (id)initWithCoder:(NSCoder *)aDecoder {
+    if (self = [super init]) {
+        self.blog = [aDecoder decodeObjectForKey:@"blog"];
+        self.company = [aDecoder decodeObjectForKey:@"company"];
+        self.EMail = [aDecoder decodeObjectForKey:@"EMail"];
+        self.gravatarID = [aDecoder decodeObjectForKey:@"gravatarID"];
+        self.location = [aDecoder decodeObjectForKey:@"location"];
+        self.login = [aDecoder decodeObjectForKey:@"login"];
+        self.name = [aDecoder decodeObjectForKey:@"name"];
+        self.type = [aDecoder decodeObjectForKey:@"type"];
+    }
+    return self;
+}
+
 @end

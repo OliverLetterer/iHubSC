@@ -10,7 +10,7 @@
 
 @class GHDirectory;
 
-@interface GHRepository : NSObject {
+@interface GHRepository : NSObject <NSCoding> {
     NSString *_creationDate;
     NSString *_desctiptionRepo;
     NSNumber *_fork;

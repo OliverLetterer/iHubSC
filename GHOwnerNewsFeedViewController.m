@@ -161,7 +161,8 @@
     [super viewDidLoad];
     
     if (!self.newsFeed) {
-        [self loadDataBasedOnSegmentControl];
+        self.newsFeed = [self loadSerializedNewsFeed];
+        [self pullToReleaseTableViewReloadData];
     }
 }
 
@@ -170,27 +171,6 @@
     
     [_segmentControl release];
     _segmentControl = nil;
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-}
-
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-}
-
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-}
-
-- (void)viewDidDisappear:(BOOL)animated {
-    [super viewDidDisappear:animated];
-}
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    // Return YES for supported orientations
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
 #pragma mark - instance methods
@@ -219,7 +199,6 @@
     // disable the segment control
     self.segmentControl.userInteractionEnabled = NO;
     self.segmentControl.alpha = 0.5;
-    self.defaultOrganizationName = nil;
     
     if (!self.newsFeed) {
         self.isDownloadingEssentialData = YES;
@@ -227,6 +206,7 @@
     // download new data
     if (self.segmentControl.selectedSegmentIndex == 0) {
         // News Feed
+        self.defaultOrganizationName = nil;
         [self showLoadingInformation:NSLocalizedString(@"Fetching private News Feed", @"")];
         [GHNewsFeed privateNewsWithCompletionHandler:^(GHNewsFeed *feed, NSError *error) {
             self.isDownloadingEssentialData = NO;
@@ -237,6 +217,7 @@
                 [self handleError:error];
             } else {
                 self.newsFeed = feed;
+                [self serializeNewsFeed:feed];
                 self.segmentControl.userInteractionEnabled = YES;
                 self.segmentControl.alpha = 1.0;
             }
@@ -272,6 +253,7 @@
                     [self handleError:error];
                 } else {
                     self.newsFeed = feed;
+                    [self serializeNewsFeed:feed];
                     self.segmentControl.userInteractionEnabled = YES;
                     self.segmentControl.alpha = 1.0;
                 }
@@ -309,6 +291,7 @@
                                            }
                                        } else {
                                            self.segmentControl.selectedSegmentIndex = 0;
+                                           [self loadDataBasedOnSegmentControl];
                                            UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Organization Error", @"") 
                                                                                             message:NSLocalizedString(@"You are not part of any Organization!", @"") 
                                                                                            delegate:nil 
@@ -337,6 +320,7 @@
             [self handleError:error];
         } else {
             self.newsFeed = feed;
+            [self serializeNewsFeed:feed];
             self.segmentControl.userInteractionEnabled = YES;
             self.segmentControl.alpha = 1.0;
         }
@@ -403,3 +387,29 @@
 }
 
 @end
+
+
+
+
+
+
+NSString *const NewsFeedSerializationFileName = @"de.olettere.lastKnownNewsFeed.plist";
+
+@implementation GHOwnerNewsFeedViewController (GHOwnerNewsFeedViewControllerSerializaiton)
+
+- (void)serializeNewsFeed:(GHNewsFeed *)newsFeed {
+    NSString *documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *filePath = [documentsDirectory stringByAppendingPathComponent:NewsFeedSerializationFileName];
+    
+    [NSKeyedArchiver archiveRootObject:newsFeed toFile:filePath];
+}
+
+- (GHNewsFeed *)loadSerializedNewsFeed {
+    NSString *documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *filePath = [documentsDirectory stringByAppendingPathComponent:NewsFeedSerializationFileName];
+    
+    return [NSKeyedUnarchiver unarchiveObjectWithFile:filePath];
+}
+
+@end
+

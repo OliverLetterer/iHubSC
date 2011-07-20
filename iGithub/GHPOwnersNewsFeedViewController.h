@@ -15,3 +15,11 @@
 }
 
 @end
+
+
+@interface GHPOwnersNewsFeedViewController (GHPOwnersNewsFeedViewControllerSerializaiton)
+
+- (void)serializeNewsFeed:(GHNewsFeed *)newsFeed;
+- (GHNewsFeed *)loadSerializedNewsFeed;
+
+@end

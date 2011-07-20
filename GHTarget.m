@@ -36,4 +36,23 @@
     [super dealloc];
 }
 
+#pragma mark - NSCoding
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    [aCoder encodeObject:self.followers forKey:@"followers"];
+    [aCoder encodeObject:self.gravatarID forKey:@"gravatarID"];
+    [aCoder encodeObject:self.login forKey:@"login"];
+    [aCoder encodeObject:self.repos forKey:@"repos"];
+}
+
+- (id)initWithCoder:(NSCoder *)aDecoder {
+    if (self = [super init]) {
+        self.followers = [aDecoder decodeObjectForKey:@"followers"];
+        self.gravatarID = [aDecoder decodeObjectForKey:@"gravatarID"];
+        self.login = [aDecoder decodeObjectForKey:@"login"];
+        self.repos = [aDecoder decodeObjectForKey:@"repos"];
+    }
+    return self;
+}
+
 @end

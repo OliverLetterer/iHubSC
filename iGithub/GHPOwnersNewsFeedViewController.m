@@ -30,8 +30,19 @@
             [self handleError:error];
         } else {
             self.newsFeed = feed;
+            [self serializeNewsFeed:feed];
         }
     }];
+}
+
+#pragma mark - View lifecycle
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    if (!self.newsFeed) {
+        self.newsFeed = [self loadSerializedNewsFeed];
+    }
 }
 
 #pragma mark - UITableViewDelegate
@@ -73,6 +84,32 @@
     } else {
         [super tableView:tableView didSelectRowAtIndexPath:indexPath];
     }
+}
+
+@end
+
+
+
+
+
+
+
+NSString *const GHPOwnersNewsFeedViewControllerNewsFeedSerializationFileName = @"de.olettere.lastKnownNewsFeed.plist";
+
+@implementation GHPOwnersNewsFeedViewController (GHPOwnersNewsFeedViewControllerSerializaiton)
+
+- (void)serializeNewsFeed:(GHNewsFeed *)newsFeed {
+    NSString *documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *filePath = [documentsDirectory stringByAppendingPathComponent:GHPOwnersNewsFeedViewControllerNewsFeedSerializationFileName];
+    
+    [NSKeyedArchiver archiveRootObject:newsFeed toFile:filePath];
+}
+
+- (GHNewsFeed *)loadSerializedNewsFeed {
+    NSString *documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *filePath = [documentsDirectory stringByAppendingPathComponent:GHPOwnersNewsFeedViewControllerNewsFeedSerializationFileName];
+    
+    return [NSKeyedUnarchiver unarchiveObjectWithFile:filePath];
 }
 
 @end

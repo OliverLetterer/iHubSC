@@ -10,7 +10,7 @@
 
 @class GHActorAttributes, GHPayload, GHRepository;
 
-@interface GHNewsFeedItem : NSObject {
+@interface GHNewsFeedItem : NSObject <NSCoding> {
     NSString *_actor;
     GHActorAttributes *_actorAttributes;
     NSString *_creationDate;

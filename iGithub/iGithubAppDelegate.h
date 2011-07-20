@@ -9,8 +9,6 @@
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
 
-#warning serialize newsfeed
-
 @interface iGithubAppDelegate : NSObject <UIApplicationDelegate> {
     NSManagedObjectContext *_managedObjectContext;
     NSManagedObjectModel *_managedObjectModel;

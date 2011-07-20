@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 
 
-@interface GHActorAttributes : NSObject {
+@interface GHActorAttributes : NSObject <NSCoding> {
     NSString *_blog;
     NSString *_company;
     NSString *_EMail;

@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 
 
-@interface GHCommitMessage : NSObject {
+@interface GHCommitMessage : NSObject <NSCoding> {
     NSString *_head;
     NSString *_EMail;
     NSString *_message;

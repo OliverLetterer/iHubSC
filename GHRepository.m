@@ -232,4 +232,55 @@
     [super dealloc];
 }
 
+#pragma mark - NSCoding
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    [aCoder encodeObject:self.creationDate forKey:@"creationDate"];
+    [aCoder encodeObject:self.desctiptionRepo forKey:@"desctiptionRepo"];
+    [aCoder encodeObject:self.fork forKey:@"fork"];
+    [aCoder encodeObject:self.forks forKey:@"forks"];
+    [aCoder encodeObject:self.hasDownloads forKey:@"hasDownloads"];
+    [aCoder encodeObject:self.hasIssues forKey:@"hasIssues"];
+    [aCoder encodeObject:self.hasWiki forKey:@"hasWiki"];
+    [aCoder encodeObject:self.homePage forKey:@"homePage"];
+    [aCoder encodeObject:self.integrateBranch forKey:@"integrateBranch"];
+    [aCoder encodeObject:self.language forKey:@"language"];
+    [aCoder encodeObject:self.name forKey:@"name"];
+    [aCoder encodeObject:self.openIssues forKey:@"openIssues"];
+    [aCoder encodeObject:self.owner forKey:@"owner"];
+    [aCoder encodeObject:self.parent forKey:@"parent"];
+    [aCoder encodeObject:self.private forKey:@"private"];
+    [aCoder encodeObject:self.pushedAt forKey:@"pushedAt"];
+    [aCoder encodeObject:self.size forKey:@"size"];
+    [aCoder encodeObject:self.source forKey:@"source"];
+    [aCoder encodeObject:self.URL forKey:@"URL"];
+    [aCoder encodeObject:self.watchers forKey:@"watchers"];
+}
+
+- (id)initWithCoder:(NSCoder *)aDecoder {
+    if (self = [super init]) {
+        self.creationDate = [aDecoder decodeObjectForKey:@"creationDate"];
+        self.desctiptionRepo = [aDecoder decodeObjectForKey:@"desctiptionRepo"];
+        self.fork = [aDecoder decodeObjectForKey:@"fork"];
+        self.forks = [aDecoder decodeObjectForKey:@"forks"];
+        self.hasDownloads = [aDecoder decodeObjectForKey:@"hasDownloads"];
+        self.hasIssues = [aDecoder decodeObjectForKey:@"hasIssues"];
+        self.hasWiki = [aDecoder decodeObjectForKey:@"hasWiki"];
+        self.homePage = [aDecoder decodeObjectForKey:@"homePage"];
+        self.integrateBranch = [aDecoder decodeObjectForKey:@"integrateBranch"];
+        self.language = [aDecoder decodeObjectForKey:@"language"];
+        self.name = [aDecoder decodeObjectForKey:@"name"];
+        self.openIssues = [aDecoder decodeObjectForKey:@"openIssues"];
+        self.owner = [aDecoder decodeObjectForKey:@"owner"];
+        self.parent = [aDecoder decodeObjectForKey:@"parent"];
+        self.private = [aDecoder decodeObjectForKey:@"private"];
+        self.pushedAt = [aDecoder decodeObjectForKey:@"pushedAt"];
+        self.size = [aDecoder decodeObjectForKey:@"size"];
+        self.source = [aDecoder decodeObjectForKey:@"source"];
+        self.URL = [aDecoder decodeObjectForKey:@"URL"];
+        self.watchers = [aDecoder decodeObjectForKey:@"watchers"];
+    }
+    return self;
+}
+
 @end

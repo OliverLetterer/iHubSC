@@ -34,4 +34,17 @@
     [super dealloc];
 }
 
+#pragma mark - NSCoding
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    [aCoder encodeObject:self.action forKey:@"action"];
+}
+
+- (id)initWithCoder:(NSCoder *)aDecoder {
+    if (self = [super initWithCoder:aDecoder]) {
+        self.action = [aDecoder decodeObjectForKey:@"action"];
+    }
+    return self;
+}
+
 @end

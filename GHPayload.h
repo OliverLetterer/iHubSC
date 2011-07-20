@@ -28,7 +28,7 @@ typedef enum {
     GHPayloadPublicEvent
 } GHPayloadEvent;
 
-@interface GHPayload : NSObject {
+@interface GHPayload : NSObject <NSCoding> {
     
 }
 

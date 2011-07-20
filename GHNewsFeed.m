@@ -95,4 +95,17 @@
     [super dealloc];
 }
 
+#pragma mark - NSCoding
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    [aCoder encodeObject:self.items forKey:@"items"];
+}
+
+- (id)initWithCoder:(NSCoder *)aDecoder {
+    if (self = [super init]) {
+        self.items = [aDecoder decodeObjectForKey:@"items"];
+    }
+    return self;
+}
+
 @end

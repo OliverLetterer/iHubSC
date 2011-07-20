@@ -40,4 +40,19 @@
     [super dealloc];
 }
 
+#pragma mark - NSCoding
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    [aCoder encodeObject:self.commentID forKey:@"commentID"];
+    [aCoder encodeObject:self.issueID forKey:@"issueID"];
+}
+
+- (id)initWithCoder:(NSCoder *)aDecoder {
+    if (self = [super initWithCoder:aDecoder]) {
+        self.commentID = [aDecoder decodeObjectForKey:@"commentID"];
+        self.issueID = [aDecoder decodeObjectForKey:@"issueID"];
+    }
+    return self;
+}
+
 @end

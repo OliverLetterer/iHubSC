@@ -36,4 +36,19 @@
     [super dealloc];
 }
 
+#pragma mark - NSCoding
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    [aCoder encodeObject:self.ref forKey:@"ref"];
+    [aCoder encodeObject:self.refType forKey:@"refType"];
+}
+
+- (id)initWithCoder:(NSCoder *)aDecoder {
+    if (self = [super initWithCoder:aDecoder]) {
+        self.ref = [aDecoder decodeObjectForKey:@"ref"];
+        self.refType = [aDecoder decodeObjectForKey:@"refType"];
+    }
+    return self;
+}
+
 @end

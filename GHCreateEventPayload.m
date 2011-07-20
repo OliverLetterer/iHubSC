@@ -58,4 +58,23 @@
     [super dealloc];
 }
 
+#pragma mark - NSCoding
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    [aCoder encodeObject:self.description forKey:@"description"];
+    [aCoder encodeObject:self.masterBranch forKey:@"masterBranch"];
+    [aCoder encodeObject:self.ref forKey:@"ref"];
+    [aCoder encodeObject:self.refType forKey:@"refType"];
+}
+
+- (id)initWithCoder:(NSCoder *)aDecoder {
+    if (self = [super initWithCoder:aDecoder]) {
+        self.description = [aDecoder decodeObjectForKey:@"description"];
+        self.masterBranch = [aDecoder decodeObjectForKey:@"masterBranch"];
+        self.ref = [aDecoder decodeObjectForKey:@"ref"];
+        self.refType = [aDecoder decodeObjectForKey:@"refType"];
+    }
+    return self;
+}
+
 @end

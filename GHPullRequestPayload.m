@@ -26,7 +26,7 @@
         self.number = [rawDictionary objectForKeyOrNilOnNullObject:@"number"];
         self.action = [rawDictionary objectForKeyOrNilOnNullObject:@"action"];
         NSObject *pullRequest = [rawDictionary objectForKeyOrNilOnNullObject:@"pull_request"];
-        if ([[pullRequest class] isSubclassOfClass:NSClassFromString(@"NSDictionary")]) {
+        if ([pullRequest isKindOfClass:[NSDictionary class]]) {
             self.pullRequest = [[[GHPullRequest alloc] initWithRawDictionary:(NSDictionary *)pullRequest] autorelease];
         }
         // Initialization code
@@ -42,6 +42,23 @@
     [_action release];
     [_pullRequest release];
     [super dealloc];
+}
+
+#pragma mark - NSCoding
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    [aCoder encodeObject:self.action forKey:@"action"];
+    [aCoder encodeObject:self.pullRequest forKey:@"pullRequest"];
+    [aCoder encodeObject:self.number forKey:@"number"];
+}
+
+- (id)initWithCoder:(NSCoder *)aDecoder {
+    if (self = [super initWithCoder:aDecoder]) {
+        self.action = [aDecoder decodeObjectForKey:@"action"];
+        self.pullRequest = [aDecoder decodeObjectForKey:@"pullRequest"];
+        self.number = [aDecoder decodeObjectForKey:@"number"];
+    }
+    return self;
 }
 
 @end

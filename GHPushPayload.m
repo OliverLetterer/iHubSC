@@ -50,4 +50,21 @@
     [super dealloc];
 }
 
+#pragma mark - NSCoding
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    [aCoder encodeObject:self.head forKey:@"head"];
+    [aCoder encodeObject:self.ref forKey:@"ref"];
+    [aCoder encodeObject:self.commits forKey:@"commits"];
+}
+
+- (id)initWithCoder:(NSCoder *)aDecoder {
+    if (self = [super initWithCoder:aDecoder]) {
+        self.head = [aDecoder decodeObjectForKey:@"head"];
+        self.ref = [aDecoder decodeObjectForKey:@"ref"];
+        self.commits = [aDecoder decodeObjectForKey:@"commits"];
+    }
+    return self;
+}
+
 @end
