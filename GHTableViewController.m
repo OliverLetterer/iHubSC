@@ -627,9 +627,7 @@ static CGFloat wrapperViewHeight = 21.0f;
 @implementation GHTableViewController (GHHeightCaching)
 
 - (void)cacheHeight:(CGFloat)height forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if ([indexPath isKindOfClass:NSClassFromString(@"UIMutableIndexPath")]) {
-        indexPath = [NSIndexPath indexPathForRow:indexPath.row inSection:indexPath.section];
-    }
+    indexPath = [NSIndexPath indexPathForRow:indexPath.row inSection:indexPath.section];
     [self.cachedHeightsDictionary setObject:[NSNumber numberWithFloat:height] forKey:indexPath];
 }
 
