@@ -9,7 +9,6 @@
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
 
-#warning make UI responsive while an alert appeares
 #warning test swipe recognizer
 #warning experiment with notification positions and size
 #warning serialize newsfeed
