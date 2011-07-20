@@ -432,10 +432,6 @@ static CGFloat wrapperViewHeight = 21.0f;
     }
 }
 
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-}
-
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     
@@ -534,6 +530,32 @@ static CGFloat wrapperViewHeight = 21.0f;
     CGRect frame = self.tableView.backgroundView.frame;
     frame.origin = scrollView.contentOffset;
     self.tableView.backgroundView.frame = frame;
+}
+
+#pragma mark - Keyed Archiving
+
+- (void)encodeWithCoder:(NSCoder *)encoder {
+    [super encodeWithCoder:encoder];
+    [encoder encodeObject:_nextPageForSectionsDictionary forKey:@"nextPageForSectionsDictionary"];
+    [encoder encodeObject:_cachedHeightsDictionary forKey:@"cachedHeightsDictionary"];
+    [encoder encodeBool:_reloadDataIfNewUserGotAuthenticated forKey:@"reloadDataIfNewUserGotAuthenticated"];
+    [encoder encodeBool:_reloadDataOnApplicationWillEnterForeground forKey:@"reloadDataOnApplicationWillEnterForeground"];
+    [encoder encodeInteger:_myTableViewStyle forKey:@"myTableViewStyle"];
+    [encoder encodeCGPoint:_lastContentOffset forKey:@"lastContentOffset"];
+    [encoder encodeObject:_lastSelectedIndexPath forKey:@"lastSelectedIndexPath"];
+}
+
+- (id)initWithCoder:(NSCoder *)decoder {
+    if ((self = [super initWithCoder:decoder])) {
+        _nextPageForSectionsDictionary = [[decoder decodeObjectForKey:@"nextPageForSectionsDictionary"] retain];
+        _cachedHeightsDictionary = [[decoder decodeObjectForKey:@"cachedHeightsDictionary"] retain];
+        _reloadDataIfNewUserGotAuthenticated = [decoder decodeBoolForKey:@"reloadDataIfNewUserGotAuthenticated"];
+        _reloadDataOnApplicationWillEnterForeground = [decoder decodeBoolForKey:@"reloadDataOnApplicationWillEnterForeground"];
+        _myTableViewStyle = [decoder decodeIntegerForKey:@"myTableViewStyle"];
+        _lastContentOffset = [decoder decodeCGPointForKey:@"lastContentOffset"];
+        _lastSelectedIndexPath = [[decoder decodeObjectForKey:@"lastSelectedIndexPath"] retain];
+    }
+    return self;
 }
 
 @end
