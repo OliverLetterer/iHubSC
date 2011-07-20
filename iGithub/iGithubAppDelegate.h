@@ -10,7 +10,6 @@
 #import <CoreData/CoreData.h>
 
 #warning serialize newsfeed
-#warning Fetching XXX does not disappear when error occures
 
 @interface iGithubAppDelegate : NSObject <UIApplicationDelegate> {
     NSManagedObjectContext *_managedObjectContext;

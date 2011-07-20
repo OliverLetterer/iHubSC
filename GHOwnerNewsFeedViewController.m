@@ -231,6 +231,9 @@
         [GHNewsFeed privateNewsWithCompletionHandler:^(GHNewsFeed *feed, NSError *error) {
             self.isDownloadingEssentialData = NO;
             if (error) {
+                [self detachNewStateString:NSLocalizedString(@"Error", @"") removeAfterDisplayed:YES];
+                self.segmentControl.userInteractionEnabled = YES;
+                self.segmentControl.alpha = 1.0;
                 [self handleError:error];
             } else {
                 self.newsFeed = feed;
@@ -246,6 +249,9 @@
                        completionHandler:^(GHNewsFeed *feed, NSError *error) {
                            self.isDownloadingEssentialData = NO;
                            if (error) {
+                               [self detachNewStateString:NSLocalizedString(@"Error", @"") removeAfterDisplayed:YES];
+                               self.segmentControl.userInteractionEnabled = YES;
+                               self.segmentControl.alpha = 1.0;
                                [self handleError:error];
                            } else {
                                self.newsFeed = feed;
@@ -260,6 +266,9 @@
             [GHNewsFeed newsFeedForUserNamed:self.defaultOrganizationName completionHandler:^(GHNewsFeed *feed, NSError *error) {
                 self.isDownloadingEssentialData = NO;
                 if (error) {
+                    [self detachNewStateString:NSLocalizedString(@"Error", @"") removeAfterDisplayed:YES];
+                    self.segmentControl.userInteractionEnabled = YES;
+                    self.segmentControl.alpha = 1.0;
                     [self handleError:error];
                 } else {
                     self.newsFeed = feed;
@@ -322,6 +331,9 @@
     
     [GHNewsFeed newsFeedForUserNamed:self.defaultOrganizationName completionHandler:^(GHNewsFeed *feed, NSError *error) {
         if (error) {
+            [self detachNewStateString:NSLocalizedString(@"Error", @"") removeAfterDisplayed:YES];
+            self.segmentControl.userInteractionEnabled = YES;
+            self.segmentControl.alpha = 1.0;
             [self handleError:error];
         } else {
             self.newsFeed = feed;
