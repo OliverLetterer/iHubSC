@@ -14,8 +14,6 @@
 #import "GHUserViewController.h"
 #import "GHSearchViewController.h"
 
-#warning add markdown support on iphone
-
 @interface iGithubAppDelegate_iPhone : iGithubAppDelegate <MFMailComposeViewControllerDelegate> {
     UITabBarController *_tabBarController;
     GHOwnerNewsFeedViewController *_newsFeedViewController;
