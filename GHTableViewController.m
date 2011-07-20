@@ -501,6 +501,9 @@ static CGFloat wrapperViewHeight = 21.0f;
     if (_isInBackgroundMode) {
         return;
     }
+    if (self.isDownloadingEssentialData) {
+        self.isDownloadingEssentialData = NO;
+    }
     if ([error code] == 3) {
         // authentication problem
         if (![GHAuthenticationManager sharedInstance].username) {
