@@ -152,4 +152,24 @@
     }
 }
 
+#pragma mark Keyed Archiving
+
+- (void)encodeWithCoder:(NSCoder *)encoder {
+    [super encodeWithCoder:encoder];
+    [encoder encodeObject:_directory forKey:@"directory"];
+    [encoder encodeObject:_repository forKey:@"repository"];
+    [encoder encodeObject:_branch forKey:@"branch"];
+    [encoder encodeObject:_hash forKey:@"hash"];
+}
+
+- (id)initWithCoder:(NSCoder *)decoder {
+    if ((self = [super initWithCoder:decoder])) {
+        _directory = [[decoder decodeObjectForKey:@"directory"] retain];
+        _repository = [[decoder decodeObjectForKey:@"repository"] retain];
+        _branch = [[decoder decodeObjectForKey:@"branch"] retain];
+        _hash = [[decoder decodeObjectForKey:@"hash"] retain];
+    }
+    return self;
+}
+
 @end

@@ -390,8 +390,48 @@
     _imageView = nil;
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    // Return YES for supported orientations
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+#pragma mark Keyed Archiving
+
+- (void)encodeWithCoder:(NSCoder *)encoder {
+    [super encodeWithCoder:encoder];
+    [encoder encodeObject:_repository forKey:@"repository"];
+    [encoder encodeObject:_tree forKey:@"tree"];
+    [encoder encodeObject:_filename forKey:@"filename"];
+    [encoder encodeObject:_relativeURL forKey:@"relativeURL"];
+    [encoder encodeObject:_metadata forKey:@"metadata"];
+    [encoder encodeObject:_contentString forKey:@"contentString"];
+    [encoder encodeObject:_markdownString forKey:@"markdownString"];
+    [encoder encodeObject:_contentImage forKey:@"contentImage"];
+    [encoder encodeBool:_isMimeTypeUnkonw forKey:@"isMimeTypeUnkonw"];
+    [encoder encodeObject:_request forKey:@"request"];
+    [encoder encodeObject:_scrollView forKey:@"scrollView"];
+    [encoder encodeObject:_backgroundGradientLayer forKey:@"backgroundGradientLayer"];
+    [encoder encodeObject:_loadingLabel forKey:@"loadingLabel"];
+    [encoder encodeObject:_activityIndicatorView forKey:@"activityIndicatorView"];
+    [encoder encodeObject:_progressView forKey:@"progressView"];
+    [encoder encodeObject:_imageView forKey:@"imageView"];
 }
+
+- (id)initWithCoder:(NSCoder *)decoder {
+    if ((self = [super initWithCoder:decoder])) {
+        _repository = [[decoder decodeObjectForKey:@"repository"] retain];
+        _tree = [[decoder decodeObjectForKey:@"tree"] retain];
+        _filename = [[decoder decodeObjectForKey:@"filename"] retain];
+        _relativeURL = [[decoder decodeObjectForKey:@"relativeURL"] retain];
+        _metadata = [[decoder decodeObjectForKey:@"metadata"] retain];
+        _contentString = [[decoder decodeObjectForKey:@"contentString"] retain];
+        _markdownString = [[decoder decodeObjectForKey:@"markdownString"] retain];
+        _contentImage = [[decoder decodeObjectForKey:@"contentImage"] retain];
+        _isMimeTypeUnkonw = [decoder decodeBoolForKey:@"isMimeTypeUnkonw"];
+        _request = [[decoder decodeObjectForKey:@"request"] retain];
+        _scrollView = [[decoder decodeObjectForKey:@"scrollView"] retain];
+        _backgroundGradientLayer = [[decoder decodeObjectForKey:@"backgroundGradientLayer"] retain];
+        _loadingLabel = [[decoder decodeObjectForKey:@"loadingLabel"] retain];
+        _activityIndicatorView = [[decoder decodeObjectForKey:@"activityIndicatorView"] retain];
+        _progressView = [[decoder decodeObjectForKey:@"progressView"] retain];
+        _imageView = [[decoder decodeObjectForKey:@"imageView"] retain];
+    }
+    return self;
+}
+
 @end
