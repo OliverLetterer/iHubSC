@@ -35,6 +35,7 @@
 #pragma mark - NSCoding
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
+    [super encodeWithCoder:aCoder];
     [aCoder encodeObject:self.actor forKey:@"actor"];
     [aCoder encodeObject:self.gravatarID forKey:@"gravatarID"];
 }

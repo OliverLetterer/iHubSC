@@ -34,7 +34,7 @@
 #pragma mark - NSCoding
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
-        
+        [super encodeWithCoder:aCoder];
 }
 
 - (id)initWithCoder:(NSCoder *)aDecoder {

@@ -43,6 +43,7 @@
 #pragma mark - NSCoding
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
+    [super encodeWithCoder:aCoder];
     [aCoder encodeObject:self.commentID forKey:@"commentID"];
     [aCoder encodeObject:self.issueID forKey:@"issueID"];
 }

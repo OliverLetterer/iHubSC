@@ -49,6 +49,7 @@
 #pragma mark - NSCoding
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
+    [super encodeWithCoder:aCoder];
     [aCoder encodeObject:self.action forKey:@"action"];
     [aCoder encodeObject:self.descriptionGist forKey:@"descriptionGist"];
     [aCoder encodeObject:self.name forKey:@"name"];

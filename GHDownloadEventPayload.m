@@ -39,6 +39,7 @@
 #pragma mark - NSCoding
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
+    [super encodeWithCoder:aCoder];
     [aCoder encodeObject:self.ID forKey:@"ID"];
     [aCoder encodeObject:self.URL forKey:@"URL"];
 }

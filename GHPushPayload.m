@@ -53,6 +53,7 @@
 #pragma mark - NSCoding
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
+    [super encodeWithCoder:aCoder];
     [aCoder encodeObject:self.head forKey:@"head"];
     [aCoder encodeObject:self.ref forKey:@"ref"];
     [aCoder encodeObject:self.commits forKey:@"commits"];
