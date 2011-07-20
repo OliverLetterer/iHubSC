@@ -20,6 +20,7 @@ extern const CGFloat ANAdvancedNavigationControllerDefaultDraggingDistance;
     NSMutableArray *_viewControllers;
     
     CGFloat _draggingDistance;
+    NSDate *_draggingStartDate;
     NSInteger _draggingRightAnchorViewControllerIndex;
     
     ANRemoveRectangleIndicatorView *_removeRectangleIndicatorView;
@@ -28,6 +29,8 @@ extern const CGFloat ANAdvancedNavigationControllerDefaultDraggingDistance;
 }
 
 - (void)updateBackgroundView;
+
+@property (nonatomic, retain) NSDate *draggingStartDate;
 
 @property (nonatomic, retain) NSMutableArray *viewControllers;
 

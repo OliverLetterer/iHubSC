@@ -24,6 +24,7 @@ const CGFloat ANAdvancedNavigationControllerDefaultDraggingDistance         = 47
 @synthesize backgroundView=_backgroundView;
 @synthesize leftViewController=_leftViewController, viewControllers=_viewControllers, removeRectangleIndicatorView=_removeRectangleIndicatorView;
 @synthesize delegate=_delegate;
+@synthesize draggingStartDate=_draggingStartDate;
 
 #pragma mark - setters and getters
 
@@ -125,6 +126,7 @@ const CGFloat ANAdvancedNavigationControllerDefaultDraggingDistance         = 47
 - (void)viewDidUnload {
     [super viewDidUnload];
     [_removeRectangleIndicatorView release], _removeRectangleIndicatorView = nil;
+    [_draggingStartDate release], _draggingStartDate = nil;
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -138,6 +140,7 @@ const CGFloat ANAdvancedNavigationControllerDefaultDraggingDistance         = 47
     [_backgroundView release];
     [_viewControllers release];
     [_removeRectangleIndicatorView release];
+    [_draggingStartDate release];
     
     [super dealloc];
 }

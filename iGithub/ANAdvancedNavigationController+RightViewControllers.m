@@ -398,6 +398,7 @@
 - (void)__mainPanGestureRecognizedDidRecognizePanGesture:(UIPanGestureRecognizer *)panGestureRecognizer {
     if (panGestureRecognizer.state == UIGestureRecognizerStateBegan) {
         _draggingDistance = 0.0f;
+        self.draggingStartDate = [NSDate date];
     } else if (panGestureRecognizer.state == UIGestureRecognizerStateChanged) {
         // changed
         CGFloat translation = [panGestureRecognizer translationInView:self.view].x;
@@ -423,11 +424,13 @@
         }
         
         if (self.viewControllers.count > 0 && !didPopViewControllers) {
+            NSDate *now = [NSDate date];
+            CGFloat draggingTimeInterval = [now timeIntervalSinceDate:self.draggingStartDate];
             // find that view controller, that is the best for the right anchor position
             NSInteger index = 0;
             UIViewController *viewController = [self __bestRightAnchorPointViewControllerWithIndex:&index];
             if (viewController) {
-                if (_draggingRightAnchorViewControllerIndex == index && fabsf(_draggingDistance) >= 10.0f) {
+                if (_draggingRightAnchorViewControllerIndex == index && draggingTimeInterval < 0.5f) {
                     // we did "swipe", just move the next viewController in that direction in
                     if (_draggingDistance > 0.0f) {
                         index--;
@@ -447,6 +450,7 @@
         }
         
         _draggingDistance = 0.0f;
+        self.draggingStartDate = nil;
     }
 }
 
