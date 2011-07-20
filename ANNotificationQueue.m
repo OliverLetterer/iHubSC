@@ -117,6 +117,7 @@ CGFloat const ANNotificationQueueAnimationDuration = 0.35f*2.0f;
     
     UIView *containerView = [[[UIView alloc] initWithFrame:topContainerView.bounds] autorelease];
     containerView.backgroundColor = [UIColor clearColor];
+    containerView.userInteractionEnabled = NO;
     [containerView addSubview:notificationView];
     [topContainerView addSubview:containerView];
     
