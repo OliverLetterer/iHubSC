@@ -44,4 +44,18 @@
     [super dealloc];
 }
 
+#pragma mark Keyed Archiving
+
+- (void)encodeWithCoder:(NSCoder *)encoder {
+    [super encodeWithCoder:encoder];
+    [encoder encodeObject:_hash forKey:@"hash"];
+}
+
+- (id)initWithCoder:(NSCoder *)decoder {
+    if ((self = [super initWithCoder:decoder])) {
+        _hash = [[decoder decodeObjectForKey:@"hash"] retain];
+    }
+    return self;
+}
+
 @end

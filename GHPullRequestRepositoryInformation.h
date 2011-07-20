@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "GithubAPI.h"
 
-@interface GHPullRequestRepositoryInformation : NSObject {
+@interface GHPullRequestRepositoryInformation : NSObject <NSCoding> {
 @private
     NSString *_label;
     NSString *_ref;

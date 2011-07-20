@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 
 
-@interface GHCommitFileInformation : NSObject {
+@interface GHCommitFileInformation : NSObject <NSCoding> {
 @private
     NSString *_diff;
     NSString *_filename;

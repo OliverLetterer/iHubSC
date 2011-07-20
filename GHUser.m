@@ -31,6 +31,63 @@
     return [[[GHUser alloc] initWithRawUserDictionary:rawDictionary] autorelease];
 }
 
+#pragma mark Keyed Archiving
+
+- (void)encodeWithCoder:(NSCoder *)encoder {
+    [encoder encodeObject:_createdAt forKey:@"createdAt"];
+    [encoder encodeInteger:_followersCount forKey:@"followersCount"];
+    [encoder encodeInteger:_followingCount forKey:@"followingCount"];
+    [encoder encodeObject:_gravatarID forKey:@"gravatarID"];
+    [encoder encodeInteger:_ID forKey:@"iD"];
+    [encoder encodeObject:_login forKey:@"login"];
+    [encoder encodeInteger:_publicGistCount forKey:@"publicGistCount"];
+    [encoder encodeInteger:_publicRepoCount forKey:@"publicRepoCount"];
+    [encoder encodeObject:_type forKey:@"type"];
+    [encoder encodeInteger:_privateRepoCount forKey:@"privateRepoCount"];
+    [encoder encodeInteger:_collaborators forKey:@"collaborators"];
+    [encoder encodeInteger:_diskUsage forKey:@"diskUsage"];
+    [encoder encodeInteger:_ownedPrivateRepoCount forKey:@"ownedPrivateRepoCount"];
+    [encoder encodeInteger:_privateGistCount forKey:@"privateGistCount"];
+    [encoder encodeObject:_planName forKey:@"planName"];
+    [encoder encodeInteger:_planCollaborators forKey:@"planCollaborators"];
+    [encoder encodeInteger:_planSpace forKey:@"planSpace"];
+    [encoder encodeInteger:_planPrivateRepos forKey:@"planPrivateRepos"];
+    [encoder encodeObject:_password forKey:@"password"];
+    [encoder encodeObject:_EMail forKey:@"eMail"];
+    [encoder encodeObject:_location forKey:@"location"];
+    [encoder encodeObject:_company forKey:@"company"];
+    [encoder encodeObject:_blog forKey:@"blog"];
+}
+
+- (id)initWithCoder:(NSCoder *)decoder {
+    if ((self = [super init])) {
+        _createdAt = [[decoder decodeObjectForKey:@"createdAt"] retain];
+        _followersCount = [decoder decodeIntegerForKey:@"followersCount"];
+        _followingCount = [decoder decodeIntegerForKey:@"followingCount"];
+        _gravatarID = [[decoder decodeObjectForKey:@"gravatarID"] retain];
+        _ID = [decoder decodeIntegerForKey:@"iD"];
+        _login = [[decoder decodeObjectForKey:@"login"] retain];
+        _publicGistCount = [decoder decodeIntegerForKey:@"publicGistCount"];
+        _publicRepoCount = [decoder decodeIntegerForKey:@"publicRepoCount"];
+        _type = [[decoder decodeObjectForKey:@"type"] retain];
+        _privateRepoCount = [decoder decodeIntegerForKey:@"privateRepoCount"];
+        _collaborators = [decoder decodeIntegerForKey:@"collaborators"];
+        _diskUsage = [decoder decodeIntegerForKey:@"diskUsage"];
+        _ownedPrivateRepoCount = [decoder decodeIntegerForKey:@"ownedPrivateRepoCount"];
+        _privateGistCount = [decoder decodeIntegerForKey:@"privateGistCount"];
+        _planName = [[decoder decodeObjectForKey:@"planName"] retain];
+        _planCollaborators = [decoder decodeIntegerForKey:@"planCollaborators"];
+        _planSpace = [decoder decodeIntegerForKey:@"planSpace"];
+        _planPrivateRepos = [decoder decodeIntegerForKey:@"planPrivateRepos"];
+        _password = [[decoder decodeObjectForKey:@"password"] retain];
+        _EMail = [[decoder decodeObjectForKey:@"eMail"] retain];
+        _location = [[decoder decodeObjectForKey:@"location"] retain];
+        _company = [[decoder decodeObjectForKey:@"company"] retain];
+        _blog = [[decoder decodeObjectForKey:@"blog"] retain];
+    }
+    return self;
+}
+
 + (void)searchUsersWithSearchString:(NSString *)searchString completionHandler:(void (^)(NSArray *, NSError *))handler {
     dispatch_async(GHAPIBackgroundQueue(), ^(void) {
         

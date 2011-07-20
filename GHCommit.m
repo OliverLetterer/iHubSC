@@ -60,6 +60,43 @@
     return self;
 }
 
+#pragma mark Keyed Archiving
+
+- (void)encodeWithCoder:(NSCoder *)encoder {
+    [encoder encodeObject:_message forKey:@"message"];
+    [encoder encodeObject:_added forKey:@"added"];
+    [encoder encodeObject:_removed forKey:@"removed"];
+    [encoder encodeObject:_parents forKey:@"parents"];
+    [encoder encodeObject:_modified forKey:@"modified"];
+    [encoder encodeObject:_author forKey:@"author"];
+    [encoder encodeObject:_URL forKey:@"uRL"];
+    [encoder encodeObject:_ID forKey:@"iD"];
+    [encoder encodeObject:_commitDate forKey:@"commitDate"];
+    [encoder encodeObject:_authoredDate forKey:@"authoredDate"];
+    [encoder encodeObject:_tree forKey:@"tree"];
+    [encoder encodeObject:_commiter forKey:@"commiter"];
+    [encoder encodeObject:_user forKey:@"user"];
+}
+
+- (id)initWithCoder:(NSCoder *)decoder {
+    if ((self = [super init])) {
+        _message = [[decoder decodeObjectForKey:@"message"] retain];
+        _added = [[decoder decodeObjectForKey:@"added"] retain];
+        _removed = [[decoder decodeObjectForKey:@"removed"] retain];
+        _parents = [[decoder decodeObjectForKey:@"parents"] retain];
+        _modified = [[decoder decodeObjectForKey:@"modified"] retain];
+        _author = [[decoder decodeObjectForKey:@"author"] retain];
+        _URL = [[decoder decodeObjectForKey:@"uRL"] retain];
+        _ID = [[decoder decodeObjectForKey:@"iD"] retain];
+        _commitDate = [[decoder decodeObjectForKey:@"commitDate"] retain];
+        _authoredDate = [[decoder decodeObjectForKey:@"authoredDate"] retain];
+        _tree = [[decoder decodeObjectForKey:@"tree"] retain];
+        _commiter = [[decoder decodeObjectForKey:@"commiter"] retain];
+        _user = [[decoder decodeObjectForKey:@"user"] retain];
+    }
+    return self;
+}
+
 + (void)commit:(NSString *)commitID onRepository:(NSString *)repository 
                                completionHandler:(void(^)(GHCommit *commit, NSError *error))handler {
     

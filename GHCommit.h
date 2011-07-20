@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "GithubAPI.h"
 
-@interface GHCommit : NSObject {
+@interface GHCommit : NSObject <NSCoding> {
 @private
     NSString *_message;
     NSMutableArray *_added;

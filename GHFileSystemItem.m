@@ -35,4 +35,17 @@
     [super dealloc];
 }
 
+#pragma mark Keyed Archiving
+
+- (void)encodeWithCoder:(NSCoder *)encoder {
+    [encoder encodeObject:_name forKey:@"name"];
+}
+
+- (id)initWithCoder:(NSCoder *)decoder {
+    if ((self = [super init])) {
+        _name = [[decoder decodeObjectForKey:@"name"] retain];
+    }
+    return self;
+}
+
 @end

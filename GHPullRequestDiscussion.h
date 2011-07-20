@@ -11,7 +11,7 @@
 
 @class GHPullRequestRepositoryInformation;
 
-@interface GHPullRequestDiscussion : NSObject {
+@interface GHPullRequestDiscussion : NSObject <NSCoding> {
 @private
     GHPullRequestRepositoryInformation *_base;
     GHPullRequestRepositoryInformation *_head;

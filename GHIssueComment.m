@@ -43,7 +43,33 @@
     [_updatedAt release];
     [_user release];
     [_userInfo release];
+    
     [super dealloc];
+}
+
+#pragma mark Keyed Archiving
+
+- (void)encodeWithCoder:(NSCoder *)encoder {
+    [encoder encodeObject:_body forKey:@"body"];
+    [encoder encodeObject:_createdAt forKey:@"createdAt"];
+    [encoder encodeObject:_gravatarID forKey:@"gravatarID"];
+    [encoder encodeObject:_ID forKey:@"iD"];
+    [encoder encodeObject:_updatedAt forKey:@"updatedAt"];
+    [encoder encodeObject:_user forKey:@"user"];
+    [encoder encodeObject:_userInfo forKey:@"userInfo"];
+}
+
+- (id)initWithCoder:(NSCoder *)decoder {
+    if ((self = [super init])) {
+        _body = [[decoder decodeObjectForKey:@"body"] retain];
+        _createdAt = [[decoder decodeObjectForKey:@"createdAt"] retain];
+        _gravatarID = [[decoder decodeObjectForKey:@"gravatarID"] retain];
+        _ID = [[decoder decodeObjectForKey:@"iD"] retain];
+        _updatedAt = [[decoder decodeObjectForKey:@"updatedAt"] retain];
+        _user = [[decoder decodeObjectForKey:@"user"] retain];
+        _userInfo = [[decoder decodeObjectForKey:@"userInfo"] retain];
+    }
+    return self;
 }
 
 @end

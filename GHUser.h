@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <dispatch/dispatch.h>
 
-@interface GHUser : NSObject {
+@interface GHUser : NSObject <NSCoding> {
     NSString *_createdAt;
     NSUInteger _followersCount;
     NSUInteger _followingCount;

@@ -10,7 +10,7 @@
 
 @class GHUser;
 
-@interface GHIssueComment : NSObject {
+@interface GHIssueComment : NSObject <NSCoding> {
     NSString *_body;
     NSString *_createdAt;
     NSString *_gravatarID;

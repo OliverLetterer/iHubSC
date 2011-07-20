@@ -32,4 +32,19 @@
     [super dealloc];
 }
 
+#pragma mark Keyed Archiving
+
+- (void)encodeWithCoder:(NSCoder *)encoder {
+    [encoder encodeObject:_diff forKey:@"diff"];
+    [encoder encodeObject:_filename forKey:@"filename"];
+}
+
+- (id)initWithCoder:(NSCoder *)decoder {
+    if ((self = [super init])) {
+        _diff = [[decoder decodeObjectForKey:@"diff"] retain];
+        _filename = [[decoder decodeObjectForKey:@"filename"] retain];
+    }
+    return self;
+}
+
 @end

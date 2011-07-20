@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 
 
-@interface GHRawIssue : NSObject {
+@interface GHRawIssue : NSObject <NSCoding> {
 @private
     NSString *_gravatarID;
     NSNumber *_position;

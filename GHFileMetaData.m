@@ -27,6 +27,29 @@
     return self;
 }
 
+#pragma mark Keyed Archiving
+
+- (void)encodeWithCoder:(NSCoder *)encoder {
+    [encoder encodeObject:_name forKey:@"name"];
+    [encoder encodeObject:_size forKey:@"size"];
+    [encoder encodeObject:_hash forKey:@"hash"];
+    [encoder encodeObject:_mode forKey:@"mode"];
+    [encoder encodeObject:_mimeType forKey:@"mimeType"];
+    [encoder encodeObject:_repository forKey:@"repository"];
+}
+
+- (id)initWithCoder:(NSCoder *)decoder {
+    if ((self = [super init])) {
+        _name = [[decoder decodeObjectForKey:@"name"] retain];
+        _size = [[decoder decodeObjectForKey:@"size"] retain];
+        _hash = [[decoder decodeObjectForKey:@"hash"] retain];
+        _mode = [[decoder decodeObjectForKey:@"mode"] retain];
+        _mimeType = [[decoder decodeObjectForKey:@"mimeType"] retain];
+        _repository = [[decoder decodeObjectForKey:@"repository"] retain];
+    }
+    return self;
+}
+
 + (void)metaDataOfFile:(NSString *)filename 
          atRelativeURL:(NSString *)relativeURL 
           onRepository:(NSString *)repository 

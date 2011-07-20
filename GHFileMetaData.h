@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "ASIHTTPRequest.h"
 
-@interface GHFileMetaData : NSObject {
+@interface GHFileMetaData : NSObject <NSCoding> {
 @private
     NSString *_name;
     NSNumber *_size;

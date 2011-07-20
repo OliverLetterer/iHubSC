@@ -55,4 +55,41 @@
     [super dealloc];
 }
 
+#pragma mark Keyed Archiving
+
+- (void)encodeWithCoder:(NSCoder *)encoder {
+    [encoder encodeObject:_gravatarID forKey:@"gravatarID"];
+    [encoder encodeObject:_position forKey:@"position"];
+    [encoder encodeObject:_number forKey:@"number"];
+    [encoder encodeObject:_votes forKey:@"votes"];
+    [encoder encodeObject:_creationDate forKey:@"creationDate"];
+    [encoder encodeObject:_comments forKey:@"comments"];
+    [encoder encodeObject:_body forKey:@"body"];
+    [encoder encodeObject:_title forKey:@"title"];
+    [encoder encodeObject:_updatedAd forKey:@"updatedAd"];
+    [encoder encodeObject:_closedAd forKey:@"closedAd"];
+    [encoder encodeObject:_user forKey:@"user"];
+    [encoder encodeObject:_labelsJSON forKey:@"labelsJSON"];
+    [encoder encodeObject:_state forKey:@"state"];
+}
+
+- (id)initWithCoder:(NSCoder *)decoder {
+    if ((self = [super init])) {
+        _gravatarID = [[decoder decodeObjectForKey:@"gravatarID"] retain];
+        _position = [[decoder decodeObjectForKey:@"position"] retain];
+        _number = [[decoder decodeObjectForKey:@"number"] retain];
+        _votes = [[decoder decodeObjectForKey:@"votes"] retain];
+        _creationDate = [[decoder decodeObjectForKey:@"creationDate"] retain];
+        _comments = [[decoder decodeObjectForKey:@"comments"] retain];
+        _body = [[decoder decodeObjectForKey:@"body"] retain];
+        _title = [[decoder decodeObjectForKey:@"title"] retain];
+        _updatedAd = [[decoder decodeObjectForKey:@"updatedAd"] retain];
+        _closedAd = [[decoder decodeObjectForKey:@"closedAd"] retain];
+        _user = [[decoder decodeObjectForKey:@"user"] retain];
+        _labelsJSON = [[decoder decodeObjectForKey:@"labelsJSON"] retain];
+        _state = [[decoder decodeObjectForKey:@"state"] retain];
+    }
+    return self;
+}
+
 @end

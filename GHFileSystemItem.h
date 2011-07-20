@@ -13,7 +13,7 @@ typedef enum {
     GHFileSystemItemTypeFile
 } GHFileSystemItemType;
 
-@interface GHFileSystemItem : NSObject {
+@interface GHFileSystemItem : NSObject <NSCoding> {
 @protected
     NSString *_name;
 }

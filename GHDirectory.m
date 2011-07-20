@@ -90,6 +90,22 @@
     [super dealloc];
 }
 
+#pragma mark Keyed Archiving
+
+- (void)encodeWithCoder:(NSCoder *)encoder {
+    [super encodeWithCoder:encoder];
+    [encoder encodeObject:_directories forKey:@"directories"];
+    [encoder encodeObject:_files forKey:@"files"];
+}
+
+- (id)initWithCoder:(NSCoder *)decoder {
+    if ((self = [super initWithCoder:decoder])) {
+        _directories = [[decoder decodeObjectForKey:@"directories"] retain];
+        _files = [[decoder decodeObjectForKey:@"files"] retain];
+    }
+    return self;
+}
+
 #pragma mark - private
 
 - (void)_parseFilesDictionary:(NSDictionary *)filesDictionary directories:(NSArray **)directories files:(NSArray **)files {
