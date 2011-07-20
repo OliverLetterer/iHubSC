@@ -154,6 +154,7 @@
     } else {
         self.segmentControl.selectedSegmentIndex = 0;
     }
+    self.segmentControl.selectedSegmentIndex = _lastSelectedSegmentControlIndex;
     [self.segmentControl addTarget:self action:@selector(segmentControlValueChanged:) forControlEvents:UIControlEventValueChanged];
 }
 
@@ -203,6 +204,7 @@
     if (!self.newsFeed) {
         self.isDownloadingEssentialData = YES;
     }
+    _lastSelectedSegmentControlIndex = self.segmentControl.selectedSegmentIndex;
     // download new data
     if (self.segmentControl.selectedSegmentIndex == 0) {
         // News Feed
@@ -395,6 +397,7 @@
     [encoder encodeObject:_lastCreationDate forKey:@"lastCreationDate"];
     [encoder encodeObject:_pendingStateStringsArray forKey:@"pendingStateStringsArray"];
     [encoder encodeObject:_lastStateUpdateDate forKey:@"lastStateUpdateDate"];
+    [encoder encodeInteger:_lastSelectedSegmentControlIndex forKey:@"lastSelectedSegmentControlIndex"];
 }
 
 - (id)initWithCoder:(NSCoder *)decoder {
@@ -404,6 +407,7 @@
         _lastCreationDate = [[decoder decodeObjectForKey:@"lastCreationDate"] retain];
         _pendingStateStringsArray = [[decoder decodeObjectForKey:@"pendingStateStringsArray"] retain];
         _lastStateUpdateDate = [[decoder decodeObjectForKey:@"lastStateUpdateDate"] retain];
+        _lastSelectedSegmentControlIndex = [decoder decodeIntegerForKey:@"lastSelectedSegmentControlIndex"];
         
         self.tabBarItem = [[[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"News", @"") 
                                                          image:[UIImage imageNamed:@"56-feed.png"] 

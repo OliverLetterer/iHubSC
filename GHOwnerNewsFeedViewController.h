@@ -9,8 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "GHNewsFeedViewController.h"
 
-#warning better NSCoding support (selected segement)
-
 @interface GHOwnerNewsFeedViewController : GHNewsFeedViewController <UIActionSheetDelegate> {
 @private
     UISegmentedControl *_segmentControl;
@@ -22,6 +20,8 @@
     
     NSMutableArray *_pendingStateStringsArray;
     NSDate *_lastStateUpdateDate;
+    
+    NSUInteger _lastSelectedSegmentControlIndex;
 }
 
 @property (nonatomic, retain) UISegmentedControl *segmentControl;
