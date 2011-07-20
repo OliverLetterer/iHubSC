@@ -338,7 +338,6 @@
 		A7DE2DFD13CCB80F005B810B /* ANNotificationErrorImage.png in Resources */ = {isa = PBXBuildFile; fileRef = A7DE2DFB13CCB80E005B810B /* ANNotificationErrorImage.png */; };
 		A7DE2E0013CCBE7E005B810B /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = A7DE2DFF13CCBE7E005B810B /* UIImage+Resize.m */; };
 		A7EE1120136F3FFB00A1E693 /* GHAPIIssueCommentV3.m in Sources */ = {isa = PBXBuildFile; fileRef = A7EE111F136F3FFA00A1E693 /* GHAPIIssueCommentV3.m */; };
-		A7EE1123136F481500A1E693 /* Appirater.m in Sources */ = {isa = PBXBuildFile; fileRef = A7EE1122136F481100A1E693 /* Appirater.m */; };
 		A7F334A513BCCF0100DB922D /* ANAdvancedNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7F3349B13BCCF0100DB922D /* ANAdvancedNavigationController.m */; };
 		A7F334A613BCCF0100DB922D /* ANAdvancedNavigationController+LeftViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7F3349D13BCCF0100DB922D /* ANAdvancedNavigationController+LeftViewController.m */; };
 		A7F334A813BCCF0100DB922D /* ANRectangleView.m in Sources */ = {isa = PBXBuildFile; fileRef = A7F334A213BCCF0100DB922D /* ANRectangleView.m */; };
@@ -953,8 +952,6 @@
 		A7DE2DFF13CCBE7E005B810B /* UIImage+Resize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Resize.m"; sourceTree = "<group>"; };
 		A7EE111E136F3FFA00A1E693 /* GHAPIIssueCommentV3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHAPIIssueCommentV3.h; sourceTree = "<group>"; };
 		A7EE111F136F3FFA00A1E693 /* GHAPIIssueCommentV3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHAPIIssueCommentV3.m; sourceTree = "<group>"; };
-		A7EE1121136F480D00A1E693 /* Appirater.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Appirater.h; path = appirater/Appirater.h; sourceTree = "<group>"; };
-		A7EE1122136F481100A1E693 /* Appirater.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Appirater.m; path = appirater/Appirater.m; sourceTree = "<group>"; };
 		A7F3349A13BCCF0100DB922D /* ANAdvancedNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANAdvancedNavigationController.h; sourceTree = "<group>"; };
 		A7F3349B13BCCF0100DB922D /* ANAdvancedNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANAdvancedNavigationController.m; sourceTree = "<group>"; };
 		A7F3349C13BCCF0100DB922D /* ANAdvancedNavigationController+LeftViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ANAdvancedNavigationController+LeftViewController.h"; sourceTree = "<group>"; };
@@ -1944,15 +1941,6 @@
 			name = Util;
 			sourceTree = "<group>";
 		};
-		A7677150137078B1006D70D6 /* Appirater */ = {
-			isa = PBXGroup;
-			children = (
-				A7EE1121136F480D00A1E693 /* Appirater.h */,
-				A7EE1122136F481100A1E693 /* Appirater.m */,
-			);
-			name = Appirater;
-			sourceTree = "<group>";
-		};
 		A767715B13707A7A006D70D6 /* GHAPIGistV3 */ = {
 			isa = PBXGroup;
 			children = (
@@ -2445,7 +2433,6 @@
 			isa = PBXGroup;
 			children = (
 				A7089518134A0C49000DD6CE /* Foundation Additions */,
-				A7677150137078B1006D70D6 /* Appirater */,
 				A750573F1343422200514A82 /* UserInterface */,
 				A7BF146413426D85001AE50D /* Github API */,
 				A7BF1436134216EB001AE50D /* GHSettingsHelper */,
@@ -3297,7 +3284,6 @@
 				A7837EA1136CADA500B13B95 /* PDColoredProgressView.m in Sources */,
 				A7837EA5136CADD400B13B95 /* GHAPIMilestoneV3TableViewCell.m in Sources */,
 				A7EE1120136F3FFB00A1E693 /* GHAPIIssueCommentV3.m in Sources */,
-				A7EE1123136F481500A1E693 /* Appirater.m in Sources */,
 				A767715E13707A88006D70D6 /* GHAPIGistV3.m in Sources */,
 				A767716113707C6F006D70D6 /* GHAPIGistFileV3.m in Sources */,
 				A7F92B881373149C000EBC5E /* GHAPIGistForkV3.m in Sources */,
