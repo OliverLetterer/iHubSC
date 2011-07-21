@@ -13,7 +13,7 @@
 #import "GHCollapsingAndSpinningTableViewCell.h"
 #import "GHIssueTitleTableViewCell.h"
 #import "GHIssueViewController.h"
-#import "GHNewsFeedItemTableViewCell.h"
+#import "GHTableViewCell.h"
 #import "GHUserViewController.h"
 #import "GHRecentCommitsViewController.h"
 #import "GHViewRootDirectoryViewController.h"

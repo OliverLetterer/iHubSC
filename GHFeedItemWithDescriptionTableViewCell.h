@@ -7,9 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "GHNewsFeedItemTableViewCell.h"
+#import "GHTableViewCell.h"
 
-@interface GHFeedItemWithDescriptionTableViewCell : GHNewsFeedItemTableViewCell {
+@interface GHFeedItemWithDescriptionTableViewCell : GHTableViewCell {
 @private
     UILabel *_descriptionLabel;
 }

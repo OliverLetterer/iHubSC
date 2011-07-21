@@ -8,7 +8,7 @@
 
 #import "GHTableViewController.h"
 #import "GithubAPI.h"
-#import "GHNewsFeedItemTableViewCell.h"
+#import "GHTableViewCell.h"
 #import "GHTableViewController+private.h"
 #import "UIColor+GithubUI.h"
 

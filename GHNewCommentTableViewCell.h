@@ -7,9 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "GHNewsFeedItemTableViewCell.h"
+#import "GHTableViewCell.h"
 
-@interface GHNewCommentTableViewCell : GHNewsFeedItemTableViewCell {
+@interface GHNewCommentTableViewCell : GHTableViewCell {
 @private
     UITextView *_textView;
 }

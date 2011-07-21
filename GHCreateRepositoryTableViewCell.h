@@ -7,9 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "GHNewsFeedItemTableViewCell.h"
+#import "GHTableViewCell.h"
 
-@interface GHCreateRepositoryTableViewCell : GHNewsFeedItemTableViewCell {
+@interface GHCreateRepositoryTableViewCell : GHTableViewCell {
 @private
     UILabel *_publicLabel;
     UISwitch *_publicSwitch;

@@ -7,9 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "GHNewsFeedItemTableViewCell.h"
+#import "GHTableViewCell.h"
 
-@interface GHPushFeedItemTableViewCell : GHNewsFeedItemTableViewCell {
+@interface GHPushFeedItemTableViewCell : GHTableViewCell {
 @private
     UILabel *_firstCommitLabel;
     UILabel *_secondCommitLabel;

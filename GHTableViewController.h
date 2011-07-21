@@ -18,7 +18,7 @@
 #import "ANAdvancedNavigationController.h"
 #import "GHPCollapsingAndSpinningTableViewCell.h"
 
-@class GHNewsFeedItemTableViewCell;
+@class GHTableViewCell;
 
 @interface GHTableViewController : GHPullToReleaseTableViewController <UIExpandableTableViewDatasource, UIExpandableTableViewDelegate> {
 @private

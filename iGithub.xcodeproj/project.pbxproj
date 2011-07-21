@@ -14,7 +14,7 @@
 		A703B9361347315B0014235D /* GHPushFeedItemTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A703B9341347315A0014235D /* GHPushFeedItemTableViewCell.m */; };
 		A703B944134754FC0014235D /* UITableViewCell+Background.m in Sources */ = {isa = PBXBuildFile; fileRef = A703B943134754FC0014235D /* UITableViewCell+Background.m */; };
 		A703B9471347562B0014235D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A703B9461347562B0014235D /* QuartzCore.framework */; };
-		A703B94D1347713B0014235D /* GHNewsFeedItemTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A703B94C1347713B0014235D /* GHNewsFeedItemTableViewCell.m */; };
+		A703B94D1347713B0014235D /* GHTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A703B94C1347713B0014235D /* GHTableViewCell.m */; };
 		A703B95313478C4F0014235D /* GHCommitEventPayload.m in Sources */ = {isa = PBXBuildFile; fileRef = A703B95213478C4F0014235D /* GHCommitEventPayload.m */; };
 		A703B957134791D00014235D /* GHPayloadWithRepository.m in Sources */ = {isa = PBXBuildFile; fileRef = A703B956134791CF0014235D /* GHPayloadWithRepository.m */; };
 		A703B95B134794F40014235D /* GHTarget.m in Sources */ = {isa = PBXBuildFile; fileRef = A703B95A134794F40014235D /* GHTarget.m */; };
@@ -368,8 +368,8 @@
 		A703B9451347560F0014235D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		A703B9461347562B0014235D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		A703B94813476FB20014235D /* TODO.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TODO.txt; sourceTree = "<group>"; };
-		A703B94B1347713B0014235D /* GHNewsFeedItemTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHNewsFeedItemTableViewCell.h; sourceTree = "<group>"; };
-		A703B94C1347713B0014235D /* GHNewsFeedItemTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHNewsFeedItemTableViewCell.m; sourceTree = "<group>"; };
+		A703B94B1347713B0014235D /* GHTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; path = GHTableViewCell.h; sourceTree = "<group>"; };
+		A703B94C1347713B0014235D /* GHTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHTableViewCell.m; sourceTree = "<group>"; };
 		A703B95113478C4F0014235D /* GHCommitEventPayload.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHCommitEventPayload.h; sourceTree = "<group>"; };
 		A703B95213478C4F0014235D /* GHCommitEventPayload.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHCommitEventPayload.m; sourceTree = "<group>"; };
 		A703B955134791CF0014235D /* GHPayloadWithRepository.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPayloadWithRepository.h; sourceTree = "<group>"; };
@@ -2068,8 +2068,8 @@
 		A782206A13D8BACD00A52D9E /* GHTableViewCell */ = {
 			isa = PBXGroup;
 			children = (
-				A703B94B1347713B0014235D /* GHNewsFeedItemTableViewCell.h */,
-				A703B94C1347713B0014235D /* GHNewsFeedItemTableViewCell.m */,
+				A703B94B1347713B0014235D /* GHTableViewCell.h */,
+				A703B94C1347713B0014235D /* GHTableViewCell.m */,
 			);
 			name = GHTableViewCell;
 			sourceTree = "<group>";
@@ -3323,7 +3323,7 @@
 				A7CE1B8A13463A6E00169F94 /* GHIssue.m in Sources */,
 				A703B9361347315B0014235D /* GHPushFeedItemTableViewCell.m in Sources */,
 				A703B944134754FC0014235D /* UITableViewCell+Background.m in Sources */,
-				A703B94D1347713B0014235D /* GHNewsFeedItemTableViewCell.m in Sources */,
+				A703B94D1347713B0014235D /* GHTableViewCell.m in Sources */,
 				A703B95313478C4F0014235D /* GHCommitEventPayload.m in Sources */,
 				A703B957134791D00014235D /* GHPayloadWithRepository.m in Sources */,
 				A703B95B134794F40014235D /* GHTarget.m in Sources */,

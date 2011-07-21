@@ -11,7 +11,7 @@
 #import "GHIssueTitleTableViewCell.h"
 #import "GHIssueCommentTableViewCell.h"
 
-@class GHAPIIssueV3, GHNewsFeedItemTableViewCell, GHIssueComment, GHPullRequestDiscussion, DTAttributedTextView;
+@class GHAPIIssueV3, GHTableViewCell, GHIssueComment, GHPullRequestDiscussion, DTAttributedTextView;
 
 @interface GHIssueViewController : GHTableViewController <UIAlertViewDelegate, GHIssueTitleTableViewCellDelegate, UIActionSheetDelegate, GHIssueCommentTableViewCellDelegate> {
 @private

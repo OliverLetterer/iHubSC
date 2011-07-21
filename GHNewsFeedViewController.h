@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "GHTableViewController.h"
 
-@class GHNewsFeed, GHNewsFeedItemTableViewCell, GHNewsFeedItem;
+@class GHNewsFeed, GHTableViewCell, GHNewsFeedItem;
 
 @interface GHNewsFeedViewController : GHTableViewController {
 @protected

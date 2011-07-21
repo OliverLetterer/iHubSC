@@ -7,9 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "GHNewsFeedItemTableViewCell.h"
+#import "GHTableViewCell.h"
 
-@interface GHCreateIssueTableViewCell : GHNewsFeedItemTableViewCell {
+@interface GHCreateIssueTableViewCell : GHTableViewCell {
 @private
     UITextField *_titleTextField;
     UITextView *_descriptionTextField;
