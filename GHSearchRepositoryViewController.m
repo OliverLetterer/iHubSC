@@ -98,7 +98,7 @@
     
     GHRepository *repository = [self.repositories objectAtIndex:indexPath.row];
     
-    cell.titleLabel.text = [NSString stringWithFormat:@"%@/%@", repository.owner, repository.name];
+    cell.textLabel.text = [NSString stringWithFormat:@"%@/%@", repository.owner, repository.name];
     
     cell.descriptionLabel.text = repository.desctiptionRepo;
     

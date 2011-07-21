@@ -83,7 +83,7 @@
     
     GHUser *user = [self.users objectAtIndex:indexPath.row];
     
-    cell.titleLabel.text = user.login;
+    cell.textLabel.text = user.login;
     cell.descriptionLabel.text = nil;
     
     cell.repositoryLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Since %@", @""), user.createdAt.prettyTimeIntervalSinceNow];

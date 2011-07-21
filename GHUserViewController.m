@@ -618,7 +618,7 @@
                 cell.accessoryType = UITableViewCellAccessoryNone;
             }
             
-            cell.titleLabel.text = self.user.login;
+            cell.textLabel.text = self.user.login;
             cell.descriptionLabel.text = nil;
             cell.repositoryLabel.text = nil;
             
@@ -725,7 +725,7 @@
         
         GHAPIRepositoryV3 *repository = [self.repositoriesArray objectAtIndex:indexPath.row-1];
         
-        cell.titleLabel.text = [NSString stringWithFormat:@"%@/%@", repository.owner.login, repository.name];
+        cell.textLabel.text = [NSString stringWithFormat:@"%@/%@", repository.owner.login, repository.name];
         cell.descriptionLabel.text = repository.description;
         
         if ([repository.private boolValue]) {
@@ -747,7 +747,7 @@
             
             GHAPIRepositoryV3 *repository = [self.watchedRepositoriesArray objectAtIndex:indexPath.row-1];
             
-            cell.titleLabel.text = [NSString stringWithFormat:@"%@/%@", repository.owner.login, repository.name];
+            cell.textLabel.text = [NSString stringWithFormat:@"%@/%@", repository.owner.login, repository.name];
             
             cell.descriptionLabel.text = repository.description;
             
@@ -841,7 +841,7 @@
         
         GHAPIOrganizationV3 *organization = [self.organizations objectAtIndex:indexPath.row-1];
         
-        cell.titleLabel.text = organization.name ? organization.name : organization.login;
+        cell.textLabel.text = organization.name ? organization.name : organization.login;
         
         cell.descriptionLabel.text = organization.type;
         
@@ -860,7 +860,7 @@
         
         GHAPIGistV3 *gist = [self.gists objectAtIndex:indexPath.row-1];
         
-        cell.titleLabel.text = [NSString stringWithFormat:@"Gist: %@", gist.ID];
+        cell.textLabel.text = [NSString stringWithFormat:@"Gist: %@", gist.ID];
         
         cell.descriptionLabel.text = gist.description;
         cell.repositoryLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Created %@ ago", @""), gist.createdAt.prettyTimeIntervalSinceNow];

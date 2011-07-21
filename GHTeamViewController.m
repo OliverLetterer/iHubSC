@@ -199,7 +199,7 @@
         
         GHAPIRepositoryV3 *repository = [self.repositories objectAtIndex:indexPath.row-1];
         
-        cell.titleLabel.text = repository.name;
+        cell.textLabel.text = repository.name;
         cell.descriptionLabel.text = repository.description;
         
         if ([repository.private boolValue]) {

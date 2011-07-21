@@ -262,7 +262,7 @@
                 cell.accessoryType = UITableViewCellAccessoryNone;
             }
             
-            cell.titleLabel.text = self.organization.login;
+            cell.textLabel.text = self.organization.login;
             cell.descriptionLabel.text = nil;
             cell.repositoryLabel.text = nil;
             
@@ -350,7 +350,7 @@
         
         GHAPIRepositoryV3 *repository = [self.publicRepositories objectAtIndex:indexPath.row-1];
         
-        cell.titleLabel.text = [NSString stringWithFormat:@"%@/%@", repository.owner.login, repository.name];
+        cell.textLabel.text = [NSString stringWithFormat:@"%@/%@", repository.owner.login, repository.name];
         
         cell.descriptionLabel.text = repository.description;
         

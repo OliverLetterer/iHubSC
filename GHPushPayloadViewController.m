@@ -85,7 +85,7 @@
     
     GHCommitMessage *message = [self.payload.commits objectAtIndex:indexPath.row];
     
-    cell.titleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ committed %@", @""), message.name, message.head];
+    cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ committed %@", @""), message.name, message.head];
     cell.descriptionLabel.text = message.message;
     cell.imageView.image = [UIImage imageNamed:@"DefaultUserImage.png"];
     

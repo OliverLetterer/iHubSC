@@ -446,11 +446,11 @@
             cell.accessoryType = UITableViewCellAccessoryNone;
             
             if (self.repository.isForked) {
-                cell.titleLabel.text = [NSString stringWithFormat:@"%@/%@", self.repository.owner.login, self.repository.name];
+                cell.textLabel.text = [NSString stringWithFormat:@"%@/%@", self.repository.owner.login, self.repository.name];
                 cell.descriptionLabel.text = self.repository.description;
                 cell.repositoryLabel.text = [NSString stringWithFormat:NSLocalizedString(@"forked from %@", @""), [NSString stringWithFormat:@"%@/%@", self.repository.parent.owner.login, self.repository.parent.name]];
             } else {
-                cell.titleLabel.text = self.repository.name;
+                cell.textLabel.text = self.repository.name;
                 cell.descriptionLabel.text = self.repository.description;
                 cell.repositoryLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Created by %@", @""), self.repository.owner.login];
             }
@@ -680,7 +680,7 @@
         
         GHPullRequestDiscussion *discussion = [self.pullRequests objectAtIndex:indexPath.row-1];
         
-        cell.titleLabel.text = discussion.user.login;
+        cell.textLabel.text = discussion.user.login;
         cell.descriptionLabel.text = discussion.title;
         
         cell.repositoryLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ ago", @""), discussion.createdAt.prettyTimeIntervalSinceNow];

@@ -454,7 +454,7 @@
             
             [self updateImageView:cell.imageView atIndexPath:indexPath withAvatarURLString:[GHSettingsHelper avatarURL]];
             
-            cell.titleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ (right now)", @""), [GHSettingsHelper username]];
+            cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ (right now)", @""), [GHSettingsHelper username]];
             
             self.textView = cell.textView;
             cell.textView.inputAccessoryView = self.textViewToolBar;
@@ -480,7 +480,7 @@
             [self updateImageView:cell.imageView atIndexPath:indexPath withAvatarURLString:comment.user.avatarURL];
             
             cell.buttonDelegate = self;
-            cell.titleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ commented on this %@", @""), comment.user.login, self.issueName];
+            cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ commented on this %@", @""), comment.user.login, self.issueName];
             cell.repositoryLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ ago", @""), comment.updatedAt.prettyTimeIntervalSinceNow];
             cell.attributedTextView.attributedString = comment.attributedBody;
             
@@ -500,7 +500,7 @@
             cell.repositoryLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ ago", @""), event.createdAt.prettyTimeIntervalSinceNow];
             
             cell.descriptionLabel.text = nil;
-            cell.titleLabel.text = nil;
+            cell.textLabel.text = nil;
             
             switch (event.type) {
                 case GHAPIIssueEventTypeV3Closed:
@@ -511,37 +511,37 @@
                     } else {
                         description = [NSString stringWithFormat:NSLocalizedString(@"%@ closed this %@", @""), event.actor.login, self.issueName];
                     }
-                    cell.titleLabel.text = description;
+                    cell.textLabel.text = description;
                     cell.descriptionLabel.text = event.commitID;
                     break;
                     
                 case GHAPIIssueEventTypeV3Reopened:
-                    cell.titleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ reopened this %@", @""), event.actor.login, self.issueName];
+                    cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ reopened this %@", @""), event.actor.login, self.issueName];
                     break;
                     
                 case GHAPIIssueEventTypeV3Subscribed:
-                    cell.titleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ subscribed to this %@", @""), event.actor.login, self.issueName];
+                    cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ subscribed to this %@", @""), event.actor.login, self.issueName];
                     break;
                     
                 case GHAPIIssueEventTypeV3Merged:
-                    cell.titleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ merged this %@ with", @""), event.actor.login, self.issueName];
+                    cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ merged this %@ with", @""), event.actor.login, self.issueName];
                     cell.descriptionLabel.text = event.commitID;
                     
                     break;
                     
                 case GHAPIIssueEventTypeV3Referenced:
-                    cell.titleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"This %@ was referenced in", @""), self.issueName];
+                    cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"This %@ was referenced in", @""), self.issueName];
                     cell.descriptionLabel.text = event.commitID;
                     
                     break;
                     
                 case GHAPIIssueEventTypeV3Mentioned:
-                    cell.titleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ was mentioned in a body", @""), event.actor.login];
+                    cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ was mentioned in a body", @""), event.actor.login];
                     
                     break;
                     
                 case GHAPIIssueEventTypeV3Assigned:
-                    cell.titleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ was assigned to this %@", @""), event.actor.login, self.issueName];
+                    cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ was assigned to this %@", @""), event.actor.login, self.issueName];
                     
                     break;
                     
@@ -564,7 +564,7 @@
         
         [self updateImageView:cell.imageView atIndexPath:indexPath withGravatarID:commit.user.gravatarID];
         
-        cell.titleLabel.text = commit.ID;
+        cell.textLabel.text = commit.ID;
         cell.descriptionLabel.text = commit.message;
         
         return cell;

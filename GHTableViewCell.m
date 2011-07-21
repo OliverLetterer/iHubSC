@@ -20,10 +20,6 @@
 
 #pragma mark - setters and getters
 
-- (UILabel *)titleLabel {
-    return self.textLabel;
-}
-
 - (UILabel *)repositoryLabel {
     return self.detailTextLabel;
 }
@@ -33,10 +29,10 @@
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if ((self = [super initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:reuseIdentifier])) {
         // setup my views
-        self.titleLabel.font = [UIFont boldSystemFontOfSize:11.0];
-        self.titleLabel.textColor = [UIColor colorWithWhite:0.25 alpha:1.0];
-        self.titleLabel.highlightedTextColor = [UIColor whiteColor];
-        self.titleLabel.backgroundColor = [UIColor clearColor];
+        self.textLabel.font = [UIFont boldSystemFontOfSize:11.0];
+        self.textLabel.textColor = [UIColor colorWithWhite:0.25 alpha:1.0];
+        self.textLabel.highlightedTextColor = [UIColor whiteColor];
+        self.textLabel.backgroundColor = [UIColor clearColor];
         
         self.repositoryLabel.font = [UIFont fontWithName:@"Helvetica-Oblique" size:12.0];
         self.repositoryLabel.textColor = [UIColor colorWithWhite:0.25 alpha:1.0];
@@ -74,7 +70,7 @@
     [self.timeLabel sizeToFit];
     CGFloat width = CGRectGetWidth(self.timeLabel.bounds);
     self.timeLabel.frame = CGRectMake(CGRectGetWidth(self.contentView.bounds)-width, 4.0f, width, CGRectGetHeight(self.timeLabel.bounds));
-    self.titleLabel.frame = CGRectMake(78.0, 4.0, CGRectGetWidth(self.contentView.bounds)-width-78.0f, 15.0);
+    self.textLabel.frame = CGRectMake(78.0, 4.0, CGRectGetWidth(self.contentView.bounds)-width-78.0f, 15.0);
     self.repositoryLabel.frame = CGRectMake(78.0, self.contentView.bounds.size.height - GHNewsFeedItemTableViewCellRepositoryLabelHeight - GHNewsFeedItemTableViewCellRepositoryLabelBottomOffset, 222.0, GHNewsFeedItemTableViewCellRepositoryLabelHeight);
 }
 
@@ -82,7 +78,7 @@
     [super prepareForReuse];
     
     self.imageView.image = nil;
-    self.titleLabel.text = nil;
+    self.textLabel.text = nil;
     self.repositoryLabel.text = nil;
     self.timeLabel.text = nil;
 }

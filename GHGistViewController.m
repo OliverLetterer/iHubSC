@@ -307,7 +307,7 @@
             
             GHAPIGistV3 *gist = self.gist;
             
-            cell.titleLabel.text = [NSString stringWithFormat:@"Gist: %@", gist.ID];
+            cell.textLabel.text = [NSString stringWithFormat:@"Gist: %@", gist.ID];
             
             cell.descriptionLabel.text = gist.description;
             cell.repositoryLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Created %@ ago", @""), gist.createdAt.prettyTimeIntervalSinceNow];
@@ -395,7 +395,7 @@
             
             [self updateImageView:cell.imageView atIndexPath:indexPath withAvatarURLString:comment.user.avatarURL];
             
-            cell.titleLabel.text = comment.user.login;
+            cell.textLabel.text = comment.user.login;
             cell.descriptionLabel.text = comment.body;
             cell.repositoryLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ ago", @""), comment.createdAt.prettyTimeIntervalSinceNow];
             
@@ -411,7 +411,7 @@
             
             [self updateImageView:cell.imageView atIndexPath:indexPath withAvatarURLString:[GHSettingsHelper avatarURL]];
             
-            cell.titleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ (right now)", @""), [GHSettingsHelper username]];
+            cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ (right now)", @""), [GHSettingsHelper username]];
             
             self.textView = cell.textView;
             cell.textView.inputAccessoryView = self.textViewToolBar;
