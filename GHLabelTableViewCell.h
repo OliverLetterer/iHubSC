@@ -8,9 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import <QuartzCore/QuartzCore.h>
-#import "UITableViewCellWithLinearGradientBackgroundView.h"
+#import "GHTableViewCellWithLinearGradientBackgroundView.h"
 
-@interface GHLabelTableViewCell : UITableViewCellWithLinearGradientBackgroundView {
+@interface GHLabelTableViewCell : GHTableViewCellWithLinearGradientBackgroundView {
 @private
     UIView *_colorView;
 }

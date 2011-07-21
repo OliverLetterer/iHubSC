@@ -7,7 +7,7 @@
 //
 
 #import "GHPullToReleaseTableViewController.h"
-#import "UITableViewCellWithLinearGradientBackgroundView.h"
+#import "GHTableViewCellWithLinearGradientBackgroundView.h"
 
 #define kGHPullToReleaseTableViewControllerDefaultAnimationDuration 0.3f
 
@@ -121,9 +121,9 @@ NSString *const NSUserDefaultLastUpdateDateKey = @"NSUserDefaultLastUpdateDateKe
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *CellIdentifier = @"Cell";
     
-    UITableViewCellWithLinearGradientBackgroundView *cell = (UITableViewCellWithLinearGradientBackgroundView *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    GHTableViewCellWithLinearGradientBackgroundView *cell = (GHTableViewCellWithLinearGradientBackgroundView *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[UITableViewCellWithLinearGradientBackgroundView alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[[GHTableViewCellWithLinearGradientBackgroundView alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
     }
     
     cell.textLabel.text = [NSString stringWithFormat:@"%@", indexPath];

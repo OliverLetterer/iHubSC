@@ -8,11 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "INProgressView.h"
-#import "UITableViewCellWithLinearGradientBackgroundView.h"
+#import "GHTableViewCellWithLinearGradientBackgroundView.h"
 
 #define GHAPIMilestoneV3TableViewCellHeight 44.0f;
 
-@interface GHAPIMilestoneV3TableViewCell : UITableViewCellWithLinearGradientBackgroundView {
+@interface GHAPIMilestoneV3TableViewCell : GHTableViewCellWithLinearGradientBackgroundView {
 @private
     INProgressView *_progressView;
 }

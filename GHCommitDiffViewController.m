@@ -7,7 +7,7 @@
 //
 
 #import "GHCommitDiffViewController.h"
-#import "UITableViewCellWithLinearGradientBackgroundView.h"
+#import "GHTableViewCellWithLinearGradientBackgroundView.h"
 #import "GHLinearGradientBackgroundView.h"
 #import "GHPDiffViewTableViewCell.h"
 

@@ -7,10 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "UITableViewCellWithLinearGradientBackgroundView.h"
+#import "GHTableViewCellWithLinearGradientBackgroundView.h"
 #import "UIExpandableTableView.h"
 
-@interface GHCollapsingAndSpinningTableViewCell : UITableViewCellWithLinearGradientBackgroundView <UIExpandingTableViewCell> {
+@interface GHCollapsingAndSpinningTableViewCell : GHTableViewCellWithLinearGradientBackgroundView <UIExpandingTableViewCell> {
 @private
     BOOL _isSpinning;
     

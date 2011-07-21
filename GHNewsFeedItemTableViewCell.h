@@ -7,9 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "UITableViewCellWithLinearGradientBackgroundView.h"
+#import "GHTableViewCellWithLinearGradientBackgroundView.h"
 
-@interface GHNewsFeedItemTableViewCell : UITableViewCellWithLinearGradientBackgroundView {
+@interface GHNewsFeedItemTableViewCell : GHTableViewCellWithLinearGradientBackgroundView {
 @private
     UILabel *_timeLabel;
 }
