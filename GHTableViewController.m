@@ -399,6 +399,12 @@ static CGFloat wrapperViewHeight = 21.0f;
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        if (self.lastSelectedIndexPath) {
+            [self.tableView selectRowAtIndexPath:self.lastSelectedIndexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
+        }
+    }
+    
     self.lastSelectedIndexPath = nil;
 }
 
@@ -459,6 +465,14 @@ static CGFloat wrapperViewHeight = 21.0f;
             _hasGradientBackgrounds = YES;
         }
         self.navigationController.navigationBar.tintColor = [UIColor defaultNavigationBarTintColor];
+    } else {
+        if (!CGPointEqualToPoint(_lastContentOffset, CGPointZero)) {
+            [self.tableView setContentOffset:_lastContentOffset animated:NO];
+        }
+        
+        if (self.lastSelectedIndexPath) {
+            [self.tableView selectRowAtIndexPath:self.lastSelectedIndexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
+        }
     }
 }
 
@@ -568,6 +582,12 @@ static CGFloat wrapperViewHeight = 21.0f;
 
 - (void)encodeWithCoder:(NSCoder *)encoder {
     [super encodeWithCoder:encoder];
+    
+    if (!_lastSelectedIndexPath) {
+        if (self.isViewLoaded) {
+            self.lastSelectedIndexPath = self.tableView.indexPathForSelectedRow;
+        }
+    }
     
     NSMutableArray *expandedSectionsArray = [NSMutableArray arrayWithCapacity:5];
     for (NSInteger section = 0; section < self.tableView.numberOfSections; section++) {

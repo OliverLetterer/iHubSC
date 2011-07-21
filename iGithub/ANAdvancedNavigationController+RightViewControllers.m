@@ -579,7 +579,6 @@
 }
 
 - (void)_insertRightViewControllerViews {
-#warning update shadows
     [self.viewControllers enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         if (![self __isRightViewControllerAlreayInViewHierarchy:obj]) {
             UIViewController *viewController = obj;
@@ -589,8 +588,10 @@
             view.center = CGPointZero;
             [viewController viewDidAppear:NO];
         }
-        [self __moveRightViewControllerToRightAnchorPoint:[self.viewControllers objectAtIndex:_indexOfFrontViewController] animated:NO];
     }];
+    [self __moveRightViewControllerToRightAnchorPoint:[self.viewControllers objectAtIndex:_indexOfFrontViewController] animated:NO];
+    
+    [self __updateViewControllerShadows];
 }
 
 @end
