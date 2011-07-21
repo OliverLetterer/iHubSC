@@ -10,8 +10,6 @@
 #import "iGithubAppDelegate.h"
 #import "ANAdvancedNavigationController.h"
 
-#warning update Default.png to match new state
-
 @interface iGithubAppDelegate_iPad : iGithubAppDelegate <ANAdvancedNavigationControllerDelegate> {
     ANAdvancedNavigationController *_advancedNavigationController;
 }

@@ -181,6 +181,8 @@
 		A75C3EA813B35B5300D64681 /* GHOwnerNewsFeedViewController+Private.m in Sources */ = {isa = PBXBuildFile; fileRef = A75C3EA713B35B5200D64681 /* GHOwnerNewsFeedViewController+Private.m */; };
 		A75EFA5113D4325200C162F3 /* GHPIssueInfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A75EFA5013D4325200C162F3 /* GHPIssueInfoTableViewCell.m */; };
 		A75EFA5813D4382F00C162F3 /* WAAttributesMarkdownFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = A75EFA5713D4382F00C162F3 /* WAAttributesMarkdownFormatter.m */; };
+		A7611E0713D8A73200227467 /* Default-Landscape~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = A7611E0513D8A73200227467 /* Default-Landscape~ipad.png */; };
+		A7611E0813D8A73200227467 /* Default-Portrait~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = A7611E0613D8A73200227467 /* Default-Portrait~ipad.png */; };
 		A767715E13707A88006D70D6 /* GHAPIGistV3.m in Sources */ = {isa = PBXBuildFile; fileRef = A767715D13707A88006D70D6 /* GHAPIGistV3.m */; };
 		A767716113707C6F006D70D6 /* GHAPIGistFileV3.m in Sources */ = {isa = PBXBuildFile; fileRef = A767716013707C6F006D70D6 /* GHAPIGistFileV3.m */; };
 		A76771641370A34F006D70D6 /* GHClipBoard.png in Resources */ = {isa = PBXBuildFile; fileRef = A76771621370A34E006D70D6 /* GHClipBoard.png */; };
@@ -208,8 +210,6 @@
 		A77654D71395556A00787420 /* WAMarkdown.m in Sources */ = {isa = PBXBuildFile; fileRef = A77654D21395556A00787420 /* WAMarkdown.m */; };
 		A77654D81395556A00787420 /* WAMarkdownParser.m in Sources */ = {isa = PBXBuildFile; fileRef = A77654D41395556A00787420 /* WAMarkdownParser.m */; };
 		A77654DA13955A0100787420 /* MarkdownStyle in Resources */ = {isa = PBXBuildFile; fileRef = A77654D913955A0000787420 /* MarkdownStyle */; };
-		A77B027013D05FAE00FC0508 /* Default-Portrait~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = A77B026E13D05FAE00FC0508 /* Default-Portrait~ipad.png */; };
-		A77B027113D05FAE00FC0508 /* Default-Landscape~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = A77B026F13D05FAE00FC0508 /* Default-Landscape~ipad.png */; };
 		A7837E95136C905200B13B95 /* GHAPIIssueV3.m in Sources */ = {isa = PBXBuildFile; fileRef = A7837E94136C905100B13B95 /* GHAPIIssueV3.m */; };
 		A7837E9A136C93FC00B13B95 /* GHAPIMilestoneV3.m in Sources */ = {isa = PBXBuildFile; fileRef = A7837E99136C93FC00B13B95 /* GHAPIMilestoneV3.m */; };
 		A7837EA1136CADA500B13B95 /* PDColoredProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = A7837EA0136CADA400B13B95 /* PDColoredProgressView.m */; };
@@ -678,6 +678,8 @@
 		A75EFA5013D4325200C162F3 /* GHPIssueInfoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPIssueInfoTableViewCell.m; sourceTree = "<group>"; };
 		A75EFA5613D4382E00C162F3 /* WAAttributesMarkdownFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WAAttributesMarkdownFormatter.h; sourceTree = "<group>"; };
 		A75EFA5713D4382F00C162F3 /* WAAttributesMarkdownFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WAAttributesMarkdownFormatter.m; sourceTree = "<group>"; };
+		A7611E0513D8A73200227467 /* Default-Landscape~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape~ipad.png"; sourceTree = "<group>"; };
+		A7611E0613D8A73200227467 /* Default-Portrait~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait~ipad.png"; sourceTree = "<group>"; };
 		A767715C13707A88006D70D6 /* GHAPIGistV3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHAPIGistV3.h; sourceTree = "<group>"; };
 		A767715D13707A88006D70D6 /* GHAPIGistV3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHAPIGistV3.m; sourceTree = "<group>"; };
 		A767715F13707C6F006D70D6 /* GHAPIGistFileV3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHAPIGistFileV3.h; sourceTree = "<group>"; };
@@ -718,8 +720,6 @@
 		A77654D31395556A00787420 /* WAMarkdownParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WAMarkdownParser.h; sourceTree = "<group>"; };
 		A77654D41395556A00787420 /* WAMarkdownParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WAMarkdownParser.m; sourceTree = "<group>"; };
 		A77654D913955A0000787420 /* MarkdownStyle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MarkdownStyle; sourceTree = "<group>"; };
-		A77B026E13D05FAE00FC0508 /* Default-Portrait~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait~ipad.png"; sourceTree = "<group>"; };
-		A77B026F13D05FAE00FC0508 /* Default-Landscape~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape~ipad.png"; sourceTree = "<group>"; };
 		A7837E93136C905100B13B95 /* GHAPIIssueV3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHAPIIssueV3.h; sourceTree = "<group>"; };
 		A7837E94136C905100B13B95 /* GHAPIIssueV3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHAPIIssueV3.m; sourceTree = "<group>"; };
 		A7837E98136C93FC00B13B95 /* GHAPIMilestoneV3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHAPIMilestoneV3.h; sourceTree = "<group>"; };
@@ -1616,8 +1616,8 @@
 		A745D096139B97CC00FF8FB1 /* Defaults */ = {
 			isa = PBXGroup;
 			children = (
-				A77B026E13D05FAE00FC0508 /* Default-Portrait~ipad.png */,
-				A77B026F13D05FAE00FC0508 /* Default-Landscape~ipad.png */,
+				A7611E0513D8A73200227467 /* Default-Landscape~ipad.png */,
+				A7611E0613D8A73200227467 /* Default-Portrait~ipad.png */,
 				A75787F113D81A6C00BE5B04 /* Default.png */,
 				A75787EC13D8174000BE5B04 /* Default@2x.png */,
 			);
@@ -3206,8 +3206,6 @@
 				A7DE2DF813CCB07D005B810B /* ANNotificationSuccessImage@2x.png in Resources */,
 				A7DE2DFC13CCB80F005B810B /* ANNotificationSuccessImage.png in Resources */,
 				A7DE2DFD13CCB80F005B810B /* ANNotificationErrorImage.png in Resources */,
-				A77B027013D05FAE00FC0508 /* Default-Portrait~ipad.png in Resources */,
-				A77B027113D05FAE00FC0508 /* Default-Landscape~ipad.png in Resources */,
 				A76B09BF13D620820068DDDE /* Icon-72.png in Resources */,
 				A76B09C013D620820068DDDE /* Icon-Small-50.png in Resources */,
 				A76B09C113D620820068DDDE /* Icon-Small.png in Resources */,
@@ -3217,6 +3215,8 @@
 				A76B09C513D620820068DDDE /* iTunesArtwork.png in Resources */,
 				A75787EE13D8174000BE5B04 /* Default@2x.png in Resources */,
 				A75787F213D81A6C00BE5B04 /* Default.png in Resources */,
+				A7611E0713D8A73200227467 /* Default-Landscape~ipad.png in Resources */,
+				A7611E0813D8A73200227467 /* Default-Portrait~ipad.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
