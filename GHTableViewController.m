@@ -20,6 +20,7 @@
 @synthesize reloadDataIfNewUserGotAuthenticated=_reloadDataIfNewUserGotAuthenticated, reloadDataOnApplicationWillEnterForeground=_reloadDataOnApplicationWillEnterForeground;
 @synthesize isDownloadingEssentialData=_isDownloadingEssentialData, downloadingEssentialDataView=_downloadingEssentialDataView;
 @synthesize lastSelectedIndexPath=_lastSelectedIndexPath;
+@synthesize sectionsStateArray=_sectionsStateArray;
 
 #pragma mark - setters and getters
 
@@ -303,6 +304,7 @@ static CGFloat wrapperViewHeight = 21.0f;
     [_nextPageForSectionsDictionary release];
     [_downloadingEssentialDataView release];
     [_lastSelectedIndexPath release];
+    [_sectionsStateArray release];
     
     [super dealloc];
 }
@@ -379,9 +381,16 @@ static CGFloat wrapperViewHeight = 21.0f;
         self.tableView.separatorColor = [UIColor colorWithRed:186.0f/255.0f green:186.0f/255.0f blue:186.0f/255.0f alpha:1.0f];
     }
     
+    // restore expansion state
+    [self.sectionsStateArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        NSNumber *section = obj;
+        [self.tableView expandSection:[section integerValue] animated:NO];
+    }];
+    
     if (!CGPointEqualToPoint(_lastContentOffset, CGPointZero)) {
-        self.tableView.contentOffset = _lastContentOffset;
+        [self.tableView setContentOffset:_lastContentOffset animated:NO];
     }
+    
     if (self.lastSelectedIndexPath) {
         [self.tableView selectRowAtIndexPath:self.lastSelectedIndexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
     }
@@ -391,6 +400,21 @@ static CGFloat wrapperViewHeight = 21.0f;
     [super viewDidAppear:animated];
     
     self.lastSelectedIndexPath = nil;
+}
+
+- (void)viewWillUnload {
+    [super viewWillUnload];
+    
+    NSMutableArray *expandedSectionsArray = [NSMutableArray arrayWithCapacity:5];
+    for (NSInteger section = 0; section < self.tableView.numberOfSections; section++) {
+        BOOL isSectionExpanded = [self.tableView isSectionExpanded:section];
+        if (isSectionExpanded) {
+            NSNumber *sectionKey = [NSNumber numberWithInteger:section];
+            [expandedSectionsArray addObject:sectionKey];
+        }
+    }
+    
+    self.sectionsStateArray = expandedSectionsArray;
 }
 
 - (void)viewDidUnload {
@@ -447,10 +471,6 @@ static CGFloat wrapperViewHeight = 21.0f;
 
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
-}
-
-- (void)viewWillUnload {
-    [super viewWillUnload];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
@@ -548,6 +568,17 @@ static CGFloat wrapperViewHeight = 21.0f;
 
 - (void)encodeWithCoder:(NSCoder *)encoder {
     [super encodeWithCoder:encoder];
+    
+    NSMutableArray *expandedSectionsArray = [NSMutableArray arrayWithCapacity:5];
+    for (NSInteger section = 0; section < self.tableView.numberOfSections; section++) {
+        BOOL isSectionExpanded = [self.tableView isSectionExpanded:section];
+        if (isSectionExpanded) {
+            NSNumber *sectionKey = [NSNumber numberWithInteger:section];
+            [expandedSectionsArray addObject:sectionKey];
+        }
+    }
+    
+    [encoder encodeObject:expandedSectionsArray forKey:@"sectionsStateArray"];
     [encoder encodeObject:_nextPageForSectionsDictionary forKey:@"nextPageForSectionsDictionary"];
     [encoder encodeObject:_cachedHeightsDictionary forKey:@"123cachedHeightsDictionary"];
     [encoder encodeBool:_reloadDataIfNewUserGotAuthenticated forKey:@"reloadDataIfNewUserGotAuthenticated"];
@@ -555,7 +586,6 @@ static CGFloat wrapperViewHeight = 21.0f;
     [encoder encodeInteger:_myTableViewStyle forKey:@"myTableViewStyle"];
     [encoder encodeCGPoint:_lastContentOffset forKey:@"lastContentOffset"];
     [encoder encodeObject:_lastSelectedIndexPath forKey:@"lastSelectedIndexPath"];
-//    [encoder encodeObject:self.tableView forKey:@"tableView"];
 }
 
 - (id)initWithCoder:(NSCoder *)decoder {
@@ -567,7 +597,7 @@ static CGFloat wrapperViewHeight = 21.0f;
         _myTableViewStyle = [decoder decodeIntegerForKey:@"myTableViewStyle"];
         _lastContentOffset = [decoder decodeCGPointForKey:@"lastContentOffset"];
         _lastSelectedIndexPath = [[decoder decodeObjectForKey:@"lastSelectedIndexPath"] retain];
-//        self.tableView = [decoder decodeObjectForKey:@"tableView"];
+        _sectionsStateArray = [[decoder decodeObjectForKey:@"sectionsStateArray"] retain];
     }
     return self;
 }

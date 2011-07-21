@@ -41,7 +41,12 @@
     // restoring state
     CGPoint _lastContentOffset;
     NSIndexPath *_lastSelectedIndexPath;
+    
+    NSArray *_sectionsStateArray;
 }
+
+@property (nonatomic, retain) NSArray *sectionsStateArray;
+
 
 @property (nonatomic, copy) NSIndexPath *lastSelectedIndexPath;
 
