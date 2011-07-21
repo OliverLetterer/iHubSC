@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "GHTableViewController.h"
 
-@interface GHPNewsFeedViewController : GHTableViewController {
+@interface GHPNewsFeedViewController : GHTableViewController <NSCoding> {
 @private
     GHNewsFeed *_newsFeed;
 }

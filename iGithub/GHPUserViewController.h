@@ -11,7 +11,7 @@
 #import <MessageUI/MessageUI.h>
 #import "GHPInfoSectionTableViewController.h"
 
-@interface GHPUserViewController : GHPInfoSectionTableViewController <MFMailComposeViewControllerDelegate> {
+@interface GHPUserViewController : GHPInfoSectionTableViewController <MFMailComposeViewControllerDelegate, NSCoding> {
     GHAPIUserV3 *_user;
     NSString *_username;
     

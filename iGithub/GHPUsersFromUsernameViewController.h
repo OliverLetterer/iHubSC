@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "GHPUsersViewController.h"
 
-@interface GHPUsersFromUsernameViewController : GHPUsersViewController {
+@interface GHPUsersFromUsernameViewController : GHPUsersViewController <NSCoding> {
 @private
     NSString *_username;
 }

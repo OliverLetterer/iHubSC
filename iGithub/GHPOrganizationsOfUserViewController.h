@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "GHPOrganizationsViewController.h"
 
-@interface GHPOrganizationsOfUserViewController : GHPOrganizationsViewController {
+@interface GHPOrganizationsOfUserViewController : GHPOrganizationsViewController <NSCoding> {
 @private
     NSString *_username;
 }

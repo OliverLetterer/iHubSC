@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "GHPDataArrayViewController.h"
 
-@interface GHPTeamsViewController : GHPDataArrayViewController {
+@interface GHPTeamsViewController : GHPDataArrayViewController <NSCoding> {
 @private
     NSString *_organizationName;
 }

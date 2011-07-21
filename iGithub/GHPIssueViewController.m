@@ -1069,4 +1069,36 @@
     item.enabled = textView.selectedRange.length > 0;
 }
 
+#pragma mark Keyed Archiving
+
+- (void)encodeWithCoder:(NSCoder *)encoder {
+    [super encodeWithCoder:encoder];
+    [encoder encodeObject:_repositoryString forKey:@"repositoryString"];
+    [encoder encodeObject:_issueNumber forKey:@"issueNumber"];
+    [encoder encodeObject:_issue forKey:@"issue"];
+    [encoder encodeObject:_repository forKey:@"repository"];
+    [encoder encodeObject:_discussion forKey:@"discussion"];
+    [encoder encodeObject:_history forKey:@"history"];
+    [encoder encodeFloat:_bodyHeight forKey:@"bodyHeight"];
+    [encoder encodeObject:_linkText forKey:@"linkText"];
+    [encoder encodeObject:_linkURL forKey:@"linkURL"];
+    [encoder encodeObject:_selectedURL forKey:@"selectedURL"];
+}
+
+- (id)initWithCoder:(NSCoder *)decoder {
+    if ((self = [super initWithCoder:decoder])) {
+        _repositoryString = [[decoder decodeObjectForKey:@"repositoryString"] retain];
+        _issueNumber = [[decoder decodeObjectForKey:@"issueNumber"] retain];
+        _issue = [[decoder decodeObjectForKey:@"issue"] retain];
+        _repository = [[decoder decodeObjectForKey:@"repository"] retain];
+        _discussion = [[decoder decodeObjectForKey:@"discussion"] retain];
+        _history = [[decoder decodeObjectForKey:@"history"] retain];
+        _bodyHeight = [decoder decodeFloatForKey:@"bodyHeight"];
+        _linkText = [[decoder decodeObjectForKey:@"linkText"] retain];
+        _linkURL = [[decoder decodeObjectForKey:@"linkURL"] retain];
+        _selectedURL = [[decoder decodeObjectForKey:@"selectedURL"] retain];
+    }
+    return self;
+}
+
 @end

@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "GHTableViewController.h"
 
-@interface GHPMilestoneViewController : GHTableViewController {
+@interface GHPMilestoneViewController : GHTableViewController <NSCoding> {
 @private
     GHAPIMilestoneV3 *_milestone;
     

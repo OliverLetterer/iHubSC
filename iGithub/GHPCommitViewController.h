@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "GHTableViewController.h"
 
-@interface GHPCommitViewController : GHTableViewController {
+@interface GHPCommitViewController : GHTableViewController <NSCoding> {
 @private
     NSString *_repository;
     NSString *_commitID;

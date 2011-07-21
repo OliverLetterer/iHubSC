@@ -11,9 +11,13 @@
 #import "ANAdvancedNavigationController.h"
 
 #warning serialize application state on iPad
+#warning serialize frontViewController
 
 @interface iGithubAppDelegate_iPad : iGithubAppDelegate <ANAdvancedNavigationControllerDelegate> {
-    
+    ANAdvancedNavigationController *_advancedNavigationController;
 }
+
+@property (nonatomic, retain) ANAdvancedNavigationController *advancedNavigationController;
+
 
 @end

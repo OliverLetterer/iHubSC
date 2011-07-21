@@ -310,5 +310,20 @@
     return _hasFollowingData;
 }
 
+#pragma mark Keyed Archiving
+
+- (void)encodeWithCoder:(NSCoder *)encoder {
+    [super encodeWithCoder:encoder];
+    [encoder encodeObject:_user forKey:@"user"];
+    [encoder encodeObject:_username forKey:@"username"];
+}
+
+- (id)initWithCoder:(NSCoder *)decoder {
+    if ((self = [super initWithCoder:decoder])) {
+        _user = [[decoder decodeObjectForKey:@"user"] retain];
+        _username = [[decoder decodeObjectForKey:@"username"] retain];
+    }
+    return self;
+}
 
 @end

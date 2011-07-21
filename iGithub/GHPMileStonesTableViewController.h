@@ -10,7 +10,7 @@
 #import "GHPDataArrayViewController.h"
 
 
-@interface GHPMileStonesTableViewController : GHPDataArrayViewController {
+@interface GHPMileStonesTableViewController : GHPDataArrayViewController <NSCoding> {
 @private
     NSString *_repository;
 }

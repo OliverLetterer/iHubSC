@@ -715,4 +715,32 @@
     return _hasWatchingData;
 }
 
+#pragma mark Keyed Archiving
+
+- (void)encodeWithCoder:(NSCoder *)encoder {
+    [super encodeWithCoder:encoder];
+    [encoder encodeObject:_repositoryString forKey:@"repositoryString"];
+    [encoder encodeObject:_repository forKey:@"repository"];
+    [encoder encodeObject:_deleteToken forKey:@"deleteToken"];
+    [encoder encodeObject:_organizations forKey:@"organizations"];
+    [encoder encodeBool:_hasWatchingData forKey:@"hasWatchingData"];
+    [encoder encodeBool:_isWatchingRepository forKey:@"isWatchingRepository"];
+    [encoder encodeObject:_labels forKey:@"labels"];
+    [encoder encodeObject:_branches forKey:@"branches"];
+}
+
+- (id)initWithCoder:(NSCoder *)decoder {
+    if ((self = [super initWithCoder:decoder])) {
+        _repositoryString = [[decoder decodeObjectForKey:@"repositoryString"] retain];
+        _repository = [[decoder decodeObjectForKey:@"repository"] retain];
+        _deleteToken = [[decoder decodeObjectForKey:@"deleteToken"] retain];
+        _organizations = [[decoder decodeObjectForKey:@"organizations"] retain];
+        _hasWatchingData = [decoder decodeBoolForKey:@"hasWatchingData"];
+        _isWatchingRepository = [decoder decodeBoolForKey:@"isWatchingRepository"];
+        _labels = [[decoder decodeObjectForKey:@"labels"] retain];
+        _branches = [[decoder decodeObjectForKey:@"branches"] retain];
+    }
+    return self;
+}
+
 @end

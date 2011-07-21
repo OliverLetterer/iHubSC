@@ -582,4 +582,18 @@
     }
 }
 
+#pragma mark Keyed Archiving
+
+- (void)encodeWithCoder:(NSCoder *)encoder {
+    [super encodeWithCoder:encoder];
+    [encoder encodeObject:_newsFeed forKey:@"newsFeed"];
+}
+
+- (id)initWithCoder:(NSCoder *)decoder {
+    if ((self = [super initWithCoder:decoder])) {
+        _newsFeed = [[decoder decodeObjectForKey:@"newsFeed"] retain];
+    }
+    return self;
+}
+
 @end

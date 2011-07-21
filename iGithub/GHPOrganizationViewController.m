@@ -273,4 +273,20 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+#pragma mark Keyed Archiving
+
+- (void)encodeWithCoder:(NSCoder *)encoder {
+    [super encodeWithCoder:encoder];
+    [encoder encodeObject:_organizationName forKey:@"organizationName"];
+    [encoder encodeObject:_organization forKey:@"organization"];
+}
+
+- (id)initWithCoder:(NSCoder *)decoder {
+    if ((self = [super initWithCoder:decoder])) {
+        _organizationName = [[decoder decodeObjectForKey:@"organizationName"] retain];
+        _organization = [[decoder decodeObjectForKey:@"organization"] retain];
+    }
+    return self;
+}
+
 @end

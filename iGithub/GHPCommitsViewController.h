@@ -14,7 +14,7 @@ typedef enum {
     GHPCommitsViewControllerContentTypePushPayload
 } GHPCommitsViewControllerContentType;
 
-@interface GHPCommitsViewController : GHPDataArrayViewController {
+@interface GHPCommitsViewController : GHPDataArrayViewController <NSCoding> {
 @private
     NSString *_repository;
     NSString *_branchHash;

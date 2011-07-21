@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "GHPUsersViewController.h"
 
-@interface GHPUsersFromRepositoryViewController : GHPUsersViewController {
+@interface GHPUsersFromRepositoryViewController : GHPUsersViewController <NSCoding> {
 @private
     NSString *_repository;
 }

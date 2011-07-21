@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "GHTableViewController.h"
 
-@interface GHPDataArrayViewController : GHTableViewController {
+@interface GHPDataArrayViewController : GHTableViewController <NSCoding> {
 @private
     NSMutableArray *_dataArray;
 }

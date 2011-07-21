@@ -96,4 +96,18 @@
     
 }
 
+#pragma mark Keyed Archiving
+
+- (void)encodeWithCoder:(NSCoder *)encoder {
+    [super encodeWithCoder:encoder];
+    [encoder encodeObject:_dataArray forKey:@"dataArray"];
+}
+
+- (id)initWithCoder:(NSCoder *)decoder {
+    if ((self = [super initWithCoder:decoder])) {
+        _dataArray = [[decoder decodeObjectForKey:@"dataArray"] retain];
+    }
+    return self;
+}
+
 @end

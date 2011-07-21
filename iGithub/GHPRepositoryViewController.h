@@ -12,7 +12,7 @@
 #import "GHPCreateIssueViewController.h"
 #import "GHPInfoSectionTableViewController.h"
 
-@interface GHPRepositoryViewController : GHPInfoSectionTableViewController <GHPCreateIssueViewControllerDelegate> {
+@interface GHPRepositoryViewController : GHPInfoSectionTableViewController <GHPCreateIssueViewControllerDelegate, NSCoding> {
 @private
     NSString *_repositoryString;
     GHAPIRepositoryV3 *_repository;

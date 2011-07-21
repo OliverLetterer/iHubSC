@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "GHTableViewController.h"
 
-@interface GHPDirectoryViewController : GHTableViewController {
+@interface GHPDirectoryViewController : GHTableViewController <NSCoding> {
 @private
     GHDirectory *_directory;
     

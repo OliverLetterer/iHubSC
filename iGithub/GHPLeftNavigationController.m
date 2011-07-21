@@ -172,11 +172,19 @@
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:kUITableViewSectionNewsFeed];
-    [self.tableView selectRowAtIndexPath:indexPath 
-                                animated:NO 
-                          scrollPosition:UITableViewScrollPositionNone];
-    [self tableView:self.tableView didSelectRowAtIndexPath:indexPath];
+    if (self.lastSelectedIndexPath) {
+        [self.tableView selectRowAtIndexPath:self.lastSelectedIndexPath 
+                                    animated:NO 
+                              scrollPosition:UITableViewScrollPositionNone];
+    }
+    
+    if (self.advancedNavigationController.rightViewControllers.count == 0) {
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:kUITableViewSectionNewsFeed];
+        [self.tableView selectRowAtIndexPath:indexPath 
+                                    animated:NO 
+                              scrollPosition:UITableViewScrollPositionNone];
+        [self tableView:self.tableView didSelectRowAtIndexPath:indexPath];
+    }
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
@@ -338,6 +346,20 @@
         [self invalidadUserData];
         [self handleError:[NSError errorWithDomain:@"" code:3 userInfo:nil] ];
     }
+}
+
+#pragma mark Keyed Archiving
+
+- (void)encodeWithCoder:(NSCoder *)encoder {
+    [super encodeWithCoder:encoder];
+    [encoder encodeObject:_organizations forKey:@"organizations"];
+}
+
+- (id)initWithCoder:(NSCoder *)decoder {
+    if ((self = [super initWithCoder:decoder])) {
+        _organizations = [[decoder decodeObjectForKey:@"organizations"] retain];
+    }
+    return self;
 }
 
 @end

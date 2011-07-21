@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "GHTableViewController.h"
 
-@interface GHPTeamViewController : GHTableViewController {
+@interface GHPTeamViewController : GHTableViewController <NSCoding> {
 @private
     GHAPITeamV3 *_team;
     NSNumber *_teamID;

@@ -473,4 +473,22 @@
     return _hasStarredData;
 }
 
+#pragma mark Keyed Archiving
+
+- (void)encodeWithCoder:(NSCoder *)encoder {
+    [super encodeWithCoder:encoder];
+    [encoder encodeObject:_gistID forKey:@"gistID"];
+    [encoder encodeObject:_gist forKey:@"gist"];
+    [encoder encodeObject:_comments forKey:@"comments"];
+}
+
+- (id)initWithCoder:(NSCoder *)decoder {
+    if ((self = [super initWithCoder:decoder])) {
+        _gistID = [[decoder decodeObjectForKey:@"gistID"] retain];
+        _gist = [[decoder decodeObjectForKey:@"gist"] retain];
+        _comments = [[decoder decodeObjectForKey:@"comments"] retain];
+    }
+    return self;
+}
+
 @end

@@ -300,4 +300,22 @@
     }
 }
 
+#pragma mark Keyed Archiving
+
+- (void)encodeWithCoder:(NSCoder *)encoder {
+    [super encodeWithCoder:encoder];
+    [encoder encodeInt:_dataType forKey:@"dataType"];
+    [encoder encodeObject:_dataArray forKey:@"dataArray"];
+    [encoder encodeInt:_nextSearchType forKey:@"nextSearchType"];
+}
+
+- (id)initWithCoder:(NSCoder *)decoder {
+    if ((self = [super initWithCoder:decoder])) {
+        _dataType = [decoder decodeIntForKey:@"dataType"];
+        _dataArray = [[decoder decodeObjectForKey:@"dataArray"] retain];
+        _nextSearchType = [decoder decodeIntForKey:@"nextSearchType"];
+    }
+    return self;
+}
+
 @end

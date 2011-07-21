@@ -11,7 +11,7 @@
 #import "GHPInfoTableViewCell.h"
 #import "GHPInfoSectionTableViewController.h"
 
-@interface GHPGistViewController : GHPInfoSectionTableViewController {
+@interface GHPGistViewController : GHPInfoSectionTableViewController <NSCoding> {
 @private
     NSString *_gistID;
     GHAPIGistV3 *_gist;

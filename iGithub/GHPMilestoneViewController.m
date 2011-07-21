@@ -352,4 +352,26 @@
     }];
 }
 
+#pragma mark Keyed Archiving
+
+- (void)encodeWithCoder:(NSCoder *)encoder {
+    [super encodeWithCoder:encoder];
+    [encoder encodeObject:_milestone forKey:@"milestone"];
+    [encoder encodeObject:_repository forKey:@"repository"];
+    [encoder encodeObject:_milestoneNumber forKey:@"milestoneNumber"];
+    [encoder encodeObject:_openIssues forKey:@"openIssues"];
+    [encoder encodeObject:_closedIssues forKey:@"closedIssues"];
+}
+
+- (id)initWithCoder:(NSCoder *)decoder {
+    if ((self = [super initWithCoder:decoder])) {
+        _milestone = [[decoder decodeObjectForKey:@"milestone"] retain];
+        _repository = [[decoder decodeObjectForKey:@"repository"] retain];
+        _milestoneNumber = [[decoder decodeObjectForKey:@"milestoneNumber"] retain];
+        _openIssues = [[decoder decodeObjectForKey:@"openIssues"] retain];
+        _closedIssues = [[decoder decodeObjectForKey:@"closedIssues"] retain];
+    }
+    return self;
+}
+
 @end

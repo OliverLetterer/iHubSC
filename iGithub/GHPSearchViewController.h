@@ -16,7 +16,9 @@ typedef enum {
     GHPSearchViewControllerDataTypeUsers = 2
 } GHPSearchViewControllerDataType;
 
-@interface GHPSearchViewController : GHTableViewController <UISearchBarDelegate, UISearchDisplayDelegate, GHPSearchScopeTableViewCellDelegate> {
+#warning store searchBarState
+
+@interface GHPSearchViewController : GHTableViewController <UISearchBarDelegate, UISearchDisplayDelegate, GHPSearchScopeTableViewCellDelegate, NSCoding> {
 @private
     GHPSearchViewControllerDataType _dataType;
     NSMutableArray *_dataArray;

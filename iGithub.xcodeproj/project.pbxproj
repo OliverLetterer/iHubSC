@@ -1285,10 +1285,7 @@
 		A70A118F13C368F400685749 /* GHPMilestonesViewController */ = {
 			isa = PBXGroup;
 			children = (
-				A70A119013C3690A00685749 /* GHPMileStoneTableViewCell.h */,
-				A70A119113C3690A00685749 /* GHPMileStoneTableViewCell.m */,
-				A70A119313C36BA900685749 /* GHPieChartProgressView.h */,
-				A70A119413C36BA900685749 /* GHPieChartProgressView.m */,
+				A7ABEBB313D879FD002E3275 /* UIView's */,
 				A70A119A13C37BB100685749 /* GHPMileStonesTableViewController.h */,
 				A70A119B13C37BB100685749 /* GHPMileStonesTableViewController.m */,
 				A70A11A113C37CB300685749 /* GHPMileStonesOnRepositoryViewController.h */,
@@ -1706,7 +1703,6 @@
 		A74A65FF13BDA8ED0098106E /* GHPUserViewController */ = {
 			isa = PBXGroup;
 			children = (
-				A7D0523913BDC20B00B3D239 /* UIBarButtonSystemItemAction.png */,
 				A74A660013BDA9040098106E /* GHPUserViewController.h */,
 				A74A660113BDA9040098106E /* GHPUserViewController.m */,
 			);
@@ -1727,14 +1723,11 @@
 		A74F2A2D13BE1ACE00E57818 /* GHPRepositoryViewController */ = {
 			isa = PBXGroup;
 			children = (
+				A7ABEBB413D87A98002E3275 /* UITableViewCells */,
 				A74F2A2E13BE1AEA00E57818 /* GHPRepositoryViewController.h */,
 				A74F2A2F13BE1AEA00E57818 /* GHPRepositoryViewController.m */,
 				A74F2A3B13BF465D00E57818 /* GHPCreateIssueViewController.h */,
 				A74F2A3C13BF465E00E57818 /* GHPCreateIssueViewController.m */,
-				A74F2A3E13BF481000E57818 /* GHPCreateIssueTitleAndDescriptionTableViewCell.h */,
-				A74F2A3F13BF481000E57818 /* GHPCreateIssueTitleAndDescriptionTableViewCell.m */,
-				A70ABE9513BF77C50000D189 /* GHPLabelTableViewCell.h */,
-				A70ABE9613BF77C60000D189 /* GHPLabelTableViewCell.m */,
 			);
 			name = GHPRepositoryViewController;
 			sourceTree = "<group>";
@@ -2161,13 +2154,9 @@
 		A7A6CB6613C8D48500C1641F /* GHPSearchViewController */ = {
 			isa = PBXGroup;
 			children = (
-				A7A6CB7A13C9A22F00C1641F /* GHPSelectedBackgroundImage.png */,
+				A7ABEBB213D87954002E3275 /* UITableViewCells */,
 				A7A6CB6713C8D49A00C1641F /* GHPSearchViewController.h */,
 				A7A6CB6813C8D49A00C1641F /* GHPSearchViewController.m */,
-				A7A6CB6F13C8D70700C1641F /* GHPSearchBarTableViewCell.h */,
-				A7A6CB7013C8D70700C1641F /* GHPSearchBarTableViewCell.m */,
-				A7A6CB7613C99A4E00C1641F /* GHPSearchScopeTableViewCell.h */,
-				A7A6CB7713C99A4F00C1641F /* GHPSearchScopeTableViewCell.m */,
 			);
 			name = GHPSearchViewController;
 			sourceTree = "<group>";
@@ -2219,6 +2208,79 @@
 				A712B7F9135F24C10009B7A7 /* GHSearchViewController's */,
 			);
 			name = UserInterface;
+			sourceTree = "<group>";
+		};
+		A7ABEBAE13D84557002E3275 /* GHPLeftViewController */ = {
+			isa = PBXGroup;
+			children = (
+				A74A65F613BD0A7B0098106E /* 19-gear.png */,
+				A74A65F713BD0A7B0098106E /* 19-gear@2x.png */,
+				A78B70E513BCF75300F4CE5E /* Lupe@2x.png */,
+				A78B70E613BCF75400F4CE5E /* Lupe.PNG */,
+				A78B70DE13BCE88600F4CE5E /* ANBackgroundImage.png */,
+				A78B70D913BCE08900F4CE5E /* TabBarItemSelectedBackground.png */,
+				A78B70DA13BCE08900F4CE5E /* TabBarItemSelectedBackground@2x.png */,
+			);
+			name = GHPLeftViewController;
+			sourceTree = "<group>";
+		};
+		A7ABEBB013D8456C002E3275 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				A7F334B313BCD29300DB922D /* GHPLeftNavigationControllerTableViewCell.h */,
+				A7F334B413BCD29300DB922D /* GHPLeftNavigationControllerTableViewCell.m */,
+				A78B70E013BCE95D00F4CE5E /* UIImage+GHTabBar.h */,
+				A78B70E113BCE95D00F4CE5E /* UIImage+GHTabBar.m */,
+				A7B567A213BCFB2800047485 /* GHPEdgedLineView.h */,
+				A7B567A313BCFB2800047485 /* GHPEdgedLineView.m */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		A7ABEBB113D875BD002E3275 /* UITableViewCells */ = {
+			isa = PBXGroup;
+			children = (
+				A70A11A513C38BFA00685749 /* GHPNewCommentTableViewCell.h */,
+				A70A11A613C38BFB00685749 /* GHPNewCommentTableViewCell.m */,
+				A75EFA4F13D4325200C162F3 /* GHPIssueInfoTableViewCell.h */,
+				A75EFA5013D4325200C162F3 /* GHPIssueInfoTableViewCell.m */,
+				A784C40D13D457B400859318 /* GHPIssueCommentTableViewCell.h */,
+				A784C40E13D457B500859318 /* GHPIssueCommentTableViewCell.m */,
+			);
+			name = UITableViewCells;
+			sourceTree = "<group>";
+		};
+		A7ABEBB213D87954002E3275 /* UITableViewCells */ = {
+			isa = PBXGroup;
+			children = (
+				A7A6CB6F13C8D70700C1641F /* GHPSearchBarTableViewCell.h */,
+				A7A6CB7013C8D70700C1641F /* GHPSearchBarTableViewCell.m */,
+				A7A6CB7613C99A4E00C1641F /* GHPSearchScopeTableViewCell.h */,
+				A7A6CB7713C99A4F00C1641F /* GHPSearchScopeTableViewCell.m */,
+			);
+			name = UITableViewCells;
+			sourceTree = "<group>";
+		};
+		A7ABEBB313D879FD002E3275 /* UIView's */ = {
+			isa = PBXGroup;
+			children = (
+				A70A119313C36BA900685749 /* GHPieChartProgressView.h */,
+				A70A119413C36BA900685749 /* GHPieChartProgressView.m */,
+				A70A119013C3690A00685749 /* GHPMileStoneTableViewCell.h */,
+				A70A119113C3690A00685749 /* GHPMileStoneTableViewCell.m */,
+			);
+			name = "UIView's";
+			sourceTree = "<group>";
+		};
+		A7ABEBB413D87A98002E3275 /* UITableViewCells */ = {
+			isa = PBXGroup;
+			children = (
+				A74F2A3E13BF481000E57818 /* GHPCreateIssueTitleAndDescriptionTableViewCell.h */,
+				A74F2A3F13BF481000E57818 /* GHPCreateIssueTitleAndDescriptionTableViewCell.m */,
+				A70ABE9513BF77C50000D189 /* GHPLabelTableViewCell.h */,
+				A70ABE9613BF77C60000D189 /* GHPLabelTableViewCell.m */,
+			);
+			name = UITableViewCells;
 			sourceTree = "<group>";
 		};
 		A7B5208B13885E2C000FEE61 /* V2 */ = {
@@ -2457,8 +2519,10 @@
 		A7BF143713421862001AE50D /* Ressources */ = {
 			isa = PBXGroup;
 			children = (
+				A7D0523913BDC20B00B3D239 /* UIBarButtonSystemItemAction.png */,
 				A7384D68136BFCE200DD1BE5 /* iHub - Icon Template.psd */,
 				A7CE1B801346335D00169F94 /* GHDatabase.xcdatamodel */,
+				A7A6CB7A13C9A22F00C1641F /* GHPSelectedBackgroundImage.png */,
 				A745D096139B97CC00FF8FB1 /* Defaults */,
 				A7D41B1D135B899100CD3A5C /* Icons */,
 				A745D098139B97F200FF8FB1 /* TabBarIcons */,
@@ -2468,6 +2532,7 @@
 				A745D09C139B986100FF8FB1 /* Authentication */,
 				A745D09D139B986D00FF8FB1 /* DefaultUserImage */,
 				A745D09E139B987900FF8FB1 /* CollapsingTableViewCell */,
+				A7ABEBAE13D84557002E3275 /* GHPLeftViewController */,
 				A703B94813476FB20014235D /* TODO.txt */,
 				A709F740136733A300B0CDE7 /* Changelog.txt */,
 			);
@@ -2855,14 +2920,9 @@
 		A7DA5EAA13C2578E00288937 /* GHPIssueViewController */ = {
 			isa = PBXGroup;
 			children = (
+				A7ABEBB113D875BD002E3275 /* UITableViewCells */,
 				A7DA5EA713C2578400288937 /* GHPIssueViewController.h */,
 				A7DA5EA813C2578600288937 /* GHPIssueViewController.m */,
-				A70A11A513C38BFA00685749 /* GHPNewCommentTableViewCell.h */,
-				A70A11A613C38BFB00685749 /* GHPNewCommentTableViewCell.m */,
-				A75EFA4F13D4325200C162F3 /* GHPIssueInfoTableViewCell.h */,
-				A75EFA5013D4325200C162F3 /* GHPIssueInfoTableViewCell.m */,
-				A784C40D13D457B400859318 /* GHPIssueCommentTableViewCell.h */,
-				A784C40E13D457B500859318 /* GHPIssueCommentTableViewCell.m */,
 			);
 			name = GHPIssueViewController;
 			sourceTree = "<group>";
@@ -2985,21 +3045,9 @@
 		A7F334AF13BCD01100DB922D /* GHPLeftNavigationController */ = {
 			isa = PBXGroup;
 			children = (
-				A74A65F613BD0A7B0098106E /* 19-gear.png */,
-				A74A65F713BD0A7B0098106E /* 19-gear@2x.png */,
-				A78B70E513BCF75300F4CE5E /* Lupe@2x.png */,
-				A78B70E613BCF75400F4CE5E /* Lupe.PNG */,
-				A78B70DE13BCE88600F4CE5E /* ANBackgroundImage.png */,
-				A78B70D913BCE08900F4CE5E /* TabBarItemSelectedBackground.png */,
-				A78B70DA13BCE08900F4CE5E /* TabBarItemSelectedBackground@2x.png */,
+				A7ABEBB013D8456C002E3275 /* Views */,
 				A7F334B013BCD02700DB922D /* GHPLeftNavigationController.h */,
 				A7F334B113BCD02700DB922D /* GHPLeftNavigationController.m */,
-				A7F334B313BCD29300DB922D /* GHPLeftNavigationControllerTableViewCell.h */,
-				A7F334B413BCD29300DB922D /* GHPLeftNavigationControllerTableViewCell.m */,
-				A78B70E013BCE95D00F4CE5E /* UIImage+GHTabBar.h */,
-				A78B70E113BCE95D00F4CE5E /* UIImage+GHTabBar.m */,
-				A7B567A213BCFB2800047485 /* GHPEdgedLineView.h */,
-				A7B567A313BCFB2800047485 /* GHPEdgedLineView.m */,
 			);
 			name = GHPLeftNavigationController;
 			sourceTree = "<group>";

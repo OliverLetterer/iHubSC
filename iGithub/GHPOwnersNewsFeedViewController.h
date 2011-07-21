@@ -17,6 +17,7 @@
 @end
 
 
+#warning remove
 @interface GHPOwnersNewsFeedViewController (GHPOwnersNewsFeedViewControllerSerializaiton)
 
 - (void)serializeNewsFeed:(GHNewsFeed *)newsFeed;

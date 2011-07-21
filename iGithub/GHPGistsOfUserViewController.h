@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "GHPGistsViewController.h"
 
-@interface GHPGistsOfUserViewController : GHPGistsViewController {
+@interface GHPGistsOfUserViewController : GHPGistsViewController <NSCoding> {
 @private
     NSString *_username;
 }

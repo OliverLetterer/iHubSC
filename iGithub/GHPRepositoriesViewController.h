@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "GHPDataArrayViewController.h"
 
-@interface GHPRepositoriesViewController : GHPDataArrayViewController {
+@interface GHPRepositoriesViewController : GHPDataArrayViewController <NSCoding> {
 @private
     NSString *_username;
 }
