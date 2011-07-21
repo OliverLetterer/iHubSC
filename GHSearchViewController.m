@@ -215,14 +215,12 @@
 
 - (void)encodeWithCoder:(NSCoder *)encoder {
     [super encodeWithCoder:encoder];
-    [encoder encodeObject:_searchString forKey:@"searchString"];
     [encoder encodeBool:_isSearchBarActive forKey:@"isSearchBarActive"];
     [encoder encodeObject:self.searchString forKey:@"searchString"];
 }
 
 - (id)initWithCoder:(NSCoder *)decoder {
     if ((self = [super initWithCoder:decoder])) {
-        _searchString = [[decoder decodeObjectForKey:@"searchString"] retain];
         self.tabBarItem = [[[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemSearch tag:0] autorelease];
         self.title = NSLocalizedString(@"Search", @"");
         _isSearchBarActive = [decoder decodeBoolForKey:@"isSearchBarActive"];
