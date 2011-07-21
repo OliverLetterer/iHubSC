@@ -10,7 +10,7 @@
 #import "GHAPIMilestoneV3TableViewCell.h"
 #import "GHCollapsingAndSpinningTableViewCell.h"
 #import "GHIssueTitleTableViewCell.h"
-#import "GHViewIssueTableViewController.h"
+#import "GHIssueViewController.h"
 
 #define kUITableViewControllerSectionInfo               0
 #define kUITableViewControllerSectionInfoOpenIssues     1
@@ -319,7 +319,7 @@
     if (indexPath.section == kUITableViewControllerSectionInfoOpenIssues && indexPath.row > 0) {
         GHAPIIssueV3 *issue = [self.openIssues objectAtIndex:indexPath.row - 1];
         
-        GHViewIssueTableViewController *issueViewController = [[[GHViewIssueTableViewController alloc] initWithRepository:self.repository 
+        GHIssueViewController *issueViewController = [[[GHIssueViewController alloc] initWithRepository:self.repository 
                                                                                                               issueNumber:issue.number]
                                                                autorelease];
         [self.navigationController pushViewController:issueViewController animated:YES];
@@ -327,7 +327,7 @@
     } else if (indexPath.section == kUITableViewControllerSectionInfoClosedIssues && indexPath.row > 0) {
         GHAPIIssueV3 *issue = [self.closedIssues objectAtIndex:indexPath.row - 1];
         
-        GHViewIssueTableViewController *issueViewController = [[[GHViewIssueTableViewController alloc] initWithRepository:self.repository 
+        GHIssueViewController *issueViewController = [[[GHIssueViewController alloc] initWithRepository:self.repository 
                                                                                                               issueNumber:issue.number]
                                                                autorelease];
         [self.navigationController pushViewController:issueViewController animated:YES];

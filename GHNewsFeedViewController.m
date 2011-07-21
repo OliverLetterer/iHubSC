@@ -12,7 +12,7 @@
 #import "GHFeedItemWithDescriptionTableViewCell.h"
 #import "GHPushFeedItemTableViewCell.h"
 #import "GHFollowEventTableViewCell.h"
-#import "GHViewIssueTableViewController.h"
+#import "GHIssueViewController.h"
 #import "GHPushPayloadViewController.h"
 #import "GHRepositoryViewController.h"
 #import "GHUserViewController.h"
@@ -637,13 +637,13 @@
     
     if (item.payload.type == GHPayloadIssuesEvent) {
         GHIssuePayload *payload = (GHIssuePayload *)item.payload;
-        GHViewIssueTableViewController *viewIssueViewController = [[[GHViewIssueTableViewController alloc] 
+        GHIssueViewController *viewIssueViewController = [[[GHIssueViewController alloc] 
                                                                     initWithRepository:item.repository.fullName 
                                                                     issueNumber:payload.number] autorelease];
         [self.navigationController pushViewController:viewIssueViewController animated:YES];
     } else if (item.payload.type == GHPayloadPullRequestEvent) {
         GHPullRequestPayload *payload = (GHPullRequestPayload *)item.payload;
-        GHViewIssueTableViewController *viewIssueViewController = [[[GHViewIssueTableViewController alloc] initWithRepository:item.repository.fullName issueNumber:payload.number] autorelease];
+        GHIssueViewController *viewIssueViewController = [[[GHIssueViewController alloc] initWithRepository:item.repository.fullName issueNumber:payload.number] autorelease];
         [self.navigationController pushViewController:viewIssueViewController animated:YES];
     } else if (item.payload.type == GHPayloadPushEvent) {
         GHPushPayloadViewController *pushViewController = [[[GHPushPayloadViewController alloc] initWithPayload:(GHPushPayload *)item.payload onRepository:item.repository.fullName] autorelease];
@@ -664,7 +664,7 @@
     } else if (item.payload.type == GHPayloadIssueCommentEvent) {
         GHIssuesCommentPayload *payload = (GHIssuesCommentPayload *)item.payload;
         
-        GHViewIssueTableViewController *viewIssueViewController = [[[GHViewIssueTableViewController alloc] initWithRepository:item.repository.fullName issueNumber:payload.issueID] autorelease];
+        GHIssueViewController *viewIssueViewController = [[[GHIssueViewController alloc] initWithRepository:item.repository.fullName issueNumber:payload.issueID] autorelease];
         [self.navigationController pushViewController:viewIssueViewController animated:YES];
     } else if (item.payload.type == GHPayloadPublicEvent) {
         GHRepositoryViewController *repoViewController = [[[GHRepositoryViewController alloc] initWithRepositoryString:item.repository.fullName] autorelease];

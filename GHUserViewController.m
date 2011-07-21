@@ -18,7 +18,7 @@
 #import "GHGistViewController.h"
 #import "ANNotificationQueue.h"
 #import "GHIssueTitleTableViewCell.h"
-#import "GHViewIssueTableViewController.h"
+#import "GHIssueViewController.h"
 
 #define kUITableViewSectionUserData             0
 #define kUITableViewSectionEMail                1
@@ -1025,7 +1025,7 @@
         [self.navigationController pushViewController:gistViewController animated:YES];
     } else if (indexPath.section == kUITableViewSectionAssignedIssues) {
         GHAPIIssueV3 *issue = [self.assignedIssues objectAtIndex:indexPath.row - 1];
-        GHViewIssueTableViewController *viewController = [[[GHViewIssueTableViewController alloc] initWithRepository:issue.repository 
+        GHIssueViewController *viewController = [[[GHIssueViewController alloc] initWithRepository:issue.repository 
                                                                                                          issueNumber:issue.number]
                                                           autorelease];
         [self.navigationController pushViewController:viewController animated:YES];

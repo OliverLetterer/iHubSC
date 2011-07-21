@@ -13,7 +13,7 @@
 #import "GHFeedItemWithDescriptionTableViewCell.h"
 #import "GHPushFeedItemTableViewCell.h"
 #import "GHFollowEventTableViewCell.h"
-#import "GHViewIssueTableViewController.h"
+#import "GHIssueViewController.h"
 #import <QuartzCore/QuartzCore.h>
 #import "UIColor+GithubUI.h"
 

@@ -111,7 +111,7 @@
 		A73E29B51348747E00E85282 /* NSDictionary+GHNullTermination.m in Sources */ = {isa = PBXBuildFile; fileRef = A73E29B41348747E00E85282 /* NSDictionary+GHNullTermination.m */; };
 		A73E29B9134882E200E85282 /* GHDownloadEventPayload.m in Sources */ = {isa = PBXBuildFile; fileRef = A73E29B8134882DF00E85282 /* GHDownloadEventPayload.m */; };
 		A73E29BE1348D4DF00E85282 /* GHMemberEventPayload.m in Sources */ = {isa = PBXBuildFile; fileRef = A73E29BD1348D4D900E85282 /* GHMemberEventPayload.m */; };
-		A73E29C21348E12400E85282 /* GHViewIssueTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A73E29C11348E12200E85282 /* GHViewIssueTableViewController.m */; };
+		A73E29C21348E12400E85282 /* GHIssueViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A73E29C11348E12200E85282 /* GHIssueViewController.m */; };
 		A747C8C413BCCC0B00659504 /* libz.1.2.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A747C8C313BCCC0B00659504 /* libz.1.2.5.dylib */; };
 		A74A65F813BD0A7B0098106E /* 19-gear.png in Resources */ = {isa = PBXBuildFile; fileRef = A74A65F613BD0A7B0098106E /* 19-gear.png */; };
 		A74A65F913BD0A7B0098106E /* 19-gear@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A74A65F713BD0A7B0098106E /* 19-gear@2x.png */; };
@@ -518,7 +518,7 @@
 		A73AE5A9134EFDF300E9EBA4 /* 56-feed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "56-feed@2x.png"; sourceTree = "<group>"; };
 		A73AE5E11350AF3400E9EBA4 /* GHIssuesCommentPayload.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHIssuesCommentPayload.h; sourceTree = "<group>"; };
 		A73AE5E21350AF3400E9EBA4 /* GHIssuesCommentPayload.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHIssuesCommentPayload.m; sourceTree = "<group>"; };
-		A73AE5E41350B27900E9EBA4 /* GHRepositoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; path = GHRepositoryViewController.h; sourceTree = "<group>"; };
+		A73AE5E41350B27900E9EBA4 /* GHRepositoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHRepositoryViewController.h; sourceTree = "<group>"; };
 		A73AE5E51350B27A00E9EBA4 /* GHRepositoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHRepositoryViewController.m; sourceTree = "<group>"; };
 		A73AE5F01350FB4400E9EBA4 /* NSString+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Additions.h"; sourceTree = "<group>"; };
 		A73AE5F11350FB4400E9EBA4 /* NSString+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Additions.m"; sourceTree = "<group>"; };
@@ -550,8 +550,8 @@
 		A73E29B8134882DF00E85282 /* GHDownloadEventPayload.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHDownloadEventPayload.m; sourceTree = "<group>"; };
 		A73E29BC1348D4D300E85282 /* GHMemberEventPayload.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHMemberEventPayload.h; sourceTree = "<group>"; };
 		A73E29BD1348D4D900E85282 /* GHMemberEventPayload.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHMemberEventPayload.m; sourceTree = "<group>"; };
-		A73E29C01348E12100E85282 /* GHViewIssueTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHViewIssueTableViewController.h; sourceTree = "<group>"; };
-		A73E29C11348E12200E85282 /* GHViewIssueTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHViewIssueTableViewController.m; sourceTree = "<group>"; };
+		A73E29C01348E12100E85282 /* GHIssueViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; path = GHIssueViewController.h; sourceTree = "<group>"; };
+		A73E29C11348E12200E85282 /* GHIssueViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHIssueViewController.m; sourceTree = "<group>"; };
 		A747C8C313BCCC0B00659504 /* libz.1.2.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.5.dylib; path = usr/lib/libz.1.2.5.dylib; sourceTree = SDKROOT; };
 		A74A65F613BD0A7B0098106E /* 19-gear.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "19-gear.png"; sourceTree = "<group>"; };
 		A74A65F713BD0A7B0098106E /* 19-gear@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "19-gear@2x.png"; sourceTree = "<group>"; };
@@ -1597,10 +1597,9 @@
 			isa = PBXGroup;
 			children = (
 				A708950A1349FB65000DD6CE /* UITableViewCells */,
-				A73E29C01348E12100E85282 /* GHViewIssueTableViewController.h */,
-				A73E29C11348E12200E85282 /* GHViewIssueTableViewController.m */,
-				A7D14F741356F17300E1B980 /* GHCreateIssueTableViewController.h */,
-				A7D14F751356F17500E1B980 /* GHCreateIssueTableViewController.m */,
+				A782206213D8B99C00A52D9E /* Create Issue */,
+				A73E29C01348E12100E85282 /* GHIssueViewController.h */,
+				A73E29C11348E12200E85282 /* GHIssueViewController.m */,
 			);
 			name = Issue;
 			path = ..;
@@ -2043,6 +2042,15 @@
 				A7BC678A134D942C0083F906 /* GHCreateRepositoryViewController.m */,
 			);
 			name = "Create Repository";
+			sourceTree = "<group>";
+		};
+		A782206213D8B99C00A52D9E /* Create Issue */ = {
+			isa = PBXGroup;
+			children = (
+				A7D14F741356F17300E1B980 /* GHCreateIssueTableViewController.h */,
+				A7D14F751356F17500E1B980 /* GHCreateIssueTableViewController.m */,
+			);
+			name = "Create Issue";
 			sourceTree = "<group>";
 		};
 		A7837E97136C93E500B13B95 /* GHAPIMilestoneV3 */ = {
@@ -3315,7 +3323,7 @@
 				A73E29B51348747E00E85282 /* NSDictionary+GHNullTermination.m in Sources */,
 				A73E29B9134882E200E85282 /* GHDownloadEventPayload.m in Sources */,
 				A73E29BE1348D4DF00E85282 /* GHMemberEventPayload.m in Sources */,
-				A73E29C21348E12400E85282 /* GHViewIssueTableViewController.m in Sources */,
+				A73E29C21348E12400E85282 /* GHIssueViewController.m in Sources */,
 				A708950E1349FB82000DD6CE /* GHIssueTitleTableViewCell.m in Sources */,
 				A70895121349FE0C000DD6CE /* GHIssueDescriptionTableViewCell.m in Sources */,
 				A7089517134A03BA000DD6CE /* GHAuthenticationManager.m in Sources */,

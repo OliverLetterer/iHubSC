@@ -12,7 +12,7 @@
 #import "GHWebViewViewController.h"
 #import "GHCollapsingAndSpinningTableViewCell.h"
 #import "GHIssueTitleTableViewCell.h"
-#import "GHViewIssueTableViewController.h"
+#import "GHIssueViewController.h"
 #import "GHNewsFeedItemTableViewCell.h"
 #import "GHUserViewController.h"
 #import "GHRecentCommitsViewController.h"
@@ -837,7 +837,7 @@
             [self presentModalViewController:navController animated:YES];
         } else {
             GHAPIIssueV3 *issue = [self.issuesArray objectAtIndex:indexPath.row-2];
-            GHViewIssueTableViewController *issueViewController = [[[GHViewIssueTableViewController alloc] 
+            GHIssueViewController *issueViewController = [[[GHIssueViewController alloc] 
                                                                     initWithRepository:self.repositoryString 
                                                                     issueNumber:issue.number]
                                                                    autorelease];
@@ -957,7 +957,7 @@
         
         NSString *repo = [NSString stringWithFormat:@"%@/%@", discussion.base.repository.owner, discussion.base.repository.name];
         
-        GHViewIssueTableViewController *viewIssueViewController = [[[GHViewIssueTableViewController alloc] initWithRepository:repo issueNumber:discussion.number] autorelease];
+        GHIssueViewController *viewIssueViewController = [[[GHIssueViewController alloc] initWithRepository:repo issueNumber:discussion.number] autorelease];
         [self.navigationController pushViewController:viewIssueViewController animated:YES];
     } else if (indexPath.section == kUITableViewSectionRecentCommits) {
         GHAPIRepositoryBranchV3 *branch = [self.branches objectAtIndex:indexPath.row - 1];
