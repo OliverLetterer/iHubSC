@@ -179,7 +179,6 @@
     [super viewDidAppear:animated];
     
     [self.tableView reloadData];
-    DLog(@"%@", self.mySelectedIndexPath);
     if (self.mySelectedIndexPath) {
         [self.tableView selectRowAtIndexPath:self.mySelectedIndexPath 
                                     animated:NO 
