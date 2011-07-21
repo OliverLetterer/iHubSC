@@ -15,7 +15,6 @@
 #import "GHSearchViewController.h"
 
 #warning save expansion states
-#warning update default.pngs (make 2 new defaults)
 #warning Icons for folders and files in browse content
 #warning Update news feed cell for push payload to use one label
 #warning adopt heightForContent on iPhone
