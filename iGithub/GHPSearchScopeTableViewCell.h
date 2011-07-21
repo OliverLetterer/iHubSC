@@ -30,6 +30,8 @@
 - (id)initWithButtonTitles:(NSArray *)buttonTitles reuseIdentifier:(NSString *)reuseIdentifier;
 - (NSString *)titleForButtonAtIndex:(NSUInteger)index;
 
+- (void)selectButtonAtIndex:(NSUInteger)index;
+
 - (void)buttonClicked:(UIButton *)button;
 
 @end

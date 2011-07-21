@@ -2151,14 +2151,14 @@
 			name = GHPLabelViewController;
 			sourceTree = "<group>";
 		};
-		A7A6CB6613C8D48500C1641F /* GHPSearchViewController */ = {
+		A7A6CB6613C8D48500C1641F /* Search */ = {
 			isa = PBXGroup;
 			children = (
 				A7ABEBB213D87954002E3275 /* UITableViewCells */,
 				A7A6CB6713C8D49A00C1641F /* GHPSearchViewController.h */,
 				A7A6CB6813C8D49A00C1641F /* GHPSearchViewController.m */,
 			);
-			name = GHPSearchViewController;
+			name = Search;
 			sourceTree = "<group>";
 		};
 		A7A6CB7C13CA1CE100C1641F /* GHPNewsFeedViewController */ = {
@@ -3017,7 +3017,7 @@
 				A7F1990C13CEFD8800D83117 /* Team */,
 				A7F1990D13CEFD8F00D83117 /* Organization */,
 				A7A6CB7C13CA1CE100C1641F /* GHPNewsFeedViewController */,
-				A7A6CB6613C8D48500C1641F /* GHPSearchViewController */,
+				A7A6CB6613C8D48500C1641F /* Search */,
 				A7A6CB5E13C8C88600C1641F /* GHPLabelViewController */,
 				A74DD7A513C64E7A00570C94 /* GHPDirectoryViewController */,
 				A7F1990E13CEFDDB00D83117 /* Gist */,

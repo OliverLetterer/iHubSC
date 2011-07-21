@@ -20,6 +20,7 @@
 
 @synthesize dataType=_dataType, dataArray=_dataArray;
 @synthesize searchScopeTableViewCell=_searchScopeTableViewCell;
+@synthesize searchString=_searchString, searchBar=_searchBar;
 
 #pragma mark - setters and getters
 
@@ -48,6 +49,8 @@
     [_dataArray release];
     [_searchScopeTableViewCell release];
     [_mySearchDisplayController release];
+    [_searchString release];
+    [_searchBar release];
     
     [super dealloc];
 }
@@ -65,6 +68,26 @@
     [super viewDidUnload];
     
     [_mySearchDisplayController release], _mySearchDisplayController = nil;
+    [_searchBar release], _searchBar = nil;
+}
+
+- (void)_updateSearchBar {
+    if (self.searchString) {
+        self.searchBar.text = self.searchString;
+        DLog(@"setting searchString %@ -> %@", self.searchBar, self.searchString);
+    }
+    
+    if (_isSearchBarActive) {
+        [self.searchBar becomeFirstResponder];
+    }
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    [self performSelector:@selector(_updateSearchBar) withObject:nil afterDelay:0.01];
+    
+    DLog(@"appeared");
 }
 
 #pragma mark - Downloading
@@ -143,6 +166,8 @@
                     cell = [[[GHPSearchBarTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
                 }
                 
+                self.searchBar = cell.searchBar;
+                
                 [self setupDefaultTableViewCell:cell forRowAtIndexPath:indexPath];
                 cell.searchBar.delegate = self;
                 
@@ -170,6 +195,16 @@
                 [self setupDefaultTableViewCell:cell inTableView:tableView forRowAtIndexPath:indexPath];
                 
                 self.searchScopeTableViewCell = cell;
+                switch (_nextSearchType) {
+                    case GHPSearchViewControllerDataTypeRepositories:
+                        [cell selectButtonAtIndex:0];
+                        break;
+                    case GHPSearchViewControllerDataTypeUsers:
+                        [cell selectButtonAtIndex:1];
+                        break;
+                    default:
+                        break;
+                }
                 cell.delegate = self;
                 
                 return cell;
@@ -274,6 +309,18 @@
     [self.advancedNavigationController popViewControllersToViewController:self animated:YES];
 }
 
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
+    self.searchString = searchText;
+}
+
+- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
+    _isSearchBarActive = YES;
+}
+
+- (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar {
+    _isSearchBarActive = NO;
+}
+
 #pragma mark - UISearchDisplayDelegate
 
 - (void)searchDisplayController:(UISearchDisplayController *)controller didLoadSearchResultsTableView:(UITableView *)tableView {
@@ -307,6 +354,8 @@
     [encoder encodeInt:_dataType forKey:@"dataType"];
     [encoder encodeObject:_dataArray forKey:@"dataArray"];
     [encoder encodeInt:_nextSearchType forKey:@"nextSearchType"];
+    [encoder encodeObject:_searchString forKey:@"searchString"];
+    [encoder encodeBool:_isSearchBarActive forKey:@"isSearchBarActive"];
 }
 
 - (id)initWithCoder:(NSCoder *)decoder {
@@ -314,6 +363,8 @@
         _dataType = [decoder decodeIntForKey:@"dataType"];
         _dataArray = [[decoder decodeObjectForKey:@"dataArray"] retain];
         _nextSearchType = [decoder decodeIntForKey:@"nextSearchType"];
+        _searchString = [[decoder decodeObjectForKey:@"searchString"] retain];
+        _isSearchBarActive = [decoder decodeBoolForKey:@"isSearchBarActive"];
     }
     return self;
 }

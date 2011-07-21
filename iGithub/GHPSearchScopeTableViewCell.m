@@ -35,6 +35,13 @@
     }
 }
 
+- (void)selectButtonAtIndex:(NSUInteger)index {
+    if (!(index < _buttons.count)) {
+        return;
+    }
+    [self buttonClicked:[_buttons objectAtIndex:index]];
+}
+
 #pragma mark - Initialization
 
 - (id)initWithButtonTitles:(NSArray *)buttonTitles reuseIdentifier:(NSString *)reuseIdentifier {
