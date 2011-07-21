@@ -10,9 +10,6 @@
 [submodule "DDProgressView"]
 	path = DDProgressView
 	url = https://github.com/ddeville/DDProgressView.git
-[submodule "PDColoredProgressview"]
-	path = PDColoredProgressview
-	url = https://github.com/PascalW/PDColoredProgressview.git
 [submodule "uicolor-utilities"]
 	path = uicolor-utilities
 	url = https://github.com/ars/uicolor-utilities.git

@@ -212,7 +212,6 @@
 		A77654DA13955A0100787420 /* MarkdownStyle in Resources */ = {isa = PBXBuildFile; fileRef = A77654D913955A0000787420 /* MarkdownStyle */; };
 		A7837E95136C905200B13B95 /* GHAPIIssueV3.m in Sources */ = {isa = PBXBuildFile; fileRef = A7837E94136C905100B13B95 /* GHAPIIssueV3.m */; };
 		A7837E9A136C93FC00B13B95 /* GHAPIMilestoneV3.m in Sources */ = {isa = PBXBuildFile; fileRef = A7837E99136C93FC00B13B95 /* GHAPIMilestoneV3.m */; };
-		A7837EA1136CADA500B13B95 /* PDColoredProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = A7837EA0136CADA400B13B95 /* PDColoredProgressView.m */; };
 		A7837EA5136CADD400B13B95 /* GHAPIMilestoneV3TableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A7837EA4136CADD400B13B95 /* GHAPIMilestoneV3TableViewCell.m */; };
 		A784C40F13D457B500859318 /* GHPIssueCommentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A784C40E13D457B500859318 /* GHPIssueCommentTableViewCell.m */; };
 		A78B70DB13BCE08900F4CE5E /* TabBarItemSelectedBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = A78B70D913BCE08900F4CE5E /* TabBarItemSelectedBackground.png */; };
@@ -724,8 +723,6 @@
 		A7837E94136C905100B13B95 /* GHAPIIssueV3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHAPIIssueV3.m; sourceTree = "<group>"; };
 		A7837E98136C93FC00B13B95 /* GHAPIMilestoneV3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHAPIMilestoneV3.h; sourceTree = "<group>"; };
 		A7837E99136C93FC00B13B95 /* GHAPIMilestoneV3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHAPIMilestoneV3.m; sourceTree = "<group>"; };
-		A7837E9F136CADA300B13B95 /* PDColoredProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PDColoredProgressView.h; path = PDColoredProgressview/PDColoredProgressView.h; sourceTree = "<group>"; };
-		A7837EA0136CADA400B13B95 /* PDColoredProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PDColoredProgressView.m; path = PDColoredProgressview/PDColoredProgressView.m; sourceTree = "<group>"; };
 		A7837EA3136CADD400B13B95 /* GHAPIMilestoneV3TableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHAPIMilestoneV3TableViewCell.h; sourceTree = "<group>"; };
 		A7837EA4136CADD400B13B95 /* GHAPIMilestoneV3TableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHAPIMilestoneV3TableViewCell.m; sourceTree = "<group>"; };
 		A784C40D13D457B400859318 /* GHPIssueCommentTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPIssueCommentTableViewCell.h; sourceTree = "<group>"; };
@@ -965,7 +962,7 @@
 		A7F334B113BCD02700DB922D /* GHPLeftNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPLeftNavigationController.m; sourceTree = "<group>"; };
 		A7F334B313BCD29300DB922D /* GHPLeftNavigationControllerTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPLeftNavigationControllerTableViewCell.h; sourceTree = "<group>"; };
 		A7F334B413BCD29300DB922D /* GHPLeftNavigationControllerTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPLeftNavigationControllerTableViewCell.m; sourceTree = "<group>"; };
-		A7F6260D134B3938006487CA /* GHTableViewCellWithLinearGradientBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; path = GHTableViewCellWithLinearGradientBackgroundView.h; sourceTree = "<group>"; };
+		A7F6260D134B3938006487CA /* GHTableViewCellWithLinearGradientBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHTableViewCellWithLinearGradientBackgroundView.h; sourceTree = "<group>"; };
 		A7F6260E134B3938006487CA /* GHTableViewCellWithLinearGradientBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHTableViewCellWithLinearGradientBackgroundView.m; sourceTree = "<group>"; };
 		A7F62614134B7CD1006487CA /* GHNewCommentTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHNewCommentTableViewCell.h; sourceTree = "<group>"; };
 		A7F62615134B7CD2006487CA /* GHNewCommentTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHNewCommentTableViewCell.m; sourceTree = "<group>"; };
@@ -1250,12 +1247,8 @@
 		A7089529134A2F69000DD6CE /* UITableViewCell - Generic Subclasses */ = {
 			isa = PBXGroup;
 			children = (
-				A7F6260D134B3938006487CA /* GHTableViewCellWithLinearGradientBackgroundView.h */,
-				A7F6260E134B3938006487CA /* GHTableViewCellWithLinearGradientBackgroundView.m */,
-				A708952A134A2F83000DD6CE /* GHCollapsingAndSpinningTableViewCell.h */,
-				A708952B134A2F83000DD6CE /* GHCollapsingAndSpinningTableViewCell.m */,
-				A706C0A9139AAAA2008A6184 /* GHLinearGradientBackgroundView.h */,
-				A706C0AA139AAAA2008A6184 /* GHLinearGradientBackgroundView.m */,
+				A782205913D8B79C00A52D9E /* GHTableViewCellWithLinearGradientBackgroundView */,
+				A782205A13D8B7AD00A52D9E /* GHCollapsingAndSpinningTableViewCell */,
 			);
 			name = "UITableViewCell - Generic Subclasses";
 			path = ..;
@@ -1270,7 +1263,7 @@
 			name = GHIssueComment;
 			sourceTree = "<group>";
 		};
-		A709F747136876A500B0CDE7 /* GHOrganizationViewController */ = {
+		A709F747136876A500B0CDE7 /* Organization */ = {
 			isa = PBXGroup;
 			children = (
 				A709F748136876C500B0CDE7 /* GHOrganizationViewController.h */,
@@ -1278,7 +1271,7 @@
 				A709F7581368B7E800B0CDE7 /* GHTeamViewController.h */,
 				A709F7591368B7E800B0CDE7 /* GHTeamViewController.m */,
 			);
-			name = GHOrganizationViewController;
+			name = Organization;
 			path = ..;
 			sourceTree = "<group>";
 		};
@@ -1422,7 +1415,7 @@
 			name = "UIViewController+GHViewControllerErrorhandling";
 			sourceTree = "<group>";
 		};
-		A712B7F9135F24C10009B7A7 /* GHSearchViewController's */ = {
+		A712B7F9135F24C10009B7A7 /* Search */ = {
 			isa = PBXGroup;
 			children = (
 				A712B7F0135EBC8C0009B7A7 /* GHSearchViewController.h */,
@@ -1432,7 +1425,7 @@
 				A712B7F6135F20B00009B7A7 /* GHSearchUserViewController.h */,
 				A712B7F7135F20B40009B7A7 /* GHSearchUserViewController.m */,
 			);
-			name = "GHSearchViewController's";
+			name = Search;
 			path = ..;
 			sourceTree = "<group>";
 		};
@@ -1600,7 +1593,7 @@
 			name = GHMemberEventPayload;
 			sourceTree = "<group>";
 		};
-		A73E29C31348E12C00E85282 /* GHViewIssueTableViewController */ = {
+		A73E29C31348E12C00E85282 /* Issue */ = {
 			isa = PBXGroup;
 			children = (
 				A708950A1349FB65000DD6CE /* UITableViewCells */,
@@ -1609,7 +1602,7 @@
 				A7D14F741356F17300E1B980 /* GHCreateIssueTableViewController.h */,
 				A7D14F751356F17500E1B980 /* GHCreateIssueTableViewController.m */,
 			);
-			name = GHViewIssueTableViewController;
+			name = Issue;
 			path = ..;
 			sourceTree = "<group>";
 		};
@@ -1820,7 +1813,7 @@
 			name = UserInterface;
 			sourceTree = "<group>";
 		};
-		A75057401343424100514A82 /* GHNewsFeedViewController */ = {
+		A75057401343424100514A82 /* NewsFeed */ = {
 			isa = PBXGroup;
 			children = (
 				A703B94A134770620014235D /* UITableViewCells */,
@@ -1833,7 +1826,7 @@
 				A7D14F411354DD5C00E1B980 /* GHRecentActivityViewController.h */,
 				A7D14F421354DD5D00E1B980 /* GHRecentActivityViewController.m */,
 			);
-			name = GHNewsFeedViewController;
+			name = NewsFeed;
 			path = ..;
 			sourceTree = "<group>";
 		};
@@ -2012,6 +2005,37 @@
 			name = Markdown;
 			sourceTree = "<group>";
 		};
+		A782205913D8B79C00A52D9E /* GHTableViewCellWithLinearGradientBackgroundView */ = {
+			isa = PBXGroup;
+			children = (
+				A7F6260D134B3938006487CA /* GHTableViewCellWithLinearGradientBackgroundView.h */,
+				A7F6260E134B3938006487CA /* GHTableViewCellWithLinearGradientBackgroundView.m */,
+				A706C0A9139AAAA2008A6184 /* GHLinearGradientBackgroundView.h */,
+				A706C0AA139AAAA2008A6184 /* GHLinearGradientBackgroundView.m */,
+			);
+			name = GHTableViewCellWithLinearGradientBackgroundView;
+			sourceTree = "<group>";
+		};
+		A782205A13D8B7AD00A52D9E /* GHCollapsingAndSpinningTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				A708952A134A2F83000DD6CE /* GHCollapsingAndSpinningTableViewCell.h */,
+				A708952B134A2F83000DD6CE /* GHCollapsingAndSpinningTableViewCell.m */,
+			);
+			name = GHCollapsingAndSpinningTableViewCell;
+			sourceTree = "<group>";
+		};
+		A782205B13D8B88600A52D9E /* Commits */ = {
+			isa = PBXGroup;
+			children = (
+				A7D41B0D135AFE2400CD3A5C /* Push Payload */,
+				A7D41B0E135AFE3500CD3A5C /* Recent Commits */,
+				A7D41B0C135AFE1300CD3A5C /* View Commit */,
+				A7D41B0B135AFDF500CD3A5C /* Commit Diff */,
+			);
+			name = Commits;
+			sourceTree = "<group>";
+		};
 		A7837E97136C93E500B13B95 /* GHAPIMilestoneV3 */ = {
 			isa = PBXGroup;
 			children = (
@@ -2019,16 +2043,6 @@
 				A7837E99136C93FC00B13B95 /* GHAPIMilestoneV3.m */,
 			);
 			name = GHAPIMilestoneV3;
-			sourceTree = "<group>";
-		};
-		A7837EA2136CADAB00B13B95 /* PDColoredProgressView */ = {
-			isa = PBXGroup;
-			children = (
-				A7837E9F136CADA300B13B95 /* PDColoredProgressView.h */,
-				A7837EA0136CADA400B13B95 /* PDColoredProgressView.m */,
-			);
-			name = PDColoredProgressView;
-			path = ..;
 			sourceTree = "<group>";
 		};
 		A78F372113CF209800C22A2D /* Private */ = {
@@ -2206,22 +2220,17 @@
 			isa = PBXGroup;
 			children = (
 				A7089529134A2F69000DD6CE /* UITableViewCell - Generic Subclasses */,
-				A7B520A21389614D000FEE61 /* GHViewLabelViewController */,
-				A7B5208F13890B45000FEE61 /* GHViewMilestoneViewController */,
-				A7F92B8A137318B1000EBC5E /* GHGistViewController */,
-				A7837EA2136CADAB00B13B95 /* PDColoredProgressView */,
-				A709F747136876A500B0CDE7 /* GHOrganizationViewController */,
-				A712B7ED135E0B5E0009B7A7 /* DDProgressView */,
-				A75057401343424100514A82 /* GHNewsFeedViewController */,
-				A73E29C31348E12C00E85282 /* GHViewIssueTableViewController */,
-				A7D41B0A135AFDCE00CD3A5C /* GHSingleRepositoryViewController */,
-				A7BC6788134D94020083F906 /* GHUserViewController */,
-				A7D14FBE13576D4200E1B980 /* GHWebViewViewController */,
-				A7D41B0E135AFE3500CD3A5C /* GHRecentCommitsViewController */,
-				A7D41B0D135AFE2400CD3A5C /* GHPushPayloadViewController */,
-				A7D41B0C135AFE1300CD3A5C /* GHViewCommitViewController */,
-				A7D41B0B135AFDF500CD3A5C /* GHCommitDiffViewController */,
-				A712B7F9135F24C10009B7A7 /* GHSearchViewController's */,
+				A7B520A21389614D000FEE61 /* Label */,
+				A7B5208F13890B45000FEE61 /* Milestone */,
+				A7F92B8A137318B1000EBC5E /* Gist */,
+				A709F747136876A500B0CDE7 /* Organization */,
+				A75057401343424100514A82 /* NewsFeed */,
+				A73E29C31348E12C00E85282 /* Issue */,
+				A7D41B0A135AFDCE00CD3A5C /* Repository */,
+				A7BC6788134D94020083F906 /* User */,
+				A7D14FBE13576D4200E1B980 /* WebView */,
+				A782205B13D8B88600A52D9E /* Commits */,
+				A712B7F9135F24C10009B7A7 /* Search */,
 			);
 			name = UserInterface;
 			sourceTree = "<group>";
@@ -2321,13 +2330,13 @@
 			name = V2;
 			sourceTree = "<group>";
 		};
-		A7B5208F13890B45000FEE61 /* GHViewMilestoneViewController */ = {
+		A7B5208F13890B45000FEE61 /* Milestone */ = {
 			isa = PBXGroup;
 			children = (
 				A7B5209013890B68000FEE61 /* GHViewMilestoneViewController.h */,
 				A7B5209113890B68000FEE61 /* GHViewMilestoneViewController.m */,
 			);
-			name = GHViewMilestoneViewController;
+			name = Milestone;
 			path = ..;
 			sourceTree = "<group>";
 		};
@@ -2358,7 +2367,7 @@
 			name = UIColor;
 			sourceTree = "<group>";
 		};
-		A7B520A21389614D000FEE61 /* GHViewLabelViewController */ = {
+		A7B520A21389614D000FEE61 /* Label */ = {
 			isa = PBXGroup;
 			children = (
 				A7B5209F13892BEF000FEE61 /* GHLabelTableViewCell.h */,
@@ -2368,7 +2377,7 @@
 				A7A6CB6313C8C8F800C1641F /* GHALabelViewController.h */,
 				A7A6CB6413C8C8F800C1641F /* GHALabelViewController.m */,
 			);
-			name = GHViewLabelViewController;
+			name = Label;
 			path = ..;
 			sourceTree = "<group>";
 		};
@@ -2392,13 +2401,13 @@
 			name = "ASI-HTTP";
 			sourceTree = "<group>";
 		};
-		A7BC6788134D94020083F906 /* GHUserViewController */ = {
+		A7BC6788134D94020083F906 /* User */ = {
 			isa = PBXGroup;
 			children = (
 				A7BC6785134CE7DF0083F906 /* GHUserViewController.h */,
 				A7BC6786134CE7E00083F906 /* GHUserViewController.m */,
 			);
-			name = GHUserViewController;
+			name = User;
 			path = ..;
 			sourceTree = "<group>";
 		};
@@ -2478,6 +2487,7 @@
 		A7BF140D1342149C001AE50D /* iPhone */ = {
 			isa = PBXGroup;
 			children = (
+				A712B7ED135E0B5E0009B7A7 /* DDProgressView */,
 				A7A6CB9313CB1DD700C1641F /* UserInterface */,
 				A7BF140E1342149C001AE50D /* iGithubAppDelegate_iPhone.h */,
 				A7BF140F1342149C001AE50D /* iGithubAppDelegate_iPhone.m */,
@@ -2751,13 +2761,13 @@
 			name = GHPDataArrayViewController;
 			sourceTree = "<group>";
 		};
-		A7D14FBE13576D4200E1B980 /* GHWebViewViewController */ = {
+		A7D14FBE13576D4200E1B980 /* WebView */ = {
 			isa = PBXGroup;
 			children = (
 				A73AE6131351953900E9EBA4 /* GHWebViewViewController.h */,
 				A73AE6141351953E00E9EBA4 /* GHWebViewViewController.m */,
 			);
-			name = GHWebViewViewController;
+			name = WebView;
 			path = ..;
 			sourceTree = "<group>";
 		};
@@ -2772,7 +2782,7 @@
 			name = GHCommit;
 			sourceTree = "<group>";
 		};
-		A7D41B0A135AFDCE00CD3A5C /* GHSingleRepositoryViewController */ = {
+		A7D41B0A135AFDCE00CD3A5C /* Repository */ = {
 			isa = PBXGroup;
 			children = (
 				A7BC678C134D96C30083F906 /* UITableViewCells */,
@@ -2781,47 +2791,47 @@
 				A73AE5E41350B27900E9EBA4 /* GHSingleRepositoryViewController.h */,
 				A73AE5E51350B27A00E9EBA4 /* GHSingleRepositoryViewController.m */,
 			);
-			name = GHSingleRepositoryViewController;
+			name = Repository;
 			path = ..;
 			sourceTree = "<group>";
 		};
-		A7D41B0B135AFDF500CD3A5C /* GHCommitDiffViewController */ = {
+		A7D41B0B135AFDF500CD3A5C /* Commit Diff */ = {
 			isa = PBXGroup;
 			children = (
 				A7D41ACA1358B7D300CD3A5C /* GHCommitDiffViewController.h */,
 				A7D41ACB1358B7D300CD3A5C /* GHCommitDiffViewController.m */,
 			);
-			name = GHCommitDiffViewController;
+			name = "Commit Diff";
 			path = ..;
 			sourceTree = "<group>";
 		};
-		A7D41B0C135AFE1300CD3A5C /* GHViewCommitViewController */ = {
+		A7D41B0C135AFE1300CD3A5C /* View Commit */ = {
 			isa = PBXGroup;
 			children = (
 				A7D14FC61358315100E1B980 /* GHViewCommitViewController.h */,
 				A7D14FC71358315600E1B980 /* GHViewCommitViewController.m */,
 			);
-			name = GHViewCommitViewController;
+			name = "View Commit";
 			path = ..;
 			sourceTree = "<group>";
 		};
-		A7D41B0D135AFE2400CD3A5C /* GHPushPayloadViewController */ = {
+		A7D41B0D135AFE2400CD3A5C /* Push Payload */ = {
 			isa = PBXGroup;
 			children = (
 				A7D14FBF13576D9B00E1B980 /* GHPushPayloadViewController.h */,
 				A7D14FC013576DA000E1B980 /* GHPushPayloadViewController.m */,
 			);
-			name = GHPushPayloadViewController;
+			name = "Push Payload";
 			path = ..;
 			sourceTree = "<group>";
 		};
-		A7D41B0E135AFE3500CD3A5C /* GHRecentCommitsViewController */ = {
+		A7D41B0E135AFE3500CD3A5C /* Recent Commits */ = {
 			isa = PBXGroup;
 			children = (
 				A7D41B06135AE71300CD3A5C /* GHRecentCommitsViewController.h */,
 				A7D41B07135AE71600CD3A5C /* GHRecentCommitsViewController.m */,
 			);
-			name = GHRecentCommitsViewController;
+			name = "Recent Commits";
 			path = ..;
 			sourceTree = "<group>";
 		};
@@ -3108,13 +3118,13 @@
 			name = NSError;
 			sourceTree = "<group>";
 		};
-		A7F92B8A137318B1000EBC5E /* GHGistViewController */ = {
+		A7F92B8A137318B1000EBC5E /* Gist */ = {
 			isa = PBXGroup;
 			children = (
 				A7F92B8B137318C3000EBC5E /* GHGistViewController.h */,
 				A7F92B8C137318C3000EBC5E /* GHGistViewController.m */,
 			);
-			name = GHGistViewController;
+			name = Gist;
 			path = ..;
 			sourceTree = "<group>";
 		};
@@ -3353,7 +3363,6 @@
 				A709F75A1368B7E900B0CDE7 /* GHTeamViewController.m in Sources */,
 				A7837E95136C905200B13B95 /* GHAPIIssueV3.m in Sources */,
 				A7837E9A136C93FC00B13B95 /* GHAPIMilestoneV3.m in Sources */,
-				A7837EA1136CADA500B13B95 /* PDColoredProgressView.m in Sources */,
 				A7837EA5136CADD400B13B95 /* GHAPIMilestoneV3TableViewCell.m in Sources */,
 				A7EE1120136F3FFB00A1E693 /* GHAPIIssueCommentV3.m in Sources */,
 				A767715E13707A88006D70D6 /* GHAPIGistV3.m in Sources */,
