@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
 
+#warning only serialize data from iPhone to iPhone and iPad to iPad
+
 @interface iGithubAppDelegate : NSObject <UIApplicationDelegate> {
     NSManagedObjectContext *_managedObjectContext;
     NSManagedObjectModel *_managedObjectModel;
