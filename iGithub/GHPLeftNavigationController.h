@@ -11,6 +11,7 @@
 #import "GHPEdgedLineView.h"
 
 #warning reload organizations if failed
+#warning fix display (wrong selected tableViewCell) bug
 
 @interface GHPLeftNavigationController : GHTableViewController <UIAlertViewDelegate> {
     GHPEdgedLineView *_lineView;
