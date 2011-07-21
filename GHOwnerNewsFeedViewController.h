@@ -9,8 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "GHNewsFeedViewController.h"
 
-#warning notification may disappear to early?
-
 @interface GHOwnerNewsFeedViewController : GHNewsFeedViewController <UIActionSheetDelegate> {
 @private
     UISegmentedControl *_segmentControl;
