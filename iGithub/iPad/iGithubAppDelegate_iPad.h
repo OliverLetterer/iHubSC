@@ -10,8 +10,6 @@
 #import "iGithubAppDelegate.h"
 #import "ANAdvancedNavigationController.h"
 
-#warning serialize application state on iPad
-
 @interface iGithubAppDelegate_iPad : iGithubAppDelegate <ANAdvancedNavigationControllerDelegate> {
     ANAdvancedNavigationController *_advancedNavigationController;
 }
