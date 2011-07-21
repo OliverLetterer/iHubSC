@@ -10,20 +10,21 @@
 #import "GHTableViewController.h"
 #import "GHPEdgedLineView.h"
 
-#warning reload organizations if failed
-#warning fix display (wrong selected tableViewCell) bug
-
 @interface GHPLeftNavigationController : GHTableViewController <UIAlertViewDelegate> {
     GHPEdgedLineView *_lineView;
     UIView *_controllerView;
     
     NSArray *_organizations;
+    
+    NSIndexPath *_mySelectedIndexPath;
 }
 
 @property (nonatomic, retain) GHPEdgedLineView *lineView;
 @property (nonatomic, retain) UIView *controllerView;
 
 @property (nonatomic, retain) NSArray *organizations;
+
+@property (nonatomic, copy) NSIndexPath *mySelectedIndexPath;
 
 - (void)gearButtonClicked:(UIButton *)button;
 

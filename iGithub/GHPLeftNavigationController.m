@@ -32,18 +32,21 @@
 
 @synthesize lineView=_lineView, controllerView=_controllerView;
 @synthesize organizations=_organizations;
+@synthesize mySelectedIndexPath=_mySelectedIndexPath;
 
 - (id)initWithStyle:(UITableViewStyle)style {
     self = [super initWithStyle:UITableViewStylePlain];
     if (self) {
         // Custom initialization
-        [self downloadOrganizations];
+        [self pullToReleaseTableViewReloadData];
         self.reloadDataOnApplicationWillEnterForeground = YES;
+        self.pullToReleaseEnabled = YES;
     }
     return self;
 }
 
 - (void)pullToReleaseTableViewReloadData {
+    [super pullToReleaseTableViewReloadData];
     [self downloadOrganizations];
 }
 
@@ -62,9 +65,13 @@
 
 - (void)downloadOrganizations {
     self.organizations = nil;
+    if (self.isViewLoaded) {
+        [self.tableView reloadData];
+    }
     [GHAPIOrganizationV3 organizationsOfUser:[GHAuthenticationManager sharedInstance].username 
                                         page:1 
                            completionHandler:^(NSMutableArray *array, NSUInteger nextPage, NSError *error) {
+                               [self pullToReleaseTableViewDidReloadData];
                                if (error) {
                                    [self handleError:error];
                                } else {
@@ -155,8 +162,7 @@
     [self scrollViewDidScroll:self.tableView];
 }
 
-- (void)viewDidUnload
-{
+- (void)viewDidUnload {
     [super viewDidUnload];
     self.lineView = nil;
     self.controllerView = nil;
@@ -172,8 +178,10 @@
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
-    if (self.lastSelectedIndexPath) {
-        [self.tableView selectRowAtIndexPath:self.lastSelectedIndexPath 
+    [self.tableView reloadData];
+    DLog(@"%@", self.mySelectedIndexPath);
+    if (self.mySelectedIndexPath) {
+        [self.tableView selectRowAtIndexPath:self.mySelectedIndexPath 
                                     animated:NO 
                               scrollPosition:UITableViewScrollPositionNone];
     }
@@ -319,6 +327,9 @@
 #pragma mark - UIScrollViewDelegate
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    if ([super respondsToSelector:@selector(scrollViewDidScroll:)]) {
+        [super scrollViewDidScroll:scrollView];
+    }
     CGRect frame = self.lineView.frame;
     frame.origin.y = scrollView.bounds.origin.y;
     self.lineView.frame = frame;
@@ -334,6 +345,7 @@
     [_lineView release];
     [_controllerView release];
     [_organizations release];
+    [_mySelectedIndexPath release];
     
     [super dealloc];
 }
@@ -358,6 +370,8 @@
 - (id)initWithCoder:(NSCoder *)decoder {
     if ((self = [super initWithCoder:decoder])) {
         _organizations = [[decoder decodeObjectForKey:@"organizations"] retain];
+        self.mySelectedIndexPath = self.lastSelectedIndexPath;
+        self.lastSelectedIndexPath = nil;
     }
     return self;
 }
