@@ -50,6 +50,14 @@ const CGFloat ANAdvancedNavigationControllerDefaultDraggingDistance         = 47
     return NO;
 }
 
+- (NSUInteger)indexOfFrontViewController {
+    return _indexOfFrontViewController;
+}
+
+- (void)setIndexOfFrontViewController:(NSUInteger)indexOfFrontViewController {
+    [self _setIndexOfFrontViewController:indexOfFrontViewController];
+}
+
 #pragma mark - initialization
 
 - (id)init {

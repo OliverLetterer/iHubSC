@@ -23,4 +23,6 @@
 - (void)_insertRightViewControllerInDataModel:(UIViewController *)rightViewController;
 - (void)_insertRightViewControllerViews;
 
+- (void)_setIndexOfFrontViewController:(NSUInteger)indexOfFrontViewController;
+
 @end

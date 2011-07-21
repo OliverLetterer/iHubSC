@@ -26,6 +26,8 @@ extern const CGFloat ANAdvancedNavigationControllerDefaultDraggingDistance;
     ANRemoveRectangleIndicatorView *_removeRectangleIndicatorView;
     
     id<ANAdvancedNavigationControllerDelegate> _delegate;
+    
+    NSUInteger _indexOfFrontViewController;
 }
 
 - (void)updateBackgroundView;

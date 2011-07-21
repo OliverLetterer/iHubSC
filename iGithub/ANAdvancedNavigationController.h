@@ -43,6 +43,9 @@ extern const CGFloat ANAdvancedNavigationControllerDefaultLeftPanningOffset;
 
 - (void)pushViewController:(UIViewController *)viewController afterViewController:(UIViewController *)afterViewController animated:(BOOL)animated;
 
+// will set/return the viewController, that is on anchor point right
+@property (nonatomic, assign) NSUInteger indexOfFrontViewController;
+
 @end
 
 

@@ -50,11 +50,13 @@
     if (dictionary) {
         NSArray *rightViewControllers = [dictionary objectForKey:@"rightViewControllers"];  
         GHPLeftNavigationController *leftViewController = [dictionary objectForKey:@"leftViewController"];
+        NSUInteger indexOfFrontViewController = [[dictionary objectForKey:@"indexOfFrontViewController"] unsignedIntegerValue];
         
         self.advancedNavigationController = [[[ANAdvancedNavigationController alloc] initWithLeftViewController:leftViewController rightViewControllers:rightViewControllers] autorelease];
         self.advancedNavigationController.delegate = self;
         self.advancedNavigationController.backgroundView = [[[UIView alloc] initWithFrame:CGRectZero] autorelease];
         self.advancedNavigationController.backgroundView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"ANBackgroundImage.png"] ];
+        self.advancedNavigationController.indexOfFrontViewController = indexOfFrontViewController;
     } else {
         GHPLeftNavigationController *leftViewController = [[[GHPLeftNavigationController alloc] initWithStyle:UITableViewStyleGrouped] autorelease];
         
@@ -82,9 +84,10 @@
 #pragma mark - Serialization
 
 - (void)nowSerializeState {
-    NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithCapacity:3];
+    NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithCapacity:4];
     [dictionary setObject:self.advancedNavigationController.leftViewController forKey:@"leftViewController"];
     [dictionary setObject:self.advancedNavigationController.rightViewControllers forKey:@"rightViewControllers"];
+    [dictionary setObject:[NSNumber numberWithUnsignedInteger:self.advancedNavigationController.indexOfFrontViewController] forKey:@"indexOfFrontViewController"];
     
     DLog(@"%d", [self serializeStateInDictionary:dictionary]);
 }

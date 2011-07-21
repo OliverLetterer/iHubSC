@@ -43,6 +43,8 @@
 
 #pragma mark - inserting new viewControllers
 
+#warning try to adopt animation and completion blocks
+
 - (void)__pushRootViewController:(UIViewController *)rootViewController animated:(BOOL)animated {
     NSArray *oldViewControllers = [[self.viewControllers copy] autorelease];
     
@@ -76,6 +78,7 @@
                                      [self.delegate advancedNavigationController:self didPushViewController:rootViewController afterViewController:nil animated:animated];
                                  }
                                  [rootViewController didMoveToParentViewController:self];
+                                 _indexOfFrontViewController = 0;
                              }];
         } else {
             newView.center = nextCenterPoint;
@@ -84,6 +87,7 @@
                 [self.delegate advancedNavigationController:self didPushViewController:rootViewController afterViewController:nil animated:animated];
             }
             [rootViewController didMoveToParentViewController:self];
+            _indexOfFrontViewController = 0;
         }
     }
 }
@@ -136,6 +140,7 @@
                                      [self.delegate advancedNavigationController:self didPushViewController:viewController afterViewController:afterViewController animated:animated];
                                  }
                                  [viewController didMoveToParentViewController:self];
+                                 _indexOfFrontViewController = self.viewControllers.count-1;
                              }];
         } else {
             [self.viewControllers enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
@@ -148,6 +153,7 @@
                 [self.delegate advancedNavigationController:self didPushViewController:viewController afterViewController:afterViewController animated:animated];
             }
             [viewController didMoveToParentViewController:self];
+            _indexOfFrontViewController = self.viewControllers.count-1;
         }
     }
 }
@@ -177,11 +183,13 @@
                              [view removeFromSuperview];
                              [rightViewController viewDidDisappear:animated];
                              [rightViewController removeFromParentViewController];
+                             _indexOfFrontViewController = self.viewControllers.count-1;
                          }];
     } else {
         [view removeFromSuperview];
         [rightViewController viewDidDisappear:animated];
         [rightViewController removeFromParentViewController];
+        _indexOfFrontViewController = self.viewControllers.count-1;
     }
 }
 
@@ -210,6 +218,7 @@
                          if ([self.delegate respondsToSelector:@selector(advancedNavigationController:didPopToViewController:animated:)]) {
                              [self.delegate advancedNavigationController:self didPopToViewController:viewController animated:YES];
                          }
+                         _indexOfFrontViewController = 0;
                      }];
 }
 
@@ -274,6 +283,7 @@
 
 - (void)__moveRightViewControllerToRightAnchorPoint:(UIViewController *)rightViewController animated:(BOOL)animated {
     NSUInteger rightViewControllerIndex = [self.viewControllers indexOfObject:rightViewController];
+    _indexOfFrontViewController = rightViewControllerIndex;
     _draggingRightAnchorViewControllerIndex = rightViewControllerIndex;
     
     if (animated) {
@@ -463,6 +473,24 @@
 
 @implementation ANAdvancedNavigationController (ANAdvancedNavigationController_RightViewControllers)
 
+#pragma setters and getters
+
+- (void)_setIndexOfFrontViewController:(NSUInteger)indexOfFrontViewController {
+    if (!(indexOfFrontViewController < self.viewControllers.count)) {
+        [NSException raise:NSInternalInconsistencyException format:@"indexOfFrontViewController (%d) exceeds viewControllers bounds (%d)", indexOfFrontViewController, self.viewControllers.count];
+    }
+    
+    if (indexOfFrontViewController != _indexOfFrontViewController) {
+        _indexOfFrontViewController = indexOfFrontViewController;
+        
+        if (self.isViewLoaded) {
+            [self __moveRightViewControllerToRightAnchorPoint:[self.viewControllers objectAtIndex:_indexOfFrontViewController] animated:NO];
+        }
+    }
+}
+
+#pragma mark - Pushing and poping
+
 - (void)_pushViewController:(UIViewController *)viewController 
         afterViewController:(UIViewController *)afterViewController animated:(BOOL)animated {
     // first lets do some concistency checks
@@ -551,16 +579,17 @@
 }
 
 - (void)_insertRightViewControllerViews {
-    NSUInteger lastIndex = self.viewControllers.count-1;
+#warning update shadows
     [self.viewControllers enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         if (![self __isRightViewControllerAlreayInViewHierarchy:obj]) {
             UIViewController *viewController = obj;
             UIView *view = [self __loadViewForNewRightViewController:viewController];
             [viewController viewWillAppear:NO];
             [self.view addSubview:view];
-            view.center = [self __centerPointForRightViewController:viewController withIndexOfCurrentViewControllerAtRightAnchor:lastIndex];
+            view.center = CGPointZero;
             [viewController viewDidAppear:NO];
         }
+        [self __moveRightViewControllerToRightAnchorPoint:[self.viewControllers objectAtIndex:_indexOfFrontViewController] animated:NO];
     }];
 }
 
