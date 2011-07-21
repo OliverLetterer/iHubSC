@@ -8,7 +8,7 @@
 
 #import "GHViewLabelViewController.h"
 #import "GHLabelTableViewCell.h"
-#import "UICollapsingAndSpinningTableViewCell.h"
+#import "GHCollapsingAndSpinningTableViewCell.h"
 #import "GHIssueTitleTableViewCell.h"
 #import "GHViewIssueTableViewController.h"
 
@@ -39,9 +39,9 @@
     
     NSString *CellIdentifier = @"UICollapsingAndSpinningTableViewCell";
     
-    UICollapsingAndSpinningTableViewCell *cell = (UICollapsingAndSpinningTableViewCell *)[self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    GHCollapsingAndSpinningTableViewCell *cell = (GHCollapsingAndSpinningTableViewCell *)[self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[UICollapsingAndSpinningTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[[GHCollapsingAndSpinningTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
     }
     
     if (section == kUITableViewControllerSectionInfoOpenIssues) {

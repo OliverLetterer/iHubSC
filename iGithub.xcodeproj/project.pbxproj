@@ -35,7 +35,7 @@
 		A7089526134A2F24000DD6CE /* UITableViewCellAccessoryDisclosureIndicator.PNG in Resources */ = {isa = PBXBuildFile; fileRef = A7089522134A2F23000DD6CE /* UITableViewCellAccessoryDisclosureIndicator.PNG */; };
 		A7089527134A2F24000DD6CE /* UITableViewCellAccessoryDisclosureIndicatorSelected@2x.PNG in Resources */ = {isa = PBXBuildFile; fileRef = A7089523134A2F23000DD6CE /* UITableViewCellAccessoryDisclosureIndicatorSelected@2x.PNG */; };
 		A7089528134A2F24000DD6CE /* UITableViewCellAccessoryDisclosureIndicator@2x.PNG in Resources */ = {isa = PBXBuildFile; fileRef = A7089524134A2F23000DD6CE /* UITableViewCellAccessoryDisclosureIndicator@2x.PNG */; };
-		A708952C134A2F83000DD6CE /* UICollapsingAndSpinningTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A708952B134A2F83000DD6CE /* UICollapsingAndSpinningTableViewCell.m */; };
+		A708952C134A2F83000DD6CE /* GHCollapsingAndSpinningTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A708952B134A2F83000DD6CE /* GHCollapsingAndSpinningTableViewCell.m */; };
 		A7089530134A3DB0000DD6CE /* GHIssueComment.m in Sources */ = {isa = PBXBuildFile; fileRef = A708952F134A3DB0000DD6CE /* GHIssueComment.m */; };
 		A7089533134A4124000DD6CE /* GHIssueCommentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A7089532134A4123000DD6CE /* GHIssueCommentTableViewCell.m */; };
 		A709F74A136876C500B0CDE7 /* GHOrganizationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A709F749136876C500B0CDE7 /* GHOrganizationViewController.m */; };
@@ -403,8 +403,8 @@
 		A7089522134A2F23000DD6CE /* UITableViewCellAccessoryDisclosureIndicator.PNG */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UITableViewCellAccessoryDisclosureIndicator.PNG; sourceTree = "<group>"; };
 		A7089523134A2F23000DD6CE /* UITableViewCellAccessoryDisclosureIndicatorSelected@2x.PNG */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UITableViewCellAccessoryDisclosureIndicatorSelected@2x.PNG"; sourceTree = "<group>"; };
 		A7089524134A2F23000DD6CE /* UITableViewCellAccessoryDisclosureIndicator@2x.PNG */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UITableViewCellAccessoryDisclosureIndicator@2x.PNG"; sourceTree = "<group>"; };
-		A708952A134A2F83000DD6CE /* UICollapsingAndSpinningTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UICollapsingAndSpinningTableViewCell.h; sourceTree = "<group>"; };
-		A708952B134A2F83000DD6CE /* UICollapsingAndSpinningTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UICollapsingAndSpinningTableViewCell.m; sourceTree = "<group>"; };
+		A708952A134A2F83000DD6CE /* GHCollapsingAndSpinningTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; path = GHCollapsingAndSpinningTableViewCell.h; sourceTree = "<group>"; };
+		A708952B134A2F83000DD6CE /* GHCollapsingAndSpinningTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHCollapsingAndSpinningTableViewCell.m; sourceTree = "<group>"; };
 		A708952E134A3DB0000DD6CE /* GHIssueComment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHIssueComment.h; sourceTree = "<group>"; };
 		A708952F134A3DB0000DD6CE /* GHIssueComment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHIssueComment.m; sourceTree = "<group>"; };
 		A7089531134A4122000DD6CE /* GHIssueCommentTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHIssueCommentTableViewCell.h; sourceTree = "<group>"; };
@@ -1252,8 +1252,8 @@
 			children = (
 				A7F6260D134B3938006487CA /* UITableViewCellWithLinearGradientBackgroundView.h */,
 				A7F6260E134B3938006487CA /* UITableViewCellWithLinearGradientBackgroundView.m */,
-				A708952A134A2F83000DD6CE /* UICollapsingAndSpinningTableViewCell.h */,
-				A708952B134A2F83000DD6CE /* UICollapsingAndSpinningTableViewCell.m */,
+				A708952A134A2F83000DD6CE /* GHCollapsingAndSpinningTableViewCell.h */,
+				A708952B134A2F83000DD6CE /* GHCollapsingAndSpinningTableViewCell.m */,
 				A706C0A9139AAAA2008A6184 /* GHLinearGradientBackgroundView.h */,
 				A706C0AA139AAAA2008A6184 /* GHLinearGradientBackgroundView.m */,
 			);
@@ -3301,7 +3301,7 @@
 				A708950E1349FB82000DD6CE /* GHIssueTitleTableViewCell.m in Sources */,
 				A70895121349FE0C000DD6CE /* GHIssueDescriptionTableViewCell.m in Sources */,
 				A7089517134A03BA000DD6CE /* GHAuthenticationManager.m in Sources */,
-				A708952C134A2F83000DD6CE /* UICollapsingAndSpinningTableViewCell.m in Sources */,
+				A708952C134A2F83000DD6CE /* GHCollapsingAndSpinningTableViewCell.m in Sources */,
 				A7089530134A3DB0000DD6CE /* GHIssueComment.m in Sources */,
 				A7089533134A4124000DD6CE /* GHIssueCommentTableViewCell.m in Sources */,
 				A7F6260F134B3938006487CA /* UITableViewCellWithLinearGradientBackgroundView.m in Sources */,

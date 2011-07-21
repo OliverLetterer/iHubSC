@@ -10,7 +10,7 @@
 #import "GHFeedItemWithDescriptionTableViewCell.h"
 #import "NSString+Additions.h"
 #import "GHWebViewViewController.h"
-#import "UICollapsingAndSpinningTableViewCell.h"
+#import "GHCollapsingAndSpinningTableViewCell.h"
 #import "GHIssueTitleTableViewCell.h"
 #import "GHViewIssueTableViewController.h"
 #import "GHNewsFeedItemTableViewCell.h"
@@ -145,10 +145,10 @@
 - (UITableViewCell<UIExpandingTableViewCell> *)tableView:(UIExpandableTableView *)tableView expandingCellForSection:(NSInteger)section {
     NSString *CellIdientifier = @"UICollapsingAndSpinningTableViewCell";
     
-    UICollapsingAndSpinningTableViewCell *cell = (UICollapsingAndSpinningTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdientifier];
+    GHCollapsingAndSpinningTableViewCell *cell = (GHCollapsingAndSpinningTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdientifier];
     
     if (cell == nil) {
-        cell = [[[UICollapsingAndSpinningTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdientifier] autorelease];
+        cell = [[[GHCollapsingAndSpinningTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdientifier] autorelease];
     }
     
     if (section == kUITableViewSectionIssues) {

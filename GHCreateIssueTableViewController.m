@@ -9,7 +9,7 @@
 #import "GHCreateIssueTableViewController.h"
 #import "GHCreateIssueTableViewCell.h"
 #import "GHSettingsHelper.h"
-#import "UICollapsingAndSpinningTableViewCell.h"
+#import "GHCollapsingAndSpinningTableViewCell.h"
 
 #define kUITableViewSectionTitle 0
 #define kUITableViewSectionAssigned 1
@@ -179,9 +179,9 @@
     
     NSString *CellIdentifier = @"UICollapsingAndSpinningTableViewCell";
     
-    UICollapsingAndSpinningTableViewCell *cell = (UICollapsingAndSpinningTableViewCell *)[self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    GHCollapsingAndSpinningTableViewCell *cell = (GHCollapsingAndSpinningTableViewCell *)[self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[UICollapsingAndSpinningTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[[GHCollapsingAndSpinningTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
     }
     
     if (section == kUITableViewSectionAssigned) {

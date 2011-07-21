@@ -8,7 +8,7 @@
 
 #import "GHTeamViewController.h"
 #import "GithubAPI.h"
-#import "UICollapsingAndSpinningTableViewCell.h"
+#import "GHCollapsingAndSpinningTableViewCell.h"
 #import "GHUserViewController.h"
 #import "GHFeedItemWithDescriptionTableViewCell.h"
 
@@ -78,10 +78,10 @@
 - (UITableViewCell<UIExpandingTableViewCell> *)tableView:(UIExpandableTableView *)tableView expandingCellForSection:(NSInteger)section {
     NSString *CellIdientifier = @"UICollapsingAndSpinningTableViewCell";
     
-    UICollapsingAndSpinningTableViewCell *cell = (UICollapsingAndSpinningTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdientifier];
+    GHCollapsingAndSpinningTableViewCell *cell = (GHCollapsingAndSpinningTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdientifier];
     
     if (cell == nil) {
-        cell = [[[UICollapsingAndSpinningTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdientifier] autorelease];
+        cell = [[[GHCollapsingAndSpinningTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdientifier] autorelease];
     }
     
     if (section == kUITableViewSectionMembers) {
