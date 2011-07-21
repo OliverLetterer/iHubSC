@@ -162,7 +162,6 @@
     [super viewDidLoad];
     
     if (!self.newsFeed) {
-        self.newsFeed = [self loadSerializedNewsFeed];
         [self pullToReleaseTableViewReloadData];
     }
 }
@@ -219,7 +218,6 @@
                 [self handleError:error];
             } else {
                 self.newsFeed = feed;
-                [self serializeNewsFeed:feed];
                 self.segmentControl.userInteractionEnabled = YES;
                 self.segmentControl.alpha = 1.0;
             }
@@ -255,7 +253,6 @@
                     [self handleError:error];
                 } else {
                     self.newsFeed = feed;
-                    [self serializeNewsFeed:feed];
                     self.segmentControl.userInteractionEnabled = YES;
                     self.segmentControl.alpha = 1.0;
                 }
@@ -322,7 +319,6 @@
             [self handleError:error];
         } else {
             self.newsFeed = feed;
-            [self serializeNewsFeed:feed];
             self.segmentControl.userInteractionEnabled = YES;
             self.segmentControl.alpha = 1.0;
         }
@@ -418,29 +414,3 @@
 }
 
 @end
-
-
-
-
-
-
-NSString *const NewsFeedSerializationFileName = @"de.olettere.lastKnownNewsFeed.plist";
-
-@implementation GHOwnerNewsFeedViewController (GHOwnerNewsFeedViewControllerSerializaiton)
-
-- (void)serializeNewsFeed:(GHNewsFeed *)newsFeed {
-    NSString *documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-    NSString *filePath = [documentsDirectory stringByAppendingPathComponent:NewsFeedSerializationFileName];
-    
-    [NSKeyedArchiver archiveRootObject:newsFeed toFile:filePath];
-}
-
-- (GHNewsFeed *)loadSerializedNewsFeed {
-    NSString *documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-    NSString *filePath = [documentsDirectory stringByAppendingPathComponent:NewsFeedSerializationFileName];
-    
-    return [NSKeyedUnarchiver unarchiveObjectWithFile:filePath];
-}
-
-@end
-

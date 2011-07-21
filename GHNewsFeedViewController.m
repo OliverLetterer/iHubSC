@@ -29,7 +29,10 @@
         [_newsFeed release];
         _newsFeed = [newsFeed retain];
         [self cacheHeightForTableView];
-        [self.tableView reloadData];
+        if (self.isViewLoaded) {
+            [self.tableView reloadData];
+            [self scrollViewDidEndDecelerating:self.tableView];
+        }
     }
 }
 
