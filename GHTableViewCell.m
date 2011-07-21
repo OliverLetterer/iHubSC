@@ -18,6 +18,12 @@
 
 @synthesize timeLabel=_timeLabel;
 
+#pragma mark - setters and getters
+
++ (CGFloat)heightWithContent:(NSString *)content {
+    return 44.0f;
+}
+
 #pragma mark - Initialization
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
