@@ -18,7 +18,7 @@
 #import "GHRecentCommitsViewController.h"
 #import "GHViewRootDirectoryViewController.h"
 #import "GHAPIMilestoneV3TableViewCell.h"
-#import "GHViewMilestoneViewController.h"
+#import "GHMilestoneViewController.h"
 #import "GHLabelTableViewCell.h"
 #import "GHViewLabelViewController.h"
 #import "ANNotificationQueue.h"
@@ -978,7 +978,7 @@
     } else if (indexPath.section == kUITableViewSectionMilestones && indexPath.row > 0) {
         GHAPIMilestoneV3 *milestone = [self.milestones objectAtIndex:indexPath.row - 1];
         
-        GHViewMilestoneViewController *milestoneViewController = [[[GHViewMilestoneViewController alloc] initWithRepository:self.repositoryString
+        GHMilestoneViewController *milestoneViewController = [[[GHMilestoneViewController alloc] initWithRepository:self.repositoryString
                                                                                                             milestoneNumber:milestone.number]
                                                                   autorelease];
         [self.navigationController pushViewController:milestoneViewController animated:YES];
