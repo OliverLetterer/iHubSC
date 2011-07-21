@@ -11,6 +11,8 @@
 
 @class GHAPIGistV3;
 
+#warning is not deserializing properly
+
 @interface GHGistViewController : GHTableViewController {
 @private
     NSString *_ID;
