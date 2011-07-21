@@ -2161,7 +2161,7 @@
 			name = Search;
 			sourceTree = "<group>";
 		};
-		A7A6CB7C13CA1CE100C1641F /* GHPNewsFeedViewController */ = {
+		A7A6CB7C13CA1CE100C1641F /* NewsFeed */ = {
 			isa = PBXGroup;
 			children = (
 				A7A6CB8813CA2B0900C1641F /* UITableViewCells - News Feed */,
@@ -2172,7 +2172,7 @@
 				A7A6CB8C13CAE4CF00C1641F /* GHPUsersNewsFeedViewController.h */,
 				A7A6CB8D13CAE4D000C1641F /* GHPUsersNewsFeedViewController.m */,
 			);
-			name = GHPNewsFeedViewController;
+			name = NewsFeed;
 			sourceTree = "<group>";
 		};
 		A7A6CB8813CA2B0900C1641F /* UITableViewCells - News Feed */ = {
@@ -3016,7 +3016,7 @@
 				A7F1990913CEFD5700D83117 /* User */,
 				A7F1990C13CEFD8800D83117 /* Team */,
 				A7F1990D13CEFD8F00D83117 /* Organization */,
-				A7A6CB7C13CA1CE100C1641F /* GHPNewsFeedViewController */,
+				A7A6CB7C13CA1CE100C1641F /* NewsFeed */,
 				A7A6CB6613C8D48500C1641F /* Search */,
 				A7A6CB5E13C8C88600C1641F /* GHPLabelViewController */,
 				A74DD7A513C64E7A00570C94 /* GHPDirectoryViewController */,
