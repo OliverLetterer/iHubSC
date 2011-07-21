@@ -26,4 +26,8 @@
 
 - (void)setupAppearences;
 
+- (void)nowSerializeState;
+- (BOOL)serializeStateInDictionary:(NSMutableDictionary *)dictionary;
+- (NSMutableDictionary *)deserializeState;
+
 @end

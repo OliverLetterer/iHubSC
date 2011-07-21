@@ -11,6 +11,8 @@
 #import "GHAuthenticationManager.h"
 #import "ASIHTTPRequest.h"
 
+#define kLastKnownApplicationStateFileName @"de.olettere.iGitHub.lastKnownApplicationState.plist"
+
 @implementation iGithubAppDelegate
 
 @synthesize window=_window;
@@ -36,30 +38,40 @@
      */
 }
 
-- (void)applicationDidEnterBackground:(UIApplication *)application
-{
-    /*
-     Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
-     If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
-     */
+- (void)applicationDidEnterBackground:(UIApplication *)application {
+#ifdef DEBUG
+    [self nowSerializeState];
+#endif
 }
 
-- (void)applicationWillEnterForeground:(UIApplication *)application
-{
-    /*
-     Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
-     */
-}
-
-- (void)applicationDidBecomeActive:(UIApplication *)application
-{
-    /*
-     Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-     */
+- (void)applicationDidBecomeActive:(UIApplication *)application {
+    
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
+#ifndef DEBUG
+    [self nowSerializeState];
+#endif
+}
+
+#pragma mark - Serializations
+
+- (void)nowSerializeState {
     
+}
+
+- (BOOL)serializeStateInDictionary:(NSMutableDictionary *)dictionary {
+    NSString *documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *filePath = [documentsDirectory stringByAppendingPathComponent:kLastKnownApplicationStateFileName];
+    
+    return [NSKeyedArchiver archiveRootObject:dictionary toFile:filePath];
+}
+
+- (NSMutableDictionary *)deserializeState {
+    NSString *documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *filePath = [documentsDirectory stringByAppendingPathComponent:kLastKnownApplicationStateFileName];
+    
+    return [NSKeyedUnarchiver unarchiveObjectWithFile:filePath];
 }
 
 #pragma mark - memory management

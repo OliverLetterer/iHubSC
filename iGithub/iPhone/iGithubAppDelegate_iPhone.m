@@ -10,8 +10,6 @@
 #import "GHSettingsHelper.h"
 #import "GithubAPI.h"
 
-#define kLastKnownApplicationStateFileName @"de.olettere.lastKnownApplicationState.plist"
-
 @implementation iGithubAppDelegate_iPhone
 
 @synthesize tabBarController=_tabBarController, newsFeedViewController=_newsFeedViewController, profileViewController=_profileViewController, searchViewController=_searchViewController;
@@ -65,10 +63,7 @@
     [GHAuthenticationManager sharedInstance].password = [GHSettingsHelper password];
 #endif
     
-    NSString *documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-    NSString *filePath = [documentsDirectory stringByAppendingPathComponent:kLastKnownApplicationStateFileName];
-    
-    NSMutableDictionary *dictionary = [NSKeyedUnarchiver unarchiveObjectWithFile:filePath];
+    NSMutableDictionary *dictionary = [self deserializeState];
     
 //    tabBarController = nil;
     if (dictionary) {
@@ -99,8 +94,6 @@
         self.newsFeedViewController = [viewControllers0 objectAtIndex:0];
         self.profileViewController = [viewControllers1 objectAtIndex:0];
         self.searchViewController = [viewControllers2 objectAtIndex:0];
-        
-//        [[NSFileManager defaultManager] removeItemAtPath:filePath error:NULL];
     } else {
         NSMutableArray *tabBarItems = [NSMutableArray array];
         
@@ -129,22 +122,9 @@
     return [super application:application didFinishLaunchingWithOptions:launchOptions];
 }
 
-#pragma mark - UIApplicationDelegate
+#pragma mark - Serialization
 
-//- (void)applicationWillTerminate:(UIApplication *)application {
-//    [super applicationWillTerminate:application];
-//    NSString *documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-//    NSString *filePath = [documentsDirectory stringByAppendingPathComponent:kLastKnownApplicationStateFileName];
-//    
-//    [NSKeyedArchiver archiveRootObject:self.tabBarController toFile:filePath];
-//}
-
-- (void)applicationDidEnterBackground:(UIApplication *)application {
-    [super applicationDidEnterBackground:application];
-    
-    NSString *documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-    NSString *filePath = [documentsDirectory stringByAppendingPathComponent:kLastKnownApplicationStateFileName];
-    
+- (void)nowSerializeState {
     NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithCapacity:4];
     [dictionary setObject:[NSNumber numberWithUnsignedInteger:self.tabBarController.selectedIndex] forKey:@"self.tabBarController.selectedIndex"];
     [self.tabBarController.viewControllers enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
@@ -152,7 +132,7 @@
         [dictionary setObject:navController.viewControllers forKey:[NSNumber numberWithUnsignedInteger:idx]];
     }];
     
-    DLog(@"%d", [NSKeyedArchiver archiveRootObject:dictionary toFile:filePath]);
+    DLog(@"%d", [self serializeStateInDictionary:dictionary]);
 }
 
 #pragma mark - memory management
