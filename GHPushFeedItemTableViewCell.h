@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "GHTableViewCell.h"
 
+#warning remove
+
 @interface GHPushFeedItemTableViewCell : GHTableViewCell {
 @private
     UILabel *_firstCommitLabel;
