@@ -43,8 +43,6 @@
 
 #pragma mark - inserting new viewControllers
 
-#warning try to adopt animation and completion blocks
-
 - (void)__pushRootViewController:(UIViewController *)rootViewController animated:(BOOL)animated {
     NSArray *oldViewControllers = [[self.viewControllers copy] autorelease];
     
