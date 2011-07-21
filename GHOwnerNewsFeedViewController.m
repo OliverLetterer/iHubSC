@@ -10,7 +10,7 @@
 #import "GHOwnerNewsFeedViewController+Private.h"
 #import "GithubAPI.h"
 #import "GHSettingsHelper.h"
-#import "GHFeedItemWithDescriptionTableViewCell.h"
+#import "GHDescriptionTableViewCell.h"
 #import "GHPushFeedItemTableViewCell.h"
 #import "GHFollowEventTableViewCell.h"
 #import "GHIssueViewController.h"

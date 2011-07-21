@@ -7,7 +7,7 @@
 //
 
 #import "GHOrganizationViewController.h"
-#import "GHFeedItemWithDescriptionTableViewCell.h"
+#import "GHDescriptionTableViewCell.h"
 #import "GHWebViewViewController.h"
 #import "GHCollapsingAndSpinningTableViewCell.h"
 #import "GHRepositoryViewController.h"
@@ -255,9 +255,9 @@
         if (indexPath.row == 0) {
             NSString *CellIdentifier = @"TitleTableViewCell";
             
-            GHFeedItemWithDescriptionTableViewCell *cell = (GHFeedItemWithDescriptionTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+            GHDescriptionTableViewCell *cell = (GHDescriptionTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
             if (cell == nil) {
-                cell = [[[GHFeedItemWithDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+                cell = [[[GHDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 cell.accessoryType = UITableViewCellAccessoryNone;
             }
@@ -343,9 +343,9 @@
     } else if (indexPath.section == kUITableViewSectionPublicRepositories) {
         NSString *CellIdentifier = @"GHFeedItemWithDescriptionTableViewCell";
         
-        GHFeedItemWithDescriptionTableViewCell *cell = (GHFeedItemWithDescriptionTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        GHDescriptionTableViewCell *cell = (GHDescriptionTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         if (cell == nil) {
-            cell = [[[GHFeedItemWithDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+            cell = [[[GHDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
         }
         
         GHAPIRepositoryV3 *repository = [self.publicRepositories objectAtIndex:indexPath.row-1];

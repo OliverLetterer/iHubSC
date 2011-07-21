@@ -9,7 +9,7 @@
 #import "GHNewsFeedViewController.h"
 #import "GithubAPI.h"
 #import "GHSettingsHelper.h"
-#import "GHFeedItemWithDescriptionTableViewCell.h"
+#import "GHDescriptionTableViewCell.h"
 #import "GHPushFeedItemTableViewCell.h"
 #import "GHFollowEventTableViewCell.h"
 #import "GHIssueViewController.h"
@@ -111,10 +111,10 @@
     if (item.payload.type == GHPayloadIssuesEvent) {
         // we will display an issue
         NSString *CellIdentifier = @"GHFeedItemWithDescriptionTableViewCell";
-        GHFeedItemWithDescriptionTableViewCell *cell = (GHFeedItemWithDescriptionTableViewCell *)[self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        GHDescriptionTableViewCell *cell = (GHDescriptionTableViewCell *)[self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         
         if (!cell) {
-            cell = [[[GHFeedItemWithDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+            cell = [[[GHDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
         }
         
         GHIssuePayload *payload = (GHIssuePayload *)item.payload;
@@ -333,10 +333,10 @@
         return cell;
     } else if (item.payload.type == GHPayloadGistEvent) {
         NSString *CellIdentifier = @"GHFeedItemWithDescriptionTableViewCell";
-        GHFeedItemWithDescriptionTableViewCell *cell = (GHFeedItemWithDescriptionTableViewCell *)[self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        GHDescriptionTableViewCell *cell = (GHDescriptionTableViewCell *)[self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         
         if (!cell) {
-            cell = [[[GHFeedItemWithDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+            cell = [[[GHDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
         }
         
         GHGistEventPayload *payload = (GHGistEventPayload *)item.payload;
@@ -357,10 +357,10 @@
         return cell;
     } else if (item.payload.type == GHPayloadDownloadEvent) {
         NSString *CellIdentifier = @"GHFeedItemWithDescriptionTableViewCell";
-        GHFeedItemWithDescriptionTableViewCell *cell = (GHFeedItemWithDescriptionTableViewCell *)[self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        GHDescriptionTableViewCell *cell = (GHDescriptionTableViewCell *)[self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         
         if (!cell) {
-            cell = [[[GHFeedItemWithDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+            cell = [[[GHDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
         }
         
         GHDownloadEventPayload *payload = (GHDownloadEventPayload *)item.payload;
@@ -375,10 +375,10 @@
         return cell;
     } else if (item.payload.type == GHPayloadPullRequestEvent) {
         NSString *CellIdentifier = @"GHFeedItemWithDescriptionTableViewCell";
-        GHFeedItemWithDescriptionTableViewCell *cell = (GHFeedItemWithDescriptionTableViewCell *)[self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        GHDescriptionTableViewCell *cell = (GHDescriptionTableViewCell *)[self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         
         if (!cell) {
-            cell = [[[GHFeedItemWithDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+            cell = [[[GHDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
         }
         
         GHPullRequestPayload *payload = (GHPullRequestPayload *)item.payload;
@@ -420,10 +420,10 @@
         return cell;
     } else if (item.payload.type == GHPayloadIssueCommentEvent) {
         NSString *CellIdentifier = @"GHFeedItemWithDescriptionTableViewCell";
-        GHFeedItemWithDescriptionTableViewCell *cell = (GHFeedItemWithDescriptionTableViewCell *)[self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        GHDescriptionTableViewCell *cell = (GHDescriptionTableViewCell *)[self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         
         if (!cell) {
-            cell = [[[GHFeedItemWithDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+            cell = [[[GHDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
         }
         
         GHIssuesCommentPayload *payload = (GHIssuesCommentPayload *)item.payload;
@@ -438,10 +438,10 @@
         return cell;
     } else if (item.payload.type == GHPayloadForkApplyEvent) {
         NSString *CellIdentifier = @"GHFeedItemWithDescriptionTableViewCell";
-        GHFeedItemWithDescriptionTableViewCell *cell = (GHFeedItemWithDescriptionTableViewCell *)[self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        GHDescriptionTableViewCell *cell = (GHDescriptionTableViewCell *)[self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         
         if (!cell) {
-            cell = [[[GHFeedItemWithDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+            cell = [[[GHDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
         }
         
         GHForkApplyEventPayload *payload = (GHForkApplyEventPayload *)item.payload;
@@ -528,7 +528,7 @@
                 NSString *description = issue.title;
                 height = [self heightForDescription:description] + 20.0 + 30.0; // X + top offset of status label + 30 px white space on the bottom
             } else {
-                height = [GHFeedItemWithDescriptionTableViewCell height];
+                height = [GHDescriptionTableViewCell height];
             }
         } else if (item.payload.type == GHPayloadPushEvent) {
             minimumHeight = 78.0;

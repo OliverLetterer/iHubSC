@@ -10,7 +10,7 @@
 #import "GithubAPI.h"
 #import "GHCollapsingAndSpinningTableViewCell.h"
 #import "GHUserViewController.h"
-#import "GHFeedItemWithDescriptionTableViewCell.h"
+#import "GHDescriptionTableViewCell.h"
 
 #define kUITableViewSectionMembers 0
 #define kUITableViewSectionRepositories 1
@@ -192,9 +192,9 @@
     } else if (indexPath.section == kUITableViewSectionRepositories) {
         NSString *CellIdentifier = @"GHFeedItemWithDescriptionTableViewCell";
         
-        GHFeedItemWithDescriptionTableViewCell *cell = (GHFeedItemWithDescriptionTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        GHDescriptionTableViewCell *cell = (GHDescriptionTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         if (cell == nil) {
-            cell = [[[GHFeedItemWithDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+            cell = [[[GHDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
         }
         
         GHAPIRepositoryV3 *repository = [self.repositories objectAtIndex:indexPath.row-1];

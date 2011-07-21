@@ -8,7 +8,7 @@
 
 #import "GHGistViewController.h"
 #import "GithubAPI.h"
-#import "GHFeedItemWithDescriptionTableViewCell.h"
+#import "GHDescriptionTableViewCell.h"
 #import "GHCollapsingAndSpinningTableViewCell.h"
 #import "NSString+Additions.h"
 #import "GHUserViewController.h"
@@ -299,9 +299,9 @@
         if (indexPath.row == 0) {
             NSString *CellIdentifier = @"GHFeedItemWithDescriptionTableViewCell";
             
-            GHFeedItemWithDescriptionTableViewCell *cell = (GHFeedItemWithDescriptionTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+            GHDescriptionTableViewCell *cell = (GHDescriptionTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
             if (cell == nil) {
-                cell = [[[GHFeedItemWithDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+                cell = [[[GHDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
                 cell.accessoryType = UITableViewCellAccessoryNone;
             }
             
@@ -386,9 +386,9 @@
             
             NSString *CellIdentifier = @"GHFeedItemWithDescriptionTableViewCell";
             
-            GHFeedItemWithDescriptionTableViewCell *cell = (GHFeedItemWithDescriptionTableViewCell *)[self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+            GHDescriptionTableViewCell *cell = (GHDescriptionTableViewCell *)[self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
             if (cell == nil) {
-                cell = [[[GHFeedItemWithDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+                cell = [[[GHDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
             }
             
             GHAPIGistCommentV3 *comment = [self.comments objectAtIndex:indexPath.row - 1];

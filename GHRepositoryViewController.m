@@ -7,7 +7,7 @@
 //
 
 #import "GHRepositoryViewController.h"
-#import "GHFeedItemWithDescriptionTableViewCell.h"
+#import "GHDescriptionTableViewCell.h"
 #import "NSString+Additions.h"
 #import "GHWebViewViewController.h"
 #import "GHCollapsingAndSpinningTableViewCell.h"
@@ -437,9 +437,9 @@
             // title + description
             NSString *CellIdentifier = @"GHFeedItemWithDescriptionTableViewCell";
             
-            GHFeedItemWithDescriptionTableViewCell *cell = (GHFeedItemWithDescriptionTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+            GHDescriptionTableViewCell *cell = (GHDescriptionTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
             if (!cell) {
-                cell = [[[GHFeedItemWithDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+                cell = [[[GHDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
             }
             
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -671,9 +671,9 @@
     } else if (indexPath.section == kUITableViewSectionPullRequests) {
         NSString *CellIdentifier = @"GHFeedItemWithDescriptionTableViewCell";
         
-        GHFeedItemWithDescriptionTableViewCell *cell = (GHFeedItemWithDescriptionTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        GHDescriptionTableViewCell *cell = (GHDescriptionTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         if (cell == nil) {
-            cell = [[[GHFeedItemWithDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+            cell = [[[GHDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
         }
         
         cell.selectionStyle = UITableViewCellSelectionStyleBlue;

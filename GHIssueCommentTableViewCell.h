@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "GHFeedItemWithDescriptionTableViewCell.h"
+#import "GHDescriptionTableViewCell.h"
 #import "DTLinkButton.h"
 #import "DTAttributedTextView.h"
 
@@ -20,7 +20,7 @@
 
 @end
 
-@interface GHIssueCommentTableViewCell : GHFeedItemWithDescriptionTableViewCell <DTAttributedTextContentViewDelegate> {
+@interface GHIssueCommentTableViewCell : GHDescriptionTableViewCell <DTAttributedTextContentViewDelegate> {
 @private
     DTAttributedTextView *_attributedTextView;
     

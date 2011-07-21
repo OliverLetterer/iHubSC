@@ -13,7 +13,7 @@
 #import "GHIssueDescriptionTableViewCell.h"
 #import "GHCollapsingAndSpinningTableViewCell.h"
 #import "GHIssueCommentTableViewCell.h"
-#import "GHFeedItemWithDescriptionTableViewCell.h"
+#import "GHDescriptionTableViewCell.h"
 #import "GHNewCommentTableViewCell.h"
 #import "GHUserViewController.h"
 #import "GHRepositoryViewController.h"
@@ -487,10 +487,10 @@
             return cell;
         } else if ([object isKindOfClass:[GHAPIIssueEventV3 class] ]) {
             static NSString *CellIdentifier = @"GHFeedItemWithDescriptionTableViewCell";
-            GHFeedItemWithDescriptionTableViewCell *cell = (GHFeedItemWithDescriptionTableViewCell *)[self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+            GHDescriptionTableViewCell *cell = (GHDescriptionTableViewCell *)[self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
             
             if (!cell) {
-                cell = [[[GHFeedItemWithDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+                cell = [[[GHDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
             }
             
             GHAPIIssueEventV3 *event = (GHAPIIssueEventV3 *)object;
@@ -552,10 +552,10 @@
         }
     } else if (indexPath.section == kUITableViewSectionCommits) {
         NSString *CellIdentifier = @"GHFeedItemWithDescriptionTableViewCell";
-        GHFeedItemWithDescriptionTableViewCell *cell = (GHFeedItemWithDescriptionTableViewCell *)[self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        GHDescriptionTableViewCell *cell = (GHDescriptionTableViewCell *)[self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         
         if (!cell) {
-            cell = [[[GHFeedItemWithDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+            cell = [[[GHDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
         }
         
         cell.selectionStyle = UITableViewCellSelectionStyleBlue;
