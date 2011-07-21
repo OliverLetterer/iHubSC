@@ -16,7 +16,7 @@
 #import "GHFeedItemWithDescriptionTableViewCell.h"
 #import "GHNewCommentTableViewCell.h"
 #import "GHUserViewController.h"
-#import "GHSingleRepositoryViewController.h"
+#import "GHRepositoryViewController.h"
 #import "GHAPIMilestoneV3TableViewCell.h"
 #import "GHViewCommitViewController.h"
 #import "GHViewMilestoneViewController.h"
@@ -684,7 +684,7 @@
             GHUserViewController *userViewController = [[[GHUserViewController alloc] initWithUsername:self.issue.user.login] autorelease];
             [self.navigationController pushViewController:userViewController animated:YES];
         } else if (indexPath.row == 1) {
-            GHSingleRepositoryViewController *repoViewController = [[[GHSingleRepositoryViewController alloc] initWithRepositoryString:self.repository] autorelease];
+            GHRepositoryViewController *repoViewController = [[[GHRepositoryViewController alloc] initWithRepositoryString:self.repository] autorelease];
             [self.navigationController pushViewController:repoViewController animated:YES];
         }
     } else if (indexPath.section == kUITableViewSectionAssignee && indexPath.row == 0) {

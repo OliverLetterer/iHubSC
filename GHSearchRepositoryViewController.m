@@ -9,7 +9,7 @@
 #import "GHSearchRepositoryViewController.h"
 #import "GithubAPI.h"
 #import "GHFeedItemWithDescriptionTableViewCell.h"
-#import "GHSingleRepositoryViewController.h"
+#import "GHRepositoryViewController.h"
 
 @implementation GHSearchRepositoryViewController
 
@@ -153,7 +153,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     GHRepository *repo = [self.repositories objectAtIndex:indexPath.row];
     
-    GHSingleRepositoryViewController *viewController = [[[GHSingleRepositoryViewController alloc] initWithRepositoryString:[NSString stringWithFormat:@"%@/%@", repo.owner, repo.name] ] autorelease];
+    GHRepositoryViewController *viewController = [[[GHRepositoryViewController alloc] initWithRepositoryString:[NSString stringWithFormat:@"%@/%@", repo.owner, repo.name] ] autorelease];
     [self.navigationController pushViewController:viewController animated:YES];
 }
 

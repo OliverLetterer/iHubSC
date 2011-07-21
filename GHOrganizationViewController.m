@@ -10,7 +10,7 @@
 #import "GHFeedItemWithDescriptionTableViewCell.h"
 #import "GHWebViewViewController.h"
 #import "GHCollapsingAndSpinningTableViewCell.h"
-#import "GHSingleRepositoryViewController.h"
+#import "GHRepositoryViewController.h"
 #import "GHUserViewController.h"
 #import "GHTeamViewController.h"
 #import "GHRecentActivityViewController.h"
@@ -465,7 +465,7 @@
     } else if (indexPath.section == kUITableViewSectionPublicRepositories) {
         GHAPIRepositoryV3 *repo = [self.publicRepositories objectAtIndex:indexPath.row-1];
         
-        GHSingleRepositoryViewController *viewController = [[[GHSingleRepositoryViewController alloc] initWithRepositoryString:[NSString stringWithFormat:@"%@/%@", repo.owner.login, repo.name] ] autorelease];
+        GHRepositoryViewController *viewController = [[[GHRepositoryViewController alloc] initWithRepositoryString:[NSString stringWithFormat:@"%@/%@", repo.owner.login, repo.name] ] autorelease];
         [self.navigationController pushViewController:viewController animated:YES];
     } else if (indexPath.section == kUITableViewSectionPublicMembers) {
         GHAPIUserV3 *user = [self.publicMembers objectAtIndex:indexPath.row - 1];

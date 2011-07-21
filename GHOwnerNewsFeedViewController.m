@@ -18,7 +18,7 @@
 #import "UIColor+GithubUI.h"
 
 #import "GHUserViewController.h"
-#import "GHSingleRepositoryViewController.h"
+#import "GHRepositoryViewController.h"
 
 #define GHOwnerNewsFeedViewControllerDefaultOrganizationNameKey @"GHOwnerNewsFeedViewControllerDefaultOrganizationName"
 #define GHOwnerNewsFeedViewControllerLastCreationDateKey @"GHOwnerNewsFeedViewControllerLastCreationDate"
@@ -356,7 +356,7 @@
             viewController = [[[GHUserViewController alloc] initWithUsername:item.actorAttributes.login] autorelease];
         } else {
             // show me the repo that he is following
-            viewController = [[[GHSingleRepositoryViewController alloc] initWithRepositoryString:item.repository.fullName] autorelease];
+            viewController = [[[GHRepositoryViewController alloc] initWithRepositoryString:item.repository.fullName] autorelease];
         }
     } else if (item.payload.type == GHPayloadFollowEvent) {
         GHFollowEventPayload *payload = (GHFollowEventPayload *)item.payload;
@@ -373,7 +373,7 @@
             viewController = [[[GHUserViewController alloc] initWithUsername:item.actorAttributes.login] autorelease];
         } else {
             // didn't fork my repo, show me the repo
-            viewController = [[[GHSingleRepositoryViewController alloc] initWithRepositoryString:item.repository.fullName] autorelease];
+            viewController = [[[GHRepositoryViewController alloc] initWithRepositoryString:item.repository.fullName] autorelease];
         }
     }
     

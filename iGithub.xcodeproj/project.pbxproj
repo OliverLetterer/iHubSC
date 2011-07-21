@@ -95,7 +95,7 @@
 		A73AE5AC134EFDF400E9EBA4 /* 56-feed.png in Resources */ = {isa = PBXBuildFile; fileRef = A73AE5A8134EFDF300E9EBA4 /* 56-feed.png */; };
 		A73AE5AD134EFDF400E9EBA4 /* 56-feed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A73AE5A9134EFDF300E9EBA4 /* 56-feed@2x.png */; };
 		A73AE5E31350AF3400E9EBA4 /* GHIssuesCommentPayload.m in Sources */ = {isa = PBXBuildFile; fileRef = A73AE5E21350AF3400E9EBA4 /* GHIssuesCommentPayload.m */; };
-		A73AE5E61350B27A00E9EBA4 /* GHSingleRepositoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A73AE5E51350B27A00E9EBA4 /* GHSingleRepositoryViewController.m */; };
+		A73AE5E61350B27A00E9EBA4 /* GHRepositoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A73AE5E51350B27A00E9EBA4 /* GHRepositoryViewController.m */; };
 		A73AE5F21350FB4400E9EBA4 /* NSString+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = A73AE5F11350FB4400E9EBA4 /* NSString+Additions.m */; };
 		A73AE6151351954500E9EBA4 /* GHWebViewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A73AE6141351953E00E9EBA4 /* GHWebViewViewController.m */; };
 		A73AE6191351B11600E9EBA4 /* GHRawIssue.m in Sources */ = {isa = PBXBuildFile; fileRef = A73AE6181351B11600E9EBA4 /* GHRawIssue.m */; };
@@ -518,8 +518,8 @@
 		A73AE5A9134EFDF300E9EBA4 /* 56-feed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "56-feed@2x.png"; sourceTree = "<group>"; };
 		A73AE5E11350AF3400E9EBA4 /* GHIssuesCommentPayload.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHIssuesCommentPayload.h; sourceTree = "<group>"; };
 		A73AE5E21350AF3400E9EBA4 /* GHIssuesCommentPayload.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHIssuesCommentPayload.m; sourceTree = "<group>"; };
-		A73AE5E41350B27900E9EBA4 /* GHSingleRepositoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHSingleRepositoryViewController.h; sourceTree = "<group>"; };
-		A73AE5E51350B27A00E9EBA4 /* GHSingleRepositoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHSingleRepositoryViewController.m; sourceTree = "<group>"; };
+		A73AE5E41350B27900E9EBA4 /* GHRepositoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; path = GHRepositoryViewController.h; sourceTree = "<group>"; };
+		A73AE5E51350B27A00E9EBA4 /* GHRepositoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHRepositoryViewController.m; sourceTree = "<group>"; };
 		A73AE5F01350FB4400E9EBA4 /* NSString+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Additions.h"; sourceTree = "<group>"; };
 		A73AE5F11350FB4400E9EBA4 /* NSString+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Additions.m"; sourceTree = "<group>"; };
 		A73AE6131351953900E9EBA4 /* GHWebViewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHWebViewViewController.h; sourceTree = "<group>"; };
@@ -2036,6 +2036,15 @@
 			name = Commits;
 			sourceTree = "<group>";
 		};
+		A782205C13D8B8E900A52D9E /* Create Repository */ = {
+			isa = PBXGroup;
+			children = (
+				A7BC6789134D942C0083F906 /* GHCreateRepositoryViewController.h */,
+				A7BC678A134D942C0083F906 /* GHCreateRepositoryViewController.m */,
+			);
+			name = "Create Repository";
+			sourceTree = "<group>";
+		};
 		A7837E97136C93E500B13B95 /* GHAPIMilestoneV3 */ = {
 			isa = PBXGroup;
 			children = (
@@ -2786,10 +2795,9 @@
 			isa = PBXGroup;
 			children = (
 				A7BC678C134D96C30083F906 /* UITableViewCells */,
-				A7BC6789134D942C0083F906 /* GHCreateRepositoryViewController.h */,
-				A7BC678A134D942C0083F906 /* GHCreateRepositoryViewController.m */,
-				A73AE5E41350B27900E9EBA4 /* GHSingleRepositoryViewController.h */,
-				A73AE5E51350B27A00E9EBA4 /* GHSingleRepositoryViewController.m */,
+				A782205C13D8B8E900A52D9E /* Create Repository */,
+				A73AE5E41350B27900E9EBA4 /* GHRepositoryViewController.h */,
+				A73AE5E51350B27A00E9EBA4 /* GHRepositoryViewController.m */,
 			);
 			name = Repository;
 			path = ..;
@@ -3326,7 +3334,7 @@
 				A7F7CA62134DA1FA005509D0 /* NSError+GithubAPI.m in Sources */,
 				A73AE5A7134EF4F100E9EBA4 /* UITableView+Additions.m in Sources */,
 				A73AE5E31350AF3400E9EBA4 /* GHIssuesCommentPayload.m in Sources */,
-				A73AE5E61350B27A00E9EBA4 /* GHSingleRepositoryViewController.m in Sources */,
+				A73AE5E61350B27A00E9EBA4 /* GHRepositoryViewController.m in Sources */,
 				A73AE5F21350FB4400E9EBA4 /* NSString+Additions.m in Sources */,
 				A73AE6151351954500E9EBA4 /* GHWebViewViewController.m in Sources */,
 				A73AE6191351B11600E9EBA4 /* GHRawIssue.m in Sources */,

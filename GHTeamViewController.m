@@ -297,7 +297,7 @@
         
         GHRepository *repo = [self.repositories objectAtIndex:indexPath.row-1];
         
-        GHSingleRepositoryViewController *viewController = [[[GHSingleRepositoryViewController alloc] initWithRepositoryString:[NSString stringWithFormat:@"%@/%@", repo.owner, repo.name] ] autorelease];
+        GHRepositoryViewController *viewController = [[[GHRepositoryViewController alloc] initWithRepositoryString:[NSString stringWithFormat:@"%@/%@", repo.owner, repo.name] ] autorelease];
         [self.navigationController pushViewController:viewController animated:YES];
         
     } else {

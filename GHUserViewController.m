@@ -10,7 +10,7 @@
 #import "GithubAPI.h"
 #import "GHFeedItemWithDescriptionTableViewCell.h"
 #import "GHCollapsingAndSpinningTableViewCell.h"
-#import "GHSingleRepositoryViewController.h"
+#import "GHRepositoryViewController.h"
 #import "GHWebViewViewController.h"
 #import "NSString+Additions.h"
 #import "GHRecentActivityViewController.h"
@@ -955,7 +955,7 @@
     } else if (indexPath.section == kUITableViewSectionRepositories) {
         GHAPIRepositoryV3 *repo = [self.repositoriesArray objectAtIndex:indexPath.row-1];
         
-        GHSingleRepositoryViewController *viewController = [[[GHSingleRepositoryViewController alloc] initWithRepositoryString:[NSString stringWithFormat:@"%@/%@", repo.owner.login, repo.name] ] autorelease];
+        GHRepositoryViewController *viewController = [[[GHRepositoryViewController alloc] initWithRepositoryString:[NSString stringWithFormat:@"%@/%@", repo.owner.login, repo.name] ] autorelease];
         viewController.delegate = self;
         self.lastIndexPathForSingleRepositoryViewController = indexPath;
         [self.navigationController pushViewController:viewController animated:YES];
@@ -963,7 +963,7 @@
     } else if (indexPath.section == kUITableViewSectionWatchedRepositories) {
         GHAPIRepositoryV3 *repo = [self.watchedRepositoriesArray objectAtIndex:indexPath.row-1];
         
-        GHSingleRepositoryViewController *viewController = [[[GHSingleRepositoryViewController alloc] initWithRepositoryString:[NSString stringWithFormat:@"%@/%@", repo.owner.login, repo.name] ] autorelease];
+        GHRepositoryViewController *viewController = [[[GHRepositoryViewController alloc] initWithRepositoryString:[NSString stringWithFormat:@"%@/%@", repo.owner.login, repo.name] ] autorelease];
         viewController.delegate = self;
         self.lastIndexPathForSingleRepositoryViewController = indexPath;
         [self.navigationController pushViewController:viewController animated:YES];
@@ -1087,7 +1087,7 @@
 
 #pragma mark - GHSingleRepositoryViewControllerDelegate
 
-- (void)singleRepositoryViewControllerDidDeleteRepository:(GHSingleRepositoryViewController *)singleRepositoryViewController {
+- (void)singleRepositoryViewControllerDidDeleteRepository:(GHRepositoryViewController *)singleRepositoryViewController {
     
     NSArray *oldArray = self.lastIndexPathForSingleRepositoryViewController.section == kUITableViewSectionRepositories ? self.repositoriesArray : self.watchedRepositoriesArray;
     NSUInteger index = self.lastIndexPathForSingleRepositoryViewController.row-1;

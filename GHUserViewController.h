@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "GHTableViewController.h"
 #import "GHCreateRepositoryViewController.h"
-#import "GHSingleRepositoryViewController.h"
+#import "GHRepositoryViewController.h"
 #import "UIExpandableTableView.h"
 #import "GithubAPI.h"
 
