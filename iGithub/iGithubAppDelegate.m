@@ -64,6 +64,13 @@
     NSString *documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES) objectAtIndex:0];
     NSString *filePath = [documentsDirectory stringByAppendingPathComponent:kLastKnownApplicationStateFileName];
     
+    // save bundleVerion
+    NSString *bundleVersionKey = (NSString *)kCFBundleVersionKey;
+    NSString *bundleVersion = [[NSBundle mainBundle] objectForInfoDictionaryKey:bundleVersionKey];
+    if (bundleVersion) {
+        [dictionary setObject:bundleVersion forKey:bundleVersionKey];
+    }
+    
     return [NSKeyedArchiver archiveRootObject:dictionary toFile:filePath];
 }
 
@@ -71,7 +78,16 @@
     NSString *documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES) objectAtIndex:0];
     NSString *filePath = [documentsDirectory stringByAppendingPathComponent:kLastKnownApplicationStateFileName];
     
-    return [NSKeyedUnarchiver unarchiveObjectWithFile:filePath];
+    NSMutableDictionary *dictionary = [NSKeyedUnarchiver unarchiveObjectWithFile:filePath];
+    
+    NSString *bundleVersionKey = (NSString *)kCFBundleVersionKey;
+    NSString *newBundleVersion = [[NSBundle mainBundle] objectForInfoDictionaryKey:bundleVersionKey];
+    NSString *oldBundleVersion = [dictionary objectForKey:bundleVersionKey];
+    if (![newBundleVersion isEqual:oldBundleVersion]) {
+        return nil;
+    }
+    
+    return dictionary;
 }
 
 #pragma mark - memory management
