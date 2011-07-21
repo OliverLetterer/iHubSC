@@ -589,9 +589,11 @@
             [viewController viewDidAppear:NO];
         }
     }];
-    [self __moveRightViewControllerToRightAnchorPoint:[self.viewControllers objectAtIndex:_indexOfFrontViewController] animated:NO];
-    
-    [self __updateViewControllerShadows];
+    if (_indexOfFrontViewController < self.viewControllers.count) {
+        [self __moveRightViewControllerToRightAnchorPoint:[self.viewControllers objectAtIndex:_indexOfFrontViewController] animated:NO];
+        
+        [self __updateViewControllerShadows];
+    }
 }
 
 @end
