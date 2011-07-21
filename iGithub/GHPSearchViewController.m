@@ -74,7 +74,6 @@
 - (void)_updateSearchBar {
     if (self.searchString) {
         self.searchBar.text = self.searchString;
-        DLog(@"setting searchString %@ -> %@", self.searchBar, self.searchString);
     }
     
     if (_isSearchBarActive) {
@@ -86,8 +85,6 @@
     [super viewDidAppear:animated];
     
     [self performSelector:@selector(_updateSearchBar) withObject:nil afterDelay:0.01];
-    
-    DLog(@"appeared");
 }
 
 #pragma mark - Downloading
