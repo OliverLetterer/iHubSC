@@ -18,12 +18,6 @@
 
 @synthesize timeLabel=_timeLabel;
 
-#pragma mark - setters and getters
-
-- (UILabel *)repositoryLabel {
-    return self.detailTextLabel;
-}
-
 #pragma mark - Initialization
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
@@ -34,11 +28,11 @@
         self.textLabel.highlightedTextColor = [UIColor whiteColor];
         self.textLabel.backgroundColor = [UIColor clearColor];
         
-        self.repositoryLabel.font = [UIFont fontWithName:@"Helvetica-Oblique" size:12.0];
-        self.repositoryLabel.textColor = [UIColor colorWithWhite:0.25 alpha:1.0];
-        self.repositoryLabel.highlightedTextColor = [UIColor whiteColor];
-        self.repositoryLabel.textAlignment = UITextAlignmentRight;
-        self.repositoryLabel.backgroundColor = [UIColor clearColor];
+        self.detailTextLabel.font = [UIFont fontWithName:@"Helvetica-Oblique" size:12.0];
+        self.detailTextLabel.textColor = [UIColor colorWithWhite:0.25 alpha:1.0];
+        self.detailTextLabel.highlightedTextColor = [UIColor whiteColor];
+        self.detailTextLabel.textAlignment = UITextAlignmentRight;
+        self.detailTextLabel.backgroundColor = [UIColor clearColor];
         
         self.timeLabel = [[[UILabel alloc] initWithFrame:CGRectZero] autorelease];
         self.timeLabel.font = [UIFont systemFontOfSize:12.0f];
@@ -71,7 +65,7 @@
     CGFloat width = CGRectGetWidth(self.timeLabel.bounds);
     self.timeLabel.frame = CGRectMake(CGRectGetWidth(self.contentView.bounds)-width, 4.0f, width, CGRectGetHeight(self.timeLabel.bounds));
     self.textLabel.frame = CGRectMake(78.0, 4.0, CGRectGetWidth(self.contentView.bounds)-width-78.0f, 15.0);
-    self.repositoryLabel.frame = CGRectMake(78.0, self.contentView.bounds.size.height - GHNewsFeedItemTableViewCellRepositoryLabelHeight - GHNewsFeedItemTableViewCellRepositoryLabelBottomOffset, 222.0, GHNewsFeedItemTableViewCellRepositoryLabelHeight);
+    self.detailTextLabel.frame = CGRectMake(78.0, self.contentView.bounds.size.height - GHNewsFeedItemTableViewCellRepositoryLabelHeight - GHNewsFeedItemTableViewCellRepositoryLabelBottomOffset, 222.0, GHNewsFeedItemTableViewCellRepositoryLabelHeight);
 }
 
 - (void)prepareForReuse {
@@ -79,7 +73,7 @@
     
     self.imageView.image = nil;
     self.textLabel.text = nil;
-    self.repositoryLabel.text = nil;
+    self.detailTextLabel.text = nil;
     self.timeLabel.text = nil;
 }
 

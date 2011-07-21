@@ -264,7 +264,7 @@
             
             cell.textLabel.text = self.organization.login;
             cell.descriptionLabel.text = nil;
-            cell.repositoryLabel.text = nil;
+            cell.detailTextLabel.text = nil;
             
             [self updateImageView:cell.imageView atIndexPath:indexPath withAvatarURLString:self.organization.avatarURL];
             

@@ -14,7 +14,6 @@
     UILabel *_timeLabel;
 }
 
-@property (nonatomic, readonly) UILabel *repositoryLabel;
 @property (nonatomic, retain) UILabel *timeLabel;
 
 @end

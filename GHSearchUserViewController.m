@@ -86,7 +86,7 @@
     cell.textLabel.text = user.login;
     cell.descriptionLabel.text = nil;
     
-    cell.repositoryLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Since %@", @""), user.createdAt.prettyTimeIntervalSinceNow];
+    cell.detailTextLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Since %@", @""), user.createdAt.prettyTimeIntervalSinceNow];
     
     [self updateImageView:cell.imageView atIndexPath:indexPath withGravatarID:user.gravatarID];
     

@@ -448,11 +448,11 @@
             if (self.repository.isForked) {
                 cell.textLabel.text = [NSString stringWithFormat:@"%@/%@", self.repository.owner.login, self.repository.name];
                 cell.descriptionLabel.text = self.repository.description;
-                cell.repositoryLabel.text = [NSString stringWithFormat:NSLocalizedString(@"forked from %@", @""), [NSString stringWithFormat:@"%@/%@", self.repository.parent.owner.login, self.repository.parent.name]];
+                cell.detailTextLabel.text = [NSString stringWithFormat:NSLocalizedString(@"forked from %@", @""), [NSString stringWithFormat:@"%@/%@", self.repository.parent.owner.login, self.repository.parent.name]];
             } else {
                 cell.textLabel.text = self.repository.name;
                 cell.descriptionLabel.text = self.repository.description;
-                cell.repositoryLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Created by %@", @""), self.repository.owner.login];
+                cell.detailTextLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Created by %@", @""), self.repository.owner.login];
             }
             
             if ([self.repository.private boolValue]) {
@@ -683,7 +683,7 @@
         cell.textLabel.text = discussion.user.login;
         cell.descriptionLabel.text = discussion.title;
         
-        cell.repositoryLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ ago", @""), discussion.createdAt.prettyTimeIntervalSinceNow];
+        cell.detailTextLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ ago", @""), discussion.createdAt.prettyTimeIntervalSinceNow];
         
         [self updateImageView:cell.imageView atIndexPath:indexPath withGravatarID:discussion.user.gravatarID];
         

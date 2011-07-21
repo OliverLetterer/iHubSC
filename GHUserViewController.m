@@ -620,7 +620,7 @@
             
             cell.textLabel.text = self.user.login;
             cell.descriptionLabel.text = nil;
-            cell.repositoryLabel.text = nil;
+            cell.detailTextLabel.text = nil;
             
             [self updateImageView:cell.imageView atIndexPath:indexPath withAvatarURLString:self.user.avatarURL];
             
@@ -863,7 +863,7 @@
         cell.textLabel.text = [NSString stringWithFormat:@"Gist: %@", gist.ID];
         
         cell.descriptionLabel.text = gist.description;
-        cell.repositoryLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Created %@ ago", @""), gist.createdAt.prettyTimeIntervalSinceNow];
+        cell.detailTextLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Created %@ ago", @""), gist.createdAt.prettyTimeIntervalSinceNow];
         
         if ([gist.public boolValue]) {
             cell.imageView.image = [UIImage imageNamed:@"GHClipBoard.png"];

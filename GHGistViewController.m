@@ -310,7 +310,7 @@
             cell.textLabel.text = [NSString stringWithFormat:@"Gist: %@", gist.ID];
             
             cell.descriptionLabel.text = gist.description;
-            cell.repositoryLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Created %@ ago", @""), gist.createdAt.prettyTimeIntervalSinceNow];
+            cell.detailTextLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Created %@ ago", @""), gist.createdAt.prettyTimeIntervalSinceNow];
             
             if ([gist.public boolValue]) {
                 cell.imageView.image = [UIImage imageNamed:@"GHClipBoard.png"];
@@ -397,7 +397,7 @@
             
             cell.textLabel.text = comment.user.login;
             cell.descriptionLabel.text = comment.body;
-            cell.repositoryLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ ago", @""), comment.createdAt.prettyTimeIntervalSinceNow];
+            cell.detailTextLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ ago", @""), comment.createdAt.prettyTimeIntervalSinceNow];
             
             return cell;
         } else if (indexPath.row == [self.comments count] + 1) {

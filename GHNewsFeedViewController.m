@@ -128,7 +128,7 @@
                                  ]
                                 ];
         
-        cell.repositoryLabel.text = item.repository.fullName;
+        cell.detailTextLabel.text = item.repository.fullName;
         cell.timeLabel.text = item.creationDate.prettyShortTimeIntervalSinceNow;
         
         GHIssue *issue = [GHIssue issueFromDatabaseOnRepository:item.repository.fullName withNumber:payload.number];
@@ -166,7 +166,7 @@
         [self updateImageView:cell.imageView atIndexPath:indexPath withGravatarID:item.actorAttributes.gravatarID];
         NSUInteger numberOfCommits = [payload.commits count];
         cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ pushed to %@ (%d)", @""), item.actor, payload.branch, numberOfCommits];
-        cell.repositoryLabel.text = item.repository.fullName;
+        cell.detailTextLabel.text = item.repository.fullName;
         
         if (numberOfCommits > 0) {
             GHCommitMessage *commit = [payload.commits objectAtIndex:0];
@@ -193,7 +193,7 @@
         
         [self updateImageView:cell.imageView atIndexPath:indexPath withGravatarID:item.actorAttributes.gravatarID];
         cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ commented on a commit", @""), item.actor];
-        cell.repositoryLabel.text = item.repository.fullName;
+        cell.detailTextLabel.text = item.repository.fullName;
         cell.timeLabel.text = item.creationDate.prettyShortTimeIntervalSinceNow;
         
         return cell;
@@ -242,7 +242,7 @@
         
         [self updateImageView:cell.imageView atIndexPath:indexPath withGravatarID:item.actorAttributes.gravatarID];
         cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ %@ watching", @""), item.actor, payload.action];
-        cell.repositoryLabel.text = item.repository.fullName;
+        cell.detailTextLabel.text = item.repository.fullName;
         cell.timeLabel.text = item.creationDate.prettyShortTimeIntervalSinceNow;
         
         return cell;
@@ -260,16 +260,16 @@
         
         if (payload.objectType == GHCreateEventObjectRepository) {
             cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ created repository", @""), item.actor];
-            cell.repositoryLabel.text = payload.ref;
+            cell.detailTextLabel.text = payload.ref;
         } else if (payload.objectType == GHCreateEventObjectBranch) {
             cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ created branch %@", @""), item.actor, payload.ref];
-            cell.repositoryLabel.text = item.repository.fullName;
+            cell.detailTextLabel.text = item.repository.fullName;
         } else if (payload.objectType == GHCreateEventObjectTag) {
             cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ created tag %@", @""), item.actor, payload.ref];
-            cell.repositoryLabel.text = item.repository.fullName;
+            cell.detailTextLabel.text = item.repository.fullName;
         } else {
             cell.textLabel.text = @"__UNKNWON_CREATE_EVENT__";
-            cell.repositoryLabel.text = nil;
+            cell.detailTextLabel.text = nil;
         }
         cell.timeLabel.text = item.creationDate.prettyShortTimeIntervalSinceNow;
         
@@ -285,7 +285,7 @@
         [self updateImageView:cell.imageView atIndexPath:indexPath withGravatarID:item.actorAttributes.gravatarID];
         
         cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ forked repository", @""), item.actor];
-        cell.repositoryLabel.text = item.repository.fullName;
+        cell.detailTextLabel.text = item.repository.fullName;
         cell.timeLabel.text = item.creationDate.prettyShortTimeIntervalSinceNow;
         
         return cell;
@@ -307,9 +307,9 @@
         NSArray *components = [repoURL componentsSeparatedByString:@"/"];
         NSUInteger count = [components count];
         if (count > 1) {
-            cell.repositoryLabel.text = [NSString stringWithFormat:@"%@/%@", [components objectAtIndex:count-2], [components lastObject]];
+            cell.detailTextLabel.text = [NSString stringWithFormat:@"%@/%@", [components objectAtIndex:count-2], [components lastObject]];
         } else {
-            cell.repositoryLabel.text = item.repository.name;
+            cell.detailTextLabel.text = item.repository.name;
         }
         cell.timeLabel.text = item.creationDate.prettyShortTimeIntervalSinceNow;
         
@@ -327,7 +327,7 @@
         [self updateImageView:cell.imageView atIndexPath:indexPath withGravatarID:item.actorAttributes.gravatarID];
         
         cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ %@ %@ in wiki", @""), item.actor, payload.action, payload.pageName];
-        cell.repositoryLabel.text = item.repository.fullName;
+        cell.detailTextLabel.text = item.repository.fullName;
         cell.timeLabel.text = item.creationDate.prettyShortTimeIntervalSinceNow;
         
         return cell;
@@ -349,7 +349,7 @@
         }
         
         [self updateImageView:cell.imageView atIndexPath:indexPath withGravatarID:item.actorAttributes.gravatarID];
-        cell.repositoryLabel.text = nil;
+        cell.detailTextLabel.text = nil;
         cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ %@ %@", @""), item.actor, action, payload.name];
         cell.descriptionLabel.text = payload.descriptionGist ? payload.descriptionGist : payload.snippet;
         cell.timeLabel.text = item.creationDate.prettyShortTimeIntervalSinceNow;
@@ -367,7 +367,7 @@
         
         [self updateImageView:cell.imageView atIndexPath:indexPath withGravatarID:item.actorAttributes.gravatarID];
         
-        cell.repositoryLabel.text = item.repository.fullName;
+        cell.detailTextLabel.text = item.repository.fullName;
         cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ uploaded a file", @""), item.actor];
         cell.descriptionLabel.text = [payload.URL lastPathComponent];
         cell.timeLabel.text = item.creationDate.prettyShortTimeIntervalSinceNow;
@@ -395,7 +395,7 @@
         
         [self updateImageView:cell.imageView atIndexPath:indexPath withGravatarID:item.actorAttributes.gravatarID];
         
-        cell.repositoryLabel.text = item.repository.fullName;
+        cell.detailTextLabel.text = item.repository.fullName;
         cell.descriptionLabel.text = description;
         cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ %@ pull request %@", @""), item.actor, payload.action, payload.number];
         cell.timeLabel.text = item.creationDate.prettyShortTimeIntervalSinceNow;
@@ -413,7 +413,7 @@
         
         [self updateImageView:cell.imageView atIndexPath:indexPath withGravatarID:item.actorAttributes.gravatarID];
         
-        cell.repositoryLabel.text = item.repository.fullName;
+        cell.detailTextLabel.text = item.repository.fullName;
         cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ %@ %@", @""), item.actor, payload.action, payload.member.login];
         cell.timeLabel.text = item.creationDate.prettyShortTimeIntervalSinceNow;
         
@@ -429,7 +429,7 @@
         GHIssuesCommentPayload *payload = (GHIssuesCommentPayload *)item.payload;
         [self updateImageView:cell.imageView atIndexPath:indexPath withGravatarID:item.actorAttributes.gravatarID];
         
-        cell.repositoryLabel.text = item.repository.fullName;
+        cell.detailTextLabel.text = item.repository.fullName;
         
         cell.textLabel.text = item.actor;
         cell.descriptionLabel.text = [NSString stringWithFormat:NSLocalizedString(@"commented on Issue %@", @""), payload.issueID];
@@ -447,7 +447,7 @@
         GHForkApplyEventPayload *payload = (GHForkApplyEventPayload *)item.payload;
         
         [self updateImageView:cell.imageView atIndexPath:indexPath withGravatarID:item.actorAttributes.gravatarID];
-        cell.repositoryLabel.text = item.repository.fullName;
+        cell.detailTextLabel.text = item.repository.fullName;
         cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ applied fork commits", @""), item.actor];
         cell.descriptionLabel.text = payload.commit;
         cell.timeLabel.text = item.creationDate.prettyShortTimeIntervalSinceNow;
@@ -463,7 +463,7 @@
         
         [self updateImageView:cell.imageView atIndexPath:indexPath withGravatarID:item.actorAttributes.gravatarID];
         
-        cell.repositoryLabel.text = item.repository.fullName;
+        cell.detailTextLabel.text = item.repository.fullName;
         cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ open sourced", @""), item.actor];
         cell.timeLabel.text = item.creationDate.prettyShortTimeIntervalSinceNow;
         
