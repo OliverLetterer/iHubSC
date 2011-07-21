@@ -1935,6 +1935,22 @@
 			name = Util;
 			sourceTree = "<group>";
 		};
+		A7611E0913D8A8A900227467 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				A7A6CB7A13C9A22F00C1641F /* GHPSelectedBackgroundImage.png */,
+			);
+			name = Search;
+			sourceTree = "<group>";
+		};
+		A7611E0A13D8A8B500227467 /* Action Button */ = {
+			isa = PBXGroup;
+			children = (
+				A7D0523913BDC20B00B3D239 /* UIBarButtonSystemItemAction.png */,
+			);
+			name = "Action Button";
+			sourceTree = "<group>";
+		};
 		A767715B13707A7A006D70D6 /* GHAPIGistV3 */ = {
 			isa = PBXGroup;
 			children = (
@@ -2519,10 +2535,10 @@
 		A7BF143713421862001AE50D /* Ressources */ = {
 			isa = PBXGroup;
 			children = (
-				A7D0523913BDC20B00B3D239 /* UIBarButtonSystemItemAction.png */,
 				A7384D68136BFCE200DD1BE5 /* iHub - Icon Template.psd */,
 				A7CE1B801346335D00169F94 /* GHDatabase.xcdatamodel */,
-				A7A6CB7A13C9A22F00C1641F /* GHPSelectedBackgroundImage.png */,
+				A7611E0A13D8A8B500227467 /* Action Button */,
+				A7611E0913D8A8A900227467 /* Search */,
 				A745D096139B97CC00FF8FB1 /* Defaults */,
 				A7D41B1D135B899100CD3A5C /* Icons */,
 				A745D098139B97F200FF8FB1 /* TabBarIcons */,
