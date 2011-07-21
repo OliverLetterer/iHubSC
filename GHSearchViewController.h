@@ -16,6 +16,9 @@
     UISearchDisplayController *_mySearchDisplayController;
     
     NSString *_searchString;
+    
+    BOOL _isSearchBarActive;
+    BOOL _canTrackSearchBarState;
 }
 
 @property (nonatomic, retain) UISearchBar *searchBar;

@@ -30,7 +30,6 @@
                               [self handleError:error];
                           } else {
                               self.users = users;
-                              [self cacheHeightForRepositories];
                               if (self.isViewLoaded) {
                                   [self.tableView reloadData];
                               }
@@ -49,23 +48,6 @@
         self.title = self.searchString;
     }
     return self;
-}
-
-#pragma mark - instance methids
-
-- (void)cacheHeightForRepositories {
-    NSInteger i = 0;
-    for (GHUser *user in self.users) {
-        CGFloat height = 0.0;//[self heightForDescription:repo.desctiptionRepo] + 50.0;
-        
-        if (height < 71.0) {
-            height = 71.0;
-        }
-        
-        [self cacheHeight:height forRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
-        
-        i++;
-    }
 }
 
 #pragma mark - Memory management
@@ -114,6 +96,10 @@
 }
 
 #pragma mark - Table view delegate
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 71.0f;
+}
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     GHUser *user = [self.users objectAtIndex:indexPath.row];

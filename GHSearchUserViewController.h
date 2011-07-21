@@ -19,6 +19,5 @@
 @property (nonatomic, retain) NSArray *users;
 
 - (id)initWithSearchString:(NSString *)searchString;
-- (void)cacheHeightForRepositories;
 
 @end

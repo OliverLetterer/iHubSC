@@ -65,12 +65,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
 - (void)viewDidUnload {
@@ -85,8 +79,23 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    
+    _canTrackSearchBarState = YES;
     self.navigationController.navigationBar.tintColor = [UIColor defaultNavigationBarTintColor];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    if (_isSearchBarActive) {
+        [self.searchBar becomeFirstResponder];
+        self.searchBar.text = self.searchString;
+    }
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    _canTrackSearchBarState = NO;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
@@ -185,9 +194,21 @@
     return YES;
 }
 
+#pragma mark - UISearchBarDelegate
+
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
     self.searchString = searchText;
     [_mySearchDisplayController.searchResultsTableView reloadData];
+}
+
+- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
+    _isSearchBarActive = YES;
+}
+
+- (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar {
+    if (_canTrackSearchBarState) {
+        _isSearchBarActive = NO;
+    }
 }
 
 #pragma mark Keyed Archiving
@@ -195,6 +216,8 @@
 - (void)encodeWithCoder:(NSCoder *)encoder {
     [super encodeWithCoder:encoder];
     [encoder encodeObject:_searchString forKey:@"searchString"];
+    [encoder encodeBool:_isSearchBarActive forKey:@"isSearchBarActive"];
+    [encoder encodeObject:self.searchString forKey:@"searchString"];
 }
 
 - (id)initWithCoder:(NSCoder *)decoder {
@@ -202,6 +225,8 @@
         _searchString = [[decoder decodeObjectForKey:@"searchString"] retain];
         self.tabBarItem = [[[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemSearch tag:0] autorelease];
         self.title = NSLocalizedString(@"Search", @"");
+        _isSearchBarActive = [decoder decodeBoolForKey:@"isSearchBarActive"];
+        self.searchString = [decoder decodeObjectForKey:@"searchString"];
     }
     return self;
 }
