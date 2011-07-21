@@ -534,6 +534,7 @@
 #pragma mark Keyed Archiving
 
 - (void)encodeWithCoder:(NSCoder *)encoder {
+    [super encodeWithCoder:encoder];
     [encoder encodeObject:_ID forKey:@"iD"];
     [encoder encodeObject:_gist forKey:@"gist"];
     [encoder encodeBool:_hasStarData forKey:@"hasStarData"];
