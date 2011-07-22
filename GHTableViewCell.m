@@ -29,12 +29,12 @@
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if ((self = [super initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:reuseIdentifier])) {
         // setup my views
-        self.textLabel.font = [UIFont boldSystemFontOfSize:11.0];
+        self.textLabel.font = [UIFont boldSystemFontOfSize:13.0f];
         self.textLabel.textColor = [UIColor colorWithWhite:0.25 alpha:1.0];
         self.textLabel.highlightedTextColor = [UIColor whiteColor];
         self.textLabel.backgroundColor = [UIColor clearColor];
         
-        self.detailTextLabel.font = [UIFont fontWithName:@"Helvetica-Oblique" size:12.0];
+        self.detailTextLabel.font = [UIFont fontWithName:@"Helvetica-Oblique" size:13.0f];
         self.detailTextLabel.textColor = [UIColor colorWithWhite:0.25 alpha:1.0];
         self.detailTextLabel.highlightedTextColor = [UIColor whiteColor];
         self.detailTextLabel.textAlignment = UITextAlignmentRight;
@@ -66,12 +66,12 @@
 - (void)layoutSubviews {
     [super layoutSubviews];
     
-    self.imageView.frame = CGRectMake(10.0, 8.0, 56.0, 56.0);
+    self.imageView.frame = CGRectMake(10.0f, 8.0f, 56.0f, 56.0f);
     [self.timeLabel sizeToFit];
     CGFloat width = CGRectGetWidth(self.timeLabel.bounds);
-    self.timeLabel.frame = CGRectMake(CGRectGetWidth(self.contentView.bounds)-width, 4.0f, width, CGRectGetHeight(self.timeLabel.bounds));
-    self.textLabel.frame = CGRectMake(78.0, 4.0, CGRectGetWidth(self.contentView.bounds)-width-78.0f, 15.0);
-    self.detailTextLabel.frame = CGRectMake(78.0, self.contentView.bounds.size.height - GHNewsFeedItemTableViewCellRepositoryLabelHeight - GHNewsFeedItemTableViewCellRepositoryLabelBottomOffset, 222.0, GHNewsFeedItemTableViewCellRepositoryLabelHeight);
+    self.timeLabel.frame = CGRectMake(CGRectGetWidth(self.contentView.bounds)-width, 5.0f, width, CGRectGetHeight(self.timeLabel.bounds));
+    self.textLabel.frame = CGRectMake(78.0f, 5.0f, CGRectGetWidth(self.contentView.bounds)-width-78.0f, 16.0f);
+    self.detailTextLabel.frame = CGRectMake(78.0f, self.contentView.bounds.size.height - GHNewsFeedItemTableViewCellRepositoryLabelHeight - GHNewsFeedItemTableViewCellRepositoryLabelBottomOffset, 222.0f, GHNewsFeedItemTableViewCellRepositoryLabelHeight);
 }
 
 - (void)prepareForReuse {

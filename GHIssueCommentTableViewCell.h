@@ -23,6 +23,7 @@
 @interface GHIssueCommentTableViewCell : GHDescriptionTableViewCell <DTAttributedTextContentViewDelegate> {
 @private
     DTAttributedTextView *_attributedTextView;
+#warning is misalligned
     
     id<GHIssueCommentTableViewCellDelegate> _buttonDelegate;
 }

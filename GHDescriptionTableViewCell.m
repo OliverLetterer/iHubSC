@@ -18,9 +18,9 @@
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if ((self = [super initWithStyle:style reuseIdentifier:reuseIdentifier])) {
         // Initialization code
-        self.descriptionLabel = [[[UILabel alloc] initWithFrame:CGRectMake(78.0, 20.0, 222.0, 21.0)] autorelease];
+        self.descriptionLabel = [[[UILabel alloc] initWithFrame:CGRectZero] autorelease];
         self.descriptionLabel.numberOfLines = 0;
-        self.descriptionLabel.font = [UIFont systemFontOfSize:12.0];
+        self.descriptionLabel.font = [UIFont systemFontOfSize:13.0f];
         self.descriptionLabel.textColor = [UIColor colorWithWhite:0.25 alpha:1.0];
         self.descriptionLabel.highlightedTextColor = [UIColor whiteColor];
         self.descriptionLabel.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleHeight;
@@ -35,7 +35,13 @@
 - (void)layoutSubviews {
     [super layoutSubviews];
     
-    self.descriptionLabel.frame = CGRectMake(78.0, 17.0, 222.0, self.contentView.bounds.size.height - 48.0);
+    CGFloat offsetY = CGRectGetMinY(self.textLabel.frame) + CGRectGetHeight(self.textLabel.frame) + 2.0f;
+    
+    CGSize newSize = [self.descriptionLabel.text sizeWithFont:[UIFont systemFontOfSize:13.0f] 
+                                            constrainedToSize:CGSizeMake(222.0f, MAXFLOAT)
+                                                lineBreakMode:UILineBreakModeWordWrap];
+    
+    self.descriptionLabel.frame = CGRectMake(78.0, offsetY, 222.0, newSize.height);
 }
 
 - (void)prepareForReuse {
@@ -50,7 +56,7 @@
 + (CGFloat)heightWithContent:(NSString *)content {
     CGFloat minHeight = [self height];
     
-    CGSize newSize = [content sizeWithFont:[UIFont systemFontOfSize:12.0] 
+    CGSize newSize = [content sizeWithFont:[UIFont systemFontOfSize:13.0f] 
                          constrainedToSize:CGSizeMake(222.0f, MAXFLOAT)
                              lineBreakMode:UILineBreakModeWordWrap];
     
