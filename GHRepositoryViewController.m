@@ -796,7 +796,7 @@
     if (indexPath.section == kUITableViewSectionUserData && indexPath.row == 0) {
         // title + description
         if (![self isHeightCachedForRowAtIndexPath:indexPath]) {
-            [self cacheHeight:[self heightForDescription:self.repository.description] + 50.0 
+            [self cacheHeight:[GHDescriptionTableViewCell heightWithContent:self.repository.description] 
             forRowAtIndexPath:indexPath];
         }
         
@@ -1055,7 +1055,7 @@
 - (void)cacheHeightForIssuesArray {
     NSInteger i = 2;
     for (GHAPIIssueV3 *issue in self.issuesArray) {
-        [self cacheHeight:[self heightForDescription:issue.title]+50.0f forRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:kUITableViewSectionIssues] ];
+        [self cacheHeight:[GHDescriptionTableViewCell heightWithContent:issue.title] forRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:kUITableViewSectionIssues] ];
         i++;
     }
 }
@@ -1063,7 +1063,7 @@
 - (void)cacheHeightForPullRequests {
     NSInteger i = 1;
     for (GHPullRequestDiscussion *discussion in self.pullRequests) {
-        [self cacheHeight:[self heightForDescription:discussion.title]+50.0f forRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:kUITableViewSectionPullRequests] ];
+        [self cacheHeight:[GHDescriptionTableViewCell heightWithContent:discussion.title] forRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:kUITableViewSectionPullRequests] ];
         i++;
     }
 }

@@ -62,13 +62,7 @@
 - (void)cacheHeightForRepositories {
     NSInteger i = 0;
     for (GHRepository *repo in self.repositories) {
-        CGFloat height = [self heightForDescription:repo.desctiptionRepo] + 50.0;
-        
-        if (height < 71.0) {
-            height = 71.0;
-        }
-        
-        [self cacheHeight:height forRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
+        [self cacheHeight:[GHDescriptionTableViewCell heightWithContent:repo.desctiptionRepo] forRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
         
         i++;
     }

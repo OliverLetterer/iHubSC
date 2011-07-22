@@ -132,14 +132,6 @@ static CGFloat wrapperViewHeight = 21.0f;
     return cell;
 }
 
-- (CGFloat)heightForDescription:(NSString *)description {
-    CGSize newSize = [description sizeWithFont:[UIFont systemFontOfSize:12.0] 
-                             constrainedToSize:CGSizeMake(222.0f, MAXFLOAT)
-                                 lineBreakMode:UILineBreakModeWordWrap];
-    
-    return newSize.height < 21.0f ? 21.0f : newSize.height;
-}
-
 - (void)updateImageView:(UIImageView *)imageView 
             inTableView:(UITableView *)tableView 
             atIndexPath:(NSIndexPath *)indexPath 

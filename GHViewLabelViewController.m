@@ -252,7 +252,7 @@
 - (void)cacheHeightForOpenIssuesArray {
     NSInteger i = 1;
     for (GHAPIIssueV3 *issue in self.openIssues) {
-        [self cacheHeight:[self heightForDescription:issue.title]+50.0f forRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:kUITableViewControllerSectionInfoOpenIssues] ];
+        [self cacheHeight:[GHDescriptionTableViewCell heightWithContent:issue.title] forRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:kUITableViewControllerSectionInfoOpenIssues] ];
         i++;
     }
 }
@@ -260,7 +260,7 @@
 - (void)cacheHeightForClosedIssuesArray {
     NSInteger i = 1;
     for (GHAPIIssueV3 *issue in self.closedIssues) {
-        [self cacheHeight:[self heightForDescription:issue.title]+50.0f forRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:kUITableViewControllerSectionInfoClosedIssues] ];
+        [self cacheHeight:[GHDescriptionTableViewCell heightWithContent:issue.title] forRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:kUITableViewControllerSectionInfoClosedIssues] ];
         i++;
     }
 }

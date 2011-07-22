@@ -64,7 +64,6 @@
 - (void)loadAndDisplayDownloadingEssentialDataView;
 
 - (UITableViewCell *)dummyCellWithText:(NSString *)text;
-- (CGFloat)heightForDescription:(NSString *)description;
 
 - (void)updateImageView:(UIImageView *)imageView 
             inTableView:(UITableView *)tableView 

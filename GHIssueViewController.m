@@ -611,13 +611,7 @@
     } else if (indexPath.section == kUITableViewSectionCommits && indexPath.row > 0) {
         GHCommit *commit = [self.discussion.commits objectAtIndex:indexPath.row - 1];
         
-        CGFloat height = [self heightForDescription:commit.message] + 50.0f;
-        
-        if (height < 71.0) {
-            return 71.0;
-        }
-        
-        return height;
+        return [GHDescriptionTableViewCell heightWithContent:commit.message];
     }
     
     return result;

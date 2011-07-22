@@ -180,14 +180,7 @@
 - (void)cacheHeightForComments {
     [self.comments enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         GHAPIGistCommentV3 *comment = obj;
-        
-        CGFloat height = [self heightForDescription:comment.body] + 50.0;
-        
-        if (height < 71.0) {
-            height = 71.0;
-        }
-        
-        [self cacheHeight:height forRowAtIndexPath:[NSIndexPath indexPathForRow:idx+1 inSection:kUITableViewSectionComments]];
+        [self cacheHeight:[GHDescriptionTableViewCell heightWithContent:comment.body] forRowAtIndexPath:[NSIndexPath indexPathForRow:idx+1 inSection:kUITableViewSectionComments]];
     }];
 }
 
@@ -465,13 +458,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == kUITableViewSectionInfo) {
         if (indexPath.row == 0) {
-            CGFloat height = [self heightForDescription:self.gist.description] + 50.0;
-            
-            if (height < 71.0) {
-                height = 71.0;
-            }
-            
-            return height;
+            return [GHDescriptionTableViewCell heightWithContent:self.gist.description];
         }
     } else if (indexPath.section == kUITableViewSectionComments) {
         if (indexPath.row >= 1 && indexPath.row <= [self.comments count]) {

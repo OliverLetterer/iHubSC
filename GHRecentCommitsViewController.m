@@ -77,11 +77,7 @@
 - (void)cacheHeightsForCommits {
     NSInteger i = 0;
     for (GHAPICommitV3 *commit in self.commits) {
-        CGFloat height = [self heightForDescription:commit.message] + 50.0;
-        if (height < 71.05) {
-            height = 71.0f;
-        }
-        [self cacheHeight:height forRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0] ];
+        [self cacheHeight:[GHDescriptionTableViewCell heightWithContent:commit.message] forRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0] ];
         i++;
     }
 }

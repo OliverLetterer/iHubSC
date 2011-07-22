@@ -57,8 +57,7 @@
 - (void)cachePayloadHeights {
     NSInteger i = 0;
     for (GHCommitMessage *message in self.payload.commits) {
-        CGFloat height = [self heightForDescription:message.message] + 50.0;
-        [self cacheHeight:height forRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0] ];
+        [self cacheHeight:[GHDescriptionTableViewCell heightWithContent:message.message] forRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0] ];
         i++;
     }
 }

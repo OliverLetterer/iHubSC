@@ -181,13 +181,7 @@
 - (void)cacheHeightForTableView {
     NSInteger i = 0;
     for (GHAPIRepositoryV3 *repo in self.repositoriesArray) {
-        CGFloat height = [self heightForDescription:repo.description] + 50.0;
-        
-        if (height < 71.0) {
-            height = 71.0;
-        }
-        
-        [self cacheHeight:height forRowAtIndexPath:[NSIndexPath indexPathForRow:i+1 inSection:kUITableViewSectionRepositories]];
+        [self cacheHeight:[GHDescriptionTableViewCell heightWithContent:repo.description] forRowAtIndexPath:[NSIndexPath indexPathForRow:i+1 inSection:kUITableViewSectionRepositories]];
         
         i++;
     }
@@ -196,13 +190,7 @@
 - (void)cacheHeightForWatchedRepositories {
     NSInteger i = 0;
     for (GHAPIRepositoryV3 *repo in self.watchedRepositoriesArray) {
-        CGFloat height = [self heightForDescription:repo.description] + 50.0;
-        
-        if (height < 71.0) {
-            height = 71.0;
-        }
-        
-        [self cacheHeight:height forRowAtIndexPath:[NSIndexPath indexPathForRow:i+1 inSection:kUITableViewSectionWatchedRepositories]];
+        [self cacheHeight:[GHDescriptionTableViewCell heightWithContent:repo.description] forRowAtIndexPath:[NSIndexPath indexPathForRow:i+1 inSection:kUITableViewSectionWatchedRepositories]];
         
         i++;
     }
@@ -211,14 +199,7 @@
 - (void)cacheGistsHeight {
     [self.gists enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         GHAPIGistV3 *gist = obj;
-        
-        CGFloat height = [self heightForDescription:gist.description] + 50.0;
-        
-        if (height < 71.0) {
-            height = 71.0;
-        }
-        
-        [self cacheHeight:height forRowAtIndexPath:[NSIndexPath indexPathForRow:idx+1 inSection:kUITableViewGists]];
+        [self cacheHeight:[GHDescriptionTableViewCell heightWithContent:gist.description] forRowAtIndexPath:[NSIndexPath indexPathForRow:idx+1 inSection:kUITableViewGists]];
     }];
 }
 
@@ -229,8 +210,7 @@
 - (void)cacheAssignedIssuesHeight {
     [self.assignedIssues enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         GHAPIIssueV3 *issue = obj;
-        
-        [self cacheHeight:[self heightForDescription:[self descriptionForAssignedIssue:issue]]+50.0f forRowAtIndexPath:[NSIndexPath indexPathForRow:idx+1 inSection:kUITableViewSectionAssignedIssues] ];
+        [self cacheHeight:[GHDescriptionTableViewCell heightWithContent:[self descriptionForAssignedIssue:issue]] forRowAtIndexPath:[NSIndexPath indexPathForRow:idx+1 inSection:kUITableViewSectionAssignedIssues] ];
     }];
 }
 

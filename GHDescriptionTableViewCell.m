@@ -47,6 +47,19 @@
     return 71.0;
 }
 
++ (CGFloat)heightWithContent:(NSString *)content {
+    CGFloat minHeight = [self height];
+    
+    CGSize newSize = [content sizeWithFont:[UIFont systemFontOfSize:12.0] 
+                         constrainedToSize:CGSizeMake(222.0f, MAXFLOAT)
+                             lineBreakMode:UILineBreakModeWordWrap];
+    
+    CGFloat height = newSize.height < 21.0f ? 21.0f : newSize.height;
+    height += 50.0f;
+    
+    return height < minHeight ? minHeight : height;
+}
+
 #pragma mark - Memory management
 
 - (void)dealloc {
