@@ -10,6 +10,9 @@
 #import <CoreData/CoreData.h>
 
 #warning only serialize data from iPhone to iPhone and iPad to iPad
+#warning Google for iPhone design
+#warning Auto reload newsfeed after deserialization
+#warning Try to adopt TTTAttributedLabel
 
 @interface iGithubAppDelegate : NSObject <UIApplicationDelegate> {
     NSManagedObjectContext *_managedObjectContext;

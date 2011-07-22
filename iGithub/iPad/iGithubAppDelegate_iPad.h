@@ -10,6 +10,9 @@
 #import "iGithubAppDelegate.h"
 #import "ANAdvancedNavigationController.h"
 
+#warning Writing comments. Infinite number of action sheets
+#warning Navigate forward while typing a comment causes strange things to happen
+
 @interface iGithubAppDelegate_iPad : iGithubAppDelegate <ANAdvancedNavigationControllerDelegate> {
     ANAdvancedNavigationController *_advancedNavigationController;
 }
