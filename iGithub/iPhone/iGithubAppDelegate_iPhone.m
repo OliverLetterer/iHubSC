@@ -124,7 +124,7 @@
 
 #pragma mark - Serialization
 
-- (void)nowSerializeState {
+- (NSMutableDictionary *)serializedStateDictionary {
     NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithCapacity:4];
     [dictionary setObject:[NSNumber numberWithUnsignedInteger:self.tabBarController.selectedIndex] forKey:@"self.tabBarController.selectedIndex"];
     [self.tabBarController.viewControllers enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
@@ -132,7 +132,7 @@
         [dictionary setObject:navController.viewControllers forKey:[NSNumber numberWithUnsignedInteger:idx]];
     }];
     
-    DLog(@"%d", [self serializeStateInDictionary:dictionary]);
+    return dictionary;
 }
 
 #pragma mark - memory management

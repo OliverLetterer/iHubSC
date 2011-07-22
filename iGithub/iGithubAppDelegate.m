@@ -19,6 +19,10 @@
 
 @synthesize managedObjectContext=_managedObjectContext, managedObjectModel=_managedObjectModel, persistentStoreCoordinator=_persistentStoreCoordinator;
 
+- (NSMutableDictionary *)serializedStateDictionary {
+    return nil;
+}
+
 - (void)setupAppearences {
     
 }
@@ -57,10 +61,13 @@
 #pragma mark - Serializations
 
 - (void)nowSerializeState {
-    
+    DLog(@"%d", [self serializeStateInDictionary:self.serializedStateDictionary]);
 }
 
 - (BOOL)serializeStateInDictionary:(NSMutableDictionary *)dictionary {
+    if (!dictionary) {
+        return NO;
+    }
     NSString *documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES) objectAtIndex:0];
     NSString *filePath = [documentsDirectory stringByAppendingPathComponent:kLastKnownApplicationStateFileName];
     
@@ -70,6 +77,8 @@
     if (bundleVersion) {
         [dictionary setObject:bundleVersion forKey:bundleVersionKey];
     }
+    
+    [dictionary setObject:[NSNumber numberWithUnsignedInteger:UI_USER_INTERFACE_IDIOM()] forKey:@"UI_USER_INTERFACE_IDIOM"];
     
     return [NSKeyedArchiver archiveRootObject:dictionary toFile:filePath];
 }
@@ -84,6 +93,10 @@
     NSString *newBundleVersion = [[NSBundle mainBundle] objectForInfoDictionaryKey:bundleVersionKey];
     NSString *oldBundleVersion = [dictionary objectForKey:bundleVersionKey];
     if (![newBundleVersion isEqual:oldBundleVersion]) {
+        return nil;
+    }
+    NSNumber *idiom = [dictionary objectForKey:@"UI_USER_INTERFACE_IDIOM"];
+    if ([idiom unsignedIntegerValue] != UI_USER_INTERFACE_IDIOM()) {
         return nil;
     }
     

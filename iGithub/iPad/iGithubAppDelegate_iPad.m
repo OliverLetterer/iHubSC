@@ -83,13 +83,13 @@
 
 #pragma mark - Serialization
 
-- (void)nowSerializeState {
+- (NSMutableDictionary *)serializedStateDictionary {
     NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithCapacity:4];
     [dictionary setObject:self.advancedNavigationController.leftViewController forKey:@"leftViewController"];
     [dictionary setObject:self.advancedNavigationController.rightViewControllers forKey:@"rightViewControllers"];
     [dictionary setObject:[NSNumber numberWithUnsignedInteger:self.advancedNavigationController.indexOfFrontViewController] forKey:@"indexOfFrontViewController"];
     
-    DLog(@"%d", [self serializeStateInDictionary:dictionary]);
+    return dictionary;
 }
 
 #pragma mark - ANAdvancedNavigationControllerDelegate
