@@ -15,6 +15,7 @@
 #warning Google for iPhone design
 #warning Auto reload newsfeed after deserialization
 #warning Try to adopt TTTAttributedLabel
+#warning try to adopt OAuth?
 
 @interface iGithubAppDelegate : NSObject <UIApplicationDelegate> {
     NSManagedObjectContext *_managedObjectContext;
