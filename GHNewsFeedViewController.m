@@ -10,7 +10,6 @@
 #import "GithubAPI.h"
 #import "GHSettingsHelper.h"
 #import "GHDescriptionTableViewCell.h"
-#import "GHPushFeedItemTableViewCell.h"
 #import "GHFollowEventTableViewCell.h"
 #import "GHIssueViewController.h"
 #import "GHPushPayloadViewController.h"
@@ -154,11 +153,11 @@
     } else if (item.payload.type == GHPayloadPushEvent) {
         // tableView is asking for a push item
         
-        NSString *CellIdentifier = @"GHPushFeedItemTableViewCell";
-        GHPushFeedItemTableViewCell *cell = (GHPushFeedItemTableViewCell *)[self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        NSString *CellIdentifier = @"GHFeedItemWithDescriptionTableViewCell";
+        GHDescriptionTableViewCell *cell = (GHDescriptionTableViewCell *)[self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         
         if (!cell) {
-            cell = [[[GHPushFeedItemTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+            cell = [[[GHDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
         }
         
         GHPushPayload *payload = (GHPushPayload *)item.payload;
@@ -168,18 +167,7 @@
         cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ pushed to %@ (%d)", @""), item.actor, payload.branch, numberOfCommits];
         cell.detailTextLabel.text = item.repository.fullName;
         
-        if (numberOfCommits > 0) {
-            GHCommitMessage *commit = [payload.commits objectAtIndex:0];
-            cell.firstCommitLabel.text = commit.message;
-        } else {
-            cell.firstCommitLabel.text = nil;
-        }
-        if (numberOfCommits > 1) {
-            GHCommitMessage *commit = [payload.commits objectAtIndex:1];
-            cell.secondCommitLabel.text = commit.message;
-        } else {
-            cell.secondCommitLabel.text = nil;
-        }
+        cell.descriptionLabel.text = payload.previewString;
         cell.timeLabel.text = item.creationDate.prettyShortTimeIntervalSinceNow;
         
         return cell;
@@ -534,38 +522,7 @@
             minimumHeight = 78.0;
             GHPushPayload *payload = (GHPushPayload *)item.payload;
             // this is a commit / push message, we will display max 2 commits
-            CGFloat commitHeight = 0.0;
-            
-            NSUInteger numberOfCommits = [payload.commits count];
-            
-            if (numberOfCommits > 0) {
-                GHCommitMessage *commit = [payload.commits objectAtIndex:0];
-                CGSize firstCommitSize = [commit.message sizeWithFont:[GHPushFeedItemTableViewCell commitFont] 
-                                                    constrainedToSize:CGSizeMake(222.0f, MAXFLOAT)
-                                                        lineBreakMode:UILineBreakModeWordWrap];
-                if (firstCommitSize.height > [GHPushFeedItemTableViewCell maxCommitHeight]) {
-                    firstCommitSize.height = [GHPushFeedItemTableViewCell maxCommitHeight];
-                }
-                
-                commitHeight += firstCommitSize.height;
-            }
-            
-            
-            
-            if (numberOfCommits > 1) {
-                GHCommitMessage *commit = [payload.commits objectAtIndex:1];
-                CGSize secondCommitSize = [commit.message sizeWithFont:[GHPushFeedItemTableViewCell commitFont] 
-                                                     constrainedToSize:CGSizeMake(222.0f, MAXFLOAT)
-                                                         lineBreakMode:UILineBreakModeWordWrap];
-                if (secondCommitSize.height > [GHPushFeedItemTableViewCell maxCommitHeight]) {
-                    secondCommitSize.height = [GHPushFeedItemTableViewCell maxCommitHeight];
-                }
-                
-                commitHeight += secondCommitSize.height;
-                commitHeight += 7.0;
-            }
-            
-            height = 20.0 + commitHeight + 30.0;
+            height = [self heightForDescription:payload.previewString] + 20.0 + 30.0;
         } else if(item.payload.type == GHPayloadCommitCommentEvent) {
             height = 71.0;
         } else if(item.payload.type == GHPayloadFollowEvent) {

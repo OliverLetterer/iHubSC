@@ -67,7 +67,8 @@
                 height = [GHPDefaultNewsFeedTableViewCell heightWithContent:nil];
             }
         } else if (item.payload.type == GHPayloadPushEvent) {
-            height = [GHPDefaultNewsFeedTableViewCell heightWithContent:[self descriptionForNewsFeedItem:item] ];
+            GHPushPayload *payload = (GHPushPayload *)item.payload;
+            height = [GHPDefaultNewsFeedTableViewCell heightWithContent:payload.previewString ];
         } else if(item.payload.type == GHPayloadCommitCommentEvent) {
             height = GHPDefaultNewsFeedTableViewCellHeight;
         } else if(item.payload.type == GHPayloadFollowEvent) {
@@ -151,23 +152,6 @@
             
             description = [NSString stringWithFormat:NSLocalizedString(@"%@ with %@ and %@", @""), commitsString, additionsString, deletionsString];
         }
-    } else if (item.payload.type == GHPayloadPushEvent) {        
-        GHPushPayload *payload = (GHPushPayload *)item.payload;
-        
-        NSMutableString *commitDescription = [NSMutableString string];
-        
-        [payload.commits enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-            GHCommitMessage *commit = obj;
-            
-            if (idx == 0) {
-                [commitDescription appendString:commit.message];
-            } else if (idx == 1) {
-                [commitDescription appendFormat:@"\n\n%@", commit.message];
-                *stop = YES;
-            }
-        }];
-        
-        description = commitDescription;
     }
     
     return description;
@@ -245,7 +229,7 @@
         NSUInteger numberOfCommits = [payload.commits count];
         cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ pushed to %@ (%d)", @""), item.actor, payload.branch, numberOfCommits];
         cell.repositoryLabel.text = item.repository.fullName;
-        cell.detailTextLabel.text = [self descriptionForNewsFeedItem:item];
+        cell.detailTextLabel.text = payload.previewString;
         cell.timeLabel.text = item.creationDate.prettyShortTimeIntervalSinceNow;
         
         return cell;

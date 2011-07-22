@@ -21,5 +21,6 @@
 @property (nonatomic, retain) NSArray *commits;
 
 @property (nonatomic, readonly) NSString *branch;
+@property (nonatomic, readonly) NSString *previewString;
 
 @end

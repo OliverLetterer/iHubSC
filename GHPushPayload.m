@@ -23,6 +23,22 @@
     return [[self.ref componentsSeparatedByString:@"/"] lastObject];
 }
 
+- (NSString *)previewString {
+    NSMutableString *previewString = [NSMutableString string];
+    
+    [_commits enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        GHCommitMessage *commit = obj;
+        if (idx == 1) {
+            [previewString appendFormat:@"\n\n%@", commit.message];
+            *stop = YES;
+        } else {
+            [previewString appendFormat:@"%@", commit.message];
+        }
+    }];
+    
+    return previewString;
+}
+
 #pragma mark - Initialization
 
 - (id)initWithRawDictionary:(NSDictionary *)rawDictionary {

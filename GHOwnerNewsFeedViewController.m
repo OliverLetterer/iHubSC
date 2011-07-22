@@ -11,7 +11,6 @@
 #import "GithubAPI.h"
 #import "GHSettingsHelper.h"
 #import "GHDescriptionTableViewCell.h"
-#import "GHPushFeedItemTableViewCell.h"
 #import "GHFollowEventTableViewCell.h"
 #import "GHIssueViewController.h"
 #import <QuartzCore/QuartzCore.h>
