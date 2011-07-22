@@ -14,7 +14,6 @@
 #import "GHUserViewController.h"
 #import "GHSearchViewController.h"
 
-#warning Increase fonts
 #warning Icons for folders and files in browse content
 #warning Dttextview selectionstyle and userinteraction
 

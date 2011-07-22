@@ -29,10 +29,17 @@
     [_commits enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         GHCommitMessage *commit = obj;
         if (idx == 1) {
-            [previewString appendFormat:@"\n\n%@", commit.message];
+            [previewString appendFormat:@"\n- %@", commit.message];
+        } else if (idx == 2) {
+            NSUInteger remainingCommits = _commits.count - idx;
+            if (remainingCommits == 1) {
+                [previewString appendFormat:@"\n%d more commit...", remainingCommits];
+            } else {
+                [previewString appendFormat:@"\n%d more commits...", remainingCommits];
+            }
             *stop = YES;
         } else {
-            [previewString appendFormat:@"%@", commit.message];
+            [previewString appendFormat:@"- %@", commit.message];
         }
     }];
     
