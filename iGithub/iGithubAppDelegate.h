@@ -9,7 +9,6 @@
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
 
-#warning Auto reload newsfeed after deserialization
 #warning enable markdown for gists
 
 @interface iGithubAppDelegate : NSObject <UIApplicationDelegate> {
