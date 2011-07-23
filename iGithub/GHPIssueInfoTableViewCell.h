@@ -22,12 +22,12 @@
 
 @interface GHPIssueInfoTableViewCell : GHPInfoTableViewCell <DTAttributedTextContentViewDelegate> {
 @private
-    DTAttributedTextView *_attributedTextView;
+    DTAttributedTextContentView *_attributedTextView;
     
     id<GHPIssueInfoTableViewCellDelegate> _buttonDelegate;
 }
 
-@property (nonatomic, retain) DTAttributedTextView *attributedTextView;
+@property (nonatomic, retain) DTAttributedTextContentView *attributedTextView;
 @property (nonatomic, assign) id<GHPIssueInfoTableViewCellDelegate> buttonDelegate;
 
 - (void)linkButtonClicked:(DTLinkButton *)sender;

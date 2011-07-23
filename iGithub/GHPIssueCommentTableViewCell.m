@@ -18,11 +18,8 @@
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if ((self = [super initWithStyle:style reuseIdentifier:reuseIdentifier])) {
         // Initialization code
-        self.attributedTextView = [[[DTAttributedTextView alloc] initWithFrame:CGRectZero] autorelease];
+        self.attributedTextView = [[[DTAttributedTextContentView alloc] initWithFrame:CGRectZero] autorelease];
         self.attributedTextView.backgroundColor = [UIColor clearColor];
-        self.attributedTextView.textDelegate = self;
-        self.attributedTextView.alwaysBounceVertical = NO;
-        self.attributedTextView.onlyInteractWithSubview = YES;
         [self.contentView addSubview:self.attributedTextView];
     }
     return self;
