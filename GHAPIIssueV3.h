@@ -18,7 +18,6 @@ extern NSString *const kGHAPIIssueStateV3Closed;
 @private
     GHAPIUserV3 *_assignee;
     NSString *_body;
-    NSAttributedString *_attributedBody;
     NSString *_closedAt;
     NSNumber *_comments;
     NSString *_createdAt;
@@ -34,11 +33,12 @@ extern NSString *const kGHAPIIssueStateV3Closed;
     GHAPIUserV3 *_user;
     
     NSString *_repository;
+    NSAttributedString *_attributedBody;
+    NSAttributedString *_selectedAttributedBody;
 }
 
 @property (nonatomic, retain) GHAPIUserV3 *assignee;
 @property (nonatomic, copy) NSString *body;
-@property (nonatomic, retain) NSAttributedString *attributedBody;
 @property (nonatomic, copy) NSString *closedAt;
 @property (nonatomic, copy) NSNumber *comments;
 @property (nonatomic, copy) NSString *createdAt;
@@ -53,6 +53,8 @@ extern NSString *const kGHAPIIssueStateV3Closed;
 @property (nonatomic, copy) NSString *URL;
 @property (nonatomic, retain) GHAPIUserV3 *user;
 @property (nonatomic, copy) NSString *repository;
+@property (nonatomic, retain) NSAttributedString *attributedBody;
+@property (nonatomic, retain) NSAttributedString *selectedAttributedBody;
 
 @property (nonatomic, readonly) BOOL isPullRequest;
 @property (nonatomic, readonly) BOOL hasAssignee;

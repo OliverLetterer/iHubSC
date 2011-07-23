@@ -9,10 +9,9 @@
 #import "GHIssueViewController.h"
 #import "GithubAPI.h"
 #import "GHSettingsHelper.h"
-#import "GHIssueTitleTableViewCell.h"
+#import "GHAttributedTableViewCell.h"
 #import "GHIssueDescriptionTableViewCell.h"
 #import "GHCollapsingAndSpinningTableViewCell.h"
-#import "GHIssueCommentTableViewCell.h"
 #import "GHDescriptionTableViewCell.h"
 #import "GHNewCommentTableViewCell.h"
 #import "GHUserViewController.h"
@@ -24,7 +23,6 @@
 #import "GHViewLabelViewController.h"
 #import "ANNotificationQueue.h"
 #import "GHWebViewViewController.h"
-#import "GHIssueCommentTableViewCell.h"
 
 #define kUITableViewSectionData             0
 #define kUITableViewSectionAssignee         1
@@ -82,13 +80,57 @@
             [self handleError:error];
         } else {
             self.issue = issue;
-            [self cacheHeight:[GHIssueTitleTableViewCell heightWithAttributedString:self.issue.attributedBody 
+            [self cacheHeight:[GHAttributedTableViewCell heightWithAttributedString:self.issue.attributedBody 
                                                                inAttributedTextView:self.attributedTextView] 
             forRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:kUITableViewSectionData] ];
             self.title = [NSString stringWithFormat:NSLocalizedString(@"%@ %@", @""), self.issueName, self.number];
             [self.tableView reloadData];
         }
     }];
+}
+
+- (NSString *)descriptionForEvent:(GHAPIIssueEventV3 *)event {
+    NSString *description = nil;
+    
+    switch (event.type) {
+        case GHAPIIssueEventTypeV3Closed:
+            if (event.commitID) {
+                description = [NSString stringWithFormat:NSLocalizedString(@"closed this %@ in", @""), self.issueName];
+            } else {
+                description = [NSString stringWithFormat:NSLocalizedString(@"closed this %@", @""), self.issueName];
+            }
+            break;
+            
+        case GHAPIIssueEventTypeV3Reopened:
+            description = [NSString stringWithFormat:NSLocalizedString(@"reopened this %@", @""), self.issueName];
+            break;
+            
+        case GHAPIIssueEventTypeV3Subscribed:
+            description = [NSString stringWithFormat:NSLocalizedString(@"subscribed to this %@", @""), self.issueName];
+            break;
+            
+        case GHAPIIssueEventTypeV3Merged:
+            description = [NSString stringWithFormat:NSLocalizedString(@"merged this %@ with", @""), self.issueName];
+            description = [NSString stringWithFormat:@"%@\n\n%@", description, event.commitID];
+            break;
+            
+        case GHAPIIssueEventTypeV3Referenced:
+            description = [NSString stringWithFormat:NSLocalizedString(@"This %@ was referenced in", @""), self.issueName];
+            description = [NSString stringWithFormat:@"%@\n\n%@", description, event.commitID];
+            break;
+            
+        case GHAPIIssueEventTypeV3Mentioned:
+            description = [NSString stringWithFormat:NSLocalizedString(@"%@ was mentioned in a body", @""), event.actor.login];
+            break;
+            
+        case GHAPIIssueEventTypeV3Assigned:
+            description = [NSString stringWithFormat:NSLocalizedString(@"%@ was assigned to this %@", @""), event.actor.login, self.issueName];
+            break;
+            
+        default:
+            break;
+    }
+    return description;
 }
 
 #pragma mark - Memory management
@@ -341,10 +383,10 @@
         // the issue itself
         if (indexPath.row == 0) {
             // the title
-            NSString *CellIdentifier = @"GHIssueTitleTableViewCell";
-            GHIssueTitleTableViewCell *cell = (GHIssueTitleTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+            static NSString *CellIdentifier = @"GHIssueTitleTableViewCell";
+            GHAttributedTableViewCell *cell = (GHAttributedTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
             if (!cell) {
-                cell = [[[GHIssueTitleTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
+                cell = [[[GHAttributedTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
             }
             
             cell.textLabel.text = self.issue.title;
@@ -355,6 +397,9 @@
             ;
             cell.attributedTextView.attributedString = self.issue.attributedBody;
             cell.buttonDelegate = self;
+            
+            cell.attributedString = self.issue.attributedBody;
+            cell.selectedAttributesString = self.issue.selectedAttributedBody;
             
             return cell;
         } else if (indexPath.row == 1) {
@@ -466,16 +511,14 @@
         NSObject *object = [self.history objectAtIndex:indexPath.row - 1];
         
         if ([object isKindOfClass:[GHAPIIssueCommentV3 class] ]) {
-            static NSString *CellIdentifier = @"GHIssueCommentTableViewCell";
-            GHIssueCommentTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-            
+            static NSString *CellIdentifier = @"GHIssueTitleTableViewCell";
+            GHAttributedTableViewCell *cell = (GHAttributedTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
             if (!cell) {
-                cell = [[[GHIssueCommentTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+                cell = [[[GHAttributedTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
             }
             
             // display a comment
             GHAPIIssueCommentV3 *comment = (GHAPIIssueCommentV3 *)object;
-
             
             [self updateImageView:cell.imageView atIndexPath:indexPath withAvatarURLString:comment.user.avatarURL];
             
@@ -483,6 +526,9 @@
             cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ commented on this %@", @""), comment.user.login, self.issueName];
             cell.detailTextLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ ago", @""), comment.updatedAt.prettyTimeIntervalSinceNow];
             cell.attributedTextView.attributedString = comment.attributedBody;
+            
+            cell.attributedString = comment.attributedBody;
+            cell.selectedAttributesString = comment.selectedAttributedBody;
             
             return cell;
         } else if ([object isKindOfClass:[GHAPIIssueEventV3 class] ]) {
@@ -499,55 +545,9 @@
             
             cell.detailTextLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ ago", @""), event.createdAt.prettyTimeIntervalSinceNow];
             
-            cell.descriptionLabel.text = nil;
-            cell.textLabel.text = nil;
+            cell.descriptionLabel.text = [self descriptionForEvent:event];
+            cell.textLabel.text = event.actor.login;
             
-            switch (event.type) {
-                case GHAPIIssueEventTypeV3Closed:
-                    ;
-                    NSString *description = nil;
-                    if (event.commitID) {
-                        description = [NSString stringWithFormat:NSLocalizedString(@"%@ closed this %@ in", @""), event.actor.login, self.issueName];
-                    } else {
-                        description = [NSString stringWithFormat:NSLocalizedString(@"%@ closed this %@", @""), event.actor.login, self.issueName];
-                    }
-                    cell.textLabel.text = description;
-                    cell.descriptionLabel.text = event.commitID;
-                    break;
-                    
-                case GHAPIIssueEventTypeV3Reopened:
-                    cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ reopened this %@", @""), event.actor.login, self.issueName];
-                    break;
-                    
-                case GHAPIIssueEventTypeV3Subscribed:
-                    cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ subscribed to this %@", @""), event.actor.login, self.issueName];
-                    break;
-                    
-                case GHAPIIssueEventTypeV3Merged:
-                    cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ merged this %@ with", @""), event.actor.login, self.issueName];
-                    cell.descriptionLabel.text = event.commitID;
-                    
-                    break;
-                    
-                case GHAPIIssueEventTypeV3Referenced:
-                    cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"This %@ was referenced in", @""), self.issueName];
-                    cell.descriptionLabel.text = event.commitID;
-                    
-                    break;
-                    
-                case GHAPIIssueEventTypeV3Mentioned:
-                    cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ was mentioned in a body", @""), event.actor.login];
-                    
-                    break;
-                    
-                case GHAPIIssueEventTypeV3Assigned:
-                    cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ was assigned to this %@", @""), event.actor.login, self.issueName];
-                    
-                    break;
-                    
-                default:
-                    break;
-            }
             return cell;
         }
     } else if (indexPath.section == kUITableViewSectionCommits) {
@@ -822,27 +822,43 @@
 #pragma mark - Height caching
 
 - (void)cacheHeightsForHistroy {
+    DTAttributedTextView *textView = [[[DTAttributedTextView alloc] initWithFrame:CGRectZero] autorelease];
     [self.history enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:idx+1 inSection:kUITableViewSectionHistory];
-        
-        CGFloat height = 71.0f;
+        CGFloat height = UITableViewAutomaticDimension;
         
         if ([obj isKindOfClass:[GHAPIIssueCommentV3 class] ]) {
             // display a comment
-            GHAPIIssueCommentV3 *comment = obj;
+            GHAPIIssueCommentV3 *comment = (GHAPIIssueCommentV3 *)obj;
             
-            CGSize size = [comment.body sizeWithFont:[UIFont systemFontOfSize:12.0] 
-                                   constrainedToSize:CGSizeMake(222.0, MAXFLOAT) 
-                                       lineBreakMode:UILineBreakModeWordWrap];
-            
-            height = size.height + 50.0;
-            
-            if (height < 71.0) {
-                height = 71.0;
-            }
+            height = [GHAttributedTableViewCell heightWithAttributedString:comment.attributedBody 
+                                                      inAttributedTextView:textView];
+        } else if ([obj isKindOfClass:[GHAPIIssueEventV3 class] ]) {
+            GHAPIIssueEventV3 *event = obj;
+            height = [GHDescriptionTableViewCell heightWithContent:[self descriptionForEvent:event] ];
         }
-        [self cacheHeight:height forRowAtIndexPath:indexPath];
+        [self cacheHeight:height forRowAtIndexPath:[NSIndexPath indexPathForRow:idx+1 inSection:kUITableViewSectionHistory]];
     }];
+//    [self.history enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+//        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:idx+1 inSection:kUITableViewSectionHistory];
+//        
+//        CGFloat height = 71.0f;
+//        
+//        if ([obj isKindOfClass:[GHAPIIssueCommentV3 class] ]) {
+//            // display a comment
+//            GHAPIIssueCommentV3 *comment = obj;
+//            
+//            CGSize size = [comment.body sizeWithFont:[UIFont systemFontOfSize:12.0] 
+//                                   constrainedToSize:CGSizeMake(222.0, MAXFLOAT) 
+//                                       lineBreakMode:UILineBreakModeWordWrap];
+//            
+//            height = size.height + 50.0;
+//            
+//            if (height < 71.0) {
+//                height = 71.0;
+//            }
+//        }
+//        [self cacheHeight:height forRowAtIndexPath:indexPath];
+//    }];
 }
 
 #pragma mark - UIActionSheetDelegate
@@ -864,34 +880,12 @@
 
 #pragma mark - GHIssueTitleTableViewCellDelegate
 
-- (void)issueInfoTableViewCell:(GHIssueTitleTableViewCell *)cell receivedClickForButton:(DTLinkButton *)button {
+- (void)issueInfoTableViewCell:(GHAttributedTableViewCell *)cell receivedClickForButton:(DTLinkButton *)button {
     GHWebViewViewController *viewController = [[[GHWebViewViewController alloc] initWithURL:button.url ] autorelease];
     [self.navigationController pushViewController:viewController animated:YES];
 }
 
-- (void)issueInfoTableViewCell:(GHIssueTitleTableViewCell *)cell longPressRecognizedForButton:(DTLinkButton *)button {
-    self.selectedURL = button.url;
-    UIActionSheet *sheet = [[[UIActionSheet alloc] init] autorelease];
-    
-    sheet.title = button.url.absoluteString;
-    [sheet addButtonWithTitle:NSLocalizedString(@"View in Safari", @"")];
-    [sheet addButtonWithTitle:NSLocalizedString(@"Cancel", @"")];
-    sheet.cancelButtonIndex = 1;
-    sheet.delegate = self;
-    sheet.tag = kUIActionSheetTagLongPressedLink;
-    sheet.actionSheetStyle = UIActionSheetStyleBlackTranslucent;
-    
-    [sheet showInView:self.tabBarController.view];
-}
-
-#pragma mark - GHIssueCommentTableViewCellDelegate
-
-- (void)commentTableViewCell:(GHIssueCommentTableViewCell *)cell receivedClickForButton:(DTLinkButton *)button {
-    GHWebViewViewController *viewController = [[[GHWebViewViewController alloc] initWithURL:button.url ] autorelease];
-    [self.navigationController pushViewController:viewController animated:YES];
-}
-
-- (void)commentTableViewCell:(GHIssueCommentTableViewCell *)cell longPressRecognizedForButton:(DTLinkButton *)button {
+- (void)issueInfoTableViewCell:(GHAttributedTableViewCell *)cell longPressRecognizedForButton:(DTLinkButton *)button {
     self.selectedURL = button.url;
     UIActionSheet *sheet = [[[UIActionSheet alloc] init] autorelease];
     

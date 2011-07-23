@@ -153,7 +153,6 @@ NSString *const kGHNSStringMarkdownStyleFull = @"MarkdownStyle";
 - (NSAttributedString *)attributesStringFromMarkdownString {
     WAHTMLMarkdownFormatter *formatter = [[[WAAttributesMarkdownFormatter alloc] init] autorelease];
     NSString *HTML = [formatter HTMLForMarkdown:self];
-//    HTML = [NSString stringWithFormat:@"<font face=\"Helvetica\" color=\"blue\">%@</font>", HTML];
     NSData *HTMLData = [HTML dataUsingEncoding:NSUTF8StringEncoding];
     return [NSAttributedString attributedStringWithHTML:HTMLData options:nil];
 }

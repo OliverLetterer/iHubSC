@@ -1,17 +1,18 @@
 //
-//  GHIssueCommentTableViewCell.m
+//  GHIssueTitleTableViewCell.m
 //  iGithub
 //
 //  Created by Oliver Letterer on 04.04.11.
 //  Copyright 2011 Home. All rights reserved.
 //
 
-#import "GHIssueCommentTableViewCell.h"
+#import "GHAttributedTableViewCell.h"
 
 
-@implementation GHIssueCommentTableViewCell
+@implementation GHAttributedTableViewCell
 @synthesize attributedTextView=_attributedTextView;
 @synthesize buttonDelegate=_buttonDelegate;
+@synthesize attributedString=_attributedString, selectedAttributesString=_selectedAttributesString;
 
 #pragma mark - Initialization
 
@@ -23,6 +24,7 @@
         self.attributedTextView.backgroundColor = [UIColor clearColor];
         self.attributedTextView.textDelegate = self;
         self.attributedTextView.alwaysBounceVertical = NO;
+        self.attributedTextView.scrollsToTop = NO;
         [self.contentView addSubview:self.attributedTextView];
     }
     return self;
@@ -33,16 +35,26 @@
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
     
+    if (selected) {
+        self.attributedTextView.attributedString = self.selectedAttributesString;
+    } else {
+        self.attributedTextView.attributedString = self.attributedString;
+    }
 }
 
 - (void)setHighlighted:(BOOL)highlighted animated:(BOOL)animated {
     [super setHighlighted:highlighted animated:animated];
     
+    if (highlighted) {
+        self.attributedTextView.attributedString = self.selectedAttributesString;
+    } else {
+        self.attributedTextView.attributedString = self.attributedString;
+    }
 }
 
 - (void)layoutSubviews {
     [super layoutSubviews];
-    self.attributedTextView.frame = CGRectMake(78.0, 17.0, 222.0, self.contentView.bounds.size.height - 17.0f);
+    self.attributedTextView.frame = CGRectMake(78.0, 21.0, 222.0, self.contentView.bounds.size.height - 48.0);
 }
 
 - (void)prepareForReuse {
@@ -53,12 +65,12 @@
 #pragma mark - Target actions
 
 - (void)linkButtonClicked:(DTLinkButton *)sender {
-    [self.buttonDelegate commentTableViewCell:self receivedClickForButton:sender];
+    [self.buttonDelegate issueInfoTableViewCell:self receivedClickForButton:sender];
 }
 
 - (void)longPressRecognized:(UILongPressGestureRecognizer *)recognizer {
     if (recognizer.state == UIGestureRecognizerStateRecognized) {
-        [self.buttonDelegate commentTableViewCell:self longPressRecognizedForButton:(DTLinkButton *)recognizer.view];
+        [self.buttonDelegate issueInfoTableViewCell:self longPressRecognizedForButton:(DTLinkButton *)recognizer.view];
     }
 }
 
@@ -74,7 +86,7 @@
 	[button addTarget:self action:@selector(linkButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
 	
 	// demonstrate combination with long press
-    UILongPressGestureRecognizer *longPress = [[[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressRecognized:)] autorelease];
+	UILongPressGestureRecognizer *longPress = [[[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressRecognized:)] autorelease];
 	[button addGestureRecognizer:longPress];
 	
 	return button;
@@ -86,13 +98,15 @@
     }
     textView.attributedString = content;
     textView.frame = CGRectMake(0.0f, 0.0f, 222.0f, 10.0f);
-    return textView.contentSize.height + 75.0f;
+    return textView.contentSize.height + 65.0f;
 }
 
 #pragma mark - Memory management
 
 - (void)dealloc {
     [_attributedTextView release];
+    [_attributedString release]; 
+    [_selectedAttributesString release];
     
     [super dealloc];
 }

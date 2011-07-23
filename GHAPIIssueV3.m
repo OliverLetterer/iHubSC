@@ -8,13 +8,15 @@
 
 #import "GHAPIIssueV3.h"
 #import "GithubAPI.h"
+#import "WASelectedAttributedMarkdownFormatter.h"
+#import "NSAttributedString+HTML.h"
 
 NSString *const kGHAPIIssueStateV3Open = @"open";
 NSString *const kGHAPIIssueStateV3Closed = @"closed";
 
 @implementation GHAPIIssueV3
 
-@synthesize assignee=_assignee, body=_body, attributedBody=_attributedBody, closedAt=_closedAt, comments=_comments, createdAt=_createdAt, HTMLURL=_HTMLURL, labels=_labels, milestone=_milestone, number=_number, pullRequestID=_pullRequestID, state=_state, title=_title, updatedAt=_updatedAt, URL=_URL, user=_user, repository=_repository;
+@synthesize assignee=_assignee, body=_body, attributedBody=_attributedBody, selectedAttributedBody=_selectedAttributedBody, closedAt=_closedAt, comments=_comments, createdAt=_createdAt, HTMLURL=_HTMLURL, labels=_labels, milestone=_milestone, number=_number, pullRequestID=_pullRequestID, state=_state, title=_title, updatedAt=_updatedAt, URL=_URL, user=_user, repository=_repository;
 
 #pragma mark - setters and getters
 
@@ -30,6 +32,23 @@ NSString *const kGHAPIIssueStateV3Closed = @"closed";
     return self.milestone.number != nil;
 }
 
+- (NSAttributedString *)attributedBody {
+    if (!_attributedBody) {
+        _attributedBody = [self.body.attributesStringFromMarkdownString retain];
+    }
+    return _attributedBody;
+}
+
+- (NSAttributedString *)selectedAttributedBody {
+    if (!_selectedAttributedBody) {
+        WASelectedAttributedMarkdownFormatter *formatter = [[[WASelectedAttributedMarkdownFormatter alloc] init] autorelease];
+        NSString *HTML = [formatter HTMLForMarkdown:self.body];
+        NSData *HTMLData = [HTML dataUsingEncoding:NSUTF8StringEncoding];
+        _selectedAttributedBody = [[NSAttributedString attributedStringWithHTML:HTMLData options:nil] retain];
+    }
+    return _selectedAttributedBody;
+}
+
 #pragma mark - Initialization
 
 - (id)initWithRawDictionary:(NSDictionary *)rawDictionay {
@@ -37,7 +56,6 @@ NSString *const kGHAPIIssueStateV3Closed = @"closed";
         // Initialization code
         self.assignee = [[[GHAPIUserV3 alloc] initWithRawDictionary:[rawDictionay objectForKeyOrNilOnNullObject:@"assignee"] ] autorelease];
         self.body = [rawDictionay objectForKeyOrNilOnNullObject:@"body"];
-        self.attributedBody = self.body.attributesStringFromMarkdownString;
         self.closedAt = [rawDictionay objectForKeyOrNilOnNullObject:@"closed_at"];
         self.comments = [rawDictionay objectForKeyOrNilOnNullObject:@"comments"];
         self.createdAt = [rawDictionay objectForKeyOrNilOnNullObject:@"created_at"];
@@ -70,6 +88,7 @@ NSString *const kGHAPIIssueStateV3Closed = @"closed";
     [_assignee release];
     [_body release];
     [_attributedBody release];
+    [_selectedAttributedBody release];
     [_closedAt release];
     [_comments release];
     [_createdAt release];
@@ -113,7 +132,6 @@ NSString *const kGHAPIIssueStateV3Closed = @"closed";
     if ((self = [super init])) {
         _assignee = [[decoder decodeObjectForKey:@"assignee"] retain];
         _body = [[decoder decodeObjectForKey:@"body"] retain];
-        self.attributedBody = _body.attributesStringFromMarkdownString;
         _closedAt = [[decoder decodeObjectForKey:@"closedAt"] retain];
         _comments = [[decoder decodeObjectForKey:@"comments"] retain];
         _createdAt = [[decoder decodeObjectForKey:@"createdAt"] retain];

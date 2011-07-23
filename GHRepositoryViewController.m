@@ -11,7 +11,6 @@
 #import "NSString+Additions.h"
 #import "GHWebViewViewController.h"
 #import "GHCollapsingAndSpinningTableViewCell.h"
-#import "GHIssueTitleTableViewCell.h"
 #import "GHIssueViewController.h"
 #import "GHTableViewCell.h"
 #import "GHUserViewController.h"
@@ -571,10 +570,11 @@
             
             return cell;
         } else {
-            NSString *CellIdentifier = @"GHIssueTitleTableViewCell";
-            GHIssueTitleTableViewCell *cell = (GHIssueTitleTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-            if (!cell) {
-                cell = [[[GHIssueTitleTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
+            static NSString *CellIdentifier = @"GHFeedItemWithDescriptionTableViewCell";
+            
+            GHDescriptionTableViewCell *cell = (GHDescriptionTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+            if (cell == nil) {
+                cell = [[[GHDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
             }
             
             GHAPIIssueV3 *issue = [self.issuesArray objectAtIndex:indexPath.row - 2];

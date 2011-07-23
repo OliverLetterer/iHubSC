@@ -8,12 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "GHTableViewController.h"
-#import "GHIssueTitleTableViewCell.h"
-#import "GHIssueCommentTableViewCell.h"
+#import "GHAttributedTableViewCell.h"
 
 @class GHAPIIssueV3, GHTableViewCell, GHIssueComment, GHPullRequestDiscussion, DTAttributedTextView;
 
-@interface GHIssueViewController : GHTableViewController <UIAlertViewDelegate, GHIssueTitleTableViewCellDelegate, UIActionSheetDelegate, GHIssueCommentTableViewCellDelegate> {
+@interface GHIssueViewController : GHTableViewController <UIAlertViewDelegate, GHIssueTitleTableViewCellDelegate, UIActionSheetDelegate> {
 @private
     GHAPIIssueV3 *_issue;
     
@@ -47,6 +46,8 @@
 @property (nonatomic, retain) NSURL *selectedURL;
 
 
+
+- (NSString *)descriptionForEvent:(GHAPIIssueEventV3 *)event;
 
 - (id)initWithRepository:(NSString *)repository issueNumber:(NSNumber *)number;
 

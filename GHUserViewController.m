@@ -17,7 +17,6 @@
 #import "GHOrganizationViewController.h"
 #import "GHGistViewController.h"
 #import "ANNotificationQueue.h"
-#import "GHIssueTitleTableViewCell.h"
 #import "GHIssueViewController.h"
 
 #define kUITableViewSectionUserData             0
@@ -831,7 +830,7 @@
         
         return cell;
     } else if (indexPath.section == kUITableViewGists) {
-        NSString *CellIdentifier = @"GHFeedItemWithDescriptionTableViewCell";
+        static NSString *CellIdentifier = @"GHFeedItemWithDescriptionTableViewCell";
         
         GHDescriptionTableViewCell *cell = (GHDescriptionTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         if (cell == nil) {
@@ -853,10 +852,11 @@
         
         return cell;
     } else if (indexPath.section == kUITableViewSectionAssignedIssues) {
-        NSString *CellIdentifier = @"GHIssueTitleTableViewCell";
-        GHIssueTitleTableViewCell *cell = (GHIssueTitleTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-        if (!cell) {
-            cell = [[[GHIssueTitleTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
+        static NSString *CellIdentifier = @"GHFeedItemWithDescriptionTableViewCell";
+        
+        GHDescriptionTableViewCell *cell = (GHDescriptionTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        if (cell == nil) {
+            cell = [[[GHDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
         }
         
         GHAPIIssueV3 *issue = [self.assignedIssues objectAtIndex:indexPath.row - 1];

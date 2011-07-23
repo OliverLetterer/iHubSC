@@ -11,7 +11,8 @@
 
 #warning Google for iPhone design
 #warning Auto reload newsfeed after deserialization
-#warning Try to adopt TTTAttributedLabel
+#warning enable markdown for gists
+#warning perform hittest on AttribztedView to not perform hits, if no label was touched
 
 @interface iGithubAppDelegate : NSObject <UIApplicationDelegate> {
     NSManagedObjectContext *_managedObjectContext;

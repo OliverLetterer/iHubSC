@@ -8,10 +8,32 @@
 
 #import "GHAPIIssueCommentV3.h"
 #import "GithubAPI.h"
+#import "WASelectedAttributedMarkdownFormatter.h"
+#import "NSAttributedString+HTML.h"
 
 @implementation GHAPIIssueCommentV3
 
-@synthesize URL=_URL, body=_body, attributedBody=_attributedBody, user=_user, createdAt=_createdAt, updatedAt=_updatedAt;
+@synthesize URL=_URL, body=_body, user=_user, createdAt=_createdAt, updatedAt=_updatedAt;
+@synthesize attributedBody=_attributedBody, selectedAttributedBody=_selectedAttributedBody;
+
+#pragma mark - Setters and getters
+
+- (NSAttributedString *)attributedBody {
+    if (!_attributedBody) {
+        _attributedBody = [self.body.attributesStringFromMarkdownString retain];
+    }
+    return _attributedBody;
+}
+
+- (NSAttributedString *)selectedAttributedBody {
+    if (!_selectedAttributedBody) {
+        WASelectedAttributedMarkdownFormatter *formatter = [[[WASelectedAttributedMarkdownFormatter alloc] init] autorelease];
+        NSString *HTML = [formatter HTMLForMarkdown:self.body];
+        NSData *HTMLData = [HTML dataUsingEncoding:NSUTF8StringEncoding];
+        _selectedAttributedBody = [[NSAttributedString attributedStringWithHTML:HTMLData options:nil] retain];
+    }
+    return _selectedAttributedBody;
+}
 
 #pragma mark - Initialization
 
@@ -48,9 +70,10 @@
     [_URL release];
     [_body release];
     [_user release];
-    [_attributedBody release];
     [_createdAt release];
     [_updatedAt release];
+    [_attributedBody release];
+    [_selectedAttributedBody release];
     
     [super dealloc];
 }

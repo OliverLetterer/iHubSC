@@ -9,7 +9,6 @@
 #import "GHViewLabelViewController.h"
 #import "GHLabelTableViewCell.h"
 #import "GHCollapsingAndSpinningTableViewCell.h"
-#import "GHIssueTitleTableViewCell.h"
 #import "GHIssueViewController.h"
 
 #define kUITableViewSectionInfo                         0
@@ -169,10 +168,11 @@
         }
     } else if (indexPath.section == kUITableViewControllerSectionInfoOpenIssues) {
         if (indexPath.row > 0 && indexPath.row <= [self.openIssues count]) {
-            NSString *CellIdentifier = @"GHIssueTitleTableViewCell";
-            GHIssueTitleTableViewCell *cell = (GHIssueTitleTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-            if (!cell) {
-                cell = [[[GHIssueTitleTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
+            static NSString *CellIdentifier = @"GHFeedItemWithDescriptionTableViewCell";
+            
+            GHDescriptionTableViewCell *cell = (GHDescriptionTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+            if (cell == nil) {
+                cell = [[[GHDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
             }
             
             GHAPIIssueV3 *issue = [self.openIssues objectAtIndex:indexPath.row - 1];
@@ -190,10 +190,11 @@
         }
     } else if (indexPath.section == kUITableViewControllerSectionInfoClosedIssues) {
         if (indexPath.row > 0 && indexPath.row <= [self.closedIssues count]) {
-            NSString *CellIdentifier = @"GHIssueTitleTableViewCell";
-            GHIssueTitleTableViewCell *cell = (GHIssueTitleTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-            if (!cell) {
-                cell = [[[GHIssueTitleTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
+            static NSString *CellIdentifier = @"GHFeedItemWithDescriptionTableViewCell";
+            
+            GHDescriptionTableViewCell *cell = (GHDescriptionTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+            if (cell == nil) {
+                cell = [[[GHDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
             }
             
             GHAPIIssueV3 *issue = [self.closedIssues objectAtIndex:indexPath.row - 1];
