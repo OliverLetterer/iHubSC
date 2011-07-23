@@ -60,6 +60,40 @@
     return _lastCreationDate;
 }
 
+- (void)setNewsFeed:(GHNewsFeed *)newsFeed updateScrollView:(BOOL)updateScrollView {
+    [super setNewsFeed:newsFeed];
+    
+    if (newsFeed) {
+        
+        NSUInteger index = [_newsFeed.items indexOfObjectPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {
+            GHNewsFeedItem *item = obj;
+            if ([item.creationDate isEqualToString:self.lastCreationDate]) {
+                *stop = YES;
+                return YES;
+            }
+            return NO;
+        }];
+        
+        if (updateScrollView) {
+            if (index != NSNotFound && index > 0) {
+                CGRect rect = [self.tableView rectForRowAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0] ];
+                CGPoint scrollPoint = CGPointMake(0.0, rect.origin.y - 61.0f);
+                [self.tableView setContentOffset:scrollPoint animated:NO];
+            }
+        }
+        
+        if (newsFeed.items.count > 0) {
+            GHNewsFeedItem *item = [newsFeed.items objectAtIndex:0];
+            self.lastCreationDate = item.creationDate;
+        }
+        
+        if (index == NSNotFound) {
+            index = 0;
+        }
+        [self didRefreshNewsFeed:[NSString stringWithFormat:NSLocalizedString(@"%d new Messages", @""), index] ];
+    }
+}
+
 - (void)setNewsFeed:(GHNewsFeed *)newsFeed {
     [super setNewsFeed:newsFeed];
     
@@ -202,9 +236,13 @@
     if (!self.newsFeed) {
         self.isDownloadingEssentialData = YES;
     }
-    _lastSelectedSegmentControlIndex = self.segmentControl.selectedSegmentIndex;
+    if (self.segmentControl) {
+        _lastSelectedSegmentControlIndex = self.segmentControl.selectedSegmentIndex;
+    }
+    _updateScrollView = self.segmentControl != nil;
+    
     // download new data
-    if (self.segmentControl.selectedSegmentIndex == 0) {
+    if (_lastSelectedSegmentControlIndex == 0) {
         // News Feed
         self.defaultOrganizationName = nil;
         [self showLoadingInformation:NSLocalizedString(@"Fetching private News Feed", @"")];
@@ -216,13 +254,13 @@
                 self.segmentControl.alpha = 1.0;
                 [self handleError:error];
             } else {
-                self.newsFeed = feed;
+                [self setNewsFeed:feed updateScrollView:_updateScrollView];
                 self.segmentControl.userInteractionEnabled = YES;
                 self.segmentControl.alpha = 1.0;
             }
             [self pullToReleaseTableViewDidReloadData];
         }];
-    } else if (self.segmentControl.selectedSegmentIndex == 1) {
+    } else if (_lastSelectedSegmentControlIndex == 1) {
         // My Actions
         [self showLoadingInformation:NSLocalizedString(@"Fetching My Actions", @"")];
         [GHNewsFeed newsFeedForUserNamed:[GHSettingsHelper username] 
@@ -234,13 +272,13 @@
                                self.segmentControl.alpha = 1.0;
                                [self handleError:error];
                            } else {
-                               self.newsFeed = feed;
+                               [self setNewsFeed:feed updateScrollView:_updateScrollView];
                                self.segmentControl.userInteractionEnabled = YES;
                                self.segmentControl.alpha = 1.0;
                            }
                            [self pullToReleaseTableViewDidReloadData];
                        }];
-    } else if (self.segmentControl.selectedSegmentIndex == 2) {
+    } else if (_lastSelectedSegmentControlIndex == 2) {
         if (self.defaultOrganizationName) {
             [self showLoadingInformation:[NSString stringWithFormat:NSLocalizedString(@"Fetching %@ News Feed", @""), self.defaultOrganizationName] ];
             [GHNewsFeed newsFeedForUserNamed:self.defaultOrganizationName completionHandler:^(GHNewsFeed *feed, NSError *error) {
@@ -251,7 +289,7 @@
                     self.segmentControl.alpha = 1.0;
                     [self handleError:error];
                 } else {
-                    self.newsFeed = feed;
+                    [self setNewsFeed:feed updateScrollView:_updateScrollView];
                     self.segmentControl.userInteractionEnabled = YES;
                     self.segmentControl.alpha = 1.0;
                 }
@@ -317,7 +355,7 @@
             self.segmentControl.alpha = 1.0;
             [self handleError:error];
         } else {
-            self.newsFeed = feed;
+            [self setNewsFeed:feed updateScrollView:_updateScrollView];
             self.segmentControl.userInteractionEnabled = YES;
             self.segmentControl.alpha = 1.0;
         }
@@ -408,6 +446,7 @@
                                                          image:[UIImage imageNamed:@"56-feed.png"] 
                                                            tag:0]
                            autorelease];
+        [self loadDataBasedOnSegmentControl];
     }
     return self;
 }

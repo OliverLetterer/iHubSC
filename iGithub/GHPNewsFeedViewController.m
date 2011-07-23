@@ -551,6 +551,7 @@
 - (id)initWithCoder:(NSCoder *)decoder {
     if ((self = [super initWithCoder:decoder])) {
         _newsFeed = [[decoder decodeObjectForKey:@"newsFeed"] retain];
+        [self downloadNewsFeed];
     }
     return self;
 }

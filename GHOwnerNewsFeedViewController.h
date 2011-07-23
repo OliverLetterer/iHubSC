@@ -22,6 +22,8 @@
     NSDate *_lastStateUpdateDate;
     
     NSUInteger _lastSelectedSegmentControlIndex;
+    
+    BOOL _updateScrollView;
 }
 
 @property (nonatomic, retain) UISegmentedControl *segmentControl;
