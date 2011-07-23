@@ -55,6 +55,7 @@
 - (void)layoutSubviews {
     [super layoutSubviews];
     self.attributedTextView.frame = CGRectMake(78.0, 21.0, 222.0, self.contentView.bounds.size.height - 48.0);
+    [self.attributedTextView layoutSubviews];
 }
 
 - (void)prepareForReuse {

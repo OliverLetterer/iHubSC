@@ -824,7 +824,7 @@
 - (void)cacheHeightsForHistroy {
     DTAttributedTextView *textView = [[[DTAttributedTextView alloc] initWithFrame:CGRectZero] autorelease];
     [self.history enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        CGFloat height = UITableViewAutomaticDimension;
+        CGFloat height = 44.0f;
         
         if ([obj isKindOfClass:[GHAPIIssueCommentV3 class] ]) {
             // display a comment
