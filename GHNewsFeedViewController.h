@@ -20,4 +20,6 @@
 
 - (void)cacheHeightForTableView;
 
+- (NSString *)descriptionForNewsFeedItem:(GHNewsFeedItem *)item;
+
 @end
