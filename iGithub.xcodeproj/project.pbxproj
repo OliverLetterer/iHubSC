@@ -1938,6 +1938,13 @@
 			name = RightViewControllers;
 			sourceTree = "<group>";
 		};
+		A798886F13DB24880052FD50 /* DTAttributedTextView */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = DTAttributedTextView;
+			sourceTree = "<group>";
+		};
 		A79AE38D13CC54320008E900 /* UIImage */ = {
 			isa = PBXGroup;
 			children = (
@@ -2082,6 +2089,7 @@
 		A7A6CB9313CB1DD700C1641F /* UserInterface */ = {
 			isa = PBXGroup;
 			children = (
+				A798886F13DB24880052FD50 /* DTAttributedTextView */,
 				A7089529134A2F69000DD6CE /* UITableViewCell - Generic Subclasses */,
 				A7B520A21389614D000FEE61 /* Label */,
 				A7B5208F13890B45000FEE61 /* Milestone */,
