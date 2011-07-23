@@ -900,7 +900,7 @@
     [sheet showInView:self.tabBarController.view];
 }
 
-#pragma mark Keyed Archiving
+#pragma mark - Keyed Archiving
 
 - (void)encodeWithCoder:(NSCoder *)encoder {
     [super encodeWithCoder:encoder];

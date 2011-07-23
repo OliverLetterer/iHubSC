@@ -32,7 +32,7 @@
     [super dealloc];
 }
 
-#pragma mark Keyed Archiving
+#pragma mark - Keyed Archiving
 
 - (void)encodeWithCoder:(NSCoder *)encoder {
     [encoder encodeObject:_diff forKey:@"diff"];

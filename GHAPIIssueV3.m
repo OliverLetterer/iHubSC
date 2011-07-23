@@ -107,7 +107,7 @@ NSString *const kGHAPIIssueStateV3Closed = @"closed";
     [super dealloc];
 }
 
-#pragma mark Keyed Archiving
+#pragma mark - Keyed Archiving
 
 - (void)encodeWithCoder:(NSCoder *)encoder {
     [encoder encodeObject:_assignee forKey:@"assignee"];

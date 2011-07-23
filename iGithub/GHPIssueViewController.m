@@ -1069,7 +1069,7 @@
     item.enabled = textView.selectedRange.length > 0;
 }
 
-#pragma mark Keyed Archiving
+#pragma mark - Keyed Archiving
 
 - (void)encodeWithCoder:(NSCoder *)encoder {
     [super encodeWithCoder:encoder];

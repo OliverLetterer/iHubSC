@@ -80,7 +80,7 @@
     [self.advancedNavigationController pushViewController:viewController afterViewController:self animated:YES];
 }
 
-#pragma mark Keyed Archiving
+#pragma mark - Keyed Archiving
 
 - (void)encodeWithCoder:(NSCoder *)encoder {
     [super encodeWithCoder:encoder];

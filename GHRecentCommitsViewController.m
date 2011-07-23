@@ -166,7 +166,7 @@
     [self.navigationController pushViewController:commitViewController animated:YES];
 }
 
-#pragma mark Keyed Archiving
+#pragma mark - Keyed Archiving
 
 - (void)encodeWithCoder:(NSCoder *)encoder {
     [super encodeWithCoder:encoder];

@@ -65,7 +65,7 @@
     return self;
 }
 
-#pragma mark Keyed Archiving
+#pragma mark - Keyed Archiving
 
 - (void)encodeWithCoder:(NSCoder *)encoder {
     [encoder encodeObject:_login forKey:@"login"];
