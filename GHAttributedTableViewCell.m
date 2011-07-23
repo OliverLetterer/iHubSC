@@ -25,6 +25,7 @@
         self.attributedTextView.textDelegate = self;
         self.attributedTextView.alwaysBounceVertical = NO;
         self.attributedTextView.scrollsToTop = NO;
+        self.attributedTextView.onlyInteractWithSubview = YES;
         [self.contentView addSubview:self.attributedTextView];
     }
     return self;
