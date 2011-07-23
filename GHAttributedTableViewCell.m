@@ -20,12 +20,9 @@
     if ((self = [super initWithStyle:style reuseIdentifier:reuseIdentifier])) {
         // Initialization code
         self.descriptionLabel.text = nil;
-        self.attributedTextView = [[[DTAttributedTextView alloc] initWithFrame:CGRectZero] autorelease];
+        self.attributedTextView = [[[DTAttributedTextContentView alloc] initWithFrame:CGRectZero] autorelease];
         self.attributedTextView.backgroundColor = [UIColor clearColor];
-        self.attributedTextView.textDelegate = self;
-        self.attributedTextView.alwaysBounceVertical = NO;
-        self.attributedTextView.scrollsToTop = NO;
-        self.attributedTextView.onlyInteractWithSubview = YES;
+        self.attributedTextView.delegate = self;
         [self.contentView addSubview:self.attributedTextView];
     }
     return self;

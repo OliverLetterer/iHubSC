@@ -22,14 +22,14 @@
 
 @interface GHAttributedTableViewCell : GHDescriptionTableViewCell <DTAttributedTextContentViewDelegate> {
 @private
-    DTAttributedTextView *_attributedTextView;
+    DTAttributedTextContentView *_attributedTextView;
     id<GHAttributedTableViewCellDelegate> _buttonDelegate;
     
     NSAttributedString *_attributedString;
     NSAttributedString *_selectedAttributesString;
 }
 
-@property (nonatomic, retain) DTAttributedTextView *attributedTextView;
+@property (nonatomic, retain) DTAttributedTextContentView *attributedTextView;
 @property (nonatomic, assign) id<GHAttributedTableViewCellDelegate> buttonDelegate;
 
 @property (nonatomic, retain) NSAttributedString *attributedString;
