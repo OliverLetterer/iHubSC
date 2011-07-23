@@ -13,7 +13,7 @@
 
 @class GHAttributedTableViewCell;
 
-@protocol GHIssueTitleTableViewCellDelegate <NSObject>
+@protocol GHAttributedTableViewCellDelegate <NSObject>
 
 - (void)issueInfoTableViewCell:(GHAttributedTableViewCell *)cell receivedClickForButton:(DTLinkButton *)button;
 - (void)issueInfoTableViewCell:(GHAttributedTableViewCell *)cell longPressRecognizedForButton:(DTLinkButton *)button;
@@ -23,14 +23,14 @@
 @interface GHAttributedTableViewCell : GHDescriptionTableViewCell <DTAttributedTextContentViewDelegate> {
 @private
     DTAttributedTextView *_attributedTextView;
-    id<GHIssueTitleTableViewCellDelegate> _buttonDelegate;
+    id<GHAttributedTableViewCellDelegate> _buttonDelegate;
     
     NSAttributedString *_attributedString;
     NSAttributedString *_selectedAttributesString;
 }
 
 @property (nonatomic, retain) DTAttributedTextView *attributedTextView;
-@property (nonatomic, assign) id<GHIssueTitleTableViewCellDelegate> buttonDelegate;
+@property (nonatomic, assign) id<GHAttributedTableViewCellDelegate> buttonDelegate;
 
 @property (nonatomic, retain) NSAttributedString *attributedString;
 @property (nonatomic, retain) NSAttributedString *selectedAttributesString;

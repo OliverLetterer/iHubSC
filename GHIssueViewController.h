@@ -12,7 +12,7 @@
 
 @class GHAPIIssueV3, GHTableViewCell, GHIssueComment, GHPullRequestDiscussion, DTAttributedTextView;
 
-@interface GHIssueViewController : GHTableViewController <UIAlertViewDelegate, GHIssueTitleTableViewCellDelegate, UIActionSheetDelegate> {
+@interface GHIssueViewController : GHTableViewController <UIAlertViewDelegate, GHAttributedTableViewCellDelegate, UIActionSheetDelegate> {
 @private
     GHAPIIssueV3 *_issue;
     

@@ -27,7 +27,6 @@
 		A706C0CC139AD15C008A6184 /* UIColor+GithubUI.m in Sources */ = {isa = PBXBuildFile; fileRef = A706C0CB139AD15C008A6184 /* UIColor+GithubUI.m */; };
 		A708950E1349FB82000DD6CE /* GHAttributedTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A708950D1349FB82000DD6CE /* GHAttributedTableViewCell.m */; };
 		A70895121349FE0C000DD6CE /* GHIssueDescriptionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A70895101349FE0C000DD6CE /* GHIssueDescriptionTableViewCell.m */; };
-		A70895131349FE0C000DD6CE /* GHIssueDescriptionTableViewCellContentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A70895111349FE0C000DD6CE /* GHIssueDescriptionTableViewCellContentView.xib */; };
 		A7089517134A03BA000DD6CE /* GHAuthenticationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A7089516134A03BA000DD6CE /* GHAuthenticationManager.m */; };
 		A7089525134A2F24000DD6CE /* UITableViewCellAccessoryDisclosureIndicatorSelected.PNG in Resources */ = {isa = PBXBuildFile; fileRef = A7089521134A2F23000DD6CE /* UITableViewCellAccessoryDisclosureIndicatorSelected.PNG */; };
 		A7089526134A2F24000DD6CE /* UITableViewCellAccessoryDisclosureIndicator.PNG in Resources */ = {isa = PBXBuildFile; fileRef = A7089522134A2F23000DD6CE /* UITableViewCellAccessoryDisclosureIndicator.PNG */; };
@@ -303,7 +302,6 @@
 		A7D14F7213563BBB00E1B980 /* GHPublicEventPayload.m in Sources */ = {isa = PBXBuildFile; fileRef = A7D14F7113563BBB00E1B980 /* GHPublicEventPayload.m */; };
 		A7D14F761356F17600E1B980 /* GHCreateIssueTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7D14F751356F17500E1B980 /* GHCreateIssueTableViewController.m */; };
 		A7D14F7A1356FACF00E1B980 /* GHCreateIssueTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A7D14F781356FACD00E1B980 /* GHCreateIssueTableViewCell.m */; };
-		A7D14F7B1356FACF00E1B980 /* GHCreateIssueTableViewCellContentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A7D14F791356FACE00E1B980 /* GHCreateIssueTableViewCellContentView.xib */; };
 		A7D14FC113576DA300E1B980 /* GHPushPayloadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7D14FC013576DA000E1B980 /* GHPushPayloadViewController.m */; };
 		A7D14FC513582E9500E1B980 /* GHCommit.m in Sources */ = {isa = PBXBuildFile; fileRef = A7D14FC413582E9500E1B980 /* GHCommit.m */; };
 		A7D14FC81358316200E1B980 /* GHViewCommitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7D14FC71358315600E1B980 /* GHViewCommitViewController.m */; };
@@ -389,7 +387,6 @@
 		A708950D1349FB82000DD6CE /* GHAttributedTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHAttributedTableViewCell.m; sourceTree = "<group>"; };
 		A708950F1349FE0C000DD6CE /* GHIssueDescriptionTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHIssueDescriptionTableViewCell.h; sourceTree = "<group>"; };
 		A70895101349FE0C000DD6CE /* GHIssueDescriptionTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHIssueDescriptionTableViewCell.m; sourceTree = "<group>"; };
-		A70895111349FE0C000DD6CE /* GHIssueDescriptionTableViewCellContentView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GHIssueDescriptionTableViewCellContentView.xib; sourceTree = "<group>"; };
 		A7089515134A03BA000DD6CE /* GHAuthenticationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHAuthenticationManager.h; sourceTree = "<group>"; };
 		A7089516134A03BA000DD6CE /* GHAuthenticationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHAuthenticationManager.m; sourceTree = "<group>"; };
 		A7089521134A2F23000DD6CE /* UITableViewCellAccessoryDisclosureIndicatorSelected.PNG */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UITableViewCellAccessoryDisclosureIndicatorSelected.PNG; sourceTree = "<group>"; };
@@ -884,7 +881,6 @@
 		A7D14F751356F17500E1B980 /* GHCreateIssueTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHCreateIssueTableViewController.m; sourceTree = "<group>"; };
 		A7D14F771356FACB00E1B980 /* GHCreateIssueTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHCreateIssueTableViewCell.h; sourceTree = "<group>"; };
 		A7D14F781356FACD00E1B980 /* GHCreateIssueTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHCreateIssueTableViewCell.m; sourceTree = "<group>"; };
-		A7D14F791356FACE00E1B980 /* GHCreateIssueTableViewCellContentView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GHCreateIssueTableViewCellContentView.xib; sourceTree = "<group>"; };
 		A7D14FBF13576D9B00E1B980 /* GHPushPayloadViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPushPayloadViewController.h; sourceTree = "<group>"; };
 		A7D14FC013576DA000E1B980 /* GHPushPayloadViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPushPayloadViewController.m; sourceTree = "<group>"; };
 		A7D14FC313582E9500E1B980 /* GHCommit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHCommit.h; sourceTree = "<group>"; };
@@ -1179,12 +1175,10 @@
 			children = (
 				A708950F1349FE0C000DD6CE /* GHIssueDescriptionTableViewCell.h */,
 				A70895101349FE0C000DD6CE /* GHIssueDescriptionTableViewCell.m */,
-				A70895111349FE0C000DD6CE /* GHIssueDescriptionTableViewCellContentView.xib */,
 				A7F62614134B7CD1006487CA /* GHNewCommentTableViewCell.h */,
 				A7F62615134B7CD2006487CA /* GHNewCommentTableViewCell.m */,
 				A7D14F771356FACB00E1B980 /* GHCreateIssueTableViewCell.h */,
 				A7D14F781356FACD00E1B980 /* GHCreateIssueTableViewCell.m */,
-				A7D14F791356FACE00E1B980 /* GHCreateIssueTableViewCellContentView.xib */,
 				A706C0C1139AC407008A6184 /* CGCommon.h */,
 				A706C0C2139AC408008A6184 /* CGCommon.m */,
 				A706C0AC139AC22D008A6184 /* INProgressView.h */,
@@ -3183,6 +3177,7 @@
 		A7BF13EE1342149C001AE50D /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastUpgradeCheck = 0420;
 				ORGANIZATIONNAME = Home;
 			};
 			buildConfigurationList = A7BF13F11342149C001AE50D /* Build configuration list for PBXProject "iGithub" */;
@@ -3216,7 +3211,6 @@
 				A75057371343033200514A82 /* GHGlossBottomBorder@2x.png in Resources */,
 				A75057381343033200514A82 /* GHGlossTopBorder.png in Resources */,
 				A75057391343033200514A82 /* GHGlossBottomBorder.png in Resources */,
-				A70895131349FE0C000DD6CE /* GHIssueDescriptionTableViewCellContentView.xib in Resources */,
 				A7089525134A2F24000DD6CE /* UITableViewCellAccessoryDisclosureIndicatorSelected.PNG in Resources */,
 				A7089526134A2F24000DD6CE /* UITableViewCellAccessoryDisclosureIndicator.PNG in Resources */,
 				A7089527134A2F24000DD6CE /* UITableViewCellAccessoryDisclosureIndicatorSelected@2x.PNG in Resources */,
@@ -3229,7 +3223,6 @@
 				A73AE5AD134EFDF400E9EBA4 /* 56-feed@2x.png in Resources */,
 				A76FC9A61352D231004C642E /* 145-persondot.png in Resources */,
 				A76FC9A71352D231004C642E /* 145-persondot@2x.png in Resources */,
-				A7D14F7B1356FACF00E1B980 /* GHCreateIssueTableViewCellContentView.xib in Resources */,
 				A76771641370A34F006D70D6 /* GHClipBoard.png in Resources */,
 				A76771651370A34F006D70D6 /* GHClipBoard@2x.png in Resources */,
 				A76771681370A5B2006D70D6 /* GHClipBoardPrivate.png in Resources */,
