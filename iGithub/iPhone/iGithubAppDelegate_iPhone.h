@@ -15,7 +15,7 @@
 #import "GHSearchViewController.h"
 
 #warning Icons for folders and files in browse content
-#warning Dttextview selectionstyle and userinteraction
+#warning Google for iPhone design
 
 @interface iGithubAppDelegate_iPhone : iGithubAppDelegate <MFMailComposeViewControllerDelegate> {
     UITabBarController *_tabBarController;

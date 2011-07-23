@@ -9,7 +9,6 @@
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
 
-#warning Google for iPhone design
 #warning Auto reload newsfeed after deserialization
 #warning enable markdown for gists
 
