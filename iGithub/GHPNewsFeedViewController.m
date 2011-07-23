@@ -44,73 +44,106 @@
 }
 
 - (void)pullToReleaseTableViewReloadData {
+    [super pullToReleaseTableViewReloadData];
     [self downloadNewsFeed];
 }
 
 - (void)cacheNewsFeedHeight {
     [self.newsFeed.items enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         GHNewsFeedItem *item = obj;
+        CGFloat height = [GHPDefaultNewsFeedTableViewCell heightWithContent:[self descriptionForNewsFeedItem:item]];
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:idx inSection:0];
         
-        CGFloat height = UITableViewAutomaticDimension;
+        [self cacheHeight:height forRowAtIndexPath:indexPath];
+    }];
+}
+
+- (NSString *)descriptionForNewsFeedItem:(GHNewsFeedItem *)item {
+    NSString *description = nil;
+    
+    if (item.payload.type == GHPayloadIssuesEvent) {
+        // this is the height for an issue cell, we will display the whole issue
+        GHIssuePayload *payload = (GHIssuePayload *)item.payload;
         
-        if (item.payload.type == GHPayloadIssuesEvent) {
-            // this is the height for an issue cell, we will display the whole issue
-            GHIssuePayload *payload = (GHIssuePayload *)item.payload;
+        if ([GHIssue isIssueAvailableForRepository:item.repository.fullName withNumber:payload.number]) {
+            GHIssue *issue = [GHIssue issueFromDatabaseOnRepository:item.repository.fullName 
+                                                         withNumber:payload.number];
             
-            if ([GHIssue isIssueAvailableForRepository:item.repository.fullName withNumber:payload.number]) {
-                GHIssue *issue = [GHIssue issueFromDatabaseOnRepository:item.repository.fullName 
-                                                             withNumber:payload.number];
-                
-                NSString *description = issue.title;
-                height = [GHPDefaultNewsFeedTableViewCell heightWithContent:description];
-            } else {
-                height = [GHPDefaultNewsFeedTableViewCell heightWithContent:nil];
-            }
-        } else if (item.payload.type == GHPayloadPushEvent) {
-            GHPushPayload *payload = (GHPushPayload *)item.payload;
-            height = [GHPDefaultNewsFeedTableViewCell heightWithContent:payload.previewString ];
-        } else if(item.payload.type == GHPayloadCommitCommentEvent) {
-            height = GHPDefaultNewsFeedTableViewCellHeight;
-        } else if(item.payload.type == GHPayloadFollowEvent) {
-            height = GHPDefaultNewsFeedTableViewCellHeight;
-        } else if(item.payload.type == GHPayloadWatchEvent) {
-            height = GHPDefaultNewsFeedTableViewCellHeight;
-        } else if(item.payload.type == GHPayloadCreateEvent) {
-            height = GHPDefaultNewsFeedTableViewCellHeight;
-        } else if(item.payload.type == GHPayloadForkEvent) {
-            height = GHPDefaultNewsFeedTableViewCellHeight;
-        } else if(item.payload.type == GHPayloadDeleteEvent) {
-            height = GHPDefaultNewsFeedTableViewCellHeight;
-        } else if(item.payload.type == GHPayloadGollumEvent) {
-            height = GHPDefaultNewsFeedTableViewCellHeight;
-        } else if(item.payload.type == GHPayloadGistEvent) {
-            GHGistEventPayload *payload = (GHGistEventPayload *)item.payload;
-            NSString *description = payload.descriptionGist ? payload.descriptionGist : payload.snippet;
-            height = [GHPDefaultNewsFeedTableViewCell heightWithContent:description];
-        } else if(item.payload.type == GHPayloadDownloadEvent) {
-            GHDownloadEventPayload *payload = (GHDownloadEventPayload *)item.payload;
-            NSString *description = [payload.URL lastPathComponent];
-            height = [GHPDefaultNewsFeedTableViewCell heightWithContent:description];
-        } else if(item.payload.type == GHPayloadPullRequestEvent) {
-            height = [GHPDefaultNewsFeedTableViewCell heightWithContent:[self descriptionForNewsFeedItem:item] ];
-        } else if(item.payload.type == GHPayloadMemberEvent) {
-            height = GHPDefaultNewsFeedTableViewCellHeight;
-        } else if(item.payload.type == GHPayloadIssueCommentEvent) {
-            height = GHPDefaultNewsFeedTableViewCellHeight;
-        } else if(item.payload.type == GHPayloadForkApplyEvent) {
-            height = GHPDefaultNewsFeedTableViewCellHeight;
-        } else if (item.payload.type == GHPayloadPublicEvent) {
-            height = GHPDefaultNewsFeedTableViewCellHeight;
+            description = [NSString stringWithFormat:NSLocalizedString(@"%@ Issue %@:\n\n%@", @""), payload.action, payload.number, issue.title];
+        }
+    } else if (item.payload.type == GHPayloadPushEvent) {
+        GHPushPayload *payload = (GHPushPayload *)item.payload;
+        // this is a commit / push message, we will display max 2 commits
+        description = [NSString stringWithFormat:NSLocalizedString(@"pushed to %@ (%d)\n\n%@", @""), payload.branch, payload.commits.count, payload.previewString];
+    } else if(item.payload.type == GHPayloadCommitCommentEvent) {
+        description = NSLocalizedString(@"commented on a commit", @"");
+    } else if(item.payload.type == GHPayloadFollowEvent) {
+        GHFollowEventPayload *payload = (GHFollowEventPayload *)item.payload;
+        description = payload.target.login;
+    } else if(item.payload.type == GHPayloadWatchEvent) {
+        GHWatchEventPayload *payload = (GHWatchEventPayload *)item.payload;
+        description = [NSString stringWithFormat:NSLocalizedString(@"%@ watching", @""), payload.action];
+    } else if(item.payload.type == GHPayloadCreateEvent) {
+        GHCreateEventPayload *payload = (GHCreateEventPayload *)item.payload;
+        if (payload.objectType == GHCreateEventObjectRepository) {
+            description = NSLocalizedString(@"created repository", @"");
+        } else if (payload.objectType == GHCreateEventObjectBranch) {
+            description = [NSString stringWithFormat:NSLocalizedString(@"created branch %@", @""), payload.ref];
+        } else if (payload.objectType == GHCreateEventObjectTag) {
+            description = [NSString stringWithFormat:NSLocalizedString(@"created tag %@", @""), payload.ref];
         } else {
-#if DEBUG
-            height = UITableViewAutomaticDimension;
-#else
-            height = 0.0f;
-#endif
+            description = @"__UNKNWON_CREATE_EVENT__";
+        }
+    } else if(item.payload.type == GHPayloadForkEvent) {
+        description = NSLocalizedString(@"forked repository", @"");
+    } else if(item.payload.type == GHPayloadDeleteEvent) {
+        GHDeleteEventPayload *payload = (GHDeleteEventPayload *)item.payload;
+        description = [NSString stringWithFormat:NSLocalizedString(@"deleted %@ %@", @""), payload.refType, payload.ref];
+    } else if(item.payload.type == GHPayloadGollumEvent) {
+        GHGollumEventPayload *payload = (GHGollumEventPayload *)item.payload;
+        description = [NSString stringWithFormat:NSLocalizedString(@"%@ %@ in wiki", @""), payload.action, payload.pageName];
+    } else if(item.payload.type == GHPayloadGistEvent) {
+        GHGistEventPayload *payload = (GHGistEventPayload *)item.payload;
+        
+        NSString *action = payload.action;
+        if ([action hasSuffix:@"e"]) {
+            action = [action stringByAppendingString:@"d"];
+        } else {
+            action = [action stringByAppendingString:@"ed"];
         }
         
-        [self cacheHeight:height forRowAtIndexPath:[NSIndexPath indexPathForRow:idx inSection:0]];
-    }];
+        description = [NSString stringWithFormat:@"%@ %@:\n\n%@", action, payload.name, payload.descriptionGist ? payload.descriptionGist : payload.snippet];
+    } else if(item.payload.type == GHPayloadDownloadEvent) {
+        // this is the height for an issue cell, we will display the whole issue
+        GHDownloadEventPayload *payload = (GHDownloadEventPayload *)item.payload;
+        description = [NSString stringWithFormat:NSLocalizedString(@"uploaded file:%@", @""), item.actor, [payload.URL lastPathComponent]];
+    } else if(item.payload.type == GHPayloadPullRequestEvent) {
+        // this is the height for an issue cell, we will display the whole issue
+        GHPullRequestPayload *payload = (GHPullRequestPayload *)item.payload;
+        
+        if (payload.pullRequest) {
+            NSString *additionsString = [NSString stringWithFormat:NSLocalizedString(@"%@ %@", @""), payload.pullRequest.additions, [payload.pullRequest.additions intValue] == 1 ? NSLocalizedString(@"addition", @"") : NSLocalizedString(@"additions", @"") ];
+            NSString *deletionsString = [NSString stringWithFormat:NSLocalizedString(@"%@ %@", @""), payload.pullRequest.deletions, [payload.pullRequest.deletions intValue] == 1 ? NSLocalizedString(@"deletion", @"") : NSLocalizedString(@"deletions", @"") ];
+            NSString *commitsString = [NSString stringWithFormat:NSLocalizedString(@"%@ %@", @""), payload.pullRequest.commits, [payload.pullRequest.commits intValue] == 1 ? NSLocalizedString(@"commit", @"") : NSLocalizedString(@"commits", @"") ];
+            
+            description = [NSString stringWithFormat:NSLocalizedString(@"%@ with %@ and %@", @""), commitsString, additionsString, deletionsString];
+        }
+        description = [NSString stringWithFormat:NSLocalizedString(@"%@ pull request %@:\n\n%@", @""), payload.action, payload.number, description];
+    } else if(item.payload.type == GHPayloadMemberEvent) {
+        GHMemberEventPayload *payload = (GHMemberEventPayload *)item.payload;
+        
+        description = [NSString stringWithFormat:NSLocalizedString(@"%@ %@", @""), payload.action, payload.member.login];
+    } else if(item.payload.type == GHPayloadIssueCommentEvent) {
+        GHIssuesCommentPayload *payload = (GHIssuesCommentPayload *)item.payload;
+        description = [NSString stringWithFormat:NSLocalizedString(@"commented on Issue %@", @""), payload.issueID];
+    } else if(item.payload.type == GHPayloadForkApplyEvent) {
+        GHForkApplyEventPayload *payload = (GHForkApplyEventPayload *)item.payload;
+        description = [NSString stringWithFormat:NSLocalizedString(@"applied fork commits:\n\n%@", @""), payload.commit];
+    } else if (item.payload.type == GHPayloadPublicEvent) {
+        description = NSLocalizedString(@"open sourced", @"");
+    }
+    
+    return description;
 }
 
 #pragma mark - Initialization
@@ -137,24 +170,6 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     // Return YES for supported orientations
 	return YES;
-}
-
-- (NSString *)descriptionForNewsFeedItem:(GHNewsFeedItem *)item {
-    NSString *description = nil;
-    
-    if (item.payload.type == GHPayloadPullRequestEvent) {
-        GHPullRequestPayload *payload = (GHPullRequestPayload *)item.payload;
-        
-        if (payload.pullRequest) {
-            NSString *additionsString = [NSString stringWithFormat:NSLocalizedString(@"%@ %@", @""), payload.pullRequest.additions, [payload.pullRequest.additions intValue] == 1 ? NSLocalizedString(@"addition", @"") : NSLocalizedString(@"additions", @"") ];
-            NSString *deletionsString = [NSString stringWithFormat:NSLocalizedString(@"%@ %@", @""), payload.pullRequest.deletions, [payload.pullRequest.deletions intValue] == 1 ? NSLocalizedString(@"deletion", @"") : NSLocalizedString(@"deletions", @"") ];
-            NSString *commitsString = [NSString stringWithFormat:NSLocalizedString(@"%@ %@", @""), payload.pullRequest.commits, [payload.pullRequest.commits intValue] == 1 ? NSLocalizedString(@"commit", @"") : NSLocalizedString(@"commits", @"") ];
-            
-            description = [NSString stringWithFormat:NSLocalizedString(@"%@ with %@ and %@", @""), commitsString, additionsString, deletionsString];
-        }
-    }
-    
-    return description;
 }
 
 #pragma mark - Table view data source
@@ -184,20 +199,14 @@
         [self updateImageView:cell.imageView atIndexPath:indexPath withGravatarID:item.actorAttributes.gravatarID];
         
         GHIssuePayload *payload = (GHIssuePayload *)item.payload;
-        cell.textLabel.text = [NSString stringWithFormat:@"%@ %@", 
-                                item.actor, 
-                                [NSString stringWithFormat:NSLocalizedString(@"%@ Issue %@", @""), 
-                                 payload.action, 
-                                 payload.number
-                                 ]
-                                ];
+        cell.textLabel.text = item.actor;
         cell.repositoryLabel.text = item.repository.fullName;
         cell.timeLabel.text = item.creationDate.prettyShortTimeIntervalSinceNow;
         
         GHIssue *issue = [GHIssue issueFromDatabaseOnRepository:item.repository.fullName withNumber:payload.number];
         
         if (issue) {            
-            cell.detailTextLabel.text = issue.title;
+            cell.detailTextLabel.text = [self descriptionForNewsFeedItem:item];
         } else {
             [GHIssue issueOnRepository:[NSString stringWithFormat:@"%@/%@", item.repository.owner, item.repository.name] 
                             withNumber:payload.number 
@@ -224,12 +233,9 @@
         [self setupDefaultTableViewCell:cell forRowAtIndexPath:indexPath];
         [self updateImageView:cell.imageView atIndexPath:indexPath withGravatarID:item.actorAttributes.gravatarID];
         
-        GHPushPayload *payload = (GHPushPayload *)item.payload;
-        
-        NSUInteger numberOfCommits = [payload.commits count];
-        cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ pushed to %@ (%d)", @""), item.actor, payload.branch, numberOfCommits];
+        cell.textLabel.text = item.actor;
         cell.repositoryLabel.text = item.repository.fullName;
-        cell.detailTextLabel.text = payload.previewString;
+        cell.detailTextLabel.text = [self descriptionForNewsFeedItem:item];
         cell.timeLabel.text = item.creationDate.prettyShortTimeIntervalSinceNow;
         
         return cell;
@@ -243,7 +249,8 @@
         [self setupDefaultTableViewCell:cell forRowAtIndexPath:indexPath];
         [self updateImageView:cell.imageView atIndexPath:indexPath withGravatarID:item.actorAttributes.gravatarID];
         
-        cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ commented on a commit", @""), item.actor];
+        cell.textLabel.text = item.actor;
+        cell.detailTextLabel.text = [self descriptionForNewsFeedItem:item];
         cell.repositoryLabel.text = item.repository.fullName;
         cell.timeLabel.text = item.creationDate.prettyShortTimeIntervalSinceNow;
         
@@ -260,8 +267,8 @@
         
         GHFollowEventPayload *payload = (GHFollowEventPayload *)item.payload;
         
-        cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ started following", @""), item.actor];
-        cell.detailTextLabel.text = payload.target.login;
+        cell.textLabel.text = item.actor;
+        cell.detailTextLabel.text = [self descriptionForNewsFeedItem:item];
         cell.timeLabel.text = item.creationDate.prettyShortTimeIntervalSinceNow;
         
         [self updateImageView:cell.secondImageView atIndexPath:indexPath withGravatarID:payload.target.gravatarID];
@@ -277,9 +284,8 @@
         [self setupDefaultTableViewCell:cell forRowAtIndexPath:indexPath];
         [self updateImageView:cell.imageView atIndexPath:indexPath withGravatarID:item.actorAttributes.gravatarID];
         
-        GHWatchEventPayload *payload = (GHWatchEventPayload *)item.payload;
-        
-        cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ %@ watching", @""), item.actor, payload.action];
+        cell.textLabel.text = item.actor;
+        cell.detailTextLabel.text = [self descriptionForNewsFeedItem:item];
         cell.repositoryLabel.text = item.repository.fullName;
         cell.timeLabel.text = item.creationDate.prettyShortTimeIntervalSinceNow;
         
@@ -294,22 +300,10 @@
         [self setupDefaultTableViewCell:cell forRowAtIndexPath:indexPath];
         [self updateImageView:cell.imageView atIndexPath:indexPath withGravatarID:item.actorAttributes.gravatarID];
         
-        GHCreateEventPayload *payload = (GHCreateEventPayload *)item.payload;
-        
         cell.timeLabel.text = item.creationDate.prettyShortTimeIntervalSinceNow;
-        if (payload.objectType == GHCreateEventObjectRepository) {
-            cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ created repository", @""), item.actor];
-            cell.repositoryLabel.text = payload.ref;
-        } else if (payload.objectType == GHCreateEventObjectBranch) {
-            cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ created branch %@", @""), item.actor, payload.ref];
-            cell.repositoryLabel.text = item.repository.fullName;
-        } else if (payload.objectType == GHCreateEventObjectTag) {
-            cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ created tag %@", @""), item.actor, payload.ref];
-            cell.repositoryLabel.text = item.repository.fullName;
-        } else {
-            cell.textLabel.text = @"__UNKNWON_CREATE_EVENT__";
-            cell.repositoryLabel.text = nil;
-        }
+        cell.textLabel.text = item.actor;
+        cell.detailTextLabel.text = [self descriptionForNewsFeedItem:item];
+        cell.repositoryLabel.text = item.repository.fullName;
         
         return cell;
     } else if (item.payload.type == GHPayloadForkEvent) {
@@ -322,7 +316,8 @@
         [self setupDefaultTableViewCell:cell forRowAtIndexPath:indexPath];
         [self updateImageView:cell.imageView atIndexPath:indexPath withGravatarID:item.actorAttributes.gravatarID];
         
-        cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ forked repository", @""), item.actor];
+        cell.textLabel.text = item.actor;
+        cell.detailTextLabel.text = [self descriptionForNewsFeedItem:item];
         cell.repositoryLabel.text = item.repository.fullName;
         cell.timeLabel.text = item.creationDate.prettyShortTimeIntervalSinceNow;
         
@@ -337,10 +332,8 @@
         [self setupDefaultTableViewCell:cell forRowAtIndexPath:indexPath];
         [self updateImageView:cell.imageView atIndexPath:indexPath withGravatarID:item.actorAttributes.gravatarID];
         
-        GHDeleteEventPayload *payload = (GHDeleteEventPayload *)item.payload;
-        
-        cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ deleted %@ %@", @""), item.actor, payload.refType, payload.ref];
-        
+        cell.textLabel.text = item.actor;
+        cell.detailTextLabel.text = [self descriptionForNewsFeedItem:item];
         NSString *repoURL = item.repository.URL;
         NSArray *components = [repoURL componentsSeparatedByString:@"/"];
         NSUInteger count = [components count];
@@ -362,9 +355,8 @@
         [self setupDefaultTableViewCell:cell forRowAtIndexPath:indexPath];
         [self updateImageView:cell.imageView atIndexPath:indexPath withGravatarID:item.actorAttributes.gravatarID];
         
-        GHGollumEventPayload *payload = (GHGollumEventPayload *)item.payload;
-        
-        cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ %@ %@ in wiki", @""), item.actor, payload.action, payload.pageName];
+        cell.textLabel.text = item.actor;
+        cell.detailTextLabel.text = [self descriptionForNewsFeedItem:item];
         cell.repositoryLabel.text = item.repository.fullName;
         cell.timeLabel.text = item.creationDate.prettyShortTimeIntervalSinceNow;
         
@@ -379,18 +371,9 @@
         [self setupDefaultTableViewCell:cell forRowAtIndexPath:indexPath];
         [self updateImageView:cell.imageView atIndexPath:indexPath withGravatarID:item.actorAttributes.gravatarID];
         
-        GHGistEventPayload *payload = (GHGistEventPayload *)item.payload;
-        
-        NSString *action = payload.action;
-        if ([action hasSuffix:@"e"]) {
-            action = [action stringByAppendingString:@"d"];
-        } else {
-            action = [action stringByAppendingString:@"ed"];
-        }
-        
         cell.repositoryLabel.text = nil;
-        cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ %@ %@", @""), item.actor, action, payload.name];
-        cell.detailTextLabel.text = payload.descriptionGist ? payload.descriptionGist : payload.snippet;
+        cell.textLabel.text = item.actor;
+        cell.detailTextLabel.text = [self descriptionForNewsFeedItem:item];
         cell.timeLabel.text = item.creationDate.prettyShortTimeIntervalSinceNow;
         
         return cell;
@@ -404,11 +387,9 @@
         [self setupDefaultTableViewCell:cell forRowAtIndexPath:indexPath];
         [self updateImageView:cell.imageView atIndexPath:indexPath withGravatarID:item.actorAttributes.gravatarID];
         
-        GHDownloadEventPayload *payload = (GHDownloadEventPayload *)item.payload;
-        
         cell.repositoryLabel.text = item.repository.fullName;
-        cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ uploaded a file", @""), item.actor];
-        cell.detailTextLabel.text = [payload.URL lastPathComponent];
+        cell.textLabel.text = item.actor;
+        cell.detailTextLabel.text = [self descriptionForNewsFeedItem:item];
         cell.timeLabel.text = item.creationDate.prettyShortTimeIntervalSinceNow;
         
         return cell;
@@ -422,11 +403,9 @@
         [self setupDefaultTableViewCell:cell forRowAtIndexPath:indexPath];
         [self updateImageView:cell.imageView atIndexPath:indexPath withGravatarID:item.actorAttributes.gravatarID];
         
-        GHPullRequestPayload *payload = (GHPullRequestPayload *)item.payload;
-        
         cell.repositoryLabel.text = item.repository.fullName;
+        cell.textLabel.text = item.actor;
         cell.detailTextLabel.text = [self descriptionForNewsFeedItem:item];
-        cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ %@ pull request %@", @""), item.actor, payload.action, payload.number];
         cell.timeLabel.text = item.creationDate.prettyShortTimeIntervalSinceNow;
         
         return cell;
@@ -440,10 +419,9 @@
         [self setupDefaultTableViewCell:cell forRowAtIndexPath:indexPath];
         [self updateImageView:cell.imageView atIndexPath:indexPath withGravatarID:item.actorAttributes.gravatarID];
         
-        GHMemberEventPayload *payload = (GHMemberEventPayload *)item.payload;
-        
         cell.repositoryLabel.text = item.repository.fullName;
-        cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ %@ %@", @""), item.actor, payload.action, payload.member.login];
+        cell.textLabel.text = item.actor;
+        cell.detailTextLabel.text = [self descriptionForNewsFeedItem:item];
         cell.timeLabel.text = item.creationDate.prettyShortTimeIntervalSinceNow;
         
         return cell;
@@ -457,11 +435,9 @@
         [self setupDefaultTableViewCell:cell forRowAtIndexPath:indexPath];
         [self updateImageView:cell.imageView atIndexPath:indexPath withGravatarID:item.actorAttributes.gravatarID];
         
-        GHIssuesCommentPayload *payload = (GHIssuesCommentPayload *)item.payload;
-        
         cell.repositoryLabel.text = item.repository.fullName;
         cell.textLabel.text = item.actor;
-        cell.detailTextLabel.text = [NSString stringWithFormat:NSLocalizedString(@"commented on Issue %@", @""), payload.issueID];
+        cell.detailTextLabel.text = [self descriptionForNewsFeedItem:item];
         cell.timeLabel.text = item.creationDate.prettyShortTimeIntervalSinceNow;
         
         return cell;
@@ -475,11 +451,9 @@
         [self setupDefaultTableViewCell:cell forRowAtIndexPath:indexPath];
         [self updateImageView:cell.imageView atIndexPath:indexPath withGravatarID:item.actorAttributes.gravatarID];
         
-        GHForkApplyEventPayload *payload = (GHForkApplyEventPayload *)item.payload;
-        
         cell.repositoryLabel.text = item.repository.fullName;
-        cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ applied fork commits", @""), item.actor];
-        cell.detailTextLabel.text = payload.commit;
+        cell.textLabel.text = item.actor;
+        cell.detailTextLabel.text = [self descriptionForNewsFeedItem:item];
         cell.timeLabel.text = item.creationDate.prettyShortTimeIntervalSinceNow;
         
         return cell;
@@ -494,7 +468,8 @@
         [self updateImageView:cell.imageView atIndexPath:indexPath withGravatarID:item.actorAttributes.gravatarID];
         
         cell.repositoryLabel.text = item.repository.fullName;
-        cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ open sourced", @""), item.actor];
+        cell.textLabel.text = item.actor;
+        cell.detailTextLabel.text = [self descriptionForNewsFeedItem:item];
         cell.timeLabel.text = item.creationDate.prettyShortTimeIntervalSinceNow;
         
         return cell;
