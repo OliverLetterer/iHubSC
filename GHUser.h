@@ -36,6 +36,7 @@
     NSString *_location;
     NSString *_company;
     NSString *_blog;
+    NSString *_name;
     
     UIImage *_image;
 }
@@ -66,6 +67,7 @@
 @property (nonatomic, copy) NSString *location;
 @property (nonatomic, copy) NSString *company;
 @property (nonatomic, copy) NSString *blog;
+@property (nonatomic, copy) NSString *name;
 
 @property (nonatomic, retain) UIImage *image;
 

@@ -527,7 +527,7 @@
         GHCommit *commit = [self.discussion.commits objectAtIndex:indexPath.row-1];
         
         [self updateImageView:cell.imageView atIndexPath:indexPath withGravatarID:commit.user.gravatarID];
-        cell.textLabel.text = [NSString stringWithFormat:@"%@ - %@", commit.user.login, commit.ID];
+        cell.textLabel.text = [NSString stringWithFormat:@"%@ - %@", commit.commiter.name, commit.ID];
         cell.detailTextLabel.text = commit.message;
         
         // Configure the cell...

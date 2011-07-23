@@ -13,7 +13,7 @@
 @implementation GHUser
 
 @synthesize createdAt=_createdAt, gravatarID=_gravatarID, login=_login, type=_type, image=_image;
-@synthesize followersCount=_followersCount, followingCount=_followingCount, ID=_ID, publicGistCount=_publicGistCount, publicRepoCount=_publicRepoCount;
+@synthesize followersCount=_followersCount, followingCount=_followingCount, ID=_ID, publicGistCount=_publicGistCount, publicRepoCount=_publicRepoCount, name=_name;
 
 @synthesize privateRepoCount=_privateRepoCount, collaborators=_collaborators, diskUsage=_diskUsage, ownedPrivateRepoCount=_ownedPrivateRepoCount, privateGistCount=_privateGistCount, planCollaborators=_planCollaborators, planSpace=_planSpace, planPrivateRepos=_planPrivateRepos;
 
@@ -164,6 +164,7 @@
         self.location = [rawDictionary objectForKeyOrNilOnNullObject:@"location"];
         self.company = [rawDictionary objectForKeyOrNilOnNullObject:@"company"];
         self.blog = [rawDictionary objectForKeyOrNilOnNullObject:@"blog"];
+        self.name = [rawDictionary objectForKeyOrNilOnNullObject:@"name"];
         
         // API v3
         if (!self.gravatarID) {
@@ -189,6 +190,7 @@
     [_EMail release];
     [_company release];
     [_blog release];
+    [_name release];
     
     [_image release];
     [super dealloc];
