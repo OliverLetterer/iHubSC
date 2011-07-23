@@ -19,6 +19,7 @@
 - (void)downloadNewsFeed;
 - (void)cacheNewsFeedHeight;
 
+#warning update so that only the username is in textLabel
 - (NSString *)descriptionForNewsFeedItem:(GHNewsFeedItem *)item;
 
 @end
