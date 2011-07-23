@@ -21,6 +21,7 @@
         self.attributedTextView.backgroundColor = [UIColor clearColor];
         self.attributedTextView.textDelegate = self;
         self.attributedTextView.alwaysBounceVertical = NO;
+        self.attributedTextView.onlyInteractWithSubview = YES;
         [self.contentView addSubview:self.attributedTextView];
     }
     return self;
@@ -41,6 +42,7 @@
 - (void)layoutSubviews {
     [super layoutSubviews];
     self.attributedTextView.frame = CGRectMake(64.0f, 29.0f, CGRectGetWidth(self.contentView.bounds)-64.0f, CGRectGetHeight(self.contentView.bounds)-29.0f);
+    [self.attributedTextView layoutSubviews];
 }
 
 - (void)prepareForReuse {
