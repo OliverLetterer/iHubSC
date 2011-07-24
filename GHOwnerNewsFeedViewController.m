@@ -327,6 +327,7 @@
                                            }
                                        } else {
                                            self.segmentControl.selectedSegmentIndex = 0;
+                                           _lastSelectedSegmentControlIndex = 0;
                                            [self loadDataBasedOnSegmentControl];
                                            UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Organization Error", @"") 
                                                                                             message:NSLocalizedString(@"You are not part of any Organization!", @"") 
