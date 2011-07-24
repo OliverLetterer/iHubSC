@@ -10,9 +10,9 @@
 #import "GHTableViewController.h"
 #import "GHPInfoSectionTableViewController.h"
 #import "GHPIssueInfoTableViewCell.h"
-#import "GHPIssueCommentTableViewCell.h"
+#import "GHPAttributedTableViewCell.h"
 
-@interface GHPIssueViewController : GHPInfoSectionTableViewController <UIAlertViewDelegate, GHPIssueInfoTableViewCellDelegate, GHPIssueCommentTableViewCellDelegate, UITextViewDelegate, NSCoding> {
+@interface GHPIssueViewController : GHPInfoSectionTableViewController <UIAlertViewDelegate, GHPIssueInfoTableViewCellDelegate, GHPAttributedTableViewCellDelegate, UITextViewDelegate, NSCoding> {
 @private
     NSString *_repositoryString;
     NSNumber *_issueNumber;

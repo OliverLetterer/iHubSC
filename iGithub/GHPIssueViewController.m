@@ -135,7 +135,7 @@
                     [self handleError:error];
                 } else {
                     [self.history addObject:comment];
-                    CGFloat height = [GHPIssueCommentTableViewCell heightWithAttributedString:comment.attributedBody 
+                    CGFloat height = [GHPAttributedTableViewCell heightWithAttributedString:comment.attributedBody 
                                                                          inAttributedTextView:nil];
                     [self cacheHeight:height forRowAtIndexPath:[NSIndexPath indexPathForRow:self.history.count inSection:kUITableViewSectionHistory]];
                     self.issue.comments = [NSNumber numberWithInt:[self.issue.comments intValue] + 1];
@@ -562,10 +562,10 @@
             
             if ([object isKindOfClass:[GHAPIIssueCommentV3 class] ]) {
                 static NSString *CellIdentifier = @"GHPIssueCommentTableViewCell";
-                GHPIssueCommentTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+                GHPAttributedTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
                 
                 if (!cell) {
-                    cell = [[[GHPIssueCommentTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
+                    cell = [[[GHPAttributedTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
                 }
                 [self setupDefaultTableViewCell:cell forRowAtIndexPath:indexPath];
 
@@ -766,7 +766,7 @@
             // display a comment
             GHAPIIssueCommentV3 *comment = (GHAPIIssueCommentV3 *)obj;
             
-            height = [GHPIssueCommentTableViewCell heightWithAttributedString:comment.attributedBody 
+            height = [GHPAttributedTableViewCell heightWithAttributedString:comment.attributedBody 
                                                          inAttributedTextView:textView];
         } else if ([obj isKindOfClass:[GHAPIIssueEventV3 class] ]) {
             GHAPIIssueEventV3 *event = (GHAPIIssueEventV3 *)obj;
@@ -1045,12 +1045,12 @@
 
 #pragma mark - GHPIssueCommentTableViewCellDelegate
 
-- (void)commentTableViewCell:(GHPIssueCommentTableViewCell *)cell receivedClickForButton:(DTLinkButton *)button {
+- (void)commentTableViewCell:(GHPAttributedTableViewCell *)cell receivedClickForButton:(DTLinkButton *)button {
     GHWebViewViewController *viewController = [[[GHWebViewViewController alloc] initWithURL:button.url ] autorelease];
     [self.advancedNavigationController pushViewController:viewController afterViewController:self animated:YES];
 }
 
-- (void)commentTableViewCell:(GHPIssueCommentTableViewCell *)cell longPressRecognizedForButton:(DTLinkButton *)button {
+- (void)commentTableViewCell:(GHPAttributedTableViewCell *)cell longPressRecognizedForButton:(DTLinkButton *)button {
     self.selectedURL = button.url;
     UIActionSheet *sheet = [[[UIActionSheet alloc] init] autorelease];
     

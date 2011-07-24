@@ -181,7 +181,7 @@
 		A7837E95136C905200B13B95 /* GHAPIIssueV3.m in Sources */ = {isa = PBXBuildFile; fileRef = A7837E94136C905100B13B95 /* GHAPIIssueV3.m */; };
 		A7837E9A136C93FC00B13B95 /* GHAPIMilestoneV3.m in Sources */ = {isa = PBXBuildFile; fileRef = A7837E99136C93FC00B13B95 /* GHAPIMilestoneV3.m */; };
 		A7837EA5136CADD400B13B95 /* GHAPIMilestoneV3TableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A7837EA4136CADD400B13B95 /* GHAPIMilestoneV3TableViewCell.m */; };
-		A784C40F13D457B500859318 /* GHPIssueCommentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A784C40E13D457B500859318 /* GHPIssueCommentTableViewCell.m */; };
+		A784C40F13D457B500859318 /* GHPAttributedTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A784C40E13D457B500859318 /* GHPAttributedTableViewCell.m */; };
 		A78B70DB13BCE08900F4CE5E /* TabBarItemSelectedBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = A78B70D913BCE08900F4CE5E /* TabBarItemSelectedBackground.png */; };
 		A78B70DC13BCE08900F4CE5E /* TabBarItemSelectedBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A78B70DA13BCE08900F4CE5E /* TabBarItemSelectedBackground@2x.png */; };
 		A78B70DF13BCE88600F4CE5E /* ANBackgroundImage.png in Resources */ = {isa = PBXBuildFile; fileRef = A78B70DE13BCE88600F4CE5E /* ANBackgroundImage.png */; };
@@ -655,8 +655,8 @@
 		A7837E99136C93FC00B13B95 /* GHAPIMilestoneV3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHAPIMilestoneV3.m; sourceTree = "<group>"; };
 		A7837EA3136CADD400B13B95 /* GHAPIMilestoneV3TableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHAPIMilestoneV3TableViewCell.h; sourceTree = "<group>"; };
 		A7837EA4136CADD400B13B95 /* GHAPIMilestoneV3TableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHAPIMilestoneV3TableViewCell.m; sourceTree = "<group>"; };
-		A784C40D13D457B400859318 /* GHPIssueCommentTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPIssueCommentTableViewCell.h; sourceTree = "<group>"; };
-		A784C40E13D457B500859318 /* GHPIssueCommentTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPIssueCommentTableViewCell.m; sourceTree = "<group>"; };
+		A784C40D13D457B400859318 /* GHPAttributedTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; path = GHPAttributedTableViewCell.h; sourceTree = "<group>"; };
+		A784C40E13D457B500859318 /* GHPAttributedTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPAttributedTableViewCell.m; sourceTree = "<group>"; };
 		A78B70D913BCE08900F4CE5E /* TabBarItemSelectedBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TabBarItemSelectedBackground.png; sourceTree = "<group>"; };
 		A78B70DA13BCE08900F4CE5E /* TabBarItemSelectedBackground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TabBarItemSelectedBackground@2x.png"; sourceTree = "<group>"; };
 		A78B70DE13BCE88600F4CE5E /* ANBackgroundImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ANBackgroundImage.png; sourceTree = "<group>"; };
@@ -1127,6 +1127,7 @@
 		A703CB2113C64949002767EB /* UITableViewCell - Generic Subclasses */ = {
 			isa = PBXGroup;
 			children = (
+				A725F66313DC075F00F08DA7 /* GHPAttributedTableViewCell */,
 				A70FF3A013BF6A320082E2EC /* GHPCollapsingAndSpinningTableViewCell */,
 				A703CB2813C64B3A002767EB /* GHPImageDetailTableViewCell */,
 				A703CB1F13C648AF002767EB /* GHPDefaultTableViewCell */,
@@ -1389,6 +1390,15 @@
 			);
 			name = Search;
 			path = ..;
+			sourceTree = "<group>";
+		};
+		A725F66313DC075F00F08DA7 /* GHPAttributedTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				A784C40D13D457B400859318 /* GHPAttributedTableViewCell.h */,
+				A784C40E13D457B500859318 /* GHPAttributedTableViewCell.m */,
+			);
+			name = GHPAttributedTableViewCell;
 			sourceTree = "<group>";
 		};
 		A7288A6B13A9091500170D57 /* SyntaxHighlighting */ = {
@@ -2273,8 +2283,6 @@
 				A70A11A613C38BFB00685749 /* GHPNewCommentTableViewCell.m */,
 				A75EFA4F13D4325200C162F3 /* GHPIssueInfoTableViewCell.h */,
 				A75EFA5013D4325200C162F3 /* GHPIssueInfoTableViewCell.m */,
-				A784C40D13D457B400859318 /* GHPIssueCommentTableViewCell.h */,
-				A784C40E13D457B500859318 /* GHPIssueCommentTableViewCell.m */,
 			);
 			name = UITableViewCells;
 			sourceTree = "<group>";
@@ -3492,7 +3500,7 @@
 				A72FB17B13CF763100D2BE07 /* GHPIssuesOfAuthenticatedUserViewController.m in Sources */,
 				A75EFA5113D4325200C162F3 /* GHPIssueInfoTableViewCell.m in Sources */,
 				A75EFA5813D4382F00C162F3 /* WAAttributesMarkdownFormatter.m in Sources */,
-				A784C40F13D457B500859318 /* GHPIssueCommentTableViewCell.m in Sources */,
+				A784C40F13D457B500859318 /* GHPAttributedTableViewCell.m in Sources */,
 				A7C2D14413D7701E00DACDF7 /* GHViewController.m in Sources */,
 				A7D0277113DA0F500009FE77 /* WASelectedAttributedMarkdownFormatter.m in Sources */,
 				A798896D13DB395A0052FD50 /* CGUtils.m in Sources */,
