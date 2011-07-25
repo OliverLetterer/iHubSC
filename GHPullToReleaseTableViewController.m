@@ -110,7 +110,7 @@ NSString *const NSUserDefaultLastUpdateDateKey = @"NSUserDefaultLastUpdateDateKe
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     // Return the number of sections.
-    return 1;
+    return 0;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
