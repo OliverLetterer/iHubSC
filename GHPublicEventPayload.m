@@ -7,7 +7,7 @@
 //
 
 #import "GHPublicEventPayload.h"
-
+#import "GithubAPI.h"
 
 @implementation GHPublicEventPayload
 
