@@ -10,7 +10,6 @@
 #import "GithubAPI.h"
 #import "GHSettingsHelper.h"
 #import "GHAttributedTableViewCell.h"
-#import "GHIssueDescriptionTableViewCell.h"
 #import "GHCollapsingAndSpinningTableViewCell.h"
 #import "GHDescriptionTableViewCell.h"
 #import "GHNewCommentTableViewCell.h"
