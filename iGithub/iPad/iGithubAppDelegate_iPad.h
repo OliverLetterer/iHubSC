@@ -10,8 +10,6 @@
 #import "iGithubAppDelegate.h"
 #import "ANAdvancedNavigationController.h"
 
-#warning Navigate forward while typing a comment causes strange things to happen
-
 @interface iGithubAppDelegate_iPad : iGithubAppDelegate <ANAdvancedNavigationControllerDelegate> {
     ANAdvancedNavigationController *_advancedNavigationController;
 }
