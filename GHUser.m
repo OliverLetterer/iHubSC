@@ -53,6 +53,7 @@
     [encoder encodeObject:_location forKey:@"location"];
     [encoder encodeObject:_company forKey:@"company"];
     [encoder encodeObject:_blog forKey:@"blog"];
+    [encoder encodeObject:_name forKey:@"name"];
 }
 
 - (id)initWithCoder:(NSCoder *)decoder {
@@ -80,6 +81,7 @@
         _location = [[decoder decodeObjectForKey:@"location"] retain];
         _company = [[decoder decodeObjectForKey:@"company"] retain];
         _blog = [[decoder decodeObjectForKey:@"blog"] retain];
+        _name = [[decoder decodeObjectForKey:@"name"] retain];
     }
     return self;
 }
