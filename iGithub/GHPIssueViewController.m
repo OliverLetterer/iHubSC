@@ -40,6 +40,7 @@
 @synthesize repository=_repository, discussion=_discussion, history=_history;
 @synthesize issue=_issue;
 @synthesize selectedURL=_selectedURL;
+@synthesize lastUserComment=_lastUserComment;
 
 #pragma mark - setters and getters
 
@@ -100,6 +101,7 @@
     [_history release];
     [_discussion release];
     [_selectedURL release];
+    [_lastUserComment release];
     
     [super dealloc];
 }
@@ -400,6 +402,10 @@
             
             cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ (right now)", @""), [GHSettingsHelper username]];
             cell.delegate = self;
+            if (self.lastUserComment) {
+                cell.textView.text = self.lastUserComment;
+                self.lastUserComment = nil;
+            }
             
             return cell;
         } else {
@@ -876,6 +882,19 @@
     [encoder encodeObject:_discussion forKey:@"discussion"];
     [encoder encodeObject:_history forKey:@"history"];
     [encoder encodeFloat:_bodyHeight forKey:@"bodyHeight"];
+    if (self.isViewLoaded) {
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.history.count+1 inSection:kUITableViewSectionHistory];
+        GHPNewCommentTableViewCell *cell = nil;
+        @try {
+            cell = (GHPNewCommentTableViewCell *)[self.tableView cellForRowAtIndexPath:indexPath];
+        }
+        @catch (NSException *exception) { }
+        NSString *text = cell.textView.text;
+        
+        if (text != nil) {
+            [encoder encodeObject:text forKey:@"lastUserComment"];
+        }
+    }
 }
 
 - (id)initWithCoder:(NSCoder *)decoder {
@@ -887,6 +906,7 @@
         _discussion = [[decoder decodeObjectForKey:@"discussion"] retain];
         _history = [[decoder decodeObjectForKey:@"history"] retain];
         _bodyHeight = [decoder decodeFloatForKey:@"bodyHeight"];
+        _lastUserComment = [[decoder decodeObjectForKey:@"lastUserComment"] retain];
     }
     return self;
 }

@@ -30,6 +30,7 @@
 
 @synthesize gistID=_gistID, gist=_gist;
 @synthesize comments=_comments;
+@synthesize lastUserComment=_lastUserComment;
 
 #pragma mark - setters and getters
 
@@ -67,6 +68,7 @@
     [_gistID release];
     [_gist release];
     [_comments release];
+    [_lastUserComment release];
     
     [super dealloc];
 }
@@ -245,6 +247,10 @@
             
             cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ (right now)", @""), [GHSettingsHelper username]];
             cell.delegate = self;
+            if (self.lastUserComment) {
+                cell.textView.text = self.lastUserComment;
+                self.lastUserComment = nil;
+            }
             
             return cell;
         } else {
@@ -424,6 +430,20 @@
     [encoder encodeObject:_gistID forKey:@"gistID"];
     [encoder encodeObject:_gist forKey:@"gist"];
     [encoder encodeObject:_comments forKey:@"comments"];
+    
+    if (self.isViewLoaded) {
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.comments.count+1 inSection:kUITableViewSectionComments];
+        GHPNewCommentTableViewCell *cell = nil;
+        @try {
+            cell = (GHPNewCommentTableViewCell *)[self.tableView cellForRowAtIndexPath:indexPath];
+        }
+        @catch (NSException *exception) { }
+        NSString *text = cell.textView.text;
+        
+        if (text != nil) {
+            [encoder encodeObject:text forKey:@"lastUserComment"];
+        }
+    }
 }
 
 - (id)initWithCoder:(NSCoder *)decoder {
@@ -431,6 +451,7 @@
         _gistID = [[decoder decodeObjectForKey:@"gistID"] retain];
         _gist = [[decoder decodeObjectForKey:@"gist"] retain];
         _comments = [[decoder decodeObjectForKey:@"comments"] retain];
+        _lastUserComment = [[decoder decodeObjectForKey:@"lastUserComment"] retain];
     }
     return self;
 }

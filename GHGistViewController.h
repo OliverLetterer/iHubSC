@@ -13,8 +13,6 @@
 
 @class GHAPIGistV3;
 
-#warning serialize userInputState
-
 @interface GHGistViewController : GHTableViewController <GHAttributedTableViewCellDelegate, GHNewCommentTableViewCellDelegate> {
 @private
     NSString *_ID;
@@ -25,7 +23,11 @@
     BOOL _isGistStarred;
     
     NSMutableArray *_comments;
+    
+    NSString *_lastUserComment;
 }
+
+@property (nonatomic, copy) NSString *lastUserComment;
 
 @property (nonatomic, copy) NSString *ID;
 @property (nonatomic, retain) GHAPIGistV3 *gist;

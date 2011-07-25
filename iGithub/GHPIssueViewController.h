@@ -13,8 +13,6 @@
 #import "GHPAttributedTableViewCell.h"
 #import "GHPNewCommentTableViewCell.h"
 
-#warning serialize userInputState
-
 @interface GHPIssueViewController : GHPInfoSectionTableViewController <UIAlertViewDelegate, GHPIssueInfoTableViewCellDelegate, GHPAttributedTableViewCellDelegate, NSCoding, GHPNewCommentTableViewCellDelegate> {
 @private
     NSString *_repositoryString;
@@ -32,7 +30,11 @@
     CGFloat _bodyHeight;
     
     NSURL *_selectedURL;
+    
+    NSString *_lastUserComment;
 }
+
+@property (nonatomic, copy) NSString *lastUserComment;
 
 @property (nonatomic, retain) NSURL *selectedURL;
 

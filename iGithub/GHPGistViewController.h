@@ -13,8 +13,6 @@
 #import "GHPAttributedTableViewCell.h"
 #import "GHPNewCommentTableViewCell.h"
 
-#warning serialize userInputState
-
 @interface GHPGistViewController : GHPInfoSectionTableViewController <NSCoding, GHPAttributedTableViewCellDelegate, UIActionSheetDelegate, GHPNewCommentTableViewCellDelegate> {
 @private
     NSString *_gistID;
@@ -25,12 +23,14 @@
     BOOL _hasStarredData;
     BOOL _isGistStarred;
     
+    NSString *_lastUserComment;
 }
 
 @property (nonatomic, copy) NSString *gistID;
 @property (nonatomic, retain) GHAPIGistV3 *gist;
 
 @property (nonatomic, retain) NSMutableArray *comments;
+@property (nonatomic, copy) NSString *lastUserComment;
 
 - (id)initWithGistID:(NSString *)gistID;
 

@@ -41,6 +41,7 @@
 @synthesize issue=_issue;
 @synthesize repository=_repository, number=_number;
 @synthesize history=_history, discussion=_discussion;
+@synthesize lastUserComment=_lastUserComment;
 
 #pragma mark - setters and getters
 
@@ -136,6 +137,7 @@
     [_number release];
     [_history release];
     [_discussion release];
+    [_lastUserComment release];
     
     [super dealloc];
 }
@@ -442,6 +444,10 @@
             
             cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ (right now)", @""), [GHSettingsHelper username]];
             cell.delegate = self;
+            if (self.lastUserComment) {
+                cell.textView.text = self.lastUserComment;
+                self.lastUserComment = nil;
+            }
             
             return cell;
         }
@@ -796,6 +802,20 @@
     [encoder encodeObject:_discussion forKey:@"discussion"];
     [encoder encodeBool:_hasCollaboratorData forKey:@"hasCollaboratorData"];
     [encoder encodeBool:_isCollaborator forKey:@"isCollaborator"];
+    
+    if (self.isViewLoaded) {
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.history.count+1 inSection:kUITableViewSectionHistory];
+        GHNewCommentTableViewCell *cell = nil;
+        @try {
+            cell = (GHNewCommentTableViewCell *)[self.tableView cellForRowAtIndexPath:indexPath];
+        }
+        @catch (NSException *exception) { }
+        NSString *text = cell.textView.text;
+        
+        if (text != nil) {
+            [encoder encodeObject:text forKey:@"lastUserComment"];
+        }
+    }
 }
 
 - (id)initWithCoder:(NSCoder *)decoder {
@@ -807,6 +827,7 @@
         _discussion = [[decoder decodeObjectForKey:@"discussion"] retain];
         _hasCollaboratorData = [decoder decodeBoolForKey:@"hasCollaboratorData"];
         _isCollaborator = [decoder decodeBoolForKey:@"isCollaborator"];
+        _lastUserComment = [[decoder decodeObjectForKey:@"lastUserComment"] retain];
     }
     return self;
 }

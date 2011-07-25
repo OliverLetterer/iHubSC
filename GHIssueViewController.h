@@ -11,8 +11,6 @@
 #import "GHAttributedTableViewCell.h"
 #import "GHNewCommentTableViewCell.h"
 
-#warning serialize userInputState
-
 @class GHAPIIssueV3, GHTableViewCell, GHIssueComment, GHPullRequestDiscussion, DTAttributedTextView;
 
 @interface GHIssueViewController : GHTableViewController <UIAlertViewDelegate, GHAttributedTableViewCellDelegate, GHNewCommentTableViewCellDelegate> {
@@ -27,7 +25,11 @@
     
     BOOL _hasCollaboratorData;
     BOOL _isCollaborator;
+    
+    NSString *_lastUserComment;
 }
+
+@property (nonatomic, copy) NSString *lastUserComment;
 
 @property (nonatomic, retain) GHAPIIssueV3 *issue;
 @property (nonatomic, copy) NSString *repository;
