@@ -29,13 +29,9 @@
 #define kUITableViewNumberOfSections        4
 
 #define kUIActionSheetTagAction             172634
-#define kUIActionSheetTagFormat             172635
-#define kUIActionSheetTagInsert             172636
 #define kUIActionSheetTagLongPressedLink    172637
 
 #define kUIAlertViewTagCommitMessage        12983
-#define kUIAlertViewTagLinkText             12984
-#define kUIAlertViewTagLinkURL              12985
 #define kUIAlertViewTagInputAssignee        12986
 
 @implementation GHPIssueViewController
@@ -43,8 +39,7 @@
 @synthesize repositoryString=_repositoryString, issueNumber=_issueNumber;
 @synthesize repository=_repository, discussion=_discussion, history=_history;
 @synthesize issue=_issue;
-@synthesize textView=_textView, textViewToolBar=_textViewToolBar;
-@synthesize linkText=_linkText, linkURL=_linkURL, selectedURL=_selectedURL;
+@synthesize selectedURL=_selectedURL;
 
 #pragma mark - setters and getters
 
@@ -104,8 +99,6 @@
     [_issue release];
     [_history release];
     [_discussion release];
-    [_linkText release];
-    [_linkURL release];
     [_selectedURL release];
     
     [super dealloc];
@@ -116,148 +109,6 @@
     [super didReceiveMemoryWarning];
     
     // Release any cached data, images, etc that aren't in use.
-}
-
-#pragma mark - target actions
-
-- (void)toolbarCancelButtonClicked:(UIBarButtonItem *)barButton {
-    [self.textView resignFirstResponder];
-}
-
-- (void)toolbarDoneButtonClicked:(UIBarButtonItem *)barButton {
-    [self.textView resignFirstResponder];
-    
-    [GHAPIIssueV3 postComment:self.textView.text 
-         forIssueOnRepository:self.repositoryString 
-                   withNumber:self.issueNumber 
-            completionHandler:^(GHAPIIssueCommentV3 *comment, NSError *error) {
-                if (error) {
-                    [self handleError:error];
-                } else {
-                    [self.history addObject:comment];
-                    CGFloat height = [GHPAttributedTableViewCell heightWithAttributedString:comment.attributedBody 
-                                                                         inAttributedTextView:nil];
-                    [self cacheHeight:height forRowAtIndexPath:[NSIndexPath indexPathForRow:self.history.count inSection:kUITableViewSectionHistory]];
-                    self.issue.comments = [NSNumber numberWithInt:[self.issue.comments intValue] + 1];
-                    
-                    [self.tableView beginUpdates];
-                    
-                    [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:[self.history count]+1 inSection:kUITableViewSectionHistory]] withRowAnimation:UITableViewRowAnimationFade];
-                    [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:[self.history count] inSection:kUITableViewSectionHistory]] withRowAnimation:UITableViewRowAnimationFade];
-                    
-                    [self.tableView endUpdates];
-                    
-                    self.textView.text = nil;
-                }
-            }];
-}
-
-- (void)toolbarInsertButtonClicked:(UIBarButtonItem *)barButton {
-    UIActionSheet *sheet = [[[UIActionSheet alloc] init] autorelease];
-    
-    sheet.title = NSLocalizedString(@"Insert", @"");
-    [sheet addButtonWithTitle:NSLocalizedString(@"Hyperlink", @"")];
-    sheet.delegate = self;
-    sheet.tag = kUIActionSheetTagInsert;
-    
-    [sheet showFromBarButtonItem:barButton animated:YES];
-}
-
-- (void)toolbarFormatButtonClicked:(UIBarButtonItem *)barButton {
-    UIActionSheet *sheet = [[[UIActionSheet alloc] init] autorelease];
-    
-    sheet.title = NSLocalizedString(@"Select Format", @"");
-    [sheet addButtonWithTitle:NSLocalizedString(@"*emphasized*", @"")];
-    [sheet addButtonWithTitle:NSLocalizedString(@"**strong emphasized**", @"")];
-    [sheet addButtonWithTitle:NSLocalizedString(@"First Level Header", @"")];
-    [sheet addButtonWithTitle:NSLocalizedString(@"Second Level Header", @"")];
-    [sheet addButtonWithTitle:NSLocalizedString(@"Third Level Header", @"")];
-    sheet.delegate = self;
-    sheet.tag = kUIActionSheetTagFormat;
-    
-    [sheet showFromBarButtonItem:barButton animated:YES];
-}
-
-#pragma mark - View lifecycle
-
-/*
- - (void)loadView {
- 
- }
- */
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    
-    self.textViewToolBar = [[[UIToolbar alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0, 44.0)] autorelease];
-    self.textViewToolBar.barStyle = UIBarStyleBlackTranslucent;
-    
-    UIBarButtonItem *item = nil;
-    NSMutableArray *items = [NSMutableArray array];
-    
-    item = [[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Format", @"") 
-                                             style:UIBarButtonItemStyleBordered 
-                                            target:self 
-                                            action:@selector(toolbarFormatButtonClicked:)]
-            autorelease];
-    [items addObject:item];
-    
-    item = [[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Insert", @"") 
-                                             style:UIBarButtonItemStyleBordered 
-                                            target:self 
-                                            action:@selector(toolbarInsertButtonClicked:)]
-            autorelease];
-    [items addObject:item];
-    
-    item = [[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Cancel", @"") 
-                                             style:UIBarButtonItemStyleBordered 
-                                            target:self 
-                                            action:@selector(toolbarCancelButtonClicked:)]
-            autorelease];
-    [items addObject:item];
-    
-    item = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace 
-                                                          target:nil 
-                                                          action:@selector(noAction)]
-            autorelease];
-    [items addObject:item];
-    
-    item = [[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Submit", @"") 
-                                             style:UIBarButtonItemStyleDone 
-                                            target:self 
-                                            action:@selector(toolbarDoneButtonClicked:)]
-            autorelease];
-    [items addObject:item];
-    
-    self.textViewToolBar.items = items;
-}
-
-- (void)viewDidUnload {
-    [super viewDidUnload];
-    
-    self.textView = nil;
-    self.textViewToolBar = nil;
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-}
-
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-}
-
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-}
-
-- (void)viewDidDisappear:(BOOL)animated {
-    [super viewDidDisappear:animated];
-}
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    // Return YES for supported orientations
-	return YES;
 }
 
 #pragma mark - instance methods
@@ -548,13 +399,7 @@
             [self updateImageView:cell.imageView atIndexPath:indexPath withAvatarURLString:[GHSettingsHelper avatarURL]];
             
             cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ (right now)", @""), [GHSettingsHelper username]];
-            cell.accessoryType = UITableViewCellAccessoryNone;
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            
-            self.textView = cell.textView;
-            cell.textView.inputAccessoryView = self.textViewToolBar;
-            self.textView.scrollsToTop = NO;
-            cell.textView.delegate = self;
+            cell.delegate = self;
             
             return cell;
         } else {
@@ -833,47 +678,6 @@
         } else {
             [self setActionButtonActive:NO];
         }
-    } else if (actionSheet.tag == kUIActionSheetTagFormat) {
-        NSString *title = nil;
-        @try {
-            title = [actionSheet buttonTitleAtIndex:buttonIndex];
-        }
-        @catch (NSException *exception) {
-        }
-        
-        UITextRange *range = self.textView.selectedTextRange;
-        NSString *text = [self.textView textInRange:self.textView.selectedTextRange];
-        
-        if ([title isEqualToString:NSLocalizedString(@"*emphasized*", @"")]) {
-            [self.textView replaceRange:range withText:[NSString stringWithFormat:@"*%@*", text] ];
-        } else if ([title isEqualToString:NSLocalizedString(@"**strong emphasized**", @"")]) {
-            [self.textView replaceRange:range withText:[NSString stringWithFormat:@"**%@**", text] ];
-        } else if ([title isEqualToString:NSLocalizedString(@"First Level Header", @"")]) {
-            [self.textView replaceRange:range withText:[NSString stringWithFormat:@"%@\n====================", text] ];
-        } else if ([title isEqualToString:NSLocalizedString(@"Second Level Header", @"")]) {
-            [self.textView replaceRange:range withText:[NSString stringWithFormat:@"%@\n---------------------", text] ];
-        } else if ([title isEqualToString:NSLocalizedString(@"Third Level Header", @"")]) {
-            [self.textView replaceRange:range withText:[NSString stringWithFormat:@"###%@", text] ];
-        }
-    } else if (actionSheet.tag == kUIActionSheetTagInsert) {
-        NSString *title = nil;
-        @try {
-            title = [actionSheet buttonTitleAtIndex:buttonIndex];
-        }
-        @catch (NSException *exception) {
-        }
-        
-        if ([title isEqualToString:NSLocalizedString(@"Hyperlink", @"")]) {
-            UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Input Text", @"") 
-                                                             message:NSLocalizedString(@"", @"") 
-                                                            delegate:self 
-                                                   cancelButtonTitle:NSLocalizedString(@"Cancel", @"") 
-                                                   otherButtonTitles:NSLocalizedString(@"Next", @""), nil]
-                                  autorelease];
-            alert.alertViewStyle = UIAlertViewStylePlainTextInput;
-            alert.tag = kUIAlertViewTagLinkText;
-            [alert show];
-        }
     } else if (actionSheet.tag == kUIActionSheetTagLongPressedLink) {
         NSString *title = nil;
         @try {
@@ -917,26 +721,6 @@
                                           }
                                       }];
 
-    } else if (alertView.tag == kUIAlertViewTagLinkText) {
-        if (buttonIndex > 0) {
-            self.linkText = [alertView textFieldAtIndex:0].text;
-            UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Input URL", @"") 
-                                                             message:NSLocalizedString(@"", @"") 
-                                                            delegate:self 
-                                                   cancelButtonTitle:NSLocalizedString(@"Cancel", @"") 
-                                                   otherButtonTitles:NSLocalizedString(@"Done", @""), nil]
-                                  autorelease];
-            alert.alertViewStyle = UIAlertViewStylePlainTextInput;
-            alert.tag = kUIAlertViewTagLinkURL;
-            [alert show];
-        }
-    } else if (alertView.tag == kUIAlertViewTagLinkURL) {
-        if (buttonIndex > 0) {
-            self.linkURL = [alertView textFieldAtIndex:0].text;
-            
-            UITextRange *range = self.textView.selectedTextRange;
-            [self.textView replaceRange:range withText:[NSString stringWithFormat:@"[%@](%@)", self.linkText, self.linkURL] ];
-        }
     } else if (alertView.tag == kUIAlertViewTagInputAssignee) {
         if (buttonIndex > 0) {
             // submit clicked
@@ -1043,18 +827,42 @@
     [sheet showFromRect:[button convertRect:button.bounds toView:self.view] inView:self.view animated:YES];
 }
 
+#pragma mark - GHPNewCommentTableViewCellDelegate
+
+- (void)newCommentTableViewCell:(GHPNewCommentTableViewCell *)cell didEnterText:(NSString *)text {
+    UITextView *textView = cell.textView;
+    [textView resignFirstResponder];
+    
+    [GHAPIIssueV3 postComment:textView.text 
+         forIssueOnRepository:self.repositoryString 
+                   withNumber:self.issueNumber 
+            completionHandler:^(GHAPIIssueCommentV3 *comment, NSError *error) {
+                if (error) {
+                    [self handleError:error];
+                } else {
+                    [self.history addObject:comment];
+                    CGFloat height = [GHPAttributedTableViewCell heightWithAttributedString:comment.attributedBody 
+                                                                       inAttributedTextView:nil];
+                    [self cacheHeight:height forRowAtIndexPath:[NSIndexPath indexPathForRow:self.history.count inSection:kUITableViewSectionHistory]];
+                    self.issue.comments = [NSNumber numberWithInt:[self.issue.comments intValue] + 1];
+                    
+                    [self.tableView beginUpdates];
+                    
+                    [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:[self.history count]+1 inSection:kUITableViewSectionHistory]] withRowAnimation:UITableViewRowAnimationFade];
+                    [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:[self.history count] inSection:kUITableViewSectionHistory]] withRowAnimation:UITableViewRowAnimationFade];
+                    
+                    [self.tableView endUpdates];
+                    
+                    textView.text = nil;
+                }
+            }];
+}
+
 #pragma mark - GHPAttributedTableViewCellDelegate
 
 - (void)attributedTableViewCell:(GHPAttributedTableViewCell *)cell receivedClickForButton:(DTLinkButton *)button {
     GHWebViewViewController *viewController = [[[GHWebViewViewController alloc] initWithURL:button.url ] autorelease];
     [self.advancedNavigationController pushViewController:viewController afterViewController:self animated:YES];
-}
-
-#pragma mark - UITextViewDelegate
-
-- (void)textViewDidChangeSelection:(UITextView *)textView {
-    UIBarButtonItem *item = [self.textViewToolBar.items objectAtIndex:0];
-    item.enabled = textView.selectedRange.length > 0;
 }
 
 #pragma mark - Keyed Archiving
@@ -1068,8 +876,6 @@
     [encoder encodeObject:_discussion forKey:@"discussion"];
     [encoder encodeObject:_history forKey:@"history"];
     [encoder encodeFloat:_bodyHeight forKey:@"bodyHeight"];
-    [encoder encodeObject:_linkText forKey:@"linkText"];
-    [encoder encodeObject:_linkURL forKey:@"linkURL"];
 }
 
 - (id)initWithCoder:(NSCoder *)decoder {
@@ -1081,8 +887,6 @@
         _discussion = [[decoder decodeObjectForKey:@"discussion"] retain];
         _history = [[decoder decodeObjectForKey:@"history"] retain];
         _bodyHeight = [decoder decodeFloatForKey:@"bodyHeight"];
-        _linkText = [[decoder decodeObjectForKey:@"linkText"] retain];
-        _linkURL = [[decoder decodeObjectForKey:@"linkURL"] retain];
     }
     return self;
 }

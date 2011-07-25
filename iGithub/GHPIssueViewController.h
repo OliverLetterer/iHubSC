@@ -11,8 +11,9 @@
 #import "GHPInfoSectionTableViewController.h"
 #import "GHPIssueInfoTableViewCell.h"
 #import "GHPAttributedTableViewCell.h"
+#import "GHPNewCommentTableViewCell.h"
 
-@interface GHPIssueViewController : GHPInfoSectionTableViewController <UIAlertViewDelegate, GHPIssueInfoTableViewCellDelegate, GHPAttributedTableViewCellDelegate, UITextViewDelegate, NSCoding> {
+@interface GHPIssueViewController : GHPInfoSectionTableViewController <UIAlertViewDelegate, GHPIssueInfoTableViewCellDelegate, GHPAttributedTableViewCellDelegate, NSCoding, GHPNewCommentTableViewCellDelegate> {
 @private
     NSString *_repositoryString;
     NSNumber *_issueNumber;
@@ -23,23 +24,15 @@
     GHPullRequestDiscussion *_discussion;
     NSMutableArray *_history;
     
-    UITextView *_textView;
-    UIToolbar *_textViewToolBar;
-    
     BOOL _hasCollaboratorData;
     BOOL _isCollaborator;
     
     CGFloat _bodyHeight;
     
-    NSString *_linkText;
-    NSString *_linkURL;
     NSURL *_selectedURL;
 }
 
-@property (nonatomic, copy) NSString *linkText;
-@property (nonatomic, copy) NSString *linkURL;
 @property (nonatomic, retain) NSURL *selectedURL;
-
 
 @property (nonatomic, retain) GHAPIIssueV3 *issue;
 @property (nonatomic, retain) GHAPIRepositoryV3 *repository;
@@ -49,9 +42,6 @@
 
 @property (nonatomic, readonly) NSString *issueName;
 
-@property (nonatomic, retain) UITextView *textView;
-@property (nonatomic, retain) UIToolbar *textViewToolBar;
-
 @property (nonatomic, copy, readonly) NSString *repositoryString;
 @property (nonatomic, copy, readonly) NSNumber *issueNumber;
 - (void)setIssueNumber:(NSNumber *)issueNumber onRepository:(NSString *)repositoryString;
@@ -59,11 +49,6 @@
 - (id)initWithIssueNumber:(NSNumber *)issueNumber onRepository:(NSString *)repositoryString;
 
 - (NSString *)descriptionForIssueEvent:(GHAPIIssueEventV3 *)event;
-
-- (void)toolbarCancelButtonClicked:(UIBarButtonItem *)barButton;
-- (void)toolbarDoneButtonClicked:(UIBarButtonItem *)barButton;
-- (void)toolbarFormatButtonClicked:(UIBarButtonItem *)barButton;
-- (void)toolbarInsertButtonClicked:(UIBarButtonItem *)barButton;
 
 - (void)cacheHeightsForHistroy;
 

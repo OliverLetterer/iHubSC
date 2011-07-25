@@ -11,16 +11,14 @@
 #import "GHPInfoTableViewCell.h"
 #import "GHPInfoSectionTableViewController.h"
 #import "GHPAttributedTableViewCell.h"
+#import "GHPNewCommentTableViewCell.h"
 
-@interface GHPGistViewController : GHPInfoSectionTableViewController <NSCoding, GHPAttributedTableViewCellDelegate, UIActionSheetDelegate> {
+@interface GHPGistViewController : GHPInfoSectionTableViewController <NSCoding, GHPAttributedTableViewCellDelegate, UIActionSheetDelegate, GHPNewCommentTableViewCellDelegate> {
 @private
     NSString *_gistID;
     GHAPIGistV3 *_gist;
     
     NSMutableArray *_comments;
-    
-    UITextView *_textView;
-    UIToolbar *_textViewToolBar;
     
     BOOL _hasStarredData;
     BOOL _isGistStarred;
@@ -33,9 +31,6 @@
 @property (nonatomic, retain) NSMutableArray *comments;
 
 - (id)initWithGistID:(NSString *)gistID;
-
-@property (nonatomic, retain) UITextView *textView;
-@property (nonatomic, retain) UIToolbar *textViewToolBar;
 
 - (void)cacheCommentsHeights;
 

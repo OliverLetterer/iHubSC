@@ -655,7 +655,7 @@
 		A7837E99136C93FC00B13B95 /* GHAPIMilestoneV3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHAPIMilestoneV3.m; sourceTree = "<group>"; };
 		A7837EA3136CADD400B13B95 /* GHAPIMilestoneV3TableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHAPIMilestoneV3TableViewCell.h; sourceTree = "<group>"; };
 		A7837EA4136CADD400B13B95 /* GHAPIMilestoneV3TableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHAPIMilestoneV3TableViewCell.m; sourceTree = "<group>"; };
-		A784C40D13D457B400859318 /* GHPAttributedTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; path = GHPAttributedTableViewCell.h; sourceTree = "<group>"; };
+		A784C40D13D457B400859318 /* GHPAttributedTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPAttributedTableViewCell.h; sourceTree = "<group>"; };
 		A784C40E13D457B500859318 /* GHPAttributedTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPAttributedTableViewCell.m; sourceTree = "<group>"; };
 		A78B70D913BCE08900F4CE5E /* TabBarItemSelectedBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TabBarItemSelectedBackground.png; sourceTree = "<group>"; };
 		A78B70DA13BCE08900F4CE5E /* TabBarItemSelectedBackground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TabBarItemSelectedBackground@2x.png"; sourceTree = "<group>"; };
@@ -1127,6 +1127,7 @@
 		A703CB2113C64949002767EB /* UITableViewCell - Generic Subclasses */ = {
 			isa = PBXGroup;
 			children = (
+				A7EEE4E913DDA94900EF0E25 /* GHPNewCommentTableViewCell */,
 				A725F66313DC075F00F08DA7 /* GHPAttributedTableViewCell */,
 				A70FF3A013BF6A320082E2EC /* GHPCollapsingAndSpinningTableViewCell */,
 				A703CB2813C64B3A002767EB /* GHPImageDetailTableViewCell */,
@@ -2279,8 +2280,6 @@
 		A7ABEBB113D875BD002E3275 /* UITableViewCells */ = {
 			isa = PBXGroup;
 			children = (
-				A70A11A513C38BFA00685749 /* GHPNewCommentTableViewCell.h */,
-				A70A11A613C38BFB00685749 /* GHPNewCommentTableViewCell.m */,
 				A75EFA4F13D4325200C162F3 /* GHPIssueInfoTableViewCell.h */,
 				A75EFA5013D4325200C162F3 /* GHPIssueInfoTableViewCell.m */,
 			);
@@ -2976,6 +2975,15 @@
 				A7DCDD9313A366DF00089CCD /* GHAPIRepositoryBranchV3.m */,
 			);
 			name = GHAPIRepositoryBranchV3;
+			sourceTree = "<group>";
+		};
+		A7EEE4E913DDA94900EF0E25 /* GHPNewCommentTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				A70A11A513C38BFA00685749 /* GHPNewCommentTableViewCell.h */,
+				A70A11A613C38BFB00685749 /* GHPNewCommentTableViewCell.m */,
+			);
+			name = GHPNewCommentTableViewCell;
 			sourceTree = "<group>";
 		};
 		A7F1990913CEFD5700D83117 /* User */ = {

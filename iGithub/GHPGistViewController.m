@@ -30,7 +30,6 @@
 
 @synthesize gistID=_gistID, gist=_gist;
 @synthesize comments=_comments;
-@synthesize textView=_textView, textViewToolBar=_textViewToolBar;
 
 #pragma mark - setters and getters
 
@@ -79,68 +78,6 @@
     // Release any cached data, images, etc that aren't in use.
 }
 
-#pragma mark - View lifecycle
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-
-    self.textViewToolBar = [[[UIToolbar alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0, 44.0)] autorelease];
-    self.textViewToolBar.barStyle = UIBarStyleBlackTranslucent;
-    
-    UIBarButtonItem *item = nil;
-    NSMutableArray *items = [NSMutableArray array];
-    
-    item = [[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Cancel", @"") 
-                                             style:UIBarButtonItemStyleBordered 
-                                            target:self 
-                                            action:@selector(toolbarCancelButtonClicked:)]
-            autorelease];
-    [items addObject:item];
-    
-    item = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace 
-                                                          target:nil 
-                                                          action:@selector(noAction)]
-            autorelease];
-    [items addObject:item];
-    
-    item = [[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Submit", @"") 
-                                             style:UIBarButtonItemStyleDone 
-                                            target:self 
-                                            action:@selector(toolbarDoneButtonClicked:)]
-            autorelease];
-    [items addObject:item];
-    
-    self.textViewToolBar.items = items;
-}
-
-- (void)viewDidUnload {
-    [super viewDidUnload];
-    
-    self.textView = nil;
-    self.textViewToolBar = nil;
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-}
-
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-}
-
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-}
-
-- (void)viewDidDisappear:(BOOL)animated {
-    [super viewDidDisappear:animated];
-}
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    // Return YES for supported orientations
-	return YES;
-}
-
 #pragma mark - Height caching
 
 - (void)cacheCommentsHeights {
@@ -156,16 +93,13 @@
     [self cacheHeight:GHPNewCommentTableViewCellHeight forRowAtIndexPath:indexPath];
 }
 
-#pragma mark - target actions
+#pragma mark - GHPNewCommentTableViewCellDelegate
 
-- (void)toolbarCancelButtonClicked:(UIBarButtonItem *)barButton {
-    [self.textView resignFirstResponder];
-}
-
-- (void)toolbarDoneButtonClicked:(UIBarButtonItem *)barButton {
-    [self.textView resignFirstResponder];
+- (void)newCommentTableViewCell:(GHPNewCommentTableViewCell *)cell didEnterText:(NSString *)text {
+    UITextView *textView = cell.textView;
+    [textView resignFirstResponder];
     
-    [GHAPIGistV3 postComment:self.textView.text 
+    [GHAPIGistV3 postComment:textView.text 
                forGistWithID:self.gist.ID 
            completionHandler:^(GHAPIGistCommentV3 *comment, NSError *error) {
                if (error) {
@@ -181,7 +115,7 @@
                    
                    [self.tableView endUpdates];
                    
-                   self.textView.text = nil;
+                   textView.text = nil;
                }
            }];
 }
@@ -310,12 +244,7 @@
             [self updateImageView:cell.imageView atIndexPath:indexPath withAvatarURLString:[GHSettingsHelper avatarURL]];
             
             cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ (right now)", @""), [GHSettingsHelper username]];
-            cell.accessoryType = UITableViewCellAccessoryNone;
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            
-            self.textView = cell.textView;
-            cell.textView.inputAccessoryView = self.textViewToolBar;
-            self.textView.scrollsToTop = NO;
+            cell.delegate = self;
             
             return cell;
         } else {
