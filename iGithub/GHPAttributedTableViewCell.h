@@ -11,15 +11,14 @@
 #import "DTLinkButton.h"
 #import "GHPImageDetailTableViewCell.h"
 
-#warning make commentTableViewCell:longPressRecognizedForButton: optional and default will show actionSheet to show in safari
-#warning rename delegate methods
+#warning make attributedTableViewCell:longPressRecognizedForButton: optional and default will show actionSheet to show in safari
 
 @class GHPAttributedTableViewCell;
 
 @protocol GHPAttributedTableViewCellDelegate <NSObject>
 
-- (void)commentTableViewCell:(GHPAttributedTableViewCell *)cell receivedClickForButton:(DTLinkButton *)button;
-- (void)commentTableViewCell:(GHPAttributedTableViewCell *)cell longPressRecognizedForButton:(DTLinkButton *)button;
+- (void)attributedTableViewCell:(GHPAttributedTableViewCell *)cell receivedClickForButton:(DTLinkButton *)button;
+- (void)attributedTableViewCell:(GHPAttributedTableViewCell *)cell longPressRecognizedForButton:(DTLinkButton *)button;
 
 @end
 

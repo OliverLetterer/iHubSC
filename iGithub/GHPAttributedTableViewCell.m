@@ -20,6 +20,7 @@
         // Initialization code
         self.attributedTextView = [[[DTAttributedTextContentView alloc] initWithFrame:CGRectZero] autorelease];
         self.attributedTextView.backgroundColor = [UIColor clearColor];
+        self.attributedTextView.delegate = self;
         [self.contentView addSubview:self.attributedTextView];
     }
     return self;
@@ -50,12 +51,12 @@
 #pragma mark - Target actions
 
 - (void)linkButtonClicked:(DTLinkButton *)sender {
-    [self.buttonDelegate commentTableViewCell:self receivedClickForButton:sender];
+    [self.buttonDelegate attributedTableViewCell:self receivedClickForButton:sender];
 }
 
 - (void)longPressRecognized:(UILongPressGestureRecognizer *)recognizer {
     if (recognizer.state == UIGestureRecognizerStateRecognized) {
-        [self.buttonDelegate commentTableViewCell:self longPressRecognizedForButton:(DTLinkButton *)recognizer.view];
+        [self.buttonDelegate attributedTableViewCell:self longPressRecognizedForButton:(DTLinkButton *)recognizer.view];
     }
 }
 

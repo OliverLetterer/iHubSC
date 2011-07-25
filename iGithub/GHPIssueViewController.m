@@ -1045,12 +1045,12 @@
 
 #pragma mark - GHPAttributedTableViewCellDelegate
 
-- (void)commentTableViewCell:(GHPAttributedTableViewCell *)cell receivedClickForButton:(DTLinkButton *)button {
+- (void)attributedTableViewCell:(GHPAttributedTableViewCell *)cell receivedClickForButton:(DTLinkButton *)button {
     GHWebViewViewController *viewController = [[[GHWebViewViewController alloc] initWithURL:button.url ] autorelease];
     [self.advancedNavigationController pushViewController:viewController afterViewController:self animated:YES];
 }
 
-- (void)commentTableViewCell:(GHPAttributedTableViewCell *)cell longPressRecognizedForButton:(DTLinkButton *)button {
+- (void)attributedTableViewCell:(GHPAttributedTableViewCell *)cell longPressRecognizedForButton:(DTLinkButton *)button {
     self.selectedURL = button.url;
     UIActionSheet *sheet = [[[UIActionSheet alloc] init] autorelease];
     
