@@ -12,8 +12,8 @@
 #import "NSAttributedString+HTML.h"
 
 @implementation GHAPIGistCommentV3
-
 @synthesize ID=_ID, URL=_URL, body=_body, user=_user, createdAt=_createdAt;
+@synthesize attributedBody=_attributedBody, selectedAttributedBody=_selectedAttributedBody;
 
 - (NSAttributedString *)attributedBody {
     if (!_attributedBody) {
@@ -55,6 +55,9 @@
     [_body release];
     [_user release];
     [_createdAt release];
+    [_attributedBody release];
+    [_selectedAttributedBody release];
+    
     [super dealloc];
 }
 
