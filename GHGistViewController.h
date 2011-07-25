@@ -13,6 +13,8 @@
 
 @class GHAPIGistV3;
 
+#warning serialize userInputState
+
 @interface GHGistViewController : GHTableViewController <GHAttributedTableViewCellDelegate, GHNewCommentTableViewCellDelegate> {
 @private
     NSString *_ID;

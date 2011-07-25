@@ -11,6 +11,8 @@
 #import "GHAttributedTableViewCell.h"
 #import "GHNewCommentTableViewCell.h"
 
+#warning serialize userInputState
+
 @class GHAPIIssueV3, GHTableViewCell, GHIssueComment, GHPullRequestDiscussion, DTAttributedTextView;
 
 @interface GHIssueViewController : GHTableViewController <UIAlertViewDelegate, GHAttributedTableViewCellDelegate, GHNewCommentTableViewCellDelegate> {

@@ -13,6 +13,8 @@
 #import "GHPAttributedTableViewCell.h"
 #import "GHPNewCommentTableViewCell.h"
 
+#warning serialize userInputState
+
 @interface GHPIssueViewController : GHPInfoSectionTableViewController <UIAlertViewDelegate, GHPIssueInfoTableViewCellDelegate, GHPAttributedTableViewCellDelegate, NSCoding, GHPNewCommentTableViewCellDelegate> {
 @private
     NSString *_repositoryString;
