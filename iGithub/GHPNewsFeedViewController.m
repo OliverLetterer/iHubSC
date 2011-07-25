@@ -215,6 +215,7 @@
                          if (error) {
                              [self handleError:error];
                          } else {
+                             [self cacheNewsFeedHeight];
                              if ([tableView containsIndexPath:indexPath]) {
                                  [tableView reloadRowAtIndexPath:indexPath withRowAnimation:UITableViewRowAnimationNone];
                              }
