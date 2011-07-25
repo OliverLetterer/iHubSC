@@ -9,8 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "GHPImageDetailTableViewCell.h"
 
-#warning inherit from GHNewCommentTableViewCell
-
 extern CGFloat const GHPNewCommentTableViewCellHeight;
 
 @class GHPNewCommentTableViewCell;
