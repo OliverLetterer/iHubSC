@@ -52,7 +52,7 @@ NSString *const kGHAPIIssueStateV3Closed = @"closed";
 #pragma mark - Initialization
 
 - (id)initWithRawDictionary:(NSDictionary *)rawDictionary {
-    rawDictionary = NSObjectExpectedClass(rawDictionary, NSDictionary.class);
+    rawDictionary = GHAPIObjectExpectedClass(rawDictionary, NSDictionary.class);
     if ((self = [super init])) {
         // Initialization code
         self.assignee = [[[GHAPIUserV3 alloc] initWithRawDictionary:[rawDictionary objectForKeyOrNilOnNullObject:@"assignee"] ] autorelease];
@@ -165,7 +165,7 @@ NSString *const kGHAPIIssueStateV3Closed = @"closed";
                                  if (error) {
                                      handler(nil, GHAPIPaginationNextPageNotFound, error);
                                  } else {
-                                     NSArray *rawArray = NSObjectExpectedClass(object, NSArray.class);
+                                     NSArray *rawArray = GHAPIObjectExpectedClass(object, NSArray.class);
                                      
                                      NSMutableArray *finalArray = [NSMutableArray arrayWithCapacity:rawArray.count];
                                      for (NSDictionary *rawDictionary in rawArray) {
@@ -210,7 +210,7 @@ NSString *const kGHAPIIssueStateV3Closed = @"closed";
                                  if (error) {
                                      handler(nil, GHAPIPaginationNextPageNotFound, error);
                                  } else {
-                                     NSArray *rawArray = NSObjectExpectedClass(object, NSArray.class);
+                                     NSArray *rawArray = GHAPIObjectExpectedClass(object, NSArray.class);
                                      
                                      NSMutableArray *finalArray = [NSMutableArray arrayWithCapacity:rawArray.count];
                                      for (NSDictionary *rawDictionary in rawArray) {
@@ -277,7 +277,7 @@ NSString *const kGHAPIIssueStateV3Closed = @"closed";
         if (error) {
             handler(nil, error);
         } else {
-            NSArray *rawCommentsArray = NSObjectExpectedClass(object, NSArray.class);
+            NSArray *rawCommentsArray = GHAPIObjectExpectedClass(object, NSArray.class);
             
             NSMutableArray *array = [NSMutableArray arrayWithCapacity:rawCommentsArray.count];
             for (NSDictionary *rawDictionary in rawCommentsArray) {
@@ -384,7 +384,7 @@ NSString *const kGHAPIIssueStateV3Closed = @"closed";
         if (error) {
             handler(nil, error);
         } else {
-            NSArray *rawArray = NSObjectExpectedClass(object, NSArray.class);
+            NSArray *rawArray = GHAPIObjectExpectedClass(object, NSArray.class);
             
             NSMutableArray *finalArray = [NSMutableArray arrayWithCapacity:rawArray.count];
             for (NSDictionary *rawDictionary in rawArray) {
@@ -462,7 +462,7 @@ NSString *const kGHAPIIssueStateV3Closed = @"closed";
                                  if (error) {
                                      handler(nil, GHAPIPaginationNextPageNotFound, error);
                                  } else {
-                                     NSArray *rawArray = NSObjectExpectedClass(object, NSArray.class);
+                                     NSArray *rawArray = GHAPIObjectExpectedClass(object, NSArray.class);
                                      
                                      NSMutableArray *finalArray = [NSMutableArray arrayWithCapacity:rawArray.count];
                                      for (NSDictionary *rawDictionary in rawArray) {
@@ -484,7 +484,7 @@ NSString *const kGHAPIIssueStateV3Closed = @"closed";
                                  if (error) {
                                      handler(nil, GHAPIPaginationNextPageNotFound, error);
                                  } else {
-                                     NSArray *rawArray = NSObjectExpectedClass(object, NSArray.class);
+                                     NSArray *rawArray = GHAPIObjectExpectedClass(object, NSArray.class);
                                      
                                      NSMutableArray *finalArray = [NSMutableArray arrayWithCapacity:rawArray.count];
                                      for (NSDictionary *rawDictionary in rawArray) {

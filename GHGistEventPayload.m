@@ -21,7 +21,7 @@
 #pragma mark - Initialization
 
 - (id)initWithRawDictionary:(NSDictionary *)rawDictionary {
-    rawDictionary = NSObjectExpectedClass(rawDictionary, NSDictionary.class);
+    rawDictionary = GHAPIObjectExpectedClass(rawDictionary, NSDictionary.class);
     if ((self = [super initWithRawDictionary:rawDictionary])) {
         // Initialization code
         self.action = [rawDictionary objectForKeyOrNilOnNullObject:@"action"];

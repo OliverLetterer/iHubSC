@@ -16,8 +16,8 @@
 #pragma mark - Initialization
 
 - (id)initWithName:(NSString *)name ID:(NSString *)ID {
-    name = NSObjectExpectedClass(name, NSString.class);
-    ID = NSObjectExpectedClass(ID, NSString.class);
+    name = GHAPIObjectExpectedClass(name, NSString.class);
+    ID = GHAPIObjectExpectedClass(ID, NSString.class);
     if ((self = [super init])) {
         // Initialization code
         self.name = name;
@@ -27,7 +27,7 @@
 }
 
 - (id)initWithRawDictionary:(NSDictionary *)rawDictionary {
-    rawDictionary = NSObjectExpectedClass(rawDictionary, NSDictionary.class);
+    rawDictionary = GHAPIObjectExpectedClass(rawDictionary, NSDictionary.class);
     if ((self = [super init])) {
         self.name = [rawDictionary objectForKeyOrNilOnNullObject:@"name"];
         self.ID = [rawDictionary objectForKeyOrNilOnNullObject:@"sha"];

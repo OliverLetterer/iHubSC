@@ -34,7 +34,7 @@
 #pragma mark - Initialization
 
 - (id)initWithRawDictionary:(NSDictionary *)rawDictionary {
-    rawDictionary = NSObjectExpectedClass(rawDictionary, NSDictionary.class);
+    rawDictionary = GHAPIObjectExpectedClass(rawDictionary, NSDictionary.class);
     if ((self = [super init])) {
         // Initialization code
         self.login = [rawDictionary objectForKeyOrNilOnNullObject:@"login"];
@@ -181,7 +181,7 @@
                                  if (error) {
                                      handler(nil, GHAPIPaginationNextPageNotFound, error);
                                  } else {
-                                     NSArray *rawArray = NSObjectExpectedClass(object, NSArray.class);
+                                     NSArray *rawArray = GHAPIObjectExpectedClass(object, NSArray.class);
                                      
                                      NSMutableArray *finalArray = [NSMutableArray arrayWithCapacity:rawArray.count];
                                      for (NSDictionary *rawDictionary in rawArray) {
@@ -206,7 +206,7 @@
                                  if (error) {
                                      handler(nil, GHAPIPaginationNextPageNotFound, error);
                                  } else {
-                                     NSArray *rawArray = NSObjectExpectedClass(object, NSArray.class);
+                                     NSArray *rawArray = GHAPIObjectExpectedClass(object, NSArray.class);
                                      
                                      NSMutableArray *finalArray = [NSMutableArray arrayWithCapacity:rawArray.count];
                                      for (NSDictionary *rawDictionary in rawArray) {
@@ -281,7 +281,7 @@
                                  if (error) {
                                      handler(nil, 0, error);
                                  } else {
-                                     NSArray *rawArray = NSObjectExpectedClass(object, NSArray.class);
+                                     NSArray *rawArray = GHAPIObjectExpectedClass(object, NSArray.class);
                                      
                                      NSMutableArray *finalArray = [NSMutableArray arrayWithCapacity:rawArray.count];
                                      for (NSDictionary *rawDictionary in rawArray) {

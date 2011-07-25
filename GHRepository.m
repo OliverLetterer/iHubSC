@@ -61,8 +61,8 @@
             if (myError) {
                 handler(nil, myError);
             } else {
-                NSDictionary *dict = NSObjectExpectedClass([jsonString objectFromJSONString], NSDictionary.class);
-                handler(NSObjectExpectedClass([dict objectForKey:@"delete_token"], NSString.class), nil);
+                NSDictionary *dict = GHAPIObjectExpectedClass([jsonString objectFromJSONString], NSDictionary.class);
+                handler(GHAPIObjectExpectedClass([dict objectForKey:@"delete_token"], NSString.class), nil);
             }
         });
     });
@@ -126,7 +126,7 @@
             if (myError) {
                 handler(nil, myError);
             } else {
-                NSDictionary *dictionary = NSObjectExpectedClass([[request responseString] objectFromJSONString], NSDictionary.class);
+                NSDictionary *dictionary = GHAPIObjectExpectedClass([[request responseString] objectFromJSONString], NSDictionary.class);
                 
                 GHDirectory *rootDirectory = [[[GHDirectory alloc] initWithFilesDictionary:[dictionary objectForKeyOrNilOnNullObject:@"blobs"] name:@"" ] autorelease];
                 
@@ -161,7 +161,7 @@
             if (myError) {
                 handler(nil, myError);
             } else {
-                NSDictionary *dictionary = NSObjectExpectedClass([[request responseString] objectFromJSONString], NSDictionary.class);
+                NSDictionary *dictionary = GHAPIObjectExpectedClass([[request responseString] objectFromJSONString], NSDictionary.class);
                 
                 NSArray *allRepos = [dictionary objectForKeyOrNilOnNullObject:@"repositories"];
                 NSMutableArray *repos = [NSMutableArray arrayWithCapacity:[allRepos count] ];
@@ -179,7 +179,7 @@
 #pragma mark - Initialization
 
 - (id)initWithRawDictionary:(NSDictionary *)rawDictionary {
-    rawDictionary = NSObjectExpectedClass(rawDictionary, NSDictionary.class);
+    rawDictionary = GHAPIObjectExpectedClass(rawDictionary, NSDictionary.class);
     if ((self = [super init])) {
         // Initialization code
         self.creationDate = [rawDictionary objectForKeyOrNilOnNullObject:@"created_at"];

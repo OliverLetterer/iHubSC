@@ -20,7 +20,7 @@ NSString *const GHAPITeamV3PermissionAdmin = @"admin";
 #pragma mark - Initialization
 
 - (id)initWithRawDictionary:(NSDictionary *)rawDictionary {
-    rawDictionary = NSObjectExpectedClass(rawDictionary, NSDictionary.class);
+    rawDictionary = GHAPIObjectExpectedClass(rawDictionary, NSDictionary.class);
     if ((self = [super init])) {
         // Initialization code
         self.URL = [rawDictionary objectForKeyOrNilOnNullObject:@"url"];
@@ -112,7 +112,7 @@ NSString *const GHAPITeamV3PermissionAdmin = @"admin";
                                  if (error) {
                                      handler(nil, GHAPIPaginationNextPageNotFound, error);
                                  } else {
-                                     NSArray *rawArray = NSObjectExpectedClass(object, NSArray.class);
+                                     NSArray *rawArray = GHAPIObjectExpectedClass(object, NSArray.class);
                                      
                                      NSMutableArray *finalArray = [NSMutableArray arrayWithCapacity:rawArray.count];
                                      [rawArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
@@ -135,7 +135,7 @@ NSString *const GHAPITeamV3PermissionAdmin = @"admin";
                                  if (error) {
                                      handler(nil, GHAPIPaginationNextPageNotFound, error);
                                  } else {
-                                     NSArray *rawArray = NSObjectExpectedClass(object, NSArray.class);
+                                     NSArray *rawArray = GHAPIObjectExpectedClass(object, NSArray.class);
                                      
                                      NSMutableArray *finalArray = [NSMutableArray arrayWithCapacity:rawArray.count];
                                      [rawArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {

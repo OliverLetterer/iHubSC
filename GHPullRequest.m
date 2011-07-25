@@ -16,7 +16,7 @@
 #pragma mark - Initialization
 
 - (id)initWithRawDictionary:(NSDictionary *)rawDictionary {
-    rawDictionary = NSObjectExpectedClass(rawDictionary, NSDictionary.class);
+    rawDictionary = GHAPIObjectExpectedClass(rawDictionary, NSDictionary.class);
     if ((self = [super init])) {
         // Initialization code
         self.additions = [rawDictionary objectForKeyOrNilOnNullObject:@"additions"];
@@ -86,7 +86,7 @@
             if (myError) {
                 handler(nil, myError);
             } else {
-                NSDictionary *dictionary = NSObjectExpectedClass([jsonString objectFromJSONString], NSDictionary.class);
+                NSDictionary *dictionary = GHAPIObjectExpectedClass([jsonString objectFromJSONString], NSDictionary.class);
                 
                 handler([[[GHPullRequestDiscussion alloc] initWithRawDictionary:[dictionary objectForKey:@"pull"]] autorelease], nil);
             }
@@ -121,8 +121,8 @@
             if (myError) {
                 handler(nil, myError);
             } else {
-                NSDictionary *dictionary = NSObjectExpectedClass([jsonString objectFromJSONString], NSDictionary.class);
-                NSArray *rawPulls = NSObjectExpectedClass([dictionary objectForKeyOrNilOnNullObject:@"pulls"], NSArray.class);
+                NSDictionary *dictionary = GHAPIObjectExpectedClass([jsonString objectFromJSONString], NSDictionary.class);
+                NSArray *rawPulls = GHAPIObjectExpectedClass([dictionary objectForKeyOrNilOnNullObject:@"pulls"], NSArray.class);
                 NSMutableArray *pulls = [NSMutableArray arrayWithCapacity:[rawPulls count] ];
                 
                 for (NSDictionary *rawPullDiscussion in rawPulls) {

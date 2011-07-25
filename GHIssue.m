@@ -31,7 +31,7 @@
 @synthesize repository;
 
 - (void)updateWithRawDictionary:(NSDictionary *)rawDictionary onRepository:(NSString *)theRepository {
-    rawDictionary = NSObjectExpectedClass(rawDictionary, NSDictionary.class);
+    rawDictionary = GHAPIObjectExpectedClass(rawDictionary, NSDictionary.class);
     self.gravatarID = [rawDictionary objectForKeyOrNilOnNullObject:@"gravatar_id"];
     self.position = [rawDictionary objectForKeyOrNilOnNullObject:@"position"];
     self.number = [rawDictionary objectForKeyOrNilOnNullObject:@"number"];

@@ -8,4 +8,4 @@
 
 #import <Foundation/Foundation.h>
 
-id NSObjectExpectedClass(id object, Class class);
+id GHAPIObjectExpectedClass(id object, Class class);

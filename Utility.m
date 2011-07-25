@@ -8,6 +8,6 @@
 
 #import "Utility.h"
 
-id NSObjectExpectedClass(id object, Class class) {
+id GHAPIObjectExpectedClass(id object, Class class) {
     return [object isKindOfClass:class] ? object : nil;
 }

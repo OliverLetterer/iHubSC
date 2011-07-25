@@ -37,7 +37,7 @@
             if (myError) {
                 handler(nil, myError);
             } else {
-                NSArray *feedArray = NSObjectExpectedClass([feedString objectFromJSONString], NSArray.class);
+                NSArray *feedArray = GHAPIObjectExpectedClass([feedString objectFromJSONString], NSArray.class);
                 handler([[[GHNewsFeed alloc] initWithRawArray:feedArray] autorelease], nil);
             }
         });
@@ -67,8 +67,8 @@
             if (myError) {
                 handler(nil, myError);
             } else {
-                NSArray *feedArray = NSObjectExpectedClass([feedString objectFromJSONString], NSArray.class);
-                handler([[[GHNewsFeed alloc] initWithRawArray:NSObjectExpectedClass(feedArray, NSArray.class)] autorelease], nil);
+                NSArray *feedArray = GHAPIObjectExpectedClass([feedString objectFromJSONString], NSArray.class);
+                handler([[[GHNewsFeed alloc] initWithRawArray:GHAPIObjectExpectedClass(feedArray, NSArray.class)] autorelease], nil);
             }
         });
     });
@@ -76,7 +76,7 @@
 }
 
 - (id)initWithRawArray:(NSArray *)rawArray {
-    rawArray = NSObjectExpectedClass(rawArray, NSArray.class);
+    rawArray = GHAPIObjectExpectedClass(rawArray, NSArray.class);
     if ((self = [super init])) {
         // Initialization code
         NSMutableArray *items = [NSMutableArray array];

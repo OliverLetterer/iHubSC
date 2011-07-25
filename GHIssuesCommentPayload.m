@@ -20,7 +20,7 @@
 #pragma mark - Initialization
 
 - (id)initWithRawDictionary:(NSDictionary *)rawDictionary URL:(NSString *)URL {
-    rawDictionary = NSObjectExpectedClass(rawDictionary, NSDictionary.class);
+    rawDictionary = GHAPIObjectExpectedClass(rawDictionary, NSDictionary.class);
     if ((self = [super initWithRawDictionary:rawDictionary])) {
         // Initialization code
         self.commentID = [rawDictionary objectForKeyOrNilOnNullObject:@"comment_id"];
