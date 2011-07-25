@@ -351,7 +351,8 @@ static CGFloat wrapperViewHeight = 21.0f;
         
         self.tableView.contentInset = UIEdgeInsetsMake(-22, 0, -22, 0);
         self.defaultEdgeInset = self.tableView.contentInset;
-        self.tableView.backgroundView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"GHDefaultTableViewBackgroundImage.png"]] autorelease];
+        self.tableView.backgroundView = [[[UIView alloc] initWithFrame:CGRectZero] autorelease];
+        self.tableView.backgroundView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"GHBackgroundImage.png"] ];
     }
     
     if (_isDownloadingEssentialData) {
