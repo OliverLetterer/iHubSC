@@ -25,7 +25,6 @@
     UITextView *_textView;
     UIToolbar *_textViewToolBar;
     DTAttributedTextView *_attributedTextView;
-    NSURL *_selectedURL;
     
     BOOL _hasCollaboratorData;
     BOOL _isCollaborator;
@@ -43,9 +42,6 @@
 @property (nonatomic, retain) UITextView *textView;
 @property (nonatomic, retain) UIToolbar *textViewToolBar;
 @property (nonatomic, retain) DTAttributedTextView *attributedTextView;
-@property (nonatomic, retain) NSURL *selectedURL;
-
-
 
 - (NSString *)descriptionForEvent:(GHAPIIssueEventV3 *)event;
 

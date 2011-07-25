@@ -25,8 +25,6 @@
     
     UITextView *_textView;
     UIToolbar *_textViewToolBar;
-    
-    NSURL *_selectedURL;
 }
 
 @property (nonatomic, copy) NSString *ID;
@@ -36,8 +34,6 @@
 
 @property (nonatomic, retain) UITextView *textView;
 @property (nonatomic, retain) UIToolbar *textViewToolBar;
-
-@property (nonatomic, copy) NSURL *selectedURL;
 
 - (id)initWithID:(NSString *)ID;
 

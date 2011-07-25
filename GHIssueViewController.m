@@ -43,7 +43,6 @@
 @synthesize repository=_repository, number=_number;
 @synthesize history=_history, discussion=_discussion;
 @synthesize textView=_textView, textViewToolBar=_textViewToolBar, attributedTextView=_attributedTextView;
-@synthesize selectedURL=_selectedURL;
 
 #pragma mark - setters and getters
 
@@ -142,7 +141,6 @@
     [_textView release];
     [_textViewToolBar release];
     [_attributedTextView release];
-    [_selectedURL release];
     
     [super dealloc];
 }
@@ -857,7 +855,6 @@
     [encoder encodeObject:_textView forKey:@"textView"];
     [encoder encodeObject:_textViewToolBar forKey:@"textViewToolBar"];
     [encoder encodeObject:_attributedTextView forKey:@"attributedTextView"];
-    [encoder encodeObject:_selectedURL forKey:@"selectedURL"];
     [encoder encodeBool:_hasCollaboratorData forKey:@"hasCollaboratorData"];
     [encoder encodeBool:_isCollaborator forKey:@"isCollaborator"];
 }
@@ -872,7 +869,6 @@
         _textView = [[decoder decodeObjectForKey:@"textView"] retain];
         _textViewToolBar = [[decoder decodeObjectForKey:@"textViewToolBar"] retain];
         _attributedTextView = [[decoder decodeObjectForKey:@"attributedTextView"] retain];
-        _selectedURL = [[decoder decodeObjectForKey:@"selectedURL"] retain];
         _hasCollaboratorData = [decoder decodeBoolForKey:@"hasCollaboratorData"];
         _isCollaborator = [decoder decodeBoolForKey:@"isCollaborator"];
     }

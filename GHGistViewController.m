@@ -29,7 +29,6 @@
 
 @synthesize ID=_ID, gist=_gist, comments=_comments;
 @synthesize textView=_textView, textViewToolBar=_textViewToolBar;
-@synthesize selectedURL=_selectedURL;
 
 #pragma mark - setters and getters
 
@@ -98,7 +97,6 @@
     [_comments release];
     [_textView release];
     [_textViewToolBar release];
-    [_selectedURL release];
     
     [super dealloc];
 }
