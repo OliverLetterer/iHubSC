@@ -91,7 +91,7 @@ static CGFloat wrapperViewHeight = 21.0f;
             self.downloadingEssentialDataView = wrapperView;
             [self.view addSubview:wrapperView];
         } else {
-            UIView *wrapperView = [[[UIView alloc] initWithFrame:CGRectMake(0.0f, CGRectGetHeight(self.view.bounds)/2.0f - wrapperViewHeight/2.0f, CGRectGetWidth(self.view.bounds), wrapperViewHeight)] autorelease];
+            UIView *wrapperView = [[[UIView alloc] initWithFrame:CGRectMake(0.0f, CGRectGetHeight(self.view.bounds)*9.0f/16.0f - wrapperViewHeight/2.0f, CGRectGetWidth(self.view.bounds), wrapperViewHeight)] autorelease];
             wrapperView.backgroundColor = [UIColor clearColor];
             wrapperView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
             
@@ -110,7 +110,7 @@ static CGFloat wrapperViewHeight = 21.0f;
             UIActivityIndicatorView *activityIndicatorView = [[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite] autorelease];
             [activityIndicatorView startAnimating];
             activityIndicatorView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
-            activityIndicatorView.center = CGPointMake(label.frame.origin.x - 15.0f, label.center.y);
+            activityIndicatorView.center = CGPointMake(label.center.x, label.center.y + CGRectGetHeight(label.frame));
             [wrapperView addSubview:activityIndicatorView];
             
             self.downloadingEssentialDataView = wrapperView;
