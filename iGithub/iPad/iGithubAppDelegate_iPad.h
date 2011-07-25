@@ -10,6 +10,7 @@
 #import "iGithubAppDelegate.h"
 #import "ANAdvancedNavigationController.h"
 
+#warning let GHPNewCommentTableViewCell manage the accesoryInputView
 #warning Writing comments. Infinite number of action sheets
 #warning Navigate forward while typing a comment causes strange things to happen
 

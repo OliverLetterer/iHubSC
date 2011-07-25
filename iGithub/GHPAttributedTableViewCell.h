@@ -11,6 +11,8 @@
 #import "DTLinkButton.h"
 #import "GHPImageDetailTableViewCell.h"
 
+#warning make commentTableViewCell:longPressRecognizedForButton: optional and default will show actionSheet to show in safari
+
 @class GHPAttributedTableViewCell;
 
 @protocol GHPAttributedTableViewCellDelegate <NSObject>
