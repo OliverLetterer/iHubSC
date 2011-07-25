@@ -9,9 +9,15 @@
 #import "GHPAttributedTableViewCell.h"
 
 
+
+
+
+#define kUIActionSheetTagLongPressedLink    172637
+
 @implementation GHPAttributedTableViewCell
 @synthesize attributedTextView=_attributedTextView;
 @synthesize buttonDelegate=_buttonDelegate;
+@synthesize selectedURL=_selectedURL;
 
 #pragma mark - Initialization
 
@@ -55,8 +61,39 @@
 }
 
 - (void)longPressRecognized:(UILongPressGestureRecognizer *)recognizer {
+    DTLinkButton *button = (DTLinkButton *)recognizer.view;
     if (recognizer.state == UIGestureRecognizerStateRecognized) {
-        [self.buttonDelegate attributedTableViewCell:self longPressRecognizedForButton:(DTLinkButton *)recognizer.view];
+        if ([self.buttonDelegate respondsToSelector:@selector(attributedTableViewCell:longPressRecognizedForButton:)]) {
+            [self.buttonDelegate attributedTableViewCell:self longPressRecognizedForButton:button];
+        } else {
+            self.selectedURL = button.url;
+            UIActionSheet *sheet = [[[UIActionSheet alloc] init] autorelease];
+            
+            sheet.title = button.url.absoluteString;
+            [sheet addButtonWithTitle:NSLocalizedString(@"View in Safari", @"")];
+            sheet.delegate = self;
+            sheet.tag = kUIActionSheetTagLongPressedLink;
+            
+            UIView *viewToShowIn = [UIApplication sharedApplication].delegate.window.rootViewController.view;
+            [sheet showFromRect:[button convertRect:button.bounds toView:viewToShowIn] inView:viewToShowIn animated:YES];
+        }
+    }
+}
+
+#pragma mark - UIActionSheetDelegate
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (actionSheet.tag == kUIActionSheetTagLongPressedLink) {
+        NSString *title = nil;
+        @try {
+            title = [actionSheet buttonTitleAtIndex:buttonIndex];
+        }
+        @catch (NSException *exception) {
+        }
+        
+        if ([title isEqualToString:NSLocalizedString(@"View in Safari", @"")]) {
+            [[UIApplication sharedApplication] openURL:self.selectedURL];
+        }
     }
 }
 
@@ -97,6 +134,7 @@
 
 - (void)dealloc {
     [_attributedTextView release];
+    [_selectedURL release];
     
     [super dealloc];
 }

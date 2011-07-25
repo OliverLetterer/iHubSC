@@ -26,14 +26,11 @@
 
 #define kUITableViewNumberOfSections    4
 
-#define kUIActionSheetTagLongPressedLink    172637
-
 @implementation GHPGistViewController
 
 @synthesize gistID=_gistID, gist=_gist;
 @synthesize comments=_comments;
 @synthesize textView=_textView, textViewToolBar=_textViewToolBar;
-@synthesize selectedURL=_selectedURL;
 
 #pragma mark - setters and getters
 
@@ -71,7 +68,6 @@
     [_gistID release];
     [_gist release];
     [_comments release];
-    [_selectedURL release];
     
     [super dealloc];
 }
@@ -443,17 +439,6 @@
         } else {
             [self setActionButtonActive:NO];
         }
-    } else if (actionSheet.tag == kUIActionSheetTagLongPressedLink) {
-        NSString *title = nil;
-        @try {
-            title = [actionSheet buttonTitleAtIndex:buttonIndex];
-        }
-        @catch (NSException *exception) {
-        }
-        
-        if ([title isEqualToString:NSLocalizedString(@"View in Safari", @"")]) {
-            [[UIApplication sharedApplication] openURL:self.selectedURL];
-        }
     }
 }
 
@@ -501,18 +486,6 @@
 - (void)attributedTableViewCell:(GHPAttributedTableViewCell *)cell receivedClickForButton:(DTLinkButton *)button {
     GHWebViewViewController *viewController = [[[GHWebViewViewController alloc] initWithURL:button.url ] autorelease];
     [self.advancedNavigationController pushViewController:viewController afterViewController:self animated:YES];
-}
-
-- (void)attributedTableViewCell:(GHPAttributedTableViewCell *)cell longPressRecognizedForButton:(DTLinkButton *)button {
-    self.selectedURL = button.url;
-    UIActionSheet *sheet = [[[UIActionSheet alloc] init] autorelease];
-    
-    sheet.title = button.url.absoluteString;
-    [sheet addButtonWithTitle:NSLocalizedString(@"View in Safari", @"")];
-    sheet.delegate = self;
-    sheet.tag = kUIActionSheetTagLongPressedLink;
-    
-    [sheet showFromRect:[button convertRect:button.bounds toView:self.view] inView:self.view animated:YES];
 }
 
 #pragma mark - Keyed Archiving

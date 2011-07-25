@@ -1050,18 +1050,6 @@
     [self.advancedNavigationController pushViewController:viewController afterViewController:self animated:YES];
 }
 
-- (void)attributedTableViewCell:(GHPAttributedTableViewCell *)cell longPressRecognizedForButton:(DTLinkButton *)button {
-    self.selectedURL = button.url;
-    UIActionSheet *sheet = [[[UIActionSheet alloc] init] autorelease];
-    
-    sheet.title = button.url.absoluteString;
-    [sheet addButtonWithTitle:NSLocalizedString(@"View in Safari", @"")];
-    sheet.delegate = self;
-    sheet.tag = kUIActionSheetTagLongPressedLink;
-    
-    [sheet showFromRect:[button convertRect:button.bounds toView:self.view] inView:self.view animated:YES];
-}
-
 #pragma mark - UITextViewDelegate
 
 - (void)textViewDidChangeSelection:(UITextView *)textView {
@@ -1082,7 +1070,6 @@
     [encoder encodeFloat:_bodyHeight forKey:@"bodyHeight"];
     [encoder encodeObject:_linkText forKey:@"linkText"];
     [encoder encodeObject:_linkURL forKey:@"linkURL"];
-    [encoder encodeObject:_selectedURL forKey:@"selectedURL"];
 }
 
 - (id)initWithCoder:(NSCoder *)decoder {
@@ -1096,7 +1083,6 @@
         _bodyHeight = [decoder decodeFloatForKey:@"bodyHeight"];
         _linkText = [[decoder decodeObjectForKey:@"linkText"] retain];
         _linkURL = [[decoder decodeObjectForKey:@"linkURL"] retain];
-        _selectedURL = [[decoder decodeObjectForKey:@"selectedURL"] retain];
     }
     return self;
 }

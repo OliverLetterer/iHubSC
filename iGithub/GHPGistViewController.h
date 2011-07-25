@@ -25,7 +25,6 @@
     BOOL _hasStarredData;
     BOOL _isGistStarred;
     
-    NSURL *_selectedURL;
 }
 
 @property (nonatomic, copy) NSString *gistID;
@@ -37,8 +36,6 @@
 
 @property (nonatomic, retain) UITextView *textView;
 @property (nonatomic, retain) UIToolbar *textViewToolBar;
-
-@property (nonatomic, copy) NSURL *selectedURL;
 
 - (void)cacheCommentsHeights;
 
