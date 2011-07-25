@@ -21,6 +21,7 @@ CGFloat const GHPNewCommentTableViewCellHeight = 200.0f;
 @synthesize textView=_textView;
 @synthesize linkText=_linkText, linkURL=_linkURL;
 @synthesize delegate=_delegate;
+@synthesize activeActionSheet=_activeActionSheet;
 
 #pragma mark - Setters and getters
 
@@ -114,6 +115,17 @@ CGFloat const GHPNewCommentTableViewCellHeight = 200.0f;
             alert.tag = kUIAlertViewTagLinkText;
             [alert show];
         }
+    }
+}
+
+- (void)willPresentActionSheet:(UIActionSheet *)actionSheet {
+    [self.activeActionSheet dismissWithClickedButtonIndex:NSNotFound animated:NO];
+    self.activeActionSheet = actionSheet;
+}
+
+- (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex {
+    if (actionSheet == self.activeActionSheet) {
+        self.activeActionSheet = nil;
     }
 }
 
@@ -244,6 +256,7 @@ CGFloat const GHPNewCommentTableViewCellHeight = 200.0f;
     [_textView release];
     [_linkText release];
     [_linkURL release];
+    [_activeActionSheet release];
     
     [super dealloc];
 }

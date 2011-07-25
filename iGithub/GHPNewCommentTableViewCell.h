@@ -24,6 +24,7 @@ extern CGFloat const GHPNewCommentTableViewCellHeight;
 @interface GHPNewCommentTableViewCell : GHPImageDetailTableViewCell <UIActionSheetDelegate, UIAlertViewDelegate, UITextViewDelegate> {
 @private
     UITextView *_textView;
+    UIActionSheet *_activeActionSheet;
     
     NSString *_linkText;
     NSString *_linkURL;
@@ -33,6 +34,8 @@ extern CGFloat const GHPNewCommentTableViewCellHeight;
 
 @property (nonatomic, retain) UITextView *textView;
 @property (nonatomic, readonly) UIView *textViewInputAccessoryView;
+@property (nonatomic, retain) UIActionSheet *activeActionSheet;
+
 
 @property (nonatomic, copy) NSString *linkText;
 @property (nonatomic, copy) NSString *linkURL;
