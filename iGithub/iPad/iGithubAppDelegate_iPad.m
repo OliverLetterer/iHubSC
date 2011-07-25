@@ -10,7 +10,7 @@
 #import "GHPLeftNavigationController.h"
 #import "ANAdvancedNavigationController.h"
 #import "GHSettingsHelper.h"
-#import "GHAuthenticationManager.h"
+#import "GHAPIAuthenticationManager.h"
 #import "GHPSearchScopeTableViewCell.h"
 
 @implementation iGithubAppDelegate_iPad
@@ -38,8 +38,8 @@
 //    [GHSettingsHelper setPassword:@"iTunes1"];
     
     [GHSettingsHelper setAvatarURL:@"https://secure.gravatar.com/avatar/534296d28e4a7118d2e75e84d04d571e?s=140&d=https://gs1.wac.edgecastcdn.net/80460E/assets%2Fimages%2Fgravatars%2Fgravatar-140.png"];
-    [GHAuthenticationManager sharedInstance].username = [GHSettingsHelper username];
-    [GHAuthenticationManager sharedInstance].password = [GHSettingsHelper password];
+    [GHAPIAuthenticationManager sharedInstance].username = [GHSettingsHelper username];
+    [GHAPIAuthenticationManager sharedInstance].password = [GHSettingsHelper password];
 #else
     [GHAuthenticationManager sharedInstance].username = [GHSettingsHelper username];
     [GHAuthenticationManager sharedInstance].password = [GHSettingsHelper password];

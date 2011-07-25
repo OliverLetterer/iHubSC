@@ -758,14 +758,14 @@
 #pragma mark - ActionMenu
 
 - (void)downloadDataToDisplayActionButton {
-    [GHAPIRepositoryV3 isUser:[GHAuthenticationManager sharedInstance].username 
+    [GHAPIRepositoryV3 isUser:[GHAPIAuthenticationManager sharedInstance].username 
      collaboratorOnRepository:self.repositoryString 
             completionHandler:^(BOOL state, NSError *error) {
                 if (error) {
                     [self failedToDownloadDataToDisplayActionButtonWithError:error];
                 } else {
                     _hasCollaboratorData = YES;
-                    _isCollaborator = state || [self.repositoryString hasPrefix:[GHAuthenticationManager sharedInstance].username];
+                    _isCollaborator = state || [self.repositoryString hasPrefix:[GHAPIAuthenticationManager sharedInstance].username];
                     
                     [self didDownloadDataToDisplayActionButton];
                 }
@@ -773,7 +773,7 @@
 }
 
 - (UIActionSheet *)actionButtonActionSheet {
-    if (!_isCollaborator && ![[GHAuthenticationManager sharedInstance].username isEqualToString:self.issue.user.login]) {
+    if (!_isCollaborator && ![[GHAPIAuthenticationManager sharedInstance].username isEqualToString:self.issue.user.login]) {
         UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", @"") 
                                                          message:[NSString stringWithFormat:NSLocalizedString(@"You are not allowed to administrate this %@", @""), self.issueName] 
                                                         delegate:nil 

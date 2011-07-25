@@ -32,7 +32,7 @@
 #pragma mark - setters and getters
 
 - (BOOL)isAdminsitrativeUser {
-    return [[GHAuthenticationManager sharedInstance].username isEqualToString:self.username];
+    return [[GHAPIAuthenticationManager sharedInstance].username isEqualToString:self.username];
 }
 
 - (void)setUsername:(NSString *)username {
@@ -108,7 +108,7 @@
     } else if (section == kUITableViewSectionUserInfo) {
         return 1;
     } else if (section == kUITableViewSectionAUContent) {
-        if ([self.username isEqualToString:[GHAuthenticationManager sharedInstance].username]) {
+        if ([self.username isEqualToString:[GHAPIAuthenticationManager sharedInstance].username]) {
             return 1;
         }
     }

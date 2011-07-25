@@ -40,7 +40,7 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self 
                                              selector:@selector(authenticationManagerDidAuthenticateUserCallback:) 
-                                                 name:GHAuthenticationManagerDidAuthenticateNewUserNotification 
+                                                 name:GHAPIAuthenticationManagerDidAuthenticateNewUserNotification 
                                                object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self 
@@ -56,8 +56,8 @@
 //    [GHSettingsHelper setPassword:@"iTunes1"];
     
     [GHSettingsHelper setAvatarURL:@"https://secure.gravatar.com/avatar/534296d28e4a7118d2e75e84d04d571e?s=140&d=https://gs1.wac.edgecastcdn.net/80460E/assets%2Fimages%2Fgravatars%2Fgravatar-140.png"];
-    [GHAuthenticationManager sharedInstance].username = [GHSettingsHelper username];
-    [GHAuthenticationManager sharedInstance].password = [GHSettingsHelper password];
+    [GHAPIAuthenticationManager sharedInstance].username = [GHSettingsHelper username];
+    [GHAPIAuthenticationManager sharedInstance].password = [GHSettingsHelper password];
 #else
     [GHAuthenticationManager sharedInstance].username = [GHSettingsHelper username];
     [GHAuthenticationManager sharedInstance].password = [GHSettingsHelper password];
@@ -103,7 +103,7 @@
         self.newsFeedViewController = [[[GHOwnerNewsFeedViewController alloc] init] autorelease];
         [tabBarItems addObject:[[[UINavigationController alloc] initWithRootViewController:self.newsFeedViewController] autorelease] ];
         
-        self.profileViewController = [[[GHUserViewController alloc] initWithUsername:[GHAuthenticationManager sharedInstance].username] autorelease];
+        self.profileViewController = [[[GHUserViewController alloc] initWithUsername:[GHAPIAuthenticationManager sharedInstance].username] autorelease];
         self.profileViewController.reloadDataIfNewUserGotAuthenticated = YES;
         self.profileViewController.pullToReleaseEnabled = YES;
         [tabBarItems addObject:[[[UINavigationController alloc] initWithRootViewController:self.profileViewController] autorelease] ];

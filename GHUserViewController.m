@@ -51,7 +51,7 @@
 }
 
 - (BOOL)hasAdministrationRights {
-    return [self.username isEqualToString:[GHAuthenticationManager sharedInstance].username ];
+    return [self.username isEqualToString:[GHAPIAuthenticationManager sharedInstance].username ];
 }
 
 - (void)setUsername:(NSString *)username {
@@ -125,7 +125,7 @@
 
 - (void)accountButtonClicked:(UIBarButtonItem *)button {
     UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Account", @"") 
-                                                     message:[NSString stringWithFormat:NSLocalizedString(@"You are logged in as: %@\nRemaining API calls for today: %d", @""), [GHAuthenticationManager sharedInstance].username, [GHAPIBackgroundQueueV3 sharedInstance].remainingAPICalls ]
+                                                     message:[NSString stringWithFormat:NSLocalizedString(@"You are logged in as: %@\nRemaining API calls for today: %d", @""), [GHAPIAuthenticationManager sharedInstance].username, [GHAPIBackgroundQueueV3 sharedInstance].remainingAPICalls ]
                                                     delegate:self 
                                            cancelButtonTitle:NSLocalizedString(@"Cancel", @"") 
                                            otherButtonTitles:NSLocalizedString(@"Logout", @""), nil]
@@ -576,7 +576,7 @@
     } else if (section == kUITableViewGists) {
         return self.gists.count + 1;
     } else if (section == kUITableViewSectionAssignedIssues) {
-        if (![self.username isEqualToString:[GHAuthenticationManager sharedInstance].username]) {
+        if (![self.username isEqualToString:[GHAPIAuthenticationManager sharedInstance].username]) {
             return 0;
         } else {
             return self.assignedIssues.count+1;

@@ -297,7 +297,7 @@
             }];
         } else {
             [self showLoadingInformation:NSLocalizedString(@"Fetching Organizations", @"")];
-            [GHAPIOrganizationV3 organizationsOfUser:[GHAuthenticationManager sharedInstance].username 
+            [GHAPIOrganizationV3 organizationsOfUser:[GHAPIAuthenticationManager sharedInstance].username 
                                                 page:1 
                                    completionHandler:^(NSMutableArray *array, NSUInteger nextPage, NSError *error) {
                                        self.isDownloadingEssentialData = NO;
@@ -389,7 +389,7 @@
     UIViewController *viewController = nil;
     
     if (item.payload.type == GHPayloadWatchEvent) {
-        if ([item.repository.fullName hasPrefix:[GHAuthenticationManager sharedInstance].username]) {
+        if ([item.repository.fullName hasPrefix:[GHAPIAuthenticationManager sharedInstance].username]) {
             // watched my repo, show the user
             viewController = [[[GHUserViewController alloc] initWithUsername:item.actorAttributes.login] autorelease];
         } else {
@@ -398,7 +398,7 @@
         }
     } else if (item.payload.type == GHPayloadFollowEvent) {
         GHFollowEventPayload *payload = (GHFollowEventPayload *)item.payload;
-        if ([payload.target.login isEqualToString:[GHAuthenticationManager sharedInstance].username]) {
+        if ([payload.target.login isEqualToString:[GHAPIAuthenticationManager sharedInstance].username]) {
             // started following me, show me the user
             viewController = [[[GHUserViewController alloc] initWithUsername:item.actorAttributes.login] autorelease];
         } else {
@@ -406,7 +406,7 @@
             viewController = [[[GHUserViewController alloc] initWithUsername:payload.target.login] autorelease];
         }
     } else if (item.payload.type == GHPayloadForkEvent) {
-        if ([item.repository.fullName hasPrefix:[GHAuthenticationManager sharedInstance].username]) {
+        if ([item.repository.fullName hasPrefix:[GHAPIAuthenticationManager sharedInstance].username]) {
             // forked my repository, show me the user
             viewController = [[[GHUserViewController alloc] initWithUsername:item.actorAttributes.login] autorelease];
         } else {

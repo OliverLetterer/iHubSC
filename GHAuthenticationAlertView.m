@@ -56,7 +56,7 @@ static BOOL _isAutheticationAlertViewVisible = NO;
                                          [GHSettingsHelper setPassword:password];
                                          [GHSettingsHelper setAvatarURL:user.avatarURL];
                                          
-                                         [[GHAuthenticationManager sharedInstance] saveAuthenticatedUserWithName:user.login 
+                                         [[GHAPIAuthenticationManager sharedInstance] saveAuthenticatedUserWithName:user.login 
                                                                                                         password:password];
                                          
                                          [[NSUserDefaults standardUserDefaults] synchronize];

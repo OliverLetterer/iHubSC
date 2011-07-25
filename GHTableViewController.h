@@ -13,7 +13,7 @@
 #import "GHTableViewControllerAlertViewProxy.h"
 #import "GHPullToReleaseTableViewController.h"
 #import "GHPDefaultTableViewCell.h"
-#import "GHAuthenticationManager.h"
+#import "GHAPIAuthenticationManager.h"
 #import "GithubAPI.h"
 #import "ANAdvancedNavigationController.h"
 #import "GHPCollapsingAndSpinningTableViewCell.h"

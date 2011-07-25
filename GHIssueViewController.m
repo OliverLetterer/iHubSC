@@ -248,7 +248,7 @@
                                            }
                                        }];
     } else if (section == kUITableViewSectionAdministration) {
-        [GHAPIRepositoryV3 isUser:[GHAuthenticationManager sharedInstance].username 
+        [GHAPIRepositoryV3 isUser:[GHAPIAuthenticationManager sharedInstance].username 
          collaboratorOnRepository:self.repository 
                 completionHandler:^(BOOL state, NSError *error) {
                     if (error) {
@@ -256,7 +256,7 @@
                         [tableView cancelDownloadInSection:section];
                     } else {
                         _hasCollaboratorData = YES;
-                        _isCollaborator = state || [self.repository hasPrefix:[GHAuthenticationManager sharedInstance].username] || [self.issue.user.login isEqualToString:[GHAuthenticationManager sharedInstance].username];
+                        _isCollaborator = state || [self.repository hasPrefix:[GHAPIAuthenticationManager sharedInstance].username] || [self.issue.user.login isEqualToString:[GHAPIAuthenticationManager sharedInstance].username];
                         [tableView expandSection:section animated:YES];
                     }
                 }];
@@ -302,7 +302,7 @@
                 result++;
                 result++;   // Update Assignee
             }
-            if (self.issue.isPullRequest && _isCollaborator && [self.issue.state isEqualToString:kGHAPIIssueStateV3Open] && ![self.issue.user.login isEqualToString:[GHAuthenticationManager sharedInstance].username]) {
+            if (self.issue.isPullRequest && _isCollaborator && [self.issue.state isEqualToString:kGHAPIIssueStateV3Open] && ![self.issue.user.login isEqualToString:[GHAPIAuthenticationManager sharedInstance].username]) {
                 result++;
             }
         }

@@ -8,7 +8,7 @@
 
 #import "iGithubAppDelegate.h"
 #import "GHSettingsHelper.h"
-#import "GHAuthenticationManager.h"
+#import "GHAPIAuthenticationManager.h"
 #import "ASIHTTPRequest.h"
 
 #define kLastKnownApplicationStateFileName @"de.olettere.iGitHub.lastKnownApplicationState.plist"

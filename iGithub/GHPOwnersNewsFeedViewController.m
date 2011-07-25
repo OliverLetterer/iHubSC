@@ -53,7 +53,7 @@
     UIViewController *viewController = nil;
     
     if (item.payload.type == GHPayloadWatchEvent) {
-        if ([item.repository.fullName hasPrefix:[GHAuthenticationManager sharedInstance].username]) {
+        if ([item.repository.fullName hasPrefix:[GHAPIAuthenticationManager sharedInstance].username]) {
             // watched my repo, show the user
             viewController = [[[GHPUserViewController alloc] initWithUsername:item.actorAttributes.login] autorelease];
         } else {
@@ -62,7 +62,7 @@
         }
     } else if (item.payload.type == GHPayloadFollowEvent) {
         GHFollowEventPayload *payload = (GHFollowEventPayload *)item.payload;
-        if ([payload.target.login isEqualToString:[GHAuthenticationManager sharedInstance].username]) {
+        if ([payload.target.login isEqualToString:[GHAPIAuthenticationManager sharedInstance].username]) {
             // started following me, show me the user
             viewController = [[[GHPUserViewController alloc] initWithUsername:item.actorAttributes.login] autorelease];
         } else {
@@ -70,7 +70,7 @@
             viewController = [[[GHPUserViewController alloc] initWithUsername:payload.target.login] autorelease];
         }
     } else if (item.payload.type == GHPayloadForkEvent) {
-        if ([item.repository.fullName hasPrefix:[GHAuthenticationManager sharedInstance].username]) {
+        if ([item.repository.fullName hasPrefix:[GHAPIAuthenticationManager sharedInstance].username]) {
             // forked my repository, show me the user
             viewController = [[[GHPUserViewController alloc] initWithUsername:item.actorAttributes.login] autorelease];
         } else {

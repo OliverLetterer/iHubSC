@@ -7,7 +7,7 @@
 //
 
 #import "GHManagedObjectContext.h"
-#import "GHAuthenticationManager.h"
+#import "GHAPIAuthenticationManager.h"
 
 #import "GHAPIBackgroundQueueV3.h"
 #import "GHUser.h"

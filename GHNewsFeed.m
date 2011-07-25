@@ -22,7 +22,7 @@
     
     dispatch_async(GHAPIBackgroundQueue(), ^(void) {
         NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://github.com/%@.private.json",
-                                           [[GHAuthenticationManager sharedInstance].username stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]];
+                                           [[GHAPIAuthenticationManager sharedInstance].username stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]];
         NSError *myError = nil;
         
         ASIHTTPRequest *request = [ASIHTTPRequest authenticatedFormDataRequestWithURL:URL];

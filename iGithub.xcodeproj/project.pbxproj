@@ -26,7 +26,7 @@
 		A706C0C7139AC552008A6184 /* PullToRefreshArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = A706C0C6139AC552008A6184 /* PullToRefreshArrow.png */; };
 		A706C0CC139AD15C008A6184 /* UIColor+GithubUI.m in Sources */ = {isa = PBXBuildFile; fileRef = A706C0CB139AD15C008A6184 /* UIColor+GithubUI.m */; };
 		A708950E1349FB82000DD6CE /* GHAttributedTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A708950D1349FB82000DD6CE /* GHAttributedTableViewCell.m */; };
-		A7089517134A03BA000DD6CE /* GHAuthenticationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A7089516134A03BA000DD6CE /* GHAuthenticationManager.m */; };
+		A7089517134A03BA000DD6CE /* GHAPIAuthenticationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A7089516134A03BA000DD6CE /* GHAPIAuthenticationManager.m */; };
 		A7089525134A2F24000DD6CE /* UITableViewCellAccessoryDisclosureIndicatorSelected.PNG in Resources */ = {isa = PBXBuildFile; fileRef = A7089521134A2F23000DD6CE /* UITableViewCellAccessoryDisclosureIndicatorSelected.PNG */; };
 		A7089526134A2F24000DD6CE /* UITableViewCellAccessoryDisclosureIndicator.PNG in Resources */ = {isa = PBXBuildFile; fileRef = A7089522134A2F23000DD6CE /* UITableViewCellAccessoryDisclosureIndicator.PNG */; };
 		A7089527134A2F24000DD6CE /* UITableViewCellAccessoryDisclosureIndicatorSelected@2x.PNG in Resources */ = {isa = PBXBuildFile; fileRef = A7089523134A2F23000DD6CE /* UITableViewCellAccessoryDisclosureIndicatorSelected@2x.PNG */; };
@@ -382,8 +382,8 @@
 		A706C0CB139AD15C008A6184 /* UIColor+GithubUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+GithubUI.m"; sourceTree = "<group>"; };
 		A708950C1349FB82000DD6CE /* GHAttributedTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHAttributedTableViewCell.h; sourceTree = "<group>"; };
 		A708950D1349FB82000DD6CE /* GHAttributedTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHAttributedTableViewCell.m; sourceTree = "<group>"; };
-		A7089515134A03BA000DD6CE /* GHAuthenticationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHAuthenticationManager.h; sourceTree = "<group>"; };
-		A7089516134A03BA000DD6CE /* GHAuthenticationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHAuthenticationManager.m; sourceTree = "<group>"; };
+		A7089515134A03BA000DD6CE /* GHAPIAuthenticationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHAPIAuthenticationManager.h; sourceTree = "<group>"; };
+		A7089516134A03BA000DD6CE /* GHAPIAuthenticationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHAPIAuthenticationManager.m; sourceTree = "<group>"; };
 		A7089521134A2F23000DD6CE /* UITableViewCellAccessoryDisclosureIndicatorSelected.PNG */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UITableViewCellAccessoryDisclosureIndicatorSelected.PNG; sourceTree = "<group>"; };
 		A7089522134A2F23000DD6CE /* UITableViewCellAccessoryDisclosureIndicator.PNG */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UITableViewCellAccessoryDisclosureIndicator.PNG; sourceTree = "<group>"; };
 		A7089523134A2F23000DD6CE /* UITableViewCellAccessoryDisclosureIndicatorSelected@2x.PNG */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UITableViewCellAccessoryDisclosureIndicatorSelected@2x.PNG"; sourceTree = "<group>"; };
@@ -1178,13 +1178,13 @@
 			name = UITableViewCells;
 			sourceTree = "<group>";
 		};
-		A7089514134A0398000DD6CE /* GHAuthenticationManager */ = {
+		A7089514134A0398000DD6CE /* GHAPIAuthenticationManager */ = {
 			isa = PBXGroup;
 			children = (
-				A7089515134A03BA000DD6CE /* GHAuthenticationManager.h */,
-				A7089516134A03BA000DD6CE /* GHAuthenticationManager.m */,
+				A7089515134A03BA000DD6CE /* GHAPIAuthenticationManager.h */,
+				A7089516134A03BA000DD6CE /* GHAPIAuthenticationManager.m */,
 			);
-			name = GHAuthenticationManager;
+			name = GHAPIAuthenticationManager;
 			sourceTree = "<group>";
 		};
 		A7089518134A0C49000DD6CE /* Foundation Additions */ = {
@@ -2127,6 +2127,7 @@
 		A79F37F813883B650028F492 /* v3 */ = {
 			isa = PBXGroup;
 			children = (
+				A7BF146E13426ED9001AE50D /* GHAPIBackgroundQueueV3 */,
 				A7023DE613CB8F9F0079D1D0 /* GHAPIImageCacheV3 */,
 				A70A11A813C3B33B00685749 /* GHAPIPullRequestV3 */,
 				A773023313B38C520075235E /* GHAPICommitV3 */,
@@ -2578,8 +2579,7 @@
 				A73E29B11348744300E85282 /* Foundation & Class Additions */,
 				A750570013427F9E00514A82 /* ASI-HTTP */,
 				A7BF147C13427309001AE50D /* JSONKit */,
-				A7089514134A0398000DD6CE /* GHAuthenticationManager */,
-				A7BF146E13426ED9001AE50D /* GHAPIBackgroundQueueV3 */,
+				A7089514134A0398000DD6CE /* GHAPIAuthenticationManager */,
 				A79F37F813883B650028F492 /* v3 */,
 				A7B5208B13885E2C000FEE61 /* V2 */,
 			);
@@ -3345,7 +3345,7 @@
 				A73E29BE1348D4DF00E85282 /* GHMemberEventPayload.m in Sources */,
 				A73E29C21348E12400E85282 /* GHIssueViewController.m in Sources */,
 				A708950E1349FB82000DD6CE /* GHAttributedTableViewCell.m in Sources */,
-				A7089517134A03BA000DD6CE /* GHAuthenticationManager.m in Sources */,
+				A7089517134A03BA000DD6CE /* GHAPIAuthenticationManager.m in Sources */,
 				A708952C134A2F83000DD6CE /* GHCollapsingAndSpinningTableViewCell.m in Sources */,
 				A7089530134A3DB0000DD6CE /* GHIssueComment.m in Sources */,
 				A7F6260F134B3938006487CA /* GHTableViewCellWithLinearGradientBackgroundView.m in Sources */,

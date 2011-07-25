@@ -258,7 +258,7 @@ static CGFloat wrapperViewHeight = 21.0f;
         self.cachedHeightsDictionary = [NSMutableDictionary dictionary];
         [[NSNotificationCenter defaultCenter] addObserver:self 
                                                  selector:@selector(authenticationManagerDidAuthenticateUserCallback:) 
-                                                     name:GHAuthenticationManagerDidAuthenticateNewUserNotification 
+                                                     name:GHAPIAuthenticationManagerDidAuthenticateNewUserNotification 
                                                    object:nil];
         
         [[NSNotificationCenter defaultCenter] addObserver:self 
@@ -534,7 +534,7 @@ static CGFloat wrapperViewHeight = 21.0f;
     }
     if ([error code] == 3) {
         // authentication problem
-        if (![GHAuthenticationManager sharedInstance].username) {
+        if (![GHAPIAuthenticationManager sharedInstance].username) {
             // no user is logged in, handle the nice error
             [super handleError:error];
         } else {

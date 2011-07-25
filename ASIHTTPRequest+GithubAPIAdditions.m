@@ -14,8 +14,8 @@
 + (ASIHTTPRequest *)authenticatedRequestWithURL:(NSURL *)URL {
     ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:URL];
     
-    [request addBasicAuthenticationHeaderWithUsername:[GHAuthenticationManager sharedInstance].username 
-                                          andPassword:[GHAuthenticationManager sharedInstance].password];
+    [request addBasicAuthenticationHeaderWithUsername:[GHAPIAuthenticationManager sharedInstance].username 
+                                          andPassword:[GHAPIAuthenticationManager sharedInstance].password];
     
     return request;
 }
@@ -23,9 +23,9 @@
 + (ASIFormDataRequest *)authenticatedFormDataRequestWithURL:(NSURL *)URL {
     ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:URL];
     
-    if ([GHAuthenticationManager sharedInstance].username && [GHAuthenticationManager sharedInstance].password) {
-        [request addBasicAuthenticationHeaderWithUsername:[GHAuthenticationManager sharedInstance].username 
-                                              andPassword:[GHAuthenticationManager sharedInstance].password];
+    if ([GHAPIAuthenticationManager sharedInstance].username && [GHAPIAuthenticationManager sharedInstance].password) {
+        [request addBasicAuthenticationHeaderWithUsername:[GHAPIAuthenticationManager sharedInstance].username 
+                                              andPassword:[GHAPIAuthenticationManager sharedInstance].password];
     }
     
     return request;

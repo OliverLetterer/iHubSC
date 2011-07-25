@@ -131,7 +131,7 @@
     
     NSURL *URL = nil;
     
-    if ([username isEqualToString:[GHAuthenticationManager sharedInstance].username]) {
+    if ([username isEqualToString:[GHAPIAuthenticationManager sharedInstance].username]) {
         URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.github.com/user/orgs"]];
     } else {
         URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.github.com/users/%@/orgs",

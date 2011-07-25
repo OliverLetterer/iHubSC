@@ -7,7 +7,7 @@
 //
 
 #import "UIViewController+GHErrorHandling.h"
-#import "GHAuthenticationManager.h"
+#import "GHAPIAuthenticationManager.h"
 #import "GHSettingsHelper.h"
 #import "GHAuthenticationAlertView.h"
 #import "ANNotificationQueue.h"
@@ -21,15 +21,15 @@
     
     [[NSUserDefaults standardUserDefaults] synchronize];
     
-    [GHAuthenticationManager sharedInstance].username = nil;
-    [GHAuthenticationManager sharedInstance].password = nil;
+    [GHAPIAuthenticationManager sharedInstance].username = nil;
+    [GHAPIAuthenticationManager sharedInstance].password = nil;
 }
 
 - (void)handleError:(NSError *)error {
     if (error != nil) {
         DLog(@"%@", error);
         
-        if (![GHAuthenticationManager sharedInstance].username || [[GHAuthenticationManager sharedInstance].username isEqualToString:@""]) {
+        if (![GHAPIAuthenticationManager sharedInstance].username || [[GHAPIAuthenticationManager sharedInstance].username isEqualToString:@""]) {
             GHAuthenticationAlertView *alert = [[[GHAuthenticationAlertView alloc] initWithDelegate:nil] autorelease];
             [alert show];
             return;
