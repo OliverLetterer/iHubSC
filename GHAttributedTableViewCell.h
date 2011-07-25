@@ -11,24 +11,26 @@
 #import "DTAttributedTextView.h"
 #import "DTLinkButton.h"
 
-#warning make issueInfoTableViewCell:longPressRecognizedForButton: optional and default present action sheet
-
 @class GHAttributedTableViewCell;
 
 @protocol GHAttributedTableViewCellDelegate <NSObject>
 
 - (void)attributedTableViewCell:(GHAttributedTableViewCell *)cell receivedClickForButton:(DTLinkButton *)button;
+
+@optional
 - (void)attributedTableViewCell:(GHAttributedTableViewCell *)cell longPressRecognizedForButton:(DTLinkButton *)button;
 
 @end
 
-@interface GHAttributedTableViewCell : GHDescriptionTableViewCell <DTAttributedTextContentViewDelegate> {
+@interface GHAttributedTableViewCell : GHDescriptionTableViewCell <DTAttributedTextContentViewDelegate, UIActionSheetDelegate> {
 @private
     DTAttributedTextContentView *_attributedTextView;
     id<GHAttributedTableViewCellDelegate> _buttonDelegate;
     
     NSAttributedString *_attributedString;
     NSAttributedString *_selectedAttributesString;
+    
+    NSURL *_selectedURL;
 }
 
 @property (nonatomic, retain) DTAttributedTextContentView *attributedTextView;
@@ -36,6 +38,8 @@
 
 @property (nonatomic, retain) NSAttributedString *attributedString;
 @property (nonatomic, retain) NSAttributedString *selectedAttributesString;
+
+@property (nonatomic, copy) NSURL *selectedURL;
 
 - (void)linkButtonClicked:(DTLinkButton *)sender;
 - (void)longPressRecognized:(UILongPressGestureRecognizer *)recognizer;

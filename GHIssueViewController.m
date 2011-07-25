@@ -37,8 +37,6 @@
 #define kUIAlertViewTagInputAssignee        12316
 #define kUIAlertViewTagMergePullRequest     12317
 
-#define kUIActionSheetTagLongPressedLink    97312
-
 @implementation GHIssueViewController
 
 @synthesize issue=_issue;
@@ -838,44 +836,6 @@
         }
         [self cacheHeight:height forRowAtIndexPath:[NSIndexPath indexPathForRow:idx+1 inSection:kUITableViewSectionHistory]];
     }];
-//    [self.history enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-//        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:idx+1 inSection:kUITableViewSectionHistory];
-//        
-//        CGFloat height = 71.0f;
-//        
-//        if ([obj isKindOfClass:[GHAPIIssueCommentV3 class] ]) {
-//            // display a comment
-//            GHAPIIssueCommentV3 *comment = obj;
-//            
-//            CGSize size = [comment.body sizeWithFont:[UIFont systemFontOfSize:12.0] 
-//                                   constrainedToSize:CGSizeMake(222.0, MAXFLOAT) 
-//                                       lineBreakMode:UILineBreakModeWordWrap];
-//            
-//            height = size.height + 50.0;
-//            
-//            if (height < 71.0) {
-//                height = 71.0;
-//            }
-//        }
-//        [self cacheHeight:height forRowAtIndexPath:indexPath];
-//    }];
-}
-
-#pragma mark - UIActionSheetDelegate
-
-- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
-    if (actionSheet.tag == kUIActionSheetTagLongPressedLink) {
-        NSString *title = nil;
-        @try {
-            title = [actionSheet buttonTitleAtIndex:buttonIndex];
-        }
-        @catch (NSException *exception) {
-        }
-        
-        if ([title isEqualToString:NSLocalizedString(@"View in Safari", @"")]) {
-            [[UIApplication sharedApplication] openURL:self.selectedURL];
-        }
-    }
 }
 
 #pragma mark - GHIssueTitleTableViewCellDelegate
@@ -883,21 +843,6 @@
 - (void)attributedTableViewCell:(GHAttributedTableViewCell *)cell receivedClickForButton:(DTLinkButton *)button {
     GHWebViewViewController *viewController = [[[GHWebViewViewController alloc] initWithURL:button.url ] autorelease];
     [self.navigationController pushViewController:viewController animated:YES];
-}
-
-- (void)attributedTableViewCell:(GHAttributedTableViewCell *)cell longPressRecognizedForButton:(DTLinkButton *)button {
-    self.selectedURL = button.url;
-    UIActionSheet *sheet = [[[UIActionSheet alloc] init] autorelease];
-    
-    sheet.title = button.url.absoluteString;
-    [sheet addButtonWithTitle:NSLocalizedString(@"View in Safari", @"")];
-    [sheet addButtonWithTitle:NSLocalizedString(@"Cancel", @"")];
-    sheet.cancelButtonIndex = 1;
-    sheet.delegate = self;
-    sheet.tag = kUIActionSheetTagLongPressedLink;
-    sheet.actionSheetStyle = UIActionSheetStyleBlackTranslucent;
-    
-    [sheet showInView:self.tabBarController.view];
 }
 
 #pragma mark - Keyed Archiving

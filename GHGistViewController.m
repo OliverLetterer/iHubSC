@@ -25,8 +25,6 @@
 
 #define kUITableViewSections 5
 
-#define kUIActionSheetTagLongPressedLink    172637
-
 @implementation GHGistViewController
 
 @synthesize ID=_ID, gist=_gist, comments=_comments;
@@ -500,37 +498,6 @@
 - (void)attributedTableViewCell:(GHAttributedTableViewCell *)cell receivedClickForButton:(DTLinkButton *)button {
     GHWebViewViewController *viewController = [[[GHWebViewViewController alloc] initWithURL:button.url ] autorelease];
     [self.navigationController pushViewController:viewController animated:YES];
-}
-
-- (void)attributedTableViewCell:(GHAttributedTableViewCell *)cell longPressRecognizedForButton:(DTLinkButton *)button {
-    self.selectedURL = button.url;
-    UIActionSheet *sheet = [[[UIActionSheet alloc] init] autorelease];
-    
-    sheet.title = button.url.absoluteString;
-    [sheet addButtonWithTitle:NSLocalizedString(@"View in Safari", @"")];
-    [sheet addButtonWithTitle:NSLocalizedString(@"Cancel", @"")];
-    sheet.cancelButtonIndex = 1;
-    sheet.delegate = self;
-    sheet.tag = kUIActionSheetTagLongPressedLink;
-    
-    [sheet showInView:self.tabBarController.view];
-}
-
-#pragma mark - UIActionSheetDelegate
-
-- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
-    if (actionSheet.tag == kUIActionSheetTagLongPressedLink) {
-        NSString *title = nil;
-        @try {
-            title = [actionSheet buttonTitleAtIndex:buttonIndex];
-        }
-        @catch (NSException *exception) {
-        }
-        
-        if ([title isEqualToString:NSLocalizedString(@"View in Safari", @"")]) {
-            [[UIApplication sharedApplication] openURL:self.selectedURL];
-        }
-    }
 }
 
 #pragma mark - Keyed Archiving

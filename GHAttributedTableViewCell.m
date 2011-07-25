@@ -9,10 +9,14 @@
 #import "GHAttributedTableViewCell.h"
 
 
+
+#define kUIActionSheetTagLongPressedLink        127386
+
 @implementation GHAttributedTableViewCell
 @synthesize attributedTextView=_attributedTextView;
 @synthesize buttonDelegate=_buttonDelegate;
 @synthesize attributedString=_attributedString, selectedAttributesString=_selectedAttributesString;
+@synthesize selectedURL=_selectedURL;
 
 #pragma mark - Initialization
 
@@ -68,8 +72,41 @@
 }
 
 - (void)longPressRecognized:(UILongPressGestureRecognizer *)recognizer {
+    DTLinkButton *button = (DTLinkButton *)recognizer.view;
+    
     if (recognizer.state == UIGestureRecognizerStateRecognized) {
-        [self.buttonDelegate attributedTableViewCell:self longPressRecognizedForButton:(DTLinkButton *)recognizer.view];
+        if ([self.buttonDelegate respondsToSelector:@selector(attributedTableViewCell:longPressRecognizedForButton:)]) {
+            [self.buttonDelegate attributedTableViewCell:self longPressRecognizedForButton:button];
+        } else {
+            self.selectedURL = button.url;
+            UIActionSheet *sheet = [[[UIActionSheet alloc] init] autorelease];
+            
+            sheet.title = button.url.absoluteString;
+            [sheet addButtonWithTitle:NSLocalizedString(@"View in Safari", @"")];
+            [sheet addButtonWithTitle:NSLocalizedString(@"Cancel", @"")];
+            sheet.cancelButtonIndex = 1;
+            sheet.delegate = self;
+            sheet.tag = kUIActionSheetTagLongPressedLink;
+            
+            [sheet showInView:[UIApplication sharedApplication].delegate.window.rootViewController.view];
+        }
+    }
+}
+
+#pragma mark - UIActionSheetDelegate
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (actionSheet.tag == kUIActionSheetTagLongPressedLink) {
+        NSString *title = nil;
+        @try {
+            title = [actionSheet buttonTitleAtIndex:buttonIndex];
+        }
+        @catch (NSException *exception) {
+        }
+        
+        if ([title isEqualToString:NSLocalizedString(@"View in Safari", @"")]) {
+            [[UIApplication sharedApplication] openURL:self.selectedURL];
+        }
     }
 }
 
@@ -106,6 +143,7 @@
     [_attributedTextView release];
     [_attributedString release]; 
     [_selectedAttributesString release];
+    [_selectedURL release];
     
     [super dealloc];
 }

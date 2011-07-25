@@ -12,7 +12,7 @@
 
 @class GHAPIGistV3;
 
-@interface GHGistViewController : GHTableViewController <GHAttributedTableViewCellDelegate, UIActionSheetDelegate> {
+@interface GHGistViewController : GHTableViewController <GHAttributedTableViewCellDelegate> {
 @private
     NSString *_ID;
     GHAPIGistV3 *_gist;
