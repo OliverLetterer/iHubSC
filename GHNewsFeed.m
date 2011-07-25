@@ -10,6 +10,14 @@
 #import "GithubAPI.h"
 #import "ASIHTTPRequest.h"
 
+#warning adopt this in API v2 and v3
+static inline id NSObjectExpectedClass(id object, Class class) {
+    if ([object isKindOfClass:class]) {
+        return object;
+    }
+    return nil;
+}
+
 @implementation GHNewsFeed
 
 @synthesize items=_items;
@@ -21,7 +29,6 @@
     // use URL https://github.com/docmorelli.private.json
     
     dispatch_async(GHAPIBackgroundQueue(), ^(void) {
-        
         NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://github.com/%@.private.json",
                                            [[GHAuthenticationManager sharedInstance].username stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]];
         NSError *myError = nil;
@@ -69,7 +76,7 @@
                 handler(nil, myError);
             } else {
                 NSArray *feedArray = [feedString objectFromJSONString];
-                handler([[[GHNewsFeed alloc] initWithRawArray:feedArray] autorelease], nil);
+                handler([[[GHNewsFeed alloc] initWithRawArray:NSObjectExpectedClass(feedArray, NSArray.class)] autorelease], nil);
             }
         });
     });

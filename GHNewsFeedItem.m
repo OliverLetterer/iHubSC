@@ -18,7 +18,6 @@
 - (id)initWithRawDictionary:(NSDictionary *)rawDictionary {
     if ((self = [super init])) {
         // Initialization code
-#warning crashes when own MyActions gets deserialized iPad
         self.actor = [rawDictionary objectForKeyOrNilOnNullObject:@"actor"];
         self.creationDate = [rawDictionary objectForKeyOrNilOnNullObject:@"created_at"];
         self.public = [rawDictionary objectForKeyOrNilOnNullObject:@"public"];

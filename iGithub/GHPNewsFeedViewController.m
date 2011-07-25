@@ -157,6 +157,14 @@
     return self;
 }
 
+#pragma mark - View lifecycle
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    [self downloadNewsFeed];
+}
+
 #pragma mark - Memory management
 
 - (void)dealloc {
@@ -552,7 +560,6 @@
 - (id)initWithCoder:(NSCoder *)decoder {
     if ((self = [super initWithCoder:decoder])) {
         _newsFeed = [[decoder decodeObjectForKey:@"newsFeed"] retain];
-        [self downloadNewsFeed];
     }
     return self;
 }
