@@ -50,7 +50,7 @@
 }
 
 + (CGFloat)height {
-    return 71.0;
+    return 71.0f;
 }
 
 + (CGFloat)heightWithContent:(NSString *)content {

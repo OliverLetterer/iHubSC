@@ -134,7 +134,10 @@
     }
     textView.attributedString = content;
     textView.frame = CGRectMake(0.0f, 0.0f, 222.0f, 10.0f);
-    return textView.contentSize.height + 65.0f;
+    CGFloat height = textView.contentSize.height + 65.0f;
+    CGFloat minimumHeight = [self height];
+    
+    return height < minimumHeight ? minimumHeight : height;
 }
 
 #pragma mark - Memory management

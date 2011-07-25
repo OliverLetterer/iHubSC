@@ -14,7 +14,6 @@
 #import "GHUserViewController.h"
 #import "GHSearchViewController.h"
 
-#warning let GHNewCommentTableViewCell manage the accesoryInputView
 #warning make extern CGFloat GHNewCommentTableViewCellHeight = 161.0f;
 #warning Google for iPhone design
 

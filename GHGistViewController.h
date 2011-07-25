@@ -9,10 +9,11 @@
 #import <UIKit/UIKit.h>
 #import "GHTableViewController.h"
 #import "GHAttributedTableViewCell.h"
+#import "GHNewCommentTableViewCell.h"
 
 @class GHAPIGistV3;
 
-@interface GHGistViewController : GHTableViewController <GHAttributedTableViewCellDelegate> {
+@interface GHGistViewController : GHTableViewController <GHAttributedTableViewCellDelegate, GHNewCommentTableViewCellDelegate> {
 @private
     NSString *_ID;
     GHAPIGistV3 *_gist;
@@ -22,18 +23,12 @@
     BOOL _isGistStarred;
     
     NSMutableArray *_comments;
-    
-    UITextView *_textView;
-    UIToolbar *_textViewToolBar;
 }
 
 @property (nonatomic, copy) NSString *ID;
 @property (nonatomic, retain) GHAPIGistV3 *gist;
 
 @property (nonatomic, retain) NSMutableArray *comments;
-
-@property (nonatomic, retain) UITextView *textView;
-@property (nonatomic, retain) UIToolbar *textViewToolBar;
 
 - (id)initWithID:(NSString *)ID;
 

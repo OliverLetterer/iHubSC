@@ -9,10 +9,11 @@
 #import <UIKit/UIKit.h>
 #import "GHTableViewController.h"
 #import "GHAttributedTableViewCell.h"
+#import "GHNewCommentTableViewCell.h"
 
 @class GHAPIIssueV3, GHTableViewCell, GHIssueComment, GHPullRequestDiscussion, DTAttributedTextView;
 
-@interface GHIssueViewController : GHTableViewController <UIAlertViewDelegate, GHAttributedTableViewCellDelegate> {
+@interface GHIssueViewController : GHTableViewController <UIAlertViewDelegate, GHAttributedTableViewCellDelegate, GHNewCommentTableViewCellDelegate> {
 @private
     GHAPIIssueV3 *_issue;
     
@@ -21,10 +22,6 @@
     
     NSArray *_history;
     GHPullRequestDiscussion *_discussion;
-    
-    UITextView *_textView;
-    UIToolbar *_textViewToolBar;
-    DTAttributedTextView *_attributedTextView;
     
     BOOL _hasCollaboratorData;
     BOOL _isCollaborator;
@@ -39,18 +36,11 @@
 @property (nonatomic, retain) NSArray *history;
 @property (nonatomic, retain) GHPullRequestDiscussion *discussion;
 
-@property (nonatomic, retain) UITextView *textView;
-@property (nonatomic, retain) UIToolbar *textViewToolBar;
-@property (nonatomic, retain) DTAttributedTextView *attributedTextView;
-
 - (NSString *)descriptionForEvent:(GHAPIIssueEventV3 *)event;
 
 - (id)initWithRepository:(NSString *)repository issueNumber:(NSNumber *)number;
 
 - (void)downloadIssueData;
-
-- (void)toolbarCancelButtonClicked:(UIBarButtonItem *)barButton;
-- (void)toolbarDoneButtonClicked:(UIBarButtonItem *)barButton;
 
 - (void)cacheHeightsForHistroy;
 

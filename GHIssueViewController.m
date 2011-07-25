@@ -41,7 +41,6 @@
 @synthesize issue=_issue;
 @synthesize repository=_repository, number=_number;
 @synthesize history=_history, discussion=_discussion;
-@synthesize textView=_textView, textViewToolBar=_textViewToolBar, attributedTextView=_attributedTextView;
 
 #pragma mark - setters and getters
 
@@ -77,7 +76,7 @@
         } else {
             self.issue = issue;
             [self cacheHeight:[GHAttributedTableViewCell heightWithAttributedString:self.issue.attributedBody 
-                                                               inAttributedTextView:self.attributedTextView] 
+                                                               inAttributedTextView:nil] 
             forRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:kUITableViewSectionData] ];
             self.title = [NSString stringWithFormat:NSLocalizedString(@"%@ %@", @""), self.issueName, self.number];
             [self.tableView reloadData];
@@ -137,9 +136,6 @@
     [_number release];
     [_history release];
     [_discussion release];
-    [_textView release];
-    [_textViewToolBar release];
-    [_attributedTextView release];
     
     [super dealloc];
 }
@@ -151,16 +147,13 @@
     // Release any cached data, images, etc that aren't in use.
 }
 
-#pragma mark - target actions
+#pragma mark - GHNewCommentTableViewCell
 
-- (void)toolbarCancelButtonClicked:(UIBarButtonItem *)barButton {
-    [self.textView resignFirstResponder];
-}
-
-- (void)toolbarDoneButtonClicked:(UIBarButtonItem *)barButton {
-    [self.textView resignFirstResponder];
+- (void)newCommentTableViewCell:(GHNewCommentTableViewCell *)cell didEnterText:(NSString *)text {
+    UITextView *textView = cell.textView;
+    [textView resignFirstResponder];
     
-    [GHAPIIssueV3 postComment:self.textView.text 
+    [GHAPIIssueV3 postComment:textView.text 
       forIssueOnRepository:self.repository 
                 withNumber:self.number 
          completionHandler:^(GHAPIIssueCommentV3 *comment, NSError *error) {
@@ -181,56 +174,9 @@
                  
                  [self.tableView endUpdates];
                  
-                 self.textView.text = nil;
+                 textView.text = nil;
              }
          }];
-}
-
-#pragma mark - View lifecycle
-
-- (void)loadView {
-    self.attributedTextView = [[[DTAttributedTextView alloc] initWithFrame:CGRectZero] autorelease];
-    [super loadView];
-}
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    
-    self.textViewToolBar = [[[UIToolbar alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0, 44.0)] autorelease];
-    self.textViewToolBar.barStyle = UIBarStyleBlackTranslucent;
-    
-    UIBarButtonItem *item = nil;
-    NSMutableArray *items = [NSMutableArray array];
-    
-    item = [[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Cancel", @"") 
-                                             style:UIBarButtonItemStyleBordered 
-                                            target:self 
-                                            action:@selector(toolbarCancelButtonClicked:)]
-                             autorelease];
-    [items addObject:item];
-    
-    item = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace 
-                                                          target:nil 
-                                                          action:@selector(noAction)]
-            autorelease];
-    [items addObject:item];
-    
-    item = [[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Submit", @"") 
-                                             style:UIBarButtonItemStyleDone 
-                                            target:self 
-                                            action:@selector(toolbarDoneButtonClicked:)]
-            autorelease];
-    [items addObject:item];
-    
-    self.textViewToolBar.items = items;
-}
-
-- (void)viewDidUnload {
-    [super viewDidUnload];
-    
-    self.textView = nil;
-    self.textViewToolBar = nil;
-    self.attributedTextView = nil;
 }
 
 #pragma mark - UIExpandableTableViewDatasource
@@ -495,10 +441,7 @@
             [self updateImageView:cell.imageView atIndexPath:indexPath withAvatarURLString:[GHSettingsHelper avatarURL]];
             
             cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ (right now)", @""), [GHSettingsHelper username]];
-            
-            self.textView = cell.textView;
-            cell.textView.inputAccessoryView = self.textViewToolBar;
-            self.textView.scrollsToTop = NO;
+            cell.delegate = self;
             
             return cell;
         }
@@ -518,7 +461,7 @@
             [self updateImageView:cell.imageView atIndexPath:indexPath withAvatarURLString:comment.user.avatarURL];
             
             cell.buttonDelegate = self;
-            cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ commented on this %@", @""), comment.user.login, self.issueName];
+            cell.textLabel.text = comment.user.login;
             cell.detailTextLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ ago", @""), comment.updatedAt.prettyTimeIntervalSinceNow];
             cell.attributedTextView.attributedString = comment.attributedBody;
             
@@ -599,7 +542,7 @@
         }
     } else if (indexPath.section == kUITableViewSectionHistory && indexPath.row > 0) {
         if (indexPath.row == [self.history count] + 1) {
-            return 161.0f;
+            return GHNewCommentTableViewCellHeight;
         }
         
         return [self cachedHeightForRowAtIndexPath:indexPath];
@@ -851,9 +794,6 @@
     [encoder encodeObject:_number forKey:@"number"];
     [encoder encodeObject:_history forKey:@"history"];
     [encoder encodeObject:_discussion forKey:@"discussion"];
-    [encoder encodeObject:_textView forKey:@"textView"];
-    [encoder encodeObject:_textViewToolBar forKey:@"textViewToolBar"];
-    [encoder encodeObject:_attributedTextView forKey:@"attributedTextView"];
     [encoder encodeBool:_hasCollaboratorData forKey:@"hasCollaboratorData"];
     [encoder encodeBool:_isCollaborator forKey:@"isCollaborator"];
 }
@@ -865,9 +805,6 @@
         _number = [[decoder decodeObjectForKey:@"number"] retain];
         _history = [[decoder decodeObjectForKey:@"history"] retain];
         _discussion = [[decoder decodeObjectForKey:@"discussion"] retain];
-        _textView = [[decoder decodeObjectForKey:@"textView"] retain];
-        _textViewToolBar = [[decoder decodeObjectForKey:@"textViewToolBar"] retain];
-        _attributedTextView = [[decoder decodeObjectForKey:@"attributedTextView"] retain];
         _hasCollaboratorData = [decoder decodeBoolForKey:@"hasCollaboratorData"];
         _isCollaborator = [decoder decodeBoolForKey:@"isCollaborator"];
     }
