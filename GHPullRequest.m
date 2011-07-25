@@ -86,7 +86,7 @@
             if (myError) {
                 handler(nil, myError);
             } else {
-                NSDictionary *dictionary = [jsonString objectFromJSONString];
+                NSDictionary *dictionary = NSObjectExpectedClass([jsonString objectFromJSONString], NSDictionary.class);
                 
                 handler([[[GHPullRequestDiscussion alloc] initWithRawDictionary:[dictionary objectForKey:@"pull"]] autorelease], nil);
             }
@@ -121,8 +121,8 @@
             if (myError) {
                 handler(nil, myError);
             } else {
-                NSDictionary *dictionary = [jsonString objectFromJSONString];
-                NSArray *rawPulls = [dictionary objectForKeyOrNilOnNullObject:@"pulls"];
+                NSDictionary *dictionary = NSObjectExpectedClass([jsonString objectFromJSONString], NSDictionary.class);
+                NSArray *rawPulls = NSObjectExpectedClass([dictionary objectForKeyOrNilOnNullObject:@"pulls"], NSArray.class);
                 NSMutableArray *pulls = [NSMutableArray arrayWithCapacity:[rawPulls count] ];
                 
                 for (NSDictionary *rawPullDiscussion in rawPulls) {

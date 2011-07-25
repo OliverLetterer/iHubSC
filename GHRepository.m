@@ -61,8 +61,8 @@
             if (myError) {
                 handler(nil, myError);
             } else {
-                NSDictionary *dict = [jsonString objectFromJSONString];
-                handler([dict objectForKey:@"delete_token"], nil);
+                NSDictionary *dict = NSObjectExpectedClass([jsonString objectFromJSONString], NSDictionary.class);
+                handler(NSObjectExpectedClass([dict objectForKey:@"delete_token"], NSString.class), nil);
             }
         });
     });
@@ -126,7 +126,7 @@
             if (myError) {
                 handler(nil, myError);
             } else {
-                NSDictionary *dictionary = [[request responseString] objectFromJSONString];
+                NSDictionary *dictionary = NSObjectExpectedClass([[request responseString] objectFromJSONString], NSDictionary.class);
                 
                 GHDirectory *rootDirectory = [[[GHDirectory alloc] initWithFilesDictionary:[dictionary objectForKeyOrNilOnNullObject:@"blobs"] name:@"" ] autorelease];
                 
@@ -161,7 +161,7 @@
             if (myError) {
                 handler(nil, myError);
             } else {
-                NSDictionary *dictionary = [[request responseString] objectFromJSONString];
+                NSDictionary *dictionary = NSObjectExpectedClass([[request responseString] objectFromJSONString], NSDictionary.class);
                 
                 NSArray *allRepos = [dictionary objectForKeyOrNilOnNullObject:@"repositories"];
                 NSMutableArray *repos = [NSMutableArray arrayWithCapacity:[allRepos count] ];

@@ -11,14 +11,10 @@
 #import "ASIHTTPRequest.h"
 
 @implementation GHUser
-
 @synthesize createdAt=_createdAt, gravatarID=_gravatarID, login=_login, type=_type, image=_image;
 @synthesize followersCount=_followersCount, followingCount=_followingCount, ID=_ID, publicGistCount=_publicGistCount, publicRepoCount=_publicRepoCount, name=_name;
-
 @synthesize privateRepoCount=_privateRepoCount, collaborators=_collaborators, diskUsage=_diskUsage, ownedPrivateRepoCount=_ownedPrivateRepoCount, privateGistCount=_privateGistCount, planCollaborators=_planCollaborators, planSpace=_planSpace, planPrivateRepos=_planPrivateRepos;
-
 @synthesize EMail=_EMail, location=_location, company=_company, blog=_blog;
-
 @synthesize planName=_planName, password=_password;
 
 - (BOOL)isAuthenticated {
@@ -111,9 +107,9 @@
             if (myError) {
                 handler(nil, myError);
             } else {
-                NSDictionary *dictionary = [[request responseString] objectFromJSONString];
+                NSDictionary *dictionary = NSObjectExpectedClass([[request responseString] objectFromJSONString], NSDictionary.class);
                 
-                NSArray *allUsers = [dictionary objectForKeyOrNilOnNullObject:@"users"];
+                NSArray *allUsers = NSObjectExpectedClass([dictionary objectForKeyOrNilOnNullObject:@"users"], NSArray.class);
                 NSMutableArray *users = [NSMutableArray arrayWithCapacity:[allUsers count] ];
                 
                 for (NSDictionary *rawUser in allUsers) {

@@ -55,12 +55,9 @@
     
     [[GHAPIBackgroundQueueV3 sharedInstance] sendRequestToURL:URL setupHandler:nil
                                        completionHandler:^(id object, NSError *error, ASIFormDataRequest *request) {
-                                           DLog(@"%@", [request responseString]);
                                            if (error) {
-                                               DLog(@"%@", [error localizedDescription]);
                                                handler(nil, error);
                                            } else {
-                                               DLog(@"%@", object);
                                                handler([[[GHAPICommitV3 alloc] initWithRawDictionary:object] autorelease], nil);
                                            }
                                        }];

@@ -37,7 +37,7 @@
             if (myError) {
                 handler(nil, myError);
             } else {
-                NSArray *feedArray = [feedString objectFromJSONString];
+                NSArray *feedArray = NSObjectExpectedClass([feedString objectFromJSONString], NSArray.class);
                 handler([[[GHNewsFeed alloc] initWithRawArray:feedArray] autorelease], nil);
             }
         });
@@ -67,7 +67,7 @@
             if (myError) {
                 handler(nil, myError);
             } else {
-                NSArray *feedArray = [feedString objectFromJSONString];
+                NSArray *feedArray = NSObjectExpectedClass([feedString objectFromJSONString], NSArray.class);
                 handler([[[GHNewsFeed alloc] initWithRawArray:NSObjectExpectedClass(feedArray, NSArray.class)] autorelease], nil);
             }
         });

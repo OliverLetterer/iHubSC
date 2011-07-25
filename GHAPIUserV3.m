@@ -141,8 +141,7 @@
                                            if (error) {
                                                handler(nil, error);
                                            } else {
-                                               NSDictionary *rawDictionary = object;
-                                               handler([[[GHAPIUserV3 alloc] initWithRawDictionary:rawDictionary] autorelease] , nil);
+                                               handler([[[GHAPIUserV3 alloc] initWithRawDictionary:object] autorelease] , nil);
                                            }
                                        }];
 }
@@ -163,8 +162,7 @@
                                            if (error) {
                                                handler(nil, error);
                                            } else {
-                                               NSDictionary *rawDictionary = object;
-                                               handler([[[GHAPIUserV3 alloc] initWithRawDictionary:rawDictionary] autorelease] , nil);
+                                               handler([[[GHAPIUserV3 alloc] initWithRawDictionary:object] autorelease] , nil);
                                            }
                                        }];
     
@@ -183,7 +181,7 @@
                                  if (error) {
                                      handler(nil, GHAPIPaginationNextPageNotFound, error);
                                  } else {
-                                     NSArray *rawArray = object;
+                                     NSArray *rawArray = NSObjectExpectedClass(object, NSArray.class);
                                      
                                      NSMutableArray *finalArray = [NSMutableArray arrayWithCapacity:rawArray.count];
                                      for (NSDictionary *rawDictionary in rawArray) {
@@ -208,7 +206,7 @@
                                  if (error) {
                                      handler(nil, GHAPIPaginationNextPageNotFound, error);
                                  } else {
-                                     NSArray *rawArray = object;
+                                     NSArray *rawArray = NSObjectExpectedClass(object, NSArray.class);
                                      
                                      NSMutableArray *finalArray = [NSMutableArray arrayWithCapacity:rawArray.count];
                                      for (NSDictionary *rawDictionary in rawArray) {
@@ -283,7 +281,7 @@
                                  if (error) {
                                      handler(nil, 0, error);
                                  } else {
-                                     NSArray *rawArray = object;
+                                     NSArray *rawArray = NSObjectExpectedClass(object, NSArray.class);
                                      
                                      NSMutableArray *finalArray = [NSMutableArray arrayWithCapacity:rawArray.count];
                                      for (NSDictionary *rawDictionary in rawArray) {

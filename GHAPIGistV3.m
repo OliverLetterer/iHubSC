@@ -173,7 +173,7 @@
                                            if (error) {
                                                handler(nil, error);
                                            } else {
-                                               NSArray *rawArray = object;
+                                               NSArray *rawArray = NSObjectExpectedClass(object, NSArray.class);
                                                
                                                NSMutableArray *finalArray = [NSMutableArray arrayWithCapacity:rawArray.count];
                                                [rawArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
