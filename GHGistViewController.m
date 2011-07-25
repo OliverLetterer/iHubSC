@@ -497,12 +497,12 @@
 
 #pragma mark - GHAttributedTableViewCellDelegate
 
-- (void)issueInfoTableViewCell:(GHAttributedTableViewCell *)cell receivedClickForButton:(DTLinkButton *)button {
+- (void)attributedTableViewCell:(GHAttributedTableViewCell *)cell receivedClickForButton:(DTLinkButton *)button {
     GHWebViewViewController *viewController = [[[GHWebViewViewController alloc] initWithURL:button.url ] autorelease];
     [self.navigationController pushViewController:viewController animated:YES];
 }
 
-- (void)issueInfoTableViewCell:(GHAttributedTableViewCell *)cell longPressRecognizedForButton:(DTLinkButton *)button {
+- (void)attributedTableViewCell:(GHAttributedTableViewCell *)cell longPressRecognizedForButton:(DTLinkButton *)button {
     self.selectedURL = button.url;
     UIActionSheet *sheet = [[[UIActionSheet alloc] init] autorelease];
     

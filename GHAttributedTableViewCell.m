@@ -64,12 +64,12 @@
 #pragma mark - Target actions
 
 - (void)linkButtonClicked:(DTLinkButton *)sender {
-    [self.buttonDelegate issueInfoTableViewCell:self receivedClickForButton:sender];
+    [self.buttonDelegate attributedTableViewCell:self receivedClickForButton:sender];
 }
 
 - (void)longPressRecognized:(UILongPressGestureRecognizer *)recognizer {
     if (recognizer.state == UIGestureRecognizerStateRecognized) {
-        [self.buttonDelegate issueInfoTableViewCell:self longPressRecognizedForButton:(DTLinkButton *)recognizer.view];
+        [self.buttonDelegate attributedTableViewCell:self longPressRecognizedForButton:(DTLinkButton *)recognizer.view];
     }
 }
 
