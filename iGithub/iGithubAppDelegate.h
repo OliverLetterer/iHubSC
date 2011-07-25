@@ -9,7 +9,6 @@
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
 
-#warning enable markdown for gists
 #warning Icons for folders and files in browse content
 
 @interface iGithubAppDelegate : NSObject <UIApplicationDelegate> {

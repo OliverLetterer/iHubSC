@@ -8,10 +8,29 @@
 
 #import "GHAPIGistCommentV3.h"
 #import "GithubAPI.h"
+#import "WASelectedAttributedMarkdownFormatter.h"
+#import "NSAttributedString+HTML.h"
 
 @implementation GHAPIGistCommentV3
 
 @synthesize ID=_ID, URL=_URL, body=_body, user=_user, createdAt=_createdAt;
+
+- (NSAttributedString *)attributedBody {
+    if (!_attributedBody) {
+        _attributedBody = [self.body.attributesStringFromMarkdownString retain];
+    }
+    return _attributedBody;
+}
+
+- (NSAttributedString *)selectedAttributedBody {
+    if (!_selectedAttributedBody) {
+        WASelectedAttributedMarkdownFormatter *formatter = [[[WASelectedAttributedMarkdownFormatter alloc] init] autorelease];
+        NSString *HTML = [formatter HTMLForMarkdown:self.body];
+        NSData *HTMLData = [HTML dataUsingEncoding:NSUTF8StringEncoding];
+        _selectedAttributedBody = [[NSAttributedString attributedStringWithHTML:HTMLData options:nil] retain];
+    }
+    return _selectedAttributedBody;
+}
 
 #pragma mark - Initialization
 

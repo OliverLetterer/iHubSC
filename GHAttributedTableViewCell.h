@@ -11,6 +11,9 @@
 #import "DTAttributedTextView.h"
 #import "DTLinkButton.h"
 
+#warning make issueInfoTableViewCell:longPressRecognizedForButton: optional and default present action sheet
+#warning rename delegate methods
+
 @class GHAttributedTableViewCell;
 
 @protocol GHAttributedTableViewCellDelegate <NSObject>

@@ -10,8 +10,9 @@
 #import "GHTableViewController.h"
 #import "GHPInfoTableViewCell.h"
 #import "GHPInfoSectionTableViewController.h"
+#import "GHPAttributedTableViewCell.h"
 
-@interface GHPGistViewController : GHPInfoSectionTableViewController <NSCoding> {
+@interface GHPGistViewController : GHPInfoSectionTableViewController <NSCoding, GHPAttributedTableViewCellDelegate, UIActionSheetDelegate> {
 @private
     NSString *_gistID;
     GHAPIGistV3 *_gist;
@@ -23,6 +24,8 @@
     
     BOOL _hasStarredData;
     BOOL _isGistStarred;
+    
+    NSURL *_selectedURL;
 }
 
 @property (nonatomic, copy) NSString *gistID;
@@ -34,5 +37,9 @@
 
 @property (nonatomic, retain) UITextView *textView;
 @property (nonatomic, retain) UIToolbar *textViewToolBar;
+
+@property (nonatomic, copy) NSURL *selectedURL;
+
+- (void)cacheCommentsHeights;
 
 @end

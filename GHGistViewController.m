@@ -15,6 +15,7 @@
 #import "GHViewCloudFileViewController.h"
 #import "GHNewCommentTableViewCell.h"
 #import "GHSettingsHelper.h"
+#import "GHWebViewViewController.h"
 
 #define kUITableViewSectionInfo 0
 #define kUITableViewSectionFiles 1
@@ -24,10 +25,13 @@
 
 #define kUITableViewSections 5
 
+#define kUIActionSheetTagLongPressedLink    172637
+
 @implementation GHGistViewController
 
 @synthesize ID=_ID, gist=_gist, comments=_comments;
 @synthesize textView=_textView, textViewToolBar=_textViewToolBar;
+@synthesize selectedURL=_selectedURL;
 
 #pragma mark - setters and getters
 
@@ -96,6 +100,7 @@
     [_comments release];
     [_textView release];
     [_textViewToolBar release];
+    [_selectedURL release];
     
     [super dealloc];
 }
@@ -178,10 +183,16 @@
 #pragma mark - instance methods
 
 - (void)cacheHeightForComments {
+    DTAttributedTextView *textView = [[[DTAttributedTextView alloc] initWithFrame:CGRectZero] autorelease];
     [self.comments enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         GHAPIGistCommentV3 *comment = obj;
-        [self cacheHeight:[GHDescriptionTableViewCell heightWithContent:comment.body] forRowAtIndexPath:[NSIndexPath indexPathForRow:idx+1 inSection:kUITableViewSectionComments]];
+        CGFloat height = [GHAttributedTableViewCell heightWithAttributedString:comment.attributedBody 
+                                                          inAttributedTextView:textView];
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:idx+1 inSection:kUITableViewSectionComments];
+        [self cacheHeight:height forRowAtIndexPath:indexPath];
     }];
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.comments.count+1 inSection:kUITableViewSectionComments];
+    [self cacheHeight:161.0f forRowAtIndexPath:indexPath];
 }
 
 #pragma mark - UIExpandableTableViewDatasource
@@ -375,22 +386,23 @@
     } else if (indexPath.section == kUITableViewSectionComments) {
         // comments
         if (indexPath.row >= 1 && indexPath.row <= [self.comments count]) {
-            // display a comment
+            static NSString *CellIdentifier = @"GHPAttributedTableViewCell";
+            GHAttributedTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
             
-            NSString *CellIdentifier = @"GHFeedItemWithDescriptionTableViewCell";
-            
-            GHDescriptionTableViewCell *cell = (GHDescriptionTableViewCell *)[self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-            if (cell == nil) {
-                cell = [[[GHDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+            if (!cell) {
+                cell = [[[GHAttributedTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
             }
+            // display a comment
             
             GHAPIGistCommentV3 *comment = [self.comments objectAtIndex:indexPath.row - 1];
             
             [self updateImageView:cell.imageView atIndexPath:indexPath withAvatarURLString:comment.user.avatarURL];
             
             cell.textLabel.text = comment.user.login;
-            cell.descriptionLabel.text = comment.body;
             cell.detailTextLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ ago", @""), comment.createdAt.prettyTimeIntervalSinceNow];
+            cell.attributedString = comment.attributedBody;
+            cell.selectedAttributesString = comment.selectedAttributedBody;
+            cell.buttonDelegate = self;
             
             return cell;
         } else if (indexPath.row == [self.comments count] + 1) {
@@ -417,41 +429,6 @@
     
     return self.dummyCell;
 }
-
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
 
 #pragma mark - Table view delegate
 
@@ -515,6 +492,44 @@
         [self.navigationController pushViewController:userViewController animated:YES];
     } else {
         [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    }
+}
+
+#pragma mark - GHAttributedTableViewCellDelegate
+
+- (void)issueInfoTableViewCell:(GHAttributedTableViewCell *)cell receivedClickForButton:(DTLinkButton *)button {
+    GHWebViewViewController *viewController = [[[GHWebViewViewController alloc] initWithURL:button.url ] autorelease];
+    [self.navigationController pushViewController:viewController animated:YES];
+}
+
+- (void)issueInfoTableViewCell:(GHAttributedTableViewCell *)cell longPressRecognizedForButton:(DTLinkButton *)button {
+    self.selectedURL = button.url;
+    UIActionSheet *sheet = [[[UIActionSheet alloc] init] autorelease];
+    
+    sheet.title = button.url.absoluteString;
+    [sheet addButtonWithTitle:NSLocalizedString(@"View in Safari", @"")];
+    [sheet addButtonWithTitle:NSLocalizedString(@"Cancel", @"")];
+    sheet.cancelButtonIndex = 1;
+    sheet.delegate = self;
+    sheet.tag = kUIActionSheetTagLongPressedLink;
+    
+    [sheet showInView:self.tabBarController.view];
+}
+
+#pragma mark - UIActionSheetDelegate
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (actionSheet.tag == kUIActionSheetTagLongPressedLink) {
+        NSString *title = nil;
+        @try {
+            title = [actionSheet buttonTitleAtIndex:buttonIndex];
+        }
+        @catch (NSException *exception) {
+        }
+        
+        if ([title isEqualToString:NSLocalizedString(@"View in Safari", @"")]) {
+            [[UIApplication sharedApplication] openURL:self.selectedURL];
+        }
     }
 }
 

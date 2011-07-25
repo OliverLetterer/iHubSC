@@ -1043,7 +1043,7 @@
     [sheet showFromRect:[button convertRect:button.bounds toView:self.view] inView:self.view animated:YES];
 }
 
-#pragma mark - GHPIssueCommentTableViewCellDelegate
+#pragma mark - GHPAttributedTableViewCellDelegate
 
 - (void)commentTableViewCell:(GHPAttributedTableViewCell *)cell receivedClickForButton:(DTLinkButton *)button {
     GHWebViewViewController *viewController = [[[GHWebViewViewController alloc] initWithURL:button.url ] autorelease];

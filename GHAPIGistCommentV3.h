@@ -17,6 +17,9 @@
     NSString *_body;
     GHAPIUserV3 *_user;
     NSString *_createdAt;
+    
+    NSAttributedString *_attributedBody;
+    NSAttributedString *_selectedAttributedBody;
 }
 
 @property (nonatomic, copy) NSNumber *ID;
@@ -24,6 +27,9 @@
 @property (nonatomic, copy) NSString *body;
 @property (nonatomic, retain) GHAPIUserV3 *user;
 @property (nonatomic, copy) NSString *createdAt;
+
+@property (nonatomic, retain) NSAttributedString *attributedBody;
+@property (nonatomic, retain) NSAttributedString *selectedAttributedBody;
 
 - (id)initWithRawDictionary:(NSDictionary *)rawDictionay;
 

@@ -12,6 +12,7 @@
 #import "GHPImageDetailTableViewCell.h"
 
 #warning make commentTableViewCell:longPressRecognizedForButton: optional and default will show actionSheet to show in safari
+#warning rename delegate methods
 
 @class GHPAttributedTableViewCell;
 

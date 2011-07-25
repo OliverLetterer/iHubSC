@@ -8,10 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "GHTableViewController.h"
+#import "GHAttributedTableViewCell.h"
 
 @class GHAPIGistV3;
 
-@interface GHGistViewController : GHTableViewController {
+@interface GHGistViewController : GHTableViewController <GHAttributedTableViewCellDelegate, UIActionSheetDelegate> {
 @private
     NSString *_ID;
     GHAPIGistV3 *_gist;
@@ -24,6 +25,8 @@
     
     UITextView *_textView;
     UIToolbar *_textViewToolBar;
+    
+    NSURL *_selectedURL;
 }
 
 @property (nonatomic, copy) NSString *ID;
@@ -33,6 +36,8 @@
 
 @property (nonatomic, retain) UITextView *textView;
 @property (nonatomic, retain) UIToolbar *textViewToolBar;
+
+@property (nonatomic, copy) NSURL *selectedURL;
 
 - (id)initWithID:(NSString *)ID;
 
