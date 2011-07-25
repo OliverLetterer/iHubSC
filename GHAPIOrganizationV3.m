@@ -30,6 +30,7 @@
 #pragma mark - Initialization
 
 - (id)initWithRawDictionary:(NSDictionary *)rawDictionary {
+    rawDictionary = NSObjectExpectedClass(rawDictionary, NSDictionary.class);
     if ((self = [super init])) {
         // Initialization code
         self.login = [rawDictionary objectForKeyOrNilOnNullObject:@"login"];

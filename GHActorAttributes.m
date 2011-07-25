@@ -16,6 +16,7 @@
 #pragma mark - initialization
 
 - (id)initWithRawDictionary:(NSDictionary *)rawDictionary {
+    rawDictionary = NSObjectExpectedClass(rawDictionary, NSDictionary.class);
     if ((self = [super init])) {
         self.blog = [rawDictionary objectForKeyOrNilOnNullObject:@"blog"];
         self.company = [rawDictionary objectForKeyOrNilOnNullObject:@"company"];

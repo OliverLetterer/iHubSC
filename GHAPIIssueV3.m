@@ -51,28 +51,29 @@ NSString *const kGHAPIIssueStateV3Closed = @"closed";
 
 #pragma mark - Initialization
 
-- (id)initWithRawDictionary:(NSDictionary *)rawDictionay {
+- (id)initWithRawDictionary:(NSDictionary *)rawDictionary {
+    rawDictionary = NSObjectExpectedClass(rawDictionary, NSDictionary.class);
     if ((self = [super init])) {
         // Initialization code
-        self.assignee = [[[GHAPIUserV3 alloc] initWithRawDictionary:[rawDictionay objectForKeyOrNilOnNullObject:@"assignee"] ] autorelease];
-        self.body = [rawDictionay objectForKeyOrNilOnNullObject:@"body"];
-        self.closedAt = [rawDictionay objectForKeyOrNilOnNullObject:@"closed_at"];
-        self.comments = [rawDictionay objectForKeyOrNilOnNullObject:@"comments"];
-        self.createdAt = [rawDictionay objectForKeyOrNilOnNullObject:@"created_at"];
-        self.HTMLURL = [rawDictionay objectForKeyOrNilOnNullObject:@"html_url"];
-        self.number = [rawDictionay objectForKeyOrNilOnNullObject:@"number"];
-        self.state = [rawDictionay objectForKeyOrNilOnNullObject:@"state"];
-        self.title = [rawDictionay objectForKeyOrNilOnNullObject:@"title"];
-        self.updatedAt = [rawDictionay objectForKeyOrNilOnNullObject:@"updated_at"];
-        self.URL = [rawDictionay objectForKeyOrNilOnNullObject:@"url"];
-        self.user = [[[GHAPIUserV3 alloc] initWithRawDictionary:[rawDictionay objectForKeyOrNilOnNullObject:@"user"] ] autorelease];
+        self.assignee = [[[GHAPIUserV3 alloc] initWithRawDictionary:[rawDictionary objectForKeyOrNilOnNullObject:@"assignee"] ] autorelease];
+        self.body = [rawDictionary objectForKeyOrNilOnNullObject:@"body"];
+        self.closedAt = [rawDictionary objectForKeyOrNilOnNullObject:@"closed_at"];
+        self.comments = [rawDictionary objectForKeyOrNilOnNullObject:@"comments"];
+        self.createdAt = [rawDictionary objectForKeyOrNilOnNullObject:@"created_at"];
+        self.HTMLURL = [rawDictionary objectForKeyOrNilOnNullObject:@"html_url"];
+        self.number = [rawDictionary objectForKeyOrNilOnNullObject:@"number"];
+        self.state = [rawDictionary objectForKeyOrNilOnNullObject:@"state"];
+        self.title = [rawDictionary objectForKeyOrNilOnNullObject:@"title"];
+        self.updatedAt = [rawDictionary objectForKeyOrNilOnNullObject:@"updated_at"];
+        self.URL = [rawDictionary objectForKeyOrNilOnNullObject:@"url"];
+        self.user = [[[GHAPIUserV3 alloc] initWithRawDictionary:[rawDictionary objectForKeyOrNilOnNullObject:@"user"] ] autorelease];
         self.repository = [self.URL substringBetweenLeftBounds:@"repos/" andRightBounds:@"/issues"];
         
-        self.milestone = [[[GHAPIMilestoneV3 alloc] initWithRawDictionary:[rawDictionay objectForKeyOrNilOnNullObject:@"milestone"] ] autorelease];
-        NSString *htmlURL = [[rawDictionay objectForKeyOrNilOnNullObject:@"pull_request"] objectForKeyOrNilOnNullObject:@"html_url"];
+        self.milestone = [[[GHAPIMilestoneV3 alloc] initWithRawDictionary:[rawDictionary objectForKeyOrNilOnNullObject:@"milestone"] ] autorelease];
+        NSString *htmlURL = [[rawDictionary objectForKeyOrNilOnNullObject:@"pull_request"] objectForKeyOrNilOnNullObject:@"html_url"];
         self.pullRequestID = [[htmlURL componentsSeparatedByString:@"/"] lastObject];
         
-        NSArray *rawArray = [rawDictionay objectForKeyOrNilOnNullObject:@"labels"];
+        NSArray *rawArray = [rawDictionary objectForKeyOrNilOnNullObject:@"labels"];
         NSMutableArray *finalArray = [NSMutableArray arrayWithCapacity:rawArray.count];
         [rawArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
             [finalArray addObject:[[[GHAPILabelV3 alloc] initWithRawDictionary:obj] autorelease] ];

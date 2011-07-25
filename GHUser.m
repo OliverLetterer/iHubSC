@@ -127,6 +127,7 @@
 }
 
 - (id)initWithRawUserDictionary:(NSDictionary *)rawDictionary {
+    rawDictionary = NSObjectExpectedClass(rawDictionary, NSDictionary.class);
     NSDictionary *userDictionary = [rawDictionary objectForKeyOrNilOnNullObject:@"user"];
     if ((self = [self initWithRawDictionary:userDictionary])) {
         // setup here
@@ -135,6 +136,7 @@
 }
 
 - (id)initWithRawDictionary:(NSDictionary *)rawDictionary {
+    rawDictionary = NSObjectExpectedClass(rawDictionary, NSDictionary.class);
     if ((self = [super init])) {
         // setup here
         self.createdAt = [rawDictionary objectForKeyOrNilOnNullObject:@"created_at"];

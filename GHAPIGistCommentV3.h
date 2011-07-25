@@ -31,6 +31,6 @@
 @property (nonatomic, retain) NSAttributedString *attributedBody;
 @property (nonatomic, retain) NSAttributedString *selectedAttributedBody;
 
-- (id)initWithRawDictionary:(NSDictionary *)rawDictionay;
+- (id)initWithRawDictionary:(NSDictionary *)rawDictionary;
 
 @end

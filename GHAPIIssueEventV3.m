@@ -16,15 +16,16 @@
 
 #pragma mark - Initialization
 
-- (id)initWithRawDictionary:(NSDictionary *)rawDictionay {
+- (id)initWithRawDictionary:(NSDictionary *)rawDictionary {
+    rawDictionary = NSObjectExpectedClass(rawDictionary, NSDictionary.class);
     if ((self = [super init])) {
         // Initialization code
-        self.URL = [rawDictionay objectForKeyOrNilOnNullObject:@"url"];
-        self.event = [rawDictionay objectForKeyOrNilOnNullObject:@"event"];
-        self.commitID = [rawDictionay objectForKeyOrNilOnNullObject:@"commit_id"];
-        self.createdAt = [rawDictionay objectForKeyOrNilOnNullObject:@"created_at"];
+        self.URL = [rawDictionary objectForKeyOrNilOnNullObject:@"url"];
+        self.event = [rawDictionary objectForKeyOrNilOnNullObject:@"event"];
+        self.commitID = [rawDictionary objectForKeyOrNilOnNullObject:@"commit_id"];
+        self.createdAt = [rawDictionary objectForKeyOrNilOnNullObject:@"created_at"];
         
-        self.actor = [[[GHAPIUserV3 alloc] initWithRawDictionary:[rawDictionay objectForKeyOrNilOnNullObject:@"actor"] ] autorelease];
+        self.actor = [[[GHAPIUserV3 alloc] initWithRawDictionary:[rawDictionary objectForKeyOrNilOnNullObject:@"actor"] ] autorelease];
         
         if ([self.event isEqualToString:@"closed"]) {
             _type = GHAPIIssueEventTypeV3Closed;

@@ -38,7 +38,7 @@
 @property (nonatomic, copy) NSString *createdAt;
 @property (nonatomic, retain) NSArray *forks;   // contains GHAPIGistForkV3's
 
-- (id)initWithRawDictionary:(NSDictionary *)rawDictionay;
+- (id)initWithRawDictionary:(NSDictionary *)rawDictionary;
 
 + (void)gistWithID:(NSString *)ID completionHandler:(void(^)(GHAPIGistV3 *gist, NSError *error))handler;
 + (void)deleteGistWithID:(NSString *)ID completionHandler:(void(^)(NSError *error))handler;

@@ -22,6 +22,6 @@
 @property (nonatomic, copy) NSNumber *collaborators;
 @property (nonatomic, copy) NSNumber *privateRepos;
 
-- (id)initWithRawDictionary:(NSDictionary *)rawDictionay;
+- (id)initWithRawDictionary:(NSDictionary *)rawDictionary;
 
 @end

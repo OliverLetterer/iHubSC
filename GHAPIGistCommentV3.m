@@ -34,15 +34,16 @@
 
 #pragma mark - Initialization
 
-- (id)initWithRawDictionary:(NSDictionary *)rawDictionay {
+- (id)initWithRawDictionary:(NSDictionary *)rawDictionary {
+    rawDictionary = NSObjectExpectedClass(rawDictionary, NSDictionary.class);
     if ((self = [super init])) {
         // Initialization code
-        self.ID = [rawDictionay objectForKeyOrNilOnNullObject:@"id"];
-        self.URL = [rawDictionay objectForKeyOrNilOnNullObject:@"url"];
-        self.body = [rawDictionay objectForKeyOrNilOnNullObject:@"body"];
-        self.createdAt = [rawDictionay objectForKeyOrNilOnNullObject:@"created_at"];
+        self.ID = [rawDictionary objectForKeyOrNilOnNullObject:@"id"];
+        self.URL = [rawDictionary objectForKeyOrNilOnNullObject:@"url"];
+        self.body = [rawDictionary objectForKeyOrNilOnNullObject:@"body"];
+        self.createdAt = [rawDictionary objectForKeyOrNilOnNullObject:@"created_at"];
         
-        self.user = [[[GHAPIUserV3 alloc] initWithRawDictionary:[rawDictionay objectForKeyOrNilOnNullObject:@"user"] ] autorelease];
+        self.user = [[[GHAPIUserV3 alloc] initWithRawDictionary:[rawDictionary objectForKeyOrNilOnNullObject:@"user"] ] autorelease];
     }
     return self;
 }

@@ -15,14 +15,15 @@
 
 #pragma mark - Initialization
 
-- (id)initWithRawDictionary:(NSDictionary *)rawDictionay {
+- (id)initWithRawDictionary:(NSDictionary *)rawDictionary {
+    rawDictionary = NSObjectExpectedClass(rawDictionary, NSDictionary.class);
     if ((self = [super init])) {
         // Initialization code
-        self.name = [rawDictionay objectForKeyOrNilOnNullObject:@"name"];
-        self.size = [rawDictionay objectForKeyOrNilOnNullObject:@"size"];
-        self.hash = [rawDictionay objectForKeyOrNilOnNullObject:@"sha"];
-        self.mode = [rawDictionay objectForKeyOrNilOnNullObject:@"mode"];
-        self.mimeType = [rawDictionay objectForKeyOrNilOnNullObject:@"mime_type"];
+        self.name = [rawDictionary objectForKeyOrNilOnNullObject:@"name"];
+        self.size = [rawDictionary objectForKeyOrNilOnNullObject:@"size"];
+        self.hash = [rawDictionary objectForKeyOrNilOnNullObject:@"sha"];
+        self.mode = [rawDictionary objectForKeyOrNilOnNullObject:@"mode"];
+        self.mimeType = [rawDictionary objectForKeyOrNilOnNullObject:@"mime_type"];
     }
     return self;
 }

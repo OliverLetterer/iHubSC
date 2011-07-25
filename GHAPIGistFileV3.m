@@ -15,13 +15,14 @@
 
 #pragma mark - Initialization
 
-- (id)initWithRawDictionary:(NSDictionary *)rawDictionay {
+- (id)initWithRawDictionary:(NSDictionary *)rawDictionary {
+    rawDictionary = NSObjectExpectedClass(rawDictionary, NSDictionary.class);
     if ((self = [super init])) {
         // Initialization code
-        self.filename = [rawDictionay objectForKeyOrNilOnNullObject:@"filename"];
-        self.size = [rawDictionay objectForKeyOrNilOnNullObject:@"size"];
-        self.URL = [rawDictionay objectForKeyOrNilOnNullObject:@"raw_url"];
-        self.content = [rawDictionay objectForKeyOrNilOnNullObject:@"content"];
+        self.filename = [rawDictionary objectForKeyOrNilOnNullObject:@"filename"];
+        self.size = [rawDictionary objectForKeyOrNilOnNullObject:@"size"];
+        self.URL = [rawDictionary objectForKeyOrNilOnNullObject:@"raw_url"];
+        self.content = [rawDictionary objectForKeyOrNilOnNullObject:@"content"];
     }
     return self;
 }

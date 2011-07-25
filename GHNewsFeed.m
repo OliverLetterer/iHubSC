@@ -10,14 +10,6 @@
 #import "GithubAPI.h"
 #import "ASIHTTPRequest.h"
 
-#warning adopt this in API v2 and v3
-static inline id NSObjectExpectedClass(id object, Class class) {
-    if ([object isKindOfClass:class]) {
-        return object;
-    }
-    return nil;
-}
-
 @implementation GHNewsFeed
 
 @synthesize items=_items;
@@ -84,6 +76,7 @@ static inline id NSObjectExpectedClass(id object, Class class) {
 }
 
 - (id)initWithRawArray:(NSArray *)rawArray {
+    rawArray = NSObjectExpectedClass(rawArray, NSArray.class);
     if ((self = [super init])) {
         // Initialization code
         NSMutableArray *items = [NSMutableArray array];

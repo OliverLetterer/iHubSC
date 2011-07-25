@@ -15,20 +15,21 @@
 
 #pragma mark - Initialization
 
-- (id)initWithRawDictionary:(NSDictionary *)rawDictionay {
+- (id)initWithRawDictionary:(NSDictionary *)rawDictionary {
+    rawDictionary = NSObjectExpectedClass(rawDictionary, NSDictionary.class);
     if ((self = [super init])) {
         // Initialization code
-        self.URL = [rawDictionay objectForKeyOrNilOnNullObject:@"url"];
-        self.ID = [rawDictionay objectForKeyOrNilOnNullObject:@"id"];
-        self.description = [rawDictionay objectForKeyOrNilOnNullObject:@"description"];
-        self.user = [[[GHAPIUserV3 alloc] initWithRawDictionary:[rawDictionay objectForKeyOrNilOnNullObject:@"user"]] autorelease];
-        self.comments = [rawDictionay objectForKeyOrNilOnNullObject:@"comments"];
-        self.pullURL = [rawDictionay objectForKeyOrNilOnNullObject:@"git_pull_url"];
-        self.pushURL = [rawDictionay objectForKeyOrNilOnNullObject:@"git_push_url"];
-        self.createdAt = [rawDictionay objectForKeyOrNilOnNullObject:@"created_at"];
-        self.public = [rawDictionay objectForKeyOrNilOnNullObject:@"public"];
+        self.URL = [rawDictionary objectForKeyOrNilOnNullObject:@"url"];
+        self.ID = [rawDictionary objectForKeyOrNilOnNullObject:@"id"];
+        self.description = [rawDictionary objectForKeyOrNilOnNullObject:@"description"];
+        self.user = [[[GHAPIUserV3 alloc] initWithRawDictionary:[rawDictionary objectForKeyOrNilOnNullObject:@"user"]] autorelease];
+        self.comments = [rawDictionary objectForKeyOrNilOnNullObject:@"comments"];
+        self.pullURL = [rawDictionary objectForKeyOrNilOnNullObject:@"git_pull_url"];
+        self.pushURL = [rawDictionary objectForKeyOrNilOnNullObject:@"git_push_url"];
+        self.createdAt = [rawDictionary objectForKeyOrNilOnNullObject:@"created_at"];
+        self.public = [rawDictionary objectForKeyOrNilOnNullObject:@"public"];
         
-        NSDictionary *filesDictionary = [rawDictionay objectForKeyOrNilOnNullObject:@"files"];
+        NSDictionary *filesDictionary = [rawDictionary objectForKeyOrNilOnNullObject:@"files"];
         NSMutableArray *filesArray = [NSMutableArray arrayWithCapacity:[filesDictionary count]];
         
         [filesDictionary enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
@@ -37,7 +38,7 @@
         
         self.files = filesArray;
         
-        NSArray *rawArray = [rawDictionay objectForKeyOrNilOnNullObject:@"forks"];
+        NSArray *rawArray = [rawDictionary objectForKeyOrNilOnNullObject:@"forks"];
         NSMutableArray *finalArray = [NSMutableArray arrayWithCapacity:rawArray.count];
         [rawArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
             [finalArray addObject:[[[GHAPIGistForkV3 alloc] initWithRawDictionary:obj] autorelease] ];

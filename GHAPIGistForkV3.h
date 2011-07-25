@@ -21,6 +21,6 @@
 @property (nonatomic, copy) NSString *URL;
 @property (nonatomic, copy) NSString *createdAt;
 
-- (id)initWithRawDictionary:(NSDictionary *)rawDictionay;
+- (id)initWithRawDictionary:(NSDictionary *)rawDictionary;
 
 @end

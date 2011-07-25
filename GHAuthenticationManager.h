@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+#warning rename
+
 extern NSString *const GHAuthenticationManagerDidAuthenticateNewUserNotification;
 
 @interface GHAuthenticationManager : NSObject {

@@ -16,6 +16,7 @@
 #pragma mark - Initialization
 
 - (id)initWithRawArray:(NSArray *)array {
+    array = NSObjectExpectedClass(array, NSArray.class);
     if ((self = [super init]) && array) {
         // Initialization code
         self.head = [array objectAtIndex:0];

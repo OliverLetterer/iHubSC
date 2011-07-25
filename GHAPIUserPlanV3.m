@@ -15,13 +15,14 @@
 
 #pragma mark - Initialization
 
-- (id)initWithRawDictionary:(NSDictionary *)rawDictionay {
+- (id)initWithRawDictionary:(NSDictionary *)rawDictionary {
+    rawDictionary = NSObjectExpectedClass(rawDictionary, NSDictionary.class);
     if ((self = [super init])) {
         // Initialization code
-        self.space = [rawDictionay objectForKeyOrNilOnNullObject:@"space"];
-        self.name = [rawDictionay objectForKeyOrNilOnNullObject:@"name"];
-        self.collaborators = [rawDictionay objectForKeyOrNilOnNullObject:@"collaborators"];
-        self.privateRepos = [rawDictionay objectForKeyOrNilOnNullObject:@"private_repos"];
+        self.space = [rawDictionary objectForKeyOrNilOnNullObject:@"space"];
+        self.name = [rawDictionary objectForKeyOrNilOnNullObject:@"name"];
+        self.collaborators = [rawDictionary objectForKeyOrNilOnNullObject:@"collaborators"];
+        self.privateRepos = [rawDictionary objectForKeyOrNilOnNullObject:@"private_repos"];
     }
     return self;
 }

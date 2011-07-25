@@ -27,7 +27,7 @@
 @property (nonatomic, copy) NSString *mimeType;
 @property (nonatomic, copy) NSString *repository;
 
-- (id)initWithRawDictionary:(NSDictionary *)rawDictionay;
+- (id)initWithRawDictionary:(NSDictionary *)rawDictionary;
 
 + (void)metaDataOfFile:(NSString *)filename 
          atRelativeURL:(NSString *)URL 

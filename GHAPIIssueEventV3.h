@@ -40,7 +40,7 @@ typedef enum {
 
 @property (nonatomic, readonly) GHAPIIssueEventTypeV3 type;
 
-- (id)initWithRawDictionary:(NSDictionary *)rawDictionay;
+- (id)initWithRawDictionary:(NSDictionary *)rawDictionary;
 
 - (NSComparisonResult)compare:(NSObject *)anObject;
 

@@ -744,7 +744,7 @@
                                                                                                          message:issue.assignee.login];
                                         self.issue = issue;
                                         if (self.isViewLoaded) {
-                                            [self.tableView reloadData];
+                                            [self.tableView reloadDataAndResetExpansionStates:NO];
                                         }
                                     }
                                 }];

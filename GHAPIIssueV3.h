@@ -60,7 +60,7 @@ extern NSString *const kGHAPIIssueStateV3Closed;
 @property (nonatomic, readonly) BOOL hasAssignee;
 @property (nonatomic, readonly) BOOL hasMilestone;
 
-- (id)initWithRawDictionary:(NSDictionary *)rawDictionay;
+- (id)initWithRawDictionary:(NSDictionary *)rawDictionary;
 
 + (void)openedIssuesOnRepository:(NSString *)repository page:(NSInteger)page completionHandler:(GHAPIPaginationHandler)handler;
 

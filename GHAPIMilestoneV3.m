@@ -41,19 +41,20 @@
 
 #pragma mark - Initialization
 
-- (id)initWithRawDictionary:(NSDictionary *)rawDictionay {
+- (id)initWithRawDictionary:(NSDictionary *)rawDictionary {
+    rawDictionary = NSObjectExpectedClass(rawDictionary, NSDictionary.class);
     if ((self = [super init])) {
         // Initialization code
-        self.closedIssues = [rawDictionay objectForKeyOrNilOnNullObject:@"closed_issues"];
-        self.createdAt = [rawDictionay objectForKeyOrNilOnNullObject:@"created_at"];
-        self.milestoneDescription = [rawDictionay objectForKeyOrNilOnNullObject:@"description"];
-        self.dueOn = [rawDictionay objectForKeyOrNilOnNullObject:@"due_on"];
-        self.number = [rawDictionay objectForKeyOrNilOnNullObject:@"number"];
-        self.openIssues = [rawDictionay objectForKeyOrNilOnNullObject:@"open_issues"];
-        self.state = [rawDictionay objectForKeyOrNilOnNullObject:@"state"];
-        self.title = [rawDictionay objectForKeyOrNilOnNullObject:@"title"];
-        self.URL = [rawDictionay objectForKeyOrNilOnNullObject:@"url"];
-        self.creator = [[[GHAPIUserV3 alloc] initWithRawDictionary:[rawDictionay objectForKeyOrNilOnNullObject:@"creator"] ] autorelease];
+        self.closedIssues = [rawDictionary objectForKeyOrNilOnNullObject:@"closed_issues"];
+        self.createdAt = [rawDictionary objectForKeyOrNilOnNullObject:@"created_at"];
+        self.milestoneDescription = [rawDictionary objectForKeyOrNilOnNullObject:@"description"];
+        self.dueOn = [rawDictionary objectForKeyOrNilOnNullObject:@"due_on"];
+        self.number = [rawDictionary objectForKeyOrNilOnNullObject:@"number"];
+        self.openIssues = [rawDictionary objectForKeyOrNilOnNullObject:@"open_issues"];
+        self.state = [rawDictionary objectForKeyOrNilOnNullObject:@"state"];
+        self.title = [rawDictionary objectForKeyOrNilOnNullObject:@"title"];
+        self.URL = [rawDictionary objectForKeyOrNilOnNullObject:@"url"];
+        self.creator = [[[GHAPIUserV3 alloc] initWithRawDictionary:[rawDictionary objectForKeyOrNilOnNullObject:@"creator"] ] autorelease];
     }
     return self;
 }

@@ -40,7 +40,7 @@
 
 @property (nonatomic, readonly) CGFloat progress;
 
-- (id)initWithRawDictionary:(NSDictionary *)rawDictionay;
+- (id)initWithRawDictionary:(NSDictionary *)rawDictionary;
 
 + (void)milestoneOnRepository:(NSString *)repository number:(NSNumber *)number 
             completionHandler:(void(^)(GHAPIMilestoneV3 *milestone, NSError *error))handler;

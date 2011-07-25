@@ -33,34 +33,35 @@
 
 #pragma mark - Initialization
 
-- (id)initWithRawDictionary:(NSDictionary *)rawDictionay {
+- (id)initWithRawDictionary:(NSDictionary *)rawDictionary {
+    rawDictionary = NSObjectExpectedClass(rawDictionary, NSDictionary.class);
     if ((self = [super init])) {
         // Initialization code
-        self.login = [rawDictionay objectForKeyOrNilOnNullObject:@"login"];
-        self.ID = [rawDictionay objectForKeyOrNilOnNullObject:@"id"];
-        self.avatarURL = [rawDictionay objectForKeyOrNilOnNullObject:@"avatar_url"];
-        self.gravatarID = [[rawDictionay objectForKeyOrNilOnNullObject:@"avatar_url"] gravarID];
-        self.URL = [rawDictionay objectForKeyOrNilOnNullObject:@"url"];
-        self.name = [rawDictionay objectForKeyOrNilOnNullObject:@"name"];
-        self.company = [rawDictionay objectForKeyOrNilOnNullObject:@"company"];
-        self.blog = [rawDictionay objectForKeyOrNilOnNullObject:@"blog"];
-        self.location = [rawDictionay objectForKeyOrNilOnNullObject:@"location"];
-        self.EMail = [rawDictionay objectForKeyOrNilOnNullObject:@"email"];
-        self.hireable = [rawDictionay objectForKeyOrNilOnNullObject:@"hireable"];
-        self.bio = [rawDictionay objectForKeyOrNilOnNullObject:@"bio"];
-        self.publicRepos = [rawDictionay objectForKeyOrNilOnNullObject:@"public_repos"];
-        self.publicGists = [rawDictionay objectForKeyOrNilOnNullObject:@"public_gists"];
-        self.followers = [rawDictionay objectForKeyOrNilOnNullObject:@"followers"];
-        self.following = [rawDictionay objectForKeyOrNilOnNullObject:@"following"];
-        self.htmlURL = [rawDictionay objectForKeyOrNilOnNullObject:@"html_url"];
-        self.createdAt = [rawDictionay objectForKeyOrNilOnNullObject:@"created_at"];
-        self.type = [rawDictionay objectForKeyOrNilOnNullObject:@"type"];
-        self.totalPrivateRepos = [rawDictionay objectForKeyOrNilOnNullObject:@"total_private_repos"];
-        self.ownedPrivateRepos = [rawDictionay objectForKeyOrNilOnNullObject:@"owned_private_repos"];
-        self.privateGists = [rawDictionay objectForKeyOrNilOnNullObject:@"private_gists"];
-        self.diskUsage = [rawDictionay objectForKeyOrNilOnNullObject:@"disk_usage"];
-        self.collaborators = [rawDictionay objectForKeyOrNilOnNullObject:@"collaborators"];
-        self.plan = [[[GHAPIUserPlanV3 alloc] initWithRawDictionary:[rawDictionay objectForKeyOrNilOnNullObject:@"plan"] ] autorelease];
+        self.login = [rawDictionary objectForKeyOrNilOnNullObject:@"login"];
+        self.ID = [rawDictionary objectForKeyOrNilOnNullObject:@"id"];
+        self.avatarURL = [rawDictionary objectForKeyOrNilOnNullObject:@"avatar_url"];
+        self.gravatarID = [[rawDictionary objectForKeyOrNilOnNullObject:@"avatar_url"] gravarID];
+        self.URL = [rawDictionary objectForKeyOrNilOnNullObject:@"url"];
+        self.name = [rawDictionary objectForKeyOrNilOnNullObject:@"name"];
+        self.company = [rawDictionary objectForKeyOrNilOnNullObject:@"company"];
+        self.blog = [rawDictionary objectForKeyOrNilOnNullObject:@"blog"];
+        self.location = [rawDictionary objectForKeyOrNilOnNullObject:@"location"];
+        self.EMail = [rawDictionary objectForKeyOrNilOnNullObject:@"email"];
+        self.hireable = [rawDictionary objectForKeyOrNilOnNullObject:@"hireable"];
+        self.bio = [rawDictionary objectForKeyOrNilOnNullObject:@"bio"];
+        self.publicRepos = [rawDictionary objectForKeyOrNilOnNullObject:@"public_repos"];
+        self.publicGists = [rawDictionary objectForKeyOrNilOnNullObject:@"public_gists"];
+        self.followers = [rawDictionary objectForKeyOrNilOnNullObject:@"followers"];
+        self.following = [rawDictionary objectForKeyOrNilOnNullObject:@"following"];
+        self.htmlURL = [rawDictionary objectForKeyOrNilOnNullObject:@"html_url"];
+        self.createdAt = [rawDictionary objectForKeyOrNilOnNullObject:@"created_at"];
+        self.type = [rawDictionary objectForKeyOrNilOnNullObject:@"type"];
+        self.totalPrivateRepos = [rawDictionary objectForKeyOrNilOnNullObject:@"total_private_repos"];
+        self.ownedPrivateRepos = [rawDictionary objectForKeyOrNilOnNullObject:@"owned_private_repos"];
+        self.privateGists = [rawDictionary objectForKeyOrNilOnNullObject:@"private_gists"];
+        self.diskUsage = [rawDictionary objectForKeyOrNilOnNullObject:@"disk_usage"];
+        self.collaborators = [rawDictionary objectForKeyOrNilOnNullObject:@"collaborators"];
+        self.plan = [[[GHAPIUserPlanV3 alloc] initWithRawDictionary:[rawDictionary objectForKeyOrNilOnNullObject:@"plan"] ] autorelease];
     }
     return self;
 }

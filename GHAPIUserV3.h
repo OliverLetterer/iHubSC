@@ -71,7 +71,7 @@
 @property (nonatomic, readonly) BOOL hasCompany;
 @property (nonatomic, readonly) BOOL hasBlog;
 
-- (id)initWithRawDictionary:(NSDictionary *)rawDictionay;
+- (id)initWithRawDictionary:(NSDictionary *)rawDictionary;
 
 
 + (void)userWithName:(NSString *)username completionHandler:(void(^)(GHAPIUserV3 *user, NSError *error))handler;

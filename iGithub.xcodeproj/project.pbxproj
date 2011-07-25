@@ -327,6 +327,7 @@
 		A7DE2DFC13CCB80F005B810B /* ANNotificationSuccessImage.png in Resources */ = {isa = PBXBuildFile; fileRef = A7DE2DFA13CCB80D005B810B /* ANNotificationSuccessImage.png */; };
 		A7DE2DFD13CCB80F005B810B /* ANNotificationErrorImage.png in Resources */ = {isa = PBXBuildFile; fileRef = A7DE2DFB13CCB80E005B810B /* ANNotificationErrorImage.png */; };
 		A7DE2E0013CCBE7E005B810B /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = A7DE2DFF13CCBE7E005B810B /* UIImage+Resize.m */; };
+		A7E33FC213DDC4AC00AF726A /* Utility.m in Sources */ = {isa = PBXBuildFile; fileRef = A7E33FC113DDC4AC00AF726A /* Utility.m */; };
 		A7EE1120136F3FFB00A1E693 /* GHAPIIssueCommentV3.m in Sources */ = {isa = PBXBuildFile; fileRef = A7EE111F136F3FFA00A1E693 /* GHAPIIssueCommentV3.m */; };
 		A7F334A513BCCF0100DB922D /* ANAdvancedNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7F3349B13BCCF0100DB922D /* ANAdvancedNavigationController.m */; };
 		A7F334A613BCCF0100DB922D /* ANAdvancedNavigationController+LeftViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7F3349D13BCCF0100DB922D /* ANAdvancedNavigationController+LeftViewController.m */; };
@@ -924,6 +925,8 @@
 		A7DE2DFB13CCB80E005B810B /* ANNotificationErrorImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ANNotificationErrorImage.png; sourceTree = "<group>"; };
 		A7DE2DFE13CCBE7E005B810B /* UIImage+Resize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Resize.h"; sourceTree = "<group>"; };
 		A7DE2DFF13CCBE7E005B810B /* UIImage+Resize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Resize.m"; sourceTree = "<group>"; };
+		A7E33FC013DDC4AC00AF726A /* Utility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utility.h; sourceTree = "<group>"; };
+		A7E33FC113DDC4AC00AF726A /* Utility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utility.m; sourceTree = "<group>"; };
 		A7EE111E136F3FFA00A1E693 /* GHAPIIssueCommentV3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHAPIIssueCommentV3.h; sourceTree = "<group>"; };
 		A7EE111F136F3FFA00A1E693 /* GHAPIIssueCommentV3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHAPIIssueCommentV3.m; sourceTree = "<group>"; };
 		A7F3349A13BCCF0100DB922D /* ANAdvancedNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANAdvancedNavigationController.h; sourceTree = "<group>"; };
@@ -2570,7 +2573,7 @@
 		A7BF146413426D85001AE50D /* Github API */ = {
 			isa = PBXGroup;
 			children = (
-				A792A92713A3FD3200BB0E1A /* GHAPIConnectionHandlersV3.h */,
+				A7E33FC413DDC4B300AF726A /* Utility */,
 				A7BF146F13426EF5001AE50D /* GithubAPI.h */,
 				A77654BF1395555500787420 /* Markdown */,
 				A73E29B11348744300E85282 /* Foundation & Class Additions */,
@@ -2969,6 +2972,16 @@
 				A7DCDD9313A366DF00089CCD /* GHAPIRepositoryBranchV3.m */,
 			);
 			name = GHAPIRepositoryBranchV3;
+			sourceTree = "<group>";
+		};
+		A7E33FC413DDC4B300AF726A /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				A792A92713A3FD3200BB0E1A /* GHAPIConnectionHandlersV3.h */,
+				A7E33FC013DDC4AC00AF726A /* Utility.h */,
+				A7E33FC113DDC4AC00AF726A /* Utility.m */,
+			);
+			name = Utility;
 			sourceTree = "<group>";
 		};
 		A7EEE4E913DDA94900EF0E25 /* GHPNewCommentTableViewCell */ = {
@@ -3538,6 +3551,7 @@
 				A798898813DB395A0052FD50 /* NSURL+HTML.m in Sources */,
 				A798898913DB395A0052FD50 /* UIColor+HTML.m in Sources */,
 				A798898B13DB395A0052FD50 /* UIDevice+DTVersion.m in Sources */,
+				A7E33FC213DDC4AC00AF726A /* Utility.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

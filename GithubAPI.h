@@ -30,10 +30,9 @@
 #import "GHDirectory.h"
 #import "GHFileMetaData.h"
 
-// V3
+// v3
 #import "GHAPICommitV3.h"
 #import "GHAPITreeInfoV3.h"
-#import "GHAPIConnectionHandlersV3.h"
 #import "GHAPIIssueCommentV3.h"
 #import "GHAPIIssueV3.h"
 #import "GHAPIMilestoneV3.h"
@@ -54,6 +53,11 @@
 #import "GHAPIImageCacheV3.h"
 #import "UIImage+GHAPIImageCacheV3.h"
 
+// util
+#import "GHAPIConnectionHandlersV3.h"
+#import "Utility.h"
+
+// v2
 #import "GHPayload.h"
 #import "GHIssuePayload.h"
 #import "GHPushPayload.h"
