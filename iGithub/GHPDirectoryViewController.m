@@ -69,11 +69,17 @@
         // dir
         GHDirectory *directory = [self.directory.directories objectAtIndex:indexPath.row];
         cell.textLabel.text = [NSString stringWithFormat:@"%@/", directory.lastNameComponent];
-        //        cell.imageView.image = [UIImage imageNamed:@"GHFolder.png"];
+        cell.imageView.image = [UIImage imageNamed:@"GHFolder.png"];
     } else if (indexPath.section == 1) {
         GHFile *file = [self.directory.files objectAtIndex:indexPath.row];
         cell.textLabel.text = file.name;
-        //        cell.imageView.image = nil;
+        NSString *fileExtension = [[file.name componentsSeparatedByString:@"."] lastObject];
+        NSString *imageName = [NSString stringWithFormat:@"GHFile_%@.png", fileExtension];
+        UIImage *image = [UIImage imageNamed:imageName];
+        if (!image) {
+            image = [UIImage imageNamed:@"GHFile.png"];
+        }
+        cell.imageView.image = image;
     }
     
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
