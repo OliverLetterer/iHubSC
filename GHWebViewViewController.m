@@ -18,6 +18,7 @@
 - (id)initWithURL:(NSURL *)URL {
     if ((self = [super init])) {
         self.URL = URL;
+        _canShowActionSheet = YES;
     }
     return self;
 }
@@ -27,6 +28,7 @@
 - (void)dealloc {
     [_URL release];
     [_webView release];
+    
     [super dealloc];
 }
 
@@ -39,6 +41,14 @@
 
 #pragma mark - target actions
 
+- (void)willPresentActionSheet:(UIActionSheet *)actionSheet {
+    _canShowActionSheet = NO;
+}
+
+- (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex {
+    _canShowActionSheet = YES;
+}
+
 - (void)actionButtonClicked:(UIBarButtonItem *)sender {
     UIActionSheet *sheet = [[[UIActionSheet alloc] initWithTitle:[self.webView.request.URL absoluteString]
                                                         delegate:self 
@@ -48,7 +58,13 @@
                             autorelease];
     sheet.actionSheetStyle = UIActionSheetStyleBlackTranslucent;
     
-    [sheet showInView:self.tabBarController.view];
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        if (_canShowActionSheet) {
+            [sheet showFromBarButtonItem:sender animated:YES];
+        }
+    } else {
+        [sheet showInView:self.tabBarController.view];
+    }
 }
 
 #pragma mark - View lifecycle
@@ -120,6 +136,7 @@
 - (id)initWithCoder:(NSCoder *)decoder {
     if ((self = [super initWithCoder:decoder])) {
         _URL = [[decoder decodeObjectForKey:@"uRL"] retain];
+        _canShowActionSheet = YES;
     }
     return self;
 }

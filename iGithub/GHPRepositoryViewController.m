@@ -21,6 +21,7 @@
 #import "GHPRootDirectoryViewController.h"
 #import "GHPLabelViewController.h"
 #import "ANNotificationQueue.h"
+#import "GHWebViewViewController.h"
 
 #define kUIAlertViewTagDeleteRepository     1337
 #define kUIAlertViewTagAddCollaborator      1338
@@ -211,7 +212,11 @@
     if (section == kUITableViewSectionInfo) {
         return 2;
     } else if (section == kUITableViewSectionFurtherContent) {
-        return 5;
+        NSInteger result = 5;
+        if (self.repository.hasWiki) {
+            result++;
+        }
+        return result;
     } else if (section == kUITableViewSectionOwner) {
         if (self.repository.isForked) {
             return 2;
@@ -271,6 +276,10 @@
             cell.textLabel.text = NSLocalizedString(@"Watching Users", @"");
         } else if (indexPath.row == 4) {
             cell.textLabel.text = NSLocalizedString(@"Pull Requests", @"");
+        } else if (indexPath.row == 5) {
+            if (self.repository.hasWiki) {
+                cell.textLabel.text = NSLocalizedString(@"Wiki", @"");
+            }
         } else {
             cell.textLabel.text = nil;
         }
@@ -423,6 +432,11 @@
             viewController = [[[GHPMileStonesOnRepositoryViewController alloc] initWithRepository:self.repositoryString] autorelease];
         } else if (indexPath.row == 4) {
             viewController = [[[GHPPullRequestsOnRepositoryViewController alloc] initWithRepository:self.repositoryString] autorelease];
+        } else if (indexPath.row == 5) {
+            NSURL *repoURL = [NSURL URLWithString:self.repository.HTMLURL];
+            NSURL *wikiURL = [repoURL URLByAppendingPathComponent:@"wiki"];
+            viewController = [[[GHWebViewViewController alloc] initWithURL:wikiURL] autorelease];
+            viewController = [[[UINavigationController alloc] initWithRootViewController:viewController] autorelease];
         }
     } else if (indexPath.section == kUITableViewSectionRecentCommits) {
         GHAPIRepositoryBranchV3 *branch = [self.branches objectAtIndex:indexPath.row - 1];

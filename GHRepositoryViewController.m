@@ -28,19 +28,20 @@
 #define kUITableViewSectionCreatedAt        3
 #define kUITableViewSectionSize             4
 #define kUITableViewSectionHomepage         5
-#define kUITableViewSectionForkedFrom       6
-#define kUITableViewSectionIssues           7
-#define kUITableViewSectionMilestones       8
-#define kUITableViewSectionLabels           9
-#define kUITableViewSectionWatchingUsers    10
-#define kUITableViewSectionPullRequests     11
-#define kUITableViewSectionRecentCommits    12
-#define kUITableViewSectionBrowseBranches   13
-#define kUITableViewSectionCollaborators    14
-#define kUITableViewSectionNetwork          15
-#define kUITableViewSectionAdministration   16
+#define kUITableViewSectionWiki             6
+#define kUITableViewSectionForkedFrom       7
+#define kUITableViewSectionIssues           8
+#define kUITableViewSectionMilestones       9
+#define kUITableViewSectionLabels           10
+#define kUITableViewSectionWatchingUsers    11
+#define kUITableViewSectionPullRequests     12
+#define kUITableViewSectionRecentCommits    13
+#define kUITableViewSectionBrowseBranches   14
+#define kUITableViewSectionCollaborators    15
+#define kUITableViewSectionNetwork          16
+#define kUITableViewSectionAdministration   17
 
-#define kUITableViewNumberOfSections        17
+#define kUITableViewNumberOfSections        18
 
 #define kUIAlertViewAddCollaboratorTag      1337
 
@@ -114,7 +115,7 @@
 #pragma mark - UIExpandableTableViewDatasource
 
 - (BOOL)tableView:(UIExpandableTableView *)tableView canExpandSection:(NSInteger)section {
-    return section != kUITableViewSectionUserData && section != kUITableViewSectionOwner && section != kUITableViewSectionLanguage && section != kUITableViewSectionCreatedAt && section != kUITableViewSectionSize && section != kUITableViewSectionHomepage && section != kUITableViewSectionForkedFrom;
+    return section != kUITableViewSectionUserData && section != kUITableViewSectionOwner && section != kUITableViewSectionLanguage && section != kUITableViewSectionCreatedAt && section != kUITableViewSectionSize && section != kUITableViewSectionHomepage && section != kUITableViewSectionForkedFrom && section != kUITableViewSectionWiki;
 }
 - (BOOL)tableView:(UIExpandableTableView *)tableView needsToDownloadDataForExpandableSection:(NSInteger)section {
     if (section == kUITableViewSectionIssues) {
@@ -424,6 +425,10 @@
             return 0;
         }
         return self.collaborators.count + 2;
+    } else if (section == kUITableViewSectionWiki) {
+        if ([self.repository.hasWiki boolValue]) {
+            return 1;
+        }
     }
     
     return 0;
@@ -534,6 +539,22 @@
             
             cell.textLabel.text = NSLocalizedString(@"Homepage", @"");
             cell.detailTextLabel.text = self.repository.homepage;
+            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+            cell.selectionStyle = UITableViewCellSelectionStyleBlue;
+            
+            return cell;
+        }
+    } else if (indexPath.section == kUITableViewSectionWiki) {
+        if (indexPath.row == 0) {
+            NSString *CellIdentifier = @"DetailsHomePageTableViewCell";
+            
+            GHTableViewCellWithLinearGradientBackgroundView *cell = (GHTableViewCellWithLinearGradientBackgroundView *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+            if (!cell) {
+                cell = [[[GHTableViewCellWithLinearGradientBackgroundView alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:CellIdentifier] autorelease];
+            }
+            
+            cell.textLabel.text = NSLocalizedString(@"Wiki", @"");
+            cell.detailTextLabel.text = NSLocalizedString(@"Available", @"");
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             cell.selectionStyle = UITableViewCellSelectionStyleBlue;
             
@@ -1008,6 +1029,13 @@
             
             GHUserViewController *userViewController = [[[GHUserViewController alloc] initWithUsername:user.login] autorelease];
             [self.navigationController pushViewController:userViewController animated:YES];
+        }
+    } else if (indexPath.section == kUITableViewSectionWiki) {
+        if (indexPath.row == 0) {
+            NSURL *repoURL = [NSURL URLWithString:self.repository.HTMLURL];
+            NSURL *wikiURL = [repoURL URLByAppendingPathComponent:@"wiki"];
+            GHWebViewViewController *viewController = [[[GHWebViewViewController alloc] initWithURL:wikiURL] autorelease];
+            [self.navigationController pushViewController:viewController animated:YES];
         }
     } else {
         [self.tableView deselectRowAtIndexPath:indexPath animated:NO];

@@ -13,6 +13,8 @@
 @private
     NSURL *_URL;
     UIWebView *_webView;
+    
+    BOOL _canShowActionSheet;
 }
 
 @property (nonatomic, copy) NSURL *URL;

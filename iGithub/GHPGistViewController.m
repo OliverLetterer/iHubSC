@@ -419,7 +419,8 @@
 #pragma mark - GHPAttributedTableViewCellDelegate
 
 - (void)attributedTableViewCell:(GHPAttributedTableViewCell *)cell receivedClickForButton:(DTLinkButton *)button {
-    GHWebViewViewController *viewController = [[[GHWebViewViewController alloc] initWithURL:button.url ] autorelease];
+    UIViewController *viewController = [[[GHWebViewViewController alloc] initWithURL:button.url ] autorelease];
+    viewController = [[[UINavigationController alloc] initWithRootViewController:viewController] autorelease];
     [self.advancedNavigationController pushViewController:viewController afterViewController:self animated:YES];
 }
 
