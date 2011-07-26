@@ -9,7 +9,6 @@
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
 
-#warning Icons for folders and files in browse content
 #warning better organization support
 
 @interface iGithubAppDelegate : NSObject <UIApplicationDelegate> {
