@@ -63,7 +63,6 @@
 }
 
 - (NSString*)parser:(WAMarkdownParser*)parser stringForImage:(NSString*)src title:(NSString*)title alternativeText:(NSString*)alt {
-    title = title ? title : @"Image";
 	return [NSString stringWithFormat:@"<a href=\"%@\" style=\"color:%@\">Image</a>", src, self.defaultFontColor];
 }
 
