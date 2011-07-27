@@ -2,14 +2,14 @@
 //  GHPullToReleaseTableHeaderView.h
 //  iGithub
 //
-//  Created by Oliver Letterer on 14.05.11.
+//  Created by me on 14.05.11.
 //  Copyright 2011 Home. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 #import <QuartzCore/QuartzCore.h>
 
-#define kGHPullToReleaseTableHeaderViewPreferedHeaderHeight 60.0f
+extern CGFloat const kGHPullToReleaseTableHeaderViewPreferedHeaderHeight;
 
 typedef enum {
     GHPullToReleaseTableHeaderViewStateNormal,

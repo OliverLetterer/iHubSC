@@ -2,7 +2,7 @@
 //  GHPullToReleaseTableViewController.h
 //  iGithub
 //
-//  Created by Oliver Letterer on 14.05.11.
+//  Created by me on 14.05.11.
 //  Copyright 2011 Home. All rights reserved.
 //
 

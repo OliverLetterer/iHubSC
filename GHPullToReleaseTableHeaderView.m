@@ -2,13 +2,15 @@
 //  GHPullToReleaseTableHeaderView.m
 //  iGithub
 //
-//  Created by Oliver Letterer on 14.05.11.
+//  Created by me on 14.05.11.
 //  Copyright 2011 Home. All rights reserved.
 //
 
 #import "GHPullToReleaseTableHeaderView.h"
 
-#define kGHPullToReleaseTableHeaderViewFlipAnimationDuration 0.2f
+static CGFloat const kGHPullToReleaseTableHeaderViewFlipAnimationDuration = 0.2f;
+
+CGFloat const kGHPullToReleaseTableHeaderViewPreferedHeaderHeight = 60.0f;
 
 @implementation GHPullToReleaseTableHeaderView
 
@@ -128,16 +130,5 @@
     }
     return self;
 }
-
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
-}
-*/
-
-#pragma mark - Memory management
-
 
 @end
