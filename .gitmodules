@@ -16,3 +16,6 @@
 [submodule "GHPullToReleaseTableViewController"]
 	path = GHPullToReleaseTableViewController
 	url = git@github.com:docmorelli/GHPullToReleaseTableViewController.git
+[submodule "UIExpandableTableView"]
+	path = UIExpandableTableView
+	url = git@github.com:OliverLetterer/UIExpandableTableView.git
