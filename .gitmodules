@@ -6,7 +6,7 @@
 	url = https://github.com/pokeb/asi-http-request.git
 [submodule "UIExpandableTableView"]
 	path = UIExpandableTableView
-	url = git@github.com:docmorelli/UIExpandableTableView.git
+	url = git@github.com:OliverLetterer/UIExpandableTableView.git
 [submodule "DDProgressView"]
 	path = DDProgressView
 	url = https://github.com/ddeville/DDProgressView.git
