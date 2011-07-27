@@ -91,8 +91,6 @@
 		A71DBBEC13DF45E6008703D3 /* GHFile_sh@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A71DBBE813DF45E4008703D3 /* GHFile_sh@2x.png */; };
 		A71DBBED13DF45E6008703D3 /* GHFile_c.png in Resources */ = {isa = PBXBuildFile; fileRef = A71DBBE913DF45E5008703D3 /* GHFile_c.png */; };
 		A71DBBEE13DF45E6008703D3 /* GHFile_sh.png in Resources */ = {isa = PBXBuildFile; fileRef = A71DBBEA13DF45E5008703D3 /* GHFile_sh.png */; };
-		A723F16A137ED1E000F7649B /* GHPullToReleaseTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A723F169137ED1E000F7649B /* GHPullToReleaseTableViewController.m */; };
-		A723F16D137ED1FC00F7649B /* GHPullToReleaseTableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = A723F16C137ED1FC00F7649B /* GHPullToReleaseTableHeaderView.m */; };
 		A7288A7013A9094300170D57 /* compass in Resources */ = {isa = PBXBuildFile; fileRef = A7288A6C13A9094300170D57 /* compass */; };
 		A7288A7113A9094300170D57 /* scripts in Resources */ = {isa = PBXBuildFile; fileRef = A7288A6D13A9094300170D57 /* scripts */; };
 		A7288A7213A9094300170D57 /* src in Resources */ = {isa = PBXBuildFile; fileRef = A7288A6E13A9094300170D57 /* src */; };
@@ -187,6 +185,8 @@
 		A77654D71395556A00787420 /* WAMarkdown.m in Sources */ = {isa = PBXBuildFile; fileRef = A77654D21395556A00787420 /* WAMarkdown.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		A77654D81395556A00787420 /* WAMarkdownParser.m in Sources */ = {isa = PBXBuildFile; fileRef = A77654D41395556A00787420 /* WAMarkdownParser.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		A77654DA13955A0100787420 /* MarkdownStyle in Resources */ = {isa = PBXBuildFile; fileRef = A77654D913955A0000787420 /* MarkdownStyle */; };
+		A777B49013E0A0010050DB30 /* GHPullToReleaseTableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = A777B48D13E0A0000050DB30 /* GHPullToReleaseTableHeaderView.m */; };
+		A777B49113E0A0010050DB30 /* GHPullToReleaseTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A777B48F13E0A0010050DB30 /* GHPullToReleaseTableViewController.m */; };
 		A7837E95136C905200B13B95 /* GHAPIIssueV3.m in Sources */ = {isa = PBXBuildFile; fileRef = A7837E94136C905100B13B95 /* GHAPIIssueV3.m */; };
 		A7837E9A136C93FC00B13B95 /* GHAPIMilestoneV3.m in Sources */ = {isa = PBXBuildFile; fileRef = A7837E99136C93FC00B13B95 /* GHAPIMilestoneV3.m */; };
 		A7837EA5136CADD400B13B95 /* GHAPIMilestoneV3TableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A7837EA4136CADD400B13B95 /* GHAPIMilestoneV3TableViewCell.m */; };
@@ -511,10 +511,6 @@
 		A71DBBE813DF45E4008703D3 /* GHFile_sh@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GHFile_sh@2x.png"; sourceTree = "<group>"; };
 		A71DBBE913DF45E5008703D3 /* GHFile_c.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GHFile_c.png; sourceTree = "<group>"; };
 		A71DBBEA13DF45E5008703D3 /* GHFile_sh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GHFile_sh.png; sourceTree = "<group>"; };
-		A723F168137ED1E000F7649B /* GHPullToReleaseTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPullToReleaseTableViewController.h; sourceTree = "<group>"; };
-		A723F169137ED1E000F7649B /* GHPullToReleaseTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPullToReleaseTableViewController.m; sourceTree = "<group>"; };
-		A723F16B137ED1FC00F7649B /* GHPullToReleaseTableHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPullToReleaseTableHeaderView.h; sourceTree = "<group>"; };
-		A723F16C137ED1FC00F7649B /* GHPullToReleaseTableHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPullToReleaseTableHeaderView.m; sourceTree = "<group>"; };
 		A7288A6C13A9094300170D57 /* compass */ = {isa = PBXFileReference; lastKnownFileType = folder; path = compass; sourceTree = "<group>"; };
 		A7288A6D13A9094300170D57 /* scripts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = scripts; sourceTree = "<group>"; };
 		A7288A6E13A9094300170D57 /* src */ = {isa = PBXFileReference; lastKnownFileType = folder; path = src; sourceTree = "<group>"; };
@@ -671,6 +667,10 @@
 		A77654D31395556A00787420 /* WAMarkdownParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WAMarkdownParser.h; sourceTree = "<group>"; };
 		A77654D41395556A00787420 /* WAMarkdownParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WAMarkdownParser.m; sourceTree = "<group>"; };
 		A77654D913955A0000787420 /* MarkdownStyle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MarkdownStyle; sourceTree = "<group>"; };
+		A777B48C13E0A0000050DB30 /* GHPullToReleaseTableHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GHPullToReleaseTableHeaderView.h; path = GHPullToReleaseTableViewController/GHPullToReleaseTableHeaderView.h; sourceTree = "<group>"; };
+		A777B48D13E0A0000050DB30 /* GHPullToReleaseTableHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GHPullToReleaseTableHeaderView.m; path = GHPullToReleaseTableViewController/GHPullToReleaseTableHeaderView.m; sourceTree = "<group>"; };
+		A777B48E13E0A0000050DB30 /* GHPullToReleaseTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GHPullToReleaseTableViewController.h; path = GHPullToReleaseTableViewController/GHPullToReleaseTableViewController.h; sourceTree = "<group>"; };
+		A777B48F13E0A0010050DB30 /* GHPullToReleaseTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GHPullToReleaseTableViewController.m; path = GHPullToReleaseTableViewController/GHPullToReleaseTableViewController.m; sourceTree = "<group>"; };
 		A7837E93136C905100B13B95 /* GHAPIIssueV3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHAPIIssueV3.h; sourceTree = "<group>"; };
 		A7837E94136C905100B13B95 /* GHAPIIssueV3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHAPIIssueV3.m; sourceTree = "<group>"; };
 		A7837E98136C93FC00B13B95 /* GHAPIMilestoneV3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHAPIMilestoneV3.h; sourceTree = "<group>"; };
@@ -1825,7 +1825,7 @@
 				A7288A6B13A9091500170D57 /* SyntaxHighlighting */,
 				A712B7C7135CB58C0009B7A7 /* Browse content */,
 				A76FC9A81352D27E004C642E /* UIExpandableTableView */,
-				A7BC6780134CCED40083F906 /* PullToRefreshTableViewController */,
+				A7BC6780134CCED40083F906 /* GHPullToReleaseTableViewController */,
 				A7F62627134C45AE006487CA /* GHTableViewController */,
 				A7C2D14913D771F500DACDF7 /* GHViewController */,
 			);
@@ -2435,15 +2435,15 @@
 			path = ..;
 			sourceTree = "<group>";
 		};
-		A7BC6780134CCED40083F906 /* PullToRefreshTableViewController */ = {
+		A7BC6780134CCED40083F906 /* GHPullToReleaseTableViewController */ = {
 			isa = PBXGroup;
 			children = (
-				A723F168137ED1E000F7649B /* GHPullToReleaseTableViewController.h */,
-				A723F169137ED1E000F7649B /* GHPullToReleaseTableViewController.m */,
-				A723F16B137ED1FC00F7649B /* GHPullToReleaseTableHeaderView.h */,
-				A723F16C137ED1FC00F7649B /* GHPullToReleaseTableHeaderView.m */,
+				A777B48C13E0A0000050DB30 /* GHPullToReleaseTableHeaderView.h */,
+				A777B48D13E0A0000050DB30 /* GHPullToReleaseTableHeaderView.m */,
+				A777B48E13E0A0000050DB30 /* GHPullToReleaseTableViewController.h */,
+				A777B48F13E0A0010050DB30 /* GHPullToReleaseTableViewController.m */,
 			);
-			name = PullToRefreshTableViewController;
+			name = GHPullToReleaseTableViewController;
 			sourceTree = "<group>";
 		};
 		A7BC6781134CCF890083F906 /* ASI-HTTP */ = {
@@ -3468,8 +3468,6 @@
 				A7F92B881373149C000EBC5E /* GHAPIGistForkV3.m in Sources */,
 				A7F92B8D137318C3000EBC5E /* GHGistViewController.m in Sources */,
 				A7F92B90137334E3000EBC5E /* GHAPIGistCommentV3.m in Sources */,
-				A723F16A137ED1E000F7649B /* GHPullToReleaseTableViewController.m in Sources */,
-				A723F16D137ED1FC00F7649B /* GHPullToReleaseTableHeaderView.m in Sources */,
 				A79F37FE13883C2C0028F492 /* GHAPIUserV3.m in Sources */,
 				A79F380113883F740028F492 /* GHAPIUserPlanV3.m in Sources */,
 				A7B5208E1388648D000FEE61 /* GHAPIIssueEventV3.m in Sources */,
@@ -3616,6 +3614,8 @@
 				A798898913DB395A0052FD50 /* UIColor+HTML.m in Sources */,
 				A798898B13DB395A0052FD50 /* UIDevice+DTVersion.m in Sources */,
 				A7E33FC213DDC4AC00AF726A /* Utility.m in Sources */,
+				A777B49013E0A0010050DB30 /* GHPullToReleaseTableHeaderView.m in Sources */,
+				A777B49113E0A0010050DB30 /* GHPullToReleaseTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

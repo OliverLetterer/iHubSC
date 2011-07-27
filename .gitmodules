@@ -16,3 +16,6 @@
 [submodule "NSAttributedString-Additions-for-HTML"]
 	path = NSAttributedString-Additions-for-HTML
 	url = https://github.com/Cocoanetics/NSAttributedString-Additions-for-HTML.git
+[submodule "GHPullToReleaseTableViewController"]
+	path = GHPullToReleaseTableViewController
+	url = git@github.com:docmorelli/GHPullToReleaseTableViewController.git
