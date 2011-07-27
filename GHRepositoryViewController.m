@@ -94,9 +94,6 @@
     return self;
 }
 
-#pragma mark - Memory management
-
-
 #pragma mark - UIExpandableTableViewDatasource
 
 - (BOOL)tableView:(UIExpandableTableView *)tableView canExpandSection:(NSInteger)section {
