@@ -175,7 +175,7 @@
 		A76B09C513D620820068DDDE /* iTunesArtwork.png in Resources */ = {isa = PBXBuildFile; fileRef = A76B09BE13D620820068DDDE /* iTunesArtwork.png */; };
 		A76FC9A61352D231004C642E /* 145-persondot.png in Resources */ = {isa = PBXBuildFile; fileRef = A76FC9A41352D231004C642E /* 145-persondot.png */; };
 		A76FC9A71352D231004C642E /* 145-persondot@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A76FC9A51352D231004C642E /* 145-persondot@2x.png */; };
-		A76FC9BE13534755004C642E /* UIExpandableTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = A76FC9BD13534755004C642E /* UIExpandableTableView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		A76FC9BE13534755004C642E /* UIExpandableTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = A76FC9BD13534755004C642E /* UIExpandableTableView.m */; };
 		A773023213B38C4B0075235E /* GHAPICommitV3.m in Sources */ = {isa = PBXBuildFile; fileRef = A773023113B38C4B0075235E /* GHAPICommitV3.m */; };
 		A773023713B38D200075235E /* GHAPITreeInfoV3.m in Sources */ = {isa = PBXBuildFile; fileRef = A773023613B38D200075235E /* GHAPITreeInfoV3.m */; };
 		A77654C91395556000787420 /* array.c in Sources */ = {isa = PBXBuildFile; fileRef = A77654C11395556000787420 /* array.c */; };
@@ -345,8 +345,8 @@
 		A7EE1120136F3FFB00A1E693 /* GHAPIIssueCommentV3.m in Sources */ = {isa = PBXBuildFile; fileRef = A7EE111F136F3FFA00A1E693 /* GHAPIIssueCommentV3.m */; };
 		A7F334A513BCCF0100DB922D /* ANAdvancedNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7F3349B13BCCF0100DB922D /* ANAdvancedNavigationController.m */; };
 		A7F334A613BCCF0100DB922D /* ANAdvancedNavigationController+LeftViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7F3349D13BCCF0100DB922D /* ANAdvancedNavigationController+LeftViewController.m */; };
-		A7F334A813BCCF0100DB922D /* ANRectangleView.m in Sources */ = {isa = PBXBuildFile; fileRef = A7F334A213BCCF0100DB922D /* ANRectangleView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		A7F334A913BCCF0100DB922D /* ANRemoveRectangleIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = A7F334A413BCCF0100DB922D /* ANRemoveRectangleIndicatorView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		A7F334A813BCCF0100DB922D /* ANRectangleView.m in Sources */ = {isa = PBXBuildFile; fileRef = A7F334A213BCCF0100DB922D /* ANRectangleView.m */; };
+		A7F334A913BCCF0100DB922D /* ANRemoveRectangleIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = A7F334A413BCCF0100DB922D /* ANRemoveRectangleIndicatorView.m */; };
 		A7F334B213BCD02700DB922D /* GHPLeftNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7F334B113BCD02700DB922D /* GHPLeftNavigationController.m */; };
 		A7F334B513BCD29400DB922D /* GHPLeftNavigationControllerTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A7F334B413BCD29300DB922D /* GHPLeftNavigationControllerTableViewCell.m */; };
 		A7F6260F134B3938006487CA /* GHTableViewCellWithLinearGradientBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = A7F6260E134B3938006487CA /* GHTableViewCellWithLinearGradientBackgroundView.m */; };
