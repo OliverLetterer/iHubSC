@@ -46,7 +46,6 @@
 #pragma mark - setters and getters
 
 - (void)setRepositoryString:(NSString *)repositoryString {
-    [_repositoryString release];
     _repositoryString = [repositoryString copy];
     self.isDownloadingEssentialData = YES;
     [GHAPIRepositoryV3 repositoryNamed:_repositoryString 
@@ -91,16 +90,6 @@
 
 #pragma mark - Memory management
 
-- (void)dealloc {
-    [_repositoryString release];
-    [_repository release];
-    [_deleteToken release];
-    [_organizations release];
-    [_labels release];
-    [_branches release];
-    
-    [super dealloc];
-}
 
 #pragma mark - View lifecycle
 
@@ -250,9 +239,8 @@
             NSString *CellIdentifier = @"GHPInfoTableViewCellDelegate";
             GHPInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
             if (!cell) {
-                cell = [[[GHPInfoTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault 
-                                                              reuseIdentifier:CellIdentifier]
-                        autorelease];
+                cell = [[GHPInfoTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault 
+                                                              reuseIdentifier:CellIdentifier];
             }
             
             [cell.actionButton removeFromSuperview];
@@ -290,9 +278,8 @@
             NSString *CellIdentifier = @"GHPUserTableViewCell";
             GHPUserTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
             if (!cell) {
-                cell = [[[GHPUserTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault 
-                                                    reuseIdentifier:CellIdentifier]
-                        autorelease];
+                cell = [[GHPUserTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault 
+                                                    reuseIdentifier:CellIdentifier];
             }
             
             [self setupDefaultTableViewCell:cell forRowAtIndexPath:indexPath];
@@ -310,7 +297,7 @@
             GHPRepositoryTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
             
             if (cell == nil) {
-                cell = [[[GHPRepositoryTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
+                cell = [[GHPRepositoryTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
             }
             
             GHAPIRepositoryV3 *repository = self.repository.source;
@@ -333,7 +320,7 @@
         
         GHPLabelTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         if (!cell) {
-            cell = [[[GHPLabelTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+            cell = [[GHPLabelTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         }
         [self setupDefaultTableViewCell:cell forRowAtIndexPath:indexPath];
         
@@ -417,45 +404,42 @@
     
     if (indexPath.section == kUITableViewSectionOwner) {
         if (indexPath.row == 0) {
-            viewController = [[[GHPUserViewController alloc] initWithUsername:self.repository.owner.login ] autorelease];
+            viewController = [[GHPUserViewController alloc] initWithUsername:self.repository.owner.login ];
         } else if (indexPath.row == 1) {
-            viewController = [[[GHPRepositoryViewController alloc] initWithRepositoryString:self.repository.source.fullRepositoryName] autorelease];
+            viewController = [[GHPRepositoryViewController alloc] initWithRepositoryString:self.repository.source.fullRepositoryName];
         }
     } else if (indexPath.section == kUITableViewSectionFurtherContent) {
         if (indexPath.row == 3) {
-            viewController = [[[GHPWatchingRepositoryUsersViewController alloc] initWithRepository:self.repositoryString] autorelease];
+            viewController = [[GHPWatchingRepositoryUsersViewController alloc] initWithRepository:self.repositoryString];
         } else if (indexPath.row == 2) {
-            viewController = [[[GHPCollaboratorsViewController alloc] initWithRepository:self.repositoryString] autorelease];
+            viewController = [[GHPCollaboratorsViewController alloc] initWithRepository:self.repositoryString];
         } else if (indexPath.row == 0) {
-            viewController = [[[GHPOpenIssuesOnRepositoryViewController alloc] initWithRepository:self.repositoryString] autorelease];
+            viewController = [[GHPOpenIssuesOnRepositoryViewController alloc] initWithRepository:self.repositoryString];
         } else if (indexPath.row == 1) {
-            viewController = [[[GHPMileStonesOnRepositoryViewController alloc] initWithRepository:self.repositoryString] autorelease];
+            viewController = [[GHPMileStonesOnRepositoryViewController alloc] initWithRepository:self.repositoryString];
         } else if (indexPath.row == 4) {
-            viewController = [[[GHPPullRequestsOnRepositoryViewController alloc] initWithRepository:self.repositoryString] autorelease];
+            viewController = [[GHPPullRequestsOnRepositoryViewController alloc] initWithRepository:self.repositoryString];
         } else if (indexPath.row == 5) {
             NSURL *repoURL = [NSURL URLWithString:self.repository.HTMLURL];
             NSURL *wikiURL = [repoURL URLByAppendingPathComponent:@"wiki"];
-            viewController = [[[GHWebViewViewController alloc] initWithURL:wikiURL] autorelease];
-            viewController = [[[UINavigationController alloc] initWithRootViewController:viewController] autorelease];
+            viewController = [[GHWebViewViewController alloc] initWithURL:wikiURL];
+            viewController = [[UINavigationController alloc] initWithRootViewController:viewController];
         }
     } else if (indexPath.section == kUITableViewSectionRecentCommits) {
         GHAPIRepositoryBranchV3 *branch = [self.branches objectAtIndex:indexPath.row - 1];
         
-        viewController = [[[GHPCommitsViewController alloc] initWithRepository:self.repositoryString 
-                                                                    branchHash:branch.ID]
-                          autorelease];
+        viewController = [[GHPCommitsViewController alloc] initWithRepository:self.repositoryString 
+                                                                    branchHash:branch.ID];
     } else if (indexPath.section == kUITableViewSectionBrowseContent) {
         GHAPIRepositoryBranchV3 *branch = [self.branches objectAtIndex:indexPath.row - 1];
         
-        viewController = [[[GHPRootDirectoryViewController alloc] initWithRepository:self.repositoryString 
+        viewController = [[GHPRootDirectoryViewController alloc] initWithRepository:self.repositoryString 
                                                                               branch:branch.name 
-                                                                                hash:branch.ID]
-                          autorelease];
+                                                                                hash:branch.ID];
     } else if (indexPath.section == kUITableViewSectionLabels) {
         GHAPILabelV3 *label = [self.labels objectAtIndex:indexPath.row-1];
-        viewController = [[[GHPLabelViewController alloc] initWithRepository:self.repositoryString 
-                                                                       label:label]
-                          autorelease];
+        viewController = [[GHPLabelViewController alloc] initWithRepository:self.repositoryString 
+                                                                       label:label];
     }
     
     if (viewController) {
@@ -513,12 +497,11 @@
                                  } else {
                                      self.deleteToken = deleteToken;
                                      
-                                     UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:NSLocalizedString(@"Delete %@", @""), self.repositoryString] 
+                                     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:NSLocalizedString(@"Delete %@", @""), self.repositoryString] 
                                                                                       message:[NSString stringWithFormat:NSLocalizedString(@"Are you absolutely sure that you want to delete %@? This action can't be undone!", @""), self.repositoryString] 
                                                                                      delegate:self 
                                                                             cancelButtonTitle:NSLocalizedString(@"Cancel", @"") 
-                                                                            otherButtonTitles:NSLocalizedString(@"Delete", @""), nil]
-                                                           autorelease];
+                                                                            otherButtonTitles:NSLocalizedString(@"Delete", @""), nil];
                                      alert.tag = kUIAlertViewTagDeleteRepository;
                                      [alert show];
                                  }
@@ -526,12 +509,11 @@
         } else if ([title isEqualToString:NSLocalizedString(@"Add Collaborator", @"")]) {
             self.infoCell.actionButton.alpha = 0.0f;
             [self.infoCell.activityIndicatorView startAnimating];
-            UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Add Collaborator", @"") 
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Add Collaborator", @"") 
                                                              message:nil 
                                                             delegate:self 
                                                    cancelButtonTitle:NSLocalizedString(@"Cancel", @"") 
-                                                   otherButtonTitles:NSLocalizedString(@"Add", @""), nil]
-                                  autorelease];
+                                                   otherButtonTitles:NSLocalizedString(@"Add", @""), nil];
             alert.alertViewStyle = UIAlertViewStylePlainTextInput;
             alert.tag = kUIAlertViewTagAddCollaborator;
             [alert show];
@@ -562,7 +544,7 @@
                                                // we only have one organization, act as if user select this only organization
                                                [self organizationsActionSheetDidSelectOrganizationAtIndex:0];
                                            } else {
-                                               UIActionSheet *sheet = [[[UIActionSheet alloc] init] autorelease];
+                                               UIActionSheet *sheet = [[UIActionSheet alloc] init];
                                                
                                                [sheet setTitle:NSLocalizedString(@"Select an Organization", @"")];
                                                
@@ -581,20 +563,19 @@
                                        } else {
                                            self.infoCell.actionButton.alpha = 1.0f;
                                            [self.infoCell.activityIndicatorView stopAnimating];
-                                           UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Organization Error", @"") 
+                                           UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Organization Error", @"") 
                                                                                             message:NSLocalizedString(@"You are not part of any Organization!", @"") 
                                                                                            delegate:nil 
                                                                                   cancelButtonTitle:NSLocalizedString(@"OK", @"") 
-                                                                                  otherButtonTitles:nil]
-                                                                 autorelease];
+                                                                                  otherButtonTitles:nil];
                                            [alert show];
                                        }
                                        
                                    }];
         } else if ([title isEqualToString:NSLocalizedString(@"New Issue", @"")]) {
-            GHPCreateIssueViewController *createViewController = [[[GHPCreateIssueViewController alloc] initWithRepository:self.repositoryString delegate:self] autorelease];
+            GHPCreateIssueViewController *createViewController = [[GHPCreateIssueViewController alloc] initWithRepository:self.repositoryString delegate:self];
             
-            UINavigationController *navigationController = [[[UINavigationController alloc] initWithRootViewController:createViewController] autorelease];
+            UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:createViewController];
             navigationController.modalPresentationStyle = UIModalPresentationFormSheet;
             [self presentViewController:navigationController animated:YES completion:nil];
         }
@@ -685,7 +666,7 @@
 }
 
 - (UIActionSheet *)actionButtonActionSheet {
-    UIActionSheet *sheet = [[[UIActionSheet alloc] init] autorelease];
+    UIActionSheet *sheet = [[UIActionSheet alloc] init];
     
     NSUInteger index = 0;
     
@@ -745,14 +726,14 @@
 
 - (id)initWithCoder:(NSCoder *)decoder {
     if ((self = [super initWithCoder:decoder])) {
-        _repositoryString = [[decoder decodeObjectForKey:@"repositoryString"] retain];
-        _repository = [[decoder decodeObjectForKey:@"repository"] retain];
-        _deleteToken = [[decoder decodeObjectForKey:@"deleteToken"] retain];
-        _organizations = [[decoder decodeObjectForKey:@"organizations"] retain];
+        _repositoryString = [decoder decodeObjectForKey:@"repositoryString"];
+        _repository = [decoder decodeObjectForKey:@"repository"];
+        _deleteToken = [decoder decodeObjectForKey:@"deleteToken"];
+        _organizations = [decoder decodeObjectForKey:@"organizations"];
         _hasWatchingData = [decoder decodeBoolForKey:@"hasWatchingData"];
         _isWatchingRepository = [decoder decodeBoolForKey:@"isWatchingRepository"];
-        _labels = [[decoder decodeObjectForKey:@"labels"] retain];
-        _branches = [[decoder decodeObjectForKey:@"branches"] retain];
+        _labels = [decoder decodeObjectForKey:@"labels"];
+        _branches = [decoder decodeObjectForKey:@"branches"];
     }
     return self;
 }

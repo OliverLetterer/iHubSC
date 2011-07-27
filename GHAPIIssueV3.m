@@ -34,17 +34,17 @@ NSString *const kGHAPIIssueStateV3Closed = @"closed";
 
 - (NSAttributedString *)attributedBody {
     if (!_attributedBody) {
-        _attributedBody = [self.body.attributesStringFromMarkdownString retain];
+        _attributedBody = self.body.attributesStringFromMarkdownString;
     }
     return _attributedBody;
 }
 
 - (NSAttributedString *)selectedAttributedBody {
     if (!_selectedAttributedBody) {
-        WASelectedAttributedMarkdownFormatter *formatter = [[[WASelectedAttributedMarkdownFormatter alloc] init] autorelease];
+        WASelectedAttributedMarkdownFormatter *formatter = [[WASelectedAttributedMarkdownFormatter alloc] init];
         NSString *HTML = [formatter HTMLForMarkdown:self.body];
         NSData *HTMLData = [HTML dataUsingEncoding:NSUTF8StringEncoding];
-        _selectedAttributedBody = [[NSAttributedString attributedStringWithHTML:HTMLData options:nil] retain];
+        _selectedAttributedBody = [NSAttributedString attributedStringWithHTML:HTMLData options:nil];
     }
     return _selectedAttributedBody;
 }
@@ -55,7 +55,7 @@ NSString *const kGHAPIIssueStateV3Closed = @"closed";
     rawDictionary = GHAPIObjectExpectedClass(rawDictionary, NSDictionary.class);
     if ((self = [super init])) {
         // Initialization code
-        self.assignee = [[[GHAPIUserV3 alloc] initWithRawDictionary:[rawDictionary objectForKeyOrNilOnNullObject:@"assignee"] ] autorelease];
+        self.assignee = [[GHAPIUserV3 alloc] initWithRawDictionary:[rawDictionary objectForKeyOrNilOnNullObject:@"assignee"] ];
         self.body = [rawDictionary objectForKeyOrNilOnNullObject:@"body"];
         self.closedAt = [rawDictionary objectForKeyOrNilOnNullObject:@"closed_at"];
         self.comments = [rawDictionary objectForKeyOrNilOnNullObject:@"comments"];
@@ -66,17 +66,17 @@ NSString *const kGHAPIIssueStateV3Closed = @"closed";
         self.title = [rawDictionary objectForKeyOrNilOnNullObject:@"title"];
         self.updatedAt = [rawDictionary objectForKeyOrNilOnNullObject:@"updated_at"];
         self.URL = [rawDictionary objectForKeyOrNilOnNullObject:@"url"];
-        self.user = [[[GHAPIUserV3 alloc] initWithRawDictionary:[rawDictionary objectForKeyOrNilOnNullObject:@"user"] ] autorelease];
+        self.user = [[GHAPIUserV3 alloc] initWithRawDictionary:[rawDictionary objectForKeyOrNilOnNullObject:@"user"] ];
         self.repository = [self.URL substringBetweenLeftBounds:@"repos/" andRightBounds:@"/issues"];
         
-        self.milestone = [[[GHAPIMilestoneV3 alloc] initWithRawDictionary:[rawDictionary objectForKeyOrNilOnNullObject:@"milestone"] ] autorelease];
+        self.milestone = [[GHAPIMilestoneV3 alloc] initWithRawDictionary:[rawDictionary objectForKeyOrNilOnNullObject:@"milestone"] ];
         NSString *htmlURL = [[rawDictionary objectForKeyOrNilOnNullObject:@"pull_request"] objectForKeyOrNilOnNullObject:@"html_url"];
         self.pullRequestID = [[htmlURL componentsSeparatedByString:@"/"] lastObject];
         
         NSArray *rawArray = [rawDictionary objectForKeyOrNilOnNullObject:@"labels"];
         NSMutableArray *finalArray = [NSMutableArray arrayWithCapacity:rawArray.count];
         [rawArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-            [finalArray addObject:[[[GHAPILabelV3 alloc] initWithRawDictionary:obj] autorelease] ];
+            [finalArray addObject:[[GHAPILabelV3 alloc] initWithRawDictionary:obj] ];
         }];
         self.labels = finalArray;
     }
@@ -85,28 +85,6 @@ NSString *const kGHAPIIssueStateV3Closed = @"closed";
 
 #pragma mark - Memory management
 
-- (void)dealloc {
-    [_assignee release];
-    [_body release];
-    [_attributedBody release];
-    [_selectedAttributedBody release];
-    [_closedAt release];
-    [_comments release];
-    [_createdAt release];
-    [_HTMLURL release];
-    [_labels release];
-    [_milestone release];
-    [_number release];
-    [_pullRequestID release];
-    [_state release];
-    [_title release];
-    [_updatedAt release];
-    [_URL release];
-    [_user release];
-    [_repository release];
-    
-    [super dealloc];
-}
 
 #pragma mark - Keyed Archiving
 
@@ -131,22 +109,22 @@ NSString *const kGHAPIIssueStateV3Closed = @"closed";
 
 - (id)initWithCoder:(NSCoder *)decoder {
     if ((self = [super init])) {
-        _assignee = [[decoder decodeObjectForKey:@"assignee"] retain];
-        _body = [[decoder decodeObjectForKey:@"body"] retain];
-        _closedAt = [[decoder decodeObjectForKey:@"closedAt"] retain];
-        _comments = [[decoder decodeObjectForKey:@"comments"] retain];
-        _createdAt = [[decoder decodeObjectForKey:@"createdAt"] retain];
-        _HTMLURL = [[decoder decodeObjectForKey:@"hTMLURL"] retain];
-        _labels = [[decoder decodeObjectForKey:@"labels"] retain];
-        _milestone = [[decoder decodeObjectForKey:@"milestone"] retain];
-        _number = [[decoder decodeObjectForKey:@"number"] retain];
-        _pullRequestID = [[decoder decodeObjectForKey:@"pullRequestID"] retain];
-        _state = [[decoder decodeObjectForKey:@"state"] retain];
-        _title = [[decoder decodeObjectForKey:@"title"] retain];
-        _updatedAt = [[decoder decodeObjectForKey:@"updatedAt"] retain];
-        _URL = [[decoder decodeObjectForKey:@"uRL"] retain];
-        _user = [[decoder decodeObjectForKey:@"user"] retain];
-        _repository = [[decoder decodeObjectForKey:@"repository"] retain];
+        _assignee = [decoder decodeObjectForKey:@"assignee"];
+        _body = [decoder decodeObjectForKey:@"body"];
+        _closedAt = [decoder decodeObjectForKey:@"closedAt"];
+        _comments = [decoder decodeObjectForKey:@"comments"];
+        _createdAt = [decoder decodeObjectForKey:@"createdAt"];
+        _HTMLURL = [decoder decodeObjectForKey:@"hTMLURL"];
+        _labels = [decoder decodeObjectForKey:@"labels"];
+        _milestone = [decoder decodeObjectForKey:@"milestone"];
+        _number = [decoder decodeObjectForKey:@"number"];
+        _pullRequestID = [decoder decodeObjectForKey:@"pullRequestID"];
+        _state = [decoder decodeObjectForKey:@"state"];
+        _title = [decoder decodeObjectForKey:@"title"];
+        _updatedAt = [decoder decodeObjectForKey:@"updatedAt"];
+        _URL = [decoder decodeObjectForKey:@"uRL"];
+        _user = [decoder decodeObjectForKey:@"user"];
+        _repository = [decoder decodeObjectForKey:@"repository"];
     }
     return self;
 }
@@ -169,7 +147,7 @@ NSString *const kGHAPIIssueStateV3Closed = @"closed";
                                      
                                      NSMutableArray *finalArray = [NSMutableArray arrayWithCapacity:rawArray.count];
                                      for (NSDictionary *rawDictionary in rawArray) {
-                                         [finalArray addObject:[[[GHAPIIssueV3 alloc] initWithRawDictionary:rawDictionary] autorelease] ];
+                                         [finalArray addObject:[[GHAPIIssueV3 alloc] initWithRawDictionary:rawDictionary] ];
                                      }
                                      
                                      handler(finalArray, nextPage, nil);
@@ -191,7 +169,7 @@ NSString *const kGHAPIIssueStateV3Closed = @"closed";
         if (error) {
             handler(nil, error);
         } else {
-            handler([[[GHAPIIssueV3 alloc] initWithRawDictionary:object] autorelease], nil);
+            handler([[GHAPIIssueV3 alloc] initWithRawDictionary:object], nil);
         }
     }];
 }
@@ -214,7 +192,7 @@ NSString *const kGHAPIIssueStateV3Closed = @"closed";
                                      
                                      NSMutableArray *finalArray = [NSMutableArray arrayWithCapacity:rawArray.count];
                                      for (NSDictionary *rawDictionary in rawArray) {
-                                         [finalArray addObject:[[[GHAPIMilestoneV3 alloc] initWithRawDictionary:rawDictionary] autorelease] ];
+                                         [finalArray addObject:[[GHAPIMilestoneV3 alloc] initWithRawDictionary:rawDictionary] ];
                                      }
                                      
                                      handler(finalArray, nextPage, nil);
@@ -250,7 +228,7 @@ NSString *const kGHAPIIssueStateV3Closed = @"closed";
                                                     [jsonDictionary setObject:milestone forKey:@"milestone"];
                                                 }
                                                 NSString *jsonString = [jsonDictionary JSONString];
-                                                NSMutableData *jsonData = [[[jsonString dataUsingEncoding:NSUTF8StringEncoding] mutableCopy] autorelease];
+                                                NSMutableData *jsonData = [[jsonString dataUsingEncoding:NSUTF8StringEncoding] mutableCopy];
                                                 [request setPostBody:jsonData];
                                                 [request setPostLength:[jsonString length] ];
                                             } 
@@ -258,7 +236,7 @@ NSString *const kGHAPIIssueStateV3Closed = @"closed";
                                            if (error) {
                                                handler(nil, error);
                                            } else {
-                                               handler([[[GHAPIIssueV3 alloc] initWithRawDictionary:object] autorelease], nil);
+                                               handler([[GHAPIIssueV3 alloc] initWithRawDictionary:object], nil);
                                            }
                                        }];
 }
@@ -281,7 +259,7 @@ NSString *const kGHAPIIssueStateV3Closed = @"closed";
             
             NSMutableArray *array = [NSMutableArray arrayWithCapacity:rawCommentsArray.count];
             for (NSDictionary *rawDictionary in rawCommentsArray) {
-                [array addObject:[[[GHAPIIssueCommentV3 alloc] initWithRawDictionary:rawDictionary] autorelease] ];
+                [array addObject:[[GHAPIIssueCommentV3 alloc] initWithRawDictionary:rawDictionary] ];
             }
             
             handler(array, nil);
@@ -304,7 +282,7 @@ NSString *const kGHAPIIssueStateV3Closed = @"closed";
                                                 // {"body"=>"String"}
                                                 NSDictionary *jsonDictionary = [NSDictionary dictionaryWithObject:comment forKey:@"body"];
                                                 NSString *jsonString = [jsonDictionary JSONString];
-                                                NSMutableData *jsonData = [[[jsonString dataUsingEncoding:NSUTF8StringEncoding] mutableCopy] autorelease];
+                                                NSMutableData *jsonData = [[jsonString dataUsingEncoding:NSUTF8StringEncoding] mutableCopy];
                                                 [request setPostBody:jsonData];
                                                 [request setPostLength:[jsonString length] ];
                                             } 
@@ -312,7 +290,7 @@ NSString *const kGHAPIIssueStateV3Closed = @"closed";
                                            if (error) {
                                                handler(nil, error);
                                            } else {
-                                               handler([[[GHAPIIssueCommentV3 alloc] initWithRawDictionary:object] autorelease], nil);
+                                               handler([[GHAPIIssueCommentV3 alloc] initWithRawDictionary:object], nil);
                                            }
                                        }];
 }
@@ -335,7 +313,7 @@ NSString *const kGHAPIIssueStateV3Closed = @"closed";
                                                 
                                                 NSDictionary *jsonDictionary = [NSDictionary dictionaryWithObject:@"closed" forKey:@"state"];
                                                 NSString *jsonString = [jsonDictionary JSONString];
-                                                NSMutableData *jsonData = [[[jsonString dataUsingEncoding:NSUTF8StringEncoding] mutableCopy] autorelease];
+                                                NSMutableData *jsonData = [[jsonString dataUsingEncoding:NSUTF8StringEncoding] mutableCopy];
                                                 
                                                 [request setPostBody:jsonData];
                                                 [request setPostLength:[jsonString length] ];
@@ -363,7 +341,7 @@ NSString *const kGHAPIIssueStateV3Closed = @"closed";
                                                 
                                                 NSDictionary *jsonDictionary = [NSDictionary dictionaryWithObject:@"open" forKey:@"state"];
                                                 NSString *jsonString = [jsonDictionary JSONString];
-                                                NSMutableData *jsonData = [[[jsonString dataUsingEncoding:NSUTF8StringEncoding] mutableCopy] autorelease];
+                                                NSMutableData *jsonData = [[jsonString dataUsingEncoding:NSUTF8StringEncoding] mutableCopy];
                                                 
                                                 [request setPostBody:jsonData];
                                                 [request setPostLength:[jsonString length] ];
@@ -388,7 +366,7 @@ NSString *const kGHAPIIssueStateV3Closed = @"closed";
             
             NSMutableArray *finalArray = [NSMutableArray arrayWithCapacity:rawArray.count];
             for (NSDictionary *rawDictionary in rawArray) {
-                [finalArray addObject:[[[GHAPIIssueEventV3 alloc] initWithRawDictionary:rawDictionary] autorelease] ];
+                [finalArray addObject:[[GHAPIIssueEventV3 alloc] initWithRawDictionary:rawDictionary] ];
             }
             
             handler(finalArray, nil);
@@ -466,7 +444,7 @@ NSString *const kGHAPIIssueStateV3Closed = @"closed";
                                      
                                      NSMutableArray *finalArray = [NSMutableArray arrayWithCapacity:rawArray.count];
                                      for (NSDictionary *rawDictionary in rawArray) {
-                                         [finalArray addObject:[[[GHAPIIssueV3 alloc] initWithRawDictionary:rawDictionary] autorelease] ];
+                                         [finalArray addObject:[[GHAPIIssueV3 alloc] initWithRawDictionary:rawDictionary] ];
                                      }
                                      
                                      handler(finalArray, nextPage, nil);
@@ -488,7 +466,7 @@ NSString *const kGHAPIIssueStateV3Closed = @"closed";
                                      
                                      NSMutableArray *finalArray = [NSMutableArray arrayWithCapacity:rawArray.count];
                                      for (NSDictionary *rawDictionary in rawArray) {
-                                         [finalArray addObject:[[[GHAPIIssueV3 alloc] initWithRawDictionary:rawDictionary] autorelease] ];
+                                         [finalArray addObject:[[GHAPIIssueV3 alloc] initWithRawDictionary:rawDictionary] ];
                                      }
                                      
                                      handler(finalArray, nextPage, nil);
@@ -535,7 +513,7 @@ NSString *const kGHAPIIssueStateV3Closed = @"closed";
                                                          [jsonDictionary setObject:labels forKey:@"labels"];
                                                      }
                                                      NSString *jsonString = [jsonDictionary JSONString];
-                                                     NSMutableData *jsonData = [[[jsonString dataUsingEncoding:NSUTF8StringEncoding] mutableCopy] autorelease];
+                                                     NSMutableData *jsonData = [[jsonString dataUsingEncoding:NSUTF8StringEncoding] mutableCopy];
                                                      
                                                      [request setPostBody:jsonData];
                                                      [request setPostLength:[jsonString length] ];
@@ -544,7 +522,7 @@ NSString *const kGHAPIIssueStateV3Closed = @"closed";
                                                 if (error) {
                                                     handler(nil, error);
                                                 } else {
-                                                    handler([[[GHAPIIssueV3 alloc] initWithRawDictionary:object] autorelease], nil);
+                                                    handler([[GHAPIIssueV3 alloc] initWithRawDictionary:object], nil);
                                                 }
                                             }];
 }

@@ -18,7 +18,7 @@
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if ((self = [super initWithStyle:style reuseIdentifier:reuseIdentifier])) {
         // Initialization code
-        self.descriptionLabel = [[[UILabel alloc] initWithFrame:CGRectZero] autorelease];
+        self.descriptionLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         self.descriptionLabel.numberOfLines = 0;
         self.descriptionLabel.font = [UIFont systemFontOfSize:13.0f];
         self.descriptionLabel.textColor = [UIColor colorWithWhite:0.25 alpha:1.0];
@@ -68,9 +68,5 @@
 
 #pragma mark - Memory management
 
-- (void)dealloc {
-    [_descriptionLabel release];
-    [super dealloc];
-}
 
 @end

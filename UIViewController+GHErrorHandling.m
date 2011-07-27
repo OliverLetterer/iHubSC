@@ -30,7 +30,7 @@
         DLog(@"%@", error);
         
         if (![GHAPIAuthenticationManager sharedInstance].username || [[GHAPIAuthenticationManager sharedInstance].username isEqualToString:@""]) {
-            GHAuthenticationAlertView *alert = [[[GHAuthenticationAlertView alloc] initWithDelegate:nil] autorelease];
+            GHAuthenticationAlertView *alert = [[GHAuthenticationAlertView alloc] initWithDelegate:nil];
             [alert show];
             return;
         }
@@ -38,7 +38,7 @@
         if (error.code == 3) {
             // authentication needed
             [self invalidadUserData];
-            GHAuthenticationAlertView *alert = [[[GHAuthenticationAlertView alloc] initWithDelegate:nil] autorelease];
+            GHAuthenticationAlertView *alert = [[GHAuthenticationAlertView alloc] initWithDelegate:nil];
             [alert show];
         } else {
             [[ANNotificationQueue sharedInstance] detatchErrorNotificationWithTitle:NSLocalizedString(@"Error", @"") 

@@ -26,9 +26,9 @@
         id targetDictionary = [rawDictionary objectForKeyOrNilOnNullObject:@"target"];
         id targetAttributes = [rawDictionary objectForKeyOrNilOnNullObject:@"target_attributes"];
         if ([[targetDictionary class] isSubclassOfClass:[NSDictionary class] ]) {
-            self.target = [[[GHTarget alloc] initWithRawDictionary:targetDictionary] autorelease];
+            self.target = [[GHTarget alloc] initWithRawDictionary:targetDictionary];
         } else if ([[targetAttributes class] isSubclassOfClass:[NSDictionary class] ]) {
-            self.target = [[[GHTarget alloc] initWithRawDictionary:targetAttributes] autorelease];
+            self.target = [[GHTarget alloc] initWithRawDictionary:targetAttributes];
         }
     }
     return self;
@@ -36,10 +36,6 @@
 
 #pragma mark - Memory management
 
-- (void)dealloc {
-    [_target release];
-    [super dealloc];
-}
 
 #pragma mark - NSCoding
 

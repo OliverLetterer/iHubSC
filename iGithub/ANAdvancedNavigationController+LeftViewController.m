@@ -30,7 +30,7 @@
         [self __removeLeftViewControllerView];
     }
     [_leftViewController removeFromParentViewController];
-    [_leftViewController release], _leftViewController = nil;
+    _leftViewController = nil;
 }
 
 @end
@@ -41,7 +41,7 @@
     [self __removeLeftViewController];
     
     if (leftViewController != nil) {
-        _leftViewController = [leftViewController retain];
+        _leftViewController = leftViewController;
         [self addChildViewController:leftViewController];
         if (self.isViewLoaded) {
             [self _insertLeftViewControllerView];

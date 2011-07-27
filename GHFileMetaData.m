@@ -41,12 +41,12 @@
 
 - (id)initWithCoder:(NSCoder *)decoder {
     if ((self = [super init])) {
-        _name = [[decoder decodeObjectForKey:@"name"] retain];
-        _size = [[decoder decodeObjectForKey:@"size"] retain];
-        _hash = [[decoder decodeObjectForKey:@"hash"] retain];
-        _mode = [[decoder decodeObjectForKey:@"mode"] retain];
-        _mimeType = [[decoder decodeObjectForKey:@"mimeType"] retain];
-        _repository = [[decoder decodeObjectForKey:@"repository"] retain];
+        _name = [decoder decodeObjectForKey:@"name"];
+        _size = [decoder decodeObjectForKey:@"size"];
+        _hash = [decoder decodeObjectForKey:@"hash"];
+        _mode = [decoder decodeObjectForKey:@"mode"];
+        _mimeType = [decoder decodeObjectForKey:@"mimeType"];
+        _repository = [decoder decodeObjectForKey:@"repository"];
     }
     return self;
 }
@@ -87,7 +87,7 @@
                 handler(nil, myError);
             } else {
                 NSDictionary *dictionary = [[[request responseString] objectFromJSONString] objectForKeyOrNilOnNullObject:@"blob"];
-                GHFileMetaData *meta = [[[GHFileMetaData alloc] initWithRawDictionary:dictionary] autorelease];
+                GHFileMetaData *meta = [[GHFileMetaData alloc] initWithRawDictionary:dictionary];
                 meta.repository = repository;
                 handler(meta, nil);
             }
@@ -135,15 +135,5 @@
 
 #pragma mark - Memory management
 
-- (void)dealloc {
-    [_name release];
-    [_size release];
-    [_hash release];
-    [_mode release];
-    [_mimeType release];
-    [_repository release];
-    
-    [super dealloc];
-}
 
 @end

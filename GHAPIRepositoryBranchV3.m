@@ -49,19 +49,13 @@
 
 - (id)initWithCoder:(NSCoder *)decoder {
     if ((self = [super init])) {
-        _name = [[decoder decodeObjectForKey:@"name"] retain];
-        _ID = [[decoder decodeObjectForKey:@"iD"] retain];
+        _name = [decoder decodeObjectForKey:@"name"];
+        _ID = [decoder decodeObjectForKey:@"iD"];
     }
     return self;
 }
 
 #pragma mark - Memory management
 
-- (void)dealloc {
-    [_name release];
-    [_ID release];
-    
-    [super dealloc];
-}
 
 @end

@@ -20,9 +20,9 @@
         // Initialization code
         self.backgroundColor = [UIColor clearColor];
         self.selectionStyle = UITableViewCellSelectionStyleNone;
-        self.backgroundView = [[[UIView alloc] initWithFrame:CGRectZero] autorelease];
+        self.backgroundView = [[UIView alloc] initWithFrame:CGRectZero];
         
-        self.searchBar = [[[UISearchBar alloc] initWithFrame:CGRectZero] autorelease];
+        self.searchBar = [[UISearchBar alloc] initWithFrame:CGRectZero];
         self.searchBar.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         [self.contentView addSubview:self.searchBar];
         
@@ -60,10 +60,5 @@
 
 #pragma mark - Memory management
 
-- (void)dealloc {
-    [_searchBar release];
-    
-    [super dealloc];
-}
 
 @end

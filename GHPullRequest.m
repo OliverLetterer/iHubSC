@@ -88,7 +88,7 @@
             } else {
                 NSDictionary *dictionary = GHAPIObjectExpectedClass([jsonString objectFromJSONString], NSDictionary.class);
                 
-                handler([[[GHPullRequestDiscussion alloc] initWithRawDictionary:[dictionary objectForKey:@"pull"]] autorelease], nil);
+                handler([[GHPullRequestDiscussion alloc] initWithRawDictionary:[dictionary objectForKey:@"pull"]], nil);
             }
         });
     });
@@ -126,7 +126,7 @@
                 NSMutableArray *pulls = [NSMutableArray arrayWithCapacity:[rawPulls count] ];
                 
                 for (NSDictionary *rawPullDiscussion in rawPulls) {
-                    [pulls addObject:[[[GHPullRequestDiscussion alloc] initWithRawDictionary:rawPullDiscussion] autorelease] ];
+                    [pulls addObject:[[GHPullRequestDiscussion alloc] initWithRawDictionary:rawPullDiscussion] ];
                 }
                 handler(pulls, nil);
             }
@@ -137,15 +137,5 @@
 
 #pragma mark - Memory management
 
-- (void)dealloc {
-    [_additions release];
-    [_commits release];
-    [_deletions release];
-    [_ID release];
-    [_issueID release];
-    [_number release];
-    [_title release];
-    [super dealloc];
-}
 
 @end

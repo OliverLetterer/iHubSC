@@ -38,7 +38,7 @@
             
             NSData *imageData = [request responseData];
             
-            UIImage *theImage = [[[UIImage alloc] initWithData:imageData] autorelease];
+            UIImage *theImage = [[UIImage alloc] initWithData:imageData];
             
             if (theImage) {
                 CGSize imageSize = CGSizeMake(56.0 * [UIScreen mainScreen].scale, 56.0 * [UIScreen mainScreen].scale);

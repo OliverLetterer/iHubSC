@@ -27,7 +27,7 @@
                                                                                                            forKey:@"commit_message"];
                                                 
                                                 NSString *jsonString = [jsonDictionary JSONString];
-                                                NSMutableData *jsonData = [[[jsonString dataUsingEncoding:NSUTF8StringEncoding] mutableCopy] autorelease];
+                                                NSMutableData *jsonData = [[jsonString dataUsingEncoding:NSUTF8StringEncoding] mutableCopy];
                                                 [request setPostBody:jsonData];
                                                 [request setPostLength:[jsonString length] ];
                                             }
@@ -35,7 +35,7 @@
                                            if (error) {
                                                handler(nil, error);
                                            } else {
-                                               handler([[[GHAPIPullRequestMergeStateV3 alloc] initWithRawDictionary:object] autorelease], nil);
+                                               handler([[GHAPIPullRequestMergeStateV3 alloc] initWithRawDictionary:object], nil);
                                            }
                                        }];
 }

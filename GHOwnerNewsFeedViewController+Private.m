@@ -27,7 +27,7 @@
                         nil];
     animation.duration = 0.5f;
     
-    UISegmentedControl *segmentControl = [[[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:@"", nil]] autorelease];
+    UISegmentedControl *segmentControl = [[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:@"", nil]];
     segmentControl.segmentedControlStyle = UISegmentedControlStyleBar;
     segmentControl.tintColor = [UIColor defaultNavigationBarTintColor];
     segmentControl.frame = CGRectMake(0.0f, 0.0f, 286.0f, 32.0f);

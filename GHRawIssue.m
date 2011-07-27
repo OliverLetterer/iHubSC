@@ -38,23 +38,6 @@
 
 #pragma mark - Memory management
 
-- (void)dealloc {
-    [_gravatarID release];
-    [_position release];
-    [_number release];
-    [_votes release];
-    [_creationDate release];
-    [_comments release];
-    [_body release];
-    [_title release];
-    [_updatedAd release];
-    [_closedAd release];
-    [_user release];
-    [_labelsJSON release];
-    [_state release];
-    
-    [super dealloc];
-}
 
 #pragma mark - Keyed Archiving
 
@@ -76,19 +59,19 @@
 
 - (id)initWithCoder:(NSCoder *)decoder {
     if ((self = [super init])) {
-        _gravatarID = [[decoder decodeObjectForKey:@"gravatarID"] retain];
-        _position = [[decoder decodeObjectForKey:@"position"] retain];
-        _number = [[decoder decodeObjectForKey:@"number"] retain];
-        _votes = [[decoder decodeObjectForKey:@"votes"] retain];
-        _creationDate = [[decoder decodeObjectForKey:@"creationDate"] retain];
-        _comments = [[decoder decodeObjectForKey:@"comments"] retain];
-        _body = [[decoder decodeObjectForKey:@"body"] retain];
-        _title = [[decoder decodeObjectForKey:@"title"] retain];
-        _updatedAd = [[decoder decodeObjectForKey:@"updatedAd"] retain];
-        _closedAd = [[decoder decodeObjectForKey:@"closedAd"] retain];
-        _user = [[decoder decodeObjectForKey:@"user"] retain];
-        _labelsJSON = [[decoder decodeObjectForKey:@"labelsJSON"] retain];
-        _state = [[decoder decodeObjectForKey:@"state"] retain];
+        _gravatarID = [decoder decodeObjectForKey:@"gravatarID"];
+        _position = [decoder decodeObjectForKey:@"position"];
+        _number = [decoder decodeObjectForKey:@"number"];
+        _votes = [decoder decodeObjectForKey:@"votes"];
+        _creationDate = [decoder decodeObjectForKey:@"creationDate"];
+        _comments = [decoder decodeObjectForKey:@"comments"];
+        _body = [decoder decodeObjectForKey:@"body"];
+        _title = [decoder decodeObjectForKey:@"title"];
+        _updatedAd = [decoder decodeObjectForKey:@"updatedAd"];
+        _closedAd = [decoder decodeObjectForKey:@"closedAd"];
+        _user = [decoder decodeObjectForKey:@"user"];
+        _labelsJSON = [decoder decodeObjectForKey:@"labelsJSON"];
+        _state = [decoder decodeObjectForKey:@"state"];
     }
     return self;
 }

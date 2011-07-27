@@ -55,27 +55,27 @@
     if (item.payload.type == GHPayloadWatchEvent) {
         if ([item.repository.fullName hasPrefix:[GHAPIAuthenticationManager sharedInstance].username]) {
             // watched my repo, show the user
-            viewController = [[[GHPUserViewController alloc] initWithUsername:item.actorAttributes.login] autorelease];
+            viewController = [[GHPUserViewController alloc] initWithUsername:item.actorAttributes.login];
         } else {
             // show me the repo that he is following
-            viewController = [[[GHPRepositoryViewController alloc] initWithRepositoryString:item.repository.fullName] autorelease];
+            viewController = [[GHPRepositoryViewController alloc] initWithRepositoryString:item.repository.fullName];
         }
     } else if (item.payload.type == GHPayloadFollowEvent) {
         GHFollowEventPayload *payload = (GHFollowEventPayload *)item.payload;
         if ([payload.target.login isEqualToString:[GHAPIAuthenticationManager sharedInstance].username]) {
             // started following me, show me the user
-            viewController = [[[GHPUserViewController alloc] initWithUsername:item.actorAttributes.login] autorelease];
+            viewController = [[GHPUserViewController alloc] initWithUsername:item.actorAttributes.login];
         } else {
             // following someone else, show me the target
-            viewController = [[[GHPUserViewController alloc] initWithUsername:payload.target.login] autorelease];
+            viewController = [[GHPUserViewController alloc] initWithUsername:payload.target.login];
         }
     } else if (item.payload.type == GHPayloadForkEvent) {
         if ([item.repository.fullName hasPrefix:[GHAPIAuthenticationManager sharedInstance].username]) {
             // forked my repository, show me the user
-            viewController = [[[GHPUserViewController alloc] initWithUsername:item.actorAttributes.login] autorelease];
+            viewController = [[GHPUserViewController alloc] initWithUsername:item.actorAttributes.login];
         } else {
             // didn't fork my repo, show me the repo
-            viewController = [[[GHPRepositoryViewController alloc] initWithRepositoryString:item.repository.fullName] autorelease];
+            viewController = [[GHPRepositoryViewController alloc] initWithRepositoryString:item.repository.fullName];
         }
     }
     

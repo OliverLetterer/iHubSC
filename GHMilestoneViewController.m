@@ -53,15 +53,6 @@
 
 #pragma mark - Memory management
 
-- (void)dealloc {
-    [_milestone release];
-    [_repository release];
-    [_milestoneNumber release];
-    [_openIssues release];
-    [_closedIssues release];
-    
-    [super dealloc];
-}
 
 - (void)didReceiveMemoryWarning {
     // Releases the view if it doesn't have a superview.
@@ -91,7 +82,7 @@
     
     GHCollapsingAndSpinningTableViewCell *cell = (GHCollapsingAndSpinningTableViewCell *)[self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[GHCollapsingAndSpinningTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[GHCollapsingAndSpinningTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     
     if (section == kUITableViewControllerSectionInfoOpenIssues) {
@@ -200,7 +191,7 @@
             
             GHAPIMilestoneV3TableViewCell *cell = (GHAPIMilestoneV3TableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
             if (!cell) {
-                cell = [[[GHAPIMilestoneV3TableViewCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:CellIdentifier] autorelease];
+                cell = [[GHAPIMilestoneV3TableViewCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:CellIdentifier];
                 cell.accessoryType = UITableViewCellAccessoryNone;
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
             }
@@ -225,7 +216,7 @@
             
             GHDescriptionTableViewCell *cell = (GHDescriptionTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
             if (cell == nil) {
-                cell = [[[GHDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+                cell = [[GHDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
             }
             
             GHAPIIssueV3 *issue = [self.openIssues objectAtIndex:indexPath.row - 1];
@@ -247,7 +238,7 @@
             
             GHDescriptionTableViewCell *cell = (GHDescriptionTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
             if (cell == nil) {
-                cell = [[[GHDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+                cell = [[GHDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
             }
             
             GHAPIIssueV3 *issue = [self.closedIssues objectAtIndex:indexPath.row - 1];
@@ -320,17 +311,15 @@
     if (indexPath.section == kUITableViewControllerSectionInfoOpenIssues && indexPath.row > 0) {
         GHAPIIssueV3 *issue = [self.openIssues objectAtIndex:indexPath.row - 1];
         
-        GHIssueViewController *issueViewController = [[[GHIssueViewController alloc] initWithRepository:self.repository 
-                                                                                                              issueNumber:issue.number]
-                                                               autorelease];
+        GHIssueViewController *issueViewController = [[GHIssueViewController alloc] initWithRepository:self.repository 
+                                                                                                              issueNumber:issue.number];
         [self.navigationController pushViewController:issueViewController animated:YES];
         
     } else if (indexPath.section == kUITableViewControllerSectionInfoClosedIssues && indexPath.row > 0) {
         GHAPIIssueV3 *issue = [self.closedIssues objectAtIndex:indexPath.row - 1];
         
-        GHIssueViewController *issueViewController = [[[GHIssueViewController alloc] initWithRepository:self.repository 
-                                                                                                              issueNumber:issue.number]
-                                                               autorelease];
+        GHIssueViewController *issueViewController = [[GHIssueViewController alloc] initWithRepository:self.repository 
+                                                                                                              issueNumber:issue.number];
         [self.navigationController pushViewController:issueViewController animated:YES];
         
     } else {
@@ -368,11 +357,11 @@
 
 - (id)initWithCoder:(NSCoder *)decoder {
     if ((self = [super initWithCoder:decoder])) {
-        _milestone = [[decoder decodeObjectForKey:@"milestone"] retain];
-        _repository = [[decoder decodeObjectForKey:@"repository"] retain];
-        _milestoneNumber = [[decoder decodeObjectForKey:@"milestoneNumber"] retain];
-        _openIssues = [[decoder decodeObjectForKey:@"openIssues"] retain];
-        _closedIssues = [[decoder decodeObjectForKey:@"closedIssues"] retain];
+        _milestone = [decoder decodeObjectForKey:@"milestone"];
+        _repository = [decoder decodeObjectForKey:@"repository"];
+        _milestoneNumber = [decoder decodeObjectForKey:@"milestoneNumber"];
+        _openIssues = [decoder decodeObjectForKey:@"openIssues"];
+        _closedIssues = [decoder decodeObjectForKey:@"closedIssues"];
     }
     return self;
 }

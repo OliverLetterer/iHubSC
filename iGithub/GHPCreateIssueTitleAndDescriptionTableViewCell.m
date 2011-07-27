@@ -18,13 +18,13 @@
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if ((self = [super initWithStyle:style reuseIdentifier:reuseIdentifier])) {
         // Initialization code
-        self.textField = [[[UITextField alloc] initWithFrame:CGRectZero] autorelease];
+        self.textField = [[UITextField alloc] initWithFrame:CGRectZero];
         self.textField.borderStyle = UITextBorderStyleLine;
         self.textField.placeholder = NSLocalizedString(@"Title", @"");
         self.textField.backgroundColor = [UIColor whiteColor];
         [self.contentView addSubview:self.textField];
         
-        self.textView = [[[UITextView alloc] initWithFrame:CGRectZero] autorelease];
+        self.textView = [[UITextView alloc] initWithFrame:CGRectZero];
         self.textView.font = self.textField.font;
         [self.textView.layer setBackgroundColor: [[UIColor whiteColor] CGColor]];
         [self.textView.layer setBorderColor: [[UIColor blackColor] CGColor]];
@@ -64,11 +64,5 @@
 
 #pragma mark - Memory management
 
-- (void)dealloc {
-    [_textField release];
-    [_textView release];
-    
-    [super dealloc];
-}
 
 @end

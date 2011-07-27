@@ -13,8 +13,7 @@
 
 - (void)setAlertProxy:(GHTableViewControllerAlertViewProxy *)alertProxy {
     if (alertProxy != _alertProxy) {
-        [_alertProxy release];
-        _alertProxy = [alertProxy retain];
+        _alertProxy = alertProxy;
     }
 }
 

@@ -18,11 +18,6 @@
     self.navigationController.navigationBar.tintColor = [UIColor defaultNavigationBarTintColor];
 }
 
-- (void)dealloc {
-    [_navigationTintColor release];
-    
-    [super dealloc];
-}
 
 - (void)encodeWithCoder:(NSCoder *)coder {
     [coder encodeObject:self.title forKey:@"title"];

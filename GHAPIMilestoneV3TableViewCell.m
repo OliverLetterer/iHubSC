@@ -64,10 +64,5 @@
 
 #pragma mark - Memory management
 
-- (void)dealloc {
-    [_progressView release];
-    
-    [super dealloc];
-}
 
 @end

@@ -48,17 +48,12 @@ CGFloat const ANNotificationQueueAnimationDuration = 0.35f*2.0f;
 
 #pragma mark - Memory management
 
-- (void)dealloc {
-    [_notifications release];
-    
-    [super dealloc];
-}
 
 #pragma mark - Instance methods
 
 - (void)detatchErrorNotificationWithTitle:(NSString *)title errorMessage:(NSString *)errorMessage {
     dispatch_async(dispatch_get_main_queue(), ^(void) {
-        ANNotificationView *notificationView = [[[ANNotificationErrorView alloc] initWithFrame:self.defaultNotificationFrame] autorelease];
+        ANNotificationView *notificationView = [[ANNotificationErrorView alloc] initWithFrame:self.defaultNotificationFrame];
         notificationView.titleLabel.text = title;
         notificationView.detailTextLabel.text = errorMessage;
         
@@ -68,7 +63,7 @@ CGFloat const ANNotificationQueueAnimationDuration = 0.35f*2.0f;
 
 - (void)detatchSuccesNotificationWithTitle:(NSString *)title message:(NSString *)errorMessage {
     dispatch_async(dispatch_get_main_queue(), ^(void) {
-        ANNotificationView *notificationView = [[[ANNotificationSuccessView alloc] initWithFrame:self.defaultNotificationFrame] autorelease];
+        ANNotificationView *notificationView = [[ANNotificationSuccessView alloc] initWithFrame:self.defaultNotificationFrame];
         notificationView.titleLabel.text = title;
         notificationView.detailTextLabel.text = errorMessage;
         
@@ -115,7 +110,7 @@ CGFloat const ANNotificationQueueAnimationDuration = 0.35f*2.0f;
     
     UIView *topContainerView = [[UIApplication sharedApplication].delegate window].rootViewController.view;
     
-    UIView *containerView = [[[UIView alloc] initWithFrame:topContainerView.bounds] autorelease];
+    UIView *containerView = [[UIView alloc] initWithFrame:topContainerView.bounds];
     containerView.backgroundColor = [UIColor clearColor];
     containerView.userInteractionEnabled = NO;
     [containerView addSubview:notificationView];
@@ -207,27 +202,11 @@ static ANNotificationQueue *_instance = nil;
 }
 
 + (id)allocWithZone:(NSZone *)zone {	
-	return [[self sharedInstance] retain];	
+	return [self sharedInstance];	
 }
 
 
 - (id)copyWithZone:(NSZone *)zone {
-    return self;	
-}
-
-- (id)retain {	
-    return self;	
-}
-
-- (NSUInteger)retainCount {
-    return NSUIntegerMax;
-}
-
-- (void)release {
-    //do nothing
-}
-
-- (id)autorelease {
     return self;	
 }
 

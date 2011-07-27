@@ -24,7 +24,7 @@
 #pragma mark - Initialization
 
 + (GHUser *)userFromRawUserDictionary:(NSDictionary *)rawDictionary {
-    return [[[GHUser alloc] initWithRawUserDictionary:rawDictionary] autorelease];
+    return [[GHUser alloc] initWithRawUserDictionary:rawDictionary];
 }
 
 #pragma mark - Keyed Archiving
@@ -58,30 +58,30 @@
 
 - (id)initWithCoder:(NSCoder *)decoder {
     if ((self = [super init])) {
-        _createdAt = [[decoder decodeObjectForKey:@"createdAt"] retain];
+        _createdAt = [decoder decodeObjectForKey:@"createdAt"];
         _followersCount = [decoder decodeIntegerForKey:@"followersCount"];
         _followingCount = [decoder decodeIntegerForKey:@"followingCount"];
-        _gravatarID = [[decoder decodeObjectForKey:@"gravatarID"] retain];
+        _gravatarID = [decoder decodeObjectForKey:@"gravatarID"];
         _ID = [decoder decodeIntegerForKey:@"iD"];
-        _login = [[decoder decodeObjectForKey:@"login"] retain];
+        _login = [decoder decodeObjectForKey:@"login"];
         _publicGistCount = [decoder decodeIntegerForKey:@"publicGistCount"];
         _publicRepoCount = [decoder decodeIntegerForKey:@"publicRepoCount"];
-        _type = [[decoder decodeObjectForKey:@"type"] retain];
+        _type = [decoder decodeObjectForKey:@"type"];
         _privateRepoCount = [decoder decodeIntegerForKey:@"privateRepoCount"];
         _collaborators = [decoder decodeIntegerForKey:@"collaborators"];
         _diskUsage = [decoder decodeIntegerForKey:@"diskUsage"];
         _ownedPrivateRepoCount = [decoder decodeIntegerForKey:@"ownedPrivateRepoCount"];
         _privateGistCount = [decoder decodeIntegerForKey:@"privateGistCount"];
-        _planName = [[decoder decodeObjectForKey:@"planName"] retain];
+        _planName = [decoder decodeObjectForKey:@"planName"];
         _planCollaborators = [decoder decodeIntegerForKey:@"planCollaborators"];
         _planSpace = [decoder decodeIntegerForKey:@"planSpace"];
         _planPrivateRepos = [decoder decodeIntegerForKey:@"planPrivateRepos"];
-        _password = [[decoder decodeObjectForKey:@"password"] retain];
-        _EMail = [[decoder decodeObjectForKey:@"eMail"] retain];
-        _location = [[decoder decodeObjectForKey:@"location"] retain];
-        _company = [[decoder decodeObjectForKey:@"company"] retain];
-        _blog = [[decoder decodeObjectForKey:@"blog"] retain];
-        _name = [[decoder decodeObjectForKey:@"name"] retain];
+        _password = [decoder decodeObjectForKey:@"password"];
+        _EMail = [decoder decodeObjectForKey:@"eMail"];
+        _location = [decoder decodeObjectForKey:@"location"];
+        _company = [decoder decodeObjectForKey:@"company"];
+        _blog = [decoder decodeObjectForKey:@"blog"];
+        _name = [decoder decodeObjectForKey:@"name"];
     }
     return self;
 }
@@ -115,7 +115,7 @@
                 NSMutableArray *users = [NSMutableArray arrayWithCapacity:[allUsers count] ];
                 
                 for (NSDictionary *rawUser in allUsers) {
-                    [users addObject:[[[GHUser alloc] initWithRawDictionary:rawUser] autorelease] ];
+                    [users addObject:[[GHUser alloc] initWithRawDictionary:rawUser] ];
                 }
                 
                 handler(users, nil);
@@ -177,23 +177,5 @@
 
 #pragma mark - Memory management
 
-- (void)dealloc {
-    [_createdAt release];
-    [_gravatarID release];
-    [_login release];
-    [_type release];
-    [_image release];
-    [_planName release];
-    [_password release];
-    
-    [_location release];
-    [_EMail release];
-    [_company release];
-    [_blog release];
-    [_name release];
-    
-    [_image release];
-    [super dealloc];
-}
 
 @end

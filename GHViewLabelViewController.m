@@ -40,7 +40,7 @@
     
     GHCollapsingAndSpinningTableViewCell *cell = (GHCollapsingAndSpinningTableViewCell *)[self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[GHCollapsingAndSpinningTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[GHCollapsingAndSpinningTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     
     if (section == kUITableViewControllerSectionInfoOpenIssues) {
@@ -153,7 +153,7 @@
             
             GHLabelTableViewCell *cell = (GHLabelTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
             if (!cell) {
-                cell = [[[GHLabelTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+                cell = [[GHLabelTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
             }
             
             GHAPILabelV3 *label = self.label;
@@ -172,7 +172,7 @@
             
             GHDescriptionTableViewCell *cell = (GHDescriptionTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
             if (cell == nil) {
-                cell = [[[GHDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+                cell = [[GHDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
             }
             
             GHAPIIssueV3 *issue = [self.openIssues objectAtIndex:indexPath.row - 1];
@@ -194,7 +194,7 @@
             
             GHDescriptionTableViewCell *cell = (GHDescriptionTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
             if (cell == nil) {
-                cell = [[[GHDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+                cell = [[GHDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
             }
             
             GHAPIIssueV3 *issue = [self.closedIssues objectAtIndex:indexPath.row - 1];
@@ -230,17 +230,15 @@
     if (indexPath.section == kUITableViewControllerSectionInfoOpenIssues && indexPath.row > 0) {
         GHAPIIssueV3 *issue = [self.openIssues objectAtIndex:indexPath.row - 1];
         
-        GHIssueViewController *issueViewController = [[[GHIssueViewController alloc] initWithRepository:self.repositoryString 
-                                                                                                              issueNumber:issue.number]
-                                                               autorelease];
+        GHIssueViewController *issueViewController = [[GHIssueViewController alloc] initWithRepository:self.repositoryString 
+                                                                                                              issueNumber:issue.number];
         [self.navigationController pushViewController:issueViewController animated:YES];
         
     } else if (indexPath.section == kUITableViewControllerSectionInfoClosedIssues && indexPath.row > 0) {
         GHAPIIssueV3 *issue = [self.closedIssues objectAtIndex:indexPath.row - 1];
         
-        GHIssueViewController *issueViewController = [[[GHIssueViewController alloc] initWithRepository:self.repositoryString 
-                                                                                                              issueNumber:issue.number]
-                                                               autorelease];
+        GHIssueViewController *issueViewController = [[GHIssueViewController alloc] initWithRepository:self.repositoryString 
+                                                                                                              issueNumber:issue.number];
         [self.navigationController pushViewController:issueViewController animated:YES];
         
     } else {

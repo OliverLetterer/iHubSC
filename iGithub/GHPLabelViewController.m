@@ -160,7 +160,7 @@
     
     GHPImageDetailTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[GHPImageDetailTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[GHPImageDetailTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
     }
     [self setupDefaultTableViewCell:cell forRowAtIndexPath:indexPath];
     
@@ -199,10 +199,10 @@
     
     if (indexPath.section == kUITableViewControllerSectionInfoOpenIssues && indexPath.row > 0) {
         GHAPIIssueV3 *issue = [self.openIssues objectAtIndex:indexPath.row - 1];
-        viewController = [[[GHPIssueViewController alloc] initWithIssueNumber:issue.number onRepository:self.repositoryString] autorelease];
+        viewController = [[GHPIssueViewController alloc] initWithIssueNumber:issue.number onRepository:self.repositoryString];
     } else if (indexPath.section == kUITableViewControllerSectionInfoClosedIssues && indexPath.row > 0) {
         GHAPIIssueV3 *issue = [self.closedIssues objectAtIndex:indexPath.row - 1];
-        viewController = [[[GHPIssueViewController alloc] initWithIssueNumber:issue.number onRepository:self.repositoryString] autorelease];
+        viewController = [[GHPIssueViewController alloc] initWithIssueNumber:issue.number onRepository:self.repositoryString];
     }
     
     if (viewController) {

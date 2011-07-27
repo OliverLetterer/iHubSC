@@ -23,17 +23,13 @@
     rawDictionary = GHAPIObjectExpectedClass(rawDictionary, NSDictionary.class);
     if ((self = [super initWithRawDictionary:rawDictionary])) {
         // Initialization code
-        self.repository = [[[GHRepository alloc] initWithRawDictionary:[rawDictionary objectForKeyOrNilOnNullObject:@"repository"]] autorelease];
+        self.repository = [[GHRepository alloc] initWithRawDictionary:[rawDictionary objectForKeyOrNilOnNullObject:@"repository"]];
     }
     return self;
 }
 
 #pragma mark - Memory management
 
-- (void)dealloc {
-    [_repository release];
-    [super dealloc];
-}
 
 #pragma mark - NSCoding
 

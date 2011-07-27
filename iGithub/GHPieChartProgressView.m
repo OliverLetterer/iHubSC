@@ -28,7 +28,7 @@
 
 - (void)setTintColor:(UIColor *)tintColor {
     if (tintColor != _tintColor) {
-        [_tintColor release], _tintColor = [tintColor retain];
+        _tintColor = tintColor;
         [self setNeedsDisplay];
         
         if (_tintGradient) {
@@ -39,11 +39,11 @@
         CGFloat locations[] = {0.0f, 1.0f};
         
         NSArray *colors = [NSArray arrayWithObjects:
-                           (id)self.tintColor.CGColor, 
-                           (id)[self.tintColor colorByMultiplyingBy:0.85f].CGColor,
+                           (__bridge id)self.tintColor.CGColor, 
+                           (__bridge id)[self.tintColor colorByMultiplyingBy:0.85f].CGColor,
                            nil];
         
-        _tintGradient = CGGradientCreateWithColors(colorSpace, (CFArrayRef)colors, locations);
+        _tintGradient = CGGradientCreateWithColors(colorSpace, (__bridge CFArrayRef)colors, locations);
         
         CGColorSpaceRelease(colorSpace);
     }
@@ -64,7 +64,7 @@
         // Initialization code
         self.backgroundColor = [UIColor clearColor];
         
-        self.progressLabel = [[[UILabel alloc] initWithFrame:CGRectZero] autorelease];
+        self.progressLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         self.progressLabel.backgroundColor = [UIColor clearColor];
         self.progressLabel.textColor = [UIColor whiteColor];
         self.progressLabel.textAlignment = UITextAlignmentCenter;
@@ -135,14 +135,11 @@
 #pragma mark - Memory management
 
 - (void)dealloc {
-    [_tintColor release];
     
     if (_tintGradient) {
         CGGradientRelease(_tintGradient);
     }
-    [_progressLabel release];
     
-    [super dealloc];
 }
 
 @end

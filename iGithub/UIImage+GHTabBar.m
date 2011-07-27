@@ -24,11 +24,11 @@
         
         CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceGray();
         NSArray *colors = [NSArray arrayWithObjects:
-                           (id)[UIColor grayColor].CGColor,
-                           (id)[UIColor darkGrayColor].CGColor,
+                           (__bridge id)[UIColor grayColor].CGColor,
+                           (__bridge id)[UIColor darkGrayColor].CGColor,
                            nil];
         CGFloat locations[] = {0.0f, 1.0f};
-        CGGradientRef colorGradient = CGGradientCreateWithColors(colorSpace, (CFArrayRef)colors, locations);
+        CGGradientRef colorGradient = CGGradientCreateWithColors(colorSpace, (__bridge CFArrayRef)colors, locations);
         CGPoint startPoint = CGPointMake(targetSize.width/2.0f, 0.0f);
         CGPoint endPoint = startPoint;
         endPoint.y = targetSize.height;

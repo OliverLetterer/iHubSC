@@ -30,14 +30,14 @@
         // Initialization code
         self.textLabel.textColor = [UIColor colorWithWhite:0.55f alpha:1.0f];
         self.textLabel.shadowColor = [UIColor blackColor];
-        UIView *selectedBackgroundView = [[[UIView alloc] initWithFrame:CGRectZero] autorelease];
+        UIView *selectedBackgroundView = [[UIView alloc] initWithFrame:CGRectZero];
         selectedBackgroundView.backgroundColor = [UIColor colorWithWhite:0.0f alpha:0.25f];
         self.selectedBackgroundView = selectedBackgroundView;
         self.imageView.contentMode = UIViewContentModeScaleAspectFit;
         
-        self.backgroundView = [[[UIView alloc] initWithFrame:CGRectZero] autorelease];
+        self.backgroundView = [[UIView alloc] initWithFrame:CGRectZero];
         self.backgroundView.backgroundColor = [UIColor clearColor];
-        self.lineView = [[[GHPEdgedLineView alloc] initWithFrame:CGRectZero] autorelease];
+        self.lineView = [[GHPEdgedLineView alloc] initWithFrame:CGRectZero];
         self.lineView.transform = CGAffineTransformMakeRotation(M_PI / 2.0f);
         [self.backgroundView addSubview:self.lineView];
     }
@@ -71,9 +71,5 @@
 
 #pragma mark - Memory management
 
-- (void)dealloc {
-    [_lineView release];
-    [super dealloc];
-}
 
 @end

@@ -29,7 +29,7 @@ extern CGFloat const GHPNewCommentTableViewCellHeight;
     NSString *_linkText;
     NSString *_linkURL;
     
-    id<GHPNewCommentTableViewCellDelegate> _delegate;
+    id<GHPNewCommentTableViewCellDelegate> __weak _delegate;
 }
 
 @property (nonatomic, retain) UITextView *textView;
@@ -40,7 +40,7 @@ extern CGFloat const GHPNewCommentTableViewCellHeight;
 @property (nonatomic, copy) NSString *linkText;
 @property (nonatomic, copy) NSString *linkURL;
 
-@property (nonatomic, assign) id<GHPNewCommentTableViewCellDelegate> delegate;
+@property (nonatomic, weak) id<GHPNewCommentTableViewCellDelegate> delegate;
 
 
 @end

@@ -36,9 +36,9 @@
     if ((self = [super initWithStyle:style reuseIdentifier:reuseIdentifier])) {
         // Initialization code
         
-        GHLinearGradientBackgroundView *backgroundView = [[[GHLinearGradientBackgroundView alloc] initWithFrame:self.bounds] autorelease];
+        GHLinearGradientBackgroundView *backgroundView = [[GHLinearGradientBackgroundView alloc] initWithFrame:self.bounds];
         self.backgroundView = backgroundView;
-        _linearBackgroundView = [backgroundView retain];
+        _linearBackgroundView = backgroundView;
         
         self.textLabel.backgroundColor = [UIColor clearColor];
         self.detailTextLabel.backgroundColor = [UIColor clearColor];
@@ -83,9 +83,5 @@
 
 #pragma mark - Memory management
 
-- (void)dealloc {
-    [_linearBackgroundView release];
-    [super dealloc];
-}
 
 @end

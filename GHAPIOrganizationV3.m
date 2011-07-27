@@ -78,50 +78,29 @@
 
 - (id)initWithCoder:(NSCoder *)decoder {
     if ((self = [super init])) {
-        _login = [[decoder decodeObjectForKey:@"login"] retain];
-        _ID = [[decoder decodeObjectForKey:@"iD"] retain];
-        _URL = [[decoder decodeObjectForKey:@"uRL"] retain];
-        _avatarURL = [[decoder decodeObjectForKey:@"avatarURL"] retain];
-        _gravatarID = [[decoder decodeObjectForKey:@"gravatarID"] retain];
-        _name = [[decoder decodeObjectForKey:@"name"] retain];
-        _company = [[decoder decodeObjectForKey:@"company"] retain];
-        _blog = [[decoder decodeObjectForKey:@"blog"] retain];
-        _location = [[decoder decodeObjectForKey:@"location"] retain];
-        _EMail = [[decoder decodeObjectForKey:@"eMail"] retain];
-        _publicRepos = [[decoder decodeObjectForKey:@"publicRepos"] retain];
-        _publicGists = [[decoder decodeObjectForKey:@"publicGists"] retain];
-        _follower = [[decoder decodeObjectForKey:@"follower"] retain];
-        _following = [[decoder decodeObjectForKey:@"following"] retain];
-        _HTMLURL = [[decoder decodeObjectForKey:@"hTMLURL"] retain];
-        _createdAt = [[decoder decodeObjectForKey:@"createdAt"] retain];
-        _type = [[decoder decodeObjectForKey:@"type"] retain];
+        _login = [decoder decodeObjectForKey:@"login"];
+        _ID = [decoder decodeObjectForKey:@"iD"];
+        _URL = [decoder decodeObjectForKey:@"uRL"];
+        _avatarURL = [decoder decodeObjectForKey:@"avatarURL"];
+        _gravatarID = [decoder decodeObjectForKey:@"gravatarID"];
+        _name = [decoder decodeObjectForKey:@"name"];
+        _company = [decoder decodeObjectForKey:@"company"];
+        _blog = [decoder decodeObjectForKey:@"blog"];
+        _location = [decoder decodeObjectForKey:@"location"];
+        _EMail = [decoder decodeObjectForKey:@"eMail"];
+        _publicRepos = [decoder decodeObjectForKey:@"publicRepos"];
+        _publicGists = [decoder decodeObjectForKey:@"publicGists"];
+        _follower = [decoder decodeObjectForKey:@"follower"];
+        _following = [decoder decodeObjectForKey:@"following"];
+        _HTMLURL = [decoder decodeObjectForKey:@"hTMLURL"];
+        _createdAt = [decoder decodeObjectForKey:@"createdAt"];
+        _type = [decoder decodeObjectForKey:@"type"];
     }
     return self;
 }
 
 #pragma mark - Memory management
 
-- (void)dealloc {
-    [_login release];
-    [_ID release];
-    [_URL release];
-    [_avatarURL release];
-    [_gravatarID release];
-    [_name release];
-    [_company release];
-    [_blog release];
-    [_location release];
-    [_EMail release];
-    [_publicRepos release];
-    [_publicGists release];
-    [_follower release];
-    [_following release];
-    [_HTMLURL release];
-    [_createdAt release];
-    [_type release];
-    
-    [super dealloc];
-}
 
 #pragma mark - downloading
 
@@ -147,7 +126,7 @@
                                      
                                      NSMutableArray *finalArray = [NSMutableArray arrayWithCapacity:rawArray.count];
                                      [rawArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-                                         [finalArray addObject:[[[GHAPIOrganizationV3 alloc] initWithRawDictionary:obj] autorelease] ];
+                                         [finalArray addObject:[[GHAPIOrganizationV3 alloc] initWithRawDictionary:obj] ];
                                      }];
                                      
                                      handler(finalArray, nextPage, nil);
@@ -166,7 +145,7 @@
                                            if (error) {
                                                handler(nil, error);
                                            } else {
-                                               handler([[[GHAPIOrganizationV3 alloc] initWithRawDictionary:object] autorelease], nil);
+                                               handler([[GHAPIOrganizationV3 alloc] initWithRawDictionary:object], nil);
                                            }
                                        }];
 }
@@ -186,7 +165,7 @@
                                      
                                      NSMutableArray *finalArray = [NSMutableArray arrayWithCapacity:rawArray.count];
                                      [rawArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-                                         [finalArray addObject:[[[GHAPIRepositoryV3 alloc] initWithRawDictionary:obj] autorelease] ];
+                                         [finalArray addObject:[[GHAPIRepositoryV3 alloc] initWithRawDictionary:obj] ];
                                      }];
                                      
                                      handler(finalArray, nextPage, nil);
@@ -209,7 +188,7 @@
                                      
                                      NSMutableArray *finalArray = [NSMutableArray arrayWithCapacity:rawArray.count];
                                      [rawArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-                                         [finalArray addObject:[[[GHAPIUserV3 alloc] initWithRawDictionary:obj] autorelease] ];
+                                         [finalArray addObject:[[GHAPIUserV3 alloc] initWithRawDictionary:obj] ];
                                      }];
                                      
                                      handler(finalArray, nextPage, nil);
@@ -232,7 +211,7 @@
                                      
                                      NSMutableArray *finalArray = [NSMutableArray arrayWithCapacity:rawArray.count];
                                      [rawArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-                                         [finalArray addObject:[[[GHAPITeamV3 alloc] initWithRawDictionary:obj] autorelease] ];
+                                         [finalArray addObject:[[GHAPITeamV3 alloc] initWithRawDictionary:obj] ];
                                      }];
                                      
                                      handler(finalArray, nextPage, nil);

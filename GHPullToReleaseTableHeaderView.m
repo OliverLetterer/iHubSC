@@ -67,10 +67,9 @@
 
 - (void)setLastUpdateDate:(NSDate *)lastUpdateDate {
     if (_lastUpdateDate != lastUpdateDate || lastUpdateDate == nil) {
-        [_lastUpdateDate release];
-        _lastUpdateDate = [lastUpdateDate retain];
+        _lastUpdateDate = lastUpdateDate;
         
-        NSDateFormatter *formatter = [[[NSDateFormatter alloc] init] autorelease];
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
         [formatter setDateFormat:NSLocalizedString(@"MM/dd/yyyy hh:mm:ss", @"")];
         
         NSString *formattedDateString = nil;
@@ -91,8 +90,7 @@
         // Initialization code
         self.backgroundColor = [UIColor clearColor];
         
-        self.lastUpdateLabel = [[[UILabel alloc] initWithFrame:CGRectMake(0.0f, frame.size.height - 30.0f, self.frame.size.width, 20.0f)] 
-                                 autorelease];
+        self.lastUpdateLabel = [[UILabel alloc] initWithFrame:CGRectMake(0.0f, frame.size.height - 30.0f, self.frame.size.width, 20.0f)];
 		self.lastUpdateLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth;
 		self.lastUpdateLabel.font = [UIFont systemFontOfSize:12.0f];
 		self.lastUpdateLabel.textColor = [UIColor colorWithWhite:0.95f alpha:1.0];
@@ -102,8 +100,7 @@
 		self.lastUpdateLabel.textAlignment = UITextAlignmentCenter;
 		[self addSubview:self.lastUpdateLabel];
 		
-		self.statusLabel = [[[UILabel alloc] initWithFrame:CGRectMake(0.0f, frame.size.height - 48.0f, self.frame.size.width, 20.0f)] 
-                            autorelease];
+		self.statusLabel = [[UILabel alloc] initWithFrame:CGRectMake(0.0f, frame.size.height - 48.0f, self.frame.size.width, 20.0f)];
 		self.statusLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth;
 		self.statusLabel.font = [UIFont boldSystemFontOfSize:13.0f];
 		self.statusLabel.textColor = [UIColor colorWithWhite:0.95f alpha:1.0];
@@ -117,11 +114,11 @@
 		self.arrowImageLayer = [CALayer layer];
 		self.arrowImageLayer.frame = CGRectMake(25.0f, frame.size.height - 65.0f, 30.0f, 55.0f);
 		self.arrowImageLayer.contentsGravity = kCAGravityCenter;
-		self.arrowImageLayer.contents = (id)[UIImage imageNamed:@"PullToRefreshArrow.png"].CGImage;
+		self.arrowImageLayer.contents = (__bridge id)[UIImage imageNamed:@"PullToRefreshArrow.png"].CGImage;
 		self.arrowImageLayer.contentsScale = [[UIScreen mainScreen] scale];
 		[self.layer addSublayer:self.arrowImageLayer];
 		
-        self.activityIndicatorView = [[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite] autorelease];
+        self.activityIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
 		self.activityIndicatorView.frame = CGRectMake(25.0f, frame.size.height - 38.0f, 20.0f, 20.0f);
         self.activityIndicatorView.hidesWhenStopped = YES;
 		[self addSubview:self.activityIndicatorView];
@@ -142,15 +139,5 @@
 
 #pragma mark - Memory management
 
-- (void)dealloc {
-    [_lastUpdateLabel release];
-    [_statusLabel release];
-    [_arrowImageLayer release];
-    [_activityIndicatorView release];
-    
-    [_lastUpdateDate release];
-    
-    [super dealloc];
-}
 
 @end

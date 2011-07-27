@@ -25,12 +25,12 @@
     DTAttributedTextContentView *_attributedTextView;
     NSURL *_selectedURL;
     
-    id<GHPAttributedTableViewCellDelegate> _buttonDelegate;
+    id<GHPAttributedTableViewCellDelegate> __weak _buttonDelegate;
 }
 
 @property (nonatomic, retain) DTAttributedTextContentView *attributedTextView;
 @property (nonatomic, copy) NSURL *selectedURL;
-@property (nonatomic, assign) id<GHPAttributedTableViewCellDelegate> buttonDelegate;
+@property (nonatomic, weak) id<GHPAttributedTableViewCellDelegate> buttonDelegate;
 
 - (void)linkButtonClicked:(DTLinkButton *)sender;
 - (void)longPressRecognized:(UILongPressGestureRecognizer *)recognizer;

@@ -29,7 +29,6 @@
 @synthesize pendingStateStringsArray=_pendingStateStringsArray, lastStateUpdateDate=_lastStateUpdateDate;
 
 - (void)setDefaultOrganizationName:(NSString *)defaultOrganizationName {
-    [_defaultOrganizationName release];
     _defaultOrganizationName = [defaultOrganizationName copy];
     
     [[NSUserDefaults standardUserDefaults] setObject:_defaultOrganizationName forKey:GHOwnerNewsFeedViewControllerDefaultOrganizationNameKey];
@@ -45,7 +44,6 @@
 }
 
 - (void)setLastCreationDate:(NSString *)lastCreationDate {
-    [_lastCreationDate release];
     _lastCreationDate = [lastCreationDate copy];
     
     [[NSUserDefaults standardUserDefaults] setObject:_lastCreationDate forKey:GHOwnerNewsFeedViewControllerLastCreationDateKey];
@@ -132,10 +130,9 @@
     if ((self = [super init])) {
         self.title = NSLocalizedString(@"News", @"");
         
-        self.tabBarItem = [[[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"News", @"") 
+        self.tabBarItem = [[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"News", @"") 
                                                          image:[UIImage imageNamed:@"56-feed.png"] 
-                                                           tag:0]
-                           autorelease];
+                                                           tag:0];
         
         self.reloadDataIfNewUserGotAuthenticated = YES;
         self.pendingStateStringsArray = [NSMutableArray array];
@@ -145,17 +142,6 @@
 
 #pragma mark - Memory management
 
-- (void)dealloc {
-    [_stateSegmentControl release];
-    [_segmentControl release];
-    [_organizations release];
-    [_defaultOrganizationName release];
-    [_lastCreationDate release];
-    [_pendingStateStringsArray release];
-    [_lastStateUpdateDate release];
-    
-    [super dealloc];
-}
 
 - (void)didReceiveMemoryWarning {
     // Releases the view if it doesn't have a superview.
@@ -169,13 +155,12 @@
 - (void)loadView {
     [super loadView];
     
-    UIView *wrapperView = [[[UIView alloc] initWithFrame:CGRectMake(17.0f, 6.0f, 286.0f, 32.0f)] autorelease];
-    self.segmentControl = [[[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:
+    UIView *wrapperView = [[UIView alloc] initWithFrame:CGRectMake(17.0f, 6.0f, 286.0f, 32.0f)];
+    self.segmentControl = [[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:
                                                                       NSLocalizedString(@"News Feed", @""), 
                                                                       NSLocalizedString(@"My Actions", @""), 
                                                                       NSLocalizedString(@"Organizations", @""),
-                                                                      nil]] 
-                           autorelease];
+                                                                      nil]];
     self.segmentControl.segmentedControlStyle = UISegmentedControlStyleBar;
     [wrapperView addSubview:self.segmentControl];
     self.navigationItem.titleView = wrapperView;
@@ -202,7 +187,6 @@
 - (void)viewDidUnload {
     [super viewDidUnload];
     
-    [_segmentControl release];
     _segmentControl = nil;
 }
 
@@ -308,7 +292,7 @@
                                                // we only have one organization, act as if user select this only organization
                                                [self displayOrganizationAtIndex:0];
                                            } else {
-                                               UIActionSheet *sheet = [[[UIActionSheet alloc] init] autorelease];
+                                               UIActionSheet *sheet = [[UIActionSheet alloc] init];
                                                
                                                [sheet setTitle:NSLocalizedString(@"Select an Organization", @"")];
                                                
@@ -329,12 +313,11 @@
                                            self.segmentControl.selectedSegmentIndex = 0;
                                            _lastSelectedSegmentControlIndex = 0;
                                            [self loadDataBasedOnSegmentControl];
-                                           UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Organization Error", @"") 
+                                           UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Organization Error", @"") 
                                                                                             message:NSLocalizedString(@"You are not part of any Organization!", @"") 
                                                                                            delegate:nil 
                                                                                   cancelButtonTitle:NSLocalizedString(@"OK", @"") 
-                                                                                  otherButtonTitles:nil]
-                                                                 autorelease];
+                                                                                  otherButtonTitles:nil];
                                            [alert show];
                                        }
                                    }];
@@ -391,27 +374,27 @@
     if (item.payload.type == GHPayloadWatchEvent) {
         if ([item.repository.fullName hasPrefix:[GHAPIAuthenticationManager sharedInstance].username]) {
             // watched my repo, show the user
-            viewController = [[[GHUserViewController alloc] initWithUsername:item.actorAttributes.login] autorelease];
+            viewController = [[GHUserViewController alloc] initWithUsername:item.actorAttributes.login];
         } else {
             // show me the repo that he is following
-            viewController = [[[GHRepositoryViewController alloc] initWithRepositoryString:item.repository.fullName] autorelease];
+            viewController = [[GHRepositoryViewController alloc] initWithRepositoryString:item.repository.fullName];
         }
     } else if (item.payload.type == GHPayloadFollowEvent) {
         GHFollowEventPayload *payload = (GHFollowEventPayload *)item.payload;
         if ([payload.target.login isEqualToString:[GHAPIAuthenticationManager sharedInstance].username]) {
             // started following me, show me the user
-            viewController = [[[GHUserViewController alloc] initWithUsername:item.actorAttributes.login] autorelease];
+            viewController = [[GHUserViewController alloc] initWithUsername:item.actorAttributes.login];
         } else {
             // following someone else, show me the target
-            viewController = [[[GHUserViewController alloc] initWithUsername:payload.target.login] autorelease];
+            viewController = [[GHUserViewController alloc] initWithUsername:payload.target.login];
         }
     } else if (item.payload.type == GHPayloadForkEvent) {
         if ([item.repository.fullName hasPrefix:[GHAPIAuthenticationManager sharedInstance].username]) {
             // forked my repository, show me the user
-            viewController = [[[GHUserViewController alloc] initWithUsername:item.actorAttributes.login] autorelease];
+            viewController = [[GHUserViewController alloc] initWithUsername:item.actorAttributes.login];
         } else {
             // didn't fork my repo, show me the repo
-            viewController = [[[GHRepositoryViewController alloc] initWithRepositoryString:item.repository.fullName] autorelease];
+            viewController = [[GHRepositoryViewController alloc] initWithRepositoryString:item.repository.fullName];
         }
     }
     
@@ -436,17 +419,16 @@
 
 - (id)initWithCoder:(NSCoder *)decoder {
     if ((self = [super initWithCoder:decoder])) {
-        _organizations = [[decoder decodeObjectForKey:@"organizations"] retain];
-        _defaultOrganizationName = [[decoder decodeObjectForKey:@"defaultOrganizationName"] retain];
-        _lastCreationDate = [[decoder decodeObjectForKey:@"lastCreationDate"] retain];
-        _pendingStateStringsArray = [[decoder decodeObjectForKey:@"pendingStateStringsArray"] retain];
-        _lastStateUpdateDate = [[decoder decodeObjectForKey:@"lastStateUpdateDate"] retain];
+        _organizations = [decoder decodeObjectForKey:@"organizations"];
+        _defaultOrganizationName = [decoder decodeObjectForKey:@"defaultOrganizationName"];
+        _lastCreationDate = [decoder decodeObjectForKey:@"lastCreationDate"];
+        _pendingStateStringsArray = [decoder decodeObjectForKey:@"pendingStateStringsArray"];
+        _lastStateUpdateDate = [decoder decodeObjectForKey:@"lastStateUpdateDate"];
         _lastSelectedSegmentControlIndex = [decoder decodeIntegerForKey:@"lastSelectedSegmentControlIndex"];
         
-        self.tabBarItem = [[[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"News", @"") 
+        self.tabBarItem = [[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"News", @"") 
                                                          image:[UIImage imageNamed:@"56-feed.png"] 
-                                                           tag:0]
-                           autorelease];
+                                                           tag:0];
         [self loadDataBasedOnSegmentControl];
     }
     return self;

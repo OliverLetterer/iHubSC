@@ -48,17 +48,12 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     GHAPITeamV3 *team = [self.dataArray objectAtIndex:indexPath.row];
-    GHPTeamViewController *viewController = [[[GHPTeamViewController alloc] initWithTeamID:team.ID] autorelease];
+    GHPTeamViewController *viewController = [[GHPTeamViewController alloc] initWithTeamID:team.ID];
     [self.advancedNavigationController pushViewController:viewController afterViewController:self animated:YES];
 }
 
 #pragma mark - Memory management
 
-- (void)dealloc {
-    [_organizationName release];
-    
-    [super dealloc];
-}
 
 #pragma mark - Keyed Archiving
 
@@ -69,7 +64,7 @@
 
 - (id)initWithCoder:(NSCoder *)decoder {
     if ((self = [super initWithCoder:decoder])) {
-        _organizationName = [[decoder decodeObjectForKey:@"organizationName"] retain];
+        _organizationName = [decoder decodeObjectForKey:@"organizationName"];
     }
     return self;
 }

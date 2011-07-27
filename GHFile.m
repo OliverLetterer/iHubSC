@@ -38,11 +38,6 @@
 
 #pragma mark - Memory management
 
-- (void)dealloc {
-    [_hash release];
-    
-    [super dealloc];
-}
 
 #pragma mark - Keyed Archiving
 
@@ -53,7 +48,7 @@
 
 - (id)initWithCoder:(NSCoder *)decoder {
     if ((self = [super initWithCoder:decoder])) {
-        _hash = [[decoder decodeObjectForKey:@"hash"] retain];
+        _hash = [decoder decodeObjectForKey:@"hash"];
     }
     return self;
 }

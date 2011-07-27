@@ -18,7 +18,7 @@ CGFloat const GHPDefaultNewsFeedTableViewCellHeight = 80.0f;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if ((self = [super initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:reuseIdentifier])) {
-        self.repositoryLabel = [[[UILabel alloc] initWithFrame:CGRectZero] autorelease];
+        self.repositoryLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         self.repositoryLabel.font = [UIFont systemFontOfSize:14.0f];
         self.repositoryLabel.textColor = self.detailTextLabel.textColor;
         self.repositoryLabel.textAlignment = UITextAlignmentRight;
@@ -27,7 +27,7 @@ CGFloat const GHPDefaultNewsFeedTableViewCellHeight = 80.0f;
         self.repositoryLabel.shadowOffset = CGSizeMake(0.0f, 1.0f);
         [self.contentView addSubview:self.repositoryLabel];
         
-        self.timeLabel = [[[UILabel alloc] initWithFrame:CGRectZero] autorelease];
+        self.timeLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         self.timeLabel.font = [UIFont systemFontOfSize:14.0f];
         self.timeLabel.textColor = self.detailTextLabel.textColor;
         self.timeLabel.textAlignment = UITextAlignmentRight;
@@ -90,11 +90,5 @@ CGFloat const GHPDefaultNewsFeedTableViewCellHeight = 80.0f;
 
 #pragma mark - Memory management
 
-- (void)dealloc {
-    [_repositoryLabel release];
-    [_timeLabel release];
-    
-    [super dealloc];
-}
 
 @end

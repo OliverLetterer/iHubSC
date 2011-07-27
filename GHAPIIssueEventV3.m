@@ -25,7 +25,7 @@
         self.commitID = [rawDictionary objectForKeyOrNilOnNullObject:@"commit_id"];
         self.createdAt = [rawDictionary objectForKeyOrNilOnNullObject:@"created_at"];
         
-        self.actor = [[[GHAPIUserV3 alloc] initWithRawDictionary:[rawDictionary objectForKeyOrNilOnNullObject:@"actor"] ] autorelease];
+        self.actor = [[GHAPIUserV3 alloc] initWithRawDictionary:[rawDictionary objectForKeyOrNilOnNullObject:@"actor"] ];
         
         if ([self.event isEqualToString:@"closed"]) {
             _type = GHAPIIssueEventTypeV3Closed;
@@ -61,15 +61,6 @@
 
 #pragma mark - Memory management
 
-- (void)dealloc {
-    [_URL release];
-    [_actor release];
-    [_event release];
-    [_commitID release];
-    [_createdAt release];
-    
-    [super dealloc];
-}
 
 #pragma mark - Keyed Archiving
 
@@ -84,11 +75,11 @@
 
 - (id)initWithCoder:(NSCoder *)decoder {
     if ((self = [super init])) {
-        _URL = [[decoder decodeObjectForKey:@"uRL"] retain];
-        _actor = [[decoder decodeObjectForKey:@"actor"] retain];
-        _event = [[decoder decodeObjectForKey:@"event"] retain];
-        _commitID = [[decoder decodeObjectForKey:@"commitID"] retain];
-        _createdAt = [[decoder decodeObjectForKey:@"createdAt"] retain];
+        _URL = [decoder decodeObjectForKey:@"uRL"];
+        _actor = [decoder decodeObjectForKey:@"actor"];
+        _event = [decoder decodeObjectForKey:@"event"];
+        _commitID = [decoder decodeObjectForKey:@"commitID"];
+        _createdAt = [decoder decodeObjectForKey:@"createdAt"];
         _type = [decoder decodeIntegerForKey:@"type"];
     }
     return self;

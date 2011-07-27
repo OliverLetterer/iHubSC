@@ -31,11 +31,6 @@
 
 #pragma mark - Memory management
 
-- (void)dealloc {
-    [_commentID release];
-    [_commit release];
-    [super dealloc];
-}
 
 #pragma mark - NSCoding
 

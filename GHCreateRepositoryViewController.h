@@ -23,11 +23,11 @@
 
 @interface GHCreateRepositoryViewController : GHTableViewController <UITextFieldDelegate> {
 @private
-    id<GHCreateRepositoryViewControllerDelegate> _delegate;
+    id<GHCreateRepositoryViewControllerDelegate> __weak _delegate;
     GHCreateRepositoryTableViewCell *_createCell;
 }
 
-@property (nonatomic, assign) id<GHCreateRepositoryViewControllerDelegate> delegate;
+@property (nonatomic, weak) id<GHCreateRepositoryViewControllerDelegate> delegate;
 @property (nonatomic, retain) GHCreateRepositoryTableViewCell *createCell;
 
 - (void)cancelButtonClicked:(UIBarButtonItem *)button;

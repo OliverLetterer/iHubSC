@@ -35,7 +35,7 @@
 #pragma mark - setters and getters
 
 - (void)setGistID:(NSString *)gistID {
-    [_gistID release], _gistID = [gistID copy];
+    _gistID = [gistID copy];
     
     self.isDownloadingEssentialData = YES;
     [GHAPIGistV3 gistWithID:_gistID 
@@ -64,14 +64,6 @@
 
 #pragma mark - Memory management
 
-- (void)dealloc {
-    [_gistID release];
-    [_gist release];
-    [_comments release];
-    [_lastUserComment release];
-    
-    [super dealloc];
-}
 
 - (void)didReceiveMemoryWarning {
     // Releases the view if it doesn't have a superview.
@@ -83,7 +75,7 @@
 #pragma mark - Height caching
 
 - (void)cacheCommentsHeights {
-    DTAttributedTextView *textView = [[[DTAttributedTextView alloc] initWithFrame:CGRectZero] autorelease];
+    DTAttributedTextView *textView = [[DTAttributedTextView alloc] initWithFrame:CGRectZero];
     [self.comments enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         GHAPIGistCommentV3 *comment = obj;
         CGFloat height = [GHPAttributedTableViewCell heightWithAttributedString:comment.attributedBody 
@@ -218,9 +210,8 @@
             static NSString *CellIdentifier = @"GHPUserTableViewCell";
             GHPUserTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
             if (!cell) {
-                cell = [[[GHPUserTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault 
-                                                    reuseIdentifier:CellIdentifier]
-                        autorelease];
+                cell = [[GHPUserTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault 
+                                                    reuseIdentifier:CellIdentifier];
             }
             
             [self setupDefaultTableViewCell:cell forRowAtIndexPath:indexPath];
@@ -239,7 +230,7 @@
             
             GHPNewCommentTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
             if (cell == nil) {
-                cell = [[[GHPNewCommentTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+                cell = [[GHPNewCommentTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
             }
             [self setupDefaultTableViewCell:cell forRowAtIndexPath:indexPath];
             
@@ -258,7 +249,7 @@
             GHPAttributedTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
             
             if (!cell) {
-                cell = [[[GHPAttributedTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
+                cell = [[GHPAttributedTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
             }
             [self setupDefaultTableViewCell:cell forRowAtIndexPath:indexPath];
             
@@ -277,7 +268,7 @@
         
         GHPDefaultTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         if (!cell) {
-            cell = [[[GHPDefaultTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
+            cell = [[GHPDefaultTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
         }
         [self setupDefaultTableViewCell:cell forRowAtIndexPath:indexPath];
         
@@ -315,18 +306,17 @@
     
     if (indexPath.section == kUITableViewSectionOwner) {
         if (indexPath.row == 0) {
-            viewController = [[[GHPUserViewController alloc] initWithUsername:self.gist.user.login] autorelease];
+            viewController = [[GHPUserViewController alloc] initWithUsername:self.gist.user.login];
         }
     } else if (indexPath.section == kUITableViewSectionComments && indexPath.row <= self.comments.count) {
         GHAPIGistCommentV3 *comment = [self.comments objectAtIndex:indexPath.row -1];
         
-        viewController = [[[GHPUserViewController alloc] initWithUsername:comment.user.login] autorelease];
+        viewController = [[GHPUserViewController alloc] initWithUsername:comment.user.login];
     } else if (indexPath.section == kUITableViewSectionFiles) {
         GHAPIGistFileV3 *file = [self.gist.files objectAtIndex:indexPath.row - 1];
         
-        viewController = [[[GHViewCloudFileViewController alloc] initWithFile:file.filename 
-                                                               contentsOfFile:file.content] 
-                          autorelease];
+        viewController = [[GHViewCloudFileViewController alloc] initWithFile:file.filename 
+                                                               contentsOfFile:file.content];
     }
     
     if (viewController) {
@@ -394,7 +384,7 @@
 }
 
 - (UIActionSheet *)actionButtonActionSheet {
-    UIActionSheet *sheet = [[[UIActionSheet alloc] init] autorelease];
+    UIActionSheet *sheet = [[UIActionSheet alloc] init];
     
     if (_isGistStarred) {
         [sheet addButtonWithTitle:NSLocalizedString(@"Unstar", @"")];
@@ -419,8 +409,8 @@
 #pragma mark - GHPAttributedTableViewCellDelegate
 
 - (void)attributedTableViewCell:(GHPAttributedTableViewCell *)cell receivedClickForButton:(DTLinkButton *)button {
-    UIViewController *viewController = [[[GHWebViewViewController alloc] initWithURL:button.url ] autorelease];
-    viewController = [[[UINavigationController alloc] initWithRootViewController:viewController] autorelease];
+    UIViewController *viewController = [[GHWebViewViewController alloc] initWithURL:button.url ];
+    viewController = [[UINavigationController alloc] initWithRootViewController:viewController];
     [self.advancedNavigationController pushViewController:viewController afterViewController:self animated:YES];
 }
 
@@ -449,10 +439,10 @@
 
 - (id)initWithCoder:(NSCoder *)decoder {
     if ((self = [super initWithCoder:decoder])) {
-        _gistID = [[decoder decodeObjectForKey:@"gistID"] retain];
-        _gist = [[decoder decodeObjectForKey:@"gist"] retain];
-        _comments = [[decoder decodeObjectForKey:@"comments"] retain];
-        _lastUserComment = [[decoder decodeObjectForKey:@"lastUserComment"] retain];
+        _gistID = [decoder decodeObjectForKey:@"gistID"];
+        _gist = [decoder decodeObjectForKey:@"gist"];
+        _comments = [decoder decodeObjectForKey:@"comments"];
+        _lastUserComment = [decoder decodeObjectForKey:@"lastUserComment"];
     }
     return self;
 }

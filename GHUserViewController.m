@@ -55,7 +55,7 @@
 }
 
 - (void)setUsername:(NSString *)username {
-    [_username release], _username = [username copy];
+    _username = [username copy];
     self.title = self.username;
     
     self.watchedRepositoriesArray = nil;
@@ -91,20 +91,6 @@
 
 #pragma mark - Memory management
 
-- (void)dealloc {
-    [_repositoriesArray release];
-    [_username release];
-    [_watchedRepositoriesArray release];
-    [_followingUsers release];
-    [_followedUsers release];
-    [_lastIndexPathForSingleRepositoryViewController release];
-    [_organizations release];
-    [_user release];
-    [_gists release];
-    [_assignedIssues release];
-    
-    [super dealloc];
-}
 
 - (void)didReceiveMemoryWarning {
     // Releases the view if it doesn't have a superview.
@@ -116,20 +102,19 @@
 #pragma mark - target actions
 
 - (void)createRepositoryButtonClicked:(UIBarButtonItem *)button {
-    GHCreateRepositoryViewController *createViewController = [[[GHCreateRepositoryViewController alloc] init] autorelease];
+    GHCreateRepositoryViewController *createViewController = [[GHCreateRepositoryViewController alloc] init];
     createViewController.delegate = self;
     
-    UINavigationController *navController = [[[UINavigationController alloc] initWithRootViewController:createViewController] autorelease];
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:createViewController];
     [self presentModalViewController:navController animated:YES];
 }
 
 - (void)accountButtonClicked:(UIBarButtonItem *)button {
-    UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Account", @"") 
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Account", @"") 
                                                      message:[NSString stringWithFormat:NSLocalizedString(@"You are logged in as: %@\nRemaining API calls for today: %d", @""), [GHAPIAuthenticationManager sharedInstance].username, [GHAPIBackgroundQueueV3 sharedInstance].remainingAPICalls ]
                                                     delegate:self 
                                            cancelButtonTitle:NSLocalizedString(@"Cancel", @"") 
-                                           otherButtonTitles:NSLocalizedString(@"Logout", @""), nil]
-                          autorelease];
+                                           otherButtonTitles:NSLocalizedString(@"Logout", @""), nil];
     [alert show];
 }
 
@@ -228,17 +213,15 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     if (self.hasAdministrationRights) {
-        self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd 
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd 
                                                                                                 target:self 
-                                                                                                action:@selector(createRepositoryButtonClicked:)]
-                                                  autorelease];
+                                                                                                action:@selector(createRepositoryButtonClicked:)];
     }
     
     if ([[self.navigationController viewControllers] objectAtIndex:0] == self && self.hasAdministrationRights) {
-        self.navigationItem.leftBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Account", @"") 
+        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Account", @"") 
                                                                                   style:UIBarButtonItemStyleBordered 
-                                                                                 target:self action:@selector(accountButtonClicked:)]
-                                                 autorelease];
+                                                                                 target:self action:@selector(accountButtonClicked:)];
     }
 }
 
@@ -283,7 +266,7 @@
     GHCollapsingAndSpinningTableViewCell *cell = (GHCollapsingAndSpinningTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdientifier];
     
     if (cell == nil) {
-        cell = [[[GHCollapsingAndSpinningTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdientifier] autorelease];
+        cell = [[GHCollapsingAndSpinningTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdientifier];
     }
     
     if (section == kUITableViewSectionRepositories) {
@@ -476,12 +459,11 @@
                                        [tableView expandSection:section animated:YES];
                                        
                                        if ([self.organizations count] == 0) {
-                                           UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Organizations", @"") 
+                                           UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Organizations", @"") 
                                                                                             message:[NSString stringWithFormat:NSLocalizedString(@"%@ is not a part of any Organization.", @""), self.username]
                                                                                            delegate:nil 
                                                                                   cancelButtonTitle:NSLocalizedString(@"OK", @"") 
-                                                                                  otherButtonTitles:nil]
-                                                                 autorelease];
+                                                                                  otherButtonTitles:nil];
                                            [alert show];
                                        }
                                    }
@@ -592,7 +574,7 @@
             
             GHDescriptionTableViewCell *cell = (GHDescriptionTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
             if (cell == nil) {
-                cell = [[[GHDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+                cell = [[GHDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 cell.accessoryType = UITableViewCellAccessoryNone;
             }
@@ -611,7 +593,7 @@
             
             GHTableViewCellWithLinearGradientBackgroundView *cell = (GHTableViewCellWithLinearGradientBackgroundView *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
             if (!cell) {
-                cell = [[[GHTableViewCellWithLinearGradientBackgroundView alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:CellIdentifier] autorelease];
+                cell = [[GHTableViewCellWithLinearGradientBackgroundView alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:CellIdentifier];
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
             }
             
@@ -629,7 +611,7 @@
             
             GHTableViewCellWithLinearGradientBackgroundView *cell = (GHTableViewCellWithLinearGradientBackgroundView *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
             if (!cell) {
-                cell = [[[GHTableViewCellWithLinearGradientBackgroundView alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:CellIdentifier] autorelease];
+                cell = [[GHTableViewCellWithLinearGradientBackgroundView alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:CellIdentifier];
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
             }
             
@@ -647,7 +629,7 @@
             
             GHTableViewCellWithLinearGradientBackgroundView *cell = (GHTableViewCellWithLinearGradientBackgroundView *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
             if (!cell) {
-                cell = [[[GHTableViewCellWithLinearGradientBackgroundView alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:CellIdentifier] autorelease];
+                cell = [[GHTableViewCellWithLinearGradientBackgroundView alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:CellIdentifier];
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
             }
             
@@ -665,7 +647,7 @@
             
             GHTableViewCellWithLinearGradientBackgroundView *cell = (GHTableViewCellWithLinearGradientBackgroundView *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
             if (!cell) {
-                cell = [[[GHTableViewCellWithLinearGradientBackgroundView alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:CellIdentifier] autorelease];
+                cell = [[GHTableViewCellWithLinearGradientBackgroundView alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:CellIdentifier];
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
             }
             
@@ -682,7 +664,7 @@
             
             GHTableViewCellWithLinearGradientBackgroundView *cell = (GHTableViewCellWithLinearGradientBackgroundView *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
             if (!cell) {
-                cell = [[[GHTableViewCellWithLinearGradientBackgroundView alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:CellIdentifier] autorelease];
+                cell = [[GHTableViewCellWithLinearGradientBackgroundView alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:CellIdentifier];
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
             }
             
@@ -699,7 +681,7 @@
         
         GHDescriptionTableViewCell *cell = (GHDescriptionTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         if (cell == nil) {
-            cell = [[[GHDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+            cell = [[GHDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         }
         
         GHAPIRepositoryV3 *repository = [self.repositoriesArray objectAtIndex:indexPath.row-1];
@@ -721,7 +703,7 @@
             
             GHDescriptionTableViewCell *cell = (GHDescriptionTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
             if (cell == nil) {
-                cell = [[[GHDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+                cell = [[GHDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
             }
             
             GHAPIRepositoryV3 *repository = [self.watchedRepositoriesArray objectAtIndex:indexPath.row-1];
@@ -745,7 +727,7 @@
         
         GHTableViewCellWithLinearGradientBackgroundView *cell = (GHTableViewCellWithLinearGradientBackgroundView *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         if (!cell) {
-            cell = [[[GHTableViewCellWithLinearGradientBackgroundView alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:CellIdentifier] autorelease];
+            cell = [[GHTableViewCellWithLinearGradientBackgroundView alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:CellIdentifier];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
         }
         
@@ -774,7 +756,7 @@
         
         GHTableViewCellWithLinearGradientBackgroundView *cell = (GHTableViewCellWithLinearGradientBackgroundView *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         if (!cell) {
-            cell = [[[GHTableViewCellWithLinearGradientBackgroundView alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+            cell = [[GHTableViewCellWithLinearGradientBackgroundView alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         }
         
         
@@ -789,7 +771,7 @@
         
         GHTableViewCellWithLinearGradientBackgroundView *cell = (GHTableViewCellWithLinearGradientBackgroundView *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         if (!cell) {
-            cell = [[[GHTableViewCellWithLinearGradientBackgroundView alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+            cell = [[GHTableViewCellWithLinearGradientBackgroundView alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         }
         
         
@@ -804,7 +786,7 @@
         
         GHTableViewCellWithLinearGradientBackgroundView *cell = (GHTableViewCellWithLinearGradientBackgroundView *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         if (!cell) {
-            cell = [[[GHTableViewCellWithLinearGradientBackgroundView alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+            cell = [[GHTableViewCellWithLinearGradientBackgroundView alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         }
         
         cell.textLabel.text = _isFollowingUser ? NSLocalizedString(@"Unfollow", @"") : NSLocalizedString(@"Follow", @"");
@@ -815,7 +797,7 @@
         
         GHDescriptionTableViewCell *cell = (GHDescriptionTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         if (cell == nil) {
-            cell = [[[GHDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+            cell = [[GHDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         }
         
         GHAPIOrganizationV3 *organization = [self.organizations objectAtIndex:indexPath.row-1];
@@ -834,7 +816,7 @@
         
         GHDescriptionTableViewCell *cell = (GHDescriptionTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         if (cell == nil) {
-            cell = [[[GHDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+            cell = [[GHDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         }
         
         GHAPIGistV3 *gist = [self.gists objectAtIndex:indexPath.row-1];
@@ -856,7 +838,7 @@
         
         GHDescriptionTableViewCell *cell = (GHDescriptionTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         if (cell == nil) {
-            cell = [[[GHDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+            cell = [[GHDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         }
         
         GHAPIIssueV3 *issue = [self.assignedIssues objectAtIndex:indexPath.row - 1];
@@ -913,15 +895,15 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == kUITableViewSectionBlog && indexPath.row == 0) {
         NSURL *URL = [NSURL URLWithString:self.user.blog];
-        GHWebViewViewController *web = [[[GHWebViewViewController alloc] initWithURL:URL] autorelease];
+        GHWebViewViewController *web = [[GHWebViewViewController alloc] initWithURL:URL];
         [self.navigationController pushViewController:web animated:YES];
     } else if (indexPath.section == kUITableViewSectionPublicActivity && indexPath.row == 0) {
-        GHRecentActivityViewController *recentViewController = [[[GHRecentActivityViewController alloc] initWithUsername:self.username] autorelease];
+        GHRecentActivityViewController *recentViewController = [[GHRecentActivityViewController alloc] initWithUsername:self.username];
         [self.navigationController pushViewController:recentViewController animated:YES];
     } else if (indexPath.section == kUITableViewSectionRepositories) {
         GHAPIRepositoryV3 *repo = [self.repositoriesArray objectAtIndex:indexPath.row-1];
         
-        GHRepositoryViewController *viewController = [[[GHRepositoryViewController alloc] initWithRepositoryString:[NSString stringWithFormat:@"%@/%@", repo.owner.login, repo.name] ] autorelease];
+        GHRepositoryViewController *viewController = [[GHRepositoryViewController alloc] initWithRepositoryString:[NSString stringWithFormat:@"%@/%@", repo.owner.login, repo.name] ];
         viewController.delegate = self;
         self.lastIndexPathForSingleRepositoryViewController = indexPath;
         [self.navigationController pushViewController:viewController animated:YES];
@@ -929,20 +911,20 @@
     } else if (indexPath.section == kUITableViewSectionWatchedRepositories) {
         GHAPIRepositoryV3 *repo = [self.watchedRepositoriesArray objectAtIndex:indexPath.row-1];
         
-        GHRepositoryViewController *viewController = [[[GHRepositoryViewController alloc] initWithRepositoryString:[NSString stringWithFormat:@"%@/%@", repo.owner.login, repo.name] ] autorelease];
+        GHRepositoryViewController *viewController = [[GHRepositoryViewController alloc] initWithRepositoryString:[NSString stringWithFormat:@"%@/%@", repo.owner.login, repo.name] ];
         viewController.delegate = self;
         self.lastIndexPathForSingleRepositoryViewController = indexPath;
         [self.navigationController pushViewController:viewController animated:YES];
     } else if (indexPath.section == kUITableViewFollowingUsers) {
         GHAPIUserV3 *user = [self.followingUsers objectAtIndex:indexPath.row - 1];
         
-        GHUserViewController *userViewController = [[[GHUserViewController alloc] initWithUsername:user.login] autorelease];
+        GHUserViewController *userViewController = [[GHUserViewController alloc] initWithUsername:user.login];
         [self.navigationController pushViewController:userViewController animated:YES];
         
     } else if (indexPath.section == kUITableViewFollowedUsers) {
         GHAPIUserV3 *user = [self.followedUsers objectAtIndex:indexPath.row - 1];
         
-        GHUserViewController *userViewController = [[[GHUserViewController alloc] initWithUsername:user.login] autorelease];
+        GHUserViewController *userViewController = [[GHUserViewController alloc] initWithUsername:user.login];
         [self.navigationController pushViewController:userViewController animated:YES];
         
     } else if (indexPath.section == kUITableViewNetwork) {
@@ -981,19 +963,18 @@
         }
     } else if (indexPath.section == kUITableViewOrganizations) {
         GHAPIOrganizationV3 *organization = [self.organizations objectAtIndex:indexPath.row - 1];
-        GHOrganizationViewController *organizationViewController = [[[GHOrganizationViewController alloc] initWithOrganizationLogin:organization.login] autorelease];
+        GHOrganizationViewController *organizationViewController = [[GHOrganizationViewController alloc] initWithOrganizationLogin:organization.login];
         
         [self.navigationController pushViewController:organizationViewController animated:YES];
     } else if (indexPath.section == kUITableViewGists) {
         GHAPIGistV3 *gist = [self.gists objectAtIndex:indexPath.row - 1];
         
-        GHGistViewController *gistViewController = [[[GHGistViewController alloc] initWithID:gist.ID] autorelease];
+        GHGistViewController *gistViewController = [[GHGistViewController alloc] initWithID:gist.ID];
         [self.navigationController pushViewController:gistViewController animated:YES];
     } else if (indexPath.section == kUITableViewSectionAssignedIssues) {
         GHAPIIssueV3 *issue = [self.assignedIssues objectAtIndex:indexPath.row - 1];
-        GHIssueViewController *viewController = [[[GHIssueViewController alloc] initWithRepository:issue.repository 
-                                                                                                         issueNumber:issue.number]
-                                                          autorelease];
+        GHIssueViewController *viewController = [[GHIssueViewController alloc] initWithRepository:issue.repository 
+                                                                                                         issueNumber:issue.number];
         [self.navigationController pushViewController:viewController animated:YES];
     } else {
         [self.tableView deselectRowAtIndexPath:indexPath animated:NO];
@@ -1058,7 +1039,7 @@
     NSArray *oldArray = self.lastIndexPathForSingleRepositoryViewController.section == kUITableViewSectionRepositories ? self.repositoriesArray : self.watchedRepositoriesArray;
     NSUInteger index = self.lastIndexPathForSingleRepositoryViewController.row-1;
     
-    NSMutableArray *array = [[oldArray mutableCopy] autorelease];
+    NSMutableArray *array = [oldArray mutableCopy];
     [array removeObjectAtIndex:index];
 
     if (self.lastIndexPathForSingleRepositoryViewController.section == kUITableViewSectionRepositories) {
@@ -1103,18 +1084,18 @@
 
 - (id)initWithCoder:(NSCoder *)decoder {
     if ((self = [super initWithCoder:decoder])) {
-        _username = [[decoder decodeObjectForKey:@"username"] retain];
-        _user = [[decoder decodeObjectForKey:@"user"] retain];
-        _repositoriesArray = [[decoder decodeObjectForKey:@"repositoriesArray"] retain];
-        _watchedRepositoriesArray = [[decoder decodeObjectForKey:@"watchedRepositoriesArray"] retain];
-        _followingUsers = [[decoder decodeObjectForKey:@"followingUsers"] retain];
-        _organizations = [[decoder decodeObjectForKey:@"organizations"] retain];
-        _followedUsers = [[decoder decodeObjectForKey:@"followedUsers"] retain];
-        _gists = [[decoder decodeObjectForKey:@"gists"] retain];
-        _assignedIssues = [[decoder decodeObjectForKey:@"assignedIssues"] retain];
+        _username = [decoder decodeObjectForKey:@"username"];
+        _user = [decoder decodeObjectForKey:@"user"];
+        _repositoriesArray = [decoder decodeObjectForKey:@"repositoriesArray"];
+        _watchedRepositoriesArray = [decoder decodeObjectForKey:@"watchedRepositoriesArray"];
+        _followingUsers = [decoder decodeObjectForKey:@"followingUsers"];
+        _organizations = [decoder decodeObjectForKey:@"organizations"];
+        _followedUsers = [decoder decodeObjectForKey:@"followedUsers"];
+        _gists = [decoder decodeObjectForKey:@"gists"];
+        _assignedIssues = [decoder decodeObjectForKey:@"assignedIssues"];
         _hasFollowingData = [decoder decodeBoolForKey:@"hasFollowingData"];
         _isFollowingUser = [decoder decodeBoolForKey:@"isFollowingUser"];
-        _lastIndexPathForSingleRepositoryViewController = [[decoder decodeObjectForKey:@"lastIndexPathForSingleRepositoryViewController"] retain];
+        _lastIndexPathForSingleRepositoryViewController = [decoder decodeObjectForKey:@"lastIndexPathForSingleRepositoryViewController"];
     }
     return self;
 }

@@ -25,7 +25,7 @@
     
     GHPRepositoryTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[GHPRepositoryTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[GHPRepositoryTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
     }
     [self setupDefaultTableViewCell:cell forRowAtIndexPath:indexPath];
     
@@ -48,7 +48,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     GHAPIGistV3 *gist = [self.dataArray objectAtIndex:indexPath.row];
-    GHPGistViewController *viewController = [[[GHPGistViewController alloc] initWithGistID:gist.ID] autorelease];
+    GHPGistViewController *viewController = [[GHPGistViewController alloc] initWithGistID:gist.ID];
     
     [self.advancedNavigationController pushViewController:viewController afterViewController:self animated:YES];
 }

@@ -29,9 +29,6 @@
 
 #pragma mark - Memory management
 
-- (void)dealloc {
-    [super dealloc];
-}
 
 #pragma mark - NSCoding
 

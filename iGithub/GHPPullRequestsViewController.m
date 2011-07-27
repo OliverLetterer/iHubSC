@@ -31,11 +31,6 @@
 
 #pragma mark - Memory management
 
-- (void)dealloc {
-    [_repository release];
-    
-    [super dealloc];
-}
 
 - (void)didReceiveMemoryWarning {
     // Releases the view if it doesn't have a superview.
@@ -96,7 +91,7 @@
     
     GHPImageDetailTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[GHPImageDetailTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[GHPImageDetailTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
     }
     [self setupDefaultTableViewCell:cell forRowAtIndexPath:indexPath];
     
@@ -116,7 +111,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     GHPullRequestDiscussion *request = [self.dataArray objectAtIndex:indexPath.row];
     
-    GHPIssueViewController *viewController = [[[GHPIssueViewController alloc] initWithIssueNumber:request.number onRepository:self.repository] autorelease];
+    GHPIssueViewController *viewController = [[GHPIssueViewController alloc] initWithIssueNumber:request.number onRepository:self.repository];
     
     [self.advancedNavigationController pushViewController:viewController afterViewController:self animated:YES];
 }
@@ -140,7 +135,7 @@
 
 - (id)initWithCoder:(NSCoder *)decoder {
     if ((self = [super initWithCoder:decoder])) {
-        _repository = [[decoder decodeObjectForKey:@"repository"] retain];
+        _repository = [decoder decodeObjectForKey:@"repository"];
     }
     return self;
 }

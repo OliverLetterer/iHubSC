@@ -18,7 +18,6 @@
 #pragma mark - setters and getters
 
 - (void)setDiffString:(NSString *)diffString {
-    [_diffString release];
     _diffString = [diffString copy];
     
     self.diffView.diffString = diffString;
@@ -35,12 +34,6 @@
 
 #pragma mark - Memory management
 
-- (void)dealloc {
-    [_diffString release];
-    [_diffView release];
-    
-    [super dealloc];
-}
 
 - (void)didReceiveMemoryWarning {
     // Releases the view if it doesn't have a superview.
@@ -52,7 +45,7 @@
 #pragma mark - View lifecycle
 
 - (void)loadView {
-    UIScrollView *scrollView = [[[UIScrollView alloc] initWithFrame:[UIScreen mainScreen].bounds ] autorelease];
+    UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:[UIScreen mainScreen].bounds ];
     scrollView.backgroundColor = [UIColor whiteColor];
     scrollView.scrollsToTop = YES;
     self.view = scrollView;
@@ -61,7 +54,7 @@
     CGFloat height = [GHPDiffViewTableViewCell heightWithContent:self.diffString];
     CGRect frame = scrollView.bounds;
     frame.size.height = height;
-    self.diffView = [[[GHPDiffView alloc] initWithFrame:frame] autorelease];
+    self.diffView = [[GHPDiffView alloc] initWithFrame:frame];
     self.diffView.diffString = self.diffString;
     scrollView.contentSize = self.diffView.bounds.size;
     [self.view addSubview:self.diffView];
@@ -86,8 +79,8 @@
 
 - (id)initWithCoder:(NSCoder *)decoder {
     if ((self = [super initWithCoder:decoder])) {
-        _diffString = [[decoder decodeObjectForKey:@"diffString"] retain];
-        _diffView = [[decoder decodeObjectForKey:@"diffView"] retain];
+        _diffString = [decoder decodeObjectForKey:@"diffString"];
+        _diffView = [decoder decodeObjectForKey:@"diffView"];
     }
     return self;
 }

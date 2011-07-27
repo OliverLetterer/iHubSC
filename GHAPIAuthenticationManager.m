@@ -34,11 +34,6 @@ NSString *const GHAPIAuthenticationManagerDidAuthenticateNewUserNotification = @
 
 #pragma mark - Memory management
 
-- (void)dealloc {
-    [_username release];
-    [_password release];
-    [super dealloc];
-}
 
 @end
 
@@ -63,27 +58,11 @@ static GHAPIAuthenticationManager *_instance = nil;
 }
 
 + (id)allocWithZone:(NSZone *)zone {	
-	return [[self sharedInstance] retain];	
+	return [self sharedInstance];	
 }
 
 
 - (id)copyWithZone:(NSZone *)zone {
-    return self;	
-}
-
-- (id)retain {	
-    return self;	
-}
-
-- (NSUInteger)retainCount {
-    return NSUIntegerMax;
-}
-
-- (void)release {
-    //do nothing
-}
-
-- (id)autorelease {
     return self;	
 }
 

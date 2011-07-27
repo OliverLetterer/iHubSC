@@ -29,14 +29,6 @@
 
 #pragma mark - Memory management
 
-- (void)dealloc {
-    [_space release];
-    [_name release];
-    [_collaborators release];
-    [_privateRepos release];
-    
-    [super dealloc];
-}
 
 #pragma mark - Keyed Archiving
 
@@ -49,10 +41,10 @@
 
 - (id)initWithCoder:(NSCoder *)decoder {
     if ((self = [super init])) {
-        _name = [[decoder decodeObjectForKey:@"name"] retain];
-        _space = [[decoder decodeObjectForKey:@"space"] retain];
-        _collaborators = [[decoder decodeObjectForKey:@"collaborators"] retain];
-        _privateRepos = [[decoder decodeObjectForKey:@"privateRepos"] retain];
+        _name = [decoder decodeObjectForKey:@"name"];
+        _space = [decoder decodeObjectForKey:@"space"];
+        _collaborators = [decoder decodeObjectForKey:@"collaborators"];
+        _privateRepos = [decoder decodeObjectForKey:@"privateRepos"];
     }
     return self;
 }

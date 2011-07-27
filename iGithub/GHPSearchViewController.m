@@ -27,7 +27,7 @@
 - (void)setDataArray:(NSMutableArray *)dataArray withDataType:(GHPSearchViewControllerDataType)dataType {
     if (dataArray != _dataArray && _dataType != dataType) {
         _dataType = dataType;
-        [_dataArray release], _dataArray = [dataArray retain];
+        _dataArray = dataArray;
         
         [self.searchDisplayController.searchResultsTableView reloadData];
     }
@@ -45,15 +45,6 @@
 
 #pragma mark - Memory management
 
-- (void)dealloc {
-    [_dataArray release];
-    [_searchScopeTableViewCell release];
-    [_mySearchDisplayController release];
-    [_searchString release];
-    [_searchBar release];
-    
-    [super dealloc];
-}
 
 - (void)didReceiveMemoryWarning {
     // Releases the view if it doesn't have a superview.
@@ -67,8 +58,8 @@
 - (void)viewDidUnload {
     [super viewDidUnload];
     
-    [_mySearchDisplayController release], _mySearchDisplayController = nil;
-    [_searchBar release], _searchBar = nil;
+    _mySearchDisplayController = nil;
+    _searchBar = nil;
 }
 
 - (void)_updateSearchBar {
@@ -100,7 +91,7 @@
                                            if (error) {
                                                [self handleError:error];
                                            } else {
-                                               [self setDataArray:[[repos mutableCopy] autorelease] 
+                                               [self setDataArray:[repos mutableCopy] 
                                                      withDataType:GHPSearchViewControllerDataTypeRepositories];
                                            }
                                        }];
@@ -110,7 +101,7 @@
                               if (error) {
                                   [self handleError:error];
                               } else {
-                                  [self setDataArray:[[users mutableCopy] autorelease] 
+                                  [self setDataArray:[users mutableCopy] 
                                         withDataType:GHPSearchViewControllerDataTypeUsers];
                               }
                           }];
@@ -160,7 +151,7 @@
                 
                 GHPSearchBarTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
                 if (cell == nil) {
-                    cell = [[[GHPSearchBarTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+                    cell = [[GHPSearchBarTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
                 }
                 
                 self.searchBar = cell.searchBar;
@@ -187,7 +178,7 @@
                 GHPSearchScopeTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
                 if (cell == nil) {
                     NSArray *buttonTitles = [NSArray arrayWithObjects:kUIButtonTitleRepositories, kUIButtonTitleUsers, nil];
-                    cell = [[[GHPSearchScopeTableViewCell alloc] initWithButtonTitles:buttonTitles reuseIdentifier:CellIdentifier] autorelease];
+                    cell = [[GHPSearchScopeTableViewCell alloc] initWithButtonTitles:buttonTitles reuseIdentifier:CellIdentifier];
                 }
                 [self setupDefaultTableViewCell:cell inTableView:tableView forRowAtIndexPath:indexPath];
                 
@@ -213,7 +204,7 @@
                 
                 GHPUserTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
                 if (cell == nil) {
-                    cell = [[[GHPUserTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+                    cell = [[GHPUserTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
                 }
                 [self setupDefaultTableViewCell:cell inTableView:tableView forRowAtIndexPath:indexPath];
                 
@@ -230,7 +221,7 @@
                 GHPRepositoryTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
                 
                 if (cell == nil) {
-                    cell = [[[GHPRepositoryTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
+                    cell = [[GHPRepositoryTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
                 }
                 [self setupDefaultTableViewCell:cell inTableView:tableView forRowAtIndexPath:indexPath];
                 
@@ -277,11 +268,11 @@
             // got data
             if (_dataType == GHPSearchViewControllerDataTypeUsers) {
                 GHUser *user = [self.dataArray objectAtIndex:indexPath.row];
-                viewController = [[[GHPUserViewController alloc] initWithUsername:user.login] autorelease];
+                viewController = [[GHPUserViewController alloc] initWithUsername:user.login];
             } else if (_dataType == GHPSearchViewControllerDataTypeRepositories) {
                 GHRepository *repository = [self.dataArray objectAtIndex:indexPath.row];
                 NSString *repositoryString = [NSString stringWithFormat:@"%@/%@", repository.owner, repository.name];
-                viewController = [[[GHPRepositoryViewController alloc] initWithRepositoryString:repositoryString] autorelease];
+                viewController = [[GHPRepositoryViewController alloc] initWithRepositoryString:repositoryString];
             }
         }
     }
@@ -358,9 +349,9 @@
 - (id)initWithCoder:(NSCoder *)decoder {
     if ((self = [super initWithCoder:decoder])) {
         _dataType = [decoder decodeIntForKey:@"dataType"];
-        _dataArray = [[decoder decodeObjectForKey:@"dataArray"] retain];
+        _dataArray = [decoder decodeObjectForKey:@"dataArray"];
         _nextSearchType = [decoder decodeIntForKey:@"nextSearchType"];
-        _searchString = [[decoder decodeObjectForKey:@"searchString"] retain];
+        _searchString = [decoder decodeObjectForKey:@"searchString"];
         _isSearchBarActive = [decoder decodeBoolForKey:@"isSearchBarActive"];
     }
     return self;

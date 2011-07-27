@@ -18,9 +18,8 @@
         static NSString *CellIdentifier = @"GHPInfoTableViewCell";
         GHPInfoTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         if (!cell) {
-            cell = [[[GHPInfoTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault 
-                                                reuseIdentifier:CellIdentifier]
-                    autorelease];
+            cell = [[GHPInfoTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault 
+                                                reuseIdentifier:CellIdentifier];
         }
         
         if (!self.canDisplayActionButton) {
@@ -29,7 +28,7 @@
         
         cell.delegate = self;
         
-        [_infoCell release], _infoCell = [cell retain];
+        _infoCell = cell;
     }
     return _infoCell;
 }
@@ -62,17 +61,12 @@
 
 #pragma mark - Memory management
 
-- (void)dealloc {
-    [_infoCell release];
-    
-    [super dealloc];
-}
 
 #pragma mark - View lifecycle
 
 - (void)viewDidUnload {
     [super viewDidUnload];
-    [_infoCell release], _infoCell = nil;
+    _infoCell = nil;
 }
 
 #pragma Action Button Downloading

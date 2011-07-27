@@ -35,16 +35,6 @@ NSString *const GHAPITeamV3PermissionAdmin = @"admin";
 
 #pragma mark - Memory management
 
-- (void)dealloc {
-    [_URL release];
-    [_name release];
-    [_ID release];
-    [_permission release];
-    [_membersCount release];
-    [_reposCount release];
-    
-    [super dealloc];
-}
 
 #pragma mark - Keyed Archiving
 
@@ -59,12 +49,12 @@ NSString *const GHAPITeamV3PermissionAdmin = @"admin";
 
 - (id)initWithCoder:(NSCoder *)decoder {
     if ((self = [super init])) {
-        _URL = [[decoder decodeObjectForKey:@"uRL"] retain];
-        _name = [[decoder decodeObjectForKey:@"name"] retain];
-        _ID = [[decoder decodeObjectForKey:@"iD"] retain];
-        _permission = [[decoder decodeObjectForKey:@"permission"] retain];
-        _membersCount = [[decoder decodeObjectForKey:@"membersCount"] retain];
-        _reposCount = [[decoder decodeObjectForKey:@"reposCount"] retain];
+        _URL = [decoder decodeObjectForKey:@"uRL"];
+        _name = [decoder decodeObjectForKey:@"name"];
+        _ID = [decoder decodeObjectForKey:@"iD"];
+        _permission = [decoder decodeObjectForKey:@"permission"];
+        _membersCount = [decoder decodeObjectForKey:@"membersCount"];
+        _reposCount = [decoder decodeObjectForKey:@"reposCount"];
     }
     return self;
 }
@@ -82,7 +72,7 @@ NSString *const GHAPITeamV3PermissionAdmin = @"admin";
                                            if (error) {
                                                handler(nil, error);
                                            } else {
-                                               handler([[[GHAPITeamV3 alloc] initWithRawDictionary:object] autorelease], nil);
+                                               handler([[GHAPITeamV3 alloc] initWithRawDictionary:object], nil);
                                            }
                                        }];
 }
@@ -116,7 +106,7 @@ NSString *const GHAPITeamV3PermissionAdmin = @"admin";
                                      
                                      NSMutableArray *finalArray = [NSMutableArray arrayWithCapacity:rawArray.count];
                                      [rawArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-                                         [finalArray addObject:[[[GHAPIUserV3 alloc] initWithRawDictionary:obj] autorelease] ];
+                                         [finalArray addObject:[[GHAPIUserV3 alloc] initWithRawDictionary:obj] ];
                                      }];
                                      
                                      handler(finalArray, nextPage, nil);
@@ -139,7 +129,7 @@ NSString *const GHAPITeamV3PermissionAdmin = @"admin";
                                      
                                      NSMutableArray *finalArray = [NSMutableArray arrayWithCapacity:rawArray.count];
                                      [rawArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-                                         [finalArray addObject:[[[GHAPIRepositoryV3 alloc] initWithRawDictionary:obj] autorelease] ];
+                                         [finalArray addObject:[[GHAPIRepositoryV3 alloc] initWithRawDictionary:obj] ];
                                      }];
                                      
                                      handler(finalArray, nextPage, nil);

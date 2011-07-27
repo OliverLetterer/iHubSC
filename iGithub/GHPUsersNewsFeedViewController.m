@@ -37,11 +37,6 @@
 
 #pragma mark - Memory management
 
-- (void)dealloc {
-    [_username release];
-    
-    [super dealloc];
-}
 
 #pragma mark - Keyed Archiving
 
@@ -52,7 +47,7 @@
 
 - (id)initWithCoder:(NSCoder *)decoder {
     if ((self = [super initWithCoder:decoder])) {
-        _username = [[decoder decodeObjectForKey:@"username"] retain];
+        _username = [decoder decodeObjectForKey:@"username"];
     }
     return self;
 }

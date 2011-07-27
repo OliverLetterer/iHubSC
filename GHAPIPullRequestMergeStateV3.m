@@ -28,13 +28,6 @@
 
 #pragma mark - Memory management
 
-- (void)dealloc {
-    [_SHA release];
-    [_merged release];
-    [_message release];
-    
-    [super dealloc];
-}
 
 #pragma mark - Keyed Archiving
 
@@ -46,9 +39,9 @@
 
 - (id)initWithCoder:(NSCoder *)decoder {
     if ((self = [super init])) {
-        _SHA = [[decoder decodeObjectForKey:@"sHA"] retain];
-        _merged = [[decoder decodeObjectForKey:@"merged"] retain];
-        _message = [[decoder decodeObjectForKey:@"message"] retain];
+        _SHA = [decoder decodeObjectForKey:@"sHA"];
+        _merged = [decoder decodeObjectForKey:@"merged"];
+        _message = [decoder decodeObjectForKey:@"message"];
     }
     return self;
 }

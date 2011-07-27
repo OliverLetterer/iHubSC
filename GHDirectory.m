@@ -83,12 +83,6 @@
 
 #pragma mark - Memory management
 
-- (void)dealloc {
-    [_directories release];
-    [_files release];
-    
-    [super dealloc];
-}
 
 #pragma mark - Keyed Archiving
 
@@ -100,8 +94,8 @@
 
 - (id)initWithCoder:(NSCoder *)decoder {
     if ((self = [super initWithCoder:decoder])) {
-        _directories = [[decoder decodeObjectForKey:@"directories"] retain];
-        _files = [[decoder decodeObjectForKey:@"files"] retain];
+        _directories = [decoder decodeObjectForKey:@"directories"];
+        _files = [decoder decodeObjectForKey:@"files"];
     }
     return self;
 }
@@ -125,7 +119,7 @@
         if ([components count] == 1) {
             // well this is only one single files, lets create a file representation and add it to our files
             NSString *hash = [filesDictionary objectForKey:file];
-            GHFile *newFile = [[[GHFile alloc] initWithName:file hash:hash] autorelease];
+            GHFile *newFile = [[GHFile alloc] initWithName:file hash:hash];
             [myFilesArray addObject:newFile];
         } else {
             NSString *hash = [filesDictionary objectForKey:file];
@@ -163,7 +157,7 @@
             name = [NSString stringWithFormat:@"%@/%@", _name, baseDirectoryName];
         }
         
-        GHDirectory *newDirectory = [[[GHDirectory alloc] initWithFilesDictionary:filesDictionary name:name] autorelease];
+        GHDirectory *newDirectory = [[GHDirectory alloc] initWithFilesDictionary:filesDictionary name:name];
         
         [myDirectoriesArray addObject:newDirectory];
     }

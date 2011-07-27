@@ -31,11 +31,6 @@
 
 #pragma mark - Memory management
 
-- (void)dealloc {
-    [_ref release];
-    [_refType release];
-    [super dealloc];
-}
 
 #pragma mark - NSCoding
 

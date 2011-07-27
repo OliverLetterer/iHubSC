@@ -17,8 +17,8 @@
 #pragma mark - setters and getters
 
 - (void)setOldLines:(NSString *)diffOldLinesString newLines:(NSString *)diffNewLinesString {
-    [_diffOldLinesString release], _diffOldLinesString = [diffOldLinesString copy];
-    [_diffNewLinesString release], _diffNewLinesString = [diffNewLinesString copy];
+    _diffOldLinesString = [diffOldLinesString copy];
+    _diffNewLinesString = [diffNewLinesString copy];
     
     [self setNeedsDisplay];
 }
@@ -57,11 +57,11 @@
         
         CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
         NSArray *colors = [NSArray arrayWithObjects:
-                           (id)[UIColor colorWithRed:251.0f/255.0f green:251.0f/255.0f blue:251.0f/255.0f alpha:1.0f].CGColor,
-                           (id)[UIColor colorWithRed:229.0f/255.0f green:229.0f/255.0f blue:229.0f/255.0f alpha:1.0f].CGColor,
+                           (__bridge id)[UIColor colorWithRed:251.0f/255.0f green:251.0f/255.0f blue:251.0f/255.0f alpha:1.0f].CGColor,
+                           (__bridge id)[UIColor colorWithRed:229.0f/255.0f green:229.0f/255.0f blue:229.0f/255.0f alpha:1.0f].CGColor,
                            nil];
         CGFloat locations[] = {0.0f, 1.0f};
-        _oldNewGradient = CGGradientCreateWithColors(colorSpace, (CFArrayRef)colors, locations);
+        _oldNewGradient = CGGradientCreateWithColors(colorSpace, (__bridge CFArrayRef)colors, locations);
         CGColorSpaceRelease(colorSpace);
     }
     return self;
@@ -126,17 +126,11 @@
 #pragma mark - Memory management
 
 - (void)dealloc {
-    [_diffOldLinesString release];
-    [_diffNewLinesString release];
-    [_borderColor release];
-    [_oldNewTextColor release];
-    [_linesTextColor release];
     
     if (_oldNewGradient) {
         CGGradientRelease(_oldNewGradient);
     }
     
-    [super dealloc];
 }
 
 #pragma mark - Keyed Archiving
@@ -152,19 +146,19 @@
 
 - (id)initWithCoder:(NSCoder *)decoder {
     if ((self = [super initWithCoder:decoder])) {
-        _diffOldLinesString = [[decoder decodeObjectForKey:@"diffOldLinesString"] retain];
-        _diffNewLinesString = [[decoder decodeObjectForKey:@"diffNewLinesString"] retain];
-        _borderColor = [[decoder decodeObjectForKey:@"borderColor"] retain];
-        _oldNewTextColor = [[decoder decodeObjectForKey:@"oldNewTextColor"] retain];
-        _linesTextColor = [[decoder decodeObjectForKey:@"linesTextColor"] retain];
+        _diffOldLinesString = [decoder decodeObjectForKey:@"diffOldLinesString"];
+        _diffNewLinesString = [decoder decodeObjectForKey:@"diffNewLinesString"];
+        _borderColor = [decoder decodeObjectForKey:@"borderColor"];
+        _oldNewTextColor = [decoder decodeObjectForKey:@"oldNewTextColor"];
+        _linesTextColor = [decoder decodeObjectForKey:@"linesTextColor"];
         
         CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
         NSArray *colors = [NSArray arrayWithObjects:
-                           (id)[UIColor colorWithRed:251.0f/255.0f green:251.0f/255.0f blue:251.0f/255.0f alpha:1.0f].CGColor,
-                           (id)[UIColor colorWithRed:229.0f/255.0f green:229.0f/255.0f blue:229.0f/255.0f alpha:1.0f].CGColor,
+                           (__bridge id)[UIColor colorWithRed:251.0f/255.0f green:251.0f/255.0f blue:251.0f/255.0f alpha:1.0f].CGColor,
+                           (__bridge id)[UIColor colorWithRed:229.0f/255.0f green:229.0f/255.0f blue:229.0f/255.0f alpha:1.0f].CGColor,
                            nil];
         CGFloat locations[] = {0.0f, 1.0f};
-        _oldNewGradient = CGGradientCreateWithColors(colorSpace, (CFArrayRef)colors, locations);
+        _oldNewGradient = CGGradientCreateWithColors(colorSpace, (__bridge CFArrayRef)colors, locations);
         CGColorSpaceRelease(colorSpace);
     }
     return self;

@@ -29,14 +29,6 @@
 
 #pragma mark - Memory management
 
-- (void)dealloc {
-    [_head release];
-    [_EMail release];
-    [_message release];
-    [_name release];
-    
-    [super dealloc];
-}
 
 #pragma mark - NSCoding
 

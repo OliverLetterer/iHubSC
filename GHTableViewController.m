@@ -50,7 +50,7 @@
     
     UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
     }
     
     cell.textLabel.text = @"__DUMMY__";
@@ -66,11 +66,11 @@ static CGFloat wrapperViewHeight = 21.0f;
 - (void)loadAndDisplayDownloadingEssentialDataView {
     if (!self.downloadingEssentialDataView && self.isViewLoaded) {
         if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-            UIView *wrapperView = [[[UIView alloc] initWithFrame:CGRectMake(0.0f, CGRectGetHeight(self.view.bounds)/2.0f - wrapperViewHeight/2.0f, CGRectGetWidth(self.view.bounds), wrapperViewHeight)] autorelease];
+            UIView *wrapperView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, CGRectGetHeight(self.view.bounds)/2.0f - wrapperViewHeight/2.0f, CGRectGetWidth(self.view.bounds), wrapperViewHeight)];
             wrapperView.backgroundColor = self.view.backgroundColor;
             wrapperView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
             
-            UILabel *label = [[[UILabel alloc] initWithFrame:CGRectZero] autorelease];
+            UILabel *label = [[UILabel alloc] initWithFrame:CGRectZero];
             label.font = [UIFont systemFontOfSize:16.0f];
             label.shadowColor = [UIColor whiteColor];
             label.shadowOffset = CGSizeMake(0.0f, 1.0f);
@@ -82,7 +82,7 @@ static CGFloat wrapperViewHeight = 21.0f;
             label.center = CGPointMake(CGRectGetWidth(wrapperView.bounds)/2.0f, wrapperViewHeight/2.0f);
             [wrapperView addSubview:label];
             
-            UIActivityIndicatorView *activityIndicatorView = [[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray] autorelease];
+            UIActivityIndicatorView *activityIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
             [activityIndicatorView startAnimating];
             activityIndicatorView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
             activityIndicatorView.center = CGPointMake(label.frame.origin.x - 10.0f, label.center.y);
@@ -91,11 +91,11 @@ static CGFloat wrapperViewHeight = 21.0f;
             self.downloadingEssentialDataView = wrapperView;
             [self.view addSubview:wrapperView];
         } else {
-            UIView *wrapperView = [[[UIView alloc] initWithFrame:CGRectMake(0.0f, CGRectGetHeight(self.view.bounds)*9.0f/16.0f - wrapperViewHeight/2.0f, CGRectGetWidth(self.view.bounds), wrapperViewHeight)] autorelease];
+            UIView *wrapperView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, CGRectGetHeight(self.view.bounds)*9.0f/16.0f - wrapperViewHeight/2.0f, CGRectGetWidth(self.view.bounds), wrapperViewHeight)];
             wrapperView.backgroundColor = [UIColor clearColor];
             wrapperView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
             
-            UILabel *label = [[[UILabel alloc] initWithFrame:CGRectZero] autorelease];
+            UILabel *label = [[UILabel alloc] initWithFrame:CGRectZero];
             label.font = [UIFont systemFontOfSize:16.0f];
             label.shadowColor = [UIColor blackColor];
             label.shadowOffset = CGSizeMake(0.0f, 1.0f);
@@ -107,7 +107,7 @@ static CGFloat wrapperViewHeight = 21.0f;
             label.center = CGPointMake(CGRectGetWidth(wrapperView.bounds)/2.0f, wrapperViewHeight/2.0f);
             [wrapperView addSubview:label];
             
-            UIActivityIndicatorView *activityIndicatorView = [[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite] autorelease];
+            UIActivityIndicatorView *activityIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
             [activityIndicatorView startAnimating];
             activityIndicatorView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
             activityIndicatorView.center = CGPointMake(label.center.x, label.center.y + CGRectGetHeight(label.frame));
@@ -124,7 +124,7 @@ static CGFloat wrapperViewHeight = 21.0f;
     
     UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     
     cell.textLabel.text = text;
@@ -145,7 +145,7 @@ static CGFloat wrapperViewHeight = 21.0f;
         imageView.image = [UIImage imageNamed:@"DefaultUserImage.png"];
         [[imageView viewWithTag:kUIActivityIndicatorImageViewTag] removeFromSuperview];
         
-        UIActivityIndicatorView *activityIndicatorView = [[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray] autorelease];
+        UIActivityIndicatorView *activityIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
         activityIndicatorView.center = CGPointMake(CGRectGetWidth(imageView.bounds)/2.0f, CGRectGetHeight(imageView.bounds)/2.0f);
         activityIndicatorView.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin;
         [activityIndicatorView startAnimating];
@@ -182,7 +182,7 @@ static CGFloat wrapperViewHeight = 21.0f;
         imageView.image = [UIImage imageNamed:@"DefaultUserImage.png"];
         [[imageView viewWithTag:kUIActivityIndicatorImageViewTag] removeFromSuperview];
         
-        UIActivityIndicatorView *activityIndicatorView = [[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray] autorelease];
+        UIActivityIndicatorView *activityIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
         activityIndicatorView.center = CGPointMake(CGRectGetWidth(imageView.bounds)/2.0f, CGRectGetHeight(imageView.bounds)/2.0f);
         activityIndicatorView.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin;
         [activityIndicatorView startAnimating];
@@ -290,15 +290,8 @@ static CGFloat wrapperViewHeight = 21.0f;
         self.tableView.dataSource = nil;
     }
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-    [_cachedHeightsDictionary release];
     _alertProxy.delegate = nil;
-    [_alertProxy release];
-    [_nextPageForSectionsDictionary release];
-    [_downloadingEssentialDataView release];
-    [_lastSelectedIndexPath release];
-    [_sectionsStateArray release];
     
-    [super dealloc];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -311,7 +304,7 @@ static CGFloat wrapperViewHeight = 21.0f;
 #pragma mark - View lifecycle
 
 - (void)loadView {
-    self.tableView = [[[UIExpandableTableView alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0f, 480.0f) style:_myTableViewStyle] autorelease];
+    self.tableView = [[UIExpandableTableView alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0f, 480.0f) style:_myTableViewStyle];
     self.tableView.maximumRowCountToStillUseAnimationWhileExpanding = 100;
     
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
@@ -325,25 +318,25 @@ static CGFloat wrapperViewHeight = 21.0f;
         CAGradientLayer *gradientLayer = nil;
         UIView *view = nil;
         
-        view = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, 320.0, 22)] autorelease];
+        view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320.0, 22)];
         view.backgroundColor = [UIColor clearColor];
         gradientLayer = [CAGradientLayer layer];
         gradientLayer.frame = CGRectMake(0, 0, 480, 22);
         gradientLayer.colors = [NSArray arrayWithObjects:
-                                (id)[UIColor colorWithWhite:0.0 alpha:0.0].CGColor,
-                                (id)[UIColor colorWithWhite:0.0 alpha:0.3].CGColor,
+                                (__bridge id)[UIColor colorWithWhite:0.0 alpha:0.0].CGColor,
+                                (__bridge id)[UIColor colorWithWhite:0.0 alpha:0.3].CGColor,
                                 nil];
         gradientLayer.actions = newActions;
         [view.layer addSublayer:gradientLayer];
         self.tableView.tableHeaderView = view;
         
-        view = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, 320.0, 22)] autorelease];
+        view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320.0, 22)];
         view.backgroundColor = [UIColor clearColor];
         gradientLayer = [CAGradientLayer layer];
         gradientLayer.frame = CGRectMake(0, 0, 480, 22);
         gradientLayer.colors = [NSArray arrayWithObjects:
-                                (id)[UIColor colorWithWhite:0.0 alpha:0.3].CGColor,
-                                (id)[UIColor colorWithWhite:0.0 alpha:0.0].CGColor,
+                                (__bridge id)[UIColor colorWithWhite:0.0 alpha:0.3].CGColor,
+                                (__bridge id)[UIColor colorWithWhite:0.0 alpha:0.0].CGColor,
                                 nil];
         gradientLayer.actions = newActions;
         [view.layer addSublayer:gradientLayer];
@@ -351,7 +344,7 @@ static CGFloat wrapperViewHeight = 21.0f;
         
         self.tableView.contentInset = UIEdgeInsetsMake(-22, 0, -22, 0);
         self.defaultEdgeInset = self.tableView.contentInset;
-        self.tableView.backgroundView = [[[UIView alloc] initWithFrame:CGRectZero] autorelease];
+        self.tableView.backgroundView = [[UIView alloc] initWithFrame:CGRectZero];
         self.tableView.backgroundView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"GHBackgroundImage.png"] ];
     }
     
@@ -420,7 +413,7 @@ static CGFloat wrapperViewHeight = 21.0f;
     [super viewDidUnload];
     
     _hasGradientBackgrounds = NO;
-    [_downloadingEssentialDataView release], _downloadingEssentialDataView = nil;
+    _downloadingEssentialDataView = nil;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -441,8 +434,8 @@ static CGFloat wrapperViewHeight = 21.0f;
             gradientLayer = [CAGradientLayer layer];
             gradientLayer.frame = CGRectMake(0.0f, 0.0f, 320.0f, 22.0f);
             gradientLayer.colors = [NSArray arrayWithObjects:
-                                    (id)[UIColor colorWithWhite:0.0 alpha:0.3].CGColor,
-                                    (id)[UIColor colorWithWhite:0.0 alpha:0.0].CGColor,
+                                    (__bridge id)[UIColor colorWithWhite:0.0 alpha:0.3].CGColor,
+                                    (__bridge id)[UIColor colorWithWhite:0.0 alpha:0.0].CGColor,
                                     nil];
             gradientLayer.actions = newActions;
             [view.layer addSublayer:gradientLayer];
@@ -450,8 +443,8 @@ static CGFloat wrapperViewHeight = 21.0f;
             gradientLayer = [CAGradientLayer layer];
             gradientLayer.frame = CGRectMake(0.0f, self.view.bounds.size.height - 22.0f, 320.0f, 22.0f);
             gradientLayer.colors = [NSArray arrayWithObjects:
-                                    (id)[UIColor colorWithWhite:0.0 alpha:0.0].CGColor,
-                                    (id)[UIColor colorWithWhite:0.0 alpha:0.3].CGColor,
+                                    (__bridge id)[UIColor colorWithWhite:0.0 alpha:0.0].CGColor,
+                                    (__bridge id)[UIColor colorWithWhite:0.0 alpha:0.3].CGColor,
                                     nil];
             gradientLayer.actions = newActions;
             [view.layer addSublayer:gradientLayer];
@@ -539,16 +532,15 @@ static CGFloat wrapperViewHeight = 21.0f;
             // no user is logged in, handle the nice error
             [super handleError:error];
         } else {
-            UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Unauthorized", @"") 
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Unauthorized", @"") 
                                                              message:NSLocalizedString(@"You don't have permission do view this content. Would you like to change your Account?", @"") 
                                                             delegate:nil 
                                                    cancelButtonTitle:NSLocalizedString(@"No", @"") 
-                                                   otherButtonTitles:NSLocalizedString(@"Yes", @""), nil]
-                                  autorelease];
+                                                   otherButtonTitles:NSLocalizedString(@"Yes", @""), nil];
             
             [alert show];
             
-            self.alertProxy = [[[GHTableViewControllerAlertViewProxy alloc] initWithAlertView:alert delegate:self] autorelease];
+            self.alertProxy = [[GHTableViewControllerAlertViewProxy alloc] initWithAlertView:alert delegate:self];
         }
     } else {
         [super handleError:error];
@@ -603,14 +595,14 @@ static CGFloat wrapperViewHeight = 21.0f;
 
 - (id)initWithCoder:(NSCoder *)decoder {
     if ((self = [super initWithCoder:decoder])) {
-        _nextPageForSectionsDictionary = [[decoder decodeObjectForKey:@"nextPageForSectionsDictionary"] retain];
-        _cachedHeightsDictionary = [[decoder decodeObjectForKey:@"123cachedHeightsDictionary"] retain];
+        _nextPageForSectionsDictionary = [decoder decodeObjectForKey:@"nextPageForSectionsDictionary"];
+        _cachedHeightsDictionary = [decoder decodeObjectForKey:@"123cachedHeightsDictionary"];
         _reloadDataIfNewUserGotAuthenticated = [decoder decodeBoolForKey:@"reloadDataIfNewUserGotAuthenticated"];
         _reloadDataOnApplicationWillEnterForeground = [decoder decodeBoolForKey:@"reloadDataOnApplicationWillEnterForeground"];
         _myTableViewStyle = [decoder decodeIntegerForKey:@"myTableViewStyle"];
         _lastContentOffset = [decoder decodeCGPointForKey:@"lastContentOffset"];
-        _lastSelectedIndexPath = [[decoder decodeObjectForKey:@"lastSelectedIndexPath"] retain];
-        _sectionsStateArray = [[decoder decodeObjectForKey:@"sectionsStateArray"] retain];
+        _lastSelectedIndexPath = [decoder decodeObjectForKey:@"lastSelectedIndexPath"];
+        _sectionsStateArray = [decoder decodeObjectForKey:@"sectionsStateArray"];
     }
     return self;
 }
@@ -626,7 +618,7 @@ static CGFloat wrapperViewHeight = 21.0f;
     
     GHPCollapsingAndSpinningTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[GHPCollapsingAndSpinningTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[GHPCollapsingAndSpinningTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     [self setupDefaultTableViewCell:cell forRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:section]];
     
@@ -652,7 +644,7 @@ static CGFloat wrapperViewHeight = 21.0f;
 - (GHPDefaultTableViewCell *)defaultTableViewCellForRowAtIndexPath:(NSIndexPath *)indexPath withReuseIdentifier:(NSString *)CellIdentifier {
     GHPDefaultTableViewCell *cell = (GHPDefaultTableViewCell *)[self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[GHPDefaultTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[GHPDefaultTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     
     [self setupDefaultTableViewCell:cell forRowAtIndexPath:indexPath];

@@ -40,7 +40,7 @@
         self.detailTextLabel.textAlignment = UITextAlignmentRight;
         self.detailTextLabel.backgroundColor = [UIColor clearColor];
         
-        self.timeLabel = [[[UILabel alloc] initWithFrame:CGRectZero] autorelease];
+        self.timeLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         self.timeLabel.font = [UIFont systemFontOfSize:12.0f];
         self.timeLabel.textColor = [UIColor colorWithWhite:0.25f alpha:1.0f];
         self.timeLabel.highlightedTextColor = [UIColor whiteColor];
@@ -85,10 +85,5 @@
 
 #pragma mark - Memory management
 
-- (void)dealloc {
-    [_timeLabel release];
-    
-    [super dealloc];
-}
 
 @end

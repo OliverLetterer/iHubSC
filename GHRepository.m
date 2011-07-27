@@ -128,7 +128,7 @@
             } else {
                 NSDictionary *dictionary = GHAPIObjectExpectedClass([[request responseString] objectFromJSONString], NSDictionary.class);
                 
-                GHDirectory *rootDirectory = [[[GHDirectory alloc] initWithFilesDictionary:[dictionary objectForKeyOrNilOnNullObject:@"blobs"] name:@"" ] autorelease];
+                GHDirectory *rootDirectory = [[GHDirectory alloc] initWithFilesDictionary:[dictionary objectForKeyOrNilOnNullObject:@"blobs"] name:@"" ];
                 
                 handler(rootDirectory, nil);
             }
@@ -167,7 +167,7 @@
                 NSMutableArray *repos = [NSMutableArray arrayWithCapacity:[allRepos count] ];
                 
                 for (NSDictionary *rawRepo in allRepos) {
-                    [repos addObject:[[[GHRepository alloc] initWithRawDictionary:rawRepo] autorelease] ];
+                    [repos addObject:[[GHRepository alloc] initWithRawDictionary:rawRepo] ];
                 }
                 
                 handler(repos, nil);
@@ -208,30 +208,6 @@
 
 #pragma mark - Memory management
 
-- (void)dealloc {
-    [_creationDate release];
-    [_desctiptionRepo release];
-    [_fork release];
-    [_forks release];
-    [_hasDownloads release];
-    [_hasIssues release];
-    [_hasWiki release];
-    [_homePage release];
-    [_integrateBranch release];
-    [_language release];
-    [_name release];
-    [_openIssues release];
-    [_owner release];
-    [_parent release];
-    [_private release];
-    [_pushedAt release];
-    [_size release];
-    [_source release];
-    [_URL release];
-    [_watchers release];
-    
-    [super dealloc];
-}
 
 #pragma mark - NSCoding
 

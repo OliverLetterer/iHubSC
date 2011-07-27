@@ -25,7 +25,7 @@ extern const CGFloat ANAdvancedNavigationControllerDefaultDraggingDistance;
     
     ANRemoveRectangleIndicatorView *_removeRectangleIndicatorView;
     
-    id<ANAdvancedNavigationControllerDelegate> _delegate;
+    id<ANAdvancedNavigationControllerDelegate> __weak _delegate;
     
     NSUInteger _indexOfFrontViewController;
 }

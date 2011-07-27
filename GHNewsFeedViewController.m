@@ -25,8 +25,7 @@
 
 - (void)setNewsFeed:(GHNewsFeed *)newsFeed {
     if (newsFeed != _newsFeed) {
-        [_newsFeed release];
-        _newsFeed = [newsFeed retain];
+        _newsFeed = newsFeed;
         [self cacheHeightForTableView];
         if (self.isViewLoaded) {
             [self.tableView reloadData];
@@ -47,10 +46,6 @@
 
 #pragma mark - Memory management
 
-- (void)dealloc {
-    [_newsFeed release];
-    [super dealloc];
-}
 
 - (void)didReceiveMemoryWarning {
     // Releases the view if it doesn't have a superview.
@@ -113,7 +108,7 @@
         GHDescriptionTableViewCell *cell = (GHDescriptionTableViewCell *)[self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         
         if (!cell) {
-            cell = [[[GHDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+            cell = [[GHDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         }
         
         GHIssuePayload *payload = (GHIssuePayload *)item.payload;
@@ -154,7 +149,7 @@
         GHDescriptionTableViewCell *cell = (GHDescriptionTableViewCell *)[self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         
         if (!cell) {
-            cell = [[[GHDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+            cell = [[GHDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         }
         
         [self updateImageView:cell.imageView atIndexPath:indexPath withGravatarID:item.actorAttributes.gravatarID];
@@ -169,7 +164,7 @@
         GHDescriptionTableViewCell *cell = (GHDescriptionTableViewCell *)[self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         
         if (!cell) {
-            cell = [[[GHDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+            cell = [[GHDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         }
         
         [self updateImageView:cell.imageView atIndexPath:indexPath withGravatarID:item.actorAttributes.gravatarID];
@@ -185,7 +180,7 @@
         GHFollowEventTableViewCell *cell = (GHFollowEventTableViewCell *)[self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         
         if (!cell) {
-            cell = [[[GHFollowEventTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+            cell = [[GHFollowEventTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         }
         [self updateImageView:cell.imageView atIndexPath:indexPath withGravatarID:item.actorAttributes.gravatarID];
         
@@ -202,7 +197,7 @@
         GHDescriptionTableViewCell *cell = (GHDescriptionTableViewCell *)[self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         
         if (!cell) {
-            cell = [[[GHDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+            cell = [[GHDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         }
         [self updateImageView:cell.imageView atIndexPath:indexPath withGravatarID:item.actorAttributes.gravatarID];
         
@@ -217,7 +212,7 @@
         GHDescriptionTableViewCell *cell = (GHDescriptionTableViewCell *)[self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         
         if (!cell) {
-            cell = [[[GHDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+            cell = [[GHDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         }
         [self updateImageView:cell.imageView atIndexPath:indexPath withGravatarID:item.actorAttributes.gravatarID];
         
@@ -232,7 +227,7 @@
         GHDescriptionTableViewCell *cell = (GHDescriptionTableViewCell *)[self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         
         if (!cell) {
-            cell = [[[GHDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+            cell = [[GHDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         }
         [self updateImageView:cell.imageView atIndexPath:indexPath withGravatarID:item.actorAttributes.gravatarID];
         
@@ -247,7 +242,7 @@
         GHDescriptionTableViewCell *cell = (GHDescriptionTableViewCell *)[self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         
         if (!cell) {
-            cell = [[[GHDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+            cell = [[GHDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         }
         [self updateImageView:cell.imageView atIndexPath:indexPath withGravatarID:item.actorAttributes.gravatarID];
         
@@ -270,7 +265,7 @@
         GHDescriptionTableViewCell *cell = (GHDescriptionTableViewCell *)[self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         
         if (!cell) {
-            cell = [[[GHDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+            cell = [[GHDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         }
         [self updateImageView:cell.imageView atIndexPath:indexPath withGravatarID:item.actorAttributes.gravatarID];
         
@@ -285,7 +280,7 @@
         GHDescriptionTableViewCell *cell = (GHDescriptionTableViewCell *)[self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         
         if (!cell) {
-            cell = [[[GHDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+            cell = [[GHDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         }
         [self updateImageView:cell.imageView atIndexPath:indexPath withGravatarID:item.actorAttributes.gravatarID];
         
@@ -300,7 +295,7 @@
         GHDescriptionTableViewCell *cell = (GHDescriptionTableViewCell *)[self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         
         if (!cell) {
-            cell = [[[GHDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+            cell = [[GHDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         }
         [self updateImageView:cell.imageView atIndexPath:indexPath withGravatarID:item.actorAttributes.gravatarID];
         
@@ -315,7 +310,7 @@
         GHDescriptionTableViewCell *cell = (GHDescriptionTableViewCell *)[self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         
         if (!cell) {
-            cell = [[[GHDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+            cell = [[GHDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         }
         [self updateImageView:cell.imageView atIndexPath:indexPath withGravatarID:item.actorAttributes.gravatarID];
         
@@ -330,7 +325,7 @@
         GHDescriptionTableViewCell *cell = (GHDescriptionTableViewCell *)[self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         
         if (!cell) {
-            cell = [[[GHDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+            cell = [[GHDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         }
         [self updateImageView:cell.imageView atIndexPath:indexPath withGravatarID:item.actorAttributes.gravatarID];
         
@@ -345,7 +340,7 @@
         GHDescriptionTableViewCell *cell = (GHDescriptionTableViewCell *)[self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         
         if (!cell) {
-            cell = [[[GHDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+            cell = [[GHDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         }
         [self updateImageView:cell.imageView atIndexPath:indexPath withGravatarID:item.actorAttributes.gravatarID];
         
@@ -360,7 +355,7 @@
         GHDescriptionTableViewCell *cell = (GHDescriptionTableViewCell *)[self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         
         if (!cell) {
-            cell = [[[GHDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+            cell = [[GHDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         }
         [self updateImageView:cell.imageView atIndexPath:indexPath withGravatarID:item.actorAttributes.gravatarID];
         
@@ -375,7 +370,7 @@
         GHDescriptionTableViewCell *cell = (GHDescriptionTableViewCell *)[self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         
         if (!cell) {
-            cell = [[[GHDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+            cell = [[GHDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         }
         [self updateImageView:cell.imageView atIndexPath:indexPath withGravatarID:item.actorAttributes.gravatarID];
         
@@ -507,70 +502,70 @@
     
     if (item.payload.type == GHPayloadIssuesEvent) {
         GHIssuePayload *payload = (GHIssuePayload *)item.payload;
-        GHIssueViewController *viewIssueViewController = [[[GHIssueViewController alloc] 
+        GHIssueViewController *viewIssueViewController = [[GHIssueViewController alloc] 
                                                                     initWithRepository:item.repository.fullName 
-                                                                    issueNumber:payload.number] autorelease];
+                                                                    issueNumber:payload.number];
         [self.navigationController pushViewController:viewIssueViewController animated:YES];
     } else if (item.payload.type == GHPayloadPullRequestEvent) {
         GHPullRequestPayload *payload = (GHPullRequestPayload *)item.payload;
-        GHIssueViewController *viewIssueViewController = [[[GHIssueViewController alloc] initWithRepository:item.repository.fullName issueNumber:payload.number] autorelease];
+        GHIssueViewController *viewIssueViewController = [[GHIssueViewController alloc] initWithRepository:item.repository.fullName issueNumber:payload.number];
         [self.navigationController pushViewController:viewIssueViewController animated:YES];
     } else if (item.payload.type == GHPayloadPushEvent) {
-        GHPushPayloadViewController *pushViewController = [[[GHPushPayloadViewController alloc] initWithPayload:(GHPushPayload *)item.payload onRepository:item.repository.fullName] autorelease];
+        GHPushPayloadViewController *pushViewController = [[GHPushPayloadViewController alloc] initWithPayload:(GHPushPayload *)item.payload onRepository:item.repository.fullName];
         [self.navigationController pushViewController:pushViewController animated:YES];
     } else if (item.payload.type == GHPayloadWatchEvent) {
-        GHRepositoryViewController *repoViewController = [[[GHRepositoryViewController alloc] initWithRepositoryString:item.repository.fullName] autorelease];
+        GHRepositoryViewController *repoViewController = [[GHRepositoryViewController alloc] initWithRepositoryString:item.repository.fullName];
         [self.navigationController pushViewController:repoViewController animated:YES];
     } else if (item.payload.type == GHPayloadFollowEvent) {
         GHFollowEventPayload *payload = (GHFollowEventPayload *)item.payload;
         
-        GHUserViewController *userViewController = [[[GHUserViewController alloc] initWithUsername:payload.target.login] autorelease];
+        GHUserViewController *userViewController = [[GHUserViewController alloc] initWithUsername:payload.target.login];
         [self.navigationController pushViewController:userViewController animated:YES];
     } else if (item.payload.type == GHPayloadCreateEvent) {
         NSString *repo = item.repository.fullName;
         
-        GHRepositoryViewController *repoViewController = [[[GHRepositoryViewController alloc] initWithRepositoryString:repo] autorelease];
+        GHRepositoryViewController *repoViewController = [[GHRepositoryViewController alloc] initWithRepositoryString:repo];
         [self.navigationController pushViewController:repoViewController animated:YES];
     } else if (item.payload.type == GHPayloadIssueCommentEvent) {
         GHIssuesCommentPayload *payload = (GHIssuesCommentPayload *)item.payload;
         
-        GHIssueViewController *viewIssueViewController = [[[GHIssueViewController alloc] initWithRepository:item.repository.fullName issueNumber:payload.issueID] autorelease];
+        GHIssueViewController *viewIssueViewController = [[GHIssueViewController alloc] initWithRepository:item.repository.fullName issueNumber:payload.issueID];
         [self.navigationController pushViewController:viewIssueViewController animated:YES];
     } else if (item.payload.type == GHPayloadPublicEvent) {
-        GHRepositoryViewController *repoViewController = [[[GHRepositoryViewController alloc] initWithRepositoryString:item.repository.fullName] autorelease];
+        GHRepositoryViewController *repoViewController = [[GHRepositoryViewController alloc] initWithRepositoryString:item.repository.fullName];
         [self.navigationController pushViewController:repoViewController animated:YES];
     } else if (item.payload.type == GHPayloadCommitCommentEvent) {
-        GHRepositoryViewController *repoViewController = [[[GHRepositoryViewController alloc] initWithRepositoryString:item.repository.fullName] autorelease];
+        GHRepositoryViewController *repoViewController = [[GHRepositoryViewController alloc] initWithRepositoryString:item.repository.fullName];
         [self.navigationController pushViewController:repoViewController animated:YES];
     } else if (item.payload.type == GHPayloadDeleteEvent) {
-        GHRepositoryViewController *repoViewController = [[[GHRepositoryViewController alloc] initWithRepositoryString:
-                                                                 [NSString stringWithFormat:@"%@/%@", item.repository.owner, item.repository.name] ] autorelease];
+        GHRepositoryViewController *repoViewController = [[GHRepositoryViewController alloc] initWithRepositoryString:
+                                                                 [NSString stringWithFormat:@"%@/%@", item.repository.owner, item.repository.name] ];
         [self.navigationController pushViewController:repoViewController animated:YES];
     } else if (item.payload.type == GHPayloadDownloadEvent) {
-        GHRepositoryViewController *repoViewController = [[[GHRepositoryViewController alloc] initWithRepositoryString:
-                                                                 [NSString stringWithFormat:@"%@/%@", item.repository.owner, item.repository.name] ] autorelease];
+        GHRepositoryViewController *repoViewController = [[GHRepositoryViewController alloc] initWithRepositoryString:
+                                                                 [NSString stringWithFormat:@"%@/%@", item.repository.owner, item.repository.name] ];
         [self.navigationController pushViewController:repoViewController animated:YES];
     } else if (item.payload.type == GHPayloadForkApplyEvent) {
-        GHRepositoryViewController *repoViewController = [[[GHRepositoryViewController alloc] initWithRepositoryString:
-                                                                 [NSString stringWithFormat:@"%@/%@", item.repository.owner, item.repository.name] ] autorelease];
+        GHRepositoryViewController *repoViewController = [[GHRepositoryViewController alloc] initWithRepositoryString:
+                                                                 [NSString stringWithFormat:@"%@/%@", item.repository.owner, item.repository.name] ];
         [self.navigationController pushViewController:repoViewController animated:YES];
     } else if (item.payload.type == GHPayloadGollumEvent) {
-        GHRepositoryViewController *repoViewController = [[[GHRepositoryViewController alloc] initWithRepositoryString:
-                                                                 [NSString stringWithFormat:@"%@/%@", item.repository.owner, item.repository.name] ] autorelease];
+        GHRepositoryViewController *repoViewController = [[GHRepositoryViewController alloc] initWithRepositoryString:
+                                                                 [NSString stringWithFormat:@"%@/%@", item.repository.owner, item.repository.name] ];
         [self.navigationController pushViewController:repoViewController animated:YES];
     } else if (item.payload.type == GHPayloadForkEvent) {
-        GHRepositoryViewController *repoViewController = [[[GHRepositoryViewController alloc] initWithRepositoryString:
-                                                                 item.repository.fullName ] autorelease];
+        GHRepositoryViewController *repoViewController = [[GHRepositoryViewController alloc] initWithRepositoryString:
+                                                                 item.repository.fullName ];
         [self.navigationController pushViewController:repoViewController animated:YES];
     } else if (item.payload.type == GHPayloadMemberEvent) {
         GHMemberEventPayload *payload = (GHMemberEventPayload *)item.payload;
         
-        GHUserViewController *userViewController = [[[GHUserViewController alloc] initWithUsername:payload.member.login] autorelease];
+        GHUserViewController *userViewController = [[GHUserViewController alloc] initWithUsername:payload.member.login];
         [self.navigationController pushViewController:userViewController animated:YES];
     } else if (item.payload.type == GHPayloadGistEvent) {
         GHGistEventPayload *payload = (GHGistEventPayload *)item.payload;
         
-        GHGistViewController *gistViewController = [[[GHGistViewController alloc] initWithID:payload.gistID] autorelease];
+        GHGistViewController *gistViewController = [[GHGistViewController alloc] initWithID:payload.gistID];
         [self.navigationController pushViewController:gistViewController animated:YES];
     } else {
         [self.tableView deselectRowAtIndexPath:indexPath animated:NO];
@@ -586,7 +581,7 @@
 
 - (id)initWithCoder:(NSCoder *)decoder {
     if ((self = [super initWithCoder:decoder])) {
-        _newsFeed = [[decoder decodeObjectForKey:@"newsFeed"] retain];
+        _newsFeed = [decoder decodeObjectForKey:@"newsFeed"];
     }
     return self;
 }

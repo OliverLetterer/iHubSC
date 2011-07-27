@@ -19,7 +19,7 @@ CGFloat const GHPMileStoneTableViewCellHeight = 66.0f;
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if ((self = [super initWithStyle:style reuseIdentifier:reuseIdentifier])) {
         // Initialization code
-        self.progressView = [[[GHPieChartProgressView alloc] initWithFrame:CGRectZero] autorelease];
+        self.progressView = [[GHPieChartProgressView alloc] initWithFrame:CGRectZero];
         [self.contentView addSubview:self.progressView];
     }
     return self;
@@ -51,10 +51,5 @@ CGFloat const GHPMileStoneTableViewCellHeight = 66.0f;
 
 #pragma mark - Memory management
 
-- (void)dealloc {
-    [_progressView release];
-    
-    [super dealloc];
-}
 
 @end

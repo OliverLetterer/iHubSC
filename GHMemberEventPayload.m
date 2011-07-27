@@ -24,18 +24,13 @@
     if ((self = [super initWithRawDictionary:rawDictionary])) {
         // Initialization code
         self.action = [rawDictionary objectForKeyOrNilOnNullObject:@"action"];
-        self.member = [[[GHActorAttributes alloc] initWithRawDictionary:[rawDictionary objectForKeyOrNilOnNullObject:@"member"]] autorelease];
+        self.member = [[GHActorAttributes alloc] initWithRawDictionary:[rawDictionary objectForKeyOrNilOnNullObject:@"member"]];
     }
     return self;
 }
 
 #pragma mark - Memory management
 
-- (void)dealloc {
-    [_action release];
-    [_member release];
-    [super dealloc];
-}
 
 #pragma mark - NSCoding
 

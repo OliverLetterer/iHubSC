@@ -58,7 +58,7 @@
         NSMutableArray *commitsArray = [NSMutableArray array];
         NSArray *commits = [rawDictionary objectForKeyOrNilOnNullObject:@"shas"];
         for (NSArray *commitArray in commits) {
-            [commitsArray addObject:[[[GHCommitMessage alloc] initWithRawArray:commitArray] autorelease]];
+            [commitsArray addObject:[[GHCommitMessage alloc] initWithRawArray:commitArray]];
         }
         self.commits = commitsArray;
     }
@@ -67,12 +67,6 @@
 
 #pragma mark - Memory management
 
-- (void)dealloc {
-    [_head release];
-    [_ref release];
-    [_commits release];
-    [super dealloc];
-}
 
 #pragma mark - NSCoding
 

@@ -22,23 +22,14 @@
         self.label = [rawDictionary objectForKeyOrNilOnNullObject:@"label"];
         self.ref = [rawDictionary objectForKeyOrNilOnNullObject:@"ref"];
         self.sha = [rawDictionary objectForKeyOrNilOnNullObject:@"sha"];
-        self.repository = [[[GHRepository alloc] initWithRawDictionary:[rawDictionary objectForKeyOrNilOnNullObject:@"repository"] ] autorelease];
-        self.user = [[[GHUser alloc] initWithRawDictionary:[rawDictionary objectForKeyOrNilOnNullObject:@"user"] ] autorelease];
+        self.repository = [[GHRepository alloc] initWithRawDictionary:[rawDictionary objectForKeyOrNilOnNullObject:@"repository"] ];
+        self.user = [[GHUser alloc] initWithRawDictionary:[rawDictionary objectForKeyOrNilOnNullObject:@"user"] ];
     }
     return self;
 }
 
 #pragma mark - Memory management
 
-- (void)dealloc {
-    [_label release];
-    [_ref release];
-    [_repository release];
-    [_sha release];
-    [_user release];
-    
-    [super dealloc];
-}
 
 #pragma mark - Keyed Archiving
 
@@ -52,11 +43,11 @@
 
 - (id)initWithCoder:(NSCoder *)decoder {
     if ((self = [super init])) {
-        _label = [[decoder decodeObjectForKey:@"label"] retain];
-        _ref = [[decoder decodeObjectForKey:@"ref"] retain];
-        _repository = [[decoder decodeObjectForKey:@"repository"] retain];
-        _sha = [[decoder decodeObjectForKey:@"sha"] retain];
-        _user = [[decoder decodeObjectForKey:@"user"] retain];
+        _label = [decoder decodeObjectForKey:@"label"];
+        _ref = [decoder decodeObjectForKey:@"ref"];
+        _repository = [decoder decodeObjectForKey:@"repository"];
+        _sha = [decoder decodeObjectForKey:@"sha"];
+        _user = [decoder decodeObjectForKey:@"user"];
     }
     return self;
 }

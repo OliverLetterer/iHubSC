@@ -15,7 +15,7 @@
 #pragma mark - setters and getters
 
 - (void)setUsername:(NSString *)username {
-    [_username release], _username = [username copy];
+    _username = [username copy];
     
     [GHAPIOrganizationV3 organizationsOfUser:username page:1 
                            completionHandler:^(NSMutableArray *array, NSUInteger nextPage, NSError *error) {
@@ -52,11 +52,6 @@
 
 #pragma mark - Memory management
 
-- (void)dealloc {
-    [_username release];
-    
-    [super dealloc];
-}
 
 #pragma mark - Keyed Archiving
 
@@ -67,7 +62,7 @@
 
 - (id)initWithCoder:(NSCoder *)decoder {
     if ((self = [super initWithCoder:decoder])) {
-        _username = [[decoder decodeObjectForKey:@"username"] retain];
+        _username = [decoder decodeObjectForKey:@"username"];
     }
     return self;
 }

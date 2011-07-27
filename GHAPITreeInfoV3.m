@@ -27,12 +27,6 @@
 
 #pragma mark - Memory management
 
-- (void)dealloc {
-    [_URL release];
-    [_SHA release];
-    
-    [super dealloc];
-}
 
 #pragma mark - Keyed Archiving
 
@@ -43,8 +37,8 @@
 
 - (id)initWithCoder:(NSCoder *)decoder {
     if ((self = [super init])) {
-        _URL = [[decoder decodeObjectForKey:@"uRL"] retain];
-        _SHA = [[decoder decodeObjectForKey:@"sHA"] retain];
+        _URL = [decoder decodeObjectForKey:@"uRL"];
+        _SHA = [decoder decodeObjectForKey:@"sHA"];
     }
     return self;
 }

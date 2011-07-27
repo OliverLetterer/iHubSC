@@ -16,7 +16,6 @@
 #pragma mark - setters and getters
 
 - (void)setUsername:(NSString *)username {
-    [_username release];
     _username = [username copy];
     [self pullToReleaseTableViewReloadData];
 }
@@ -40,10 +39,6 @@
 
 #pragma mark - Memory management
 
-- (void)dealloc {
-    [_username release];
-    [super dealloc];
-}
 
 #pragma mark - instance methods
 
@@ -72,7 +67,7 @@
 
 - (id)initWithCoder:(NSCoder *)decoder {
     if ((self = [super initWithCoder:decoder])) {
-        _username = [[decoder decodeObjectForKey:@"username"] retain];
+        _username = [decoder decodeObjectForKey:@"username"];
     }
     return self;
 }

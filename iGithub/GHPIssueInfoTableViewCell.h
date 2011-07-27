@@ -24,11 +24,11 @@
 @private
     DTAttributedTextContentView *_attributedTextView;
     
-    id<GHPIssueInfoTableViewCellDelegate> _buttonDelegate;
+    id<GHPIssueInfoTableViewCellDelegate> __weak _buttonDelegate;
 }
 
 @property (nonatomic, retain) DTAttributedTextContentView *attributedTextView;
-@property (nonatomic, assign) id<GHPIssueInfoTableViewCellDelegate> buttonDelegate;
+@property (nonatomic, weak) id<GHPIssueInfoTableViewCellDelegate> buttonDelegate;
 
 - (void)linkButtonClicked:(DTLinkButton *)sender;
 - (void)longPressRecognized:(UILongPressGestureRecognizer *)recognizer;

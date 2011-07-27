@@ -28,13 +28,6 @@
 
 #pragma mark - Memory management
 
-- (void)dealloc {
-    [_URL release];
-    [_name release];
-    [_colorString release];
-    
-    [super dealloc];
-}
 
 #pragma mark - Keyed Archiving
 
@@ -46,9 +39,9 @@
 
 - (id)initWithCoder:(NSCoder *)decoder {
     if ((self = [super init])) {
-        _URL = [[decoder decodeObjectForKey:@"uRL"] retain];
-        _name = [[decoder decodeObjectForKey:@"name"] retain];
-        _colorString = [[decoder decodeObjectForKey:@"colorString"] retain];
+        _URL = [decoder decodeObjectForKey:@"uRL"];
+        _name = [decoder decodeObjectForKey:@"name"];
+        _colorString = [decoder decodeObjectForKey:@"colorString"];
     }
     return self;
 }

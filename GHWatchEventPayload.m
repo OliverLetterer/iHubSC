@@ -30,10 +30,6 @@
 
 #pragma mark - Memory management
 
-- (void)dealloc {
-    [_action release];
-    [super dealloc];
-}
 
 #pragma mark - NSCoding
 

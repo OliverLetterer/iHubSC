@@ -38,8 +38,8 @@
     // top shadow layer
     gradientLayer = [CAGradientLayer layer];
     gradientLayer.colors = [NSArray arrayWithObjects:
-                            (id)topShadowColor, 
-                            (id)bottomShadowColor, 
+                            (__bridge id)topShadowColor, 
+                            (__bridge id)bottomShadowColor, 
                             nil];
     gradientLayer.locations = [NSArray arrayWithObjects:
                                [NSNumber numberWithFloat:0.0],
@@ -51,8 +51,8 @@
     // bottom shadow layer
     gradientLayer = [CAGradientLayer layer];
     gradientLayer.colors = [NSArray arrayWithObjects:
-                            (id)topShadowColor, 
-                            (id)bottomShadowColor, 
+                            (__bridge id)topShadowColor, 
+                            (__bridge id)bottomShadowColor, 
                             nil];
     gradientLayer.locations = [NSArray arrayWithObjects:
                                [NSNumber numberWithFloat:0.0],
@@ -65,8 +65,8 @@
     // left shadow layer
     gradientLayer = [CAGradientLayer layer];
     gradientLayer.colors = [NSArray arrayWithObjects:
-                            (id)topShadowColor, 
-                            (id)bottomShadowColor, 
+                            (__bridge id)topShadowColor, 
+                            (__bridge id)bottomShadowColor, 
                             nil];
     gradientLayer.locations = [NSArray arrayWithObjects:
                                [NSNumber numberWithFloat:0.0],
@@ -79,8 +79,8 @@
     // right shadow layer
     gradientLayer = [CAGradientLayer layer];
     gradientLayer.colors = [NSArray arrayWithObjects:
-                            (id)topShadowColor, 
-                            (id)bottomShadowColor, 
+                            (__bridge id)topShadowColor, 
+                            (__bridge id)bottomShadowColor, 
                             nil];
     gradientLayer.locations = [NSArray arrayWithObjects:
                                [NSNumber numberWithFloat:0.0],

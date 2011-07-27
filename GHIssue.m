@@ -59,7 +59,7 @@
     
     NSManagedObjectContext *moc = GHSharedManagedObjectContext();
     NSEntityDescription *entityDescription = [NSEntityDescription entityForName:@"GHIssue" inManagedObjectContext:moc];
-    NSFetchRequest *request = [[[NSFetchRequest alloc] init] autorelease];
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
     [request setEntity:entityDescription];
     
     // Set example predicate and sort orderings...
@@ -95,7 +95,7 @@
     
     NSManagedObjectContext *moc = GHSharedManagedObjectContext();
     NSEntityDescription *entityDescription = [NSEntityDescription entityForName:@"GHIssue" inManagedObjectContext:moc];
-    NSFetchRequest *request = [[[NSFetchRequest alloc] init] autorelease];
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
     [request setEntity:entityDescription];
     
     // Set example predicate and sort orderings...
@@ -145,7 +145,7 @@
         myError = [request error];
         
         NSData *issueData = [request responseData];
-        NSString *issueString = [[[NSString alloc] initWithData:issueData encoding:NSUTF8StringEncoding] autorelease];
+        NSString *issueString = [[NSString alloc] initWithData:issueData encoding:NSUTF8StringEncoding];
         
         dispatch_async(dispatch_get_main_queue(), ^(void) {
             if (myError) {
@@ -188,7 +188,7 @@
         myError = [request error];
         
         NSData *issueData = [request responseData];
-        NSString *issueString = [[[NSString alloc] initWithData:issueData encoding:NSUTF8StringEncoding] autorelease];
+        NSString *issueString = [[NSString alloc] initWithData:issueData encoding:NSUTF8StringEncoding];
         
         dispatch_async(dispatch_get_main_queue(), ^(void) {
             if (myError) {
@@ -197,7 +197,7 @@
                 NSDictionary *responseDictionary = [issueString objectFromJSONString];
                 NSDictionary *rawDictionary = [responseDictionary objectForKey:@"comment"];
                 
-                GHIssueComment *comment = [[[GHIssueComment alloc] initWithRawDictionary:rawDictionary] autorelease];
+                GHIssueComment *comment = [[GHIssueComment alloc] initWithRawDictionary:rawDictionary];
                 
                 handler(comment, nil);
             }

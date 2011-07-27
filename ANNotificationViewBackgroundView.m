@@ -16,8 +16,7 @@
 
 - (void)setColors:(NSArray *)colors {
     if (colors != _colors) {
-        [_colors release];
-        _colors = [colors retain];
+        _colors = colors;
         
         CGFloat numberOfColors = (CGFloat) _colors.count;
         
@@ -28,7 +27,7 @@
         }
         
         CGGradientRelease(_gradient);
-        _gradient = CGGradientCreateWithColors(_colorSpace, (CFArrayRef)_colors, locations);
+        _gradient = CGGradientCreateWithColors(_colorSpace, (__bridge CFArrayRef)_colors, locations);
         
         free(locations);
         
@@ -54,8 +53,8 @@
         _colorSpace = CGColorSpaceCreateDeviceRGB();
         self.backgroundColor = [UIColor clearColor];
         self.colors = [NSArray arrayWithObjects:
-                       (id)[UIColor colorWithRed:192.0f/255.0 green:14.0f/255.0 blue:14.0f/255.0 alpha:1.0].CGColor, 
-                       (id)[UIColor colorWithRed:145.0f/255.0 green:14.0f/255.0 blue:14.0f/255.0 alpha:1.0].CGColor,
+                       (__bridge id)[UIColor colorWithRed:192.0f/255.0 green:14.0f/255.0 blue:14.0f/255.0 alpha:1.0].CGColor, 
+                       (__bridge id)[UIColor colorWithRed:145.0f/255.0 green:14.0f/255.0 blue:14.0f/255.0 alpha:1.0].CGColor,
                        nil];
         self.alpha = 0.98f;
         
@@ -85,7 +84,6 @@
 #pragma mark - Memory management
 
 - (void)dealloc {
-    [_colors release];
     
     if (_gradient) {
         CGGradientRelease(_gradient);
@@ -93,7 +91,6 @@
     
     CGColorSpaceRelease(_colorSpace);
     
-    [super dealloc];
 }
 
 @end

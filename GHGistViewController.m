@@ -33,7 +33,6 @@
 #pragma mark - setters and getters
 
 - (void)setID:(NSString *)ID {
-    [_ID release];
     _ID = [ID copy];
     
     self.isDownloadingEssentialData = YES;
@@ -88,19 +87,11 @@
 
 #pragma mark - Memory management
 
-- (void)dealloc {
-    [_ID release];
-    [_gist release];
-    [_comments release];
-    [_lastUserComment release];
-    
-    [super dealloc];
-}
 
 #pragma mark - instance methods
 
 - (void)cacheHeightForComments {
-    DTAttributedTextView *textView = [[[DTAttributedTextView alloc] initWithFrame:CGRectZero] autorelease];
+    DTAttributedTextView *textView = [[DTAttributedTextView alloc] initWithFrame:CGRectZero];
     [self.comments enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         GHAPIGistCommentV3 *comment = obj;
         CGFloat height = [GHAttributedTableViewCell heightWithAttributedString:comment.attributedBody 
@@ -133,7 +124,7 @@
     GHCollapsingAndSpinningTableViewCell *cell = (GHCollapsingAndSpinningTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdientifier];
     
     if (cell == nil) {
-        cell = [[[GHCollapsingAndSpinningTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdientifier] autorelease];
+        cell = [[GHCollapsingAndSpinningTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdientifier];
     }
     
     if (section == kUITableViewSectionFiles) {
@@ -222,7 +213,7 @@
             
             GHDescriptionTableViewCell *cell = (GHDescriptionTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
             if (cell == nil) {
-                cell = [[[GHDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+                cell = [[GHDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
                 cell.accessoryType = UITableViewCellAccessoryNone;
             }
             
@@ -247,7 +238,7 @@
             
             GHTableViewCellWithLinearGradientBackgroundView *cell = (GHTableViewCellWithLinearGradientBackgroundView *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
             if (!cell) {
-                cell = [[[GHTableViewCellWithLinearGradientBackgroundView alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:CellIdentifier] autorelease];
+                cell = [[GHTableViewCellWithLinearGradientBackgroundView alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:CellIdentifier];
             }
             
             cell.textLabel.text = NSLocalizedString(@"Owner", @"");
@@ -261,7 +252,7 @@
         
         GHTableViewCellWithLinearGradientBackgroundView *cell = (GHTableViewCellWithLinearGradientBackgroundView *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         if (!cell) {
-            cell = [[[GHTableViewCellWithLinearGradientBackgroundView alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
+            cell = [[GHTableViewCellWithLinearGradientBackgroundView alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
         }
         
         
@@ -277,7 +268,7 @@
         
         GHTableViewCellWithLinearGradientBackgroundView *cell = (GHTableViewCellWithLinearGradientBackgroundView *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         if (!cell) {
-            cell = [[[GHTableViewCellWithLinearGradientBackgroundView alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
+            cell = [[GHTableViewCellWithLinearGradientBackgroundView alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
         }
         
         GHAPIGistForkV3 *fork = [self.gist.forks objectAtIndex:indexPath.row - 1];
@@ -292,7 +283,7 @@
             
             GHTableViewCellWithLinearGradientBackgroundView *cell = (GHTableViewCellWithLinearGradientBackgroundView *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
             if (!cell) {
-                cell = [[[GHTableViewCellWithLinearGradientBackgroundView alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
+                cell = [[GHTableViewCellWithLinearGradientBackgroundView alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
             }
             
             cell.textLabel.text = _isGistStarred ? NSLocalizedString(@"Unstar", @"") : NSLocalizedString(@"Star", @"");
@@ -307,7 +298,7 @@
             GHAttributedTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
             
             if (!cell) {
-                cell = [[[GHAttributedTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
+                cell = [[GHAttributedTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
             }
             // display a comment
             
@@ -328,7 +319,7 @@
             
             GHNewCommentTableViewCell *cell = (GHNewCommentTableViewCell *)[self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
             if (cell == nil) {
-                cell = [[[GHNewCommentTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+                cell = [[GHNewCommentTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
             }
             
             [self updateImageView:cell.imageView atIndexPath:indexPath withAvatarURLString:[GHSettingsHelper avatarURL]];
@@ -371,12 +362,12 @@
     if (indexPath.section == kUITableViewSectionForks) {
         GHAPIGistForkV3 *fork = [self.gist.forks objectAtIndex:indexPath.row - 1];
         
-        GHUserViewController *userViewController = [[[GHUserViewController alloc] initWithUsername:fork.user.login] autorelease];
+        GHUserViewController *userViewController = [[GHUserViewController alloc] initWithUsername:fork.user.login];
         [self.navigationController pushViewController:userViewController animated:YES];
     } else if (indexPath.section == kUITableViewSectionFiles) {
         GHAPIGistFileV3 *file = [self.gist.files objectAtIndex:indexPath.row - 1];
         
-        GHViewCloudFileViewController *fileViewController = [[[GHViewCloudFileViewController alloc] initWithFile:file.filename contentsOfFile:file.content] autorelease];
+        GHViewCloudFileViewController *fileViewController = [[GHViewCloudFileViewController alloc] initWithFile:file.filename contentsOfFile:file.content];
         [self.navigationController pushViewController:fileViewController animated:YES];
     } else if (indexPath.section == kUITableViewSectionStar && indexPath.row == 1) {
         if (_isGistStarred) {
@@ -403,10 +394,10 @@
     } else if (indexPath.section == kUITableViewSectionComments && indexPath.row > 0 && indexPath.row <= self.comments.count) {
         GHAPIGistCommentV3 *comment = [self.comments objectAtIndex:indexPath.row - 1];
         
-        GHUserViewController *userViewController = [[[GHUserViewController alloc] initWithUsername:comment.user.login] autorelease];
+        GHUserViewController *userViewController = [[GHUserViewController alloc] initWithUsername:comment.user.login];
         [self.navigationController pushViewController:userViewController animated:YES];
     } else if (indexPath.section == kUITableViewSectionInfo && indexPath.row == 1) {
-        GHUserViewController *userViewController = [[[GHUserViewController alloc] initWithUsername:self.gist.user.login] autorelease];
+        GHUserViewController *userViewController = [[GHUserViewController alloc] initWithUsername:self.gist.user.login];
         [self.navigationController pushViewController:userViewController animated:YES];
     } else {
         [tableView deselectRowAtIndexPath:indexPath animated:NO];
@@ -416,7 +407,7 @@
 #pragma mark - GHAttributedTableViewCellDelegate
 
 - (void)attributedTableViewCell:(GHAttributedTableViewCell *)cell receivedClickForButton:(DTLinkButton *)button {
-    GHWebViewViewController *viewController = [[[GHWebViewViewController alloc] initWithURL:button.url ] autorelease];
+    GHWebViewViewController *viewController = [[GHWebViewViewController alloc] initWithURL:button.url ];
     [self.navigationController pushViewController:viewController animated:YES];
 }
 
@@ -447,12 +438,12 @@
 
 - (id)initWithCoder:(NSCoder *)decoder {
     if ((self = [super initWithCoder:decoder])) {
-        _ID = [[decoder decodeObjectForKey:@"iD"] retain];
-        _gist = [[decoder decodeObjectForKey:@"gist"] retain];
+        _ID = [decoder decodeObjectForKey:@"iD"];
+        _gist = [decoder decodeObjectForKey:@"gist"];
         _hasStarData = [decoder decodeBoolForKey:@"hasStarData"];
         _isGistStarred = [decoder decodeBoolForKey:@"isGistStarred"];
-        _comments = [[decoder decodeObjectForKey:@"comments"] retain];
-        _lastUserComment = [[decoder decodeObjectForKey:@"lastUserComment"] retain];
+        _comments = [decoder decodeObjectForKey:@"comments"];
+        _lastUserComment = [decoder decodeObjectForKey:@"lastUserComment"];
     }
     return self;
 }

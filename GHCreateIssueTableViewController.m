@@ -34,15 +34,6 @@
 
 #pragma mark - Memory management
 
-- (void)dealloc {
-    [_repository release];
-    [_textViewToolBar release];
-    [_textView release];
-    [_collaborators release];
-    [_milestones release];
-    
-    [super dealloc];
-}
 
 - (void)didReceiveMemoryWarning {
     // Releases the view if it doesn't have a superview.
@@ -97,36 +88,32 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    UIBarButtonItem *cancelButton = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel 
+    UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel 
                                                                                    target:self 
-                                                                                   action:@selector(cancelButtonClicked:)]
-                                     autorelease];
+                                                                                   action:@selector(cancelButtonClicked:)];
     self.navigationItem.leftBarButtonItem = cancelButton;
     
-    UIBarButtonItem *saveButton = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave 
+    UIBarButtonItem *saveButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave 
                                                                                  target:self 
-                                                                                 action:@selector(saveButtonClicked:)]
-                                   autorelease];
+                                                                                 action:@selector(saveButtonClicked:)];
     self.navigationItem.rightBarButtonItem = saveButton;
     
     
-    self.textViewToolBar = [[[UIToolbar alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0, 44.0)] autorelease];
+    self.textViewToolBar = [[UIToolbar alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0, 44.0)];
     self.textViewToolBar.barStyle = UIBarStyleBlackTranslucent;
     
     UIBarButtonItem *item = nil;
     NSMutableArray *items = [NSMutableArray array];
     
-    item = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace 
+    item = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace 
                                                           target:nil 
-                                                          action:@selector(noAction)]
-            autorelease];
+                                                          action:@selector(noAction)];
     [items addObject:item];
     
-    item = [[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Done", @"") 
+    item = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Done", @"") 
                                              style:UIBarButtonItemStyleDone 
                                             target:self 
-                                            action:@selector(toolbarDoneButtonClicked:)]
-            autorelease];
+                                            action:@selector(toolbarDoneButtonClicked:)];
     [items addObject:item];
     
     self.textViewToolBar.items = items;
@@ -181,7 +168,7 @@
     
     GHCollapsingAndSpinningTableViewCell *cell = (GHCollapsingAndSpinningTableViewCell *)[self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[GHCollapsingAndSpinningTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[GHCollapsingAndSpinningTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     
     if (section == kUITableViewSectionAssigned) {
@@ -243,12 +230,11 @@
                                                        }];
                         } else {
                             [tableView cancelDownloadInSection:section];
-                            UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", @"") 
+                            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", @"") 
                                                                              message:NSLocalizedString(@"You are not a Collaborator on this Repository. You don't have permission to assign a Milestone!", @"") 
                                                                             delegate:nil 
                                                                    cancelButtonTitle:NSLocalizedString(@"OK", @"") 
-                                                                   otherButtonTitles:nil]
-                                                  autorelease];
+                                                                   otherButtonTitles:nil];
                             [alert show];
                         }
                     }
@@ -312,7 +298,7 @@
             
             GHCreateIssueTableViewCell *cell = (GHCreateIssueTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
             if (cell == nil) {
-                cell = [[[GHCreateIssueTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+                cell = [[GHCreateIssueTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
             }
             
@@ -328,7 +314,7 @@
         
         GHTableViewCellWithLinearGradientBackgroundView *cell = (GHTableViewCellWithLinearGradientBackgroundView *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         if (!cell) {
-            cell = [[[GHTableViewCellWithLinearGradientBackgroundView alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+            cell = [[GHTableViewCellWithLinearGradientBackgroundView alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         }
         
         GHAPIUserV3 *user = [self.collaborators objectAtIndex:indexPath.row - 1];
@@ -347,7 +333,7 @@
         
         GHTableViewCellWithLinearGradientBackgroundView *cell = (GHTableViewCellWithLinearGradientBackgroundView *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         if (!cell) {
-            cell = [[[GHTableViewCellWithLinearGradientBackgroundView alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+            cell = [[GHTableViewCellWithLinearGradientBackgroundView alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         }
         
         GHAPIMilestoneV3 *milestone = [self.milestones objectAtIndex:indexPath.row - 1];
@@ -438,12 +424,12 @@
 
 - (id)initWithCoder:(NSCoder *)decoder {
     if ((self = [super initWithCoder:decoder])) {
-        _repository = [[decoder decodeObjectForKey:@"repository"] retain];
-        _collaborators = [[decoder decodeObjectForKey:@"collaborators"] retain];
+        _repository = [decoder decodeObjectForKey:@"repository"];
+        _collaborators = [decoder decodeObjectForKey:@"collaborators"];
         _assignIndex = [decoder decodeIntegerForKey:@"assignIndex"];
         _hasCollaboratorState = [decoder decodeBoolForKey:@"hasCollaboratorState"];
         _isCollaborator = [decoder decodeBoolForKey:@"isCollaborator"];
-        _milestones = [[decoder decodeObjectForKey:@"milestones"] retain];
+        _milestones = [decoder decodeObjectForKey:@"milestones"];
         _assignesMilestoneIndex = [decoder decodeIntegerForKey:@"assignesMilestoneIndex"];
     }
     return self;

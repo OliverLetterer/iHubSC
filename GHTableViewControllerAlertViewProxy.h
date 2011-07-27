@@ -21,11 +21,11 @@
 
 @interface GHTableViewControllerAlertViewProxy : NSObject {
 @private
-    id<GHTableViewControllerAlertViewProxyDelegate> _delegate;
+    id<GHTableViewControllerAlertViewProxyDelegate> __weak _delegate;
     UIAlertView *_alert;
 }
 
-@property (nonatomic, assign) id<GHTableViewControllerAlertViewProxyDelegate> delegate;
+@property (nonatomic, weak) id<GHTableViewControllerAlertViewProxyDelegate> delegate;
 @property (nonatomic, retain) UIAlertView *alert;
 
 - (id)initWithAlertView:(UIAlertView *)alertView delegate:(id<GHTableViewControllerAlertViewProxyDelegate>)delegate;

@@ -17,17 +17,17 @@
 
 - (NSAttributedString *)attributedBody {
     if (!_attributedBody) {
-        _attributedBody = [self.body.attributesStringFromMarkdownString retain];
+        _attributedBody = self.body.attributesStringFromMarkdownString;
     }
     return _attributedBody;
 }
 
 - (NSAttributedString *)selectedAttributedBody {
     if (!_selectedAttributedBody) {
-        WASelectedAttributedMarkdownFormatter *formatter = [[[WASelectedAttributedMarkdownFormatter alloc] init] autorelease];
+        WASelectedAttributedMarkdownFormatter *formatter = [[WASelectedAttributedMarkdownFormatter alloc] init];
         NSString *HTML = [formatter HTMLForMarkdown:self.body];
         NSData *HTMLData = [HTML dataUsingEncoding:NSUTF8StringEncoding];
-        _selectedAttributedBody = [[NSAttributedString attributedStringWithHTML:HTMLData options:nil] retain];
+        _selectedAttributedBody = [NSAttributedString attributedStringWithHTML:HTMLData options:nil];
     }
     return _selectedAttributedBody;
 }
@@ -43,24 +43,13 @@
         self.body = [rawDictionary objectForKeyOrNilOnNullObject:@"body"];
         self.createdAt = [rawDictionary objectForKeyOrNilOnNullObject:@"created_at"];
         
-        self.user = [[[GHAPIUserV3 alloc] initWithRawDictionary:[rawDictionary objectForKeyOrNilOnNullObject:@"user"] ] autorelease];
+        self.user = [[GHAPIUserV3 alloc] initWithRawDictionary:[rawDictionary objectForKeyOrNilOnNullObject:@"user"] ];
     }
     return self;
 }
 
 #pragma mark - Memory management
 
-- (void)dealloc {
-    [_ID release];
-    [_URL release];
-    [_body release];
-    [_user release];
-    [_createdAt release];
-    [_attributedBody release];
-    [_selectedAttributedBody release];
-    
-    [super dealloc];
-}
 
 #pragma mark - Keyed Archiving
 
@@ -74,11 +63,11 @@
 
 - (id)initWithCoder:(NSCoder *)decoder {
     if ((self = [super init])) {
-        _ID = [[decoder decodeObjectForKey:@"iD"] retain];
-        _URL = [[decoder decodeObjectForKey:@"uRL"] retain];
-        _body = [[decoder decodeObjectForKey:@"body"] retain];
-        _user = [[decoder decodeObjectForKey:@"user"] retain];
-        _createdAt = [[decoder decodeObjectForKey:@"createdAt"] retain];
+        _ID = [decoder decodeObjectForKey:@"iD"];
+        _URL = [decoder decodeObjectForKey:@"uRL"];
+        _body = [decoder decodeObjectForKey:@"body"];
+        _user = [decoder decodeObjectForKey:@"user"];
+        _createdAt = [decoder decodeObjectForKey:@"createdAt"];
     }
     return self;
 }

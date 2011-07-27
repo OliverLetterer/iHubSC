@@ -54,27 +54,13 @@
         self.state = [rawDictionary objectForKeyOrNilOnNullObject:@"state"];
         self.title = [rawDictionary objectForKeyOrNilOnNullObject:@"title"];
         self.URL = [rawDictionary objectForKeyOrNilOnNullObject:@"url"];
-        self.creator = [[[GHAPIUserV3 alloc] initWithRawDictionary:[rawDictionary objectForKeyOrNilOnNullObject:@"creator"] ] autorelease];
+        self.creator = [[GHAPIUserV3 alloc] initWithRawDictionary:[rawDictionary objectForKeyOrNilOnNullObject:@"creator"] ];
     }
     return self;
 }
 
 #pragma mark - Memory management
 
-- (void)dealloc {
-    [_closedIssues release];
-    [_createdAt release];
-    [_creator release];
-    [_milestoneDescription release];
-    [_dueOn release];
-    [_number release];
-    [_openIssues release];
-    [_state release];
-    [_title release];
-    [_URL release];
-    
-    [super dealloc];
-}
 
 #pragma mark - Keyed Archiving
 
@@ -93,16 +79,16 @@
 
 - (id)initWithCoder:(NSCoder *)decoder {
     if ((self = [super init])) {
-        _closedIssues = [[decoder decodeObjectForKey:@"closedIssues"] retain];
-        _createdAt = [[decoder decodeObjectForKey:@"createdAt"] retain];
-        _creator = [[decoder decodeObjectForKey:@"creator"] retain];
-        _milestoneDescription = [[decoder decodeObjectForKey:@"milestoneDescription"] retain];
-        _dueOn = [[decoder decodeObjectForKey:@"dueOn"] retain];
-        _number = [[decoder decodeObjectForKey:@"number"] retain];
-        _openIssues = [[decoder decodeObjectForKey:@"openIssues"] retain];
-        _state = [[decoder decodeObjectForKey:@"state"] retain];
-        _title = [[decoder decodeObjectForKey:@"title"] retain];
-        _URL = [[decoder decodeObjectForKey:@"uRL"] retain];
+        _closedIssues = [decoder decodeObjectForKey:@"closedIssues"];
+        _createdAt = [decoder decodeObjectForKey:@"createdAt"];
+        _creator = [decoder decodeObjectForKey:@"creator"];
+        _milestoneDescription = [decoder decodeObjectForKey:@"milestoneDescription"];
+        _dueOn = [decoder decodeObjectForKey:@"dueOn"];
+        _number = [decoder decodeObjectForKey:@"number"];
+        _openIssues = [decoder decodeObjectForKey:@"openIssues"];
+        _state = [decoder decodeObjectForKey:@"state"];
+        _title = [decoder decodeObjectForKey:@"title"];
+        _URL = [decoder decodeObjectForKey:@"uRL"];
     }
     return self;
 }
@@ -122,7 +108,7 @@
         if (error) {
             handler(nil, error);
         } else {
-            handler([[[GHAPIMilestoneV3 alloc] initWithRawDictionary:object] autorelease], nil);
+            handler([[GHAPIMilestoneV3 alloc] initWithRawDictionary:object], nil);
         }
     }];
 }

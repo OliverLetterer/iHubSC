@@ -52,15 +52,6 @@
 
 #pragma mark - Memory management
 
-- (void)dealloc {
-    [_repository release];
-    [_milestoneNumber release];
-    [_openIssues release];
-    [_closedIssues release];
-    [_milestone release];
-    
-    [super dealloc];
-}
 
 - (void)didReceiveMemoryWarning {
     // Releases the view if it doesn't have a superview.
@@ -237,7 +228,7 @@
             
             GHPImageDetailTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
             if (cell == nil) {
-                cell = [[[GHPImageDetailTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
+                cell = [[GHPImageDetailTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
             }
             [self setupDefaultTableViewCell:cell forRowAtIndexPath:indexPath];
             
@@ -257,7 +248,7 @@
             
             GHPImageDetailTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
             if (cell == nil) {
-                cell = [[[GHPImageDetailTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
+                cell = [[GHPImageDetailTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
             }
             [self setupDefaultTableViewCell:cell forRowAtIndexPath:indexPath];
             
@@ -331,7 +322,7 @@
     }
     
     if (issue) {
-        viewController = [[[GHPIssueViewController alloc] initWithIssueNumber:issue.number onRepository:self.repository] autorelease];
+        viewController = [[GHPIssueViewController alloc] initWithIssueNumber:issue.number onRepository:self.repository];
         [self.advancedNavigationController pushViewController:viewController afterViewController:self animated:YES];
     }
 }
@@ -365,11 +356,11 @@
 
 - (id)initWithCoder:(NSCoder *)decoder {
     if ((self = [super initWithCoder:decoder])) {
-        _milestone = [[decoder decodeObjectForKey:@"milestone"] retain];
-        _repository = [[decoder decodeObjectForKey:@"repository"] retain];
-        _milestoneNumber = [[decoder decodeObjectForKey:@"milestoneNumber"] retain];
-        _openIssues = [[decoder decodeObjectForKey:@"openIssues"] retain];
-        _closedIssues = [[decoder decodeObjectForKey:@"closedIssues"] retain];
+        _milestone = [decoder decodeObjectForKey:@"milestone"];
+        _repository = [decoder decodeObjectForKey:@"repository"];
+        _milestoneNumber = [decoder decodeObjectForKey:@"milestoneNumber"];
+        _openIssues = [decoder decodeObjectForKey:@"openIssues"];
+        _closedIssues = [decoder decodeObjectForKey:@"closedIssues"];
     }
     return self;
 }

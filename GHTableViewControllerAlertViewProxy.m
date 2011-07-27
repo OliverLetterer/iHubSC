@@ -27,11 +27,6 @@
 
 #pragma mark - Memory management
 
-- (void)dealloc {
-    [_alert release];
-    
-    [super dealloc];
-}
 
 #pragma mark - UIAlertViewDelegate
 

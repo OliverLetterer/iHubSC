@@ -23,17 +23,13 @@
 
 - (id)init {
     if ((self = [super init])) {
-        self.imagesCache = [[[NSCache alloc] init] autorelease];
+        self.imagesCache = [[NSCache alloc] init];
     }
     return self;
 }
 
 #pragma mark - Memory management
 
-- (void)dealloc {
-    [_imagesCache release];
-    [super dealloc];
-}
 
 @end
 
@@ -58,27 +54,11 @@ static GHGravatarBackgroundQueue *_instance = nil;
 }
 
 + (id)allocWithZone:(NSZone *)zone {	
-	return [[self sharedInstance] retain];	
+	return [self sharedInstance];	
 }
 
 
 - (id)copyWithZone:(NSZone *)zone {
-    return self;	
-}
-
-- (id)retain {	
-    return self;	
-}
-
-- (NSUInteger)retainCount {
-    return NSUIntegerMax;
-}
-
-- (void)release {
-    //do nothing
-}
-
-- (id)autorelease {
     return self;	
 }
 

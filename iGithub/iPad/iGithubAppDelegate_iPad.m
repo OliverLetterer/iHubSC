@@ -41,8 +41,8 @@
     [GHAPIAuthenticationManager sharedInstance].username = [GHSettingsHelper username];
     [GHAPIAuthenticationManager sharedInstance].password = [GHSettingsHelper password];
 #else
-    [GHAuthenticationManager sharedInstance].username = [GHSettingsHelper username];
-    [GHAuthenticationManager sharedInstance].password = [GHSettingsHelper password];
+    [GHAPIAuthenticationManager sharedInstance].username = [GHSettingsHelper username];
+    [GHAPIAuthenticationManager sharedInstance].password = [GHSettingsHelper password];
 #endif
     
     NSMutableDictionary *dictionary = [self deserializeState];
@@ -52,17 +52,17 @@
         GHPLeftNavigationController *leftViewController = [dictionary objectForKey:@"leftViewController"];
         NSUInteger indexOfFrontViewController = [[dictionary objectForKey:@"indexOfFrontViewController"] unsignedIntegerValue];
         
-        self.advancedNavigationController = [[[ANAdvancedNavigationController alloc] initWithLeftViewController:leftViewController rightViewControllers:rightViewControllers] autorelease];
+        self.advancedNavigationController = [[ANAdvancedNavigationController alloc] initWithLeftViewController:leftViewController rightViewControllers:rightViewControllers];
         self.advancedNavigationController.delegate = self;
-        self.advancedNavigationController.backgroundView = [[[UIView alloc] initWithFrame:CGRectZero] autorelease];
+        self.advancedNavigationController.backgroundView = [[UIView alloc] initWithFrame:CGRectZero];
         self.advancedNavigationController.backgroundView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"ANBackgroundImage.png"] ];
         self.advancedNavigationController.indexOfFrontViewController = indexOfFrontViewController;
     } else {
-        GHPLeftNavigationController *leftViewController = [[[GHPLeftNavigationController alloc] initWithStyle:UITableViewStyleGrouped] autorelease];
+        GHPLeftNavigationController *leftViewController = [[GHPLeftNavigationController alloc] initWithStyle:UITableViewStyleGrouped];
         
-        self.advancedNavigationController = [[[ANAdvancedNavigationController alloc] initWithLeftViewController:leftViewController] autorelease];
+        self.advancedNavigationController = [[ANAdvancedNavigationController alloc] initWithLeftViewController:leftViewController];
         self.advancedNavigationController.delegate = self;
-        self.advancedNavigationController.backgroundView = [[[UIView alloc] initWithFrame:CGRectZero] autorelease];
+        self.advancedNavigationController.backgroundView = [[UIView alloc] initWithFrame:CGRectZero];
         self.advancedNavigationController.backgroundView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"ANBackgroundImage.png"] ];
     }
     
@@ -76,9 +76,7 @@
     if (_advancedNavigationController.delegate == self) {
         _advancedNavigationController.delegate = nil;
     }
-    [_advancedNavigationController release];
     
-	[super dealloc];
 }
 
 #pragma mark - Serialization

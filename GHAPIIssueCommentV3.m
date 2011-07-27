@@ -20,17 +20,17 @@
 
 - (NSAttributedString *)attributedBody {
     if (!_attributedBody) {
-        _attributedBody = [self.body.attributesStringFromMarkdownString retain];
+        _attributedBody = self.body.attributesStringFromMarkdownString;
     }
     return _attributedBody;
 }
 
 - (NSAttributedString *)selectedAttributedBody {
     if (!_selectedAttributedBody) {
-        WASelectedAttributedMarkdownFormatter *formatter = [[[WASelectedAttributedMarkdownFormatter alloc] init] autorelease];
+        WASelectedAttributedMarkdownFormatter *formatter = [[WASelectedAttributedMarkdownFormatter alloc] init];
         NSString *HTML = [formatter HTMLForMarkdown:self.body];
         NSData *HTMLData = [HTML dataUsingEncoding:NSUTF8StringEncoding];
-        _selectedAttributedBody = [[NSAttributedString attributedStringWithHTML:HTMLData options:nil] retain];
+        _selectedAttributedBody = [NSAttributedString attributedStringWithHTML:HTMLData options:nil];
     }
     return _selectedAttributedBody;
 }
@@ -47,7 +47,7 @@
         self.updatedAt = [rawDictionary objectForKeyOrNilOnNullObject:@"updated_at"];
         self.URL = [rawDictionary objectForKeyOrNilOnNullObject:@"url"];
         
-        self.user = [[[GHAPIUserV3 alloc] initWithRawDictionary:[rawDictionary objectForKeyOrNilOnNullObject:@"user"] ] autorelease];
+        self.user = [[GHAPIUserV3 alloc] initWithRawDictionary:[rawDictionary objectForKeyOrNilOnNullObject:@"user"] ];
     }
     return self;
 }
@@ -67,17 +67,6 @@
 
 #pragma mark - Memory management
 
-- (void)dealloc {
-    [_URL release];
-    [_body release];
-    [_user release];
-    [_createdAt release];
-    [_updatedAt release];
-    [_attributedBody release];
-    [_selectedAttributedBody release];
-    
-    [super dealloc];
-}
 
 #pragma mark - Keyed Archiving
 
@@ -91,12 +80,12 @@
 
 - (id)initWithCoder:(NSCoder *)decoder {
     if ((self = [super init])) {
-        _URL = [[decoder decodeObjectForKey:@"uRL"] retain];
-        _body = [[decoder decodeObjectForKey:@"body"] retain];
+        _URL = [decoder decodeObjectForKey:@"uRL"];
+        _body = [decoder decodeObjectForKey:@"body"];
         self.attributedBody = _body.attributesStringFromMarkdownString;
-        _user = [[decoder decodeObjectForKey:@"user"] retain];
-        _createdAt = [[decoder decodeObjectForKey:@"createdAt"] retain];
-        _updatedAt = [[decoder decodeObjectForKey:@"updatedAt"] retain];
+        _user = [decoder decodeObjectForKey:@"user"];
+        _createdAt = [decoder decodeObjectForKey:@"createdAt"];
+        _updatedAt = [decoder decodeObjectForKey:@"updatedAt"];
     }
     return self;
 }

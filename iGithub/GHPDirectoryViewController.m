@@ -15,8 +15,7 @@
 
 - (void)setDirectory:(GHDirectory *)directory {
     if (directory != _directory) {
-        [_directory release];
-        _directory = [directory retain];
+        _directory = directory;
         
         self.title = _directory.lastNameComponent;
     }
@@ -36,13 +35,6 @@
 
 #pragma mark - Memory management
 
-- (void)dealloc {
-    [_directory release];
-    [_repository release];
-    [_branch release];
-    [_hash release];
-    [super dealloc];
-}
 
 #pragma mark - Table view data source
 
@@ -96,20 +88,18 @@
         // wow, another directory
         GHDirectory *directory = [self.directory.directories objectAtIndex:indexPath.row];
         
-        viewController = [[[GHPDirectoryViewController alloc] initWithDirectory:directory 
+        viewController = [[GHPDirectoryViewController alloc] initWithDirectory:directory 
                                                                      repository:self.repository 
                                                                          branch:self.branch
-                                                                           hash:self.hash]
-                          autorelease];
+                                                                           hash:self.hash];
     } else if (indexPath.section == 1) {
         // wow a file, show this baby
         GHFile *file = [self.directory.files objectAtIndex:indexPath.row];
         
-        viewController = [[[GHViewCloudFileViewController alloc] initWithRepository:self.repository 
+        viewController = [[GHViewCloudFileViewController alloc] initWithRepository:self.repository 
                                                                                tree:self.hash 
                                                                            filename:file.name 
-                                                                        relativeURL:self.directory.name]
-                          autorelease];
+                                                                        relativeURL:self.directory.name];
     }
     
     if (viewController) {
@@ -131,10 +121,10 @@
 
 - (id)initWithCoder:(NSCoder *)decoder {
     if ((self = [super initWithCoder:decoder])) {
-        _directory = [[decoder decodeObjectForKey:@"directory"] retain];
-        _repository = [[decoder decodeObjectForKey:@"repository"] retain];
-        _branch = [[decoder decodeObjectForKey:@"branch"] retain];
-        _hash = [[decoder decodeObjectForKey:@"hash"] retain];
+        _directory = [decoder decodeObjectForKey:@"directory"];
+        _repository = [decoder decodeObjectForKey:@"repository"];
+        _branch = [decoder decodeObjectForKey:@"branch"];
+        _hash = [decoder decodeObjectForKey:@"hash"];
     }
     return self;
 }

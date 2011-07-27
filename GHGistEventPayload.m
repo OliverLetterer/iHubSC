@@ -36,16 +36,6 @@
 
 #pragma mark - Memory management
 
-- (void)dealloc {
-    [_action release];
-    [_descriptionGist release];
-    [_name release];
-    [_snippet release];
-    [_URL release];
-    [_gistID release];
-    
-    [super dealloc];
-}
 
 #pragma mark - NSCoding
 

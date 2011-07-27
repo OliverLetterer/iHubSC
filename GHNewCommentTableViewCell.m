@@ -25,44 +25,39 @@ CGFloat const GHNewCommentTableViewCellHeight = 161.0f;
 #pragma mark - Setters and getters
 
 - (UIView *)textViewInputAccessoryView {
-    UIToolbar *toolbar = [[[UIToolbar alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0, 44.0)] autorelease];
+    UIToolbar *toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0, 44.0)];
     toolbar.barStyle = UIBarStyleBlackTranslucent;
     
     UIBarButtonItem *item = nil;
     NSMutableArray *items = [NSMutableArray array];
     
-    item = [[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Format", @"") 
+    item = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Format", @"") 
                                              style:UIBarButtonItemStyleBordered 
                                             target:self 
-                                            action:@selector(toolbarFormatButtonClicked:)]
-            autorelease];
+                                            action:@selector(toolbarFormatButtonClicked:)];
     [items addObject:item];
     
-    item = [[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Insert", @"") 
+    item = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Insert", @"") 
                                              style:UIBarButtonItemStyleBordered 
                                             target:self 
-                                            action:@selector(toolbarInsertButtonClicked:)]
-            autorelease];
+                                            action:@selector(toolbarInsertButtonClicked:)];
     [items addObject:item];
     
-    item = [[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Cancel", @"") 
+    item = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Cancel", @"") 
                                              style:UIBarButtonItemStyleBordered 
                                             target:self 
-                                            action:@selector(toolbarCancelButtonClicked:)]
-            autorelease];
+                                            action:@selector(toolbarCancelButtonClicked:)];
     [items addObject:item];
     
-    item = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace 
+    item = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace 
                                                           target:nil 
-                                                          action:@selector(noAction)]
-            autorelease];
+                                                          action:@selector(noAction)];
     [items addObject:item];
     
-    item = [[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Submit", @"") 
+    item = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Submit", @"") 
                                              style:UIBarButtonItemStyleDone 
                                             target:self 
-                                            action:@selector(toolbarDoneButtonClicked:)]
-            autorelease];
+                                            action:@selector(toolbarDoneButtonClicked:)];
     [items addObject:item];
     
     toolbar.items = items;
@@ -104,12 +99,11 @@ CGFloat const GHNewCommentTableViewCellHeight = 161.0f;
         }
         
         if ([title isEqualToString:NSLocalizedString(@"Hyperlink", @"")]) {
-            UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Input Text", @"") 
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Input Text", @"") 
                                                              message:NSLocalizedString(@"", @"") 
                                                             delegate:self 
                                                    cancelButtonTitle:NSLocalizedString(@"Cancel", @"") 
-                                                   otherButtonTitles:NSLocalizedString(@"Next", @""), nil]
-                                  autorelease];
+                                                   otherButtonTitles:NSLocalizedString(@"Next", @""), nil];
             alert.alertViewStyle = UIAlertViewStylePlainTextInput;
             alert.tag = kUIAlertViewTagLinkText;
             [alert show];
@@ -123,12 +117,11 @@ CGFloat const GHNewCommentTableViewCellHeight = 161.0f;
     if (alertView.tag == kUIAlertViewTagLinkText) {
         if (buttonIndex > 0) {
             self.linkText = [alertView textFieldAtIndex:0].text;
-            UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Input URL", @"") 
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Input URL", @"") 
                                                              message:NSLocalizedString(@"", @"") 
                                                             delegate:self 
                                                    cancelButtonTitle:NSLocalizedString(@"Cancel", @"") 
-                                                   otherButtonTitles:NSLocalizedString(@"Done", @""), nil]
-                                  autorelease];
+                                                   otherButtonTitles:NSLocalizedString(@"Done", @""), nil];
             alert.alertViewStyle = UIAlertViewStylePlainTextInput;
             alert.tag = kUIAlertViewTagLinkURL;
             [alert show];
@@ -154,7 +147,7 @@ CGFloat const GHNewCommentTableViewCellHeight = 161.0f;
 }
 
 - (void)toolbarInsertButtonClicked:(UIBarButtonItem *)barButton {
-    UIActionSheet *sheet = [[[UIActionSheet alloc] init] autorelease];
+    UIActionSheet *sheet = [[UIActionSheet alloc] init];
     
     sheet.title = NSLocalizedString(@"Insert", @"");
     [sheet addButtonWithTitle:NSLocalizedString(@"Hyperlink", @"")];
@@ -168,7 +161,7 @@ CGFloat const GHNewCommentTableViewCellHeight = 161.0f;
 }
 
 - (void)toolbarFormatButtonClicked:(UIBarButtonItem *)barButton {
-    UIActionSheet *sheet = [[[UIActionSheet alloc] init] autorelease];
+    UIActionSheet *sheet = [[UIActionSheet alloc] init];
     
     sheet.title = NSLocalizedString(@"Select Format", @"");
     [sheet addButtonWithTitle:NSLocalizedString(@"*emphasized*", @"")];
@@ -198,7 +191,7 @@ CGFloat const GHNewCommentTableViewCellHeight = 161.0f;
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if ((self = [super initWithStyle:style reuseIdentifier:reuseIdentifier])) {
         // Initialization code
-        self.textView = [[[UITextView alloc] initWithFrame:CGRectZero] autorelease];
+        self.textView = [[UITextView alloc] initWithFrame:CGRectZero];
         self.textView.font = [UIFont systemFontOfSize:16.0f];
         [self.textView.layer setBackgroundColor: [[UIColor whiteColor] CGColor]];
         [self.textView.layer setBorderColor: [[UIColor blackColor] CGColor]];
@@ -226,12 +219,5 @@ CGFloat const GHNewCommentTableViewCellHeight = 161.0f;
 
 #pragma mark - Memory management
 
-- (void)dealloc {
-    [_textView release];
-    [_linkText release];
-    [_linkURL release];
-    
-    [super dealloc];
-}
 
 @end

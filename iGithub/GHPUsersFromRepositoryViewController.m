@@ -24,11 +24,6 @@
 
 #pragma mark - Memory management
 
-- (void)dealloc {
-    [_repository release];
-    
-    [super dealloc];
-}
 
 #pragma mark - Keyed Archiving
 
@@ -39,7 +34,7 @@
 
 - (id)initWithCoder:(NSCoder *)decoder {
     if ((self = [super initWithCoder:decoder])) {
-        _repository = [[decoder decodeObjectForKey:@"repository"] retain];
+        _repository = [decoder decodeObjectForKey:@"repository"];
     }
     return self;
 }

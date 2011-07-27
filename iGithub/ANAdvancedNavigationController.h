@@ -33,7 +33,7 @@ extern const CGFloat ANAdvancedNavigationControllerDefaultLeftPanningOffset;
 @property (nonatomic, retain) UIViewController *leftViewController;
 @property (nonatomic, readonly, copy) NSArray *rightViewControllers;
 
-@property (nonatomic, assign) id<ANAdvancedNavigationControllerDelegate> delegate;
+@property (nonatomic, weak) id<ANAdvancedNavigationControllerDelegate> delegate;
 
 - (id)initWithLeftViewController:(UIViewController *)leftViewController;
 - (id)initWithLeftViewController:(UIViewController *)leftViewController rightViewControllers:(NSArray *)rightViewControllers;

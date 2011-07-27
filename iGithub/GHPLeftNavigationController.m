@@ -85,12 +85,11 @@
 }
 
 - (void)gearButtonClicked:(UIButton *)button {
-    UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Account", @"") 
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Account", @"") 
                                                      message:[NSString stringWithFormat:NSLocalizedString(@"You are logged in as: %@\nRemaining API calls for today: %d", @""), [GHAPIAuthenticationManager sharedInstance].username, [GHAPIBackgroundQueueV3 sharedInstance].remainingAPICalls ]
                                                     delegate:self 
                                            cancelButtonTitle:NSLocalizedString(@"Cancel", @"") 
-                                           otherButtonTitles:NSLocalizedString(@"Logout", @""), nil]
-                          autorelease];
+                                           otherButtonTitles:NSLocalizedString(@"Logout", @""), nil];
     [alert show];
 }
 
@@ -107,14 +106,14 @@
     self.tableView.contentInset = UIEdgeInsetsZero;
     
     CGRect frame = CGRectMake(CGRectGetWidth(self.view.bounds)-2.0f, 0.0f, 2.0f, CGRectGetHeight(self.view.bounds));
-    GHPEdgedLineView *lineView = [[[GHPEdgedLineView alloc] initWithFrame:frame] autorelease];
+    GHPEdgedLineView *lineView = [[GHPEdgedLineView alloc] initWithFrame:frame];
     lineView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleLeftMargin;
     [self.view addSubview:lineView];
     
     self.lineView = lineView;
     
     // wrapper view
-    UIView *wrapperView = [[[UIView alloc] initWithFrame:CGRectMake(0.0f, CGRectGetHeight(self.tableView.bounds)-44.0f, 300.0f, 44.0f)] autorelease];
+    UIView *wrapperView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, CGRectGetHeight(self.tableView.bounds)-44.0f, 300.0f, 44.0f)];
     wrapperView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
     wrapperView.backgroundColor = [UIColor clearColor];
     
@@ -127,7 +126,7 @@
     button.frame = CGRectMake(0.0f, 0.0f, CGRectGetHeight(wrapperView.bounds), CGRectGetHeight(wrapperView.bounds));
     [wrapperView addSubview:button];
     
-    lineView = [[[GHPEdgedLineView alloc] initWithFrame:CGRectZero] autorelease];
+    lineView = [[GHPEdgedLineView alloc] initWithFrame:CGRectZero];
     lineView.transform = CGAffineTransformMakeRotation(M_PI / 2.0f);
     lineView.frame = CGRectMake(0.0f, 0.0f, CGRectGetWidth(wrapperView.bounds), 2.0f);
     lineView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
@@ -143,13 +142,13 @@
     CAGradientLayer *gradientLayer = nil;
     UIView *gradientView = nil;
     
-    gradientView = [[[UIView alloc] initWithFrame:CGRectMake(0, -22.0f, CGRectGetWidth(wrapperView.bounds), 22.0f)] autorelease];
+    gradientView = [[UIView alloc] initWithFrame:CGRectMake(0, -22.0f, CGRectGetWidth(wrapperView.bounds), 22.0f)];
 	gradientView.backgroundColor = [UIColor clearColor];
 	gradientLayer = [CAGradientLayer layer];
 	gradientLayer.frame = CGRectMake(0.0f, 0.0f, 480.0f, 22.0f);
 	gradientLayer.colors = [NSArray arrayWithObjects:
-							(id)[UIColor colorWithWhite:0.0f alpha:0.0f].CGColor,
-							(id)[UIColor colorWithWhite:0.0f alpha:0.2f].CGColor,
+							(__bridge id)[UIColor colorWithWhite:0.0f alpha:0.0f].CGColor,
+							(__bridge id)[UIColor colorWithWhite:0.0f alpha:0.2f].CGColor,
 							nil];
     gradientLayer.actions = newActions;
 	[gradientView.layer addSublayer:gradientLayer];
@@ -228,9 +227,8 @@
         
         GHPLeftNavigationControllerTableViewCell *cell = (GHPLeftNavigationControllerTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         if (cell == nil) {
-            cell = [[[GHPLeftNavigationControllerTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault 
-                                                                    reuseIdentifier:CellIdentifier] 
-                    autorelease];
+            cell = [[GHPLeftNavigationControllerTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault 
+                                                                    reuseIdentifier:CellIdentifier];
             cell.textLabel.textColor = [UIColor whiteColor];
         }
         
@@ -244,9 +242,8 @@
         
         GHPLeftNavigationControllerTableViewCell *cell = (GHPLeftNavigationControllerTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         if (cell == nil) {
-            cell = [[[GHPLeftNavigationControllerTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault 
-                                                                    reuseIdentifier:CellIdentifier] 
-                    autorelease];
+            cell = [[GHPLeftNavigationControllerTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault 
+                                                                    reuseIdentifier:CellIdentifier];
         }
         
         if (indexPath.section == kUITableViewSectionNewsFeed) {
@@ -290,21 +287,21 @@
     
     if (indexPath.section == kUITableViewSectionNewsFeed) {
         if (indexPath.row == 0) {
-            viewController = [[[GHPOwnersNewsFeedViewController alloc] init] autorelease];
+            viewController = [[GHPOwnersNewsFeedViewController alloc] init];
         } else if (indexPath.row == 1) {
-            viewController = [[[GHPUsersNewsFeedViewController alloc] initWithUsername:[GHAPIAuthenticationManager sharedInstance].username ] autorelease];
+            viewController = [[GHPUsersNewsFeedViewController alloc] initWithUsername:[GHAPIAuthenticationManager sharedInstance].username ];
         }
     } else if (indexPath.section == kUITableViewSectionBottom) {
         if (indexPath.row == 0) {
-            viewController = [[[GHPUserViewController alloc] initWithUsername:[GHAPIAuthenticationManager sharedInstance].username ] autorelease];
+            viewController = [[GHPUserViewController alloc] initWithUsername:[GHAPIAuthenticationManager sharedInstance].username ];
             [(GHPUserViewController *)viewController setReloadDataIfNewUserGotAuthenticated:YES];
         } else if (indexPath.row == 1) {
-            viewController = [[[GHPSearchViewController alloc] init] autorelease];
+            viewController = [[GHPSearchViewController alloc] init];
         }
     } else if (indexPath.section == kUITableViewSectionOrganizations) {
         // My Profile + Search
         GHAPIOrganizationV3 *organization = [self.organizations objectAtIndex:indexPath.row];
-        viewController = [[[GHPUsersNewsFeedViewController alloc] initWithUsername:organization.login ] autorelease];
+        viewController = [[GHPUsersNewsFeedViewController alloc] initWithUsername:organization.login ];
     }
     
     if (viewController) {
@@ -340,14 +337,6 @@
 
 #pragma mark - memory management
 
-- (void)dealloc {
-    [_lineView release];
-    [_controllerView release];
-    [_organizations release];
-    [_mySelectedIndexPath release];
-    
-    [super dealloc];
-}
 
 #pragma mark - UIAlertViewDelegate
 
@@ -368,7 +357,7 @@
 
 - (id)initWithCoder:(NSCoder *)decoder {
     if ((self = [super initWithCoder:decoder])) {
-        _organizations = [[decoder decodeObjectForKey:@"organizations"] retain];
+        _organizations = [decoder decodeObjectForKey:@"organizations"];
         self.mySelectedIndexPath = self.lastSelectedIndexPath;
         self.lastSelectedIndexPath = nil;
     }

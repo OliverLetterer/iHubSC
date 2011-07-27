@@ -22,12 +22,12 @@
 
 - (void)_updatePathes {
 	CGMutablePathRef outerPath = CGMutablePathCreateForProgressViewWithRect(self.bounds);
-	self.outerPath = (id)outerPath;
+	self.outerPath = (__bridge id)outerPath;
 	CGPathRelease(outerPath);
 	
 	CGRect innerRect = CGRectMake(1, 1, self.bounds.size.width - 2, self.bounds.size.height - 2);
 	CGMutablePathRef innerPath = CGMutablePathCreateForProgressViewWithRect(innerRect);
-	self.innerPath = (id)innerPath;
+	self.innerPath = (__bridge id)innerPath;
 	CGPathRelease(innerPath);
 }
 
@@ -75,8 +75,7 @@
 
 - (void)setTintColor:(UIColor *)color {
 	if (color != _tintColor) {
-		[_tintColor release];
-		_tintColor = [color retain];
+		_tintColor = color;
 		[self _updateTintColorWithColor:_tintColor];
 		[self setNeedsDisplay];
 	}
@@ -138,7 +137,7 @@
 	
 	// draw Background
 	CGContextSaveGState(context);
-	CGContextAddPath(context, (CGMutablePathRef)self.outerPath);
+	CGContextAddPath(context, (__bridge CGMutablePathRef)self.outerPath);
 	CGContextClip(context);
 	
 	CGContextSetFillColorWithColor(context, self.progressBarBackgroundColor.CGColor);
@@ -150,7 +149,7 @@
 	// draw progressBar
 	
 	CGContextSaveGState(context);
-	CGContextAddPath(context, (CGMutablePathRef)self.innerPath);
+	CGContextAddPath(context, (__bridge CGMutablePathRef)self.innerPath);
 	CGContextClip(context);
 	
 	CGContextSetFillColorWithColor(context, self.progressBarTintColor.CGColor);
@@ -160,13 +159,6 @@
 	
 }
 
-- (void)dealloc {
-	self.innerPath = nil;
-	self.outerPath = nil;
-	self.progressBarTintColor = nil;
-	self.progressBarBackgroundColor = nil;
-    [super dealloc];
-}
 
 
 @end

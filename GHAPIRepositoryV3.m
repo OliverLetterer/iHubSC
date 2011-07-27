@@ -52,7 +52,7 @@
         // Initialization code
         self.URL = [rawDictionary objectForKeyOrNilOnNullObject:@"url"];
         self.HTMLURL = [rawDictionary objectForKeyOrNilOnNullObject:@"html_url"];
-        self.owner = [[[GHAPIUserV3 alloc] initWithRawDictionary:[rawDictionary objectForKeyOrNilOnNullObject:@"owner"]] autorelease];
+        self.owner = [[GHAPIUserV3 alloc] initWithRawDictionary:[rawDictionary objectForKeyOrNilOnNullObject:@"owner"]];
         self.name = [rawDictionary objectForKeyOrNilOnNullObject:@"name"];
         self.description = [rawDictionary objectForKeyOrNilOnNullObject:@"description"];
         self.homepage = [rawDictionary objectForKeyOrNilOnNullObject:@"homepage"];
@@ -65,10 +65,10 @@
         self.openIssues = [rawDictionary objectForKeyOrNilOnNullObject:@"open_issues"];
         self.pushedAt = [rawDictionary objectForKeyOrNilOnNullObject:@"pushed_at"];
         self.createdAt = [rawDictionary objectForKeyOrNilOnNullObject:@"created_at"];
-        self.organization = [[[GHAPIOrganizationV3 alloc] initWithRawDictionary:[rawDictionary objectForKeyOrNilOnNullObject:@"organization"]] autorelease];
+        self.organization = [[GHAPIOrganizationV3 alloc] initWithRawDictionary:[rawDictionary objectForKeyOrNilOnNullObject:@"organization"]];
         if (parse) {
-            self.parent = [[[GHAPIRepositoryV3 alloc] initWithRawDictionary:[rawDictionary objectForKeyOrNilOnNullObject:@"parent"] parseChildren:NO] autorelease];
-            self.source = [[[GHAPIRepositoryV3 alloc] initWithRawDictionary:[rawDictionary objectForKeyOrNilOnNullObject:@"source"] parseChildren:NO] autorelease];
+            self.parent = [[GHAPIRepositoryV3 alloc] initWithRawDictionary:[rawDictionary objectForKeyOrNilOnNullObject:@"parent"] parseChildren:NO];
+            self.source = [[GHAPIRepositoryV3 alloc] initWithRawDictionary:[rawDictionary objectForKeyOrNilOnNullObject:@"source"] parseChildren:NO];
         }
         self.masterBranch = [rawDictionary objectForKeyOrNilOnNullObject:@"master_branch"];
         self.hasIssues = [rawDictionary objectForKeyOrNilOnNullObject:@"has_issues"];
@@ -114,60 +114,34 @@
 
 - (id)initWithCoder:(NSCoder *)decoder {
     if ((self = [super init])) {
-        _URL = [[decoder decodeObjectForKey:@"uRL"] retain];
-        _HTMLURL = [[decoder decodeObjectForKey:@"hTMLURL"] retain];
-        _owner = [[decoder decodeObjectForKey:@"owner"] retain];
-        _name = [[decoder decodeObjectForKey:@"name"] retain];
-        _description = [[decoder decodeObjectForKey:@"description"] retain];
-        _homepage = [[decoder decodeObjectForKey:@"homepage"] retain];
-        _language = [[decoder decodeObjectForKey:@"language"] retain];
-        _private = [[decoder decodeObjectForKey:@"private"] retain];
-        _fork = [[decoder decodeObjectForKey:@"fork"] retain];
-        _forks = [[decoder decodeObjectForKey:@"forks"] retain];
-        _watchers = [[decoder decodeObjectForKey:@"watchers"] retain];
-        _size = [[decoder decodeObjectForKey:@"size"] retain];
-        _openIssues = [[decoder decodeObjectForKey:@"openIssues"] retain];
-        _pushedAt = [[decoder decodeObjectForKey:@"pushedAt"] retain];
-        _createdAt = [[decoder decodeObjectForKey:@"createdAt"] retain];
-        _organization = [[decoder decodeObjectForKey:@"organization"] retain];
-        _parent = [[decoder decodeObjectForKey:@"parent"] retain];
-        _source = [[decoder decodeObjectForKey:@"source"] retain];
-        _masterBranch = [[decoder decodeObjectForKey:@"masterBranch"] retain];
-        _hasIssues = [[decoder decodeObjectForKey:@"hasIssues"] retain];
-        _hasWiki = [[decoder decodeObjectForKey:@"hasWiki"] retain];
-        _hasDownloads = [[decoder decodeObjectForKey:@"hasDownloads"] retain];
+        _URL = [decoder decodeObjectForKey:@"uRL"];
+        _HTMLURL = [decoder decodeObjectForKey:@"hTMLURL"];
+        _owner = [decoder decodeObjectForKey:@"owner"];
+        _name = [decoder decodeObjectForKey:@"name"];
+        _description = [decoder decodeObjectForKey:@"description"];
+        _homepage = [decoder decodeObjectForKey:@"homepage"];
+        _language = [decoder decodeObjectForKey:@"language"];
+        _private = [decoder decodeObjectForKey:@"private"];
+        _fork = [decoder decodeObjectForKey:@"fork"];
+        _forks = [decoder decodeObjectForKey:@"forks"];
+        _watchers = [decoder decodeObjectForKey:@"watchers"];
+        _size = [decoder decodeObjectForKey:@"size"];
+        _openIssues = [decoder decodeObjectForKey:@"openIssues"];
+        _pushedAt = [decoder decodeObjectForKey:@"pushedAt"];
+        _createdAt = [decoder decodeObjectForKey:@"createdAt"];
+        _organization = [decoder decodeObjectForKey:@"organization"];
+        _parent = [decoder decodeObjectForKey:@"parent"];
+        _source = [decoder decodeObjectForKey:@"source"];
+        _masterBranch = [decoder decodeObjectForKey:@"masterBranch"];
+        _hasIssues = [decoder decodeObjectForKey:@"hasIssues"];
+        _hasWiki = [decoder decodeObjectForKey:@"hasWiki"];
+        _hasDownloads = [decoder decodeObjectForKey:@"hasDownloads"];
     }
     return self;
 }
 
 #pragma mark - Memory management
 
-- (void)dealloc {
-    [_URL release];
-    [_HTMLURL release];
-    [_owner release];
-    [_name release];
-    [_description release];
-    [_homepage release];
-    [_language release];
-    [_private release];
-    [_fork release];
-    [_forks release];
-    [_watchers release];
-    [_size release];
-    [_openIssues release];
-    [_pushedAt release];
-    [_createdAt release];
-    [_organization release];
-    [_parent release];
-    [_source release];
-    [_masterBranch release];
-    [_hasIssues release];
-    [_hasWiki release];
-    [_hasDownloads release];
-    
-    [super dealloc];
-}
 
 #pragma mark - API calls
 
@@ -188,7 +162,7 @@
                                      
                                      NSMutableArray *finalArray = [NSMutableArray arrayWithCapacity:rawArray.count];
                                      [rawArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-                                         [finalArray addObject:[[[GHAPILabelV3 alloc] initWithRawDictionary:obj] autorelease] ];
+                                         [finalArray addObject:[[GHAPILabelV3 alloc] initWithRawDictionary:obj] ];
                                      }];
                                      
                                      handler(finalArray, nextPage, nil);
@@ -208,7 +182,7 @@
                                            if (error) {
                                                handler(nil, error);
                                            } else {
-                                               handler([[[GHAPIRepositoryV3 alloc] initWithRawDictionary:object] autorelease], nil);
+                                               handler([[GHAPIRepositoryV3 alloc] initWithRawDictionary:object], nil);
                                            }
                                        }];
 }
@@ -237,7 +211,7 @@
                                      
                                      NSMutableArray *finalArray = [NSMutableArray arrayWithCapacity:rawArray.count];
                                      for (NSDictionary *rawDictionary in rawArray) {
-                                         [finalArray addObject:[[[GHAPIRepositoryV3 alloc] initWithRawDictionary:rawDictionary] autorelease] ];
+                                         [finalArray addObject:[[GHAPIRepositoryV3 alloc] initWithRawDictionary:rawDictionary] ];
                                      }
                                      
                                      handler(finalArray, nextPage, nil);
@@ -260,7 +234,7 @@
                                      
                                      NSMutableArray *finalArray = [NSMutableArray arrayWithCapacity:rawArray.count];
                                      [rawArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-                                         [finalArray addObject:[[[GHAPIRepositoryBranchV3 alloc] initWithRawDictionary:obj] autorelease] ];
+                                         [finalArray addObject:[[GHAPIRepositoryBranchV3 alloc] initWithRawDictionary:obj] ];
                                      }];
                                      
                                      handler(finalArray, nextPage, nil);
@@ -283,7 +257,7 @@
                                      
                                      NSMutableArray *finalArray = [NSMutableArray arrayWithCapacity:rawArray.count];
                                      [rawArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-                                         [finalArray addObject:[[[GHAPIRepositoryV3 alloc] initWithRawDictionary:obj] autorelease] ];
+                                         [finalArray addObject:[[GHAPIRepositoryV3 alloc] initWithRawDictionary:obj] ];
                                      }];
                                      
                                      handler(finalArray, nextPage, nil);
@@ -306,7 +280,7 @@
                                      
                                      NSMutableArray *finalArray = [NSMutableArray arrayWithCapacity:rawArray.count];
                                      [rawArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-                                         [finalArray addObject:[[[GHAPIUserV3 alloc] initWithRawDictionary:obj] autorelease] ];
+                                         [finalArray addObject:[[GHAPIUserV3 alloc] initWithRawDictionary:obj] ];
                                      }];
                                      
                                      handler(finalArray, nextPage, nil);
@@ -376,7 +350,7 @@
                                      
                                      NSMutableArray *finalArray = [NSMutableArray arrayWithCapacity:rawArray.count];
                                      [rawArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-                                         [finalArray addObject:[[[GHAPIUserV3 alloc] initWithRawDictionary:obj] autorelease] ];
+                                         [finalArray addObject:[[GHAPIUserV3 alloc] initWithRawDictionary:obj] ];
                                      }];
                                      
                                      handler(finalArray, nextPage, nil);
@@ -426,7 +400,7 @@
                                                 [jsonDictionary setObject:[NSNumber numberWithBool:public] forKey:@"public"];
                                                 
                                                 NSString *jsonString = [jsonDictionary JSONString];
-                                                NSMutableData *jsonData = [[[jsonString dataUsingEncoding:NSUTF8StringEncoding] mutableCopy] autorelease];
+                                                NSMutableData *jsonData = [[jsonString dataUsingEncoding:NSUTF8StringEncoding] mutableCopy];
                                                 [request setPostBody:jsonData];
                                                 [request setPostLength:[jsonString length] ];
                                                 
@@ -434,7 +408,7 @@
                                                 if (error) {
                                                     handler(nil, error);
                                                 } else {
-                                                    handler([[[GHAPIRepositoryV3 alloc] initWithRawDictionary:object] autorelease], nil);
+                                                    handler([[GHAPIRepositoryV3 alloc] initWithRawDictionary:object], nil);
                                                 }
                                             }];
 }
@@ -460,7 +434,7 @@
                                            if (error) {
                                                handler(nil, error);
                                            } else {
-                                               handler([[[GHAPIRepositoryV3 alloc] initWithRawDictionary:object] autorelease], nil);
+                                               handler([[GHAPIRepositoryV3 alloc] initWithRawDictionary:object], nil);
                                            }
                                        }];
 }
@@ -521,7 +495,7 @@
                                      
                                      NSMutableArray *finalArray = [NSMutableArray arrayWithCapacity:rawArray.count];
                                      [rawArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-                                         [finalArray addObject:[[[GHAPICommitV3 alloc] initWithRawDictionary:obj] autorelease] ];
+                                         [finalArray addObject:[[GHAPICommitV3 alloc] initWithRawDictionary:obj] ];
                                      }];
                                      
                                      handler(finalArray, nextPage, nil);

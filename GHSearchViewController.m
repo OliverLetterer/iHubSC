@@ -22,7 +22,7 @@
 - (id)init {
     if ((self = [super init])) {
         // Custom initialization
-        self.tabBarItem = [[[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemSearch tag:0] autorelease];
+        self.tabBarItem = [[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemSearch tag:0];
         self.title = NSLocalizedString(@"Search", @"");
     }
     return self;
@@ -30,13 +30,6 @@
 
 #pragma mark - Memory management
 
-- (void)dealloc {
-    [_searchBar release];
-    [_mySearchDisplayController release];
-    [_searchString release];
-    
-    [super dealloc];
-}
 
 - (void)didReceiveMemoryWarning {
     // Releases the view if it doesn't have a superview.
@@ -48,12 +41,12 @@
 #pragma mark - View lifecycle
 
 - (void)loadView {
-    self.view = [[[GHLinearGradientBackgroundView alloc] initWithFrame:CGRectZero] autorelease];
+    self.view = [[GHLinearGradientBackgroundView alloc] initWithFrame:CGRectZero];
     
-    UIImageView *imageView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"GHDefaultTableViewBackgroundImage.png"] ] autorelease];
+    UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"GHDefaultTableViewBackgroundImage.png"] ];
     [self.view addSubview:imageView];
     
-    self.searchBar = [[[UISearchBar alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0, 44.0)] autorelease];
+    self.searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0, 44.0)];
     self.searchBar.delegate = self;
     [self.view addSubview:self.searchBar];
     
@@ -70,10 +63,8 @@
 - (void)viewDidUnload {
     [super viewDidUnload];
     
-    [_searchBar release];
     _searchBar = nil;
     
-    [_mySearchDisplayController release];
     _mySearchDisplayController = nil;
 }
 
@@ -120,7 +111,7 @@
     
     GHTableViewCellWithLinearGradientBackgroundView *cell = (GHTableViewCellWithLinearGradientBackgroundView *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[GHTableViewCellWithLinearGradientBackgroundView alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[GHTableViewCellWithLinearGradientBackgroundView alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     
     if (indexPath.row == 0) {
@@ -172,7 +163,7 @@
 #pragma mark - UISearchDisplayDelegate
 
 - (void)searchDisplayController:(UISearchDisplayController *)controller didLoadSearchResultsTableView:(UITableView *)tableView {
-    tableView.backgroundView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"GHDefaultTableViewBackgroundImage.png"] ] autorelease];
+    tableView.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"GHDefaultTableViewBackgroundImage.png"] ];
     tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 }
 
@@ -181,11 +172,11 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row == 0) {
         // repository
-        GHSearchRepositoryViewController *searchViewController = [[[GHSearchRepositoryViewController alloc] initWithSearchString:self.searchString] autorelease];
+        GHSearchRepositoryViewController *searchViewController = [[GHSearchRepositoryViewController alloc] initWithSearchString:self.searchString];
         [self.navigationController pushViewController:searchViewController animated:YES];
     } else if (indexPath.row == 1) {
         // seach user
-        GHSearchUserViewController *searchViewController = [[[GHSearchUserViewController alloc] initWithSearchString:self.searchString] autorelease];
+        GHSearchUserViewController *searchViewController = [[GHSearchUserViewController alloc] initWithSearchString:self.searchString];
         [self.navigationController pushViewController:searchViewController animated:YES];
     }
 }
@@ -221,7 +212,7 @@
 
 - (id)initWithCoder:(NSCoder *)decoder {
     if ((self = [super initWithCoder:decoder])) {
-        self.tabBarItem = [[[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemSearch tag:0] autorelease];
+        self.tabBarItem = [[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemSearch tag:0];
         self.title = NSLocalizedString(@"Search", @"");
         _isSearchBarActive = [decoder decodeBoolForKey:@"isSearchBarActive"];
         self.searchString = [decoder decodeObjectForKey:@"searchString"];

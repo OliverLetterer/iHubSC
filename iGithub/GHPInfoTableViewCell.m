@@ -25,7 +25,7 @@
         // Initialization code
         self.backgroundColor = [UIColor clearColor];
         self.selectionStyle = UITableViewCellSelectionStyleNone;
-        self.backgroundView = [[[UIView alloc] initWithFrame:CGRectZero] autorelease];
+        self.backgroundView = [[UIView alloc] initWithFrame:CGRectZero];
         
         self.textLabel.backgroundColor = [UIColor clearColor];
         self.textLabel.textColor = [UIColor darkGrayColor];
@@ -45,7 +45,7 @@
         [self.actionButton addTarget:self action:@selector(actionButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
         [self.contentView addSubview:self.actionButton];
         
-        self.activityIndicatorView = [[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray] autorelease];
+        self.activityIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
         self.activityIndicatorView.hidesWhenStopped = YES;
         [self.activityIndicatorView stopAnimating];
         [self.contentView addSubview:self.activityIndicatorView];
@@ -100,11 +100,5 @@
 
 #pragma mark - Memory management
 
-- (void)dealloc {
-    [_actionButton release];
-    [_activityIndicatorView release];
-    
-    [super dealloc];
-}
 
 @end

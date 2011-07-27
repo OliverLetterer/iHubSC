@@ -25,12 +25,6 @@
 
 #pragma mark - Memory management
 
-- (void)dealloc {
-    [_URL release];
-    [_webView release];
-    
-    [super dealloc];
-}
 
 - (void)didReceiveMemoryWarning {
     // Releases the view if it doesn't have a superview.
@@ -50,12 +44,11 @@
 }
 
 - (void)actionButtonClicked:(UIBarButtonItem *)sender {
-    UIActionSheet *sheet = [[[UIActionSheet alloc] initWithTitle:[self.webView.request.URL absoluteString]
+    UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:[self.webView.request.URL absoluteString]
                                                         delegate:self 
                                                cancelButtonTitle:NSLocalizedString(@"Cancel", @"") 
                                           destructiveButtonTitle:nil 
-                                               otherButtonTitles:NSLocalizedString(@"Launch Safari", @""), nil]
-                            autorelease];
+                                               otherButtonTitles:NSLocalizedString(@"Launch Safari", @""), nil];
     sheet.actionSheetStyle = UIActionSheetStyleBlackTranslucent;
     
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
@@ -70,7 +63,7 @@
 #pragma mark - View lifecycle
 
 - (void)loadView {
-    self.webView = [[[UIWebView alloc] init] autorelease];
+    self.webView = [[UIWebView alloc] init];
     self.webView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
     self.webView.delegate = self;
     self.webView.scalesPageToFit = YES;
@@ -81,15 +74,13 @@
     [super viewDidLoad];
     [self.webView loadRequest:[NSURLRequest requestWithURL:self.URL] ];
     
-    self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction 
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction 
                                                                                             target:self 
-                                                                                            action:@selector(actionButtonClicked:)]
-                                              autorelease];
+                                                                                            action:@selector(actionButtonClicked:)];
 }
 
 - (void)viewDidUnload {
     [super viewDidUnload];
-    [_webView release];
     _webView = nil;
 }
 
@@ -108,12 +99,11 @@
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
     [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-    UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", @"") 
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", @"") 
                                                  message:[error localizedDescription] 
                                                 delegate:nil 
                                        cancelButtonTitle:NSLocalizedString(@"OK", @"") 
-                                       otherButtonTitles:nil]
-                      autorelease];
+                                       otherButtonTitles:nil];
     [alert show];
 }
 
@@ -135,7 +125,7 @@
 
 - (id)initWithCoder:(NSCoder *)decoder {
     if ((self = [super initWithCoder:decoder])) {
-        _URL = [[decoder decodeObjectForKey:@"uRL"] retain];
+        _URL = [decoder decodeObjectForKey:@"uRL"];
         _canShowActionSheet = YES;
     }
     return self;

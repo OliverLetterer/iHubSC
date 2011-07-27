@@ -25,7 +25,7 @@
 @interface GHAttributedTableViewCell : GHDescriptionTableViewCell <DTAttributedTextContentViewDelegate, UIActionSheetDelegate> {
 @private
     DTAttributedTextContentView *_attributedTextView;
-    id<GHAttributedTableViewCellDelegate> _buttonDelegate;
+    id<GHAttributedTableViewCellDelegate> __weak _buttonDelegate;
     
     NSAttributedString *_attributedString;
     NSAttributedString *_selectedAttributesString;
@@ -34,7 +34,7 @@
 }
 
 @property (nonatomic, retain) DTAttributedTextContentView *attributedTextView;
-@property (nonatomic, assign) id<GHAttributedTableViewCellDelegate> buttonDelegate;
+@property (nonatomic, weak) id<GHAttributedTableViewCellDelegate> buttonDelegate;
 
 @property (nonatomic, retain) NSAttributedString *attributedString;
 @property (nonatomic, retain) NSAttributedString *selectedAttributesString;

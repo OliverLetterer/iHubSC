@@ -21,7 +21,7 @@
                               if (error) {
                                   [self handleError:error];
                               } else {
-                                  [self setDataArray:[[requests mutableCopy] autorelease] nextPage:GHAPIPaginationNextPageNotFound];
+                                  [self setDataArray:[requests mutableCopy] nextPage:GHAPIPaginationNextPageNotFound];
                               }
                           }];
 }

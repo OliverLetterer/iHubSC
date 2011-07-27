@@ -19,30 +19,28 @@
 
 #pragma mark - Initialization
 
+- (void)requestFinished:(ASIHTTPRequest *)request {
+    self.contentImage = [[UIImage alloc] initWithData:[self.request responseData] ];
+    [self.request clearDelegatesAndCancel];
+    self.request = nil;
+    [self updateViewForImageContent];
+}
+
 - (void)setMetadata:(GHFileMetaData *)metadata {
     if (metadata != _metadata) {
-        [_metadata release];
-        _metadata = [metadata retain];
+        _metadata = metadata;
         
         if ([_metadata.mimeType rangeOfString:@"image"].location != NSNotFound) {
             [self updateViewForImageDownload];
             self.request = [self.metadata requestForContent];
             self.request.delegate = self;
-            [self.request setCompletionBlock:^(void) {
-                self.contentImage = [[[UIImage alloc] initWithData:[self.request responseData] ] autorelease];
-                [self.request clearDelegatesAndCancel];
-                self.request = nil;
-                [self updateViewForImageContent];
-            }];
-            self.request.downloadProgressDelegate = self.progressView;
-            
             [self.request startAsynchronous];
         } else {
             [_metadata contentOfFileWithCompletionHandler:^(NSData *data, NSError *error) {
                 if (error) {
                     [self handleError:error];
                 } else {
-                    NSString *fileString = [[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] autorelease];
+                    NSString *fileString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
                     
                     if (fileString) {
                         if ([self.filename hasSuffix:@".md"] || [self.filename hasSuffix:@".markdown"] || [self.filename hasSuffix:@".mdown"]) {
@@ -135,7 +133,6 @@
                                    </head>\
                                    \
                                    <body style=\"background: white; font-family: Helvetica\">"];
-//    [HTMLString appendString:@"<body style=\"background: -webkit-gradient(linear, left top, left bottom, from(#f0f0f0), to(#c0c0c0));\"><pre>"];
     
     NSMutableString *brushType = [NSMutableString stringWithString:@""];
     
@@ -169,24 +166,9 @@
 #pragma mark - Memory management
 
 - (void)dealloc {
-    [_repository release];
-    [_tree release];
-    [_filename release];
-    [_metadata release];
-    [_relativeURL release];
-    [_scrollView release];
-    [_backgroundGradientLayer release];
-    [_loadingLabel release];
-    [_activityIndicatorView release];
-    [_progressView release];
-    [_imageView release];
-    [_markdownString release];
-    [_contentString release];
     
     [_request clearDelegatesAndCancel];
-    [_request release];
     
-    [super dealloc];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -199,9 +181,9 @@
 #pragma mark - View lifecycle
 
 - (void)loadView {
-    self.view = [[[GHLinearGradientBackgroundView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 320.0f, 480.0f)] autorelease];
+    self.view = [[GHLinearGradientBackgroundView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 320.0f, 480.0f)];
     
-    self.scrollView = [[[UIScrollView alloc] initWithFrame:self.view.bounds] autorelease];
+    self.scrollView = [[UIScrollView alloc] initWithFrame:self.view.bounds];
     self.scrollView.backgroundColor = [UIColor clearColor];
     self.scrollView.alwaysBounceVertical = YES;
     self.scrollView.alwaysBounceHorizontal = YES;
@@ -213,7 +195,7 @@
     self.scrollView.delegate = self;
     [self.view addSubview:self.scrollView];
     
-    self.loadingLabel = [[[UILabel alloc] initWithFrame:CGRectMake(0.0, 170.0, 320.0, 20.0)] autorelease];
+    self.loadingLabel = [[UILabel alloc] initWithFrame:CGRectMake(0.0, 170.0, 320.0, 20.0)];
     self.loadingLabel.backgroundColor = [UIColor clearColor];
     self.loadingLabel.textColor = [UIColor blackColor];
     self.loadingLabel.textAlignment = UITextAlignmentCenter;
@@ -224,7 +206,7 @@
     self.loadingLabel.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
     [self.view addSubview:self.loadingLabel];
     
-    self.activityIndicatorView = [[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray] autorelease];
+    self.activityIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     self.activityIndicatorView.center = CGPointMake(self.loadingLabel.frame.origin.x - 10.0f, CGRectGetHeight(self.view.bounds)/2.0f);
     self.activityIndicatorView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
     [self.activityIndicatorView startAnimating];
@@ -270,7 +252,7 @@
     
     CGRect frame = self.view.bounds;
     
-    UIWebView *webView = [[[UIWebView alloc] initWithFrame:frame] autorelease];
+    UIWebView *webView = [[UIWebView alloc] initWithFrame:frame];
     [webView loadHTMLString:self.contentString baseURL:[[NSBundle mainBundle] URLForResource:@"" withExtension:nil]];
     webView.scalesPageToFit = YES;
     webView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
@@ -293,7 +275,7 @@
     
     CGRect frame = self.view.bounds;
     
-    UIWebView *webView = [[[UIWebView alloc] initWithFrame:frame] autorelease];
+    UIWebView *webView = [[UIWebView alloc] initWithFrame:frame];
     [webView loadHTMLString:self.markdownString baseURL:nil];
     webView.scalesPageToFit = YES;
     webView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
@@ -314,7 +296,7 @@
     [self.loadingLabel removeFromSuperview];
     self.loadingLabel = nil;
     
-    self.progressView = [[[DDProgressView alloc] initWithFrame:CGRectMake(20.0, CGRectGetHeight(self.view.bounds)-10.0f, CGRectGetWidth(self.view.bounds) - 40.0f, 20.0f)] autorelease];
+    self.progressView = [[DDProgressView alloc] initWithFrame:CGRectMake(20.0, CGRectGetHeight(self.view.bounds)/2.0f-10.0f, CGRectGetWidth(self.view.bounds) - 40.0f, 20.0f)];
     self.progressView.alpha = 0.0;
     self.progressView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
     [self.view addSubview:self.progressView];
@@ -339,7 +321,7 @@
     [self.loadingLabel removeFromSuperview];
     self.loadingLabel = nil;
     
-    self.imageView = [[[UIImageView alloc] initWithImage:self.contentImage] autorelease];
+    self.imageView = [[UIImageView alloc] initWithImage:self.contentImage];
     [self.scrollView addSubview:self.imageView];
     [self.imageView sizeToFit];
     
@@ -365,28 +347,16 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
 - (void)viewDidUnload {
     [super viewDidUnload];
     
-    [_scrollView release];
     _scrollView = nil;
-    [_backgroundGradientLayer release];
     _backgroundGradientLayer = nil;
-    [_loadingLabel release];
     _loadingLabel = nil;
-    [_activityIndicatorView release];
     _activityIndicatorView = nil;
-    [_progressView release];
     _progressView = nil;
-    [_imageView release];
     _imageView = nil;
 }
 
@@ -413,21 +383,21 @@
 
 - (id)initWithCoder:(NSCoder *)decoder {
     if ((self = [super initWithCoder:decoder])) {
-        _repository = [[decoder decodeObjectForKey:@"repository"] retain];
-        _tree = [[decoder decodeObjectForKey:@"tree"] retain];
-        _filename = [[decoder decodeObjectForKey:@"filename"] retain];
-        _relativeURL = [[decoder decodeObjectForKey:@"relativeURL"] retain];
-        _metadata = [[decoder decodeObjectForKey:@"metadata"] retain];
-        _contentString = [[decoder decodeObjectForKey:@"contentString"] retain];
-        _markdownString = [[decoder decodeObjectForKey:@"markdownString"] retain];
-        _contentImage = [[decoder decodeObjectForKey:@"contentImage"] retain];
+        _repository = [decoder decodeObjectForKey:@"repository"];
+        _tree = [decoder decodeObjectForKey:@"tree"];
+        _filename = [decoder decodeObjectForKey:@"filename"];
+        _relativeURL = [decoder decodeObjectForKey:@"relativeURL"];
+        _metadata = [decoder decodeObjectForKey:@"metadata"];
+        _contentString = [decoder decodeObjectForKey:@"contentString"];
+        _markdownString = [decoder decodeObjectForKey:@"markdownString"];
+        _contentImage = [decoder decodeObjectForKey:@"contentImage"];
         _isMimeTypeUnkonw = [decoder decodeBoolForKey:@"isMimeTypeUnkonw"];
-        _scrollView = [[decoder decodeObjectForKey:@"scrollView"] retain];
-        _backgroundGradientLayer = [[decoder decodeObjectForKey:@"backgroundGradientLayer"] retain];
-        _loadingLabel = [[decoder decodeObjectForKey:@"loadingLabel"] retain];
-        _activityIndicatorView = [[decoder decodeObjectForKey:@"activityIndicatorView"] retain];
-        _progressView = [[decoder decodeObjectForKey:@"progressView"] retain];
-        _imageView = [[decoder decodeObjectForKey:@"imageView"] retain];
+        _scrollView = [decoder decodeObjectForKey:@"scrollView"];
+        _backgroundGradientLayer = [decoder decodeObjectForKey:@"backgroundGradientLayer"];
+        _loadingLabel = [decoder decodeObjectForKey:@"loadingLabel"];
+        _activityIndicatorView = [decoder decodeObjectForKey:@"activityIndicatorView"];
+        _progressView = [decoder decodeObjectForKey:@"progressView"];
+        _imageView = [decoder decodeObjectForKey:@"imageView"];
     }
     return self;
 }

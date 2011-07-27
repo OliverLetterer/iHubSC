@@ -21,10 +21,10 @@
         self.displayTime = 2.0f;
         self.backgroundColor = [UIColor blackColor];
         
-        self.backgroundView = [[[ANNotificationViewBackgroundView alloc] initWithFrame:CGRectZero] autorelease];
+        self.backgroundView = [[ANNotificationViewBackgroundView alloc] initWithFrame:CGRectZero];
         [self addSubview:self.backgroundView];
         
-        self.titleLabel = [[[UILabel alloc] initWithFrame:CGRectZero] autorelease];
+        self.titleLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         self.titleLabel.textAlignment = UITextAlignmentLeft;
         self.titleLabel.textColor = [UIColor whiteColor];
         self.titleLabel.font = [UIFont boldSystemFontOfSize:21.0f];
@@ -33,7 +33,7 @@
         self.titleLabel.shadowOffset = CGSizeMake(0.0f, -2.0f);
         [self addSubview:self.titleLabel];
         
-        self.detailTextLabel = [[[UILabel alloc] initWithFrame:CGRectZero] autorelease];
+        self.detailTextLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         self.detailTextLabel.textAlignment = UITextAlignmentLeft;
         self.detailTextLabel.textColor = [UIColor whiteColor];
         self.detailTextLabel.font = [UIFont systemFontOfSize:19.0f];
@@ -42,7 +42,7 @@
         self.detailTextLabel.shadowOffset = CGSizeMake(0.0f, -2.0f);
         [self addSubview:self.detailTextLabel];
         
-        self.imageView = [[[UIImageView alloc] initWithFrame:CGRectZero] autorelease];
+        self.imageView = [[UIImageView alloc] initWithFrame:CGRectZero];
         self.imageView.contentMode = UIViewContentModeCenter;
         [self addSubview:self.imageView];
         
@@ -80,13 +80,5 @@
 
 #pragma mark - Memory management
 
-- (void)dealloc {
-    [_backgroundView release];
-    [_titleLabel release];
-    [_detailTextLabel release];
-    [_imageView release];
-    
-    [super dealloc];
-}
 
 @end

@@ -34,13 +34,6 @@
 
 #pragma mark - Memory management
 
-- (void)dealloc {
-    [_collaborators release];
-    [_milestones release];
-    [_repository release];
-    
-    [super dealloc];
-}
 
 - (void)didReceiveMemoryWarning {
     // Releases the view if it doesn't have a superview.
@@ -93,9 +86,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    self.navigationItem.leftBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelButtonClicked:)] autorelease];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelButtonClicked:)];
     
-    self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(saveButtonClicked:)] autorelease];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(saveButtonClicked:)];
 }
 
 - (void)viewDidUnload {
@@ -203,12 +196,11 @@
                                                        }];
                         } else {
                             [tableView cancelDownloadInSection:section];
-                            UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", @"") 
+                            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", @"") 
                                                                              message:NSLocalizedString(@"You are not a Collaborator on this Repository. You don't have permission to assign a Milestone!", @"") 
                                                                             delegate:nil 
                                                                    cancelButtonTitle:NSLocalizedString(@"OK", @"") 
-                                                                   otherButtonTitles:nil]
-                                                  autorelease];
+                                                                   otherButtonTitles:nil];
                             [alert show];
                         }
                     }
@@ -272,7 +264,7 @@
             
             GHPCreateIssueTitleAndDescriptionTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
             if (cell == nil) {
-                cell = [[[GHPCreateIssueTitleAndDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+                cell = [[GHPCreateIssueTitleAndDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
             }
             [self setupDefaultTableViewCell:cell forRowAtIndexPath:indexPath];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;

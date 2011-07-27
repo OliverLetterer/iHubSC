@@ -33,14 +33,6 @@
 
 #pragma mark - Memory management
 
-- (void)dealloc {
-    [_repository release];
-    [_commitID release];
-    [_commit release];
-    [_branchHash release];
-    
-    [super dealloc];
-}
 
 - (void)didReceiveMemoryWarning {
     // Releases the view if it doesn't have a superview.
@@ -79,7 +71,7 @@
     GHCollapsingAndSpinningTableViewCell *cell = (GHCollapsingAndSpinningTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdientifier];
     
     if (cell == nil) {
-        cell = [[[GHCollapsingAndSpinningTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdientifier] autorelease];
+        cell = [[GHCollapsingAndSpinningTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdientifier];
     }
     
     if (section == 0) {
@@ -132,7 +124,7 @@
     
     GHTableViewCellWithLinearGradientBackgroundView *cell = (GHTableViewCellWithLinearGradientBackgroundView *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (!cell) {
-        cell = [[[GHTableViewCellWithLinearGradientBackgroundView alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[GHTableViewCellWithLinearGradientBackgroundView alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     
     GHCommitFileInformation *info = nil;
@@ -204,7 +196,7 @@
     if (indexPath.section == 2) {
         GHCommitFileInformation *info = [self.commit.modified objectAtIndex:indexPath.row-1];
         
-        GHCommitDiffViewController *diffViewController = [[[GHCommitDiffViewController alloc] initWithDiffString:info.diff] autorelease];
+        GHCommitDiffViewController *diffViewController = [[GHCommitDiffViewController alloc] initWithDiffString:info.diff];
         diffViewController.title = [info.filename lastPathComponent];
         [self.navigationController pushViewController:diffViewController animated:YES];
     } else if (indexPath.section == 0) {
@@ -213,11 +205,10 @@
         NSString *URL = [filename stringByDeletingLastPathComponent];
         NSString *base = [filename lastPathComponent];
         
-        GHViewCloudFileViewController *fileViewController = [[[GHViewCloudFileViewController alloc] initWithRepository:self.repository 
+        GHViewCloudFileViewController *fileViewController = [[GHViewCloudFileViewController alloc] initWithRepository:self.repository 
                                                                                                                   tree:self.branchHash 
                                                                                                               filename:base 
-                                                                                                           relativeURL:URL]
-                                                             autorelease];
+                                                                                                           relativeURL:URL];
         [self.navigationController pushViewController:fileViewController animated:YES];
     } else {
         [tableView deselectRowAtIndexPath:indexPath animated:NO];
@@ -236,10 +227,10 @@
 
 - (id)initWithCoder:(NSCoder *)decoder {
     if ((self = [super initWithCoder:decoder])) {
-        _repository = [[decoder decodeObjectForKey:@"repository"] retain];
-        _commitID = [[decoder decodeObjectForKey:@"commitID"] retain];
-        _commit = [[decoder decodeObjectForKey:@"commit"] retain];
-        _branchHash = [[decoder decodeObjectForKey:@"branchHash"] retain];
+        _repository = [decoder decodeObjectForKey:@"repository"];
+        _commitID = [decoder decodeObjectForKey:@"commitID"];
+        _commit = [decoder decodeObjectForKey:@"commit"];
+        _branchHash = [decoder decodeObjectForKey:@"branchHash"];
     }
     return self;
 }

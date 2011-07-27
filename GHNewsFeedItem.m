@@ -26,42 +26,42 @@
         self.type = [rawDictionary objectForKeyOrNilOnNullObject:@"type"];
         self.URL = [rawDictionary objectForKeyOrNilOnNullObject:@"url"];
         
-        self.actorAttributes = [[[GHActorAttributes alloc] initWithRawDictionary:[rawDictionary objectForKeyOrNilOnNullObject:@"actor_attributes"]] autorelease];
-        self.repository = [[[GHRepository alloc] initWithRawDictionary:[rawDictionary objectForKeyOrNilOnNullObject:@"repository"]] autorelease];
+        self.actorAttributes = [[GHActorAttributes alloc] initWithRawDictionary:[rawDictionary objectForKeyOrNilOnNullObject:@"actor_attributes"]];
+        self.repository = [[GHRepository alloc] initWithRawDictionary:[rawDictionary objectForKeyOrNilOnNullObject:@"repository"]];
         
         NSDictionary *rawPayload = [rawDictionary objectForKeyOrNilOnNullObject:@"payload"];
         if ([self.type isEqualToString:@"PullRequestEvent"]) {
-            self.payload = [[[GHPullRequestPayload alloc] initWithRawDictionary:rawPayload] autorelease];
+            self.payload = [[GHPullRequestPayload alloc] initWithRawDictionary:rawPayload];
         } else if ([self.type isEqualToString:@"PushEvent"]) {
-            self.payload = [[[GHPushPayload alloc] initWithRawDictionary:rawPayload] autorelease];
+            self.payload = [[GHPushPayload alloc] initWithRawDictionary:rawPayload];
         } else if ([self.type isEqualToString:@"IssuesEvent"]) {
-            self.payload = [[[GHIssuePayload alloc] initWithRawDictionary:rawPayload] autorelease];
+            self.payload = [[GHIssuePayload alloc] initWithRawDictionary:rawPayload];
         } else if ([self.type isEqualToString:@"CommitCommentEvent"]) {
-            self.payload = [[[GHCommitEventPayload alloc] initWithRawDictionary:rawPayload] autorelease];
+            self.payload = [[GHCommitEventPayload alloc] initWithRawDictionary:rawPayload];
         } else if ([self.type isEqualToString:@"FollowEvent"]) {
-            self.payload = [[[GHFollowEventPayload alloc] initWithRawDictionary:rawPayload] autorelease];
+            self.payload = [[GHFollowEventPayload alloc] initWithRawDictionary:rawPayload];
         } else if ([self.type isEqualToString:@"WatchEvent"]) {
-            self.payload = [[[GHWatchEventPayload alloc] initWithRawDictionary:rawPayload] autorelease];
+            self.payload = [[GHWatchEventPayload alloc] initWithRawDictionary:rawPayload];
         } else if ([self.type isEqualToString:@"CreateEvent"]) {
-            self.payload = [[[GHCreateEventPayload alloc] initWithRawDictionary:rawPayload] autorelease];
+            self.payload = [[GHCreateEventPayload alloc] initWithRawDictionary:rawPayload];
         } else if ([self.type isEqualToString:@"ForkEvent"]) {
-            self.payload = [[[GHForkEventPayload alloc] initWithRawDictionary:rawPayload] autorelease];
+            self.payload = [[GHForkEventPayload alloc] initWithRawDictionary:rawPayload];
         } else if ([self.type isEqualToString:@"DeleteEvent"]) {
-            self.payload = [[[GHDeleteEventPayload alloc] initWithRawDictionary:rawPayload] autorelease];
+            self.payload = [[GHDeleteEventPayload alloc] initWithRawDictionary:rawPayload];
         } else if ([self.type isEqualToString:@"GollumEvent"]) {
-            self.payload = [[[GHGollumEventPayload alloc] initWithRawDictionary:rawPayload] autorelease];
+            self.payload = [[GHGollumEventPayload alloc] initWithRawDictionary:rawPayload];
         } else if ([self.type isEqualToString:@"GistEvent"]) {
-            self.payload = [[[GHGistEventPayload alloc] initWithRawDictionary:rawPayload] autorelease];
+            self.payload = [[GHGistEventPayload alloc] initWithRawDictionary:rawPayload];
         } else if ([self.type isEqualToString:@"DownloadEvent"]) {
-            self.payload = [[[GHDownloadEventPayload alloc] initWithRawDictionary:rawPayload] autorelease];
+            self.payload = [[GHDownloadEventPayload alloc] initWithRawDictionary:rawPayload];
         } else if ([self.type isEqualToString:@"MemberEvent"]) {
-            self.payload = [[[GHMemberEventPayload alloc] initWithRawDictionary:rawPayload] autorelease];
+            self.payload = [[GHMemberEventPayload alloc] initWithRawDictionary:rawPayload];
         } else if ([self.type isEqualToString:@"IssueCommentEvent"]) {
-            self.payload = [[[GHIssuesCommentPayload alloc] initWithRawDictionary:rawPayload URL:self.URL] autorelease];
+            self.payload = [[GHIssuesCommentPayload alloc] initWithRawDictionary:rawPayload URL:self.URL];
         } else if ([self.type isEqualToString:@"ForkApplyEvent"]) {
-            self.payload = [[[GHForkApplyEventPayload alloc] initWithRawDictionary:rawPayload] autorelease];
+            self.payload = [[GHForkApplyEventPayload alloc] initWithRawDictionary:rawPayload];
         } else if ([self.type isEqualToString:@"PublicEvent"]) {
-            self.payload = [[[GHPublicEventPayload alloc] initWithRawDictionary:rawPayload] autorelease];
+            self.payload = [[GHPublicEventPayload alloc] initWithRawDictionary:rawPayload];
         } else {
 #if DEBUG
             [[NSNotificationCenter defaultCenter] postNotificationName:@"GHUnknownPayloadEventType" object:nil userInfo:rawDictionary];
@@ -76,19 +76,6 @@
 
 #pragma mark - Memory management
 
-- (void)dealloc {
-    [_actor release];
-    [_actorAttributes release];
-    [_creationDate release];
-    [_payload release];
-    [_public release];
-    [_repository release];
-    [_times release];
-    [_type release];
-    [_URL release];
-    
-    [super dealloc];
-}
 
 #pragma mark - NSCoding
 

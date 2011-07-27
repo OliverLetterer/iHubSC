@@ -25,7 +25,7 @@
     
     GHPUserTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[GHPUserTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[GHPUserTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
     }
     [self setupDefaultTableViewCell:cell forRowAtIndexPath:indexPath];
     
@@ -43,7 +43,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     GHAPIOrganizationV3 *organization = [self.dataArray objectAtIndex:indexPath.row];
     
-    GHPOrganizationViewController *viewController = [[[GHPOrganizationViewController alloc] initWithOrganizationName:organization.login] autorelease];
+    GHPOrganizationViewController *viewController = [[GHPOrganizationViewController alloc] initWithOrganizationName:organization.login];
     [self.advancedNavigationController pushViewController:viewController afterViewController:self animated:YES];
 }
 

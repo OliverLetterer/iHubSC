@@ -21,11 +21,11 @@
 @private
     UIButton *_actionButton;
     UIActivityIndicatorView *_activityIndicatorView;
-    id<GHPInfoTableViewCellDelegate> _delegate;
+    id<GHPInfoTableViewCellDelegate> __weak _delegate;
 }
 
 @property (nonatomic, retain) UIButton *actionButton;
 @property (nonatomic, retain) UIActivityIndicatorView *activityIndicatorView;
-@property (nonatomic, assign) id<GHPInfoTableViewCellDelegate> delegate;
+@property (nonatomic, weak) id<GHPInfoTableViewCellDelegate> delegate;
 
 @end

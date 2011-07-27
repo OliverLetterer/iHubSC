@@ -27,10 +27,6 @@
 
 #pragma mark - Memory management
 
-- (void)dealloc {
-    [_createCell release];
-    [super dealloc];
-}
 
 - (void)didReceiveMemoryWarning {
     // Releases the view if it doesn't have a superview.
@@ -54,21 +50,18 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    self.navigationItem.leftBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel 
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel 
                                                                                            target:self 
-                                                                                           action:@selector(cancelButtonClicked:)]
-                                             autorelease];
+                                                                                           action:@selector(cancelButtonClicked:)];
     
-    self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Create", @"") 
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Create", @"") 
                                                                                style:UIBarButtonItemStyleDone 
                                                                               target:self 
-                                                                              action:@selector(createButtonClicked:)]
-                                              autorelease];
+                                                                              action:@selector(createButtonClicked:)];
 }
 
 - (void)viewDidUnload {
     [super viewDidUnload];
-    [_createCell release];
     _createCell = nil;
 }
 
@@ -135,9 +128,8 @@
     
     GHCreateRepositoryTableViewCell *cell = (GHCreateRepositoryTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[GHCreateRepositoryTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault 
-                                                       reuseIdentifier:CellIdentifier] 
-                autorelease];
+        cell = [[GHCreateRepositoryTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault 
+                                                       reuseIdentifier:CellIdentifier];
         
         cell.titleTextField.delegate = self;
         cell.descriptionTextField.delegate = self;

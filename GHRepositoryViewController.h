@@ -29,7 +29,7 @@
     
     NSString *_deleteToken;
     
-    id<GHSingleRepositoryViewControllerDelegate> _delegate;
+    id<GHSingleRepositoryViewControllerDelegate> __weak _delegate;
     
     NSArray *_pullRequests;
     
@@ -56,7 +56,7 @@
 @property (nonatomic, retain) NSMutableArray *watchedUsersArray;
 
 @property (nonatomic, copy) NSString *deleteToken;
-@property (nonatomic, assign) id<GHSingleRepositoryViewControllerDelegate> delegate;
+@property (nonatomic, weak) id<GHSingleRepositoryViewControllerDelegate> delegate;
 
 @property (nonatomic, retain) NSArray *pullRequests;
 - (void)cacheHeightForPullRequests;

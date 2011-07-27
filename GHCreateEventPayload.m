@@ -50,14 +50,6 @@
 
 #pragma mark - Memory management
 
-- (void)dealloc {
-    [_description release];
-    [_masterBranch release];
-    [_ref release];
-    [_refType release];
-    
-    [super dealloc];
-}
 
 #pragma mark - NSCoding
 

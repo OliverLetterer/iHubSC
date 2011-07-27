@@ -18,12 +18,12 @@
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if ((self = [super initWithStyle:style reuseIdentifier:reuseIdentifier])) {
         // Initialization code
-        self.diffView = [[[GHPDiffView alloc] initWithFrame:CGRectZero] autorelease];
+        self.diffView = [[GHPDiffView alloc] initWithFrame:CGRectZero];
         [self.contentView addSubview:self.diffView];
         
         self.backgroundColor = [UIColor clearColor];
         self.selectionStyle = UITableViewCellSelectionStyleNone;
-        self.backgroundView = [[[UIView alloc] initWithFrame:CGRectZero] autorelease];
+        self.backgroundView = [[UIView alloc] initWithFrame:CGRectZero];
     }
     return self;
 }
@@ -60,10 +60,5 @@
 
 #pragma mark - Memory management
 
-- (void)dealloc {
-    [_diffView release];
-    
-    [super dealloc];
-}
 
 @end

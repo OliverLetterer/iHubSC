@@ -22,8 +22,8 @@
 }
 
 - (void)setRepository:(NSString *)repository branchHash:(NSString *)branchHash {
-    [_repository release], _repository = [repository copy];
-    [_branchHash release], _branchHash = [branchHash copy];
+    _repository = [repository copy];
+    _branchHash = [branchHash copy];
     
     [GHAPIRepositoryV3 commitsOnRepository:self.repository branchSHA:self.branchHash page:1 
                          completionHandler:^(NSMutableArray *array, NSUInteger nextPage, NSError *error) {
@@ -65,20 +65,13 @@
         self.repository = repository;
         _contentType = GHPCommitsViewControllerContentTypePushPayload;
         self.pushPayload = pushPayload;
-        [self setDataArray:[[self.pushPayload.commits mutableCopy] autorelease] nextPage:GHAPIPaginationNextPageNotFound];
+        [self setDataArray:[self.pushPayload.commits mutableCopy] nextPage:GHAPIPaginationNextPageNotFound];
     }
     return self;
 }
 
 #pragma mark - Memory management
 
-- (void)dealloc {
-    [_repository release];
-    [_branchHash release];
-    [_pushPayload release];
-    
-    [super dealloc];
-}
 
 #pragma mark - Table view data source
 
@@ -88,7 +81,7 @@
         
         GHPImageDetailTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         if (cell == nil) {
-            cell = [[[GHPImageDetailTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
+            cell = [[GHPImageDetailTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
         }
         [self setupDefaultTableViewCell:cell forRowAtIndexPath:indexPath];
         
@@ -104,7 +97,7 @@
         
         GHPImageDetailTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         if (cell == nil) {
-            cell = [[[GHPImageDetailTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
+            cell = [[GHPImageDetailTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
         }
         [self setupDefaultTableViewCell:cell forRowAtIndexPath:indexPath];
         
@@ -165,15 +158,13 @@
     if (_contentType == GHPCommitsViewControllerContentTypePushPayload) {
         GHCommitMessage *message = [self.dataArray objectAtIndex:indexPath.row];
         
-        viewController = [[[GHPCommitViewController alloc] initWithRepository:self.repository 
-                                                                     commitID:message.head]
-                          autorelease];
+        viewController = [[GHPCommitViewController alloc] initWithRepository:self.repository 
+                                                                     commitID:message.head];
     } else {
         GHAPICommitV3 *commit = [self.dataArray objectAtIndex:indexPath.row];
         
-        viewController = [[[GHPCommitViewController alloc] initWithRepository:self.repository 
-                                                                     commitID:commit.SHA]
-                          autorelease];
+        viewController = [[GHPCommitViewController alloc] initWithRepository:self.repository 
+                                                                     commitID:commit.SHA];
     }
     
     if (viewController) {
@@ -213,9 +204,9 @@
 
 - (id)initWithCoder:(NSCoder *)decoder {
     if ((self = [super initWithCoder:decoder])) {
-        _repository = [[decoder decodeObjectForKey:@"repository"] retain];
-        _branchHash = [[decoder decodeObjectForKey:@"branchHash"] retain];
-        _pushPayload = [[decoder decodeObjectForKey:@"pushPayload"] retain];
+        _repository = [decoder decodeObjectForKey:@"repository"];
+        _branchHash = [decoder decodeObjectForKey:@"branchHash"];
+        _pushPayload = [decoder decodeObjectForKey:@"pushPayload"];
         _contentType = [decoder decodeIntForKey:@"contentType"];
     }
     return self;

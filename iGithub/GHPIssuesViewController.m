@@ -42,12 +42,6 @@
 
 #pragma mark - Memory management
 
-- (void)dealloc {
-    [_repository release];
-    [_username release];
-    
-    [super dealloc];
-}
 
 #pragma mark - Table view data source
 
@@ -56,7 +50,7 @@
     
     GHPImageDetailTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[GHPImageDetailTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[GHPImageDetailTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
     }
     [self setupDefaultTableViewCell:cell forRowAtIndexPath:indexPath];
     
@@ -76,7 +70,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     GHAPIIssueV3 *issue = [self.dataArray objectAtIndex:indexPath.row];
     
-    GHPIssueViewController *viewController = [[[GHPIssueViewController alloc] initWithIssueNumber:issue.number onRepository:issue.repository] autorelease];
+    GHPIssueViewController *viewController = [[GHPIssueViewController alloc] initWithIssueNumber:issue.number onRepository:issue.repository];
     
     [self.advancedNavigationController pushViewController:viewController afterViewController:self animated:YES];
 }
@@ -101,8 +95,8 @@
 
 - (id)initWithCoder:(NSCoder *)decoder {
     if ((self = [super initWithCoder:decoder])) {
-        _repository = [[decoder decodeObjectForKey:@"repository"] retain];
-        _username = [[decoder decodeObjectForKey:@"username"] retain];
+        _repository = [decoder decodeObjectForKey:@"repository"];
+        _username = [decoder decodeObjectForKey:@"username"];
     }
     return self;
 }

@@ -18,8 +18,7 @@
 
 - (void)setPayload:(GHPushPayload *)payload {
     if (payload != _payload) {
-        [_payload release];
-        _payload = [payload retain];
+        _payload = payload;
         [self cachePayloadHeights];
         [self.tableView reloadData];
     }
@@ -39,11 +38,6 @@
 
 #pragma mark - Memory management
 
-- (void)dealloc {
-    [_payload release];
-    [_repository release];
-    [super dealloc];
-}
 
 - (void)didReceiveMemoryWarning {
     // Releases the view if it doesn't have a superview.
@@ -79,7 +73,7 @@
     GHDescriptionTableViewCell *cell = (GHDescriptionTableViewCell *)[self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     if (!cell) {
-        cell = [[[GHDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[GHDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     
     GHCommitMessage *message = [self.payload.commits objectAtIndex:indexPath.row];
@@ -131,9 +125,8 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     GHCommitMessage *message = [self.payload.commits objectAtIndex:indexPath.row];
     
-    GHViewCommitViewController *commitViewController = [[[GHViewCommitViewController alloc] initWithRepository:self.repository
-                                                                                                      commitID:message.head]
-                                                        autorelease];
+    GHViewCommitViewController *commitViewController = [[GHViewCommitViewController alloc] initWithRepository:self.repository
+                                                                                                      commitID:message.head];
     commitViewController.branchHash = self.payload.head;
     [self.navigationController pushViewController:commitViewController animated:YES];
 }
@@ -152,8 +145,8 @@
 
 - (id)initWithCoder:(NSCoder *)decoder {
     if ((self = [super initWithCoder:decoder])) {
-        _payload = [[decoder decodeObjectForKey:@"payload"] retain];
-        _repository = [[decoder decodeObjectForKey:@"repository"] retain];
+        _payload = [decoder decodeObjectForKey:@"payload"];
+        _repository = [decoder decodeObjectForKey:@"repository"];
     }
     return self;
 }

@@ -18,7 +18,7 @@
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if ((self = [super initWithStyle:style reuseIdentifier:reuseIdentifier])) {
         // Initialization code
-        self.secondImageView = [[[UIImageView alloc] initWithFrame:CGRectZero] autorelease];
+        self.secondImageView = [[UIImageView alloc] initWithFrame:CGRectZero];
         [self.contentView addSubview:self.secondImageView];
     }
     return self;
@@ -53,10 +53,5 @@
 
 #pragma mark - Memory management
 
-- (void)dealloc {
-    [_secondImageView release];
-    
-    [super dealloc];
-}
 
 @end

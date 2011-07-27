@@ -21,7 +21,7 @@
 
 @interface GHCreateIssueTableViewController : GHTableViewController {
 @private
-    id<GHCreateIssueTableViewControllerDelegate> _delegate;
+    id<GHCreateIssueTableViewControllerDelegate> __weak _delegate;
     NSString *_repository;
     
     UITextView *_textView;
@@ -36,7 +36,7 @@
     NSUInteger _assignesMilestoneIndex;
 }
 
-@property (nonatomic, assign) id<GHCreateIssueTableViewControllerDelegate> delegate;
+@property (nonatomic, weak) id<GHCreateIssueTableViewControllerDelegate> delegate;
 @property (nonatomic, copy) NSString *repository;
 
 @property (nonatomic, retain) UITextView *textView;

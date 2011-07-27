@@ -25,7 +25,7 @@
     
     GHPUserTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[GHPUserTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[GHPUserTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     
     GHAPIUserV3 *user = [self.dataArray objectAtIndex:indexPath.row];
@@ -81,7 +81,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     GHAPIUserV3 *user = [self.dataArray objectAtIndex:indexPath.row];
-    GHPUserViewController *userViewController = [[[GHPUserViewController alloc] initWithUsername:user.login] autorelease];
+    GHPUserViewController *userViewController = [[GHPUserViewController alloc] initWithUsername:user.login];
     [self.advancedNavigationController pushViewController:userViewController afterViewController:self animated:YES];
 }
 

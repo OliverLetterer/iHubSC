@@ -30,14 +30,6 @@
 
 #pragma mark - Memory management
 
-- (void)dealloc {
-    [_repositoryString release];
-    [_label release];
-    [_openIssues release];
-    [_closedIssues release];
-    
-    [super dealloc];
-}
 
 #pragma mark - Height Caching
 
@@ -60,10 +52,10 @@
 
 - (id)initWithCoder:(NSCoder *)decoder {
     if ((self = [super initWithCoder:decoder])) {
-        _repositoryString = [[decoder decodeObjectForKey:@"repositoryString"] retain];
-        _label = [[decoder decodeObjectForKey:@"label"] retain];
-        _openIssues = [[decoder decodeObjectForKey:@"openIssues"] retain];
-        _closedIssues = [[decoder decodeObjectForKey:@"closedIssues"] retain];
+        _repositoryString = [decoder decodeObjectForKey:@"repositoryString"];
+        _label = [decoder decodeObjectForKey:@"label"];
+        _openIssues = [decoder decodeObjectForKey:@"openIssues"];
+        _closedIssues = [decoder decodeObjectForKey:@"closedIssues"];
     }
     return self;
 }

@@ -33,7 +33,7 @@
 @synthesize publicRepositories=_publicRepositories, publicMembers=_publicMembers, teams=_teams;
 
 - (void)setOrganizationLogin:(NSString *)organizationLogin {
-    [_organizationLogin release], _organizationLogin = [organizationLogin copy];
+    _organizationLogin = [organizationLogin copy];
     
     self.isDownloadingEssentialData = YES;
     [GHAPIOrganizationV3 organizationByName:_organizationLogin 
@@ -63,15 +63,6 @@
 
 #pragma mark - Memory management
 
-- (void)dealloc {
-    [_organizationLogin release];
-    [_organization release];
-    [_publicRepositories release];
-    [_publicMembers release];
-    [_teams release];
-    
-    [super dealloc];
-}
 
 #pragma mark - View lifecycle
 
@@ -103,7 +94,7 @@
     GHCollapsingAndSpinningTableViewCell *cell = (GHCollapsingAndSpinningTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdientifier];
     
     if (cell == nil) {
-        cell = [[[GHCollapsingAndSpinningTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdientifier] autorelease];
+        cell = [[GHCollapsingAndSpinningTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdientifier];
     }
     
     if (section == kUITableViewSectionPublicRepositories) {
@@ -198,12 +189,11 @@
                                             [tableView expandSection:section animated:YES];
                                             
                                             if (self.teams.count == 0) {
-                                                UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Teams", @"") 
+                                                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Teams", @"") 
                                                                                                  message:NSLocalizedString(@"There are no Teams available for this Organization", @"")
                                                                                                 delegate:nil 
                                                                                        cancelButtonTitle:NSLocalizedString(@"OK", @"") 
-                                                                                       otherButtonTitles:nil]
-                                                                      autorelease];
+                                                                                       otherButtonTitles:nil];
                                                 [alert show];
                                             }
                                         }
@@ -257,7 +247,7 @@
             
             GHDescriptionTableViewCell *cell = (GHDescriptionTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
             if (cell == nil) {
-                cell = [[[GHDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+                cell = [[GHDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 cell.accessoryType = UITableViewCellAccessoryNone;
             }
@@ -276,7 +266,7 @@
             
             GHTableViewCellWithLinearGradientBackgroundView *cell = (GHTableViewCellWithLinearGradientBackgroundView *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
             if (!cell) {
-                cell = [[[GHTableViewCellWithLinearGradientBackgroundView alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:CellIdentifier] autorelease];
+                cell = [[GHTableViewCellWithLinearGradientBackgroundView alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:CellIdentifier];
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
             }
             
@@ -294,7 +284,7 @@
             
             GHTableViewCellWithLinearGradientBackgroundView *cell = (GHTableViewCellWithLinearGradientBackgroundView *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
             if (!cell) {
-                cell = [[[GHTableViewCellWithLinearGradientBackgroundView alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:CellIdentifier] autorelease];
+                cell = [[GHTableViewCellWithLinearGradientBackgroundView alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:CellIdentifier];
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
             }
             
@@ -312,7 +302,7 @@
             
             GHTableViewCellWithLinearGradientBackgroundView *cell = (GHTableViewCellWithLinearGradientBackgroundView *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
             if (!cell) {
-                cell = [[[GHTableViewCellWithLinearGradientBackgroundView alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:CellIdentifier] autorelease];
+                cell = [[GHTableViewCellWithLinearGradientBackgroundView alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:CellIdentifier];
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
             }
             
@@ -329,7 +319,7 @@
             
             GHTableViewCellWithLinearGradientBackgroundView *cell = (GHTableViewCellWithLinearGradientBackgroundView *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
             if (!cell) {
-                cell = [[[GHTableViewCellWithLinearGradientBackgroundView alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:CellIdentifier] autorelease];
+                cell = [[GHTableViewCellWithLinearGradientBackgroundView alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:CellIdentifier];
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
             }
             
@@ -345,7 +335,7 @@
         
         GHDescriptionTableViewCell *cell = (GHDescriptionTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         if (cell == nil) {
-            cell = [[[GHDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+            cell = [[GHDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         }
         
         GHAPIRepositoryV3 *repository = [self.publicRepositories objectAtIndex:indexPath.row-1];
@@ -368,7 +358,7 @@
         
         GHTableViewCellWithLinearGradientBackgroundView *cell = (GHTableViewCellWithLinearGradientBackgroundView *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         if (!cell) {
-            cell = [[[GHTableViewCellWithLinearGradientBackgroundView alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+            cell = [[GHTableViewCellWithLinearGradientBackgroundView alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         }
         
         
@@ -383,7 +373,7 @@
         
         GHTableViewCellWithLinearGradientBackgroundView *cell = (GHTableViewCellWithLinearGradientBackgroundView *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         if (!cell) {
-            cell = [[[GHTableViewCellWithLinearGradientBackgroundView alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+            cell = [[GHTableViewCellWithLinearGradientBackgroundView alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         }
         
         
@@ -457,25 +447,25 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == kUITableViewSectionBlog && indexPath.row == 0) {
         NSURL *URL = [NSURL URLWithString:self.organization.blog];
-        GHWebViewViewController *web = [[[GHWebViewViewController alloc] initWithURL:URL] autorelease];
+        GHWebViewViewController *web = [[GHWebViewViewController alloc] initWithURL:URL];
         [self.navigationController pushViewController:web animated:YES];
     } else if (indexPath.section == kUITableViewSectionPublicActivity && indexPath.row == 0) {
-        GHRecentActivityViewController *recentViewController = [[[GHRecentActivityViewController alloc] initWithUsername:self.organization.login] autorelease];
+        GHRecentActivityViewController *recentViewController = [[GHRecentActivityViewController alloc] initWithUsername:self.organization.login];
         [self.navigationController pushViewController:recentViewController animated:YES];
     } else if (indexPath.section == kUITableViewSectionPublicRepositories) {
         GHAPIRepositoryV3 *repo = [self.publicRepositories objectAtIndex:indexPath.row-1];
         
-        GHRepositoryViewController *viewController = [[[GHRepositoryViewController alloc] initWithRepositoryString:[NSString stringWithFormat:@"%@/%@", repo.owner.login, repo.name] ] autorelease];
+        GHRepositoryViewController *viewController = [[GHRepositoryViewController alloc] initWithRepositoryString:[NSString stringWithFormat:@"%@/%@", repo.owner.login, repo.name] ];
         [self.navigationController pushViewController:viewController animated:YES];
     } else if (indexPath.section == kUITableViewSectionPublicMembers) {
         GHAPIUserV3 *user = [self.publicMembers objectAtIndex:indexPath.row - 1];
         
-        GHUserViewController *userViewController = [[[GHUserViewController alloc] initWithUsername:user.login] autorelease];
+        GHUserViewController *userViewController = [[GHUserViewController alloc] initWithUsername:user.login];
         [self.navigationController pushViewController:userViewController animated:YES];
     } else if (indexPath.section == kUITableViewSectionTeams) {
         GHAPITeamV3 *team = [self.teams objectAtIndex:indexPath.row - 1];
         
-        GHTeamViewController *teamViewController = [[[GHTeamViewController alloc] initWithTeamID:team.ID] autorelease];
+        GHTeamViewController *teamViewController = [[GHTeamViewController alloc] initWithTeamID:team.ID];
         [self.navigationController pushViewController:teamViewController animated:YES];
     } else {
         [tableView deselectRowAtIndexPath:indexPath animated:NO];
@@ -494,11 +484,11 @@
 
 - (id)initWithCoder:(NSCoder *)decoder {
     if ((self = [super initWithCoder:decoder])) {
-        _organizationLogin = [[decoder decodeObjectForKey:@"organizationLogin"] retain];
-        _organization = [[decoder decodeObjectForKey:@"organization"] retain];
-        _publicRepositories = [[decoder decodeObjectForKey:@"publicRepositories"] retain];
-        _publicMembers = [[decoder decodeObjectForKey:@"publicMembers"] retain];
-        _teams = [[decoder decodeObjectForKey:@"teams"] retain];
+        _organizationLogin = [decoder decodeObjectForKey:@"organizationLogin"];
+        _organization = [decoder decodeObjectForKey:@"organization"];
+        _publicRepositories = [decoder decodeObjectForKey:@"publicRepositories"];
+        _publicMembers = [decoder decodeObjectForKey:@"publicMembers"];
+        _teams = [decoder decodeObjectForKey:@"teams"];
     }
     return self;
 }

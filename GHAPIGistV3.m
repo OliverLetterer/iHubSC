@@ -22,7 +22,7 @@
         self.URL = [rawDictionary objectForKeyOrNilOnNullObject:@"url"];
         self.ID = [rawDictionary objectForKeyOrNilOnNullObject:@"id"];
         self.description = [rawDictionary objectForKeyOrNilOnNullObject:@"description"];
-        self.user = [[[GHAPIUserV3 alloc] initWithRawDictionary:[rawDictionary objectForKeyOrNilOnNullObject:@"user"]] autorelease];
+        self.user = [[GHAPIUserV3 alloc] initWithRawDictionary:[rawDictionary objectForKeyOrNilOnNullObject:@"user"]];
         self.comments = [rawDictionary objectForKeyOrNilOnNullObject:@"comments"];
         self.pullURL = [rawDictionary objectForKeyOrNilOnNullObject:@"git_pull_url"];
         self.pushURL = [rawDictionary objectForKeyOrNilOnNullObject:@"git_push_url"];
@@ -33,7 +33,7 @@
         NSMutableArray *filesArray = [NSMutableArray arrayWithCapacity:[filesDictionary count]];
         
         [filesDictionary enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
-            [filesArray addObject:[[[GHAPIGistFileV3 alloc] initWithRawDictionary:obj] autorelease] ];
+            [filesArray addObject:[[GHAPIGistFileV3 alloc] initWithRawDictionary:obj] ];
         }];
         
         self.files = filesArray;
@@ -41,7 +41,7 @@
         NSArray *rawArray = [rawDictionary objectForKeyOrNilOnNullObject:@"forks"];
         NSMutableArray *finalArray = [NSMutableArray arrayWithCapacity:rawArray.count];
         [rawArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-            [finalArray addObject:[[[GHAPIGistForkV3 alloc] initWithRawDictionary:obj] autorelease] ];
+            [finalArray addObject:[[GHAPIGistForkV3 alloc] initWithRawDictionary:obj] ];
         }];
         
         self.forks = finalArray;
@@ -67,17 +67,17 @@
 
 - (id)initWithCoder:(NSCoder *)decoder {
     if ((self = [super init])) {
-        _URL = [[decoder decodeObjectForKey:@"uRL"] retain];
-        _ID = [[decoder decodeObjectForKey:@"iD"] retain];
-        _description = [[decoder decodeObjectForKey:@"description"] retain];
-        _public = [[decoder decodeObjectForKey:@"public"] retain];
-        _user = [[decoder decodeObjectForKey:@"user"] retain];
-        _files = [[decoder decodeObjectForKey:@"files"] retain];
-        _comments = [[decoder decodeObjectForKey:@"comments"] retain];
-        _pullURL = [[decoder decodeObjectForKey:@"pullURL"] retain];
-        _pushURL = [[decoder decodeObjectForKey:@"pushURL"] retain];
-        _createdAt = [[decoder decodeObjectForKey:@"createdAt"] retain];
-        _forks = [[decoder decodeObjectForKey:@"forks"] retain];
+        _URL = [decoder decodeObjectForKey:@"uRL"];
+        _ID = [decoder decodeObjectForKey:@"iD"];
+        _description = [decoder decodeObjectForKey:@"description"];
+        _public = [decoder decodeObjectForKey:@"public"];
+        _user = [decoder decodeObjectForKey:@"user"];
+        _files = [decoder decodeObjectForKey:@"files"];
+        _comments = [decoder decodeObjectForKey:@"comments"];
+        _pullURL = [decoder decodeObjectForKey:@"pullURL"];
+        _pushURL = [decoder decodeObjectForKey:@"pushURL"];
+        _createdAt = [decoder decodeObjectForKey:@"createdAt"];
+        _forks = [decoder decodeObjectForKey:@"forks"];
     }
     return self;
 }
@@ -96,7 +96,7 @@
                                            if (error) {
                                                handler(nil, error);
                                            } else {
-                                               handler([[[GHAPIGistV3 alloc] initWithRawDictionary:object] autorelease], nil);
+                                               handler([[GHAPIGistV3 alloc] initWithRawDictionary:object], nil);
                                            }
                                            
                                        }];
@@ -177,7 +177,7 @@
                                                
                                                NSMutableArray *finalArray = [NSMutableArray arrayWithCapacity:rawArray.count];
                                                [rawArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-                                                   [finalArray addObject:[[[GHAPIGistCommentV3 alloc] initWithRawDictionary:obj] autorelease] ];
+                                                   [finalArray addObject:[[GHAPIGistCommentV3 alloc] initWithRawDictionary:obj] ];
                                                }];
                                                
                                                handler(finalArray, nil);
@@ -200,7 +200,7 @@
                                                 }
                                                 
                                                 NSString *jsonString = [jsonDictionary JSONString];
-                                                NSMutableData *jsonData = [[[jsonString dataUsingEncoding:NSUTF8StringEncoding] mutableCopy] autorelease];
+                                                NSMutableData *jsonData = [[jsonString dataUsingEncoding:NSUTF8StringEncoding] mutableCopy];
                                                 [request setPostBody:jsonData];
                                                 [request setPostLength:[jsonString length] ];
                                                 
@@ -209,27 +209,12 @@
                                            if (error) {
                                                handler(nil, error);
                                            } else {
-                                               handler([[[GHAPIGistCommentV3 alloc] initWithRawDictionary:object] autorelease], nil);
+                                               handler([[GHAPIGistCommentV3 alloc] initWithRawDictionary:object], nil);
                                            }
                                        }];
 }
 
 #pragma mark - Memory management
 
-- (void)dealloc {
-    [_URL release];
-    [_ID release];
-    [_description release];
-    [_public release];
-    [_user release];
-    [_files release];
-    [_comments release];
-    [_pullURL release];
-    [_pushURL release];
-    [_createdAt release];
-    [_forks release];
-    
-    [super dealloc];
-}
 
 @end

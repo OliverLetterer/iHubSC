@@ -19,7 +19,7 @@
     rawDictionary = GHAPIObjectExpectedClass(rawDictionary, NSDictionary.class);
     if ((self = [super init])) {
         // Initialization code
-        self.user = [[[GHAPIUserV3 alloc] initWithRawDictionary:[rawDictionary objectForKeyOrNilOnNullObject:@"user"] ] autorelease];
+        self.user = [[GHAPIUserV3 alloc] initWithRawDictionary:[rawDictionary objectForKeyOrNilOnNullObject:@"user"] ];
         self.URL = [rawDictionary objectForKeyOrNilOnNullObject:@"url"];
         self.createdAt = [rawDictionary objectForKeyOrNilOnNullObject:@"created_at"];
     }
@@ -28,13 +28,6 @@
 
 #pragma mark - Memory management
 
-- (void)dealloc {
-    [_user release];
-    [_URL release];
-    [_createdAt release];
-    
-    [super dealloc];
-}
 
 #pragma mark - Keyed Archiving
 
@@ -46,9 +39,9 @@
 
 - (id)initWithCoder:(NSCoder *)decoder {
     if ((self = [super init])) {
-        _user = [[decoder decodeObjectForKey:@"user"] retain];
-        _URL = [[decoder decodeObjectForKey:@"uRL"] retain];
-        _createdAt = [[decoder decodeObjectForKey:@"createdAt"] retain];
+        _user = [decoder decodeObjectForKey:@"user"];
+        _URL = [decoder decodeObjectForKey:@"uRL"];
+        _createdAt = [decoder decodeObjectForKey:@"createdAt"];
     }
     return self;
 }

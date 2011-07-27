@@ -23,8 +23,8 @@
         }
         self.displayTime = 1.0f;
         self.backgroundView.colors = [NSArray arrayWithObjects:
-                                      (id)[UIColor colorWithRed:192.0f/255.0 green:14.0f/255.0 blue:14.0f/255.0 alpha:1.0].CGColor, 
-                                      (id)[UIColor colorWithRed:145.0f/255.0 green:14.0f/255.0 blue:14.0f/255.0 alpha:1.0].CGColor,
+                                      (__bridge id)[UIColor colorWithRed:192.0f/255.0 green:14.0f/255.0 blue:14.0f/255.0 alpha:1.0].CGColor, 
+                                      (__bridge id)[UIColor colorWithRed:145.0f/255.0 green:14.0f/255.0 blue:14.0f/255.0 alpha:1.0].CGColor,
                                       nil];
     }
     return self;
@@ -32,9 +32,5 @@
 
 #pragma mark - Memory management
 
-- (void)dealloc {
-    
-    [super dealloc];
-}
 
 @end

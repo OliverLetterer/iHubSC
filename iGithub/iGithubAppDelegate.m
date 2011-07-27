@@ -105,13 +105,6 @@
 
 #pragma mark - memory management
 
-- (void)dealloc {
-    [_managedObjectContext release];
-    [_managedObjectModel release];
-    [_persistentStoreCoordinator release];
-    [_window release];
-    [super dealloc];
-}
 
 - (void)saveContext
 {

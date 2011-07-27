@@ -43,10 +43,6 @@ dispatch_queue_t GHAPIBackgroundQueue() {
 
 #pragma mark - Memory management
 
-- (void)dealloc {
-    
-    [super dealloc];
-}
 
 #pragma mark - instance methods
 
@@ -124,27 +120,11 @@ static GHAPIBackgroundQueueV3 *_instance = nil;
 }
 
 + (id)allocWithZone:(NSZone *)zone {	
-	return [[self sharedInstance] retain];	
+	return [self sharedInstance];	
 }
 
 
 - (id)copyWithZone:(NSZone *)zone {
-    return self;	
-}
-
-- (id)retain {	
-    return self;	
-}
-
-- (NSUInteger)retainCount {
-    return NSUIntegerMax;
-}
-
-- (void)release {
-    //do nothing
-}
-
-- (id)autorelease {
     return self;	
 }
 

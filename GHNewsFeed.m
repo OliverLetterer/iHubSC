@@ -31,14 +31,14 @@
         myError = [request error];
         
         NSData *feedData = [request responseData];
-        NSString *feedString = [[[NSString alloc] initWithData:feedData encoding:NSUTF8StringEncoding] autorelease];
+        NSString *feedString = [[NSString alloc] initWithData:feedData encoding:NSUTF8StringEncoding];
         
         dispatch_async(dispatch_get_main_queue(), ^(void) {
             if (myError) {
                 handler(nil, myError);
             } else {
                 NSArray *feedArray = GHAPIObjectExpectedClass([feedString objectFromJSONString], NSArray.class);
-                handler([[[GHNewsFeed alloc] initWithRawArray:feedArray] autorelease], nil);
+                handler([[GHNewsFeed alloc] initWithRawArray:feedArray], nil);
             }
         });
     });
@@ -61,14 +61,14 @@
         myError = [request error];
         
         NSData *feedData = [request responseData];
-        NSString *feedString = [[[NSString alloc] initWithData:feedData encoding:NSUTF8StringEncoding] autorelease];
+        NSString *feedString = [[NSString alloc] initWithData:feedData encoding:NSUTF8StringEncoding];
         
         dispatch_async(dispatch_get_main_queue(), ^(void) {
             if (myError) {
                 handler(nil, myError);
             } else {
                 NSArray *feedArray = GHAPIObjectExpectedClass([feedString objectFromJSONString], NSArray.class);
-                handler([[[GHNewsFeed alloc] initWithRawArray:GHAPIObjectExpectedClass(feedArray, NSArray.class)] autorelease], nil);
+                handler([[GHNewsFeed alloc] initWithRawArray:GHAPIObjectExpectedClass(feedArray, NSArray.class)], nil);
             }
         });
     });
@@ -81,7 +81,7 @@
         // Initialization code
         NSMutableArray *items = [NSMutableArray array];
         for (NSDictionary *feedEntry in rawArray) {
-            [items addObject:[[[GHNewsFeedItem alloc] initWithRawDictionary:feedEntry] autorelease] ];
+            [items addObject:[[GHNewsFeedItem alloc] initWithRawDictionary:feedEntry] ];
         }
         self.items = items;
     }
@@ -90,10 +90,6 @@
 
 #pragma mark - Memory management
 
-- (void)dealloc {
-    [_items release];
-    [super dealloc];
-}
 
 #pragma mark - NSCoding
 

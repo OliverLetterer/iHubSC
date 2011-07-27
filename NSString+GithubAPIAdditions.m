@@ -18,16 +18,16 @@
 @implementation NSString (GHAPIDateFormatting)
 
 - (NSDate *)dateFromGithubAPIDateString {
-    NSDateFormatter *formatter = [[[NSDateFormatter alloc] init] autorelease];
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"yyyy/MM/dd HH:mm:ss ZZZ"];
     NSDate *date = [formatter dateFromString:self];
     
     if (!date) {
-        NSDateFormatter *f = [[[NSDateFormatter alloc] init] autorelease];
+        NSDateFormatter *f = [[NSDateFormatter alloc] init];
         [f setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss'Z'"];
         f.timeZone = [NSTimeZone timeZoneForSecondsFromGMT:0];
-        f.calendar = [[[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar] autorelease];
-        f.locale = [[[NSLocale alloc] initWithLocaleIdentifier:@"en_US"] autorelease];
+        f.calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+        f.locale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US"];
         date = [f dateFromString:self];
     }
     
@@ -73,7 +73,7 @@
     for (NSString *basicLinkString in basicLinksArray) {
         if ([basicLinkString rangeOfString:@"rel=\"next\""].location != NSNotFound) {
             
-            NSRegularExpression *expression = [[[NSRegularExpression alloc] initWithPattern:@"page=(0|1|2|3|4|5|6|7|8|9)+&" options:NSRegularExpressionCaseInsensitive error:NULL] autorelease];
+            NSRegularExpression *expression = [[NSRegularExpression alloc] initWithPattern:@"page=(0|1|2|3|4|5|6|7|8|9)+&" options:NSRegularExpressionCaseInsensitive error:NULL];
             
             [expression enumerateMatchesInString:basicLinkString options:0 range:NSMakeRange(0, basicLinkString.length) 
                                       usingBlock:^(NSTextCheckingResult *result, NSMatchingFlags flags, BOOL *stop) {
@@ -145,13 +145,13 @@ NSString *const kGHNSStringMarkdownStyleFull = @"MarkdownStyle";
                                                    error:NULL];
     NSMutableString *parsedString = [NSMutableString stringWithFormat:@"%@", style];
     
-    WAHTMLMarkdownFormatter *formatter = [[[WAHTMLMarkdownFormatter alloc] init] autorelease];
+    WAHTMLMarkdownFormatter *formatter = [[WAHTMLMarkdownFormatter alloc] init];
     [parsedString appendFormat:@"%@", [formatter HTMLForMarkdown:self]];
     return parsedString;
 }
 
 - (NSAttributedString *)attributesStringFromMarkdownString {
-    WAHTMLMarkdownFormatter *formatter = [[[WAAttributesMarkdownFormatter alloc] init] autorelease];
+    WAHTMLMarkdownFormatter *formatter = [[WAAttributesMarkdownFormatter alloc] init];
     NSString *HTML = [formatter HTMLForMarkdown:self];
     NSData *HTMLData = [HTML dataUsingEncoding:NSUTF8StringEncoding];
     return [NSAttributedString attributedStringWithHTML:HTMLData options:nil];

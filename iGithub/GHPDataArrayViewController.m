@@ -21,7 +21,7 @@
 
 - (void)setDataArray:(NSMutableArray *)dataArray nextPage:(NSUInteger)nextPage {
     if (dataArray != _dataArray) {
-        [_dataArray release], _dataArray = [dataArray retain];
+        _dataArray = dataArray;
         
         self.isDownloadingEssentialData = NO;
         [self cacheDataArrayHeights];
@@ -61,11 +61,6 @@
 
 #pragma mark - Memory management
 
-- (void)dealloc {
-    [_dataArray release];
-    
-    [super dealloc];
-}
 
 #pragma mark - Table view data source
 
@@ -105,7 +100,7 @@
 
 - (id)initWithCoder:(NSCoder *)decoder {
     if ((self = [super initWithCoder:decoder])) {
-        _dataArray = [[decoder decodeObjectForKey:@"dataArray"] retain];
+        _dataArray = [decoder decodeObjectForKey:@"dataArray"];
     }
     return self;
 }

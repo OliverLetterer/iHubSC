@@ -20,7 +20,6 @@
 @synthesize team=_team, teamID=_teamID, members=_members, repositories=_repositories;
 
 - (void)setTeamID:(NSNumber *)teamID {
-    [_teamID release];
     _teamID = [teamID copy];
     
     self.isDownloadingEssentialData = YES;
@@ -51,14 +50,6 @@
 
 #pragma mark - Memory management
 
-- (void)dealloc {
-    [_team release];
-    [_teamID release];
-    [_members release];
-    [_repositories release];
-    
-    [super dealloc];
-}
 
 #pragma mark - UIExpandableTableViewDatasource
 
@@ -81,7 +72,7 @@
     GHCollapsingAndSpinningTableViewCell *cell = (GHCollapsingAndSpinningTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdientifier];
     
     if (cell == nil) {
-        cell = [[[GHCollapsingAndSpinningTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdientifier] autorelease];
+        cell = [[GHCollapsingAndSpinningTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdientifier];
     }
     
     if (section == kUITableViewSectionMembers) {
@@ -179,7 +170,7 @@
         
         GHTableViewCellWithLinearGradientBackgroundView *cell = (GHTableViewCellWithLinearGradientBackgroundView *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         if (!cell) {
-            cell = [[[GHTableViewCellWithLinearGradientBackgroundView alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+            cell = [[GHTableViewCellWithLinearGradientBackgroundView alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         }
         
         
@@ -194,7 +185,7 @@
         
         GHDescriptionTableViewCell *cell = (GHDescriptionTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         if (cell == nil) {
-            cell = [[[GHDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+            cell = [[GHDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         }
         
         GHAPIRepositoryV3 *repository = [self.repositories objectAtIndex:indexPath.row-1];
@@ -291,13 +282,13 @@
     if (indexPath.section == kUITableViewSectionMembers && indexPath.row > 0) {
         GHAPIUserV3 *user = [self.members objectAtIndex:indexPath.row - 1];
         
-        GHUserViewController *userViewController = [[[GHUserViewController alloc] initWithUsername:user.login] autorelease];
+        GHUserViewController *userViewController = [[GHUserViewController alloc] initWithUsername:user.login];
         [self.navigationController pushViewController:userViewController animated:YES];
     } else if (indexPath.section == kUITableViewSectionRepositories && indexPath.row > 0) {
         
         GHRepository *repo = [self.repositories objectAtIndex:indexPath.row-1];
         
-        GHRepositoryViewController *viewController = [[[GHRepositoryViewController alloc] initWithRepositoryString:[NSString stringWithFormat:@"%@/%@", repo.owner, repo.name] ] autorelease];
+        GHRepositoryViewController *viewController = [[GHRepositoryViewController alloc] initWithRepositoryString:[NSString stringWithFormat:@"%@/%@", repo.owner, repo.name] ];
         [self.navigationController pushViewController:viewController animated:YES];
         
     } else {
@@ -316,10 +307,10 @@
 
 - (id)initWithCoder:(NSCoder *)decoder {
     if ((self = [super initWithCoder:decoder])) {
-        _team = [[decoder decodeObjectForKey:@"team"] retain];
-        _teamID = [[decoder decodeObjectForKey:@"teamID"] retain];
-        _members = [[decoder decodeObjectForKey:@"members"] retain];
-        _repositories = [[decoder decodeObjectForKey:@"repositories"] retain];
+        _team = [decoder decodeObjectForKey:@"team"];
+        _teamID = [decoder decodeObjectForKey:@"teamID"];
+        _members = [decoder decodeObjectForKey:@"members"];
+        _repositories = [decoder decodeObjectForKey:@"repositories"];
     }
     return self;
 }

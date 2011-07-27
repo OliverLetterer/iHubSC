@@ -44,7 +44,7 @@
 #pragma mark - inserting new viewControllers
 
 - (void)__pushRootViewController:(UIViewController *)rootViewController animated:(BOOL)animated {
-    NSArray *oldViewControllers = [[self.viewControllers copy] autorelease];
+    NSArray *oldViewControllers = [self.viewControllers copy];
     
     [oldViewControllers enumerateObjectsUsingBlock:^(__strong id obj, NSUInteger idx, BOOL *stop) {
         [self __removeRightViewController:obj animated:animated];
@@ -192,7 +192,7 @@
 }
 
 - (void)__popViewControllersAfterDraggingFarToTheRight {
-    NSArray *oldArray = [[self.viewControllers copy] autorelease];
+    NSArray *oldArray = [self.viewControllers copy];
     
     [oldArray enumerateObjectsUsingBlock:^(__strong id obj, NSUInteger idx, BOOL *stop) {
         if (idx > 0) {
@@ -249,7 +249,7 @@
             return rightViewController.view.superview;
         }
     }
-    UIView *wrapperView = [[[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, ANAdvancedNavigationControllerDefaultViewControllerWidth, CGRectGetHeight(self.view.bounds))] autorelease];
+    UIView *wrapperView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, ANAdvancedNavigationControllerDefaultViewControllerWidth, CGRectGetHeight(self.view.bounds))];
     wrapperView.backgroundColor = [UIColor blackColor];
     
     rightViewController.view.frame = wrapperView.bounds;
@@ -519,7 +519,7 @@
         [NSException raise:NSInternalInconsistencyException format:@"viewController (%@) is not part of the viewController Hierarchy", viewController];
     }
     
-    NSArray *oldArray = [[self.viewControllers copy] autorelease];
+    NSArray *oldArray = [self.viewControllers copy];
     
     NSInteger index = [self.viewControllers indexOfObject:viewController]+1;
     if ([self.delegate respondsToSelector:@selector(advancedNavigationController:willPopToViewController:animated:)]) {
@@ -554,7 +554,7 @@
 }
 
 - (void)_prepareViewForPanning {
-    UIPanGestureRecognizer *recognizer = [[[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(__mainPanGestureRecognizedDidRecognizePanGesture:)] autorelease];
+    UIPanGestureRecognizer *recognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(__mainPanGestureRecognizedDidRecognizePanGesture:)];
     recognizer.maximumNumberOfTouches = 1;
     [self.view addGestureRecognizer:recognizer];
 }

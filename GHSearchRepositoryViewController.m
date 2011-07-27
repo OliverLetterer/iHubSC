@@ -18,7 +18,7 @@
 #pragma mark - setters and getters
 
 - (void)setSearchString:(NSString *)searchString {
-    [_searchString release], _searchString = [searchString copy];
+    _searchString = [searchString copy];
     self.repositories = nil;
     
     self.isDownloadingEssentialData = YES;
@@ -50,12 +50,6 @@
 
 #pragma mark - Memory management
 
-- (void)dealloc {
-    [_searchString release];
-    [_repositories release];
-    
-    [super dealloc];
-}
 
 #pragma mark - instance methods
 
@@ -87,7 +81,7 @@
     
     GHDescriptionTableViewCell *cell = (GHDescriptionTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[GHDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[GHDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     
     GHRepository *repository = [self.repositories objectAtIndex:indexPath.row];
@@ -147,7 +141,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     GHRepository *repo = [self.repositories objectAtIndex:indexPath.row];
     
-    GHRepositoryViewController *viewController = [[[GHRepositoryViewController alloc] initWithRepositoryString:[NSString stringWithFormat:@"%@/%@", repo.owner, repo.name] ] autorelease];
+    GHRepositoryViewController *viewController = [[GHRepositoryViewController alloc] initWithRepositoryString:[NSString stringWithFormat:@"%@/%@", repo.owner, repo.name] ];
     [self.navigationController pushViewController:viewController animated:YES];
 }
 
@@ -165,8 +159,8 @@
 
 - (id)initWithCoder:(NSCoder *)decoder {
     if ((self = [super initWithCoder:decoder])) {
-        _searchString = [[decoder decodeObjectForKey:@"searchString"] retain];
-        _repositories = [[decoder decodeObjectForKey:@"repositories"] retain];
+        _searchString = [decoder decodeObjectForKey:@"searchString"];
+        _repositories = [decoder decodeObjectForKey:@"repositories"];
     }
     return self;
 }

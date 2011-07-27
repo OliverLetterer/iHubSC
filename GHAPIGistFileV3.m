@@ -29,13 +29,6 @@
 
 #pragma mark - Memory management
 
-- (void)dealloc {
-    [_filename release];
-    [_size release];
-    [_URL release];
-    [_content release];
-    [super dealloc];
-}
 
 #pragma mark - Keyed Archiving
 
@@ -48,10 +41,10 @@
 
 - (id)initWithCoder:(NSCoder *)decoder {
     if ((self = [super init])) {
-        _filename = [[decoder decodeObjectForKey:@"filename"] retain];
-        _size = [[decoder decodeObjectForKey:@"size"] retain];
-        _URL = [[decoder decodeObjectForKey:@"uRL"] retain];
-        _content = [[decoder decodeObjectForKey:@"content"] retain];
+        _filename = [decoder decodeObjectForKey:@"filename"];
+        _size = [decoder decodeObjectForKey:@"size"];
+        _URL = [decoder decodeObjectForKey:@"uRL"];
+        _content = [decoder decodeObjectForKey:@"content"];
     }
     return self;
 }

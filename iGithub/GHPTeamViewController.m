@@ -19,7 +19,7 @@
 @synthesize team=_team, teamID=_teamID, members=_members, repositories=_repositories;
 
 - (void)setTeamID:(NSNumber *)teamID {
-    [_teamID release], _teamID = [teamID copy];
+    _teamID = [teamID copy];
     
     [GHAPITeamV3 teamByID:_teamID 
         completionHandler:^(GHAPITeamV3 *team, NSError *error) {
@@ -47,14 +47,6 @@
 
 #pragma mark - Memory management
 
-- (void)dealloc {
-    [_team release];
-    [_teamID release];
-    [_members release];
-    [_repositories release];
-    
-    [super dealloc];
-}
 
 #pragma mark - UIExpandableTableViewDatasource
 
@@ -169,7 +161,7 @@
         
         GHPUserTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         if (!cell) {
-            cell = [[[GHPUserTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+            cell = [[GHPUserTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         }
         [self setupDefaultTableViewCell:cell forRowAtIndexPath:indexPath];
         
@@ -185,7 +177,7 @@
         
         GHPRepositoryTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         if (cell == nil) {
-            cell = [[[GHPRepositoryTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
+            cell = [[GHPRepositoryTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
         }
         [self setupDefaultTableViewCell:cell forRowAtIndexPath:indexPath];
         
@@ -286,12 +278,12 @@
     if (indexPath.section == kUITableViewSectionMembers && indexPath.row > 0) {
         GHAPIUserV3 *user = [self.members objectAtIndex:indexPath.row - 1];
         
-        viewController = [[[GHPUserViewController alloc] initWithUsername:user.login] autorelease];
+        viewController = [[GHPUserViewController alloc] initWithUsername:user.login];
     } else if (indexPath.section == kUITableViewSectionRepositories && indexPath.row > 0) {
         
         GHAPIRepositoryV3 *repo = [self.repositories objectAtIndex:indexPath.row-1];
         
-        viewController = [[[GHPRepositoryViewController alloc] initWithRepositoryString:repo.fullRepositoryName] autorelease];
+        viewController = [[GHPRepositoryViewController alloc] initWithRepositoryString:repo.fullRepositoryName];
     }
     
     if (viewController) {
@@ -313,10 +305,10 @@
 
 - (id)initWithCoder:(NSCoder *)decoder {
     if ((self = [super initWithCoder:decoder])) {
-        _team = [[decoder decodeObjectForKey:@"team"] retain];
-        _teamID = [[decoder decodeObjectForKey:@"teamID"] retain];
-        _members = [[decoder decodeObjectForKey:@"members"] retain];
-        _repositories = [[decoder decodeObjectForKey:@"repositories"] retain];
+        _team = [decoder decodeObjectForKey:@"team"];
+        _teamID = [decoder decodeObjectForKey:@"teamID"];
+        _members = [decoder decodeObjectForKey:@"members"];
+        _repositories = [decoder decodeObjectForKey:@"repositories"];
     }
     return self;
 }

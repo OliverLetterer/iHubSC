@@ -19,19 +19,19 @@
     rawDictionary = GHAPIObjectExpectedClass(rawDictionary, NSDictionary.class);
     if ((self = [super init])) {
         // Initialization code
-        self.author = [[[GHUser alloc] initWithRawDictionary:[rawDictionary objectForKey:@"author"] ] autorelease];
+        self.author = [[GHUser alloc] initWithRawDictionary:[rawDictionary objectForKey:@"author"] ];
         self.authoredDate = [rawDictionary objectForKeyOrNilOnNullObject:@"authored_date"];
         self.commitDate = [rawDictionary objectForKeyOrNilOnNullObject:@"committed_date"];
-        self.commiter = [[[GHUser alloc] initWithRawDictionary:[rawDictionary objectForKey:@"committer"] ] autorelease];
+        self.commiter = [[GHUser alloc] initWithRawDictionary:[rawDictionary objectForKey:@"committer"] ];
         self.ID = [rawDictionary objectForKeyOrNilOnNullObject:@"id"];
         self.message = [rawDictionary objectForKeyOrNilOnNullObject:@"message"];
         self.tree = [rawDictionary objectForKeyOrNilOnNullObject:@"tree"];
         self.URL = [rawDictionary objectForKeyOrNilOnNullObject:@"url"];
-        self.user = [[[GHUser alloc] initWithRawDictionary:[rawDictionary objectForKeyOrNilOnNullObject:@"user"] ] autorelease];
+        self.user = [[GHUser alloc] initWithRawDictionary:[rawDictionary objectForKeyOrNilOnNullObject:@"user"] ];
         
         self.modified = [NSMutableArray array];
         for (NSDictionary *fileInfo in [rawDictionary objectForKeyOrNilOnNullObject:@"modified"]) {
-            [self.modified addObject:[[[GHCommitFileInformation alloc] initWithRawDictionary:fileInfo] autorelease] ];
+            [self.modified addObject:[[GHCommitFileInformation alloc] initWithRawDictionary:fileInfo] ];
         }
         
         self.removed = [NSMutableArray array];
@@ -81,19 +81,19 @@
 
 - (id)initWithCoder:(NSCoder *)decoder {
     if ((self = [super init])) {
-        _message = [[decoder decodeObjectForKey:@"message"] retain];
-        _added = [[decoder decodeObjectForKey:@"added"] retain];
-        _removed = [[decoder decodeObjectForKey:@"removed"] retain];
-        _parents = [[decoder decodeObjectForKey:@"parents"] retain];
-        _modified = [[decoder decodeObjectForKey:@"modified"] retain];
-        _author = [[decoder decodeObjectForKey:@"author"] retain];
-        _URL = [[decoder decodeObjectForKey:@"uRL"] retain];
-        _ID = [[decoder decodeObjectForKey:@"iD"] retain];
-        _commitDate = [[decoder decodeObjectForKey:@"commitDate"] retain];
-        _authoredDate = [[decoder decodeObjectForKey:@"authoredDate"] retain];
-        _tree = [[decoder decodeObjectForKey:@"tree"] retain];
-        _commiter = [[decoder decodeObjectForKey:@"commiter"] retain];
-        _user = [[decoder decodeObjectForKey:@"user"] retain];
+        _message = [decoder decodeObjectForKey:@"message"];
+        _added = [decoder decodeObjectForKey:@"added"];
+        _removed = [decoder decodeObjectForKey:@"removed"];
+        _parents = [decoder decodeObjectForKey:@"parents"];
+        _modified = [decoder decodeObjectForKey:@"modified"];
+        _author = [decoder decodeObjectForKey:@"author"];
+        _URL = [decoder decodeObjectForKey:@"uRL"];
+        _ID = [decoder decodeObjectForKey:@"iD"];
+        _commitDate = [decoder decodeObjectForKey:@"commitDate"];
+        _authoredDate = [decoder decodeObjectForKey:@"authoredDate"];
+        _tree = [decoder decodeObjectForKey:@"tree"];
+        _commiter = [decoder decodeObjectForKey:@"commiter"];
+        _user = [decoder decodeObjectForKey:@"user"];
     }
     return self;
 }
@@ -128,7 +128,7 @@
             } else {
                 NSDictionary *dictionary = [jsonString objectFromJSONString];
                 NSDictionary *rawCommitDictionary = [dictionary objectForKey:@"commit"];
-                handler([[[GHCommit alloc] initWithRawDictionary:rawCommitDictionary] autorelease], nil);
+                handler([[GHCommit alloc] initWithRawDictionary:rawCommitDictionary], nil);
             }
         });
     });
@@ -137,22 +137,5 @@
 
 #pragma mark - Memory management
 
-- (void)dealloc {
-    [_message release];
-    [_URL release];
-    [_ID release];
-    [_commitDate release];
-    [_authoredDate release];
-    [_tree release];
-    [_added release];
-    [_removed release];
-    [_parents release];
-    [_modified release];
-    [_author release];
-    [_commiter release];
-    [_user release];
-    
-    [super dealloc];
-}
 
 @end

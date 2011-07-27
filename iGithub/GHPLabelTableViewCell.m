@@ -18,7 +18,7 @@
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if ((self = [super initWithStyle:style reuseIdentifier:reuseIdentifier])) {
         // Initialization code
-        self.colorView = [[[UIView alloc] initWithFrame:CGRectZero] autorelease];
+        self.colorView = [[UIView alloc] initWithFrame:CGRectZero];
         self.colorView.layer.masksToBounds = YES;
         self.colorView.layer.cornerRadius = 3.0f;
         [self.contentView addSubview:self.colorView];
@@ -51,10 +51,5 @@
 
 #pragma mark - Memory management
 
-- (void)dealloc {
-    [_colorView release];
-    
-    [super dealloc];
-}
 
 @end

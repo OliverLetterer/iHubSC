@@ -18,10 +18,10 @@
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if ((self = [super initWithStyle:style reuseIdentifier:reuseIdentifier])) {
         // Initialization code
-        self.targetImageView = [[[UIImageView alloc] initWithFrame:CGRectZero] autorelease];
+        self.targetImageView = [[UIImageView alloc] initWithFrame:CGRectZero];
         [self.contentView addSubview:self.targetImageView];
         
-        self.targetNameLabel = [[[UILabel alloc] initWithFrame:CGRectZero] autorelease];
+        self.targetNameLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         self.targetNameLabel.font = [UIFont boldSystemFontOfSize:12.0];
         self.targetNameLabel.textColor = [UIColor colorWithWhite:0.25 alpha:1.0];
         self.targetNameLabel.highlightedTextColor = [UIColor whiteColor];
@@ -57,10 +57,5 @@
 
 #pragma mark - Memory management
 
-- (void)dealloc {
-    [_targetImageView release];
-    [_targetNameLabel release];
-    [super dealloc];
-}
 
 @end

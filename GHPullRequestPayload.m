@@ -28,7 +28,7 @@
         self.action = [rawDictionary objectForKeyOrNilOnNullObject:@"action"];
         NSObject *pullRequest = [rawDictionary objectForKeyOrNilOnNullObject:@"pull_request"];
         if ([pullRequest isKindOfClass:[NSDictionary class]]) {
-            self.pullRequest = [[[GHPullRequest alloc] initWithRawDictionary:(NSDictionary *)pullRequest] autorelease];
+            self.pullRequest = [[GHPullRequest alloc] initWithRawDictionary:(NSDictionary *)pullRequest];
         }
         // Initialization code
         
@@ -38,12 +38,6 @@
 
 #pragma mark - Memory management
 
-- (void)dealloc {
-    [_number release];
-    [_action release];
-    [_pullRequest release];
-    [super dealloc];
-}
 
 #pragma mark - NSCoding
 

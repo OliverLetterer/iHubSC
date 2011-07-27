@@ -18,7 +18,7 @@
 #pragma mark - setters and getters
 
 - (void)setSearchString:(NSString *)searchString {
-    [_searchString release], _searchString = [searchString copy];
+    _searchString = [searchString copy];
     
     self.users = nil;
     
@@ -52,12 +52,6 @@
 
 #pragma mark - Memory management
 
-- (void)dealloc {
-    [_users release];
-    [_searchString release];
-    
-    [super dealloc];
-}
 
 #pragma mark - Table view data source
 
@@ -78,7 +72,7 @@
     
     GHDescriptionTableViewCell *cell = (GHDescriptionTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[GHDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[GHDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     
     GHUser *user = [self.users objectAtIndex:indexPath.row];
@@ -104,7 +98,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     GHUser *user = [self.users objectAtIndex:indexPath.row];
     
-    GHUserViewController *userViewController = [[[GHUserViewController alloc] initWithUsername:user.login] autorelease];
+    GHUserViewController *userViewController = [[GHUserViewController alloc] initWithUsername:user.login];
     [self.navigationController pushViewController:userViewController animated:YES];
 }
 
@@ -118,8 +112,8 @@
 
 - (id)initWithCoder:(NSCoder *)decoder {
     if ((self = [super initWithCoder:decoder])) {
-        _searchString = [[decoder decodeObjectForKey:@"searchString"] retain];
-        _users = [[decoder decodeObjectForKey:@"users"] retain];
+        _searchString = [decoder decodeObjectForKey:@"searchString"];
+        _users = [decoder decodeObjectForKey:@"users"];
     }
     return self;
 }

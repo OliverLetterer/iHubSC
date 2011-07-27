@@ -46,9 +46,5 @@ CGFloat const GHPUserTableViewCellHeight = 66.0f;
 
 #pragma mark - Memory management
 
-- (void)dealloc {
-    
-    [super dealloc];
-}
 
 @end

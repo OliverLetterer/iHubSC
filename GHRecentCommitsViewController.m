@@ -31,14 +31,6 @@
 
 #pragma mark - Memory management
 
-- (void)dealloc {
-    [_repository release];
-    [_branch release];
-    [_commits release];
-    [_branchHash release];
-    
-    [super dealloc];
-}
 
 #pragma mark - pagination
 
@@ -102,7 +94,7 @@
     GHDescriptionTableViewCell *cell = (GHDescriptionTableViewCell *)[self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     if (!cell) {
-        cell = [[[GHDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[GHDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     
     GHAPICommitV3 *commit = [self.commits objectAtIndex:indexPath.row];
@@ -159,9 +151,8 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     GHAPICommitV3 *commit = [self.commits objectAtIndex:indexPath.row];
     
-    GHViewCommitViewController *commitViewController = [[[GHViewCommitViewController alloc] initWithRepository:self.repository 
-                                                                                                      commitID:commit.SHA]
-                                                        autorelease];
+    GHViewCommitViewController *commitViewController = [[GHViewCommitViewController alloc] initWithRepository:self.repository 
+                                                                                                      commitID:commit.SHA];
     commitViewController.branchHash = self.branchHash;
     [self.navigationController pushViewController:commitViewController animated:YES];
 }
@@ -178,10 +169,10 @@
 
 - (id)initWithCoder:(NSCoder *)decoder {
     if ((self = [super initWithCoder:decoder])) {
-        _repository = [[decoder decodeObjectForKey:@"repository"] retain];
-        _branch = [[decoder decodeObjectForKey:@"branch"] retain];
-        _branchHash = [[decoder decodeObjectForKey:@"branchHash"] retain];
-        _commits = [[decoder decodeObjectForKey:@"commits"] retain];
+        _repository = [decoder decodeObjectForKey:@"repository"];
+        _branch = [decoder decodeObjectForKey:@"branch"];
+        _branchHash = [decoder decodeObjectForKey:@"branchHash"];
+        _commits = [decoder decodeObjectForKey:@"commits"];
     }
     return self;
 }

@@ -46,7 +46,7 @@
 
 - (id)initWithButtonTitles:(NSArray *)buttonTitles reuseIdentifier:(NSString *)reuseIdentifier {
     if ((self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier])) {
-        _buttons = [[NSMutableArray arrayWithCapacity:buttonTitles.count] retain];
+        _buttons = [NSMutableArray arrayWithCapacity:buttonTitles.count];
         
         [buttonTitles enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
             NSString *title = obj;
@@ -104,10 +104,5 @@
 
 #pragma mark - Memory management
 
-- (void)dealloc {
-    [_buttons release];
-    
-    [super dealloc];
-}
 
 @end

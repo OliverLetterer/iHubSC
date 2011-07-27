@@ -27,8 +27,8 @@
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if ((self = [super initWithStyle:style reuseIdentifier:reuseIdentifier])) {
         // Initialization code
-        self.disclosureIndicatorImageView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"UITableViewCellAccessoryDisclosureIndicator.PNG"]] autorelease];
-        self.activityIndicatorView = [[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray] autorelease];
+        self.disclosureIndicatorImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"UITableViewCellAccessoryDisclosureIndicator.PNG"]];
+        self.activityIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
         [self.activityIndicatorView startAnimating];
     }
     return self;
@@ -92,10 +92,5 @@
 
 #pragma mark - Memory management
 
-- (void)dealloc {
-    [_activityIndicatorView release];
-    [_disclosureIndicatorImageView release];
-    [super dealloc];
-}
 
 @end

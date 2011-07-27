@@ -80,7 +80,7 @@
 }
 
 - (NSString *)stringInGithubAPIFormat {
-    NSDateFormatter *formatter = [[[NSDateFormatter alloc] init] autorelease];
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"yyyy/MM/dd HH:mm:ss ZZZ"];
     
     return [formatter stringFromDate:self];

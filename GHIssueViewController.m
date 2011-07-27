@@ -131,16 +131,6 @@
 
 #pragma mark - Memory management
 
-- (void)dealloc {
-    [_issue release];
-    [_repository release];
-    [_number release];
-    [_history release];
-    [_discussion release];
-    [_lastUserComment release];
-    
-    [super dealloc];
-}
 
 - (void)didReceiveMemoryWarning {
     // Releases the view if it doesn't have a superview.
@@ -162,7 +152,7 @@
              if (error) {
                  [self handleError:error];
              } else {
-                 NSMutableArray *tmpArray = [[self.history mutableCopy] autorelease];
+                 NSMutableArray *tmpArray = [self.history mutableCopy];
                  [tmpArray addObject:comment];
                  self.history = tmpArray;
                  [self cacheHeightsForHistroy];
@@ -204,7 +194,7 @@
     
     GHCollapsingAndSpinningTableViewCell *cell = (GHCollapsingAndSpinningTableViewCell *)[self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[GHCollapsingAndSpinningTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[GHCollapsingAndSpinningTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     
     if (section == kUITableViewSectionAdministration) {
@@ -329,7 +319,7 @@
             static NSString *CellIdentifier = @"GHIssueTitleTableViewCell";
             GHAttributedTableViewCell *cell = (GHAttributedTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
             if (!cell) {
-                cell = [[[GHAttributedTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
+                cell = [[GHAttributedTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
             }
             
             cell.textLabel.text = self.issue.title;
@@ -350,7 +340,7 @@
             
             GHTableViewCellWithLinearGradientBackgroundView *cell = (GHTableViewCellWithLinearGradientBackgroundView *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
             if (!cell) {
-                cell = [[[GHTableViewCellWithLinearGradientBackgroundView alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:CellIdentifier] autorelease];
+                cell = [[GHTableViewCellWithLinearGradientBackgroundView alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:CellIdentifier];
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
             }
             
@@ -368,7 +358,7 @@
             
             GHTableViewCellWithLinearGradientBackgroundView *cell = (GHTableViewCellWithLinearGradientBackgroundView *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
             if (!cell) {
-                cell = [[[GHTableViewCellWithLinearGradientBackgroundView alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:CellIdentifier] autorelease];
+                cell = [[GHTableViewCellWithLinearGradientBackgroundView alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:CellIdentifier];
             }
             
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
@@ -386,7 +376,7 @@
             
             GHAPIMilestoneV3TableViewCell *cell = (GHAPIMilestoneV3TableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
             if (!cell) {
-                cell = [[[GHAPIMilestoneV3TableViewCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:CellIdentifier] autorelease];
+                cell = [[GHAPIMilestoneV3TableViewCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:CellIdentifier];
             }
             
             GHAPIMilestoneV3 *milestone = self.issue.milestone;
@@ -412,7 +402,7 @@
         
         GHTableViewCellWithLinearGradientBackgroundView *cell = (GHTableViewCellWithLinearGradientBackgroundView *)[self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         if (cell == nil) {
-            cell = [[[GHTableViewCellWithLinearGradientBackgroundView alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+            cell = [[GHTableViewCellWithLinearGradientBackgroundView alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         }
         
         if (indexPath.row == 1) {
@@ -437,7 +427,7 @@
             
             GHNewCommentTableViewCell *cell = (GHNewCommentTableViewCell *)[self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
             if (cell == nil) {
-                cell = [[[GHNewCommentTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+                cell = [[GHNewCommentTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
             }
             
             [self updateImageView:cell.imageView atIndexPath:indexPath withAvatarURLString:[GHSettingsHelper avatarURL]];
@@ -458,7 +448,7 @@
             static NSString *CellIdentifier = @"GHIssueTitleTableViewCell";
             GHAttributedTableViewCell *cell = (GHAttributedTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
             if (!cell) {
-                cell = [[[GHAttributedTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
+                cell = [[GHAttributedTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
             }
             
             // display a comment
@@ -480,7 +470,7 @@
             GHDescriptionTableViewCell *cell = (GHDescriptionTableViewCell *)[self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
             
             if (!cell) {
-                cell = [[[GHDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+                cell = [[GHDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
             }
             
             GHAPIIssueEventV3 *event = (GHAPIIssueEventV3 *)object;
@@ -499,7 +489,7 @@
         GHDescriptionTableViewCell *cell = (GHDescriptionTableViewCell *)[self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         
         if (!cell) {
-            cell = [[[GHDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+            cell = [[GHDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         }
         
         cell.selectionStyle = UITableViewCellSelectionStyleBlue;
@@ -517,7 +507,7 @@
         
         GHLabelTableViewCell *cell = (GHLabelTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         if (!cell) {
-            cell = [[[GHLabelTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+            cell = [[GHLabelTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         }
         
         GHAPILabelV3 *label = [self.issue.labels objectAtIndex:indexPath.row - 1];
@@ -596,41 +586,39 @@
             }
         } else if (indexPath.row == 2) {
             // Update assignee
-            UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Input Assignee", @"") 
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Input Assignee", @"") 
                                                              message:NSLocalizedString(@"", @"") 
                                                             delegate:self 
                                                    cancelButtonTitle:NSLocalizedString(@"Cancel", @"") 
-                                                   otherButtonTitles:NSLocalizedString(@"Submit", @""), nil]
-                                  autorelease];
+                                                   otherButtonTitles:NSLocalizedString(@"Submit", @""), nil];
             alert.tag = kUIAlertViewTagInputAssignee;
             alert.alertViewStyle = UIAlertViewStylePlainTextInput;
             [alert show];
         } else if (indexPath.row == 3) {
             // Pull Request
-            UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Merge message", @"") 
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Merge message", @"") 
                                                              message:nil 
                                                             delegate:self 
                                                    cancelButtonTitle:NSLocalizedString(@"Cancel", @"") 
-                                                   otherButtonTitles:NSLocalizedString(@"Merge", @""), nil]
-                                  autorelease];
+                                                   otherButtonTitles:NSLocalizedString(@"Merge", @""), nil];
             alert.tag = kUIAlertViewTagMergePullRequest;
             alert.alertViewStyle = UIAlertViewStylePlainTextInput;
             [alert show];
         }
     } else if (indexPath.section == kUITableViewSectionData) {
         if (indexPath.row == 0) {
-            GHUserViewController *userViewController = [[[GHUserViewController alloc] initWithUsername:self.issue.user.login] autorelease];
+            GHUserViewController *userViewController = [[GHUserViewController alloc] initWithUsername:self.issue.user.login];
             [self.navigationController pushViewController:userViewController animated:YES];
         } else if (indexPath.row == 1) {
-            GHRepositoryViewController *repoViewController = [[[GHRepositoryViewController alloc] initWithRepositoryString:self.repository] autorelease];
+            GHRepositoryViewController *repoViewController = [[GHRepositoryViewController alloc] initWithRepositoryString:self.repository];
             [self.navigationController pushViewController:repoViewController animated:YES];
         }
     } else if (indexPath.section == kUITableViewSectionAssignee && indexPath.row == 0) {
-        GHUserViewController *userViewController = [[[GHUserViewController alloc] initWithUsername:self.issue.assignee.login] autorelease];
+        GHUserViewController *userViewController = [[GHUserViewController alloc] initWithUsername:self.issue.assignee.login];
         [self.navigationController pushViewController:userViewController animated:YES];
     } else if (indexPath.section == kUITableViewSectionMilestone && indexPath.row == 0) {
         GHAPIMilestoneV3 *milestone = self.issue.milestone;
-        GHMilestoneViewController *milestoneViewController = [[[GHMilestoneViewController alloc] initWithRepository:self.repository milestoneNumber:milestone.number] autorelease];
+        GHMilestoneViewController *milestoneViewController = [[GHMilestoneViewController alloc] initWithRepository:self.repository milestoneNumber:milestone.number];
         [self.navigationController pushViewController:milestoneViewController animated:YES];
     } else if (indexPath.section == kUITableViewSectionHistory && indexPath.row > 0 && indexPath.row < [self.history count]+1) {
         
@@ -638,7 +626,7 @@
         
         if ([object isKindOfClass:[GHAPIIssueCommentV3 class] ]) {
             GHAPIIssueCommentV3 *comment = (GHAPIIssueCommentV3 *)object;
-            GHUserViewController *userViewController = [[[GHUserViewController alloc] initWithUsername:comment.user.login] autorelease];
+            GHUserViewController *userViewController = [[GHUserViewController alloc] initWithUsername:comment.user.login];
             [self.navigationController pushViewController:userViewController animated:YES];
         } else if ([object isKindOfClass:[GHAPIIssueEventV3 class] ]) {
             GHAPIIssueEventV3 *event = (GHAPIIssueEventV3 *)object;
@@ -648,34 +636,34 @@
             switch (event.type) {
                 case GHAPIIssueEventTypeV3Closed:
                     if (event.commitID) {
-                        nextViewController = [[[GHViewCommitViewController alloc] initWithRepository:self.repository commitID:event.commitID] autorelease];
+                        nextViewController = [[GHViewCommitViewController alloc] initWithRepository:self.repository commitID:event.commitID];
                     } else {
-                        nextViewController = [[[GHUserViewController alloc] initWithUsername:event.actor.login] autorelease];
+                        nextViewController = [[GHUserViewController alloc] initWithUsername:event.actor.login];
                     }
                     break;
                     
                 case GHAPIIssueEventTypeV3Reopened:
-                    nextViewController = [[[GHUserViewController alloc] initWithUsername:event.actor.login] autorelease];
+                    nextViewController = [[GHUserViewController alloc] initWithUsername:event.actor.login];
                     break;
                     
                 case GHAPIIssueEventTypeV3Subscribed:
-                    nextViewController = [[[GHUserViewController alloc] initWithUsername:event.actor.login] autorelease];
+                    nextViewController = [[GHUserViewController alloc] initWithUsername:event.actor.login];
                     break;
                     
                 case GHAPIIssueEventTypeV3Merged:
-                    nextViewController = [[[GHViewCommitViewController alloc] initWithRepository:self.repository commitID:event.commitID] autorelease];
+                    nextViewController = [[GHViewCommitViewController alloc] initWithRepository:self.repository commitID:event.commitID];
                     break;
                     
                 case GHAPIIssueEventTypeV3Referenced:
-                    nextViewController = [[[GHViewCommitViewController alloc] initWithRepository:self.repository commitID:event.commitID] autorelease];
+                    nextViewController = [[GHViewCommitViewController alloc] initWithRepository:self.repository commitID:event.commitID];
                     break;
                     
                 case GHAPIIssueEventTypeV3Mentioned:
-                    nextViewController = [[[GHUserViewController alloc] initWithUsername:event.actor.login] autorelease];
+                    nextViewController = [[GHUserViewController alloc] initWithUsername:event.actor.login];
                     break;
                     
                 case GHAPIIssueEventTypeV3Assigned:
-                    nextViewController = [[[GHUserViewController alloc] initWithUsername:event.actor.login] autorelease];
+                    nextViewController = [[GHUserViewController alloc] initWithUsername:event.actor.login];
                     break;
                     
                 default:
@@ -694,16 +682,14 @@
         
         NSString *repo = [NSString stringWithFormat:@"%@/%@", self.discussion.head.repository.owner, self.discussion.head.repository.name];
         
-        GHViewCommitViewController *commitViewController = [[[GHViewCommitViewController alloc] initWithRepository:repo
-                                                                                                          commitID:commit.ID]
-                                                            autorelease];
+        GHViewCommitViewController *commitViewController = [[GHViewCommitViewController alloc] initWithRepository:repo
+                                                                                                          commitID:commit.ID];
         [self.navigationController pushViewController:commitViewController animated:YES];
     } else if (indexPath.section == kUITableViewSectionLabels && indexPath.row > 0) {
         GHAPILabelV3 *label = [self.issue.labels objectAtIndex:indexPath.row - 1];
         
-        GHViewLabelViewController *labelViewController = [[[GHViewLabelViewController alloc] initWithRepository:self.repository  
-                                                                                                          label:label]
-                                                          autorelease];
+        GHViewLabelViewController *labelViewController = [[GHViewLabelViewController alloc] initWithRepository:self.repository  
+                                                                                                          label:label];
         [self.navigationController pushViewController:labelViewController animated:YES];
     } else {
         [self.tableView deselectRowAtIndexPath:indexPath animated:NO];
@@ -747,12 +733,11 @@
                                                       [[ANNotificationQueue sharedInstance] detatchSuccesNotificationWithTitle:NSLocalizedString(@"Merge successful", @"") message:state.message];
                                                       self.issue.state = kGHAPIIssueStateV3Closed;
                                                   } else {
-                                                      UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Merge failed", @"") 
+                                                      UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Merge failed", @"") 
                                                                                                        message:state.message 
                                                                                                       delegate:nil 
                                                                                              cancelButtonTitle:NSLocalizedString(@"OK", @"") 
-                                                                                             otherButtonTitles:nil]
-                                                                            autorelease];
+                                                                                             otherButtonTitles:nil];
                                                       [alert show];
                                                   }
                                                   
@@ -766,7 +751,7 @@
 #pragma mark - Height caching
 
 - (void)cacheHeightsForHistroy {
-    DTAttributedTextView *textView = [[[DTAttributedTextView alloc] initWithFrame:CGRectZero] autorelease];
+    DTAttributedTextView *textView = [[DTAttributedTextView alloc] initWithFrame:CGRectZero];
     [self.history enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         CGFloat height = 44.0f;
         
@@ -787,7 +772,7 @@
 #pragma mark - GHIssueTitleTableViewCellDelegate
 
 - (void)attributedTableViewCell:(GHAttributedTableViewCell *)cell receivedClickForButton:(DTLinkButton *)button {
-    GHWebViewViewController *viewController = [[[GHWebViewViewController alloc] initWithURL:button.url ] autorelease];
+    GHWebViewViewController *viewController = [[GHWebViewViewController alloc] initWithURL:button.url ];
     [self.navigationController pushViewController:viewController animated:YES];
 }
 
@@ -820,14 +805,14 @@
 
 - (id)initWithCoder:(NSCoder *)decoder {
     if ((self = [super initWithCoder:decoder])) {
-        _issue = [[decoder decodeObjectForKey:@"issue"] retain];
-        _repository = [[decoder decodeObjectForKey:@"repository"] retain];
-        _number = [[decoder decodeObjectForKey:@"number"] retain];
-        _history = [[decoder decodeObjectForKey:@"history"] retain];
-        _discussion = [[decoder decodeObjectForKey:@"discussion"] retain];
+        _issue = [decoder decodeObjectForKey:@"issue"];
+        _repository = [decoder decodeObjectForKey:@"repository"];
+        _number = [decoder decodeObjectForKey:@"number"];
+        _history = [decoder decodeObjectForKey:@"history"];
+        _discussion = [decoder decodeObjectForKey:@"discussion"];
         _hasCollaboratorData = [decoder decodeBoolForKey:@"hasCollaboratorData"];
         _isCollaborator = [decoder decodeBoolForKey:@"isCollaborator"];
-        _lastUserComment = [[decoder decodeObjectForKey:@"lastUserComment"] retain];
+        _lastUserComment = [decoder decodeObjectForKey:@"lastUserComment"];
     }
     return self;
 }

@@ -22,10 +22,10 @@
     NSMutableArray *_buttons;
     NSUInteger _currentSelectedButtonIndex;
     
-    id<GHPSearchScopeTableViewCellDelegate> _delegate;
+    id<GHPSearchScopeTableViewCellDelegate> __weak _delegate;
 }
 
-@property (nonatomic, assign) id<GHPSearchScopeTableViewCellDelegate> delegate;
+@property (nonatomic, weak) id<GHPSearchScopeTableViewCellDelegate> delegate;
 
 - (id)initWithButtonTitles:(NSArray *)buttonTitles reuseIdentifier:(NSString *)reuseIdentifier;
 - (NSString *)titleForButtonAtIndex:(NSUInteger)index;

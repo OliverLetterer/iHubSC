@@ -43,7 +43,7 @@ const CGFloat ANAdvancedNavigationControllerDefaultDraggingDistance         = 47
 }
 
 - (NSArray *)rightViewControllers {
-    return [[_viewControllers copy] autorelease];
+    return [_viewControllers copy];
 }
 
 - (BOOL)automaticallyForwardAppearanceAndRotationMethodsToChildViewControllers {
@@ -115,7 +115,7 @@ const CGFloat ANAdvancedNavigationControllerDefaultDraggingDistance         = 47
     [super loadView];
     
     CGFloat removeHeight = 75.0f;
-    self.removeRectangleIndicatorView = [[[ANRemoveRectangleIndicatorView alloc] initWithFrame:CGRectMake(ANAdvancedNavigationControllerDefaultLeftViewControllerWidth + 5.0f, CGRectGetHeight(self.view.bounds)/2.0f-removeHeight, 175.0f, removeHeight*2.0f)] autorelease];
+    self.removeRectangleIndicatorView = [[ANRemoveRectangleIndicatorView alloc] initWithFrame:CGRectMake(ANAdvancedNavigationControllerDefaultLeftViewControllerWidth + 5.0f, CGRectGetHeight(self.view.bounds)/2.0f-removeHeight, 175.0f, removeHeight*2.0f)];
     self.removeRectangleIndicatorView.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
     [self.view insertSubview:self.removeRectangleIndicatorView atIndex:0];
 }
@@ -133,24 +133,12 @@ const CGFloat ANAdvancedNavigationControllerDefaultDraggingDistance         = 47
 
 - (void)viewDidUnload {
     [super viewDidUnload];
-    [_removeRectangleIndicatorView release], _removeRectangleIndicatorView = nil;
-    [_draggingStartDate release], _draggingStartDate = nil;
+    _removeRectangleIndicatorView = nil;
+    _draggingStartDate = nil;
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-}
-
-#pragma mark - memory management
-
-- (void)dealloc {
-    self.leftViewController = nil;
-    [_backgroundView release];
-    [_viewControllers release];
-    [_removeRectangleIndicatorView release];
-    [_draggingStartDate release];
-    
-    [super dealloc];
 }
 
 #pragma mark - rotation

@@ -25,8 +25,7 @@ UIFont *GHPDiffViewBoldFont(void) {
 #pragma mark - setters and getters
 
 - (void)setDiffString:(NSString *)diffString {
-    [_diffString release];
-    NSMutableString *tmpString = [[diffString mutableCopy] autorelease];
+    NSMutableString *tmpString = [diffString mutableCopy];
     NSRange deleteRange = [tmpString rangeOfString:@"@@ -" options:NSCaseInsensitiveSearch];
     if (deleteRange.location != NSNotFound) {
         [tmpString deleteCharactersInRange:NSMakeRange(0, deleteRange.location)];
@@ -88,12 +87,12 @@ UIFont *GHPDiffViewBoldFont(void) {
     if ((self = [super initWithFrame:frame])) {
         // Initialization code
         self.borderColor = [UIColor colorWithRed:191.0f/255.0f green:191.0f/255.0f blue:191.0f/255.0f alpha:1.0f];
-        self.lineNumbersView = [[[GHPDiffViewLineNumbersView alloc] initWithFrame:CGRectZero] autorelease];
+        self.lineNumbersView = [[GHPDiffViewLineNumbersView alloc] initWithFrame:CGRectZero];
         [self addSubview:self.lineNumbersView];
         self.backgroundColor = [UIColor whiteColor];
         
-        self.contentDiffView = [[[GHPDiffViewContentView alloc] initWithFrame:CGRectZero] autorelease];
-        self.scrollView = [[[UIScrollView alloc] initWithFrame:CGRectZero] autorelease];
+        self.contentDiffView = [[GHPDiffViewContentView alloc] initWithFrame:CGRectZero];
+        self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectZero];
         self.scrollView.scrollsToTop = NO;
         [self.scrollView addSubview:self.contentDiffView];
         [self addSubview:self.scrollView];
@@ -127,15 +126,6 @@ UIFont *GHPDiffViewBoldFont(void) {
 
 #pragma mark - Memory management
 
-- (void)dealloc {
-    [_diffString release];
-    [_lineNumbersView release];
-    [_borderColor release];
-    [_contentDiffView release];
-    [_scrollView release];
-    
-    [super dealloc];
-}
 
 #pragma mark - Keyed Archiving
 
@@ -150,11 +140,11 @@ UIFont *GHPDiffViewBoldFont(void) {
 
 - (id)initWithCoder:(NSCoder *)decoder {
     if ((self = [super initWithCoder:decoder])) {
-        _borderColor = [[decoder decodeObjectForKey:@"borderColor"] retain];
-        _diffString = [[decoder decodeObjectForKey:@"diffString"] retain];
-        _lineNumbersView = [[decoder decodeObjectForKey:@"lineNumbersView"] retain];
-        _contentDiffView = [[decoder decodeObjectForKey:@"contentDiffView"] retain];
-        _scrollView = [[decoder decodeObjectForKey:@"scrollView"] retain];
+        _borderColor = [decoder decodeObjectForKey:@"borderColor"];
+        _diffString = [decoder decodeObjectForKey:@"diffString"];
+        _lineNumbersView = [decoder decodeObjectForKey:@"lineNumbersView"];
+        _contentDiffView = [decoder decodeObjectForKey:@"contentDiffView"];
+        _scrollView = [decoder decodeObjectForKey:@"scrollView"];
     }
     return self;
 }

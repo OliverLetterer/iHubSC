@@ -19,8 +19,7 @@
 
 - (void)setCommit:(GHCommit *)commit {
     if (commit != _commit) {
-        [_commit release];
-        _commit = [commit retain];
+        _commit = commit;
         
         if (self.isViewLoaded) {
             [self.tableView reloadData];
@@ -29,8 +28,6 @@
 }
 
 - (void)setRepository:(NSString *)repository commitID:(NSString *)commitID {
-    [_repository release];
-    [_commitID release];
     
     _repository = [repository copy];
     _commitID = [commitID copy];
@@ -58,13 +55,6 @@
 
 #pragma mark - Memory management
 
-- (void)dealloc {
-    [_repository release];
-    [_commitID release];
-    [_commit release];
-    
-    [super dealloc];
-}
 
 - (void)didReceiveMemoryWarning {
     // Releases the view if it doesn't have a superview.
@@ -195,7 +185,7 @@
         
         GHPDiffViewTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         if (cell == nil) {
-            cell = [[[GHPDiffViewTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+            cell = [[GHPDiffViewTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         }
         
         GHCommitFileInformation *fileInfo = [self.commit.modified objectAtIndex:indexPath.section];
@@ -211,7 +201,7 @@
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     
     // Configure the cell...
@@ -261,11 +251,10 @@
         NSString *URL = [filename stringByDeletingLastPathComponent];
         NSString *base = [filename lastPathComponent];
         
-        GHViewCloudFileViewController *fileViewController = [[[GHViewCloudFileViewController alloc] initWithRepository:self.repository 
+        GHViewCloudFileViewController *fileViewController = [[GHViewCloudFileViewController alloc] initWithRepository:self.repository 
                                                                                                                   tree:self.commitID 
                                                                                                               filename:base 
-                                                                                                           relativeURL:URL]
-                                                             autorelease];
+                                                                                                           relativeURL:URL];
         [self.advancedNavigationController pushViewController:fileViewController afterViewController:self animated:YES];
     } else {
         [tableView deselectRowAtIndexPath:indexPath animated:NO];
@@ -283,9 +272,9 @@
 
 - (id)initWithCoder:(NSCoder *)decoder {
     if ((self = [super initWithCoder:decoder])) {
-        _repository = [[decoder decodeObjectForKey:@"repository"] retain];
-        _commitID = [[decoder decodeObjectForKey:@"commitID"] retain];
-        _commit = [[decoder decodeObjectForKey:@"commit"] retain];
+        _repository = [decoder decodeObjectForKey:@"repository"];
+        _commitID = [decoder decodeObjectForKey:@"commitID"];
+        _commit = [decoder decodeObjectForKey:@"commit"];
     }
     return self;
 }

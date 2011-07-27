@@ -27,7 +27,7 @@
     if (accessoryType != self.accessoryType) {
         [super setAccessoryType:accessoryType];
         if (accessoryType == UITableViewCellAccessoryDisclosureIndicator) {
-            UIImageView *imageView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"UITableViewCellAccessoryDisclosureIndicatorOriginal.png"] ] autorelease];
+            UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"UITableViewCellAccessoryDisclosureIndicatorOriginal.png"] ];
             imageView.contentMode = UIViewContentModeCenter;
             self.accessoryView = imageView;
         } else {
@@ -41,13 +41,13 @@
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if ((self = [super initWithStyle:style reuseIdentifier:reuseIdentifier])) {
         // Initialization code
-        self.myBackgroundView = [[[GHPDefaultTableViewCellBackgroundView alloc] init] autorelease];
+        self.myBackgroundView = [[GHPDefaultTableViewCellBackgroundView alloc] init];
         self.backgroundView = self.myBackgroundView;
         
-        self.mySelectedBackgroundView = [[[GHPDefaultTableViewCellBackgroundView alloc] init] autorelease];
+        self.mySelectedBackgroundView = [[GHPDefaultTableViewCellBackgroundView alloc] init];
         self.mySelectedBackgroundView.colors = [NSArray arrayWithObjects:
-                                                (id)[UIColor colorWithRed:252.0f/255.0f green:252.0f/255.0f blue:246.0f/255.0f alpha:1.0].CGColor, 
-                                                (id)[UIColor colorWithRed:241.0f/255.0f green:242.0f/255.0f blue:222.0f/255.0f alpha:1.0].CGColor,
+                                                (__bridge id)[UIColor colorWithRed:252.0f/255.0f green:252.0f/255.0f blue:246.0f/255.0f alpha:1.0].CGColor, 
+                                                (__bridge id)[UIColor colorWithRed:241.0f/255.0f green:242.0f/255.0f blue:222.0f/255.0f alpha:1.0].CGColor,
                                                 nil];
         self.selectedBackgroundView = self.mySelectedBackgroundView;
         
@@ -89,11 +89,5 @@
 
 #pragma mark - Memory management
 
-- (void)dealloc {
-    [_myBackgroundView release];
-    [_mySelectedBackgroundView release];
-    
-    [super dealloc];
-}
 
 @end

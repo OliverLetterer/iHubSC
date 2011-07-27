@@ -28,7 +28,7 @@ NSString *const NSUserDefaultLastUpdateDateKey = @"NSUserDefaultLastUpdateDateKe
 
 - (void)setLastUpdateDate:(NSDate *)lastUpdateDate {
     if (lastUpdateDate != _lastUpdateDate) {
-        [_lastUpdateDate release], _lastUpdateDate = [lastUpdateDate retain];
+        _lastUpdateDate = lastUpdateDate;
         
         [[NSUserDefaults standardUserDefaults] setObject:_lastUpdateDate forKey:NSUserDefaultLastUpdateDateKey];
     }
@@ -36,7 +36,7 @@ NSString *const NSUserDefaultLastUpdateDateKey = @"NSUserDefaultLastUpdateDateKe
 
 - (NSDate *)lastUpdateDate {
     if (!_lastUpdateDate) {
-        _lastUpdateDate = [[[NSUserDefaults standardUserDefaults] objectForKey:NSUserDefaultLastUpdateDateKey] retain];
+        _lastUpdateDate = [[NSUserDefaults standardUserDefaults] objectForKey:NSUserDefaultLastUpdateDateKey];
     }
     return _lastUpdateDate;
 }
@@ -52,12 +52,6 @@ NSString *const NSUserDefaultLastUpdateDateKey = @"NSUserDefaultLastUpdateDateKe
 
 #pragma mark - Memory management
 
-- (void)dealloc {
-    [_pullToReleaseHeaderView release];
-    [_lastUpdateDate release];
-    
-    [super dealloc];
-}
 
 - (void)didReceiveMemoryWarning {
     // Releases the view if it doesn't have a superview.
@@ -74,7 +68,7 @@ NSString *const NSUserDefaultLastUpdateDateKey = @"NSUserDefaultLastUpdateDateKe
     if (!self.pullToReleaseEnabled) {
         return;
     }
-    self.pullToReleaseHeaderView = [[[GHPullToReleaseTableHeaderView alloc] initWithFrame:CGRectMake(0.0, - kGHPullToReleaseTableHeaderViewPreferedHeaderHeight - _defaultEdgeInset.top, 320.0f, kGHPullToReleaseTableHeaderViewPreferedHeaderHeight)] autorelease];
+    self.pullToReleaseHeaderView = [[GHPullToReleaseTableHeaderView alloc] initWithFrame:CGRectMake(0.0, - kGHPullToReleaseTableHeaderViewPreferedHeaderHeight - _defaultEdgeInset.top, 320.0f, kGHPullToReleaseTableHeaderViewPreferedHeaderHeight)];
     self.pullToReleaseHeaderView.lastUpdateDate = self.lastUpdateDate;
     [self.tableView addSubview:self.pullToReleaseHeaderView];
 }
@@ -82,7 +76,7 @@ NSString *const NSUserDefaultLastUpdateDateKey = @"NSUserDefaultLastUpdateDateKe
 - (void)viewDidUnload {
     [super viewDidUnload];
     
-    [_pullToReleaseHeaderView release], _pullToReleaseHeaderView = nil;
+    _pullToReleaseHeaderView = nil;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -123,7 +117,7 @@ NSString *const NSUserDefaultLastUpdateDateKey = @"NSUserDefaultLastUpdateDateKe
     
     GHTableViewCellWithLinearGradientBackgroundView *cell = (GHTableViewCellWithLinearGradientBackgroundView *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[GHTableViewCellWithLinearGradientBackgroundView alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[GHTableViewCellWithLinearGradientBackgroundView alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     
     cell.textLabel.text = [NSString stringWithFormat:@"%@", indexPath];
@@ -268,7 +262,7 @@ NSString *const NSUserDefaultLastUpdateDateKey = @"NSUserDefaultLastUpdateDateKe
     if ((self = [super initWithStyle:[decoder decodeIntegerForKey:@"tableViewStyle"]])) {
         _pullToReleaseEnabled = [decoder decodeBoolForKey:@"pullToReleaseEnabled"];
         _defaultEdgeInset = [decoder decodeUIEdgeInsetsForKey:@"defaultEdgeInset"];
-        _lastUpdateDate = [[decoder decodeObjectForKey:@"lastUpdateDate"] retain];
+        _lastUpdateDate = [decoder decodeObjectForKey:@"lastUpdateDate"];
         self.title = [decoder decodeObjectForKey:@"title"];
     }
     return self;

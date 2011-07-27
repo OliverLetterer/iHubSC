@@ -53,7 +53,7 @@
 #pragma mark - setters and getters
 
 - (void)setRepositoryString:(NSString *)repositoryString {
-    [_repositoryString release], _repositoryString = [repositoryString copy];
+    _repositoryString = [repositoryString copy];
     
     self.isDownloadingEssentialData = YES;
     [GHAPIRepositoryV3 repositoryNamed:self.repositoryString 
@@ -96,21 +96,6 @@
 
 #pragma mark - Memory management
 
-- (void)dealloc {
-    [_repositoryString release];
-    [_repository release];
-    [_issuesArray release];
-    [_watchedUsersArray release];
-    [_deleteToken release];
-    [_pullRequests release];
-    [_branches release];
-    [_labels release];
-    [_milestones release];
-    [_organizations release];
-    [_collaborators release];
-    
-    [super dealloc];
-}
 
 #pragma mark - UIExpandableTableViewDatasource
 
@@ -148,7 +133,7 @@
     GHCollapsingAndSpinningTableViewCell *cell = (GHCollapsingAndSpinningTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdientifier];
     
     if (cell == nil) {
-        cell = [[[GHCollapsingAndSpinningTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdientifier] autorelease];
+        cell = [[GHCollapsingAndSpinningTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdientifier];
     }
     
     if (section == kUITableViewSectionIssues) {
@@ -228,12 +213,11 @@
                                       [self.tableView expandSection:section animated:YES];
                                       
                                       if ([self.pullRequests count] == 0) {
-                                          UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", @"") 
+                                          UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", @"") 
                                                                                            message:NSLocalizedString(@"This repository does not have any Pull Requests.", @"") 
                                                                                           delegate:nil 
                                                                                  cancelButtonTitle:NSLocalizedString(@"OK", @"") 
-                                                                                 otherButtonTitles:nil]
-                                                                autorelease];
+                                                                                 otherButtonTitles:nil];
                                           [alert show];
                                       }
                                   }
@@ -443,7 +427,7 @@
             
             GHDescriptionTableViewCell *cell = (GHDescriptionTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
             if (!cell) {
-                cell = [[[GHDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+                cell = [[GHDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
             }
             
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -473,7 +457,7 @@
             
             GHTableViewCellWithLinearGradientBackgroundView *cell = (GHTableViewCellWithLinearGradientBackgroundView *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
             if (!cell) {
-                cell = [[[GHTableViewCellWithLinearGradientBackgroundView alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:CellIdentifier] autorelease];
+                cell = [[GHTableViewCellWithLinearGradientBackgroundView alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:CellIdentifier];
             }
             
             cell.textLabel.text = NSLocalizedString(@"Owner", @"");
@@ -488,7 +472,7 @@
             
             GHTableViewCellWithLinearGradientBackgroundView *cell = (GHTableViewCellWithLinearGradientBackgroundView *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
             if (!cell) {
-                cell = [[[GHTableViewCellWithLinearGradientBackgroundView alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:CellIdentifier] autorelease];
+                cell = [[GHTableViewCellWithLinearGradientBackgroundView alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:CellIdentifier];
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
             }
             
@@ -503,7 +487,7 @@
             
             GHTableViewCellWithLinearGradientBackgroundView *cell = (GHTableViewCellWithLinearGradientBackgroundView *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
             if (!cell) {
-                cell = [[[GHTableViewCellWithLinearGradientBackgroundView alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:CellIdentifier] autorelease];
+                cell = [[GHTableViewCellWithLinearGradientBackgroundView alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:CellIdentifier];
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
             }
             
@@ -519,7 +503,7 @@
             
             GHTableViewCellWithLinearGradientBackgroundView *cell = (GHTableViewCellWithLinearGradientBackgroundView *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
             if (!cell) {
-                cell = [[[GHTableViewCellWithLinearGradientBackgroundView alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:CellIdentifier] autorelease];
+                cell = [[GHTableViewCellWithLinearGradientBackgroundView alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:CellIdentifier];
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
             }
             
@@ -534,7 +518,7 @@
             
             GHTableViewCellWithLinearGradientBackgroundView *cell = (GHTableViewCellWithLinearGradientBackgroundView *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
             if (!cell) {
-                cell = [[[GHTableViewCellWithLinearGradientBackgroundView alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:CellIdentifier] autorelease];
+                cell = [[GHTableViewCellWithLinearGradientBackgroundView alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:CellIdentifier];
             }
             
             cell.textLabel.text = NSLocalizedString(@"Homepage", @"");
@@ -550,7 +534,7 @@
             
             GHTableViewCellWithLinearGradientBackgroundView *cell = (GHTableViewCellWithLinearGradientBackgroundView *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
             if (!cell) {
-                cell = [[[GHTableViewCellWithLinearGradientBackgroundView alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:CellIdentifier] autorelease];
+                cell = [[GHTableViewCellWithLinearGradientBackgroundView alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:CellIdentifier];
             }
             
             cell.textLabel.text = NSLocalizedString(@"Wiki", @"");
@@ -566,7 +550,7 @@
             
             GHTableViewCellWithLinearGradientBackgroundView *cell = (GHTableViewCellWithLinearGradientBackgroundView *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
             if (!cell) {
-                cell = [[[GHTableViewCellWithLinearGradientBackgroundView alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:CellIdentifier] autorelease];
+                cell = [[GHTableViewCellWithLinearGradientBackgroundView alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:CellIdentifier];
             }
             
             cell.textLabel.text = NSLocalizedString(@"Forked from", @"");
@@ -584,7 +568,7 @@
             
             GHTableViewCellWithLinearGradientBackgroundView *cell = (GHTableViewCellWithLinearGradientBackgroundView *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
             if (!cell) {
-                cell = [[[GHTableViewCellWithLinearGradientBackgroundView alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+                cell = [[GHTableViewCellWithLinearGradientBackgroundView alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
             }
             
             cell.textLabel.text = NSLocalizedString(@"Create a new Issue", @"");
@@ -595,7 +579,7 @@
             
             GHDescriptionTableViewCell *cell = (GHDescriptionTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
             if (cell == nil) {
-                cell = [[[GHDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+                cell = [[GHDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
             }
             
             GHAPIIssueV3 *issue = [self.issuesArray objectAtIndex:indexPath.row - 2];
@@ -618,7 +602,7 @@
             
             GHTableViewCellWithLinearGradientBackgroundView *cell = (GHTableViewCellWithLinearGradientBackgroundView *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
             if (!cell) {
-                cell = [[[GHTableViewCellWithLinearGradientBackgroundView alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+                cell = [[GHTableViewCellWithLinearGradientBackgroundView alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
             }
             
             cell.textLabel.text = NSLocalizedString(@"Add new Collaborator", @"");
@@ -629,7 +613,7 @@
             
             GHTableViewCellWithLinearGradientBackgroundView *cell = (GHTableViewCellWithLinearGradientBackgroundView *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
             if (!cell) {
-                cell = [[[GHTableViewCellWithLinearGradientBackgroundView alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+                cell = [[GHTableViewCellWithLinearGradientBackgroundView alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
             }
             
             GHAPIUserV3 *user = [self.collaborators objectAtIndex:indexPath.row - 2];
@@ -646,7 +630,7 @@
             
             GHTableViewCellWithLinearGradientBackgroundView *cell = (GHTableViewCellWithLinearGradientBackgroundView *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
             if (!cell) {
-                cell = [[[GHTableViewCellWithLinearGradientBackgroundView alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+                cell = [[GHTableViewCellWithLinearGradientBackgroundView alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
             }
             
             GHAPIUserV3 *user = [self.watchedUsersArray objectAtIndex:indexPath.row - 1];
@@ -664,7 +648,7 @@
             
             GHTableViewCellWithLinearGradientBackgroundView *cell = (GHTableViewCellWithLinearGradientBackgroundView *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
             if (!cell) {
-                cell = [[[GHTableViewCellWithLinearGradientBackgroundView alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+                cell = [[GHTableViewCellWithLinearGradientBackgroundView alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
             }
             
             cell.textLabel.text = NSLocalizedString(@"Delete this Repository", @"");
@@ -676,7 +660,7 @@
         
         GHTableViewCellWithLinearGradientBackgroundView *cell = (GHTableViewCellWithLinearGradientBackgroundView *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         if (!cell) {
-            cell = [[[GHTableViewCellWithLinearGradientBackgroundView alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+            cell = [[GHTableViewCellWithLinearGradientBackgroundView alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         }
         
         if (indexPath.row == 1) {
@@ -694,7 +678,7 @@
         
         GHDescriptionTableViewCell *cell = (GHDescriptionTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         if (cell == nil) {
-            cell = [[[GHDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+            cell = [[GHDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         }
         
         cell.selectionStyle = UITableViewCellSelectionStyleBlue;
@@ -715,7 +699,7 @@
             
             GHTableViewCellWithLinearGradientBackgroundView *cell = (GHTableViewCellWithLinearGradientBackgroundView *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
             if (!cell) {
-                cell = [[[GHTableViewCellWithLinearGradientBackgroundView alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+                cell = [[GHTableViewCellWithLinearGradientBackgroundView alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
             }
             
             GHAPIRepositoryBranchV3 *branch = [self.branches objectAtIndex:indexPath.row - 1];
@@ -730,7 +714,7 @@
         
         GHAPIMilestoneV3TableViewCell *cell = (GHAPIMilestoneV3TableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         if (!cell) {
-            cell = [[[GHAPIMilestoneV3TableViewCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:CellIdentifier] autorelease];
+            cell = [[GHAPIMilestoneV3TableViewCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:CellIdentifier];
             
             cell.selectionStyle = UITableViewCellSelectionStyleBlue;
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
@@ -754,7 +738,7 @@
             
             GHLabelTableViewCell *cell = (GHLabelTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
             if (!cell) {
-                cell = [[[GHLabelTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+                cell = [[GHLabelTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
             }
             
             GHAPILabelV3 *label = [self.labels objectAtIndex:indexPath.row - 1];
@@ -837,37 +821,36 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == kUITableViewSectionForkedFrom && indexPath.row == 0) {
-        GHRepositoryViewController *repoViewController = [[[GHRepositoryViewController alloc] initWithRepositoryString:[NSString stringWithFormat:@"%@/%@", self.repository.parent.owner.login, self.repository.parent.name] ] autorelease];
+        GHRepositoryViewController *repoViewController = [[GHRepositoryViewController alloc] initWithRepositoryString:[NSString stringWithFormat:@"%@/%@", self.repository.parent.owner.login, self.repository.parent.name] ];
         repoViewController.delegate = self;
         [self.navigationController pushViewController:repoViewController animated:YES];
     } else if (indexPath.section == kUITableViewSectionOwner && indexPath.row == 0) {
-        GHUserViewController *userViewController = [[[GHUserViewController alloc] initWithUsername:self.repository.owner.login] autorelease];
+        GHUserViewController *userViewController = [[GHUserViewController alloc] initWithUsername:self.repository.owner.login];
         [self.navigationController pushViewController:userViewController animated:YES];
     } else if (indexPath.section == kUITableViewSectionHomepage && indexPath.row == 0) {
         NSURL *URL = [NSURL URLWithString:self.repository.homepage];
         
-        GHWebViewViewController *webViewController = [[[GHWebViewViewController alloc] initWithURL:URL] autorelease];
+        GHWebViewViewController *webViewController = [[GHWebViewViewController alloc] initWithURL:URL];
         [self.navigationController pushViewController:webViewController animated:YES];
     } else if (indexPath.section == kUITableViewSectionIssues) {
         if (indexPath.row == 1) {
-            GHCreateIssueTableViewController *createViewController = [[[GHCreateIssueTableViewController alloc] initWithRepository:self.repositoryString] autorelease];
+            GHCreateIssueTableViewController *createViewController = [[GHCreateIssueTableViewController alloc] initWithRepository:self.repositoryString];
             createViewController.delegate = self;
             
-            UINavigationController *navController = [[[UINavigationController alloc] initWithRootViewController:createViewController] autorelease];
+            UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:createViewController];
             
             [self presentModalViewController:navController animated:YES];
         } else {
             GHAPIIssueV3 *issue = [self.issuesArray objectAtIndex:indexPath.row-2];
-            GHIssueViewController *issueViewController = [[[GHIssueViewController alloc] 
+            GHIssueViewController *issueViewController = [[GHIssueViewController alloc] 
                                                                     initWithRepository:self.repositoryString 
-                                                                    issueNumber:issue.number]
-                                                                   autorelease];
+                                                                    issueNumber:issue.number];
             [self.navigationController pushViewController:issueViewController animated:YES];
         }
     } else if (indexPath.section == kUITableViewSectionWatchingUsers) {
         // watched user
         GHAPIUserV3 *user = [self.watchedUsersArray objectAtIndex:indexPath.row-1];
-        GHUserViewController *userViewController = [[[GHUserViewController alloc] initWithUsername:user.login] autorelease];
+        GHUserViewController *userViewController = [[GHUserViewController alloc] initWithUsername:user.login];
         [self.navigationController pushViewController:userViewController animated:YES];
         
     } else if (indexPath.section == kUITableViewSectionNetwork) {
@@ -923,7 +906,7 @@
                                                // we only have one organization, act as if user select this only organization
                                                [self organizationsActionSheetDidSelectOrganizationAtIndex:0];
                                            } else {
-                                               UIActionSheet *sheet = [[[UIActionSheet alloc] init] autorelease];
+                                               UIActionSheet *sheet = [[UIActionSheet alloc] init];
                                                
                                                [sheet setTitle:NSLocalizedString(@"Select an Organization", @"")];
                                                
@@ -941,12 +924,11 @@
                                                [sheet showInView:self.tabBarController.view];
                                            }
                                        } else {
-                                           UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Organization Error", @"") 
+                                           UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Organization Error", @"") 
                                                                                             message:NSLocalizedString(@"You are not part of any Organization!", @"") 
                                                                                            delegate:nil 
                                                                                   cancelButtonTitle:NSLocalizedString(@"OK", @"") 
-                                                                                  otherButtonTitles:nil]
-                                                                 autorelease];
+                                                                                  otherButtonTitles:nil];
                                            [alert show];
                                        }
                                        
@@ -963,12 +945,11 @@
                                  } else {
                                      self.deleteToken = deleteToken;
                                      
-                                     UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:NSLocalizedString(@"Delete %@", @""), self.repositoryString] 
+                                     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:NSLocalizedString(@"Delete %@", @""), self.repositoryString] 
                                                                                       message:[NSString stringWithFormat:NSLocalizedString(@"Are you absolutely sure that you want to delete %@? This action can't be undone!", @""), self.repositoryString] 
                                                                                      delegate:self 
                                                                             cancelButtonTitle:NSLocalizedString(@"Cancel", @"") 
-                                                                            otherButtonTitles:NSLocalizedString(@"Delete", @""), nil]
-                                                           autorelease];
+                                                                            otherButtonTitles:NSLocalizedString(@"Delete", @""), nil];
                                      [alert show];
                                  }
                              }];
@@ -978,48 +959,43 @@
         
         NSString *repo = [NSString stringWithFormat:@"%@/%@", discussion.base.repository.owner, discussion.base.repository.name];
         
-        GHIssueViewController *viewIssueViewController = [[[GHIssueViewController alloc] initWithRepository:repo issueNumber:discussion.number] autorelease];
+        GHIssueViewController *viewIssueViewController = [[GHIssueViewController alloc] initWithRepository:repo issueNumber:discussion.number];
         [self.navigationController pushViewController:viewIssueViewController animated:YES];
     } else if (indexPath.section == kUITableViewSectionRecentCommits) {
         GHAPIRepositoryBranchV3 *branch = [self.branches objectAtIndex:indexPath.row - 1];
         
-        GHRecentCommitsViewController *recentViewController = [[[GHRecentCommitsViewController alloc] initWithRepository:self.repositoryString 
-                                                                                                                  branch:branch.name]
-                                                               autorelease];
+        GHRecentCommitsViewController *recentViewController = [[GHRecentCommitsViewController alloc] initWithRepository:self.repositoryString 
+                                                                                                                  branch:branch.name];
         recentViewController.branchHash = branch.ID;
         [self.navigationController pushViewController:recentViewController animated:YES];
     } else if (indexPath.section == kUITableViewSectionBrowseBranches) {
         GHAPIRepositoryBranchV3 *branch = [self.branches objectAtIndex:indexPath.row - 1];
         
-        GHViewRootDirectoryViewController *rootViewController = [[[GHViewRootDirectoryViewController alloc] initWithRepository:self.repositoryString
+        GHViewRootDirectoryViewController *rootViewController = [[GHViewRootDirectoryViewController alloc] initWithRepository:self.repositoryString
                                                                                                                         branch:branch.name
-                                                                                                                          hash:branch.ID]
-                                                                 autorelease];
+                                                                                                                          hash:branch.ID];
         [self.navigationController pushViewController:rootViewController animated:YES];
     } else if (indexPath.section == kUITableViewSectionMilestones && indexPath.row > 0) {
         GHAPIMilestoneV3 *milestone = [self.milestones objectAtIndex:indexPath.row - 1];
         
-        GHMilestoneViewController *milestoneViewController = [[[GHMilestoneViewController alloc] initWithRepository:self.repositoryString
-                                                                                                            milestoneNumber:milestone.number]
-                                                                  autorelease];
+        GHMilestoneViewController *milestoneViewController = [[GHMilestoneViewController alloc] initWithRepository:self.repositoryString
+                                                                                                            milestoneNumber:milestone.number];
         [self.navigationController pushViewController:milestoneViewController animated:YES];
     } else if (indexPath.section == kUITableViewSectionLabels && indexPath.row > 0) {
         GHAPILabelV3 *label = [self.labels objectAtIndex:indexPath.row - 1];
         
-        GHViewLabelViewController *labelViewController = [[[GHViewLabelViewController alloc] initWithRepository:self.repositoryString  
-                                                                                                          label:label]
-                                                          autorelease];
+        GHViewLabelViewController *labelViewController = [[GHViewLabelViewController alloc] initWithRepository:self.repositoryString  
+                                                                                                          label:label];
         [self.navigationController pushViewController:labelViewController animated:YES];
     } else if (indexPath.section == kUITableViewSectionCollaborators) {
         if (indexPath.row == 1) {
             // new collaborator
             
-            UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Enter Username", @"") 
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Enter Username", @"") 
                                                              message:nil 
                                                             delegate:self 
                                                    cancelButtonTitle:NSLocalizedString(@"Cancel", @"") 
-                                                   otherButtonTitles:NSLocalizedString(@"OK", @""), nil]
-                                  autorelease];
+                                                   otherButtonTitles:NSLocalizedString(@"OK", @""), nil];
             alert.alertViewStyle = UIAlertViewStylePlainTextInput;
             alert.tag = kUIAlertViewAddCollaboratorTag;
             [alert show];
@@ -1027,14 +1003,14 @@
         } else {
             GHAPIUserV3 *user = [self.collaborators objectAtIndex:indexPath.row - 2];
             
-            GHUserViewController *userViewController = [[[GHUserViewController alloc] initWithUsername:user.login] autorelease];
+            GHUserViewController *userViewController = [[GHUserViewController alloc] initWithUsername:user.login];
             [self.navigationController pushViewController:userViewController animated:YES];
         }
     } else if (indexPath.section == kUITableViewSectionWiki) {
         if (indexPath.row == 0) {
             NSURL *repoURL = [NSURL URLWithString:self.repository.HTMLURL];
             NSURL *wikiURL = [repoURL URLByAppendingPathComponent:@"wiki"];
-            GHWebViewViewController *viewController = [[[GHWebViewViewController alloc] initWithURL:wikiURL] autorelease];
+            GHWebViewViewController *viewController = [[GHWebViewViewController alloc] initWithURL:wikiURL];
             [self.navigationController pushViewController:viewController animated:YES];
         }
     } else {
@@ -1159,19 +1135,19 @@
 
 - (id)initWithCoder:(NSCoder *)decoder {
     if ((self = [super initWithCoder:decoder])) {
-        _repositoryString = [[decoder decodeObjectForKey:@"repositoryString"] retain];
-        _repository = [[decoder decodeObjectForKey:@"repository"] retain];
+        _repositoryString = [decoder decodeObjectForKey:@"repositoryString"];
+        _repository = [decoder decodeObjectForKey:@"repository"];
         _hasWatchingData = [decoder decodeBoolForKey:@"hasWatchingData"];
         _isWatchingRepository = [decoder decodeBoolForKey:@"isWatchingRepository"];
-        _deleteToken = [[decoder decodeObjectForKey:@"deleteToken"] retain];
-        _pullRequests = [[decoder decodeObjectForKey:@"pullRequests"] retain];
-        _branches = [[decoder decodeObjectForKey:@"branches"] retain];
-        _labels = [[decoder decodeObjectForKey:@"labels"] retain];
-        _milestones = [[decoder decodeObjectForKey:@"milestones"] retain];
-        _organizations = [[decoder decodeObjectForKey:@"organizations"] retain];
-        _issuesArray = [[decoder decodeObjectForKey:@"issuesArray"] retain];
-        _watchedUsersArray = [[decoder decodeObjectForKey:@"watchedUsersArray"] retain];
-        _collaborators = [[decoder decodeObjectForKey:@"collaborators"] retain];
+        _deleteToken = [decoder decodeObjectForKey:@"deleteToken"];
+        _pullRequests = [decoder decodeObjectForKey:@"pullRequests"];
+        _branches = [decoder decodeObjectForKey:@"branches"];
+        _labels = [decoder decodeObjectForKey:@"labels"];
+        _milestones = [decoder decodeObjectForKey:@"milestones"];
+        _organizations = [decoder decodeObjectForKey:@"organizations"];
+        _issuesArray = [decoder decodeObjectForKey:@"issuesArray"];
+        _watchedUsersArray = [decoder decodeObjectForKey:@"watchedUsersArray"];
+        _collaborators = [decoder decodeObjectForKey:@"collaborators"];
     }
     return self;
 }

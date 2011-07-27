@@ -61,7 +61,7 @@
         self.privateGists = [rawDictionary objectForKeyOrNilOnNullObject:@"private_gists"];
         self.diskUsage = [rawDictionary objectForKeyOrNilOnNullObject:@"disk_usage"];
         self.collaborators = [rawDictionary objectForKeyOrNilOnNullObject:@"collaborators"];
-        self.plan = [[[GHAPIUserPlanV3 alloc] initWithRawDictionary:[rawDictionary objectForKeyOrNilOnNullObject:@"plan"] ] autorelease];
+        self.plan = [[GHAPIUserPlanV3 alloc] initWithRawDictionary:[rawDictionary objectForKeyOrNilOnNullObject:@"plan"] ];
     }
     return self;
 }
@@ -98,31 +98,31 @@
 
 - (id)initWithCoder:(NSCoder *)decoder {
     if ((self = [super init])) {
-        _login = [[decoder decodeObjectForKey:@"login"] retain];
-        _ID = [[decoder decodeObjectForKey:@"iD"] retain];
-        _avatarURL = [[decoder decodeObjectForKey:@"avatarURL"] retain];
-        _gravatarID = [[decoder decodeObjectForKey:@"gravatarID"] retain];
-        _URL = [[decoder decodeObjectForKey:@"uRL"] retain];
-        _name = [[decoder decodeObjectForKey:@"name"] retain];
-        _company = [[decoder decodeObjectForKey:@"company"] retain];
-        _blog = [[decoder decodeObjectForKey:@"blog"] retain];
-        _location = [[decoder decodeObjectForKey:@"location"] retain];
-        _EMail = [[decoder decodeObjectForKey:@"eMail"] retain];
-        _hireable = [[decoder decodeObjectForKey:@"hireable"] retain];
-        _bio = [[decoder decodeObjectForKey:@"bio"] retain];
-        _publicRepos = [[decoder decodeObjectForKey:@"publicRepos"] retain];
-        _publicGists = [[decoder decodeObjectForKey:@"publicGists"] retain];
-        _followers = [[decoder decodeObjectForKey:@"followers"] retain];
-        _following = [[decoder decodeObjectForKey:@"following"] retain];
-        _htmlURL = [[decoder decodeObjectForKey:@"htmlURL"] retain];
-        _createdAt = [[decoder decodeObjectForKey:@"createdAt"] retain];
-        _type = [[decoder decodeObjectForKey:@"type"] retain];
-        _totalPrivateRepos = [[decoder decodeObjectForKey:@"totalPrivateRepos"] retain];
-        _ownedPrivateRepos = [[decoder decodeObjectForKey:@"ownedPrivateRepos"] retain];
-        _privateGists = [[decoder decodeObjectForKey:@"privateGists"] retain];
-        _diskUsage = [[decoder decodeObjectForKey:@"diskUsage"] retain];
-        _collaborators = [[decoder decodeObjectForKey:@"collaborators"] retain];
-        _plan = [[decoder decodeObjectForKey:@"plan"] retain];
+        _login = [decoder decodeObjectForKey:@"login"];
+        _ID = [decoder decodeObjectForKey:@"iD"];
+        _avatarURL = [decoder decodeObjectForKey:@"avatarURL"];
+        _gravatarID = [decoder decodeObjectForKey:@"gravatarID"];
+        _URL = [decoder decodeObjectForKey:@"uRL"];
+        _name = [decoder decodeObjectForKey:@"name"];
+        _company = [decoder decodeObjectForKey:@"company"];
+        _blog = [decoder decodeObjectForKey:@"blog"];
+        _location = [decoder decodeObjectForKey:@"location"];
+        _EMail = [decoder decodeObjectForKey:@"eMail"];
+        _hireable = [decoder decodeObjectForKey:@"hireable"];
+        _bio = [decoder decodeObjectForKey:@"bio"];
+        _publicRepos = [decoder decodeObjectForKey:@"publicRepos"];
+        _publicGists = [decoder decodeObjectForKey:@"publicGists"];
+        _followers = [decoder decodeObjectForKey:@"followers"];
+        _following = [decoder decodeObjectForKey:@"following"];
+        _htmlURL = [decoder decodeObjectForKey:@"htmlURL"];
+        _createdAt = [decoder decodeObjectForKey:@"createdAt"];
+        _type = [decoder decodeObjectForKey:@"type"];
+        _totalPrivateRepos = [decoder decodeObjectForKey:@"totalPrivateRepos"];
+        _ownedPrivateRepos = [decoder decodeObjectForKey:@"ownedPrivateRepos"];
+        _privateGists = [decoder decodeObjectForKey:@"privateGists"];
+        _diskUsage = [decoder decodeObjectForKey:@"diskUsage"];
+        _collaborators = [decoder decodeObjectForKey:@"collaborators"];
+        _plan = [decoder decodeObjectForKey:@"plan"];
     }
     return self;
 }
@@ -141,7 +141,7 @@
                                            if (error) {
                                                handler(nil, error);
                                            } else {
-                                               handler([[[GHAPIUserV3 alloc] initWithRawDictionary:object] autorelease] , nil);
+                                               handler([[GHAPIUserV3 alloc] initWithRawDictionary:object] , nil);
                                            }
                                        }];
 }
@@ -162,7 +162,7 @@
                                            if (error) {
                                                handler(nil, error);
                                            } else {
-                                               handler([[[GHAPIUserV3 alloc] initWithRawDictionary:object] autorelease] , nil);
+                                               handler([[GHAPIUserV3 alloc] initWithRawDictionary:object] , nil);
                                            }
                                        }];
     
@@ -185,7 +185,7 @@
                                      
                                      NSMutableArray *finalArray = [NSMutableArray arrayWithCapacity:rawArray.count];
                                      for (NSDictionary *rawDictionary in rawArray) {
-                                         [finalArray addObject:[[[GHAPIUserV3 alloc] initWithRawDictionary:rawDictionary] autorelease] ];
+                                         [finalArray addObject:[[GHAPIUserV3 alloc] initWithRawDictionary:rawDictionary] ];
                                      }
                                      
                                      handler(finalArray, nextPage, nil);
@@ -210,7 +210,7 @@
                                      
                                      NSMutableArray *finalArray = [NSMutableArray arrayWithCapacity:rawArray.count];
                                      for (NSDictionary *rawDictionary in rawArray) {
-                                         [finalArray addObject:[[[GHAPIUserV3 alloc] initWithRawDictionary:rawDictionary] autorelease] ];
+                                         [finalArray addObject:[[GHAPIUserV3 alloc] initWithRawDictionary:rawDictionary] ];
                                      }
                                      
                                      handler(finalArray, nextPage, nil);
@@ -285,44 +285,12 @@
                                      
                                      NSMutableArray *finalArray = [NSMutableArray arrayWithCapacity:rawArray.count];
                                      for (NSDictionary *rawDictionary in rawArray) {
-                                         [finalArray addObject:[[[GHAPIGistV3 alloc] initWithRawDictionary:rawDictionary] autorelease] ];
+                                         [finalArray addObject:[[GHAPIGistV3 alloc] initWithRawDictionary:rawDictionary] ];
                                      }
                                      
                                      handler(finalArray, nextPage, nil);
                                  }
                              }];
-}
-
-#pragma mark - Memory management
-
-- (void)dealloc {
-    [_login release];
-    [_ID release];
-    [_avatarURL release];
-    [_gravatarID release];
-    [_URL release];
-    [_name release];
-    [_company release];
-    [_blog release];
-    [_location release];
-    [_EMail release];
-    [_hireable release];
-    [_bio release];
-    [_publicRepos release];
-    [_publicGists release];
-    [_followers release];
-    [_following release];
-    [_htmlURL release];
-    [_createdAt release];
-    [_type release];
-    [_totalPrivateRepos release];
-    [_ownedPrivateRepos release];
-    [_privateGists release];
-    [_diskUsage release];
-    [_collaborators release];
-    [_plan release];
-    
-    [super dealloc];
 }
 
 @end

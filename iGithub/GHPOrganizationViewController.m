@@ -25,7 +25,7 @@
 #pragma mark - setters and getters
 
 - (void)setOrganizationName:(NSString *)organizationName {
-    [_organizationName release], _organizationName = [organizationName copy];
+    _organizationName = [organizationName copy];
     
     self.isDownloadingEssentialData = YES;
     [GHAPIOrganizationV3 organizationByName:_organizationName 
@@ -70,12 +70,6 @@
 
 #pragma mark - Memory management
 
-- (void)dealloc {
-    [_organizationName release];
-    [_organization release];
-    
-    [super dealloc];
-}
 
 #pragma mark - View lifecycle
 
@@ -189,13 +183,13 @@
     
     if (indexPath.section == kUITableViewSectionContent) {
         if (indexPath.row == 0) {
-            viewController = [[[GHPUsersNewsFeedViewController alloc] initWithUsername:self.organizationName] autorelease];
+            viewController = [[GHPUsersNewsFeedViewController alloc] initWithUsername:self.organizationName];
         } else if (indexPath.row == 1) {
-            viewController = [[[GHPRepositoriesOfOrganizationViewController alloc] initWithUsername:self.organizationName] autorelease];
+            viewController = [[GHPRepositoriesOfOrganizationViewController alloc] initWithUsername:self.organizationName];
         } else if (indexPath.row == 2) {
-            viewController = [[[GHPMembersOfOrganizationViewController alloc] initWithUsername:self.organizationName] autorelease];
+            viewController = [[GHPMembersOfOrganizationViewController alloc] initWithUsername:self.organizationName];
         } else if (indexPath.row == 3) {
-            viewController = [[[GHPTeamsOfOrganizationViewController alloc] initWithOrganizationName:self.organizationName] autorelease];
+            viewController = [[GHPTeamsOfOrganizationViewController alloc] initWithOrganizationName:self.organizationName];
         }
     }
     
@@ -218,18 +212,17 @@
     if ([title isEqualToString:NSLocalizedString(@"View Blog in Safari", @"")]) {
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:self.organization.blog] ];
     } else if ([title isEqualToString:NSLocalizedString(@"E-Mail", @"")]) {
-        MFMailComposeViewController *mailViewController = [[[MFMailComposeViewController alloc] init] autorelease];
+        MFMailComposeViewController *mailViewController = [[MFMailComposeViewController alloc] init];
         mailViewController.mailComposeDelegate = self;
         [mailViewController setToRecipients:[NSArray arrayWithObject:self.organization.EMail]];
         
         [self presentViewController:mailViewController animated:YES completion:nil];
     } else if ([title isEqualToString:NSLocalizedString(@"Create a new Team", @"")]) {
-        UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Create a new Team", @"") 
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Create a new Team", @"") 
                                                          message:nil 
                                                         delegate:self 
                                                cancelButtonTitle:NSLocalizedString(@"Cancel", @"") 
-                                               otherButtonTitles:NSLocalizedString(@"Create", @""), nil]
-                              autorelease];
+                                               otherButtonTitles:NSLocalizedString(@"Create", @""), nil];
         alert.tag = kUIAlertViewTagCreateTeam;
         alert.alertViewStyle = UIAlertViewStylePlainTextInput;
         [alert show];
@@ -245,7 +238,7 @@
 #pragma mark - ActionMenu
 
 - (UIActionSheet *)actionButtonActionSheet {
-    UIActionSheet *sheet = [[[UIActionSheet alloc] init] autorelease];
+    UIActionSheet *sheet = [[UIActionSheet alloc] init];
     
 //    [sheet addButtonWithTitle:NSLocalizedString(@"Create a new Team", @"")];
     
@@ -283,8 +276,8 @@
 
 - (id)initWithCoder:(NSCoder *)decoder {
     if ((self = [super initWithCoder:decoder])) {
-        _organizationName = [[decoder decodeObjectForKey:@"organizationName"] retain];
-        _organization = [[decoder decodeObjectForKey:@"organization"] retain];
+        _organizationName = [decoder decodeObjectForKey:@"organizationName"];
+        _organization = [decoder decodeObjectForKey:@"organization"];
     }
     return self;
 }

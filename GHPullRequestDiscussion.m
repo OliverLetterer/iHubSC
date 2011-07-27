@@ -28,7 +28,7 @@
         self.htmlURL = [rawDictionary objectForKeyOrNilOnNullObject:@"html_url"];
         self.issueCreatedAt = [rawDictionary objectForKeyOrNilOnNullObject:@"issue_created_at"];
         self.issueUpdatedAt = [rawDictionary objectForKeyOrNilOnNullObject:@"issue_updated_at"];
-        self.issueUser = [[[GHUser alloc] initWithRawDictionary:[rawDictionary objectForKeyOrNilOnNullObject:@"issue_user"] ] autorelease];
+        self.issueUser = [[GHUser alloc] initWithRawDictionary:[rawDictionary objectForKeyOrNilOnNullObject:@"issue_user"] ];
         self.labels = [rawDictionary objectForKeyOrNilOnNullObject:@"labels"];
         self.number = [rawDictionary objectForKeyOrNilOnNullObject:@"number"];
         self.patchURL = [rawDictionary objectForKeyOrNilOnNullObject:@"patch_url"];
@@ -36,11 +36,11 @@
         self.state = [rawDictionary objectForKeyOrNilOnNullObject:@"state"];
         self.title = [rawDictionary objectForKeyOrNilOnNullObject:@"title"];
         self.updatedAt = [rawDictionary objectForKeyOrNilOnNullObject:@"updated_at"];
-        self.user = [[[GHUser alloc] initWithRawDictionary:[rawDictionary objectForKeyOrNilOnNullObject:@"user"] ] autorelease];
+        self.user = [[GHUser alloc] initWithRawDictionary:[rawDictionary objectForKeyOrNilOnNullObject:@"user"] ];
         self.votes = [rawDictionary objectForKeyOrNilOnNullObject:@"votes"];
         
-        self.base = [[[GHPullRequestRepositoryInformation alloc] initWithRawDictionary:[rawDictionary objectForKeyOrNilOnNullObject:@"base"] ] autorelease];
-        self.head = [[[GHPullRequestRepositoryInformation alloc] initWithRawDictionary:[rawDictionary objectForKeyOrNilOnNullObject:@"head"] ] autorelease];
+        self.base = [[GHPullRequestRepositoryInformation alloc] initWithRawDictionary:[rawDictionary objectForKeyOrNilOnNullObject:@"base"] ];
+        self.head = [[GHPullRequestRepositoryInformation alloc] initWithRawDictionary:[rawDictionary objectForKeyOrNilOnNullObject:@"head"] ];
         
         NSMutableArray *commits = [NSMutableArray array];
         NSMutableArray *comments = [NSMutableArray array];
@@ -48,9 +48,9 @@
         
         for (NSDictionary *discussionDictionary in discussions) {
             if ([[discussionDictionary objectForKeyOrNilOnNullObject:@"type"] isEqualToString:@"Commit"]) {
-                [commits addObject:[[[GHCommit alloc] initWithRawDictionary:discussionDictionary] autorelease] ];
+                [commits addObject:[[GHCommit alloc] initWithRawDictionary:discussionDictionary] ];
             } else if ([[discussionDictionary objectForKeyOrNilOnNullObject:@"type"] isEqualToString:@"IssueComment"]) {
-                [comments addObject:[[[GHIssueComment alloc] initWithRawDictionary:discussionDictionary] autorelease] ];
+                [comments addObject:[[GHIssueComment alloc] initWithRawDictionary:discussionDictionary] ];
             }
         }
         
@@ -62,32 +62,6 @@
 
 #pragma mark - Memory management
 
-- (void)dealloc {
-    [_base release];
-    [_head release];
-    [_issueUser release];
-    [_labels release];
-    [_user release];
-    [_body release];
-    [_comments release];
-    [_createdAt release];
-    [_diffURL release];
-    [_gravatarID release];
-    [_htmlURL release];
-    [_issueCreatedAt release];
-    [_issueUpdatedAt release];
-    [_number release];
-    [_patchURL release];
-    [_position release];
-    [_state release];
-    [_title release];
-    [_updatedAt release];
-    [_votes release];
-    [_commits release];
-    [_commentsArray release];
-    
-    [super dealloc];
-}
 
 #pragma mark - Keyed Archiving
 
@@ -118,28 +92,28 @@
 
 - (id)initWithCoder:(NSCoder *)decoder {
     if ((self = [super init])) {
-        _base = [[decoder decodeObjectForKey:@"base"] retain];
-        _head = [[decoder decodeObjectForKey:@"head"] retain];
-        _commits = [[decoder decodeObjectForKey:@"commits"] retain];
-        _commentsArray = [[decoder decodeObjectForKey:@"commentsArray"] retain];
-        _body = [[decoder decodeObjectForKey:@"body"] retain];
-        _comments = [[decoder decodeObjectForKey:@"comments"] retain];
-        _createdAt = [[decoder decodeObjectForKey:@"createdAt"] retain];
-        _diffURL = [[decoder decodeObjectForKey:@"diffURL"] retain];
-        _gravatarID = [[decoder decodeObjectForKey:@"gravatarID"] retain];
-        _htmlURL = [[decoder decodeObjectForKey:@"htmlURL"] retain];
-        _issueCreatedAt = [[decoder decodeObjectForKey:@"issueCreatedAt"] retain];
-        _issueUpdatedAt = [[decoder decodeObjectForKey:@"issueUpdatedAt"] retain];
-        _issueUser = [[decoder decodeObjectForKey:@"issueUser"] retain];
-        _labels = [[decoder decodeObjectForKey:@"labels"] retain];
-        _number = [[decoder decodeObjectForKey:@"number"] retain];
-        _patchURL = [[decoder decodeObjectForKey:@"patchURL"] retain];
-        _position = [[decoder decodeObjectForKey:@"position"] retain];
-        _state = [[decoder decodeObjectForKey:@"state"] retain];
-        _title = [[decoder decodeObjectForKey:@"title"] retain];
-        _updatedAt = [[decoder decodeObjectForKey:@"updatedAt"] retain];
-        _user = [[decoder decodeObjectForKey:@"user"] retain];
-        _votes = [[decoder decodeObjectForKey:@"votes"] retain];
+        _base = [decoder decodeObjectForKey:@"base"];
+        _head = [decoder decodeObjectForKey:@"head"];
+        _commits = [decoder decodeObjectForKey:@"commits"];
+        _commentsArray = [decoder decodeObjectForKey:@"commentsArray"];
+        _body = [decoder decodeObjectForKey:@"body"];
+        _comments = [decoder decodeObjectForKey:@"comments"];
+        _createdAt = [decoder decodeObjectForKey:@"createdAt"];
+        _diffURL = [decoder decodeObjectForKey:@"diffURL"];
+        _gravatarID = [decoder decodeObjectForKey:@"gravatarID"];
+        _htmlURL = [decoder decodeObjectForKey:@"htmlURL"];
+        _issueCreatedAt = [decoder decodeObjectForKey:@"issueCreatedAt"];
+        _issueUpdatedAt = [decoder decodeObjectForKey:@"issueUpdatedAt"];
+        _issueUser = [decoder decodeObjectForKey:@"issueUser"];
+        _labels = [decoder decodeObjectForKey:@"labels"];
+        _number = [decoder decodeObjectForKey:@"number"];
+        _patchURL = [decoder decodeObjectForKey:@"patchURL"];
+        _position = [decoder decodeObjectForKey:@"position"];
+        _state = [decoder decodeObjectForKey:@"state"];
+        _title = [decoder decodeObjectForKey:@"title"];
+        _updatedAt = [decoder decodeObjectForKey:@"updatedAt"];
+        _user = [decoder decodeObjectForKey:@"user"];
+        _votes = [decoder decodeObjectForKey:@"votes"];
     }
     return self;
 }

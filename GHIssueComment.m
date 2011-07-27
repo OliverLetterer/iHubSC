@@ -28,7 +28,7 @@
         if ([user isKindOfClass:[NSString class] ]) {
             self.user = (NSString *)user;
         } else if ([user isKindOfClass:[NSDictionary class] ]) {
-            self.userInfo = [[[GHUser alloc] initWithRawDictionary:(NSDictionary *)user] autorelease];
+            self.userInfo = [[GHUser alloc] initWithRawDictionary:(NSDictionary *)user];
         }
     }
     return self;
@@ -36,17 +36,6 @@
 
 #pragma mark - Memory management
 
-- (void)dealloc {
-    [_body release];
-    [_createdAt release];
-    [_gravatarID release];
-    [_ID release];
-    [_updatedAt release];
-    [_user release];
-    [_userInfo release];
-    
-    [super dealloc];
-}
 
 #pragma mark - Keyed Archiving
 
@@ -62,13 +51,13 @@
 
 - (id)initWithCoder:(NSCoder *)decoder {
     if ((self = [super init])) {
-        _body = [[decoder decodeObjectForKey:@"body"] retain];
-        _createdAt = [[decoder decodeObjectForKey:@"createdAt"] retain];
-        _gravatarID = [[decoder decodeObjectForKey:@"gravatarID"] retain];
-        _ID = [[decoder decodeObjectForKey:@"iD"] retain];
-        _updatedAt = [[decoder decodeObjectForKey:@"updatedAt"] retain];
-        _user = [[decoder decodeObjectForKey:@"user"] retain];
-        _userInfo = [[decoder decodeObjectForKey:@"userInfo"] retain];
+        _body = [decoder decodeObjectForKey:@"body"];
+        _createdAt = [decoder decodeObjectForKey:@"createdAt"];
+        _gravatarID = [decoder decodeObjectForKey:@"gravatarID"];
+        _ID = [decoder decodeObjectForKey:@"iD"];
+        _updatedAt = [decoder decodeObjectForKey:@"updatedAt"];
+        _user = [decoder decodeObjectForKey:@"user"];
+        _userInfo = [decoder decodeObjectForKey:@"userInfo"];
     }
     return self;
 }

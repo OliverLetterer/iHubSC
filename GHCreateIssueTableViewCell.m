@@ -17,13 +17,13 @@
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if ((self = [super initWithStyle:style reuseIdentifier:reuseIdentifier])) {
-        self.titleTextField = [[[UITextField alloc] init] autorelease];
+        self.titleTextField = [[UITextField alloc] init];
         self.titleTextField.font = [UIFont boldSystemFontOfSize:12.0];
         self.titleTextField.placeholder = NSLocalizedString(@"Repository title", @"");
         self.titleTextField.borderStyle = UITextBorderStyleBezel;
         [self.contentView addSubview:self.titleTextField];
         
-        self.descriptionTextField = [[[UITextView alloc] init] autorelease];
+        self.descriptionTextField = [[UITextView alloc] init];
         self.descriptionTextField.backgroundColor = [UIColor whiteColor];
         self.descriptionTextField.font = [UIFont systemFontOfSize:12.0];
         self.descriptionTextField.layer.borderColor = [UIColor colorWithRed:245.0/255.0 green:245.0/255.0 blue:245.0/255.0 alpha:1.0].CGColor;
@@ -60,11 +60,5 @@
 
 #pragma mark - Memory management
 
-- (void)dealloc {
-    [_titleTextField release];
-    [_descriptionTextField release];
-    
-    [super dealloc];
-}
 
 @end

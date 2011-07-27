@@ -18,7 +18,6 @@
 #pragma mark - setters and getters
 
 - (void)setDiffString:(NSString *)diffString {
-    [_diffString release];
     _diffString = [diffString copy];
     
     __block CGFloat width = 0.0f;
@@ -88,11 +87,6 @@
 
 #pragma mark - Memory management
 
-- (void)dealloc {
-    [_diffString release];
-    
-    [super dealloc];
-}
 
 #pragma mark - Keyed Archiving
 
@@ -104,7 +98,7 @@
 
 - (id)initWithCoder:(NSCoder *)decoder {
     if ((self = [super initWithCoder:decoder])) {
-        _diffString = [[decoder decodeObjectForKey:@"diffString"] retain];
+        _diffString = [decoder decodeObjectForKey:@"diffString"];
         _width = [decoder decodeFloatForKey:@"width"];
     }
     return self;

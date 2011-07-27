@@ -21,16 +21,16 @@
         // Initialization code
         self.URL = [rawDictionary objectForKeyOrNilOnNullObject:@"url"];
         self.SHA = [rawDictionary objectForKeyOrNilOnNullObject:@"sha"];
-        self.author = [[[GHAPIUserV3 alloc] initWithRawDictionary:[rawDictionary objectForKeyOrNilOnNullObject:@"author"] ] autorelease];
-        self.committer = [[[GHAPIUserV3 alloc] initWithRawDictionary:[rawDictionary objectForKeyOrNilOnNullObject:@"committer"] ] autorelease];
+        self.author = [[GHAPIUserV3 alloc] initWithRawDictionary:[rawDictionary objectForKeyOrNilOnNullObject:@"author"] ];
+        self.committer = [[GHAPIUserV3 alloc] initWithRawDictionary:[rawDictionary objectForKeyOrNilOnNullObject:@"committer"] ];
         self.message = [rawDictionary objectForKeyOrNilOnNullObject:@"message"];
-        self.tree = [[[GHAPITreeInfoV3 alloc] initWithRawDictionary:[rawDictionary objectForKeyOrNilOnNullObject:@"tree"] ] autorelease];
+        self.tree = [[GHAPITreeInfoV3 alloc] initWithRawDictionary:[rawDictionary objectForKeyOrNilOnNullObject:@"tree"] ];
         
         NSArray *rawArray = [rawDictionary objectForKeyOrNilOnNullObject:@"parents"];
         NSMutableArray *finalArray = [NSMutableArray arrayWithCapacity:rawArray.count];
         
         [rawArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-            [finalArray addObject:[[[GHAPITreeInfoV3 alloc] initWithRawDictionary:obj] autorelease]];
+            [finalArray addObject:[[GHAPITreeInfoV3 alloc] initWithRawDictionary:obj]];
         }];
         self.parents = finalArray;
         
@@ -38,7 +38,7 @@
             self.message = [[rawDictionary objectForKeyOrNilOnNullObject:@"commit"] objectForKeyOrNilOnNullObject:@"message"];
         }
         if (!self.tree.SHA) {
-            self.tree = [[[GHAPITreeInfoV3 alloc] initWithRawDictionary:[[rawDictionary objectForKeyOrNilOnNullObject:@"commit"] objectForKeyOrNilOnNullObject:@"tree"] ] autorelease];
+            self.tree = [[GHAPITreeInfoV3 alloc] initWithRawDictionary:[[rawDictionary objectForKeyOrNilOnNullObject:@"commit"] objectForKeyOrNilOnNullObject:@"tree"] ];
         }
     }
     return self;
@@ -58,24 +58,13 @@
                                            if (error) {
                                                handler(nil, error);
                                            } else {
-                                               handler([[[GHAPICommitV3 alloc] initWithRawDictionary:object] autorelease], nil);
+                                               handler([[GHAPICommitV3 alloc] initWithRawDictionary:object], nil);
                                            }
                                        }];
 }
 
 #pragma mark - Memory management
 
-- (void)dealloc {
-    [_SHA release];
-    [_URL release];
-    [_author release];
-    [_committer release];
-    [_message release];
-    [_tree release];
-    [_parents release];
-    
-    [super dealloc];
-}
 
 #pragma mark - Keyed Archiving
 
@@ -91,13 +80,13 @@
 
 - (id)initWithCoder:(NSCoder *)decoder {
     if ((self = [super init])) {
-        _SHA = [[decoder decodeObjectForKey:@"sHA"] retain];
-        _URL = [[decoder decodeObjectForKey:@"uRL"] retain];
-        _author = [[decoder decodeObjectForKey:@"author"] retain];
-        _committer = [[decoder decodeObjectForKey:@"committer"] retain];
-        _message = [[decoder decodeObjectForKey:@"message"] retain];
-        _tree = [[decoder decodeObjectForKey:@"tree"] retain];
-        _parents = [[decoder decodeObjectForKey:@"parents"] retain];
+        _SHA = [decoder decodeObjectForKey:@"sHA"];
+        _URL = [decoder decodeObjectForKey:@"uRL"];
+        _author = [decoder decodeObjectForKey:@"author"];
+        _committer = [decoder decodeObjectForKey:@"committer"];
+        _message = [decoder decodeObjectForKey:@"message"];
+        _tree = [decoder decodeObjectForKey:@"tree"];
+        _parents = [decoder decodeObjectForKey:@"parents"];
     }
     return self;
 }

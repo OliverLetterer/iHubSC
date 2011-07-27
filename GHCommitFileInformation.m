@@ -27,11 +27,6 @@
 
 #pragma mark - Memory management
 
-- (void)dealloc {
-    [_diff release];
-    [_filename release];
-    [super dealloc];
-}
 
 #pragma mark - Keyed Archiving
 
@@ -42,8 +37,8 @@
 
 - (id)initWithCoder:(NSCoder *)decoder {
     if ((self = [super init])) {
-        _diff = [[decoder decodeObjectForKey:@"diff"] retain];
-        _filename = [[decoder decodeObjectForKey:@"filename"] retain];
+        _diff = [decoder decodeObjectForKey:@"diff"];
+        _filename = [decoder decodeObjectForKey:@"filename"];
     }
     return self;
 }

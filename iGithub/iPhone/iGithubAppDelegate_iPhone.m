@@ -17,14 +17,13 @@
 - (void)authenticationManagerDidAuthenticateUserCallback:(NSNotification *)notification {
     self.profileViewController.username = [GHSettingsHelper username];
     
-    self.profileViewController.tabBarItem = [[[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"My Profile", @"") 
+    self.profileViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"My Profile", @"") 
                                                                            image:[UIImage imageNamed:@"145-persondot.png"] 
-                                                                             tag:0]
-                                             autorelease];
+                                                                             tag:0];
 }
 
 - (void)unknownPayloadEventTypeCallback:(NSNotification *)notification {
-    MFMailComposeViewController* controller = [[[MFMailComposeViewController alloc] init] autorelease];
+    MFMailComposeViewController* controller = [[MFMailComposeViewController alloc] init];
     controller.mailComposeDelegate = self;
     [controller setSubject:@"Unkown Event Type found"];
     [controller setMessageBody:[[notification userInfo] description] isHTML:NO]; 
@@ -59,14 +58,14 @@
     [GHAPIAuthenticationManager sharedInstance].username = [GHSettingsHelper username];
     [GHAPIAuthenticationManager sharedInstance].password = [GHSettingsHelper password];
 #else
-    [GHAuthenticationManager sharedInstance].username = [GHSettingsHelper username];
-    [GHAuthenticationManager sharedInstance].password = [GHSettingsHelper password];
+    [GHAPIAuthenticationManager sharedInstance].username = [GHSettingsHelper username];
+    [GHAPIAuthenticationManager sharedInstance].password = [GHSettingsHelper password];
 #endif
     
     NSMutableDictionary *dictionary = [self deserializeState];
     
     if (dictionary) {
-        self.tabBarController = [[[UITabBarController alloc] init] autorelease];
+        self.tabBarController = [[UITabBarController alloc] init];
         self.window.rootViewController = self.tabBarController;
         
         NSMutableArray *viewControllers = [NSMutableArray arrayWithCapacity:3];
@@ -75,15 +74,15 @@
         NSArray *viewControllers1 = [dictionary objectForKey:[NSNumber numberWithUnsignedInteger:1]];
         NSArray *viewControllers2 = [dictionary objectForKey:[NSNumber numberWithUnsignedInteger:2]];
         
-        UINavigationController *navigationController = [[[UINavigationController alloc] init] autorelease];
+        UINavigationController *navigationController = [[UINavigationController alloc] init];
         [navigationController setViewControllers:viewControllers0 animated:NO];
         [viewControllers addObject:navigationController];
         
-        navigationController = [[[UINavigationController alloc] init] autorelease];
+        navigationController = [[UINavigationController alloc] init];
         [navigationController setViewControllers:viewControllers1 animated:NO];
         [viewControllers addObject:navigationController];
         
-        navigationController = [[[UINavigationController alloc] init] autorelease];
+        navigationController = [[UINavigationController alloc] init];
         [navigationController setViewControllers:viewControllers2 animated:NO];
         [viewControllers addObject:navigationController];
         
@@ -96,27 +95,26 @@
     } else {
         NSMutableArray *tabBarItems = [NSMutableArray array];
         
-        self.tabBarController = [[[UITabBarController alloc] init] autorelease];
+        self.tabBarController = [[UITabBarController alloc] init];
         self.window.rootViewController = self.tabBarController;
         
-        self.newsFeedViewController = [[[GHOwnerNewsFeedViewController alloc] init] autorelease];
-        [tabBarItems addObject:[[[UINavigationController alloc] initWithRootViewController:self.newsFeedViewController] autorelease] ];
+        self.newsFeedViewController = [[GHOwnerNewsFeedViewController alloc] init];
+        [tabBarItems addObject:[[UINavigationController alloc] initWithRootViewController:self.newsFeedViewController] ];
         
-        self.profileViewController = [[[GHUserViewController alloc] initWithUsername:[GHAPIAuthenticationManager sharedInstance].username] autorelease];
+        self.profileViewController = [[GHUserViewController alloc] initWithUsername:[GHAPIAuthenticationManager sharedInstance].username];
         self.profileViewController.reloadDataIfNewUserGotAuthenticated = YES;
         self.profileViewController.pullToReleaseEnabled = YES;
-        [tabBarItems addObject:[[[UINavigationController alloc] initWithRootViewController:self.profileViewController] autorelease] ];
+        [tabBarItems addObject:[[UINavigationController alloc] initWithRootViewController:self.profileViewController] ];
         
-        self.searchViewController = [[[GHSearchViewController alloc] init] autorelease];
-        [tabBarItems addObject:[[[UINavigationController alloc] initWithRootViewController:self.searchViewController] autorelease] ];
+        self.searchViewController = [[GHSearchViewController alloc] init];
+        [tabBarItems addObject:[[UINavigationController alloc] initWithRootViewController:self.searchViewController] ];
         
         self.tabBarController.viewControllers = tabBarItems;
     }
     
-    self.profileViewController.tabBarItem = [[[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"My Profile", @"") 
+    self.profileViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"My Profile", @"") 
                                                                            image:[UIImage imageNamed:@"145-persondot.png"] 
-                                                                             tag:0]
-                                             autorelease];
+                                                                             tag:0];
     
     return [super application:application didFinishLaunchingWithOptions:launchOptions];
 }
@@ -137,11 +135,7 @@
 #pragma mark - memory management
 
 - (void)dealloc {
-    [_profileViewController release];
-    [_tabBarController release];
-    [_newsFeedViewController release];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-	[super dealloc];
 }
 
 @end

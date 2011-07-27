@@ -36,7 +36,6 @@
 }
 
 - (void)setUsername:(NSString *)username {
-    [_username release];
     _username = [username copy];
     
     self.isDownloadingEssentialData = YES;
@@ -86,12 +85,6 @@
 
 #pragma mark - memory management
 
-- (void)dealloc {
-    [_user release];
-    [_username release];
-    
-    [super dealloc];
-}
 
 #pragma mark - Table view data source
 
@@ -184,23 +177,23 @@
     if (indexPath.section == kUITableViewSectionUserContent) {
         if (indexPath.row == 0) {
             // Repositories
-            viewController = [[[GHPOwnedRepositoriesOfUserViewController alloc] initWithUsername:self.username] autorelease];
+            viewController = [[GHPOwnedRepositoriesOfUserViewController alloc] initWithUsername:self.username];
         } else if (indexPath.row == 1) {
-            viewController = [[[GHPWatchedRepositoriesViewController alloc] initWithUsername:self.username] autorelease];
+            viewController = [[GHPWatchedRepositoriesViewController alloc] initWithUsername:self.username];
         } else if (indexPath.row == 2) {
-            viewController = [[[GHPFollwingUsersViewController alloc] initWithUsername:self.username] autorelease];
+            viewController = [[GHPFollwingUsersViewController alloc] initWithUsername:self.username];
         } else if (indexPath.row == 3) {
-            viewController = [[[GHPFollowedUsersViewController alloc] initWithUsername:self.username] autorelease];
+            viewController = [[GHPFollowedUsersViewController alloc] initWithUsername:self.username];
         } else if (indexPath.row == 4) {
-            viewController = [[[GHPGistsOfUserViewController alloc] initWithUsername:self.username] autorelease];
+            viewController = [[GHPGistsOfUserViewController alloc] initWithUsername:self.username];
         } else if (indexPath.row == 6) {
-            viewController = [[[GHPUsersNewsFeedViewController alloc] initWithUsername:self.username] autorelease];
+            viewController = [[GHPUsersNewsFeedViewController alloc] initWithUsername:self.username];
         } else if (indexPath.row == 5) {
-            viewController = [[[GHPOrganizationsOfUserViewController alloc] initWithUsername:self.username] autorelease];
+            viewController = [[GHPOrganizationsOfUserViewController alloc] initWithUsername:self.username];
         }
     } else if (indexPath.section == kUITableViewSectionAUContent) {
         if (indexPath.row == 0) {
-            viewController = [[[GHPIssuesOfAuthenticatedUserViewController alloc] initWithUsername:self.username] autorelease];
+            viewController = [[GHPIssuesOfAuthenticatedUserViewController alloc] initWithUsername:self.username];
         }
     }
     
@@ -247,7 +240,7 @@
     } else if ([title isEqualToString:NSLocalizedString(@"View Blog in Safari", @"")]) {
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:self.user.blog] ];
     } else if ([title isEqualToString:NSLocalizedString(@"E-Mail", @"")]) {
-        MFMailComposeViewController *mailViewController = [[[MFMailComposeViewController alloc] init] autorelease];
+        MFMailComposeViewController *mailViewController = [[MFMailComposeViewController alloc] init];
         mailViewController.mailComposeDelegate = self;
         [mailViewController setToRecipients:[NSArray arrayWithObject:self.user.EMail]];
         
@@ -278,7 +271,7 @@
 }
 
 - (UIActionSheet *)actionButtonActionSheet {
-    UIActionSheet *sheet = [[[UIActionSheet alloc] init] autorelease];
+    UIActionSheet *sheet = [[UIActionSheet alloc] init];
     
     if (!self.isAdminsitrativeUser) {
         if (!_isFollowingUser) {
@@ -320,8 +313,8 @@
 
 - (id)initWithCoder:(NSCoder *)decoder {
     if ((self = [super initWithCoder:decoder])) {
-        _user = [[decoder decodeObjectForKey:@"user"] retain];
-        _username = [[decoder decodeObjectForKey:@"username"] retain];
+        _user = [decoder decodeObjectForKey:@"user"];
+        _username = [decoder decodeObjectForKey:@"username"];
     }
     return self;
 }

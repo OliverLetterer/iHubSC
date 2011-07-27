@@ -18,25 +18,25 @@
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if ((self = [super initWithStyle:style reuseIdentifier:reuseIdentifier])) {
         // Initialization code
-        self.titleTextField = [[[UITextField alloc] init] autorelease];
+        self.titleTextField = [[UITextField alloc] init];
         self.titleTextField.font = [UIFont boldSystemFontOfSize:12.0];
         self.titleTextField.placeholder = NSLocalizedString(@"Repository title", @"");
         self.titleTextField.borderStyle = UITextBorderStyleBezel;
         self.titleTextField.textColor = [UIColor blackColor];
         [self.contentView addSubview:self.titleTextField];
         
-        self.descriptionTextField = [[[UITextField alloc] init] autorelease];
+        self.descriptionTextField = [[UITextField alloc] init];
         self.descriptionTextField.font = [UIFont boldSystemFontOfSize:12.0];
         self.descriptionTextField.placeholder = NSLocalizedString(@"Repository description", @"");
         self.descriptionTextField.borderStyle = UITextBorderStyleBezel;
         self.descriptionTextField.textColor = [UIColor blackColor];
         [self.contentView addSubview:self.descriptionTextField];
         
-        self.publicSwitch = [[[UISwitch alloc] init] autorelease];
+        self.publicSwitch = [[UISwitch alloc] init];
         [self.publicSwitch setOn:YES];
         [self.contentView addSubview:self.publicSwitch];
         
-        self.publicLabel = [[[UILabel alloc] init] autorelease];
+        self.publicLabel = [[UILabel alloc] init];
         self.publicLabel.text = NSLocalizedString(@"Public", @"");
         self.publicLabel.backgroundColor = [UIColor clearColor];
         [self.contentView addSubview:self.publicLabel];
@@ -75,13 +75,5 @@
 
 #pragma mark - Memory management
 
-- (void)dealloc {
-    [_publicLabel release];
-    [_publicSwitch release];
-    [_titleTextField release];
-    [_descriptionTextField release];
-    
-    [super dealloc];
-}
 
 @end

@@ -22,7 +22,7 @@
 
 @interface GHPCreateIssueViewController : GHTableViewController {
 @private
-    id<GHPCreateIssueViewControllerDelegate> _delegate;
+    id<GHPCreateIssueViewControllerDelegate> __weak _delegate;
     
     NSMutableArray *_collaborators;
     NSUInteger _assignIndex;
@@ -35,7 +35,7 @@
     NSString *_repository;
 }
 
-@property (nonatomic, assign) id<GHPCreateIssueViewControllerDelegate> delegate;
+@property (nonatomic, weak) id<GHPCreateIssueViewControllerDelegate> delegate;
 
 @property (nonatomic, retain) NSMutableArray *collaborators;
 @property (nonatomic, retain) NSMutableArray *milestones;

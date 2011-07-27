@@ -64,9 +64,5 @@
 
 #pragma mark - Memory management
 
-- (void)dealloc {
-    
-    [super dealloc];
-}
 
 @end
