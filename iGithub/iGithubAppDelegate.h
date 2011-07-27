@@ -10,6 +10,7 @@
 #import <CoreData/CoreData.h>
 
 #warning better organization support
+#warning take a look into "applied fork commits"
 
 @interface iGithubAppDelegate : NSObject <UIApplicationDelegate> {
     NSManagedObjectContext *_managedObjectContext;
