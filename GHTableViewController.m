@@ -284,16 +284,6 @@ static CGFloat wrapperViewHeight = 21.0f;
 
 #pragma mark - Memory management
 
-- (void)dealloc {
-    if (self.isViewLoaded) {
-        self.tableView.delegate = nil;
-        self.tableView.dataSource = nil;
-    }
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-    _alertProxy.delegate = nil;
-    
-}
-
 - (void)didReceiveMemoryWarning {
     // Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];

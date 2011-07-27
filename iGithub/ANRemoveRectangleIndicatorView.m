@@ -71,10 +71,10 @@
         CGFloat topOffset = 20.0f;
         CGFloat width = CGRectGetWidth(self.bounds)/2.5f;
         self.backgroundColor = [UIColor clearColor];
-        _firstRectangleView = [[[ANRectangleView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, width, CGRectGetHeight(self.bounds)-topOffset)] autorelease];
+        _firstRectangleView = [[ANRectangleView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, width, CGRectGetHeight(self.bounds)-topOffset)];
         [self addSubview:_firstRectangleView];
         
-        _secondRectangleView = [[[ANRectangleView alloc] initWithFrame:CGRectMake(width/2.0f, topOffset, width, CGRectGetHeight(self.bounds)-20.0f)] autorelease];
+        _secondRectangleView = [[ANRectangleView alloc] initWithFrame:CGRectMake(width/2.0f, topOffset, width, CGRectGetHeight(self.bounds)-20.0f)];
         _secondRectangleViewCenterPoint = _secondRectangleView.center;
         _secondRectangleViewFlippedCenterPoint = CGPointMake(_secondRectangleViewCenterPoint.x + 80.0f, _secondRectangleViewCenterPoint.y + 30.0f);
         _secondRectangleViewRemovedCenterPoint = CGPointMake(_secondRectangleViewFlippedCenterPoint.x + 10.0f, _secondRectangleViewFlippedCenterPoint.y + 150.0f);
@@ -84,22 +84,6 @@
         self.alpha = 0.0f;
     }
     return self;
-}
-
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
-{
-    // Drawing code
-}
-*/
-
-- (void)dealloc {
-    [_firstRectangleView release];
-    [_secondRectangleView release];
-    
-    [super dealloc];
 }
 
 @end
