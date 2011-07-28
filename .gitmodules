@@ -28,3 +28,6 @@
 [submodule "scifihifi-iphone"]
 	path = Submodules/scifihifi-iphone
 	url = https://github.com/ldandersen/scifihifi-iphone.git
+[submodule "GHPieChartProgressView"]
+	path = Submodules/GHPieChartProgressView
+	url = git@github.com:OliverLetterer/GHPieChartProgressView.git

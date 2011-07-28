@@ -43,7 +43,6 @@
 		A757970E13E1A030008670B0 /* GHPMileStonesOnRepositoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A757967613E1A030008670B0 /* GHPMileStonesOnRepositoryViewController.m */; };
 		A757970F13E1A030008670B0 /* GHPMileStonesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A757967813E1A030008670B0 /* GHPMileStonesTableViewController.m */; };
 		A757971013E1A030008670B0 /* GHPMilestoneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A757967B13E1A030008670B0 /* GHPMilestoneViewController.m */; };
-		A757971113E1A030008670B0 /* GHPieChartProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = A757967E13E1A030008670B0 /* GHPieChartProgressView.m */; };
 		A757971213E1A030008670B0 /* GHPMileStoneTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A757968013E1A030008670B0 /* GHPMileStoneTableViewCell.m */; };
 		A757971313E1A030008670B0 /* GHPNewsFeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A757968313E1A030008670B0 /* GHPNewsFeedViewController.m */; };
 		A757971413E1A030008670B0 /* GHPOwnersNewsFeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A757968513E1A030008670B0 /* GHPOwnersNewsFeedViewController.m */; };
@@ -92,6 +91,7 @@
 		A757973F13E1A030008670B0 /* GHPImageDetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A75796F713E1A030008670B0 /* GHPImageDetailTableViewCell.m */; };
 		A757974013E1A030008670B0 /* GHPNewCommentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A75796FA13E1A030008670B0 /* GHPNewCommentTableViewCell.m */; };
 		A757978C13E1A3A3008670B0 /* SFHFKeychainUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = A757976C13E1A3A3008670B0 /* SFHFKeychainUtils.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		A75797D413E1A623008670B0 /* GHPieChartProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = A75797BA13E1A623008670B0 /* GHPieChartProgressView.m */; };
 		A7841C6F13E1849200131648 /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841C6E13E1849200131648 /* JSONKit.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		A7841CAF13E1853200131648 /* CGUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841C7213E1853200131648 /* CGUtils.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		A7841CB413E1853200131648 /* DTAttributedTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841C7C13E1853200131648 /* DTAttributedTextView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -458,8 +458,6 @@
 		A757967813E1A030008670B0 /* GHPMileStonesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPMileStonesTableViewController.m; sourceTree = "<group>"; };
 		A757967A13E1A030008670B0 /* GHPMilestoneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPMilestoneViewController.h; sourceTree = "<group>"; };
 		A757967B13E1A030008670B0 /* GHPMilestoneViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPMilestoneViewController.m; sourceTree = "<group>"; };
-		A757967D13E1A030008670B0 /* GHPieChartProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPieChartProgressView.h; sourceTree = "<group>"; };
-		A757967E13E1A030008670B0 /* GHPieChartProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPieChartProgressView.m; sourceTree = "<group>"; };
 		A757967F13E1A030008670B0 /* GHPMileStoneTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPMileStoneTableViewCell.h; sourceTree = "<group>"; };
 		A757968013E1A030008670B0 /* GHPMileStoneTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPMileStoneTableViewCell.m; sourceTree = "<group>"; };
 		A757968213E1A030008670B0 /* GHPNewsFeedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPNewsFeedViewController.h; sourceTree = "<group>"; };
@@ -556,6 +554,8 @@
 		A75796FA13E1A030008670B0 /* GHPNewCommentTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPNewCommentTableViewCell.m; sourceTree = "<group>"; };
 		A757976B13E1A3A3008670B0 /* SFHFKeychainUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SFHFKeychainUtils.h; path = security/SFHFKeychainUtils.h; sourceTree = "<group>"; };
 		A757976C13E1A3A3008670B0 /* SFHFKeychainUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SFHFKeychainUtils.m; path = security/SFHFKeychainUtils.m; sourceTree = "<group>"; };
+		A75797B913E1A623008670B0 /* GHPieChartProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPieChartProgressView.h; sourceTree = "<group>"; };
+		A75797BA13E1A623008670B0 /* GHPieChartProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPieChartProgressView.m; sourceTree = "<group>"; };
 		A7841C6D13E1849200131648 /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JSONKit.h; path = Submodules/JSONKit/JSONKit.h; sourceTree = "<group>"; };
 		A7841C6E13E1849200131648 /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JSONKit.m; path = Submodules/JSONKit/JSONKit.m; sourceTree = "<group>"; };
 		A7841C7113E1853200131648 /* CGUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CGUtils.h; path = "Submodules/NSAttributedString-Additions-for-HTML/Classes/CGUtils.h"; sourceTree = SOURCE_ROOT; };
@@ -1432,8 +1432,6 @@
 		A757967C13E1A030008670B0 /* UITableViewCell's */ = {
 			isa = PBXGroup;
 			children = (
-				A757967D13E1A030008670B0 /* GHPieChartProgressView.h */,
-				A757967E13E1A030008670B0 /* GHPieChartProgressView.m */,
 				A757967F13E1A030008670B0 /* GHPMileStoneTableViewCell.h */,
 				A757968013E1A030008670B0 /* GHPMileStoneTableViewCell.m */,
 			);
@@ -1772,6 +1770,16 @@
 			path = "Submodules/scifihifi-iphone";
 			sourceTree = SOURCE_ROOT;
 		};
+		A757979113E1A622008670B0 /* GHPieChartProgressView */ = {
+			isa = PBXGroup;
+			children = (
+				A75797B913E1A623008670B0 /* GHPieChartProgressView.h */,
+				A75797BA13E1A623008670B0 /* GHPieChartProgressView.m */,
+			);
+			name = GHPieChartProgressView;
+			path = Submodules/GHPieChartProgressView;
+			sourceTree = SOURCE_ROOT;
+		};
 		A76FC9A81352D27E004C642E /* UIExpandableTableView */ = {
 			isa = PBXGroup;
 			children = (
@@ -1801,6 +1809,7 @@
 		A7841C7013E184F500131648 /* Submodules */ = {
 			isa = PBXGroup;
 			children = (
+				A757979113E1A622008670B0 /* GHPieChartProgressView */,
 				A757974413E1A3A3008670B0 /* scifihifi-iphone */,
 				A757962413E19B18008670B0 /* ANAdvancedNavigationController */,
 				A7841C2E13E1494800131648 /* GHTableViewAlertView */,
@@ -3627,7 +3636,6 @@
 				A757970E13E1A030008670B0 /* GHPMileStonesOnRepositoryViewController.m in Sources */,
 				A757970F13E1A030008670B0 /* GHPMileStonesTableViewController.m in Sources */,
 				A757971013E1A030008670B0 /* GHPMilestoneViewController.m in Sources */,
-				A757971113E1A030008670B0 /* GHPieChartProgressView.m in Sources */,
 				A757971213E1A030008670B0 /* GHPMileStoneTableViewCell.m in Sources */,
 				A757971313E1A030008670B0 /* GHPNewsFeedViewController.m in Sources */,
 				A757971413E1A030008670B0 /* GHPOwnersNewsFeedViewController.m in Sources */,
@@ -3676,6 +3684,7 @@
 				A757973F13E1A030008670B0 /* GHPImageDetailTableViewCell.m in Sources */,
 				A757974013E1A030008670B0 /* GHPNewCommentTableViewCell.m in Sources */,
 				A757978C13E1A3A3008670B0 /* SFHFKeychainUtils.m in Sources */,
+				A75797D413E1A623008670B0 /* GHPieChartProgressView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
