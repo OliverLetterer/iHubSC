@@ -8,7 +8,6 @@
 
 #import "GHAuthenticationAlertView.h"
 #import "GithubAPI.h"
-#import "GHSettingsHelper.h"
 
 static BOOL _isAutheticationAlertViewVisible = NO;
 
@@ -52,14 +51,7 @@ static BOOL _isAutheticationAlertViewVisible = NO;
                                          _hasAuthenticatedUser = YES;
                                          [self dismissWithClickedButtonIndex:0 animated:YES];
                                          
-                                         [GHSettingsHelper setUsername:user.login];
-                                         [GHSettingsHelper setPassword:password];
-                                         [GHSettingsHelper setAvatarURL:user.avatarURL];
-                                         
-                                         [[GHAPIAuthenticationManager sharedInstance] saveAuthenticatedUserWithName:user.login 
-                                                                                                        password:password];
-                                         
-                                         [[NSUserDefaults standardUserDefaults] synchronize];
+                                         [[GHAPIAuthenticationManager sharedInstance] addAuthenticatedUser:user password:password];
                                      }
                                  }];
     } else {

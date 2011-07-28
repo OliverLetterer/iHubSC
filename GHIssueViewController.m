@@ -8,7 +8,6 @@
 
 #import "GHIssueViewController.h"
 #import "GithubAPI.h"
-#import "GHSettingsHelper.h"
 #import "GHAttributedTableViewCell.h"
 #import "GHCollapsingAndSpinningTableViewCell.h"
 #import "GHDescriptionTableViewCell.h"
@@ -238,7 +237,7 @@
                                            }
                                        }];
     } else if (section == kUITableViewSectionAdministration) {
-        [GHAPIRepositoryV3 isUser:[GHAPIAuthenticationManager sharedInstance].username 
+        [GHAPIRepositoryV3 isUser:[GHAPIAuthenticationManager sharedInstance].authenticatedUser.login 
          collaboratorOnRepository:self.repository 
                 completionHandler:^(BOOL state, NSError *error) {
                     if (error) {
@@ -246,7 +245,7 @@
                         [tableView cancelDownloadInSection:section];
                     } else {
                         _hasCollaboratorData = YES;
-                        _isCollaborator = state || [self.repository hasPrefix:[GHAPIAuthenticationManager sharedInstance].username] || [self.issue.user.login isEqualToString:[GHAPIAuthenticationManager sharedInstance].username];
+                        _isCollaborator = state || [self.repository hasPrefix:[GHAPIAuthenticationManager sharedInstance].authenticatedUser.login] || [self.issue.user.login isEqualToString:[GHAPIAuthenticationManager sharedInstance].authenticatedUser.login];
                         [tableView expandSection:section animated:YES];
                     }
                 }];
@@ -292,7 +291,7 @@
                 result++;
                 result++;   // Update Assignee
             }
-            if (self.issue.isPullRequest && _isCollaborator && [self.issue.state isEqualToString:kGHAPIIssueStateV3Open] && ![self.issue.user.login isEqualToString:[GHAPIAuthenticationManager sharedInstance].username]) {
+            if (self.issue.isPullRequest && _isCollaborator && [self.issue.state isEqualToString:kGHAPIIssueStateV3Open] && ![self.issue.user.login isEqualToString:[GHAPIAuthenticationManager sharedInstance].authenticatedUser.login]) {
                 result++;
             }
         }
@@ -430,9 +429,9 @@
                 cell = [[GHNewCommentTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
             }
             
-            [self updateImageView:cell.imageView atIndexPath:indexPath withAvatarURLString:[GHSettingsHelper avatarURL]];
+            [self updateImageView:cell.imageView atIndexPath:indexPath withAvatarURLString:[GHAPIAuthenticationManager sharedInstance].authenticatedUser.avatarURL];
             
-            cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ (right now)", @""), [GHSettingsHelper username]];
+            cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ (right now)", @""), [GHAPIAuthenticationManager sharedInstance].authenticatedUser.login];
             cell.delegate = self;
             if (self.lastUserComment) {
                 cell.textView.text = self.lastUserComment;

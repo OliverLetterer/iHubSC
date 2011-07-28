@@ -13,17 +13,9 @@ extern NSString *const GHAPIAuthenticationManagerDidChangeAuthenticatedUserNotif
 
 @interface GHAPIAuthenticationManager : NSObject {
 @private
-    NSString *_username;
-    NSString *_password;
-    
     NSMutableArray *_usersArray;
     GHAPIUserV3 *_authenticatedUser;
 }
-
-@property (nonatomic, copy) NSString *username;
-@property (nonatomic, copy) NSString *password;
-
-- (void)saveAuthenticatedUserWithName:(NSString *)username password:(NSString *)password;
 
 - (void)addAuthenticatedUser:(GHAPIUserV3 *)user password:(NSString *)password;
 - (void)removeAuthenticatedUser:(GHAPIUserV3 *)user;

@@ -9,7 +9,6 @@
 #import "GHOwnerNewsFeedViewController.h"
 #import "GHOwnerNewsFeedViewController+Private.h"
 #import "GithubAPI.h"
-#import "GHSettingsHelper.h"
 #import "GHDescriptionTableViewCell.h"
 #import "GHFollowEventTableViewCell.h"
 #import "GHIssueViewController.h"
@@ -247,7 +246,7 @@
     } else if (_lastSelectedSegmentControlIndex == 1) {
         // My Actions
         [self showLoadingInformation:NSLocalizedString(@"Fetching My Actions", @"")];
-        [GHNewsFeed newsFeedForUserNamed:[GHSettingsHelper username] 
+        [GHNewsFeed newsFeedForUserNamed:[GHAPIAuthenticationManager sharedInstance].authenticatedUser.login 
                        completionHandler:^(GHNewsFeed *feed, NSError *error) {
                            self.isDownloadingEssentialData = NO;
                            if (error) {
@@ -281,7 +280,7 @@
             }];
         } else {
             [self showLoadingInformation:NSLocalizedString(@"Fetching Organizations", @"")];
-            [GHAPIOrganizationV3 organizationsOfUser:[GHAPIAuthenticationManager sharedInstance].username 
+            [GHAPIOrganizationV3 organizationsOfUser:[GHAPIAuthenticationManager sharedInstance].authenticatedUser.login 
                                                 page:1 
                                    completionHandler:^(NSMutableArray *array, NSUInteger nextPage, NSError *error) {
                                        self.isDownloadingEssentialData = NO;
@@ -372,7 +371,7 @@
     UIViewController *viewController = nil;
     
     if (item.payload.type == GHPayloadWatchEvent) {
-        if ([item.repository.fullName hasPrefix:[GHAPIAuthenticationManager sharedInstance].username]) {
+        if ([item.repository.fullName hasPrefix:[GHAPIAuthenticationManager sharedInstance].authenticatedUser.login]) {
             // watched my repo, show the user
             viewController = [[GHUserViewController alloc] initWithUsername:item.actorAttributes.login];
         } else {
@@ -381,7 +380,7 @@
         }
     } else if (item.payload.type == GHPayloadFollowEvent) {
         GHFollowEventPayload *payload = (GHFollowEventPayload *)item.payload;
-        if ([payload.target.login isEqualToString:[GHAPIAuthenticationManager sharedInstance].username]) {
+        if ([payload.target.login isEqualToString:[GHAPIAuthenticationManager sharedInstance].authenticatedUser.login]) {
             // started following me, show me the user
             viewController = [[GHUserViewController alloc] initWithUsername:item.actorAttributes.login];
         } else {
@@ -389,7 +388,7 @@
             viewController = [[GHUserViewController alloc] initWithUsername:payload.target.login];
         }
     } else if (item.payload.type == GHPayloadForkEvent) {
-        if ([item.repository.fullName hasPrefix:[GHAPIAuthenticationManager sharedInstance].username]) {
+        if ([item.repository.fullName hasPrefix:[GHAPIAuthenticationManager sharedInstance].authenticatedUser.login]) {
             // forked my repository, show me the user
             viewController = [[GHUserViewController alloc] initWithUsername:item.actorAttributes.login];
         } else {

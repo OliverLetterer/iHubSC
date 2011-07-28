@@ -70,12 +70,12 @@
 }
 
 - (BOOL)canDeleteRepository {
-    return [self.repository.owner.login isEqualToString:[GHAPIAuthenticationManager sharedInstance].username ];
+    return [self.repository.owner.login isEqualToString:[GHAPIAuthenticationManager sharedInstance].authenticatedUser.login ];
 }
 
 - (BOOL)isFollowingRepository {
     return [self.watchedUsersArray indexOfObjectPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {
-        if ([[GHAPIAuthenticationManager sharedInstance].username isEqualToString:obj]) {
+        if ([[GHAPIAuthenticationManager sharedInstance].authenticatedUser.login isEqualToString:obj]) {
             *stop = YES;
             return YES;
         }
@@ -893,7 +893,7 @@
                                 }
                             }];
         } else if (indexPath.row == 3) {
-            [GHAPIOrganizationV3 organizationsOfUser:[GHAPIAuthenticationManager sharedInstance].username page:1 
+            [GHAPIOrganizationV3 organizationsOfUser:[GHAPIAuthenticationManager sharedInstance].authenticatedUser.login page:1 
                                    completionHandler:^(NSMutableArray *array, NSUInteger nextPage, NSError *error) {
                                        
                                        self.organizations = array;

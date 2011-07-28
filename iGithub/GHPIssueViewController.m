@@ -15,7 +15,6 @@
 #import "GHPImageDetailTableViewCell.h"
 #import "GHPCommitViewController.h"
 #import "GHPNewCommentTableViewCell.h"
-#import "GHSettingsHelper.h"
 #import "GHPMilestoneViewController.h"
 #import "ANNotificationQueue.h"
 #import "GHViewCloudFileViewController.h"
@@ -385,9 +384,9 @@
             
             [self setupDefaultTableViewCell:cell forRowAtIndexPath:indexPath];
             
-            [self updateImageView:cell.imageView atIndexPath:indexPath withAvatarURLString:[GHSettingsHelper avatarURL]];
+            [self updateImageView:cell.imageView atIndexPath:indexPath withAvatarURLString:[GHAPIAuthenticationManager sharedInstance].authenticatedUser.avatarURL ];
             
-            cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ (right now)", @""), [GHSettingsHelper username]];
+            cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ (right now)", @""), [GHAPIAuthenticationManager sharedInstance].authenticatedUser.login];
             cell.delegate = self;
             if (self.lastUserComment) {
                 cell.textView.text = self.lastUserComment;
@@ -741,14 +740,14 @@
 #pragma mark - ActionMenu
 
 - (void)downloadDataToDisplayActionButton {
-    [GHAPIRepositoryV3 isUser:[GHAPIAuthenticationManager sharedInstance].username 
+    [GHAPIRepositoryV3 isUser:[GHAPIAuthenticationManager sharedInstance].authenticatedUser.login 
      collaboratorOnRepository:self.repositoryString 
             completionHandler:^(BOOL state, NSError *error) {
                 if (error) {
                     [self failedToDownloadDataToDisplayActionButtonWithError:error];
                 } else {
                     _hasCollaboratorData = YES;
-                    _isCollaborator = state || [self.repositoryString hasPrefix:[GHAPIAuthenticationManager sharedInstance].username];
+                    _isCollaborator = state || [self.repositoryString hasPrefix:[GHAPIAuthenticationManager sharedInstance].authenticatedUser.login];
                     
                     [self didDownloadDataToDisplayActionButton];
                 }
@@ -756,7 +755,7 @@
 }
 
 - (UIActionSheet *)actionButtonActionSheet {
-    if (!_isCollaborator && ![[GHAPIAuthenticationManager sharedInstance].username isEqualToString:self.issue.user.login]) {
+    if (!_isCollaborator && ![[GHAPIAuthenticationManager sharedInstance].authenticatedUser.login isEqualToString:self.issue.user.login]) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", @"") 
                                                          message:[NSString stringWithFormat:NSLocalizedString(@"You are not allowed to administrate this %@", @""), self.issueName] 
                                                         delegate:nil 

@@ -110,7 +110,7 @@
     
     NSURL *URL = nil;
     
-    if ([username isEqualToString:[GHAPIAuthenticationManager sharedInstance].username]) {
+    if ([username isEqualToString:[GHAPIAuthenticationManager sharedInstance].authenticatedUser.login]) {
         URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.github.com/user/orgs"]];
     } else {
         URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.github.com/users/%@/orgs",

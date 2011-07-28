@@ -7,7 +7,6 @@
 //
 
 #import "iGithubAppDelegate_iPhone.h"
-#import "GHSettingsHelper.h"
 #import "GithubAPI.h"
 
 @implementation iGithubAppDelegate_iPhone
@@ -15,7 +14,7 @@
 @synthesize tabBarController=_tabBarController, newsFeedViewController=_newsFeedViewController, profileViewController=_profileViewController, searchViewController=_searchViewController;
 
 - (void)authenticationManagerDidAuthenticateUserCallback:(NSNotification *)notification {
-    self.profileViewController.username = [GHSettingsHelper username];
+    self.profileViewController.username = [GHAPIAuthenticationManager sharedInstance].authenticatedUser.login;
     
     self.profileViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"My Profile", @"") 
                                                                            image:[UIImage imageNamed:@"145-persondot.png"] 
@@ -46,21 +45,21 @@
                                              selector:@selector(unknownPayloadEventTypeCallback:) 
                                                  name:@"GHUnknownPayloadEventType" 
                                                object:nil];
-    
-#if DEBUG
-    [GHSettingsHelper setUsername:@"OliverLetterer"];
-    [GHSettingsHelper setPassword:@"1337-l0g1n"];
-    
+#warning check for reenable
+//#if DEBUG
+//    [GHSettingsHelper setUsername:@"OliverLetterer"];
+//    [GHSettingsHelper setPassword:@"1337-l0g1n"];
+//    
 //    [GHSettingsHelper setUsername:@"iTunesTestAccount"];
 //    [GHSettingsHelper setPassword:@"iTunes1"];
-    
-    [GHSettingsHelper setAvatarURL:@"http://www.gravatar.com/avatar/5ba61d83fd609c878b116cfc4328b65c?s=80"];
-    [GHAPIAuthenticationManager sharedInstance].username = [GHSettingsHelper username];
-    [GHAPIAuthenticationManager sharedInstance].password = [GHSettingsHelper password];
-#else
-    [GHAPIAuthenticationManager sharedInstance].username = [GHSettingsHelper username];
-    [GHAPIAuthenticationManager sharedInstance].password = [GHSettingsHelper password];
-#endif
+//    
+//    [GHSettingsHelper setAvatarURL:@"http://www.gravatar.com/avatar/5ba61d83fd609c878b116cfc4328b65c?s=80"];
+//    [GHAPIAuthenticationManager sharedInstance].authenticatedUser.login = [GHAPIAuthenticationManager sharedInstance].authenticatedUser.login;
+//    [GHAPIAuthenticationManager sharedInstance].password = [GHSettingsHelper password];
+//#else
+//    [GHAPIAuthenticationManager sharedInstance].authenticatedUser.login = [GHAPIAuthenticationManager sharedInstance].authenticatedUser.login;
+//    [GHAPIAuthenticationManager sharedInstance].password = [GHSettingsHelper password];
+//#endif
     
     NSMutableDictionary *dictionary = [self deserializeState];
     
@@ -101,7 +100,7 @@
         self.newsFeedViewController = [[GHOwnerNewsFeedViewController alloc] init];
         [tabBarItems addObject:[[UINavigationController alloc] initWithRootViewController:self.newsFeedViewController] ];
         
-        self.profileViewController = [[GHUserViewController alloc] initWithUsername:[GHAPIAuthenticationManager sharedInstance].username];
+        self.profileViewController = [[GHUserViewController alloc] initWithUsername:[GHAPIAuthenticationManager sharedInstance].authenticatedUser.login];
         self.profileViewController.reloadDataIfNewUserGotAuthenticated = YES;
         self.profileViewController.pullToReleaseEnabled = YES;
         [tabBarItems addObject:[[UINavigationController alloc] initWithRootViewController:self.profileViewController] ];

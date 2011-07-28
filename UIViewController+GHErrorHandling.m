@@ -8,28 +8,21 @@
 
 #import "UIViewController+GHErrorHandling.h"
 #import "GHAPIAuthenticationManager.h"
-#import "GHSettingsHelper.h"
 #import "GHAuthenticationAlertView.h"
 #import "ANNotificationQueue.h"
 
 @implementation UIViewController (GHViewControllerErrorhandling)
 
 - (void)invalidadUserData {
-    [GHSettingsHelper setPassword:nil];
-    [GHSettingsHelper setAvatarURL:nil];
-    [GHSettingsHelper setUsername:nil];
-    
-    [[NSUserDefaults standardUserDefaults] synchronize];
-    
-    [GHAPIAuthenticationManager sharedInstance].username = nil;
-    [GHAPIAuthenticationManager sharedInstance].password = nil;
+    [GHAPIAuthenticationManager sharedInstance].authenticatedUser = nil;
 }
 
 - (void)handleError:(NSError *)error {
     if (error != nil) {
         DLog(@"%@", error);
         
-        if (![GHAPIAuthenticationManager sharedInstance].username || [[GHAPIAuthenticationManager sharedInstance].username isEqualToString:@""]) {
+        if (![GHAPIAuthenticationManager sharedInstance].authenticatedUser.login || [[GHAPIAuthenticationManager sharedInstance].authenticatedUser.login isEqualToString:@""]) {
+#warning change account here
             GHAuthenticationAlertView *alert = [[GHAuthenticationAlertView alloc] initWithDelegate:nil];
             [alert show];
             return;
@@ -38,6 +31,7 @@
         if (error.code == 3) {
             // authentication needed
             [self invalidadUserData];
+            #warning change account here
             GHAuthenticationAlertView *alert = [[GHAuthenticationAlertView alloc] initWithDelegate:nil];
             [alert show];
         } else {

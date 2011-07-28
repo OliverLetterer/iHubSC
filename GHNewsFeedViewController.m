@@ -8,7 +8,6 @@
 
 #import "GHNewsFeedViewController.h"
 #import "GithubAPI.h"
-#import "GHSettingsHelper.h"
 #import "GHDescriptionTableViewCell.h"
 #import "GHFollowEventTableViewCell.h"
 #import "GHIssueViewController.h"

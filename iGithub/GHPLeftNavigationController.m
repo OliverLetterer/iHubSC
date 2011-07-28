@@ -11,7 +11,6 @@
 #import "GHPEdgedLineView.h"
 #import "GHAPIAuthenticationManager.h"
 #import "GithubAPI.h"
-#import "GHSettingsHelper.h"
 #import "UIImage+Resize.h"
 #import "UIImage+GHTabBar.h"
 #import "ANAdvancedNavigationController.h"
@@ -68,7 +67,7 @@
     if (self.isViewLoaded) {
         [self.tableView reloadData];
     }
-    [GHAPIOrganizationV3 organizationsOfUser:[GHAPIAuthenticationManager sharedInstance].username 
+    [GHAPIOrganizationV3 organizationsOfUser:[GHAPIAuthenticationManager sharedInstance].authenticatedUser.login 
                                         page:1 
                            completionHandler:^(NSMutableArray *array, NSUInteger nextPage, NSError *error) {
                                [self pullToReleaseTableViewDidReloadData];
@@ -86,7 +85,7 @@
 
 - (void)gearButtonClicked:(UIButton *)button {
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Account", @"") 
-                                                     message:[NSString stringWithFormat:NSLocalizedString(@"You are logged in as: %@\nRemaining API calls for today: %d", @""), [GHAPIAuthenticationManager sharedInstance].username, [GHAPIBackgroundQueueV3 sharedInstance].remainingAPICalls ]
+                                                     message:[NSString stringWithFormat:NSLocalizedString(@"You are logged in as: %@\nRemaining API calls for today: %d", @""), [GHAPIAuthenticationManager sharedInstance].authenticatedUser.login, [GHAPIBackgroundQueueV3 sharedInstance].remainingAPICalls ]
                                                     delegate:self 
                                            cancelButtonTitle:NSLocalizedString(@"Cancel", @"") 
                                            otherButtonTitles:NSLocalizedString(@"Logout", @""), nil];
@@ -232,9 +231,9 @@
             cell.textLabel.textColor = [UIColor whiteColor];
         }
         
-        cell.textLabel.text = [GHAPIAuthenticationManager sharedInstance].username;
+        cell.textLabel.text = [GHAPIAuthenticationManager sharedInstance].authenticatedUser.login;
         
-        [self updateImageView:cell.imageView atIndexPath:indexPath withAvatarURLString:[GHSettingsHelper avatarURL]];
+        [self updateImageView:cell.imageView atIndexPath:indexPath withAvatarURLString:[GHAPIAuthenticationManager sharedInstance].authenticatedUser.avatarURL];
         
         return cell;
     } else {
@@ -289,11 +288,11 @@
         if (indexPath.row == 0) {
             viewController = [[GHPOwnersNewsFeedViewController alloc] init];
         } else if (indexPath.row == 1) {
-            viewController = [[GHPUsersNewsFeedViewController alloc] initWithUsername:[GHAPIAuthenticationManager sharedInstance].username ];
+            viewController = [[GHPUsersNewsFeedViewController alloc] initWithUsername:[GHAPIAuthenticationManager sharedInstance].authenticatedUser.login ];
         }
     } else if (indexPath.section == kUITableViewSectionBottom) {
         if (indexPath.row == 0) {
-            viewController = [[GHPUserViewController alloc] initWithUsername:[GHAPIAuthenticationManager sharedInstance].username ];
+            viewController = [[GHPUserViewController alloc] initWithUsername:[GHAPIAuthenticationManager sharedInstance].authenticatedUser.login ];
             [(GHPUserViewController *)viewController setReloadDataIfNewUserGotAuthenticated:YES];
         } else if (indexPath.row == 1) {
             viewController = [[GHPSearchViewController alloc] init];

@@ -7,7 +7,6 @@
 //
 
 #import "iGithubAppDelegate.h"
-#import "GHSettingsHelper.h"
 #import "GHAPIAuthenticationManager.h"
 #import "ASIHTTPRequest.h"
 

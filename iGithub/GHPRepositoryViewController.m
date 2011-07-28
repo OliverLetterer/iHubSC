@@ -75,7 +75,7 @@
 }
 
 - (BOOL)canAdministrateRepository {
-    return [self.repository.owner.login isEqualToString:[GHAPIAuthenticationManager sharedInstance].username ];
+    return [self.repository.owner.login isEqualToString:[GHAPIAuthenticationManager sharedInstance].authenticatedUser.login ];
 }
 
 #pragma mark - Initialization
@@ -534,7 +534,7 @@
         } else if ([title isEqualToString:NSLocalizedString(@"Fork to an Organization", @"")]) {
             self.infoCell.actionButton.alpha = 0.0f;
             [self.infoCell.activityIndicatorView startAnimating];
-            [GHAPIOrganizationV3 organizationsOfUser:[GHAPIAuthenticationManager sharedInstance].username page:1 
+            [GHAPIOrganizationV3 organizationsOfUser:[GHAPIAuthenticationManager sharedInstance].authenticatedUser.login page:1 
                                    completionHandler:^(NSMutableArray *array, NSUInteger nextPage, NSError *error) {
                                        
                                        self.organizations = array;

@@ -518,7 +518,7 @@ static CGFloat wrapperViewHeight = 21.0f;
     }
     if ([error code] == 3) {
         // authentication problem
-        if (![GHAPIAuthenticationManager sharedInstance].username) {
+        if (![GHAPIAuthenticationManager sharedInstance].authenticatedUser) {
             // no user is logged in, handle the nice error
             [super handleError:error];
         } else {

@@ -190,7 +190,7 @@
 + (void)repositoriesForUserNamed:(NSString *)username page:(NSUInteger)page completionHandler:(GHAPIPaginationHandler)handler {
     NSURL *URL = nil;
     
-    if ([username isEqualToString:[GHAPIAuthenticationManager sharedInstance].username]) {
+    if ([username isEqualToString:[GHAPIAuthenticationManager sharedInstance].authenticatedUser.login]) {
         // authenticated user
         // v3: GET /user/repos
         URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.github.com/user/repos"] ];

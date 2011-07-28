@@ -8,7 +8,6 @@
 
 #import "GHCreateIssueTableViewController.h"
 #import "GHCreateIssueTableViewCell.h"
-#import "GHSettingsHelper.h"
 #import "GHCollapsingAndSpinningTableViewCell.h"
 
 #define kUITableViewSectionTitle 0
@@ -206,7 +205,7 @@
                                         }
                                     }];
     } else if (section == kUITableViewSectionMilestones) {
-        [GHAPIRepositoryV3 isUser:[GHAPIAuthenticationManager sharedInstance].username 
+        [GHAPIRepositoryV3 isUser:[GHAPIAuthenticationManager sharedInstance].authenticatedUser.login 
          collaboratorOnRepository:self.repository 
                 completionHandler:^(BOOL state, NSError *error) {
                     if (error) {
@@ -216,7 +215,7 @@
                         _hasCollaboratorState = YES;
                         _isCollaborator = state;
                         
-                        if (_isCollaborator || [self.repository hasPrefix:[GHAPIAuthenticationManager sharedInstance].username ]) {
+                        if (_isCollaborator || [self.repository hasPrefix:[GHAPIAuthenticationManager sharedInstance].authenticatedUser.login ]) {
                             [GHAPIIssueV3 milestonesForIssueOnRepository:self.repository withNumber:nil page:1 
                                                        completionHandler:^(NSMutableArray *array, NSUInteger nextPage, NSError *error) {
                                                            if (error) {
@@ -302,7 +301,7 @@
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
             }
             
-            [self updateImageView:cell.imageView atIndexPath:indexPath withAvatarURLString:[GHSettingsHelper avatarURL]];
+            [self updateImageView:cell.imageView atIndexPath:indexPath withAvatarURLString:[GHAPIAuthenticationManager sharedInstance].authenticatedUser.avatarURL];
             
             cell.descriptionTextField.inputAccessoryView = self.textViewToolBar;
             self.textView = cell.descriptionTextField;

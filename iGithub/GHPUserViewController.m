@@ -16,7 +16,6 @@
 #import "GHPOrganizationsOfUserViewController.h"
 #import "GHPIssuesOfAuthenticatedUserViewController.h"
 
-#import "GHSettingsHelper.h"
 #import "ANNotificationQueue.h"
 
 #define kUITableViewSectionUserInfo         0
@@ -32,7 +31,7 @@
 #pragma mark - setters and getters
 
 - (BOOL)isAdminsitrativeUser {
-    return [[GHAPIAuthenticationManager sharedInstance].username isEqualToString:self.username];
+    return [[GHAPIAuthenticationManager sharedInstance].authenticatedUser.login isEqualToString:self.username];
 }
 
 - (void)setUsername:(NSString *)username {
@@ -101,7 +100,7 @@
     } else if (section == kUITableViewSectionUserInfo) {
         return 1;
     } else if (section == kUITableViewSectionAUContent) {
-        if ([self.username isEqualToString:[GHAPIAuthenticationManager sharedInstance].username]) {
+        if ([self.username isEqualToString:[GHAPIAuthenticationManager sharedInstance].authenticatedUser.login]) {
             return 1;
         }
     }

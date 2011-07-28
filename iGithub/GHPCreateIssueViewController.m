@@ -172,7 +172,7 @@
                                         }
                                     }];
     } else if (section == kUITableViewSectionMilestones) {
-        [GHAPIRepositoryV3 isUser:[GHAPIAuthenticationManager sharedInstance].username 
+        [GHAPIRepositoryV3 isUser:[GHAPIAuthenticationManager sharedInstance].authenticatedUser.login 
          collaboratorOnRepository:self.repository 
                 completionHandler:^(BOOL state, NSError *error) {
                     if (error) {
@@ -182,7 +182,7 @@
                         _hasCollaboratorState = YES;
                         _isCollaborator = state;
                         
-                        if (_isCollaborator || [self.repository hasPrefix:[GHAPIAuthenticationManager sharedInstance].username ]) {
+                        if (_isCollaborator || [self.repository hasPrefix:[GHAPIAuthenticationManager sharedInstance].authenticatedUser.login ]) {
                             [GHAPIIssueV3 milestonesForIssueOnRepository:self.repository withNumber:nil page:1 
                                                        completionHandler:^(NSMutableArray *array, NSUInteger nextPage, NSError *error) {
                                                            if (error) {

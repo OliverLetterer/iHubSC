@@ -10,7 +10,6 @@
 #import "GHPUserTableViewCell.h"
 #import "GHPUserViewController.h"
 #import "GHPNewCommentTableViewCell.h"
-#import "GHSettingsHelper.h"
 #import "NSString+Additions.h"
 #import "GHViewCloudFileViewController.h"
 #import "ANNotificationQueue.h"
@@ -234,9 +233,9 @@
             }
             [self setupDefaultTableViewCell:cell forRowAtIndexPath:indexPath];
             
-            [self updateImageView:cell.imageView atIndexPath:indexPath withAvatarURLString:[GHSettingsHelper avatarURL]];
+            [self updateImageView:cell.imageView atIndexPath:indexPath withAvatarURLString:[GHAPIAuthenticationManager sharedInstance].authenticatedUser.avatarURL];
             
-            cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ (right now)", @""), [GHSettingsHelper username]];
+            cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ (right now)", @""), [GHAPIAuthenticationManager sharedInstance].authenticatedUser.login];
             cell.delegate = self;
             if (self.lastUserComment) {
                 cell.textView.text = self.lastUserComment;

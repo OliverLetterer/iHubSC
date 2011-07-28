@@ -28,7 +28,7 @@ NSString *const kGHAPIAuthenticationManagerAuthenticatedUserFileName = @"kGHAPIA
 @end
 
 @implementation GHAPIAuthenticationManager
-@synthesize username=_username, password=_password;
+//@synthesize username=_username, password=_password;
 @synthesize authenticatedUser=_authenticatedUser;
 
 #pragma mark - Setters and getters
@@ -45,6 +45,7 @@ NSString *const kGHAPIAuthenticationManagerAuthenticatedUserFileName = @"kGHAPIA
     
     if (authenticatedUser != _authenticatedUser) {
         _authenticatedUser = authenticatedUser;
+        [self _saveUserState];
         
         [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:GHAPIAuthenticationManagerDidChangeAuthenticatedUserNotification object:nil] ];
     }
@@ -96,12 +97,12 @@ NSString *const kGHAPIAuthenticationManagerAuthenticatedUserFileName = @"kGHAPIA
 
 #pragma mark - Instance methods
 
-- (void)saveAuthenticatedUserWithName:(NSString *)username password:(NSString *)password {
-    self.username = username;
-    self.password = password;
-    
-    [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:GHAPIAuthenticationManagerDidChangeAuthenticatedUserNotification object:nil] ];
-}
+//- (void)saveAuthenticatedUserWithName:(NSString *)username password:(NSString *)password {
+//    self.username = username;
+//    self.password = password;
+//    
+//    [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:GHAPIAuthenticationManagerDidChangeAuthenticatedUserNotification object:nil] ];
+//}
 
 - (void)addAuthenticatedUser:(GHAPIUserV3 *)user password:(NSString *)password {
     user.password = password;
@@ -115,7 +116,7 @@ NSString *const kGHAPIAuthenticationManagerAuthenticatedUserFileName = @"kGHAPIA
     if (_usersArray.count > 0) {
         newUser = [_usersArray objectAtIndex:0];
     }
-    self.authenticatedUser = nil;
+    self.authenticatedUser = newUser;
 }
 
 @end

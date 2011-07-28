@@ -9,7 +9,6 @@
 #import "iGithubAppDelegate_iPad.h"
 #import "GHPLeftNavigationController.h"
 #import "ANAdvancedNavigationController.h"
-#import "GHSettingsHelper.h"
 #import "GHAPIAuthenticationManager.h"
 #import "GHPSearchScopeTableViewCell.h"
 
@@ -30,20 +29,18 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     [self setupAppearences];
-#if DEBUG
-    [GHSettingsHelper setUsername:@"OliverLetterer"];
-    [GHSettingsHelper setPassword:@"1337-l0g1n"];
-    
-//    [GHSettingsHelper setUsername:@"iTunesTestAccount"];
-//    [GHSettingsHelper setPassword:@"iTunes1"];
-    
-    [GHSettingsHelper setAvatarURL:@"http://www.gravatar.com/avatar/5ba61d83fd609c878b116cfc4328b65c?s=80"];
-    [GHAPIAuthenticationManager sharedInstance].username = [GHSettingsHelper username];
-    [GHAPIAuthenticationManager sharedInstance].password = [GHSettingsHelper password];
-#else
-    [GHAPIAuthenticationManager sharedInstance].username = [GHSettingsHelper username];
-    [GHAPIAuthenticationManager sharedInstance].password = [GHSettingsHelper password];
-#endif
+#warning check for reenable
+//#if DEBUG
+//    
+////    [GHSettingsHelper setUsername:@"iTunesTestAccount"];
+////    [GHSettingsHelper setPassword:@"iTunes1"];
+//    
+//    [GHAPIAuthenticationManager sharedInstance].authenticatedUser.login = [GHAPIAuthenticationManager sharedInstance].authenticatedUser.login;
+//    [GHAPIAuthenticationManager sharedInstance].password = [GHSettingsHelper password];
+//#else
+//    [GHAPIAuthenticationManager sharedInstance].authenticatedUser.login = [GHAPIAuthenticationManager sharedInstance].authenticatedUser.login;
+//    [GHAPIAuthenticationManager sharedInstance].password = [GHSettingsHelper password];
+//#endif
     
     NSMutableDictionary *dictionary = [self deserializeState];
     
