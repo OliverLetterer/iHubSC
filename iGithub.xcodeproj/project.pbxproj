@@ -172,8 +172,6 @@
 		A7841DA113E18E2E00131648 /* TabBarItemSelectedBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A7841D5C13E18E2D00131648 /* TabBarItemSelectedBackground@2x.png */; };
 		A7841DA213E18E2E00131648 /* GHBackgroundImage.png in Resources */ = {isa = PBXBuildFile; fileRef = A7841D5E13E18E2D00131648 /* GHBackgroundImage.png */; };
 		A7841DA313E18E2E00131648 /* GHBackgroundImage@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A7841D5F13E18E2D00131648 /* GHBackgroundImage@2x.png */; };
-		A7841DA413E18E2E00131648 /* GHDefaultTableViewBackgroundImage.png in Resources */ = {isa = PBXBuildFile; fileRef = A7841D6013E18E2D00131648 /* GHDefaultTableViewBackgroundImage.png */; };
-		A7841DA513E18E2E00131648 /* GHDefaultTableViewBackgroundImage@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A7841D6113E18E2D00131648 /* GHDefaultTableViewBackgroundImage@2x.png */; };
 		A7841DA613E18E2E00131648 /* PullToRefreshArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = A7841D6213E18E2D00131648 /* PullToRefreshArrow.png */; };
 		A7841DA713E18E2E00131648 /* PullToRefreshArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A7841D6313E18E2D00131648 /* PullToRefreshArrow@2x.png */; };
 		A7841DA813E18E2E00131648 /* GHClipBoard.png in Resources */ = {isa = PBXBuildFile; fileRef = A7841D6513E18E2D00131648 /* GHClipBoard.png */; };
@@ -685,8 +683,6 @@
 		A7841D5C13E18E2D00131648 /* TabBarItemSelectedBackground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TabBarItemSelectedBackground@2x.png"; sourceTree = "<group>"; };
 		A7841D5E13E18E2D00131648 /* GHBackgroundImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GHBackgroundImage.png; sourceTree = "<group>"; };
 		A7841D5F13E18E2D00131648 /* GHBackgroundImage@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GHBackgroundImage@2x.png"; sourceTree = "<group>"; };
-		A7841D6013E18E2D00131648 /* GHDefaultTableViewBackgroundImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GHDefaultTableViewBackgroundImage.png; sourceTree = "<group>"; };
-		A7841D6113E18E2D00131648 /* GHDefaultTableViewBackgroundImage@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GHDefaultTableViewBackgroundImage@2x.png"; sourceTree = "<group>"; };
 		A7841D6213E18E2D00131648 /* PullToRefreshArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PullToRefreshArrow.png; sourceTree = "<group>"; };
 		A7841D6313E18E2D00131648 /* PullToRefreshArrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "PullToRefreshArrow@2x.png"; sourceTree = "<group>"; };
 		A7841D6513E18E2D00131648 /* GHClipBoard.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GHClipBoard.png; sourceTree = "<group>"; };
@@ -1930,8 +1926,6 @@
 			children = (
 				A7841D5E13E18E2D00131648 /* GHBackgroundImage.png */,
 				A7841D5F13E18E2D00131648 /* GHBackgroundImage@2x.png */,
-				A7841D6013E18E2D00131648 /* GHDefaultTableViewBackgroundImage.png */,
-				A7841D6113E18E2D00131648 /* GHDefaultTableViewBackgroundImage@2x.png */,
 				A7841D6213E18E2D00131648 /* PullToRefreshArrow.png */,
 				A7841D6313E18E2D00131648 /* PullToRefreshArrow@2x.png */,
 			);
@@ -3343,8 +3337,6 @@
 				A7841DA113E18E2E00131648 /* TabBarItemSelectedBackground@2x.png in Resources */,
 				A7841DA213E18E2E00131648 /* GHBackgroundImage.png in Resources */,
 				A7841DA313E18E2E00131648 /* GHBackgroundImage@2x.png in Resources */,
-				A7841DA413E18E2E00131648 /* GHDefaultTableViewBackgroundImage.png in Resources */,
-				A7841DA513E18E2E00131648 /* GHDefaultTableViewBackgroundImage@2x.png in Resources */,
 				A7841DA613E18E2E00131648 /* PullToRefreshArrow.png in Resources */,
 				A7841DA713E18E2E00131648 /* PullToRefreshArrow@2x.png in Resources */,
 				A7841DA813E18E2E00131648 /* GHClipBoard.png in Resources */,
