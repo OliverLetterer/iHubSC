@@ -10,6 +10,8 @@
 #import "iGithubAppDelegate.h"
 #import "ANAdvancedNavigationController.h"
 
+#warning make keychain submodule?
+
 @interface iGithubAppDelegate_iPad : iGithubAppDelegate <ANAdvancedNavigationControllerDelegate> {
     ANAdvancedNavigationController *_advancedNavigationController;
 }
