@@ -39,7 +39,7 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self 
                                              selector:@selector(authenticationManagerDidAuthenticateUserCallback:) 
-                                                 name:GHAPIAuthenticationManagerDidAuthenticateNewUserNotification 
+                                                 name:GHAPIAuthenticationManagerDidChangeAuthenticatedUserNotification 
                                                object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self 

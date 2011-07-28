@@ -110,12 +110,18 @@
 }
 
 - (void)accountButtonClicked:(UIBarButtonItem *)button {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Account", @"") 
-                                                     message:[NSString stringWithFormat:NSLocalizedString(@"You are logged in as: %@\nRemaining API calls for today: %d", @""), [GHAPIAuthenticationManager sharedInstance].username, [GHAPIBackgroundQueueV3 sharedInstance].remainingAPICalls ]
-                                                    delegate:self 
-                                           cancelButtonTitle:NSLocalizedString(@"Cancel", @"") 
-                                           otherButtonTitles:NSLocalizedString(@"Logout", @""), nil];
+    GHTableViewAlertView *alert = [[GHTableViewAlertView alloc] initWithTitle:NSLocalizedString(@"Accounts", @"") 
+                                                                      message:nil 
+                                                                     delegate:nil 
+                                                            cancelButtonTitle:NSLocalizedString(@"Cancel", @"") 
+                                                            otherButtonTitles:NSLocalizedString(@"Add", @""), nil];
     [alert show];
+//    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Account", @"") 
+//                                                     message:[NSString stringWithFormat:NSLocalizedString(@"You are logged in as: %@\nRemaining API calls for today: %d", @""), [GHAPIAuthenticationManager sharedInstance].username, [GHAPIBackgroundQueueV3 sharedInstance].remainingAPICalls ]
+//                                                    delegate:self 
+//                                           cancelButtonTitle:NSLocalizedString(@"Cancel", @"") 
+//                                           otherButtonTitles:NSLocalizedString(@"Logout", @""), nil];
+//    [alert show];
 }
 
 #pragma mark - instance methods

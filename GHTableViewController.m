@@ -258,7 +258,7 @@ static CGFloat wrapperViewHeight = 21.0f;
         self.cachedHeightsDictionary = [NSMutableDictionary dictionary];
         [[NSNotificationCenter defaultCenter] addObserver:self 
                                                  selector:@selector(authenticationManagerDidAuthenticateUserCallback:) 
-                                                     name:GHAPIAuthenticationManagerDidAuthenticateNewUserNotification 
+                                                     name:GHAPIAuthenticationManagerDidChangeAuthenticatedUserNotification 
                                                    object:nil];
         
         [[NSNotificationCenter defaultCenter] addObserver:self 

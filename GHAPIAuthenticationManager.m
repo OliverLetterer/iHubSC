@@ -7,8 +7,11 @@
 //
 
 #import "GHAPIAuthenticationManager.h"
+#import "GithubAPI.h"
+#import "SFHFKeychainUtils.h"
 
-NSString *const GHAPIAuthenticationManagerDidAuthenticateNewUserNotification = @"GHAuthenticationManagerDidAuthenticateNewUser";
+NSString *const GHAPIAuthenticationManagerDidChangeAuthenticatedUserNotification = @"GHAPIAuthenticationManagerDidChangeAuthenticatedUserNotification";
+NSString *const kGHAPIKeychainService = @"de.olettere.iGithub";
 
 @implementation GHAPIAuthenticationManager
 
@@ -29,7 +32,7 @@ NSString *const GHAPIAuthenticationManagerDidAuthenticateNewUserNotification = @
     self.username = username;
     self.password = password;
     
-    [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:GHAPIAuthenticationManagerDidAuthenticateNewUserNotification object:nil] ];
+    [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:GHAPIAuthenticationManagerDidChangeAuthenticatedUserNotification object:nil] ];
 }
 
 #pragma mark - Memory management
@@ -64,6 +67,30 @@ static GHAPIAuthenticationManager *_instance = nil;
 
 - (id)copyWithZone:(NSZone *)zone {
     return self;	
+}
+
+@end
+
+
+
+
+
+#pragma mark - GHAPIUserV3 additions
+
+@implementation GHAPIUserV3 (GHAPIAuthenticationManagerAdditions)
+
+- (NSString *)password {
+    return [SFHFKeychainUtils getPasswordForUsername:self.login 
+                                      andServiceName:kGHAPIKeychainService 
+                                               error:NULL];;
+}
+
+- (void)setPassword:(NSString *)password {
+    [SFHFKeychainUtils storeUsername:self.login 
+                         andPassword:password 
+                      forServiceName:kGHAPIKeychainService 
+                      updateExisting:YES 
+                               error:NULL];
 }
 
 @end
