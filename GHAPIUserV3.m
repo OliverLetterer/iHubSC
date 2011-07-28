@@ -31,6 +31,10 @@
     return self.blog != nil;
 }
 
+- (BOOL)isEqualToUser:(GHAPIUserV3 *)user {
+    return [self.login isEqualToString:user.login];
+}
+
 #pragma mark - Initialization
 
 - (id)initWithRawDictionary:(NSDictionary *)rawDictionary {

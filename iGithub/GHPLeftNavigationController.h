@@ -10,7 +10,7 @@
 #import "GHTableViewController.h"
 #import "GHPEdgedLineView.h"
 
-@interface GHPLeftNavigationController : GHTableViewController <UIAlertViewDelegate> {
+@interface GHPLeftNavigationController : GHTableViewController {
     GHPEdgedLineView *_lineView;
     UIView *_controllerView;
     

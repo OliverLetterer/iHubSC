@@ -13,9 +13,10 @@
 @interface GHAuthenticationAlertView : UIAlertView {
 @private
     BOOL _hasAuthenticatedUser;
+    BOOL _showCancelButton;
 }
 
-- (id)initWithDelegate:(id)delegate;
+- (id)initWithDelegate:(id)delegate showCancelButton:(BOOL)showCancelButton;
 
 - (void)setLoginButtonEnabled:(BOOL)enabled;
 

@@ -40,6 +40,8 @@
     GHAPIUserPlanV3 *_plan;
 }
 
+- (BOOL)isEqualToUser:(GHAPIUserV3 *)user;
+
 @property (nonatomic, copy) NSString *login;
 @property (nonatomic, copy) NSNumber *ID;
 @property (nonatomic, copy) NSString *avatarURL;

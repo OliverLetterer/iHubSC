@@ -20,8 +20,9 @@ static BOOL _isAutheticationAlertViewVisible = NO;
     return nil;
 }
 
-- (id)initWithDelegate:(id)delegate {
-    if (self = [super initWithTitle:NSLocalizedString(@"Login to GitHub", @"") message:nil delegate:delegate cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"Login", @""), nil]) {
+- (id)initWithDelegate:(id)delegate showCancelButton:(BOOL)showCancelButton {
+    _showCancelButton = showCancelButton;
+    if (self = [super initWithTitle:NSLocalizedString(@"Login to GitHub", @"") message:nil delegate:delegate cancelButtonTitle:showCancelButton ? NSLocalizedString(@"Cancel", @"") : nil otherButtonTitles:NSLocalizedString(@"Login", @""), nil]) {
         // Initialization code here.
         self.alertViewStyle = UIAlertViewStyleLoginAndPasswordInput;
     }
@@ -38,7 +39,7 @@ static BOOL _isAutheticationAlertViewVisible = NO;
 }
 
 - (void)dismissWithClickedButtonIndex:(NSInteger)buttonIndex animated:(BOOL)animated {
-    if (!_hasAuthenticatedUser) {
+    if (!_hasAuthenticatedUser && (buttonIndex == 1 || !_showCancelButton)) {
         [self setLoginButtonEnabled:NO];
         NSString *username = [self textFieldAtIndex:0].text;
         NSString *password = [self textFieldAtIndex:1].text;

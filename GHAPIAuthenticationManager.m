@@ -13,7 +13,7 @@
 NSString *const GHAPIAuthenticationManagerDidChangeAuthenticatedUserNotification = @"GHAPIAuthenticationManagerDidChangeAuthenticatedUserNotification";
 NSString *const kGHAPIKeychainService = @"de.olettere.iGithub";
 NSString *const kGHAPIAuthenticationManagerUsersArrayFileName = @"GHAPIAuthenticationManagerUsersArray.plist";
-NSString *const kGHAPIAuthenticationManagerAuthenticatedUserFileName = @"kGHAPIAuthenticationManagerAuthenticatedUser.plist";
+NSString *const kGHAPIAuthenticationManagerLastAuthenticatedUserNumberKey = @"kGHAPIAuthenticationManagerLastAuthenticatedUserNumberKey";
 
 @interface GHAPIAuthenticationManager () {
 @private
@@ -62,24 +62,24 @@ NSString *const kGHAPIAuthenticationManagerAuthenticatedUserFileName = @"kGHAPIA
 
 - (void)_saveUserState {
     NSURL *arrayURL = [self.saveURL URLByAppendingPathComponent:kGHAPIAuthenticationManagerUsersArrayFileName];
-    NSURL *userURL = [self.saveURL URLByAppendingPathComponent:kGHAPIAuthenticationManagerAuthenticatedUserFileName];
     
     NSData *arrayData = [NSKeyedArchiver archivedDataWithRootObject:_usersArray];
-    NSData *userData = [NSKeyedArchiver archivedDataWithRootObject:_authenticatedUser];
     
     [arrayData writeToURL:arrayURL options:NSDataWritingFileProtectionNone error:nil];
-    [userData writeToURL:userURL options:NSDataWritingFileProtectionNone error:nil];
+    [[NSUserDefaults standardUserDefaults] setInteger:[_usersArray indexOfObject:_authenticatedUser] forKey:kGHAPIAuthenticationManagerLastAuthenticatedUserNumberKey];
 }
 
 - (void)_loadUserState {
     NSURL *arrayURL = [self.saveURL URLByAppendingPathComponent:kGHAPIAuthenticationManagerUsersArrayFileName];
-    NSURL *userURL = [self.saveURL URLByAppendingPathComponent:kGHAPIAuthenticationManagerAuthenticatedUserFileName];
     
     NSData *arrayData = [NSData dataWithContentsOfURL:arrayURL];
-    NSData *userData = [NSData dataWithContentsOfURL:userURL];
     
     _usersArray = [NSKeyedUnarchiver unarchiveObjectWithData:arrayData];
-    _authenticatedUser = [NSKeyedUnarchiver unarchiveObjectWithData:userData];
+    NSInteger index = [[NSUserDefaults standardUserDefaults] integerForKey:kGHAPIAuthenticationManagerLastAuthenticatedUserNumberKey];
+    @try {
+        _authenticatedUser = [_usersArray objectAtIndex:index];
+    }
+    @catch (NSException *exception) { }
 }
 
 #pragma mark - Initialization
@@ -104,6 +104,15 @@ NSString *const kGHAPIAuthenticationManagerAuthenticatedUserFileName = @"kGHAPIA
 
 - (void)removeAuthenticatedUser:(GHAPIUserV3 *)user {
     [_usersArray removeObject:user];
+    [self _saveUserState];
+    
+    if ([user isEqualToUser:self.authenticatedUser]) {
+        GHAPIUserV3 *newUser = nil;
+        if (_usersArray.count > 0) {
+            newUser = [_usersArray objectAtIndex:0];
+        }
+        self.authenticatedUser = newUser;
+    }
 }
 
 @end

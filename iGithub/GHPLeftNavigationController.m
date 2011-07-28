@@ -17,6 +17,7 @@
 #import "GHPSearchViewController.h"
 #import "GHPOwnersNewsFeedViewController.h"
 #import "GHPUsersNewsFeedViewController.h"
+#import "GHManageAuthenticatedUsersAlertView.h"
 
 #import "GHPUserViewController.h"
 
@@ -57,6 +58,12 @@
     
     if (self.isViewLoaded) {
         [self.tableView reloadData];
+        
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:kUITableViewSectionNewsFeed];
+        [self.tableView selectRowAtIndexPath:indexPath 
+                                    animated:NO 
+                              scrollPosition:UITableViewScrollPositionNone];
+        [self tableView:self.tableView didSelectRowAtIndexPath:indexPath];
     }
 }
 
@@ -84,11 +91,11 @@
 }
 
 - (void)gearButtonClicked:(UIButton *)button {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Account", @"") 
-                                                     message:[NSString stringWithFormat:NSLocalizedString(@"You are logged in as: %@\nRemaining API calls for today: %d", @""), [GHAPIAuthenticationManager sharedInstance].authenticatedUser.login, [GHAPIBackgroundQueueV3 sharedInstance].remainingAPICalls ]
-                                                    delegate:self 
-                                           cancelButtonTitle:NSLocalizedString(@"Cancel", @"") 
-                                           otherButtonTitles:NSLocalizedString(@"Logout", @""), nil];
+    GHManageAuthenticatedUsersAlertView *alert = [[GHManageAuthenticatedUsersAlertView alloc] initWithTitle:nil 
+                                                                                                    message:nil 
+                                                                                                   delegate:nil 
+                                                                                          cancelButtonTitle:nil 
+                                                                                          otherButtonTitles:nil];
     [alert show];
 }
 
@@ -332,19 +339,6 @@
     frame = self.controllerView.frame;
     frame.origin.y = scrollView.bounds.origin.y + CGRectGetHeight(scrollView.bounds) - 44.0f;
     self.controllerView.frame = frame;
-}
-
-#pragma mark - memory management
-
-
-#pragma mark - UIAlertViewDelegate
-
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-    if (buttonIndex == 1) {
-        // Logout clicked
-        [self invalidadUserData];
-        [self handleError:[NSError errorWithDomain:@"" code:3 userInfo:nil] ];
-    }
 }
 
 #pragma mark - Keyed Archiving

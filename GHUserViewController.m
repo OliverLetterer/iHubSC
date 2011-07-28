@@ -18,6 +18,7 @@
 #import "GHGistViewController.h"
 #import "ANNotificationQueue.h"
 #import "GHIssueViewController.h"
+#import "GHManageAuthenticatedUsersAlertView.h"
 
 #define kUITableViewSectionUserData             0
 #define kUITableViewSectionEMail                1
@@ -110,17 +111,11 @@
 }
 
 - (void)accountButtonClicked:(UIBarButtonItem *)button {
-//    GHTableViewAlertView *alert = [[GHTableViewAlertView alloc] initWithTitle:NSLocalizedString(@"Accounts", @"") 
-//                                                                      message:nil 
-//                                                                     delegate:nil 
-//                                                            cancelButtonTitle:NSLocalizedString(@"Cancel", @"") 
-//                                                            otherButtonTitles:NSLocalizedString(@"Add", @""), nil];
-//    [alert show];
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Account", @"") 
-                                                     message:[NSString stringWithFormat:NSLocalizedString(@"You are logged in as: %@\nRemaining API calls for today: %d", @""), [GHAPIAuthenticationManager sharedInstance].authenticatedUser.login, [GHAPIBackgroundQueueV3 sharedInstance].remainingAPICalls ]
-                                                    delegate:self 
-                                           cancelButtonTitle:NSLocalizedString(@"Cancel", @"") 
-                                           otherButtonTitles:NSLocalizedString(@"Logout", @""), nil];
+    GHManageAuthenticatedUsersAlertView *alert = [[GHManageAuthenticatedUsersAlertView alloc] initWithTitle:nil 
+                                                                      message:nil 
+                                                                     delegate:nil 
+                                                            cancelButtonTitle:nil 
+                                                            otherButtonTitles:nil];
     [alert show];
 }
 
@@ -1058,16 +1053,6 @@
                           withRowAnimation:UITableViewRowAnimationTop];
     
     [self.navigationController popViewControllerAnimated:YES];
-}
-
-#pragma mark - UIAlertViewDelegate
-
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-    if (buttonIndex == 1) {
-        // Logout clicked
-        [self invalidadUserData];
-        [self handleError:[NSError errorWithDomain:@"" code:3 userInfo:nil] ];
-    }
 }
 
 #pragma mark - Keyed Archiving

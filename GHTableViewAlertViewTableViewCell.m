@@ -23,16 +23,21 @@
 		_activityIndicatorView.hidesWhenStopped = YES;
 		[_activityIndicatorView stopAnimating];
 		
-		_seperatorView = [[GHTableViewAlertViewTableViewCellSeperatorView alloc] initWithFrame:CGRectMake(0, self.bounds.size.height-2.0, self.bounds.size.width, 2.0)];
+		_seperatorView = [[GHTableViewAlertViewTableViewCellSeperatorView alloc] initWithFrame:CGRectMake(0.0f, self.bounds.size.height-2.0f, self.bounds.size.width, 2.0f)];
 		[self addSubview:_seperatorView];
+        
+        self.textLabel.font = [UIFont boldSystemFontOfSize:15.0f];
+		self.backgroundView.backgroundColor = [UIColor clearColor];
 	}
     return self;
 }
 
 - (void)layoutSubviews {
 	[super layoutSubviews];
-	_activityIndicatorView.center = CGPointMake(self.bounds.size.width - _activityIndicatorView.bounds.size.width - 5.0, self.bounds.size.height/2.0);
-	_seperatorView.frame = CGRectMake(0, self.bounds.size.height-2.0, self.bounds.size.width, 2.0);
+	_activityIndicatorView.center = CGPointMake(self.bounds.size.width - _activityIndicatorView.bounds.size.width - 5.0f, self.bounds.size.height/2.0f);
+	_seperatorView.frame = CGRectMake(0.0f, self.bounds.size.height-2.0f, self.bounds.size.width, 2.0f);
+    
+    self.imageView.frame = CGRectInset(self.imageView.frame, 4.0f, 4.0f);
 }
 
 - (void)prepareForReuse {

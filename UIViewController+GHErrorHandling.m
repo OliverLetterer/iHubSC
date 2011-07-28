@@ -23,7 +23,7 @@
         
         if (![GHAPIAuthenticationManager sharedInstance].authenticatedUser.login || [[GHAPIAuthenticationManager sharedInstance].authenticatedUser.login isEqualToString:@""]) {
 #warning change account here
-            GHAuthenticationAlertView *alert = [[GHAuthenticationAlertView alloc] initWithDelegate:nil];
+            GHAuthenticationAlertView *alert = [[GHAuthenticationAlertView alloc] initWithDelegate:nil showCancelButton:NO];
             [alert show];
             return;
         }
@@ -32,7 +32,7 @@
             // authentication needed
             [self invalidadUserData];
             #warning change account here
-            GHAuthenticationAlertView *alert = [[GHAuthenticationAlertView alloc] initWithDelegate:nil];
+            GHAuthenticationAlertView *alert = [[GHAuthenticationAlertView alloc] initWithDelegate:nil showCancelButton:NO];
             [alert show];
         } else {
             [[ANNotificationQueue sharedInstance] detatchErrorNotificationWithTitle:NSLocalizedString(@"Error", @"") 

@@ -256,6 +256,7 @@ static CGFloat wrapperViewHeight = 21.0f;
         _myTableViewStyle = style;
         // Custom initialization
         self.cachedHeightsDictionary = [NSMutableDictionary dictionary];
+        
         [[NSNotificationCenter defaultCenter] addObserver:self 
                                                  selector:@selector(authenticationManagerDidAuthenticateUserCallback:) 
                                                      name:GHAPIAuthenticationManagerDidChangeAuthenticatedUserNotification 
@@ -593,6 +594,21 @@ static CGFloat wrapperViewHeight = 21.0f;
         _lastContentOffset = [decoder decodeCGPointForKey:@"lastContentOffset"];
         _lastSelectedIndexPath = [decoder decodeObjectForKey:@"lastSelectedIndexPath"];
         _sectionsStateArray = [decoder decodeObjectForKey:@"sectionsStateArray"];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self 
+                                                 selector:@selector(authenticationManagerDidAuthenticateUserCallback:) 
+                                                     name:GHAPIAuthenticationManagerDidChangeAuthenticatedUserNotification 
+                                                   object:nil];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self 
+                                                 selector:@selector(applicationWillEnterForegroundCallback:) 
+                                                     name:UIApplicationWillEnterForegroundNotification 
+                                                   object:nil];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self 
+                                                 selector:@selector(applicationDidEnterBackgroundCallback:) 
+                                                     name:UIApplicationDidEnterBackgroundNotification 
+                                                   object:nil];
     }
     return self;
 }

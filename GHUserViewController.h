@@ -12,9 +12,8 @@
 #import "GHRepositoryViewController.h"
 #import "UIExpandableTableView.h"
 #import "GithubAPI.h"
-#import "GHTableViewAlertView.h"
 
-@interface GHUserViewController : GHTableViewController <GHCreateRepositoryViewControllerDelegate, GHSingleRepositoryViewControllerDelegate, UIAlertViewDelegate> {
+@interface GHUserViewController : GHTableViewController <GHCreateRepositoryViewControllerDelegate, GHSingleRepositoryViewControllerDelegate> {
 @private
     NSString *_username;
     GHAPIUserV3 *_user;

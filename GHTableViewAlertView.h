@@ -7,6 +7,8 @@
 //  
 
 #import <Foundation/Foundation.h>
+#import "GHTableViewAlertViewTableViewBackgroundView.h"
+#import "GHTableViewAlertViewTableViewCell.h"
 
 @interface GHTableViewAlertView : UIAlertView {
 	UITableView *_tableView;
