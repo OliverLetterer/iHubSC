@@ -8,8 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-#warning make submodule
-
 @interface GHPieChartProgressView : UIView {
 @private
     CGFloat _progress;
