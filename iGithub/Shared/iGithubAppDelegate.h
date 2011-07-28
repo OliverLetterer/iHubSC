@@ -10,7 +10,6 @@
 #import <CoreData/CoreData.h>
 
 #warning better organization support
-#warning search background does not match new style
 
 @interface iGithubAppDelegate : NSObject <UIApplicationDelegate> {
     NSManagedObjectContext *_managedObjectContext;

@@ -14,7 +14,6 @@
 #import "GHTableViewCellWithLinearGradientBackgroundView.h"
 
 @implementation GHSearchViewController
-
 @synthesize searchBar=_searchBar, searchString=_searchString;
 
 #pragma mark - Initialization
@@ -31,10 +30,11 @@
 #pragma mark - View lifecycle
 
 - (void)loadView {
-    self.view = [[GHLinearGradientBackgroundView alloc] initWithFrame:CGRectZero];
+    [super loadView];
     
-    UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"GHDefaultTableViewBackgroundImage.png"] ];
+    UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"GHBackgroundImage.png"] ];
     [self.view addSubview:imageView];
+    imageView.center = CGPointApplyAffineTransform(imageView.center, CGAffineTransformMakeTranslation(0.0f, 2.0f));
     
     self.searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0, 44.0)];
     self.searchBar.delegate = self;
@@ -113,7 +113,7 @@
 #pragma mark - UISearchDisplayDelegate
 
 - (void)searchDisplayController:(UISearchDisplayController *)controller didLoadSearchResultsTableView:(UITableView *)tableView {
-    tableView.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"GHDefaultTableViewBackgroundImage.png"] ];
+    tableView.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"GHBackgroundImage.png"] ];
     tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 }
 
