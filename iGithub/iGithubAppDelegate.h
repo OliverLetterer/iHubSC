@@ -12,6 +12,7 @@
 #warning better organization support
 #warning take a look into "applied fork commits"
 #warning search background does not match new style
+#warning manage multiple user accounts
 
 @interface iGithubAppDelegate : NSObject <UIApplicationDelegate> {
     NSManagedObjectContext *_managedObjectContext;
