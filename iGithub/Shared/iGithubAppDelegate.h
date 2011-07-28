@@ -11,6 +11,8 @@
 
 #warning better organization support
 #warning add a calendar to edit due dates
+#warning images for users on iPhone
+#warning update milestone and all other related issue data
 
 @interface iGithubAppDelegate : NSObject <UIApplicationDelegate> {
     NSManagedObjectContext *_managedObjectContext;
