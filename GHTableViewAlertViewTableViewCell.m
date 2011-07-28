@@ -23,8 +23,8 @@
 		_activityIndicatorView.hidesWhenStopped = YES;
 		[_activityIndicatorView stopAnimating];
 		
-		_seperatorView = [[GHTableViewAlertViewTableViewCellSeperatorView alloc] initWithFrame:CGRectMake(0.0f, self.bounds.size.height-2.0f, self.bounds.size.width, 2.0f)];
-		[self addSubview:_seperatorView];
+		_seperatorView = [[GHTableViewAlertViewTableViewCellSeperatorView alloc] initWithFrame:CGRectZero];
+		[self.contentView addSubview:_seperatorView];
         
         self.textLabel.font = [UIFont boldSystemFontOfSize:15.0f];
 		self.backgroundView.backgroundColor = [UIColor clearColor];

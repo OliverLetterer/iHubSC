@@ -21,10 +21,10 @@
 	CGContextFillRect(ctx, self.bounds);
 	
 	[[UIColor lightGrayColor] setStroke];
-	CGContextStrokeRect(ctx, CGRectMake(0.0, -0.5, self.bounds.size.width, 1.0));
+	CGContextStrokeRect(ctx, CGRectMake(0.0f, -0.5f, self.bounds.size.width, 1.0f));
 	
 	[[UIColor whiteColor] setStroke];
-	CGContextStrokeRect(ctx, CGRectMake(0.0, 1.5, self.bounds.size.width, 1.0));
+	CGContextStrokeRect(ctx, CGRectMake(0.0f, 1.5f, self.bounds.size.width, 1.0f));
 }
 
 @end

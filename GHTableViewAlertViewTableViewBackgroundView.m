@@ -11,33 +11,6 @@
 
 @implementation GHTableViewAlertViewTableViewBackgroundView
 
-
-//- (id)initWithFrame:(CGRect)frame {
-//    
-//    self = [super initWithFrame:frame];
-//    if (self) {
-//        // Initialization code.
-//		// top shadow
-//		UIColor *darkShadowColor = [UIColor colorWithWhite:0.0 alpha:0.75];
-//		UIColor *lightShadowColor = [UIColor colorWithWhite:0.0 alpha:0.0];
-//		
-//		
-//		CAGradientLayer *gradientLayer = [CAGradientLayer layer];
-//		gradientLayer.colors = [NSArray arrayWithObjects:(id)darkShadowColor.CGColor, (id)lightShadowColor.CGColor, nil];
-//		gradientLayer.locations = [NSArray arrayWithObjects:[NSNumber numberWithFloat:0.0], [NSNumber numberWithFloat:1.0], nil];
-//		gradientLayer.frame = CGRectMake(0, 0, frame.size.width, 5.0);
-//		[self.layer addSublayer:gradientLayer];
-//		
-//		gradientLayer = [CAGradientLayer layer];
-//		gradientLayer.colors = [NSArray arrayWithObjects:(id)darkShadowColor.CGColor, (id)lightShadowColor.CGColor, nil];
-//		gradientLayer.locations = [NSArray arrayWithObjects:[NSNumber numberWithFloat:0.0], [NSNumber numberWithFloat:1.0], nil];
-//		[gradientLayer setAffineTransform:CGAffineTransformMakeRotation(M_PI/180.0*180.0)];
-//		gradientLayer.frame = CGRectMake(0, self.frame.size.height-2.0, frame.size.width, 5.0);
-//		[self.layer addSublayer:gradientLayer];
-//    }
-//    return self;
-//}
-
 - (void)setFrame:(CGRect)frame {
 	[super setFrame:frame];
 	[super setNeedsDisplay];
