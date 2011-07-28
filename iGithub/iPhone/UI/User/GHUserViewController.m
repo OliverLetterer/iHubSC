@@ -220,7 +220,7 @@
     }
     
     if ([[self.navigationController viewControllers] objectAtIndex:0] == self && self.hasAdministrationRights) {
-        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Account", @"") 
+        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Accounts", @"") 
                                                                                   style:UIBarButtonItemStyleBordered 
                                                                                  target:self action:@selector(accountButtonClicked:)];
     }
