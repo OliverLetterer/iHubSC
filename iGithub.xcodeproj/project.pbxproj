@@ -41,7 +41,7 @@
 		A757970C13E1A030008670B0 /* GHPLabelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A757966F13E1A030008670B0 /* GHPLabelViewController.m */; };
 		A757970D13E1A030008670B0 /* GHPLabelTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A757967213E1A030008670B0 /* GHPLabelTableViewCell.m */; };
 		A757970E13E1A030008670B0 /* GHPMileStonesOnRepositoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A757967613E1A030008670B0 /* GHPMileStonesOnRepositoryViewController.m */; };
-		A757970F13E1A030008670B0 /* GHPMileStonesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A757967813E1A030008670B0 /* GHPMileStonesTableViewController.m */; };
+		A757970F13E1A030008670B0 /* GHPMileStonesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A757967813E1A030008670B0 /* GHPMileStonesViewController.m */; };
 		A757971013E1A030008670B0 /* GHPMilestoneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A757967B13E1A030008670B0 /* GHPMilestoneViewController.m */; };
 		A757971213E1A030008670B0 /* GHPMileStoneTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A757968013E1A030008670B0 /* GHPMileStoneTableViewCell.m */; };
 		A757971313E1A030008670B0 /* GHPNewsFeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A757968313E1A030008670B0 /* GHPNewsFeedViewController.m */; };
@@ -454,8 +454,8 @@
 		A757967213E1A030008670B0 /* GHPLabelTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPLabelTableViewCell.m; sourceTree = "<group>"; };
 		A757967513E1A030008670B0 /* GHPMileStonesOnRepositoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPMileStonesOnRepositoryViewController.h; sourceTree = "<group>"; };
 		A757967613E1A030008670B0 /* GHPMileStonesOnRepositoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPMileStonesOnRepositoryViewController.m; sourceTree = "<group>"; };
-		A757967713E1A030008670B0 /* GHPMileStonesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPMileStonesTableViewController.h; sourceTree = "<group>"; };
-		A757967813E1A030008670B0 /* GHPMileStonesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPMileStonesTableViewController.m; sourceTree = "<group>"; };
+		A757967713E1A030008670B0 /* GHPMileStonesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; path = GHPMileStonesViewController.h; sourceTree = "<group>"; };
+		A757967813E1A030008670B0 /* GHPMileStonesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPMileStonesViewController.m; sourceTree = "<group>"; };
 		A757967A13E1A030008670B0 /* GHPMilestoneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPMilestoneViewController.h; sourceTree = "<group>"; };
 		A757967B13E1A030008670B0 /* GHPMilestoneViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPMilestoneViewController.m; sourceTree = "<group>"; };
 		A757967F13E1A030008670B0 /* GHPMileStoneTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPMileStoneTableViewCell.h; sourceTree = "<group>"; };
@@ -1414,8 +1414,8 @@
 			children = (
 				A757967513E1A030008670B0 /* GHPMileStonesOnRepositoryViewController.h */,
 				A757967613E1A030008670B0 /* GHPMileStonesOnRepositoryViewController.m */,
-				A757967713E1A030008670B0 /* GHPMileStonesTableViewController.h */,
-				A757967813E1A030008670B0 /* GHPMileStonesTableViewController.m */,
+				A757967713E1A030008670B0 /* GHPMileStonesViewController.h */,
+				A757967813E1A030008670B0 /* GHPMileStonesViewController.m */,
 			);
 			path = GHPMilestonesViewController;
 			sourceTree = "<group>";
@@ -3634,7 +3634,7 @@
 				A757970C13E1A030008670B0 /* GHPLabelViewController.m in Sources */,
 				A757970D13E1A030008670B0 /* GHPLabelTableViewCell.m in Sources */,
 				A757970E13E1A030008670B0 /* GHPMileStonesOnRepositoryViewController.m in Sources */,
-				A757970F13E1A030008670B0 /* GHPMileStonesTableViewController.m in Sources */,
+				A757970F13E1A030008670B0 /* GHPMileStonesViewController.m in Sources */,
 				A757971013E1A030008670B0 /* GHPMilestoneViewController.m in Sources */,
 				A757971213E1A030008670B0 /* GHPMileStoneTableViewCell.m in Sources */,
 				A757971313E1A030008670B0 /* GHPNewsFeedViewController.m in Sources */,

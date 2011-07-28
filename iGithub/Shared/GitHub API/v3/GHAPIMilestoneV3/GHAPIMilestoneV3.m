@@ -14,7 +14,9 @@
 @synthesize closedIssues=_closedIssues, createdAt=_createdAt, creator=_creator, milestoneDescription=_milestoneDescription, dueOn=_dueOn, number=_number, openIssues=_openIssues, state=_state, title=_title, URL=_URL;
 
 - (CGFloat)progress {
-    return [self.closedIssues floatValue] / ([self.closedIssues floatValue] + [self.openIssues floatValue]);
+    CGFloat nenner = ([self.closedIssues floatValue] + [self.openIssues floatValue]);
+    CGFloat zaehler = [self.closedIssues floatValue];
+    return nenner == 0.0f ? 0.0f : zaehler/nenner;
 }
 
 - (NSString *)dueFormattedString {

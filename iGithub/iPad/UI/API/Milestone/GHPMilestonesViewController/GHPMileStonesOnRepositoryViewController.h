@@ -7,9 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "GHPMileStonesTableViewController.h"
+#import "GHPMileStonesViewController.h"
 
-@interface GHPMileStonesOnRepositoryViewController : GHPMileStonesTableViewController {
+@interface GHPMileStonesOnRepositoryViewController : GHPMileStonesViewController {
 @private
     
 }
