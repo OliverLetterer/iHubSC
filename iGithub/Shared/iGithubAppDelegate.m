@@ -60,7 +60,8 @@
 #pragma mark - Serializations
 
 - (void)nowSerializeState {
-    DLog(@"%d", [self serializeStateInDictionary:self.serializedStateDictionary]);
+    BOOL didSerialize = [self serializeStateInDictionary:self.serializedStateDictionary];
+    DLog(@"%d", didSerialize);
 }
 
 - (BOOL)serializeStateInDictionary:(NSMutableDictionary *)dictionary {
