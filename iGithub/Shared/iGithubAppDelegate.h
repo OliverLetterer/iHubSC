@@ -10,6 +10,7 @@
 #import <CoreData/CoreData.h>
 
 #warning better organization support
+#warning add a calendar to edit due dates
 
 @interface iGithubAppDelegate : NSObject <UIApplicationDelegate> {
     NSManagedObjectContext *_managedObjectContext;
