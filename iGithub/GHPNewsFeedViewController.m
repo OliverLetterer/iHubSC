@@ -136,8 +136,7 @@
         GHIssuesCommentPayload *payload = (GHIssuesCommentPayload *)item.payload;
         description = [NSString stringWithFormat:NSLocalizedString(@"commented on Issue %@", @""), payload.issueID];
     } else if(item.payload.type == GHPayloadForkApplyEvent) {
-        GHForkApplyEventPayload *payload = (GHForkApplyEventPayload *)item.payload;
-        description = [NSString stringWithFormat:NSLocalizedString(@"applied fork commits:\n\n%@", @""), payload.commit];
+        description = NSLocalizedString(@"applied fork commits", @"");
     } else if (item.payload.type == GHPayloadPublicEvent) {
         description = NSLocalizedString(@"open sourced", @"");
     }

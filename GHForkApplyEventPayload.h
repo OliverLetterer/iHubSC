@@ -12,13 +12,13 @@
 // :user applied fork commits
 @interface GHForkApplyEventPayload : GHPayload {
 @private
-    NSString *_commit;
+    NSString *_before;
     NSString *_head;
-    NSString *_original;
+    NSString *_after;
 }
 
-@property (nonatomic, copy) NSString *commit;
+@property (nonatomic, copy) NSString *before;
 @property (nonatomic, copy) NSString *head;
-@property (nonatomic, copy) NSString *original;
+@property (nonatomic, copy) NSString *after;
 
 @end
