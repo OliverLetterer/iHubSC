@@ -16,7 +16,8 @@ extern NSString *const GHAPIAuthenticationManagerDidChangeAuthenticatedUserNotif
     NSString *_username;
     NSString *_password;
     
-    NSArray *_usersArray;
+    NSMutableArray *_usersArray;
+    GHAPIUserV3 *_authenticatedUser;
 }
 
 @property (nonatomic, copy) NSString *username;
@@ -28,6 +29,7 @@ extern NSString *const GHAPIAuthenticationManagerDidChangeAuthenticatedUserNotif
 - (void)removeAuthenticatedUser:(GHAPIUserV3 *)user;
 
 @property (nonatomic, retain) GHAPIUserV3 *authenticatedUser;
+@property (nonatomic, readonly) NSArray *usersArray;
 
 
 @end

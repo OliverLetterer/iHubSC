@@ -12,16 +12,84 @@
 
 NSString *const GHAPIAuthenticationManagerDidChangeAuthenticatedUserNotification = @"GHAPIAuthenticationManagerDidChangeAuthenticatedUserNotification";
 NSString *const kGHAPIKeychainService = @"de.olettere.iGithub";
+NSString *const kGHAPIAuthenticationManagerUsersArrayFileName = @"GHAPIAuthenticationManagerUsersArray.plist";
+NSString *const kGHAPIAuthenticationManagerAuthenticatedUserFileName = @"kGHAPIAuthenticationManagerAuthenticatedUser.plist";
+
+@interface GHAPIAuthenticationManager () {
+@private
+    
+}
+
+@property (nonatomic, readonly) NSURL *saveURL;
+
+- (void)_saveUserState;
+- (void)_loadUserState;
+
+@end
 
 @implementation GHAPIAuthenticationManager
-
 @synthesize username=_username, password=_password;
+@synthesize authenticatedUser=_authenticatedUser;
+
+#pragma mark - Setters and getters
+
+- (NSArray *)usersArray {
+    return [_usersArray copy];
+}
+
+- (void)setAuthenticatedUser:(GHAPIUserV3 *)authenticatedUser {
+    if (![_usersArray containsObject:authenticatedUser]) {
+        DLog(@"_usersArray (%@) does not contain authenticatedUser(%@)", _usersArray, authenticatedUser);
+        return;
+    }
+    
+    if (authenticatedUser != _authenticatedUser) {
+        _authenticatedUser = authenticatedUser;
+        
+        [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:GHAPIAuthenticationManagerDidChangeAuthenticatedUserNotification object:nil] ];
+    }
+}
+
+- (NSURL *)saveURL {
+    NSURL *libraryURL = [[NSFileManager defaultManager] URLForDirectory:NSLibraryDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:YES error:NULL];
+    NSString *subDirectory = @"GHAPIAuthenticationManager";
+    libraryURL = [libraryURL URLByAppendingPathComponent:subDirectory isDirectory:YES];
+    [[NSFileManager defaultManager] createDirectoryAtURL:libraryURL withIntermediateDirectories:YES attributes:nil error:nil];
+    return libraryURL;
+}
+
+#pragma mark - private
+
+- (void)_saveUserState {
+    NSURL *arrayURL = [self.saveURL URLByAppendingPathComponent:kGHAPIAuthenticationManagerUsersArrayFileName];
+    NSURL *userURL = [self.saveURL URLByAppendingPathComponent:kGHAPIAuthenticationManagerAuthenticatedUserFileName];
+    
+    NSData *arrayData = [NSKeyedArchiver archivedDataWithRootObject:_usersArray];
+    NSData *userData = [NSKeyedArchiver archivedDataWithRootObject:_authenticatedUser];
+    
+    [arrayData writeToURL:arrayURL options:NSDataWritingFileProtectionNone error:nil];
+    [userData writeToURL:userURL options:NSDataWritingFileProtectionNone error:nil];
+}
+
+- (void)_loadUserState {
+    NSURL *arrayURL = [self.saveURL URLByAppendingPathComponent:kGHAPIAuthenticationManagerUsersArrayFileName];
+    NSURL *userURL = [self.saveURL URLByAppendingPathComponent:kGHAPIAuthenticationManagerAuthenticatedUserFileName];
+    
+    NSData *arrayData = [NSData dataWithContentsOfURL:arrayURL];
+    NSData *userData = [NSData dataWithContentsOfURL:userURL];
+    
+    _usersArray = [NSKeyedUnarchiver unarchiveObjectWithData:arrayData];
+    _authenticatedUser = [NSKeyedUnarchiver unarchiveObjectWithData:userData];
+}
 
 #pragma mark - Initialization
 
 - (id)init {
     if ((self = [super init])) {
-        
+        [self _loadUserState];
+        if (!_usersArray) {
+            _usersArray = [NSMutableArray array];
+        }
     }
     return self;
 }
@@ -35,8 +103,20 @@ NSString *const kGHAPIKeychainService = @"de.olettere.iGithub";
     [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:GHAPIAuthenticationManagerDidChangeAuthenticatedUserNotification object:nil] ];
 }
 
-#pragma mark - Memory management
+- (void)addAuthenticatedUser:(GHAPIUserV3 *)user password:(NSString *)password {
+    user.password = password;
+    [_usersArray addObject:user];
+    self.authenticatedUser = user;
+}
 
+- (void)removeAuthenticatedUser:(GHAPIUserV3 *)user {
+    [_usersArray removeObject:user];
+    GHAPIUserV3 *newUser = nil;
+    if (_usersArray.count > 0) {
+        newUser = [_usersArray objectAtIndex:0];
+    }
+    self.authenticatedUser = nil;
+}
 
 @end
 
