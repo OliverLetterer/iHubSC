@@ -203,26 +203,17 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-}
-
-- (void)viewDidUnload {
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
+    
     if (self.hasAdministrationRights) {
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd 
-                                                                                                target:self 
-                                                                                                action:@selector(createRepositoryButtonClicked:)];
+                                                                                               target:self 
+                                                                                               action:@selector(createRepositoryButtonClicked:)];
     }
     
     if ([[self.navigationController viewControllers] objectAtIndex:0] == self && self.hasAdministrationRights) {
         self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Accounts", @"") 
-                                                                                  style:UIBarButtonItemStyleBordered 
-                                                                                 target:self action:@selector(accountButtonClicked:)];
+                                                                                 style:UIBarButtonItemStyleBordered 
+                                                                                target:self action:@selector(accountButtonClicked:)];
     }
 }
 
