@@ -176,7 +176,6 @@
 		A7841D0913E189B200131648 /* GHTableViewAlertViewTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841D0413E189B200131648 /* GHTableViewAlertViewTableViewCell.m */; };
 		A7841D0A13E189B200131648 /* GHTableViewAlertViewTableViewCellSeperatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841D0613E189B200131648 /* GHTableViewAlertViewTableViewCellSeperatorView.m */; };
 		A7841D7F13E18E2D00131648 /* UIBarButtonSystemItemAction.png in Resources */ = {isa = PBXBuildFile; fileRef = A7841D3513E18E2D00131648 /* UIBarButtonSystemItemAction.png */; };
-		A7841D8013E18E2D00131648 /* Changelog.txt in Resources */ = {isa = PBXBuildFile; fileRef = A7841D3613E18E2D00131648 /* Changelog.txt */; };
 		A7841D8113E18E2D00131648 /* UITableViewCellAccessoryDisclosureIndicator.PNG in Resources */ = {isa = PBXBuildFile; fileRef = A7841D3813E18E2D00131648 /* UITableViewCellAccessoryDisclosureIndicator.PNG */; };
 		A7841D8213E18E2D00131648 /* UITableViewCellAccessoryDisclosureIndicator@2x.PNG in Resources */ = {isa = PBXBuildFile; fileRef = A7841D3913E18E2D00131648 /* UITableViewCellAccessoryDisclosureIndicator@2x.PNG */; };
 		A7841D8313E18E2D00131648 /* UITableViewCellAccessoryDisclosureIndicatorOriginal.png in Resources */ = {isa = PBXBuildFile; fileRef = A7841D3A13E18E2D00131648 /* UITableViewCellAccessoryDisclosureIndicatorOriginal.png */; };
@@ -226,8 +225,6 @@
 		A7841DAF13E18E2E00131648 /* Icon-Small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A7841D6D13E18E2D00131648 /* Icon-Small@2x.png */; };
 		A7841DB013E18E2E00131648 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = A7841D6E13E18E2D00131648 /* Icon.png */; };
 		A7841DB113E18E2E00131648 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A7841D6F13E18E2D00131648 /* Icon@2x.png */; };
-		A7841DB213E18E2E00131648 /* iTunesArtwork.png in Resources */ = {isa = PBXBuildFile; fileRef = A7841D7013E18E2D00131648 /* iTunesArtwork.png */; };
-		A7841DB313E18E2E00131648 /* iHub - Icon Template.psd in Resources */ = {isa = PBXBuildFile; fileRef = A7841D7113E18E2D00131648 /* iHub - Icon Template.psd */; };
 		A7841DB413E18E2E00131648 /* GHPrivateRepositoryIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = A7841D7313E18E2D00131648 /* GHPrivateRepositoryIcon.png */; };
 		A7841DB513E18E2E00131648 /* GHPrivateRepositoryIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A7841D7413E18E2D00131648 /* GHPrivateRepositoryIcon@2x.png */; };
 		A7841DB613E18E2E00131648 /* GHPublicRepositoryIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = A7841D7513E18E2D00131648 /* GHPublicRepositoryIcon.png */; };
@@ -237,7 +234,6 @@
 		A7841DBA13E18E2E00131648 /* 145-persondot@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A7841D7B13E18E2D00131648 /* 145-persondot@2x.png */; };
 		A7841DBB13E18E2E00131648 /* 56-feed.png in Resources */ = {isa = PBXBuildFile; fileRef = A7841D7C13E18E2D00131648 /* 56-feed.png */; };
 		A7841DBC13E18E2E00131648 /* 56-feed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A7841D7D13E18E2D00131648 /* 56-feed@2x.png */; };
-		A7841DBD13E18E2E00131648 /* TODO.txt in Resources */ = {isa = PBXBuildFile; fileRef = A7841D7E13E18E2D00131648 /* TODO.txt */; };
 		A784C40F13D457B500859318 /* GHPAttributedTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A784C40E13D457B500859318 /* GHPAttributedTableViewCell.m */; };
 		A78B70E213BCE95E00F4CE5E /* UIImage+GHTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = A78B70E113BCE95D00F4CE5E /* UIImage+GHTabBar.m */; };
 		A78F372513CF20D200C22A2D /* ANAdvancedNavigationController+RightViewControllers.m in Sources */ = {isa = PBXBuildFile; fileRef = A78F372413CF20D200C22A2D /* ANAdvancedNavigationController+RightViewControllers.m */; };
@@ -3308,7 +3304,6 @@
 				A7DE2DFC13CCB80F005B810B /* ANNotificationSuccessImage.png in Resources */,
 				A7DE2DFD13CCB80F005B810B /* ANNotificationErrorImage.png in Resources */,
 				A7841D7F13E18E2D00131648 /* UIBarButtonSystemItemAction.png in Resources */,
-				A7841D8013E18E2D00131648 /* Changelog.txt in Resources */,
 				A7841D8113E18E2D00131648 /* UITableViewCellAccessoryDisclosureIndicator.PNG in Resources */,
 				A7841D8213E18E2D00131648 /* UITableViewCellAccessoryDisclosureIndicator@2x.PNG in Resources */,
 				A7841D8313E18E2D00131648 /* UITableViewCellAccessoryDisclosureIndicatorOriginal.png in Resources */,
@@ -3357,8 +3352,6 @@
 				A7841DAF13E18E2E00131648 /* Icon-Small@2x.png in Resources */,
 				A7841DB013E18E2E00131648 /* Icon.png in Resources */,
 				A7841DB113E18E2E00131648 /* Icon@2x.png in Resources */,
-				A7841DB213E18E2E00131648 /* iTunesArtwork.png in Resources */,
-				A7841DB313E18E2E00131648 /* iHub - Icon Template.psd in Resources */,
 				A7841DB413E18E2E00131648 /* GHPrivateRepositoryIcon.png in Resources */,
 				A7841DB513E18E2E00131648 /* GHPrivateRepositoryIcon@2x.png in Resources */,
 				A7841DB613E18E2E00131648 /* GHPublicRepositoryIcon.png in Resources */,
@@ -3368,7 +3361,6 @@
 				A7841DBA13E18E2E00131648 /* 145-persondot@2x.png in Resources */,
 				A7841DBB13E18E2E00131648 /* 56-feed.png in Resources */,
 				A7841DBC13E18E2E00131648 /* 56-feed@2x.png in Resources */,
-				A7841DBD13E18E2E00131648 /* TODO.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
