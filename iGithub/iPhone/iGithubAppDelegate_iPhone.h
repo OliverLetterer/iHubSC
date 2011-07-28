@@ -14,8 +14,6 @@
 #import "GHUserViewController.h"
 #import "GHSearchViewController.h"
 
-#warning reload newsfeed if new user gets authenticated
-
 @interface iGithubAppDelegate_iPhone : iGithubAppDelegate <MFMailComposeViewControllerDelegate> {
     UITabBarController *_tabBarController;
     GHOwnerNewsFeedViewController *_newsFeedViewController;

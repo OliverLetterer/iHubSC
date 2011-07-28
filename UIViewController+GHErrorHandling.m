@@ -10,6 +10,7 @@
 #import "GHAPIAuthenticationManager.h"
 #import "GHAuthenticationAlertView.h"
 #import "ANNotificationQueue.h"
+#import "GHManageAuthenticatedUsersAlertView.h"
 
 @implementation UIViewController (GHViewControllerErrorhandling)
 
@@ -21,8 +22,7 @@
     if (error != nil) {
         DLog(@"%@", error);
         
-        if (![GHAPIAuthenticationManager sharedInstance].authenticatedUser.login || [[GHAPIAuthenticationManager sharedInstance].authenticatedUser.login isEqualToString:@""]) {
-#warning change account here
+        if (![GHAPIAuthenticationManager sharedInstance].authenticatedUser) {
             GHAuthenticationAlertView *alert = [[GHAuthenticationAlertView alloc] initWithDelegate:nil showCancelButton:NO];
             [alert show];
             return;
@@ -31,8 +31,7 @@
         if (error.code == 3) {
             // authentication needed
             [self invalidadUserData];
-            #warning change account here
-            GHAuthenticationAlertView *alert = [[GHAuthenticationAlertView alloc] initWithDelegate:nil showCancelButton:NO];
+            GHManageAuthenticatedUsersAlertView *alert = [[GHManageAuthenticatedUsersAlertView alloc] initWithTitle:nil message:nil delegate:nil cancelButtonTitle:nil otherButtonTitles:nil];
             [alert show];
         } else {
             [[ANNotificationQueue sharedInstance] detatchErrorNotificationWithTitle:NSLocalizedString(@"Error", @"") 

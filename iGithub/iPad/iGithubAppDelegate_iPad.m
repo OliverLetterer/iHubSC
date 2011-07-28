@@ -29,18 +29,6 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     [self setupAppearences];
-#warning check for reenable
-//#if DEBUG
-//    
-////    [GHSettingsHelper setUsername:@"iTunesTestAccount"];
-////    [GHSettingsHelper setPassword:@"iTunes1"];
-//    
-//    [GHAPIAuthenticationManager sharedInstance].authenticatedUser.login = [GHAPIAuthenticationManager sharedInstance].authenticatedUser.login;
-//    [GHAPIAuthenticationManager sharedInstance].password = [GHSettingsHelper password];
-//#else
-//    [GHAPIAuthenticationManager sharedInstance].authenticatedUser.login = [GHAPIAuthenticationManager sharedInstance].authenticatedUser.login;
-//    [GHAPIAuthenticationManager sharedInstance].password = [GHSettingsHelper password];
-//#endif
     
     NSMutableDictionary *dictionary = [self deserializeState];
     
