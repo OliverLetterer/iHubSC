@@ -2,7 +2,7 @@
 	path = Submodules/JSONKit
 	url = https://github.com/johnezang/JSONKit.git
 [submodule "asi-http-request"]
-	path = asi-http-request
+	path = Submodules/asi-http-request
 	url = https://github.com/pokeb/asi-http-request.git
 [submodule "DDProgressView"]
 	path = DDProgressView
