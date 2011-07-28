@@ -1999,6 +1999,7 @@
 		A7BF13EE1342149C001AE50D /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastUpgradeCheck = 0420;
 				ORGANIZATIONNAME = Home;
 			};
 			buildConfigurationList = A7BF13F11342149C001AE50D /* Build configuration list for PBXProject "iGithub" */;
