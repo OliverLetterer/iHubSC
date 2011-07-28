@@ -91,6 +91,7 @@
 		A757973E13E1A030008670B0 /* UITableViewCell+GHHeight.m in Sources */ = {isa = PBXBuildFile; fileRef = A75796F413E1A030008670B0 /* UITableViewCell+GHHeight.m */; };
 		A757973F13E1A030008670B0 /* GHPImageDetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A75796F713E1A030008670B0 /* GHPImageDetailTableViewCell.m */; };
 		A757974013E1A030008670B0 /* GHPNewCommentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A75796FA13E1A030008670B0 /* GHPNewCommentTableViewCell.m */; };
+		A757978C13E1A3A3008670B0 /* SFHFKeychainUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = A757976C13E1A3A3008670B0 /* SFHFKeychainUtils.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		A7841C6F13E1849200131648 /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841C6E13E1849200131648 /* JSONKit.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		A7841CAF13E1853200131648 /* CGUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841C7213E1853200131648 /* CGUtils.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		A7841CB413E1853200131648 /* DTAttributedTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841C7C13E1853200131648 /* DTAttributedTextView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -325,7 +326,6 @@
 		A7841FBF13E194BC00131648 /* GHAPIUserPlanV3.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841F3413E194BB00131648 /* GHAPIUserPlanV3.m */; };
 		A7841FC013E194BC00131648 /* GHAPIUserV3.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841F3613E194BB00131648 /* GHAPIUserV3.m */; };
 		A7841FC113E194BC00131648 /* iGithubAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841F3813E194BB00131648 /* iGithubAppDelegate.m */; };
-		A7841FC213E194BC00131648 /* SFHFKeychainUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841F3B13E194BB00131648 /* SFHFKeychainUtils.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		A7841FC313E194BC00131648 /* ANNotificationQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841F3F13E194BB00131648 /* ANNotificationQueue.m */; };
 		A7841FC413E194BC00131648 /* ANNotificationErrorView.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841F4213E194BB00131648 /* ANNotificationErrorView.m */; };
 		A7841FC513E194BC00131648 /* ANNotificationSuccessView.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841F4413E194BB00131648 /* ANNotificationSuccessView.m */; };
@@ -554,6 +554,8 @@
 		A75796F713E1A030008670B0 /* GHPImageDetailTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPImageDetailTableViewCell.m; sourceTree = "<group>"; };
 		A75796F913E1A030008670B0 /* GHPNewCommentTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPNewCommentTableViewCell.h; sourceTree = "<group>"; };
 		A75796FA13E1A030008670B0 /* GHPNewCommentTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPNewCommentTableViewCell.m; sourceTree = "<group>"; };
+		A757976B13E1A3A3008670B0 /* SFHFKeychainUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SFHFKeychainUtils.h; path = security/SFHFKeychainUtils.h; sourceTree = "<group>"; };
+		A757976C13E1A3A3008670B0 /* SFHFKeychainUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SFHFKeychainUtils.m; path = security/SFHFKeychainUtils.m; sourceTree = "<group>"; };
 		A7841C6D13E1849200131648 /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JSONKit.h; path = Submodules/JSONKit/JSONKit.h; sourceTree = "<group>"; };
 		A7841C6E13E1849200131648 /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JSONKit.m; path = Submodules/JSONKit/JSONKit.m; sourceTree = "<group>"; };
 		A7841C7113E1853200131648 /* CGUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CGUtils.h; path = "Submodules/NSAttributedString-Additions-for-HTML/Classes/CGUtils.h"; sourceTree = SOURCE_ROOT; };
@@ -963,8 +965,6 @@
 		A7841F3613E194BB00131648 /* GHAPIUserV3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHAPIUserV3.m; sourceTree = "<group>"; };
 		A7841F3713E194BB00131648 /* iGithubAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iGithubAppDelegate.h; sourceTree = "<group>"; };
 		A7841F3813E194BB00131648 /* iGithubAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iGithubAppDelegate.m; sourceTree = "<group>"; };
-		A7841F3A13E194BB00131648 /* SFHFKeychainUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFHFKeychainUtils.h; sourceTree = "<group>"; };
-		A7841F3B13E194BB00131648 /* SFHFKeychainUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFHFKeychainUtils.m; sourceTree = "<group>"; };
 		A7841F3E13E194BB00131648 /* ANNotificationQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANNotificationQueue.h; sourceTree = "<group>"; };
 		A7841F3F13E194BB00131648 /* ANNotificationQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANNotificationQueue.m; sourceTree = "<group>"; };
 		A7841F4113E194BB00131648 /* ANNotificationErrorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANNotificationErrorView.h; sourceTree = "<group>"; };
@@ -1762,6 +1762,16 @@
 			path = GHPNewCommentTableViewCell;
 			sourceTree = "<group>";
 		};
+		A757974413E1A3A3008670B0 /* scifihifi-iphone */ = {
+			isa = PBXGroup;
+			children = (
+				A757976B13E1A3A3008670B0 /* SFHFKeychainUtils.h */,
+				A757976C13E1A3A3008670B0 /* SFHFKeychainUtils.m */,
+			);
+			name = "scifihifi-iphone";
+			path = "Submodules/scifihifi-iphone";
+			sourceTree = SOURCE_ROOT;
+		};
 		A76FC9A81352D27E004C642E /* UIExpandableTableView */ = {
 			isa = PBXGroup;
 			children = (
@@ -1791,6 +1801,7 @@
 		A7841C7013E184F500131648 /* Submodules */ = {
 			isa = PBXGroup;
 			children = (
+				A757974413E1A3A3008670B0 /* scifihifi-iphone */,
 				A757962413E19B18008670B0 /* ANAdvancedNavigationController */,
 				A7841C2E13E1494800131648 /* GHTableViewAlertView */,
 				A7BC6780134CCED40083F906 /* GHPullToReleaseTableViewController */,
@@ -2097,7 +2108,6 @@
 				A7841F3813E194BB00131648 /* iGithubAppDelegate.m */,
 				A7841E5413E194BB00131648 /* Foundation Additions */,
 				A7841E6913E194BB00131648 /* GitHub API */,
-				A7841F3913E194BB00131648 /* Keychain */,
 				A7841F3C13E194BB00131648 /* UI */,
 			);
 			path = Shared;
@@ -2648,15 +2658,6 @@
 				A7841F3613E194BB00131648 /* GHAPIUserV3.m */,
 			);
 			path = GHAPIUserV3;
-			sourceTree = "<group>";
-		};
-		A7841F3913E194BB00131648 /* Keychain */ = {
-			isa = PBXGroup;
-			children = (
-				A7841F3A13E194BB00131648 /* SFHFKeychainUtils.h */,
-				A7841F3B13E194BB00131648 /* SFHFKeychainUtils.m */,
-			);
-			path = Keychain;
 			sourceTree = "<group>";
 		};
 		A7841F3C13E194BB00131648 /* UI */ = {
@@ -3545,7 +3546,6 @@
 				A7841FBF13E194BC00131648 /* GHAPIUserPlanV3.m in Sources */,
 				A7841FC013E194BC00131648 /* GHAPIUserV3.m in Sources */,
 				A7841FC113E194BC00131648 /* iGithubAppDelegate.m in Sources */,
-				A7841FC213E194BC00131648 /* SFHFKeychainUtils.m in Sources */,
 				A7841FC313E194BC00131648 /* ANNotificationQueue.m in Sources */,
 				A7841FC413E194BC00131648 /* ANNotificationErrorView.m in Sources */,
 				A7841FC513E194BC00131648 /* ANNotificationSuccessView.m in Sources */,
@@ -3675,6 +3675,7 @@
 				A757973E13E1A030008670B0 /* UITableViewCell+GHHeight.m in Sources */,
 				A757973F13E1A030008670B0 /* GHPImageDetailTableViewCell.m in Sources */,
 				A757974013E1A030008670B0 /* GHPNewCommentTableViewCell.m in Sources */,
+				A757978C13E1A3A3008670B0 /* SFHFKeychainUtils.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

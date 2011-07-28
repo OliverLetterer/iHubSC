@@ -25,3 +25,6 @@
 [submodule "ANAdvancedNavigationController"]
 	path = Submodules/ANAdvancedNavigationController
 	url = git@github.com:OliverLetterer/ANAdvancedNavigationController.git
+[submodule "scifihifi-iphone"]
+	path = Submodules/scifihifi-iphone
+	url = https://github.com/ldandersen/scifihifi-iphone.git
