@@ -14,11 +14,11 @@
 	path = Submodules/NSAttributedString-Additions-for-HTML
 	url = https://github.com/Cocoanetics/NSAttributedString-Additions-for-HTML.git
 [submodule "UIExpandableTableView"]
-	path = UIExpandableTableView
+	path = Submodules/UIExpandableTableView
 	url = git@github.com:OliverLetterer/UIExpandableTableView.git
 [submodule "GHPullToReleaseTableViewController"]
-	path = GHPullToReleaseTableViewController
+	path = Submodules/GHPullToReleaseTableViewController
 	url = git@github.com:OliverLetterer/GHPullToReleaseTableViewController.git
 [submodule "GHTableViewAlertView"]
-	path = GHTableViewAlertView
+	path = Submodules/GHTableViewAlertView
 	url = git@github.com:OliverLetterer/GHTableViewAlertView.git

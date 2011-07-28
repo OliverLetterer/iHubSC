@@ -162,7 +162,6 @@
 		A76B09C513D620820068DDDE /* iTunesArtwork.png in Resources */ = {isa = PBXBuildFile; fileRef = A76B09BE13D620820068DDDE /* iTunesArtwork.png */; };
 		A76FC9A61352D231004C642E /* 145-persondot.png in Resources */ = {isa = PBXBuildFile; fileRef = A76FC9A41352D231004C642E /* 145-persondot.png */; };
 		A76FC9A71352D231004C642E /* 145-persondot@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A76FC9A51352D231004C642E /* 145-persondot@2x.png */; };
-		A76FC9BE13534755004C642E /* UIExpandableTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = A76FC9BD13534755004C642E /* UIExpandableTableView.m */; };
 		A773023213B38C4B0075235E /* GHAPICommitV3.m in Sources */ = {isa = PBXBuildFile; fileRef = A773023113B38C4B0075235E /* GHAPICommitV3.m */; };
 		A773023713B38D200075235E /* GHAPITreeInfoV3.m in Sources */ = {isa = PBXBuildFile; fileRef = A773023613B38D200075235E /* GHAPITreeInfoV3.m */; };
 		A77654C91395556000787420 /* array.c in Sources */ = {isa = PBXBuildFile; fileRef = A77654C11395556000787420 /* array.c */; };
@@ -174,16 +173,10 @@
 		A77654D71395556A00787420 /* WAMarkdown.m in Sources */ = {isa = PBXBuildFile; fileRef = A77654D21395556A00787420 /* WAMarkdown.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		A77654D81395556A00787420 /* WAMarkdownParser.m in Sources */ = {isa = PBXBuildFile; fileRef = A77654D41395556A00787420 /* WAMarkdownParser.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		A77654DA13955A0100787420 /* MarkdownStyle in Resources */ = {isa = PBXBuildFile; fileRef = A77654D913955A0000787420 /* MarkdownStyle */; };
-		A7818F9C13E0B98A009508FC /* GHPullToReleaseTableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = A7818F9913E0B98A009508FC /* GHPullToReleaseTableHeaderView.m */; };
-		A7818F9D13E0B98A009508FC /* GHPullToReleaseTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7818F9B13E0B98A009508FC /* GHPullToReleaseTableViewController.m */; };
 		A7837E95136C905200B13B95 /* GHAPIIssueV3.m in Sources */ = {isa = PBXBuildFile; fileRef = A7837E94136C905100B13B95 /* GHAPIIssueV3.m */; };
 		A7837E9A136C93FC00B13B95 /* GHAPIMilestoneV3.m in Sources */ = {isa = PBXBuildFile; fileRef = A7837E99136C93FC00B13B95 /* GHAPIMilestoneV3.m */; };
 		A7837EA5136CADD400B13B95 /* GHAPIMilestoneV3TableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A7837EA4136CADD400B13B95 /* GHAPIMilestoneV3TableViewCell.m */; };
 		A7841C4413E15FBD00131648 /* GHManageAuthenticatedUsersAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841C4313E15FBD00131648 /* GHManageAuthenticatedUsersAlertView.m */; };
-		A7841C5913E178DD00131648 /* GHTableViewAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841C5213E178CA00131648 /* GHTableViewAlertView.m */; };
-		A7841C5A13E178DD00131648 /* GHTableViewAlertViewTableViewBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841C5413E178D000131648 /* GHTableViewAlertViewTableViewBackgroundView.m */; };
-		A7841C5B13E178DD00131648 /* GHTableViewAlertViewTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841C5613E178D700131648 /* GHTableViewAlertViewTableViewCell.m */; };
-		A7841C5C13E178DD00131648 /* GHTableViewAlertViewTableViewCellSeperatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841C5813E178DA00131648 /* GHTableViewAlertViewTableViewCellSeperatorView.m */; };
 		A7841C6F13E1849200131648 /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841C6E13E1849200131648 /* JSONKit.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		A7841CAF13E1853200131648 /* CGUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841C7213E1853200131648 /* CGUtils.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		A7841CB413E1853200131648 /* DTAttributedTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841C7C13E1853200131648 /* DTAttributedTextView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -221,6 +214,13 @@
 		A7841CEF13E1874B00131648 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841CEE13E1874B00131648 /* Reachability.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		A7841CF213E1881900131648 /* UIColor-Expanded.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841CF113E1881900131648 /* UIColor-Expanded.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		A7841CF513E188E300131648 /* DDProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841CF413E188E300131648 /* DDProgressView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		A7841CF813E1894500131648 /* UIExpandableTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841CF713E1894500131648 /* UIExpandableTableView.m */; };
+		A7841CFD13E1899000131648 /* GHPullToReleaseTableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841CFA13E1899000131648 /* GHPullToReleaseTableHeaderView.m */; };
+		A7841CFE13E1899000131648 /* GHPullToReleaseTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841CFC13E1899000131648 /* GHPullToReleaseTableViewController.m */; };
+		A7841D0713E189B200131648 /* GHTableViewAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841D0013E189B200131648 /* GHTableViewAlertView.m */; };
+		A7841D0813E189B200131648 /* GHTableViewAlertViewTableViewBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841D0213E189B200131648 /* GHTableViewAlertViewTableViewBackgroundView.m */; };
+		A7841D0913E189B200131648 /* GHTableViewAlertViewTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841D0413E189B200131648 /* GHTableViewAlertViewTableViewCell.m */; };
+		A7841D0A13E189B200131648 /* GHTableViewAlertViewTableViewCellSeperatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841D0613E189B200131648 /* GHTableViewAlertViewTableViewCellSeperatorView.m */; };
 		A784C40F13D457B500859318 /* GHPAttributedTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A784C40E13D457B500859318 /* GHPAttributedTableViewCell.m */; };
 		A78B70DB13BCE08900F4CE5E /* TabBarItemSelectedBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = A78B70D913BCE08900F4CE5E /* TabBarItemSelectedBackground.png */; };
 		A78B70DC13BCE08900F4CE5E /* TabBarItemSelectedBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A78B70DA13BCE08900F4CE5E /* TabBarItemSelectedBackground@2x.png */; };
@@ -622,8 +622,6 @@
 		A76B09BE13D620820068DDDE /* iTunesArtwork.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iTunesArtwork.png; sourceTree = "<group>"; };
 		A76FC9A41352D231004C642E /* 145-persondot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "145-persondot.png"; sourceTree = "<group>"; };
 		A76FC9A51352D231004C642E /* 145-persondot@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "145-persondot@2x.png"; sourceTree = "<group>"; };
-		A76FC9BC13534755004C642E /* UIExpandableTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UIExpandableTableView.h; path = UIExpandableTableView/UIExpandableTableView.h; sourceTree = "<group>"; };
-		A76FC9BD13534755004C642E /* UIExpandableTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UIExpandableTableView.m; path = UIExpandableTableView/UIExpandableTableView.m; sourceTree = "<group>"; };
 		A773023013B38C4B0075235E /* GHAPICommitV3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHAPICommitV3.h; sourceTree = "<group>"; };
 		A773023113B38C4B0075235E /* GHAPICommitV3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHAPICommitV3.m; sourceTree = "<group>"; };
 		A773023513B38D200075235E /* GHAPITreeInfoV3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHAPITreeInfoV3.h; sourceTree = "<group>"; };
@@ -645,10 +643,6 @@
 		A77654D31395556A00787420 /* WAMarkdownParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WAMarkdownParser.h; sourceTree = "<group>"; };
 		A77654D41395556A00787420 /* WAMarkdownParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WAMarkdownParser.m; sourceTree = "<group>"; };
 		A77654D913955A0000787420 /* MarkdownStyle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MarkdownStyle; sourceTree = "<group>"; };
-		A7818F9813E0B98A009508FC /* GHPullToReleaseTableHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GHPullToReleaseTableHeaderView.h; path = GHPullToReleaseTableViewController/GHPullToReleaseTableHeaderView.h; sourceTree = "<group>"; };
-		A7818F9913E0B98A009508FC /* GHPullToReleaseTableHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GHPullToReleaseTableHeaderView.m; path = GHPullToReleaseTableViewController/GHPullToReleaseTableHeaderView.m; sourceTree = "<group>"; };
-		A7818F9A13E0B98A009508FC /* GHPullToReleaseTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GHPullToReleaseTableViewController.h; path = GHPullToReleaseTableViewController/GHPullToReleaseTableViewController.h; sourceTree = "<group>"; };
-		A7818F9B13E0B98A009508FC /* GHPullToReleaseTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GHPullToReleaseTableViewController.m; path = GHPullToReleaseTableViewController/GHPullToReleaseTableViewController.m; sourceTree = "<group>"; };
 		A7837E93136C905100B13B95 /* GHAPIIssueV3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHAPIIssueV3.h; sourceTree = "<group>"; };
 		A7837E94136C905100B13B95 /* GHAPIIssueV3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHAPIIssueV3.m; sourceTree = "<group>"; };
 		A7837E98136C93FC00B13B95 /* GHAPIMilestoneV3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHAPIMilestoneV3.h; sourceTree = "<group>"; };
@@ -657,14 +651,6 @@
 		A7837EA4136CADD400B13B95 /* GHAPIMilestoneV3TableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHAPIMilestoneV3TableViewCell.m; sourceTree = "<group>"; };
 		A7841C4213E15FBD00131648 /* GHManageAuthenticatedUsersAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHManageAuthenticatedUsersAlertView.h; sourceTree = "<group>"; };
 		A7841C4313E15FBD00131648 /* GHManageAuthenticatedUsersAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHManageAuthenticatedUsersAlertView.m; sourceTree = "<group>"; };
-		A7841C5113E178C800131648 /* GHTableViewAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GHTableViewAlertView.h; path = GHTableViewAlertView/GHTableViewAlertView.h; sourceTree = "<group>"; };
-		A7841C5213E178CA00131648 /* GHTableViewAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GHTableViewAlertView.m; path = GHTableViewAlertView/GHTableViewAlertView.m; sourceTree = "<group>"; };
-		A7841C5313E178CD00131648 /* GHTableViewAlertViewTableViewBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GHTableViewAlertViewTableViewBackgroundView.h; path = GHTableViewAlertView/GHTableViewAlertViewTableViewBackgroundView.h; sourceTree = "<group>"; };
-		A7841C5413E178D000131648 /* GHTableViewAlertViewTableViewBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GHTableViewAlertViewTableViewBackgroundView.m; path = GHTableViewAlertView/GHTableViewAlertViewTableViewBackgroundView.m; sourceTree = "<group>"; };
-		A7841C5513E178D300131648 /* GHTableViewAlertViewTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GHTableViewAlertViewTableViewCell.h; path = GHTableViewAlertView/GHTableViewAlertViewTableViewCell.h; sourceTree = "<group>"; };
-		A7841C5613E178D700131648 /* GHTableViewAlertViewTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GHTableViewAlertViewTableViewCell.m; path = GHTableViewAlertView/GHTableViewAlertViewTableViewCell.m; sourceTree = "<group>"; };
-		A7841C5713E178D900131648 /* GHTableViewAlertViewTableViewCellSeperatorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GHTableViewAlertViewTableViewCellSeperatorView.h; path = GHTableViewAlertView/GHTableViewAlertViewTableViewCellSeperatorView.h; sourceTree = "<group>"; };
-		A7841C5813E178DA00131648 /* GHTableViewAlertViewTableViewCellSeperatorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GHTableViewAlertViewTableViewCellSeperatorView.m; path = GHTableViewAlertView/GHTableViewAlertViewTableViewCellSeperatorView.m; sourceTree = "<group>"; };
 		A7841C6D13E1849200131648 /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JSONKit.h; path = Submodules/JSONKit/JSONKit.h; sourceTree = "<group>"; };
 		A7841C6E13E1849200131648 /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JSONKit.m; path = Submodules/JSONKit/JSONKit.m; sourceTree = "<group>"; };
 		A7841C7113E1853200131648 /* CGUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CGUtils.h; path = "Submodules/NSAttributedString-Additions-for-HTML/Classes/CGUtils.h"; sourceTree = SOURCE_ROOT; };
@@ -743,6 +729,20 @@
 		A7841CF113E1881900131648 /* UIColor-Expanded.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIColor-Expanded.m"; path = "Submodules/uicolor-utilities/UIColor-Expanded.m"; sourceTree = "<group>"; };
 		A7841CF313E188E300131648 /* DDProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DDProgressView.h; path = Submodules/DDProgressView/DDProgressView/DDProgressView.h; sourceTree = "<group>"; };
 		A7841CF413E188E300131648 /* DDProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DDProgressView.m; path = Submodules/DDProgressView/DDProgressView/DDProgressView.m; sourceTree = "<group>"; };
+		A7841CF613E1894500131648 /* UIExpandableTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UIExpandableTableView.h; path = Submodules/UIExpandableTableView/UIExpandableTableView.h; sourceTree = "<group>"; };
+		A7841CF713E1894500131648 /* UIExpandableTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UIExpandableTableView.m; path = Submodules/UIExpandableTableView/UIExpandableTableView.m; sourceTree = "<group>"; };
+		A7841CF913E1899000131648 /* GHPullToReleaseTableHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GHPullToReleaseTableHeaderView.h; path = Submodules/GHPullToReleaseTableViewController/GHPullToReleaseTableHeaderView.h; sourceTree = "<group>"; };
+		A7841CFA13E1899000131648 /* GHPullToReleaseTableHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GHPullToReleaseTableHeaderView.m; path = Submodules/GHPullToReleaseTableViewController/GHPullToReleaseTableHeaderView.m; sourceTree = "<group>"; };
+		A7841CFB13E1899000131648 /* GHPullToReleaseTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GHPullToReleaseTableViewController.h; path = Submodules/GHPullToReleaseTableViewController/GHPullToReleaseTableViewController.h; sourceTree = "<group>"; };
+		A7841CFC13E1899000131648 /* GHPullToReleaseTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GHPullToReleaseTableViewController.m; path = Submodules/GHPullToReleaseTableViewController/GHPullToReleaseTableViewController.m; sourceTree = "<group>"; };
+		A7841CFF13E189B200131648 /* GHTableViewAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GHTableViewAlertView.h; path = Submodules/GHTableViewAlertView/GHTableViewAlertView.h; sourceTree = "<group>"; };
+		A7841D0013E189B200131648 /* GHTableViewAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GHTableViewAlertView.m; path = Submodules/GHTableViewAlertView/GHTableViewAlertView.m; sourceTree = "<group>"; };
+		A7841D0113E189B200131648 /* GHTableViewAlertViewTableViewBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GHTableViewAlertViewTableViewBackgroundView.h; path = Submodules/GHTableViewAlertView/GHTableViewAlertViewTableViewBackgroundView.h; sourceTree = "<group>"; };
+		A7841D0213E189B200131648 /* GHTableViewAlertViewTableViewBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GHTableViewAlertViewTableViewBackgroundView.m; path = Submodules/GHTableViewAlertView/GHTableViewAlertViewTableViewBackgroundView.m; sourceTree = "<group>"; };
+		A7841D0313E189B200131648 /* GHTableViewAlertViewTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GHTableViewAlertViewTableViewCell.h; path = Submodules/GHTableViewAlertView/GHTableViewAlertViewTableViewCell.h; sourceTree = "<group>"; };
+		A7841D0413E189B200131648 /* GHTableViewAlertViewTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GHTableViewAlertViewTableViewCell.m; path = Submodules/GHTableViewAlertView/GHTableViewAlertViewTableViewCell.m; sourceTree = "<group>"; };
+		A7841D0513E189B200131648 /* GHTableViewAlertViewTableViewCellSeperatorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GHTableViewAlertViewTableViewCellSeperatorView.h; path = Submodules/GHTableViewAlertView/GHTableViewAlertViewTableViewCellSeperatorView.h; sourceTree = "<group>"; };
+		A7841D0613E189B200131648 /* GHTableViewAlertViewTableViewCellSeperatorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GHTableViewAlertViewTableViewCellSeperatorView.m; path = Submodules/GHTableViewAlertView/GHTableViewAlertViewTableViewCellSeperatorView.m; sourceTree = "<group>"; };
 		A784C40D13D457B400859318 /* GHPAttributedTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPAttributedTableViewCell.h; sourceTree = "<group>"; };
 		A784C40E13D457B500859318 /* GHPAttributedTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPAttributedTableViewCell.m; sourceTree = "<group>"; };
 		A78B70D913BCE08900F4CE5E /* TabBarItemSelectedBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TabBarItemSelectedBackground.png; sourceTree = "<group>"; };
@@ -1833,14 +1833,11 @@
 			isa = PBXGroup;
 			children = (
 				A7841C4113E15FA000131648 /* GHManageAuthenticatedUsersAlertView */,
-				A7841C2E13E1494800131648 /* GHTableViewAlertView */,
 				A782206813D8BA1500A52D9E /* GHALabelViewController */,
 				A7D70BCB13D2C69D0063811F /* GHPDiffView */,
 				A79AE38E13CC96D20008E900 /* ANNotificationQueue */,
 				A7288A6B13A9091500170D57 /* SyntaxHighlighting */,
 				A712B7C7135CB58C0009B7A7 /* Browse content */,
-				A76FC9A81352D27E004C642E /* UIExpandableTableView */,
-				A7BC6780134CCED40083F906 /* GHPullToReleaseTableViewController */,
 				A7F62627134C45AE006487CA /* GHTableViewController */,
 				A7C2D14913D771F500DACDF7 /* GHViewController */,
 			);
@@ -1925,10 +1922,11 @@
 		A76FC9A81352D27E004C642E /* UIExpandableTableView */ = {
 			isa = PBXGroup;
 			children = (
-				A76FC9BC13534755004C642E /* UIExpandableTableView.h */,
-				A76FC9BD13534755004C642E /* UIExpandableTableView.m */,
+				A7841CF613E1894500131648 /* UIExpandableTableView.h */,
+				A7841CF713E1894500131648 /* UIExpandableTableView.m */,
 			);
 			name = UIExpandableTableView;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		A773023313B38C520075235E /* GHAPICommitV3 */ = {
@@ -2058,16 +2056,17 @@
 		A7841C2E13E1494800131648 /* GHTableViewAlertView */ = {
 			isa = PBXGroup;
 			children = (
-				A7841C5113E178C800131648 /* GHTableViewAlertView.h */,
-				A7841C5213E178CA00131648 /* GHTableViewAlertView.m */,
-				A7841C5313E178CD00131648 /* GHTableViewAlertViewTableViewBackgroundView.h */,
-				A7841C5413E178D000131648 /* GHTableViewAlertViewTableViewBackgroundView.m */,
-				A7841C5513E178D300131648 /* GHTableViewAlertViewTableViewCell.h */,
-				A7841C5613E178D700131648 /* GHTableViewAlertViewTableViewCell.m */,
-				A7841C5713E178D900131648 /* GHTableViewAlertViewTableViewCellSeperatorView.h */,
-				A7841C5813E178DA00131648 /* GHTableViewAlertViewTableViewCellSeperatorView.m */,
+				A7841CFF13E189B200131648 /* GHTableViewAlertView.h */,
+				A7841D0013E189B200131648 /* GHTableViewAlertView.m */,
+				A7841D0113E189B200131648 /* GHTableViewAlertViewTableViewBackgroundView.h */,
+				A7841D0213E189B200131648 /* GHTableViewAlertViewTableViewBackgroundView.m */,
+				A7841D0313E189B200131648 /* GHTableViewAlertViewTableViewCell.h */,
+				A7841D0413E189B200131648 /* GHTableViewAlertViewTableViewCell.m */,
+				A7841D0513E189B200131648 /* GHTableViewAlertViewTableViewCellSeperatorView.h */,
+				A7841D0613E189B200131648 /* GHTableViewAlertViewTableViewCellSeperatorView.m */,
 			);
 			name = GHTableViewAlertView;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		A7841C4113E15FA000131648 /* GHManageAuthenticatedUsersAlertView */ = {
@@ -2082,6 +2081,9 @@
 		A7841C7013E184F500131648 /* Submodules */ = {
 			isa = PBXGroup;
 			children = (
+				A7841C2E13E1494800131648 /* GHTableViewAlertView */,
+				A7BC6780134CCED40083F906 /* GHPullToReleaseTableViewController */,
+				A76FC9A81352D27E004C642E /* UIExpandableTableView */,
 				A712B7ED135E0B5E0009B7A7 /* DDProgressView */,
 				A70A119613C374B200685749 /* UIColor-Util */,
 				A750570013427F9E00514A82 /* asi-http-request */,
@@ -2489,12 +2491,13 @@
 		A7BC6780134CCED40083F906 /* GHPullToReleaseTableViewController */ = {
 			isa = PBXGroup;
 			children = (
-				A7818F9813E0B98A009508FC /* GHPullToReleaseTableHeaderView.h */,
-				A7818F9913E0B98A009508FC /* GHPullToReleaseTableHeaderView.m */,
-				A7818F9A13E0B98A009508FC /* GHPullToReleaseTableViewController.h */,
-				A7818F9B13E0B98A009508FC /* GHPullToReleaseTableViewController.m */,
+				A7841CF913E1899000131648 /* GHPullToReleaseTableHeaderView.h */,
+				A7841CFA13E1899000131648 /* GHPullToReleaseTableHeaderView.m */,
+				A7841CFB13E1899000131648 /* GHPullToReleaseTableViewController.h */,
+				A7841CFC13E1899000131648 /* GHPullToReleaseTableViewController.m */,
 			);
 			name = GHPullToReleaseTableViewController;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		A7BC6781134CCF890083F906 /* ASI-HTTP */ = {
@@ -3457,7 +3460,6 @@
 				A73AE5F21350FB4400E9EBA4 /* NSString+Additions.m in Sources */,
 				A73AE6151351954500E9EBA4 /* GHWebViewViewController.m in Sources */,
 				A73AE6191351B11600E9EBA4 /* GHRawIssue.m in Sources */,
-				A76FC9BE13534755004C642E /* UIExpandableTableView.m in Sources */,
 				A7D14F401354DB8600E1B980 /* GHOwnerNewsFeedViewController.m in Sources */,
 				A7D14F431354DD5D00E1B980 /* GHRecentActivityViewController.m in Sources */,
 				A7D14F481354ED1100E1B980 /* GHForkApplyEventPayload.m in Sources */,
@@ -3616,13 +3618,7 @@
 				A7C2D14413D7701E00DACDF7 /* GHViewController.m in Sources */,
 				A7D0277113DA0F500009FE77 /* WASelectedAttributedMarkdownFormatter.m in Sources */,
 				A7E33FC213DDC4AC00AF726A /* Utility.m in Sources */,
-				A7818F9C13E0B98A009508FC /* GHPullToReleaseTableHeaderView.m in Sources */,
-				A7818F9D13E0B98A009508FC /* GHPullToReleaseTableViewController.m in Sources */,
 				A7841C4413E15FBD00131648 /* GHManageAuthenticatedUsersAlertView.m in Sources */,
-				A7841C5913E178DD00131648 /* GHTableViewAlertView.m in Sources */,
-				A7841C5A13E178DD00131648 /* GHTableViewAlertViewTableViewBackgroundView.m in Sources */,
-				A7841C5B13E178DD00131648 /* GHTableViewAlertViewTableViewCell.m in Sources */,
-				A7841C5C13E178DD00131648 /* GHTableViewAlertViewTableViewCellSeperatorView.m in Sources */,
 				A7841C6F13E1849200131648 /* JSONKit.m in Sources */,
 				A7841CAF13E1853200131648 /* CGUtils.m in Sources */,
 				A7841CB413E1853200131648 /* DTAttributedTextView.m in Sources */,
@@ -3660,6 +3656,13 @@
 				A7841CEF13E1874B00131648 /* Reachability.m in Sources */,
 				A7841CF213E1881900131648 /* UIColor-Expanded.m in Sources */,
 				A7841CF513E188E300131648 /* DDProgressView.m in Sources */,
+				A7841CF813E1894500131648 /* UIExpandableTableView.m in Sources */,
+				A7841CFD13E1899000131648 /* GHPullToReleaseTableHeaderView.m in Sources */,
+				A7841CFE13E1899000131648 /* GHPullToReleaseTableViewController.m in Sources */,
+				A7841D0713E189B200131648 /* GHTableViewAlertView.m in Sources */,
+				A7841D0813E189B200131648 /* GHTableViewAlertViewTableViewBackgroundView.m in Sources */,
+				A7841D0913E189B200131648 /* GHTableViewAlertViewTableViewCell.m in Sources */,
+				A7841D0A13E189B200131648 /* GHTableViewAlertViewTableViewCellSeperatorView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
