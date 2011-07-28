@@ -19,3 +19,6 @@
 [submodule "GHPullToReleaseTableViewController"]
 	path = GHPullToReleaseTableViewController
 	url = git@github.com:OliverLetterer/GHPullToReleaseTableViewController.git
+[submodule "GHTableViewAlertView"]
+	path = GHTableViewAlertView
+	url = git@github.com:OliverLetterer/GHTableViewAlertView.git

@@ -190,11 +190,11 @@
 		A7837E95136C905200B13B95 /* GHAPIIssueV3.m in Sources */ = {isa = PBXBuildFile; fileRef = A7837E94136C905100B13B95 /* GHAPIIssueV3.m */; };
 		A7837E9A136C93FC00B13B95 /* GHAPIMilestoneV3.m in Sources */ = {isa = PBXBuildFile; fileRef = A7837E99136C93FC00B13B95 /* GHAPIMilestoneV3.m */; };
 		A7837EA5136CADD400B13B95 /* GHAPIMilestoneV3TableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A7837EA4136CADD400B13B95 /* GHAPIMilestoneV3TableViewCell.m */; };
-		A7841C3813E1496300131648 /* GHTableViewAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841C3113E1496300131648 /* GHTableViewAlertView.m */; };
-		A7841C3913E1496300131648 /* GHTableViewAlertViewTableViewBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841C3313E1496300131648 /* GHTableViewAlertViewTableViewBackgroundView.m */; };
-		A7841C3A13E1496300131648 /* GHTableViewAlertViewTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841C3513E1496300131648 /* GHTableViewAlertViewTableViewCell.m */; };
-		A7841C3B13E1496300131648 /* GHTableViewAlertViewTableViewCellSeperatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841C3713E1496300131648 /* GHTableViewAlertViewTableViewCellSeperatorView.m */; };
 		A7841C4413E15FBD00131648 /* GHManageAuthenticatedUsersAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841C4313E15FBD00131648 /* GHManageAuthenticatedUsersAlertView.m */; };
+		A7841C5913E178DD00131648 /* GHTableViewAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841C5213E178CA00131648 /* GHTableViewAlertView.m */; };
+		A7841C5A13E178DD00131648 /* GHTableViewAlertViewTableViewBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841C5413E178D000131648 /* GHTableViewAlertViewTableViewBackgroundView.m */; };
+		A7841C5B13E178DD00131648 /* GHTableViewAlertViewTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841C5613E178D700131648 /* GHTableViewAlertViewTableViewCell.m */; };
+		A7841C5C13E178DD00131648 /* GHTableViewAlertViewTableViewCellSeperatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841C5813E178DA00131648 /* GHTableViewAlertViewTableViewCellSeperatorView.m */; };
 		A784C40F13D457B500859318 /* GHPAttributedTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A784C40E13D457B500859318 /* GHPAttributedTableViewCell.m */; };
 		A78B70DB13BCE08900F4CE5E /* TabBarItemSelectedBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = A78B70D913BCE08900F4CE5E /* TabBarItemSelectedBackground.png */; };
 		A78B70DC13BCE08900F4CE5E /* TabBarItemSelectedBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A78B70DA13BCE08900F4CE5E /* TabBarItemSelectedBackground@2x.png */; };
@@ -681,16 +681,16 @@
 		A7837E99136C93FC00B13B95 /* GHAPIMilestoneV3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHAPIMilestoneV3.m; sourceTree = "<group>"; };
 		A7837EA3136CADD400B13B95 /* GHAPIMilestoneV3TableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHAPIMilestoneV3TableViewCell.h; sourceTree = "<group>"; };
 		A7837EA4136CADD400B13B95 /* GHAPIMilestoneV3TableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHAPIMilestoneV3TableViewCell.m; sourceTree = "<group>"; };
-		A7841C3013E1496300131648 /* GHTableViewAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHTableViewAlertView.h; sourceTree = "<group>"; };
-		A7841C3113E1496300131648 /* GHTableViewAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHTableViewAlertView.m; sourceTree = "<group>"; };
-		A7841C3213E1496300131648 /* GHTableViewAlertViewTableViewBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHTableViewAlertViewTableViewBackgroundView.h; sourceTree = "<group>"; };
-		A7841C3313E1496300131648 /* GHTableViewAlertViewTableViewBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHTableViewAlertViewTableViewBackgroundView.m; sourceTree = "<group>"; };
-		A7841C3413E1496300131648 /* GHTableViewAlertViewTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHTableViewAlertViewTableViewCell.h; sourceTree = "<group>"; };
-		A7841C3513E1496300131648 /* GHTableViewAlertViewTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHTableViewAlertViewTableViewCell.m; sourceTree = "<group>"; };
-		A7841C3613E1496300131648 /* GHTableViewAlertViewTableViewCellSeperatorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHTableViewAlertViewTableViewCellSeperatorView.h; sourceTree = "<group>"; };
-		A7841C3713E1496300131648 /* GHTableViewAlertViewTableViewCellSeperatorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHTableViewAlertViewTableViewCellSeperatorView.m; sourceTree = "<group>"; };
 		A7841C4213E15FBD00131648 /* GHManageAuthenticatedUsersAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHManageAuthenticatedUsersAlertView.h; sourceTree = "<group>"; };
 		A7841C4313E15FBD00131648 /* GHManageAuthenticatedUsersAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHManageAuthenticatedUsersAlertView.m; sourceTree = "<group>"; };
+		A7841C5113E178C800131648 /* GHTableViewAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GHTableViewAlertView.h; path = GHTableViewAlertView/GHTableViewAlertView.h; sourceTree = "<group>"; };
+		A7841C5213E178CA00131648 /* GHTableViewAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GHTableViewAlertView.m; path = GHTableViewAlertView/GHTableViewAlertView.m; sourceTree = "<group>"; };
+		A7841C5313E178CD00131648 /* GHTableViewAlertViewTableViewBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GHTableViewAlertViewTableViewBackgroundView.h; path = GHTableViewAlertView/GHTableViewAlertViewTableViewBackgroundView.h; sourceTree = "<group>"; };
+		A7841C5413E178D000131648 /* GHTableViewAlertViewTableViewBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GHTableViewAlertViewTableViewBackgroundView.m; path = GHTableViewAlertView/GHTableViewAlertViewTableViewBackgroundView.m; sourceTree = "<group>"; };
+		A7841C5513E178D300131648 /* GHTableViewAlertViewTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GHTableViewAlertViewTableViewCell.h; path = GHTableViewAlertView/GHTableViewAlertViewTableViewCell.h; sourceTree = "<group>"; };
+		A7841C5613E178D700131648 /* GHTableViewAlertViewTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GHTableViewAlertViewTableViewCell.m; path = GHTableViewAlertView/GHTableViewAlertViewTableViewCell.m; sourceTree = "<group>"; };
+		A7841C5713E178D900131648 /* GHTableViewAlertViewTableViewCellSeperatorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GHTableViewAlertViewTableViewCellSeperatorView.h; path = GHTableViewAlertView/GHTableViewAlertViewTableViewCellSeperatorView.h; sourceTree = "<group>"; };
+		A7841C5813E178DA00131648 /* GHTableViewAlertViewTableViewCellSeperatorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GHTableViewAlertViewTableViewCellSeperatorView.m; path = GHTableViewAlertView/GHTableViewAlertViewTableViewCellSeperatorView.m; sourceTree = "<group>"; };
 		A784C40D13D457B400859318 /* GHPAttributedTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPAttributedTableViewCell.h; sourceTree = "<group>"; };
 		A784C40E13D457B500859318 /* GHPAttributedTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPAttributedTableViewCell.m; sourceTree = "<group>"; };
 		A78B70D913BCE08900F4CE5E /* TabBarItemSelectedBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TabBarItemSelectedBackground.png; sourceTree = "<group>"; };
@@ -2057,14 +2057,14 @@
 		A7841C2E13E1494800131648 /* GHTableViewAlertView */ = {
 			isa = PBXGroup;
 			children = (
-				A7841C3013E1496300131648 /* GHTableViewAlertView.h */,
-				A7841C3113E1496300131648 /* GHTableViewAlertView.m */,
-				A7841C3213E1496300131648 /* GHTableViewAlertViewTableViewBackgroundView.h */,
-				A7841C3313E1496300131648 /* GHTableViewAlertViewTableViewBackgroundView.m */,
-				A7841C3413E1496300131648 /* GHTableViewAlertViewTableViewCell.h */,
-				A7841C3513E1496300131648 /* GHTableViewAlertViewTableViewCell.m */,
-				A7841C3613E1496300131648 /* GHTableViewAlertViewTableViewCellSeperatorView.h */,
-				A7841C3713E1496300131648 /* GHTableViewAlertViewTableViewCellSeperatorView.m */,
+				A7841C5113E178C800131648 /* GHTableViewAlertView.h */,
+				A7841C5213E178CA00131648 /* GHTableViewAlertView.m */,
+				A7841C5313E178CD00131648 /* GHTableViewAlertViewTableViewBackgroundView.h */,
+				A7841C5413E178D000131648 /* GHTableViewAlertViewTableViewBackgroundView.m */,
+				A7841C5513E178D300131648 /* GHTableViewAlertViewTableViewCell.h */,
+				A7841C5613E178D700131648 /* GHTableViewAlertViewTableViewCell.m */,
+				A7841C5713E178D900131648 /* GHTableViewAlertViewTableViewCellSeperatorView.h */,
+				A7841C5813E178DA00131648 /* GHTableViewAlertViewTableViewCellSeperatorView.m */,
 			);
 			name = GHTableViewAlertView;
 			sourceTree = "<group>";
@@ -3643,11 +3643,11 @@
 				A7E33FC213DDC4AC00AF726A /* Utility.m in Sources */,
 				A7818F9C13E0B98A009508FC /* GHPullToReleaseTableHeaderView.m in Sources */,
 				A7818F9D13E0B98A009508FC /* GHPullToReleaseTableViewController.m in Sources */,
-				A7841C3813E1496300131648 /* GHTableViewAlertView.m in Sources */,
-				A7841C3913E1496300131648 /* GHTableViewAlertViewTableViewBackgroundView.m in Sources */,
-				A7841C3A13E1496300131648 /* GHTableViewAlertViewTableViewCell.m in Sources */,
-				A7841C3B13E1496300131648 /* GHTableViewAlertViewTableViewCellSeperatorView.m in Sources */,
 				A7841C4413E15FBD00131648 /* GHManageAuthenticatedUsersAlertView.m in Sources */,
+				A7841C5913E178DD00131648 /* GHTableViewAlertView.m in Sources */,
+				A7841C5A13E178DD00131648 /* GHTableViewAlertViewTableViewBackgroundView.m in Sources */,
+				A7841C5B13E178DD00131648 /* GHTableViewAlertViewTableViewCell.m in Sources */,
+				A7841C5C13E178DD00131648 /* GHTableViewAlertViewTableViewCellSeperatorView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
