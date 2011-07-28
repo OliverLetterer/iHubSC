@@ -74,7 +74,6 @@
 		A712B7D0135CBED10009B7A7 /* GHFileMetaData.m in Sources */ = {isa = PBXBuildFile; fileRef = A712B7CF135CBED10009B7A7 /* GHFileMetaData.m */; };
 		A712B7D3135CC0DB0009B7A7 /* GHViewCloudFileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A712B7D2135CC0DB0009B7A7 /* GHViewCloudFileViewController.m */; };
 		A712B7D6135CC2130009B7A7 /* UIViewController+GHErrorHandling.m in Sources */ = {isa = PBXBuildFile; fileRef = A712B7D5135CC2130009B7A7 /* UIViewController+GHErrorHandling.m */; };
-		A712B7EC135DEF940009B7A7 /* DDProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = A712B7EB135DEF920009B7A7 /* DDProgressView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		A712B7F2135EBC990009B7A7 /* GHSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A712B7F1135EBC940009B7A7 /* GHSearchViewController.m */; };
 		A712B7F5135F09D90009B7A7 /* GHSearchRepositoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A712B7F4135F09D10009B7A7 /* GHSearchRepositoryViewController.m */; };
 		A712B7F8135F20BB0009B7A7 /* GHSearchUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A712B7F7135F20B40009B7A7 /* GHSearchUserViewController.m */; };
@@ -220,7 +219,8 @@
 		A7841CEB13E1873600131648 /* ASIInputStream.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841CE113E1873600131648 /* ASIInputStream.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		A7841CEC13E1873600131648 /* ASINetworkQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841CE313E1873600131648 /* ASINetworkQueue.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		A7841CEF13E1874B00131648 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841CEE13E1874B00131648 /* Reachability.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		A7841CF213E1881900131648 /* UIColor-Expanded.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841CF113E1881900131648 /* UIColor-Expanded.m */; };
+		A7841CF213E1881900131648 /* UIColor-Expanded.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841CF113E1881900131648 /* UIColor-Expanded.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		A7841CF513E188E300131648 /* DDProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841CF413E188E300131648 /* DDProgressView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		A784C40F13D457B500859318 /* GHPAttributedTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A784C40E13D457B500859318 /* GHPAttributedTableViewCell.m */; };
 		A78B70DB13BCE08900F4CE5E /* TabBarItemSelectedBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = A78B70D913BCE08900F4CE5E /* TabBarItemSelectedBackground.png */; };
 		A78B70DC13BCE08900F4CE5E /* TabBarItemSelectedBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A78B70DA13BCE08900F4CE5E /* TabBarItemSelectedBackground@2x.png */; };
@@ -493,8 +493,6 @@
 		A712B7D2135CC0DB0009B7A7 /* GHViewCloudFileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHViewCloudFileViewController.m; sourceTree = "<group>"; };
 		A712B7D4135CC2130009B7A7 /* UIViewController+GHErrorHandling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+GHErrorHandling.h"; sourceTree = "<group>"; };
 		A712B7D5135CC2130009B7A7 /* UIViewController+GHErrorHandling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+GHErrorHandling.m"; sourceTree = "<group>"; };
-		A712B7EA135DEF900009B7A7 /* DDProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DDProgressView.h; path = DDProgressView/DDProgressView/DDProgressView.h; sourceTree = "<group>"; };
-		A712B7EB135DEF920009B7A7 /* DDProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DDProgressView.m; path = DDProgressView/DDProgressView/DDProgressView.m; sourceTree = "<group>"; };
 		A712B7F0135EBC8C0009B7A7 /* GHSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHSearchViewController.h; sourceTree = "<group>"; };
 		A712B7F1135EBC940009B7A7 /* GHSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHSearchViewController.m; sourceTree = "<group>"; };
 		A712B7F3135F09C80009B7A7 /* GHSearchRepositoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHSearchRepositoryViewController.h; sourceTree = "<group>"; };
@@ -743,6 +741,8 @@
 		A7841CEE13E1874B00131648 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Reachability.m; path = "Submodules/asi-http-request/External/Reachability/Reachability.m"; sourceTree = "<group>"; };
 		A7841CF013E1881900131648 /* UIColor-Expanded.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIColor-Expanded.h"; path = "Submodules/uicolor-utilities/UIColor-Expanded.h"; sourceTree = "<group>"; };
 		A7841CF113E1881900131648 /* UIColor-Expanded.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIColor-Expanded.m"; path = "Submodules/uicolor-utilities/UIColor-Expanded.m"; sourceTree = "<group>"; };
+		A7841CF313E188E300131648 /* DDProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DDProgressView.h; path = Submodules/DDProgressView/DDProgressView/DDProgressView.h; sourceTree = "<group>"; };
+		A7841CF413E188E300131648 /* DDProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DDProgressView.m; path = Submodules/DDProgressView/DDProgressView/DDProgressView.m; sourceTree = "<group>"; };
 		A784C40D13D457B400859318 /* GHPAttributedTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPAttributedTableViewCell.h; sourceTree = "<group>"; };
 		A784C40E13D457B500859318 /* GHPAttributedTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPAttributedTableViewCell.m; sourceTree = "<group>"; };
 		A78B70D913BCE08900F4CE5E /* TabBarItemSelectedBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TabBarItemSelectedBackground.png; sourceTree = "<group>"; };
@@ -1396,8 +1396,8 @@
 		A712B7ED135E0B5E0009B7A7 /* DDProgressView */ = {
 			isa = PBXGroup;
 			children = (
-				A712B7EA135DEF900009B7A7 /* DDProgressView.h */,
-				A712B7EB135DEF920009B7A7 /* DDProgressView.m */,
+				A7841CF313E188E300131648 /* DDProgressView.h */,
+				A7841CF413E188E300131648 /* DDProgressView.m */,
 			);
 			name = DDProgressView;
 			path = ..;
@@ -2082,6 +2082,7 @@
 		A7841C7013E184F500131648 /* Submodules */ = {
 			isa = PBXGroup;
 			children = (
+				A712B7ED135E0B5E0009B7A7 /* DDProgressView */,
 				A70A119613C374B200685749 /* UIColor-Util */,
 				A750570013427F9E00514A82 /* asi-http-request */,
 				A7BF147C13427309001AE50D /* JSONKit */,
@@ -2592,7 +2593,6 @@
 		A7BF140D1342149C001AE50D /* iPhone */ = {
 			isa = PBXGroup;
 			children = (
-				A712B7ED135E0B5E0009B7A7 /* DDProgressView */,
 				A7A6CB9313CB1DD700C1641F /* UserInterface */,
 				A7BF140E1342149C001AE50D /* iGithubAppDelegate_iPhone.h */,
 				A7BF140F1342149C001AE50D /* iGithubAppDelegate_iPhone.m */,
@@ -3480,7 +3480,6 @@
 				A712B7D0135CBED10009B7A7 /* GHFileMetaData.m in Sources */,
 				A712B7D3135CC0DB0009B7A7 /* GHViewCloudFileViewController.m in Sources */,
 				A712B7D6135CC2130009B7A7 /* UIViewController+GHErrorHandling.m in Sources */,
-				A712B7EC135DEF940009B7A7 /* DDProgressView.m in Sources */,
 				A712B7F2135EBC990009B7A7 /* GHSearchViewController.m in Sources */,
 				A712B7F5135F09D90009B7A7 /* GHSearchRepositoryViewController.m in Sources */,
 				A712B7F8135F20BB0009B7A7 /* GHSearchUserViewController.m in Sources */,
@@ -3660,6 +3659,7 @@
 				A7841CEC13E1873600131648 /* ASINetworkQueue.m in Sources */,
 				A7841CEF13E1874B00131648 /* Reachability.m in Sources */,
 				A7841CF213E1881900131648 /* UIColor-Expanded.m in Sources */,
+				A7841CF513E188E300131648 /* DDProgressView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

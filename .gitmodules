@@ -5,7 +5,7 @@
 	path = Submodules/asi-http-request
 	url = https://github.com/pokeb/asi-http-request.git
 [submodule "DDProgressView"]
-	path = DDProgressView
+	path = Submodules/DDProgressView
 	url = https://github.com/ddeville/DDProgressView.git
 [submodule "uicolor-utilities"]
 	path = Submodules/uicolor-utilities
