@@ -49,6 +49,12 @@
 		A7528E5913D42A7F0007C4D9 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7528E5813D42A7F0007C4D9 /* CoreText.framework */; };
 		A7528E5B13D42AA20007C4D9 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7528E5A13D42AA20007C4D9 /* MediaPlayer.framework */; };
 		A7528E6113D42E310007C4D9 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7528E6013D42E310007C4D9 /* ImageIO.framework */; };
+		A757963513E19B18008670B0 /* ANAdvancedNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = A757962613E19B18008670B0 /* ANAdvancedNavigationController.m */; };
+		A757963613E19B18008670B0 /* ANRectangleView.m in Sources */ = {isa = PBXBuildFile; fileRef = A757962813E19B18008670B0 /* ANRectangleView.m */; };
+		A757963713E19B18008670B0 /* ANRemoveRectangleIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = A757962A13E19B18008670B0 /* ANRemoveRectangleIndicatorView.m */; };
+		A757963813E19B18008670B0 /* ANAdvancedNavigationController+LeftViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A757962F13E19B18008670B0 /* ANAdvancedNavigationController+LeftViewController.m */; };
+		A757963913E19B18008670B0 /* ANAdvancedNavigationController+RightViewControllers+Anchors.m in Sources */ = {isa = PBXBuildFile; fileRef = A757963213E19B18008670B0 /* ANAdvancedNavigationController+RightViewControllers+Anchors.m */; };
+		A757963A13E19B18008670B0 /* ANAdvancedNavigationController+RightViewControllers.m in Sources */ = {isa = PBXBuildFile; fileRef = A757963413E19B18008670B0 /* ANAdvancedNavigationController+RightViewControllers.m */; };
 		A75EFA5113D4325200C162F3 /* GHPIssueInfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A75EFA5013D4325200C162F3 /* GHPIssueInfoTableViewCell.m */; };
 		A7841C6F13E1849200131648 /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841C6E13E1849200131648 /* JSONKit.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		A7841CAF13E1853200131648 /* CGUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841C7213E1853200131648 /* CGUtils.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -342,8 +348,6 @@
 		A784206513E1987D00131648 /* GHWebViewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A784203F13E1987C00131648 /* GHWebViewViewController.m */; };
 		A784C40F13D457B500859318 /* GHPAttributedTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A784C40E13D457B500859318 /* GHPAttributedTableViewCell.m */; };
 		A78B70E213BCE95E00F4CE5E /* UIImage+GHTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = A78B70E113BCE95D00F4CE5E /* UIImage+GHTabBar.m */; };
-		A78F372513CF20D200C22A2D /* ANAdvancedNavigationController+RightViewControllers.m in Sources */ = {isa = PBXBuildFile; fileRef = A78F372413CF20D200C22A2D /* ANAdvancedNavigationController+RightViewControllers.m */; };
-		A78F372A13CF294100C22A2D /* ANAdvancedNavigationController+RightViewControllers+Anchors.m in Sources */ = {isa = PBXBuildFile; fileRef = A78F372913CF294100C22A2D /* ANAdvancedNavigationController+RightViewControllers+Anchors.m */; };
 		A7A6CB6213C8C89D00C1641F /* GHPLabelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7A6CB6113C8C89D00C1641F /* GHPLabelViewController.m */; };
 		A7A6CB6913C8D49A00C1641F /* GHPSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7A6CB6813C8D49A00C1641F /* GHPSearchViewController.m */; };
 		A7A6CB7113C8D70700C1641F /* GHPSearchBarTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A7A6CB7013C8D70700C1641F /* GHPSearchBarTableViewCell.m */; };
@@ -383,10 +387,6 @@
 		A7DA5EA313C250A900288937 /* GHPIssuesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7DA5EA213C250A900288937 /* GHPIssuesViewController.m */; };
 		A7DA5EA613C2534C00288937 /* GHPOpenIssuesOnRepositoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7DA5EA513C2534C00288937 /* GHPOpenIssuesOnRepositoryViewController.m */; };
 		A7DA5EA913C2578600288937 /* GHPIssueViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7DA5EA813C2578600288937 /* GHPIssueViewController.m */; };
-		A7F334A513BCCF0100DB922D /* ANAdvancedNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7F3349B13BCCF0100DB922D /* ANAdvancedNavigationController.m */; };
-		A7F334A613BCCF0100DB922D /* ANAdvancedNavigationController+LeftViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7F3349D13BCCF0100DB922D /* ANAdvancedNavigationController+LeftViewController.m */; };
-		A7F334A813BCCF0100DB922D /* ANRectangleView.m in Sources */ = {isa = PBXBuildFile; fileRef = A7F334A213BCCF0100DB922D /* ANRectangleView.m */; };
-		A7F334A913BCCF0100DB922D /* ANRemoveRectangleIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = A7F334A413BCCF0100DB922D /* ANRemoveRectangleIndicatorView.m */; };
 		A7F334B213BCD02700DB922D /* GHPLeftNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7F334B113BCD02700DB922D /* GHPLeftNavigationController.m */; };
 		A7F334B513BCD29400DB922D /* GHPLeftNavigationControllerTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A7F334B413BCD29300DB922D /* GHPLeftNavigationControllerTableViewCell.m */; };
 /* End PBXBuildFile section */
@@ -470,6 +470,19 @@
 		A7528E5813D42A7F0007C4D9 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		A7528E5A13D42AA20007C4D9 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		A7528E6013D42E310007C4D9 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
+		A757962513E19B18008670B0 /* ANAdvancedNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANAdvancedNavigationController.h; sourceTree = "<group>"; };
+		A757962613E19B18008670B0 /* ANAdvancedNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANAdvancedNavigationController.m; sourceTree = "<group>"; };
+		A757962713E19B18008670B0 /* ANRectangleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANRectangleView.h; sourceTree = "<group>"; };
+		A757962813E19B18008670B0 /* ANRectangleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANRectangleView.m; sourceTree = "<group>"; };
+		A757962913E19B18008670B0 /* ANRemoveRectangleIndicatorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANRemoveRectangleIndicatorView.h; sourceTree = "<group>"; };
+		A757962A13E19B18008670B0 /* ANRemoveRectangleIndicatorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANRemoveRectangleIndicatorView.m; sourceTree = "<group>"; };
+		A757962C13E19B18008670B0 /* ANAdvancedNavigationController+private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ANAdvancedNavigationController+private.h"; sourceTree = "<group>"; };
+		A757962E13E19B18008670B0 /* ANAdvancedNavigationController+LeftViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ANAdvancedNavigationController+LeftViewController.h"; sourceTree = "<group>"; };
+		A757962F13E19B18008670B0 /* ANAdvancedNavigationController+LeftViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ANAdvancedNavigationController+LeftViewController.m"; sourceTree = "<group>"; };
+		A757963113E19B18008670B0 /* ANAdvancedNavigationController+RightViewControllers+Anchors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ANAdvancedNavigationController+RightViewControllers+Anchors.h"; sourceTree = "<group>"; };
+		A757963213E19B18008670B0 /* ANAdvancedNavigationController+RightViewControllers+Anchors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ANAdvancedNavigationController+RightViewControllers+Anchors.m"; sourceTree = "<group>"; };
+		A757963313E19B18008670B0 /* ANAdvancedNavigationController+RightViewControllers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ANAdvancedNavigationController+RightViewControllers.h"; sourceTree = "<group>"; };
+		A757963413E19B18008670B0 /* ANAdvancedNavigationController+RightViewControllers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ANAdvancedNavigationController+RightViewControllers.m"; sourceTree = "<group>"; };
 		A75EFA4F13D4325200C162F3 /* GHPIssueInfoTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPIssueInfoTableViewCell.h; sourceTree = "<group>"; };
 		A75EFA5013D4325200C162F3 /* GHPIssueInfoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPIssueInfoTableViewCell.m; sourceTree = "<group>"; };
 		A7841C6D13E1849200131648 /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JSONKit.h; path = Submodules/JSONKit/JSONKit.h; sourceTree = "<group>"; };
@@ -996,10 +1009,6 @@
 		A784C40E13D457B500859318 /* GHPAttributedTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPAttributedTableViewCell.m; sourceTree = "<group>"; };
 		A78B70E013BCE95D00F4CE5E /* UIImage+GHTabBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+GHTabBar.h"; sourceTree = "<group>"; };
 		A78B70E113BCE95D00F4CE5E /* UIImage+GHTabBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+GHTabBar.m"; sourceTree = "<group>"; };
-		A78F372313CF20D200C22A2D /* ANAdvancedNavigationController+RightViewControllers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ANAdvancedNavigationController+RightViewControllers.h"; sourceTree = "<group>"; };
-		A78F372413CF20D200C22A2D /* ANAdvancedNavigationController+RightViewControllers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ANAdvancedNavigationController+RightViewControllers.m"; sourceTree = "<group>"; };
-		A78F372813CF294100C22A2D /* ANAdvancedNavigationController+RightViewControllers+Anchors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ANAdvancedNavigationController+RightViewControllers+Anchors.h"; sourceTree = "<group>"; };
-		A78F372913CF294100C22A2D /* ANAdvancedNavigationController+RightViewControllers+Anchors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ANAdvancedNavigationController+RightViewControllers+Anchors.m"; sourceTree = "<group>"; };
 		A7A6CB6013C8C89D00C1641F /* GHPLabelViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPLabelViewController.h; sourceTree = "<group>"; };
 		A7A6CB6113C8C89D00C1641F /* GHPLabelViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPLabelViewController.m; sourceTree = "<group>"; };
 		A7A6CB6713C8D49A00C1641F /* GHPSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPSearchViewController.h; sourceTree = "<group>"; };
@@ -1073,15 +1082,6 @@
 		A7DA5EA513C2534C00288937 /* GHPOpenIssuesOnRepositoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPOpenIssuesOnRepositoryViewController.m; sourceTree = "<group>"; };
 		A7DA5EA713C2578400288937 /* GHPIssueViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPIssueViewController.h; sourceTree = "<group>"; };
 		A7DA5EA813C2578600288937 /* GHPIssueViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPIssueViewController.m; sourceTree = "<group>"; };
-		A7F3349A13BCCF0100DB922D /* ANAdvancedNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANAdvancedNavigationController.h; sourceTree = "<group>"; };
-		A7F3349B13BCCF0100DB922D /* ANAdvancedNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANAdvancedNavigationController.m; sourceTree = "<group>"; };
-		A7F3349C13BCCF0100DB922D /* ANAdvancedNavigationController+LeftViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ANAdvancedNavigationController+LeftViewController.h"; sourceTree = "<group>"; };
-		A7F3349D13BCCF0100DB922D /* ANAdvancedNavigationController+LeftViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ANAdvancedNavigationController+LeftViewController.m"; sourceTree = "<group>"; };
-		A7F334A013BCCF0100DB922D /* ANAdvancedNavigationController+private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ANAdvancedNavigationController+private.h"; sourceTree = "<group>"; };
-		A7F334A113BCCF0100DB922D /* ANRectangleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANRectangleView.h; sourceTree = "<group>"; };
-		A7F334A213BCCF0100DB922D /* ANRectangleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANRectangleView.m; sourceTree = "<group>"; };
-		A7F334A313BCCF0100DB922D /* ANRemoveRectangleIndicatorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANRemoveRectangleIndicatorView.h; sourceTree = "<group>"; };
-		A7F334A413BCCF0100DB922D /* ANRemoveRectangleIndicatorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANRemoveRectangleIndicatorView.m; sourceTree = "<group>"; };
 		A7F334B013BCD02700DB922D /* GHPLeftNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPLeftNavigationController.h; sourceTree = "<group>"; };
 		A7F334B113BCD02700DB922D /* GHPLeftNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPLeftNavigationController.m; sourceTree = "<group>"; };
 		A7F334B313BCD29300DB922D /* GHPLeftNavigationControllerTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPLeftNavigationControllerTableViewCell.h; sourceTree = "<group>"; };
@@ -1357,6 +1357,51 @@
 			path = ..;
 			sourceTree = "<group>";
 		};
+		A757962413E19B18008670B0 /* ANAdvancedNavigationController */ = {
+			isa = PBXGroup;
+			children = (
+				A757962513E19B18008670B0 /* ANAdvancedNavigationController.h */,
+				A757962613E19B18008670B0 /* ANAdvancedNavigationController.m */,
+				A757962713E19B18008670B0 /* ANRectangleView.h */,
+				A757962813E19B18008670B0 /* ANRectangleView.m */,
+				A757962913E19B18008670B0 /* ANRemoveRectangleIndicatorView.h */,
+				A757962A13E19B18008670B0 /* ANRemoveRectangleIndicatorView.m */,
+				A757962B13E19B18008670B0 /* Private */,
+			);
+			name = ANAdvancedNavigationController;
+			path = Submodules/ANAdvancedNavigationController/ANAdvancedNavigationController;
+			sourceTree = SOURCE_ROOT;
+		};
+		A757962B13E19B18008670B0 /* Private */ = {
+			isa = PBXGroup;
+			children = (
+				A757962C13E19B18008670B0 /* ANAdvancedNavigationController+private.h */,
+				A757962D13E19B18008670B0 /* LeftViewController */,
+				A757963013E19B18008670B0 /* RightViewControllers */,
+			);
+			path = Private;
+			sourceTree = "<group>";
+		};
+		A757962D13E19B18008670B0 /* LeftViewController */ = {
+			isa = PBXGroup;
+			children = (
+				A757962E13E19B18008670B0 /* ANAdvancedNavigationController+LeftViewController.h */,
+				A757962F13E19B18008670B0 /* ANAdvancedNavigationController+LeftViewController.m */,
+			);
+			path = LeftViewController;
+			sourceTree = "<group>";
+		};
+		A757963013E19B18008670B0 /* RightViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				A757963113E19B18008670B0 /* ANAdvancedNavigationController+RightViewControllers+Anchors.h */,
+				A757963213E19B18008670B0 /* ANAdvancedNavigationController+RightViewControllers+Anchors.m */,
+				A757963313E19B18008670B0 /* ANAdvancedNavigationController+RightViewControllers.h */,
+				A757963413E19B18008670B0 /* ANAdvancedNavigationController+RightViewControllers.m */,
+			);
+			path = RightViewControllers;
+			sourceTree = "<group>";
+		};
 		A76FC9A81352D27E004C642E /* UIExpandableTableView */ = {
 			isa = PBXGroup;
 			children = (
@@ -1386,6 +1431,7 @@
 		A7841C7013E184F500131648 /* Submodules */ = {
 			isa = PBXGroup;
 			children = (
+				A757962413E19B18008670B0 /* ANAdvancedNavigationController */,
 				A7841C2E13E1494800131648 /* GHTableViewAlertView */,
 				A7BC6780134CCED40083F906 /* GHPullToReleaseTableViewController */,
 				A76FC9A81352D27E004C642E /* UIExpandableTableView */,
@@ -2688,36 +2734,6 @@
 			path = WebView;
 			sourceTree = "<group>";
 		};
-		A78F372113CF209800C22A2D /* Private */ = {
-			isa = PBXGroup;
-			children = (
-				A7F334A013BCCF0100DB922D /* ANAdvancedNavigationController+private.h */,
-				A78F372613CF28F100C22A2D /* LeftViewController */,
-				A78F372713CF290800C22A2D /* RightViewControllers */,
-			);
-			name = Private;
-			sourceTree = "<group>";
-		};
-		A78F372613CF28F100C22A2D /* LeftViewController */ = {
-			isa = PBXGroup;
-			children = (
-				A7F3349C13BCCF0100DB922D /* ANAdvancedNavigationController+LeftViewController.h */,
-				A7F3349D13BCCF0100DB922D /* ANAdvancedNavigationController+LeftViewController.m */,
-			);
-			name = LeftViewController;
-			sourceTree = "<group>";
-		};
-		A78F372713CF290800C22A2D /* RightViewControllers */ = {
-			isa = PBXGroup;
-			children = (
-				A78F372813CF294100C22A2D /* ANAdvancedNavigationController+RightViewControllers+Anchors.h */,
-				A78F372913CF294100C22A2D /* ANAdvancedNavigationController+RightViewControllers+Anchors.m */,
-				A78F372313CF20D200C22A2D /* ANAdvancedNavigationController+RightViewControllers.h */,
-				A78F372413CF20D200C22A2D /* ANAdvancedNavigationController+RightViewControllers.m */,
-			);
-			name = RightViewControllers;
-			sourceTree = "<group>";
-		};
 		A798886F13DB24880052FD50 /* NSAttributedString-Additions-for-HTML */ = {
 			isa = PBXGroup;
 			children = (
@@ -2962,7 +2978,6 @@
 		A7BF14141342149C001AE50D /* iPad */ = {
 			isa = PBXGroup;
 			children = (
-				A7F334AB13BCCF0800DB922D /* ANAdvancedNavigationController */,
 				A70DAE0713B49FC500DE4279 /* UserInterface */,
 				A7BF14151342149C001AE50D /* iGithubAppDelegate_iPad.h */,
 				A7BF14161342149C001AE50D /* iGithubAppDelegate_iPad.m */,
@@ -3213,20 +3228,6 @@
 			name = API;
 			sourceTree = "<group>";
 		};
-		A7F334AB13BCCF0800DB922D /* ANAdvancedNavigationController */ = {
-			isa = PBXGroup;
-			children = (
-				A78F372113CF209800C22A2D /* Private */,
-				A7F3349A13BCCF0100DB922D /* ANAdvancedNavigationController.h */,
-				A7F3349B13BCCF0100DB922D /* ANAdvancedNavigationController.m */,
-				A7F334A113BCCF0100DB922D /* ANRectangleView.h */,
-				A7F334A213BCCF0100DB922D /* ANRectangleView.m */,
-				A7F334A313BCCF0100DB922D /* ANRemoveRectangleIndicatorView.h */,
-				A7F334A413BCCF0100DB922D /* ANRemoveRectangleIndicatorView.m */,
-			);
-			name = ANAdvancedNavigationController;
-			sourceTree = "<group>";
-		};
 		A7F334AF13BCD01100DB922D /* GHPLeftNavigationController */ = {
 			isa = PBXGroup;
 			children = (
@@ -3404,10 +3405,6 @@
 				A7BF14171342149C001AE50D /* iGithubAppDelegate_iPad.m in Sources */,
 				A70DAE0D13B4A0D900DE4279 /* GHPDefaultTableViewCell.m in Sources */,
 				A70DAE1013B4A1DE00DE4279 /* GHPDefaultTableViewCellBackgroundView.m in Sources */,
-				A7F334A513BCCF0100DB922D /* ANAdvancedNavigationController.m in Sources */,
-				A7F334A613BCCF0100DB922D /* ANAdvancedNavigationController+LeftViewController.m in Sources */,
-				A7F334A813BCCF0100DB922D /* ANRectangleView.m in Sources */,
-				A7F334A913BCCF0100DB922D /* ANRemoveRectangleIndicatorView.m in Sources */,
 				A7F334B213BCD02700DB922D /* GHPLeftNavigationController.m in Sources */,
 				A7F334B513BCD29400DB922D /* GHPLeftNavigationControllerTableViewCell.m in Sources */,
 				A78B70E213BCE95E00F4CE5E /* UIImage+GHTabBar.m in Sources */,
@@ -3471,8 +3468,6 @@
 				A7D5548E13CB4FE600358610 /* GHPTeamsOfOrganizationViewController.m in Sources */,
 				A7D5549313CB562900358610 /* GHPInfoSectionTableViewController.m in Sources */,
 				A7D5549713CB665500358610 /* GHPTeamViewController.m in Sources */,
-				A78F372513CF20D200C22A2D /* ANAdvancedNavigationController+RightViewControllers.m in Sources */,
-				A78F372A13CF294100C22A2D /* ANAdvancedNavigationController+RightViewControllers+Anchors.m in Sources */,
 				A72FB17B13CF763100D2BE07 /* GHPIssuesOfAuthenticatedUserViewController.m in Sources */,
 				A75EFA5113D4325200C162F3 /* GHPIssueInfoTableViewCell.m in Sources */,
 				A784C40F13D457B500859318 /* GHPAttributedTableViewCell.m in Sources */,
@@ -3666,6 +3661,12 @@
 				A784206313E1987D00131648 /* GHTableViewCellWithLinearGradientBackgroundView.m in Sources */,
 				A784206413E1987D00131648 /* GHUserViewController.m in Sources */,
 				A784206513E1987D00131648 /* GHWebViewViewController.m in Sources */,
+				A757963513E19B18008670B0 /* ANAdvancedNavigationController.m in Sources */,
+				A757963613E19B18008670B0 /* ANRectangleView.m in Sources */,
+				A757963713E19B18008670B0 /* ANRemoveRectangleIndicatorView.m in Sources */,
+				A757963813E19B18008670B0 /* ANAdvancedNavigationController+LeftViewController.m in Sources */,
+				A757963913E19B18008670B0 /* ANAdvancedNavigationController+RightViewControllers+Anchors.m in Sources */,
+				A757963A13E19B18008670B0 /* ANAdvancedNavigationController+RightViewControllers.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

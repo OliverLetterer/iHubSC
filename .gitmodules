@@ -22,3 +22,6 @@
 [submodule "GHTableViewAlertView"]
 	path = Submodules/GHTableViewAlertView
 	url = git@github.com:OliverLetterer/GHTableViewAlertView.git
+[submodule "ANAdvancedNavigationController"]
+	path = Submodules/ANAdvancedNavigationController
+	url = git@github.com:OliverLetterer/ANAdvancedNavigationController.git
