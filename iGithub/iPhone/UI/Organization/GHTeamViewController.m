@@ -48,9 +48,6 @@
     return self;
 }
 
-#pragma mark - Memory management
-
-
 #pragma mark - UIExpandableTableViewDatasource
 
 - (BOOL)tableView:(UIExpandableTableView *)tableView canExpandSection:(NSInteger)section {
@@ -254,25 +251,12 @@
     }
 }
 
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
 #pragma mark - Table view delegate
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == kUITableViewSectionRepositories && indexPath.row > 0) {
-        return 71.0f;
+        GHAPIRepositoryV3 *repository = [self.repositories objectAtIndex:indexPath.row - 1];
+        return [GHDescriptionTableViewCell heightWithContent:repository.description];
     }
     
     return 44.0f;
