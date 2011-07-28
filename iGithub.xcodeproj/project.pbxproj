@@ -2113,11 +2113,11 @@
 		A7841E5313E194BB00131648 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
-				A7841F3713E194BB00131648 /* iGithubAppDelegate.h */,
-				A7841F3813E194BB00131648 /* iGithubAppDelegate.m */,
 				A7841E5413E194BB00131648 /* Foundation Additions */,
 				A7841E6913E194BB00131648 /* GitHub API */,
 				A7841F3C13E194BB00131648 /* UI */,
+				A7841F3713E194BB00131648 /* iGithubAppDelegate.h */,
+				A7841F3813E194BB00131648 /* iGithubAppDelegate.m */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
