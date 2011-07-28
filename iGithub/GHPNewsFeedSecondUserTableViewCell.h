@@ -12,8 +12,11 @@
 @interface GHPNewsFeedSecondUserTableViewCell : GHPDefaultNewsFeedTableViewCell {
 @private
     UIImageView *_secondImageView;
+    UILabel *_secondLabel;
 }
 
 @property (nonatomic, retain) UIImageView *secondImageView;
+@property (nonatomic, retain) UILabel *secondLabel;
+
 
 @end

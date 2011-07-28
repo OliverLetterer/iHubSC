@@ -45,8 +45,10 @@
 
 - (void)layoutSubviews {
     [super layoutSubviews];
-    self.targetImageView.frame = CGRectMake(78.0, 26.0, 38.0, 38.0);
-    self.targetNameLabel.frame = CGRectMake(124.0, 33.0, 176.0, 16.0);
+    CGRect frame = self.descriptionLabel.frame;
+    frame = CGRectMake(78.0f, frame.origin.y + CGRectGetHeight(frame) + 2.0f, 38.0f, 38.0f);
+    self.targetImageView.frame = frame;
+    self.targetNameLabel.frame = CGRectMake(124.0, frame.origin.y, 176.0, frame.size.height);
 }
 
 - (void)prepareForReuse {
@@ -55,7 +57,18 @@
     self.targetNameLabel.text = nil;
 }
 
-#pragma mark - Memory management
++ (CGFloat)heightWithContent:(NSString *)content {
+    CGFloat minHeight = [self height];
+    
+    CGSize newSize = [content sizeWithFont:[UIFont systemFontOfSize:13.0f] 
+                         constrainedToSize:CGSizeMake(222.0f, MAXFLOAT)
+                             lineBreakMode:UILineBreakModeWordWrap];
+    
+    CGFloat height = newSize.height < 21.0f ? 21.0f : newSize.height;
+    height += 65.0f;
+    
+    return height < minHeight ? minHeight : height;
+}
 
 
 @end

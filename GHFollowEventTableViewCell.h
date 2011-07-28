@@ -7,9 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "GHTableViewCell.h"
+#import "GHDescriptionTableViewCell.h"
 
-@interface GHFollowEventTableViewCell : GHTableViewCell {
+@interface GHFollowEventTableViewCell : GHDescriptionTableViewCell {
 @private
     UIImageView *_targetImageView;
     UILabel *_targetNameLabel;

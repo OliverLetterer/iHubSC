@@ -186,7 +186,8 @@
         
         GHFollowEventPayload *payload = (GHFollowEventPayload *)item.payload;
         
-        cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ started following", @""), item.actor];
+        cell.textLabel.text = item.actor;
+        cell.descriptionLabel.text = [self descriptionForNewsFeedItem:item];
         cell.targetNameLabel.text = payload.target.login;
         [self updateImageView:cell.targetImageView atIndexPath:indexPath withGravatarID:payload.target.gravatarID];
         cell.timeLabel.text = item.creationDate.prettyShortTimeIntervalSinceNow;
@@ -407,7 +408,7 @@
     } else if(item.payload.type == GHPayloadCommitCommentEvent) {
         description = NSLocalizedString(@"commented on a commit", @"");
     } else if(item.payload.type == GHPayloadFollowEvent) {
-        description = @"";
+        description = NSLocalizedString(@"started following", @"");
     } else if(item.payload.type == GHPayloadWatchEvent) {
         GHWatchEventPayload *payload = (GHWatchEventPayload *)item.payload;
         description = [NSString stringWithFormat:NSLocalizedString(@"%@ watching", @""), payload.action];
@@ -483,7 +484,12 @@
         minimumHeight = 15.0f;
 #endif
         
-        height = [GHDescriptionTableViewCell heightWithContent:[self descriptionForNewsFeedItem:item] ];
+        NSString *description = [self descriptionForNewsFeedItem:item];
+        if (item.payload.type == GHPayloadFollowEvent) {
+            height = [GHFollowEventTableViewCell heightWithContent:description];
+        } else {
+            height = [GHDescriptionTableViewCell heightWithContent:description];
+        }
         
         [self cacheHeight:height < minimumHeight ? minimumHeight : height forRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
         i++;

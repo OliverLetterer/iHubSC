@@ -50,7 +50,13 @@
 - (void)cacheNewsFeedHeight {
     [self.newsFeed.items enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         GHNewsFeedItem *item = obj;
-        CGFloat height = [GHPDefaultNewsFeedTableViewCell heightWithContent:[self descriptionForNewsFeedItem:item]];
+        CGFloat height = 0.0f;
+        NSString *description = [self descriptionForNewsFeedItem:item];
+        if (item.payload.type == GHPayloadFollowEvent) {
+            height = [GHPNewsFeedSecondUserTableViewCell heightWithContent:description];
+        } else {
+            height = [GHPDefaultNewsFeedTableViewCell heightWithContent:description];
+        }
         NSIndexPath *indexPath = [NSIndexPath indexPathForRow:idx inSection:0];
         
         [self cacheHeight:height forRowAtIndexPath:indexPath];
@@ -77,8 +83,7 @@
     } else if(item.payload.type == GHPayloadCommitCommentEvent) {
         description = NSLocalizedString(@"commented on a commit", @"");
     } else if(item.payload.type == GHPayloadFollowEvent) {
-        GHFollowEventPayload *payload = (GHFollowEventPayload *)item.payload;
-        description = payload.target.login;
+        description = NSLocalizedString(@"started following", @"");
     } else if(item.payload.type == GHPayloadWatchEvent) {
         GHWatchEventPayload *payload = (GHWatchEventPayload *)item.payload;
         description = [NSString stringWithFormat:NSLocalizedString(@"%@ watching", @""), payload.action];
@@ -162,8 +167,6 @@
     
     [self downloadNewsFeed];
 }
-
-#pragma mark - Memory management
 
 
 #pragma mark - View lifecycle
@@ -271,6 +274,7 @@
         
         cell.textLabel.text = item.actor;
         cell.detailTextLabel.text = [self descriptionForNewsFeedItem:item];
+        cell.secondLabel.text = payload.target.login;
         cell.timeLabel.text = item.creationDate.prettyShortTimeIntervalSinceNow;
         
         [self updateImageView:cell.secondImageView atIndexPath:indexPath withGravatarID:payload.target.gravatarID];
