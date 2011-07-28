@@ -11,6 +11,7 @@
 
 #warning better organization support
 #warning search background does not match new style
+#warning attributed cell's look strange
 
 @interface iGithubAppDelegate : NSObject <UIApplicationDelegate> {
     NSManagedObjectContext *_managedObjectContext;
