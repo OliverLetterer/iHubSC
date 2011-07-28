@@ -39,7 +39,6 @@
 		A709F75A1368B7E900B0CDE7 /* GHTeamViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A709F7591368B7E800B0CDE7 /* GHTeamViewController.m */; };
 		A70A119213C3690A00685749 /* GHPMileStoneTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A70A119113C3690A00685749 /* GHPMileStoneTableViewCell.m */; };
 		A70A119513C36BA900685749 /* GHPieChartProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = A70A119413C36BA900685749 /* GHPieChartProgressView.m */; };
-		A70A119913C374C300685749 /* UIColor-Expanded.m in Sources */ = {isa = PBXBuildFile; fileRef = A70A119813C374C300685749 /* UIColor-Expanded.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		A70A119C13C37BB100685749 /* GHPMileStonesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A70A119B13C37BB100685749 /* GHPMileStonesTableViewController.m */; };
 		A70A11A313C37CB300685749 /* GHPMileStonesOnRepositoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A70A11A213C37CB300685749 /* GHPMileStonesOnRepositoryViewController.m */; };
 		A70A11A713C38BFB00685749 /* GHPNewCommentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A70A11A613C38BFB00685749 /* GHPNewCommentTableViewCell.m */; };
@@ -221,6 +220,7 @@
 		A7841CEB13E1873600131648 /* ASIInputStream.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841CE113E1873600131648 /* ASIInputStream.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		A7841CEC13E1873600131648 /* ASINetworkQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841CE313E1873600131648 /* ASINetworkQueue.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		A7841CEF13E1874B00131648 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841CEE13E1874B00131648 /* Reachability.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		A7841CF213E1881900131648 /* UIColor-Expanded.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841CF113E1881900131648 /* UIColor-Expanded.m */; };
 		A784C40F13D457B500859318 /* GHPAttributedTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A784C40E13D457B500859318 /* GHPAttributedTableViewCell.m */; };
 		A78B70DB13BCE08900F4CE5E /* TabBarItemSelectedBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = A78B70D913BCE08900F4CE5E /* TabBarItemSelectedBackground.png */; };
 		A78B70DC13BCE08900F4CE5E /* TabBarItemSelectedBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A78B70DA13BCE08900F4CE5E /* TabBarItemSelectedBackground@2x.png */; };
@@ -423,8 +423,6 @@
 		A70A119113C3690A00685749 /* GHPMileStoneTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPMileStoneTableViewCell.m; sourceTree = "<group>"; };
 		A70A119313C36BA900685749 /* GHPieChartProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPieChartProgressView.h; sourceTree = "<group>"; };
 		A70A119413C36BA900685749 /* GHPieChartProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPieChartProgressView.m; sourceTree = "<group>"; };
-		A70A119713C374C300685749 /* UIColor-Expanded.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIColor-Expanded.h"; path = "uicolor-utilities/UIColor-Expanded.h"; sourceTree = "<group>"; };
-		A70A119813C374C300685749 /* UIColor-Expanded.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIColor-Expanded.m"; path = "uicolor-utilities/UIColor-Expanded.m"; sourceTree = "<group>"; };
 		A70A119A13C37BB100685749 /* GHPMileStonesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPMileStonesTableViewController.h; sourceTree = "<group>"; };
 		A70A119B13C37BB100685749 /* GHPMileStonesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPMileStonesTableViewController.m; sourceTree = "<group>"; };
 		A70A11A113C37CB300685749 /* GHPMileStonesOnRepositoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPMileStonesOnRepositoryViewController.h; sourceTree = "<group>"; };
@@ -743,6 +741,8 @@
 		A7841CE413E1873600131648 /* ASIProgressDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASIProgressDelegate.h; path = "Submodules/asi-http-request/Classes/ASIProgressDelegate.h"; sourceTree = "<group>"; };
 		A7841CED13E1874B00131648 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Reachability.h; path = "Submodules/asi-http-request/External/Reachability/Reachability.h"; sourceTree = "<group>"; };
 		A7841CEE13E1874B00131648 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Reachability.m; path = "Submodules/asi-http-request/External/Reachability/Reachability.m"; sourceTree = "<group>"; };
+		A7841CF013E1881900131648 /* UIColor-Expanded.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIColor-Expanded.h"; path = "Submodules/uicolor-utilities/UIColor-Expanded.h"; sourceTree = "<group>"; };
+		A7841CF113E1881900131648 /* UIColor-Expanded.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIColor-Expanded.m"; path = "Submodules/uicolor-utilities/UIColor-Expanded.m"; sourceTree = "<group>"; };
 		A784C40D13D457B400859318 /* GHPAttributedTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPAttributedTableViewCell.h; sourceTree = "<group>"; };
 		A784C40E13D457B500859318 /* GHPAttributedTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPAttributedTableViewCell.m; sourceTree = "<group>"; };
 		A78B70D913BCE08900F4CE5E /* TabBarItemSelectedBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TabBarItemSelectedBackground.png; sourceTree = "<group>"; };
@@ -1230,7 +1230,6 @@
 		A7089518134A0C49000DD6CE /* Foundation Additions */ = {
 			isa = PBXGroup;
 			children = (
-				A70A119613C374B200685749 /* UIColor-Util */,
 				A706C0C9139AD139008A6184 /* UIColor+Github */,
 				A73AE5EF1350FB0200E9EBA4 /* NSString+Additions */,
 				A73AE5A4134EF4C900E9EBA4 /* UITableView+Additions */,
@@ -1291,10 +1290,11 @@
 		A70A119613C374B200685749 /* UIColor-Util */ = {
 			isa = PBXGroup;
 			children = (
-				A70A119713C374C300685749 /* UIColor-Expanded.h */,
-				A70A119813C374C300685749 /* UIColor-Expanded.m */,
+				A7841CF013E1881900131648 /* UIColor-Expanded.h */,
+				A7841CF113E1881900131648 /* UIColor-Expanded.m */,
 			);
 			name = "UIColor-Util";
+			path = ..;
 			sourceTree = "<group>";
 		};
 		A70A11A813C3B33B00685749 /* GHAPIPullRequestV3 */ = {
@@ -2082,6 +2082,7 @@
 		A7841C7013E184F500131648 /* Submodules */ = {
 			isa = PBXGroup;
 			children = (
+				A70A119613C374B200685749 /* UIColor-Util */,
 				A750570013427F9E00514A82 /* asi-http-request */,
 				A7BF147C13427309001AE50D /* JSONKit */,
 				A798886F13DB24880052FD50 /* NSAttributedString-Additions-for-HTML */,
@@ -3565,7 +3566,6 @@
 				A7DA5EA913C2578600288937 /* GHPIssueViewController.m in Sources */,
 				A70A119213C3690A00685749 /* GHPMileStoneTableViewCell.m in Sources */,
 				A70A119513C36BA900685749 /* GHPieChartProgressView.m in Sources */,
-				A70A119913C374C300685749 /* UIColor-Expanded.m in Sources */,
 				A70A119C13C37BB100685749 /* GHPMileStonesTableViewController.m in Sources */,
 				A70A11A313C37CB300685749 /* GHPMileStonesOnRepositoryViewController.m in Sources */,
 				A70A11A713C38BFB00685749 /* GHPNewCommentTableViewCell.m in Sources */,
@@ -3659,6 +3659,7 @@
 				A7841CEB13E1873600131648 /* ASIInputStream.m in Sources */,
 				A7841CEC13E1873600131648 /* ASINetworkQueue.m in Sources */,
 				A7841CEF13E1874B00131648 /* Reachability.m in Sources */,
+				A7841CF213E1881900131648 /* UIColor-Expanded.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

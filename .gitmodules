@@ -8,7 +8,7 @@
 	path = DDProgressView
 	url = https://github.com/ddeville/DDProgressView.git
 [submodule "uicolor-utilities"]
-	path = uicolor-utilities
+	path = Submodules/uicolor-utilities
 	url = https://github.com/ars/uicolor-utilities.git
 [submodule "NSAttributedString-Additions-for-HTML"]
 	path = Submodules/NSAttributedString-Additions-for-HTML
