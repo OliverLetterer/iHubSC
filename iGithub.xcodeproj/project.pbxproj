@@ -454,7 +454,7 @@
 		A757967213E1A030008670B0 /* GHPLabelTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPLabelTableViewCell.m; sourceTree = "<group>"; };
 		A757967513E1A030008670B0 /* GHPMileStonesOnRepositoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPMileStonesOnRepositoryViewController.h; sourceTree = "<group>"; };
 		A757967613E1A030008670B0 /* GHPMileStonesOnRepositoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPMileStonesOnRepositoryViewController.m; sourceTree = "<group>"; };
-		A757967713E1A030008670B0 /* GHPMileStonesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; path = GHPMileStonesViewController.h; sourceTree = "<group>"; };
+		A757967713E1A030008670B0 /* GHPMileStonesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPMileStonesViewController.h; sourceTree = "<group>"; };
 		A757967813E1A030008670B0 /* GHPMileStonesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPMileStonesViewController.m; sourceTree = "<group>"; };
 		A757967A13E1A030008670B0 /* GHPMilestoneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPMilestoneViewController.h; sourceTree = "<group>"; };
 		A757967B13E1A030008670B0 /* GHPMilestoneViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPMilestoneViewController.m; sourceTree = "<group>"; };
