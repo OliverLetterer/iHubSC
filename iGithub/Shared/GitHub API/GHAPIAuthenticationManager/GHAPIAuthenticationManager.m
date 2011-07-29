@@ -37,7 +37,7 @@ NSString *const kGHAPIAuthenticationManagerLastAuthenticatedUserNumberKey = @"kG
 }
 
 - (void)setAuthenticatedUser:(GHAPIUserV3 *)authenticatedUser {
-    if (![_usersArray containsObject:authenticatedUser]) {
+    if (![_usersArray containsObject:authenticatedUser] && authenticatedUser != nil) {
         DLog(@"_usersArray (%@) does not contain authenticatedUser(%@)", _usersArray, authenticatedUser);
         return;
     }
