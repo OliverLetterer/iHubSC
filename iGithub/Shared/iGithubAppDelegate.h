@@ -16,6 +16,7 @@
 #warning update create issue view on iphone
 #warning what happens, if password changes?
 #warning make README directly showable
+#warning support https://github.com/github/github-flavored-markdown
 
 @interface iGithubAppDelegate : NSObject <UIApplicationDelegate> {
     NSManagedObjectContext *_managedObjectContext;
