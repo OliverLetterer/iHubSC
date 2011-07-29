@@ -13,6 +13,9 @@
 #warning add a calendar to edit due dates
 #warning images for users on iPhone
 #warning update milestone and all other related issue data
+#warning update create issue view on iphone
+#warning what happens, if password changes?
+#warning make README directly showable
 
 @interface iGithubAppDelegate : NSObject <UIApplicationDelegate> {
     NSManagedObjectContext *_managedObjectContext;
