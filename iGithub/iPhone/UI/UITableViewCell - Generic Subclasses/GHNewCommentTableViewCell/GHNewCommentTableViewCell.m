@@ -16,6 +16,9 @@
 #define kUIAlertViewTagLinkURL              12985
 
 CGFloat const GHNewCommentTableViewCellHeight = 161.0f;
+NSInteger const GHNewCommentTableViewCellSubmitButtonTag = 87512;
+
+
 
 @implementation GHNewCommentTableViewCell
 @synthesize textView=_textView;
@@ -58,6 +61,7 @@ CGFloat const GHNewCommentTableViewCellHeight = 161.0f;
                                              style:UIBarButtonItemStyleDone 
                                             target:self 
                                             action:@selector(toolbarDoneButtonClicked:)];
+    item.tag = GHNewCommentTableViewCellSubmitButtonTag;
     [items addObject:item];
     
     toolbar.items = items;

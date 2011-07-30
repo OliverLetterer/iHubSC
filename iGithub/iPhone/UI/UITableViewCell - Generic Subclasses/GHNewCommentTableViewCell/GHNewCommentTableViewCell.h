@@ -10,6 +10,7 @@
 #import "GHTableViewCell.h"
 
 extern CGFloat const GHNewCommentTableViewCellHeight;
+extern NSInteger const GHNewCommentTableViewCellSubmitButtonTag;
 
 @class GHNewCommentTableViewCell;
 
@@ -39,5 +40,9 @@ extern CGFloat const GHNewCommentTableViewCellHeight;
 
 @property (nonatomic, weak) id<GHNewCommentTableViewCellDelegate> delegate;
 
+- (void)toolbarCancelButtonClicked:(UIBarButtonItem *)barButton;
+- (void)toolbarDoneButtonClicked:(UIBarButtonItem *)barButton;
+- (void)toolbarInsertButtonClicked:(UIBarButtonItem *)barButton;
+- (void)toolbarFormatButtonClicked:(UIBarButtonItem *)barButton;
 
 @end

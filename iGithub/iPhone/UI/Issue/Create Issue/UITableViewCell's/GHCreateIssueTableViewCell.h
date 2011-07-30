@@ -7,15 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "GHTableViewCell.h"
+#import "GHNewCommentTableViewCell.h"
 
-@interface GHCreateIssueTableViewCell : GHTableViewCell {
+@interface GHCreateIssueTableViewCell : GHNewCommentTableViewCell {
 @private
     UITextField *_titleTextField;
-    UITextView *_descriptionTextField;
 }
 
 @property (nonatomic, retain) UITextField *titleTextField;
-@property (nonatomic, retain) UITextView *descriptionTextField;
+
+@property (nonatomic, readonly) UIView *titleTextFieldInputAccessoryView;
+
+- (void)titleTextFieldNextButtonClicked:(UIBarButtonItem *)sender;
 
 @end

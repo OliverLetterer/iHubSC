@@ -62,7 +62,7 @@
     }
     
     [GHAPIIssueV3 createIssueOnRepository:self.repository title:cell.titleTextField.text 
-                                  body:cell.descriptionTextField.text assignee:assignee.login milestone:milestoneNumber 
+                                  body:cell.textView.text assignee:assignee.login milestone:milestoneNumber 
                      completionHandler:^(GHAPIIssueV3 *issue, NSError *error) {
                          if (error) {
                              [self handleError:error];
@@ -295,16 +295,13 @@
         if (indexPath.row == 0) {
             NSString *CellIdentifier = @"GHCreateIssueTableViewCell";
             
-            GHCreateIssueTableViewCell *cell = (GHCreateIssueTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+            GHCreateIssueTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
             if (cell == nil) {
                 cell = [[GHCreateIssueTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
             }
             
             [self updateImageView:cell.imageView atIndexPath:indexPath withAvatarURLString:[GHAPIAuthenticationManager sharedInstance].authenticatedUser.avatarURL];
-            
-            cell.descriptionTextField.inputAccessoryView = self.textViewToolBar;
-            self.textView = cell.descriptionTextField;
             
             return cell;
         }
