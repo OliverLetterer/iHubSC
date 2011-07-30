@@ -2260,13 +2260,13 @@
 		A7841E6913E194BB00131648 /* GitHub API */ = {
 			isa = PBXGroup;
 			children = (
-				A7204D7213E45A1F0098C86A /* Markdown */,
 				A7841E8313E194BB00131648 /* GithubAPI.h */,
 				A7841E6A13E194BB00131648 /* Foundation & Class Additions */,
 				A7841E8013E194BB00131648 /* GHAPIAuthenticationManager */,
+				A7204D7213E45A1F0098C86A /* Markdown */,
 				A7841E9A13E194BB00131648 /* Utility */,
-				A7841E9E13E194BB00131648 /* v2 */,
 				A7841F0013E194BB00131648 /* v3 */,
+				A7841E9E13E194BB00131648 /* v2 */,
 			);
 			path = "GitHub API";
 			sourceTree = "<group>";
