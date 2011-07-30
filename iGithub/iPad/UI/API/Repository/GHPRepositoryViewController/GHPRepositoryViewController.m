@@ -22,6 +22,7 @@
 #import "GHPLabelViewController.h"
 #import "ANNotificationQueue.h"
 #import "GHWebViewViewController.h"
+#import "GHViewREADMEViewController.h"
 
 #define kUIAlertViewTagDeleteRepository     1337
 #define kUIAlertViewTagAddCollaborator      1338
@@ -31,12 +32,13 @@
 
 #define kUITableViewSectionInfo             0
 #define kUITableViewSectionOwner            1
-#define kUITableViewSectionFurtherContent   2
-#define kUITableViewSectionRecentCommits    3
-#define kUITableViewSectionBrowseContent    4
-#define kUITableViewSectionLabels           5
+#define KUITableViewSectionREADME           2
+#define kUITableViewSectionFurtherContent   3
+#define kUITableViewSectionRecentCommits    4
+#define kUITableViewSectionBrowseContent    5
+#define kUITableViewSectionLabels           6
 
-#define kUITableViewNumberOfSections        6
+#define kUITableViewNumberOfSections        7
 
 @implementation GHPRepositoryViewController
 
@@ -86,16 +88,6 @@
         self.repositoryString = repositoryString;
     }
     return self;
-}
-
-#pragma mark - Memory management
-
-
-#pragma mark - View lifecycle
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    // Return YES for supported orientations
-	return YES;
 }
 
 #pragma mark - UIExpandableTableViewDatasource
@@ -215,6 +207,8 @@
         return self.labels.count + 1;
     } else if (section == kUITableViewSectionRecentCommits || section == kUITableViewSectionBrowseContent) {
         return self.branches.count + 1;
+    } else if (section == KUITableViewSectionREADME) {
+        return 1;
     }
     // Return the number of rows in the section.
     return 0;
@@ -340,45 +334,19 @@
         cell.textLabel.text = branch.name;
         
         return cell;
+    } else if (indexPath.section == KUITableViewSectionREADME) {
+        GHPDefaultTableViewCell *cell = [self defaultTableViewCellForRowAtIndexPath:indexPath withReuseIdentifier:@"GHPDefaultTableViewCell"];
+        
+        cell.textLabel.text = NSLocalizedString(@"README", @"");
+        cell.imageView.image = [UIImage imageNamed:@"GHFile.png"];
+        
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        
+        return cell;
     }
     
     return self.dummyCell;
 }
-
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
 
 #pragma mark - Table view delegate
 
@@ -440,6 +408,8 @@
         GHAPILabelV3 *label = [self.labels objectAtIndex:indexPath.row-1];
         viewController = [[GHPLabelViewController alloc] initWithRepository:self.repositoryString 
                                                                        label:label];
+    } else if (indexPath.section == KUITableViewSectionREADME) {
+        viewController = [[GHViewREADMEViewController alloc] initWithRepository:self.repositoryString];
     }
     
     if (viewController) {

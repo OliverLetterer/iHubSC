@@ -67,7 +67,7 @@
         if (![relativeURL isEqualToString:@"/"]) {
             URL = [URL URLByAppendingPathComponent:relativeURL];
         }
-        URL = [URL URLByAppendingPathComponent:filename];
+        URL = [URL URLByAppendingPathComponent:[NSString stringWithFormat:@"%@", filename]];
         NSString *URLString = [URL absoluteString];
         URL = [NSURL URLWithString:[URLString stringByAppendingString:@"?meta=1"]];
         

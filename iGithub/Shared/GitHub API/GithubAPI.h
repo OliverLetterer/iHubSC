@@ -52,6 +52,8 @@
 #import "GHAPIPullRequestMergeStateV3.h"
 #import "GHAPIImageCacheV3.h"
 #import "UIImage+GHAPIImageCacheV3.h"
+#import "GHAPITreeV3.h"
+#import "GHAPITreeFileV3.h"
 
 // util
 #import "GHAPIConnectionHandlersV3.h"

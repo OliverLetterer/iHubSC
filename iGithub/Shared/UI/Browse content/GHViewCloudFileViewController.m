@@ -25,6 +25,11 @@
     [self updateViewForImageContent];
 }
 
+- (void)setFilename:(NSString *)filename {
+    _filename = [filename copy];
+    self.title = _filename;
+}
+
 - (void)setMetadata:(GHFileMetaData *)metadata {
     if (metadata != _metadata) {
         _metadata = metadata;

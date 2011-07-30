@@ -21,6 +21,7 @@
 #import "GHLabelTableViewCell.h"
 #import "GHViewLabelViewController.h"
 #import "ANNotificationQueue.h"
+#import "GHViewREADMEViewController.h"
 
 #define kUITableViewSectionUserData         0
 #define kUITableViewSectionOwner            1
@@ -471,6 +472,8 @@
                 cell.imageView.image = [UIImage imageNamed:@"GHPublicRepositoryIcon.png"];
             }
             
+            cell.selectionStyle = UITableViewCellSelectionStyleBlue;
+            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             return cell;
         }
     } else if (indexPath.section == kUITableViewSectionOwner) {
@@ -1000,6 +1003,9 @@
             GHWebViewViewController *viewController = [[GHWebViewViewController alloc] initWithURL:wikiURL];
             [self.navigationController pushViewController:viewController animated:YES];
         }
+    } else if (indexPath.section == kUITableViewSectionUserData) {
+        GHViewREADMEViewController *viewController = [[GHViewREADMEViewController alloc] initWithRepository:self.repositoryString];
+        [self.navigationController pushViewController:viewController animated:YES];
     } else {
         [self.tableView deselectRowAtIndexPath:indexPath animated:NO];
     }
