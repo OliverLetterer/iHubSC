@@ -7,7 +7,6 @@
 //
 
 #import "GHViewCloudFileViewController.h"
-#import "WAHTMLMarkdownFormatter.h"
 #import "GHLinearGradientBackgroundView.h"
 
 @implementation GHViewCloudFileViewController
@@ -44,7 +43,7 @@
                     
                     if (fileString) {
                         if ([self.filename hasSuffix:@".md"] || [self.filename hasSuffix:@".markdown"] || [self.filename hasSuffix:@".mdown"]) {
-                            self.markdownString = fileString.HTMLMarkdownFormattedString;
+                            self.markdownString = [GHAPIMarkdownFormatter fullHTMLPageFromMarkdownString:fileString];
                             [self updateViewToShowMarkdownFile];
                         } else {
                             self.contentString = [self HTMLPageStringFromFileContent:fileString];

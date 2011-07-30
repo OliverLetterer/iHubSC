@@ -8,7 +8,6 @@
 
 #import "GHAPIGistCommentV3.h"
 #import "GithubAPI.h"
-#import "WASelectedAttributedMarkdownFormatter.h"
 #import "NSAttributedString+HTML.h"
 
 @implementation GHAPIGistCommentV3
@@ -17,17 +16,14 @@
 
 - (NSAttributedString *)attributedBody {
     if (!_attributedBody) {
-        _attributedBody = self.body.attributesStringFromMarkdownString;
+        _attributedBody = self.body.nonSelectedAttributesStringFromMarkdown;
     }
     return _attributedBody;
 }
 
 - (NSAttributedString *)selectedAttributedBody {
     if (!_selectedAttributedBody) {
-        WASelectedAttributedMarkdownFormatter *formatter = [[WASelectedAttributedMarkdownFormatter alloc] init];
-        NSString *HTML = [formatter HTMLForMarkdown:self.body];
-        NSData *HTMLData = [HTML dataUsingEncoding:NSUTF8StringEncoding];
-        _selectedAttributedBody = [NSAttributedString attributedStringWithHTML:HTMLData options:nil];
+        _selectedAttributedBody = self.body.selectedAttributesStringFromMarkdown;
     }
     return _selectedAttributedBody;
 }

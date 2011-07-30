@@ -56,6 +56,7 @@
 // util
 #import "GHAPIConnectionHandlersV3.h"
 #import "Utility.h"
+#import "GHAPIMarkdownFormatter.h"
 
 // v2
 #import "GHPayload.h"

@@ -31,3 +31,6 @@
 [submodule "GHPieChartProgressView"]
 	path = Submodules/GHPieChartProgressView
 	url = git@github.com:OliverLetterer/GHPieChartProgressView.git
+[submodule "markdownlive"]
+	path = Submodules/markdownlive
+	url = git@github.com:OliverLetterer/markdownlive.git

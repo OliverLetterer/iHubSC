@@ -17,9 +17,11 @@
 @end
 
 
+
 @interface NSString (GHAPIHTTPParsing)
 @property (nonatomic, readonly) NSUInteger nextPage;
 @end
+
 
 
 @interface NSString (GHAPIColorParsing)
@@ -27,19 +29,19 @@
 @end
 
 
+
 @interface NSString (Parsing)
 - (NSString *)substringBetweenLeftBounds:(NSString *)leftBounds andRightBounds:(NSString *)rightBounds;
 @end
 
 
-extern NSString *const kGHNSStringMarkdownStyleFull;
 
 @interface NSString (GHMarkdownParsing)
-@property (nonatomic, readonly) NSString *HTMLMarkdownFormattedString;
-- (NSString *)stringFromMarkdownStyle:(NSString *)markdownStyle;
-
-@property (nonatomic, readonly) NSAttributedString *attributesStringFromMarkdownString;
+@property (nonatomic, readonly) NSAttributedString *nonSelectedAttributesStringFromMarkdown;
+@property (nonatomic, readonly) NSAttributedString *selectedAttributesStringFromMarkdown;
 @end
+
+
 
 @interface NSString (GHAPIHasing)
 - (NSString *)stringFromMD5Hash;

@@ -8,6 +8,20 @@
 
 /* Begin PBXBuildFile section */
 		A703B9471347562B0014235D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A703B9461347562B0014235D /* QuartzCore.framework */; };
+		A7204D5413E459590098C86A /* discountWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = A7204D4F13E459590098C86A /* discountWrapper.m */; };
+		A7204D5513E459590098C86A /* markdownWrapper.c in Sources */ = {isa = PBXBuildFile; fileRef = A7204D5013E459590098C86A /* markdownWrapper.c */; };
+		A7204D5613E459590098C86A /* mkdioWrapper.c in Sources */ = {isa = PBXBuildFile; fileRef = A7204D5213E459590098C86A /* mkdioWrapper.c */; };
+		A7204D6713E4598A0098C86A /* mkdio.c in Sources */ = {isa = PBXBuildFile; fileRef = A7204D5B13E459890098C86A /* mkdio.c */; };
+		A7204D6813E4598A0098C86A /* markdown.c in Sources */ = {isa = PBXBuildFile; fileRef = A7204D5D13E459890098C86A /* markdown.c */; };
+		A7204D6913E4598A0098C86A /* generate.c in Sources */ = {isa = PBXBuildFile; fileRef = A7204D5E13E459890098C86A /* generate.c */; };
+		A7204D6A13E4598A0098C86A /* resource.c in Sources */ = {isa = PBXBuildFile; fileRef = A7204D5F13E459890098C86A /* resource.c */; };
+		A7204D6B13E4598A0098C86A /* xml.c in Sources */ = {isa = PBXBuildFile; fileRef = A7204D6013E459890098C86A /* xml.c */; };
+		A7204D6C13E4598A0098C86A /* Csio.c in Sources */ = {isa = PBXBuildFile; fileRef = A7204D6113E459890098C86A /* Csio.c */; };
+		A7204D6D13E4598A0098C86A /* emmatch.c in Sources */ = {isa = PBXBuildFile; fileRef = A7204D6213E459890098C86A /* emmatch.c */; };
+		A7204D6E13E4598A0098C86A /* html5.c in Sources */ = {isa = PBXBuildFile; fileRef = A7204D6313E459890098C86A /* html5.c */; };
+		A7204D6F13E4598A0098C86A /* tags.c in Sources */ = {isa = PBXBuildFile; fileRef = A7204D6513E459890098C86A /* tags.c */; };
+		A7204D7013E4598A0098C86A /* setup.c in Sources */ = {isa = PBXBuildFile; fileRef = A7204D6613E4598A0098C86A /* setup.c */; };
+		A7204D8113E4759F0098C86A /* GHAPIMarkdownFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = A7204D8013E4759F0098C86A /* GHAPIMarkdownFormatter.m */; };
 		A747C8C413BCCC0B00659504 /* libz.1.2.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A747C8C313BCCC0B00659504 /* libz.1.2.5.dylib */; };
 		A750571F13427FE800514A82 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A750571E13427FE800514A82 /* CFNetwork.framework */; };
 		A750572113427FEF00514A82 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A750572013427FEF00514A82 /* SystemConfiguration.framework */; };
@@ -248,17 +262,6 @@
 		A7841F7313E194BC00131648 /* UIColor+GithubAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841E7C13E194BB00131648 /* UIColor+GithubAPI.m */; };
 		A7841F7413E194BC00131648 /* UIImage+GHAPIImageCacheV3.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841E7F13E194BB00131648 /* UIImage+GHAPIImageCacheV3.m */; };
 		A7841F7513E194BC00131648 /* GHAPIAuthenticationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841E8213E194BB00131648 /* GHAPIAuthenticationManager.m */; };
-		A7841F7613E194BC00131648 /* array.c in Sources */ = {isa = PBXBuildFile; fileRef = A7841E8513E194BB00131648 /* array.c */; };
-		A7841F7713E194BC00131648 /* buffer.c in Sources */ = {isa = PBXBuildFile; fileRef = A7841E8713E194BB00131648 /* buffer.c */; };
-		A7841F7813E194BC00131648 /* markdown.c in Sources */ = {isa = PBXBuildFile; fileRef = A7841E8913E194BB00131648 /* markdown.c */; };
-		A7841F7913E194BC00131648 /* MarkdownStyle in Resources */ = {isa = PBXBuildFile; fileRef = A7841E8B13E194BB00131648 /* MarkdownStyle */; };
-		A7841F7A13E194BC00131648 /* renderers.c in Sources */ = {isa = PBXBuildFile; fileRef = A7841E8C13E194BB00131648 /* renderers.c */; };
-		A7841F7B13E194BC00131648 /* WAAttributesMarkdownFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841E8F13E194BB00131648 /* WAAttributesMarkdownFormatter.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		A7841F7C13E194BC00131648 /* WAFoundationExtras.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841E9113E194BB00131648 /* WAFoundationExtras.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		A7841F7D13E194BC00131648 /* WAHTMLMarkdownFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841E9313E194BB00131648 /* WAHTMLMarkdownFormatter.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		A7841F7E13E194BC00131648 /* WAMarkdown.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841E9513E194BB00131648 /* WAMarkdown.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		A7841F7F13E194BC00131648 /* WAMarkdownParser.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841E9713E194BB00131648 /* WAMarkdownParser.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		A7841F8013E194BC00131648 /* WASelectedAttributedMarkdownFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841E9913E194BB00131648 /* WASelectedAttributedMarkdownFormatter.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		A7841F8113E194BC00131648 /* Utility.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841E9D13E194BB00131648 /* Utility.m */; };
 		A7841F8213E194BC00131648 /* GHActorAttributes.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841EA113E194BB00131648 /* GHActorAttributes.m */; };
 		A7841F8313E194BC00131648 /* GHCommit.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841EA413E194BB00131648 /* GHCommit.m */; };
@@ -379,6 +382,7 @@
 		A784206313E1987D00131648 /* GHTableViewCellWithLinearGradientBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = A784203913E1987C00131648 /* GHTableViewCellWithLinearGradientBackgroundView.m */; };
 		A784206413E1987D00131648 /* GHUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A784203C13E1987C00131648 /* GHUserViewController.m */; };
 		A784206513E1987D00131648 /* GHWebViewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A784203F13E1987C00131648 /* GHWebViewViewController.m */; };
+		A7BD1EE313E476520016A662 /* styles.css in Resources */ = {isa = PBXBuildFile; fileRef = A7BD1EE213E476520016A662 /* styles.css */; };
 		A7BF13FC1342149C001AE50D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7BF13FB1342149C001AE50D /* UIKit.framework */; };
 		A7BF13FE1342149C001AE50D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7BF13FD1342149C001AE50D /* Foundation.framework */; };
 		A7BF14001342149C001AE50D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7BF13FF1342149C001AE50D /* CoreGraphics.framework */; };
@@ -392,6 +396,29 @@
 /* Begin PBXFileReference section */
 		A703B9451347560F0014235D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		A703B9461347562B0014235D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		A7204D4413E4593A0098C86A /* config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = config.h; sourceTree = "<group>"; };
+		A7204D4513E4593A0098C86A /* mkdio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mkdio.h; sourceTree = "<group>"; };
+		A7204D4D13E459590098C86A /* Discount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Discount.h; sourceTree = "<group>"; };
+		A7204D4E13E459590098C86A /* discountWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = discountWrapper.h; sourceTree = "<group>"; };
+		A7204D4F13E459590098C86A /* discountWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = discountWrapper.m; sourceTree = "<group>"; };
+		A7204D5013E459590098C86A /* markdownWrapper.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = markdownWrapper.c; sourceTree = "<group>"; };
+		A7204D5113E459590098C86A /* markdownWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = markdownWrapper.h; sourceTree = "<group>"; };
+		A7204D5213E459590098C86A /* mkdioWrapper.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = mkdioWrapper.c; sourceTree = "<group>"; };
+		A7204D5313E459590098C86A /* mkdioWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mkdioWrapper.h; sourceTree = "<group>"; };
+		A7204D5B13E459890098C86A /* mkdio.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = mkdio.c; path = Submodules/markdownlive/discount/mkdio.c; sourceTree = SOURCE_ROOT; };
+		A7204D5C13E459890098C86A /* markdown.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = markdown.h; path = Submodules/markdownlive/discount/markdown.h; sourceTree = SOURCE_ROOT; };
+		A7204D5D13E459890098C86A /* markdown.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = markdown.c; path = Submodules/markdownlive/discount/markdown.c; sourceTree = SOURCE_ROOT; };
+		A7204D5E13E459890098C86A /* generate.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = generate.c; path = Submodules/markdownlive/discount/generate.c; sourceTree = SOURCE_ROOT; };
+		A7204D5F13E459890098C86A /* resource.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = resource.c; path = Submodules/markdownlive/discount/resource.c; sourceTree = SOURCE_ROOT; };
+		A7204D6013E459890098C86A /* xml.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = xml.c; path = Submodules/markdownlive/discount/xml.c; sourceTree = SOURCE_ROOT; };
+		A7204D6113E459890098C86A /* Csio.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = Csio.c; path = Submodules/markdownlive/discount/Csio.c; sourceTree = SOURCE_ROOT; };
+		A7204D6213E459890098C86A /* emmatch.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = emmatch.c; path = Submodules/markdownlive/discount/emmatch.c; sourceTree = SOURCE_ROOT; };
+		A7204D6313E459890098C86A /* html5.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = html5.c; path = Submodules/markdownlive/discount/html5.c; sourceTree = SOURCE_ROOT; };
+		A7204D6413E459890098C86A /* tags.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = tags.h; path = Submodules/markdownlive/discount/tags.h; sourceTree = SOURCE_ROOT; };
+		A7204D6513E459890098C86A /* tags.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = tags.c; path = Submodules/markdownlive/discount/tags.c; sourceTree = SOURCE_ROOT; };
+		A7204D6613E4598A0098C86A /* setup.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = setup.c; path = Submodules/markdownlive/discount/setup.c; sourceTree = SOURCE_ROOT; };
+		A7204D7F13E4759F0098C86A /* GHAPIMarkdownFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GHAPIMarkdownFormatter.h; path = Markdown/GHAPIMarkdownFormatter.h; sourceTree = "<group>"; };
+		A7204D8013E4759F0098C86A /* GHAPIMarkdownFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GHAPIMarkdownFormatter.m; path = Markdown/GHAPIMarkdownFormatter.m; sourceTree = "<group>"; };
 		A747C8C313BCCC0B00659504 /* libz.1.2.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.5.dylib; path = usr/lib/libz.1.2.5.dylib; sourceTree = SDKROOT; };
 		A750571E13427FE800514A82 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		A750572013427FEF00514A82 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -809,27 +836,6 @@
 		A7841E8113E194BB00131648 /* GHAPIAuthenticationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHAPIAuthenticationManager.h; sourceTree = "<group>"; };
 		A7841E8213E194BB00131648 /* GHAPIAuthenticationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHAPIAuthenticationManager.m; sourceTree = "<group>"; };
 		A7841E8313E194BB00131648 /* GithubAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GithubAPI.h; sourceTree = "<group>"; };
-		A7841E8513E194BB00131648 /* array.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = array.c; sourceTree = "<group>"; };
-		A7841E8613E194BB00131648 /* array.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = array.h; sourceTree = "<group>"; };
-		A7841E8713E194BB00131648 /* buffer.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = buffer.c; sourceTree = "<group>"; };
-		A7841E8813E194BB00131648 /* buffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = buffer.h; sourceTree = "<group>"; };
-		A7841E8913E194BB00131648 /* markdown.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = markdown.c; sourceTree = "<group>"; };
-		A7841E8A13E194BB00131648 /* markdown.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = markdown.h; sourceTree = "<group>"; };
-		A7841E8B13E194BB00131648 /* MarkdownStyle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MarkdownStyle; sourceTree = "<group>"; };
-		A7841E8C13E194BB00131648 /* renderers.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = renderers.c; sourceTree = "<group>"; };
-		A7841E8D13E194BB00131648 /* renderers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = renderers.h; sourceTree = "<group>"; };
-		A7841E8E13E194BB00131648 /* WAAttributesMarkdownFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WAAttributesMarkdownFormatter.h; sourceTree = "<group>"; };
-		A7841E8F13E194BB00131648 /* WAAttributesMarkdownFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WAAttributesMarkdownFormatter.m; sourceTree = "<group>"; };
-		A7841E9013E194BB00131648 /* WAFoundationExtras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WAFoundationExtras.h; sourceTree = "<group>"; };
-		A7841E9113E194BB00131648 /* WAFoundationExtras.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WAFoundationExtras.m; sourceTree = "<group>"; };
-		A7841E9213E194BB00131648 /* WAHTMLMarkdownFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WAHTMLMarkdownFormatter.h; sourceTree = "<group>"; };
-		A7841E9313E194BB00131648 /* WAHTMLMarkdownFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WAHTMLMarkdownFormatter.m; sourceTree = "<group>"; };
-		A7841E9413E194BB00131648 /* WAMarkdown.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WAMarkdown.h; sourceTree = "<group>"; };
-		A7841E9513E194BB00131648 /* WAMarkdown.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WAMarkdown.m; sourceTree = "<group>"; };
-		A7841E9613E194BB00131648 /* WAMarkdownParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WAMarkdownParser.h; sourceTree = "<group>"; };
-		A7841E9713E194BB00131648 /* WAMarkdownParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WAMarkdownParser.m; sourceTree = "<group>"; };
-		A7841E9813E194BB00131648 /* WASelectedAttributedMarkdownFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WASelectedAttributedMarkdownFormatter.h; sourceTree = "<group>"; };
-		A7841E9913E194BB00131648 /* WASelectedAttributedMarkdownFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WASelectedAttributedMarkdownFormatter.m; sourceTree = "<group>"; };
 		A7841E9B13E194BB00131648 /* GHAPIConnectionHandlersV3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHAPIConnectionHandlersV3.h; sourceTree = "<group>"; };
 		A7841E9C13E194BB00131648 /* Utility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utility.h; sourceTree = "<group>"; };
 		A7841E9D13E194BB00131648 /* Utility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utility.m; sourceTree = "<group>"; };
@@ -1070,6 +1076,7 @@
 		A784203C13E1987C00131648 /* GHUserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHUserViewController.m; sourceTree = "<group>"; };
 		A784203E13E1987C00131648 /* GHWebViewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHWebViewViewController.h; sourceTree = "<group>"; };
 		A784203F13E1987C00131648 /* GHWebViewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHWebViewViewController.m; sourceTree = "<group>"; };
+		A7BD1EE213E476520016A662 /* styles.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; name = styles.css; path = Submodules/markdownlive/styles.css; sourceTree = SOURCE_ROOT; };
 		A7BF13F71342149C001AE50D /* iGithub.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iGithub.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A7BF13FB1342149C001AE50D /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		A7BF13FD1342149C001AE50D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -1127,6 +1134,70 @@
 			);
 			name = DDProgressView;
 			path = ..;
+			sourceTree = "<group>";
+		};
+		A7204D3F13E4587E0098C86A /* markdownlive */ = {
+			isa = PBXGroup;
+			children = (
+				A7BD1EE213E476520016A662 /* styles.css */,
+				A7204D7113E4598F0098C86A /* discount */,
+				A7204D4C13E459590098C86A /* discount_wrappers */,
+				A7204D4313E4593A0098C86A /* discount-config */,
+			);
+			name = markdownlive;
+			sourceTree = "<group>";
+		};
+		A7204D4313E4593A0098C86A /* discount-config */ = {
+			isa = PBXGroup;
+			children = (
+				A7204D4413E4593A0098C86A /* config.h */,
+				A7204D4513E4593A0098C86A /* mkdio.h */,
+			);
+			name = "discount-config";
+			path = "Submodules/markdownlive/discount-config";
+			sourceTree = SOURCE_ROOT;
+		};
+		A7204D4C13E459590098C86A /* discount_wrappers */ = {
+			isa = PBXGroup;
+			children = (
+				A7204D4D13E459590098C86A /* Discount.h */,
+				A7204D4E13E459590098C86A /* discountWrapper.h */,
+				A7204D4F13E459590098C86A /* discountWrapper.m */,
+				A7204D5013E459590098C86A /* markdownWrapper.c */,
+				A7204D5113E459590098C86A /* markdownWrapper.h */,
+				A7204D5213E459590098C86A /* mkdioWrapper.c */,
+				A7204D5313E459590098C86A /* mkdioWrapper.h */,
+			);
+			name = discount_wrappers;
+			path = Submodules/markdownlive/discount_wrappers;
+			sourceTree = SOURCE_ROOT;
+		};
+		A7204D7113E4598F0098C86A /* discount */ = {
+			isa = PBXGroup;
+			children = (
+				A7204D5B13E459890098C86A /* mkdio.c */,
+				A7204D5C13E459890098C86A /* markdown.h */,
+				A7204D5D13E459890098C86A /* markdown.c */,
+				A7204D5E13E459890098C86A /* generate.c */,
+				A7204D5F13E459890098C86A /* resource.c */,
+				A7204D6013E459890098C86A /* xml.c */,
+				A7204D6113E459890098C86A /* Csio.c */,
+				A7204D6213E459890098C86A /* emmatch.c */,
+				A7204D6313E459890098C86A /* html5.c */,
+				A7204D6413E459890098C86A /* tags.h */,
+				A7204D6513E459890098C86A /* tags.c */,
+				A7204D6613E4598A0098C86A /* setup.c */,
+			);
+			name = discount;
+			sourceTree = "<group>";
+		};
+		A7204D7213E45A1F0098C86A /* Markdown */ = {
+			isa = PBXGroup;
+			children = (
+				A7204D7F13E4759F0098C86A /* GHAPIMarkdownFormatter.h */,
+				A7204D8013E4759F0098C86A /* GHAPIMarkdownFormatter.m */,
+			);
+			name = Markdown;
 			sourceTree = "<group>";
 		};
 		A750570013427F9E00514A82 /* asi-http-request */ = {
@@ -1805,6 +1876,7 @@
 		A7841C7013E184F500131648 /* Submodules */ = {
 			isa = PBXGroup;
 			children = (
+				A7204D3F13E4587E0098C86A /* markdownlive */,
 				A757979113E1A622008670B0 /* GHPieChartProgressView */,
 				A757974413E1A3A3008670B0 /* scifihifi-iphone */,
 				A757962413E19B18008670B0 /* ANAdvancedNavigationController */,
@@ -2188,10 +2260,10 @@
 		A7841E6913E194BB00131648 /* GitHub API */ = {
 			isa = PBXGroup;
 			children = (
+				A7204D7213E45A1F0098C86A /* Markdown */,
 				A7841E8313E194BB00131648 /* GithubAPI.h */,
 				A7841E6A13E194BB00131648 /* Foundation & Class Additions */,
 				A7841E8013E194BB00131648 /* GHAPIAuthenticationManager */,
-				A7841E8413E194BB00131648 /* Markdown */,
 				A7841E9A13E194BB00131648 /* Utility */,
 				A7841E9E13E194BB00131648 /* v2 */,
 				A7841F0013E194BB00131648 /* v3 */,
@@ -2283,34 +2355,6 @@
 				A7841E8213E194BB00131648 /* GHAPIAuthenticationManager.m */,
 			);
 			path = GHAPIAuthenticationManager;
-			sourceTree = "<group>";
-		};
-		A7841E8413E194BB00131648 /* Markdown */ = {
-			isa = PBXGroup;
-			children = (
-				A7841E8513E194BB00131648 /* array.c */,
-				A7841E8613E194BB00131648 /* array.h */,
-				A7841E8713E194BB00131648 /* buffer.c */,
-				A7841E8813E194BB00131648 /* buffer.h */,
-				A7841E8913E194BB00131648 /* markdown.c */,
-				A7841E8A13E194BB00131648 /* markdown.h */,
-				A7841E8B13E194BB00131648 /* MarkdownStyle */,
-				A7841E8C13E194BB00131648 /* renderers.c */,
-				A7841E8D13E194BB00131648 /* renderers.h */,
-				A7841E8E13E194BB00131648 /* WAAttributesMarkdownFormatter.h */,
-				A7841E8F13E194BB00131648 /* WAAttributesMarkdownFormatter.m */,
-				A7841E9013E194BB00131648 /* WAFoundationExtras.h */,
-				A7841E9113E194BB00131648 /* WAFoundationExtras.m */,
-				A7841E9213E194BB00131648 /* WAHTMLMarkdownFormatter.h */,
-				A7841E9313E194BB00131648 /* WAHTMLMarkdownFormatter.m */,
-				A7841E9413E194BB00131648 /* WAMarkdown.h */,
-				A7841E9513E194BB00131648 /* WAMarkdown.m */,
-				A7841E9613E194BB00131648 /* WAMarkdownParser.h */,
-				A7841E9713E194BB00131648 /* WAMarkdownParser.m */,
-				A7841E9813E194BB00131648 /* WASelectedAttributedMarkdownFormatter.h */,
-				A7841E9913E194BB00131648 /* WASelectedAttributedMarkdownFormatter.m */,
-			);
-			path = Markdown;
 			sourceTree = "<group>";
 		};
 		A7841E9A13E194BB00131648 /* Utility */ = {
@@ -3398,9 +3442,9 @@
 				A7841E5013E1905200131648 /* ANNotificationErrorImage@2x.png in Resources */,
 				A7841E5113E1905200131648 /* ANNotificationSuccessImage.png in Resources */,
 				A7841E5213E1905200131648 /* ANNotificationSuccessImage@2x.png in Resources */,
-				A7841F7913E194BC00131648 /* MarkdownStyle in Resources */,
 				A784204013E1987C00131648 /* MainWindow_iPhone.xib in Resources */,
 				A75796FB13E1A030008670B0 /* MainWindow_iPad.xib in Resources */,
+				A7BD1EE313E476520016A662 /* styles.css in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3468,16 +3512,6 @@
 				A7841F7313E194BC00131648 /* UIColor+GithubAPI.m in Sources */,
 				A7841F7413E194BC00131648 /* UIImage+GHAPIImageCacheV3.m in Sources */,
 				A7841F7513E194BC00131648 /* GHAPIAuthenticationManager.m in Sources */,
-				A7841F7613E194BC00131648 /* array.c in Sources */,
-				A7841F7713E194BC00131648 /* buffer.c in Sources */,
-				A7841F7813E194BC00131648 /* markdown.c in Sources */,
-				A7841F7A13E194BC00131648 /* renderers.c in Sources */,
-				A7841F7B13E194BC00131648 /* WAAttributesMarkdownFormatter.m in Sources */,
-				A7841F7C13E194BC00131648 /* WAFoundationExtras.m in Sources */,
-				A7841F7D13E194BC00131648 /* WAHTMLMarkdownFormatter.m in Sources */,
-				A7841F7E13E194BC00131648 /* WAMarkdown.m in Sources */,
-				A7841F7F13E194BC00131648 /* WAMarkdownParser.m in Sources */,
-				A7841F8013E194BC00131648 /* WASelectedAttributedMarkdownFormatter.m in Sources */,
 				A7841F8113E194BC00131648 /* Utility.m in Sources */,
 				A7841F8213E194BC00131648 /* GHActorAttributes.m in Sources */,
 				A7841F8313E194BC00131648 /* GHCommit.m in Sources */,
@@ -3677,6 +3711,20 @@
 				A757982F13E1C1D5008670B0 /* GHTableViewAlertViewTableViewBackgroundView.m in Sources */,
 				A757983013E1C1D5008670B0 /* GHTableViewAlertViewTableViewCell.m in Sources */,
 				A757983113E1C1D5008670B0 /* GHTableViewAlertViewTableViewCellSeperatorView.m in Sources */,
+				A7204D5413E459590098C86A /* discountWrapper.m in Sources */,
+				A7204D5513E459590098C86A /* markdownWrapper.c in Sources */,
+				A7204D5613E459590098C86A /* mkdioWrapper.c in Sources */,
+				A7204D6713E4598A0098C86A /* mkdio.c in Sources */,
+				A7204D6813E4598A0098C86A /* markdown.c in Sources */,
+				A7204D6913E4598A0098C86A /* generate.c in Sources */,
+				A7204D6A13E4598A0098C86A /* resource.c in Sources */,
+				A7204D6B13E4598A0098C86A /* xml.c in Sources */,
+				A7204D6C13E4598A0098C86A /* Csio.c in Sources */,
+				A7204D6D13E4598A0098C86A /* emmatch.c in Sources */,
+				A7204D6E13E4598A0098C86A /* html5.c in Sources */,
+				A7204D6F13E4598A0098C86A /* tags.c in Sources */,
+				A7204D7013E4598A0098C86A /* setup.c in Sources */,
+				A7204D8113E4759F0098C86A /* GHAPIMarkdownFormatter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

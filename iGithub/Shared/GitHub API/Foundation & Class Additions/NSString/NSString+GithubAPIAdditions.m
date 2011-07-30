@@ -10,8 +10,6 @@
 #import "NSDate+GithubAPIAdditions.h"
 #import "UIColor+GithubAPI.h"
 #import "GithubAPI.h"
-#import "WAHTMLMarkdownFormatter.h"
-#import "WAAttributesMarkdownFormatter.h"
 #import <CommonCrypto/CommonDigest.h> // Need to import for CC_MD5 access
 #import "NSAttributedString+HTML.h"
 
@@ -63,6 +61,8 @@
 
 
 
+
+
 @implementation NSString (GHAPIHTTPParsing)
 
 - (NSUInteger)nextPage {
@@ -91,6 +91,8 @@
 
 
 
+
+
 @implementation NSString (GHAPIColorParsing)
 
 - (UIColor *)colorFromAPIColorString {
@@ -98,6 +100,8 @@
 }
 
 @end
+
+
 
 
 
@@ -130,29 +134,17 @@
 
 
 
-NSString *const kGHNSStringMarkdownStyleFull = @"MarkdownStyle";
-
 
 @implementation NSString (GHMarkdownParsing)
-- (NSString *)HTMLMarkdownFormattedString {
-    return [self stringFromMarkdownStyle:kGHNSStringMarkdownStyleFull];
+
+- (NSAttributedString *)selectedAttributesStringFromMarkdown {
+    NSString *HTML = [GHAPIMarkdownFormatter selectedFormattedHTMLStringFromMarkdownString:self];
+    NSData *HTMLData = [HTML dataUsingEncoding:NSUTF8StringEncoding];
+    return [NSAttributedString attributedStringWithHTML:HTMLData options:nil];
 }
 
-- (NSString *)stringFromMarkdownStyle:(NSString *)markdownStyle {
-    NSString *formatFilePath = [[NSBundle mainBundle] pathForResource:markdownStyle ofType:nil];
-    NSString *style = [NSString stringWithContentsOfFile:formatFilePath 
-                                                encoding:NSUTF8StringEncoding 
-                                                   error:NULL];
-    NSMutableString *parsedString = [NSMutableString stringWithFormat:@"%@", style];
-    
-    WAHTMLMarkdownFormatter *formatter = [[WAHTMLMarkdownFormatter alloc] init];
-    [parsedString appendFormat:@"%@", [formatter HTMLForMarkdown:self]];
-    return parsedString;
-}
-
-- (NSAttributedString *)attributesStringFromMarkdownString {
-    WAHTMLMarkdownFormatter *formatter = [[WAAttributesMarkdownFormatter alloc] init];
-    NSString *HTML = [formatter HTMLForMarkdown:self];
+- (NSAttributedString *)nonSelectedAttributesStringFromMarkdown {
+    NSString *HTML = [GHAPIMarkdownFormatter issueFormattedHTMLStringFromMarkdownString:self];
     NSData *HTMLData = [HTML dataUsingEncoding:NSUTF8StringEncoding];
     return [NSAttributedString attributedStringWithHTML:HTMLData options:nil];
 }
@@ -160,7 +152,11 @@ NSString *const kGHNSStringMarkdownStyleFull = @"MarkdownStyle";
 @end
 
 
+
+
+
 @implementation NSString (GHAPIHasing)
+
 - (NSString *)stringFromMD5Hash {
     const char *cStr = [self UTF8String];
     unsigned char result[16];
@@ -173,5 +169,6 @@ NSString *const kGHNSStringMarkdownStyleFull = @"MarkdownStyle";
             result[12], result[13], result[14], result[15]
             ];  
 }
+
 @end
 

@@ -8,7 +8,6 @@
 
 #import "GHAPIIssueCommentV3.h"
 #import "GithubAPI.h"
-#import "WASelectedAttributedMarkdownFormatter.h"
 #import "NSAttributedString+HTML.h"
 
 @implementation GHAPIIssueCommentV3
@@ -20,17 +19,14 @@
 
 - (NSAttributedString *)attributedBody {
     if (!_attributedBody) {
-        _attributedBody = self.body.attributesStringFromMarkdownString;
+        _attributedBody = self.body.nonSelectedAttributesStringFromMarkdown;
     }
     return _attributedBody;
 }
 
 - (NSAttributedString *)selectedAttributedBody {
     if (!_selectedAttributedBody) {
-        WASelectedAttributedMarkdownFormatter *formatter = [[WASelectedAttributedMarkdownFormatter alloc] init];
-        NSString *HTML = [formatter HTMLForMarkdown:self.body];
-        NSData *HTMLData = [HTML dataUsingEncoding:NSUTF8StringEncoding];
-        _selectedAttributedBody = [NSAttributedString attributedStringWithHTML:HTMLData options:nil];
+        _selectedAttributedBody = self.body.selectedAttributesStringFromMarkdown;
     }
     return _selectedAttributedBody;
 }
@@ -42,7 +38,6 @@
     if ((self = [super init])) {
         // Initialization code
         self.body = [rawDictionary objectForKeyOrNilOnNullObject:@"body"];
-        self.attributedBody = self.body.attributesStringFromMarkdownString;
         self.createdAt = [rawDictionary objectForKeyOrNilOnNullObject:@"created_at"];
         self.updatedAt = [rawDictionary objectForKeyOrNilOnNullObject:@"updated_at"];
         self.URL = [rawDictionary objectForKeyOrNilOnNullObject:@"url"];
@@ -82,7 +77,6 @@
     if ((self = [super init])) {
         _URL = [decoder decodeObjectForKey:@"uRL"];
         _body = [decoder decodeObjectForKey:@"body"];
-        self.attributedBody = _body.attributesStringFromMarkdownString;
         _user = [decoder decodeObjectForKey:@"user"];
         _createdAt = [decoder decodeObjectForKey:@"createdAt"];
         _updatedAt = [decoder decodeObjectForKey:@"updatedAt"];
