@@ -28,7 +28,7 @@
 }
 
 - (NSString *)descriptionStringForIssue:(GHAPIIssueV3 *)issue {
-    return [NSString stringWithFormat:NSLocalizedString(@"Issue %@ on %@\n%@", @""), issue.number, issue.repository, issue.title];
+    return [NSString stringWithFormat:NSLocalizedString(@"Issue %@ on %@\n\n%@", @""), issue.number, issue.repository, issue.title];
 }
 
 #pragma mark - Pagination
