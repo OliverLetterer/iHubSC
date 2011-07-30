@@ -70,4 +70,6 @@
 
 - (void)organizationsActionSheetDidSelectOrganizationAtIndex:(NSUInteger)index;
 
+- (void)addButtonClicked:(UIBarButtonItem *)sender;
+
 @end

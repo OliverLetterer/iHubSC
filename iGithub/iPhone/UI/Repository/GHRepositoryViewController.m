@@ -45,6 +45,9 @@
 
 #define kUIAlertViewAddCollaboratorTag      1337
 
+#define kUIActionSheetAddButtonTag          9864
+#define kUIActionSheetSelectOrganizationTag 9865
+
 @implementation GHRepositoryViewController
 
 @synthesize repositoryString=_repositoryString, repository=_repository, issuesArray=_issuesArray, watchedUsersArray=_watchedUsersArray, deleteToken=_deleteToken, delegate=_delegate;
@@ -92,6 +95,28 @@
         self.title = [[self.repositoryString componentsSeparatedByString:@"/"] lastObject];
     }
     return self;
+}
+
+#pragma mark - View lifecycle
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self 
+                                                                                           action:@selector(addButtonClicked:)];
+}
+
+#pragma mark - Target action's
+
+- (void)addButtonClicked:(UIBarButtonItem *)sender {
+    UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:self.repository.fullRepositoryName 
+                                                       delegate:self 
+                                              cancelButtonTitle:NSLocalizedString(@"Cancel", @"") 
+                                         destructiveButtonTitle:nil 
+                                              otherButtonTitles:NSLocalizedString(@"Create Issue", @""), nil];
+    sheet.tag = kUIActionSheetAddButtonTag;
+    sheet.actionSheetStyle = UIActionSheetStyleBlackTranslucent;
+    [sheet showInView:self.tabBarController.view];
 }
 
 #pragma mark - UIExpandableTableViewDatasource
@@ -361,7 +386,7 @@
         if ([self.repository.openIssues unsignedIntValue] == 0) {
             return 0;
         }
-        return [self.issuesArray count] + 2;
+        return [self.issuesArray count] + 1;
     } else if (section == kUITableViewSectionWatchingUsers) {
         if ([self.repository.watchers intValue] == 0) {
             return 0;
@@ -559,39 +584,25 @@
         }
     } else if (indexPath.section == kUITableViewSectionIssues) {
         // issues
-        if (indexPath.row == 1) {
-            // new issue
-            NSString *CellIdentifier = @"UITableViewCellWithLinearGradientBackgroundView";
-            
-            GHTableViewCellWithLinearGradientBackgroundView *cell = (GHTableViewCellWithLinearGradientBackgroundView *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-            if (!cell) {
-                cell = [[GHTableViewCellWithLinearGradientBackgroundView alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-            }
-            
-            cell.textLabel.text = NSLocalizedString(@"Create a new Issue", @"");
-            
-            return cell;
-        } else {
-            static NSString *CellIdentifier = @"GHFeedItemWithDescriptionTableViewCell";
-            
-            GHDescriptionTableViewCell *cell = (GHDescriptionTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-            if (cell == nil) {
-                cell = [[GHDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-            }
-            
-            GHAPIIssueV3 *issue = [self.issuesArray objectAtIndex:indexPath.row - 2];
-            
-            cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Issue %@", @""), issue.number];
-            
-            [self updateImageView:cell.imageView atIndexPath:indexPath withAvatarURLString:issue.user.avatarURL];
-            
-            cell.detailTextLabel.text = [NSString stringWithFormat:@"by %@ %@", issue.user.login, [NSString stringWithFormat:NSLocalizedString(@"%@ ago", @""), issue.createdAt.prettyTimeIntervalSinceNow]];
-            ;
-            
-            cell.descriptionLabel.text = issue.title;
-            
-            return cell;
+        static NSString *CellIdentifier = @"GHFeedItemWithDescriptionTableViewCell";
+        
+        GHDescriptionTableViewCell *cell = (GHDescriptionTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        if (cell == nil) {
+            cell = [[GHDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         }
+        
+        GHAPIIssueV3 *issue = [self.issuesArray objectAtIndex:indexPath.row-1];
+        
+        cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Issue %@", @""), issue.number];
+        
+        [self updateImageView:cell.imageView atIndexPath:indexPath withAvatarURLString:issue.user.avatarURL];
+        
+        cell.detailTextLabel.text = [NSString stringWithFormat:@"by %@ %@", issue.user.login, [NSString stringWithFormat:NSLocalizedString(@"%@ ago", @""), issue.createdAt.prettyTimeIntervalSinceNow]];
+        ;
+        
+        cell.descriptionLabel.text = issue.title;
+        
+        return cell;
     } else if (indexPath.section == kUITableViewSectionCollaborators) {
         if (indexPath.row == 1) {
             // new Collaborator
@@ -781,20 +792,6 @@
     }   
 }
 
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     if (indexPath.section == kUITableViewSectionUserData && indexPath.row == 0) {
@@ -805,7 +802,7 @@
         }
         
         return [self cachedHeightForRowAtIndexPath:indexPath];
-    } else if (indexPath.section == kUITableViewSectionIssues && indexPath.row > 1 && indexPath.row <= [self.issuesArray count]+1) {
+    } else if (indexPath.section == kUITableViewSectionIssues && indexPath.row > 0 && indexPath.row <= [self.issuesArray count]) {
         return [self cachedHeightForRowAtIndexPath:indexPath];
     } else if (indexPath.section == kUITableViewSectionPullRequests && indexPath.row > 0 && indexPath.row <= [self.pullRequests count]) {
         return [self cachedHeightForRowAtIndexPath:indexPath];
@@ -832,20 +829,11 @@
         GHWebViewViewController *webViewController = [[GHWebViewViewController alloc] initWithURL:URL];
         [self.navigationController pushViewController:webViewController animated:YES];
     } else if (indexPath.section == kUITableViewSectionIssues) {
-        if (indexPath.row == 1) {
-            GHCreateIssueTableViewController *createViewController = [[GHCreateIssueTableViewController alloc] initWithRepository:self.repositoryString];
-            createViewController.delegate = self;
-            
-            UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:createViewController];
-            
-            [self presentModalViewController:navController animated:YES];
-        } else {
-            GHAPIIssueV3 *issue = [self.issuesArray objectAtIndex:indexPath.row-2];
-            GHIssueViewController *issueViewController = [[GHIssueViewController alloc] 
-                                                                    initWithRepository:self.repositoryString 
-                                                                    issueNumber:issue.number];
-            [self.navigationController pushViewController:issueViewController animated:YES];
-        }
+        GHAPIIssueV3 *issue = [self.issuesArray objectAtIndex:indexPath.row-1];
+        GHIssueViewController *issueViewController = [[GHIssueViewController alloc] 
+                                                      initWithRepository:self.repositoryString 
+                                                      issueNumber:issue.number];
+        [self.navigationController pushViewController:issueViewController animated:YES];
     } else if (indexPath.section == kUITableViewSectionWatchingUsers) {
         // watched user
         GHAPIUserV3 *user = [self.watchedUsersArray objectAtIndex:indexPath.row-1];
@@ -917,7 +905,7 @@
                                                sheet.cancelButtonIndex = sheet.numberOfButtons-1;
                                                
                                                sheet.actionSheetStyle = UIActionSheetStyleBlackTranslucent;
-                                               
+                                               sheet.tag = kUIActionSheetSelectOrganizationTag;
                                                sheet.delegate = self;
                                                
                                                [sheet showInView:self.tabBarController.view];
@@ -1056,11 +1044,12 @@
 #pragma mark - height caching
 
 - (void)cacheHeightForIssuesArray {
-    NSInteger i = 2;
-    for (GHAPIIssueV3 *issue in self.issuesArray) {
-        [self cacheHeight:[GHDescriptionTableViewCell heightWithContent:issue.title] forRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:kUITableViewSectionIssues] ];
-        i++;
-    }
+    [self.issuesArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        GHAPIIssueV3 *issue = obj;
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:idx+1 inSection:kUITableViewSectionIssues];
+        CGFloat height = [GHDescriptionTableViewCell heightWithContent:issue.title];
+        [self cacheHeight:height forRowAtIndexPath:indexPath];
+    }];
 }
 
 - (void)cacheHeightForPullRequests {
@@ -1094,8 +1083,20 @@
 #pragma mark - UIActionSheetDelegate
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
-    if (buttonIndex < actionSheet.numberOfButtons - 1) {
-        [self organizationsActionSheetDidSelectOrganizationAtIndex:buttonIndex];
+    if (actionSheet.tag == kUIActionSheetSelectOrganizationTag) {
+        if (buttonIndex < actionSheet.numberOfButtons - 1) {
+            [self organizationsActionSheetDidSelectOrganizationAtIndex:buttonIndex];
+        }
+    } else if (actionSheet.tag == kUIActionSheetAddButtonTag) {
+        if (buttonIndex == 0) {
+            // Create Issue
+            GHCreateIssueTableViewController *createViewController = [[GHCreateIssueTableViewController alloc] initWithRepository:self.repositoryString];
+            createViewController.delegate = self;
+            
+            UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:createViewController];
+            
+            [self presentModalViewController:navController animated:YES];
+        }
     }
 }
 
