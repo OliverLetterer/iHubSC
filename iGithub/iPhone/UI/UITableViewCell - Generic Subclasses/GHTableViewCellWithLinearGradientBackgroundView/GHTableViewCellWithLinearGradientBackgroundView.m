@@ -74,6 +74,8 @@
 
 - (void)layoutSubviews {
     [super layoutSubviews];
+    
+    self.imageView.frame = CGRectInset(self.imageView.frame, 3.0f, 3.0f);
 }
 
 - (void)prepareForReuse {

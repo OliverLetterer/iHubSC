@@ -309,7 +309,7 @@
             return cell;
         }
     } else if (indexPath.section == kUITableViewSectionAssigned) {
-        NSString *CellIdentifier = @"DetailsTableViewCell";
+        NSString *CellIdentifier = @"UserCell";
         
         GHTableViewCellWithLinearGradientBackgroundView *cell = (GHTableViewCellWithLinearGradientBackgroundView *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         if (!cell) {
@@ -318,6 +318,7 @@
         
         GHAPIUserV3 *user = [self.collaborators objectAtIndex:indexPath.row - 1];
         
+        [self updateImageView:cell.imageView atIndexPath:indexPath withAvatarURLString:user.avatarURL];
         if (indexPath.row == _assignIndex) {
             cell.accessoryType = UITableViewCellAccessoryCheckmark;
         } else {
@@ -328,7 +329,7 @@
         
         return cell;
     } else if (indexPath.section == kUITableViewSectionMilestones) {
-        NSString *CellIdentifier = @"DetailsTableViewCell";
+        NSString *CellIdentifier = @"MilestoneCell";
         
         GHTableViewCellWithLinearGradientBackgroundView *cell = (GHTableViewCellWithLinearGradientBackgroundView *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         if (!cell) {

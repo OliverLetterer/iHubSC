@@ -615,6 +615,7 @@
             
             GHAPIUserV3 *user = [self.collaborators objectAtIndex:indexPath.row - 2];
             
+            [self updateImageView:cell.imageView atIndexPath:indexPath withAvatarURLString:user.avatarURL];
             cell.textLabel.text = user.login;
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             
@@ -632,6 +633,7 @@
             
             GHAPIUserV3 *user = [self.watchedUsersArray objectAtIndex:indexPath.row - 1];
             
+            [self updateImageView:cell.imageView atIndexPath:indexPath withAvatarURLString:user.avatarURL];
             cell.textLabel.text = user.login;
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             

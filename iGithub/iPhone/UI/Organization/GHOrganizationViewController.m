@@ -364,6 +364,7 @@
         
         GHAPIUserV3 *user = [self.publicMembers objectAtIndex:indexPath.row - 1];
         
+        [self updateImageView:cell.imageView atIndexPath:indexPath withAvatarURLString:user.avatarURL];
         cell.textLabel.text = user.login;
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         
