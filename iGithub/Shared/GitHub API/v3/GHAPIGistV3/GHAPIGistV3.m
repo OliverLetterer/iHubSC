@@ -85,7 +85,6 @@
 #pragma mark - downloading
 
 + (void)gistWithID:(NSString *)ID completionHandler:(void (^)(GHAPIGistV3 *, NSError *))handler {
-    
     // v3: GET /gists/:id
     
     NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.github.com/gists/%@", 
@@ -213,8 +212,5 @@
                                            }
                                        }];
 }
-
-#pragma mark - Memory management
-
 
 @end
