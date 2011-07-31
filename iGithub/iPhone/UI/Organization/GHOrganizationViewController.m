@@ -439,7 +439,8 @@
         if (indexPath.row == 0) {
             return 44.0f;
         }
-        return 71.0f;
+        GHAPIRepositoryV3 *repository = [self.publicRepositories objectAtIndex:indexPath.row-1];
+        return [GHDescriptionTableViewCell heightWithContent:repository.description];
     }
     
     return 44.0f;
