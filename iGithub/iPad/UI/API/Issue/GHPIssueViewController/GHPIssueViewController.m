@@ -643,6 +643,8 @@
                                         [self handleError:error];
                                     } else {
                                         self.issue.state = kGHAPIIssueStateV3Open;
+                                        
+                                        [[ANNotificationQueue sharedInstance] detatchSuccesNotificationWithTitle:NSLocalizedString(@"Successfully", @"") message:[NSString stringWithFormat:NSLocalizedString(@"Reopened this %@", @""), self.issueName]];
                                     }
                                 }];
         } else if ([title isEqualToString:[NSString stringWithFormat:NSLocalizedString(@"Close this %@", @""), self.issueName]]) {
@@ -653,6 +655,8 @@
                                        [self handleError:error];
                                    } else {
                                        self.issue.state = kGHAPIIssueStateV3Closed;
+                                       
+                                       [[ANNotificationQueue sharedInstance] detatchSuccesNotificationWithTitle:NSLocalizedString(@"Successfully", @"") message:[NSString stringWithFormat:NSLocalizedString(@"Closed this %@", @""), self.issueName]];
                                    }
                                }];
         } else if ([title isEqualToString:NSLocalizedString(@"Update Assignee", @"")]) {
