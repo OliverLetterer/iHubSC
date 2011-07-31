@@ -401,8 +401,8 @@
     return YES;
 }
 
-- (BOOL)canDisplayActionButtonActionSheet {
-    return _hasStarredData;
+- (BOOL)needsToDownloadDataToDisplayActionButtonActionSheet {
+    return !_hasStarredData;
 }
 
 #pragma mark - GHPAttributedTableViewCellDelegate

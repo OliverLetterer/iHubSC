@@ -41,8 +41,8 @@
     return YES;
 }
 
-- (BOOL)canDisplayActionButtonActionSheet {
-    return YES;
+- (BOOL)needsToDownloadDataToDisplayActionButtonActionSheet {
+    return NO;
 }
 
 - (void)setActionButtonActive:(BOOL)actionButtonActive {
@@ -58,9 +58,6 @@
 - (BOOL)isActionButtonActive {
     return self.infoCell.activityIndicatorView.isAnimating;
 }
-
-#pragma mark - Memory management
-
 
 #pragma mark - View lifecycle
 
@@ -88,7 +85,7 @@
 #pragma mark - GHPInfoTableViewCellDelegate
 
 - (void)infoTableViewCellActionButtonClicked:(GHPInfoTableViewCell *)cell {
-    if (!self.canDisplayActionButtonActionSheet) {
+    if (self.needsToDownloadDataToDisplayActionButtonActionSheet) {
         [self setActionButtonActive:YES];
         [self downloadDataToDisplayActionButton];
     } else {
@@ -101,7 +98,6 @@
                        animated:YES];
         }
     }
-
 }
 
 @end

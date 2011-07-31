@@ -676,8 +676,8 @@
     return YES;
 }
 
-- (BOOL)canDisplayActionButtonActionSheet {
-    return _hasWatchingData;
+- (BOOL)needsToDownloadDataToDisplayActionButtonActionSheet {
+    return !_hasWatchingData;
 }
 
 #pragma mark - Keyed Archiving

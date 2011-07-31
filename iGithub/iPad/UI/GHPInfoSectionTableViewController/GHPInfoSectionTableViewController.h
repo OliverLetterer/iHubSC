@@ -19,10 +19,10 @@
 
 // action Button
 @property (nonatomic, readonly) UIActionSheet *actionButtonActionSheet;     // overwrite
-@property (nonatomic, readonly) BOOL canDisplayActionButtonActionSheet;     // overwrite
+@property (nonatomic, readonly) BOOL needsToDownloadDataToDisplayActionButtonActionSheet;     // overwrite
 @property (nonatomic, readonly) BOOL canDisplayActionButton;                // overwrite
 
-@property (nonatomic, assign, getter = isActionButtonActive) BOOL actionButtonActive;
+@property (nonatomic, assign, getter=isActionButtonActive) BOOL actionButtonActive;
 
 - (void)downloadDataToDisplayActionButton;      // overwrite
 - (void)didDownloadDataToDisplayActionButton;

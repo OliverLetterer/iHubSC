@@ -298,8 +298,8 @@
     return !self.isAdminsitrativeUser;
 }
 
-- (BOOL)canDisplayActionButtonActionSheet {
-    return _hasFollowingData;
+- (BOOL)needsToDownloadDataToDisplayActionButtonActionSheet {
+    return !_hasFollowingData;
 }
 
 #pragma mark - Keyed Archiving

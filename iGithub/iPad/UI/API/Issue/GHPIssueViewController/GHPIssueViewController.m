@@ -791,8 +791,8 @@
     return YES;
 }
 
-- (BOOL)canDisplayActionButtonActionSheet {
-    return _hasCollaboratorData;
+- (BOOL)needsToDownloadDataToDisplayActionButtonActionSheet {
+    return !_hasCollaboratorData;
 }
 
 #pragma mark - GHPIssueInfoTableViewCellDelegate
