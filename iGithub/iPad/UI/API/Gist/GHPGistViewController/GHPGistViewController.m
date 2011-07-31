@@ -51,6 +51,10 @@
           }];
 }
 
+- (BOOL)isGistOwnedByAuthenticatedUser {
+    return [[GHAPIAuthenticationManager sharedInstance].authenticatedUser isEqualToUser:self.gist.user];
+}
+
 #pragma mark - Initialization
 
 - (id)initWithGistID:(NSString *)gistID {
@@ -59,16 +63,6 @@
         self.gistID = gistID;
     }
     return self;
-}
-
-#pragma mark - Memory management
-
-
-- (void)didReceiveMemoryWarning {
-    // Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
-    
-    // Release any cached data, images, etc that aren't in use.
 }
 
 #pragma mark - Height caching
@@ -333,35 +327,53 @@
         @try {
             title = [actionSheet buttonTitleAtIndex:buttonIndex];
         }
-        @catch (NSException *exception) {
-        }
+        @catch (NSException *exception) {}
         
-        [self setActionButtonActive:YES];
-        
-        if ([title isEqualToString:NSLocalizedString(@"Unstar", @"")]) {
-            [GHAPIGistV3 unstarGistWithID:self.gistID 
+        if ([title isEqualToString:NSLocalizedString(@"Delete", @"")]) {
+            self.actionButtonActive = YES;
+            [GHAPIGistV3 deleteGistWithID:self.gist.ID 
                         completionHandler:^(NSError *error) {
-                            [self setActionButtonActive:NO];
+                            self.actionButtonActive = NO;
                             if (error) {
                                 [self handleError:error];
                             } else {
-                                [[ANNotificationQueue sharedInstance] detatchSuccesNotificationWithTitle:NSLocalizedString(@"Successfully Unstarred", @"") message:[NSString stringWithFormat:NSLocalizedString(@"Gist %@", @""), self.gist.ID]];
-                                _isGistStarred = NO;
+                                [[ANNotificationQueue sharedInstance] detatchSuccesNotificationWithTitle:NSLocalizedString(@"Successfully", @"") message:NSLocalizedString(@"Deleted Gist", @"")];
+                                [self.advancedNavigationController popViewController:self animated:YES];
                             }
                         }];
+        } else if ([title isEqualToString:NSLocalizedString(@"Unstar", @"")]) {
+            self.actionButtonActive = YES;
+            [GHAPIGistV3 unstarGistWithID:self.gist.ID completionHandler:^(NSError *error) {
+                self.actionButtonActive = NO;
+                if (error) {
+                    [self handleError:error];
+                } else {
+                    _isGistStarred = NO;
+                    [[ANNotificationQueue sharedInstance] detatchSuccesNotificationWithTitle:NSLocalizedString(@"Successfully", @"") message:NSLocalizedString(@"Unstarred Gist", @"") ];
+                }
+            }];
         } else if ([title isEqualToString:NSLocalizedString(@"Star", @"")]) {
-            [GHAPIGistV3 starGistWithID:self.gistID 
-                      completionHandler:^(NSError *error) {
-                          [self setActionButtonActive:NO];
+            self.actionButtonActive = YES;
+            [GHAPIGistV3 starGistWithID:self.gist.ID completionHandler:^(NSError *error) {
+                self.actionButtonActive = NO;
+                if (error) {
+                    [self handleError:error];
+                } else {
+                    _isGistStarred = YES;
+                    [[ANNotificationQueue sharedInstance] detatchSuccesNotificationWithTitle:NSLocalizedString(@"Successfully", @"") message:NSLocalizedString(@"Starred Gist", @"") ];
+                }
+            }];
+        } else if ([title isEqualToString:NSLocalizedString(@"Fork", @"")]) {
+            self.actionButtonActive = YES;
+            [GHAPIGistV3 forkGistWithID:self.gist.ID 
+                      completionHandler:^(GHAPIGistV3 *gist, NSError *error) {
+                          self.actionButtonActive = NO;
                           if (error) {
                               [self handleError:error];
                           } else {
-                              [[ANNotificationQueue sharedInstance] detatchSuccesNotificationWithTitle:NSLocalizedString(@"Successfully Starred", @"") message:[NSString stringWithFormat:NSLocalizedString(@"Gist %@", @""), self.gist.ID]];
-                              _isGistStarred = YES;
+                              [[ANNotificationQueue sharedInstance] detatchSuccesNotificationWithTitle:NSLocalizedString(@"Successfully", @"") message:NSLocalizedString(@"Forked Gist", @"") ];
                           }
                       }];
-        } else {
-            [self setActionButtonActive:NO];
         }
     }
 }
@@ -384,11 +396,19 @@
 
 - (UIActionSheet *)actionButtonActionSheet {
     UIActionSheet *sheet = [[UIActionSheet alloc] init];
+    sheet.title = [NSString stringWithFormat:@"Gist: %@", self.gist.ID];;
+    NSUInteger currentButtonIndex = 0;
     
-    if (_isGistStarred) {
-        [sheet addButtonWithTitle:NSLocalizedString(@"Unstar", @"")];
+    if (self.isGistOwnedByAuthenticatedUser) {
+        [sheet addButtonWithTitle:NSLocalizedString(@"Delete", @"")];
+        sheet.destructiveButtonIndex = currentButtonIndex;
+        currentButtonIndex++;
     } else {
-        [sheet addButtonWithTitle:NSLocalizedString(@"Star", @"")];
+        [sheet addButtonWithTitle:_isGistStarred ? NSLocalizedString(@"Unstar", @"") : NSLocalizedString(@"Star", @"")];
+        currentButtonIndex++;
+        
+        [sheet addButtonWithTitle:NSLocalizedString(@"Fork", @"")];
+        currentButtonIndex++;
     }
     
     sheet.delegate = self;
@@ -402,7 +422,10 @@
 }
 
 - (BOOL)needsToDownloadDataToDisplayActionButtonActionSheet {
-    return !_hasStarredData;
+    if (!self.isGistOwnedByAuthenticatedUser) {
+        return !_hasStarredData;
+    }
+    return NO;
 }
 
 #pragma mark - GHPAttributedTableViewCellDelegate

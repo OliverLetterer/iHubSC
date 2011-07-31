@@ -26,6 +26,8 @@
     NSString *_lastUserComment;
 }
 
+@property (nonatomic, readonly) BOOL isGistOwnedByAuthenticatedUser;
+
 @property (nonatomic, copy) NSString *gistID;
 @property (nonatomic, retain) GHAPIGistV3 *gist;
 

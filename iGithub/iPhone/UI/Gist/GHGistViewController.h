@@ -7,13 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "GHTableViewController.h"
+#import "GHActionButtonTableViewController.h"
 #import "GHAttributedTableViewCell.h"
 #import "GHNewCommentTableViewCell.h"
 
 @class GHAPIGistV3;
 
-@interface GHGistViewController : GHTableViewController <GHAttributedTableViewCellDelegate, GHNewCommentTableViewCellDelegate> {
+@interface GHGistViewController : GHActionButtonTableViewController <GHAttributedTableViewCellDelegate, GHNewCommentTableViewCellDelegate> {
 @private
     NSString *_ID;
     GHAPIGistV3 *_gist;
@@ -26,6 +26,8 @@
     
     NSString *_lastUserComment;
 }
+
+@property (nonatomic, readonly) BOOL isGistOwnedByAuthenticatedUser;
 
 @property (nonatomic, copy) NSString *lastUserComment;
 

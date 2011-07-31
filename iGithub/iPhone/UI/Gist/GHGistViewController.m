@@ -15,14 +15,14 @@
 #import "GHViewCloudFileViewController.h"
 #import "GHNewCommentTableViewCell.h"
 #import "GHWebViewViewController.h"
+#import "ANNotificationQueue.h"
 
 #define kUITableViewSectionInfo 0
 #define kUITableViewSectionFiles 1
 #define kUITableViewSectionForks 2
 #define kUITableViewSectionComments 3
-#define kUITableViewSectionStar 4
 
-#define kUITableViewSections 5
+#define kUITableViewSections 4
 
 @implementation GHGistViewController
 
@@ -44,6 +44,10 @@
             [self.tableView reloadData];
         }
     }];
+}
+
+- (BOOL)isGistOwnedByAuthenticatedUser {
+    return [[GHAPIAuthenticationManager sharedInstance].authenticatedUser isEqualToUser:self.gist.user];
 }
 
 #pragma mark - Initialization
@@ -84,9 +88,6 @@
       }];
 }
 
-#pragma mark - Memory management
-
-
 #pragma mark - instance methods
 
 - (void)cacheHeightForComments {
@@ -105,13 +106,11 @@
 #pragma mark - UIExpandableTableViewDatasource
 
 - (BOOL)tableView:(UIExpandableTableView *)tableView canExpandSection:(NSInteger)section {
-    return section == kUITableViewSectionFiles || section == kUITableViewSectionForks || section == kUITableViewSectionStar || section == kUITableViewSectionComments;
+    return section == kUITableViewSectionFiles || section == kUITableViewSectionForks || section == kUITableViewSectionComments;
 }
 
 - (BOOL)tableView:(UIExpandableTableView *)tableView needsToDownloadDataForExpandableSection:(NSInteger)section {
-    if (section == kUITableViewSectionStar) {
-        return !_hasStarData;
-    } else if (section == kUITableViewSectionComments) {
+    if (section == kUITableViewSectionComments) {
         return self.comments == nil;
     }
     return NO;
@@ -130,16 +129,6 @@
         cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Files (%d)", @""), self.gist.files.count ];
     } else if (section == kUITableViewSectionForks) {
         cell.textLabel.text = NSLocalizedString(@"Forked by", @"");
-    } else if (section == kUITableViewSectionStar) {
-        if (!_hasStarData) {
-            cell.textLabel.text = NSLocalizedString(@"Star", @"");
-        } else {
-            if (_isGistStarred) {
-                cell.textLabel.text = NSLocalizedString(@"Starred", @"");
-            } else {
-                cell.textLabel.text = NSLocalizedString(@"Unstarred", @"");
-            }
-        }
     } else if (section == kUITableViewSectionComments) {
         cell.textLabel.text = NSLocalizedString(@"Comments", @"");
     }
@@ -150,18 +139,7 @@
 #pragma mark - UIExpandableTableViewDelegate
 
 - (void)tableView:(UIExpandableTableView *)tableView downloadDataForExpandableSection:(NSInteger)section {
-    if (section == kUITableViewSectionStar) {
-        [GHAPIGistV3 isGistStarredWithID:self.gist.ID completionHandler:^(BOOL starred, NSError *error) {
-            if (error) {
-                [self handleError:error];
-                [tableView cancelDownloadInSection:section];
-            } else {
-                _hasStarData = YES;
-                _isGistStarred = starred;
-                [tableView expandSection:section animated:YES];
-            }
-        }];
-    } else if (section == kUITableViewSectionComments) {
+    if (section == kUITableViewSectionComments) {
         [GHAPIGistV3 commentsForGistWithID:self.gist.ID completionHandler:^(NSMutableArray *comments, NSError *error) {
             if (error) {
                 [self handleError:error];
@@ -196,8 +174,6 @@
         return self.gist.files.count + 1;
     } else if (section == kUITableViewSectionForks) {
         return self.gist.forks.count + 1;
-    } else if (section == kUITableViewSectionStar) {
-        return 2;
     } else if (section == kUITableViewSectionComments) {
         return self.comments.count + 2;
     }
@@ -276,20 +252,6 @@
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         
         return cell;
-    } else if (indexPath.section == kUITableViewSectionStar) {
-        if (indexPath.row == 1) {
-            NSString *CellIdentifier = @"UITableViewCellWithLinearGradientBackgroundViewStar";
-            
-            GHTableViewCellWithLinearGradientBackgroundView *cell = (GHTableViewCellWithLinearGradientBackgroundView *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-            if (!cell) {
-                cell = [[GHTableViewCellWithLinearGradientBackgroundView alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
-            }
-            
-            cell.textLabel.text = _isGistStarred ? NSLocalizedString(@"Unstar", @"") : NSLocalizedString(@"Star", @"");
-            cell.accessoryType = UITableViewCellAccessoryNone;
-            
-            return cell;
-        }
     } else if (indexPath.section == kUITableViewSectionComments) {
         // comments
         if (indexPath.row >= 1 && indexPath.row <= [self.comments count]) {
@@ -368,28 +330,6 @@
         
         GHViewCloudFileViewController *fileViewController = [[GHViewCloudFileViewController alloc] initWithFile:file.filename contentsOfFile:file.content];
         [self.navigationController pushViewController:fileViewController animated:YES];
-    } else if (indexPath.section == kUITableViewSectionStar && indexPath.row == 1) {
-        if (_isGistStarred) {
-            [GHAPIGistV3 unstarGistWithID:self.gist.ID completionHandler:^(NSError *error) {
-                if (error) {
-                    [self handleError:error];
-                } else {
-                    _isGistStarred = NO;
-                }
-                [tableView reloadSections:[NSIndexSet indexSetWithIndex:kUITableViewSectionStar] 
-                         withRowAnimation:UITableViewRowAnimationNone];
-            }];
-        } else {
-            [GHAPIGistV3 starGistWithID:self.gist.ID completionHandler:^(NSError *error) {
-                if (error) {
-                    [self handleError:error];
-                } else {
-                    _isGistStarred = YES;
-                }
-                [tableView reloadSections:[NSIndexSet indexSetWithIndex:kUITableViewSectionStar] 
-                         withRowAnimation:UITableViewRowAnimationNone];
-            }];
-        }
     } else if (indexPath.section == kUITableViewSectionComments && indexPath.row > 0 && indexPath.row <= self.comments.count) {
         GHAPIGistCommentV3 *comment = [self.comments objectAtIndex:indexPath.row - 1];
         
@@ -445,6 +385,119 @@
         _lastUserComment = [decoder decodeObjectForKey:@"lastUserComment"];
     }
     return self;
+}
+
+#pragma mark - UIActionSheetDelegate
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (actionSheet.tag == kUIActionButtonActionSheetTag) {
+        NSString *title = nil;
+        @try {
+            title = [actionSheet buttonTitleAtIndex:buttonIndex];
+        }
+        @catch (NSException *exception) {}
+        
+        if ([title isEqualToString:NSLocalizedString(@"Delete", @"")]) {
+            self.actionButtonActive = YES;
+            [GHAPIGistV3 deleteGistWithID:self.gist.ID 
+                        completionHandler:^(NSError *error) {
+                            self.actionButtonActive = NO;
+                            if (error) {
+                                [self handleError:error];
+                            } else {
+                                [[ANNotificationQueue sharedInstance] detatchSuccesNotificationWithTitle:NSLocalizedString(@"Successfully", @"") message:NSLocalizedString(@"Deleted Gist", @"")];
+                                if (self.navigationController.topViewController == self) {
+                                    [self.navigationController popViewControllerAnimated:YES];
+                                }
+                            }
+                        }];
+        } else if ([title isEqualToString:NSLocalizedString(@"Unstar", @"")]) {
+            self.actionButtonActive = YES;
+            [GHAPIGistV3 unstarGistWithID:self.gist.ID completionHandler:^(NSError *error) {
+                self.actionButtonActive = NO;
+                if (error) {
+                    [self handleError:error];
+                } else {
+                    _isGistStarred = NO;
+                    [[ANNotificationQueue sharedInstance] detatchSuccesNotificationWithTitle:NSLocalizedString(@"Successfully", @"") message:NSLocalizedString(@"Unstarred Gist", @"") ];
+                }
+            }];
+        } else if ([title isEqualToString:NSLocalizedString(@"Star", @"")]) {
+            self.actionButtonActive = YES;
+            [GHAPIGistV3 starGistWithID:self.gist.ID completionHandler:^(NSError *error) {
+                self.actionButtonActive = NO;
+                if (error) {
+                    [self handleError:error];
+                } else {
+                    _isGistStarred = YES;
+                    [[ANNotificationQueue sharedInstance] detatchSuccesNotificationWithTitle:NSLocalizedString(@"Successfully", @"") message:NSLocalizedString(@"Starred Gist", @"") ];
+                }
+            }];
+        } else if ([title isEqualToString:NSLocalizedString(@"Fork", @"")]) {
+            self.actionButtonActive = YES;
+            [GHAPIGistV3 forkGistWithID:self.gist.ID 
+                      completionHandler:^(GHAPIGistV3 *gist, NSError *error) {
+                          self.actionButtonActive = NO;
+                          if (error) {
+                              [self handleError:error];
+                          } else {
+                              [[ANNotificationQueue sharedInstance] detatchSuccesNotificationWithTitle:NSLocalizedString(@"Successfully", @"") message:NSLocalizedString(@"Forked Gist", @"") ];
+                          }
+                      }];
+        }
+    }
+}
+
+#pragma mark - GHActionButtonTableViewController
+
+- (void)downloadDataToDisplayActionButton {
+    [GHAPIGistV3 isGistStarredWithID:self.gist.ID completionHandler:^(BOOL starred, NSError *error) {
+        if (error) {
+            [self failedToDownloadDataToDisplayActionButtonWithError:error];
+        } else {
+            _hasStarData = YES;
+            _isGistStarred = starred;
+            [self didDownloadDataToDisplayActionButton];
+        }
+    }];
+}
+
+- (UIActionSheet *)actionButtonActionSheet {
+    UIActionSheet *sheet = [[UIActionSheet alloc] init];
+    sheet.title = [NSString stringWithFormat:@"Gist: %@", self.gist.ID];;
+    NSUInteger currentButtonIndex = 0;
+    
+    if (self.isGistOwnedByAuthenticatedUser) {
+        [sheet addButtonWithTitle:NSLocalizedString(@"Delete", @"")];
+        sheet.destructiveButtonIndex = currentButtonIndex;
+        currentButtonIndex++;
+    } else {
+        [sheet addButtonWithTitle:_isGistStarred ? NSLocalizedString(@"Unstar", @"") : NSLocalizedString(@"Star", @"")];
+        currentButtonIndex++;
+        
+        [sheet addButtonWithTitle:NSLocalizedString(@"Fork", @"")];
+        currentButtonIndex++;
+    }
+    
+    [sheet addButtonWithTitle:NSLocalizedString(@"Cancel", @"")];
+    sheet.cancelButtonIndex = currentButtonIndex;
+    currentButtonIndex++;
+    
+    sheet.actionSheetStyle = UIActionSheetStyleBlackTranslucent;
+    sheet.delegate = self;
+    
+    return sheet;
+}
+
+- (BOOL)canDisplayActionButton {
+    return YES;
+}
+
+- (BOOL)needsToDownloadDataToDisplayActionButtonActionSheet {
+    if (!self.isGistOwnedByAuthenticatedUser) {
+        return !_hasStarData;
+    }
+    return NO;
 }
 
 @end
