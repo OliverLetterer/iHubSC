@@ -10,9 +10,18 @@
 #import "GHCreateIssueTableViewCell.h"
 #import "GHCollapsingAndSpinningTableViewCell.h"
 
-#define kUITableViewSectionTitle 0
-#define kUITableViewSectionAssigned 1
-#define kUITableViewSectionMilestones 2
+#define kUITableViewSectionTitle        0
+#define kUITableViewSectionAssigned     1
+#define kUITableViewSectionMilestones   2
+
+#define kUITableViewNumberOfSections    3
+
+
+NSInteger const kGHCreateIssueTableViewControllerSectionTitle = kUITableViewSectionTitle;
+NSInteger const kGHCreateIssueTableViewControllerSectionAssignee = kUITableViewSectionAssigned;
+NSInteger const kGHCreateIssueTableViewControllerSectionMilestones = kUITableViewSectionMilestones;
+
+
 
 @implementation GHCreateIssueTableViewController
 
@@ -159,9 +168,9 @@
                         [tableView cancelDownloadInSection:section];
                     } else {
                         _hasCollaboratorState = YES;
-                        _isCollaborator = state;
+                        _isCollaborator = state || [self.repository hasPrefix:[GHAPIAuthenticationManager sharedInstance].authenticatedUser.login ];
                         
-                        if (_isCollaborator || [self.repository hasPrefix:[GHAPIAuthenticationManager sharedInstance].authenticatedUser.login ]) {
+                        if (_isCollaborator) {
                             [GHAPIIssueV3 milestonesForIssueOnRepository:self.repository withNumber:nil page:1 
                                                        completionHandler:^(NSMutableArray *array, NSUInteger nextPage, NSError *error) {
                                                            if (error) {
@@ -221,7 +230,7 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     // Return the number of sections.
-    return 3;
+    return kUITableViewNumberOfSections;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {

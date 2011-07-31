@@ -7,13 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "GHTableViewController.h"
+#import "GHActionButtonTableViewController.h"
 #import "GHAttributedTableViewCell.h"
 #import "GHNewCommentTableViewCell.h"
+#import "GHUpdateIssueViewController.h"
 
 @class GHAPIIssueV3, GHTableViewCell, GHIssueComment, GHPullRequestDiscussion, DTAttributedTextView;
 
-@interface GHIssueViewController : GHTableViewController <UIAlertViewDelegate, GHAttributedTableViewCellDelegate, GHNewCommentTableViewCellDelegate> {
+@interface GHIssueViewController : GHActionButtonTableViewController <UIAlertViewDelegate, GHAttributedTableViewCellDelegate, GHNewCommentTableViewCellDelegate, GHCreateIssueTableViewControllerDelegate> {
 @private
     GHAPIIssueV3 *_issue;
     
@@ -24,7 +25,9 @@
     GHPullRequestDiscussion *_discussion;
     
     BOOL _hasCollaboratorData;
+    
     BOOL _isCollaborator;
+    BOOL _isCreatorOfIssue;
     
     NSString *_lastUserComment;
 }

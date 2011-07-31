@@ -16,6 +16,12 @@
 
 #define kUITableViewNumberOfSections                3
 
+NSInteger const kGHPCreateIssueTableViewControllerSectionTitle = kUITableViewSectionTitleAndDescription;
+NSInteger const kGHPCreateIssueTableViewControllerSectionAssignee = kUITableViewSectionAssigned;
+NSInteger const kGHPCreateIssueTableViewControllerSectionMilestones = kUITableViewSectionMilestones;
+
+
+
 @implementation GHPCreateIssueViewController
 @synthesize delegate=_delegate, collaborators=_collaborators, milestones=_milestones, repository=_repository;
 @synthesize assigneeString=_assigneeString, selectedMilestoneNumber=_selectedMilestoneNumber;

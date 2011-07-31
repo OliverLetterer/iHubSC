@@ -9,6 +9,13 @@
 #import <UIKit/UIKit.h>
 #import "GHTableViewController.h"
 #import "GithubAPI.h"
+#import "GHCreateIssueTableViewCell.h"
+
+extern NSInteger const kGHCreateIssueTableViewControllerSectionTitle;
+extern NSInteger const kGHCreateIssueTableViewControllerSectionAssignee;
+extern NSInteger const kGHCreateIssueTableViewControllerSectionMilestones;
+
+
 
 @class GHCreateIssueTableViewController;
 
@@ -18,6 +25,8 @@
 - (void)createIssueViewControllerDidCancel:(GHCreateIssueTableViewController *)createViewController;
 
 @end
+
+
 
 @interface GHCreateIssueTableViewController : GHTableViewController {
 @private

@@ -12,8 +12,9 @@
 #import "GHPIssueInfoTableViewCell.h"
 #import "GHPAttributedTableViewCell.h"
 #import "GHPNewCommentTableViewCell.h"
+#import "GHPUpdateIssueViewController.h"
 
-@interface GHPIssueViewController : GHPInfoSectionTableViewController <UIAlertViewDelegate, GHPIssueInfoTableViewCellDelegate, GHPAttributedTableViewCellDelegate, NSCoding, GHPNewCommentTableViewCellDelegate> {
+@interface GHPIssueViewController : GHPInfoSectionTableViewController <UIAlertViewDelegate, GHPIssueInfoTableViewCellDelegate, GHPAttributedTableViewCellDelegate, NSCoding, GHPNewCommentTableViewCellDelegate, GHPCreateIssueViewControllerDelegate> {
 @private
     NSString *_repositoryString;
     NSNumber *_issueNumber;
@@ -26,6 +27,7 @@
     
     BOOL _hasCollaboratorData;
     BOOL _isCollaborator;
+    BOOL _isCreatorOfIssue;
     
     CGFloat _bodyHeight;
     

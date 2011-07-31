@@ -9,6 +9,13 @@
 #import <UIKit/UIKit.h>
 #import "GHTableViewController.h"
 
+
+extern NSInteger const kGHPCreateIssueTableViewControllerSectionTitle;
+extern NSInteger const kGHPCreateIssueTableViewControllerSectionAssignee;
+extern NSInteger const kGHPCreateIssueTableViewControllerSectionMilestones;
+
+
+
 @class GHPCreateIssueViewController;
 
 @protocol GHPCreateIssueViewControllerDelegate <NSObject>

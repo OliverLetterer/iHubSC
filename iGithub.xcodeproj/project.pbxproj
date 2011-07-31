@@ -387,6 +387,8 @@
 		A7BD1EFF13E539D70016A662 /* GHActionButtonTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7BD1EFE13E539D70016A662 /* GHActionButtonTableViewController.m */; };
 		A7BD1F1A13E565280016A662 /* GHPCreateIssueViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7BD1F1613E565280016A662 /* GHPCreateIssueViewController.m */; };
 		A7BD1F1B13E565280016A662 /* GHPCreateIssueTitleAndDescriptionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A7BD1F1913E565280016A662 /* GHPCreateIssueTitleAndDescriptionTableViewCell.m */; };
+		A7BD1F2C13E586190016A662 /* GHUpdateIssueViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7BD1F2B13E586190016A662 /* GHUpdateIssueViewController.m */; };
+		A7BD1F3013E5A1170016A662 /* GHPUpdateIssueViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7BD1F2F13E5A1170016A662 /* GHPUpdateIssueViewController.m */; };
 		A7BF13FC1342149C001AE50D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7BF13FB1342149C001AE50D /* UIKit.framework */; };
 		A7BF13FE1342149C001AE50D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7BF13FD1342149C001AE50D /* Foundation.framework */; };
 		A7BF14001342149C001AE50D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7BF13FF1342149C001AE50D /* CoreGraphics.framework */; };
@@ -1089,6 +1091,10 @@
 		A7BD1F1613E565280016A662 /* GHPCreateIssueViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPCreateIssueViewController.m; sourceTree = "<group>"; };
 		A7BD1F1813E565280016A662 /* GHPCreateIssueTitleAndDescriptionTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPCreateIssueTitleAndDescriptionTableViewCell.h; sourceTree = "<group>"; };
 		A7BD1F1913E565280016A662 /* GHPCreateIssueTitleAndDescriptionTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPCreateIssueTitleAndDescriptionTableViewCell.m; sourceTree = "<group>"; };
+		A7BD1F2A13E586190016A662 /* GHUpdateIssueViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHUpdateIssueViewController.h; sourceTree = "<group>"; };
+		A7BD1F2B13E586190016A662 /* GHUpdateIssueViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHUpdateIssueViewController.m; sourceTree = "<group>"; };
+		A7BD1F2E13E5A1170016A662 /* GHPUpdateIssueViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPUpdateIssueViewController.h; sourceTree = "<group>"; };
+		A7BD1F2F13E5A1170016A662 /* GHPUpdateIssueViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPUpdateIssueViewController.m; sourceTree = "<group>"; };
 		A7BF13F71342149C001AE50D /* iGithub.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iGithub.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A7BF13FB1342149C001AE50D /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		A7BF13FD1342149C001AE50D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -1409,6 +1415,7 @@
 		A757965A13E1A030008670B0 /* Issue */ = {
 			isa = PBXGroup;
 			children = (
+				A7BD1F2D13E5A1030016A662 /* GHPUpdateIssueViewController */,
 				A7BD1F1413E565270016A662 /* GHPCreateIssueViewController */,
 				A757965B13E1A030008670B0 /* GHPIssuesViewController */,
 				A757966213E1A030008670B0 /* GHPIssueViewController */,
@@ -2904,6 +2911,7 @@
 		A7841FEA13E1987C00131648 /* Issue */ = {
 			isa = PBXGroup;
 			children = (
+				A7BD1F2913E586180016A662 /* GHUpdateIssueViewController */,
 				A7841FEB13E1987C00131648 /* Create Issue */,
 				A7841FF113E1987C00131648 /* GHIssueViewController.h */,
 				A7841FF213E1987C00131648 /* GHIssueViewController.m */,
@@ -3261,6 +3269,24 @@
 				A7BD1F1913E565280016A662 /* GHPCreateIssueTitleAndDescriptionTableViewCell.m */,
 			);
 			path = "UITableViewCell's";
+			sourceTree = "<group>";
+		};
+		A7BD1F2913E586180016A662 /* GHUpdateIssueViewController */ = {
+			isa = PBXGroup;
+			children = (
+				A7BD1F2A13E586190016A662 /* GHUpdateIssueViewController.h */,
+				A7BD1F2B13E586190016A662 /* GHUpdateIssueViewController.m */,
+			);
+			path = GHUpdateIssueViewController;
+			sourceTree = "<group>";
+		};
+		A7BD1F2D13E5A1030016A662 /* GHPUpdateIssueViewController */ = {
+			isa = PBXGroup;
+			children = (
+				A7BD1F2E13E5A1170016A662 /* GHPUpdateIssueViewController.h */,
+				A7BD1F2F13E5A1170016A662 /* GHPUpdateIssueViewController.m */,
+			);
+			path = GHPUpdateIssueViewController;
 			sourceTree = "<group>";
 		};
 		A7BF13EC1342149C001AE50D = {
@@ -3773,6 +3799,8 @@
 				A7BD1EFF13E539D70016A662 /* GHActionButtonTableViewController.m in Sources */,
 				A7BD1F1A13E565280016A662 /* GHPCreateIssueViewController.m in Sources */,
 				A7BD1F1B13E565280016A662 /* GHPCreateIssueTitleAndDescriptionTableViewCell.m in Sources */,
+				A7BD1F2C13E586190016A662 /* GHUpdateIssueViewController.m in Sources */,
+				A7BD1F3013E5A1170016A662 /* GHPUpdateIssueViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

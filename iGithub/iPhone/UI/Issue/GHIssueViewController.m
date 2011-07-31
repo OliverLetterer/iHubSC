@@ -28,11 +28,9 @@
 #define kUITableViewSectionCommits          3
 #define kUITableViewSectionLabels           4
 #define kUITableViewSectionHistory          5
-#define kUITableViewSectionAdministration   6
 
-#define kUITableViesNumberOfSections        7
+#define kUITableViesNumberOfSections        6
 
-#define kUIAlertViewTagInputAssignee        12316
 #define kUIAlertViewTagMergePullRequest     12317
 
 @implementation GHIssueViewController
@@ -128,16 +126,6 @@
     return description;
 }
 
-#pragma mark - Memory management
-
-
-- (void)didReceiveMemoryWarning {
-    // Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
-    
-    // Release any cached data, images, etc that aren't in use.
-}
-
 #pragma mark - GHNewCommentTableViewCell
 
 - (void)newCommentTableViewCell:(GHNewCommentTableViewCell *)cell didEnterText:(NSString *)text {
@@ -181,8 +169,6 @@
         return self.history == nil;
     } else if (section == kUITableViewSectionCommits) {
         return self.discussion == nil;
-    } else if (section == kUITableViewSectionAdministration) {
-        return !_hasCollaboratorData;
     }
     return NO;
 }
@@ -196,9 +182,7 @@
         cell = [[GHCollapsingAndSpinningTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     
-    if (section == kUITableViewSectionAdministration) {
-        cell.textLabel.text = NSLocalizedString(@"Administration", @"");
-    } else if (section == kUITableViewSectionHistory) {
+    if (section == kUITableViewSectionHistory) {
         cell.textLabel.text = NSLocalizedString(@"History", @"");
     } else if (section == kUITableViewSectionCommits) {
         cell.textLabel.text = NSLocalizedString(@"View attatched Commits", @"");
@@ -236,19 +220,6 @@
                                                [tableView expandSection:section animated:YES];
                                            }
                                        }];
-    } else if (section == kUITableViewSectionAdministration) {
-        [GHAPIRepositoryV3 isUser:[GHAPIAuthenticationManager sharedInstance].authenticatedUser.login 
-         collaboratorOnRepository:self.repository 
-                completionHandler:^(BOOL state, NSError *error) {
-                    if (error) {
-                        [self handleError:error];
-                        [tableView cancelDownloadInSection:section];
-                    } else {
-                        _hasCollaboratorData = YES;
-                        _isCollaborator = state || [self.repository hasPrefix:[GHAPIAuthenticationManager sharedInstance].authenticatedUser.login] || [self.issue.user.login isEqualToString:[GHAPIAuthenticationManager sharedInstance].authenticatedUser.login];
-                        [tableView expandSection:section animated:YES];
-                    }
-                }];
     }
 }
 
@@ -282,18 +253,6 @@
     } else if (section == kUITableViewSectionMilestone) {
         if (self.issue.hasMilestone) {
             return 1;
-        }
-    } else if (section == kUITableViewSectionAdministration) {
-        // first will be administrate
-        result = 1;
-        if (_hasCollaboratorData) {
-            if (_isCollaborator) {
-                result++;
-                result++;   // Update Assignee
-            }
-            if (self.issue.isPullRequest && _isCollaborator && [self.issue.state isEqualToString:kGHAPIIssueStateV3Open] && ![self.issue.user.login isEqualToString:[GHAPIAuthenticationManager sharedInstance].authenticatedUser.login]) {
-                result++;
-            }
         }
     } else if (section == kUITableViewSectionHistory) {
         return self.history.count + 2;
@@ -395,30 +354,6 @@
             
             return cell;
         }
-    } else if (indexPath.section == kUITableViewSectionAdministration) {
-        // administrate
-        NSString *CellIdentifier = @"UITableViewCellWithLinearGradientBackgroundView";
-        
-        GHTableViewCellWithLinearGradientBackgroundView *cell = (GHTableViewCellWithLinearGradientBackgroundView *)[self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-        if (cell == nil) {
-            cell = [[GHTableViewCellWithLinearGradientBackgroundView alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-        }
-        
-        if (indexPath.row == 1) {
-            // open/ close
-            
-            if ([self.issue.state isEqualToString:kGHAPIIssueStateV3Open]) {
-                cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Close this %@", @""), self.issueName];
-            } else {
-                cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Reopen this %@", @""), self.issueName];
-            }
-        } else if (indexPath.row == 2) {
-            // Update Assignee
-            cell.textLabel.text = NSLocalizedString(@"Update Assignee", @"");
-        } else if (indexPath.row == 3) {
-            cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Merge this %@", @""), self.issueName];
-        }
-        return cell;
     } else if (indexPath.section == kUITableViewSectionHistory) {
         if (indexPath.row == [self.history count] + 1) {
             // this is the new comment button
@@ -553,58 +488,7 @@
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == kUITableViewSectionAdministration) {
-        if (indexPath.row == 1) {
-            if ([self.issue.state isEqualToString:kGHAPIIssueStateV3Open]) {
-                [GHAPIIssueV3 closeIssueOnRepository:self.repository 
-                                          withNumber:self.number
-                                   completionHandler:^(NSError *error) {
-                                       if (error) {
-                                           [self handleError:error];
-                                       } else {
-                                           self.issue.state = kGHAPIIssueStateV3Closed;
-                                           [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:kUITableViewSectionAdministration]
-                                                         withRowAnimation:UITableViewRowAnimationFade];
-                                           
-                                           [[ANNotificationQueue sharedInstance] detatchSuccesNotificationWithTitle:NSLocalizedString(@"Successfully", @"") message:[NSString stringWithFormat:NSLocalizedString(@"Closed this %@", @""), self.issueName]];
-                                       }
-                                   }];
-            } else {
-                [GHAPIIssueV3 reopenIssueOnRepository:self.repository withNumber:self.number 
-                                    completionHandler:^(NSError *error) {
-                                        if (error) {
-                                            [self handleError:error];
-                                        } else {
-                                            self.issue.state = kGHAPIIssueStateV3Open;
-                                            [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:kUITableViewSectionAdministration]
-                                                          withRowAnimation:UITableViewRowAnimationFade];
-                                            
-                                            [[ANNotificationQueue sharedInstance] detatchSuccesNotificationWithTitle:NSLocalizedString(@"Successfully", @"") message:[NSString stringWithFormat:NSLocalizedString(@"Reoped this %@", @""), self.issueName] ];
-                                        }
-                                    }];
-            }
-        } else if (indexPath.row == 2) {
-            // Update assignee
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Input Assignee", @"") 
-                                                             message:NSLocalizedString(@"", @"") 
-                                                            delegate:self 
-                                                   cancelButtonTitle:NSLocalizedString(@"Cancel", @"") 
-                                                   otherButtonTitles:NSLocalizedString(@"Submit", @""), nil];
-            alert.tag = kUIAlertViewTagInputAssignee;
-            alert.alertViewStyle = UIAlertViewStylePlainTextInput;
-            [alert show];
-        } else if (indexPath.row == 3) {
-            // Pull Request
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Merge message", @"") 
-                                                             message:nil 
-                                                            delegate:self 
-                                                   cancelButtonTitle:NSLocalizedString(@"Cancel", @"") 
-                                                   otherButtonTitles:NSLocalizedString(@"Merge", @""), nil];
-            alert.tag = kUIAlertViewTagMergePullRequest;
-            alert.alertViewStyle = UIAlertViewStylePlainTextInput;
-            [alert show];
-        }
-    } else if (indexPath.section == kUITableViewSectionData) {
+    if (indexPath.section == kUITableViewSectionData) {
         if (indexPath.row == 0) {
             GHUserViewController *userViewController = [[GHUserViewController alloc] initWithUsername:self.issue.user.login];
             [self.navigationController pushViewController:userViewController animated:YES];
@@ -698,33 +582,12 @@
 #pragma mark - UIAlertViewDelegate
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-    if (alertView.tag == kUIAlertViewTagInputAssignee) {
-        if (buttonIndex > 0) {
-            // submit clicked
-            NSString *assignee = [alertView textFieldAtIndex:0].text;
-            [GHAPIIssueV3 updateIssueOnRepository:self.repository 
-                                       withNumber:self.issue.number 
-                                            title:nil body:nil 
-                                         assignee:assignee 
-                                            state:nil milestone:nil labels:nil 
-                                completionHandler:^(GHAPIIssueV3 *issue, NSError *error) {
-                                    if (error) {
-                                        [self handleError:error];
-                                    } else {
-                                        self.issue = issue;
-                                        [[ANNotificationQueue sharedInstance] detatchSuccesNotificationWithTitle:NSLocalizedString(@"Successfully assigned", @"") 
-                                                                                                         message:issue.assignee.login];
-                                        if (self.isViewLoaded) {
-                                            [self.tableView reloadData];
-                                        }
-                                    }
-                                }];
-        }
-    } else if (alertView.tag == kUIAlertViewTagMergePullRequest) {
+    if (alertView.tag == kUIAlertViewTagMergePullRequest) {
         if (buttonIndex == 1) {
             [GHAPIPullRequestV3 mergPullRequestOnRepository:self.repository withNumber:self.number 
                                               commitMessage:[alertView textFieldAtIndex:0].text 
                                           completionHandler:^(GHAPIPullRequestMergeStateV3 *state, NSError *error) {
+                                              self.actionButtonActive = NO;
                                               if (error) {
                                                   [self handleError:error];
                                               } else {
@@ -743,6 +606,8 @@
                                                   [self.tableView reloadDataAndResetExpansionStates:NO];
                                               }
                                           }];
+        } else {
+            self.actionButtonActive = NO;
         }
     }
 }
@@ -814,6 +679,136 @@
         _lastUserComment = [decoder decodeObjectForKey:@"lastUserComment"];
     }
     return self;
+}
+
+#pragma mark - GHCreateIssueTableViewControllerDelegate
+
+- (void)createIssueViewController:(GHCreateIssueTableViewController *)createViewController didCreateIssue:(GHAPIIssueV3 *)issue {
+    self.issue = issue;
+    if (self.isViewLoaded) {
+        [self.tableView reloadData];
+    }
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)createIssueViewControllerDidCancel:(GHCreateIssueTableViewController *)createViewController {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+#pragma mark - UIActionSheetDelegate
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (actionSheet.tag == kUIActionButtonActionSheetTag) {
+        NSString *title = nil;
+        @try {
+            title = [actionSheet buttonTitleAtIndex:buttonIndex];
+        }
+        @catch (NSException *exception) {}
+        
+        if ([title isEqualToString:NSLocalizedString(@"Edit", @"")]) {
+            GHUpdateIssueViewController *viewController = [[GHUpdateIssueViewController alloc] initWithIssue:self.issue canAssignMilestoneAndAssignee:_isCollaborator];
+            viewController.delegate = self;
+            UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:viewController];
+            [self presentViewController:navController animated:YES completion:nil];
+        } else if ([title isEqualToString:NSLocalizedString(@"Close", @"")]) {
+            self.actionButtonActive = YES;
+            [GHAPIIssueV3 closeIssueOnRepository:self.repository 
+                                      withNumber:self.number
+                               completionHandler:^(NSError *error) {
+                                   self.actionButtonActive = NO;
+                                   if (error) {
+                                       [self handleError:error];
+                                   } else {
+                                       self.issue.state = kGHAPIIssueStateV3Closed;
+                                       
+                                       [[ANNotificationQueue sharedInstance] detatchSuccesNotificationWithTitle:NSLocalizedString(@"Successfully", @"") message:[NSString stringWithFormat:NSLocalizedString(@"Closed this %@", @""), self.issueName]];
+                                   }
+                               }];
+        } else if ([title isEqualToString:NSLocalizedString(@"Reopen", @"")]) {
+            self.actionButtonActive = YES;
+            [GHAPIIssueV3 reopenIssueOnRepository:self.repository withNumber:self.number 
+                                completionHandler:^(NSError *error) {
+                                    self.actionButtonActive = NO;
+                                    if (error) {
+                                        [self handleError:error];
+                                    } else {
+                                        self.issue.state = kGHAPIIssueStateV3Open;
+                                        
+                                        [[ANNotificationQueue sharedInstance] detatchSuccesNotificationWithTitle:NSLocalizedString(@"Successfully", @"") message:[NSString stringWithFormat:NSLocalizedString(@"Reoped this %@", @""), self.issueName] ];
+                                    }
+                                }];
+        } else if ([title isEqualToString:NSLocalizedString(@"Merge", @"")]) {
+            self.actionButtonActive = YES;
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Input merge message", @"") 
+                                                            message:nil 
+                                                           delegate:self 
+                                                  cancelButtonTitle:NSLocalizedString(@"Cancel", @"") 
+                                                  otherButtonTitles:NSLocalizedString(@"Merge", @""), nil];
+            alert.tag = kUIAlertViewTagMergePullRequest;
+            alert.alertViewStyle = UIAlertViewStylePlainTextInput;
+            [alert show];
+        }
+    }
+}
+
+#pragma mark - GHActionButtonTableViewController
+
+- (void)downloadDataToDisplayActionButton {
+    [GHAPIRepositoryV3 isUser:[GHAPIAuthenticationManager sharedInstance].authenticatedUser.login 
+     collaboratorOnRepository:self.repository 
+            completionHandler:^(BOOL state, NSError *error) {
+                if (error) {
+                    [self failedToDownloadDataToDisplayActionButtonWithError:error];
+                } else {
+                    _hasCollaboratorData = YES;
+                    _isCollaborator = state || [self.repository hasPrefix:[GHAPIAuthenticationManager sharedInstance].authenticatedUser.login];
+                    _isCreatorOfIssue = [self.issue.user.login isEqualToString:[GHAPIAuthenticationManager sharedInstance].authenticatedUser.login];
+                    
+                    [self didDownloadDataToDisplayActionButton];
+                }
+            }];
+}
+
+- (UIActionSheet *)actionButtonActionSheet {
+    UIActionSheet *sheet = [[UIActionSheet alloc] init];
+    sheet.title = [NSString stringWithFormat:NSLocalizedString(@"%@ %@", @""), self.issueName, self.issue.number];
+    NSUInteger currentButtonIndex = 0;
+    
+    if (_isCreatorOfIssue || _isCollaborator) {
+        [sheet addButtonWithTitle:NSLocalizedString(@"Edit", @"")];
+        currentButtonIndex++;
+        
+        if ([self.issue.state isEqualToString:kGHAPIIssueStateV3Open]) {
+            [sheet addButtonWithTitle:NSLocalizedString(@"Close", @"")];
+            currentButtonIndex++;
+        } else {
+            [sheet addButtonWithTitle:NSLocalizedString(@"Reopen", @"")];
+            currentButtonIndex++;
+        }
+        
+        if (self.issue.isPullRequest) {
+            [sheet addButtonWithTitle:NSLocalizedString(@"Merge", @"")];
+            sheet.destructiveButtonIndex = currentButtonIndex;
+            currentButtonIndex++;
+        }
+    }
+    
+    [sheet addButtonWithTitle:NSLocalizedString(@"Cancel", @"")];
+    sheet.cancelButtonIndex = currentButtonIndex;
+    currentButtonIndex++;
+    
+    sheet.actionSheetStyle = UIActionSheetStyleBlackTranslucent;
+    sheet.delegate = self;
+    
+    return sheet;
+}
+
+- (BOOL)canDisplayActionButton {
+    return YES;
+}
+
+- (BOOL)needsToDownloadDataToDisplayActionButtonActionSheet {
+    return !_hasCollaboratorData;
 }
 
 @end
