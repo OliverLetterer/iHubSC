@@ -25,12 +25,12 @@
     id<GHPCreateIssueViewControllerDelegate> __weak _delegate;
     
     NSMutableArray *_collaborators;
-    NSUInteger _assignIndex;
+    NSString *_assigneeString;
     
     BOOL _hasCollaboratorState;
     BOOL _isCollaborator;
     NSMutableArray *_milestones;
-    NSUInteger _assignesMilestoneIndex;
+    NSNumber *_selectedMilestoneNumber;
     
     NSString *_repository;
 }
@@ -41,6 +41,11 @@
 @property (nonatomic, retain) NSMutableArray *milestones;
 
 @property (nonatomic, copy) NSString *repository;
+
+@property (nonatomic, copy) NSString *assigneeString;
+@property (nonatomic, copy) NSNumber *selectedMilestoneNumber;
+
+
 
 - (void)cancelButtonClicked:(UIBarButtonItem *)sender;
 - (void)saveButtonClicked:(UIBarButtonItem *)sender;

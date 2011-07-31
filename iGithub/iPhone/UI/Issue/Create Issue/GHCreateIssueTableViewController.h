@@ -24,31 +24,29 @@
     id<GHCreateIssueTableViewControllerDelegate> __weak _delegate;
     NSString *_repository;
     
-    UITextView *_textView;
-    UIToolbar *_textViewToolBar;
-    
     NSMutableArray *_collaborators;
-    NSUInteger _assignIndex;
+    NSString *_assigneeString;
     
     BOOL _hasCollaboratorState;
     BOOL _isCollaborator;
+    
     NSMutableArray *_milestones;
-    NSUInteger _assignesMilestoneIndex;
+    NSNumber *_selectedMilestoneNumber;
 }
 
 @property (nonatomic, weak) id<GHCreateIssueTableViewControllerDelegate> delegate;
 @property (nonatomic, copy) NSString *repository;
 
-@property (nonatomic, retain) UITextView *textView;
-@property (nonatomic, retain) UIToolbar *textViewToolBar;
-
 @property (nonatomic, retain) NSMutableArray *collaborators;
 @property (nonatomic, retain) NSMutableArray *milestones;
 
+@property (nonatomic, copy) NSString *assigneeString;
+@property (nonatomic, copy) NSNumber *selectedMilestoneNumber;
+
+
+
 - (void)cancelButtonClicked:(UIBarButtonItem *)sender;
 - (void)saveButtonClicked:(UIBarButtonItem *)sender;
-
-- (void)toolbarDoneButtonClicked:(UIBarButtonItem *)barButton;
 
 - (id)initWithRepository:(NSString *)repository;
 

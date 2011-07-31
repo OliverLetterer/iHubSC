@@ -18,7 +18,26 @@
 
 @synthesize delegate=_delegate;
 @synthesize repository=_repository;
-@synthesize textViewToolBar=_textViewToolBar, textView=_textView, collaborators=_collaborators, milestones=_milestones;
+@synthesize collaborators=_collaborators, milestones=_milestones;
+@synthesize assigneeString=_assigneeString, selectedMilestoneNumber=_selectedMilestoneNumber;
+
+#pragma mark - setters and getters
+
+- (void)setAssigneeString:(NSString *)assigneeString {
+    _assigneeString = [assigneeString copy];
+    
+    if (self.isViewLoaded) {
+        [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:kUITableViewSectionAssigned] withRowAnimation:UITableViewRowAnimationNone];
+    }
+}
+
+- (void)setSelectedMilestoneNumber:(NSNumber *)selectedMilestoneNumber {
+    _selectedMilestoneNumber = [selectedMilestoneNumber copy];
+    
+    if (self.isViewLoaded) {
+        [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:kUITableViewSectionMilestones] withRowAnimation:UITableViewRowAnimationNone];
+    }
+}
 
 #pragma mark - Initialization
 
@@ -31,38 +50,13 @@
     return self;
 }
 
-#pragma mark - Memory management
-
-
-- (void)didReceiveMemoryWarning {
-    // Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
-    
-    // Release any cached data, images, etc that aren't in use.
-}
-
 #pragma mark - target actions
-
-- (void)toolbarDoneButtonClicked:(UIBarButtonItem *)barButton {
-    [self.textView resignFirstResponder];
-}
 
 - (void)saveButtonClicked:(UIBarButtonItem *)sender {
     GHCreateIssueTableViewCell *cell = (GHCreateIssueTableViewCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:kUITableViewSectionTitle] ];
     
-    GHAPIUserV3 *assignee = nil;
-    NSNumber *milestoneNumber = nil;
-    
-    if (_assignIndex > 0) {
-        assignee = [self.collaborators objectAtIndex:_assignIndex - 1];
-    }
-    if (_assignesMilestoneIndex > 0) {
-        GHAPIMilestoneV3 *milestone = [self.milestones objectAtIndex:_assignesMilestoneIndex - 1];
-        milestoneNumber = milestone.number;
-    }
-    
     [GHAPIIssueV3 createIssueOnRepository:self.repository title:cell.titleTextField.text 
-                                  body:cell.textView.text assignee:assignee.login milestone:milestoneNumber 
+                                  body:cell.textView.text assignee:self.assigneeString milestone:self.selectedMilestoneNumber 
                      completionHandler:^(GHAPIIssueV3 *issue, NSError *error) {
                          if (error) {
                              [self handleError:error];
@@ -78,12 +72,6 @@
 
 #pragma mark - View lifecycle
 
-/*
- - (void)loadView {
- 
- }
- */
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -96,54 +84,6 @@
                                                                                  target:self 
                                                                                  action:@selector(saveButtonClicked:)];
     self.navigationItem.rightBarButtonItem = saveButton;
-    
-    
-    self.textViewToolBar = [[UIToolbar alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0, 44.0)];
-    self.textViewToolBar.barStyle = UIBarStyleBlackTranslucent;
-    
-    UIBarButtonItem *item = nil;
-    NSMutableArray *items = [NSMutableArray array];
-    
-    item = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace 
-                                                          target:nil 
-                                                          action:@selector(noAction)];
-    [items addObject:item];
-    
-    item = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Done", @"") 
-                                             style:UIBarButtonItemStyleDone 
-                                            target:self 
-                                            action:@selector(toolbarDoneButtonClicked:)];
-    [items addObject:item];
-    
-    self.textViewToolBar.items = items;
-}
-
-- (void)viewDidUnload {
-    [super viewDidUnload];
-    
-    self.textViewToolBar = nil;
-    self.textView = nil;
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-}
-
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-}
-
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-}
-
-- (void)viewDidDisappear:(BOOL)animated {
-    [super viewDidDisappear:animated];
-}
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    // Return YES for supported orientations
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
 #pragma mark - UIExpandableTableViewDatasource
@@ -171,18 +111,24 @@
     }
     
     if (section == kUITableViewSectionAssigned) {
-        if (_assignIndex != 0) {
-            GHAPIUserV3 *user = [self.collaborators objectAtIndex:_assignIndex-1];
-            cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Assigned to %@", @""), user.login];
+        if (self.assigneeString) {
+            cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ is assigned", @""), self.assigneeString];
         } else {
-            cell.textLabel.text = NSLocalizedString(@"Assign to", @"");
+            cell.textLabel.text = NSLocalizedString(@"No one is assigned", @"");
         }
     } else if (section == kUITableViewSectionMilestones) {
-        if (_assignesMilestoneIndex != 0) {
-            GHAPIMilestoneV3 *milestone = [self.milestones objectAtIndex:_assignesMilestoneIndex - 1];
+        if (self.selectedMilestoneNumber) {
+            __block GHAPIMilestoneV3 *milestone = nil;
+            [self.milestones enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+                GHAPIMilestoneV3 *theMilestone = obj;
+                if ([theMilestone.number isEqualToNumber:self.selectedMilestoneNumber]) {
+                    milestone = theMilestone;
+                    *stop = YES;
+                }
+            }];
             cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Milestone (%@)", @""), milestone.title];
         } else {
-            cell.textLabel.text = NSLocalizedString(@"Select Milestone", @"");
+            cell.textLabel.text = NSLocalizedString(@"No Milestone", @"");
         }
     }
     
@@ -316,7 +262,7 @@
         GHAPIUserV3 *user = [self.collaborators objectAtIndex:indexPath.row - 1];
         
         [self updateImageView:cell.imageView atIndexPath:indexPath withAvatarURLString:user.avatarURL];
-        if (indexPath.row == _assignIndex) {
+        if ([user.login isEqualToString:self.assigneeString]) {
             cell.accessoryType = UITableViewCellAccessoryCheckmark;
         } else {
             cell.accessoryType = UITableViewCellAccessoryNone;
@@ -335,7 +281,7 @@
         
         GHAPIMilestoneV3 *milestone = [self.milestones objectAtIndex:indexPath.row - 1];
         
-        if (indexPath.row == _assignesMilestoneIndex) {
+        if (self.selectedMilestoneNumber && [milestone.number isEqualToNumber:self.selectedMilestoneNumber]) {
             cell.accessoryType = UITableViewCellAccessoryCheckmark;
         } else {
             cell.accessoryType = UITableViewCellAccessoryNone;
@@ -349,41 +295,6 @@
     return self.dummyCell;
 }
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
 #pragma mark - Table view delegate
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -396,11 +307,11 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == kUITableViewSectionAssigned) {
-        _assignIndex = indexPath.row;
-        [tableView reloadSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationNone];
+        GHAPIUserV3 *user = [self.collaborators objectAtIndex:indexPath.row-1];
+        self.assigneeString = user.login;
     } else if (indexPath.section == kUITableViewSectionMilestones) {
-        _assignesMilestoneIndex = indexPath.row;
-        [tableView reloadSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationNone];
+        GHAPIMilestoneV3 *milestone = [self.milestones objectAtIndex:indexPath.row-1];
+        self.selectedMilestoneNumber = milestone.number;
     } else {
         [tableView deselectRowAtIndexPath:indexPath animated:NO];
     }
@@ -412,22 +323,22 @@
     [super encodeWithCoder:encoder];
     [encoder encodeObject:_repository forKey:@"repository"];
     [encoder encodeObject:_collaborators forKey:@"collaborators"];
-    [encoder encodeInteger:_assignIndex forKey:@"assignIndex"];
+    [encoder encodeObject:_assigneeString forKey:@"_assigneeString"];
     [encoder encodeBool:_hasCollaboratorState forKey:@"hasCollaboratorState"];
     [encoder encodeBool:_isCollaborator forKey:@"isCollaborator"];
     [encoder encodeObject:_milestones forKey:@"milestones"];
-    [encoder encodeInteger:_assignesMilestoneIndex forKey:@"assignesMilestoneIndex"];
+    [encoder encodeObject:_selectedMilestoneNumber forKey:@"_selectedMilestoneNumber"];
 }
 
 - (id)initWithCoder:(NSCoder *)decoder {
     if ((self = [super initWithCoder:decoder])) {
         _repository = [decoder decodeObjectForKey:@"repository"];
         _collaborators = [decoder decodeObjectForKey:@"collaborators"];
-        _assignIndex = [decoder decodeIntegerForKey:@"assignIndex"];
+        _assigneeString = [decoder decodeObjectForKey:@"_assigneeString"];
         _hasCollaboratorState = [decoder decodeBoolForKey:@"hasCollaboratorState"];
         _isCollaborator = [decoder decodeBoolForKey:@"isCollaborator"];
         _milestones = [decoder decodeObjectForKey:@"milestones"];
-        _assignesMilestoneIndex = [decoder decodeIntegerForKey:@"assignesMilestoneIndex"];
+        _selectedMilestoneNumber = [decoder decodeObjectForKey:@"_selectedMilestoneNumber"];
     }
     return self;
 }

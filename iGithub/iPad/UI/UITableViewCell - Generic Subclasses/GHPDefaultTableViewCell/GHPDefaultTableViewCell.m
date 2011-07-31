@@ -67,27 +67,10 @@
 
 #pragma mark - super implementation
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
-
-}
-
-- (void)setHighlighted:(BOOL)highlighted animated:(BOOL)animated {
-    [super setHighlighted:highlighted animated:animated];
-    
-}
-
 - (void)layoutSubviews {
     [super layoutSubviews];
     
+    self.imageView.frame = CGRectInset(self.imageView.frame, 3.0f, 3.0f);
 }
-
-- (void)prepareForReuse {
-    [super prepareForReuse];
-    
-}
-
-#pragma mark - Memory management
-
 
 @end
