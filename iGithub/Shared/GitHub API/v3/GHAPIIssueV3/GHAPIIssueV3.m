@@ -294,7 +294,6 @@ NSString *const kGHAPIIssueStateV3Closed = @"closed";
 + (void)closeIssueOnRepository:(NSString *)repository 
                     withNumber:(NSNumber *)number 
              completionHandler:(void (^)(NSError *error))handler {
-    
     // v3: PATCH /repos/:user/:repo/issues/:id
     
     NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.github.com/repos/%@/issues/%@",
