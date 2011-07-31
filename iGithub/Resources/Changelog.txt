@@ -98,6 +98,7 @@ V2.0
 - iHub is now serializing the applications state. That means you can even reboot your device and resume where you left iHub.
 - Icons for Browsing Repository content
 - fast access to README files on repositories (on iPhone, just click on the first cell while viewing a repository)
+- major markdown improvements
 
 iTunes Changelog:
 
