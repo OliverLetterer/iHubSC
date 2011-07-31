@@ -34,9 +34,8 @@
 #define kUITableViewGists                       11
 #define kUITableViewOrganizations               12
 #define kUITableViewSectionPlan                 13
-#define kUITableViewNetwork                     14
 
-#define kUITableViewNumberOfSections            15
+#define kUITableViewNumberOfSections            14
 
 @implementation GHUserViewController
 
@@ -101,14 +100,6 @@
 }
 
 #pragma mark - target actions
-
-- (void)createRepositoryButtonClicked:(UIBarButtonItem *)button {
-    GHCreateRepositoryViewController *createViewController = [[GHCreateRepositoryViewController alloc] init];
-    createViewController.delegate = self;
-    
-    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:createViewController];
-    [self presentModalViewController:navController animated:YES];
-}
 
 - (void)accountButtonClicked:(UIBarButtonItem *)button {
     GHManageAuthenticatedUsersAlertView *alert = [[GHManageAuthenticatedUsersAlertView alloc] initWithTitle:nil 
@@ -204,12 +195,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    if (self.hasAdministrationRights) {
-        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd 
-                                                                                               target:self 
-                                                                                               action:@selector(createRepositoryButtonClicked:)];
-    }
-    
     if ([[self.navigationController viewControllers] objectAtIndex:0] == self && self.hasAdministrationRights) {
         self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Accounts", @"") 
                                                                                  style:UIBarButtonItemStyleBordered 
@@ -225,7 +210,6 @@
             section == kUITableViewSectionPlan ||
             section == kUITableViewFollowingUsers ||
             section == kUITableViewFollowedUsers ||
-            section == kUITableViewNetwork || 
             section == kUITableViewOrganizations ||
             section == kUITableViewGists ||
             section == kUITableViewSectionAssignedIssues;
@@ -240,8 +224,6 @@
         return self.followingUsers == nil;
     } else if (section == kUITableViewFollowedUsers) {
         return self.followedUsers == nil;
-    } else if (section == kUITableViewNetwork) {
-        return !_hasFollowingData;
     } else if (section == kUITableViewOrganizations) {
         return self.organizations == nil;
     } else if (section == kUITableViewGists) {
@@ -271,8 +253,6 @@
         cell.textLabel.text = NSLocalizedString(@"Following", @"");
     } else if (section == kUITableViewFollowedUsers) {
         cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"User following %@", @""), self.username];
-    } else if (section == kUITableViewNetwork) {
-        cell.textLabel.text = NSLocalizedString(@"Network", @"");
     } else if (section == kUITableViewOrganizations) {
         cell.textLabel.text = NSLocalizedString(@"Organizations", @"");
     } else if (section == kUITableViewGists) {
@@ -427,18 +407,6 @@
                                           [tableView expandSection:section animated:YES];
                                       }
                                   }];
-    } else if (section == kUITableViewNetwork) {
-        [GHAPIUserV3 isFollowingUserNamed:self.username 
-                     completionHandler:^(BOOL following, NSError *error) {
-                         if (error) {
-                             [self handleError:error];
-                             [tableView cancelDownloadInSection:section];
-                         } else {
-                             _hasFollowingData = YES;
-                             _isFollowingUser = following;
-                             [tableView expandSection:section animated:YES];
-                         }
-                     }];
     } else if (section == kUITableViewOrganizations) {
         [GHAPIOrganizationV3 organizationsOfUser:self.username page:1 
                                completionHandler:^(NSMutableArray *array, NSUInteger nextPage, NSError *error) {
@@ -539,12 +507,6 @@
             return 0;
         }
         return [self.followedUsers count] + 1;
-    } else if (section == kUITableViewNetwork) {
-        if (!self.canFollowUser) {
-            return 0;
-        } else {
-            return 2;
-        }
     } else if (section == kUITableViewOrganizations) {
         return [self.organizations count] + 1;
     } else if (section == kUITableViewGists) {
@@ -775,17 +737,6 @@
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         
         return cell;
-    } else if (indexPath.section == kUITableViewNetwork) {
-        NSString *CellIdentifier = @"UITableViewCellWithLinearGradientBackgroundViewNetwork2";
-        
-        GHTableViewCellWithLinearGradientBackgroundView *cell = (GHTableViewCellWithLinearGradientBackgroundView *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-        if (!cell) {
-            cell = [[GHTableViewCellWithLinearGradientBackgroundView alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-        }
-        
-        cell.textLabel.text = _isFollowingUser ? NSLocalizedString(@"Unfollow", @"") : NSLocalizedString(@"Follow", @"");
-        
-        return cell;
     } else if (indexPath.section == kUITableViewOrganizations) {
         NSString *CellIdentifier = @"GHFeedItemWithDescriptionTableViewCell";
         
@@ -920,41 +871,6 @@
         
         GHUserViewController *userViewController = [[GHUserViewController alloc] initWithUsername:user.login];
         [self.navigationController pushViewController:userViewController animated:YES];
-        
-    } else if (indexPath.section == kUITableViewNetwork) {
-        if (_isFollowingUser) {
-            [GHAPIUserV3 unfollowUser:self.username 
-                 completionHandler:^(NSError *error) {
-                     if (error) {
-                         [self handleError:error];
-                     } else {
-                         _isFollowingUser = NO;
-                         
-                         NSMutableIndexSet *set = [NSMutableIndexSet indexSet];
-                         [set addIndex:kUITableViewNetwork];
-                         [self.tableView collapseSection:kUITableViewFollowedUsers animated:YES];
-                         self.followedUsers = nil;
-                         [self.tableView reloadSections:set withRowAnimation:UITableViewRowAnimationNone];
-                         [[ANNotificationQueue sharedInstance] detatchSuccesNotificationWithTitle:NSLocalizedString(@"Stopped following", @"") message:self.username];
-                     }
-                 }];
-        } else {
-            [GHAPIUserV3 followUser:self.username 
-               completionHandler:^(NSError *error) {
-                   if (error) {
-                       [self handleError:error];
-                   } else {
-                       _isFollowingUser = YES;
-                       
-                       NSMutableIndexSet *set = [NSMutableIndexSet indexSet];
-                       [set addIndex:kUITableViewNetwork];
-                       [self.tableView collapseSection:kUITableViewFollowedUsers animated:YES];
-                       self.followedUsers = nil;
-                       [self.tableView reloadSections:set withRowAnimation:UITableViewRowAnimationNone];
-                       [[ANNotificationQueue sharedInstance] detatchSuccesNotificationWithTitle:NSLocalizedString(@"Now following", @"") message:self.username];
-                   }
-               }];
-        }
     } else if (indexPath.section == kUITableViewOrganizations) {
         GHAPIOrganizationV3 *organization = [self.organizations objectAtIndex:indexPath.row - 1];
         GHOrganizationViewController *organizationViewController = [[GHOrganizationViewController alloc] initWithOrganizationLogin:organization.login];
@@ -1082,6 +998,109 @@
         _lastIndexPathForSingleRepositoryViewController = [decoder decodeObjectForKey:@"lastIndexPathForSingleRepositoryViewController"];
     }
     return self;
+}
+
+#pragma mark - UIActionSheetDelegate
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (actionSheet.tag == kUIActionButtonActionSheetTag) {
+        NSString *title = nil;
+        @try {
+            title = [actionSheet buttonTitleAtIndex:buttonIndex];
+        }
+        @catch (NSException *exception) {}
+        
+        if ([title isEqualToString:NSLocalizedString(@"Unfollow", @"")]) {
+            self.actionButtonActive = YES;
+            [GHAPIUserV3 unfollowUser:self.username 
+                    completionHandler:^(NSError *error) {
+                        self.actionButtonActive = NO;
+                        if (error) {
+                            [self handleError:error];
+                        } else {
+                            _isFollowingUser = NO;
+                            [[ANNotificationQueue sharedInstance] detatchSuccesNotificationWithTitle:NSLocalizedString(@"Stopped following", @"") message:self.username];
+                        }
+                    }];
+        } else if ([title isEqualToString:NSLocalizedString(@"Follow", @"")]) {
+            self.actionButtonActive = YES;
+            [GHAPIUserV3 followUser:self.username 
+                  completionHandler:^(NSError *error) {
+                      self.actionButtonActive = NO;
+                      if (error) {
+                          [self handleError:error];
+                      } else {
+                          _isFollowingUser = YES;
+                          
+                          NSMutableIndexSet *set = [NSMutableIndexSet indexSet];
+                          [self.tableView collapseSection:kUITableViewFollowedUsers animated:YES];
+                          self.followedUsers = nil;
+                          [self.tableView reloadSections:set withRowAnimation:UITableViewRowAnimationNone];
+                          [[ANNotificationQueue sharedInstance] detatchSuccesNotificationWithTitle:NSLocalizedString(@"Now following", @"") message:self.username];
+                      }
+                  }];
+        } else if ([title isEqualToString:NSLocalizedString(@"Create Repository", @"")]) {
+            GHCreateRepositoryViewController *createViewController = [[GHCreateRepositoryViewController alloc] init];
+            createViewController.delegate = self;
+            
+            UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:createViewController];
+            [self presentModalViewController:navController animated:YES];
+        }
+    }
+}
+
+#pragma mark - GHActionButtonTableViewController
+
+- (void)downloadDataToDisplayActionButton {
+    [GHAPIUserV3 isFollowingUserNamed:self.username 
+                    completionHandler:^(BOOL following, NSError *error) {
+                        if (error) {
+                            [self failedToDownloadDataToDisplayActionButtonWithError:error];
+                        } else {
+                            _hasFollowingData = YES;
+                            _isFollowingUser = following;
+                            [self didDownloadDataToDisplayActionButton];
+                        }
+                    }];
+}
+
+- (UIActionSheet *)actionButtonActionSheet {
+    UIActionSheet *sheet = [[UIActionSheet alloc] init];
+    sheet.title = self.username;
+    NSUInteger currentButtonIndex = 0;
+    
+    if (self.canFollowUser) {
+        if (_isFollowingUser) {
+            [sheet addButtonWithTitle:NSLocalizedString(@"Unfollow", @"")];
+            currentButtonIndex++;
+        } else {
+            [sheet addButtonWithTitle:NSLocalizedString(@"Follow", @"")];
+            currentButtonIndex++;
+        }
+    } else {
+        [sheet addButtonWithTitle:NSLocalizedString(@"Create Repository", @"")];
+        currentButtonIndex++;
+    }
+    
+    [sheet addButtonWithTitle:NSLocalizedString(@"Cancel", @"")];
+    sheet.cancelButtonIndex = currentButtonIndex;
+    currentButtonIndex++;
+    
+    sheet.actionSheetStyle = UIActionSheetStyleBlackTranslucent;
+    sheet.delegate = self;
+    
+    return sheet;
+}
+
+- (BOOL)canDisplayActionButton {
+    return YES;
+}
+
+- (BOOL)needsToDownloadDataToDisplayActionButtonActionSheet {
+    if (self.canFollowUser) {
+        return !_hasFollowingData;
+    }
+    return NO;
 }
 
 @end

@@ -7,13 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "GHTableViewController.h"
+#import "GHActionButtonTableViewController.h"
 #import "GHCreateRepositoryViewController.h"
 #import "GHRepositoryViewController.h"
 #import "UIExpandableTableView.h"
 #import "GithubAPI.h"
 
-@interface GHUserViewController : GHTableViewController <GHCreateRepositoryViewControllerDelegate, GHSingleRepositoryViewControllerDelegate> {
+@interface GHUserViewController : GHActionButtonTableViewController <GHCreateRepositoryViewControllerDelegate, GHSingleRepositoryViewControllerDelegate> {
 @private
     NSString *_username;
     GHAPIUserV3 *_user;
@@ -50,7 +50,6 @@
 
 - (id)initWithUsername:(NSString *)username;
 
-- (void)createRepositoryButtonClicked:(UIBarButtonItem *)button;
 - (void)accountButtonClicked:(UIBarButtonItem *)button;
 
 - (void)downloadRepositories;
