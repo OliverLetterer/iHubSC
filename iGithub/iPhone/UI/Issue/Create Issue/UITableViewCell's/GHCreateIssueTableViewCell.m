@@ -54,7 +54,7 @@
     if ((self = [super initWithStyle:style reuseIdentifier:reuseIdentifier])) {
         self.titleTextField = [[UITextField alloc] init];
         self.titleTextField.font = [UIFont boldSystemFontOfSize:12.0];
-        self.titleTextField.placeholder = NSLocalizedString(@"Repository title", @"");
+        self.titleTextField.placeholder = NSLocalizedString(@"Title", @"");
         self.titleTextField.borderStyle = UITextBorderStyleBezel;
         self.titleTextField.backgroundColor = [UIColor whiteColor];
         self.titleTextField.inputAccessoryView = self.titleTextFieldInputAccessoryView;
