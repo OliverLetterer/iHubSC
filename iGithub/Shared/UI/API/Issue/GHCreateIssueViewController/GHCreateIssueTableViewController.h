@@ -14,6 +14,7 @@
 extern NSInteger const kGHCreateIssueTableViewControllerSectionTitle;
 extern NSInteger const kGHCreateIssueTableViewControllerSectionAssignee;
 extern NSInteger const kGHCreateIssueTableViewControllerSectionMilestones;
+extern NSInteger const kGHCreateIssueTableViewControllerSectionLabels;
 
 
 
@@ -41,6 +42,9 @@ extern NSInteger const kGHCreateIssueTableViewControllerSectionMilestones;
     
     NSMutableArray *_milestones;
     NSNumber *_selectedMilestoneNumber;
+    
+    NSMutableArray *_labels;
+    NSMutableArray *_selectedLabels;
 }
 
 @property (nonatomic, weak) id<GHCreateIssueTableViewControllerDelegate> delegate;
@@ -52,6 +56,11 @@ extern NSInteger const kGHCreateIssueTableViewControllerSectionMilestones;
 @property (nonatomic, copy) NSString *assigneeString;
 @property (nonatomic, copy) NSNumber *selectedMilestoneNumber;
 
+@property (nonatomic, retain) NSMutableArray *labels;
+@property (nonatomic, retain) NSMutableArray *selectedLabels;
+
+
+- (void)downloadDataWithDownloadBlock:(void(^)(void))downloadBlock forTableView:(UIExpandableTableView *)tableView inSection:(NSUInteger)section;
 
 
 - (void)cancelButtonClicked:(UIBarButtonItem *)sender;

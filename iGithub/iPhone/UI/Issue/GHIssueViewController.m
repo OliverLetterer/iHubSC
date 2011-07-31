@@ -685,6 +685,10 @@
 
 - (void)createIssueViewController:(GHCreateIssueTableViewController *)createViewController didCreateIssue:(GHAPIIssueV3 *)issue {
     self.issue = issue;
+    [self cacheHeight:[GHAttributedTableViewCell heightWithAttributedString:self.issue.attributedBody 
+                                                       inAttributedTextView:nil] 
+    forRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:kUITableViewSectionData] ];
+    
     if (self.isViewLoaded) {
         [self.tableView reloadData];
     }
@@ -706,7 +710,7 @@
         @catch (NSException *exception) {}
         
         if ([title isEqualToString:NSLocalizedString(@"Edit", @"")]) {
-            GHUpdateIssueViewController *viewController = [[GHUpdateIssueViewController alloc] initWithIssue:self.issue canAssignMilestoneAndAssignee:_isCollaborator];
+            GHUpdateIssueViewController *viewController = [[GHUpdateIssueViewController alloc] initWithIssue:self.issue];
             viewController.delegate = self;
             UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:viewController];
             [self presentViewController:navController animated:YES completion:nil];

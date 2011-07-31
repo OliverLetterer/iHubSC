@@ -9,10 +9,10 @@
 #import <UIKit/UIKit.h>
 #import "GHTableViewController.h"
 #import "GHPInfoTableViewCell.h"
-#import "GHPCreateIssueViewController.h"
 #import "GHPInfoSectionTableViewController.h"
+#import "GHCreateIssueTableViewController.h"
 
-@interface GHPRepositoryViewController : GHPInfoSectionTableViewController <GHPCreateIssueViewControllerDelegate, NSCoding> {
+@interface GHPRepositoryViewController : GHPInfoSectionTableViewController <GHCreateIssueTableViewControllerDelegate, NSCoding> {
 @private
     NSString *_repositoryString;
     GHAPIRepositoryV3 *_repository;

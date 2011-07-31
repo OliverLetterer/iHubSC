@@ -87,7 +87,8 @@ extern NSString *const kGHAPIIssueStateV3Closed;
                           title:(NSString *)title 
                            body:(NSString *)body 
                        assignee:(NSString *)assignee 
-                      milestone:(NSNumber *)milestone
+                      milestone:(NSNumber *)milestone 
+                         labels:(NSArray *)labels 
               completionHandler:(void (^)(GHAPIIssueV3 *issue, NSError *error))handler;
 
 + (void)commentsForIssueOnRepository:(NSString *)repository 

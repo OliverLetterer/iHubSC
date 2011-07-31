@@ -13,13 +13,11 @@
 @private
     GHAPIIssueV3 *_issue;
     
-    BOOL _canAssignMilestoneAndAssignee;
-    
     BOOL _didUpdateFirstCell;
 }
 
 @property (nonatomic, retain) GHAPIIssueV3 *issue;
 
-- (id)initWithIssue:(GHAPIIssueV3 *)issue canAssignMilestoneAndAssignee:(BOOL)canAssignMilestoneAndAssignee;
+- (id)initWithIssue:(GHAPIIssueV3 *)issue;
 
 @end

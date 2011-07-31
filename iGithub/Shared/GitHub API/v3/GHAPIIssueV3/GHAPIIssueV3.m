@@ -201,40 +201,46 @@ NSString *const kGHAPIIssueStateV3Closed = @"closed";
                            body:(NSString *)body 
                        assignee:(NSString *)assignee 
                       milestone:(NSNumber *)milestone 
+                         labels:(NSArray *)labels 
               completionHandler:(void (^)(GHAPIIssueV3 *issue, NSError *error))handler {
-    
-    // v3: POST /repos/:user/:repo/issues
+    // POST /repos/:user/:repo/issues
     
     NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.github.com/repos/%@/issues",
                                        [repository stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] ] ];
     
     [[GHAPIBackgroundQueueV3 sharedInstance] sendRequestToURL:URL 
-                                            setupHandler:^(ASIFormDataRequest *request) {
-                                                NSMutableDictionary *jsonDictionary = [NSMutableDictionary dictionaryWithCapacity:4];
-                                                if (title) {
-                                                    [jsonDictionary setObject:title forKey:@"title"];
+                                                 setupHandler:^(ASIFormDataRequest *request) { 
+                                                     [request setRequestMethod:@"POST"];
+                                                     NSMutableDictionary *jsonDictionary = [NSMutableDictionary dictionaryWithCapacity:6];
+                                                     
+                                                     if (title) {
+                                                         [jsonDictionary setObject:title forKey:@"title"];
+                                                     }
+                                                     if (body) {
+                                                         [jsonDictionary setObject:body forKey:@"body"];
+                                                     }
+                                                     if (assignee) {
+                                                         [jsonDictionary setObject:assignee forKey:@"assignee"];
+                                                     }
+                                                     if (milestone) {
+                                                         [jsonDictionary setObject:milestone forKey:@"milestone"];
+                                                     }
+                                                     if (labels) {
+                                                         [jsonDictionary setObject:labels forKey:@"labels"];
+                                                     }
+                                                     NSString *jsonString = [jsonDictionary JSONString];
+                                                     NSMutableData *jsonData = [[jsonString dataUsingEncoding:NSUTF8StringEncoding] mutableCopy];
+                                                     
+                                                     [request setPostBody:jsonData];
+                                                     [request setPostLength:[jsonString length] ];
+                                                 } 
+                                            completionHandler:^(id object, NSError *error, ASIFormDataRequest *request) {
+                                                if (error) {
+                                                    handler(nil, error);
+                                                } else {
+                                                    handler([[GHAPIIssueV3 alloc] initWithRawDictionary:object], nil);
                                                 }
-                                                if (body) {
-                                                    [jsonDictionary setObject:body forKey:@"body"];
-                                                }
-                                                if (assignee) {
-                                                    [jsonDictionary setObject:assignee forKey:@"assignee"];
-                                                }
-                                                if (milestone) {
-                                                    [jsonDictionary setObject:milestone forKey:@"milestone"];
-                                                }
-                                                NSString *jsonString = [jsonDictionary JSONString];
-                                                NSMutableData *jsonData = [[jsonString dataUsingEncoding:NSUTF8StringEncoding] mutableCopy];
-                                                [request setPostBody:jsonData];
-                                                [request setPostLength:[jsonString length] ];
-                                            } 
-                                       completionHandler:^(id object, NSError *error, ASIFormDataRequest *request) {
-                                           if (error) {
-                                               handler(nil, error);
-                                           } else {
-                                               handler([[GHAPIIssueV3 alloc] initWithRawDictionary:object], nil);
-                                           }
-                                       }];
+                                            }];
 }
 
 + (void)commentsForIssueOnRepository:(NSString *)repository 
@@ -497,15 +503,21 @@ NSString *const kGHAPIIssueStateV3Closed = @"closed";
                                                      }
                                                      if (assignee) {
                                                          [jsonDictionary setObject:assignee forKey:@"assignee"];
+                                                     } else {
+                                                         [jsonDictionary setObject:[NSNull null] forKey:@"assignee"];
                                                      }
                                                      if (state) {
                                                          [jsonDictionary setObject:state forKey:@"state"];
                                                      }
                                                      if (milestone) {
                                                          [jsonDictionary setObject:milestone forKey:@"milestone"];
+                                                     } else {
+                                                         [jsonDictionary setObject:[NSNull null] forKey:@"milestone"];
                                                      }
                                                      if (labels) {
                                                          [jsonDictionary setObject:labels forKey:@"labels"];
+                                                     } else {
+                                                         [jsonDictionary setObject:[NSNull null] forKey:@"labels"];
                                                      }
                                                      NSString *jsonString = [jsonDictionary JSONString];
                                                      NSMutableData *jsonData = [[jsonString dataUsingEncoding:NSUTF8StringEncoding] mutableCopy];

@@ -693,7 +693,7 @@
                                    }
                                }];
         } else if ([title isEqualToString:NSLocalizedString(@"Edit", @"")]) {
-            GHPUpdateIssueViewController *viewController = [[GHPUpdateIssueViewController alloc] initWithIssue:self.issue canAssignMilestoneAndAssignee:_isCollaborator];
+            GHUpdateIssueViewController *viewController = [[GHUpdateIssueViewController alloc] initWithIssue:self.issue];
             viewController.delegate = self;
             UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:viewController];
             navController.modalPresentationStyle = UIModalPresentationFormSheet;
@@ -773,14 +773,17 @@
     return !_hasCollaboratorData;
 }
 
-#pragma mark - GHPCreateIssueViewControllerDelegate
+#pragma mark - GHCreateIssueTableViewControllerDelegate
 
-- (void)createIssueViewControllerIsDone:(GHPCreateIssueViewController *)createIssueViewController {
+- (void)createIssueViewControllerDidCancel:(GHCreateIssueTableViewController *)createViewController {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (void)createIssueViewController:(GHPCreateIssueViewController *)createIssueViewController didCreateIssue:(GHAPIIssueV3 *)issue {
+- (void)createIssueViewController:(GHCreateIssueTableViewController *)createViewController didCreateIssue:(GHAPIIssueV3 *)issue {
     self.issue = issue;
+    _bodyHeight = [GHPIssueInfoTableViewCell heightWithAttributedString:issue.attributedBody 
+                                                   inAttributedTextView:nil];
+    
     if (self.isViewLoaded) {
         [self.tableView reloadData];
     }

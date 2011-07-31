@@ -348,8 +348,6 @@
 		A784204413E1987C00131648 /* GHRecentCommitsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841FE313E1987C00131648 /* GHRecentCommitsViewController.m */; };
 		A784204513E1987C00131648 /* GHViewCommitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841FE613E1987C00131648 /* GHViewCommitViewController.m */; };
 		A784204613E1987C00131648 /* GHGistViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841FE913E1987C00131648 /* GHGistViewController.m */; };
-		A784204713E1987C00131648 /* GHCreateIssueTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841FED13E1987C00131648 /* GHCreateIssueTableViewController.m */; };
-		A784204813E1987C00131648 /* GHCreateIssueTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841FF013E1987C00131648 /* GHCreateIssueTableViewCell.m */; };
 		A784204913E1987C00131648 /* GHIssueViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841FF213E1987C00131648 /* GHIssueViewController.m */; };
 		A784204A13E1987C00131648 /* CGCommon.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841FF513E1987C00131648 /* CGCommon.m */; };
 		A784204B13E1987C00131648 /* INProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841FF713E1987C00131648 /* INProgressView.m */; };
@@ -385,10 +383,10 @@
 		A7BD1EF313E4A12A0016A662 /* GHAPITreeFileV3.m in Sources */ = {isa = PBXBuildFile; fileRef = A7BD1EF213E4A12A0016A662 /* GHAPITreeFileV3.m */; };
 		A7BD1EF613E4A49C0016A662 /* GHAPITreeInfoV3.m in Sources */ = {isa = PBXBuildFile; fileRef = A7BD1EF513E4A49B0016A662 /* GHAPITreeInfoV3.m */; };
 		A7BD1EFF13E539D70016A662 /* GHActionButtonTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7BD1EFE13E539D70016A662 /* GHActionButtonTableViewController.m */; };
-		A7BD1F1A13E565280016A662 /* GHPCreateIssueViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7BD1F1613E565280016A662 /* GHPCreateIssueViewController.m */; };
-		A7BD1F1B13E565280016A662 /* GHPCreateIssueTitleAndDescriptionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A7BD1F1913E565280016A662 /* GHPCreateIssueTitleAndDescriptionTableViewCell.m */; };
-		A7BD1F2C13E586190016A662 /* GHUpdateIssueViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7BD1F2B13E586190016A662 /* GHUpdateIssueViewController.m */; };
-		A7BD1F3013E5A1170016A662 /* GHPUpdateIssueViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7BD1F2F13E5A1170016A662 /* GHPUpdateIssueViewController.m */; };
+		A7BD1F4913E5D4280016A662 /* GHCreateIssueTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7BD1F4213E5D4280016A662 /* GHCreateIssueTableViewController.m */; };
+		A7BD1F4A13E5D4280016A662 /* GHCreateIssueTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A7BD1F4513E5D4280016A662 /* GHCreateIssueTableViewCell.m */; };
+		A7BD1F4B13E5D4280016A662 /* GHUpdateIssueViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7BD1F4813E5D4280016A662 /* GHUpdateIssueViewController.m */; };
+		A7BD1F4E13E5D48B0016A662 /* GHPCreateIssueTitleAndDescriptionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A7BD1F4D13E5D48B0016A662 /* GHPCreateIssueTitleAndDescriptionTableViewCell.m */; };
 		A7BF13FC1342149C001AE50D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7BF13FB1342149C001AE50D /* UIKit.framework */; };
 		A7BF13FE1342149C001AE50D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7BF13FD1342149C001AE50D /* Foundation.framework */; };
 		A7BF14001342149C001AE50D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7BF13FF1342149C001AE50D /* CoreGraphics.framework */; };
@@ -1014,10 +1012,6 @@
 		A7841FE613E1987C00131648 /* GHViewCommitViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHViewCommitViewController.m; sourceTree = "<group>"; };
 		A7841FE813E1987C00131648 /* GHGistViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHGistViewController.h; sourceTree = "<group>"; };
 		A7841FE913E1987C00131648 /* GHGistViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHGistViewController.m; sourceTree = "<group>"; };
-		A7841FEC13E1987C00131648 /* GHCreateIssueTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHCreateIssueTableViewController.h; sourceTree = "<group>"; };
-		A7841FED13E1987C00131648 /* GHCreateIssueTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHCreateIssueTableViewController.m; sourceTree = "<group>"; };
-		A7841FEF13E1987C00131648 /* GHCreateIssueTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHCreateIssueTableViewCell.h; sourceTree = "<group>"; };
-		A7841FF013E1987C00131648 /* GHCreateIssueTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHCreateIssueTableViewCell.m; sourceTree = "<group>"; };
 		A7841FF113E1987C00131648 /* GHIssueViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHIssueViewController.h; sourceTree = "<group>"; };
 		A7841FF213E1987C00131648 /* GHIssueViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHIssueViewController.m; sourceTree = "<group>"; };
 		A7841FF413E1987C00131648 /* CGCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGCommon.h; sourceTree = "<group>"; };
@@ -1087,14 +1081,14 @@
 		A7BD1EF513E4A49B0016A662 /* GHAPITreeInfoV3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHAPITreeInfoV3.m; sourceTree = "<group>"; };
 		A7BD1EFD13E539D70016A662 /* GHActionButtonTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHActionButtonTableViewController.h; sourceTree = "<group>"; };
 		A7BD1EFE13E539D70016A662 /* GHActionButtonTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHActionButtonTableViewController.m; sourceTree = "<group>"; };
-		A7BD1F1513E565280016A662 /* GHPCreateIssueViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPCreateIssueViewController.h; sourceTree = "<group>"; };
-		A7BD1F1613E565280016A662 /* GHPCreateIssueViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPCreateIssueViewController.m; sourceTree = "<group>"; };
-		A7BD1F1813E565280016A662 /* GHPCreateIssueTitleAndDescriptionTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPCreateIssueTitleAndDescriptionTableViewCell.h; sourceTree = "<group>"; };
-		A7BD1F1913E565280016A662 /* GHPCreateIssueTitleAndDescriptionTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPCreateIssueTitleAndDescriptionTableViewCell.m; sourceTree = "<group>"; };
-		A7BD1F2A13E586190016A662 /* GHUpdateIssueViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHUpdateIssueViewController.h; sourceTree = "<group>"; };
-		A7BD1F2B13E586190016A662 /* GHUpdateIssueViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHUpdateIssueViewController.m; sourceTree = "<group>"; };
-		A7BD1F2E13E5A1170016A662 /* GHPUpdateIssueViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPUpdateIssueViewController.h; sourceTree = "<group>"; };
-		A7BD1F2F13E5A1170016A662 /* GHPUpdateIssueViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPUpdateIssueViewController.m; sourceTree = "<group>"; };
+		A7BD1F4113E5D4280016A662 /* GHCreateIssueTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHCreateIssueTableViewController.h; sourceTree = "<group>"; };
+		A7BD1F4213E5D4280016A662 /* GHCreateIssueTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHCreateIssueTableViewController.m; sourceTree = "<group>"; };
+		A7BD1F4413E5D4280016A662 /* GHCreateIssueTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHCreateIssueTableViewCell.h; sourceTree = "<group>"; };
+		A7BD1F4513E5D4280016A662 /* GHCreateIssueTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHCreateIssueTableViewCell.m; sourceTree = "<group>"; };
+		A7BD1F4713E5D4280016A662 /* GHUpdateIssueViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHUpdateIssueViewController.h; sourceTree = "<group>"; };
+		A7BD1F4813E5D4280016A662 /* GHUpdateIssueViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHUpdateIssueViewController.m; sourceTree = "<group>"; };
+		A7BD1F4C13E5D48B0016A662 /* GHPCreateIssueTitleAndDescriptionTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPCreateIssueTitleAndDescriptionTableViewCell.h; sourceTree = "<group>"; };
+		A7BD1F4D13E5D48B0016A662 /* GHPCreateIssueTitleAndDescriptionTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPCreateIssueTitleAndDescriptionTableViewCell.m; sourceTree = "<group>"; };
 		A7BF13F71342149C001AE50D /* iGithub.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iGithub.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A7BF13FB1342149C001AE50D /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		A7BF13FD1342149C001AE50D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -1415,8 +1409,6 @@
 		A757965A13E1A030008670B0 /* Issue */ = {
 			isa = PBXGroup;
 			children = (
-				A7BD1F2D13E5A1030016A662 /* GHPUpdateIssueViewController */,
-				A7BD1F1413E565270016A662 /* GHPCreateIssueViewController */,
 				A757965B13E1A030008670B0 /* GHPIssuesViewController */,
 				A757966213E1A030008670B0 /* GHPIssueViewController */,
 				A757966813E1A030008670B0 /* GHPPullRequestsViewController */,
@@ -2717,6 +2709,7 @@
 		A7841F3C13E194BB00131648 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				A7BD1F3E13E5D4280016A662 /* API */,
 				A7841F3D13E194BB00131648 /* ANNotificationQueue */,
 				A7841F4913E194BB00131648 /* Browse content */,
 				A7841F5013E194BB00131648 /* GHALabelViewController */,
@@ -2911,32 +2904,11 @@
 		A7841FEA13E1987C00131648 /* Issue */ = {
 			isa = PBXGroup;
 			children = (
-				A7BD1F2913E586180016A662 /* GHUpdateIssueViewController */,
-				A7841FEB13E1987C00131648 /* Create Issue */,
 				A7841FF113E1987C00131648 /* GHIssueViewController.h */,
 				A7841FF213E1987C00131648 /* GHIssueViewController.m */,
 				A7841FF313E1987C00131648 /* UIView's */,
 			);
 			path = Issue;
-			sourceTree = "<group>";
-		};
-		A7841FEB13E1987C00131648 /* Create Issue */ = {
-			isa = PBXGroup;
-			children = (
-				A7841FEC13E1987C00131648 /* GHCreateIssueTableViewController.h */,
-				A7841FED13E1987C00131648 /* GHCreateIssueTableViewController.m */,
-				A7841FEE13E1987C00131648 /* UITableViewCell's */,
-			);
-			path = "Create Issue";
-			sourceTree = "<group>";
-		};
-		A7841FEE13E1987C00131648 /* UITableViewCell's */ = {
-			isa = PBXGroup;
-			children = (
-				A7841FEF13E1987C00131648 /* GHCreateIssueTableViewCell.h */,
-				A7841FF013E1987C00131648 /* GHCreateIssueTableViewCell.m */,
-			);
-			path = "UITableViewCell's";
 			sourceTree = "<group>";
 		};
 		A7841FF313E1987C00131648 /* UIView's */ = {
@@ -3252,41 +3224,51 @@
 			path = GHActionButtonTableViewController;
 			sourceTree = "<group>";
 		};
-		A7BD1F1413E565270016A662 /* GHPCreateIssueViewController */ = {
+		A7BD1F3E13E5D4280016A662 /* API */ = {
 			isa = PBXGroup;
 			children = (
-				A7BD1F1513E565280016A662 /* GHPCreateIssueViewController.h */,
-				A7BD1F1613E565280016A662 /* GHPCreateIssueViewController.m */,
-				A7BD1F1713E565280016A662 /* UITableViewCell's */,
+				A7BD1F3F13E5D4280016A662 /* Issue */,
 			);
-			path = GHPCreateIssueViewController;
+			path = API;
 			sourceTree = "<group>";
 		};
-		A7BD1F1713E565280016A662 /* UITableViewCell's */ = {
+		A7BD1F3F13E5D4280016A662 /* Issue */ = {
 			isa = PBXGroup;
 			children = (
-				A7BD1F1813E565280016A662 /* GHPCreateIssueTitleAndDescriptionTableViewCell.h */,
-				A7BD1F1913E565280016A662 /* GHPCreateIssueTitleAndDescriptionTableViewCell.m */,
+				A7BD1F4013E5D4280016A662 /* GHCreateIssueViewController */,
+				A7BD1F4613E5D4280016A662 /* GHUpdateIssueViewController */,
+			);
+			path = Issue;
+			sourceTree = "<group>";
+		};
+		A7BD1F4013E5D4280016A662 /* GHCreateIssueViewController */ = {
+			isa = PBXGroup;
+			children = (
+				A7BD1F4113E5D4280016A662 /* GHCreateIssueTableViewController.h */,
+				A7BD1F4213E5D4280016A662 /* GHCreateIssueTableViewController.m */,
+				A7BD1F4313E5D4280016A662 /* UITableViewCell's */,
+			);
+			path = GHCreateIssueViewController;
+			sourceTree = "<group>";
+		};
+		A7BD1F4313E5D4280016A662 /* UITableViewCell's */ = {
+			isa = PBXGroup;
+			children = (
+				A7BD1F4C13E5D48B0016A662 /* GHPCreateIssueTitleAndDescriptionTableViewCell.h */,
+				A7BD1F4D13E5D48B0016A662 /* GHPCreateIssueTitleAndDescriptionTableViewCell.m */,
+				A7BD1F4413E5D4280016A662 /* GHCreateIssueTableViewCell.h */,
+				A7BD1F4513E5D4280016A662 /* GHCreateIssueTableViewCell.m */,
 			);
 			path = "UITableViewCell's";
 			sourceTree = "<group>";
 		};
-		A7BD1F2913E586180016A662 /* GHUpdateIssueViewController */ = {
+		A7BD1F4613E5D4280016A662 /* GHUpdateIssueViewController */ = {
 			isa = PBXGroup;
 			children = (
-				A7BD1F2A13E586190016A662 /* GHUpdateIssueViewController.h */,
-				A7BD1F2B13E586190016A662 /* GHUpdateIssueViewController.m */,
+				A7BD1F4713E5D4280016A662 /* GHUpdateIssueViewController.h */,
+				A7BD1F4813E5D4280016A662 /* GHUpdateIssueViewController.m */,
 			);
 			path = GHUpdateIssueViewController;
-			sourceTree = "<group>";
-		};
-		A7BD1F2D13E5A1030016A662 /* GHPUpdateIssueViewController */ = {
-			isa = PBXGroup;
-			children = (
-				A7BD1F2E13E5A1170016A662 /* GHPUpdateIssueViewController.h */,
-				A7BD1F2F13E5A1170016A662 /* GHPUpdateIssueViewController.m */,
-			);
-			path = GHPUpdateIssueViewController;
 			sourceTree = "<group>";
 		};
 		A7BF13EC1342149C001AE50D = {
@@ -3669,8 +3651,6 @@
 				A784204413E1987C00131648 /* GHRecentCommitsViewController.m in Sources */,
 				A784204513E1987C00131648 /* GHViewCommitViewController.m in Sources */,
 				A784204613E1987C00131648 /* GHGistViewController.m in Sources */,
-				A784204713E1987C00131648 /* GHCreateIssueTableViewController.m in Sources */,
-				A784204813E1987C00131648 /* GHCreateIssueTableViewCell.m in Sources */,
 				A784204913E1987C00131648 /* GHIssueViewController.m in Sources */,
 				A784204A13E1987C00131648 /* CGCommon.m in Sources */,
 				A784204B13E1987C00131648 /* INProgressView.m in Sources */,
@@ -3797,10 +3777,10 @@
 				A7BD1EF313E4A12A0016A662 /* GHAPITreeFileV3.m in Sources */,
 				A7BD1EF613E4A49C0016A662 /* GHAPITreeInfoV3.m in Sources */,
 				A7BD1EFF13E539D70016A662 /* GHActionButtonTableViewController.m in Sources */,
-				A7BD1F1A13E565280016A662 /* GHPCreateIssueViewController.m in Sources */,
-				A7BD1F1B13E565280016A662 /* GHPCreateIssueTitleAndDescriptionTableViewCell.m in Sources */,
-				A7BD1F2C13E586190016A662 /* GHUpdateIssueViewController.m in Sources */,
-				A7BD1F3013E5A1170016A662 /* GHPUpdateIssueViewController.m in Sources */,
+				A7BD1F4913E5D4280016A662 /* GHCreateIssueTableViewController.m in Sources */,
+				A7BD1F4A13E5D4280016A662 /* GHCreateIssueTableViewCell.m in Sources */,
+				A7BD1F4B13E5D4280016A662 /* GHUpdateIssueViewController.m in Sources */,
+				A7BD1F4E13E5D48B0016A662 /* GHPCreateIssueTitleAndDescriptionTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

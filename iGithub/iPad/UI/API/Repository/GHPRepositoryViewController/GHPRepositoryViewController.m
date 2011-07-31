@@ -543,8 +543,8 @@
                                        
                                    }];
         } else if ([title isEqualToString:NSLocalizedString(@"New Issue", @"")]) {
-            GHPCreateIssueViewController *createViewController = [[GHPCreateIssueViewController alloc] initWithRepository:self.repositoryString delegate:self];
-            
+            GHCreateIssueTableViewController *createViewController = [[GHCreateIssueTableViewController alloc] initWithRepository:self.repositoryString];
+            createViewController.delegate = self;
             UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:createViewController];
             navigationController.modalPresentationStyle = UIModalPresentationFormSheet;
             [self presentViewController:navigationController animated:YES completion:nil];
@@ -609,14 +609,14 @@
     }
 }
 
-#pragma mark - GHPCreateIssueViewControllerDelegate
+#pragma mark - GHCreateIssueTableViewControllerDelegate
 
-- (void)createIssueViewControllerIsDone:(GHPCreateIssueViewController *)createIssueViewController {
+- (void)createIssueViewController:(GHCreateIssueTableViewController *)createViewController didCreateIssue:(GHAPIIssueV3 *)issue {
+    [[ANNotificationQueue sharedInstance] detatchSuccesNotificationWithTitle:NSLocalizedString(@"Created Issue", @"") message:issue.title];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (void)createIssueViewController:(GHPCreateIssueViewController *)createIssueViewController didCreateIssue:(GHAPIIssueV3 *)issue {
-    [[ANNotificationQueue sharedInstance] detatchSuccesNotificationWithTitle:NSLocalizedString(@"Created Issue", @"") message:issue.title];
+- (void)createIssueViewControllerDidCancel:(GHCreateIssueTableViewController *)createViewController {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
