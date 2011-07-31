@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "GHTableViewController.h"
+#import "GHActionButtonTableViewController.h"
 #import "GithubAPI.h"
 #import "GHCreateIssueTableViewController.h"
 
@@ -19,7 +19,7 @@
 
 @end
 
-@interface GHRepositoryViewController : GHTableViewController <UIAlertViewDelegate, GHSingleRepositoryViewControllerDelegate, GHCreateIssueTableViewControllerDelegate, UIActionSheetDelegate> {
+@interface GHRepositoryViewController : GHActionButtonTableViewController <UIAlertViewDelegate, GHSingleRepositoryViewControllerDelegate, GHCreateIssueTableViewControllerDelegate> {
 @private
     NSString *_repositoryString;
     GHAPIRepositoryV3 *_repository;
@@ -69,7 +69,5 @@
 - (id)initWithRepositoryString:(NSString *)repositoryString;
 
 - (void)organizationsActionSheetDidSelectOrganizationAtIndex:(NSUInteger)index;
-
-- (void)addButtonClicked:(UIBarButtonItem *)sender;
 
 @end
