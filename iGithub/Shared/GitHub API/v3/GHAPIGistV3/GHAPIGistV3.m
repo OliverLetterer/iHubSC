@@ -99,7 +99,6 @@
                                            }
                                            
                                        }];
-    
 }
 
 + (void)deleteGistWithID:(NSString *)ID completionHandler:(void (^)(NSError *))handler {
@@ -114,6 +113,20 @@
                                             } completionHandler:^(id object, NSError *error, ASIFormDataRequest *request) {
                                                 handler(error);
                                             }];
+}
+
++ (void)forkGistWithID:(NSString *)ID completionHandler:(void(^)(GHAPIGistV3 *gist, NSError *error))handler {
+    // v3: POST /gists/:id/fork
+    
+    NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.github.com/gists/%@/fork", 
+                                       [ID stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] ] ];
+    
+    [[GHAPIBackgroundQueueV3 sharedInstance] sendRequestToURL:URL 
+                                                 setupHandler:^(ASIFormDataRequest *request) {
+                                                     [request setRequestMethod:@"POST"];
+                                                 } completionHandler:^(id object, NSError *error, ASIFormDataRequest *request) {
+                                                     handler([[GHAPIGistV3 alloc] initWithRawDictionary:object], nil);
+                                                 }];
 }
 
 + (void)isGistStarredWithID:(NSString *)ID completionHandler:(void(^)(BOOL starred, NSError *error))handler {

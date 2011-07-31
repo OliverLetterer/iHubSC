@@ -45,6 +45,7 @@
 + (void)isGistStarredWithID:(NSString *)ID completionHandler:(void(^)(BOOL starred, NSError *error))handler;
 + (void)starGistWithID:(NSString *)ID completionHandler:(void(^)(NSError *error))handler;
 + (void)unstarGistWithID:(NSString *)ID completionHandler:(void(^)(NSError *error))handler;
++ (void)forkGistWithID:(NSString *)ID completionHandler:(void(^)(GHAPIGistV3 *gist, NSError *error))handler;
 
 + (void)commentsForGistWithID:(NSString *)ID completionHandler:(void(^)(NSMutableArray *comments, NSError *error))handler;
 + (void)postComment:(NSString *)comment forGistWithID:(NSString *)ID completionHandler:(void(^)(GHAPIGistCommentV3 *comment, NSError *error))handler;
