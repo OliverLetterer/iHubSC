@@ -23,6 +23,7 @@
         self.titleTextField.placeholder = NSLocalizedString(@"Repository title", @"");
         self.titleTextField.borderStyle = UITextBorderStyleBezel;
         self.titleTextField.textColor = [UIColor blackColor];
+        self.titleTextField.backgroundColor = [UIColor whiteColor];
         [self.contentView addSubview:self.titleTextField];
         
         self.descriptionTextField = [[UITextField alloc] init];
@@ -30,6 +31,7 @@
         self.descriptionTextField.placeholder = NSLocalizedString(@"Repository description", @"");
         self.descriptionTextField.borderStyle = UITextBorderStyleBezel;
         self.descriptionTextField.textColor = [UIColor blackColor];
+        self.descriptionTextField.backgroundColor = [UIColor whiteColor];
         [self.contentView addSubview:self.descriptionTextField];
         
         self.publicSwitch = [[UISwitch alloc] init];
