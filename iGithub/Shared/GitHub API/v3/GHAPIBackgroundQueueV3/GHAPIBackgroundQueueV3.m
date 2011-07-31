@@ -70,6 +70,7 @@ dispatch_queue_t GHAPIBackgroundQueue() {
         
         dispatch_async(dispatch_get_main_queue(), ^(void) {
             if (myError) {
+                DLog(@"error in URL: %@", URL);
                 completionHandler(nil, myError, request);
             } else {
                 completionHandler([[request responseString] objectFromJSONString], nil, request);
