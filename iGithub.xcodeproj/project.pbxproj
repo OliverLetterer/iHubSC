@@ -400,7 +400,7 @@
 			remoteGlobalIDString = A7C525F213E6FE1A0003EEE5;
 			remoteInfo = GHMarkdownParser;
 		};
-		A744F57713E72F140038C189 /* PBXContainerItemProxy */ = {
+		A744F58213E73D2D0038C189 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = A744F56E13E72DE60038C189 /* GHMarkdownParser.xcodeproj */;
 			proxyType = 1;
@@ -1109,7 +1109,7 @@
 		A7C5254E13E69F9A0003EEE5 /* GHCreateMilestoneTitleAndDescriptionTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHCreateMilestoneTitleAndDescriptionTableViewCell.h; sourceTree = "<group>"; };
 		A7C5254F13E69F9A0003EEE5 /* GHCreateMilestoneTitleAndDescriptionTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHCreateMilestoneTitleAndDescriptionTableViewCell.m; sourceTree = "<group>"; };
 		A7C5256413E6ACCC0003EEE5 /* Kal.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Kal.xcodeproj; path = Submodules/Kal/src/Kal.xcodeproj; sourceTree = SOURCE_ROOT; };
-		A7C5257213E6ADF90003EEE5 /* Kal.bundle */ = {isa = PBXFileReference; name = Kal.bundle; path = ../Submodules/Kal/src/Kal.bundle; sourceTree = "<group>"; };
+		A7C5257213E6ADF90003EEE5 /* Kal.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = Kal.bundle; path = ../Submodules/Kal/src/Kal.bundle; sourceTree = "<group>"; };
 		A7C5257C13E6B2B80003EEE5 /* GHDateSelectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHDateSelectViewController.h; sourceTree = "<group>"; };
 		A7C5257D13E6B2B80003EEE5 /* GHDateSelectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHDateSelectViewController.m; sourceTree = "<group>"; };
 		A7C5257F13E6B64A0003EEE5 /* GHPCreateMilestoneTitleAndDescriptionTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPCreateMilestoneTitleAndDescriptionTableViewCell.h; sourceTree = "<group>"; };
@@ -3394,7 +3394,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				A744F57813E72F140038C189 /* PBXTargetDependency */,
+				A744F58313E73D2D0038C189 /* PBXTargetDependency */,
 				A7C5256E13E6AD890003EEE5 /* PBXTargetDependency */,
 			);
 			name = iGithub;
@@ -3843,10 +3843,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		A744F57813E72F140038C189 /* PBXTargetDependency */ = {
+		A744F58313E73D2D0038C189 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = GHMarkdownParser;
-			targetProxy = A744F57713E72F140038C189 /* PBXContainerItemProxy */;
+			targetProxy = A744F58213E73D2D0038C189 /* PBXContainerItemProxy */;
 		};
 		A7C5256E13E6AD890003EEE5 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
