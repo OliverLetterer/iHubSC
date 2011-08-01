@@ -16,7 +16,6 @@
 
 + (NSString *)fullHTMLPageFromMarkdownString:(NSString *)markdown;
 
-+ (NSString *)HTMLStringFromMarkdownString:(NSString *)markdown;
 + (NSString *)issueFormattedHTMLStringFromMarkdownString:(NSString *)markdown;
 + (NSString *)selectedFormattedHTMLStringFromMarkdownString:(NSString *)markdown;
 

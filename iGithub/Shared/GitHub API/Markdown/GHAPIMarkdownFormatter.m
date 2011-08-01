@@ -13,37 +13,13 @@
 @implementation GHAPIMarkdownFormatter
 
 + (NSString *)fullHTMLPageFromMarkdownString:(NSString *)markdown {
-    NSString *HTML = [self HTMLStringFromMarkdownString:markdown];
+    NSString *HTML = markdown.flavoredHTMLStringFromMarkdown;
     
     NSURL *styleURL = [[NSBundle bundleForClass:self] URLForResource:@"styles" withExtension:@"css"];
     NSString *cssHTML = [NSString stringWithFormat:@"<link rel=\"stylesheet\" type=\"text/css\" href=\"%@\">\n", [styleURL absoluteString]];
     
     NSString *HTMLPage = [NSString stringWithFormat:@"<!DOCTYPE html>\n<html>\n<head>\n%@</head>\n<body>%@</body>\n</html>", cssHTML, HTML];
     return HTMLPage;
-}
-
-+ (NSString *)HTMLStringFromMarkdownString:(NSString *)markdown {
-    return [GHMarkdownParser flavoredHTMLStringFromMarkdownString:markdown];
-    
-    NSMutableString *fixedMarkdown = [NSMutableString stringWithCapacity:markdown.length];
-    __block BOOL isCodeBlock = NO;
-    [markdown enumerateLinesUsingBlock:^(NSString *line, BOOL *stop) {
-        if ([line rangeOfString:@"```"].location != NSNotFound) {
-            isCodeBlock = !isCodeBlock;
-        } else {
-            if (isCodeBlock) {
-                [fixedMarkdown appendFormat:@"\t%@\n", line];
-            } else {
-                [fixedMarkdown appendFormat:@"%@\n", line];
-            }
-        }
-    }];
-    
-    NSString *HTML = [GHMarkdownParser HTMLStringFromMarkdownString:fixedMarkdown];
-    
-    HTML = [HTML stringByReplacingOccurrencesOfString:@"<p>```</p>" withString:@""];
-    
-    return HTML;
 }
 
 + (NSString *)issueFormattedHTMLStringFromMarkdownString:(NSString *)markdown {
@@ -57,7 +33,7 @@
         color = @"rgb(64,64,64)";
     }
     
-    NSMutableString *HTML = [[self HTMLStringFromMarkdownString:markdown] mutableCopy];
+    NSMutableString *HTML = [markdown.flavoredHTMLStringFromMarkdown mutableCopy];
     
     [HTML replaceOccurrencesOfString:@"<p>" 
                           withString:[NSString stringWithFormat:@"<p style=\"color:%@;font-family:Helvetica;font-size:%@;text-shadow:0px 0.5px #FFFFFF\">", color, fontSize] 
@@ -125,7 +101,7 @@
         color = @"rgb(255,255,255)";
     }
     
-    NSMutableString *HTML = [[self HTMLStringFromMarkdownString:markdown] mutableCopy];
+    NSMutableString *HTML = [markdown.flavoredHTMLStringFromMarkdown mutableCopy];
     
     [HTML replaceOccurrencesOfString:@"<p>" 
                           withString:[NSString stringWithFormat:@"<p style=\"color:%@;font-family:Helvetica;font-size:%@\">", color, fontSize] 
