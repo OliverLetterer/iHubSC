@@ -900,11 +900,10 @@
         
         if ([title isEqualToString:NSLocalizedString(@"Create Issue", @"")]) {
             // Create Issue
-            GHCreateIssueTableViewController *createViewController = [[GHCreateIssueTableViewController alloc] initWithRepository:self.repositoryString];
-            createViewController.delegate = self;
+            GHCreateIssueTableViewController *viewController = [[GHCreateIssueTableViewController alloc] initWithRepository:self.repositoryString];
+            viewController.delegate = self;
             
-            UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:createViewController];
-            
+            UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:viewController];
             [self presentModalViewController:navController animated:YES];
         } else if ([title isEqualToString:NSLocalizedString(@"Delete", @"")]) {
             self.actionButtonActive = YES;
