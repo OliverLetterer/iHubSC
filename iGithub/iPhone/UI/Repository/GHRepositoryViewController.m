@@ -865,9 +865,9 @@
 
 - (void)createIssueViewController:(GHCreateIssueTableViewController *)createViewController didCreateIssue:(GHAPIIssueV3 *)issue {
     [self.issuesArray insertObject:issue atIndex:0];
+    self.repository.openIssues = [NSNumber numberWithInt:[self.repository.openIssues intValue]+1 ];
     [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:kUITableViewSectionIssues] 
                   withRowAnimation:UITableViewRowAnimationNone];
-    self.repository.openIssues = [NSNumber numberWithInt:[self.repository.openIssues intValue]+1 ];
     [self dismissModalViewControllerAnimated:YES];
 }
 
