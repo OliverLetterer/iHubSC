@@ -393,9 +393,32 @@
 		A7BF14061342149C001AE50D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A7BF14041342149C001AE50D /* InfoPlist.strings */; };
 		A7BF14091342149C001AE50D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A7BF14081342149C001AE50D /* main.m */; };
 		A7BF143113421572001AE50D /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7BF143013421572001AE50D /* Security.framework */; };
+		A7C5254D13E69E360003EEE5 /* GHCreateMilestoneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7C5254C13E69E360003EEE5 /* GHCreateMilestoneViewController.m */; };
+		A7C5255013E69F9A0003EEE5 /* GHCreateMilestoneTitleAndDescriptionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A7C5254F13E69F9A0003EEE5 /* GHCreateMilestoneTitleAndDescriptionTableViewCell.m */; };
+		A7C5256F13E6ADA10003EEE5 /* libKal.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A7C5256C13E6ACCD0003EEE5 /* libKal.a */; };
+		A7C5257313E6ADF90003EEE5 /* Kal.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A7C5257213E6ADF90003EEE5 /* Kal.bundle */; };
+		A7C5257E13E6B2B80003EEE5 /* GHDateSelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7C5257D13E6B2B80003EEE5 /* GHDateSelectViewController.m */; };
+		A7C5258113E6B64A0003EEE5 /* GHPCreateMilestoneTitleAndDescriptionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A7C5258013E6B64A0003EEE5 /* GHPCreateMilestoneTitleAndDescriptionTableViewCell.m */; };
 		A7CE1B831346349200169F94 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7CE1B821346349000169F94 /* CoreData.framework */; };
 		A7D14F451354E5A700E1B980 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7D14F441354E5A600E1B980 /* MessageUI.framework */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		A7C5256B13E6ACCD0003EEE5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A7C5256413E6ACCC0003EEE5 /* Kal.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D2AAC07E0554694100DB518D;
+			remoteInfo = Kal;
+		};
+		A7C5256D13E6AD890003EEE5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A7C5256413E6ACCC0003EEE5 /* Kal.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D2AAC07D0554694100DB518D;
+			remoteInfo = Kal;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		A703B9451347560F0014235D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -1098,6 +1121,16 @@
 		A7BF14071342149C001AE50D /* iGithub-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "iGithub-Prefix.pch"; sourceTree = "<group>"; };
 		A7BF14081342149C001AE50D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		A7BF143013421572001AE50D /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		A7C5254B13E69E360003EEE5 /* GHCreateMilestoneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHCreateMilestoneViewController.h; sourceTree = "<group>"; };
+		A7C5254C13E69E360003EEE5 /* GHCreateMilestoneViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHCreateMilestoneViewController.m; sourceTree = "<group>"; };
+		A7C5254E13E69F9A0003EEE5 /* GHCreateMilestoneTitleAndDescriptionTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHCreateMilestoneTitleAndDescriptionTableViewCell.h; sourceTree = "<group>"; };
+		A7C5254F13E69F9A0003EEE5 /* GHCreateMilestoneTitleAndDescriptionTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHCreateMilestoneTitleAndDescriptionTableViewCell.m; sourceTree = "<group>"; };
+		A7C5256413E6ACCC0003EEE5 /* Kal.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Kal.xcodeproj; path = Submodules/Kal/src/Kal.xcodeproj; sourceTree = SOURCE_ROOT; };
+		A7C5257213E6ADF90003EEE5 /* Kal.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = Kal.bundle; path = Submodules/Kal/src/Kal.bundle; sourceTree = "<group>"; };
+		A7C5257C13E6B2B80003EEE5 /* GHDateSelectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHDateSelectViewController.h; sourceTree = "<group>"; };
+		A7C5257D13E6B2B80003EEE5 /* GHDateSelectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHDateSelectViewController.m; sourceTree = "<group>"; };
+		A7C5257F13E6B64A0003EEE5 /* GHPCreateMilestoneTitleAndDescriptionTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPCreateMilestoneTitleAndDescriptionTableViewCell.h; sourceTree = "<group>"; };
+		A7C5258013E6B64A0003EEE5 /* GHPCreateMilestoneTitleAndDescriptionTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPCreateMilestoneTitleAndDescriptionTableViewCell.m; sourceTree = "<group>"; };
 		A7CE1B821346349000169F94 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		A7D14F441354E5A600E1B980 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		A7D41AC41358B6B500CD3A5C /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
@@ -1108,6 +1141,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A7C5256F13E6ADA10003EEE5 /* libKal.a in Frameworks */,
 				A7528E6113D42E310007C4D9 /* ImageIO.framework in Frameworks */,
 				A7528E5B13D42AA20007C4D9 /* MediaPlayer.framework in Frameworks */,
 				A7528E5913D42A7F0007C4D9 /* CoreText.framework in Frameworks */,
@@ -1876,6 +1910,7 @@
 		A7841C7013E184F500131648 /* Submodules */ = {
 			isa = PBXGroup;
 			children = (
+				A7C5255A13E6AB420003EEE5 /* Kal */,
 				A7204D3F13E4587E0098C86A /* markdownlive */,
 				A757979113E1A622008670B0 /* GHPieChartProgressView */,
 				A757974413E1A3A3008670B0 /* scifihifi-iphone */,
@@ -2709,6 +2744,7 @@
 		A7841F3C13E194BB00131648 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				A7C5257B13E6B2AD0003EEE5 /* GHDateSelectViewController */,
 				A7BD1F3E13E5D4280016A662 /* API */,
 				A7841F3D13E194BB00131648 /* ANNotificationQueue */,
 				A7841F4913E194BB00131648 /* Browse content */,
@@ -3227,6 +3263,7 @@
 		A7BD1F3E13E5D4280016A662 /* API */ = {
 			isa = PBXGroup;
 			children = (
+				A7C5254813E69DED0003EEE5 /* Milestone */,
 				A7BD1F3F13E5D4280016A662 /* Issue */,
 			);
 			path = API;
@@ -3274,6 +3311,7 @@
 		A7BF13EC1342149C001AE50D = {
 			isa = PBXGroup;
 			children = (
+				A7C5257213E6ADF90003EEE5 /* Kal.bundle */,
 				A7841C7013E184F500131648 /* Submodules */,
 				A7BF14011342149C001AE50D /* iGithub */,
 				A7BF13FA1342149C001AE50D /* Frameworks */,
@@ -3346,6 +3384,52 @@
 			path = ..;
 			sourceTree = "<group>";
 		};
+		A7C5254813E69DED0003EEE5 /* Milestone */ = {
+			isa = PBXGroup;
+			children = (
+				A7C5254913E69DED0003EEE5 /* UITableViewCell's */,
+				A7C5254B13E69E360003EEE5 /* GHCreateMilestoneViewController.h */,
+				A7C5254C13E69E360003EEE5 /* GHCreateMilestoneViewController.m */,
+			);
+			path = Milestone;
+			sourceTree = "<group>";
+		};
+		A7C5254913E69DED0003EEE5 /* UITableViewCell's */ = {
+			isa = PBXGroup;
+			children = (
+				A7C5254E13E69F9A0003EEE5 /* GHCreateMilestoneTitleAndDescriptionTableViewCell.h */,
+				A7C5254F13E69F9A0003EEE5 /* GHCreateMilestoneTitleAndDescriptionTableViewCell.m */,
+				A7C5257F13E6B64A0003EEE5 /* GHPCreateMilestoneTitleAndDescriptionTableViewCell.h */,
+				A7C5258013E6B64A0003EEE5 /* GHPCreateMilestoneTitleAndDescriptionTableViewCell.m */,
+			);
+			path = "UITableViewCell's";
+			sourceTree = "<group>";
+		};
+		A7C5255A13E6AB420003EEE5 /* Kal */ = {
+			isa = PBXGroup;
+			children = (
+				A7C5256413E6ACCC0003EEE5 /* Kal.xcodeproj */,
+			);
+			name = Kal;
+			sourceTree = "<group>";
+		};
+		A7C5256513E6ACCC0003EEE5 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A7C5256C13E6ACCD0003EEE5 /* libKal.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A7C5257B13E6B2AD0003EEE5 /* GHDateSelectViewController */ = {
+			isa = PBXGroup;
+			children = (
+				A7C5257C13E6B2B80003EEE5 /* GHDateSelectViewController.h */,
+				A7C5257D13E6B2B80003EEE5 /* GHDateSelectViewController.m */,
+			);
+			path = GHDateSelectViewController;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -3360,6 +3444,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				A7C5256E13E6AD890003EEE5 /* PBXTargetDependency */,
 			);
 			name = iGithub;
 			productName = iGithub;
@@ -3385,12 +3470,28 @@
 			mainGroup = A7BF13EC1342149C001AE50D;
 			productRefGroup = A7BF13F81342149C001AE50D /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = A7C5256513E6ACCC0003EEE5 /* Products */;
+					ProjectRef = A7C5256413E6ACCC0003EEE5 /* Kal.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				A7BF13F61342149C001AE50D /* iGithub */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		A7C5256C13E6ACCD0003EEE5 /* libKal.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libKal.a;
+			remoteRef = A7C5256B13E6ACCD0003EEE5 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		A7BF13F51342149C001AE50D /* Resources */ = {
@@ -3497,6 +3598,7 @@
 				A784204013E1987C00131648 /* MainWindow_iPhone.xib in Resources */,
 				A75796FB13E1A030008670B0 /* MainWindow_iPad.xib in Resources */,
 				A7BD1EE313E476520016A662 /* styles.css in Resources */,
+				A7C5257313E6ADF90003EEE5 /* Kal.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3781,10 +3883,22 @@
 				A7BD1F4A13E5D4280016A662 /* GHCreateIssueTableViewCell.m in Sources */,
 				A7BD1F4B13E5D4280016A662 /* GHUpdateIssueViewController.m in Sources */,
 				A7BD1F4E13E5D48B0016A662 /* GHPCreateIssueTitleAndDescriptionTableViewCell.m in Sources */,
+				A7C5254D13E69E360003EEE5 /* GHCreateMilestoneViewController.m in Sources */,
+				A7C5255013E69F9A0003EEE5 /* GHCreateMilestoneTitleAndDescriptionTableViewCell.m in Sources */,
+				A7C5257E13E6B2B80003EEE5 /* GHDateSelectViewController.m in Sources */,
+				A7C5258113E6B64A0003EEE5 /* GHPCreateMilestoneTitleAndDescriptionTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		A7C5256E13E6AD890003EEE5 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Kal;
+			targetProxy = A7C5256D13E6AD890003EEE5 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		A757963C13E1A030008670B0 /* MainWindow_iPad.xib */ = {
@@ -3830,7 +3944,13 @@
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "Submodules/Kal/**";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				LIBRARY_SEARCH_PATHS = "Submodules/Kal/**";
+				OTHER_LDFLAGS = (
+					"-Objc",
+					"-all_load",
+				);
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
@@ -3851,8 +3971,14 @@
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "Submodules/Kal/**";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				LIBRARY_SEARCH_PATHS = "Submodules/Kal/**";
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				OTHER_LDFLAGS = (
+					"-Objc",
+					"-all_load",
+				);
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;

@@ -10,6 +10,7 @@
 #import "GHActionButtonTableViewController.h"
 #import "GithubAPI.h"
 #import "GHCreateIssueTableViewController.h"
+#import "GHCreateMilestoneViewController.h"
 
 @class GHRepositoryViewController;
 
@@ -19,7 +20,7 @@
 
 @end
 
-@interface GHRepositoryViewController : GHActionButtonTableViewController <UIAlertViewDelegate, GHSingleRepositoryViewControllerDelegate, GHCreateIssueTableViewControllerDelegate> {
+@interface GHRepositoryViewController : GHActionButtonTableViewController <UIAlertViewDelegate, GHSingleRepositoryViewControllerDelegate, GHCreateIssueTableViewControllerDelegate, GHCreateMilestoneViewControllerDelegate> {
 @private
     NSString *_repositoryString;
     GHAPIRepositoryV3 *_repository;

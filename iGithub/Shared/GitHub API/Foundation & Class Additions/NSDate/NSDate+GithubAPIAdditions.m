@@ -86,4 +86,13 @@
     return [formatter stringFromDate:self];
 }
 
+- (NSString *)stringInV3Format {
+    NSDateFormatter * f = [[NSDateFormatter alloc] init];
+    [f setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss'Z'"];
+    f.timeZone = [NSTimeZone timeZoneForSecondsFromGMT:0];
+    f.calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    f.locale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US"];
+    return [f stringFromDate:self];
+}
+
 @end

@@ -15,4 +15,6 @@
 @property (nonatomic, readonly) NSString *prettyTimeIntervalSinceNow;
 @property (nonatomic, readonly) NSString *stringInGithubAPIFormat;
 
+@property (nonatomic, readonly) NSString *stringInV3Format;
+
 @end

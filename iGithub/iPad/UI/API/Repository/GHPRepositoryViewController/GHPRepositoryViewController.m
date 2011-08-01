@@ -548,6 +548,18 @@
             UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:createViewController];
             navigationController.modalPresentationStyle = UIModalPresentationFormSheet;
             [self presentViewController:navigationController animated:YES completion:nil];
+        } else if ([title isEqualToString:NSLocalizedString(@"New Milestone", @"")]) {
+            GHCreateMilestoneViewController *viewController = [[GHCreateMilestoneViewController alloc] initWithRepository:self.repositoryString];
+            viewController.modalInPopover = YES;
+            viewController.delegate = self;
+            UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:viewController];
+            UIPopoverController *popOver = [[UIPopoverController alloc] initWithContentViewController:navController];
+            _currentPopover = popOver;
+            popOver.delegate = self;
+            [popOver presentPopoverFromRect:[self.infoCell.actionButton convertRect:self.infoCell.actionButton.bounds toView:self.view] 
+                                     inView:self.view 
+                   permittedArrowDirections:UIPopoverArrowDirectionRight 
+                                   animated:YES];
         }
     } else if (actionSheet.tag == kUIActionSheetTagSelectOrganization) {
         if (buttonIndex < actionSheet.numberOfButtons - 1) {
@@ -570,6 +582,12 @@
                             [[ANNotificationQueue sharedInstance] detatchSuccesNotificationWithTitle:NSLocalizedString(@"Forked Repository to", @"") message:organization.login];
                         }
                     }];
+}
+
+#pragma mark - UIPopoverControllerDelegate
+
+- (void)popoverControllerDidDismissPopover:(UIPopoverController *)popoverController {
+    _currentPopover = nil;
 }
 
 #pragma mark - UIAlertViewDelegate
@@ -637,33 +655,42 @@
 
 - (UIActionSheet *)actionButtonActionSheet {
     UIActionSheet *sheet = [[UIActionSheet alloc] init];
-    
-    NSUInteger index = 0;
+    NSUInteger currentButtonIndex = 0;
     
     if (!self.canAdministrateRepository) {
         if (!_isWatchingRepository) {
             [sheet addButtonWithTitle:NSLocalizedString(@"Watch", @"")];
-            index++;
+            currentButtonIndex++;
         } else {
-            index++;
             [sheet addButtonWithTitle:NSLocalizedString(@"Unwatch", @"")];
+            currentButtonIndex++;
         }
     }
-    index++;
     [sheet addButtonWithTitle:NSLocalizedString(@"New Issue", @"")];
+    currentButtonIndex++;
     if (self.repository.hasHomepage) {
-        index++;
         [sheet addButtonWithTitle:NSLocalizedString(@"View Homepage in Safari", @"")];
+        currentButtonIndex++;
     }
     if (self.canAdministrateRepository) {
-        index++;
         [sheet addButtonWithTitle:NSLocalizedString(@"Add Collaborator", @"")];
-        [sheet addButtonWithTitle:NSLocalizedString(@"Delete Repository", @"")];
-        [sheet setDestructiveButtonIndex:index];
+        currentButtonIndex++;
+        [sheet addButtonWithTitle:NSLocalizedString(@"New Milestone", @"")];
+        currentButtonIndex++;
     } else {
         [sheet addButtonWithTitle:NSLocalizedString(@"Fork to my Account", @"")];
-        [sheet addButtonWithTitle:NSLocalizedString(@"Fork to an Organization", @"")];
+        currentButtonIndex++;
     }
+    
+    [sheet addButtonWithTitle:NSLocalizedString(@"Fork to an Organization", @"")];
+    currentButtonIndex++;
+    
+    if (self.canAdministrateRepository) {
+        [sheet addButtonWithTitle:NSLocalizedString(@"Delete Repository", @"")];
+        sheet.destructiveButtonIndex = currentButtonIndex;
+        currentButtonIndex++;
+    }
+    
     if (sheet.numberOfButtons == 0) {
         return nil;
     }
@@ -706,6 +733,16 @@
         _branches = [decoder decodeObjectForKey:@"branches"];
     }
     return self;
+}
+
+#pragma mark - GHCreateMilestoneViewControllerDelegate
+
+- (void)createMilestoneViewController:(GHCreateMilestoneViewController *)createViewController didCreateMilestone:(GHAPIMilestoneV3 *)milestone {
+    [_currentPopover dismissPopoverAnimated:YES];
+}
+
+- (void)createMilestoneViewControllerDidCancel:(GHCreateMilestoneViewController *)createViewController {
+    [_currentPopover dismissPopoverAnimated:YES];
 }
 
 @end

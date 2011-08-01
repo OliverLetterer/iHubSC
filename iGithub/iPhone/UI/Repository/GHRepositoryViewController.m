@@ -892,10 +892,23 @@
 }
 
 - (void)createIssueViewController:(GHCreateIssueTableViewController *)createViewController didCreateIssue:(GHAPIIssueV3 *)issue {
-    self.issuesArray = nil;
+    [self.issuesArray insertObject:issue atIndex:0];
+    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:kUITableViewSectionIssues] 
+                  withRowAnimation:UITableViewRowAnimationNone];
     self.repository.openIssues = [NSNumber numberWithInt:[self.repository.openIssues intValue]+1 ];
-    [self.tableView reloadData];
-    [self.tableView expandSection:kUITableViewSectionIssues animated:YES];
+    [self dismissModalViewControllerAnimated:YES];
+}
+
+#pragma mark - GHCreateMilestoneViewControllerDelegate
+
+- (void)createMilestoneViewController:(GHCreateMilestoneViewController *)createViewController didCreateMilestone:(GHAPIMilestoneV3 *)milestone {
+    [self.milestones insertObject:milestone atIndex:0];
+    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:kUITableViewSectionMilestones] 
+                  withRowAnimation:UITableViewRowAnimationNone];
+    [self dismissModalViewControllerAnimated:YES];
+}
+
+- (void)createMilestoneViewControllerDidCancel:(GHCreateMilestoneViewController *)createViewController {
     [self dismissModalViewControllerAnimated:YES];
 }
 
@@ -1021,7 +1034,12 @@
                                        
                                    }];
         } else if ([title isEqualToString:NSLocalizedString(@"Create Milestone", @"")]) {
+            GHCreateMilestoneViewController *viewController = [[GHCreateMilestoneViewController alloc] initWithRepository:self.repositoryString];
+            viewController.delegate = self;
             
+            UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:viewController];
+            
+            [self presentModalViewController:navController animated:YES];
         }
     }
 }
