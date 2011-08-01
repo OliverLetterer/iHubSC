@@ -457,4 +457,78 @@
     return self;
 }
 
+#pragma mark - GHCreateTeamViewControllerDelegate
+
+- (void)createTeamViewControllerDidCancel:(GHCreateTeamViewController *)createViewController {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)createTeamViewController:(GHCreateTeamViewController *)createViewController didCreateTeam:(GHAPITeamV3 *)team {
+    [self.teams addObject:team];
+    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:kUITableViewSectionTeams] withRowAnimation:UITableViewRowAnimationNone];
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+#pragma mark - UIActionSheetDelegate
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    NSString *title = nil;
+    @try {
+        title = [actionSheet buttonTitleAtIndex:buttonIndex];
+    }
+    @catch (NSException *exception) {}
+    
+    if ([title isEqualToString:NSLocalizedString(@"Add Team", @"")]) {
+        GHCreateTeamViewController *viewController = [[GHCreateTeamViewController alloc] initWithOrganization:self.organizationLogin];
+        viewController.delegate = self;
+        
+        UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:viewController];
+        [self presentModalViewController:navController animated:YES];
+    }
+}
+
+#pragma mark - GHActionButtonTableViewController
+
+- (void)downloadDataToDisplayActionButton {
+    [GHAPIOrganizationV3 isUser:[GHAPIAuthenticationManager sharedInstance].authenticatedUser.login administratorInOrganization:self.organizationLogin completionHandler:^(BOOL state, NSError *error) {
+        if (error) {
+            [self failedToDownloadDataToDisplayActionButtonWithError:error];
+        } else {
+            _hasAdminData = YES;
+            _isAdmin = state;
+            [self didDownloadDataToDisplayActionButton];
+        }
+    }];
+}
+
+- (UIActionSheet *)actionButtonActionSheet {
+    if (!_isAdmin) {
+        return nil;
+    }
+    
+    UIActionSheet *sheet = [[UIActionSheet alloc] init];
+    sheet.title = self.organizationLogin;
+    NSUInteger currentButtonIndex = 0;
+    
+    [sheet addButtonWithTitle:NSLocalizedString(@"Add Team", @"")];
+    currentButtonIndex++;
+    
+    [sheet addButtonWithTitle:NSLocalizedString(@"Cancel", @"")];
+    sheet.cancelButtonIndex = currentButtonIndex;
+    currentButtonIndex++;
+    
+    sheet.actionSheetStyle = UIActionSheetStyleBlackTranslucent;
+    sheet.delegate = self;
+    
+    return sheet;
+}
+
+- (BOOL)canDisplayActionButton {
+    return YES;
+}
+
+- (BOOL)needsToDownloadDataToDisplayActionButtonActionSheet {
+    return !_hasAdminData;
+}
+
 @end

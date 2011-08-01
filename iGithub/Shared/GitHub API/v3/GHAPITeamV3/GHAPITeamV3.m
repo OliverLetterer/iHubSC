@@ -29,6 +29,8 @@ NSString *const GHAPITeamV3PermissionAdmin = @"admin";
         self.permission = [rawDictionary objectForKeyOrNilOnNullObject:@"permission"];
         self.membersCount = [rawDictionary objectForKeyOrNilOnNullObject:@"members_count"];
         self.reposCount = [rawDictionary objectForKeyOrNilOnNullObject:@"repos_count"];
+        
+        DLog(@"%@", rawDictionary);
     }
     return self;
 }
@@ -173,9 +175,8 @@ NSString *const GHAPITeamV3PermissionAdmin = @"admin";
                                        ] ];
     
     [[GHAPIBackgroundQueueV3 sharedInstance] sendRequestToURL:URL 
-                                                 setupHandler:^(ASIFormDataRequest *request) {
-                                                     [request setRequestMethod:@"DELETE"];
-                                                 } completionHandler:^(id object, NSError *error, ASIFormDataRequest *request) {
+                                                 setupHandler:nil 
+                                            completionHandler:^(id object, NSError *error, ASIFormDataRequest *request) {
                                                      if ([request responseStatusCode] == 404) {
                                                          handler(NO, nil);
                                                      } else if (error) {

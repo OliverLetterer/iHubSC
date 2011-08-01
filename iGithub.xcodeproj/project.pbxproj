@@ -392,6 +392,7 @@
 		A7C5259613E6E0170003EEE5 /* GHUpdateMilestoneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7C5259513E6E0160003EEE5 /* GHUpdateMilestoneViewController.m */; };
 		A7CE1B831346349200169F94 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7CE1B821346349000169F94 /* CoreData.framework */; };
 		A7D14F451354E5A700E1B980 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7D14F441354E5A600E1B980 /* MessageUI.framework */; };
+		A7FDA6A113E7446F00DE4FF3 /* GHCreateTeamViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7FDA6A013E7446F00DE4FF3 /* GHCreateTeamViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1125,6 +1126,8 @@
 		A7CE1B821346349000169F94 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		A7D14F441354E5A600E1B980 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		A7D41AC41358B6B500CD3A5C /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
+		A7FDA69F13E7446F00DE4FF3 /* GHCreateTeamViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHCreateTeamViewController.h; sourceTree = "<group>"; };
+		A7FDA6A013E7446F00DE4FF3 /* GHCreateTeamViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHCreateTeamViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -3221,6 +3224,7 @@
 		A7BD1F3E13E5D4280016A662 /* API */ = {
 			isa = PBXGroup;
 			children = (
+				A7FDA69713E7441600DE4FF3 /* Organization */,
 				A7C5254813E69DED0003EEE5 /* Milestone */,
 				A7BD1F3F13E5D4280016A662 /* Issue */,
 			);
@@ -3388,6 +3392,15 @@
 				A7C5257D13E6B2B80003EEE5 /* GHDateSelectViewController.m */,
 			);
 			path = GHDateSelectViewController;
+			sourceTree = "<group>";
+		};
+		A7FDA69713E7441600DE4FF3 /* Organization */ = {
+			isa = PBXGroup;
+			children = (
+				A7FDA69F13E7446F00DE4FF3 /* GHCreateTeamViewController.h */,
+				A7FDA6A013E7446F00DE4FF3 /* GHCreateTeamViewController.m */,
+			);
+			path = Organization;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -3849,6 +3862,7 @@
 				A7C5259613E6E0170003EEE5 /* GHUpdateMilestoneViewController.m in Sources */,
 				A744F58813E73E490038C189 /* DTRangedAttribute.m in Sources */,
 				A744F58913E73E490038C189 /* DTRangedAttributesOptimizer.m in Sources */,
+				A7FDA6A113E7446F00DE4FF3 /* GHCreateTeamViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

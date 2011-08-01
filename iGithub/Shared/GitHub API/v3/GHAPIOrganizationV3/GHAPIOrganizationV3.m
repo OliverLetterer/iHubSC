@@ -225,27 +225,30 @@
         [self isUser:username administratorInOrganization:organization checkTeamsWithPage:nextPage completionHandler:handler];
     } else {
         // now ask the team, if user is a member
-        GHAPITeamV3 *team = [teamsArray objectAtIndex:currentTeamIndex];
-        if ([team.permission isEqualToString:GHAPITeamV3PermissionAdmin]) {
-            // this team has admin right, check if user is member
-            [GHAPITeamV3 isUser:username memberInTeamByID:team.ID completionHandler:^(BOOL state, NSError *error) {
-                if (error) {
-                    // error happend
-                    handler(NO, error);
+        GHAPITeamV3 *badTeam = [teamsArray objectAtIndex:currentTeamIndex];
+        [GHAPITeamV3 teamByID:badTeam.ID 
+            completionHandler:^(GHAPITeamV3 *team, NSError *error) {
+                if ([team.permission isEqualToString:GHAPITeamV3PermissionAdmin]) {
+                    // this team has admin right, check if user is member
+                    [GHAPITeamV3 isUser:username memberInTeamByID:team.ID completionHandler:^(BOOL state, NSError *error) {
+                        if (error) {
+                            // error happend
+                            handler(NO, error);
+                        } else {
+                            if (state) {
+                                // user is member
+                                handler(YES, nil);
+                            } else {
+                                // user is no member, check for next team
+                                [self isUser:username administratorInOrganization:organization nextPate:nextPage inArray:teamsArray currentTeamIndex:currentTeamIndex+1 completionHandler:handler];
+                            }
+                        }
+                    }];
                 } else {
-                    if (state) {
-                        // user is member
-                        handler(YES, nil);
-                    } else {
-                        // user is no member, check for next team
-                        [self isUser:username administratorInOrganization:organization nextPate:nextPage inArray:teamsArray currentTeamIndex:currentTeamIndex+1 completionHandler:handler];
-                    }
+                    // this team does not have admin right, check next team
+                    [self isUser:username administratorInOrganization:organization nextPate:nextPage inArray:teamsArray currentTeamIndex:currentTeamIndex+1 completionHandler:handler];
                 }
             }];
-        } else {
-            // this team does not have admin right, check next team
-            [self isUser:username administratorInOrganization:organization nextPate:nextPage inArray:teamsArray currentTeamIndex:currentTeamIndex+1 completionHandler:handler];
-        }
     }
 }
 

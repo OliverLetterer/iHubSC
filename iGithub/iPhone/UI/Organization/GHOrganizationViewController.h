@@ -7,10 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "GHTableViewController.h"
-#import "GithubAPI.h"
+#import "GHActionButtonTableViewController.h"
+#import "GHCreateTeamViewController.h"
 
-@interface GHOrganizationViewController : GHTableViewController {
+@interface GHOrganizationViewController : GHActionButtonTableViewController <GHCreateTeamViewControllerDelegate> {
 @private
     NSString *_organizationLogin;
     
@@ -18,6 +18,9 @@
     NSMutableArray *_publicRepositories;
     NSMutableArray *_publicMembers;
     NSMutableArray *_teams;
+    
+    BOOL _hasAdminData;
+    BOOL _isAdmin;
 }
 
 @property (nonatomic, copy) NSString *organizationLogin;
