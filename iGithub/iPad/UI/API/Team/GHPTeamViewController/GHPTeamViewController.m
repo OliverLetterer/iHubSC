@@ -160,7 +160,7 @@
         static NSString *CellIdentifier = @"GHPUserTableViewCell";
         
         GHPUserTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-        if (!cell) {
+        if (cell == nil) {
             cell = [[GHPUserTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         }
         [self setupDefaultTableViewCell:cell forRowAtIndexPath:indexPath];
@@ -198,75 +198,14 @@
     return self.dummyCell;
 }
 
-//// Override to support conditional editing of the table view.
-//- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-//    // Return NO if you do not want the specified item to be editable.
-//    
-//    if (indexPath.section == kUITableViewSectionMembers && indexPath.row > 0) {
-//        return YES;
-//    } else if (indexPath.section == kUITableViewSectionRepositories && indexPath.row > 0) {
-//        return YES;
-//    }
-//    
-//    return NO;
-//}
-//
-//// Override to support editing the table view.
-//- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-//    if (editingStyle == UITableViewCellEditingStyleDelete) {
-//        // Delete the row from the data source
-//        
-//        if (indexPath.section == kUITableViewSectionMembers) {
-//            GHAPIUserV3 *user = [self.members objectAtIndex:indexPath.row - 1];
-//            
-//            [GHAPITeamV3 teamByID:self.teamID deleteUserNamed:user.login completionHandler:^(NSError *error) {
-//                if (error) {
-//                    [self handleError:error];
-//                    [tableView reloadRowAtIndexPath:indexPath withRowAnimation:UITableViewRowAnimationNone];
-//                } else {
-//                    [self.members removeObjectAtIndex:indexPath.row - 1];
-//                    [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
-//                }
-//            }];
-//        } else if (indexPath.section == kUITableViewSectionRepositories) {
-//            GHAPIRepositoryV3 *repo = [self.repositories objectAtIndex:indexPath.row-1];
-//            
-//            NSString *repoName = [NSString stringWithFormat:@"%@/%@", repo.owner.login, repo.name];
-//            
-//            [GHAPITeamV3 teamByID:self.teamID deleteRepositoryNamed:repoName 
-//                completionHandler:^(NSError *error) {
-//                    if (error) {
-//                        [self handleError:error];
-//                        [tableView reloadRowAtIndexPath:indexPath withRowAnimation:UITableViewRowAnimationNone];
-//                    } else {
-//                        [self.repositories removeObjectAtIndex:indexPath.row - 1];
-//                        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
-//                    }
-//                }];
-//        }
-//    }
-//}
-
-/*
- // Override to support rearranging the table view.
- - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
- }
- */
-
-/*
- // Override to support conditional rearranging of the table view.
- - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
- // Return NO if you do not want the item to be re-orderable.
- return YES;
- }
- */
-
 #pragma mark - Table view delegate
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == kUITableViewSectionRepositories && indexPath.row > 0) {
         GHAPIRepositoryV3 *repository = [self.repositories objectAtIndex:indexPath.row-1];
         return [GHPRepositoryTableViewCell heightWithContent:repository.description];
+    } else if (indexPath.section == kUITableViewSectionMembers && indexPath.row > 0) {
+        return GHPUserTableViewCellHeight;
     }
     
     return UITableViewAutomaticDimension;
