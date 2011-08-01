@@ -1109,7 +1109,7 @@
 		A7C5254E13E69F9A0003EEE5 /* GHCreateMilestoneTitleAndDescriptionTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHCreateMilestoneTitleAndDescriptionTableViewCell.h; sourceTree = "<group>"; };
 		A7C5254F13E69F9A0003EEE5 /* GHCreateMilestoneTitleAndDescriptionTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHCreateMilestoneTitleAndDescriptionTableViewCell.m; sourceTree = "<group>"; };
 		A7C5256413E6ACCC0003EEE5 /* Kal.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Kal.xcodeproj; path = Submodules/Kal/src/Kal.xcodeproj; sourceTree = SOURCE_ROOT; };
-		A7C5257213E6ADF90003EEE5 /* Kal.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = Kal.bundle; path = Submodules/Kal/src/Kal.bundle; sourceTree = "<group>"; };
+		A7C5257213E6ADF90003EEE5 /* Kal.bundle */ = {isa = PBXFileReference; name = Kal.bundle; path = ../Submodules/Kal/src/Kal.bundle; sourceTree = "<group>"; };
 		A7C5257C13E6B2B80003EEE5 /* GHDateSelectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHDateSelectViewController.h; sourceTree = "<group>"; };
 		A7C5257D13E6B2B80003EEE5 /* GHDateSelectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHDateSelectViewController.m; sourceTree = "<group>"; };
 		A7C5257F13E6B64A0003EEE5 /* GHPCreateMilestoneTitleAndDescriptionTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPCreateMilestoneTitleAndDescriptionTableViewCell.h; sourceTree = "<group>"; };
@@ -3259,7 +3259,6 @@
 		A7BF13EC1342149C001AE50D = {
 			isa = PBXGroup;
 			children = (
-				A7C5257213E6ADF90003EEE5 /* Kal.bundle */,
 				A7841C7013E184F500131648 /* Submodules */,
 				A7BF14011342149C001AE50D /* iGithub */,
 				A7BF13FA1342149C001AE50D /* Frameworks */,
@@ -3358,6 +3357,7 @@
 		A7C5255A13E6AB420003EEE5 /* Kal */ = {
 			isa = PBXGroup;
 			children = (
+				A7C5257213E6ADF90003EEE5 /* Kal.bundle */,
 				A7C5256413E6ACCC0003EEE5 /* Kal.xcodeproj */,
 			);
 			name = Kal;
