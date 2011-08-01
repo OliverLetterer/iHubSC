@@ -10,9 +10,10 @@
 #import "GHTableViewController.h"
 #import "GHPInfoTableViewCell.h"
 
-@interface GHPInfoSectionTableViewController : GHTableViewController <GHPInfoTableViewCellDelegate, UIActionSheetDelegate> {
+@interface GHPInfoSectionTableViewController : GHTableViewController <GHPInfoTableViewCellDelegate, UIActionSheetDelegate, UIPopoverControllerDelegate> {
 @protected
     GHPInfoTableViewCell *_infoCell;
+    UIPopoverController *_currentPopoverController;
 }
 
 @property (nonatomic, readonly) GHPInfoTableViewCell *infoCell;
@@ -27,5 +28,7 @@
 - (void)downloadDataToDisplayActionButton;      // overwrite
 - (void)didDownloadDataToDisplayActionButton;
 - (void)failedToDownloadDataToDisplayActionButtonWithError:(NSError *)error;
+
+- (void)presentViewControllerFromActionButton:(UIViewController *)viewController detatchNavigationController:(BOOL)detatchNavigationController animated:(BOOL)animted;
 
 @end

@@ -13,7 +13,7 @@
 #import "GHCreateIssueTableViewController.h"
 #import "GHCreateMilestoneViewController.h"
 
-@interface GHPRepositoryViewController : GHPInfoSectionTableViewController <GHCreateIssueTableViewControllerDelegate, NSCoding, GHCreateMilestoneViewControllerDelegate, UIPopoverControllerDelegate> {
+@interface GHPRepositoryViewController : GHPInfoSectionTableViewController <GHCreateIssueTableViewControllerDelegate, NSCoding, GHCreateMilestoneViewControllerDelegate> {
 @private
     NSString *_repositoryString;
     GHAPIRepositoryV3 *_repository;
@@ -25,8 +25,6 @@
     
     NSMutableArray *_labels;
     NSMutableArray *_branches;
-    
-    UIPopoverController *_currentPopover;
 }
 
 @property (nonatomic, copy) NSString *repositoryString;

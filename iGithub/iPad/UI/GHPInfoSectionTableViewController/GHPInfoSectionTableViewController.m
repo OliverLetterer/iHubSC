@@ -100,4 +100,21 @@
     }
 }
 
+#pragma mark - UIPopoverControllerDelegate
+
+- (void)popoverControllerDidDismissPopover:(UIPopoverController *)popoverController {
+    _currentPopoverController = nil;
+}
+
+#pragma mark - instance methods
+
+- (void)presentViewControllerFromActionButton:(UIViewController *)viewController detatchNavigationController:(BOOL)detatchNavigationController animated:(BOOL)animted {
+    if (detatchNavigationController) {
+        viewController = [[UINavigationController alloc] initWithRootViewController:viewController];
+    }
+    _currentPopoverController = [[UIPopoverController alloc] initWithContentViewController:viewController];
+    _currentPopoverController.delegate = self;
+    [_currentPopoverController presentPopoverFromRect:[self.infoCell.actionButton convertRect:self.infoCell.actionButton.bounds toView:self.advancedNavigationController.view] inView:self.advancedNavigationController.view permittedArrowDirections:UIPopoverArrowDirectionRight animated:YES];
+}
+
 @end

@@ -546,26 +546,12 @@
             GHCreateIssueTableViewController *viewController = [[GHCreateIssueTableViewController alloc] initWithRepository:self.repositoryString];
             viewController.presentedInPopoverController = YES;
             viewController.delegate = self;
-            UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:viewController];
-            UIPopoverController *popOver = [[UIPopoverController alloc] initWithContentViewController:navController];
-            _currentPopover = popOver;
-            popOver.delegate = self;
-            [popOver presentPopoverFromRect:[self.infoCell.actionButton convertRect:self.infoCell.actionButton.bounds toView:self.advancedNavigationController.view] 
-                                     inView:self.advancedNavigationController.view 
-                   permittedArrowDirections:UIPopoverArrowDirectionRight 
-                                   animated:YES];
+            [self presentViewControllerFromActionButton:viewController detatchNavigationController:YES animated:YES];
         } else if ([title isEqualToString:NSLocalizedString(@"New Milestone", @"")]) {
             GHCreateMilestoneViewController *viewController = [[GHCreateMilestoneViewController alloc] initWithRepository:self.repositoryString];
             viewController.presentedInPopoverController = YES;
             viewController.delegate = self;
-            UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:viewController];
-            UIPopoverController *popOver = [[UIPopoverController alloc] initWithContentViewController:navController];
-            _currentPopover = popOver;
-            popOver.delegate = self;
-            [popOver presentPopoverFromRect:[self.infoCell.actionButton convertRect:self.infoCell.actionButton.bounds toView:self.advancedNavigationController.view] 
-                                     inView:self.advancedNavigationController.view 
-                   permittedArrowDirections:UIPopoverArrowDirectionRight 
-                                   animated:YES];
+            [self presentViewControllerFromActionButton:viewController detatchNavigationController:YES animated:YES];
         }
     } else if (actionSheet.tag == kUIActionSheetTagSelectOrganization) {
         if (buttonIndex < actionSheet.numberOfButtons - 1) {
@@ -588,12 +574,6 @@
                             [[ANNotificationQueue sharedInstance] detatchSuccesNotificationWithTitle:NSLocalizedString(@"Forked Repository to", @"") message:organization.login];
                         }
                     }];
-}
-
-#pragma mark - UIPopoverControllerDelegate
-
-- (void)popoverControllerDidDismissPopover:(UIPopoverController *)popoverController {
-    _currentPopover = nil;
 }
 
 #pragma mark - UIAlertViewDelegate
@@ -734,22 +714,22 @@
 
 - (void)createMilestoneViewController:(GHCreateMilestoneViewController *)createViewController didCreateMilestone:(GHAPIMilestoneV3 *)milestone {
     [[ANNotificationQueue sharedInstance] detatchSuccesNotificationWithTitle:NSLocalizedString(@"Created Milestone", @"") message:milestone.title];
-    [_currentPopover dismissPopoverAnimated:YES];
+    [_currentPopoverController dismissPopoverAnimated:YES];
 }
 
 - (void)createMilestoneViewControllerDidCancel:(GHCreateMilestoneViewController *)createViewController {
-    [_currentPopover dismissPopoverAnimated:YES];
+    [_currentPopoverController dismissPopoverAnimated:YES];
 }
 
 #pragma mark - GHCreateIssueTableViewControllerDelegate
 
 - (void)createIssueViewController:(GHCreateIssueTableViewController *)createViewController didCreateIssue:(GHAPIIssueV3 *)issue {
     [[ANNotificationQueue sharedInstance] detatchSuccesNotificationWithTitle:NSLocalizedString(@"Created Issue", @"") message:issue.title];
-    [_currentPopover dismissPopoverAnimated:YES];
+    [_currentPopoverController dismissPopoverAnimated:YES];
 }
 
 - (void)createIssueViewControllerDidCancel:(GHCreateIssueTableViewController *)createViewController {
-    [_currentPopover dismissPopoverAnimated:YES];
+    [_currentPopoverController dismissPopoverAnimated:YES];
 }
 
 

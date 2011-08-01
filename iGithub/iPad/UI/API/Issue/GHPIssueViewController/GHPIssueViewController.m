@@ -696,14 +696,7 @@
             GHUpdateIssueViewController *viewController = [[GHUpdateIssueViewController alloc] initWithIssue:self.issue];
             viewController.presentedInPopoverController = YES;
             viewController.delegate = self;
-            UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:viewController];
-            UIPopoverController *popOver = [[UIPopoverController alloc] initWithContentViewController:navController];
-            _currentPopoverController = popOver;
-            popOver.delegate = self;
-            [popOver presentPopoverFromRect:[self.infoCell.actionButton convertRect:self.infoCell.actionButton.bounds toView:self.advancedNavigationController.view] 
-                                     inView:self.advancedNavigationController.view 
-                   permittedArrowDirections:UIPopoverArrowDirectionRight 
-                                   animated:YES];
+            [self presentViewControllerFromActionButton:viewController detatchNavigationController:YES animated:YES];
         }
     } else if (actionSheet.tag == kUIActionSheetTagLongPressedLink) {
         NSString *title = nil;
@@ -854,12 +847,6 @@
     UIViewController *viewController = [[GHWebViewViewController alloc] initWithURL:button.url ];
     viewController = [[UINavigationController alloc] initWithRootViewController:viewController];
     [self.advancedNavigationController pushViewController:viewController afterViewController:self animated:YES];
-}
-
-#pragma mark - UIPopoverControllerDelegate
-
-- (void)popoverControllerDidDismissPopover:(UIPopoverController *)popoverController {
-    _currentPopoverController = nil;
 }
 
 #pragma mark - Keyed Archiving
