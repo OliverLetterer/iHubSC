@@ -11,6 +11,8 @@
 		A7204D8113E4759F0098C86A /* GHAPIMarkdownFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = A7204D8013E4759F0098C86A /* GHAPIMarkdownFormatter.m */; };
 		A744F56C13E72D030038C189 /* styles.css in Resources */ = {isa = PBXBuildFile; fileRef = A744F56B13E72D030038C189 /* styles.css */; };
 		A744F57913E730E40038C189 /* libGHMarkdownParser.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A744F57613E72DE60038C189 /* libGHMarkdownParser.a */; };
+		A744F58813E73E490038C189 /* DTRangedAttribute.m in Sources */ = {isa = PBXBuildFile; fileRef = A744F58513E73E490038C189 /* DTRangedAttribute.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		A744F58913E73E490038C189 /* DTRangedAttributesOptimizer.m in Sources */ = {isa = PBXBuildFile; fileRef = A744F58713E73E490038C189 /* DTRangedAttributesOptimizer.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		A747C8C413BCCC0B00659504 /* libz.1.2.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A747C8C313BCCC0B00659504 /* libz.1.2.5.dylib */; };
 		A750571F13427FE800514A82 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A750571E13427FE800514A82 /* CFNetwork.framework */; };
 		A750572113427FEF00514A82 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A750572013427FEF00514A82 /* SystemConfiguration.framework */; };
@@ -430,6 +432,10 @@
 		A7204D8013E4759F0098C86A /* GHAPIMarkdownFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GHAPIMarkdownFormatter.m; path = Markdown/GHAPIMarkdownFormatter.m; sourceTree = "<group>"; };
 		A744F56B13E72D030038C189 /* styles.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = styles.css; sourceTree = "<group>"; };
 		A744F56E13E72DE60038C189 /* GHMarkdownParser.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = GHMarkdownParser.xcodeproj; path = Submodules/GHMarkdownParser/GHMarkdownParser/GHMarkdownParser.xcodeproj; sourceTree = SOURCE_ROOT; };
+		A744F58413E73E490038C189 /* DTRangedAttribute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DTRangedAttribute.h; path = "Submodules/NSAttributedString-Additions-for-HTML/Classes/DTRangedAttribute.h"; sourceTree = SOURCE_ROOT; };
+		A744F58513E73E490038C189 /* DTRangedAttribute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DTRangedAttribute.m; path = "Submodules/NSAttributedString-Additions-for-HTML/Classes/DTRangedAttribute.m"; sourceTree = SOURCE_ROOT; };
+		A744F58613E73E490038C189 /* DTRangedAttributesOptimizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DTRangedAttributesOptimizer.h; path = "Submodules/NSAttributedString-Additions-for-HTML/Classes/DTRangedAttributesOptimizer.h"; sourceTree = SOURCE_ROOT; };
+		A744F58713E73E490038C189 /* DTRangedAttributesOptimizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DTRangedAttributesOptimizer.m; path = "Submodules/NSAttributedString-Additions-for-HTML/Classes/DTRangedAttributesOptimizer.m"; sourceTree = SOURCE_ROOT; };
 		A747C8C313BCCC0B00659504 /* libz.1.2.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.5.dylib; path = usr/lib/libz.1.2.5.dylib; sourceTree = SDKROOT; };
 		A750571E13427FE800514A82 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		A750572013427FEF00514A82 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -3146,6 +3152,10 @@
 				A7841C8C13E1853200131648 /* DTHTMLElement.m */,
 				A7841C8D13E1853200131648 /* DTLazyImageView.h */,
 				A7841C8E13E1853200131648 /* DTLazyImageView.m */,
+				A744F58413E73E490038C189 /* DTRangedAttribute.h */,
+				A744F58513E73E490038C189 /* DTRangedAttribute.m */,
+				A744F58613E73E490038C189 /* DTRangedAttributesOptimizer.h */,
+				A744F58713E73E490038C189 /* DTRangedAttributesOptimizer.m */,
 				A7841C9113E1853200131648 /* DTTextAttachment.h */,
 				A7841C9213E1853200131648 /* DTTextAttachment.m */,
 				A7841C9313E1853200131648 /* NSAttributedString+HTML.h */,
@@ -3837,6 +3847,8 @@
 				A7C5257E13E6B2B80003EEE5 /* GHDateSelectViewController.m in Sources */,
 				A7C5258113E6B64A0003EEE5 /* GHPCreateMilestoneTitleAndDescriptionTableViewCell.m in Sources */,
 				A7C5259613E6E0170003EEE5 /* GHUpdateMilestoneViewController.m in Sources */,
+				A744F58813E73E490038C189 /* DTRangedAttribute.m in Sources */,
+				A744F58913E73E490038C189 /* DTRangedAttributesOptimizer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
