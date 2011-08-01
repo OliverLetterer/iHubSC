@@ -1,21 +1,39 @@
 [submodule "JSONKit"]
-	path = JSONKit
+	path = Submodules/JSONKit
 	url = https://github.com/johnezang/JSONKit.git
 [submodule "asi-http-request"]
-	path = asi-http-request
+	path = Submodules/asi-http-request
 	url = https://github.com/pokeb/asi-http-request.git
-[submodule "UIExpandableTableView"]
-	path = UIExpandableTableView
-	url = git@github.com:docmorelli/UIExpandableTableView.git
 [submodule "DDProgressView"]
-	path = DDProgressView
+	path = Submodules/DDProgressView
 	url = https://github.com/ddeville/DDProgressView.git
-[submodule "PDColoredProgressview"]
-	path = PDColoredProgressview
-	url = https://github.com/PascalW/PDColoredProgressview.git
-[submodule "appirater"]
-	path = appirater
-	url = https://github.com/arashpayan/appirater.git
-[submodule "MTStatusBarOverlay"]
-	path = MTStatusBarOverlay
-	url = https://github.com/myell0w/MTStatusBarOverlay.git
+[submodule "uicolor-utilities"]
+	path = Submodules/uicolor-utilities
+	url = https://github.com/ars/uicolor-utilities.git
+[submodule "NSAttributedString-Additions-for-HTML"]
+	path = Submodules/NSAttributedString-Additions-for-HTML
+	url = https://github.com/Cocoanetics/NSAttributedString-Additions-for-HTML.git
+[submodule "UIExpandableTableView"]
+	path = Submodules/UIExpandableTableView
+	url = git@github.com:OliverLetterer/UIExpandableTableView.git
+[submodule "GHPullToReleaseTableViewController"]
+	path = Submodules/GHPullToReleaseTableViewController
+	url = git@github.com:OliverLetterer/GHPullToReleaseTableViewController.git
+[submodule "GHTableViewAlertView"]
+	path = Submodules/GHTableViewAlertView
+	url = git@github.com:OliverLetterer/GHTableViewAlertView.git
+[submodule "ANAdvancedNavigationController"]
+	path = Submodules/ANAdvancedNavigationController
+	url = git@github.com:OliverLetterer/ANAdvancedNavigationController.git
+[submodule "scifihifi-iphone"]
+	path = Submodules/scifihifi-iphone
+	url = https://github.com/ldandersen/scifihifi-iphone.git
+[submodule "GHPieChartProgressView"]
+	path = Submodules/GHPieChartProgressView
+	url = git@github.com:OliverLetterer/GHPieChartProgressView.git
+[submodule "Kal"]
+	path = Submodules/Kal
+	url = https://github.com/klazuka/Kal.git
+[submodule "GHMarkdownParser"]
+	path = Submodules/GHMarkdownParser
+	url = git@github.com:OliverLetterer/GHMarkdownParser.git

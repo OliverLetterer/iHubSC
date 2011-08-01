@@ -21,3 +21,5 @@
 # else  
 #   define DLog(...)  
 # endif
+
+#define DT_USE_THREAD_SAFE_INITIALIZATION

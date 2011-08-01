@@ -1,0 +1,38 @@
+support all these events
+
+    [-] CommitCommentEvent  - user commented on a commit
+[O] CommitEvent 
+    [-] CreateEvent 
+    [-] DeleteEvent 
+    [-] DownloadEvent       - when a user adds a download on a repo
+    [-] FollowEvent         - user started following another user
+    [-] ForkApplyEvent 
+    [-] ForkEvent           - user forked another repository
+    [X] GistEvent 
+[O] GitHubEvent 
+    [-] GollumEvent         - user created a page in the wiki
+    [-] IssueCommentEvent   - user commented on an issue
+    [-] IssuesEvent 
+    [-] MemberEvent         - user added a Member to a repository
+    [-] PublicEvent 
+    [-] PullRequestEvent 
+    [-] PushEvent
+[O] TeamAddEvent 
+    [-] WatchEvent 
+[O] WikiEvent
+
+[O]: Not implemented
+[X]: Implemented
+[-]: clickable (include in navigation hierarchie)
+
+
+TODO:
+- !!!!!!!!!!!!!!!! umlaute are displayed wrong (-> see optikfluffel user profile)
+- Network graph for recent activity (see Network API)
+- markdown support for Comments
+- Some kind of icons for folders and filetypes when browsing source trees would be nice. (currently none)
+- No access to Wiki pages.
+- Basically, you can access almost everything (but no wikis is a big deal!), but it's kind of clunky to do so. This app shows promise, but right now I would recommend against buying it. Keep your eye on this one, however, because if the developer gets active and improves the UI this could be amazing some day.
+
+Old APIv2 Calls:
+- search for a user

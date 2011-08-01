@@ -26,6 +26,6 @@
 @property (nonatomic, retain) GHUserViewController *profileViewController;
 @property (nonatomic, retain) GHSearchViewController *searchViewController;
 
-- (void)authenticationViewControllerdidAuthenticateUserCallback:(NSNotification *)notification;
+- (void)authenticationManagerDidAuthenticateUserCallback:(NSNotification *)notification;
 
 @end
