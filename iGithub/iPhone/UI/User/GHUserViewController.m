@@ -1045,6 +1045,12 @@
             
             UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:createViewController];
             [self presentModalViewController:navController animated:YES];
+        } else if ([title isEqualToString:NSLocalizedString(@"E-Mail", @"")]) {
+            MFMailComposeViewController *mailViewController = [[MFMailComposeViewController alloc] init];
+            mailViewController.mailComposeDelegate = self;
+            [mailViewController setToRecipients:[NSArray arrayWithObject:self.user.EMail]];
+            
+            [self presentViewController:mailViewController animated:YES completion:nil];
         }
     }
 }
@@ -1082,6 +1088,11 @@
         currentButtonIndex++;
     }
     
+    if (self.user.hasEMail && [MFMailComposeViewController canSendMail]) {
+        [sheet addButtonWithTitle:NSLocalizedString(@"E-Mail", @"")];
+        currentButtonIndex++;
+    }
+    
     [sheet addButtonWithTitle:NSLocalizedString(@"Cancel", @"")];
     sheet.cancelButtonIndex = currentButtonIndex;
     currentButtonIndex++;
@@ -1101,6 +1112,12 @@
         return !_hasFollowingData;
     }
     return NO;
+}
+
+#pragma mark - MFMailComposeViewControllerDelegate
+
+- (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error {
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

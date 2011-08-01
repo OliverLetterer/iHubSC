@@ -7,13 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MessageUI/MessageUI.h>
 #import "GHActionButtonTableViewController.h"
 #import "GHCreateRepositoryViewController.h"
 #import "GHRepositoryViewController.h"
 #import "UIExpandableTableView.h"
 #import "GithubAPI.h"
 
-@interface GHUserViewController : GHActionButtonTableViewController <GHCreateRepositoryViewControllerDelegate, GHSingleRepositoryViewControllerDelegate> {
+@interface GHUserViewController : GHActionButtonTableViewController <GHCreateRepositoryViewControllerDelegate, GHSingleRepositoryViewControllerDelegate, MFMailComposeViewControllerDelegate> {
 @private
     NSString *_username;
     GHAPIUserV3 *_user;
