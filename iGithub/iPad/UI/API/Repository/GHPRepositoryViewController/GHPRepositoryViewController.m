@@ -543,21 +543,27 @@
                                        
                                    }];
         } else if ([title isEqualToString:NSLocalizedString(@"New Issue", @"")]) {
-            GHCreateIssueTableViewController *createViewController = [[GHCreateIssueTableViewController alloc] initWithRepository:self.repositoryString];
-            createViewController.delegate = self;
-            UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:createViewController];
-            navigationController.modalPresentationStyle = UIModalPresentationFormSheet;
-            [self presentViewController:navigationController animated:YES completion:nil];
-        } else if ([title isEqualToString:NSLocalizedString(@"New Milestone", @"")]) {
-            GHCreateMilestoneViewController *viewController = [[GHCreateMilestoneViewController alloc] initWithRepository:self.repositoryString];
-            viewController.modalInPopover = YES;
+            GHCreateIssueTableViewController *viewController = [[GHCreateIssueTableViewController alloc] initWithRepository:self.repositoryString];
+            viewController.presentedInPopoverController = YES;
             viewController.delegate = self;
             UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:viewController];
             UIPopoverController *popOver = [[UIPopoverController alloc] initWithContentViewController:navController];
             _currentPopover = popOver;
             popOver.delegate = self;
-            [popOver presentPopoverFromRect:[self.infoCell.actionButton convertRect:self.infoCell.actionButton.bounds toView:self.view] 
-                                     inView:self.view 
+            [popOver presentPopoverFromRect:[self.infoCell.actionButton convertRect:self.infoCell.actionButton.bounds toView:self.advancedNavigationController.view] 
+                                     inView:self.advancedNavigationController.view 
+                   permittedArrowDirections:UIPopoverArrowDirectionRight 
+                                   animated:YES];
+        } else if ([title isEqualToString:NSLocalizedString(@"New Milestone", @"")]) {
+            GHCreateMilestoneViewController *viewController = [[GHCreateMilestoneViewController alloc] initWithRepository:self.repositoryString];
+            viewController.presentedInPopoverController = YES;
+            viewController.delegate = self;
+            UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:viewController];
+            UIPopoverController *popOver = [[UIPopoverController alloc] initWithContentViewController:navController];
+            _currentPopover = popOver;
+            popOver.delegate = self;
+            [popOver presentPopoverFromRect:[self.infoCell.actionButton convertRect:self.infoCell.actionButton.bounds toView:self.advancedNavigationController.view] 
+                                     inView:self.advancedNavigationController.view 
                    permittedArrowDirections:UIPopoverArrowDirectionRight 
                                    animated:YES];
         }
@@ -625,17 +631,6 @@
             self.actionButtonActive = NO;
         }
     }
-}
-
-#pragma mark - GHCreateIssueTableViewControllerDelegate
-
-- (void)createIssueViewController:(GHCreateIssueTableViewController *)createViewController didCreateIssue:(GHAPIIssueV3 *)issue {
-    [[ANNotificationQueue sharedInstance] detatchSuccesNotificationWithTitle:NSLocalizedString(@"Created Issue", @"") message:issue.title];
-    [self dismissViewControllerAnimated:YES completion:nil];
-}
-
-- (void)createIssueViewControllerDidCancel:(GHCreateIssueTableViewController *)createViewController {
-    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark - ActionMenu
@@ -738,11 +733,24 @@
 #pragma mark - GHCreateMilestoneViewControllerDelegate
 
 - (void)createMilestoneViewController:(GHCreateMilestoneViewController *)createViewController didCreateMilestone:(GHAPIMilestoneV3 *)milestone {
+    [[ANNotificationQueue sharedInstance] detatchSuccesNotificationWithTitle:NSLocalizedString(@"Created Milestone", @"") message:milestone.title];
     [_currentPopover dismissPopoverAnimated:YES];
 }
 
 - (void)createMilestoneViewControllerDidCancel:(GHCreateMilestoneViewController *)createViewController {
     [_currentPopover dismissPopoverAnimated:YES];
 }
+
+#pragma mark - GHCreateIssueTableViewControllerDelegate
+
+- (void)createIssueViewController:(GHCreateIssueTableViewController *)createViewController didCreateIssue:(GHAPIIssueV3 *)issue {
+    [[ANNotificationQueue sharedInstance] detatchSuccesNotificationWithTitle:NSLocalizedString(@"Created Issue", @"") message:issue.title];
+    [_currentPopover dismissPopoverAnimated:YES];
+}
+
+- (void)createIssueViewControllerDidCancel:(GHCreateIssueTableViewController *)createViewController {
+    [_currentPopover dismissPopoverAnimated:YES];
+}
+
 
 @end

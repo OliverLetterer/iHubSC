@@ -110,15 +110,19 @@ NSInteger const kGHCreateIssueTableViewControllerSectionLabels = kUITableViewSec
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel 
-                                                                                   target:self 
-                                                                                   action:@selector(cancelButtonClicked:)];
-    self.navigationItem.leftBarButtonItem = cancelButton;
+    if (!self.isPresentedInPopoverController) {
+        UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel 
+                                                                                      target:self 
+                                                                                      action:@selector(cancelButtonClicked:)];
+        self.navigationItem.leftBarButtonItem = cancelButton;
+    }
     
     UIBarButtonItem *saveButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave 
                                                                                  target:self 
                                                                                  action:@selector(saveButtonClicked:)];
     self.navigationItem.rightBarButtonItem = saveButton;
+    
+    self.contentSizeForViewInPopover = CGSizeMake(320.0f, 480.0f);
 }
 
 #pragma mark - instance methods

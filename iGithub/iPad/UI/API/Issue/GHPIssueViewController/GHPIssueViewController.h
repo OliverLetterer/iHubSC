@@ -14,7 +14,7 @@
 #import "GHPNewCommentTableViewCell.h"
 #import "GHUpdateIssueViewController.h"
 
-@interface GHPIssueViewController : GHPInfoSectionTableViewController <UIAlertViewDelegate, GHPIssueInfoTableViewCellDelegate, GHPAttributedTableViewCellDelegate, NSCoding, GHPNewCommentTableViewCellDelegate, GHCreateIssueTableViewControllerDelegate> {
+@interface GHPIssueViewController : GHPInfoSectionTableViewController <UIAlertViewDelegate, GHPIssueInfoTableViewCellDelegate, GHPAttributedTableViewCellDelegate, NSCoding, GHPNewCommentTableViewCellDelegate, GHCreateIssueTableViewControllerDelegate, UIPopoverControllerDelegate> {
 @private
     NSString *_repositoryString;
     NSNumber *_issueNumber;
@@ -34,6 +34,8 @@
     NSURL *_selectedURL;
     
     NSString *_lastUserComment;
+    
+    UIPopoverController *_currentPopoverController;
 }
 
 @property (nonatomic, copy) NSString *lastUserComment;
