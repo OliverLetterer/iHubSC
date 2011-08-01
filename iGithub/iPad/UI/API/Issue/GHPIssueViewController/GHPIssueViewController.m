@@ -742,6 +742,7 @@
         
         if ([self.issue.state isEqualToString:kGHAPIIssueStateV3Open]) {
             [sheet addButtonWithTitle:NSLocalizedString(@"Close", @"")];
+            sheet.destructiveButtonIndex = currentButtonIndex;
             currentButtonIndex++;
         } else {
             [sheet addButtonWithTitle:NSLocalizedString(@"Reopen", @"")];
