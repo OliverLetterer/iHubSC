@@ -399,6 +399,7 @@
 		A7C5257313E6ADF90003EEE5 /* Kal.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A7C5257213E6ADF90003EEE5 /* Kal.bundle */; };
 		A7C5257E13E6B2B80003EEE5 /* GHDateSelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7C5257D13E6B2B80003EEE5 /* GHDateSelectViewController.m */; };
 		A7C5258113E6B64A0003EEE5 /* GHPCreateMilestoneTitleAndDescriptionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A7C5258013E6B64A0003EEE5 /* GHPCreateMilestoneTitleAndDescriptionTableViewCell.m */; };
+		A7C5259613E6E0170003EEE5 /* GHUpdateMilestoneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7C5259513E6E0160003EEE5 /* GHUpdateMilestoneViewController.m */; };
 		A7CE1B831346349200169F94 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7CE1B821346349000169F94 /* CoreData.framework */; };
 		A7D14F451354E5A700E1B980 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7D14F441354E5A600E1B980 /* MessageUI.framework */; };
 /* End PBXBuildFile section */
@@ -1131,6 +1132,8 @@
 		A7C5257D13E6B2B80003EEE5 /* GHDateSelectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHDateSelectViewController.m; sourceTree = "<group>"; };
 		A7C5257F13E6B64A0003EEE5 /* GHPCreateMilestoneTitleAndDescriptionTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPCreateMilestoneTitleAndDescriptionTableViewCell.h; sourceTree = "<group>"; };
 		A7C5258013E6B64A0003EEE5 /* GHPCreateMilestoneTitleAndDescriptionTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPCreateMilestoneTitleAndDescriptionTableViewCell.m; sourceTree = "<group>"; };
+		A7C5259413E6E0160003EEE5 /* GHUpdateMilestoneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHUpdateMilestoneViewController.h; sourceTree = "<group>"; };
+		A7C5259513E6E0160003EEE5 /* GHUpdateMilestoneViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHUpdateMilestoneViewController.m; sourceTree = "<group>"; };
 		A7CE1B821346349000169F94 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		A7D14F441354E5A600E1B980 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		A7D41AC41358B6B500CD3A5C /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
@@ -3390,6 +3393,8 @@
 				A7C5254913E69DED0003EEE5 /* UITableViewCell's */,
 				A7C5254B13E69E360003EEE5 /* GHCreateMilestoneViewController.h */,
 				A7C5254C13E69E360003EEE5 /* GHCreateMilestoneViewController.m */,
+				A7C5259413E6E0160003EEE5 /* GHUpdateMilestoneViewController.h */,
+				A7C5259513E6E0160003EEE5 /* GHUpdateMilestoneViewController.m */,
 			);
 			path = Milestone;
 			sourceTree = "<group>";
@@ -3887,6 +3892,7 @@
 				A7C5255013E69F9A0003EEE5 /* GHCreateMilestoneTitleAndDescriptionTableViewCell.m in Sources */,
 				A7C5257E13E6B2B80003EEE5 /* GHDateSelectViewController.m in Sources */,
 				A7C5258113E6B64A0003EEE5 /* GHPCreateMilestoneTitleAndDescriptionTableViewCell.m in Sources */,
+				A7C5259613E6E0170003EEE5 /* GHUpdateMilestoneViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

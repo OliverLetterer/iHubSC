@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "GHTableViewController.h"
+#import "GHPInfoSectionTableViewController.h"
+#import "GHUpdateMilestoneViewController.h"
 
-@interface GHPMilestoneViewController : GHTableViewController <NSCoding> {
+@interface GHPMilestoneViewController : GHPInfoSectionTableViewController <NSCoding, GHCreateMilestoneViewControllerDelegate> {
 @private
     GHAPIMilestoneV3 *_milestone;
     
@@ -18,6 +19,9 @@
     
     NSMutableArray *_openIssues;
     NSMutableArray *_closedIssues;
+    
+    BOOL _hasCollaboratorData;
+    BOOL _isCollaborator;
 }
 
 @property (nonatomic, retain) GHAPIMilestoneV3 *milestone;

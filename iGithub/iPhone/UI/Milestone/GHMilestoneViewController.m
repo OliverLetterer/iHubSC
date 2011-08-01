@@ -51,16 +51,6 @@
                           }];
 }
 
-#pragma mark - Memory management
-
-
-- (void)didReceiveMemoryWarning {
-    // Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
-    
-    // Release any cached data, images, etc that aren't in use.
-}
-
 #pragma mark - UIExpandableTableViewDatasource
 
 - (BOOL)tableView:(UIExpandableTableView *)tableView canExpandSection:(NSInteger)section {
@@ -259,41 +249,6 @@
     return self.dummyCell;
 }
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
 #pragma mark - Table view delegate
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -364,6 +319,89 @@
         _closedIssues = [decoder decodeObjectForKey:@"closedIssues"];
     }
     return self;
+}
+
+#pragma mark - GHCreateMilestoneViewControllerDelegate
+
+- (void)createMilestoneViewControllerDidCancel:(GHCreateMilestoneViewController *)createViewController {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)createMilestoneViewController:(GHCreateMilestoneViewController *)createViewController didCreateMilestone:(GHAPIMilestoneV3 *)milestone {
+    self.milestone = milestone;
+    self.title = self.milestone.title;
+    if ([self isViewLoaded]) {
+        [self.tableView reloadData];
+    }
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+#pragma mark - UIActionSheetDelegate
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (actionSheet.tag == kUIActionButtonActionSheetTag) {
+        NSString *title = nil;
+        @try {
+            title = [actionSheet buttonTitleAtIndex:buttonIndex];
+        }
+        @catch (NSException *exception) {}
+        
+        if ([title isEqualToString:NSLocalizedString(@"Edit", @"")]) {
+            // Create Issue
+            GHUpdateMilestoneViewController *viewController = [[GHUpdateMilestoneViewController alloc] initWithMilestone:self.milestone repository:self.repository];
+            viewController.delegate = self;
+            
+            UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:viewController];
+            [self presentModalViewController:navController animated:YES];
+        }
+    }
+}
+
+#pragma mark - GHActionButtonTableViewController
+
+- (void)downloadDataToDisplayActionButton {
+    NSString *username = [GHAPIAuthenticationManager sharedInstance].authenticatedUser.login;
+    [GHAPIRepositoryV3 isUser:username 
+     collaboratorOnRepository:self.repository 
+            completionHandler:^(BOOL state, NSError *error) {
+                if (error) {
+                    [self failedToDownloadDataToDisplayActionButtonWithError:error];
+                } else {
+                    _hasCollaboratorData = YES;
+                    _isCollaborator = state || [self.repository hasPrefix:username];
+                    [self didDownloadDataToDisplayActionButton];
+                }
+            }];
+}
+
+- (UIActionSheet *)actionButtonActionSheet {
+    if (!_isCollaborator) {
+        return nil;
+    }
+    
+    UIActionSheet *sheet = [[UIActionSheet alloc] init];
+    sheet.title = self.milestone.title;
+    NSUInteger currentButtonIndex = 0;
+    
+    [sheet addButtonWithTitle:NSLocalizedString(@"Edit", @"")];
+    currentButtonIndex++;
+    
+    [sheet addButtonWithTitle:NSLocalizedString(@"Cancel", @"")];
+    sheet.cancelButtonIndex = currentButtonIndex;
+    currentButtonIndex++;
+    
+    sheet.actionSheetStyle = UIActionSheetStyleBlackTranslucent;
+    sheet.delegate = self;
+    
+    return sheet;
+}
+
+- (BOOL)canDisplayActionButton {
+    return YES;
+}
+
+- (BOOL)needsToDownloadDataToDisplayActionButtonActionSheet {
+    return !_hasCollaboratorData;
 }
 
 @end

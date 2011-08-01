@@ -47,4 +47,6 @@
 
 + (void)createMilestoneOnRepository:(NSString *)repository title:(NSString *)title description:(NSString *)description dueOn:(NSDate *)dueOn completionHandler:(void(^)(GHAPIMilestoneV3 *milestone, NSError *error))handler;
 
++ (void)updateMilestoneOnRepository:(NSString *)repository withID:(NSNumber *)ID title:(NSString *)title description:(NSString *)description dueOn:(NSDate *)dueOn completionHandler:(void(^)(GHAPIMilestoneV3 *milestone, NSError *error))handler;
+
 @end

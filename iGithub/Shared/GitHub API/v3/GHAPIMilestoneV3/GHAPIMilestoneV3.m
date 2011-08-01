@@ -151,4 +151,44 @@
                                             }];
 }
 
++ (void)updateMilestoneOnRepository:(NSString *)repository withID:(NSNumber *)ID title:(NSString *)title description:(NSString *)description dueOn:(NSDate *)dueOn completionHandler:(void(^)(GHAPIMilestoneV3 *milestone, NSError *error))handler {
+    // PATCH /repos/:user/:repo/milestones/:id
+    
+    NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.github.com/repos/%@/milestones/%@",
+                                       [repository stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding], ID ] ];
+    
+    [[GHAPIBackgroundQueueV3 sharedInstance] sendRequestToURL:URL 
+                                                 setupHandler:^(ASIFormDataRequest *request) { 
+                                                     [request setRequestMethod:@"PATCH"];
+                                                     NSMutableDictionary *jsonDictionary = [NSMutableDictionary dictionaryWithCapacity:6];
+                                                     
+                                                     if (title) {
+                                                         [jsonDictionary setObject:title forKey:@"title"];
+                                                     }
+                                                     if (description) {
+                                                         [jsonDictionary setObject:description forKey:@"description"];
+                                                     } else {
+                                                         [jsonDictionary setObject:[NSNull null] forKey:@"description"];
+                                                     }
+                                                     if (dueOn) {
+                                                         [jsonDictionary setObject:dueOn.stringInV3Format forKey:@"due_on"];
+                                                     } else {
+                                                         [jsonDictionary setObject:[NSNull null] forKey:@"due_on"];
+                                                     }
+                                                     
+                                                     NSString *jsonString = [jsonDictionary JSONString];
+                                                     NSMutableData *jsonData = [[jsonString dataUsingEncoding:NSUTF8StringEncoding] mutableCopy];
+                                                     
+                                                     [request setPostBody:jsonData];
+                                                     [request setPostLength:[jsonString length] ];
+                                                 } 
+                                            completionHandler:^(id object, NSError *error, ASIFormDataRequest *request) {
+                                                if (error) {
+                                                    handler(nil, error);
+                                                } else {
+                                                    handler([[GHAPIMilestoneV3 alloc] initWithRawDictionary:object], nil);
+                                                }
+                                            }];
+}
+
 @end
