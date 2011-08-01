@@ -8,20 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		A703B9471347562B0014235D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A703B9461347562B0014235D /* QuartzCore.framework */; };
-		A7204D5413E459590098C86A /* discountWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = A7204D4F13E459590098C86A /* discountWrapper.m */; };
-		A7204D5513E459590098C86A /* markdownWrapper.c in Sources */ = {isa = PBXBuildFile; fileRef = A7204D5013E459590098C86A /* markdownWrapper.c */; };
-		A7204D5613E459590098C86A /* mkdioWrapper.c in Sources */ = {isa = PBXBuildFile; fileRef = A7204D5213E459590098C86A /* mkdioWrapper.c */; };
-		A7204D6713E4598A0098C86A /* mkdio.c in Sources */ = {isa = PBXBuildFile; fileRef = A7204D5B13E459890098C86A /* mkdio.c */; };
-		A7204D6813E4598A0098C86A /* markdown.c in Sources */ = {isa = PBXBuildFile; fileRef = A7204D5D13E459890098C86A /* markdown.c */; };
-		A7204D6913E4598A0098C86A /* generate.c in Sources */ = {isa = PBXBuildFile; fileRef = A7204D5E13E459890098C86A /* generate.c */; };
-		A7204D6A13E4598A0098C86A /* resource.c in Sources */ = {isa = PBXBuildFile; fileRef = A7204D5F13E459890098C86A /* resource.c */; };
-		A7204D6B13E4598A0098C86A /* xml.c in Sources */ = {isa = PBXBuildFile; fileRef = A7204D6013E459890098C86A /* xml.c */; };
-		A7204D6C13E4598A0098C86A /* Csio.c in Sources */ = {isa = PBXBuildFile; fileRef = A7204D6113E459890098C86A /* Csio.c */; };
-		A7204D6D13E4598A0098C86A /* emmatch.c in Sources */ = {isa = PBXBuildFile; fileRef = A7204D6213E459890098C86A /* emmatch.c */; };
-		A7204D6E13E4598A0098C86A /* html5.c in Sources */ = {isa = PBXBuildFile; fileRef = A7204D6313E459890098C86A /* html5.c */; };
-		A7204D6F13E4598A0098C86A /* tags.c in Sources */ = {isa = PBXBuildFile; fileRef = A7204D6513E459890098C86A /* tags.c */; };
-		A7204D7013E4598A0098C86A /* setup.c in Sources */ = {isa = PBXBuildFile; fileRef = A7204D6613E4598A0098C86A /* setup.c */; };
 		A7204D8113E4759F0098C86A /* GHAPIMarkdownFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = A7204D8013E4759F0098C86A /* GHAPIMarkdownFormatter.m */; };
+		A744F56C13E72D030038C189 /* styles.css in Resources */ = {isa = PBXBuildFile; fileRef = A744F56B13E72D030038C189 /* styles.css */; };
+		A744F57913E730E40038C189 /* libGHMarkdownParser.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A744F57613E72DE60038C189 /* libGHMarkdownParser.a */; };
 		A747C8C413BCCC0B00659504 /* libz.1.2.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A747C8C313BCCC0B00659504 /* libz.1.2.5.dylib */; };
 		A750571F13427FE800514A82 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A750571E13427FE800514A82 /* CFNetwork.framework */; };
 		A750572113427FEF00514A82 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A750572013427FEF00514A82 /* SystemConfiguration.framework */; };
@@ -377,7 +366,6 @@
 		A784206313E1987D00131648 /* GHTableViewCellWithLinearGradientBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = A784203913E1987C00131648 /* GHTableViewCellWithLinearGradientBackgroundView.m */; };
 		A784206413E1987D00131648 /* GHUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A784203C13E1987C00131648 /* GHUserViewController.m */; };
 		A784206513E1987D00131648 /* GHWebViewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A784203F13E1987C00131648 /* GHWebViewViewController.m */; };
-		A7BD1EE313E476520016A662 /* styles.css in Resources */ = {isa = PBXBuildFile; fileRef = A7BD1EE213E476520016A662 /* styles.css */; };
 		A7BD1EEB13E49D880016A662 /* GHViewREADMEViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7BD1EEA13E49D870016A662 /* GHViewREADMEViewController.m */; };
 		A7BD1EF013E49F230016A662 /* GHAPITreeV3.m in Sources */ = {isa = PBXBuildFile; fileRef = A7BD1EEF13E49F230016A662 /* GHAPITreeV3.m */; };
 		A7BD1EF313E4A12A0016A662 /* GHAPITreeFileV3.m in Sources */ = {isa = PBXBuildFile; fileRef = A7BD1EF213E4A12A0016A662 /* GHAPITreeFileV3.m */; };
@@ -405,6 +393,20 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		A744F57513E72DE60038C189 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A744F56E13E72DE60038C189 /* GHMarkdownParser.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = A7C525F213E6FE1A0003EEE5;
+			remoteInfo = GHMarkdownParser;
+		};
+		A744F57713E72F140038C189 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A744F56E13E72DE60038C189 /* GHMarkdownParser.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = A7C525F113E6FE1A0003EEE5;
+			remoteInfo = GHMarkdownParser;
+		};
 		A7C5256B13E6ACCD0003EEE5 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = A7C5256413E6ACCC0003EEE5 /* Kal.xcodeproj */;
@@ -424,29 +426,10 @@
 /* Begin PBXFileReference section */
 		A703B9451347560F0014235D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		A703B9461347562B0014235D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		A7204D4413E4593A0098C86A /* config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = config.h; sourceTree = "<group>"; };
-		A7204D4513E4593A0098C86A /* mkdio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mkdio.h; sourceTree = "<group>"; };
-		A7204D4D13E459590098C86A /* Discount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Discount.h; sourceTree = "<group>"; };
-		A7204D4E13E459590098C86A /* discountWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = discountWrapper.h; sourceTree = "<group>"; };
-		A7204D4F13E459590098C86A /* discountWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = discountWrapper.m; sourceTree = "<group>"; };
-		A7204D5013E459590098C86A /* markdownWrapper.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = markdownWrapper.c; sourceTree = "<group>"; };
-		A7204D5113E459590098C86A /* markdownWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = markdownWrapper.h; sourceTree = "<group>"; };
-		A7204D5213E459590098C86A /* mkdioWrapper.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = mkdioWrapper.c; sourceTree = "<group>"; };
-		A7204D5313E459590098C86A /* mkdioWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mkdioWrapper.h; sourceTree = "<group>"; };
-		A7204D5B13E459890098C86A /* mkdio.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = mkdio.c; path = Submodules/markdownlive/discount/mkdio.c; sourceTree = SOURCE_ROOT; };
-		A7204D5C13E459890098C86A /* markdown.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = markdown.h; path = Submodules/markdownlive/discount/markdown.h; sourceTree = SOURCE_ROOT; };
-		A7204D5D13E459890098C86A /* markdown.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = markdown.c; path = Submodules/markdownlive/discount/markdown.c; sourceTree = SOURCE_ROOT; };
-		A7204D5E13E459890098C86A /* generate.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = generate.c; path = Submodules/markdownlive/discount/generate.c; sourceTree = SOURCE_ROOT; };
-		A7204D5F13E459890098C86A /* resource.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = resource.c; path = Submodules/markdownlive/discount/resource.c; sourceTree = SOURCE_ROOT; };
-		A7204D6013E459890098C86A /* xml.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = xml.c; path = Submodules/markdownlive/discount/xml.c; sourceTree = SOURCE_ROOT; };
-		A7204D6113E459890098C86A /* Csio.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = Csio.c; path = Submodules/markdownlive/discount/Csio.c; sourceTree = SOURCE_ROOT; };
-		A7204D6213E459890098C86A /* emmatch.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = emmatch.c; path = Submodules/markdownlive/discount/emmatch.c; sourceTree = SOURCE_ROOT; };
-		A7204D6313E459890098C86A /* html5.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = html5.c; path = Submodules/markdownlive/discount/html5.c; sourceTree = SOURCE_ROOT; };
-		A7204D6413E459890098C86A /* tags.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = tags.h; path = Submodules/markdownlive/discount/tags.h; sourceTree = SOURCE_ROOT; };
-		A7204D6513E459890098C86A /* tags.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = tags.c; path = Submodules/markdownlive/discount/tags.c; sourceTree = SOURCE_ROOT; };
-		A7204D6613E4598A0098C86A /* setup.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = setup.c; path = Submodules/markdownlive/discount/setup.c; sourceTree = SOURCE_ROOT; };
 		A7204D7F13E4759F0098C86A /* GHAPIMarkdownFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GHAPIMarkdownFormatter.h; path = Markdown/GHAPIMarkdownFormatter.h; sourceTree = "<group>"; };
 		A7204D8013E4759F0098C86A /* GHAPIMarkdownFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GHAPIMarkdownFormatter.m; path = Markdown/GHAPIMarkdownFormatter.m; sourceTree = "<group>"; };
+		A744F56B13E72D030038C189 /* styles.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = styles.css; sourceTree = "<group>"; };
+		A744F56E13E72DE60038C189 /* GHMarkdownParser.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = GHMarkdownParser.xcodeproj; path = Submodules/GHMarkdownParser/GHMarkdownParser/GHMarkdownParser.xcodeproj; sourceTree = SOURCE_ROOT; };
 		A747C8C313BCCC0B00659504 /* libz.1.2.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.5.dylib; path = usr/lib/libz.1.2.5.dylib; sourceTree = SDKROOT; };
 		A750571E13427FE800514A82 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		A750572013427FEF00514A82 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -1094,7 +1077,6 @@
 		A784203C13E1987C00131648 /* GHUserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHUserViewController.m; sourceTree = "<group>"; };
 		A784203E13E1987C00131648 /* GHWebViewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHWebViewViewController.h; sourceTree = "<group>"; };
 		A784203F13E1987C00131648 /* GHWebViewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHWebViewViewController.m; sourceTree = "<group>"; };
-		A7BD1EE213E476520016A662 /* styles.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; name = styles.css; path = Submodules/markdownlive/styles.css; sourceTree = SOURCE_ROOT; };
 		A7BD1EE913E49D870016A662 /* GHViewREADMEViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHViewREADMEViewController.h; sourceTree = "<group>"; };
 		A7BD1EEA13E49D870016A662 /* GHViewREADMEViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHViewREADMEViewController.m; sourceTree = "<group>"; };
 		A7BD1EEE13E49F230016A662 /* GHAPITreeV3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHAPITreeV3.h; sourceTree = "<group>"; };
@@ -1144,6 +1126,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A744F57913E730E40038C189 /* libGHMarkdownParser.a in Frameworks */,
 				A7C5256F13E6ADA10003EEE5 /* libKal.a in Frameworks */,
 				A7528E6113D42E310007C4D9 /* ImageIO.framework in Frameworks */,
 				A7528E5B13D42AA20007C4D9 /* MediaPlayer.framework in Frameworks */,
@@ -1185,61 +1168,6 @@
 			path = ..;
 			sourceTree = "<group>";
 		};
-		A7204D3F13E4587E0098C86A /* markdownlive */ = {
-			isa = PBXGroup;
-			children = (
-				A7BD1EE213E476520016A662 /* styles.css */,
-				A7204D7113E4598F0098C86A /* discount */,
-				A7204D4C13E459590098C86A /* discount_wrappers */,
-				A7204D4313E4593A0098C86A /* discount-config */,
-			);
-			name = markdownlive;
-			sourceTree = "<group>";
-		};
-		A7204D4313E4593A0098C86A /* discount-config */ = {
-			isa = PBXGroup;
-			children = (
-				A7204D4413E4593A0098C86A /* config.h */,
-				A7204D4513E4593A0098C86A /* mkdio.h */,
-			);
-			name = "discount-config";
-			path = "Submodules/markdownlive/discount-config";
-			sourceTree = SOURCE_ROOT;
-		};
-		A7204D4C13E459590098C86A /* discount_wrappers */ = {
-			isa = PBXGroup;
-			children = (
-				A7204D4D13E459590098C86A /* Discount.h */,
-				A7204D4E13E459590098C86A /* discountWrapper.h */,
-				A7204D4F13E459590098C86A /* discountWrapper.m */,
-				A7204D5013E459590098C86A /* markdownWrapper.c */,
-				A7204D5113E459590098C86A /* markdownWrapper.h */,
-				A7204D5213E459590098C86A /* mkdioWrapper.c */,
-				A7204D5313E459590098C86A /* mkdioWrapper.h */,
-			);
-			name = discount_wrappers;
-			path = Submodules/markdownlive/discount_wrappers;
-			sourceTree = SOURCE_ROOT;
-		};
-		A7204D7113E4598F0098C86A /* discount */ = {
-			isa = PBXGroup;
-			children = (
-				A7204D5B13E459890098C86A /* mkdio.c */,
-				A7204D5C13E459890098C86A /* markdown.h */,
-				A7204D5D13E459890098C86A /* markdown.c */,
-				A7204D5E13E459890098C86A /* generate.c */,
-				A7204D5F13E459890098C86A /* resource.c */,
-				A7204D6013E459890098C86A /* xml.c */,
-				A7204D6113E459890098C86A /* Csio.c */,
-				A7204D6213E459890098C86A /* emmatch.c */,
-				A7204D6313E459890098C86A /* html5.c */,
-				A7204D6413E459890098C86A /* tags.h */,
-				A7204D6513E459890098C86A /* tags.c */,
-				A7204D6613E4598A0098C86A /* setup.c */,
-			);
-			name = discount;
-			sourceTree = "<group>";
-		};
 		A7204D7213E45A1F0098C86A /* Markdown */ = {
 			isa = PBXGroup;
 			children = (
@@ -1247,6 +1175,22 @@
 				A7204D8013E4759F0098C86A /* GHAPIMarkdownFormatter.m */,
 			);
 			name = Markdown;
+			sourceTree = "<group>";
+		};
+		A744F56D13E72DDF0038C189 /* GHMarkdownParser */ = {
+			isa = PBXGroup;
+			children = (
+				A744F56E13E72DE60038C189 /* GHMarkdownParser.xcodeproj */,
+			);
+			name = GHMarkdownParser;
+			sourceTree = "<group>";
+		};
+		A744F56F13E72DE60038C189 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A744F57613E72DE60038C189 /* libGHMarkdownParser.a */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		A750570013427F9E00514A82 /* asi-http-request */ = {
@@ -1913,8 +1857,8 @@
 		A7841C7013E184F500131648 /* Submodules */ = {
 			isa = PBXGroup;
 			children = (
+				A744F56D13E72DDF0038C189 /* GHMarkdownParser */,
 				A7C5255A13E6AB420003EEE5 /* Kal */,
-				A7204D3F13E4587E0098C86A /* markdownlive */,
 				A757979113E1A622008670B0 /* GHPieChartProgressView */,
 				A757974413E1A3A3008670B0 /* scifihifi-iphone */,
 				A757962413E19B18008670B0 /* ANAdvancedNavigationController */,
@@ -1934,6 +1878,7 @@
 		A7841D3313E18E2D00131648 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				A744F56B13E72D030038C189 /* styles.css */,
 				A7841E4A13E1905200131648 /* ANNotificationQueue */,
 				A7841DBF13E1902500131648 /* SyntaxHighlighting */,
 				A7841D7113E18E2D00131648 /* iHub - Icon Template.psd */,
@@ -3449,6 +3394,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				A744F57813E72F140038C189 /* PBXTargetDependency */,
 				A7C5256E13E6AD890003EEE5 /* PBXTargetDependency */,
 			);
 			name = iGithub;
@@ -3477,6 +3423,10 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
+					ProductGroup = A744F56F13E72DE60038C189 /* Products */;
+					ProjectRef = A744F56E13E72DE60038C189 /* GHMarkdownParser.xcodeproj */;
+				},
+				{
 					ProductGroup = A7C5256513E6ACCC0003EEE5 /* Products */;
 					ProjectRef = A7C5256413E6ACCC0003EEE5 /* Kal.xcodeproj */;
 				},
@@ -3489,6 +3439,13 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		A744F57613E72DE60038C189 /* libGHMarkdownParser.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libGHMarkdownParser.a;
+			remoteRef = A744F57513E72DE60038C189 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		A7C5256C13E6ACCD0003EEE5 /* libKal.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -3602,8 +3559,8 @@
 				A7841E5213E1905200131648 /* ANNotificationSuccessImage@2x.png in Resources */,
 				A784204013E1987C00131648 /* MainWindow_iPhone.xib in Resources */,
 				A75796FB13E1A030008670B0 /* MainWindow_iPad.xib in Resources */,
-				A7BD1EE313E476520016A662 /* styles.css in Resources */,
 				A7C5257313E6ADF90003EEE5 /* Kal.bundle in Resources */,
+				A744F56C13E72D030038C189 /* styles.css in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3865,19 +3822,6 @@
 				A757982F13E1C1D5008670B0 /* GHTableViewAlertViewTableViewBackgroundView.m in Sources */,
 				A757983013E1C1D5008670B0 /* GHTableViewAlertViewTableViewCell.m in Sources */,
 				A757983113E1C1D5008670B0 /* GHTableViewAlertViewTableViewCellSeperatorView.m in Sources */,
-				A7204D5413E459590098C86A /* discountWrapper.m in Sources */,
-				A7204D5513E459590098C86A /* markdownWrapper.c in Sources */,
-				A7204D5613E459590098C86A /* mkdioWrapper.c in Sources */,
-				A7204D6713E4598A0098C86A /* mkdio.c in Sources */,
-				A7204D6813E4598A0098C86A /* markdown.c in Sources */,
-				A7204D6913E4598A0098C86A /* generate.c in Sources */,
-				A7204D6A13E4598A0098C86A /* resource.c in Sources */,
-				A7204D6B13E4598A0098C86A /* xml.c in Sources */,
-				A7204D6C13E4598A0098C86A /* Csio.c in Sources */,
-				A7204D6D13E4598A0098C86A /* emmatch.c in Sources */,
-				A7204D6E13E4598A0098C86A /* html5.c in Sources */,
-				A7204D6F13E4598A0098C86A /* tags.c in Sources */,
-				A7204D7013E4598A0098C86A /* setup.c in Sources */,
 				A7204D8113E4759F0098C86A /* GHAPIMarkdownFormatter.m in Sources */,
 				A7BD1EEB13E49D880016A662 /* GHViewREADMEViewController.m in Sources */,
 				A7BD1EF013E49F230016A662 /* GHAPITreeV3.m in Sources */,
@@ -3899,6 +3843,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		A744F57813E72F140038C189 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = GHMarkdownParser;
+			targetProxy = A744F57713E72F140038C189 /* PBXContainerItemProxy */;
+		};
 		A7C5256E13E6AD890003EEE5 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = Kal;
@@ -3950,9 +3899,15 @@
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = "Submodules/Kal/**";
+				HEADER_SEARCH_PATHS = (
+					"Submodules/GHMarkdownParser/**",
+					"Submodules/Kal/**",
+				);
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
-				LIBRARY_SEARCH_PATHS = "Submodules/Kal/**";
+				LIBRARY_SEARCH_PATHS = (
+					"Submodules/GHMarkdownParser/**",
+					"Submodules/Kal/**",
+				);
 				OTHER_LDFLAGS = (
 					"-Objc",
 					"-all_load",
@@ -3977,9 +3932,15 @@
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = "Submodules/Kal/**";
+				HEADER_SEARCH_PATHS = (
+					"Submodules/GHMarkdownParser/**",
+					"Submodules/Kal/**",
+				);
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
-				LIBRARY_SEARCH_PATHS = "Submodules/Kal/**";
+				LIBRARY_SEARCH_PATHS = (
+					"Submodules/GHMarkdownParser/**",
+					"Submodules/Kal/**",
+				);
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				OTHER_LDFLAGS = (
 					"-Objc",

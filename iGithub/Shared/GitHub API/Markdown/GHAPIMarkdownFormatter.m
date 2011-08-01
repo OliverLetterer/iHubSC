@@ -8,7 +8,7 @@
 
 #import "GHAPIMarkdownFormatter.h"
 #import "GithubAPI.h"
-#import "discountWrapper.h"
+#import "GHMarkdownParser.h"
 
 @implementation GHAPIMarkdownFormatter
 
@@ -23,12 +23,13 @@
 }
 
 + (NSString *)HTMLStringFromMarkdownString:(NSString *)markdown {
+    return [GHMarkdownParser flavoredHTMLStringFromMarkdownString:markdown];
+    
     NSMutableString *fixedMarkdown = [NSMutableString stringWithCapacity:markdown.length];
     __block BOOL isCodeBlock = NO;
     [markdown enumerateLinesUsingBlock:^(NSString *line, BOOL *stop) {
         if ([line rangeOfString:@"```"].location != NSNotFound) {
             isCodeBlock = !isCodeBlock;
-            [fixedMarkdown appendFormat:@"```\n"];
         } else {
             if (isCodeBlock) {
                 [fixedMarkdown appendFormat:@"\t%@\n", line];
@@ -38,7 +39,7 @@
         }
     }];
     
-    NSString *HTML = discountToHTML(fixedMarkdown);
+    NSString *HTML = [GHMarkdownParser HTMLStringFromMarkdownString:fixedMarkdown];
     
     HTML = [HTML stringByReplacingOccurrencesOfString:@"<p>```</p>" withString:@""];
     
