@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "GHTableViewController.h"
 #import <MessageUI/MessageUI.h>
+#import "GHTableViewController.h"
 #import "GHPInfoSectionTableViewController.h"
 
 @interface GHPUserViewController : GHPInfoSectionTableViewController <MFMailComposeViewControllerDelegate, NSCoding> {
