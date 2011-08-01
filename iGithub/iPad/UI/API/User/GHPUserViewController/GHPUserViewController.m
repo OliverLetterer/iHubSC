@@ -240,6 +240,7 @@
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:self.user.blog] ];
     } else if ([title isEqualToString:NSLocalizedString(@"E-Mail", @"")]) {
         MFMailComposeViewController *mailViewController = [[MFMailComposeViewController alloc] init];
+        mailViewController.modalPresentationStyle = UIModalPresentationFormSheet;
         mailViewController.mailComposeDelegate = self;
         [mailViewController setToRecipients:[NSArray arrayWithObject:self.user.EMail]];
         
