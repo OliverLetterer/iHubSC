@@ -43,7 +43,7 @@
 }
 
 @property (nonatomic, readonly) BOOL isFollowingRepository;
-@property (nonatomic, readonly) BOOL canDeleteRepository;
+@property (nonatomic, readonly) BOOL canAdministrateRepository;
 
 @property (nonatomic, copy) NSString *repositoryString;
 @property (nonatomic, retain) GHAPIRepositoryV3 *repository;

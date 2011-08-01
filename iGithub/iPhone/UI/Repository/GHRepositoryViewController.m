@@ -70,7 +70,7 @@
                  }];
 }
 
-- (BOOL)canDeleteRepository {
+- (BOOL)canAdministrateRepository {
     return [self.repository.owner.login isEqualToString:[GHAPIAuthenticationManager sharedInstance].authenticatedUser.login ];
 }
 
@@ -375,7 +375,7 @@
             return 1;
         }
     } else if (section == kUITableViewSectionCollaborators) {
-        if (!self.canDeleteRepository) {
+        if (!self.canAdministrateRepository) {
             return 0;
         }
         return self.collaborators.count + 2;
@@ -1020,6 +1020,8 @@
                                        }
                                        
                                    }];
+        } else if ([title isEqualToString:NSLocalizedString(@"Create Milestone", @"")]) {
+            
         }
     }
 }
@@ -1100,7 +1102,7 @@
     [sheet addButtonWithTitle:NSLocalizedString(@"Create Issue", @"")];
     currentButtonIndex++;
     
-    if (!self.canDeleteRepository) {
+    if (!self.canAdministrateRepository) {
         if (_isWatchingRepository) {
             [sheet addButtonWithTitle:NSLocalizedString(@"Unwatch", @"")];
             currentButtonIndex++;
@@ -1112,10 +1114,16 @@
         [sheet addButtonWithTitle:NSLocalizedString(@"Fork to my Account", @"")];
         currentButtonIndex++;
     }
+    
+    if (self.canAdministrateRepository) {
+        [sheet addButtonWithTitle:NSLocalizedString(@"Create Milestone", @"")];
+        currentButtonIndex++;
+    }
+    
     [sheet addButtonWithTitle:NSLocalizedString(@"Fork to an Organization", @"")];
     currentButtonIndex++;
     
-    if (self.canDeleteRepository) {
+    if (self.canAdministrateRepository) {
         [sheet addButtonWithTitle:NSLocalizedString(@"Delete", @"")];
         sheet.destructiveButtonIndex = currentButtonIndex;
         currentButtonIndex++;
@@ -1136,7 +1144,7 @@
 }
 
 - (BOOL)needsToDownloadDataToDisplayActionButtonActionSheet {
-    if (self.canDeleteRepository) {
+    if (self.canAdministrateRepository) {
         return NO;
     }
     return !_hasWatchingData;
