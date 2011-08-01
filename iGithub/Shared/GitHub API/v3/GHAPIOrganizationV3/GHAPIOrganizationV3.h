@@ -61,4 +61,11 @@
 + (void)membersOfOrganizationNamed:(NSString *)organizationName page:(NSUInteger)page completionHandler:(GHAPIPaginationHandler)handler;
 + (void)teamsOfOrganizationNamed:(NSString *)organizationName page:(NSUInteger)page completionHandler:(GHAPIPaginationHandler)handler;
 
++ (void)isUser:(NSString *)username administratorInOrganization:(NSString *)organization completionHandler:(GHAPIStateHandler)handler;
+
+
+// private
++ (void)isUser:(NSString *)username administratorInOrganization:(NSString *)organization nextPate:(NSUInteger)nextPage inArray:(NSMutableArray *)teamsArray currentTeamIndex:(NSUInteger)currentTeamIndex completionHandler:(GHAPIStateHandler)handler;
++ (void)isUser:(NSString *)username administratorInOrganization:(NSString *)organization checkTeamsWithPage:(NSUInteger)page completionHandler:(GHAPIStateHandler)handler;
+
 @end

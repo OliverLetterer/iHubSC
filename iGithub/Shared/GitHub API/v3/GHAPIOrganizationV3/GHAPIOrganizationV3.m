@@ -219,4 +219,57 @@
                              }];
 }
 
++ (void)isUser:(NSString *)username administratorInOrganization:(NSString *)organization nextPate:(NSUInteger)nextPage inArray:(NSMutableArray *)teamsArray currentTeamIndex:(NSUInteger)currentTeamIndex completionHandler:(GHAPIStateHandler)handler {
+    if (currentTeamIndex >= teamsArray.count) {
+        // exceded teamsarrays bounds, so get next set of teams
+        [self isUser:username administratorInOrganization:organization checkTeamsWithPage:nextPage completionHandler:handler];
+    } else {
+        // now ask the team, if user is a member
+        GHAPITeamV3 *team = [teamsArray objectAtIndex:currentTeamIndex];
+        if ([team.permission isEqualToString:GHAPITeamV3PermissionAdmin]) {
+            // this team has admin right, check if user is member
+            [GHAPITeamV3 isUser:username memberInTeamByID:team.ID completionHandler:^(BOOL state, NSError *error) {
+                if (error) {
+                    // error happend
+                    handler(NO, error);
+                } else {
+                    if (state) {
+                        // user is member
+                        handler(YES, nil);
+                    } else {
+                        // user is no member, check for next team
+                        [self isUser:username administratorInOrganization:organization nextPate:nextPage inArray:teamsArray currentTeamIndex:currentTeamIndex+1 completionHandler:handler];
+                    }
+                }
+            }];
+        } else {
+            // this team does not have admin right, check next team
+            [self isUser:username administratorInOrganization:organization nextPate:nextPage inArray:teamsArray currentTeamIndex:currentTeamIndex+1 completionHandler:handler];
+        }
+    }
+}
+
++ (void)isUser:(NSString *)username administratorInOrganization:(NSString *)organization checkTeamsWithPage:(NSUInteger)page completionHandler:(GHAPIStateHandler)handler {
+    if (page == GHAPIPaginationNextPageNotFound) {
+        // no more page is available, member is not in any admin group. end
+        handler(NO, nil);
+    } else {
+        // we can get this page
+        [GHAPIOrganizationV3 teamsOfOrganizationNamed:organization page:page 
+                                    completionHandler:^(NSMutableArray *array, NSUInteger nextPage, NSError *error) {
+                                        if (error) {
+                                            handler(NO, error);
+                                        } else {
+                                            // enumerate teams and check if user is a member
+                                            [self isUser:username administratorInOrganization:organization nextPate:nextPage 
+                                                 inArray:array currentTeamIndex:0 completionHandler:handler];
+                                        }
+                                    }];
+    }
+}
+
++ (void)isUser:(NSString *)username administratorInOrganization:(NSString *)organization completionHandler:(GHAPIStateHandler)handler {
+    [self isUser:username administratorInOrganization:organization checkTeamsWithPage:1 completionHandler:handler];
+}
+
 @end

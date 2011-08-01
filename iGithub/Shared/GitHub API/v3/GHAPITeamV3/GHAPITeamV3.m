@@ -33,9 +33,6 @@ NSString *const GHAPITeamV3PermissionAdmin = @"admin";
     return self;
 }
 
-#pragma mark - Memory management
-
-
 #pragma mark - Keyed Archiving
 
 - (void)encodeWithCoder:(NSCoder *)encoder {
@@ -165,6 +162,28 @@ NSString *const GHAPITeamV3PermissionAdmin = @"admin";
                                             } completionHandler:^(id object, NSError *error, ASIFormDataRequest *request) {
                                                 handler(error);
                                             }];
+}
+
++ (void)isUser:(NSString *)username memberInTeamByID:(NSNumber *)teamID completionHandler:(GHAPIStateHandler)handler {
+    // v3: GET /teams/:id/members/:user
+    
+    NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.github.com/teams/%@/members/%@",
+                                       teamID,
+                                       [username stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]
+                                       ] ];
+    
+    [[GHAPIBackgroundQueueV3 sharedInstance] sendRequestToURL:URL 
+                                                 setupHandler:^(ASIFormDataRequest *request) {
+                                                     [request setRequestMethod:@"DELETE"];
+                                                 } completionHandler:^(id object, NSError *error, ASIFormDataRequest *request) {
+                                                     if ([request responseStatusCode] == 404) {
+                                                         handler(NO, nil);
+                                                     } else if (error) {
+                                                         handler(NO, error);
+                                                     } else {
+                                                         handler([request responseStatusCode] == 204, nil);
+                                                     }
+                                                 }];
 }
 
 @end
