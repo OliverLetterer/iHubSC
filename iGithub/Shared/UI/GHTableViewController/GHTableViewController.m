@@ -21,6 +21,7 @@
 @synthesize isDownloadingEssentialData=_isDownloadingEssentialData, downloadingEssentialDataView=_downloadingEssentialDataView;
 @synthesize lastSelectedIndexPath=_lastSelectedIndexPath;
 @synthesize sectionsStateArray=_sectionsStateArray;
+@synthesize presentedInPopoverController=_presentedInPopoverController;
 
 #pragma mark - setters and getters
 

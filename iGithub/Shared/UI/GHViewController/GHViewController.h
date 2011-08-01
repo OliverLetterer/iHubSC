@@ -12,7 +12,11 @@
 @interface GHViewController : UIViewController <NSCoding> {
 @private
     UIColor *_navigationTintColor;
+
+    BOOL _presentedInPopoverController;
 }
+
+@property (nonatomic, assign, getter = isPresentedInPopoverController) BOOL presentedInPopoverController;
 
 @property (nonatomic, retain) UIColor *navigationTintColor;
 

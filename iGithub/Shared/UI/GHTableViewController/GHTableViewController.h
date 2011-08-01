@@ -43,10 +43,13 @@
     NSIndexPath *_lastSelectedIndexPath;
     
     NSArray *_sectionsStateArray;
+    
+    BOOL _presentedInPopoverController;
 }
 
-@property (nonatomic, retain) NSArray *sectionsStateArray;
+@property (nonatomic, assign, getter = isPresentedInPopoverController) BOOL presentedInPopoverController;
 
+@property (nonatomic, retain) NSArray *sectionsStateArray;
 
 @property (nonatomic, copy) NSIndexPath *lastSelectedIndexPath;
 

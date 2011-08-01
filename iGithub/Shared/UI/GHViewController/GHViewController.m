@@ -10,8 +10,8 @@
 #import "UIColor+GithubUI.h"
 
 @implementation GHViewController
-
 @synthesize navigationTintColor=_navigationTintColor;
+@synthesize presentedInPopoverController=_presentedInPopoverController;
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
