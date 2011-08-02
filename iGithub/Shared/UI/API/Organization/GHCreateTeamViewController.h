@@ -29,7 +29,7 @@ extern NSInteger const kGHCreateTeamViewControllerTableViewSectionPermission;
 extern NSInteger const kGHCreateTeamViewControllerTableViewSectionRepositories;
 extern NSInteger const kGHCreateTeamViewControllerTableViewSectionMembers;
 
-@interface GHCreateTeamViewController : GHTableViewController {
+@interface GHCreateTeamViewController : GHTableViewController <UIAlertViewDelegate> {
 @private
     id<GHCreateTeamViewControllerDelegate> __weak _delegate;
     NSString *_organization;

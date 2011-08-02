@@ -218,7 +218,7 @@ NSString *NSStringFromGHAPITeamPermissionV3(NSString *GHAPITeamPermissionV3) {
     } else if (section == kGHCreateTeamViewControllerTableViewSectionRepositories) {
         return _repositories.count + 1;
     } else if (section == kGHCreateTeamViewControllerTableViewSectionMembers) {
-        return _members.count + 1;
+        return _members.count + 2;
     }
     return 0;
 }
@@ -335,47 +335,70 @@ NSString *NSStringFromGHAPITeamPermissionV3(NSString *GHAPITeamPermissionV3) {
             return cell;
         }
     } else if (indexPath.section == kGHCreateTeamViewControllerTableViewSectionMembers) {
-        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-            static NSString *CellIdentifier = @"GHPUserTableViewCell";
-            
-            GHPUserTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-            if (cell == nil) {
-                cell = [[GHPUserTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-            }
-            [self setupDefaultTableViewCell:cell forRowAtIndexPath:indexPath];
-            
-            GHAPIUserV3 *user = [_members objectAtIndex:indexPath.row];
-            
-            [self updateImageView:cell.imageView atIndexPath:indexPath withAvatarURLString:user.avatarURL];
-            cell.textLabel.text = user.login;
-            
-            if ([self.selectedMembers containsObject:user.login]) {
-                cell.accessoryType = UITableViewCellAccessoryCheckmark;
+        if (indexPath.row == 1) {
+            if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+                static NSString *CellIdentifier = @"newmembercell";
+                
+                GHPDefaultTableViewCell *cell = [self defaultTableViewCellForRowAtIndexPath:indexPath withReuseIdentifier:CellIdentifier];
+                
+                cell.textLabel.text = NSLocalizedString(@"Other User", @"");
+                
+                return cell;
             } else {
-                cell.accessoryType = UITableViewCellAccessoryNone;
+                static NSString *CellIdentifier = @"newmembercell";
+                
+                GHTableViewCellWithLinearGradientBackgroundView *cell = (GHTableViewCellWithLinearGradientBackgroundView *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+                if (!cell) {
+                    cell = [[GHTableViewCellWithLinearGradientBackgroundView alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+                }
+                
+                cell.textLabel.text = NSLocalizedString(@"Other User", @"");
+                
+                return cell;
             }
-            
-            return cell;
         } else {
-            static NSString *CellIdentifier = @"UITableViewCellWithLinearGradientBackgroundView";
-            
-            GHTableViewCellWithLinearGradientBackgroundView *cell = (GHTableViewCellWithLinearGradientBackgroundView *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-            if (!cell) {
-                cell = [[GHTableViewCellWithLinearGradientBackgroundView alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-            }
-            
-            GHAPIUserV3 *user = [_members objectAtIndex:indexPath.row - 1];
-            
-            [self updateImageView:cell.imageView atIndexPath:indexPath withAvatarURLString:user.avatarURL];
-            cell.textLabel.text = user.login;
-            
-            if ([self.selectedMembers containsObject:user.login]) {
-                cell.accessoryType = UITableViewCellAccessoryCheckmark;
+            if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+                static NSString *CellIdentifier = @"GHPUserTableViewCell";
+                
+                GHPUserTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+                if (cell == nil) {
+                    cell = [[GHPUserTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+                }
+                [self setupDefaultTableViewCell:cell forRowAtIndexPath:indexPath];
+                
+                GHAPIUserV3 *user = [_members objectAtIndex:indexPath.row-2];
+                
+                [self updateImageView:cell.imageView atIndexPath:indexPath withAvatarURLString:user.avatarURL];
+                cell.textLabel.text = user.login;
+                
+                if ([self.selectedMembers containsObject:user.login]) {
+                    cell.accessoryType = UITableViewCellAccessoryCheckmark;
+                } else {
+                    cell.accessoryType = UITableViewCellAccessoryNone;
+                }
+                
+                return cell;
             } else {
-                cell.accessoryType = UITableViewCellAccessoryNone;
+                static NSString *CellIdentifier = @"UITableViewCellWithLinearGradientBackgroundView";
+                
+                GHTableViewCellWithLinearGradientBackgroundView *cell = (GHTableViewCellWithLinearGradientBackgroundView *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+                if (!cell) {
+                    cell = [[GHTableViewCellWithLinearGradientBackgroundView alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+                }
+                
+                GHAPIUserV3 *user = [_members objectAtIndex:indexPath.row-2];
+                
+                [self updateImageView:cell.imageView atIndexPath:indexPath withAvatarURLString:user.avatarURL];
+                cell.textLabel.text = user.login;
+                
+                if ([self.selectedMembers containsObject:user.login]) {
+                    cell.accessoryType = UITableViewCellAccessoryCheckmark;
+                } else {
+                    cell.accessoryType = UITableViewCellAccessoryNone;
+                }
+                
+                return cell;
             }
-            
-            return cell;
         }
     }
     
@@ -396,13 +419,23 @@ NSString *NSStringFromGHAPITeamPermissionV3(NSString *GHAPITeamPermissionV3) {
         }
         [tableView reloadRowAtIndexPath:indexPath withRowAnimation:UITableViewRowAnimationNone];
     } else if (indexPath.section == kGHCreateTeamViewControllerTableViewSectionMembers) {
-        GHAPIUserV3 *user = [_members objectAtIndex:indexPath.row-1];
-        if ([self.selectedMembers containsObject:user.login]) {
-            [self.selectedMembers removeObject:user.login];
+        if (indexPath.row > 1) {
+            GHAPIUserV3 *user = [_members objectAtIndex:indexPath.row-2];
+            if ([self.selectedMembers containsObject:user.login]) {
+                [self.selectedMembers removeObject:user.login];
+            } else {
+                [self.selectedMembers addObject:user.login];
+            }
+            [tableView reloadRowAtIndexPath:indexPath withRowAnimation:UITableViewRowAnimationNone];
         } else {
-            [self.selectedMembers addObject:user.login];
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Insert Username", @"") 
+                                                             message:NSLocalizedString(@"", @"") 
+                                                            delegate:self 
+                                                   cancelButtonTitle:NSLocalizedString(@"Cancel", @"") 
+                                                   otherButtonTitles:NSLocalizedString(@"Add", @""), nil];
+            alert.alertViewStyle = UIAlertViewStylePlainTextInput;
+            [alert show];
         }
-        [tableView reloadRowAtIndexPath:indexPath withRowAnimation:UITableViewRowAnimationNone];
     }
     
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
@@ -417,7 +450,7 @@ NSString *NSStringFromGHAPITeamPermissionV3(NSString *GHAPITeamPermissionV3) {
             GHAPIRepositoryV3 *repository = [_repositories objectAtIndex:indexPath.row-1];
             return [GHDescriptionTableViewCell heightWithContent:repository.description];
         }
-    } else if (indexPath.section == kGHCreateTeamViewControllerTableViewSectionMembers && indexPath.row > 0) {
+    } else if (indexPath.section == kGHCreateTeamViewControllerTableViewSectionMembers && indexPath.row > 1) {
         if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
             return GHPUserTableViewCellHeight;
         } else {
@@ -425,6 +458,24 @@ NSString *NSStringFromGHAPITeamPermissionV3(NSString *GHAPITeamPermissionV3) {
         }
     }
     return 44.0f;
+}
+
+#pragma mark - UIAlertViewDelegate
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (buttonIndex == 1) {
+        NSString *username = [alertView textFieldAtIndex:0].text;
+        [GHAPIUserV3 userWithName:username completionHandler:^(GHAPIUserV3 *user, NSError *error) {
+            if (error) {
+                [self handleError:error];
+            } else {
+                [_members addObject:user];
+                [self.selectedMembers addObject:user.login];
+                [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:kGHCreateTeamViewControllerTableViewSectionMembers] 
+                              withRowAnimation:UITableViewRowAnimationNone];
+            }
+        }];
+    }
 }
 
 #pragma mark - target actions
