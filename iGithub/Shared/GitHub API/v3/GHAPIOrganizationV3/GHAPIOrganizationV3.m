@@ -219,6 +219,45 @@
                              }];
 }
 
++ (void)createTeamForOrganization:(NSString *)organization name:(NSString *)name permission:(NSString *)permission repositories:(NSArray *)repositories teamMembers:(NSArray *)teamMembers completionHandler:(void (^)(GHAPITeamV3 *team, NSError *error))handler {
+    // v3: POST /orgs/:org/teams
+    
+    NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.github.com/orgs/%@/teams",
+                                       [organization stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] ] ];
+    
+    [[GHAPIBackgroundQueueV3 sharedInstance] sendRequestToURL:URL 
+                                                 setupHandler:^(ASIFormDataRequest *request) { 
+                                                     [request setRequestMethod:@"POST"];
+                                                     NSMutableDictionary *jsonDictionary = [NSMutableDictionary dictionaryWithCapacity:3];
+                                                     
+                                                     if (name) {
+                                                         [jsonDictionary setObject:name forKey:@"name"];
+                                                     }
+                                                     if (permission) {
+                                                         [jsonDictionary setObject:permission forKey:@"permission"];
+                                                     }
+                                                     if (repositories) {
+                                                         [jsonDictionary setObject:repositories forKey:@"repo_names"];
+                                                     }
+                                                     NSString *jsonString = [jsonDictionary JSONString];
+                                                     NSMutableData *jsonData = [[jsonString dataUsingEncoding:NSUTF8StringEncoding] mutableCopy];
+                                                     
+                                                     [request setPostBody:jsonData];
+                                                     [request setPostLength:[jsonString length] ];
+                                                 } 
+                                            completionHandler:^(id object, NSError *error, ASIFormDataRequest *request) {
+                                                if (error) {
+                                                    handler(nil, error);
+                                                } else {
+                                                    GHAPITeamV3 *team = [[GHAPITeamV3 alloc] initWithRawDictionary:object];
+                                                    [GHAPITeamV3 updateTeamWithID:team.ID setTeamMembers:teamMembers 
+                                                                completionHandler:^(NSError *error) {
+                                                                    handler(team, error);
+                                                                }];
+                                                }
+                                            }];
+}
+
 + (void)isUser:(NSString *)username administratorInOrganization:(NSString *)organization nextPate:(NSUInteger)nextPage inArray:(NSMutableArray *)teamsArray currentTeamIndex:(NSUInteger)currentTeamIndex completionHandler:(GHAPIStateHandler)handler {
     if (currentTeamIndex >= teamsArray.count) {
         // exceded teamsarrays bounds, so get next set of teams

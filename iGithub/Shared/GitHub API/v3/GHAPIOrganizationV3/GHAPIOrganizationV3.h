@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import "GHAPIConnectionHandlersV3.h"
 
+@class GHAPITeamV3;
+
 @interface GHAPIOrganizationV3 : NSObject <NSCoding> {
 @private
     NSString *_login;
@@ -63,6 +65,7 @@
 
 + (void)isUser:(NSString *)username administratorInOrganization:(NSString *)organization completionHandler:(GHAPIStateHandler)handler;
 
++ (void)createTeamForOrganization:(NSString *)organization name:(NSString *)name permission:(NSString *)permission repositories:(NSArray *)repositories teamMembers:(NSArray *)teamMembers completionHandler:(void (^)(GHAPITeamV3 *team, NSError *error))handler;
 
 // private
 + (void)isUser:(NSString *)username administratorInOrganization:(NSString *)organization nextPate:(NSUInteger)nextPage inArray:(NSMutableArray *)teamsArray currentTeamIndex:(NSUInteger)currentTeamIndex completionHandler:(GHAPIStateHandler)handler;

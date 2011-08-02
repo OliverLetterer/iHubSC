@@ -393,6 +393,8 @@
 		A7CE1B831346349200169F94 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7CE1B821346349000169F94 /* CoreData.framework */; };
 		A7D14F451354E5A700E1B980 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7D14F441354E5A600E1B980 /* MessageUI.framework */; };
 		A7FDA6A113E7446F00DE4FF3 /* GHCreateTeamViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7FDA6A013E7446F00DE4FF3 /* GHCreateTeamViewController.m */; };
+		A7FDA6B413E7DD6D00DE4FF3 /* GHTextFieldTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A7FDA6B313E7DD6D00DE4FF3 /* GHTextFieldTableViewCell.m */; };
+		A7FDA6C513E7DECA00DE4FF3 /* GHPTextFieldTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A7FDA6C413E7DECA00DE4FF3 /* GHPTextFieldTableViewCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1128,6 +1130,10 @@
 		A7D41AC41358B6B500CD3A5C /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		A7FDA69F13E7446F00DE4FF3 /* GHCreateTeamViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHCreateTeamViewController.h; sourceTree = "<group>"; };
 		A7FDA6A013E7446F00DE4FF3 /* GHCreateTeamViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHCreateTeamViewController.m; sourceTree = "<group>"; };
+		A7FDA6B213E7DD6D00DE4FF3 /* GHTextFieldTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHTextFieldTableViewCell.h; sourceTree = "<group>"; };
+		A7FDA6B313E7DD6D00DE4FF3 /* GHTextFieldTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHTextFieldTableViewCell.m; sourceTree = "<group>"; };
+		A7FDA6C313E7DECA00DE4FF3 /* GHPTextFieldTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPTextFieldTableViewCell.h; sourceTree = "<group>"; };
+		A7FDA6C413E7DECA00DE4FF3 /* GHPTextFieldTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPTextFieldTableViewCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1759,6 +1765,7 @@
 		A75796E713E1A030008670B0 /* UITableViewCell - Generic Subclasses */ = {
 			isa = PBXGroup;
 			children = (
+				A7FDA6C213E7DEC000DE4FF3 /* GHPTextFieldTableViewCell */,
 				A75796E813E1A030008670B0 /* GHPAttributedTableViewCell */,
 				A75796EB13E1A030008670B0 /* GHPCollapsingAndSpinningTableViewCell */,
 				A75796EE13E1A030008670B0 /* GHPDefaultTableViewCell */,
@@ -3034,6 +3041,7 @@
 		A784202513E1987C00131648 /* UITableViewCell - Generic Subclasses */ = {
 			isa = PBXGroup;
 			children = (
+				A7FDA6B113E7DD5E00DE4FF3 /* GHTextFieldTableViewCell */,
 				A784202613E1987C00131648 /* GHAttributedTableViewCell */,
 				A784202913E1987C00131648 /* GHCollapsingAndSpinningTableViewCell */,
 				A784202C13E1987C00131648 /* GHDescriptionTableViewCell */,
@@ -3397,10 +3405,36 @@
 		A7FDA69713E7441600DE4FF3 /* Organization */ = {
 			isa = PBXGroup;
 			children = (
+				A7FDA6B013E7DD1800DE4FF3 /* UITableViewCell's */,
 				A7FDA69F13E7446F00DE4FF3 /* GHCreateTeamViewController.h */,
 				A7FDA6A013E7446F00DE4FF3 /* GHCreateTeamViewController.m */,
 			);
 			path = Organization;
+			sourceTree = "<group>";
+		};
+		A7FDA6B013E7DD1800DE4FF3 /* UITableViewCell's */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "UITableViewCell's";
+			sourceTree = "<group>";
+		};
+		A7FDA6B113E7DD5E00DE4FF3 /* GHTextFieldTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				A7FDA6B213E7DD6D00DE4FF3 /* GHTextFieldTableViewCell.h */,
+				A7FDA6B313E7DD6D00DE4FF3 /* GHTextFieldTableViewCell.m */,
+			);
+			path = GHTextFieldTableViewCell;
+			sourceTree = "<group>";
+		};
+		A7FDA6C213E7DEC000DE4FF3 /* GHPTextFieldTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				A7FDA6C313E7DECA00DE4FF3 /* GHPTextFieldTableViewCell.h */,
+				A7FDA6C413E7DECA00DE4FF3 /* GHPTextFieldTableViewCell.m */,
+			);
+			path = GHPTextFieldTableViewCell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -3863,6 +3897,8 @@
 				A744F58813E73E490038C189 /* DTRangedAttribute.m in Sources */,
 				A744F58913E73E490038C189 /* DTRangedAttributesOptimizer.m in Sources */,
 				A7FDA6A113E7446F00DE4FF3 /* GHCreateTeamViewController.m in Sources */,
+				A7FDA6B413E7DD6D00DE4FF3 /* GHTextFieldTableViewCell.m in Sources */,
+				A7FDA6C513E7DECA00DE4FF3 /* GHPTextFieldTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

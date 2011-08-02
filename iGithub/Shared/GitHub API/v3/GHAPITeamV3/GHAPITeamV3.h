@@ -43,4 +43,15 @@ extern NSString *const GHAPITeamV3PermissionAdmin;
 
 + (void)isUser:(NSString *)username memberInTeamByID:(NSNumber *)teamID completionHandler:(GHAPIStateHandler)handler;
 
++ (void)updateTeamWithID:(NSNumber *)teamID setTeamMembers:(NSArray *)teamMembers completionHandler:(GHAPIErrorHandler)handler;
+
++ (void)teamByID:(NSNumber *)teamID addUserNamed:(NSString *)username completionHandler:(GHAPIErrorHandler)handler;
+
+// private
++ (void)allMembersOfTeamWithID:(NSNumber *)teamID completionHandler:(void (^)(NSMutableArray *members, NSError *error))handler;
++ (void)_dumpMembersOfTeamWithID:(NSNumber *)teamID inArray:(NSMutableArray *)membersArray page:(NSUInteger)page completionHandler:(GHAPIErrorHandler)handler;
+
++ (void)teamWithID:(NSNumber *)teamID removeMembersFromArray:(NSArray *)array completionHandler:(GHAPIErrorHandler)handler;
++ (void)_teamWithID:(NSNumber *)teamID removeMembersFromArray:(NSArray *)membersToRemove currentMemberIndex:(NSUInteger)currentMemberIndex completionHandler:(GHAPIErrorHandler)handler;
+
 @end

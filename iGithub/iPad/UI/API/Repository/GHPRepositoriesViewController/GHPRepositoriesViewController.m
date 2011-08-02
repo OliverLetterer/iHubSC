@@ -43,6 +43,7 @@
     if (cell == nil) {
         cell = [[GHPRepositoryTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
     }
+    [self setupDefaultTableViewCell:cell forRowAtIndexPath:indexPath];
     
     GHAPIRepositoryV3 *repository = [self.dataArray objectAtIndex:indexPath.row];
     
@@ -54,8 +55,6 @@
     } else {
         cell.imageView.image = [UIImage imageNamed:@"GHPublicRepositoryIcon.png"];
     }
-    
-    [self setupDefaultTableViewCell:cell forRowAtIndexPath:indexPath];
     
     return cell;
 }

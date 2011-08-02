@@ -27,11 +27,11 @@
     if (cell == nil) {
         cell = [[GHPUserTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
+    [self setupDefaultTableViewCell:cell forRowAtIndexPath:indexPath];
     
     GHAPIUserV3 *user = [self.dataArray objectAtIndex:indexPath.row];
     
     [self updateImageView:cell.imageView atIndexPath:indexPath withAvatarURLString:user.avatarURL];
-    [self setupDefaultTableViewCell:cell forRowAtIndexPath:indexPath];
     cell.textLabel.text = user.login;
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     

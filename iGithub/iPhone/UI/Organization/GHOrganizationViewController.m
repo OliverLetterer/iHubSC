@@ -61,14 +61,11 @@
     return self;
 }
 
-#pragma mark - Memory management
-
-
 #pragma mark - View lifecycle
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    // Return YES for supported orientations
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    self.title = self.organization.name ? self.organization.name : self.organization.login;
 }
 
 #pragma mark - UIExpandableTableViewDatasource

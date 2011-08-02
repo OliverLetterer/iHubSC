@@ -185,4 +185,132 @@ NSString *const GHAPITeamV3PermissionAdmin = @"admin";
                                                  }];
 }
 
++ (void)_dumpMembersOfTeamWithID:(NSNumber *)teamID inArray:(NSMutableArray *)membersArray page:(NSUInteger)page completionHandler:(GHAPIErrorHandler)handler {
+    if (page == GHAPIPaginationNextPageNotFound) {
+        handler(nil);
+    } else {
+        [GHAPITeamV3 membersOfTeamByID:teamID page:page 
+                     completionHandler:^(NSMutableArray *array, NSUInteger nextPage, NSError *error) {
+                         if (error) {
+                             handler(error);
+                         } else {
+                             [membersArray addObjectsFromArray:array];
+                             [self _dumpMembersOfTeamWithID:teamID inArray:membersArray page:nextPage 
+                                          completionHandler:handler];
+                         }
+                     }];
+    }
+}
+
++ (void)allMembersOfTeamWithID:(NSNumber *)teamID completionHandler:(void (^)(NSMutableArray *members, NSError *error))handler {
+    NSMutableArray *members = [NSMutableArray array];
+    [self _dumpMembersOfTeamWithID:teamID inArray:members page:1 completionHandler:^(NSError *error) {
+        if (error) {
+            handler(nil, error);
+        } else {
+            handler(members, nil);
+        }
+    }];
+}
+
++ (void)_teamWithID:(NSNumber *)teamID removeMembersFromArray:(NSArray *)membersToRemove currentMemberIndex:(NSUInteger)currentMemberIndex completionHandler:(GHAPIErrorHandler)handler {
+    if (currentMemberIndex >= membersToRemove.count) {
+        handler(nil);
+    } else {
+        NSString *username = [membersToRemove objectAtIndex:currentMemberIndex];
+        [GHAPITeamV3 teamByID:teamID deleteUserNamed:username completionHandler:^(NSError *error) {
+            if (error) {
+                handler(error);
+            } else {
+                [self _teamWithID:teamID removeMembersFromArray:membersToRemove currentMemberIndex:currentMemberIndex+1 completionHandler:handler];
+            }
+        }];
+    }
+}
+
++ (void)teamWithID:(NSNumber *)teamID removeMembersFromArray:(NSArray *)array completionHandler:(GHAPIErrorHandler)handler {
+    [self _teamWithID:teamID removeMembersFromArray:array currentMemberIndex:0 completionHandler:handler];
+}
+
++ (void)teamByID:(NSNumber *)teamID addUserNamed:(NSString *)username completionHandler:(GHAPIErrorHandler)handler {
+    // v3: PUT /teams/:id/members/:user
+    
+    NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.github.com/teams/%@/members/%@",
+                                       teamID,
+                                       [username stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]
+                                       ] ];
+    
+    [[GHAPIBackgroundQueueV3 sharedInstance] sendRequestToURL:URL 
+                                                 setupHandler:^(ASIFormDataRequest *request) {
+                                                     [request setRequestMethod:@"PUT"];
+                                                 } completionHandler:^(id object, NSError *error, ASIFormDataRequest *request) {
+                                                     if ([request responseStatusCode] == 204) {
+                                                         handler(nil);
+                                                     } else {
+                                                         handler(error);
+                                                     }
+                                                 }];
+}
+
++ (void)_teamWithID:(NSNumber *)teamID addMembersFromArray:(NSArray *)membersToAdd currentMemberIndex:(NSUInteger)currentMemberIndex completionHandler:(GHAPIErrorHandler)handler {
+    if (currentMemberIndex >= membersToAdd.count) {
+        handler(nil);
+    } else {
+        NSString *username = [membersToAdd objectAtIndex:currentMemberIndex];
+        [GHAPITeamV3 teamByID:teamID addUserNamed:username completionHandler:^(NSError *error) {
+            if (error) {
+                handler(error);
+            } else {
+                [self _teamWithID:teamID addMembersFromArray:membersToAdd currentMemberIndex:currentMemberIndex+1 completionHandler:handler];
+            }
+        }];
+    }
+}
+
++ (void)teamWithID:(NSNumber *)teamID addMembersFromArray:(NSArray *)array completionHandler:(GHAPIErrorHandler)handler {
+    [self _teamWithID:teamID addMembersFromArray:array currentMemberIndex:0 completionHandler:handler];
+}
+
++ (void)updateTeamWithID:(NSNumber *)teamID setTeamMembers:(NSArray *)newTeamMembers completionHandler:(GHAPIErrorHandler)handler {
+    // 1. remove all team members that are not in teamMembers
+    // 2. now add all members that are not alread in teamMembers
+    [GHAPITeamV3 allMembersOfTeamWithID:teamID completionHandler:^(NSMutableArray *members, NSError *error) {
+        if (error) {
+            handler(error);
+        } else {
+            NSMutableArray *removeArray = [NSMutableArray array];
+            
+            for (GHAPIUserV3 *user in members) {
+                if (![newTeamMembers containsObject:user.login]) {
+                    [removeArray addObject:user.login];
+                }
+            }
+            
+            NSMutableArray *addArray = [NSMutableArray array];
+            for (NSString *username in newTeamMembers) {
+                BOOL found = NO;
+                for (GHAPIUserV3 *user in members) {
+                    if ([username isEqualToString:user.login]) {
+                        found = YES;
+                        break;
+                    }
+                }
+                if (!found) {
+                    [addArray addObject:username];
+                }
+            }
+            
+            [GHAPITeamV3 teamWithID:teamID removeMembersFromArray:removeArray completionHandler:^(NSError *error) {
+                if (error) {
+                    handler(error);
+                } else {
+                    [self teamWithID:teamID addMembersFromArray:addArray completionHandler:^(NSError *error) {
+                        handler(error);
+                    }];
+                }
+            }];
+        }
+    }];
+}
+
 @end

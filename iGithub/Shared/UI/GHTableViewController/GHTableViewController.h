@@ -17,6 +17,7 @@
 #import "GithubAPI.h"
 #import "ANAdvancedNavigationController.h"
 #import "GHPCollapsingAndSpinningTableViewCell.h"
+#import "GHCollapsingAndSpinningTableViewCell.h"
 
 @class GHTableViewCell;
 

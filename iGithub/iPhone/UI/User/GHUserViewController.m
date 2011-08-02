@@ -631,7 +631,7 @@
         }
     } else if (indexPath.section == kUITableViewSectionRepositories) {
         // display all repostories
-        NSString *CellIdentifier = @"GHFeedItemWithDescriptionTableViewCell";
+        static NSString *CellIdentifier = @"GHFeedItemWithDescriptionTableViewCell";
         
         GHDescriptionTableViewCell *cell = (GHDescriptionTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         if (cell == nil) {
@@ -706,7 +706,7 @@
         }
         return cell;
     } else if (indexPath.section == kUITableViewFollowingUsers) {
-        NSString *CellIdentifier = @"UITableViewCellWithLinearGradientBackgroundView";
+        static NSString *CellIdentifier = @"UITableViewCellWithLinearGradientBackgroundView";
         
         GHTableViewCellWithLinearGradientBackgroundView *cell = (GHTableViewCellWithLinearGradientBackgroundView *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         if (!cell) {
