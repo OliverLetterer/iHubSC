@@ -48,12 +48,9 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     GHAPITeamV3 *team = [self.dataArray objectAtIndex:indexPath.row];
-    GHPTeamViewController *viewController = [[GHPTeamViewController alloc] initWithTeamID:team.ID];
+    GHPTeamViewController *viewController = [[GHPTeamViewController alloc] initWithTeamID:team.ID organization:self.organizationName];
     [self.advancedNavigationController pushViewController:viewController afterViewController:self animated:YES];
 }
-
-#pragma mark - Memory management
-
 
 #pragma mark - Keyed Archiving
 

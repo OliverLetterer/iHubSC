@@ -426,7 +426,7 @@
     } else if (indexPath.section == kUITableViewSectionTeams) {
         GHAPITeamV3 *team = [self.teams objectAtIndex:indexPath.row - 1];
         
-        GHTeamViewController *teamViewController = [[GHTeamViewController alloc] initWithTeamID:team.ID];
+        GHTeamViewController *teamViewController = [[GHTeamViewController alloc] initWithTeamID:team.ID organization:self.organizationLogin];
         [self.navigationController pushViewController:teamViewController animated:YES];
     } else {
         [tableView deselectRowAtIndexPath:indexPath animated:NO];

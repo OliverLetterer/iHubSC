@@ -14,6 +14,7 @@
 @private
     GHAPITeamV3 *_team;
     NSNumber *_teamID;
+    NSString *_organization;
     
     NSMutableArray *_members;
     NSMutableArray *_repositories;
@@ -21,9 +22,10 @@
 
 @property (nonatomic, retain) GHAPITeamV3 *team;
 @property (nonatomic, copy) NSNumber *teamID;
+@property (nonatomic, copy) NSString *organization;
 @property (nonatomic, retain) NSMutableArray *members;
 @property (nonatomic, retain) NSMutableArray *repositories;
 
-- (id)initWithTeamID:(NSNumber *)teamID;
+- (id)initWithTeamID:(NSNumber *)teamID organization:(NSString *)organization;
 
 @end

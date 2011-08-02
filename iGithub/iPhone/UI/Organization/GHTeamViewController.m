@@ -17,7 +17,7 @@
 
 @implementation GHTeamViewController
 
-@synthesize team=_team, teamID=_teamID, members=_members, repositories=_repositories;
+@synthesize team=_team, teamID=_teamID, members=_members, repositories=_repositories, organization=_organization;
 
 - (void)setTeamID:(NSNumber *)teamID {
     _teamID = [teamID copy];
@@ -40,10 +40,11 @@
 
 #pragma mark - Initialization
 
-- (id)initWithTeamID:(NSNumber *)teamID {
+- (id)initWithTeamID:(NSNumber *)teamID organization:(NSString *)organization {
     if ((self = [super initWithStyle:UITableViewStylePlain])) {
         // Custom initialization
         self.teamID = teamID;
+        self.organization = organization;
     }
     return self;
 }
