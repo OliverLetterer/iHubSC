@@ -396,6 +396,8 @@
 		A7FDA6B413E7DD6D00DE4FF3 /* GHTextFieldTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A7FDA6B313E7DD6D00DE4FF3 /* GHTextFieldTableViewCell.m */; };
 		A7FDA6C513E7DECA00DE4FF3 /* GHPTextFieldTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A7FDA6C413E7DECA00DE4FF3 /* GHPTextFieldTableViewCell.m */; };
 		A7FDA6E213E8736000DE4FF3 /* GHEditTeamViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7FDA6E113E8735F00DE4FF3 /* GHEditTeamViewController.m */; };
+		A7FDA6F313E88D5200DE4FF3 /* ANNotificationQueueRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7FDA6F213E88D5200DE4FF3 /* ANNotificationQueueRootViewController.m */; };
+		A7FDA70313E890C400DE4FF3 /* ANNotificationQueueRootViewControllerView.m in Sources */ = {isa = PBXBuildFile; fileRef = A7FDA70213E890C300DE4FF3 /* ANNotificationQueueRootViewControllerView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1137,6 +1139,10 @@
 		A7FDA6C413E7DECA00DE4FF3 /* GHPTextFieldTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPTextFieldTableViewCell.m; sourceTree = "<group>"; };
 		A7FDA6E013E8735F00DE4FF3 /* GHEditTeamViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHEditTeamViewController.h; sourceTree = "<group>"; };
 		A7FDA6E113E8735F00DE4FF3 /* GHEditTeamViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHEditTeamViewController.m; sourceTree = "<group>"; };
+		A7FDA6F113E88D5200DE4FF3 /* ANNotificationQueueRootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANNotificationQueueRootViewController.h; sourceTree = "<group>"; };
+		A7FDA6F213E88D5200DE4FF3 /* ANNotificationQueueRootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANNotificationQueueRootViewController.m; sourceTree = "<group>"; };
+		A7FDA70113E890C200DE4FF3 /* ANNotificationQueueRootViewControllerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANNotificationQueueRootViewControllerView.h; sourceTree = "<group>"; };
+		A7FDA70213E890C300DE4FF3 /* ANNotificationQueueRootViewControllerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANNotificationQueueRootViewControllerView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -2727,6 +2733,7 @@
 		A7841F3D13E194BB00131648 /* ANNotificationQueue */ = {
 			isa = PBXGroup;
 			children = (
+				A7FDA6F013E88D4500DE4FF3 /* ANNotificationQueueRootViewController */,
 				A7841F3E13E194BB00131648 /* ANNotificationQueue.h */,
 				A7841F3F13E194BB00131648 /* ANNotificationQueue.m */,
 				A7841F4013E194BB00131648 /* ANNotificationView */,
@@ -3442,6 +3449,17 @@
 			path = GHPTextFieldTableViewCell;
 			sourceTree = "<group>";
 		};
+		A7FDA6F013E88D4500DE4FF3 /* ANNotificationQueueRootViewController */ = {
+			isa = PBXGroup;
+			children = (
+				A7FDA6F113E88D5200DE4FF3 /* ANNotificationQueueRootViewController.h */,
+				A7FDA6F213E88D5200DE4FF3 /* ANNotificationQueueRootViewController.m */,
+				A7FDA70113E890C200DE4FF3 /* ANNotificationQueueRootViewControllerView.h */,
+				A7FDA70213E890C300DE4FF3 /* ANNotificationQueueRootViewControllerView.m */,
+			);
+			path = ANNotificationQueueRootViewController;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -3905,6 +3923,8 @@
 				A7FDA6B413E7DD6D00DE4FF3 /* GHTextFieldTableViewCell.m in Sources */,
 				A7FDA6C513E7DECA00DE4FF3 /* GHPTextFieldTableViewCell.m in Sources */,
 				A7FDA6E213E8736000DE4FF3 /* GHEditTeamViewController.m in Sources */,
+				A7FDA6F313E88D5200DE4FF3 /* ANNotificationQueueRootViewController.m in Sources */,
+				A7FDA70313E890C400DE4FF3 /* ANNotificationQueueRootViewControllerView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

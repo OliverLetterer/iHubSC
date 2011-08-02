@@ -14,14 +14,17 @@
 #import "ANNotificationView.h"
 #import "ANNotificationErrorView.h"
 #import "ANNotificationSuccessView.h"
+#import "ANNotificationQueueRootViewController.h"
 
 @interface ANNotificationQueue () {
 @private
     NSMutableArray *_notifications;
+    UIWindow *_currentWindow;
 }
 
 @property (nonatomic, retain) NSMutableArray *notifications;
 @property (nonatomic, readonly) CGRect defaultNotificationFrame;
+@property (nonatomic, readonly) UIWindow *currentWindow;
 
 - (void)_detachNotification:(ANNotificationView *)notificationView;
 - (void)_displayNextNotification;
@@ -42,12 +45,13 @@ CGFloat const ANNotificationQueueAnimationDuration = 0.35f*2.0f;
 - (id)init {
     if ((self = [super init])) {
         self.notifications = [NSMutableArray array];
+        [self.currentWindow makeKeyAndVisible];
+        [self.currentWindow resignKeyWindow];
+        [[UIApplication sharedApplication].delegate.window makeKeyAndVisible];
+        self.currentWindow.alpha = 0.0f;
     }
     return self;
 }
-
-#pragma mark - Memory management
-
 
 #pragma mark - Instance methods
 
@@ -87,6 +91,18 @@ CGFloat const ANNotificationQueueAnimationDuration = 0.35f*2.0f;
     return frame;
 }
 
+- (UIWindow *)currentWindow {
+    if (!_currentWindow) {
+        _currentWindow = [[UIWindow alloc] initWithFrame:[UIApplication sharedApplication].delegate.window.frame];
+        _currentWindow.rootViewController = [[ANNotificationQueueRootViewController alloc] init];
+        _currentWindow.windowLevel = UIWindowLevelAlert;
+        _currentWindow.userInteractionEnabled = NO;
+        _currentWindow.backgroundColor = [UIColor clearColor];
+        [_currentWindow makeKeyAndVisible];
+    }
+    return _currentWindow;
+}
+
 - (void)_detachNotification:(ANNotificationView *)notificationView {
     if (!notificationView) {
         return;
@@ -101,14 +117,23 @@ CGFloat const ANNotificationQueueAnimationDuration = 0.35f*2.0f;
 
 - (void)_displayNextNotification {
     if ([self.notifications count] == 0) {
+        [_currentWindow resignKeyWindow];
+        [[UIApplication sharedApplication].delegate.window makeKeyAndVisible];
+        [UIView animateWithDuration:0.25f animations:^(void) {
+            _currentWindow.alpha = 0.0f;
+        }];
 		return;
 	}
+    [self.currentWindow makeKeyAndVisible];
+    [UIView animateWithDuration:0.25f animations:^(void) {
+        self.currentWindow.alpha = 1.0f;
+    }];
 	
 	ANNotificationView *notificationView = [self.notifications objectAtIndex:0];
     notificationView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
     
     
-    UIView *topContainerView = [[UIApplication sharedApplication].delegate window].rootViewController.view;
+    UIView *topContainerView = self.currentWindow.rootViewController.view;
     
     UIView *containerView = [[UIView alloc] initWithFrame:topContainerView.bounds];
     containerView.backgroundColor = [UIColor clearColor];

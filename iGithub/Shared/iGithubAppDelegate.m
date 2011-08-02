@@ -9,6 +9,7 @@
 #import "iGithubAppDelegate.h"
 #import "GHAPIAuthenticationManager.h"
 #import "ASIHTTPRequest.h"
+#import "ANNotificationQueue.h"
 
 #define kLastKnownApplicationStateFileName @"de.olettere.iGitHub.lastKnownApplicationState.plist"
 
@@ -27,13 +28,13 @@
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    NSLog(@"%@", [ANNotificationQueue sharedInstance]);
     [ASIHTTPRequest setDefaultTimeOutSeconds:20.0];
     [self.window makeKeyAndVisible];
     return YES;
 }
 
-- (void)applicationWillResignActive:(UIApplication *)application
-{
+- (void)applicationWillResignActive:(UIApplication *)application {
     [[NSUserDefaults standardUserDefaults] synchronize];
     /*
      Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
