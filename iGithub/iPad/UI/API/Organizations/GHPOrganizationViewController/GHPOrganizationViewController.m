@@ -183,20 +183,21 @@
     } else if ([title isEqualToString:NSLocalizedString(@"Add Team", @"")]) {
         GHCreateTeamViewController *viewController = [[GHCreateTeamViewController alloc] initWithOrganization:self.organizationName];
         viewController.delegate = self;
-        viewController.presentedInPopoverController = YES;
         
-        [self presentViewControllerFromActionButton:viewController detatchNavigationController:YES animated:YES];
+        UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:viewController];
+        navController.modalPresentationStyle = UIModalPresentationFormSheet;
+        [self presentViewController:navController animated:YES completion:nil];
     }
 }
 
 #pragma mark - GHCreateTeamViewControllerDelegate
 
 - (void)createTeamViewControllerDidCancel:(GHCreateTeamViewController *)createViewController {
-    [_currentPopoverController dismissPopoverAnimated:YES];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)createTeamViewController:(GHCreateTeamViewController *)createViewController didCreateTeam:(GHAPITeamV3 *)team {
-    [_currentPopoverController dismissPopoverAnimated:YES];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark - UIAlertViewDelegate 

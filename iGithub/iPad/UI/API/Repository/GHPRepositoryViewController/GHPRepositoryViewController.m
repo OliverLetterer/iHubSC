@@ -544,9 +544,11 @@
                                    }];
         } else if ([title isEqualToString:NSLocalizedString(@"New Issue", @"")]) {
             GHCreateIssueTableViewController *viewController = [[GHCreateIssueTableViewController alloc] initWithRepository:self.repositoryString];
-            viewController.presentedInPopoverController = YES;
             viewController.delegate = self;
-            [self presentViewControllerFromActionButton:viewController detatchNavigationController:YES animated:YES];
+            
+            UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:viewController];
+            navController.modalPresentationStyle = UIModalPresentationFormSheet;
+            [self presentViewController:navController animated:YES completion:nil];
         } else if ([title isEqualToString:NSLocalizedString(@"New Milestone", @"")]) {
             GHCreateMilestoneViewController *viewController = [[GHCreateMilestoneViewController alloc] initWithRepository:self.repositoryString];
             viewController.presentedInPopoverController = YES;
@@ -725,11 +727,11 @@
 
 - (void)createIssueViewController:(GHCreateIssueTableViewController *)createViewController didCreateIssue:(GHAPIIssueV3 *)issue {
     [[ANNotificationQueue sharedInstance] detatchSuccesNotificationWithTitle:NSLocalizedString(@"Created Issue", @"") message:issue.title];
-    [_currentPopoverController dismissPopoverAnimated:YES];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)createIssueViewControllerDidCancel:(GHCreateIssueTableViewController *)createViewController {
-    [_currentPopoverController dismissPopoverAnimated:YES];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 

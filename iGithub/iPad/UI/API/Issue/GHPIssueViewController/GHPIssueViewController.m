@@ -66,17 +66,24 @@
                                                [self handleError:error];
                                            } else {
                                                self.issue = issue;
-                                               _bodyHeight = [GHPIssueInfoTableViewCell heightWithAttributedString:issue.attributedBody 
-                                                                                              inAttributedTextView:nil];
                                                self.repository = repository;
                                                self.isDownloadingEssentialData = NO;
-                                               if (self.isViewLoaded) {
-                                                   [self.tableView reloadData];
-                                               }
                                            }
                                        }];
                       }
                   }];
+}
+
+- (void)setIssue:(GHAPIIssueV3 *)issue {
+    if (issue != _issue) {
+        _issue = issue;
+        
+        _bodyHeight = [GHPIssueInfoTableViewCell heightWithAttributedString:issue.attributedBody 
+                                                       inAttributedTextView:nil];
+        if (self.isViewLoaded) {
+            [self.tableView reloadData];
+        }
+    }
 }
 
 #pragma mark - Initialization
@@ -694,9 +701,11 @@
                                }];
         } else if ([title isEqualToString:NSLocalizedString(@"Edit", @"")]) {
             GHUpdateIssueViewController *viewController = [[GHUpdateIssueViewController alloc] initWithIssue:self.issue];
-            viewController.presentedInPopoverController = YES;
             viewController.delegate = self;
-            [self presentViewControllerFromActionButton:viewController detatchNavigationController:YES animated:YES];
+            
+            UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:viewController];
+            navController.modalPresentationStyle = UIModalPresentationFormSheet;
+            [self presentViewController:navController animated:YES completion:nil];
         }
     } else if (actionSheet.tag == kUIActionSheetTagLongPressedLink) {
         NSString *title = nil;
@@ -776,18 +785,12 @@
 #pragma mark - GHCreateIssueTableViewControllerDelegate
 
 - (void)createIssueViewControllerDidCancel:(GHCreateIssueTableViewController *)createViewController {
-    [_currentPopoverController dismissPopoverAnimated:YES];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)createIssueViewController:(GHCreateIssueTableViewController *)createViewController didCreateIssue:(GHAPIIssueV3 *)issue {
     self.issue = issue;
-    _bodyHeight = [GHPIssueInfoTableViewCell heightWithAttributedString:issue.attributedBody 
-                                                   inAttributedTextView:nil];
-    
-    if (self.isViewLoaded) {
-        [self.tableView reloadData];
-    }
-    [_currentPopoverController dismissPopoverAnimated:YES];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark - GHPIssueInfoTableViewCellDelegate
