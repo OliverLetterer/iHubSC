@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "GHPInfoSectionTableViewController.h"
+#import "GHEditTeamViewController.h"
 
-@interface GHPTeamViewController : GHPInfoSectionTableViewController <NSCoding> {
+@interface GHPTeamViewController : GHPInfoSectionTableViewController <NSCoding, GHCreateTeamViewControllerDelegate> {
 @private
     GHAPITeamV3 *_team;
     NSNumber *_teamID;

@@ -228,6 +228,7 @@ NSString *NSStringFromGHAPITeamPermissionV3(NSString *GHAPITeamPermissionV3) {
         if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
             static NSString *CellIdentifier = @"GHPDefaultTableViewCell";
             GHPDefaultTableViewCell *cell = [self defaultTableViewCellForRowAtIndexPath:indexPath withReuseIdentifier:CellIdentifier];
+            [self setupDefaultTableViewCell:cell forRowAtIndexPath:indexPath];
             
             NSString *permission = [self.availablePermissions objectAtIndex:indexPath.row-1];
             cell.textLabel.text = NSStringFromGHAPITeamPermissionV3(permission);

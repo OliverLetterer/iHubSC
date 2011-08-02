@@ -395,6 +395,7 @@
 		A7FDA6A113E7446F00DE4FF3 /* GHCreateTeamViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7FDA6A013E7446F00DE4FF3 /* GHCreateTeamViewController.m */; };
 		A7FDA6B413E7DD6D00DE4FF3 /* GHTextFieldTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A7FDA6B313E7DD6D00DE4FF3 /* GHTextFieldTableViewCell.m */; };
 		A7FDA6C513E7DECA00DE4FF3 /* GHPTextFieldTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A7FDA6C413E7DECA00DE4FF3 /* GHPTextFieldTableViewCell.m */; };
+		A7FDA6E213E8736000DE4FF3 /* GHEditTeamViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7FDA6E113E8735F00DE4FF3 /* GHEditTeamViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1134,6 +1135,8 @@
 		A7FDA6B313E7DD6D00DE4FF3 /* GHTextFieldTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHTextFieldTableViewCell.m; sourceTree = "<group>"; };
 		A7FDA6C313E7DECA00DE4FF3 /* GHPTextFieldTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPTextFieldTableViewCell.h; sourceTree = "<group>"; };
 		A7FDA6C413E7DECA00DE4FF3 /* GHPTextFieldTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPTextFieldTableViewCell.m; sourceTree = "<group>"; };
+		A7FDA6E013E8735F00DE4FF3 /* GHEditTeamViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHEditTeamViewController.h; sourceTree = "<group>"; };
+		A7FDA6E113E8735F00DE4FF3 /* GHEditTeamViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHEditTeamViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -3408,6 +3411,8 @@
 				A7FDA6B013E7DD1800DE4FF3 /* UITableViewCell's */,
 				A7FDA69F13E7446F00DE4FF3 /* GHCreateTeamViewController.h */,
 				A7FDA6A013E7446F00DE4FF3 /* GHCreateTeamViewController.m */,
+				A7FDA6E013E8735F00DE4FF3 /* GHEditTeamViewController.h */,
+				A7FDA6E113E8735F00DE4FF3 /* GHEditTeamViewController.m */,
 			);
 			path = Organization;
 			sourceTree = "<group>";
@@ -3899,6 +3904,7 @@
 				A7FDA6A113E7446F00DE4FF3 /* GHCreateTeamViewController.m in Sources */,
 				A7FDA6B413E7DD6D00DE4FF3 /* GHTextFieldTableViewCell.m in Sources */,
 				A7FDA6C513E7DECA00DE4FF3 /* GHPTextFieldTableViewCell.m in Sources */,
+				A7FDA6E213E8736000DE4FF3 /* GHEditTeamViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

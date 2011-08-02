@@ -9,8 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "GithubAPI.h"
 #import "GHActionButtonTableViewController.h"
+#import "GHEditTeamViewController.h"
 
-@interface GHTeamViewController : GHActionButtonTableViewController {
+@interface GHTeamViewController : GHActionButtonTableViewController <GHCreateTeamViewControllerDelegate> {
 @private
     GHAPITeamV3 *_team;
     NSNumber *_teamID;

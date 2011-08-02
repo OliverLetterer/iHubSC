@@ -213,6 +213,33 @@ NSString *const GHAPITeamV3PermissionAdmin = @"admin";
     }];
 }
 
++ (void)allRepositoriesOfTeamWithID:(NSNumber *)teamID completionHandler:(void (^)(NSMutableArray *repositories, NSError *error))handler {
+    NSMutableArray *repos = [NSMutableArray array];
+    [self _dumpRepositoriesOfTeamWithID:teamID inArray:repos page:1 completionHandler:^(NSError *error) {
+        if (error) {
+            handler(nil, error);
+        } else {
+            handler(repos, nil);
+        }
+    }];
+}
+
++ (void)_dumpRepositoriesOfTeamWithID:(NSNumber *)teamID inArray:(NSMutableArray *)repositoriesArray page:(NSUInteger)page completionHandler:(GHAPIErrorHandler)handler {
+    if (page == GHAPIPaginationNextPageNotFound) {
+        handler(nil);
+    } else {
+        [GHAPITeamV3 repositoriesOfTeamByID:teamID page:page 
+                          completionHandler:^(NSMutableArray *array, NSUInteger nextPage, NSError *error) {
+                         if (error) {
+                             handler(error);
+                         } else {
+                             [repositoriesArray addObjectsFromArray:array];
+                             [self _dumpMembersOfTeamWithID:teamID inArray:repositoriesArray page:nextPage completionHandler:handler];
+                         }
+                     }];
+    }
+}
+
 + (void)_teamWithID:(NSNumber *)teamID removeMembersFromArray:(NSArray *)membersToRemove currentMemberIndex:(NSUInteger)currentMemberIndex completionHandler:(GHAPIErrorHandler)handler {
     if (currentMemberIndex >= membersToRemove.count) {
         handler(nil);
@@ -305,6 +332,151 @@ NSString *const GHAPITeamV3PermissionAdmin = @"admin";
                     handler(error);
                 } else {
                     [self teamWithID:teamID addMembersFromArray:addArray completionHandler:^(NSError *error) {
+                        handler(error);
+                    }];
+                }
+            }];
+        }
+    }];
+}
+
++ (void)updateTeamWithID:(NSNumber *)teamID teamMembers:(NSArray *)teamMembers repositories:(NSArray *)repositories permission:(NSString *)permission name:(NSString *)name completionHandler:(void (^)(GHAPITeamV3 *team, NSError *error))handler {
+    // v3: PATCH /teams/:id
+    
+    NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.github.com/teams/%@", teamID] ];
+    
+    
+    [[GHAPIBackgroundQueueV3 sharedInstance] sendRequestToURL:URL 
+                                                 setupHandler:^(ASIFormDataRequest *request) { 
+                                                     [request setRequestMethod:@"PATCH"];
+                                                     NSMutableDictionary *jsonDictionary = [NSMutableDictionary dictionaryWithCapacity:2];
+                                                     
+                                                     if (permission) {
+                                                         [jsonDictionary setObject:permission forKey:@"permission"];
+                                                     }
+                                                     if (name) {
+                                                         [jsonDictionary setObject:name forKey:@"name"];
+                                                     }
+                                                     NSString *jsonString = [jsonDictionary JSONString];
+                                                     NSMutableData *jsonData = [[jsonString dataUsingEncoding:NSUTF8StringEncoding] mutableCopy];
+                                                     
+                                                     [request setPostBody:jsonData];
+                                                     [request setPostLength:[jsonString length] ];
+                                                 } 
+                                            completionHandler:^(id object, NSError *error, ASIFormDataRequest *request) {
+                                                if (error) {
+                                                    handler(nil, error);
+                                                } else {
+                                                    GHAPITeamV3 *team = [[GHAPITeamV3 alloc] initWithRawDictionary:object];
+                                                    [self updateTeamWithID:teamID setTeamMembers:teamMembers 
+                                                         completionHandler:^(NSError *error) {
+                                                             if (error) {
+                                                                 handler(nil, error);
+                                                             } else {
+                                                                 [self updateTeamWithID:teamID setRepositories:repositories 
+                                                                      completionHandler:^(NSError *error) {
+                                                                          handler(team, error);
+                                                                      }];
+                                                             }
+                                                         }];
+                                                }
+                                            }];
+}
+
+
+
++ (void)_teamWithID:(NSNumber *)teamID removeRepositoriesFromArray:(NSArray *)repositoriesToRemove currentRepoIndex:(NSUInteger)currentRepoIndex completionHandler:(GHAPIErrorHandler)handler {
+    if (currentRepoIndex >= repositoriesToRemove.count) {
+        handler(nil);
+    } else {
+        NSString *repoName = [repositoriesToRemove objectAtIndex:currentRepoIndex];
+        [GHAPITeamV3 teamByID:teamID deleteRepositoryNamed:repoName completionHandler:^(NSError *error) {
+            if (error) {
+                handler(error);
+            } else {
+                [self _teamWithID:teamID removeRepositoriesFromArray:repositoriesToRemove currentRepoIndex:currentRepoIndex+1 completionHandler:handler];
+            }
+        }];
+    }
+}
+
++ (void)teamWithID:(NSNumber *)teamID removeRepositoriesFromArray:(NSArray *)array completionHandler:(GHAPIErrorHandler)handler {
+    [self _teamWithID:teamID removeRepositoriesFromArray:array currentRepoIndex:0 completionHandler:handler];
+}
+
++ (void)teamByID:(NSNumber *)teamID addRepositoryNamed:(NSString *)repository completionHandler:(GHAPIErrorHandler)handler {
+    // v3: PUT /teams/:id/repos/:user/:repo
+    
+    NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.github.com/teams/%@/repos/%@",
+                                       teamID,
+                                       [repository stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]
+                                       ] ];
+    
+    [[GHAPIBackgroundQueueV3 sharedInstance] sendRequestToURL:URL 
+                                                 setupHandler:^(ASIFormDataRequest *request) {
+                                                     [request setRequestMethod:@"PUT"];
+                                                 } completionHandler:^(id object, NSError *error, ASIFormDataRequest *request) {
+                                                     if ([request responseStatusCode] == 204) {
+                                                         handler(nil);
+                                                     } else {
+                                                         handler(error);
+                                                     }
+                                                 }];
+}
+
++ (void)_teamWithID:(NSNumber *)teamID addRepositoriesFromArray:(NSArray *)reposArray currentRepoIndex:(NSUInteger)currentRepoIndex completionHandler:(GHAPIErrorHandler)handler {
+    if (currentRepoIndex >= reposArray.count) {
+        handler(nil);
+    } else {
+        NSString *repoName = [reposArray objectAtIndex:currentRepoIndex];
+        [GHAPITeamV3 teamByID:teamID addRepositoryNamed:repoName completionHandler:^(NSError *error) {
+            if (error) {
+                handler(error);
+            } else {
+                [self _teamWithID:teamID addRepositoriesFromArray:reposArray currentRepoIndex:currentRepoIndex+1 completionHandler:handler];
+            }
+        }];
+    }
+}
+
++ (void)teamWithID:(NSNumber *)teamID addRepositoriesFromArray:(NSArray *)array completionHandler:(GHAPIErrorHandler)handler {
+    [self _teamWithID:teamID addRepositoriesFromArray:array currentRepoIndex:0 completionHandler:handler];
+}
+
++ (void)updateTeamWithID:(NSNumber *)teamID setRepositories:(NSArray *)repos completionHandler:(GHAPIErrorHandler)handler {
+    // 1. remove all repos that are not in repos
+    // 2. now add all repos that are not alread in current repos
+    [GHAPITeamV3 allRepositoriesOfTeamWithID:teamID completionHandler:^(NSMutableArray *repositories, NSError *error) {
+        if (error) {
+            handler(error);
+        } else {
+            NSMutableArray *removeArray = [NSMutableArray array];
+            
+            for (GHAPIRepositoryV3 *repo in repositories) {
+                if (![repos containsObject:repo.fullRepositoryName]) {
+                    [removeArray addObject:repo.fullRepositoryName];
+                }
+            }
+            
+            NSMutableArray *addArray = [NSMutableArray array];
+            for (NSString *repoName in repos) {
+                BOOL found = NO;
+                for (GHAPIRepositoryV3 *repo in repositories) {
+                    if ([repoName isEqualToString:repo.fullRepositoryName]) {
+                        found = YES;
+                        break;
+                    }
+                }
+                if (!found) {
+                    [addArray addObject:repoName];
+                }
+            }
+            
+            [GHAPITeamV3 teamWithID:teamID removeRepositoriesFromArray:removeArray completionHandler:^(NSError *error) {
+                if (error) {
+                    handler(error);
+                } else {
+                    [self teamWithID:teamID addRepositoriesFromArray:addArray completionHandler:^(NSError *error) {
                         handler(error);
                     }];
                 }

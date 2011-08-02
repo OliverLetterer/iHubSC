@@ -44,8 +44,12 @@ extern NSString *const GHAPITeamV3PermissionAdmin;
 + (void)isUser:(NSString *)username memberInTeamByID:(NSNumber *)teamID completionHandler:(GHAPIStateHandler)handler;
 
 + (void)updateTeamWithID:(NSNumber *)teamID setTeamMembers:(NSArray *)teamMembers completionHandler:(GHAPIErrorHandler)handler;
++ (void)updateTeamWithID:(NSNumber *)teamID setRepositories:(NSArray *)repos completionHandler:(GHAPIErrorHandler)handler;
+
++ (void)updateTeamWithID:(NSNumber *)teamID teamMembers:(NSArray *)teamMembers repositories:(NSArray *)repositories permission:(NSString *)permission name:(NSString *)name completionHandler:(void (^)(GHAPITeamV3 *team, NSError *error))handler;
 
 + (void)teamByID:(NSNumber *)teamID addUserNamed:(NSString *)username completionHandler:(GHAPIErrorHandler)handler;
++ (void)teamByID:(NSNumber *)teamID addRepositoryNamed:(NSString *)repository completionHandler:(GHAPIErrorHandler)handler;
 
 // private
 + (void)allMembersOfTeamWithID:(NSNumber *)teamID completionHandler:(void (^)(NSMutableArray *members, NSError *error))handler;
@@ -53,5 +57,17 @@ extern NSString *const GHAPITeamV3PermissionAdmin;
 
 + (void)teamWithID:(NSNumber *)teamID removeMembersFromArray:(NSArray *)array completionHandler:(GHAPIErrorHandler)handler;
 + (void)_teamWithID:(NSNumber *)teamID removeMembersFromArray:(NSArray *)membersToRemove currentMemberIndex:(NSUInteger)currentMemberIndex completionHandler:(GHAPIErrorHandler)handler;
+
++ (void)teamWithID:(NSNumber *)teamID addMembersFromArray:(NSArray *)array completionHandler:(GHAPIErrorHandler)handler;
++ (void)_teamWithID:(NSNumber *)teamID addMembersFromArray:(NSArray *)membersToAdd currentMemberIndex:(NSUInteger)currentMemberIndex completionHandler:(GHAPIErrorHandler)handler;
+
++ (void)allRepositoriesOfTeamWithID:(NSNumber *)teamID completionHandler:(void (^)(NSMutableArray *repositories, NSError *error))handler;
++ (void)_dumpRepositoriesOfTeamWithID:(NSNumber *)teamID inArray:(NSMutableArray *)repositoriesArray page:(NSUInteger)page completionHandler:(GHAPIErrorHandler)handler;
+
++ (void)teamWithID:(NSNumber *)teamID removeRepositoriesFromArray:(NSArray *)array completionHandler:(GHAPIErrorHandler)handler;
++ (void)_teamWithID:(NSNumber *)teamID removeRepositoriesFromArray:(NSArray *)repositoriesToRemove currentRepoIndex:(NSUInteger)currentRepoIndex completionHandler:(GHAPIErrorHandler)handler;
+
++ (void)teamWithID:(NSNumber *)teamID addRepositoriesFromArray:(NSArray *)array completionHandler:(GHAPIErrorHandler)handler;
++ (void)_teamWithID:(NSNumber *)teamID addRepositoriesFromArray:(NSArray *)reposArray currentRepoIndex:(NSUInteger)currentRepoIndex completionHandler:(GHAPIErrorHandler)handler;
 
 @end

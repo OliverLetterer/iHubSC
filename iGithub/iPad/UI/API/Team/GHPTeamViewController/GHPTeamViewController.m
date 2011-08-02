@@ -31,12 +31,21 @@
                 [self handleError:error];
             } else {
                 self.team = team;
-                self.title = self.team.name;
-                if (self.isViewLoaded) {
-                    [self.tableView reloadData];
-                }
             }
         }];
+}
+
+- (void)setTeam:(GHAPITeamV3 *)team {
+    if (team != _team) {
+        _team = team;
+        
+        self.title = _team.name;
+        self.members = nil;
+        self.repositories = nil;
+        if (self.isViewLoaded) {
+            [self.tableView reloadData];
+        }
+    }
 }
 
 #pragma mark - Initialization
@@ -257,6 +266,7 @@
     [encoder encodeObject:_teamID forKey:@"teamID"];
     [encoder encodeObject:_members forKey:@"members"];
     [encoder encodeObject:_repositories forKey:@"repositories"];
+    [encoder encodeObject:_organization forKey:@"_organization"];
 }
 
 - (id)initWithCoder:(NSCoder *)decoder {
@@ -265,6 +275,7 @@
         _teamID = [decoder decodeObjectForKey:@"teamID"];
         _members = [decoder decodeObjectForKey:@"members"];
         _repositories = [decoder decodeObjectForKey:@"repositories"];
+        _organization = [decoder decodeObjectForKey:@"_organization"];
     }
     return self;
 }
@@ -279,11 +290,11 @@
     @catch (NSException *exception) {}
     
     if ([title isEqualToString:NSLocalizedString(@"Edit", @"")]) {
-        //        GHCreateTeamViewController *viewController = [[GHCreateTeamViewController alloc] initWithOrganization:self.organizationLogin];
-        //        viewController.delegate = self;
-        //        
-        //        UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:viewController];
-        //        [self presentModalViewController:navController animated:YES];
+        GHEditTeamViewController *viewController = [[GHEditTeamViewController alloc] initWithTeam:self.team organization:self.organization];
+        viewController.delegate = self;
+        UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:viewController];
+        navController.modalPresentationStyle = UIModalPresentationFormSheet;
+        [self presentModalViewController:navController animated:YES];
     } else if ([title isEqualToString:NSLocalizedString(@"Delete", @"")]) {
         [GHAPITeamV3 deleteTeamWithID:self.teamID completionHandler:^(NSError *error) {
             if (error) {
@@ -342,6 +353,17 @@
 
 - (BOOL)needsToDownloadDataToDisplayActionButtonActionSheet {
     return !_hasAdminData;
+}
+
+#pragma mark - GHCreateTeamViewControllerDelegate
+
+- (void)createTeamViewControllerDidCancel:(GHCreateTeamViewController *)createViewController {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)createTeamViewController:(GHCreateTeamViewController *)createViewController didCreateTeam:(GHAPITeamV3 *)team {
+    self.team = team;
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end
