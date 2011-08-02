@@ -7,10 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MessageUI/MessageUI.h>
+
 #import "GHActionButtonTableViewController.h"
 #import "GHCreateTeamViewController.h"
 
-@interface GHOrganizationViewController : GHActionButtonTableViewController <GHCreateTeamViewControllerDelegate> {
+@interface GHOrganizationViewController : GHActionButtonTableViewController <GHCreateTeamViewControllerDelegate, MFMailComposeViewControllerDelegate> {
 @private
     NSString *_organizationLogin;
     

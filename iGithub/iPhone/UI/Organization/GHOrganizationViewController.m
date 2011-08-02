@@ -466,6 +466,12 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+#pragma mark - MFMailComposeViewControllerDelegate
+
+- (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
 #pragma mark - UIActionSheetDelegate
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
@@ -481,6 +487,14 @@
         
         UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:viewController];
         [self presentModalViewController:navController animated:YES];
+    } else if ([title isEqualToString:NSLocalizedString(@"View Blog in Safari", @"")]) {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:self.organization.blog] ];
+    } else if ([title isEqualToString:NSLocalizedString(@"E-Mail", @"")]) {
+        MFMailComposeViewController *mailViewController = [[MFMailComposeViewController alloc] init];
+        mailViewController.mailComposeDelegate = self;
+        [mailViewController setToRecipients:[NSArray arrayWithObject:self.organization.EMail]];
+        
+        [self presentViewController:mailViewController animated:YES completion:nil];
     }
 }
 
@@ -509,6 +523,15 @@
     
     [sheet addButtonWithTitle:NSLocalizedString(@"Add Team", @"")];
     currentButtonIndex++;
+    
+    if (self.organization.hasBlog) {
+        [sheet addButtonWithTitle:NSLocalizedString(@"View Blog in Safari", @"")];
+        currentButtonIndex++;
+    }
+    if (self.organization.hasEMail && [MFMailComposeViewController canSendMail]) {
+        [sheet addButtonWithTitle:NSLocalizedString(@"E-Mail", @"")];
+        currentButtonIndex++;
+    }
     
     [sheet addButtonWithTitle:NSLocalizedString(@"Cancel", @"")];
     sheet.cancelButtonIndex = currentButtonIndex;

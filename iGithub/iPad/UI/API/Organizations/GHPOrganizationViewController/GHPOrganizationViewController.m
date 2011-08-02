@@ -217,16 +217,23 @@
         [mailViewController setToRecipients:[NSArray arrayWithObject:self.organization.EMail]];
         
         [self presentViewController:mailViewController animated:YES completion:nil];
-    } else if ([title isEqualToString:NSLocalizedString(@"Create a new Team", @"")]) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Create a new Team", @"") 
-                                                         message:nil 
-                                                        delegate:self 
-                                               cancelButtonTitle:NSLocalizedString(@"Cancel", @"") 
-                                               otherButtonTitles:NSLocalizedString(@"Create", @""), nil];
-        alert.tag = kUIAlertViewTagCreateTeam;
-        alert.alertViewStyle = UIAlertViewStylePlainTextInput;
-        [alert show];
+    } else if ([title isEqualToString:NSLocalizedString(@"Add Team", @"")]) {
+        GHCreateTeamViewController *viewController = [[GHCreateTeamViewController alloc] initWithOrganization:self.organizationName];
+        viewController.delegate = self;
+        viewController.presentedInPopoverController = YES;
+        
+        [self presentViewControllerFromActionButton:viewController detatchNavigationController:YES animated:YES];
     }
+}
+
+#pragma mark - GHCreateTeamViewControllerDelegate
+
+- (void)createTeamViewControllerDidCancel:(GHCreateTeamViewController *)createViewController {
+    [_currentPopoverController dismissPopoverAnimated:YES];
+}
+
+- (void)createTeamViewController:(GHCreateTeamViewController *)createViewController didCreateTeam:(GHAPITeamV3 *)team {
+    [_currentPopoverController dismissPopoverAnimated:YES];
 }
 
 #pragma mark - UIAlertViewDelegate 
@@ -237,27 +244,51 @@
 
 #pragma mark - ActionMenu
 
+- (void)downloadDataToDisplayActionButton {
+    [GHAPIOrganizationV3 isUser:[GHAPIAuthenticationManager sharedInstance].authenticatedUser.login administratorInOrganization:self.organizationName completionHandler:^(BOOL state, NSError *error) {
+        if (error) {
+            [self failedToDownloadDataToDisplayActionButtonWithError:error];
+        } else {
+            _hasAdminData = YES;
+            _isAdmin = state;
+            [self didDownloadDataToDisplayActionButton];
+        }
+    }];
+}
+
 - (UIActionSheet *)actionButtonActionSheet {
     UIActionSheet *sheet = [[UIActionSheet alloc] init];
+    sheet.title = self.organizationName;
+    NSUInteger currentButtonIndex = 0;
     
-//    [sheet addButtonWithTitle:NSLocalizedString(@"Create a new Team", @"")];
+    [sheet addButtonWithTitle:NSLocalizedString(@"Add Team", @"")];
+    currentButtonIndex++;
     
     if (self.organization.hasBlog) {
         [sheet addButtonWithTitle:NSLocalizedString(@"View Blog in Safari", @"")];
+        currentButtonIndex++;
     }
     if (self.organization.hasEMail && [MFMailComposeViewController canSendMail]) {
         [sheet addButtonWithTitle:NSLocalizedString(@"E-Mail", @"")];
+        currentButtonIndex++;
     }
     
-    if (sheet.numberOfButtons == 0) {
-        return nil;
-    }
+    [sheet addButtonWithTitle:NSLocalizedString(@"Cancel", @"")];
+    sheet.cancelButtonIndex = currentButtonIndex;
+    currentButtonIndex++;
+    
+    sheet.actionSheetStyle = UIActionSheetStyleBlackTranslucent;
     sheet.delegate = self;
+    
     return sheet;
 }
 
 - (BOOL)canDisplayActionButton {
-    return self.actionButtonActionSheet != nil;
+    return YES;
+}
+
+- (BOOL)needsToDownloadDataToDisplayActionButtonActionSheet {
+    return !_hasAdminData;
 }
 
 #pragma mark - MFMailComposeViewControllerDelegate
