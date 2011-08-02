@@ -12,8 +12,6 @@
 #import "GHPMembersOfOrganizationViewController.h"
 #import "GHPTeamsOfOrganizationViewController.h"
 
-#define kUIAlertViewTagCreateTeam               12637
-
 #define kUITableViewSectionInfo                 0
 #define kUITableViewSectionContent              1
 
