@@ -50,6 +50,7 @@
     rawDictionary = GHAPIObjectExpectedClass(rawDictionary, NSDictionary.class);
     if ((self = [super init])) {
         // Initialization code
+        self.description = @"";
         self.URL = [rawDictionary objectForKeyOrNilOnNullObject:@"url"];
         self.HTMLURL = [rawDictionary objectForKeyOrNilOnNullObject:@"html_url"];
         self.owner = [[GHAPIUserV3 alloc] initWithRawDictionary:[rawDictionary objectForKeyOrNilOnNullObject:@"owner"]];
