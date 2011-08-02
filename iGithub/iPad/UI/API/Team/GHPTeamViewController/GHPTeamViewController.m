@@ -362,6 +362,7 @@
 }
 
 - (void)createTeamViewController:(GHCreateTeamViewController *)createViewController didCreateTeam:(GHAPITeamV3 *)team {
+    [[ANNotificationQueue sharedInstance] detatchSuccesNotificationWithTitle:NSLocalizedString(@"Updated Team", @"") message:team.name];
     self.team = team;
     [self dismissViewControllerAnimated:YES completion:nil];
 }

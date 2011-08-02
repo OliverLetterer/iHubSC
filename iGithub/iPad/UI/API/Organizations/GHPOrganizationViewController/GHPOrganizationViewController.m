@@ -11,6 +11,7 @@
 #import "GHPRepositoriesOfOrganizationViewController.h"
 #import "GHPMembersOfOrganizationViewController.h"
 #import "GHPTeamsOfOrganizationViewController.h"
+#import "ANNotificationQueue.h"
 
 #define kUITableViewSectionInfo                 0
 #define kUITableViewSectionContent              1
@@ -197,6 +198,7 @@
 }
 
 - (void)createTeamViewController:(GHCreateTeamViewController *)createViewController didCreateTeam:(GHAPITeamV3 *)team {
+    [[ANNotificationQueue sharedInstance] detatchSuccesNotificationWithTitle:NSLocalizedString(@"Created Team", @"") message:team.name];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 

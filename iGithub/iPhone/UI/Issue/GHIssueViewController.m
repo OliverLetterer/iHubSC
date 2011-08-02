@@ -684,6 +684,7 @@
 #pragma mark - GHCreateIssueTableViewControllerDelegate
 
 - (void)createIssueViewController:(GHCreateIssueTableViewController *)createViewController didCreateIssue:(GHAPIIssueV3 *)issue {
+    [[ANNotificationQueue sharedInstance] detatchSuccesNotificationWithTitle:NSLocalizedString(@"Updated Issue", @"") message:issue.title];
     self.issue = issue;
     [self cacheHeight:[GHAttributedTableViewCell heightWithAttributedString:self.issue.attributedBody 
                                                        inAttributedTextView:nil] 

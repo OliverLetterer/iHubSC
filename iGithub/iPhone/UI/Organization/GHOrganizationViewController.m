@@ -14,6 +14,7 @@
 #import "GHUserViewController.h"
 #import "GHTeamViewController.h"
 #import "GHRecentActivityViewController.h"
+#import "ANNotificationQueue.h"
 
 #define kUITableViewSectionInfo                 0
 #define kUITableViewSectionEMail                1
@@ -461,6 +462,7 @@
 }
 
 - (void)createTeamViewController:(GHCreateTeamViewController *)createViewController didCreateTeam:(GHAPITeamV3 *)team {
+    [[ANNotificationQueue sharedInstance] detatchSuccesNotificationWithTitle:NSLocalizedString(@"Created Team", @"") message:team.name];
     [self.teams addObject:team];
     [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:kUITableViewSectionTeams] withRowAnimation:UITableViewRowAnimationNone];
     [self dismissViewControllerAnimated:YES completion:nil];

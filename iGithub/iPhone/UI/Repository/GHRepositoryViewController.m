@@ -864,6 +864,7 @@
 }
 
 - (void)createIssueViewController:(GHCreateIssueTableViewController *)createViewController didCreateIssue:(GHAPIIssueV3 *)issue {
+    [[ANNotificationQueue sharedInstance] detatchSuccesNotificationWithTitle:NSLocalizedString(@"Created Issue", @"") message:issue.title];
     [self.issuesArray insertObject:issue atIndex:0];
     self.repository.openIssues = [NSNumber numberWithInt:[self.repository.openIssues intValue]+1 ];
     [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:kUITableViewSectionIssues] 
@@ -874,6 +875,7 @@
 #pragma mark - GHCreateMilestoneViewControllerDelegate
 
 - (void)createMilestoneViewController:(GHCreateMilestoneViewController *)createViewController didCreateMilestone:(GHAPIMilestoneV3 *)milestone {
+    [[ANNotificationQueue sharedInstance] detatchSuccesNotificationWithTitle:NSLocalizedString(@"Created Milestone", @"") message:milestone.title];
     [self.milestones insertObject:milestone atIndex:0];
     [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:kUITableViewSectionMilestones] 
                   withRowAnimation:UITableViewRowAnimationNone];

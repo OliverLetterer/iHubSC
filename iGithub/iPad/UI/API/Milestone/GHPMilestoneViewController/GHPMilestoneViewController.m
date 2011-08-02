@@ -10,6 +10,7 @@
 #import "GHPCollapsingAndSpinningTableViewCell.h"
 #import "GHPImageDetailTableViewCell.h"
 #import "GHPIssueViewController.h"
+#import "ANNotificationQueue.h"
 
 #define kUITableViewInfoSection                         0
 #define kUITableViewControllerSectionInfoOpenIssues     1
@@ -361,6 +362,7 @@
 }
 
 - (void)createMilestoneViewController:(GHCreateMilestoneViewController *)createViewController didCreateMilestone:(GHAPIMilestoneV3 *)milestone {
+    [[ANNotificationQueue sharedInstance] detatchSuccesNotificationWithTitle:NSLocalizedString(@"Updated Milestone", @"") message:milestone.title];
     self.milestone = milestone;
     self.title = self.milestone.title;
     if ([self isViewLoaded]) {
