@@ -7,15 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "GHTableViewController.h"
+#import "GHPInfoSectionTableViewController.h"
 
-@interface GHPTeamViewController : GHTableViewController <NSCoding> {
+@interface GHPTeamViewController : GHPInfoSectionTableViewController <NSCoding> {
 @private
     GHAPITeamV3 *_team;
     NSNumber *_teamID;
     NSString *_organization;
     NSMutableArray *_members;
     NSMutableArray *_repositories;
+    
+    BOOL _hasAdminData;
+    BOOL _isAdmin;
 }
 
 @property (nonatomic, retain) GHAPITeamV3 *team;

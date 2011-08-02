@@ -11,9 +11,13 @@
 #import "GHPRepositoryTableViewCell.h"
 #import "GHPUserViewController.h"
 #import "GHPRepositoryViewController.h"
+#import "ANNotificationQueue.h"
 
-#define kUITableViewSectionMembers 0
-#define kUITableViewSectionRepositories 1
+#define kUITableViewSectionInfo             0
+#define kUITableViewSectionMembers          1
+#define kUITableViewSectionRepositories     2
+
+#define kUITableViewNumberOfSections        3
 
 @implementation GHPTeamViewController
 @synthesize team=_team, teamID=_teamID, members=_members, repositories=_repositories, organization=_organization;
@@ -143,7 +147,7 @@
         return 0;
     }
     // Return the number of sections.
-    return 2;
+    return kUITableViewNumberOfSections;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -151,6 +155,8 @@
         return self.members.count + 1;
     } else if (section == kUITableViewSectionRepositories) {
         return self.repositories.count + 1;
+    } else if (section == kUITableViewSectionInfo) {
+        return 1;
     }
     // Return the number of rows in the section.
     return 0;
@@ -194,6 +200,12 @@
         }
         
         return cell;
+    } else if (indexPath.section == kUITableViewSectionInfo) {
+        GHPInfoTableViewCell *cell = self.infoCell;   
+        
+        cell.textLabel.text = self.team.name;
+        
+        return cell;
     }
     
     return self.dummyCell;
@@ -207,6 +219,10 @@
         return [GHPRepositoryTableViewCell heightWithContent:repository.description];
     } else if (indexPath.section == kUITableViewSectionMembers && indexPath.row > 0) {
         return GHPUserTableViewCellHeight;
+    } else if (indexPath.section == kUITableViewSectionInfo) {
+        if (indexPath.row == 0) {
+            return [GHPInfoTableViewCell heightWithContent:nil];
+        }
     }
     
     return UITableViewAutomaticDimension;
@@ -251,6 +267,81 @@
         _repositories = [decoder decodeObjectForKey:@"repositories"];
     }
     return self;
+}
+
+#pragma mark - UIActionSheetDelegate
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    NSString *title = nil;
+    @try {
+        title = [actionSheet buttonTitleAtIndex:buttonIndex];
+    }
+    @catch (NSException *exception) {}
+    
+    if ([title isEqualToString:NSLocalizedString(@"Edit", @"")]) {
+        //        GHCreateTeamViewController *viewController = [[GHCreateTeamViewController alloc] initWithOrganization:self.organizationLogin];
+        //        viewController.delegate = self;
+        //        
+        //        UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:viewController];
+        //        [self presentModalViewController:navController animated:YES];
+    } else if ([title isEqualToString:NSLocalizedString(@"Delete", @"")]) {
+        [GHAPITeamV3 deleteTeamWithID:self.teamID completionHandler:^(NSError *error) {
+            if (error) {
+                [self handleError:error];
+            } else {
+                [[ANNotificationQueue sharedInstance] detatchSuccesNotificationWithTitle:NSLocalizedString(@"Successfully deleted", @"") message:self.team.name];
+                [self.advancedNavigationController popViewController:self animated:YES];
+            }
+        }];
+    }
+}
+
+#pragma mark - GHActionButtonTableViewController
+
+- (void)downloadDataToDisplayActionButton {
+    [GHAPIOrganizationV3 isUser:[GHAPIAuthenticationManager sharedInstance].authenticatedUser.login administratorInOrganization:self.organization completionHandler:^(BOOL state, NSError *error) {
+        if (error) {
+            [self failedToDownloadDataToDisplayActionButtonWithError:error];
+        } else {
+            _hasAdminData = YES;
+            _isAdmin = state;
+            [self didDownloadDataToDisplayActionButton];
+        }
+    }];
+}
+
+- (UIActionSheet *)actionButtonActionSheet {
+    if (!_isAdmin) {
+        return nil;
+    }
+    
+    UIActionSheet *sheet = [[UIActionSheet alloc] init];
+    sheet.title = self.team.name;
+    NSUInteger currentButtonIndex = 0;
+    
+    [sheet addButtonWithTitle:NSLocalizedString(@"Edit", @"")];
+    currentButtonIndex++;
+    
+    [sheet addButtonWithTitle:NSLocalizedString(@"Delete", @"")];
+    sheet.destructiveButtonIndex = currentButtonIndex;
+    currentButtonIndex++;
+    
+    [sheet addButtonWithTitle:NSLocalizedString(@"Cancel", @"")];
+    sheet.cancelButtonIndex = currentButtonIndex;
+    currentButtonIndex++;
+    
+    sheet.actionSheetStyle = UIActionSheetStyleBlackTranslucent;
+    sheet.delegate = self;
+    
+    return sheet;
+}
+
+- (BOOL)canDisplayActionButton {
+    return YES;
+}
+
+- (BOOL)needsToDownloadDataToDisplayActionButtonActionSheet {
+    return !_hasAdminData;
 }
 
 @end

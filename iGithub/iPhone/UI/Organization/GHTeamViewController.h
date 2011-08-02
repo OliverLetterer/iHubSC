@@ -8,9 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "GithubAPI.h"
-#import "GHTableViewController.h"
+#import "GHActionButtonTableViewController.h"
 
-@interface GHTeamViewController : GHTableViewController {
+@interface GHTeamViewController : GHActionButtonTableViewController {
 @private
     GHAPITeamV3 *_team;
     NSNumber *_teamID;
@@ -18,6 +18,9 @@
     
     NSMutableArray *_members;
     NSMutableArray *_repositories;
+    
+    BOOL _hasAdminData;
+    BOOL _isAdmin;
 }
 
 @property (nonatomic, retain) GHAPITeamV3 *team;

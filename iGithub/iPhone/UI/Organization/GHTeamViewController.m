@@ -11,6 +11,7 @@
 #import "GHCollapsingAndSpinningTableViewCell.h"
 #import "GHUserViewController.h"
 #import "GHDescriptionTableViewCell.h"
+#import "ANNotificationQueue.h"
 
 #define kUITableViewSectionMembers 0
 #define kUITableViewSectionRepositories 1
@@ -204,55 +205,6 @@
     return self.dummyCell;
 }
 
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    
-    if (indexPath.section == kUITableViewSectionMembers && indexPath.row > 0) {
-        return YES;
-    } else if (indexPath.section == kUITableViewSectionRepositories && indexPath.row > 0) {
-        return YES;
-    }
-    
-    return NO;
-}
-
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        
-        if (indexPath.section == kUITableViewSectionMembers) {
-            GHAPIUserV3 *user = [self.members objectAtIndex:indexPath.row - 1];
-            
-            [GHAPITeamV3 teamByID:self.teamID deleteUserNamed:user.login completionHandler:^(NSError *error) {
-                if (error) {
-                    [self handleError:error];
-                    [tableView reloadRowAtIndexPath:indexPath withRowAnimation:UITableViewRowAnimationNone];
-                } else {
-                    [self.members removeObjectAtIndex:indexPath.row - 1];
-                    [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
-                }
-            }];
-        } else if (indexPath.section == kUITableViewSectionRepositories) {
-            GHAPIRepositoryV3 *repo = [self.repositories objectAtIndex:indexPath.row-1];
-            
-            NSString *repoName = [NSString stringWithFormat:@"%@/%@", repo.owner.login, repo.name];
-            
-            [GHAPITeamV3 teamByID:self.teamID deleteRepositoryNamed:repoName 
-                completionHandler:^(NSError *error) {
-                    if (error) {
-                        [self handleError:error];
-                        [tableView reloadRowAtIndexPath:indexPath withRowAnimation:UITableViewRowAnimationNone];
-                    } else {
-                        [self.repositories removeObjectAtIndex:indexPath.row - 1];
-                        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
-                    }
-                }];
-        }
-    }
-}
-
 #pragma mark - Table view delegate
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -299,6 +251,81 @@
         _repositories = [decoder decodeObjectForKey:@"repositories"];
     }
     return self;
+}
+
+#pragma mark - UIActionSheetDelegate
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    NSString *title = nil;
+    @try {
+        title = [actionSheet buttonTitleAtIndex:buttonIndex];
+    }
+    @catch (NSException *exception) {}
+    
+    if ([title isEqualToString:NSLocalizedString(@"Edit", @"")]) {
+//        GHCreateTeamViewController *viewController = [[GHCreateTeamViewController alloc] initWithOrganization:self.organizationLogin];
+//        viewController.delegate = self;
+//        
+//        UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:viewController];
+//        [self presentModalViewController:navController animated:YES];
+    } else if ([title isEqualToString:NSLocalizedString(@"Delete", @"")]) {
+        [GHAPITeamV3 deleteTeamWithID:self.teamID completionHandler:^(NSError *error) {
+            if (error) {
+                [self handleError:error];
+            } else {
+                [[ANNotificationQueue sharedInstance] detatchSuccesNotificationWithTitle:NSLocalizedString(@"Successfully deleted", @"") message:self.team.name];
+                [self.navigationController popViewControllerAnimated:YES];
+            }
+        }];
+    }
+}
+
+#pragma mark - GHActionButtonTableViewController
+
+- (void)downloadDataToDisplayActionButton {
+    [GHAPIOrganizationV3 isUser:[GHAPIAuthenticationManager sharedInstance].authenticatedUser.login administratorInOrganization:self.organization completionHandler:^(BOOL state, NSError *error) {
+        if (error) {
+            [self failedToDownloadDataToDisplayActionButtonWithError:error];
+        } else {
+            _hasAdminData = YES;
+            _isAdmin = state;
+            [self didDownloadDataToDisplayActionButton];
+        }
+    }];
+}
+
+- (UIActionSheet *)actionButtonActionSheet {
+    if (!_isAdmin) {
+        return nil;
+    }
+    
+    UIActionSheet *sheet = [[UIActionSheet alloc] init];
+    sheet.title = self.team.name;
+    NSUInteger currentButtonIndex = 0;
+    
+    [sheet addButtonWithTitle:NSLocalizedString(@"Edit", @"")];
+    currentButtonIndex++;
+    
+    [sheet addButtonWithTitle:NSLocalizedString(@"Delete", @"")];
+    sheet.destructiveButtonIndex = currentButtonIndex;
+    currentButtonIndex++;
+    
+    [sheet addButtonWithTitle:NSLocalizedString(@"Cancel", @"")];
+    sheet.cancelButtonIndex = currentButtonIndex;
+    currentButtonIndex++;
+    
+    sheet.actionSheetStyle = UIActionSheetStyleBlackTranslucent;
+    sheet.delegate = self;
+    
+    return sheet;
+}
+
+- (BOOL)canDisplayActionButton {
+    return YES;
+}
+
+- (BOOL)needsToDownloadDataToDisplayActionButtonActionSheet {
+    return !_hasAdminData;
 }
 
 @end
