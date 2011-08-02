@@ -29,8 +29,6 @@ NSString *const GHAPITeamV3PermissionAdmin = @"admin";
         self.permission = [rawDictionary objectForKeyOrNilOnNullObject:@"permission"];
         self.membersCount = [rawDictionary objectForKeyOrNilOnNullObject:@"members_count"];
         self.reposCount = [rawDictionary objectForKeyOrNilOnNullObject:@"repos_count"];
-        
-        DLog(@"%@", rawDictionary);
     }
     return self;
 }
