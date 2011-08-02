@@ -803,38 +803,6 @@
     return self.dummyCell;
 }
 
-
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    if (indexPath.section == kUITableViewGists && indexPath.row > 0 && self.hasAdministrationRights) {
-        return YES;
-    }
-    return NO;
-}
-
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        if (indexPath.section == kUITableViewGists && indexPath.row > 0) {
-            GHAPIGistV3 *gist = [self.gists objectAtIndex:indexPath.row - 1];
-            
-            [GHAPIGistV3 deleteGistWithID:gist.ID completionHandler:^(NSError *error) {
-                if (error) {
-                    [self handleError:error];
-                    [tableView reloadSections:[NSIndexSet indexSetWithIndex:indexPath.section] 
-                             withRowAnimation:UITableViewRowAnimationNone];
-                } else {
-                    [self.gists removeObjectAtIndex:indexPath.row - 1];
-                    [self cacheGistsHeight];
-                    [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
-                }
-            }];
-        }
-    }  
-}
-
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
