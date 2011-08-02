@@ -50,7 +50,6 @@
     rawDictionary = GHAPIObjectExpectedClass(rawDictionary, NSDictionary.class);
     if ((self = [super init])) {
         // Initialization code
-        self.description = @"";
         self.URL = [rawDictionary objectForKeyOrNilOnNullObject:@"url"];
         self.HTMLURL = [rawDictionary objectForKeyOrNilOnNullObject:@"html_url"];
         self.owner = [[GHAPIUserV3 alloc] initWithRawDictionary:[rawDictionary objectForKeyOrNilOnNullObject:@"owner"]];
@@ -75,6 +74,10 @@
         self.hasIssues = [rawDictionary objectForKeyOrNilOnNullObject:@"has_issues"];
         self.hasWiki = [rawDictionary objectForKeyOrNilOnNullObject:@"has_wiki"];
         self.hasDownloads = [rawDictionary objectForKeyOrNilOnNullObject:@"has_downloads"];
+        
+        if (!_description) {
+            self.description = @"";
+        }
     }
     return self;
 }
