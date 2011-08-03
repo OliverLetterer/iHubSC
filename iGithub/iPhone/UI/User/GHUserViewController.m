@@ -28,20 +28,19 @@
 #define kUITableViewSectionPublicActivity       5
 #define kUITableViewSectionRepositories         6
 #define kUITableViewSectionWatchedRepositories  7
-#define kUITableViewSectionAssignedIssues       8
-#define kUITableViewFollowingUsers              9
-#define kUITableViewFollowedUsers               10
-#define kUITableViewGists                       11
-#define kUITableViewOrganizations               12
-#define kUITableViewSectionPlan                 13
+#define kUITableViewFollowingUsers              8
+#define kUITableViewFollowedUsers               9
+#define kUITableViewGists                       10
+#define kUITableViewOrganizations               11
+#define kUITableViewSectionPlan                 12
 
-#define kUITableViewNumberOfSections            14
+#define kUITableViewNumberOfSections            13
 
 @implementation GHUserViewController
 
 @synthesize repositoriesArray=_repositoriesArray;
 @synthesize username=_username, user=_user;
-@synthesize watchedRepositoriesArray=_watchedRepositoriesArray, followingUsers=_followingUsers, followedUsers=_followedUsers, organizations=_organizations, gists=_gists, assignedIssues=_assignedIssues;
+@synthesize watchedRepositoriesArray=_watchedRepositoriesArray, followingUsers=_followingUsers, followedUsers=_followedUsers, organizations=_organizations, gists=_gists;
 @synthesize lastIndexPathForSingleRepositoryViewController=_lastIndexPathForSingleRepositoryViewController;
 
 #pragma mark - setters and getters
@@ -117,7 +116,6 @@
     self.followedUsers = nil;
     self.organizations = nil;
     self.gists = nil;
-    self.assignedIssues = nil;
     [self.tableView reloadData];
     
     [GHAPIUserV3 userWithName:self.username 
@@ -161,13 +159,6 @@
     return [NSString stringWithFormat:NSLocalizedString(@"on %@\n\n%@", @""), issue.repository, issue.title];
 }
 
-- (void)cacheAssignedIssuesHeight {
-    [self.assignedIssues enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        GHAPIIssueV3 *issue = obj;
-        [self cacheHeight:[GHDescriptionTableViewCell heightWithContent:[self descriptionForAssignedIssue:issue]] forRowAtIndexPath:[NSIndexPath indexPathForRow:idx+1 inSection:kUITableViewSectionAssignedIssues] ];
-    }];
-}
-
 #pragma mark - UIExpandableTableViewDatasource
 
 - (BOOL)tableView:(UIExpandableTableView *)tableView canExpandSection:(NSInteger)section {
@@ -177,8 +168,7 @@
             section == kUITableViewFollowingUsers ||
             section == kUITableViewFollowedUsers ||
             section == kUITableViewOrganizations ||
-            section == kUITableViewGists ||
-            section == kUITableViewSectionAssignedIssues;
+            section == kUITableViewGists;
 }
 
 - (BOOL)tableView:(UIExpandableTableView *)tableView needsToDownloadDataForExpandableSection:(NSInteger)section {
@@ -194,8 +184,6 @@
         return self.organizations == nil;
     } else if (section == kUITableViewGists) {
         return self.gists == nil;
-    } else if (section == kUITableViewSectionAssignedIssues) {
-        return self.assignedIssues == nil;
     }
     return NO;
 }
@@ -223,8 +211,6 @@
         cell.textLabel.text = NSLocalizedString(@"Organizations", @"");
     } else if (section == kUITableViewGists) {
         cell.textLabel.text = NSLocalizedString(@"Gists", @"");
-    } else if (section == kUITableViewSectionAssignedIssues) {
-        cell.textLabel.text = NSLocalizedString(@"Issues assigned to me", @"");
     }
     
     return cell;
@@ -313,19 +299,6 @@
                                                      withRowAnimation:UITableViewRowAnimationAutomatic];
                                    }
                                }];
-    } else if (section == kUITableViewSectionAssignedIssues) {
-        [GHAPIIssueV3 issuesOfAuthenticatedUserOnPage:page 
-                                    completionHandler:^(NSMutableArray *array, NSUInteger nextPage, NSError *error) {
-                                        if (error) {
-                                            [self handleError:error];
-                                        } else {
-                                            [self.assignedIssues addObjectsFromArray:array];
-                                            [self cacheAssignedIssuesHeight];
-                                            [self setNextPage:nextPage forSection:section];
-                                            [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:section] 
-                                                          withRowAnimation:UITableViewRowAnimationAutomatic];
-                                        }
-                                    }];
     }
 }
 
@@ -408,18 +381,6 @@
                        [tableView expandSection:section animated:YES];
                    }
                }];
-    } else if (section == kUITableViewSectionAssignedIssues) {
-        [GHAPIIssueV3 issuesOfAuthenticatedUserOnPage:1 
-                                    completionHandler:^(NSMutableArray *array, NSUInteger nextPage, NSError *error) {
-                                        if (error) {
-                                            [self handleError:error];
-                                        } else {
-                                            self.assignedIssues = array;
-                                            [self cacheAssignedIssuesHeight];
-                                            [self setNextPage:nextPage forSection:section];
-                                            [tableView expandSection:section animated:YES];
-                                        }
-                                    }];
     }
 }
 
@@ -477,12 +438,6 @@
         return [self.organizations count] + 1;
     } else if (section == kUITableViewGists) {
         return self.gists.count + 1;
-    } else if (section == kUITableViewSectionAssignedIssues) {
-        if (![self.username isEqualToString:[GHAPIAuthenticationManager sharedInstance].authenticatedUser.login]) {
-            return 0;
-        } else {
-            return self.assignedIssues.count+1;
-        }
     }
     return result;
 }
@@ -744,26 +699,6 @@
         }
         
         return cell;
-    } else if (indexPath.section == kUITableViewSectionAssignedIssues) {
-        static NSString *CellIdentifier = @"GHFeedItemWithDescriptionTableViewCell";
-        
-        GHDescriptionTableViewCell *cell = (GHDescriptionTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-        if (cell == nil) {
-            cell = [[GHDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-        }
-        
-        GHAPIIssueV3 *issue = [self.assignedIssues objectAtIndex:indexPath.row - 1];
-        
-        cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Issue %@", @""), issue.number];
-        
-        [self updateImageView:cell.imageView atIndexPath:indexPath withAvatarURLString:issue.user.avatarURL];
-        
-        cell.detailTextLabel.text = [NSString stringWithFormat:@"by %@ %@", issue.user.login, [NSString stringWithFormat:NSLocalizedString(@"%@ ago", @""), issue.createdAt.prettyTimeIntervalSinceNow]];
-        ;
-        
-        cell.descriptionLabel.text = [self descriptionForAssignedIssue:issue];
-        
-        return cell;
     }
     
     return self.dummyCell;
@@ -815,11 +750,6 @@
         
         GHGistViewController *gistViewController = [[GHGistViewController alloc] initWithID:gist.ID];
         [self.navigationController pushViewController:gistViewController animated:YES];
-    } else if (indexPath.section == kUITableViewSectionAssignedIssues) {
-        GHAPIIssueV3 *issue = [self.assignedIssues objectAtIndex:indexPath.row - 1];
-        GHIssueViewController *viewController = [[GHIssueViewController alloc] initWithRepository:issue.repository 
-                                                                                                         issueNumber:issue.number];
-        [self.navigationController pushViewController:viewController animated:YES];
     } else {
         [self.tableView deselectRowAtIndexPath:indexPath animated:NO];
     }
@@ -847,11 +777,6 @@
         // watched repo
         return [self cachedHeightForRowAtIndexPath:indexPath];
     } else if (indexPath.section == kUITableViewGists) {
-        if (indexPath.row == 0) {
-            return 44.0f;
-        }
-        return [self cachedHeightForRowAtIndexPath:indexPath];
-    } else if (indexPath.section == kUITableViewSectionAssignedIssues) {
         if (indexPath.row == 0) {
             return 44.0f;
         }
@@ -910,7 +835,6 @@
     [encoder encodeObject:_organizations forKey:@"organizations"];
     [encoder encodeObject:_followedUsers forKey:@"followedUsers"];
     [encoder encodeObject:_gists forKey:@"gists"];
-    [encoder encodeObject:_assignedIssues forKey:@"assignedIssues"];
     [encoder encodeBool:_hasFollowingData forKey:@"hasFollowingData"];
     [encoder encodeBool:_isFollowingUser forKey:@"isFollowingUser"];
     [encoder encodeObject:_lastIndexPathForSingleRepositoryViewController forKey:@"lastIndexPathForSingleRepositoryViewController"];
@@ -926,7 +850,6 @@
         _organizations = [decoder decodeObjectForKey:@"organizations"];
         _followedUsers = [decoder decodeObjectForKey:@"followedUsers"];
         _gists = [decoder decodeObjectForKey:@"gists"];
-        _assignedIssues = [decoder decodeObjectForKey:@"assignedIssues"];
         _hasFollowingData = [decoder decodeBoolForKey:@"hasFollowingData"];
         _isFollowingUser = [decoder decodeBoolForKey:@"isFollowingUser"];
         _lastIndexPathForSingleRepositoryViewController = [decoder decodeObjectForKey:@"lastIndexPathForSingleRepositoryViewController"];
