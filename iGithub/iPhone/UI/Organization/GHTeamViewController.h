@@ -22,6 +22,7 @@
     
     BOOL _hasAdminData;
     BOOL _isAdmin;
+    BOOL _canEditTeam;
 }
 
 @property (nonatomic, retain) GHAPITeamV3 *team;

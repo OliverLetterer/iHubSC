@@ -277,6 +277,12 @@
         GHEditTeamViewController *viewController = [[GHEditTeamViewController alloc] initWithTeam:self.team organization:self.organization];
         viewController.delegate = self;
         
+        if (_isAdmin) {
+            viewController.permission = GHEditTeamViewControllerEditingPermissionAll;
+        } else {
+            viewController.permission = GHEditTeamViewControllerEditingPermissionMembers;
+        }
+        
         UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:viewController];
         [self presentModalViewController:navController animated:YES];
     } else if ([title isEqualToString:NSLocalizedString(@"Delete", @"")]) {
@@ -294,19 +300,30 @@
 #pragma mark - GHActionButtonTableViewController
 
 - (void)downloadDataToDisplayActionButton {
-    [GHAPIOrganizationV3 isUser:[GHAPIAuthenticationManager sharedInstance].authenticatedUser.login administratorInOrganization:self.organization completionHandler:^(BOOL state, NSError *error) {
+    NSString *username = [GHAPIAuthenticationManager sharedInstance].authenticatedUser.login;
+    [GHAPIOrganizationV3 isUser:username administratorInOrganization:self.organization completionHandler:^(BOOL state, NSError *error) {
         if (error) {
             [self failedToDownloadDataToDisplayActionButtonWithError:error];
         } else {
-            _hasAdminData = YES;
             _isAdmin = state;
-            [self didDownloadDataToDisplayActionButton];
+            if ([self.team.permission isEqualToString:GHAPITeamV3PermissionAdmin]) {
+                [GHAPITeamV3 isUser:username memberInTeamByID:self.teamID 
+                  completionHandler:^(BOOL state, NSError *error) {
+                      if (error) {
+                          [self failedToDownloadDataToDisplayActionButtonWithError:error];
+                      } else {
+                          _hasAdminData = YES;
+                          _canEditTeam = state;
+                          [self didDownloadDataToDisplayActionButton];
+                      }
+                  }];
+            }
         }
     }];
 }
 
 - (UIActionSheet *)actionButtonActionSheet {
-    if (!_isAdmin) {
+    if (!_isAdmin && !_canEditTeam) {
         return nil;
     }
     
@@ -317,9 +334,11 @@
     [sheet addButtonWithTitle:NSLocalizedString(@"Edit", @"")];
     currentButtonIndex++;
     
-    [sheet addButtonWithTitle:NSLocalizedString(@"Delete", @"")];
-    sheet.destructiveButtonIndex = currentButtonIndex;
-    currentButtonIndex++;
+    if (_isAdmin) {
+        [sheet addButtonWithTitle:NSLocalizedString(@"Delete", @"")];
+        sheet.destructiveButtonIndex = currentButtonIndex;
+        currentButtonIndex++;
+    }
     
     [sheet addButtonWithTitle:NSLocalizedString(@"Cancel", @"")];
     sheet.cancelButtonIndex = currentButtonIndex;

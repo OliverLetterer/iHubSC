@@ -10,7 +10,19 @@
 
 
 @implementation GHEditTeamViewController
-@synthesize team=_team;
+@synthesize team=_team, permission=_permission;
+
+#pragma mark - setters and getters
+
+- (void)setPermission:(GHEditTeamViewControllerEditingPermission)permission {
+    if (permission != _permission) {
+        _permission = permission;
+        
+        if (self.isViewLoaded) {
+            [self.tableView reloadData];
+        }
+    }
+}
 
 #pragma mark - Initialization
 
@@ -61,6 +73,15 @@
     return [super numberOfSectionsInTableView:tableView];
 }
 
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    if (_permission == GHEditTeamViewControllerEditingPermissionMembers) {
+        if (section != kGHCreateTeamViewControllerTableViewSectionMembers) {
+            return 0;
+        }
+    }
+    return [super tableView:tableView numberOfRowsInSection:section];
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [super tableView:tableView cellForRowAtIndexPath:indexPath];
     
@@ -97,14 +118,24 @@
         name = cell.textField.text;
     }
     
-    [GHAPITeamV3 updateTeamWithID:self.team.ID teamMembers:_selectedMembers repositories:_selectedRepositories permission:_selectedPermission
-                             name:name completionHandler:^(GHAPITeamV3 *team, NSError *error) {
-                                 if (error) {
-                                     [self handleError:error];
-                                 } else {
-                                     [self.delegate createTeamViewController:self didCreateTeam:team];
-                                 }
-                             }];
+    if (_permission == GHEditTeamViewControllerEditingPermissionMembers) {
+        [GHAPITeamV3 updateTeamWithID:self.team.ID setTeamMembers:_selectedMembers completionHandler:^(NSError *error) {
+            if (error) {
+                [self handleError:error];
+            } else {
+                [self.delegate createTeamViewController:self didCreateTeam:self.team];
+            }
+        }];
+    } else if (_permission == GHEditTeamViewControllerEditingPermissionAll) {
+        [GHAPITeamV3 updateTeamWithID:self.team.ID teamMembers:_selectedMembers repositories:_selectedRepositories permission:_selectedPermission
+                                 name:name completionHandler:^(GHAPITeamV3 *team, NSError *error) {
+                                     if (error) {
+                                         [self handleError:error];
+                                     } else {
+                                         [self.delegate createTeamViewController:self didCreateTeam:team];
+                                     }
+                                 }];
+    }
 }
 
 @end
