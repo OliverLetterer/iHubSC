@@ -58,10 +58,6 @@
 
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-    if (_advancedNavigationController.delegate == self) {
-        _advancedNavigationController.delegate = nil;
-    }
-    
 }
 
 #pragma mark - Serialization
