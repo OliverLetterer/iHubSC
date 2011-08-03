@@ -100,6 +100,10 @@
 		A757982F13E1C1D5008670B0 /* GHTableViewAlertViewTableViewBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = A757982913E1C1D5008670B0 /* GHTableViewAlertViewTableViewBackgroundView.m */; };
 		A757983013E1C1D5008670B0 /* GHTableViewAlertViewTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A757982B13E1C1D5008670B0 /* GHTableViewAlertViewTableViewCell.m */; };
 		A76C011913E9D022005E26C4 /* GHAlertViewOverlayImage@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A76C011813E9D022005E26C4 /* GHAlertViewOverlayImage@2x.png */; };
+		A76C011E13E9D3DD005E26C4 /* compass in Resources */ = {isa = PBXBuildFile; fileRef = A76C011A13E9D3DD005E26C4 /* compass */; };
+		A76C011F13E9D3DD005E26C4 /* scripts in Resources */ = {isa = PBXBuildFile; fileRef = A76C011B13E9D3DD005E26C4 /* scripts */; };
+		A76C012013E9D3DD005E26C4 /* src in Resources */ = {isa = PBXBuildFile; fileRef = A76C011C13E9D3DD005E26C4 /* src */; };
+		A76C012113E9D3DD005E26C4 /* styles in Resources */ = {isa = PBXBuildFile; fileRef = A76C011D13E9D3DD005E26C4 /* styles */; };
 		A7841C6F13E1849200131648 /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841C6E13E1849200131648 /* JSONKit.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		A7841CAF13E1853200131648 /* CGUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841C7213E1853200131648 /* CGUtils.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		A7841CB413E1853200131648 /* DTAttributedTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841C7C13E1853200131648 /* DTAttributedTextView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -197,42 +201,6 @@
 		A7841DBA13E18E2E00131648 /* 145-persondot@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A7841D7B13E18E2D00131648 /* 145-persondot@2x.png */; };
 		A7841DBB13E18E2E00131648 /* 56-feed.png in Resources */ = {isa = PBXBuildFile; fileRef = A7841D7C13E18E2D00131648 /* 56-feed.png */; };
 		A7841DBC13E18E2E00131648 /* 56-feed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A7841D7D13E18E2D00131648 /* 56-feed@2x.png */; };
-		A7841E0713E1902600131648 /* _theme_template.scss in Resources */ = {isa = PBXBuildFile; fileRef = A7841DC113E1902500131648 /* _theme_template.scss */; };
-		A7841E0813E1902600131648 /* config.rb in Resources */ = {isa = PBXBuildFile; fileRef = A7841DC213E1902500131648 /* config.rb */; };
-		A7841E0913E1902600131648 /* shCore.scss in Resources */ = {isa = PBXBuildFile; fileRef = A7841DC313E1902500131648 /* shCore.scss */; };
-		A7841E0A13E1902600131648 /* shCoreDefault.scss in Resources */ = {isa = PBXBuildFile; fileRef = A7841DC413E1902500131648 /* shCoreDefault.scss */; };
-		A7841E0B13E1902600131648 /* shCoreDjango.scss in Resources */ = {isa = PBXBuildFile; fileRef = A7841DC513E1902500131648 /* shCoreDjango.scss */; };
-		A7841E0C13E1902600131648 /* shCoreEclipse.scss in Resources */ = {isa = PBXBuildFile; fileRef = A7841DC613E1902500131648 /* shCoreEclipse.scss */; };
-		A7841E0D13E1902600131648 /* shCoreEmacs.scss in Resources */ = {isa = PBXBuildFile; fileRef = A7841DC713E1902600131648 /* shCoreEmacs.scss */; };
-		A7841E0E13E1902600131648 /* shCoreFadeToGrey.scss in Resources */ = {isa = PBXBuildFile; fileRef = A7841DC813E1902600131648 /* shCoreFadeToGrey.scss */; };
-		A7841E0F13E1902600131648 /* shCoreMDUltra.scss in Resources */ = {isa = PBXBuildFile; fileRef = A7841DC913E1902600131648 /* shCoreMDUltra.scss */; };
-		A7841E1013E1902600131648 /* shCoreMidnight.scss in Resources */ = {isa = PBXBuildFile; fileRef = A7841DCA13E1902600131648 /* shCoreMidnight.scss */; };
-		A7841E1113E1902600131648 /* shCoreRDark.scss in Resources */ = {isa = PBXBuildFile; fileRef = A7841DCB13E1902600131648 /* shCoreRDark.scss */; };
-		A7841E1213E1902600131648 /* shThemeDefault.scss in Resources */ = {isa = PBXBuildFile; fileRef = A7841DCC13E1902600131648 /* shThemeDefault.scss */; };
-		A7841E1313E1902600131648 /* shThemeDjango.scss in Resources */ = {isa = PBXBuildFile; fileRef = A7841DCD13E1902600131648 /* shThemeDjango.scss */; };
-		A7841E1413E1902600131648 /* shThemeEclipse.scss in Resources */ = {isa = PBXBuildFile; fileRef = A7841DCE13E1902600131648 /* shThemeEclipse.scss */; };
-		A7841E1513E1902600131648 /* shThemeEmacs.scss in Resources */ = {isa = PBXBuildFile; fileRef = A7841DCF13E1902600131648 /* shThemeEmacs.scss */; };
-		A7841E1613E1902600131648 /* shThemeFadeToGrey.scss in Resources */ = {isa = PBXBuildFile; fileRef = A7841DD013E1902600131648 /* shThemeFadeToGrey.scss */; };
-		A7841E1713E1902600131648 /* shThemeMDUltra.scss in Resources */ = {isa = PBXBuildFile; fileRef = A7841DD113E1902600131648 /* shThemeMDUltra.scss */; };
-		A7841E1813E1902600131648 /* shThemeMidnight.scss in Resources */ = {isa = PBXBuildFile; fileRef = A7841DD213E1902600131648 /* shThemeMidnight.scss */; };
-		A7841E1913E1902600131648 /* shThemeRDark.scss in Resources */ = {isa = PBXBuildFile; fileRef = A7841DD313E1902600131648 /* shThemeRDark.scss */; };
-		A7841E3913E1902600131648 /* shCore.css in Resources */ = {isa = PBXBuildFile; fileRef = A7841DF613E1902600131648 /* shCore.css */; };
-		A7841E3A13E1902600131648 /* shCoreDefault.css in Resources */ = {isa = PBXBuildFile; fileRef = A7841DF713E1902600131648 /* shCoreDefault.css */; };
-		A7841E3B13E1902600131648 /* shCoreDjango.css in Resources */ = {isa = PBXBuildFile; fileRef = A7841DF813E1902600131648 /* shCoreDjango.css */; };
-		A7841E3C13E1902600131648 /* shCoreEclipse.css in Resources */ = {isa = PBXBuildFile; fileRef = A7841DF913E1902600131648 /* shCoreEclipse.css */; };
-		A7841E3D13E1902600131648 /* shCoreEmacs.css in Resources */ = {isa = PBXBuildFile; fileRef = A7841DFA13E1902600131648 /* shCoreEmacs.css */; };
-		A7841E3E13E1902600131648 /* shCoreFadeToGrey.css in Resources */ = {isa = PBXBuildFile; fileRef = A7841DFB13E1902600131648 /* shCoreFadeToGrey.css */; };
-		A7841E3F13E1902600131648 /* shCoreMDUltra.css in Resources */ = {isa = PBXBuildFile; fileRef = A7841DFC13E1902600131648 /* shCoreMDUltra.css */; };
-		A7841E4013E1902600131648 /* shCoreMidnight.css in Resources */ = {isa = PBXBuildFile; fileRef = A7841DFD13E1902600131648 /* shCoreMidnight.css */; };
-		A7841E4113E1902600131648 /* shCoreRDark.css in Resources */ = {isa = PBXBuildFile; fileRef = A7841DFE13E1902600131648 /* shCoreRDark.css */; };
-		A7841E4213E1902600131648 /* shThemeDefault.css in Resources */ = {isa = PBXBuildFile; fileRef = A7841DFF13E1902600131648 /* shThemeDefault.css */; };
-		A7841E4313E1902600131648 /* shThemeDjango.css in Resources */ = {isa = PBXBuildFile; fileRef = A7841E0013E1902600131648 /* shThemeDjango.css */; };
-		A7841E4413E1902600131648 /* shThemeEclipse.css in Resources */ = {isa = PBXBuildFile; fileRef = A7841E0113E1902600131648 /* shThemeEclipse.css */; };
-		A7841E4513E1902600131648 /* shThemeEmacs.css in Resources */ = {isa = PBXBuildFile; fileRef = A7841E0213E1902600131648 /* shThemeEmacs.css */; };
-		A7841E4613E1902600131648 /* shThemeFadeToGrey.css in Resources */ = {isa = PBXBuildFile; fileRef = A7841E0313E1902600131648 /* shThemeFadeToGrey.css */; };
-		A7841E4713E1902600131648 /* shThemeMDUltra.css in Resources */ = {isa = PBXBuildFile; fileRef = A7841E0413E1902600131648 /* shThemeMDUltra.css */; };
-		A7841E4813E1902600131648 /* shThemeMidnight.css in Resources */ = {isa = PBXBuildFile; fileRef = A7841E0513E1902600131648 /* shThemeMidnight.css */; };
-		A7841E4913E1902600131648 /* shThemeRDark.css in Resources */ = {isa = PBXBuildFile; fileRef = A7841E0613E1902600131648 /* shThemeRDark.css */; };
 		A7841E4F13E1905200131648 /* ANNotificationErrorImage.png in Resources */ = {isa = PBXBuildFile; fileRef = A7841E4B13E1905200131648 /* ANNotificationErrorImage.png */; };
 		A7841E5013E1905200131648 /* ANNotificationErrorImage@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A7841E4C13E1905200131648 /* ANNotificationErrorImage@2x.png */; };
 		A7841E5113E1905200131648 /* ANNotificationSuccessImage.png in Resources */ = {isa = PBXBuildFile; fileRef = A7841E4D13E1905200131648 /* ANNotificationSuccessImage.png */; };
@@ -610,6 +578,10 @@
 		A757982A13E1C1D5008670B0 /* GHTableViewAlertViewTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHTableViewAlertViewTableViewCell.h; sourceTree = "<group>"; };
 		A757982B13E1C1D5008670B0 /* GHTableViewAlertViewTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHTableViewAlertViewTableViewCell.m; sourceTree = "<group>"; };
 		A76C011813E9D022005E26C4 /* GHAlertViewOverlayImage@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GHAlertViewOverlayImage@2x.png"; sourceTree = "<group>"; };
+		A76C011A13E9D3DD005E26C4 /* compass */ = {isa = PBXFileReference; lastKnownFileType = folder; path = compass; sourceTree = "<group>"; };
+		A76C011B13E9D3DD005E26C4 /* scripts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = scripts; sourceTree = "<group>"; };
+		A76C011C13E9D3DD005E26C4 /* src */ = {isa = PBXFileReference; lastKnownFileType = folder; path = src; sourceTree = "<group>"; };
+		A76C011D13E9D3DD005E26C4 /* styles */ = {isa = PBXFileReference; lastKnownFileType = folder; path = styles; sourceTree = "<group>"; };
 		A7841C6D13E1849200131648 /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JSONKit.h; path = Submodules/JSONKit/JSONKit.h; sourceTree = "<group>"; };
 		A7841C6E13E1849200131648 /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JSONKit.m; path = Submodules/JSONKit/JSONKit.m; sourceTree = "<group>"; };
 		A7841C7113E1853200131648 /* CGUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CGUtils.h; path = "Submodules/NSAttributedString-Additions-for-HTML/Classes/CGUtils.h"; sourceTree = SOURCE_ROOT; };
@@ -755,73 +727,6 @@
 		A7841D7C13E18E2D00131648 /* 56-feed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "56-feed.png"; sourceTree = "<group>"; };
 		A7841D7D13E18E2D00131648 /* 56-feed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "56-feed@2x.png"; sourceTree = "<group>"; };
 		A7841D7E13E18E2D00131648 /* TODO.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TODO.txt; sourceTree = "<group>"; };
-		A7841DC113E1902500131648 /* _theme_template.scss */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = _theme_template.scss; sourceTree = "<group>"; };
-		A7841DC213E1902500131648 /* config.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = config.rb; sourceTree = "<group>"; };
-		A7841DC313E1902500131648 /* shCore.scss */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = shCore.scss; sourceTree = "<group>"; };
-		A7841DC413E1902500131648 /* shCoreDefault.scss */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = shCoreDefault.scss; sourceTree = "<group>"; };
-		A7841DC513E1902500131648 /* shCoreDjango.scss */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = shCoreDjango.scss; sourceTree = "<group>"; };
-		A7841DC613E1902500131648 /* shCoreEclipse.scss */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = shCoreEclipse.scss; sourceTree = "<group>"; };
-		A7841DC713E1902600131648 /* shCoreEmacs.scss */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = shCoreEmacs.scss; sourceTree = "<group>"; };
-		A7841DC813E1902600131648 /* shCoreFadeToGrey.scss */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = shCoreFadeToGrey.scss; sourceTree = "<group>"; };
-		A7841DC913E1902600131648 /* shCoreMDUltra.scss */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = shCoreMDUltra.scss; sourceTree = "<group>"; };
-		A7841DCA13E1902600131648 /* shCoreMidnight.scss */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = shCoreMidnight.scss; sourceTree = "<group>"; };
-		A7841DCB13E1902600131648 /* shCoreRDark.scss */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = shCoreRDark.scss; sourceTree = "<group>"; };
-		A7841DCC13E1902600131648 /* shThemeDefault.scss */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = shThemeDefault.scss; sourceTree = "<group>"; };
-		A7841DCD13E1902600131648 /* shThemeDjango.scss */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = shThemeDjango.scss; sourceTree = "<group>"; };
-		A7841DCE13E1902600131648 /* shThemeEclipse.scss */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = shThemeEclipse.scss; sourceTree = "<group>"; };
-		A7841DCF13E1902600131648 /* shThemeEmacs.scss */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = shThemeEmacs.scss; sourceTree = "<group>"; };
-		A7841DD013E1902600131648 /* shThemeFadeToGrey.scss */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = shThemeFadeToGrey.scss; sourceTree = "<group>"; };
-		A7841DD113E1902600131648 /* shThemeMDUltra.scss */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = shThemeMDUltra.scss; sourceTree = "<group>"; };
-		A7841DD213E1902600131648 /* shThemeMidnight.scss */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = shThemeMidnight.scss; sourceTree = "<group>"; };
-		A7841DD313E1902600131648 /* shThemeRDark.scss */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = shThemeRDark.scss; sourceTree = "<group>"; };
-		A7841DD513E1902600131648 /* shAutoloader.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = shAutoloader.js; sourceTree = "<group>"; };
-		A7841DD613E1902600131648 /* shBrushAppleScript.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = shBrushAppleScript.js; sourceTree = "<group>"; };
-		A7841DD713E1902600131648 /* shBrushAS3.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = shBrushAS3.js; sourceTree = "<group>"; };
-		A7841DD813E1902600131648 /* shBrushBash.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = shBrushBash.js; sourceTree = "<group>"; };
-		A7841DD913E1902600131648 /* shBrushColdFusion.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = shBrushColdFusion.js; sourceTree = "<group>"; };
-		A7841DDA13E1902600131648 /* shBrushCpp.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = shBrushCpp.js; sourceTree = "<group>"; };
-		A7841DDB13E1902600131648 /* shBrushCSharp.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = shBrushCSharp.js; sourceTree = "<group>"; };
-		A7841DDC13E1902600131648 /* shBrushCss.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = shBrushCss.js; sourceTree = "<group>"; };
-		A7841DDD13E1902600131648 /* shBrushDelphi.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = shBrushDelphi.js; sourceTree = "<group>"; };
-		A7841DDE13E1902600131648 /* shBrushDiff.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = shBrushDiff.js; sourceTree = "<group>"; };
-		A7841DDF13E1902600131648 /* shBrushErlang.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = shBrushErlang.js; sourceTree = "<group>"; };
-		A7841DE013E1902600131648 /* shBrushGroovy.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = shBrushGroovy.js; sourceTree = "<group>"; };
-		A7841DE113E1902600131648 /* shBrushJava.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = shBrushJava.js; sourceTree = "<group>"; };
-		A7841DE213E1902600131648 /* shBrushJavaFX.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = shBrushJavaFX.js; sourceTree = "<group>"; };
-		A7841DE313E1902600131648 /* shBrushJScript.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = shBrushJScript.js; sourceTree = "<group>"; };
-		A7841DE413E1902600131648 /* shBrushPerl.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = shBrushPerl.js; sourceTree = "<group>"; };
-		A7841DE513E1902600131648 /* shBrushPhp.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = shBrushPhp.js; sourceTree = "<group>"; };
-		A7841DE613E1902600131648 /* shBrushPlain.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = shBrushPlain.js; sourceTree = "<group>"; };
-		A7841DE713E1902600131648 /* shBrushPowerShell.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = shBrushPowerShell.js; sourceTree = "<group>"; };
-		A7841DE813E1902600131648 /* shBrushPython.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = shBrushPython.js; sourceTree = "<group>"; };
-		A7841DE913E1902600131648 /* shBrushRuby.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = shBrushRuby.js; sourceTree = "<group>"; };
-		A7841DEA13E1902600131648 /* shBrushSass.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = shBrushSass.js; sourceTree = "<group>"; };
-		A7841DEB13E1902600131648 /* shBrushScala.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = shBrushScala.js; sourceTree = "<group>"; };
-		A7841DEC13E1902600131648 /* shBrushSql.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = shBrushSql.js; sourceTree = "<group>"; };
-		A7841DED13E1902600131648 /* shBrushVb.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = shBrushVb.js; sourceTree = "<group>"; };
-		A7841DEE13E1902600131648 /* shBrushXml.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = shBrushXml.js; sourceTree = "<group>"; };
-		A7841DEF13E1902600131648 /* shCore.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = shCore.js; sourceTree = "<group>"; };
-		A7841DF013E1902600131648 /* shLegacy.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = shLegacy.js; sourceTree = "<group>"; };
-		A7841DF213E1902600131648 /* shAutoloader.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = shAutoloader.js; sourceTree = "<group>"; };
-		A7841DF313E1902600131648 /* shCore.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = shCore.js; sourceTree = "<group>"; };
-		A7841DF413E1902600131648 /* shLegacy.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = shLegacy.js; sourceTree = "<group>"; };
-		A7841DF613E1902600131648 /* shCore.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = shCore.css; sourceTree = "<group>"; };
-		A7841DF713E1902600131648 /* shCoreDefault.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = shCoreDefault.css; sourceTree = "<group>"; };
-		A7841DF813E1902600131648 /* shCoreDjango.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = shCoreDjango.css; sourceTree = "<group>"; };
-		A7841DF913E1902600131648 /* shCoreEclipse.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = shCoreEclipse.css; sourceTree = "<group>"; };
-		A7841DFA13E1902600131648 /* shCoreEmacs.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = shCoreEmacs.css; sourceTree = "<group>"; };
-		A7841DFB13E1902600131648 /* shCoreFadeToGrey.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = shCoreFadeToGrey.css; sourceTree = "<group>"; };
-		A7841DFC13E1902600131648 /* shCoreMDUltra.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = shCoreMDUltra.css; sourceTree = "<group>"; };
-		A7841DFD13E1902600131648 /* shCoreMidnight.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = shCoreMidnight.css; sourceTree = "<group>"; };
-		A7841DFE13E1902600131648 /* shCoreRDark.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = shCoreRDark.css; sourceTree = "<group>"; };
-		A7841DFF13E1902600131648 /* shThemeDefault.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = shThemeDefault.css; sourceTree = "<group>"; };
-		A7841E0013E1902600131648 /* shThemeDjango.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = shThemeDjango.css; sourceTree = "<group>"; };
-		A7841E0113E1902600131648 /* shThemeEclipse.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = shThemeEclipse.css; sourceTree = "<group>"; };
-		A7841E0213E1902600131648 /* shThemeEmacs.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = shThemeEmacs.css; sourceTree = "<group>"; };
-		A7841E0313E1902600131648 /* shThemeFadeToGrey.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = shThemeFadeToGrey.css; sourceTree = "<group>"; };
-		A7841E0413E1902600131648 /* shThemeMDUltra.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = shThemeMDUltra.css; sourceTree = "<group>"; };
-		A7841E0513E1902600131648 /* shThemeMidnight.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = shThemeMidnight.css; sourceTree = "<group>"; };
-		A7841E0613E1902600131648 /* shThemeRDark.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = shThemeRDark.css; sourceTree = "<group>"; };
 		A7841E4B13E1905200131648 /* ANNotificationErrorImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ANNotificationErrorImage.png; sourceTree = "<group>"; };
 		A7841E4C13E1905200131648 /* ANNotificationErrorImage@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ANNotificationErrorImage@2x.png"; sourceTree = "<group>"; };
 		A7841E4D13E1905200131648 /* ANNotificationSuccessImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ANNotificationSuccessImage.png; sourceTree = "<group>"; };
@@ -2074,107 +1979,12 @@
 		A7841DBF13E1902500131648 /* SyntaxHighlighting */ = {
 			isa = PBXGroup;
 			children = (
-				A7841DC013E1902500131648 /* compass */,
-				A7841DD413E1902600131648 /* scripts */,
-				A7841DF113E1902600131648 /* src */,
-				A7841DF513E1902600131648 /* styles */,
+				A76C011A13E9D3DD005E26C4 /* compass */,
+				A76C011B13E9D3DD005E26C4 /* scripts */,
+				A76C011C13E9D3DD005E26C4 /* src */,
+				A76C011D13E9D3DD005E26C4 /* styles */,
 			);
 			path = SyntaxHighlighting;
-			sourceTree = "<group>";
-		};
-		A7841DC013E1902500131648 /* compass */ = {
-			isa = PBXGroup;
-			children = (
-				A7841DC113E1902500131648 /* _theme_template.scss */,
-				A7841DC213E1902500131648 /* config.rb */,
-				A7841DC313E1902500131648 /* shCore.scss */,
-				A7841DC413E1902500131648 /* shCoreDefault.scss */,
-				A7841DC513E1902500131648 /* shCoreDjango.scss */,
-				A7841DC613E1902500131648 /* shCoreEclipse.scss */,
-				A7841DC713E1902600131648 /* shCoreEmacs.scss */,
-				A7841DC813E1902600131648 /* shCoreFadeToGrey.scss */,
-				A7841DC913E1902600131648 /* shCoreMDUltra.scss */,
-				A7841DCA13E1902600131648 /* shCoreMidnight.scss */,
-				A7841DCB13E1902600131648 /* shCoreRDark.scss */,
-				A7841DCC13E1902600131648 /* shThemeDefault.scss */,
-				A7841DCD13E1902600131648 /* shThemeDjango.scss */,
-				A7841DCE13E1902600131648 /* shThemeEclipse.scss */,
-				A7841DCF13E1902600131648 /* shThemeEmacs.scss */,
-				A7841DD013E1902600131648 /* shThemeFadeToGrey.scss */,
-				A7841DD113E1902600131648 /* shThemeMDUltra.scss */,
-				A7841DD213E1902600131648 /* shThemeMidnight.scss */,
-				A7841DD313E1902600131648 /* shThemeRDark.scss */,
-			);
-			path = compass;
-			sourceTree = "<group>";
-		};
-		A7841DD413E1902600131648 /* scripts */ = {
-			isa = PBXGroup;
-			children = (
-				A7841DD513E1902600131648 /* shAutoloader.js */,
-				A7841DD613E1902600131648 /* shBrushAppleScript.js */,
-				A7841DD713E1902600131648 /* shBrushAS3.js */,
-				A7841DD813E1902600131648 /* shBrushBash.js */,
-				A7841DD913E1902600131648 /* shBrushColdFusion.js */,
-				A7841DDA13E1902600131648 /* shBrushCpp.js */,
-				A7841DDB13E1902600131648 /* shBrushCSharp.js */,
-				A7841DDC13E1902600131648 /* shBrushCss.js */,
-				A7841DDD13E1902600131648 /* shBrushDelphi.js */,
-				A7841DDE13E1902600131648 /* shBrushDiff.js */,
-				A7841DDF13E1902600131648 /* shBrushErlang.js */,
-				A7841DE013E1902600131648 /* shBrushGroovy.js */,
-				A7841DE113E1902600131648 /* shBrushJava.js */,
-				A7841DE213E1902600131648 /* shBrushJavaFX.js */,
-				A7841DE313E1902600131648 /* shBrushJScript.js */,
-				A7841DE413E1902600131648 /* shBrushPerl.js */,
-				A7841DE513E1902600131648 /* shBrushPhp.js */,
-				A7841DE613E1902600131648 /* shBrushPlain.js */,
-				A7841DE713E1902600131648 /* shBrushPowerShell.js */,
-				A7841DE813E1902600131648 /* shBrushPython.js */,
-				A7841DE913E1902600131648 /* shBrushRuby.js */,
-				A7841DEA13E1902600131648 /* shBrushSass.js */,
-				A7841DEB13E1902600131648 /* shBrushScala.js */,
-				A7841DEC13E1902600131648 /* shBrushSql.js */,
-				A7841DED13E1902600131648 /* shBrushVb.js */,
-				A7841DEE13E1902600131648 /* shBrushXml.js */,
-				A7841DEF13E1902600131648 /* shCore.js */,
-				A7841DF013E1902600131648 /* shLegacy.js */,
-			);
-			path = scripts;
-			sourceTree = "<group>";
-		};
-		A7841DF113E1902600131648 /* src */ = {
-			isa = PBXGroup;
-			children = (
-				A7841DF213E1902600131648 /* shAutoloader.js */,
-				A7841DF313E1902600131648 /* shCore.js */,
-				A7841DF413E1902600131648 /* shLegacy.js */,
-			);
-			path = src;
-			sourceTree = "<group>";
-		};
-		A7841DF513E1902600131648 /* styles */ = {
-			isa = PBXGroup;
-			children = (
-				A7841DF613E1902600131648 /* shCore.css */,
-				A7841DF713E1902600131648 /* shCoreDefault.css */,
-				A7841DF813E1902600131648 /* shCoreDjango.css */,
-				A7841DF913E1902600131648 /* shCoreEclipse.css */,
-				A7841DFA13E1902600131648 /* shCoreEmacs.css */,
-				A7841DFB13E1902600131648 /* shCoreFadeToGrey.css */,
-				A7841DFC13E1902600131648 /* shCoreMDUltra.css */,
-				A7841DFD13E1902600131648 /* shCoreMidnight.css */,
-				A7841DFE13E1902600131648 /* shCoreRDark.css */,
-				A7841DFF13E1902600131648 /* shThemeDefault.css */,
-				A7841E0013E1902600131648 /* shThemeDjango.css */,
-				A7841E0113E1902600131648 /* shThemeEclipse.css */,
-				A7841E0213E1902600131648 /* shThemeEmacs.css */,
-				A7841E0313E1902600131648 /* shThemeFadeToGrey.css */,
-				A7841E0413E1902600131648 /* shThemeMDUltra.css */,
-				A7841E0513E1902600131648 /* shThemeMidnight.css */,
-				A7841E0613E1902600131648 /* shThemeRDark.css */,
-			);
-			path = styles;
 			sourceTree = "<group>";
 		};
 		A7841E4A13E1905200131648 /* ANNotificationQueue */ = {
@@ -3603,42 +3413,6 @@
 				A7841DBA13E18E2E00131648 /* 145-persondot@2x.png in Resources */,
 				A7841DBB13E18E2E00131648 /* 56-feed.png in Resources */,
 				A7841DBC13E18E2E00131648 /* 56-feed@2x.png in Resources */,
-				A7841E0713E1902600131648 /* _theme_template.scss in Resources */,
-				A7841E0813E1902600131648 /* config.rb in Resources */,
-				A7841E0913E1902600131648 /* shCore.scss in Resources */,
-				A7841E0A13E1902600131648 /* shCoreDefault.scss in Resources */,
-				A7841E0B13E1902600131648 /* shCoreDjango.scss in Resources */,
-				A7841E0C13E1902600131648 /* shCoreEclipse.scss in Resources */,
-				A7841E0D13E1902600131648 /* shCoreEmacs.scss in Resources */,
-				A7841E0E13E1902600131648 /* shCoreFadeToGrey.scss in Resources */,
-				A7841E0F13E1902600131648 /* shCoreMDUltra.scss in Resources */,
-				A7841E1013E1902600131648 /* shCoreMidnight.scss in Resources */,
-				A7841E1113E1902600131648 /* shCoreRDark.scss in Resources */,
-				A7841E1213E1902600131648 /* shThemeDefault.scss in Resources */,
-				A7841E1313E1902600131648 /* shThemeDjango.scss in Resources */,
-				A7841E1413E1902600131648 /* shThemeEclipse.scss in Resources */,
-				A7841E1513E1902600131648 /* shThemeEmacs.scss in Resources */,
-				A7841E1613E1902600131648 /* shThemeFadeToGrey.scss in Resources */,
-				A7841E1713E1902600131648 /* shThemeMDUltra.scss in Resources */,
-				A7841E1813E1902600131648 /* shThemeMidnight.scss in Resources */,
-				A7841E1913E1902600131648 /* shThemeRDark.scss in Resources */,
-				A7841E3913E1902600131648 /* shCore.css in Resources */,
-				A7841E3A13E1902600131648 /* shCoreDefault.css in Resources */,
-				A7841E3B13E1902600131648 /* shCoreDjango.css in Resources */,
-				A7841E3C13E1902600131648 /* shCoreEclipse.css in Resources */,
-				A7841E3D13E1902600131648 /* shCoreEmacs.css in Resources */,
-				A7841E3E13E1902600131648 /* shCoreFadeToGrey.css in Resources */,
-				A7841E3F13E1902600131648 /* shCoreMDUltra.css in Resources */,
-				A7841E4013E1902600131648 /* shCoreMidnight.css in Resources */,
-				A7841E4113E1902600131648 /* shCoreRDark.css in Resources */,
-				A7841E4213E1902600131648 /* shThemeDefault.css in Resources */,
-				A7841E4313E1902600131648 /* shThemeDjango.css in Resources */,
-				A7841E4413E1902600131648 /* shThemeEclipse.css in Resources */,
-				A7841E4513E1902600131648 /* shThemeEmacs.css in Resources */,
-				A7841E4613E1902600131648 /* shThemeFadeToGrey.css in Resources */,
-				A7841E4713E1902600131648 /* shThemeMDUltra.css in Resources */,
-				A7841E4813E1902600131648 /* shThemeMidnight.css in Resources */,
-				A7841E4913E1902600131648 /* shThemeRDark.css in Resources */,
 				A7841E4F13E1905200131648 /* ANNotificationErrorImage.png in Resources */,
 				A7841E5013E1905200131648 /* ANNotificationErrorImage@2x.png in Resources */,
 				A7841E5113E1905200131648 /* ANNotificationSuccessImage.png in Resources */,
@@ -3649,6 +3423,10 @@
 				A744F56C13E72D030038C189 /* styles.css in Resources */,
 				A730A34213E9330E0007C06C /* GHAlertViewOverlayImage.png in Resources */,
 				A76C011913E9D022005E26C4 /* GHAlertViewOverlayImage@2x.png in Resources */,
+				A76C011E13E9D3DD005E26C4 /* compass in Resources */,
+				A76C011F13E9D3DD005E26C4 /* scripts in Resources */,
+				A76C012013E9D3DD005E26C4 /* src in Resources */,
+				A76C012113E9D3DD005E26C4 /* styles in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

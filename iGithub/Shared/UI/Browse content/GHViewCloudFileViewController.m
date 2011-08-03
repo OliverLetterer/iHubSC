@@ -98,6 +98,7 @@
 #pragma mark - HTML parsing
 
 - (NSString *)HTMLPageStringFromFileContent:(NSString *)fileContent {
+    DLog(@"now");
     NSMutableDictionary *brushesForFileExtensionsDictionary = [NSMutableDictionary dictionary];
     [brushesForFileExtensionsDictionary setObject:@"javascript" forKey:@".js"];
     [brushesForFileExtensionsDictionary setObject:@"ruby" forKey:@".rb"];
@@ -149,6 +150,10 @@
             [brushType appendString:theObject];
         }
     }];
+    
+    if ([brushType isEqualToString:@""]) {
+        brushType = [NSMutableString stringWithString:@"javascript"];
+    }
     
     [HTMLString appendFormat:@"<pre class=\"brush: %@;\" width=\"320px\">", brushType];
     
