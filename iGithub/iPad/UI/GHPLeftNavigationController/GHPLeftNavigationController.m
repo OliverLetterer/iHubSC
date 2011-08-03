@@ -18,6 +18,7 @@
 #import "GHPOwnersNewsFeedViewController.h"
 #import "GHPUsersNewsFeedViewController.h"
 #import "GHManageAuthenticatedUsersAlertView.h"
+#import "GHPIssuesOfAuthenticatedUserViewController.h"
 
 #import "GHPUserViewController.h"
 
@@ -218,8 +219,8 @@
         // News Feed + Your Actions
         return 2;
     } else if (section == kUITableViewSectionBottom) {
-        // My Profile + Search
-        return 2;
+        // My Profile + My Issues + Search
+        return 3;
     } else if (section == kUITableViewSectionOrganizations) {
         // My Profile + Search
         return self.organizations.count;
@@ -265,6 +266,9 @@
                 cell.textLabel.text = NSLocalizedString(@"My Profile", @"");
                 [cell setItemImage:[UIImage imageNamed:@"145-persondot.png"] ];
             } else if (indexPath.row == 1) {
+                cell.textLabel.text = NSLocalizedString(@"My Issues", @"");
+                [cell setItemImage:[UIImage imageNamed:@"162-receipt.png"] ];
+            } else if (indexPath.row == 2) {
                 cell.textLabel.text = NSLocalizedString(@"Search", @"");
                 [cell setItemImage:[UIImage imageNamed:@"Lupe.PNG"] ];
             }
@@ -302,6 +306,8 @@
             viewController = [[GHPUserViewController alloc] initWithUsername:[GHAPIAuthenticationManager sharedInstance].authenticatedUser.login ];
             [(GHPUserViewController *)viewController setReloadDataIfNewUserGotAuthenticated:YES];
         } else if (indexPath.row == 1) {
+            viewController = [[GHPIssuesOfAuthenticatedUserViewController alloc] init];
+        } else if (indexPath.row == 2) {
             viewController = [[GHPSearchViewController alloc] init];
         }
     } else if (indexPath.section == kUITableViewSectionOrganizations) {

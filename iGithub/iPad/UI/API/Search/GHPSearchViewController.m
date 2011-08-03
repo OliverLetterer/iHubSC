@@ -43,16 +43,6 @@
     return self;
 }
 
-#pragma mark - Memory management
-
-
-- (void)didReceiveMemoryWarning {
-    // Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
-    
-    // Release any cached data, images, etc that aren't in use.
-}
-
 #pragma mark - View lifecycle
 
 - (void)viewDidUnload {
@@ -312,7 +302,7 @@
 #pragma mark - UISearchDisplayDelegate
 
 - (void)searchDisplayController:(UISearchDisplayController *)controller didLoadSearchResultsTableView:(UITableView *)tableView {
-    [tableView initWithFrame:CGRectZero style:UITableViewStyleGrouped];
+    tableView = [tableView initWithFrame:CGRectZero style:UITableViewStyleGrouped];
     tableView.backgroundColor = self.tableView.backgroundColor;
     tableView.backgroundView = nil;
 }

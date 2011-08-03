@@ -20,9 +20,8 @@
 
 #define kUITableViewSectionUserInfo         0
 #define kUITableViewSectionUserContent      1
-#define kUITableViewSectionAUContent        2
 
-#define kUITableViewNumberOfSections        3
+#define kUITableViewNumberOfSections        2
 
 @implementation GHPUserViewController
 
@@ -99,10 +98,6 @@
         return 7;
     } else if (section == kUITableViewSectionUserInfo) {
         return 1;
-    } else if (section == kUITableViewSectionAUContent) {
-        if ([self.username isEqualToString:[GHAPIAuthenticationManager sharedInstance].authenticatedUser.login]) {
-            return 1;
-        }
     }
     return 0;
 }
@@ -145,16 +140,6 @@
             
             return cell;
         }
-    } else if (indexPath.section == kUITableViewSectionAUContent) {
-        GHPDefaultTableViewCell *cell = [self defaultTableViewCellForRowAtIndexPath:indexPath withReuseIdentifier:@"GHPDefaultTableViewCell"];
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-        if (indexPath.row == 0) {
-            cell.textLabel.text = NSLocalizedString(@"Issues assigned to me", @"");
-        } else {
-            cell.textLabel.text = nil;
-        }
-        
-        return cell;
     }
 
     return self.dummyCell;
@@ -189,10 +174,6 @@
             viewController = [[GHPUsersNewsFeedViewController alloc] initWithUsername:self.username];
         } else if (indexPath.row == 5) {
             viewController = [[GHPOrganizationsOfUserViewController alloc] initWithUsername:self.username];
-        }
-    } else if (indexPath.section == kUITableViewSectionAUContent) {
-        if (indexPath.row == 0) {
-            viewController = [[GHPIssuesOfAuthenticatedUserViewController alloc] initWithUsername:self.username];
         }
     }
     
