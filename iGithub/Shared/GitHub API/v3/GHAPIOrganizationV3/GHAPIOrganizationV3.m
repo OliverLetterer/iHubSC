@@ -311,7 +311,47 @@
 }
 
 + (void)isUser:(NSString *)username administratorInOrganization:(NSString *)organization completionHandler:(GHAPIStateHandler)handler {
-    [self isUser:username administratorInOrganization:organization checkTeamsWithPage:1 completionHandler:handler];
+    [self allTeamsOfOrganization:organization completionHandler:^(NSMutableArray *teams, NSError *error) {
+        if (error) {
+            handler(NO, error);
+        } else {
+            GHAPITeamV3 *ownersTeam = nil;
+            for (GHAPITeamV3 *team in teams) {
+                if ([team.name isEqualToString:@"Owners"]) {
+                    ownersTeam = team;
+                    break;
+                }
+            }
+            [GHAPITeamV3 isUser:username memberInTeamByID:ownersTeam.ID completionHandler:handler];
+        }
+    }];
+}
+
++ (void)allTeamsOfOrganization:(NSString *)organization completionHandler:(void (^)(NSMutableArray *teams, NSError *error))handler {
+    NSMutableArray *teams = [NSMutableArray array];
+    [self _dumpTeamsOfOrganization:organization inArray:teams page:1 completionHandler:^(NSError *error) {
+        if (error) {
+            handler(nil, error);
+        } else {
+            handler(teams, nil);
+        }
+    }];
+}
+
++ (void)_dumpTeamsOfOrganization:(NSString *)organization inArray:(NSMutableArray *)teamsArray page:(NSUInteger)page completionHandler:(GHAPIErrorHandler)handler {
+    if (page == GHAPIPaginationNextPageNotFound) {
+        handler(nil);
+    } else {
+        [self teamsOfOrganizationNamed:organization page:page 
+                     completionHandler:^(NSMutableArray *array, NSUInteger nextPage, NSError *error) {
+                         if (error) {
+                             handler(error);
+                         } else {
+                             [teamsArray addObjectsFromArray:array];
+                             [self _dumpTeamsOfOrganization:organization inArray:teamsArray page:nextPage completionHandler:handler];
+                         }
+                     }];
+    }
 }
 
 @end

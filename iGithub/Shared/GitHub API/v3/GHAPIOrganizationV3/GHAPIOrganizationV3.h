@@ -71,4 +71,7 @@
 + (void)isUser:(NSString *)username administratorInOrganization:(NSString *)organization nextPate:(NSUInteger)nextPage inArray:(NSMutableArray *)teamsArray currentTeamIndex:(NSUInteger)currentTeamIndex completionHandler:(GHAPIStateHandler)handler;
 + (void)isUser:(NSString *)username administratorInOrganization:(NSString *)organization checkTeamsWithPage:(NSUInteger)page completionHandler:(GHAPIStateHandler)handler;
 
++ (void)allTeamsOfOrganization:(NSString *)organization completionHandler:(void (^)(NSMutableArray *teams, NSError *error))handler;
++ (void)_dumpTeamsOfOrganization:(NSString *)organization inArray:(NSMutableArray *)teamsArray page:(NSUInteger)page completionHandler:(GHAPIErrorHandler)handler;
+
 @end
