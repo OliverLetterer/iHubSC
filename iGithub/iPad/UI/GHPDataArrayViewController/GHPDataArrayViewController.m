@@ -59,9 +59,6 @@
     return self;
 }
 
-#pragma mark - Memory management
-
-
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
