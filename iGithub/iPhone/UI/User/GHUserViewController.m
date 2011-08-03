@@ -84,30 +84,8 @@
     if ((self = [super initWithStyle:UITableViewStylePlain])) {
         // Custom initialization
         self.username = username;
-        self.pullToReleaseEnabled = self.hasAdministrationRights;
     }
     return self;
-}
-
-#pragma mark - Memory management
-
-
-- (void)didReceiveMemoryWarning {
-    // Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
-    
-    // Release any cached data, images, etc that aren't in use.
-}
-
-#pragma mark - target actions
-
-- (void)accountButtonClicked:(UIBarButtonItem *)button {
-    GHManageAuthenticatedUsersAlertView *alert = [[GHManageAuthenticatedUsersAlertView alloc] initWithTitle:nil 
-                                                                      message:nil 
-                                                                     delegate:nil 
-                                                            cancelButtonTitle:nil 
-                                                            otherButtonTitles:nil];
-    [alert show];
 }
 
 #pragma mark - instance methods
@@ -188,18 +166,6 @@
         GHAPIIssueV3 *issue = obj;
         [self cacheHeight:[GHDescriptionTableViewCell heightWithContent:[self descriptionForAssignedIssue:issue]] forRowAtIndexPath:[NSIndexPath indexPathForRow:idx+1 inSection:kUITableViewSectionAssignedIssues] ];
     }];
-}
-
-#pragma mark - View lifecycle
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    
-    if ([[self.navigationController viewControllers] objectAtIndex:0] == self && self.hasAdministrationRights) {
-        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Accounts", @"") 
-                                                                                 style:UIBarButtonItemStyleBordered 
-                                                                                target:self action:@selector(accountButtonClicked:)];
-    }
 }
 
 #pragma mark - UIExpandableTableViewDatasource

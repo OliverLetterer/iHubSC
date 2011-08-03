@@ -398,6 +398,7 @@
 		A7FDA6E213E8736000DE4FF3 /* GHEditTeamViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7FDA6E113E8735F00DE4FF3 /* GHEditTeamViewController.m */; };
 		A7FDA6F313E88D5200DE4FF3 /* ANNotificationQueueRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7FDA6F213E88D5200DE4FF3 /* ANNotificationQueueRootViewController.m */; };
 		A7FDA70313E890C400DE4FF3 /* ANNotificationQueueRootViewControllerView.m in Sources */ = {isa = PBXBuildFile; fileRef = A7FDA70213E890C300DE4FF3 /* ANNotificationQueueRootViewControllerView.m */; };
+		A7FDA70613E91BD300DE4FF3 /* GHAuthenticatedUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7FDA70513E91BD200DE4FF3 /* GHAuthenticatedUserViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1143,6 +1144,8 @@
 		A7FDA6F213E88D5200DE4FF3 /* ANNotificationQueueRootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANNotificationQueueRootViewController.m; sourceTree = "<group>"; };
 		A7FDA70113E890C200DE4FF3 /* ANNotificationQueueRootViewControllerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANNotificationQueueRootViewControllerView.h; sourceTree = "<group>"; };
 		A7FDA70213E890C300DE4FF3 /* ANNotificationQueueRootViewControllerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANNotificationQueueRootViewControllerView.m; sourceTree = "<group>"; };
+		A7FDA70413E91BD200DE4FF3 /* GHAuthenticatedUserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHAuthenticatedUserViewController.h; sourceTree = "<group>"; };
+		A7FDA70513E91BD200DE4FF3 /* GHAuthenticatedUserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHAuthenticatedUserViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -3123,6 +3126,8 @@
 			children = (
 				A784203B13E1987C00131648 /* GHUserViewController.h */,
 				A784203C13E1987C00131648 /* GHUserViewController.m */,
+				A7FDA70413E91BD200DE4FF3 /* GHAuthenticatedUserViewController.h */,
+				A7FDA70513E91BD200DE4FF3 /* GHAuthenticatedUserViewController.m */,
 			);
 			path = User;
 			sourceTree = "<group>";
@@ -3925,6 +3930,7 @@
 				A7FDA6E213E8736000DE4FF3 /* GHEditTeamViewController.m in Sources */,
 				A7FDA6F313E88D5200DE4FF3 /* ANNotificationQueueRootViewController.m in Sources */,
 				A7FDA70313E890C400DE4FF3 /* ANNotificationQueueRootViewControllerView.m in Sources */,
+				A7FDA70613E91BD300DE4FF3 /* GHAuthenticatedUserViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

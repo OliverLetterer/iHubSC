@@ -85,9 +85,7 @@
         self.newsFeedViewController = [[GHOwnerNewsFeedViewController alloc] init];
         [tabBarItems addObject:[[UINavigationController alloc] initWithRootViewController:self.newsFeedViewController] ];
         
-        self.profileViewController = [[GHUserViewController alloc] initWithUsername:[GHAPIAuthenticationManager sharedInstance].authenticatedUser.login];
-        self.profileViewController.reloadDataIfNewUserGotAuthenticated = YES;
-        self.profileViewController.pullToReleaseEnabled = YES;
+        self.profileViewController = [[GHAuthenticatedUserViewController alloc] init];
         [tabBarItems addObject:[[UINavigationController alloc] initWithRootViewController:self.profileViewController] ];
         
         self.searchViewController = [[GHSearchViewController alloc] init];

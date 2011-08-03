@@ -51,8 +51,6 @@
 
 - (id)initWithUsername:(NSString *)username;
 
-- (void)accountButtonClicked:(UIBarButtonItem *)button;
-
 - (void)downloadRepositories;
 - (void)cacheHeightForTableView;
 - (void)cacheHeightForWatchedRepositories;
