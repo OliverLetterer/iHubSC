@@ -49,18 +49,47 @@ NSString *const kGHAPIIssueStateV3Closed = @"closed";
     if (!string) {
         return NO;
     }
-    if ([self.assignee.login rangeOfString:string options:NSCaseInsensitiveSearch].location != NSNotFound) {
-        return YES;
+    NSMutableArray *possibleString = [NSMutableArray arrayWithCapacity:10];
+    NSString *myString = nil;
+    
+    myString = self.assignee.login;
+    if (myString) {
+        [possibleString addObject:myString];
     }
-    if ([self.repository rangeOfString:string options:NSCaseInsensitiveSearch].location != NSNotFound) {
-        return YES;
+    myString = self.repository;
+    if (myString) {
+        [possibleString addObject:myString];
     }
-    if ([self.title rangeOfString:string options:NSCaseInsensitiveSearch].location != NSNotFound) {
-        return YES;
+    myString = self.title;
+    if (myString) {
+        [possibleString addObject:myString];
     }
-    if ([self.body rangeOfString:string options:NSCaseInsensitiveSearch].location != NSNotFound) {
-        return YES;
+    myString = self.body;
+    if (myString) {
+        [possibleString addObject:myString];
     }
+    myString = self.milestone.title;
+    if (myString) {
+        [possibleString addObject:myString];
+    }
+    myString = self.milestone.milestoneDescription;
+    if (myString) {
+        [possibleString addObject:myString];
+    }
+    
+    for (GHAPILabelV3 *label in self.labels) {
+        myString = label.name;
+        if (myString) {
+            [possibleString addObject:myString];
+        }
+    }
+    
+    for (NSString *str in possibleString) {
+        if ([str rangeOfString:string options:NSCaseInsensitiveSearch].location != NSNotFound) {
+            return YES;
+        }
+    }
+    
     return NO;
 }
 
