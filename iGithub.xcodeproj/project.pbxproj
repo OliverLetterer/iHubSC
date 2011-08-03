@@ -99,6 +99,7 @@
 		A757982E13E1C1D5008670B0 /* GHTableViewAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = A757982713E1C1D5008670B0 /* GHTableViewAlertView.m */; };
 		A757982F13E1C1D5008670B0 /* GHTableViewAlertViewTableViewBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = A757982913E1C1D5008670B0 /* GHTableViewAlertViewTableViewBackgroundView.m */; };
 		A757983013E1C1D5008670B0 /* GHTableViewAlertViewTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A757982B13E1C1D5008670B0 /* GHTableViewAlertViewTableViewCell.m */; };
+		A76C011913E9D022005E26C4 /* GHAlertViewOverlayImage@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A76C011813E9D022005E26C4 /* GHAlertViewOverlayImage@2x.png */; };
 		A7841C6F13E1849200131648 /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841C6E13E1849200131648 /* JSONKit.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		A7841CAF13E1853200131648 /* CGUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841C7213E1853200131648 /* CGUtils.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		A7841CB413E1853200131648 /* DTAttributedTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841C7C13E1853200131648 /* DTAttributedTextView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -608,6 +609,7 @@
 		A757982913E1C1D5008670B0 /* GHTableViewAlertViewTableViewBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHTableViewAlertViewTableViewBackgroundView.m; sourceTree = "<group>"; };
 		A757982A13E1C1D5008670B0 /* GHTableViewAlertViewTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHTableViewAlertViewTableViewCell.h; sourceTree = "<group>"; };
 		A757982B13E1C1D5008670B0 /* GHTableViewAlertViewTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHTableViewAlertViewTableViewCell.m; sourceTree = "<group>"; };
+		A76C011813E9D022005E26C4 /* GHAlertViewOverlayImage@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GHAlertViewOverlayImage@2x.png"; sourceTree = "<group>"; };
 		A7841C6D13E1849200131648 /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JSONKit.h; path = Submodules/JSONKit/JSONKit.h; sourceTree = "<group>"; };
 		A7841C6E13E1849200131648 /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JSONKit.m; path = Submodules/JSONKit/JSONKit.m; sourceTree = "<group>"; };
 		A7841C7113E1853200131648 /* CGUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CGUtils.h; path = "Submodules/NSAttributedString-Additions-for-HTML/Classes/CGUtils.h"; sourceTree = SOURCE_ROOT; };
@@ -1858,6 +1860,7 @@
 		A757982513E1C1D5008670B0 /* GHTableViewAlertView */ = {
 			isa = PBXGroup;
 			children = (
+				A76C011813E9D022005E26C4 /* GHAlertViewOverlayImage@2x.png */,
 				A730A34113E9330E0007C06C /* GHAlertViewOverlayImage.png */,
 				A757982613E1C1D5008670B0 /* GHTableViewAlertView.h */,
 				A757982713E1C1D5008670B0 /* GHTableViewAlertView.m */,
@@ -3645,6 +3648,7 @@
 				A7C5257313E6ADF90003EEE5 /* Kal.bundle in Resources */,
 				A744F56C13E72D030038C189 /* styles.css in Resources */,
 				A730A34213E9330E0007C06C /* GHAlertViewOverlayImage.png in Resources */,
+				A76C011913E9D022005E26C4 /* GHAlertViewOverlayImage@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
