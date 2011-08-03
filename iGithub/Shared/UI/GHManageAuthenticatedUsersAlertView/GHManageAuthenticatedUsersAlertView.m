@@ -18,8 +18,6 @@
 
 - (id)initWithTitle:(NSString *)title message:(NSString *)message delegate:(id)delegate cancelButtonTitle:(NSString *)cancelButtonTitle otherButtonTitles:(NSString *)otherButtonTitles, ... {
     if (self = [super initWithTitle:NSLocalizedString(@"Accounts", @"") message:nil delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", @"") otherButtonTitles:NSLocalizedString(@"Add", @""), nil]) {
-        self.tableView.delegate = self;
-        self.tableView.dataSource = self;
         
         UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0.0f, 0.0f, CGRectGetWidth(self.tableView.bounds), 21.0f)];
         label.backgroundColor = [UIColor clearColor];

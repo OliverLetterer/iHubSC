@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "GHTableViewAlertView.h"
 
-@interface GHManageAuthenticatedUsersAlertView : GHTableViewAlertView <UITableViewDelegate, UITableViewDataSource, UIAlertViewDelegate> {
+@interface GHManageAuthenticatedUsersAlertView : GHTableViewAlertView <UIAlertViewDelegate> {
 @private
     
 }
