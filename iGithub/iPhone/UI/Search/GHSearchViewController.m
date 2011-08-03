@@ -36,7 +36,7 @@
     [self.view addSubview:imageView];
     imageView.center = CGPointApplyAffineTransform(imageView.center, CGAffineTransformMakeTranslation(0.0f, 2.0f));
     
-    self.searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0, 44.0)];
+    self.searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 320.0f, 44.0f)];
     self.searchBar.delegate = self;
     [self.view addSubview:self.searchBar];
     

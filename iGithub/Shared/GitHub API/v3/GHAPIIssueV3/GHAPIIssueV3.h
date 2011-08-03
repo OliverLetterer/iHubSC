@@ -60,6 +60,8 @@ extern NSString *const kGHAPIIssueStateV3Closed;
 @property (nonatomic, readonly) BOOL hasAssignee;
 @property (nonatomic, readonly) BOOL hasMilestone;
 
+- (BOOL)matchedString:(NSString *)string;
+
 - (id)initWithRawDictionary:(NSDictionary *)rawDictionary;
 
 + (void)openedIssuesOnRepository:(NSString *)repository page:(NSInteger)page completionHandler:(GHAPIPaginationHandler)handler;
@@ -122,5 +124,8 @@ extern NSString *const kGHAPIIssueStateV3Closed;
          completionHandler:(GHAPIPaginationHandler)handler;
 
 + (void)issuesOfAuthenticatedUserOnPage:(NSInteger)page completionHandler:(GHAPIPaginationHandler)handler;
+
++ (void)allIssuesOfAuthenticatedUserWithCompletionHandler:(void (^)(NSMutableArray *issues, NSError *error))handler;
++ (void)_dumpIssuesOfAuthenticatedUserInArray:(NSMutableArray *)issuesArray page:(NSUInteger)page completionHandler:(GHAPIErrorHandler)handler;
 
 @end

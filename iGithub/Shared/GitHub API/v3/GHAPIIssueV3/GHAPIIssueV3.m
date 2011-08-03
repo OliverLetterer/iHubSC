@@ -45,6 +45,25 @@ NSString *const kGHAPIIssueStateV3Closed = @"closed";
     return _selectedAttributedBody;
 }
 
+- (BOOL)matchedString:(NSString *)string {
+    if (!string) {
+        return NO;
+    }
+    if ([self.assignee.login rangeOfString:string options:NSCaseInsensitiveSearch].location != NSNotFound) {
+        return YES;
+    }
+    if ([self.repository rangeOfString:string options:NSCaseInsensitiveSearch].location != NSNotFound) {
+        return YES;
+    }
+    if ([self.title rangeOfString:string options:NSCaseInsensitiveSearch].location != NSNotFound) {
+        return YES;
+    }
+    if ([self.body rangeOfString:string options:NSCaseInsensitiveSearch].location != NSNotFound) {
+        return YES;
+    }
+    return NO;
+}
+
 #pragma mark - Initialization
 
 - (id)initWithRawDictionary:(NSDictionary *)rawDictionary {
@@ -532,6 +551,32 @@ NSString *const kGHAPIIssueStateV3Closed = @"closed";
                                                     handler([[GHAPIIssueV3 alloc] initWithRawDictionary:object], nil);
                                                 }
                                             }];
+}
+
++ (void)allIssuesOfAuthenticatedUserWithCompletionHandler:(void (^)(NSMutableArray *issues, NSError *error))handler {
+    NSMutableArray *issues = [NSMutableArray array];
+    [self _dumpIssuesOfAuthenticatedUserInArray:issues page:1 completionHandler:^(NSError *error) {
+        if (error) {
+            handler(nil, error);
+        } else {
+            handler(issues, nil);
+        }
+    }];
+}
+
++ (void)_dumpIssuesOfAuthenticatedUserInArray:(NSMutableArray *)issuesArray page:(NSUInteger)page completionHandler:(GHAPIErrorHandler)handler {
+    if (page == GHAPIPaginationNextPageNotFound) {
+        handler(nil);
+    } else {
+        [self issuesOfAuthenticatedUserOnPage:page completionHandler:^(NSMutableArray *array, NSUInteger nextPage, NSError *error) {
+            if (error) {
+                handler(error);
+            } else {
+                [issuesArray addObjectsFromArray:array];
+                [self _dumpIssuesOfAuthenticatedUserInArray:issuesArray page:nextPage completionHandler:handler];
+            }
+        }];
+    }
 }
 
 @end

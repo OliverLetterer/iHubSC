@@ -14,18 +14,22 @@
 #import "GHUserViewController.h"
 #import "GHSearchViewController.h"
 #import "GHAuthenticatedUserViewController.h"
+#import "GHIssuesOfAuthenticatedUserViewController.h"
 
 @interface iGithubAppDelegate_iPhone : iGithubAppDelegate <MFMailComposeViewControllerDelegate> {
     UITabBarController *_tabBarController;
     GHOwnerNewsFeedViewController *_newsFeedViewController;
     GHAuthenticatedUserViewController *_profileViewController;
     GHSearchViewController *_searchViewController;
+    GHIssuesOfAuthenticatedUserViewController *_issuesOfUserViewController;
 }
 
 @property (nonatomic, retain) UITabBarController *tabBarController;
 @property (nonatomic, retain) GHOwnerNewsFeedViewController *newsFeedViewController;
 @property (nonatomic, retain) GHAuthenticatedUserViewController *profileViewController;
 @property (nonatomic, retain) GHSearchViewController *searchViewController;
+@property (nonatomic, retain) GHIssuesOfAuthenticatedUserViewController *issuesOfUserViewController;
+
 
 - (void)authenticationManagerDidAuthenticateUserCallback:(NSNotification *)notification;
 
