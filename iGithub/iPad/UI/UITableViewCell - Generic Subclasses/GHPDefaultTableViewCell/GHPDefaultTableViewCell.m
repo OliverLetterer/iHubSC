@@ -73,4 +73,10 @@
     self.imageView.frame = CGRectInset(self.imageView.frame, 3.0f, 3.0f);
 }
 
+- (void)prepareForReuse {
+    [super prepareForReuse];
+    
+    self.imageView.image = nil;
+}
+
 @end

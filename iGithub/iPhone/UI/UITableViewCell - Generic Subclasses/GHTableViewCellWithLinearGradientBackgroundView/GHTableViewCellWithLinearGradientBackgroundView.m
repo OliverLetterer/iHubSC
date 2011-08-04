@@ -81,9 +81,7 @@
 - (void)prepareForReuse {
     [super prepareForReuse];
     
+    self.imageView.image = nil;
 }
-
-#pragma mark - Memory management
-
 
 @end
