@@ -48,7 +48,7 @@
     
     NSMutableDictionary *dictionary = [self deserializeState];
     
-//    dictionary = nil;
+    dictionary = nil;
     if (dictionary) {
         self.tabBarController = [[UITabBarController alloc] init];
         self.window.rootViewController = self.tabBarController;
