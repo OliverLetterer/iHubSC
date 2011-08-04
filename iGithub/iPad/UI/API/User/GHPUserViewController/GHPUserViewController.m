@@ -29,6 +29,10 @@
 
 #pragma mark - setters and getters
 
+- (BOOL)canFollowUser {
+    return !self.isAdminsitrativeUser;
+}
+
 - (BOOL)isAdminsitrativeUser {
     return [[GHAPIAuthenticationManager sharedInstance].authenticatedUser.login isEqualToString:self.username];
 }
@@ -184,6 +188,19 @@
     }
 }
 
+#pragma mark - GHCreateRepositoryViewControllerDelegate
+
+- (void)createRepositoryViewControllerDidCancel:(GHCreateRepositoryViewController *)createRepositoryViewController {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)createRepositoryViewController:(GHCreateRepositoryViewController *)createRepositoryViewController didCreateRepository:(GHAPIRepositoryV3 *)repository {
+    [[ANNotificationQueue sharedInstance] detatchSuccesNotificationWithTitle:NSLocalizedString(@"Created Repository", @"") 
+                                                                     message:repository.name];
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
 #pragma mark - UIActionSheetDelegate
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
@@ -226,6 +243,13 @@
         [mailViewController setToRecipients:[NSArray arrayWithObject:self.user.EMail]];
         
         [self presentViewController:mailViewController animated:YES completion:nil];
+    } else if ([title isEqualToString:NSLocalizedString(@"Create Repository", @"")]) {
+        GHCreateRepositoryViewController *createViewController = [[GHCreateRepositoryViewController alloc] init];
+        createViewController.delegate = self;
+        
+        UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:createViewController];
+        navController.modalPresentationStyle = UIModalPresentationFormSheet;
+        [self presentModalViewController:navController animated:YES];
     }
 }
 
@@ -260,6 +284,8 @@
         } else {
             [sheet addButtonWithTitle:NSLocalizedString(@"Unfollow", @"")];
         }
+    } else {
+        [sheet addButtonWithTitle:NSLocalizedString(@"Create Repository", @"")];
     }
     
     if (self.user.hasBlog) {
@@ -277,11 +303,14 @@
 }
 
 - (BOOL)canDisplayActionButton {
-    return !self.isAdminsitrativeUser;
+    return YES;
 }
 
 - (BOOL)needsToDownloadDataToDisplayActionButtonActionSheet {
-    return !_hasFollowingData;
+    if (self.canFollowUser) {
+        return !_hasFollowingData;
+    }
+    return NO;
 }
 
 #pragma mark - Keyed Archiving

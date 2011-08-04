@@ -24,16 +24,14 @@
 @interface GHCreateRepositoryViewController : GHTableViewController <UITextFieldDelegate> {
 @private
     id<GHCreateRepositoryViewControllerDelegate> __weak _delegate;
-    GHCreateRepositoryTableViewCell *_createCell;
 }
 
 @property (nonatomic, weak) id<GHCreateRepositoryViewControllerDelegate> delegate;
-@property (nonatomic, retain) GHCreateRepositoryTableViewCell *createCell;
 
 - (void)cancelButtonClicked:(UIBarButtonItem *)button;
 - (void)createButtonClicked:(UIBarButtonItem *)button;
 
-- (void)publicSwitchChanged:(UISwitch *)sender;
+- (void)publicSwitchChanged:(id)sender;
 
 - (void)createRepository;
 

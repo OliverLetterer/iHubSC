@@ -10,8 +10,9 @@
 #import <MessageUI/MessageUI.h>
 #import "GHTableViewController.h"
 #import "GHPInfoSectionTableViewController.h"
+#import "GHCreateRepositoryViewController.h"
 
-@interface GHPUserViewController : GHPInfoSectionTableViewController <MFMailComposeViewControllerDelegate, NSCoding> {
+@interface GHPUserViewController : GHPInfoSectionTableViewController <MFMailComposeViewControllerDelegate, NSCoding, GHCreateRepositoryViewControllerDelegate> {
     GHAPIUserV3 *_user;
     NSString *_username;
     
@@ -25,6 +26,9 @@
 @property (nonatomic, readonly) NSString *userDetailInfoString;
 
 @property (nonatomic, readonly) BOOL isAdminsitrativeUser;
+
+@property (nonatomic, readonly) BOOL canFollowUser;
+
 
 - (id)initWithUsername:(NSString *)username;
 

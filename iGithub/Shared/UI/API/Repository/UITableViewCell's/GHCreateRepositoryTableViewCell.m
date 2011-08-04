@@ -10,7 +10,6 @@
 
 
 @implementation GHCreateRepositoryTableViewCell
-
 @synthesize publicLabel=_publicLabel, publicSwitch=_publicSwitch, titleTextField=_titleTextField, descriptionTextField=_descriptionTextField;
 
 #pragma mark - Initialization
@@ -51,16 +50,6 @@
 
 #pragma mark - super implementation
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
-    
-}
-
-- (void)setHighlighted:(BOOL)highlighted animated:(BOOL)animated {
-    [super setHighlighted:highlighted animated:animated];
-    
-}
-
 - (void)layoutSubviews {
     [super layoutSubviews];
     
@@ -69,13 +58,5 @@
     self.publicSwitch.frame = CGRectMake(206.0, 68.0, 94.0, 27.0);
     self.publicLabel.frame = CGRectMake(67.0, 71.0, 131.0, 21.0);
 }
-
-- (void)prepareForReuse {
-    [super prepareForReuse];
-    
-}
-
-#pragma mark - Memory management
-
 
 @end

@@ -792,6 +792,9 @@
     [self dismissModalViewControllerAnimated:YES];
     [self.repositoriesArray addObject:repository];
     
+    [[ANNotificationQueue sharedInstance] detatchSuccesNotificationWithTitle:NSLocalizedString(@"Created Repository", @"") 
+                                                                     message:repository.name];
+    
     [self cacheHeightForTableView];
     [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:kUITableViewSectionRepositories] 
                   withRowAnimation:kUITableViewSectionRepositories];
