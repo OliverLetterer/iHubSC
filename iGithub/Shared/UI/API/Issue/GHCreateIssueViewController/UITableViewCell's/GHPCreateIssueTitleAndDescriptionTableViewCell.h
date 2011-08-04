@@ -7,15 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "GHPDefaultTableViewCell.h"
+#import "GHPNewCommentTableViewCell.h"
 
-@interface GHPCreateIssueTitleAndDescriptionTableViewCell : GHPDefaultTableViewCell {
+@interface GHPCreateIssueTitleAndDescriptionTableViewCell : GHPNewCommentTableViewCell {
 @private
     UITextField *_textField;
-    UITextView *_textView;
 }
 
 @property (nonatomic, retain) UITextField *textField;
-@property (nonatomic, retain) UITextView *textView;
 
 @end

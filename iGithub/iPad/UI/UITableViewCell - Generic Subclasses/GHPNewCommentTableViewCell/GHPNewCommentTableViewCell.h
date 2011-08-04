@@ -36,11 +36,16 @@ extern CGFloat const GHPNewCommentTableViewCellHeight;
 @property (nonatomic, readonly) UIView *textViewInputAccessoryView;
 @property (nonatomic, retain) UIActionSheet *activeActionSheet;
 
-
 @property (nonatomic, copy) NSString *linkText;
 @property (nonatomic, copy) NSString *linkURL;
 
 @property (nonatomic, weak) id<GHPNewCommentTableViewCellDelegate> delegate;
+
+@property (nonatomic, readonly) NSString *submitButtonText;
+
+
+- (void)toolbarCancelButtonClicked:(UIBarButtonItem *)barButton;
+- (void)toolbarDoneButtonClicked:(UIBarButtonItem *)barButton;
 
 
 @end

@@ -25,6 +25,10 @@ CGFloat const GHPNewCommentTableViewCellHeight = 200.0f;
 
 #pragma mark - Setters and getters
 
+- (NSString *)submitButtonText {
+    return NSLocalizedString(@"Submit", @"");
+}
+
 - (UIView *)textViewInputAccessoryView {
     UIToolbar *toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0, 44.0)];
     toolbar.barStyle = UIBarStyleBlackTranslucent;
@@ -55,7 +59,7 @@ CGFloat const GHPNewCommentTableViewCellHeight = 200.0f;
                                                           action:@selector(noAction)];
     [items addObject:item];
     
-    item = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Submit", @"") 
+    item = [[UIBarButtonItem alloc] initWithTitle:self.submitButtonText 
                                              style:UIBarButtonItemStyleDone 
                                             target:self 
                                             action:@selector(toolbarDoneButtonClicked:)];
