@@ -21,12 +21,6 @@
 		A7528E5913D42A7F0007C4D9 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7528E5813D42A7F0007C4D9 /* CoreText.framework */; };
 		A7528E5B13D42AA20007C4D9 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7528E5A13D42AA20007C4D9 /* MediaPlayer.framework */; };
 		A7528E6113D42E310007C4D9 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7528E6013D42E310007C4D9 /* ImageIO.framework */; };
-		A757963513E19B18008670B0 /* ANAdvancedNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = A757962613E19B18008670B0 /* ANAdvancedNavigationController.m */; };
-		A757963613E19B18008670B0 /* ANRectangleView.m in Sources */ = {isa = PBXBuildFile; fileRef = A757962813E19B18008670B0 /* ANRectangleView.m */; };
-		A757963713E19B18008670B0 /* ANRemoveRectangleIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = A757962A13E19B18008670B0 /* ANRemoveRectangleIndicatorView.m */; };
-		A757963813E19B18008670B0 /* ANAdvancedNavigationController+LeftViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A757962F13E19B18008670B0 /* ANAdvancedNavigationController+LeftViewController.m */; };
-		A757963913E19B18008670B0 /* ANAdvancedNavigationController+RightViewControllers+Anchors.m in Sources */ = {isa = PBXBuildFile; fileRef = A757963213E19B18008670B0 /* ANAdvancedNavigationController+RightViewControllers+Anchors.m */; };
-		A757963A13E19B18008670B0 /* ANAdvancedNavigationController+RightViewControllers.m in Sources */ = {isa = PBXBuildFile; fileRef = A757963413E19B18008670B0 /* ANAdvancedNavigationController+RightViewControllers.m */; };
 		A75796FB13E1A030008670B0 /* MainWindow_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = A757963C13E1A030008670B0 /* MainWindow_iPad.xib */; };
 		A75796FC13E1A030008670B0 /* iGithubAppDelegate_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = A757963F13E1A030008670B0 /* iGithubAppDelegate_iPad.m */; };
 		A75796FD13E1A030008670B0 /* GHPDirectoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A757964413E1A030008670B0 /* GHPDirectoryViewController.m */; };
@@ -341,6 +335,7 @@
 		A784206313E1987D00131648 /* GHTableViewCellWithLinearGradientBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = A784203913E1987C00131648 /* GHTableViewCellWithLinearGradientBackgroundView.m */; };
 		A784206413E1987D00131648 /* GHUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A784203C13E1987C00131648 /* GHUserViewController.m */; };
 		A784206513E1987D00131648 /* GHWebViewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A784203F13E1987C00131648 /* GHWebViewViewController.m */; };
+		A7B6545613EA9189009E4414 /* libANAdvancedNavigationController.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A7B6545313EA917B009E4414 /* libANAdvancedNavigationController.a */; };
 		A7BD1EEB13E49D880016A662 /* GHViewREADMEViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7BD1EEA13E49D870016A662 /* GHViewREADMEViewController.m */; };
 		A7BD1EF013E49F230016A662 /* GHAPITreeV3.m in Sources */ = {isa = PBXBuildFile; fileRef = A7BD1EEF13E49F230016A662 /* GHAPITreeV3.m */; };
 		A7BD1EF313E4A12A0016A662 /* GHAPITreeFileV3.m in Sources */ = {isa = PBXBuildFile; fileRef = A7BD1EF213E4A12A0016A662 /* GHAPITreeFileV3.m */; };
@@ -389,6 +384,20 @@
 			remoteGlobalIDString = A7C525F113E6FE1A0003EEE5;
 			remoteInfo = GHMarkdownParser;
 		};
+		A7B6545213EA917B009E4414 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A7B6544B13EA917B009E4414 /* ANAdvancedNavigationController.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = A7C3773213EA8EF800B9943A;
+			remoteInfo = ANAdvancedNavigationController;
+		};
+		A7B6545413EA9183009E4414 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A7B6544B13EA917B009E4414 /* ANAdvancedNavigationController.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = A7C3773113EA8EF800B9943A;
+			remoteInfo = ANAdvancedNavigationController;
+		};
 		A7C5256B13E6ACCD0003EEE5 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = A7C5256413E6ACCC0003EEE5 /* Kal.xcodeproj */;
@@ -425,19 +434,6 @@
 		A7528E5813D42A7F0007C4D9 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		A7528E5A13D42AA20007C4D9 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		A7528E6013D42E310007C4D9 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
-		A757962513E19B18008670B0 /* ANAdvancedNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANAdvancedNavigationController.h; sourceTree = "<group>"; };
-		A757962613E19B18008670B0 /* ANAdvancedNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANAdvancedNavigationController.m; sourceTree = "<group>"; };
-		A757962713E19B18008670B0 /* ANRectangleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANRectangleView.h; sourceTree = "<group>"; };
-		A757962813E19B18008670B0 /* ANRectangleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANRectangleView.m; sourceTree = "<group>"; };
-		A757962913E19B18008670B0 /* ANRemoveRectangleIndicatorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANRemoveRectangleIndicatorView.h; sourceTree = "<group>"; };
-		A757962A13E19B18008670B0 /* ANRemoveRectangleIndicatorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANRemoveRectangleIndicatorView.m; sourceTree = "<group>"; };
-		A757962C13E19B18008670B0 /* ANAdvancedNavigationController+private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ANAdvancedNavigationController+private.h"; sourceTree = "<group>"; };
-		A757962E13E19B18008670B0 /* ANAdvancedNavigationController+LeftViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ANAdvancedNavigationController+LeftViewController.h"; sourceTree = "<group>"; };
-		A757962F13E19B18008670B0 /* ANAdvancedNavigationController+LeftViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ANAdvancedNavigationController+LeftViewController.m"; sourceTree = "<group>"; };
-		A757963113E19B18008670B0 /* ANAdvancedNavigationController+RightViewControllers+Anchors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ANAdvancedNavigationController+RightViewControllers+Anchors.h"; sourceTree = "<group>"; };
-		A757963213E19B18008670B0 /* ANAdvancedNavigationController+RightViewControllers+Anchors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ANAdvancedNavigationController+RightViewControllers+Anchors.m"; sourceTree = "<group>"; };
-		A757963313E19B18008670B0 /* ANAdvancedNavigationController+RightViewControllers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ANAdvancedNavigationController+RightViewControllers.h"; sourceTree = "<group>"; };
-		A757963413E19B18008670B0 /* ANAdvancedNavigationController+RightViewControllers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ANAdvancedNavigationController+RightViewControllers.m"; sourceTree = "<group>"; };
 		A757963D13E1A030008670B0 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow_iPad.xib; sourceTree = "<group>"; };
 		A757963E13E1A030008670B0 /* iGithubAppDelegate_iPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iGithubAppDelegate_iPad.h; sourceTree = "<group>"; };
 		A757963F13E1A030008670B0 /* iGithubAppDelegate_iPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iGithubAppDelegate_iPad.m; sourceTree = "<group>"; };
@@ -1006,6 +1002,7 @@
 		A784203C13E1987C00131648 /* GHUserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHUserViewController.m; sourceTree = "<group>"; };
 		A784203E13E1987C00131648 /* GHWebViewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHWebViewViewController.h; sourceTree = "<group>"; };
 		A784203F13E1987C00131648 /* GHWebViewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHWebViewViewController.m; sourceTree = "<group>"; };
+		A7B6544B13EA917B009E4414 /* ANAdvancedNavigationController.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = ANAdvancedNavigationController.xcodeproj; sourceTree = "<group>"; };
 		A7BD1EE913E49D870016A662 /* GHViewREADMEViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHViewREADMEViewController.h; sourceTree = "<group>"; };
 		A7BD1EEA13E49D870016A662 /* GHViewREADMEViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHViewREADMEViewController.m; sourceTree = "<group>"; };
 		A7BD1EEE13E49F230016A662 /* GHAPITreeV3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHAPITreeV3.h; sourceTree = "<group>"; };
@@ -1069,6 +1066,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A7B6545613EA9189009E4414 /* libANAdvancedNavigationController.a in Frameworks */,
 				A744F57913E730E40038C189 /* libGHMarkdownParser.a in Frameworks */,
 				A7C5256F13E6ADA10003EEE5 /* libKal.a in Frameworks */,
 				A7528E6113D42E310007C4D9 /* ImageIO.framework in Frameworks */,
@@ -1169,47 +1167,11 @@
 		A757962413E19B18008670B0 /* ANAdvancedNavigationController */ = {
 			isa = PBXGroup;
 			children = (
-				A757962513E19B18008670B0 /* ANAdvancedNavigationController.h */,
-				A757962613E19B18008670B0 /* ANAdvancedNavigationController.m */,
-				A757962713E19B18008670B0 /* ANRectangleView.h */,
-				A757962813E19B18008670B0 /* ANRectangleView.m */,
-				A757962913E19B18008670B0 /* ANRemoveRectangleIndicatorView.h */,
-				A757962A13E19B18008670B0 /* ANRemoveRectangleIndicatorView.m */,
-				A757962B13E19B18008670B0 /* Private */,
+				A7B6544B13EA917B009E4414 /* ANAdvancedNavigationController.xcodeproj */,
 			);
 			name = ANAdvancedNavigationController;
 			path = Submodules/ANAdvancedNavigationController/ANAdvancedNavigationController;
 			sourceTree = SOURCE_ROOT;
-		};
-		A757962B13E19B18008670B0 /* Private */ = {
-			isa = PBXGroup;
-			children = (
-				A757962C13E19B18008670B0 /* ANAdvancedNavigationController+private.h */,
-				A757962D13E19B18008670B0 /* LeftViewController */,
-				A757963013E19B18008670B0 /* RightViewControllers */,
-			);
-			path = Private;
-			sourceTree = "<group>";
-		};
-		A757962D13E19B18008670B0 /* LeftViewController */ = {
-			isa = PBXGroup;
-			children = (
-				A757962E13E19B18008670B0 /* ANAdvancedNavigationController+LeftViewController.h */,
-				A757962F13E19B18008670B0 /* ANAdvancedNavigationController+LeftViewController.m */,
-			);
-			path = LeftViewController;
-			sourceTree = "<group>";
-		};
-		A757963013E19B18008670B0 /* RightViewControllers */ = {
-			isa = PBXGroup;
-			children = (
-				A757963113E19B18008670B0 /* ANAdvancedNavigationController+RightViewControllers+Anchors.h */,
-				A757963213E19B18008670B0 /* ANAdvancedNavigationController+RightViewControllers+Anchors.m */,
-				A757963313E19B18008670B0 /* ANAdvancedNavigationController+RightViewControllers.h */,
-				A757963413E19B18008670B0 /* ANAdvancedNavigationController+RightViewControllers.m */,
-			);
-			path = RightViewControllers;
-			sourceTree = "<group>";
 		};
 		A757963B13E1A030008670B0 /* iPad */ = {
 			isa = PBXGroup;
@@ -3045,6 +3007,14 @@
 			name = Util;
 			sourceTree = "<group>";
 		};
+		A7B6544C13EA917B009E4414 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A7B6545313EA917B009E4414 /* libANAdvancedNavigationController.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		A7BC6780134CCED40083F906 /* GHPullToReleaseTableViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -3314,6 +3284,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				A7B6545513EA9183009E4414 /* PBXTargetDependency */,
 				A744F58313E73D2D0038C189 /* PBXTargetDependency */,
 				A7C5256E13E6AD890003EEE5 /* PBXTargetDependency */,
 			);
@@ -3343,6 +3314,10 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
+					ProductGroup = A7B6544C13EA917B009E4414 /* Products */;
+					ProjectRef = A7B6544B13EA917B009E4414 /* ANAdvancedNavigationController.xcodeproj */;
+				},
+				{
 					ProductGroup = A744F56F13E72DE60038C189 /* Products */;
 					ProjectRef = A744F56E13E72DE60038C189 /* GHMarkdownParser.xcodeproj */;
 				},
@@ -3364,6 +3339,13 @@
 			fileType = archive.ar;
 			path = libGHMarkdownParser.a;
 			remoteRef = A744F57513E72DE60038C189 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		A7B6545313EA917B009E4414 /* libANAdvancedNavigationController.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libANAdvancedNavigationController.a;
+			remoteRef = A7B6545213EA917B009E4414 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		A7C5256C13E6ACCD0003EEE5 /* libKal.a */ = {
@@ -3636,12 +3618,6 @@
 				A784206313E1987D00131648 /* GHTableViewCellWithLinearGradientBackgroundView.m in Sources */,
 				A784206413E1987D00131648 /* GHUserViewController.m in Sources */,
 				A784206513E1987D00131648 /* GHWebViewViewController.m in Sources */,
-				A757963513E19B18008670B0 /* ANAdvancedNavigationController.m in Sources */,
-				A757963613E19B18008670B0 /* ANRectangleView.m in Sources */,
-				A757963713E19B18008670B0 /* ANRemoveRectangleIndicatorView.m in Sources */,
-				A757963813E19B18008670B0 /* ANAdvancedNavigationController+LeftViewController.m in Sources */,
-				A757963913E19B18008670B0 /* ANAdvancedNavigationController+RightViewControllers+Anchors.m in Sources */,
-				A757963A13E19B18008670B0 /* ANAdvancedNavigationController+RightViewControllers.m in Sources */,
 				A75796FC13E1A030008670B0 /* iGithubAppDelegate_iPad.m in Sources */,
 				A75796FD13E1A030008670B0 /* GHPDirectoryViewController.m in Sources */,
 				A75796FE13E1A030008670B0 /* GHPRootDirectoryViewController.m in Sources */,
@@ -3750,6 +3726,11 @@
 			name = GHMarkdownParser;
 			targetProxy = A744F58213E73D2D0038C189 /* PBXContainerItemProxy */;
 		};
+		A7B6545513EA9183009E4414 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = ANAdvancedNavigationController;
+			targetProxy = A7B6545413EA9183009E4414 /* PBXContainerItemProxy */;
+		};
 		A7C5256E13E6AD890003EEE5 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = Kal;
@@ -3802,11 +3783,13 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
+					"Submodules/ANAdvancedNavigationController/**",
 					"Submodules/GHMarkdownParser/**",
 					"Submodules/Kal/**",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				LIBRARY_SEARCH_PATHS = (
+					"Submodules/ANAdvancedNavigationController/**",
 					"Submodules/GHMarkdownParser/**",
 					"Submodules/Kal/**",
 				);
@@ -3835,11 +3818,13 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
+					"Submodules/ANAdvancedNavigationController/**",
 					"Submodules/GHMarkdownParser/**",
 					"Submodules/Kal/**",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				LIBRARY_SEARCH_PATHS = (
+					"Submodules/ANAdvancedNavigationController/**",
 					"Submodules/GHMarkdownParser/**",
 					"Submodules/Kal/**",
 				);
