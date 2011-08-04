@@ -21,6 +21,7 @@
 		A7528E5913D42A7F0007C4D9 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7528E5813D42A7F0007C4D9 /* CoreText.framework */; };
 		A7528E5B13D42AA20007C4D9 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7528E5A13D42AA20007C4D9 /* MediaPlayer.framework */; };
 		A7528E6113D42E310007C4D9 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7528E6013D42E310007C4D9 /* ImageIO.framework */; };
+		A755973213EB203B005C2F5A /* ANNotificationQueueWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = A755973113EB203B005C2F5A /* ANNotificationQueueWindow.m */; };
 		A75796FB13E1A030008670B0 /* MainWindow_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = A757963C13E1A030008670B0 /* MainWindow_iPad.xib */; };
 		A75796FC13E1A030008670B0 /* iGithubAppDelegate_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = A757963F13E1A030008670B0 /* iGithubAppDelegate_iPad.m */; };
 		A75796FD13E1A030008670B0 /* GHPDirectoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A757964413E1A030008670B0 /* GHPDirectoryViewController.m */; };
@@ -369,7 +370,6 @@
 		A7FDA6C513E7DECA00DE4FF3 /* GHPTextFieldTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A7FDA6C413E7DECA00DE4FF3 /* GHPTextFieldTableViewCell.m */; };
 		A7FDA6E213E8736000DE4FF3 /* GHEditTeamViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7FDA6E113E8735F00DE4FF3 /* GHEditTeamViewController.m */; };
 		A7FDA6F313E88D5200DE4FF3 /* ANNotificationQueueRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7FDA6F213E88D5200DE4FF3 /* ANNotificationQueueRootViewController.m */; };
-		A7FDA70313E890C400DE4FF3 /* ANNotificationQueueRootViewControllerView.m in Sources */ = {isa = PBXBuildFile; fileRef = A7FDA70213E890C300DE4FF3 /* ANNotificationQueueRootViewControllerView.m */; };
 		A7FDA70613E91BD300DE4FF3 /* GHAuthenticatedUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7FDA70513E91BD200DE4FF3 /* GHAuthenticatedUserViewController.m */; };
 /* End PBXBuildFile section */
 
@@ -438,6 +438,8 @@
 		A7528E5813D42A7F0007C4D9 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		A7528E5A13D42AA20007C4D9 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		A7528E6013D42E310007C4D9 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
+		A755973013EB203B005C2F5A /* ANNotificationQueueWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANNotificationQueueWindow.h; sourceTree = "<group>"; };
+		A755973113EB203B005C2F5A /* ANNotificationQueueWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANNotificationQueueWindow.m; sourceTree = "<group>"; };
 		A757963D13E1A030008670B0 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow_iPad.xib; sourceTree = "<group>"; };
 		A757963E13E1A030008670B0 /* iGithubAppDelegate_iPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iGithubAppDelegate_iPad.h; sourceTree = "<group>"; };
 		A757963F13E1A030008670B0 /* iGithubAppDelegate_iPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iGithubAppDelegate_iPad.m; sourceTree = "<group>"; };
@@ -1064,8 +1066,6 @@
 		A7FDA6E113E8735F00DE4FF3 /* GHEditTeamViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHEditTeamViewController.m; sourceTree = "<group>"; };
 		A7FDA6F113E88D5200DE4FF3 /* ANNotificationQueueRootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANNotificationQueueRootViewController.h; sourceTree = "<group>"; };
 		A7FDA6F213E88D5200DE4FF3 /* ANNotificationQueueRootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANNotificationQueueRootViewController.m; sourceTree = "<group>"; };
-		A7FDA70113E890C200DE4FF3 /* ANNotificationQueueRootViewControllerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANNotificationQueueRootViewControllerView.h; sourceTree = "<group>"; };
-		A7FDA70213E890C300DE4FF3 /* ANNotificationQueueRootViewControllerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANNotificationQueueRootViewControllerView.m; sourceTree = "<group>"; };
 		A7FDA70413E91BD200DE4FF3 /* GHAuthenticatedUserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHAuthenticatedUserViewController.h; sourceTree = "<group>"; };
 		A7FDA70513E91BD200DE4FF3 /* GHAuthenticatedUserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHAuthenticatedUserViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -2547,6 +2547,8 @@
 				A7841F3E13E194BB00131648 /* ANNotificationQueue.h */,
 				A7841F3F13E194BB00131648 /* ANNotificationQueue.m */,
 				A7841F4013E194BB00131648 /* ANNotificationView */,
+				A755973013EB203B005C2F5A /* ANNotificationQueueWindow.h */,
+				A755973113EB203B005C2F5A /* ANNotificationQueueWindow.m */,
 			);
 			path = ANNotificationQueue;
 			sourceTree = "<group>";
@@ -3286,8 +3288,6 @@
 			children = (
 				A7FDA6F113E88D5200DE4FF3 /* ANNotificationQueueRootViewController.h */,
 				A7FDA6F213E88D5200DE4FF3 /* ANNotificationQueueRootViewController.m */,
-				A7FDA70113E890C200DE4FF3 /* ANNotificationQueueRootViewControllerView.h */,
-				A7FDA70213E890C300DE4FF3 /* ANNotificationQueueRootViewControllerView.m */,
 			);
 			path = ANNotificationQueueRootViewController;
 			sourceTree = "<group>";
@@ -3736,11 +3736,11 @@
 				A7FDA6C513E7DECA00DE4FF3 /* GHPTextFieldTableViewCell.m in Sources */,
 				A7FDA6E213E8736000DE4FF3 /* GHEditTeamViewController.m in Sources */,
 				A7FDA6F313E88D5200DE4FF3 /* ANNotificationQueueRootViewController.m in Sources */,
-				A7FDA70313E890C400DE4FF3 /* ANNotificationQueueRootViewControllerView.m in Sources */,
 				A7FDA70613E91BD300DE4FF3 /* GHAuthenticatedUserViewController.m in Sources */,
 				A76C012813E9D649005E26C4 /* GHIssuesOfAuthenticatedUserViewController.m in Sources */,
 				A76C013413E9DE99005E26C4 /* GHSearchFieldTableViewCell.m in Sources */,
 				A7DC78F613EACFFC002ABD4B /* NSUserDefaults+Settings.m in Sources */,
+				A755973213EB203B005C2F5A /* ANNotificationQueueWindow.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

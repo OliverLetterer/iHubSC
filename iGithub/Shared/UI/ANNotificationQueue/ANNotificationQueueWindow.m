@@ -1,23 +1,25 @@
 //
-//  ANNotificationQueueRootViewControllerView.m
+//  ANNotificationQueueWindow.m
 //  iGithub
 //
-//  Created by Oliver Letterer on 02.08.11.
+//  Created by Oliver Letterer on 04.08.11.
 //  Copyright 2011 Home. All rights reserved.
 //
 
-#import "ANNotificationQueueRootViewControllerView.h"
+#import "ANNotificationQueueWindow.h"
 #import <QuartzCore/QuartzCore.h>
+#import "ANNotificationQueueRootViewController.h"
 
-@implementation ANNotificationQueueRootViewControllerView
+@implementation ANNotificationQueueWindow
 
 #pragma mark - Initialization
 
 - (id)initWithFrame:(CGRect)frame {
     if ((self = [super initWithFrame:frame])) {
         // Initialization code
-//        self.layer.needsDisplayOnBoundsChange = YES;
+        //        self.layer.needsDisplayOnBoundsChange = YES;
         self.backgroundColor = [UIColor clearColor];
+        self.layer.needsDisplayOnBoundsChange = YES;
         
         CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceGray();
         
@@ -28,6 +30,10 @@
         CGFloat locations[] = {0.0f, 1.0f};
         _gradient = CGGradientCreateWithColors(colorSpace, (__bridge CFArrayRef)colors, locations);
         CGColorSpaceRelease(colorSpace);
+        
+        self.rootViewController = [[ANNotificationQueueRootViewController alloc] init];
+        self.windowLevel = UIWindowLevelAlert;
+        self.userInteractionEnabled = NO;
     }
     return self;
 }

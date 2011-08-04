@@ -7,11 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ANNotificationQueueRootViewControllerView.h"
 
 @interface ANNotificationQueueRootViewController : UIViewController {
 @private
-    ANNotificationQueueRootViewControllerView *_backgroundView;
+    
 }
 
 @end

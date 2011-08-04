@@ -12,19 +12,6 @@
 
 #pragma mark - View lifecycle
 
-- (void)loadView {
-    [super loadView];
-    self.view.backgroundColor = [UIColor clearColor];
-    _backgroundView = [[ANNotificationQueueRootViewControllerView alloc] initWithFrame:self.view.bounds];
-    _backgroundView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-    [self.view addSubview:_backgroundView];
-}
-
-- (void)viewDidUnload {
-    [super viewDidUnload];
-    _backgroundView = nil;
-}
-
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     // Return YES for supported orientations
 	return YES;

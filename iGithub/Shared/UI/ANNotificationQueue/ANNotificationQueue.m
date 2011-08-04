@@ -14,7 +14,7 @@
 #import "ANNotificationView.h"
 #import "ANNotificationErrorView.h"
 #import "ANNotificationSuccessView.h"
-#import "ANNotificationQueueRootViewController.h"
+#import "ANNotificationQueueWindow.h"
 
 @interface ANNotificationQueue () {
 @private
@@ -93,11 +93,7 @@ CGFloat const ANNotificationQueueAnimationDuration = 0.35f*2.0f;
 
 - (UIWindow *)currentWindow {
     if (!_currentWindow) {
-        _currentWindow = [[UIWindow alloc] initWithFrame:[UIApplication sharedApplication].delegate.window.frame];
-        _currentWindow.rootViewController = [[ANNotificationQueueRootViewController alloc] init];
-        _currentWindow.windowLevel = UIWindowLevelAlert;
-        _currentWindow.userInteractionEnabled = NO;
-        _currentWindow.backgroundColor = [UIColor clearColor];
+        _currentWindow = [[ANNotificationQueueWindow alloc] initWithFrame:[UIApplication sharedApplication].delegate.window.frame];
         [_currentWindow makeKeyAndVisible];
     }
     return _currentWindow;
@@ -118,14 +114,14 @@ CGFloat const ANNotificationQueueAnimationDuration = 0.35f*2.0f;
 - (void)_displayNextNotification {
     if ([self.notifications count] == 0) {
         [_currentWindow resignKeyWindow];
-        [[UIApplication sharedApplication].delegate.window makeKeyAndVisible];
-        [UIView animateWithDuration:0.25f animations:^(void) {
+        [[UIApplication sharedApplication].delegate.window becomeKeyWindow];
+        [UIView animateWithDuration:0.5f animations:^(void) {
             _currentWindow.alpha = 0.0f;
         }];
 		return;
 	}
     [self.currentWindow makeKeyAndVisible];
-    [UIView animateWithDuration:0.25f animations:^(void) {
+    [UIView animateWithDuration:0.5f animations:^(void) {
         self.currentWindow.alpha = 1.0f;
     }];
 	
