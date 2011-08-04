@@ -2713,9 +2713,9 @@
 			children = (
 				A7841FF113E1987C00131648 /* GHIssueViewController.h */,
 				A7841FF213E1987C00131648 /* GHIssueViewController.m */,
-				A7841FF313E1987C00131648 /* UIView's */,
 				A76C012613E9D649005E26C4 /* GHIssuesOfAuthenticatedUserViewController.h */,
 				A76C012713E9D649005E26C4 /* GHIssuesOfAuthenticatedUserViewController.m */,
+				A7841FF313E1987C00131648 /* UIView's */,
 			);
 			path = Issue;
 			sourceTree = "<group>";
