@@ -191,4 +191,18 @@
                                             }];
 }
 
++ (void)deleteMilstoneOnRepository:(NSString *)repository withID:(NSNumber *)ID completionHandler:(GHAPIErrorHandler)handler {
+    // v3: DELETE /repos/:user/:repo/milestones/:id
+    
+    NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.github.com/repos/%@/milestones/%@",
+                                       [repository stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding], ID ] ];
+    
+    [[GHAPIBackgroundQueueV3 sharedInstance] sendRequestToURL:URL 
+                                                 setupHandler:^(ASIFormDataRequest *request) {
+                                                     [request setRequestMethod:@"DELETE"];
+                                                 } completionHandler:^(id object, NSError *error, ASIFormDataRequest *request) {
+                                                     handler(error);
+                                                 }];
+}
+
 @end

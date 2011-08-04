@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "GHAPIConnectionHandlersV3.h"
 
 @class GHAPIUserV3;
 
@@ -48,5 +49,7 @@
 + (void)createMilestoneOnRepository:(NSString *)repository title:(NSString *)title description:(NSString *)description dueOn:(NSDate *)dueOn completionHandler:(void(^)(GHAPIMilestoneV3 *milestone, NSError *error))handler;
 
 + (void)updateMilestoneOnRepository:(NSString *)repository withID:(NSNumber *)ID title:(NSString *)title description:(NSString *)description dueOn:(NSDate *)dueOn completionHandler:(void(^)(GHAPIMilestoneV3 *milestone, NSError *error))handler;
+
++ (void)deleteMilstoneOnRepository:(NSString *)repository withID:(NSNumber *)ID completionHandler:(GHAPIErrorHandler)handler;
 
 @end

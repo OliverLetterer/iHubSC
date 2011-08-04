@@ -355,6 +355,17 @@
             
             UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:viewController];
             [self presentModalViewController:navController animated:YES];
+        } else if ([title isEqualToString:NSLocalizedString(@"Delete", @"")]) {
+            [GHAPIMilestoneV3 deleteMilstoneOnRepository:self.repository withID:self.milestoneNumber completionHandler:^(NSError *error) {
+                if (error) {
+                    [self handleError:error];
+                } else {
+                    [[ANNotificationQueue sharedInstance] detatchSuccesNotificationWithTitle:NSLocalizedString(@"Deleted Milestone", @"") message:self.milestone.title];
+                    if (self.navigationController.topViewController == self) {
+                        [self.navigationController popViewControllerAnimated:YES];
+                    }
+                }
+            }];
         }
     }
 }
@@ -386,6 +397,10 @@
     NSUInteger currentButtonIndex = 0;
     
     [sheet addButtonWithTitle:NSLocalizedString(@"Edit", @"")];
+    currentButtonIndex++;
+    
+    [sheet addButtonWithTitle:NSLocalizedString(@"Delete", @"")];
+    sheet.destructiveButtonIndex = currentButtonIndex;
     currentButtonIndex++;
     
     [sheet addButtonWithTitle:NSLocalizedString(@"Cancel", @"")];

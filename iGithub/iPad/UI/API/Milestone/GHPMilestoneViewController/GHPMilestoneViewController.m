@@ -319,6 +319,10 @@
     [sheet addButtonWithTitle:NSLocalizedString(@"Edit", @"")];
     currentButtonIndex++;
     
+    [sheet addButtonWithTitle:NSLocalizedString(@"Delete", @"")];
+    sheet.destructiveButtonIndex = currentButtonIndex;
+    currentButtonIndex++;
+    
     [sheet addButtonWithTitle:NSLocalizedString(@"Cancel", @"")];
     sheet.cancelButtonIndex = currentButtonIndex;
     currentButtonIndex++;
@@ -352,6 +356,15 @@
         viewController.delegate = self;
         
         [self presentViewControllerFromActionButton:viewController detatchNavigationController:YES animated:YES];
+    } else if ([title isEqualToString:NSLocalizedString(@"Delete", @"")]) {
+        [GHAPIMilestoneV3 deleteMilstoneOnRepository:self.repository withID:self.milestoneNumber completionHandler:^(NSError *error) {
+            if (error) {
+                [self handleError:error];
+            } else {
+                [[ANNotificationQueue sharedInstance] detatchSuccesNotificationWithTitle:NSLocalizedString(@"Deleted Milestone", @"") message:self.milestone.title];
+                [self.advancedNavigationController popViewController:self animated:YES];
+            }
+        }];
     }
 }
 
