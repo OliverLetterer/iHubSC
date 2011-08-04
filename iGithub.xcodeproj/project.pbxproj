@@ -362,6 +362,8 @@
 		A7D14F451354E5A700E1B980 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7D14F441354E5A600E1B980 /* MessageUI.framework */; };
 		A7DC78F213EACEE0002ABD4B /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A7DC78F113EACEE0002ABD4B /* Settings.bundle */; };
 		A7DC78F613EACFFC002ABD4B /* NSUserDefaults+Settings.m in Sources */ = {isa = PBXBuildFile; fileRef = A7DC78F513EACFFC002ABD4B /* NSUserDefaults+Settings.m */; };
+		A7DC790413EAD7D2002ABD4B /* GHEmptyBarButtonItem@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A7DC790213EAD7D2002ABD4B /* GHEmptyBarButtonItem@2x.png */; };
+		A7DC790513EAD7D2002ABD4B /* GHEmptyBarButtonItem.png in Resources */ = {isa = PBXBuildFile; fileRef = A7DC790313EAD7D2002ABD4B /* GHEmptyBarButtonItem.png */; };
 		A7FDA6A113E7446F00DE4FF3 /* GHCreateTeamViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7FDA6A013E7446F00DE4FF3 /* GHCreateTeamViewController.m */; };
 		A7FDA6B413E7DD6D00DE4FF3 /* GHTextFieldTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A7FDA6B313E7DD6D00DE4FF3 /* GHTextFieldTableViewCell.m */; };
 		A7FDA6C513E7DECA00DE4FF3 /* GHPTextFieldTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A7FDA6C413E7DECA00DE4FF3 /* GHPTextFieldTableViewCell.m */; };
@@ -1050,6 +1052,8 @@
 		A7DC78F113EACEE0002ABD4B /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		A7DC78F413EACFFC002ABD4B /* NSUserDefaults+Settings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSUserDefaults+Settings.h"; sourceTree = "<group>"; };
 		A7DC78F513EACFFC002ABD4B /* NSUserDefaults+Settings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSUserDefaults+Settings.m"; sourceTree = "<group>"; };
+		A7DC790213EAD7D2002ABD4B /* GHEmptyBarButtonItem@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GHEmptyBarButtonItem@2x.png"; sourceTree = "<group>"; };
+		A7DC790313EAD7D2002ABD4B /* GHEmptyBarButtonItem.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GHEmptyBarButtonItem.png; sourceTree = "<group>"; };
 		A7FDA69F13E7446F00DE4FF3 /* GHCreateTeamViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHCreateTeamViewController.h; sourceTree = "<group>"; };
 		A7FDA6A013E7446F00DE4FF3 /* GHCreateTeamViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHCreateTeamViewController.m; sourceTree = "<group>"; };
 		A7FDA6B213E7DD6D00DE4FF3 /* GHTextFieldTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHTextFieldTableViewCell.h; sourceTree = "<group>"; };
@@ -1825,6 +1829,8 @@
 		A7841D3413E18E2D00131648 /* Action Button */ = {
 			isa = PBXGroup;
 			children = (
+				A7DC790213EAD7D2002ABD4B /* GHEmptyBarButtonItem@2x.png */,
+				A7DC790313EAD7D2002ABD4B /* GHEmptyBarButtonItem.png */,
 				A7841D3513E18E2D00131648 /* UIBarButtonSystemItemAction.png */,
 			);
 			path = "Action Button";
@@ -3452,6 +3458,8 @@
 				A76C012F13E9D7E6005E26C4 /* 162-receipt@2x.png in Resources */,
 				A76C013013E9D7E6005E26C4 /* 162-receipt.png in Resources */,
 				A7DC78F213EACEE0002ABD4B /* Settings.bundle in Resources */,
+				A7DC790413EAD7D2002ABD4B /* GHEmptyBarButtonItem@2x.png in Resources */,
+				A7DC790513EAD7D2002ABD4B /* GHEmptyBarButtonItem.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

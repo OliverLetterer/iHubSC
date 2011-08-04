@@ -23,11 +23,15 @@ NSInteger const kUIActionButtonActionSheetTag = 549532;
 
 - (UIBarButtonItem *)loadingActionButton {
     if (!_loadingActionButton) {
+        UIView *wrapperView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 43.0f, 30.0f)];
+        UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"GHEmptyBarButtonItem.png"] ];
+        [wrapperView addSubview:imageView];
         UIActivityIndicatorView *activityIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+        [wrapperView addSubview:activityIndicatorView];
         [activityIndicatorView startAnimating];
-        _loadingActionButton = [[UIBarButtonItem alloc] initWithCustomView:activityIndicatorView];
+        activityIndicatorView.center = CGPointMake(CGRectGetMidX(wrapperView.bounds), CGRectGetMidY(wrapperView.bounds));
+        _loadingActionButton = [[UIBarButtonItem alloc] initWithCustomView:wrapperView];
         _loadingActionButton.enabled = NO;
-        _loadingActionButton.style = UIBarButtonItemStyleBordered;
     }
     return _loadingActionButton;
 }
