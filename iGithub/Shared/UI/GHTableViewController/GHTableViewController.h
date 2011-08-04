@@ -98,6 +98,9 @@
 
 - (void)downloadDataForPage:(NSUInteger)page inSection:(NSUInteger)section;
 
+@property (nonatomic, readonly) UIView *tableHeaderShadowView;
+@property (nonatomic, readonly) UIView *tableFooterShadowView;
+
 @end
 
 

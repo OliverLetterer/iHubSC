@@ -20,5 +20,7 @@
 
 @property (nonatomic, retain) UIColor *navigationTintColor;
 
+@property (nonatomic, readonly) UIView *tableHeaderShadowView;
+@property (nonatomic, readonly) UIView *tableFooterShadowView;
 
 @end

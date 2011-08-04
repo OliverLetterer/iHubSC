@@ -25,6 +25,55 @@
 
 #pragma mark - setters and getters
 
+- (UIView *)tableFooterShadowView {
+    NSDictionary *newActions = [NSDictionary dictionaryWithObjectsAndKeys:[NSNull null], @"onOrderIn",
+                                [NSNull null], @"onOrderOut",
+                                [NSNull null], @"sublayers",
+                                [NSNull null], @"contents",
+                                [NSNull null], @"bounds",
+                                nil];
+    
+    CAGradientLayer *gradientLayer = nil;
+    UIView *view = nil;
+    
+    view = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 320.0f, 22.0f)];
+    view.backgroundColor = [UIColor clearColor];
+    gradientLayer = [CAGradientLayer layer];
+    gradientLayer.frame = CGRectMake(0.0f, 0.0f, 480.0f, 22.0f);
+    gradientLayer.colors = [NSArray arrayWithObjects:
+                            (__bridge id)[UIColor colorWithWhite:0.0f alpha:0.3f].CGColor,
+                            (__bridge id)[UIColor colorWithWhite:0.0f alpha:0.0f].CGColor,
+                            nil];
+    gradientLayer.actions = newActions;
+    [view.layer addSublayer:gradientLayer];
+    
+    return view;
+}
+
+- (UIView *)tableHeaderShadowView {
+    NSDictionary *newActions = [NSDictionary dictionaryWithObjectsAndKeys:[NSNull null], @"onOrderIn",
+                                [NSNull null], @"onOrderOut",
+                                [NSNull null], @"sublayers",
+                                [NSNull null], @"contents",
+                                [NSNull null], @"bounds",
+                                nil];
+    
+    CAGradientLayer *gradientLayer = nil;
+    UIView *view = nil;
+    
+    view = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 320.0f, 22.0f)];
+    view.backgroundColor = [UIColor clearColor];
+    gradientLayer = [CAGradientLayer layer];
+    gradientLayer.frame = CGRectMake(0.0f, 0.0f, 480.0f, 22.0f);
+    gradientLayer.colors = [NSArray arrayWithObjects:
+                            (__bridge id)[UIColor colorWithWhite:0.0f alpha:0.0f].CGColor,
+                            (__bridge id)[UIColor colorWithWhite:0.0f alpha:0.3f].CGColor,
+                            nil];
+    gradientLayer.actions = newActions;
+    [view.layer addSublayer:gradientLayer];
+    return view;
+}
+
 - (void)setIsDownloadingEssentialData:(BOOL)isDownloadingEssentialData {
     if (isDownloadingEssentialData != _isDownloadingEssentialData) {
         _isDownloadingEssentialData = isDownloadingEssentialData;
@@ -300,39 +349,8 @@ static CGFloat wrapperViewHeight = 21.0f;
     self.tableView.maximumRowCountToStillUseAnimationWhileExpanding = 100;
     
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
-        NSDictionary *newActions = [NSDictionary dictionaryWithObjectsAndKeys:[NSNull null], @"onOrderIn",
-                                    [NSNull null], @"onOrderOut",
-                                    [NSNull null], @"sublayers",
-                                    [NSNull null], @"contents",
-                                    [NSNull null], @"bounds",
-                                    nil];
-        
-        CAGradientLayer *gradientLayer = nil;
-        UIView *view = nil;
-        
-        view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320.0, 22)];
-        view.backgroundColor = [UIColor clearColor];
-        gradientLayer = [CAGradientLayer layer];
-        gradientLayer.frame = CGRectMake(0, 0, 480, 22);
-        gradientLayer.colors = [NSArray arrayWithObjects:
-                                (__bridge id)[UIColor colorWithWhite:0.0 alpha:0.0].CGColor,
-                                (__bridge id)[UIColor colorWithWhite:0.0 alpha:0.3].CGColor,
-                                nil];
-        gradientLayer.actions = newActions;
-        [view.layer addSublayer:gradientLayer];
-        self.tableView.tableHeaderView = view;
-        
-        view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320.0, 22)];
-        view.backgroundColor = [UIColor clearColor];
-        gradientLayer = [CAGradientLayer layer];
-        gradientLayer.frame = CGRectMake(0, 0, 480, 22);
-        gradientLayer.colors = [NSArray arrayWithObjects:
-                                (__bridge id)[UIColor colorWithWhite:0.0 alpha:0.3].CGColor,
-                                (__bridge id)[UIColor colorWithWhite:0.0 alpha:0.0].CGColor,
-                                nil];
-        gradientLayer.actions = newActions;
-        [view.layer addSublayer:gradientLayer];
-        self.tableView.tableFooterView = view;
+        self.tableView.tableHeaderView = self.tableHeaderShadowView;
+        self.tableView.tableFooterView = self.tableFooterShadowView;
         
         self.tableView.contentInset = UIEdgeInsetsMake(-22, 0, -22, 0);
         self.defaultEdgeInset = self.tableView.contentInset;
