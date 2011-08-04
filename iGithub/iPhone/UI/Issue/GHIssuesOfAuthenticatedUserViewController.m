@@ -11,6 +11,7 @@
 #import "GHIssueViewController.h"
 #import "GHSearchFieldTableViewCell.h"
 #import "UIColor+GithubUI.h"
+#import "NSUserDefaults+Settings.h"
 
 #define kUITableViewSectionSearch                   0
 #define kUITableViewSectionAssignedIssues           1
@@ -28,7 +29,7 @@
         
         [self cacheAssignedIssuesHeight];
         NSUInteger count = _assignedIssues.count;
-        if (count > 0) {
+        if (count > 0 && [NSUserDefaults standardUserDefaults].showIssuesBadge) {
             self.tabBarItem.badgeValue = [NSString stringWithFormat:@"%u", count];
         } else {
             self.tabBarItem.badgeValue = nil;

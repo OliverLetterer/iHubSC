@@ -360,6 +360,8 @@
 		A7C5259613E6E0170003EEE5 /* GHUpdateMilestoneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7C5259513E6E0160003EEE5 /* GHUpdateMilestoneViewController.m */; };
 		A7CE1B831346349200169F94 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7CE1B821346349000169F94 /* CoreData.framework */; };
 		A7D14F451354E5A700E1B980 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7D14F441354E5A600E1B980 /* MessageUI.framework */; };
+		A7DC78F213EACEE0002ABD4B /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A7DC78F113EACEE0002ABD4B /* Settings.bundle */; };
+		A7DC78F613EACFFC002ABD4B /* NSUserDefaults+Settings.m in Sources */ = {isa = PBXBuildFile; fileRef = A7DC78F513EACFFC002ABD4B /* NSUserDefaults+Settings.m */; };
 		A7FDA6A113E7446F00DE4FF3 /* GHCreateTeamViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7FDA6A013E7446F00DE4FF3 /* GHCreateTeamViewController.m */; };
 		A7FDA6B413E7DD6D00DE4FF3 /* GHTextFieldTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A7FDA6B313E7DD6D00DE4FF3 /* GHTextFieldTableViewCell.m */; };
 		A7FDA6C513E7DECA00DE4FF3 /* GHPTextFieldTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A7FDA6C413E7DECA00DE4FF3 /* GHPTextFieldTableViewCell.m */; };
@@ -1045,6 +1047,9 @@
 		A7CE1B821346349000169F94 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		A7D14F441354E5A600E1B980 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		A7D41AC41358B6B500CD3A5C /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
+		A7DC78F113EACEE0002ABD4B /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
+		A7DC78F413EACFFC002ABD4B /* NSUserDefaults+Settings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSUserDefaults+Settings.h"; sourceTree = "<group>"; };
+		A7DC78F513EACFFC002ABD4B /* NSUserDefaults+Settings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSUserDefaults+Settings.m"; sourceTree = "<group>"; };
 		A7FDA69F13E7446F00DE4FF3 /* GHCreateTeamViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHCreateTeamViewController.h; sourceTree = "<group>"; };
 		A7FDA6A013E7446F00DE4FF3 /* GHCreateTeamViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHCreateTeamViewController.m; sourceTree = "<group>"; };
 		A7FDA6B213E7DD6D00DE4FF3 /* GHTextFieldTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHTextFieldTableViewCell.h; sourceTree = "<group>"; };
@@ -1812,6 +1817,7 @@
 				A7841D7913E18E2D00131648 /* TabBarIcons */,
 				A7841D7E13E18E2D00131648 /* TODO.txt */,
 				A7841D3613E18E2D00131648 /* Changelog.txt */,
+				A7DC78F113EACEE0002ABD4B /* Settings.bundle */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -1996,6 +2002,7 @@
 		A7841E5413E194BB00131648 /* Foundation Additions */ = {
 			isa = PBXGroup;
 			children = (
+				A7DC78F313EACFD4002ABD4B /* NSUserDefaults+Additions */,
 				A7841E5513E194BB00131648 /* NSString+Additions */,
 				A7841E5813E194BB00131648 /* UIColor+Github */,
 				A7841E5B13E194BB00131648 /* UIImage+Additions */,
@@ -3222,6 +3229,15 @@
 			path = GHDateSelectViewController;
 			sourceTree = "<group>";
 		};
+		A7DC78F313EACFD4002ABD4B /* NSUserDefaults+Additions */ = {
+			isa = PBXGroup;
+			children = (
+				A7DC78F413EACFFC002ABD4B /* NSUserDefaults+Settings.h */,
+				A7DC78F513EACFFC002ABD4B /* NSUserDefaults+Settings.m */,
+			);
+			path = "NSUserDefaults+Additions";
+			sourceTree = "<group>";
+		};
 		A7FDA69713E7441600DE4FF3 /* Organization */ = {
 			isa = PBXGroup;
 			children = (
@@ -3435,6 +3451,7 @@
 				A76C012113E9D3DD005E26C4 /* styles in Resources */,
 				A76C012F13E9D7E6005E26C4 /* 162-receipt@2x.png in Resources */,
 				A76C013013E9D7E6005E26C4 /* 162-receipt.png in Resources */,
+				A7DC78F213EACEE0002ABD4B /* Settings.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3715,6 +3732,7 @@
 				A7FDA70613E91BD300DE4FF3 /* GHAuthenticatedUserViewController.m in Sources */,
 				A76C012813E9D649005E26C4 /* GHIssuesOfAuthenticatedUserViewController.m in Sources */,
 				A76C013413E9DE99005E26C4 /* GHSearchFieldTableViewCell.m in Sources */,
+				A7DC78F613EACFFC002ABD4B /* NSUserDefaults+Settings.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
