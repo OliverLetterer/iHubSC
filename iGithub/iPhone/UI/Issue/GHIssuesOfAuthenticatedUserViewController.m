@@ -76,11 +76,11 @@
     [super pullToReleaseTableViewReloadData];
     
     [GHAPIIssueV3 allIssuesOfAuthenticatedUserWithCompletionHandler:^(NSMutableArray *issues, NSError *error) {
+        [self pullToReleaseTableViewDidReloadData];
         if (error) {
             [self handleError:error];
         } else {
             self.assignedIssues = issues;
-            [self pullToReleaseTableViewDidReloadData];
         }
     }];
 }
