@@ -27,6 +27,12 @@
         _assignedIssues = assignedIssues;
         
         [self cacheAssignedIssuesHeight];
+        NSUInteger count = _assignedIssues.count;
+        if (count > 0) {
+            self.tabBarItem.badgeValue = [NSString stringWithFormat:@"%u", count];
+        } else {
+            self.tabBarItem.badgeValue = nil;
+        }
         if (self.isViewLoaded) {
             [self.tableView reloadData];
         }
@@ -293,13 +299,13 @@
 
 - (id)initWithCoder:(NSCoder *)decoder {
     if ((self = [super initWithCoder:decoder])) {
-        _assignedIssues = [decoder decodeObjectForKey:@"assignedIssues"];
+        self.tabBarItem = [[UITabBarItem alloc] initWithTitle:nil image:[UIImage imageNamed:@"162-receipt.png"] tag:0];
+        self.title = NSLocalizedString(@"My Issues", @"");
+        
+        self.assignedIssues = [decoder decodeObjectForKey:@"assignedIssues"];
         _searchString = [decoder decodeObjectForKey:@"searchString"];
         _filteresIssues = [decoder decodeObjectForKey:@"filteresIssues"];
         _isSearchBarActive = [decoder decodeBoolForKey:@"isSearchBarActive"];
-        
-        self.tabBarItem = [[UITabBarItem alloc] initWithTitle:nil image:[UIImage imageNamed:@"162-receipt.png"] tag:0];
-        self.title = NSLocalizedString(@"My Issues", @"");
     }
     return self;
 }
