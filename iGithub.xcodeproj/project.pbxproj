@@ -335,6 +335,7 @@
 		A784206313E1987D00131648 /* GHTableViewCellWithLinearGradientBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = A784203913E1987C00131648 /* GHTableViewCellWithLinearGradientBackgroundView.m */; };
 		A784206413E1987D00131648 /* GHUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A784203C13E1987C00131648 /* GHUserViewController.m */; };
 		A784206513E1987D00131648 /* GHWebViewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A784203F13E1987C00131648 /* GHWebViewViewController.m */; };
+		A7AE937513EC0843007B7CE1 /* GHAPIV3NotificationUserDictionaryKeys.m in Sources */ = {isa = PBXBuildFile; fileRef = A7AE937413EC0843007B7CE1 /* GHAPIV3NotificationUserDictionaryKeys.m */; };
 		A7B6545613EA9189009E4414 /* libANAdvancedNavigationController.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A7B6545313EA917B009E4414 /* libANAdvancedNavigationController.a */; };
 		A7BD1EEB13E49D880016A662 /* GHViewREADMEViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7BD1EEA13E49D870016A662 /* GHViewREADMEViewController.m */; };
 		A7BD1EF013E49F230016A662 /* GHAPITreeV3.m in Sources */ = {isa = PBXBuildFile; fileRef = A7BD1EEF13E49F230016A662 /* GHAPITreeV3.m */; };
@@ -1005,6 +1006,8 @@
 		A784203C13E1987C00131648 /* GHUserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHUserViewController.m; sourceTree = "<group>"; };
 		A784203E13E1987C00131648 /* GHWebViewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHWebViewViewController.h; sourceTree = "<group>"; };
 		A784203F13E1987C00131648 /* GHWebViewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHWebViewViewController.m; sourceTree = "<group>"; };
+		A7AE937313EC0843007B7CE1 /* GHAPIV3NotificationUserDictionaryKeys.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHAPIV3NotificationUserDictionaryKeys.h; sourceTree = "<group>"; };
+		A7AE937413EC0843007B7CE1 /* GHAPIV3NotificationUserDictionaryKeys.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHAPIV3NotificationUserDictionaryKeys.m; sourceTree = "<group>"; };
 		A7B6544B13EA917B009E4414 /* ANAdvancedNavigationController.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = ANAdvancedNavigationController.xcodeproj; sourceTree = "<group>"; };
 		A7BD1EE913E49D870016A662 /* GHViewREADMEViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHViewREADMEViewController.h; sourceTree = "<group>"; };
 		A7BD1EEA13E49D870016A662 /* GHViewREADMEViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHViewREADMEViewController.m; sourceTree = "<group>"; };
@@ -2199,6 +2202,8 @@
 				A7841E9B13E194BB00131648 /* GHAPIConnectionHandlersV3.h */,
 				A7841E9C13E194BB00131648 /* Utility.h */,
 				A7841E9D13E194BB00131648 /* Utility.m */,
+				A7AE937313EC0843007B7CE1 /* GHAPIV3NotificationUserDictionaryKeys.h */,
+				A7AE937413EC0843007B7CE1 /* GHAPIV3NotificationUserDictionaryKeys.m */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -3735,6 +3740,7 @@
 				A755974A13EB452A005C2F5A /* GHCreateRepositoryViewController.m in Sources */,
 				A755974B13EB452A005C2F5A /* GHCreateRepositoryTableViewCell.m in Sources */,
 				A755975F13EB45C6005C2F5A /* GHPCreateRepositoryTableViewCell.m in Sources */,
+				A7AE937513EC0843007B7CE1 /* GHAPIV3NotificationUserDictionaryKeys.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

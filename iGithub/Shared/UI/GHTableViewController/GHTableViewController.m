@@ -307,6 +307,7 @@ static CGFloat wrapperViewHeight = 21.0f;
 
 - (id)initWithStyle:(UITableViewStyle)style {
     if ((self = [super initWithStyle:style])) {
+        [self setupNotifications];
         _myTableViewStyle = style;
         // Custom initialization
         self.cachedHeightsDictionary = [NSMutableDictionary dictionary];
@@ -335,15 +336,6 @@ static CGFloat wrapperViewHeight = 21.0f;
         self.nextPageForSectionsDictionary = [NSMutableDictionary dictionary];
     }
     return self;
-}
-
-#pragma mark - Memory management
-
-- (void)didReceiveMemoryWarning {
-    // Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
-    
-    // Release any cached data, images, etc that aren't in use.
 }
 
 #pragma mark - View lifecycle
@@ -609,6 +601,7 @@ static CGFloat wrapperViewHeight = 21.0f;
 
 - (id)initWithCoder:(NSCoder *)decoder {
     if ((self = [super initWithCoder:decoder])) {
+        [self setupNotifications];
         _nextPageForSectionsDictionary = [decoder decodeObjectForKey:@"nextPageForSectionsDictionary"];
         _cachedHeightsDictionary = [decoder decodeObjectForKey:@"123cachedHeightsDictionary"];
         _reloadDataIfNewUserGotAuthenticated = [decoder decodeBoolForKey:@"reloadDataIfNewUserGotAuthenticated"];
@@ -679,6 +672,21 @@ static CGFloat wrapperViewHeight = 21.0f;
     [self setupDefaultTableViewCell:cell forRowAtIndexPath:indexPath];
     
     return cell;
+}
+
+@end
+
+
+
+
+@implementation GHTableViewController (GHAPIV3Notifications)
+
+- (void)setupNotifications {
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(gistDeletedNotificationCallback:) name:GHAPIGistV3DeleteNotification object:nil];
+}
+
+- (void)gistDeletedNotificationCallback:(NSNotification *)notification {
+    
 }
 
 @end

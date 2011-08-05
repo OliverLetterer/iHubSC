@@ -18,6 +18,18 @@
     return NSLocalizedString(@"No Gists available", @"");
 }
 
+#pragma mark - Notifications
+
+- (void)gistDeletedNotificationCallback:(NSNotification *)notification {
+    NSString *gistID = [notification.userInfo objectForKey:GHAPIV3NotificationUserDictionaryGistIDKey];
+    NSIndexSet *deleteSet = [self.dataArray indexesOfObjectsPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {
+        GHAPIGistV3 *gist = obj;
+        return [gist.ID isEqualToString:gistID];
+    }];
+    
+    [self dataArrayRemoveObjectsInSet:deleteSet];
+}
+
 #pragma mark - Table view data source
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {

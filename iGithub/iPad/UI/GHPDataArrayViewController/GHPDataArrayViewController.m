@@ -45,6 +45,15 @@
     [self cacheDataArrayHeights];
     
     if (self.isViewLoaded) {
+        [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] 
+                      withRowAnimation:UITableViewRowAnimationAutomatic];
+    }
+}
+
+- (void)dataArrayRemoveObjectsInSet:(NSIndexSet *)indexSet {
+    [self.dataArray removeObjectsAtIndexes:indexSet];
+    [self cacheDataArrayHeights];
+    if (self.isViewLoaded) {
         [self.tableView reloadData];
     }
 }

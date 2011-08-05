@@ -8,6 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
+extern NSString *const GHAPIGistV3StarStateChangedNotification;
+extern NSString *const GHAPIGistV3DeleteNotification;
+
+
 @class GHAPIUserV3, GHAPIGistCommentV3;
 
 @interface GHAPIGistV3 : NSObject <NSCoding> {

@@ -87,6 +87,23 @@
     return self;
 }
 
+#pragma mark - Notifications
+
+- (void)gistDeletedNotificationCallback:(NSNotification *)notification {
+    NSString *gistID = [notification.userInfo objectForKey:GHAPIV3NotificationUserDictionaryGistIDKey];
+    NSIndexSet *deleteSet = [self.gists indexesOfObjectsPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {
+        GHAPIGistV3 *gist = obj;
+        return [gist.ID isEqualToString:gistID];
+    }];
+    
+    [self.gists removeObjectsAtIndexes:deleteSet];
+    [self cacheGistsHeight];
+    if (self.isViewLoaded) {
+        [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:kUITableViewGists] 
+                      withRowAnimation:UITableViewRowAnimationAutomatic];
+    }
+}
+
 #pragma mark - instance methods
 
 - (void)downloadRepositories {

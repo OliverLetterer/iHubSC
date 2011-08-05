@@ -59,6 +59,7 @@
 #import "GHAPIConnectionHandlersV3.h"
 #import "Utility.h"
 #import "GHAPIMarkdownFormatter.h"
+#import "GHAPIV3NotificationUserDictionaryKeys.h"
 
 // v2
 #import "GHPayload.h"

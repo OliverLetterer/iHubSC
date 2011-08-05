@@ -106,6 +106,18 @@
 
 
 
+@interface GHTableViewController (GHAPIV3Notifications)
+
+- (void)setupNotifications;
+
+- (void)gistDeletedNotificationCallback:(NSNotification *)notification;
+
+@end
+
+
+
+
+
 @interface GHTableViewController (iPad)
 
 - (void)setupDefaultTableViewCell:(GHPDefaultTableViewCell *)cell inTableView:(UITableView *)tableView forRowAtIndexPath:(NSIndexPath *)indexPath;

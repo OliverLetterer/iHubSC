@@ -20,6 +20,8 @@
 - (void)setDataArray:(NSMutableArray *)dataArray nextPage:(NSUInteger)nextPage;
 - (void)appendDataFromArray:(NSMutableArray *)array nextPage:(NSUInteger)nextPage;
 
+- (void)dataArrayRemoveObjectsInSet:(NSIndexSet *)indexSet;
+
 - (void)cacheDataArrayHeights;
 
 @end

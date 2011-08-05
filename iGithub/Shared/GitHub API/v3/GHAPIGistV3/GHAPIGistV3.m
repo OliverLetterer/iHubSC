@@ -9,6 +9,11 @@
 #import "GHAPIGistV3.h"
 #import "GithubAPI.h"
 
+NSString *const GHAPIGistV3StarStateChangedNotification = @"GHAPIGistV3StarStateChangedNotification";
+NSString *const GHAPIGistV3DeleteNotification = @"GHAPIGistV3DeleteNotification";
+
+
+
 @implementation GHAPIGistV3
 
 @synthesize URL=_URL, ID=_ID, description=_description, public=_public, user=_user, files=_files, comments=_comments, pullURL=_pullURL, pushURL=_pushURL, createdAt=_createdAt, forks=_forks;
@@ -111,6 +116,8 @@
                                             setupHandler:^(ASIFormDataRequest *request) {
                                                 [request setRequestMethod:@"DELETE"];
                                             } completionHandler:^(id object, NSError *error, ASIFormDataRequest *request) {
+                                                [[NSNotificationCenter defaultCenter] postNotificationName:GHAPIGistV3DeleteNotification object:nil 
+                                                                                                  userInfo:[NSDictionary dictionaryWithObject:ID forKey:GHAPIV3NotificationUserDictionaryGistIDKey]];
                                                 handler(error);
                                             }];
 }
