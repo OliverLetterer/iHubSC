@@ -45,10 +45,6 @@ CGFloat const ANNotificationQueueAnimationDuration = 0.35f*2.0f;
 - (id)init {
     if ((self = [super init])) {
         self.notifications = [NSMutableArray array];
-        [self.currentWindow makeKeyAndVisible];
-        [self.currentWindow resignKeyWindow];
-        [[UIApplication sharedApplication].delegate.window makeKeyAndVisible];
-        self.currentWindow.alpha = 0.0f;
     }
     return self;
 }
@@ -92,7 +88,7 @@ CGFloat const ANNotificationQueueAnimationDuration = 0.35f*2.0f;
 - (UIWindow *)currentWindow {
     if (!_currentWindow) {
         _currentWindow = [[ANNotificationQueueWindow alloc] initWithFrame:[UIApplication sharedApplication].delegate.window.frame];
-        [_currentWindow makeKeyAndVisible];
+        self.currentWindow.alpha = 0.0f;
     }
     return _currentWindow;
 }
