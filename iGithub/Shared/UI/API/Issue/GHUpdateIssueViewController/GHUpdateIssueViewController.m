@@ -93,10 +93,10 @@
     [GHAPIIssueV3 updateIssueOnRepository:self.repository withNumber:self.issue.number 
                                     title:title 
                                      body:body 
-                                 assignee:self.assigneeString 
+                                 assignee:self.assigneeString ? self.assigneeString : (id)[NSNull null]
                                     state:self.issue.state 
-                                milestone:self.selectedMilestoneNumber 
-                                   labels:self.selectedLabels.count > 0 ? self.selectedLabels : nil
+                                milestone:self.selectedMilestoneNumber ? self.selectedMilestoneNumber : (id)[NSNull null]
+                                   labels:self.selectedLabels.count > 0 ? self.selectedLabels : (id)[NSNull null]
                         completionHandler:^(GHAPIIssueV3 *issue, NSError *error) {
                             if (error) {
                                 [self handleError:error];

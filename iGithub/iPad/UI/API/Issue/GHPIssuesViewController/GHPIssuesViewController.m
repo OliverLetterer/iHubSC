@@ -40,8 +40,25 @@
     return self;
 }
 
-#pragma mark - Memory management
+#pragma mark - Notifications
 
+- (void)issueChangedNotificationCallback:(NSNotification *)notification {
+    GHAPIIssueV3 *issue = [notification.userInfo objectForKey:GHAPIV3NotificationUserDictionaryIssueKey];
+    BOOL changed = NO;
+    
+    NSUInteger index = [self.dataArray indexOfObject:issue];
+    if (index != NSNotFound) {
+        [self.dataArray replaceObjectAtIndex:index withObject:issue];
+        changed = YES;
+    }
+    
+    if (changed) {
+        [self cacheDataArrayHeights];
+        if (self.isViewLoaded) {
+            [self.tableView reloadData];
+        }
+    }
+}
 
 #pragma mark - Table view data source
 

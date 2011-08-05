@@ -26,8 +26,18 @@
     return self;
 }
 
-#pragma mark - Memory management
+#pragma mark - Equal
 
+- (BOOL)isEqualToLabel:(GHAPILabelV3 *)label {
+    return [self.name isEqualToString:label.name];
+}
+
+- (BOOL)isEqual:(id)object {
+    if ([object isKindOfClass:GHAPILabelV3.class]) {
+        return [self isEqualToLabel:object];
+    }
+    return NO;
+}
 
 #pragma mark - Keyed Archiving
 

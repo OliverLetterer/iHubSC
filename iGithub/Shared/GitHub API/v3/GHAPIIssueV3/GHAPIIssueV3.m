@@ -10,6 +10,12 @@
 #import "GithubAPI.h"
 #import "NSAttributedString+HTML.h"
 
+NSString *const GHAPIIssueV3ContentChangedNotification = @"GHAPIIssueV3ContentChangedNotification";
+NSString *const GHAPIIssueV3CreationNotification = @"GHAPIIssueV3CreationNotification";
+NSString *const GHAPIIssueV3MergedNotification = @"GHAPIIssueV3MergedNotification";
+
+
+
 NSString *const kGHAPIIssueStateV3Open = @"open";
 NSString *const kGHAPIIssueStateV3Closed = @"closed";
 
@@ -93,6 +99,17 @@ NSString *const kGHAPIIssueStateV3Closed = @"closed";
     return NO;
 }
 
+- (BOOL)isEqualToIssue:(GHAPIIssueV3 *)issue {
+    return [self.repository isEqualToString:issue.repository] && [self.number isEqualToNumber:issue.number];
+}
+
+- (BOOL)isEqual:(id)object {
+    if ([object isKindOfClass:GHAPIIssueV3.class]) {
+        return [self isEqualToIssue:object];
+    }
+    return NO;
+}
+
 #pragma mark - Initialization
 
 - (id)initWithRawDictionary:(NSDictionary *)rawDictionary {
@@ -126,9 +143,6 @@ NSString *const kGHAPIIssueStateV3Closed = @"closed";
     }
     return self;
 }
-
-#pragma mark - Memory management
-
 
 #pragma mark - Keyed Archiving
 
@@ -348,56 +362,27 @@ NSString *const kGHAPIIssueStateV3Closed = @"closed";
 + (void)closeIssueOnRepository:(NSString *)repository 
                     withNumber:(NSNumber *)number 
              completionHandler:(void (^)(NSError *error))handler {
-    // v3: PATCH /repos/:user/:repo/issues/:id
-    
-    NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.github.com/repos/%@/issues/%@",
-                                       [repository stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding], number ] ];
-    
-    
-    [[GHAPIBackgroundQueueV3 sharedInstance] sendRequestToURL:URL 
-                                            setupHandler:^(ASIFormDataRequest *request) { 
-                                                // {"body"=>"String"}
-                                                
-                                                [request setRequestMethod:@"PATCH"];
-                                                
-                                                NSDictionary *jsonDictionary = [NSDictionary dictionaryWithObject:@"closed" forKey:@"state"];
-                                                NSString *jsonString = [jsonDictionary JSONString];
-                                                NSMutableData *jsonData = [[jsonString dataUsingEncoding:NSUTF8StringEncoding] mutableCopy];
-                                                
-                                                [request setPostBody:jsonData];
-                                                [request setPostLength:[jsonString length] ];
-                                            } 
-                                       completionHandler:^(id object, NSError *error, ASIFormDataRequest *request) {
-                                           handler(error);
-                                       }];
+    [self updateIssueOnRepository:repository withNumber:number title:nil body:nil assignee:nil state:kGHAPIIssueStateV3Closed 
+                        milestone:nil labels:nil completionHandler:^(GHAPIIssueV3 *issue, NSError *error) {
+                            if (error) {
+                                handler(error);
+                            } else {
+                                handler(nil);
+                            }
+                        }];
 }
 
 + (void)reopenIssueOnRepository:(NSString *)repository 
                      withNumber:(NSNumber *)number 
               completionHandler:(void (^)(NSError *error))handler {
-    
-    // v3: PATCH /repos/:user/:repo/issues/:id
-    
-    NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.github.com/repos/%@/issues/%@",
-                                       [repository stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding], number ] ];
-    
-    
-    [[GHAPIBackgroundQueueV3 sharedInstance] sendRequestToURL:URL 
-                                            setupHandler:^(ASIFormDataRequest *request) { 
-                                                // {"body"=>"String"}
-                                                
-                                                [request setRequestMethod:@"PATCH"];
-                                                
-                                                NSDictionary *jsonDictionary = [NSDictionary dictionaryWithObject:@"open" forKey:@"state"];
-                                                NSString *jsonString = [jsonDictionary JSONString];
-                                                NSMutableData *jsonData = [[jsonString dataUsingEncoding:NSUTF8StringEncoding] mutableCopy];
-                                                
-                                                [request setPostBody:jsonData];
-                                                [request setPostLength:[jsonString length] ];
-                                            } 
-                                       completionHandler:^(id object, NSError *error, ASIFormDataRequest *request) {
-                                           handler(error);
-                                       }];
+    [self updateIssueOnRepository:repository withNumber:number title:nil body:nil assignee:nil state:kGHAPIIssueStateV3Open 
+                        milestone:nil labels:nil completionHandler:^(GHAPIIssueV3 *issue, NSError *error) {
+                            if (error) {
+                                handler(error);
+                            } else {
+                                handler(nil);
+                            }
+                        }];
 }
 
 + (void)eventforIssueWithID:(NSNumber *)issueID OnRepository:(NSString *)repository 
@@ -551,21 +536,15 @@ NSString *const kGHAPIIssueStateV3Closed = @"closed";
                                                      }
                                                      if (assignee) {
                                                          [jsonDictionary setObject:assignee forKey:@"assignee"];
-                                                     } else {
-                                                         [jsonDictionary setObject:[NSNull null] forKey:@"assignee"];
                                                      }
                                                      if (state) {
                                                          [jsonDictionary setObject:state forKey:@"state"];
                                                      }
                                                      if (milestone) {
                                                          [jsonDictionary setObject:milestone forKey:@"milestone"];
-                                                     } else {
-                                                         [jsonDictionary setObject:[NSNull null] forKey:@"milestone"];
                                                      }
                                                      if (labels) {
                                                          [jsonDictionary setObject:labels forKey:@"labels"];
-                                                     } else {
-                                                         [jsonDictionary setObject:[NSNull null] forKey:@"labels"];
                                                      }
                                                      NSString *jsonString = [jsonDictionary JSONString];
                                                      NSMutableData *jsonData = [[jsonString dataUsingEncoding:NSUTF8StringEncoding] mutableCopy];
@@ -577,7 +556,10 @@ NSString *const kGHAPIIssueStateV3Closed = @"closed";
                                                 if (error) {
                                                     handler(nil, error);
                                                 } else {
-                                                    handler([[GHAPIIssueV3 alloc] initWithRawDictionary:object], nil);
+                                                    GHAPIIssueV3 *issue = [[GHAPIIssueV3 alloc] initWithRawDictionary:object];
+                                                    [[NSNotificationCenter defaultCenter] postNotificationName:GHAPIIssueV3ContentChangedNotification object:nil 
+                                                                                                      userInfo:[NSDictionary dictionaryWithObject:issue forKey:GHAPIV3NotificationUserDictionaryIssueKey] ];
+                                                    handler(issue, nil);
                                                 }
                                             }];
 }

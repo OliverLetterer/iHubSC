@@ -88,6 +88,16 @@
     }
 }
 
+#pragma mark - Notifications
+
+- (void)issueChangedNotificationCallback:(NSNotification *)notification {
+    GHAPIIssueV3 *issue = [notification.userInfo objectForKey:GHAPIV3NotificationUserDictionaryIssueKey];
+    
+    if ([issue isEqualToIssue:self.issue]) {
+        self.issue = issue;
+    }
+}
+
 #pragma mark - Initialization
 
 - (id)initWithIssueNumber:(NSNumber *)issueNumber onRepository:(NSString *)repository {

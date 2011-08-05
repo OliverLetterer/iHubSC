@@ -9,6 +9,12 @@
 #import <Foundation/Foundation.h>
 #import "GHAPIConnectionHandlersV3.h"
 
+extern NSString *const GHAPIIssueV3ContentChangedNotification;
+extern NSString *const GHAPIIssueV3CreationNotification;
+extern NSString *const GHAPIIssueV3MergedNotification;
+
+
+
 @class GHAPIUserV3, GHAPIMilestoneV3, GHAPIIssueCommentV3;
 
 extern NSString *const kGHAPIIssueStateV3Open;
@@ -61,6 +67,8 @@ extern NSString *const kGHAPIIssueStateV3Closed;
 @property (nonatomic, readonly) BOOL hasMilestone;
 
 - (BOOL)matchedString:(NSString *)string;
+
+- (BOOL)isEqualToIssue:(GHAPIIssueV3 *)issue;
 
 - (id)initWithRawDictionary:(NSDictionary *)rawDictionary;
 

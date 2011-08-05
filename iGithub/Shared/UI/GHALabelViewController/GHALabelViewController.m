@@ -22,14 +22,71 @@
         // Custom initialization
         self.repositoryString = repository;
         self.label = label;
-        
-        self.title = label.name;
     }
     return self;
 }
 
-#pragma mark - Memory management
+#pragma mark - setters and getters
 
+- (void)setLabel:(GHAPILabelV3 *)label {
+    if (label != _label) {
+        _label = label;
+        
+        self.title = label.name;
+    }
+}
+
+#pragma mark - Notifications
+
+- (void)issueChangedNotificationCallback:(NSNotification *)notification {
+    GHAPIIssueV3 *issue = [notification.userInfo objectForKey:GHAPIV3NotificationUserDictionaryIssueKey];
+    BOOL changed = NO;
+    
+    // issue now has this milestone -> add based on state
+    // issue changed state without milestone -> swap in arrays
+    // issue was present but milestone changed -> remove
+    
+    if ([issue.labels containsObject:self.label]) {
+        // issue belongs here
+        if ([self.openIssues containsObject:issue] && [issue.state isEqualToString:kGHAPIIssueStateV3Closed]) {
+            // state changed
+            [self.openIssues removeObject:issue];
+            [self.closedIssues insertObject:issue atIndex:0];
+            changed = YES;
+        } else if ([self.closedIssues containsObject:issue] && [issue.state isEqualToString:kGHAPIIssueStateV3Open]) {
+            // state changed
+            [self.closedIssues removeObject:issue];
+            [self.openIssues insertObject:issue atIndex:0];
+            changed = YES;
+        } else {
+            if ([issue.state isEqualToString:kGHAPIIssueStateV3Closed]) {
+                [self.closedIssues insertObject:issue atIndex:0];
+                changed = YES;
+            } else {
+                [self.openIssues insertObject:issue atIndex:0];
+                changed = YES;
+            }
+        }
+    } else {
+        // issue doesnt belong here
+        if ([self.openIssues containsObject:issue]) {
+            [self.openIssues removeObject:issue];
+            changed = YES;
+        }
+        if ([self.closedIssues containsObject:issue]) {
+            [self.closedIssues removeObject:issue];
+            changed = YES;
+        }
+    }
+    
+    if (changed) {
+        [self cacheHeightForOpenIssuesArray];
+        [self cacheHeightForClosedIssuesArray];
+        if (self.isViewLoaded) {
+            [self.tableView reloadDataAndResetExpansionStates:NO];
+        }
+    }
+}
 
 #pragma mark - Height Caching
 
@@ -44,6 +101,7 @@
 #pragma mark - Keyed Archiving
 
 - (void)encodeWithCoder:(NSCoder *)encoder {
+    [super encodeWithCoder:encoder];
     [encoder encodeObject:_repositoryString forKey:@"repositoryString"];
     [encoder encodeObject:_label forKey:@"label"];
     [encoder encodeObject:_openIssues forKey:@"openIssues"];
@@ -53,7 +111,7 @@
 - (id)initWithCoder:(NSCoder *)decoder {
     if ((self = [super initWithCoder:decoder])) {
         _repositoryString = [decoder decodeObjectForKey:@"repositoryString"];
-        _label = [decoder decodeObjectForKey:@"label"];
+        self.label = [decoder decodeObjectForKey:@"label"];
         _openIssues = [decoder decodeObjectForKey:@"openIssues"];
         _closedIssues = [decoder decodeObjectForKey:@"closedIssues"];
     }

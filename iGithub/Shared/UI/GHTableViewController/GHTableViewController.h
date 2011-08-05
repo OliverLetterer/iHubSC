@@ -113,6 +113,8 @@
 - (void)gistDeletedNotificationCallback:(NSNotification *)notification;
 - (void)gistCreatedNotificationCallback:(NSNotification *)notification;
 
+- (void)issueChangedNotificationCallback:(NSNotification *)notification;
+
 @end
 
 

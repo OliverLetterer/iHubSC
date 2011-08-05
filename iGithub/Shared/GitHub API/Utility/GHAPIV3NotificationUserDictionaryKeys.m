@@ -12,3 +12,5 @@ NSString *const GHAPIV3NotificationUserDictionaryGistKey = @"Gist";
 NSString *const GHAPIV3NotificationUserDictionaryGistIDKey = @"ID";
 NSString *const GHAPIV3NotificationUserDictionaryGistCommetKey = @"Comment";
 NSString *const GHAPIV3NotificationUserDictionaryGistStarStateKey = @"State";
+
+NSString *const GHAPIV3NotificationUserDictionaryIssueKey = @"Issue";

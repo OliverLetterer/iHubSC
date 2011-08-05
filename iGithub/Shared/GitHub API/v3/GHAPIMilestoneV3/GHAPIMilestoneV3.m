@@ -41,6 +41,17 @@
     return [pastDate timeIntervalSinceNow] > 0 || !self.dueOn;
 }
 
+- (BOOL)isEqualToMilestone:(GHAPIMilestoneV3 *)milestone {
+    return [self.URL isEqualToString:milestone.URL];
+}
+
+- (BOOL)isEqual:(id)object {
+    if ([object isKindOfClass:GHAPIMilestoneV3.class]) {
+        return [self isEqualToMilestone:object];
+    }
+    return NO;
+}
+
 #pragma mark - Initialization
 
 - (id)initWithRawDictionary:(NSDictionary *)rawDictionary {

@@ -23,6 +23,19 @@
 @synthesize milestone=_milestone, repository=_repository, milestoneNumber=_milestoneNumber;
 @synthesize openIssues=_openIssues, closedIssues=_closedIssues;
 
+#pragma mark - setters and getters
+
+- (void)setMilestone:(GHAPIMilestoneV3 *)milestone {
+    if (milestone != _milestone) {
+        _milestone = milestone;
+        
+        self.title = _milestone.title;
+        if ([self isViewLoaded]) {
+            [self.tableView reloadData];
+        }
+    }
+}
+
 #pragma mark - Initialization
 
 - (id)initWithRepository:(NSString *)repository milestoneNumber:(NSNumber *)milestoneNumber {
@@ -44,12 +57,60 @@
                                   [self handleError:error];
                               } else {
                                   self.milestone = milestone;
-                                  self.title = self.milestone.title;
-                                  if ([self isViewLoaded]) {
-                                      [self.tableView reloadData];
-                                  }
                               }
                           }];
+}
+
+#pragma mark - Notifications
+
+- (void)issueChangedNotificationCallback:(NSNotification *)notification {
+    GHAPIIssueV3 *issue = [notification.userInfo objectForKey:GHAPIV3NotificationUserDictionaryIssueKey];
+    BOOL changed = NO;
+    
+    // issue now has this milestone -> add based on state
+    // issue changed state without milestone -> swap in arrays
+    // issue was present but milestone changed -> remove
+    
+    if ([issue.milestone isEqualToMilestone:self.milestone]) {
+        // issue belongs here
+        if ([self.openIssues containsObject:issue] && [issue.state isEqualToString:kGHAPIIssueStateV3Closed]) {
+            // state changed
+            [self.openIssues removeObject:issue];
+            [self.closedIssues insertObject:issue atIndex:0];
+            changed = YES;
+        } else if ([self.closedIssues containsObject:issue] && [issue.state isEqualToString:kGHAPIIssueStateV3Open]) {
+            // state changed
+            [self.closedIssues removeObject:issue];
+            [self.openIssues insertObject:issue atIndex:0];
+            changed = YES;
+        } else {
+            if ([issue.state isEqualToString:kGHAPIIssueStateV3Closed]) {
+                [self.closedIssues insertObject:issue atIndex:0];
+                changed = YES;
+            } else {
+                [self.openIssues insertObject:issue atIndex:0];
+                changed = YES;
+            }
+        }
+    } else {
+        // issue doesnt belong here
+        if ([self.openIssues containsObject:issue]) {
+            [self.openIssues removeObject:issue];
+            changed = YES;
+        }
+        if ([self.closedIssues containsObject:issue]) {
+            [self.closedIssues removeObject:issue];
+            changed = YES;
+        }
+    }
+    
+    if (changed) {
+        [self cacheHeightForOpenIssuesArray];
+        [self cacheHeightForClosedIssuesArray];
+        if (self.isViewLoaded) {
+            [self.tableView reloadDataAndResetExpansionStates:NO];
+        }
+    }
 }
 
 #pragma mark - UIExpandableTableViewDatasource
@@ -77,9 +138,9 @@
     }
     
     if (section == kUITableViewControllerSectionInfoOpenIssues) {
-        cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Open Issues (%@)", @""), self.milestone.openIssues];
+        cell.textLabel.text = NSLocalizedString(@"Open Issues", @"");
     } else if (section == kUITableViewControllerSectionInfoClosedIssues) {
-        cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Closed Issues (%@)", @""), self.milestone.closedIssues];
+        cell.textLabel.text = NSLocalizedString(@"Closed Issues", @"");
     }
     
     return cell;
@@ -304,6 +365,7 @@
 #pragma mark - Keyed Archiving
 
 - (void)encodeWithCoder:(NSCoder *)encoder {
+    [super encodeWithCoder:encoder];
     [encoder encodeObject:_milestone forKey:@"milestone"];
     [encoder encodeObject:_repository forKey:@"repository"];
     [encoder encodeObject:_milestoneNumber forKey:@"milestoneNumber"];

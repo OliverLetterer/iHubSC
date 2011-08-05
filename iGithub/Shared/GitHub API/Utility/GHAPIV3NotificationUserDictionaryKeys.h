@@ -12,3 +12,5 @@ extern NSString *const GHAPIV3NotificationUserDictionaryGistKey;
 extern NSString *const GHAPIV3NotificationUserDictionaryGistIDKey;
 extern NSString *const GHAPIV3NotificationUserDictionaryGistCommetKey;
 extern NSString *const GHAPIV3NotificationUserDictionaryGistStarStateKey;
+
+extern NSString *const GHAPIV3NotificationUserDictionaryIssueKey;

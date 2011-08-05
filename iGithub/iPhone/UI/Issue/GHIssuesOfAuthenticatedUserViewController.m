@@ -54,6 +54,32 @@
     self.filteresIssues = array;
 }
 
+#pragma mark - Notifications
+
+- (void)issueChangedNotificationCallback:(NSNotification *)notification {
+    GHAPIIssueV3 *issue = [notification.userInfo objectForKey:GHAPIV3NotificationUserDictionaryIssueKey];
+    BOOL changed = NO;
+    
+    NSUInteger index = [self.assignedIssues indexOfObject:issue];
+    if (index != NSNotFound) {
+        [self.assignedIssues replaceObjectAtIndex:index withObject:issue];
+        changed = YES;
+    }
+    
+    index = [self.filteresIssues indexOfObject:issue];
+    if (index != NSNotFound) {
+        [self.filteresIssues replaceObjectAtIndex:index withObject:issue];
+        changed = YES;
+    }
+    
+    if (changed) {
+        [self cacheAssignedIssuesHeight];
+        if (self.isViewLoaded) {
+            [self.tableView reloadData];
+        }
+    }
+}
+
 #pragma mark - Initialization
 
 - (id)init {

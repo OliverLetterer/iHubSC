@@ -52,6 +52,58 @@
                           }];
 }
 
+#pragma mark - Notifications
+
+- (void)issueChangedNotificationCallback:(NSNotification *)notification {
+    GHAPIIssueV3 *issue = [notification.userInfo objectForKey:GHAPIV3NotificationUserDictionaryIssueKey];
+    BOOL changed = NO;
+    
+    // issue now has this milestone -> add based on state
+    // issue changed state without milestone -> swap in arrays
+    // issue was present but milestone changed -> remove
+    
+    if ([issue.milestone isEqualToMilestone:self.milestone]) {
+        // issue belongs here
+        if ([self.openIssues containsObject:issue] && [issue.state isEqualToString:kGHAPIIssueStateV3Closed]) {
+            // state changed
+            [self.openIssues removeObject:issue];
+            [self.closedIssues insertObject:issue atIndex:0];
+            changed = YES;
+        } else if ([self.closedIssues containsObject:issue] && [issue.state isEqualToString:kGHAPIIssueStateV3Open]) {
+            // state changed
+            [self.closedIssues removeObject:issue];
+            [self.openIssues insertObject:issue atIndex:0];
+            changed = YES;
+        } else {
+            if ([issue.state isEqualToString:kGHAPIIssueStateV3Closed]) {
+                [self.closedIssues insertObject:issue atIndex:0];
+                changed = YES;
+            } else {
+                [self.openIssues insertObject:issue atIndex:0];
+                changed = YES;
+            }
+        }
+    } else {
+        // issue doesnt belong here
+        if ([self.openIssues containsObject:issue]) {
+            [self.openIssues removeObject:issue];
+            changed = YES;
+        }
+        if ([self.closedIssues containsObject:issue]) {
+            [self.closedIssues removeObject:issue];
+            changed = YES;
+        }
+    }
+    
+    if (changed) {
+        [self cacheHeightForOpenIssuesArray];
+        [self cacheHeightForClosedIssuesArray];
+        if (self.isViewLoaded) {
+            [self.tableView reloadDataAndResetExpansionStates:NO];
+        }
+    }
+}
+
 #pragma mark - UIExpandableTableViewDatasource
 
 - (BOOL)tableView:(UIExpandableTableView *)tableView canExpandSection:(NSInteger)section {
@@ -72,9 +124,9 @@
     GHPCollapsingAndSpinningTableViewCell *cell = [self defaultPadCollapsingAndSpinningTableViewCellForSection:section];
     
     if (section == kUITableViewControllerSectionInfoOpenIssues) {
-        cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Open Issues (%@)", @""), self.milestone.openIssues];
+        cell.textLabel.text = NSLocalizedString(@"Open Issues", @"");
     } else if (section == kUITableViewControllerSectionInfoClosedIssues) {
-        cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Closed Issues (%@)", @""), self.milestone.closedIssues];
+        cell.textLabel.text = NSLocalizedString(@"Closed Issues", @"");
     }
     
     return cell;
@@ -281,7 +333,7 @@
 
 - (id)initWithCoder:(NSCoder *)decoder {
     if ((self = [super initWithCoder:decoder])) {
-        _milestone = [decoder decodeObjectForKey:@"milestone"];
+        self.milestone = [decoder decodeObjectForKey:@"milestone"];
         _repository = [decoder decodeObjectForKey:@"repository"];
         _milestoneNumber = [decoder decodeObjectForKey:@"milestoneNumber"];
         _openIssues = [decoder decodeObjectForKey:@"openIssues"];

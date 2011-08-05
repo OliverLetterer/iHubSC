@@ -84,6 +84,26 @@
     }] != NSNotFound;
 }
 
+#pragma mark - Notifications
+
+- (void)issueChangedNotificationCallback:(NSNotification *)notification {
+    GHAPIIssueV3 *issue = [notification.userInfo objectForKey:GHAPIV3NotificationUserDictionaryIssueKey];
+    BOOL changed = NO;
+    
+    NSUInteger index = [self.issuesArray indexOfObject:issue];
+    if (index != NSNotFound) {
+        [self.issuesArray replaceObjectAtIndex:index withObject:issue];
+        changed = YES;
+    }
+    
+    if (changed) {
+        [self cacheHeightForIssuesArray];
+        if (self.isViewLoaded) {
+            [self.tableView reloadDataAndResetExpansionStates:NO];
+        }
+    }
+}
+
 #pragma mark - Initialization
 
 - (id)initWithRepositoryString:(NSString *)repositoryString {

@@ -41,6 +41,8 @@
 
 @property (nonatomic, readonly) CGFloat progress;
 
+- (BOOL)isEqualToMilestone:(GHAPIMilestoneV3 *)milestone;
+
 - (id)initWithRawDictionary:(NSDictionary *)rawDictionary;
 
 + (void)milestoneOnRepository:(NSString *)repository number:(NSNumber *)number 

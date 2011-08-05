@@ -22,4 +22,6 @@
 
 - (id)initWithRawDictionary:(NSDictionary *)rawDictionary;
 
+- (BOOL)isEqualToLabel:(GHAPILabelV3 *)label;
+
 @end

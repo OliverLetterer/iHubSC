@@ -50,6 +50,29 @@
     }
 }
 
+- (void)setIssue:(GHAPIIssueV3 *)issue {
+    if (issue != _issue) {
+        _issue = issue;
+        
+        [self cacheHeight:[GHAttributedTableViewCell heightWithAttributedString:self.issue.attributedBody] 
+        forRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:kUITableViewSectionData] ];
+        self.title = [NSString stringWithFormat:NSLocalizedString(@"%@ %@", @""), self.issueName, self.number];
+        if (self.isViewLoaded) {
+            [self.tableView reloadData];
+        }
+    }
+}
+
+#pragma mark - Notifications
+
+- (void)issueChangedNotificationCallback:(NSNotification *)notification {
+    GHAPIIssueV3 *issue = [notification.userInfo objectForKey:GHAPIV3NotificationUserDictionaryIssueKey];
+    
+    if ([issue isEqualToIssue:self.issue]) {
+        self.issue = issue;
+    }
+}
+
 #pragma mark - Initialization
 
 - (id)initWithRepository:(NSString *)repository issueNumber:(NSNumber *)number {
@@ -73,10 +96,6 @@
             [self handleError:error];
         } else {
             self.issue = issue;
-            [self cacheHeight:[GHAttributedTableViewCell heightWithAttributedString:self.issue.attributedBody] 
-            forRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:kUITableViewSectionData] ];
-            self.title = [NSString stringWithFormat:NSLocalizedString(@"%@ %@", @""), self.issueName, self.number];
-            [self.tableView reloadData];
         }
     }];
 }
