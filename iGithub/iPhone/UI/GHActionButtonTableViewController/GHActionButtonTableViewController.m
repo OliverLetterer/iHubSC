@@ -10,6 +10,8 @@
 
 NSInteger const kUIActionButtonActionSheetTag = 549532;
 
+NSInteger const kUIActionButtonActivityIndicatorView = 123908;
+
 @implementation GHActionButtonTableViewController
 
 #pragma mark - setters and getters
@@ -27,6 +29,7 @@ NSInteger const kUIActionButtonActionSheetTag = 549532;
         UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"GHEmptyBarButtonItem.png"] ];
         [wrapperView addSubview:imageView];
         UIActivityIndicatorView *activityIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+        activityIndicatorView.tag = kUIActionButtonActivityIndicatorView;
         [wrapperView addSubview:activityIndicatorView];
         [activityIndicatorView startAnimating];
         activityIndicatorView.center = CGPointMake(CGRectGetMidX(wrapperView.bounds), CGRectGetMidY(wrapperView.bounds));
@@ -49,10 +52,18 @@ NSInteger const kUIActionButtonActionSheetTag = 549532;
 }
 
 - (void)setActionButtonActive:(BOOL)actionButtonActive {
-    if (actionButtonActive) {
-        self.navigationItem.rightBarButtonItem = self.loadingActionButton;
-    } else {
-        self.navigationItem.rightBarButtonItem = self.actionButton;
+    if (actionButtonActive != self.isActionButtonActive) {
+        if (actionButtonActive) {
+            self.navigationItem.rightBarButtonItem = self.loadingActionButton;
+            UIActivityIndicatorView *activityIndicatorView = (UIActivityIndicatorView *)[self.loadingActionButton.customView viewWithTag:kUIActionButtonActivityIndicatorView];
+            
+            activityIndicatorView.transform = CGAffineTransformMakeScale(0.05f, 0.05f);
+            [UIView animateWithDuration:0.25f animations:^(void) {
+                activityIndicatorView.transform = CGAffineTransformIdentity;
+            }];
+        } else {
+            self.navigationItem.rightBarButtonItem = self.actionButton;
+        }
     }
 }
 
@@ -85,7 +96,9 @@ NSInteger const kUIActionButtonActionSheetTag = 549532;
         UIActionSheet *sheet = self.actionButtonActionSheet;
         sheet.tag = kUIActionButtonActionSheetTag;
         
-        [sheet showInView:self.tabBarController.view];
+        if (self.tabBarController.view) {
+            [sheet showInView:self.tabBarController.view];
+        }
     }
 }
 
