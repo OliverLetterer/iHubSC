@@ -18,6 +18,7 @@
 #import "ANAdvancedNavigationController.h"
 #import "GHPCollapsingAndSpinningTableViewCell.h"
 #import "GHCollapsingAndSpinningTableViewCell.h"
+#import "ANNotificationQueue.h"
 
 @class GHTableViewCell;
 
