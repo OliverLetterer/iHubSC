@@ -33,7 +33,6 @@
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    NSLog(@"%@", [ANNotificationQueue sharedInstance]);
     [ASIHTTPRequest setDefaultTimeOutSeconds:20.0];
     [self.window makeKeyAndVisible];
     return YES;
@@ -66,8 +65,7 @@
 #pragma mark - Serializations
 
 - (void)nowSerializeState {
-    BOOL didSerialize = [self serializeStateInDictionary:self.serializedStateDictionary];
-    DLog(@"%d", didSerialize);
+    [self serializeStateInDictionary:self.serializedStateDictionary];
 }
 
 - (BOOL)serializeStateInDictionary:(NSMutableDictionary *)dictionary {
