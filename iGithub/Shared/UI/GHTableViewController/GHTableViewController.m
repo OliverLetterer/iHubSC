@@ -688,7 +688,7 @@ static CGFloat wrapperViewHeight = 21.0f;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(issueChangedNotificationCallback:) name:GHAPIIssueV3ContentChangedNotification object:nil];
     
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(gistDeletedNotificationCallback:) name:GHAPIGistV3DeleteNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(issueCreationNotificationCallback:) name:GHAPIIssueV3CreationNotification object:nil];
 //    
 //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(gistCreatedNotificationCallback:) name:GHAPIGistV3CreatedNotification object:nil];
 //    
@@ -710,6 +710,10 @@ static CGFloat wrapperViewHeight = 21.0f;
 }
 
 - (void)issueChangedNotificationCallback:(NSNotification *)notification {
+    
+}
+
+- (void)issueCreationNotificationCallback:(NSNotification *)notification {
     
 }
 

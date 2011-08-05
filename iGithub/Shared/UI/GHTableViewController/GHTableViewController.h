@@ -114,6 +114,7 @@
 - (void)gistCreatedNotificationCallback:(NSNotification *)notification;
 
 - (void)issueChangedNotificationCallback:(NSNotification *)notification;
+- (void)issueCreationNotificationCallback:(NSNotification *)notification;
 
 @end
 

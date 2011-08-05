@@ -88,6 +88,28 @@
     }
 }
 
+- (void)issueCreationNotificationCallback:(NSNotification *)notification {
+    GHAPIIssueV3 *issue = [notification.userInfo objectForKey:GHAPIV3NotificationUserDictionaryIssueKey];
+    BOOL changed = NO;
+    
+    if ([issue.labels containsObject:self.label]) {
+        if ([issue.state isEqualToString:kGHAPIIssueStateV3Open]) {
+            [self.openIssues insertObject:issue atIndex:0];
+        } else {
+            [self.closedIssues insertObject:issue atIndex:0];
+        }
+        changed = YES;
+    }
+    
+    if (changed) {
+        [self cacheHeightForOpenIssuesArray];
+        [self cacheHeightForClosedIssuesArray];
+        if (self.isViewLoaded) {
+            [self.tableView reloadDataAndResetExpansionStates:NO];
+        }
+    }
+}
+
 #pragma mark - Height Caching
 
 - (void)cacheHeightForOpenIssuesArray {

@@ -34,6 +34,66 @@
     self.filteresIssues = array;
 }
 
+#pragma mark - Notifications
+
+- (void)issueCreationNotificationCallback:(NSNotification *)notification {
+    GHAPIIssueV3 *issue = [notification.userInfo objectForKey:GHAPIV3NotificationUserDictionaryIssueKey];
+    BOOL changed = NO;
+    
+    if ([issue.assignee.login isEqualToString:[GHAPIAuthenticationManager sharedInstance].authenticatedUser.login] && [issue.state isEqualToString:kGHAPIIssueStateV3Open]) {
+        [self.dataArray insertObject:issue atIndex:0];
+        
+        if ([issue matchedString:self.searchString]) {
+            [self.filteresIssues insertObject:issue atIndex:0];
+        }
+        
+        changed = YES;
+    }
+    
+    if (changed) {
+        [self cacheDataArrayHeights];
+        if (self.isViewLoaded) {
+            [self.tableView reloadDataAndResetExpansionStates:NO];
+            [_mySearchDisplayController.searchResultsTableView reloadData];
+        }
+    }
+}
+
+- (void)issueChangedNotificationCallback:(NSNotification *)notification {
+    GHAPIIssueV3 *issue = [notification.userInfo objectForKey:GHAPIV3NotificationUserDictionaryIssueKey];
+    BOOL changed = NO;
+    
+    if ([issue.assignee.login isEqualToString:[GHAPIAuthenticationManager sharedInstance].authenticatedUser.login]) {
+        // issue belongs here
+        if ([issue.state isEqualToString:kGHAPIIssueStateV3Open]) {
+            // issue is open
+            if (![self.dataArray containsObject:issue]) {
+                [self.dataArray insertObject:issue atIndex:0];
+                changed = YES;
+            }
+        } else {
+            // issue is closed
+            if ([self.dataArray containsObject:issue]) {
+                [self.dataArray removeObject:issue];
+                changed = YES;
+            }
+        }
+    } else {
+        if ([self.dataArray containsObject:issue]) {
+            [self.dataArray removeObject:issue];
+            changed = YES;
+        }
+    }
+    
+    if (changed) {
+        [self cacheDataArrayHeights];
+        if (self.isViewLoaded) {
+            [self.tableView reloadDataAndResetExpansionStates:NO];
+            [_mySearchDisplayController.searchResultsTableView reloadData];
+        }
+    }
+}
+
 #pragma mark - Initialization
 
 - (id)init {

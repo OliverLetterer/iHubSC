@@ -12,7 +12,6 @@
 
 NSString *const GHAPIIssueV3ContentChangedNotification = @"GHAPIIssueV3ContentChangedNotification";
 NSString *const GHAPIIssueV3CreationNotification = @"GHAPIIssueV3CreationNotification";
-NSString *const GHAPIIssueV3MergedNotification = @"GHAPIIssueV3MergedNotification";
 
 
 
@@ -300,7 +299,10 @@ NSString *const kGHAPIIssueStateV3Closed = @"closed";
                                                 if (error) {
                                                     handler(nil, error);
                                                 } else {
-                                                    handler([[GHAPIIssueV3 alloc] initWithRawDictionary:object], nil);
+                                                    GHAPIIssueV3 *issue = [[GHAPIIssueV3 alloc] initWithRawDictionary:object];
+                                                    [[NSNotificationCenter defaultCenter] postNotificationName:GHAPIIssueV3CreationNotification object:nil 
+                                                                                                      userInfo:[NSDictionary dictionaryWithObject:issue forKey:GHAPIV3NotificationUserDictionaryIssueKey] ];
+                                                    handler(issue, nil);
                                                 }
                                             }];
 }

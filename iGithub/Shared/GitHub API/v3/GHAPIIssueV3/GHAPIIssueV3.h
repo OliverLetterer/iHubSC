@@ -11,7 +11,6 @@
 
 extern NSString *const GHAPIIssueV3ContentChangedNotification;
 extern NSString *const GHAPIIssueV3CreationNotification;
-extern NSString *const GHAPIIssueV3MergedNotification;
 
 
 

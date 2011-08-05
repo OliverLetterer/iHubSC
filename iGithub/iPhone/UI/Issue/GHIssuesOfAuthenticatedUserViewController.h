@@ -30,4 +30,6 @@
 - (NSString *)descriptionForAssignedIssue:(GHAPIIssueV3 *)issue;
 - (void)cacheAssignedIssuesHeight;
 
+- (void)updateBadgeValue;
+
 @end

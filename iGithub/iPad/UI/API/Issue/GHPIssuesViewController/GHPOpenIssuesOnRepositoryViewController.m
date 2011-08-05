@@ -27,6 +27,49 @@
                          }];
 }
 
+#pragma mark - Notifications
+
+- (void)issueCreationNotificationCallback:(NSNotification *)notification {
+    GHAPIIssueV3 *issue = [notification.userInfo objectForKey:GHAPIV3NotificationUserDictionaryIssueKey];
+    BOOL changed = NO;
+    
+    if ([issue.repository isEqualToString:self.repository] && [issue.state isEqualToString:kGHAPIIssueStateV3Open]) {
+        [self.dataArray insertObject:issue atIndex:0];
+        changed = YES;
+    }
+    
+    if (changed) {
+        [self cacheDataArrayHeights];
+        if (self.isViewLoaded) {
+            [self.tableView reloadDataAndResetExpansionStates:NO];
+        }
+    }
+}
+
+- (void)issueChangedNotificationCallback:(NSNotification *)notification {
+    GHAPIIssueV3 *issue = [notification.userInfo objectForKey:GHAPIV3NotificationUserDictionaryIssueKey];
+    BOOL changed = NO;
+    
+    if ([issue.repository isEqualToString:self.repository]) {
+        NSUInteger index = [self.dataArray indexOfObject:issue];
+        if (index != NSNotFound) {
+            if ([issue.state isEqualToString:kGHAPIIssueStateV3Open]) {
+                [self.dataArray replaceObjectAtIndex:index withObject:issue];
+            } else {
+                [self.dataArray removeObjectAtIndex:index];
+            }
+            changed = YES;
+        }
+    }
+    
+    if (changed) {
+        [self cacheDataArrayHeights];
+        if (self.isViewLoaded) {
+            [self.tableView reloadData];
+        }
+    }
+}
+
 #pragma mark - Pagination
 
 - (void)downloadDataForPage:(NSUInteger)page inSection:(NSUInteger)section {

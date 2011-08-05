@@ -28,12 +28,7 @@
         _assignedIssues = assignedIssues;
         
         [self cacheAssignedIssuesHeight];
-        NSUInteger count = _assignedIssues.count;
-        if (count > 0 && [NSUserDefaults standardUserDefaults].showIssuesBadge) {
-            self.tabBarItem.badgeValue = [NSString stringWithFormat:@"%u", count];
-        } else {
-            self.tabBarItem.badgeValue = nil;
-        }
+        [self updateBadgeValue];
         if (self.isViewLoaded) {
             [self.tableView reloadData];
         }
@@ -73,10 +68,46 @@
     }
     
     if (changed) {
+        [self updateBadgeValue];
         [self cacheAssignedIssuesHeight];
         if (self.isViewLoaded) {
             [self.tableView reloadData];
         }
+    }
+}
+
+- (void)issueCreationNotificationCallback:(NSNotification *)notification {
+    GHAPIIssueV3 *issue = [notification.userInfo objectForKey:GHAPIV3NotificationUserDictionaryIssueKey];
+    BOOL changed = NO;
+    
+    if ([issue.assignee.login isEqualToString:[GHAPIAuthenticationManager sharedInstance].authenticatedUser.login] && [issue.state isEqualToString:kGHAPIIssueStateV3Open]) {
+        [self.assignedIssues insertObject:issue atIndex:0];
+        
+        if ([issue matchedString:self.searchString]) {
+            [self.filteresIssues insertObject:issue atIndex:0];
+        }
+        
+        changed = YES;
+    }
+    
+    if (changed) {
+        [self updateBadgeValue];
+        [self cacheAssignedIssuesHeight];
+        if (self.isViewLoaded) {
+            [self.tableView reloadDataAndResetExpansionStates:NO];
+            [_mySearchDisplayController.searchResultsTableView reloadData];
+        }
+    }
+}
+
+#pragma mark - instance methods
+
+- (void)updateBadgeValue {
+    NSUInteger count = _assignedIssues.count;
+    if (count > 0 && [NSUserDefaults standardUserDefaults].showIssuesBadge) {
+        self.tabBarItem.badgeValue = [NSString stringWithFormat:@"%u", count];
+    } else {
+        self.tabBarItem.badgeValue = nil;
     }
 }
 
@@ -112,11 +143,6 @@
 }
 
 #pragma mark - View lifecycle
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    
-}
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
