@@ -13,6 +13,23 @@
 @synthesize displayTime=_displayTime;
 @synthesize backgroundView=_backgroundView, titleLabel=_titleLabel, detailTextLabel=_detailTextLabel, imageView=_imageView;
 
+#pragma mark - setters and getters
+
+- (CGFloat)textOffsetX {
+    CGFloat offset = 0.0f;
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        offset = 75.0f + 8.0f;
+    } else {
+        offset = 38.0f + 8.0f;
+    }
+    
+    return offset;
+}
+
+- (CGFloat)textOffsetY {
+    return 20.0f;
+}
+
 #pragma mark - Initialization
 
 - (id)initWithFrame:(CGRect)frame {
@@ -31,6 +48,8 @@
         self.titleLabel.backgroundColor = [UIColor clearColor];
         self.titleLabel.shadowColor = [UIColor colorWithWhite:0.0f alpha:0.75f];
         self.titleLabel.shadowOffset = CGSizeMake(0.0f, -2.0f);
+        self.titleLabel.numberOfLines = 0;
+        self.titleLabel.lineBreakMode = UILineBreakModeWordWrap;
         [self addSubview:self.titleLabel];
         
         self.detailTextLabel = [[UILabel alloc] initWithFrame:CGRectZero];
@@ -40,6 +59,8 @@
         self.detailTextLabel.backgroundColor = [UIColor clearColor];
         self.detailTextLabel.shadowColor = [UIColor colorWithWhite:0.0f alpha:0.75f];
         self.detailTextLabel.shadowOffset = CGSizeMake(0.0f, -2.0f);
+        self.detailTextLabel.numberOfLines = 0;
+        self.detailTextLabel.lineBreakMode = UILineBreakModeWordWrap;
         [self addSubview:self.detailTextLabel];
         
         self.imageView = [[UIImageView alloc] initWithFrame:CGRectZero];
@@ -65,20 +86,30 @@
         self.imageView.center = CGPointMake(25.0f, CGRectGetHeight(self.bounds) / 2.0f);
     }
     
-    CGRect frame = self.imageView.frame;
-    frame.origin.x += CGRectGetWidth(self.imageView.frame) + 8.0f;
-    frame.size.width = CGRectGetWidth(self.bounds) - frame.origin.x;
-    frame.origin.y = 20.0f;
-    self.titleLabel.frame = frame;
-    [self.titleLabel sizeToFit];
+    CGFloat textOffsetX = self.textOffsetX;
+    CGFloat textOffsetY = self.textOffsetY;
+    CGSize containerSize = CGSizeMake(CGRectGetWidth(self.bounds) - textOffsetX - 5.0f, MAXFLOAT);
     
-    frame = self.titleLabel.frame;
-    frame.origin.y += CGRectGetHeight(frame) + 8.0f;
-    self.detailTextLabel.frame = frame;
-    [self.detailTextLabel sizeToFit];
+    CGSize titleSize = [_titleLabel sizeThatFits:containerSize];
+    _titleLabel.frame = CGRectMake(textOffsetX, textOffsetY, titleSize.width, titleSize.height);
+    
+    CGSize descriptionSize = [_detailTextLabel sizeThatFits:containerSize];
+    CGFloat descriptionOffsetY = CGRectGetHeight(_titleLabel.frame) + 5.0f + _titleLabel.frame.origin.y;
+    _detailTextLabel.frame = CGRectMake(textOffsetX, descriptionOffsetY, descriptionSize.width, descriptionSize.height);
 }
 
-#pragma mark - Memory management
-
+- (CGSize)sizeThatFits:(CGSize)size {
+    CGFloat textOffsetX = self.textOffsetX;
+    CGFloat textOffsetY = self.textOffsetY;
+    CGSize containerSize = CGSizeMake(size.width - textOffsetX - 5.0f, size.height - 2.0f*textOffsetY);
+    
+    CGSize titleSize = [_titleLabel sizeThatFits:containerSize];
+    
+    CGSize descriptionSize = [_detailTextLabel sizeThatFits:containerSize];
+    
+    CGSize returnSize = CGSizeMake(size.width, titleSize.height + descriptionSize.height + 2.0f*textOffsetY + 5.0f);
+    
+    return returnSize;
+}
 
 @end

@@ -23,7 +23,7 @@
 }
 
 @property (nonatomic, retain) NSMutableArray *notifications;
-@property (nonatomic, readonly) CGRect defaultNotificationFrame;
+@property (nonatomic, readonly) CGFloat defaultNotificationWidth;
 @property (nonatomic, readonly) UIWindow *currentWindow;
 
 - (void)_detachNotification:(ANNotificationView *)notificationView;
@@ -57,7 +57,7 @@ CGFloat const ANNotificationQueueAnimationDuration = 0.35f*2.0f;
 
 - (void)detatchErrorNotificationWithTitle:(NSString *)title errorMessage:(NSString *)errorMessage {
     dispatch_async(dispatch_get_main_queue(), ^(void) {
-        ANNotificationView *notificationView = [[ANNotificationErrorView alloc] initWithFrame:self.defaultNotificationFrame];
+        ANNotificationView *notificationView = [[ANNotificationErrorView alloc] initWithFrame:CGRectZero];
         notificationView.titleLabel.text = title;
         notificationView.detailTextLabel.text = errorMessage;
         
@@ -67,7 +67,7 @@ CGFloat const ANNotificationQueueAnimationDuration = 0.35f*2.0f;
 
 - (void)detatchSuccesNotificationWithTitle:(NSString *)title message:(NSString *)errorMessage {
     dispatch_async(dispatch_get_main_queue(), ^(void) {
-        ANNotificationView *notificationView = [[ANNotificationSuccessView alloc] initWithFrame:self.defaultNotificationFrame];
+        ANNotificationView *notificationView = [[ANNotificationSuccessView alloc] initWithFrame:CGRectZero];
         notificationView.titleLabel.text = title;
         notificationView.detailTextLabel.text = errorMessage;
         
@@ -77,18 +77,16 @@ CGFloat const ANNotificationQueueAnimationDuration = 0.35f*2.0f;
 
 #pragma mark - Private methods
 
-- (CGRect)defaultNotificationFrame {
-    CGRect frame = CGRectZero;
+- (CGFloat)defaultNotificationWidth {
+    CGFloat width = 0.0f;
     
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-        frame.size.width = 500.0f;
-        frame.size.height = 125.0f;
+        width = 500.0f;
     } else {
-        frame.size.width = 280.0f;
-        frame.size.height = 125.0f;
+        width = 280.0f;
     }
     
-    return frame;
+    return width;
 }
 
 - (UIWindow *)currentWindow {
@@ -126,6 +124,10 @@ CGFloat const ANNotificationQueueAnimationDuration = 0.35f*2.0f;
     }];
 	
 	ANNotificationView *notificationView = [self.notifications objectAtIndex:0];
+    CGSize size = [notificationView sizeThatFits:CGSizeMake(self.defaultNotificationWidth, MAXFLOAT)];
+    CGRect frame = notificationView.frame;
+    frame.size = size;
+    notificationView.frame = frame;
     notificationView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
     
     

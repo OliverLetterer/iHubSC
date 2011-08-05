@@ -27,4 +27,7 @@
 @property (nonatomic, retain) UILabel *detailTextLabel;
 @property (nonatomic, retain) UIImageView *imageView;
 
+@property (nonatomic, readonly) CGFloat textOffsetX;
+@property (nonatomic, readonly) CGFloat textOffsetY;
+
 @end
