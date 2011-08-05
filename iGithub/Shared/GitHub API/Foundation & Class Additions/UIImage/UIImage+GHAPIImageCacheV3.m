@@ -15,7 +15,7 @@
 @implementation UIImage (GHAPIImageCacheV3)
 
 + (void)imageFromAvatarURLString:(NSString *)avatarURLString 
-      withCompletionHandler:(void(^)(UIImage *image, NSError *error, BOOL didDownload))handler {
+      withCompletionHandler:(void(^)(UIImage *image))handler {
     
     UIImage *myImage = [UIImage cachedImageFromAvatarURLString:avatarURLString];
     
@@ -26,7 +26,7 @@
             UIImage *myImage = [UIImage cachedImageFromAvatarURLString:avatarURLString];
             if (myImage) {
                 dispatch_sync(dispatch_get_main_queue(), ^(void) {
-                    handler(myImage, nil, NO);
+                    handler(myImage);
                 });
                 return;
             }
@@ -55,19 +55,20 @@
             
             dispatch_async(dispatch_get_main_queue(), ^(void) {
                 if (myError) {
+                    DLog(@"errro");
                     [[GHAPIImageCacheV3 sharedInstance] cacheImage:[UIImage imageNamed:@"DefaultUserImage.png"] forURL:avatarURLString storeOnDisk:NO];
-                    handler([UIImage imageNamed:@"DefaultUserImage.png"], myError, NO);
+                    handler([UIImage imageNamed:@"DefaultUserImage.png"]);
                 } else {
                     if (theImage) {
-                        handler(theImage, nil, YES);
+                        handler(theImage);
                     } else {
-                        handler([UIImage imageNamed:@"DefaultUserImage.png"], nil, NO);
+                        handler([UIImage imageNamed:@"DefaultUserImage.png"]);
                     }
                 }
             });
         });
     } else {
-        handler(myImage, nil, NO);
+        handler(myImage);
     }
 }
 

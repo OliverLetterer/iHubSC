@@ -12,7 +12,7 @@
 @interface UIImage (GHAPIImageCacheV3)
 
 + (void)imageFromAvatarURLString:(NSString *)avatarURLString 
-      withCompletionHandler:(void(^)(UIImage *image, NSError *error, BOOL didDownload))handler;
+      withCompletionHandler:(void(^)(UIImage *image))handler;
 
 + (UIImage *)cachedImageFromAvatarURLString:(NSString *)avatarURLString;
 

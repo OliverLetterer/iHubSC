@@ -262,8 +262,6 @@
 		A7841FA613E194BC00131648 /* GHRepository.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841EF213E194BB00131648 /* GHRepository.m */; };
 		A7841FA713E194BC00131648 /* GHTarget.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841EF513E194BB00131648 /* GHTarget.m */; };
 		A7841FA813E194BC00131648 /* GHUser.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841EF813E194BB00131648 /* GHUser.m */; };
-		A7841FA913E194BC00131648 /* GHGravatarBackgroundQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841EFB13E194BB00131648 /* GHGravatarBackgroundQueue.m */; };
-		A7841FAA13E194BC00131648 /* GHGravatarImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841EFD13E194BB00131648 /* GHGravatarImageCache.m */; };
 		A7841FAB13E194BC00131648 /* UIImage+Gravatar.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841EFF13E194BB00131648 /* UIImage+Gravatar.m */; };
 		A7841FAC13E194BC00131648 /* GHAPIBackgroundQueueV3.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841F0313E194BB00131648 /* GHAPIBackgroundQueueV3.m */; };
 		A7841FAD13E194BC00131648 /* GHAPICommitV3.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841F0613E194BB00131648 /* GHAPICommitV3.m */; };
@@ -862,10 +860,6 @@
 		A7841EF513E194BB00131648 /* GHTarget.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHTarget.m; sourceTree = "<group>"; };
 		A7841EF713E194BB00131648 /* GHUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHUser.h; sourceTree = "<group>"; };
 		A7841EF813E194BB00131648 /* GHUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHUser.m; sourceTree = "<group>"; };
-		A7841EFA13E194BB00131648 /* GHGravatarBackgroundQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHGravatarBackgroundQueue.h; sourceTree = "<group>"; };
-		A7841EFB13E194BB00131648 /* GHGravatarBackgroundQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHGravatarBackgroundQueue.m; sourceTree = "<group>"; };
-		A7841EFC13E194BB00131648 /* GHGravatarImageCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHGravatarImageCache.h; sourceTree = "<group>"; };
-		A7841EFD13E194BB00131648 /* GHGravatarImageCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHGravatarImageCache.m; sourceTree = "<group>"; };
 		A7841EFE13E194BB00131648 /* UIImage+Gravatar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Gravatar.h"; sourceTree = "<group>"; };
 		A7841EFF13E194BB00131648 /* UIImage+Gravatar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Gravatar.m"; sourceTree = "<group>"; };
 		A7841F0213E194BB00131648 /* GHAPIBackgroundQueueV3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHAPIBackgroundQueueV3.h; sourceTree = "<group>"; };
@@ -2394,10 +2388,6 @@
 		A7841EF913E194BB00131648 /* Gravatar */ = {
 			isa = PBXGroup;
 			children = (
-				A7841EFA13E194BB00131648 /* GHGravatarBackgroundQueue.h */,
-				A7841EFB13E194BB00131648 /* GHGravatarBackgroundQueue.m */,
-				A7841EFC13E194BB00131648 /* GHGravatarImageCache.h */,
-				A7841EFD13E194BB00131648 /* GHGravatarImageCache.m */,
 				A7841EFE13E194BB00131648 /* UIImage+Gravatar.h */,
 				A7841EFF13E194BB00131648 /* UIImage+Gravatar.m */,
 			);
@@ -3572,8 +3562,6 @@
 				A7841FA613E194BC00131648 /* GHRepository.m in Sources */,
 				A7841FA713E194BC00131648 /* GHTarget.m in Sources */,
 				A7841FA813E194BC00131648 /* GHUser.m in Sources */,
-				A7841FA913E194BC00131648 /* GHGravatarBackgroundQueue.m in Sources */,
-				A7841FAA13E194BC00131648 /* GHGravatarImageCache.m in Sources */,
 				A7841FAB13E194BC00131648 /* UIImage+Gravatar.m in Sources */,
 				A7841FAC13E194BC00131648 /* GHAPIBackgroundQueueV3.m in Sources */,
 				A7841FAD13E194BC00131648 /* GHAPICommitV3.m in Sources */,

@@ -203,9 +203,13 @@ static CGFloat wrapperViewHeight = 21.0f;
         [imageView addSubview:activityIndicatorView];
         
         [UIImage imageFromGravatarID:gravatarID 
-               withCompletionHandler:^(UIImage *image, NSError *error, BOOL didDownload) {
-                   if (indexPath && [tableView containsIndexPath:indexPath]) {
-                       [tableView reloadRowAtIndexPath:indexPath withRowAnimation:UITableViewRowAnimationNone];
+               withCompletionHandler:^(UIImage *image) {
+                   @try {
+                       NSArray *array = [NSArray arrayWithObject:indexPath];
+                       [tableView reloadRowsAtIndexPaths:array withRowAnimation:UITableViewRowAnimationNone];
+                   }
+                   @catch (NSException *exception) {
+                       [tableView reloadData];
                    }
                }];
     }
@@ -240,7 +244,7 @@ static CGFloat wrapperViewHeight = 21.0f;
         [imageView addSubview:activityIndicatorView];
         
         [UIImage imageFromAvatarURLString:avatarURLString 
-                    withCompletionHandler:^(UIImage *image, NSError *error, BOOL didDownload) {
+                    withCompletionHandler:^(UIImage *image) {
                         if (indexPath && [tableView containsIndexPath:indexPath]) {
                             [tableView reloadRowAtIndexPath:indexPath withRowAnimation:UITableViewRowAnimationNone];
                         }

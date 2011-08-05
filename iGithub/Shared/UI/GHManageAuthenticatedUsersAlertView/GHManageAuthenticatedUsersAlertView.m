@@ -51,7 +51,7 @@
         [imageView addSubview:activityIndicatorView];
         
         [UIImage imageFromAvatarURLString:avatarURLString 
-                    withCompletionHandler:^(UIImage *image, NSError *error, BOOL didDownload) {
+                    withCompletionHandler:^(UIImage *image) {
                         @try {
                             NSArray *array = [NSArray arrayWithObject:indexPath];
                             [self.tableView reloadRowsAtIndexPaths:array withRowAnimation:UITableViewRowAnimationNone];

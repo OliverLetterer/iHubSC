@@ -10,62 +10,25 @@
 #import "GithubAPI.h"
 #import "UIImage+Resize.h"
 #import "ASIHTTPRequest.h"
+#import "UIImage+GHAPIImageCacheV3.h"
 
 @implementation UIImage (GHGravatar)
 
 + (void)imageFromGravatarID:(NSString *)gravatarID 
-      withCompletionHandler:(void(^)(UIImage *image, NSError *error, BOOL didDownload))handler {
+      withCompletionHandler:(void(^)(UIImage *image))handler {
     
-    UIImage *myImage = [UIImage cachedImageFromGravatarID:gravatarID];
+    NSURL *imageURL = [NSURL URLWithString:[NSString stringWithFormat:@"http://www.gravatar.com/avatar/%@?s=200", gravatarID]];
+    NSString *URLString = [imageURL absoluteString];
     
-    if (!myImage) {
-        dispatch_async([GHGravatarBackgroundQueue sharedInstance].backgroundQueue, ^(void) {
-            UIImage *myImage = [UIImage cachedImageFromGravatarID:gravatarID];
-            if (myImage) {
-                dispatch_sync(dispatch_get_main_queue(), ^(void) {
-                    handler(myImage, nil, NO);
-                });
-                return;
-            }
-            
-            NSError *myError = nil;
-            NSURL *imageURL = [NSURL URLWithString:[NSString stringWithFormat:@"http://www.gravatar.com/avatar/%@?s=200", gravatarID]];
-            
-            ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:imageURL];
-            [request startSynchronous];
-            
-            myError = [request error];
-            
-            NSData *imageData = [request responseData];
-            
-            UIImage *theImage = [[UIImage alloc] initWithData:imageData];
-            
-            if (theImage) {
-                CGSize imageSize = CGSizeMake(56.0 * [UIScreen mainScreen].scale, 56.0 * [UIScreen mainScreen].scale);
-                
-                theImage = [theImage resizedImageToSize:imageSize];
-                [GHGravatarImageCache cacheGravatarImage:theImage forGravatarID:gravatarID];
-            }
-            
-            dispatch_async(dispatch_get_main_queue(), ^(void) {
-                if (myError) {
-                    handler(nil, myError, NO);
-                } else {
-                    if (theImage) {
-                        handler(theImage, nil, YES);
-                    } else {
-                        handler([UIImage imageNamed:@"DefaultUserImage.png"], nil, NO);
-                    }
-                }
-            });
-        });
-    } else {
-        handler(myImage, nil, NO);
-    }
+    [UIImage imageFromAvatarURLString:URLString withCompletionHandler:handler];
+    
 }
 
 + (UIImage *)cachedImageFromGravatarID:(NSString *)gravatarID {
-    return [GHGravatarImageCache cachedGravatarImageFromGravatarID:gravatarID];
+    NSURL *imageURL = [NSURL URLWithString:[NSString stringWithFormat:@"http://www.gravatar.com/avatar/%@?s=200", gravatarID]];
+    NSString *URLString = [imageURL absoluteString];
+    
+    return [UIImage cachedImageFromAvatarURLString:URLString];
 }
 
 @end
