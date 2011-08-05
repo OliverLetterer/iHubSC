@@ -111,6 +111,7 @@
 - (void)setupNotifications;
 
 - (void)gistDeletedNotificationCallback:(NSNotification *)notification;
+- (void)gistCreatedNotificationCallback:(NSNotification *)notification;
 
 @end
 

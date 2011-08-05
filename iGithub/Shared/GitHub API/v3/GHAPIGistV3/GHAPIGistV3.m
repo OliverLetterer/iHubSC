@@ -9,9 +9,8 @@
 #import "GHAPIGistV3.h"
 #import "GithubAPI.h"
 
-NSString *const GHAPIGistV3StarStateChangedNotification = @"GHAPIGistV3StarStateChangedNotification";
 NSString *const GHAPIGistV3DeleteNotification = @"GHAPIGistV3DeleteNotification";
-
+NSString *const GHAPIGistV3CreatedNotification = @"GHAPIGistV3CreatedNotification";
 
 
 @implementation GHAPIGistV3
@@ -132,7 +131,10 @@ NSString *const GHAPIGistV3DeleteNotification = @"GHAPIGistV3DeleteNotification"
                                                  setupHandler:^(ASIFormDataRequest *request) {
                                                      [request setRequestMethod:@"POST"];
                                                  } completionHandler:^(id object, NSError *error, ASIFormDataRequest *request) {
-                                                     handler([[GHAPIGistV3 alloc] initWithRawDictionary:object], nil);
+                                                     GHAPIGistV3 *gist = [[GHAPIGistV3 alloc] initWithRawDictionary:object];
+                                                     [[NSNotificationCenter defaultCenter] postNotificationName:GHAPIGistV3CreatedNotification object:nil 
+                                                                                                       userInfo:[NSDictionary dictionaryWithObject:gist forKey:GHAPIV3NotificationUserDictionaryGistKey]];
+                                                     handler(gist, nil);
                                                  }];
 }
 

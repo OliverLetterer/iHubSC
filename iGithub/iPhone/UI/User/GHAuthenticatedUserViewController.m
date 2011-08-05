@@ -21,6 +21,11 @@
     return self;
 }
 
+- (void)authenticationManagerDidAuthenticateUserCallback:(NSNotification *)notification {
+    [super authenticationManagerDidAuthenticateUserCallback:notification];
+    self.username = [GHAPIAuthenticationManager sharedInstance].authenticatedUser.login;
+}
+
 #pragma mark - target actions
 
 - (void)accountButtonClicked:(UIBarButtonItem *)button {

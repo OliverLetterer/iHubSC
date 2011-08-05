@@ -28,6 +28,21 @@
            }];
 }
 
+#pragma mark - Notifications
+
+- (void)gistCreatedNotificationCallback:(NSNotification *)notification {
+    if ([self.username isEqualToString:[GHAPIAuthenticationManager sharedInstance].authenticatedUser.login ]) {
+        GHAPIGistV3 *gist = [notification.userInfo objectForKey:GHAPIV3NotificationUserDictionaryGistKey];
+        [self.dataArray insertObject:gist atIndex:0];
+        
+        [self cacheDataArrayHeights];
+        if (self.isViewLoaded) {
+            [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] 
+                          withRowAnimation:UITableViewRowAnimationAutomatic];
+        }
+    }
+}
+
 #pragma mark - Pagination
 
 - (void)downloadDataForPage:(NSUInteger)page inSection:(NSUInteger)section {

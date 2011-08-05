@@ -15,7 +15,7 @@
 #import "GithubAPI.h"
 
 @interface GHUserViewController : GHActionButtonTableViewController <GHCreateRepositoryViewControllerDelegate, GHSingleRepositoryViewControllerDelegate, MFMailComposeViewControllerDelegate> {
-@private
+@protected
     NSString *_username;
     GHAPIUserV3 *_user;
     

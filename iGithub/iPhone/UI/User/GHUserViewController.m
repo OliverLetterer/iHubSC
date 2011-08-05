@@ -104,6 +104,20 @@
     }
 }
 
+- (void)gistCreatedNotificationCallback:(NSNotification *)notification {
+    if ([self.username isEqualToString:[GHAPIAuthenticationManager sharedInstance].authenticatedUser.login ]) {
+        GHAPIGistV3 *gist = [notification.userInfo objectForKey:GHAPIV3NotificationUserDictionaryGistKey];
+        [self.gists insertObject:gist atIndex:0];
+        
+        [self cacheGistsHeight];
+        if (self.isViewLoaded) {
+            [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:kUITableViewGists] 
+                          withRowAnimation:UITableViewRowAnimationAutomatic];
+        }
+    }
+    
+}
+
 #pragma mark - instance methods
 
 - (void)downloadRepositories {
