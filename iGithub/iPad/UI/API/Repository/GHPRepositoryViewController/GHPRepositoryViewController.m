@@ -310,7 +310,7 @@
             return cell;
         }
     } else if (indexPath.section == kUITableViewSectionLabels) {
-        NSString *CellIdentifier = @"GHLabelTableViewCell";
+        static NSString *CellIdentifier = @"GHLabelTableViewCell";
         
         GHPLabelTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         if (!cell) {

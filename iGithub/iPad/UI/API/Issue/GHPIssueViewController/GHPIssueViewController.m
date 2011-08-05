@@ -19,13 +19,16 @@
 #import "ANNotificationQueue.h"
 #import "GHViewCloudFileViewController.h"
 #import "GHWebViewViewController.h"
+#import "GHPLabelTableViewCell.h"
+#import "GHPLabelViewController.h"
 
 #define kUITableViewSectionInfo             0
 #define kUITableViewSectionDetails          1
-#define kUITableViewSectionCommits          2
+#define kUITableViewSectionLabels           2
 #define kUITableViewSectionHistory          3
+#define kUITableViewSectionCommits          4
 
-#define kUITableViewNumberOfSections        4
+#define kUITableViewNumberOfSections        5
 
 #define kUIActionSheetTagAction             172634
 #define kUIActionSheetTagLongPressedLink    172637
@@ -153,13 +156,13 @@
 #pragma mark - UIExpandableTableViewDatasource
 
 - (BOOL)tableView:(UIExpandableTableView *)tableView canExpandSection:(NSInteger)section {
-    return section == kUITableViewSectionCommits || section == kUITableViewSectionHistory;
+    return section == kUITableViewSectionCommits || section == kUITableViewSectionHistory || section == kUITableViewSectionLabels;
 }
 
 - (BOOL)tableView:(UIExpandableTableView *)tableView needsToDownloadDataForExpandableSection:(NSInteger)section {
     if (section == kUITableViewSectionCommits) {
         return self.discussion == nil;
-    }else if (section == kUITableViewSectionHistory) {
+    } else if (section == kUITableViewSectionHistory) {
         return self.history == nil;
     }
     return NO;
@@ -172,6 +175,8 @@
         cell.textLabel.text = NSLocalizedString(@"View attatched Commits", @"");
     } else if (section == kUITableViewSectionHistory) {
         cell.textLabel.text = NSLocalizedString(@"History", @"");
+    } else if (section == kUITableViewSectionLabels) {
+        cell.textLabel.text = NSLocalizedString(@"Labels", @"");
     }
     
     return cell;
@@ -234,6 +239,11 @@
         return self.issue.isPullRequest ? [self.discussion.commits count] + 1 : 0;
     } else if (section == kUITableViewSectionHistory) {
         return self.history.count + 2;
+    } else if (section == kUITableViewSectionLabels) {
+        if (self.issue.labels.count == 0) {
+            return 0;
+        }
+        return self.issue.labels.count+1;
     }
     return 0;
 }
@@ -442,45 +452,27 @@
                 return cell;
             }
         }
+    } else if (indexPath.section == kUITableViewSectionLabels) {
+        static NSString *CellIdentifier = @"GHLabelTableViewCell";
+        
+        GHPLabelTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        if (!cell) {
+            cell = [[GHPLabelTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        }
+        [self setupDefaultTableViewCell:cell forRowAtIndexPath:indexPath];
+        
+        GHAPILabelV3 *label = [self.issue.labels objectAtIndex:indexPath.row - 1];
+        
+        cell.textLabel.text = label.name;
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        
+        cell.colorView.backgroundColor = label.colorString.colorFromAPIColorString;
+        
+        return cell;
     }
     
     return self.dummyCell;
 }
-
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
 
 #pragma mark - Table view delegate
 
@@ -588,12 +580,15 @@
                     break;
             }
         }
+    } else if (indexPath.section == kUITableViewSectionLabels) {
+        GHAPILabelV3 *label = [self.issue.labels objectAtIndex:indexPath.row - 1];
+        viewController = [[GHPLabelViewController alloc] initWithRepository:self.repositoryString label:label];
     }
     
     if (viewController) {
         [self.advancedNavigationController pushViewController:viewController afterViewController:self animated:YES];
     } else {
-        [tableView deselectRowAtIndexPath:indexPath animated:YES];
+        [tableView deselectRowAtIndexPath:indexPath animated:NO];
     }
 }
 
