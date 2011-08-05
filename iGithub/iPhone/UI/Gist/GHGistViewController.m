@@ -91,11 +91,9 @@
 #pragma mark - instance methods
 
 - (void)cacheHeightForComments {
-    DTAttributedTextView *textView = [[DTAttributedTextView alloc] initWithFrame:CGRectZero];
     [self.comments enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         GHAPIGistCommentV3 *comment = obj;
-        CGFloat height = [GHAttributedTableViewCell heightWithAttributedString:comment.attributedBody 
-                                                          inAttributedTextView:textView];
+        CGFloat height = [GHAttributedTableViewCell heightWithAttributedString:comment.attributedBody];
         NSIndexPath *indexPath = [NSIndexPath indexPathForRow:idx+1 inSection:kUITableViewSectionComments];
         [self cacheHeight:height forRowAtIndexPath:indexPath];
     }];

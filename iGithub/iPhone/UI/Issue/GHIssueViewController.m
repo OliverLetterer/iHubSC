@@ -73,8 +73,7 @@
             [self handleError:error];
         } else {
             self.issue = issue;
-            [self cacheHeight:[GHAttributedTableViewCell heightWithAttributedString:self.issue.attributedBody 
-                                                               inAttributedTextView:nil] 
+            [self cacheHeight:[GHAttributedTableViewCell heightWithAttributedString:self.issue.attributedBody] 
             forRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:kUITableViewSectionData] ];
             self.title = [NSString stringWithFormat:NSLocalizedString(@"%@ %@", @""), self.issueName, self.number];
             [self.tableView reloadData];
@@ -615,7 +614,6 @@
 #pragma mark - Height caching
 
 - (void)cacheHeightsForHistroy {
-    DTAttributedTextView *textView = [[DTAttributedTextView alloc] initWithFrame:CGRectZero];
     [self.history enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         CGFloat height = 44.0f;
         
@@ -623,8 +621,7 @@
             // display a comment
             GHAPIIssueCommentV3 *comment = (GHAPIIssueCommentV3 *)obj;
             
-            height = [GHAttributedTableViewCell heightWithAttributedString:comment.attributedBody 
-                                                      inAttributedTextView:textView];
+            height = [GHAttributedTableViewCell heightWithAttributedString:comment.attributedBody];
         } else if ([obj isKindOfClass:[GHAPIIssueEventV3 class] ]) {
             GHAPIIssueEventV3 *event = obj;
             height = [GHDescriptionTableViewCell heightWithContent:[self descriptionForEvent:event] ];
@@ -686,8 +683,7 @@
 - (void)createIssueViewController:(GHCreateIssueTableViewController *)createViewController didCreateIssue:(GHAPIIssueV3 *)issue {
     [[ANNotificationQueue sharedInstance] detatchSuccesNotificationWithTitle:NSLocalizedString(@"Updated Issue", @"") message:issue.title];
     self.issue = issue;
-    [self cacheHeight:[GHAttributedTableViewCell heightWithAttributedString:self.issue.attributedBody 
-                                                       inAttributedTextView:nil] 
+    [self cacheHeight:[GHAttributedTableViewCell heightWithAttributedString:self.issue.attributedBody] 
     forRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:kUITableViewSectionData] ];
     
     if (self.isViewLoaded) {
