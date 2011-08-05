@@ -22,6 +22,7 @@
 @property (nonatomic, retain, readonly) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 
 @property (nonatomic, readonly) NSMutableDictionary *serializedStateDictionary;
+@property (nonatomic, readonly) NSString *lastKnownApplicationStateDictionaryFilePath;
 
 - (void)saveContext;
 - (NSURL *)applicationDocumentsDirectory;

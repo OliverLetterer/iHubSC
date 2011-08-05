@@ -11,8 +11,6 @@
 #import "ASIHTTPRequest.h"
 #import "ANNotificationQueue.h"
 
-#define kLastKnownApplicationStateFileName @"de.olettere.iGitHub.lastKnownApplicationState.plist"
-
 @implementation iGithubAppDelegate
 
 @synthesize window=_window;
@@ -21,6 +19,13 @@
 
 - (NSMutableDictionary *)serializedStateDictionary {
     return nil;
+}
+
+- (NSString *)lastKnownApplicationStateDictionaryFilePath {
+    NSString *documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *filePath = [documentsDirectory stringByAppendingPathComponent:@"de.olettere.iGitHub.lastKnownApplicationState.plist"];
+    
+    return filePath;
 }
 
 - (void)setupAppearences {
@@ -69,8 +74,6 @@
     if (!dictionary) {
         return NO;
     }
-    NSString *documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-    NSString *filePath = [documentsDirectory stringByAppendingPathComponent:kLastKnownApplicationStateFileName];
     
     // save bundleVerion
     NSString *bundleVersionKey = (NSString *)kCFBundleVersionKey;
@@ -81,14 +84,13 @@
     
     [dictionary setObject:[NSNumber numberWithUnsignedInteger:UI_USER_INTERFACE_IDIOM()] forKey:@"UI_USER_INTERFACE_IDIOM"];
     
-    return [NSKeyedArchiver archiveRootObject:dictionary toFile:filePath];
+    return [NSKeyedArchiver archiveRootObject:dictionary toFile:self.lastKnownApplicationStateDictionaryFilePath];
 }
 
 - (NSMutableDictionary *)deserializeState {
-    NSString *documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-    NSString *filePath = [documentsDirectory stringByAppendingPathComponent:kLastKnownApplicationStateFileName];
+    NSMutableDictionary *dictionary = [NSKeyedUnarchiver unarchiveObjectWithFile:self.lastKnownApplicationStateDictionaryFilePath];
     
-    NSMutableDictionary *dictionary = [NSKeyedUnarchiver unarchiveObjectWithFile:filePath];
+    [[NSFileManager defaultManager] removeItemAtPath:self.lastKnownApplicationStateDictionaryFilePath error:NULL];
     
     NSString *bundleVersionKey = (NSString *)kCFBundleVersionKey;
     NSString *newBundleVersion = [[NSBundle mainBundle] objectForInfoDictionaryKey:bundleVersionKey];
@@ -106,9 +108,7 @@
 
 #pragma mark - memory management
 
-
-- (void)saveContext
-{
+- (void)saveContext {
     NSError *error = nil;
     NSManagedObjectContext *managedObjectContext = self.managedObjectContext;
     if (managedObjectContext != nil)
@@ -132,8 +132,7 @@
  Returns the managed object context for the application.
  If the context doesn't already exist, it is created and bound to the persistent store coordinator for the application.
  */
-- (NSManagedObjectContext *)managedObjectContext
-{
+- (NSManagedObjectContext *)managedObjectContext {
     if (_managedObjectContext != nil)
     {
         return _managedObjectContext;
@@ -152,8 +151,7 @@
  Returns the managed object model for the application.
  If the model doesn't already exist, it is created from the application's model.
  */
-- (NSManagedObjectModel *)managedObjectModel
-{
+- (NSManagedObjectModel *)managedObjectModel {
     if (_managedObjectModel != nil)
     {
         return _managedObjectModel;
@@ -167,8 +165,7 @@
  Returns the persistent store coordinator for the application.
  If the coordinator doesn't already exist, it is created and the application's store added to it.
  */
-- (NSPersistentStoreCoordinator *)persistentStoreCoordinator
-{
+- (NSPersistentStoreCoordinator *)persistentStoreCoordinator {
     if (_persistentStoreCoordinator != nil)
     {
         return _persistentStoreCoordinator;
@@ -215,8 +212,7 @@
 /**
  Returns the URL to the application's Documents directory.
  */
-- (NSURL *)applicationDocumentsDirectory
-{
+- (NSURL *)applicationDocumentsDirectory {
     return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
 }
 
