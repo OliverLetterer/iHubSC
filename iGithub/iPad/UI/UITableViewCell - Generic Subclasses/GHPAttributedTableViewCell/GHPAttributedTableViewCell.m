@@ -115,19 +115,14 @@
 	return button;
 }
 
-+ (CGFloat)heightWithAttributedString:(NSAttributedString *)content inAttributedTextView:(DTAttributedTextView *)textView {
-    if (!textView) {
-        textView = [[DTAttributedTextView alloc] initWithFrame:CGRectZero];
-    }
-    textView.attributedString = content;
-    textView.frame = CGRectMake(0.0f, 0.0f, 317.0f, 10.0f);
++ (CGFloat)heightWithAttributedString:(NSAttributedString *)content {
+    DTAttributedTextContentView *contentView = [[DTAttributedTextContentView alloc] initWithAttributedString:content width:317.0f];
+    CGFloat minimumHeight = 80.0f;
     
-    CGFloat height = textView.contentSize.height + 41.0f;
-    if (height < 80.0f) {
-        height = 80.0f;
-    }
+    CGSize size = [contentView sizeThatFits:CGSizeMake(222.0f, MAXFLOAT)];
+    CGFloat height = size.height + 41.0f;
     
-    return height;
+    return height < minimumHeight ? minimumHeight : height;
 }
 
 #pragma mark - Memory management

@@ -35,6 +35,6 @@
 - (void)linkButtonClicked:(DTLinkButton *)sender;
 - (void)longPressRecognized:(UILongPressGestureRecognizer *)recognizer;
 
-+ (CGFloat)heightWithAttributedString:(NSAttributedString *)content inAttributedTextView:(DTAttributedTextView *)textView;
++ (CGFloat)heightWithAttributedString:(NSAttributedString *)content;
 
 @end

@@ -81,8 +81,7 @@
     if (issue != _issue) {
         _issue = issue;
         
-        _bodyHeight = [GHPIssueInfoTableViewCell heightWithAttributedString:issue.attributedBody 
-                                                       inAttributedTextView:nil];
+        _bodyHeight = [GHPIssueInfoTableViewCell heightWithAttributedString:issue.attributedBody];
         if (self.isViewLoaded) {
             [self.tableView reloadData];
         }
@@ -97,16 +96,6 @@
         [self setIssueNumber:issueNumber onRepository:repository];
     }
     return self;
-}
-
-#pragma mark - Memory management
-
-
-- (void)didReceiveMemoryWarning {
-    // Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
-    
-    // Release any cached data, images, etc that aren't in use.
 }
 
 #pragma mark - instance methods
@@ -595,7 +584,6 @@
 #pragma mark - Height caching
 
 - (void)cacheHeightsForHistroy {
-    DTAttributedTextView *textView = [[DTAttributedTextView alloc] initWithFrame:CGRectZero];
     [self.history enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         CGFloat height = UITableViewAutomaticDimension;
         
@@ -603,8 +591,7 @@
             // display a comment
             GHAPIIssueCommentV3 *comment = (GHAPIIssueCommentV3 *)obj;
             
-            height = [GHPAttributedTableViewCell heightWithAttributedString:comment.attributedBody 
-                                                         inAttributedTextView:textView];
+            height = [GHPAttributedTableViewCell heightWithAttributedString:comment.attributedBody];
         } else if ([obj isKindOfClass:[GHAPIIssueEventV3 class] ]) {
             GHAPIIssueEventV3 *event = (GHAPIIssueEventV3 *)obj;
             
@@ -823,8 +810,7 @@
                     [self handleError:error];
                 } else {
                     [self.history addObject:comment];
-                    CGFloat height = [GHPAttributedTableViewCell heightWithAttributedString:comment.attributedBody 
-                                                                       inAttributedTextView:nil];
+                    CGFloat height = [GHPAttributedTableViewCell heightWithAttributedString:comment.attributedBody];
                     [self cacheHeight:height forRowAtIndexPath:[NSIndexPath indexPathForRow:self.history.count inSection:kUITableViewSectionHistory]];
                     self.issue.comments = [NSNumber numberWithInt:[self.issue.comments intValue] + 1];
                     
