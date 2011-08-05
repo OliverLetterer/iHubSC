@@ -41,9 +41,6 @@ dispatch_queue_t GHAPIBackgroundQueue() {
     return self;
 }
 
-#pragma mark - Memory management
-
-
 #pragma mark - instance methods
 
 - (void)sendRequestToURL:(NSURL *)URL 

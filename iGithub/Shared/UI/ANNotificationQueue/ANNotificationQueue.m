@@ -114,7 +114,7 @@ CGFloat const ANNotificationQueueAnimationDuration = 0.35f*2.0f;
 - (void)_displayNextNotification {
     if ([self.notifications count] == 0) {
         [_currentWindow resignKeyWindow];
-        [[UIApplication sharedApplication].delegate.window becomeKeyWindow];
+        [[UIApplication sharedApplication].delegate.window makeKeyAndVisible];
         [UIView animateWithDuration:0.5f animations:^(void) {
             _currentWindow.alpha = 0.0f;
         }];
@@ -213,12 +213,10 @@ static ANNotificationQueue *_instance = nil;
 @implementation ANNotificationQueue (Singleton)
 
 + (ANNotificationQueue *)sharedInstance {
-	@synchronized(self) {
-		
-        if (!_instance) {
-            _instance = [[super allocWithZone:NULL] init];
-        }
-    }
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        _instance = [[super allocWithZone:NULL] init];
+    });
     return _instance;
 }
 
