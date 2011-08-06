@@ -17,7 +17,6 @@
 - (id)initWithFrame:(CGRect)frame {
     if ((self = [super initWithFrame:frame])) {
         // Initialization code
-        //        self.layer.needsDisplayOnBoundsChange = YES;
         self.backgroundColor = [UIColor clearColor];
         self.layer.needsDisplayOnBoundsChange = YES;
         
