@@ -37,6 +37,3 @@
 [submodule "GHMarkdownParser"]
 	path = Submodules/GHMarkdownParser
 	url = git@github.com:OliverLetterer/GHMarkdownParser.git
-[submodule "OAuth2Client"]
-	path = Submodules/OAuth2Client
-	url = https://github.com/nxtbgthng/OAuth2Client.git

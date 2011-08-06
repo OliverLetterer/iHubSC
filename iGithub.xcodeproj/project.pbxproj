@@ -3835,9 +3835,10 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
-					"Submodules/ANAdvancedNavigationController/**",
-					"Submodules/GHMarkdownParser/**",
-					"Submodules/Kal/**",
+					"Submodules/**",
+					Submodules/ANAdvancedNavigationController,
+					Submodules/GHMarkdownParser,
+					Submodules/Kal,
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				LIBRARY_SEARCH_PATHS = (
@@ -3870,9 +3871,10 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
-					"Submodules/ANAdvancedNavigationController/**",
-					"Submodules/GHMarkdownParser/**",
-					"Submodules/Kal/**",
+					"Submodules/**",
+					Submodules/ANAdvancedNavigationController,
+					Submodules/GHMarkdownParser,
+					Submodules/Kal,
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				LIBRARY_SEARCH_PATHS = (
