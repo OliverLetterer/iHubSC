@@ -36,7 +36,7 @@
 #pragma mark - Initialization
 
 - (id)initWithIssue:(GHAPIIssueV3 *)issue {
-    if ((self = [super initWithStyle:UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad ? UITableViewStyleGrouped : UITableViewStylePlain])) {
+    if ((self = [super init])) {
         // Custom initialization
         self.issue = issue;
         
@@ -90,6 +90,7 @@
         body = cell.textView.text;
     }
     
+    self.navigationItem.rightBarButtonItem = self.loadingButton;
     [GHAPIIssueV3 updateIssueOnRepository:self.repository withNumber:self.issue.number 
                                     title:title 
                                      body:body 
@@ -98,6 +99,7 @@
                                 milestone:self.selectedMilestoneNumber ? self.selectedMilestoneNumber : (id)[NSNull null]
                                    labels:self.selectedLabels.count > 0 ? self.selectedLabels : (id)[NSNull null]
                         completionHandler:^(GHAPIIssueV3 *issue, NSError *error) {
+                            self.navigationItem.rightBarButtonItem = self.saveButton;
                             if (error) {
                                 [self handleError:error];
                             } else {

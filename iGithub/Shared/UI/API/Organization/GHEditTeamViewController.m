@@ -118,8 +118,10 @@
         name = cell.textField.text;
     }
     
+    self.navigationItem.rightBarButtonItem = self.loadingButton;
     if (_permission == GHEditTeamViewControllerEditingPermissionMembers) {
         [GHAPITeamV3 updateTeamWithID:self.team.ID setTeamMembers:_selectedMembers completionHandler:^(NSError *error) {
+            self.navigationItem.rightBarButtonItem = self.saveButton;
             if (error) {
                 [self handleError:error];
             } else {
@@ -129,6 +131,7 @@
     } else if (_permission == GHEditTeamViewControllerEditingPermissionAll) {
         [GHAPITeamV3 updateTeamWithID:self.team.ID teamMembers:_selectedMembers repositories:_selectedRepositories permission:_selectedPermission
                                  name:name completionHandler:^(GHAPITeamV3 *team, NSError *error) {
+                                     self.navigationItem.rightBarButtonItem = self.saveButton;
                                      if (error) {
                                          [self handleError:error];
                                      } else {

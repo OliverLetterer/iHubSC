@@ -63,7 +63,7 @@ NSInteger const kGHCreateIssueTableViewControllerSectionLabels = kUITableViewSec
 #pragma mark - Initialization
 
 - (id)initWithRepository:(NSString *)repository {
-    if ((self = [super initWithStyle:UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad ? UITableViewStyleGrouped : UITableViewStylePlain])) {
+    if ((self = [super init])) {
         // Custom initialization
         self.title = NSLocalizedString(@"New Issue", @"");
         self.repository = repository;
@@ -89,10 +89,12 @@ NSInteger const kGHCreateIssueTableViewControllerSectionLabels = kUITableViewSec
         body = cell.textView.text;
     }
     
+    self.navigationItem.rightBarButtonItem = self.loadingButton;
     [GHAPIIssueV3 createIssueOnRepository:self.repository 
                                     title:title body:body assignee:self.assigneeString milestone:self.selectedMilestoneNumber 
                                    labels:self.selectedLabels.count > 0 ? self.selectedLabels : nil 
                         completionHandler:^(GHAPIIssueV3 *issue, NSError *error) {
+                            self.navigationItem.rightBarButtonItem = self.saveButton;
                             if (error) {
                                 [self handleError:error];
                             } else {
@@ -103,26 +105,6 @@ NSInteger const kGHCreateIssueTableViewControllerSectionLabels = kUITableViewSec
 
 - (void)cancelButtonClicked:(UIBarButtonItem *)sender {
     [self.delegate createIssueViewControllerDidCancel:self];
-}
-
-#pragma mark - View lifecycle
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    
-    if (!self.isPresentedInPopoverController) {
-        UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel 
-                                                                                      target:self 
-                                                                                      action:@selector(cancelButtonClicked:)];
-        self.navigationItem.leftBarButtonItem = cancelButton;
-    }
-    
-    UIBarButtonItem *saveButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave 
-                                                                                 target:self 
-                                                                                 action:@selector(saveButtonClicked:)];
-    self.navigationItem.rightBarButtonItem = saveButton;
-    
-    self.contentSizeForViewInPopover = CGSizeMake(320.0f, 480.0f);
 }
 
 #pragma mark - instance methods

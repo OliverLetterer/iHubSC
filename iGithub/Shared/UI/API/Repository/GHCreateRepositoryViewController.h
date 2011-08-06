@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "GHTableViewController.h"
+#import "GHCreateContentViewController.h"
 
 @class GHCreateRepositoryViewController, GHAPIRepositoryV3, GHCreateRepositoryTableViewCell;
 
@@ -21,18 +21,13 @@
 @end
 
 
-@interface GHCreateRepositoryViewController : GHTableViewController <UITextFieldDelegate> {
+@interface GHCreateRepositoryViewController : GHCreateContentViewController <UITextFieldDelegate> {
 @private
     id<GHCreateRepositoryViewControllerDelegate> __weak _delegate;
 }
 
 @property (nonatomic, weak) id<GHCreateRepositoryViewControllerDelegate> delegate;
 
-- (void)cancelButtonClicked:(UIBarButtonItem *)button;
-- (void)createButtonClicked:(UIBarButtonItem *)button;
-
 - (void)publicSwitchChanged:(id)sender;
-
-- (void)createRepository;
 
 @end

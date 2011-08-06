@@ -17,7 +17,7 @@
 #pragma mark - Initialization
 
 - (id)init {
-    if ((self = [super initWithStyle:UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad ? UITableViewStyleGrouped : UITableViewStylePlain])) {
+    if ((self = [super init])) {
         // Custom initialization
         self.title = NSLocalizedString(@"Create a Repository", @"");
     }
@@ -30,28 +30,7 @@
     [self.delegate createRepositoryViewControllerDidCancel:self];
 }
 
-- (void)createButtonClicked:(UIBarButtonItem *)button {
-    [self createRepository];
-}
-
-#pragma mark - View lifecycle
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel 
-                                                                                           target:self 
-                                                                                           action:@selector(cancelButtonClicked:)];
-    
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Create", @"") 
-                                                                               style:UIBarButtonItemStyleDone 
-                                                                              target:self 
-                                                                              action:@selector(createButtonClicked:)];
-}
-
-#pragma mark - instance methods
-
-- (void)createRepository {
+- (void)saveButtonClicked:(UIBarButtonItem *)sender {
     NSString *title = nil;
     NSString *description = nil;
     BOOL public = NO;
@@ -68,10 +47,12 @@
         public = cell.publicSwitch.isOn;
     }
     
+    self.navigationItem.rightBarButtonItem = self.loadingButton;
     [GHAPIRepositoryV3 createRepositoryWithName:title 
                                     description:description 
                                          public:public 
                               completionHandler:^(GHAPIRepositoryV3 *repository, NSError *error) {
+                                  self.navigationItem.rightBarButtonItem = self.saveButton;
                                   if (error) {
                                       [self handleError:error];
                                   } else {

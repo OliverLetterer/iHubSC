@@ -27,7 +27,7 @@
 #pragma mark - Initialization
 
 - (id)initWithMilestone:(GHAPIMilestoneV3 *)milestone repository:(NSString *)repository {
-    if ((self = [super initWithStyle:UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad ? UITableViewStyleGrouped : UITableViewStylePlain])) {
+    if ((self = [super init])) {
         self.milestone = milestone;
         self.repository = repository;
     }
@@ -79,9 +79,11 @@
         description = cell.textView.text;
     }
     
+    self.navigationItem.rightBarButtonItem = self.loadingButton;
     [GHAPIMilestoneV3 updateMilestoneOnRepository:self.repository withID:self.milestone.number 
                                             title:title description:description dueOn:self.selectedDueDate 
                                 completionHandler:^(GHAPIMilestoneV3 *milestone, NSError *error) {
+                                    self.navigationItem.rightBarButtonItem = self.saveButton;
                                     if (error) {
                                         [self handleError:error];
                                     } else {

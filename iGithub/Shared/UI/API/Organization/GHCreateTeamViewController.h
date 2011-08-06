@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "GHTableViewController.h"
+#import "GHCreateContentViewController.h"
 #import "GHTextFieldTableViewCell.h"
 #import "GHPTextFieldTableViewCell.h"
 
@@ -29,7 +29,7 @@ extern NSInteger const kGHCreateTeamViewControllerTableViewSectionPermission;
 extern NSInteger const kGHCreateTeamViewControllerTableViewSectionRepositories;
 extern NSInteger const kGHCreateTeamViewControllerTableViewSectionMembers;
 
-@interface GHCreateTeamViewController : GHTableViewController <UIAlertViewDelegate> {
+@interface GHCreateTeamViewController : GHCreateContentViewController <UIAlertViewDelegate> {
 @protected
     id<GHCreateTeamViewControllerDelegate> __weak _delegate;
     NSString *_organization;
@@ -52,11 +52,6 @@ extern NSInteger const kGHCreateTeamViewControllerTableViewSectionMembers;
 @property (nonatomic, readonly) NSMutableArray *selectedRepositories;
 @property (nonatomic, readonly) NSMutableArray *selectedMembers;
 
-
-
 - (id)initWithOrganization:(NSString *)organization;
-
-- (void)cancelButtonClicked:(UIBarButtonItem *)sender;
-- (void)saveButtonClicked:(UIBarButtonItem *)sender;
 
 @end

@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "GHTableViewController.h"
+#import "GHCreateContentViewController.h"
 #import "GHDateSelectViewController.h"
 
 @class GHCreateMilestoneViewController;
@@ -24,7 +24,7 @@ extern NSInteger const kGHCreateMilestoneViewControllerTableViewSectionTitleAndD
 extern NSInteger const kGHCreateMilestoneViewControllerTableViewSectionDueDate;
 
 
-@interface GHCreateMilestoneViewController : GHTableViewController <GHDateSelectViewControllerDelegate> {
+@interface GHCreateMilestoneViewController : GHCreateContentViewController <GHDateSelectViewControllerDelegate> {
 @private
     id<GHCreateMilestoneViewControllerDelegate> __weak _delegate;
     NSString *_repository;
@@ -37,10 +37,6 @@ extern NSInteger const kGHCreateMilestoneViewControllerTableViewSectionDueDate;
 
 @property (nonatomic, retain) NSDate *selectedDueDate;
 
-
 - (id)initWithRepository:(NSString *)repository;
-
-- (void)cancelButtonClicked:(UIBarButtonItem *)sender;
-- (void)saveButtonClicked:(UIBarButtonItem *)sender;
 
 @end

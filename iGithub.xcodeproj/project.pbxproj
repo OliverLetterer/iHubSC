@@ -336,6 +336,10 @@
 		A784206413E1987D00131648 /* GHUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A784203C13E1987C00131648 /* GHUserViewController.m */; };
 		A784206513E1987D00131648 /* GHWebViewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A784203F13E1987C00131648 /* GHWebViewViewController.m */; };
 		A7AE937513EC0843007B7CE1 /* GHAPIV3NotificationUserDictionaryKeys.m in Sources */ = {isa = PBXBuildFile; fileRef = A7AE937413EC0843007B7CE1 /* GHAPIV3NotificationUserDictionaryKeys.m */; };
+		A7AE93BD13ED3CE3007B7CE1 /* UIBarButtonItemSaveBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A7AE93BA13ED3CE3007B7CE1 /* UIBarButtonItemSaveBackground@2x.png */; };
+		A7AE93BE13ED3CE3007B7CE1 /* UIBarButtonItemSaveBackground~iPad.png in Resources */ = {isa = PBXBuildFile; fileRef = A7AE93BB13ED3CE3007B7CE1 /* UIBarButtonItemSaveBackground~iPad.png */; };
+		A7AE93BF13ED3CE3007B7CE1 /* UIBarButtonItemSaveBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = A7AE93BC13ED3CE3007B7CE1 /* UIBarButtonItemSaveBackground.png */; };
+		A7AE93C313ED3D6B007B7CE1 /* GHCreateContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7AE93C213ED3D6B007B7CE1 /* GHCreateContentViewController.m */; };
 		A7B6545613EA9189009E4414 /* libANAdvancedNavigationController.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A7B6545313EA917B009E4414 /* libANAdvancedNavigationController.a */; };
 		A7BD1EEB13E49D880016A662 /* GHViewREADMEViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7BD1EEA13E49D870016A662 /* GHViewREADMEViewController.m */; };
 		A7BD1EF013E49F230016A662 /* GHAPITreeV3.m in Sources */ = {isa = PBXBuildFile; fileRef = A7BD1EEF13E49F230016A662 /* GHAPITreeV3.m */; };
@@ -1008,6 +1012,11 @@
 		A784203F13E1987C00131648 /* GHWebViewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHWebViewViewController.m; sourceTree = "<group>"; };
 		A7AE937313EC0843007B7CE1 /* GHAPIV3NotificationUserDictionaryKeys.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHAPIV3NotificationUserDictionaryKeys.h; sourceTree = "<group>"; };
 		A7AE937413EC0843007B7CE1 /* GHAPIV3NotificationUserDictionaryKeys.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHAPIV3NotificationUserDictionaryKeys.m; sourceTree = "<group>"; };
+		A7AE93BA13ED3CE3007B7CE1 /* UIBarButtonItemSaveBackground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIBarButtonItemSaveBackground@2x.png"; sourceTree = "<group>"; };
+		A7AE93BB13ED3CE3007B7CE1 /* UIBarButtonItemSaveBackground~iPad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIBarButtonItemSaveBackground~iPad.png"; sourceTree = "<group>"; };
+		A7AE93BC13ED3CE3007B7CE1 /* UIBarButtonItemSaveBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UIBarButtonItemSaveBackground.png; sourceTree = "<group>"; };
+		A7AE93C113ED3D6B007B7CE1 /* GHCreateContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHCreateContentViewController.h; sourceTree = "<group>"; };
+		A7AE93C213ED3D6B007B7CE1 /* GHCreateContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHCreateContentViewController.m; sourceTree = "<group>"; };
 		A7B6544B13EA917B009E4414 /* ANAdvancedNavigationController.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = ANAdvancedNavigationController.xcodeproj; sourceTree = "<group>"; };
 		A7BD1EE913E49D870016A662 /* GHViewREADMEViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHViewREADMEViewController.h; sourceTree = "<group>"; };
 		A7BD1EEA13E49D870016A662 /* GHViewREADMEViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHViewREADMEViewController.m; sourceTree = "<group>"; };
@@ -1850,6 +1859,9 @@
 		A7841D3413E18E2D00131648 /* Action Button */ = {
 			isa = PBXGroup;
 			children = (
+				A7AE93BA13ED3CE3007B7CE1 /* UIBarButtonItemSaveBackground@2x.png */,
+				A7AE93BB13ED3CE3007B7CE1 /* UIBarButtonItemSaveBackground~iPad.png */,
+				A7AE93BC13ED3CE3007B7CE1 /* UIBarButtonItemSaveBackground.png */,
 				A7DC790213EAD7D2002ABD4B /* GHEmptyBarButtonItem@2x.png */,
 				A7DC790313EAD7D2002ABD4B /* GHEmptyBarButtonItem.png */,
 				A7841D3513E18E2D00131648 /* UIBarButtonSystemItemAction.png */,
@@ -3021,6 +3033,15 @@
 			name = Util;
 			sourceTree = "<group>";
 		};
+		A7AE93C013ED3D58007B7CE1 /* GHCreateContentViewController */ = {
+			isa = PBXGroup;
+			children = (
+				A7AE93C113ED3D6B007B7CE1 /* GHCreateContentViewController.h */,
+				A7AE93C213ED3D6B007B7CE1 /* GHCreateContentViewController.m */,
+			);
+			path = GHCreateContentViewController;
+			sourceTree = "<group>";
+		};
 		A7B6544C13EA917B009E4414 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -3066,6 +3087,7 @@
 		A7BD1F3E13E5D4280016A662 /* API */ = {
 			isa = PBXGroup;
 			children = (
+				A7AE93C013ED3D58007B7CE1 /* GHCreateContentViewController */,
 				A755974413EB4529005C2F5A /* Repository */,
 				A7FDA69713E7441600DE4FF3 /* Organization */,
 				A7C5254813E69DED0003EEE5 /* Milestone */,
@@ -3460,6 +3482,9 @@
 				A7DC78F213EACEE0002ABD4B /* Settings.bundle in Resources */,
 				A7DC790413EAD7D2002ABD4B /* GHEmptyBarButtonItem@2x.png in Resources */,
 				A7DC790513EAD7D2002ABD4B /* GHEmptyBarButtonItem.png in Resources */,
+				A7AE93BD13ED3CE3007B7CE1 /* UIBarButtonItemSaveBackground@2x.png in Resources */,
+				A7AE93BE13ED3CE3007B7CE1 /* UIBarButtonItemSaveBackground~iPad.png in Resources */,
+				A7AE93BF13ED3CE3007B7CE1 /* UIBarButtonItemSaveBackground.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3741,6 +3766,7 @@
 				A755974B13EB452A005C2F5A /* GHCreateRepositoryTableViewCell.m in Sources */,
 				A755975F13EB45C6005C2F5A /* GHPCreateRepositoryTableViewCell.m in Sources */,
 				A7AE937513EC0843007B7CE1 /* GHAPIV3NotificationUserDictionaryKeys.m in Sources */,
+				A7AE93C313ED3D6B007B7CE1 /* GHCreateContentViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

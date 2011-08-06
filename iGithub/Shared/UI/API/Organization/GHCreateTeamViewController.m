@@ -72,34 +72,13 @@ NSString *NSStringFromGHAPITeamPermissionV3(NSString *GHAPITeamPermissionV3) {
 #pragma mark - Initialization
 
 - (id)initWithOrganization:(NSString *)organization {
-    if ((self = [super initWithStyle:UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad ? UITableViewStyleGrouped : UITableViewStylePlain])) {
+    if ((self = [super init])) {
         self.organization = organization;
         self.title = NSLocalizedString(@"Create Team", @"");
         
         self.selectedPermission = GHAPITeamV3PermissionPull;
     }
     return self;
-}
-
-#pragma mark - View lifecycle
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    
-    if (!self.isPresentedInPopoverController) {
-        UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel 
-                                                                                      target:self 
-                                                                                      action:@selector(cancelButtonClicked:)];
-        self.navigationItem.leftBarButtonItem = cancelButton;
-    }
-    self.navigationController.contentSizeForViewInPopover = self.contentSizeForViewInPopover;
-    
-    UIBarButtonItem *saveButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave 
-                                                                                target:self 
-                                                                                action:@selector(saveButtonClicked:)];
-    self.navigationItem.rightBarButtonItem = saveButton;
-    
-    self.contentSizeForViewInPopover = CGSizeMake(320.0f, 480.0f);
 }
 
 #pragma mark - UIExpandableTableViewDatasource
@@ -494,7 +473,9 @@ NSString *NSStringFromGHAPITeamPermissionV3(NSString *GHAPITeamPermissionV3) {
         name = cell.textField.text;
     }
     
+    self.navigationItem.rightBarButtonItem = self.loadingButton;
     [GHAPIOrganizationV3 createTeamForOrganization:self.organization name:name permission:self.selectedPermission repositories:_selectedRepositories teamMembers:_selectedMembers completionHandler:^(GHAPITeamV3 *team, NSError *error) {
+        self.navigationItem.rightBarButtonItem = self.saveButton;
         if (error) {
             [self handleError:error];
         } else {

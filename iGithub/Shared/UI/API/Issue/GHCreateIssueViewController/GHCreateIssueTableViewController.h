@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "GHTableViewController.h"
+#import "GHCreateContentViewController.h"
 #import "GithubAPI.h"
 #import "GHCreateIssueTableViewCell.h"
 
@@ -29,7 +29,7 @@ extern NSInteger const kGHCreateIssueTableViewControllerSectionLabels;
 
 
 
-@interface GHCreateIssueTableViewController : GHTableViewController {
+@interface GHCreateIssueTableViewController : GHCreateContentViewController {
 @private
     id<GHCreateIssueTableViewControllerDelegate> __weak _delegate;
     NSString *_repository;
@@ -61,10 +61,6 @@ extern NSInteger const kGHCreateIssueTableViewControllerSectionLabels;
 
 
 - (void)downloadDataWithDownloadBlock:(void(^)(void))downloadBlock forTableView:(UIExpandableTableView *)tableView inSection:(NSUInteger)section;
-
-
-- (void)cancelButtonClicked:(UIBarButtonItem *)sender;
-- (void)saveButtonClicked:(UIBarButtonItem *)sender;
 
 - (id)initWithRepository:(NSString *)repository;
 
