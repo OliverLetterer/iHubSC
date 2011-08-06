@@ -456,7 +456,7 @@
             
             description = [NSString stringWithFormat:NSLocalizedString(@"%@ with %@ and %@", @""), commitsString, additionsString, deletionsString];
         }
-        description = [NSString stringWithFormat:NSLocalizedString(@"%@ pull request %@:\n\n%@", @""), payload.action, payload.number, description];
+        description = [NSString stringWithFormat:NSLocalizedString(@"%@ pull request %@:\n\n%@\n\n%@", @""), payload.action, payload.number, payload.pullRequest.title, description];
     } else if(item.payload.type == GHPayloadMemberEvent) {
         GHMemberEventPayload *payload = (GHMemberEventPayload *)item.payload;
         
