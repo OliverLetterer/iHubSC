@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "GHAPIConnectionHandlersV3.h"
 
-@class GHAPIUserV3, GHAPIOrganizationV3;
+@class GHAPIUserV3, GHAPIOrganizationV3, GHAPILabelV3;
 
 @interface GHAPIRepositoryV3 : NSObject <NSCoding> {
 @private
@@ -68,6 +68,7 @@
 - (id)initWithRawDictionary:(NSDictionary *)rawDictionary;
 
 + (void)labelsOnRepository:(NSString *)repository page:(NSUInteger)page completionHandler:(GHAPIPaginationHandler)handler;
++ (void)createLabelOnRepository:(NSString *)repository name:(NSString *)name color:(UIColor *)color completionHandler:(void (^)(GHAPILabelV3 *label, NSError *error))handler;
 
 + (void)repositoryNamed:(NSString *)repositoryName 
   withCompletionHandler:(void (^)(GHAPIRepositoryV3 *repository, NSError *error))handler;

@@ -41,6 +41,8 @@
     NSMutableArray *_issuesArray;
     NSMutableArray *_watchedUsersArray;
     NSMutableArray *_collaborators;
+    
+    UIColor *_labelColor;
 }
 
 @property (nonatomic, readonly) BOOL isFollowingRepository;

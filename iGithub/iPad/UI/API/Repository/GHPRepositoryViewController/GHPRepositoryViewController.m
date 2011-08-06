@@ -23,9 +23,12 @@
 #import "ANNotificationQueue.h"
 #import "GHWebViewViewController.h"
 #import "GHViewREADMEViewController.h"
+#import "GHColorAlertView.h"
 
 #define kUIAlertViewTagDeleteRepository     1337
 #define kUIAlertViewTagAddCollaborator      1338
+#define kUIAlertViewLabelColorTag           1339
+#define kUIAlertViewLabelNameTag            1340
 
 #define kUIActionSheetTagAction             1339
 #define kUIActionSheetTagSelectOrganization 1340
@@ -554,6 +557,15 @@
             viewController.presentedInPopoverController = YES;
             viewController.delegate = self;
             [self presentViewControllerFromActionButton:viewController detatchNavigationController:YES animated:YES];
+        } else if ([title isEqualToString:NSLocalizedString(@"Create Label", @"")]) {
+            GHColorAlertView *alert = [[GHColorAlertView alloc] initWithTitle:NSLocalizedString(@"Select Color", @"") 
+                                                                      message:nil 
+                                                                     delegate:self 
+                                                            cancelButtonTitle:NSLocalizedString(@"Cancel", @"") 
+                                                            otherButtonTitles:NSLocalizedString(@"OK", @""), nil];
+            alert.tag = kUIAlertViewLabelColorTag;
+            [alert show];
+            
         }
     } else if (actionSheet.tag == kUIActionSheetTagSelectOrganization) {
         if (buttonIndex < actionSheet.numberOfButtons - 1) {
@@ -612,6 +624,36 @@
         } else {
             self.actionButtonActive = NO;
         }
+    } else if (alertView.tag == kUIAlertViewLabelColorTag) {
+        if (buttonIndex == 1) {
+            GHColorAlertView *alert = (GHColorAlertView *)alertView;
+            _labelColor = alert.selectedColor;
+            
+            UIAlertView *secondAlert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Input Name", @"") 
+                                                                  message:nil 
+                                                                 delegate:self 
+                                                        cancelButtonTitle:NSLocalizedString(@"Cancel", @"") 
+                                                        otherButtonTitles:NSLocalizedString(@"OK", @""), nil];
+            secondAlert.alertViewStyle = UIAlertViewStylePlainTextInput;
+            secondAlert.tag = kUIAlertViewLabelNameTag;
+            [secondAlert show];
+        }
+    } else if (alertView.tag == kUIAlertViewLabelNameTag) {
+        if (buttonIndex == 1) {
+            NSString *name = [alertView textFieldAtIndex:0].text;
+            
+            [GHAPIRepositoryV3 createLabelOnRepository:self.repositoryString name:name color:_labelColor 
+                                     completionHandler:^(GHAPILabelV3 *label, NSError *error) {
+                                         if (error) {
+                                             [self handleError:error];
+                                         } else {
+                                             [self.labels insertObject:label atIndex:0];
+                                             if (self.isViewLoaded) {
+                                                 [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:kUITableViewSectionLabels] withRowAnimation:UITableViewRowAnimationAutomatic];
+                                             }
+                                         }
+                                     }];
+        }
     }
 }
 
@@ -653,6 +695,8 @@
         [sheet addButtonWithTitle:NSLocalizedString(@"Add Collaborator", @"")];
         currentButtonIndex++;
         [sheet addButtonWithTitle:NSLocalizedString(@"New Milestone", @"")];
+        currentButtonIndex++;
+        [sheet addButtonWithTitle:NSLocalizedString(@"Create Label", @"")];
         currentButtonIndex++;
     } else {
         [sheet addButtonWithTitle:NSLocalizedString(@"Fork to my Account", @"")];

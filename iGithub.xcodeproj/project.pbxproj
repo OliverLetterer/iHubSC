@@ -335,6 +335,7 @@
 		A784206313E1987D00131648 /* GHTableViewCellWithLinearGradientBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = A784203913E1987C00131648 /* GHTableViewCellWithLinearGradientBackgroundView.m */; };
 		A784206413E1987D00131648 /* GHUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A784203C13E1987C00131648 /* GHUserViewController.m */; };
 		A784206513E1987D00131648 /* GHWebViewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A784203F13E1987C00131648 /* GHWebViewViewController.m */; };
+		A7A9E8D413EDA738001F468F /* GHColorAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = A7A9E8D313EDA738001F468F /* GHColorAlertView.m */; };
 		A7AE937513EC0843007B7CE1 /* GHAPIV3NotificationUserDictionaryKeys.m in Sources */ = {isa = PBXBuildFile; fileRef = A7AE937413EC0843007B7CE1 /* GHAPIV3NotificationUserDictionaryKeys.m */; };
 		A7AE93BD13ED3CE3007B7CE1 /* UIBarButtonItemSaveBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A7AE93BA13ED3CE3007B7CE1 /* UIBarButtonItemSaveBackground@2x.png */; };
 		A7AE93BE13ED3CE3007B7CE1 /* UIBarButtonItemSaveBackground~iPad.png in Resources */ = {isa = PBXBuildFile; fileRef = A7AE93BB13ED3CE3007B7CE1 /* UIBarButtonItemSaveBackground~iPad.png */; };
@@ -1010,6 +1011,8 @@
 		A784203C13E1987C00131648 /* GHUserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHUserViewController.m; sourceTree = "<group>"; };
 		A784203E13E1987C00131648 /* GHWebViewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHWebViewViewController.h; sourceTree = "<group>"; };
 		A784203F13E1987C00131648 /* GHWebViewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHWebViewViewController.m; sourceTree = "<group>"; };
+		A7A9E8D213EDA738001F468F /* GHColorAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; path = GHColorAlertView.h; sourceTree = "<group>"; };
+		A7A9E8D313EDA738001F468F /* GHColorAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHColorAlertView.m; sourceTree = "<group>"; };
 		A7AE937313EC0843007B7CE1 /* GHAPIV3NotificationUserDictionaryKeys.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHAPIV3NotificationUserDictionaryKeys.h; sourceTree = "<group>"; };
 		A7AE937413EC0843007B7CE1 /* GHAPIV3NotificationUserDictionaryKeys.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHAPIV3NotificationUserDictionaryKeys.m; sourceTree = "<group>"; };
 		A7AE93BA13ED3CE3007B7CE1 /* UIBarButtonItemSaveBackground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIBarButtonItemSaveBackground@2x.png"; sourceTree = "<group>"; };
@@ -2558,6 +2561,7 @@
 		A7841F3C13E194BB00131648 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				A7A9E8CC13EDA614001F468F /* Label */,
 				A7C5257B13E6B2AD0003EEE5 /* GHDateSelectViewController */,
 				A7BD1F3E13E5D4280016A662 /* API */,
 				A7841F3D13E194BB00131648 /* ANNotificationQueue */,
@@ -3031,6 +3035,16 @@
 				A7841CAE13E1853200131648 /* UIDevice+DTVersion.m */,
 			);
 			name = Util;
+			sourceTree = "<group>";
+		};
+		A7A9E8CC13EDA614001F468F /* Label */ = {
+			isa = PBXGroup;
+			children = (
+				A7A9E8D213EDA738001F468F /* GHColorAlertView.h */,
+				A7A9E8D313EDA738001F468F /* GHColorAlertView.m */,
+			);
+			name = Label;
+			path = API/Label;
 			sourceTree = "<group>";
 		};
 		A7AE93C013ED3D58007B7CE1 /* GHCreateContentViewController */ = {
@@ -3767,6 +3781,7 @@
 				A755975F13EB45C6005C2F5A /* GHPCreateRepositoryTableViewCell.m in Sources */,
 				A7AE937513EC0843007B7CE1 /* GHAPIV3NotificationUserDictionaryKeys.m in Sources */,
 				A7AE93C313ED3D6B007B7CE1 /* GHCreateContentViewController.m in Sources */,
+				A7A9E8D413EDA738001F468F /* GHColorAlertView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

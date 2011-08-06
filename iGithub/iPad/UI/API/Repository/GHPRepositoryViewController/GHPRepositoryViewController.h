@@ -25,6 +25,8 @@
     
     NSMutableArray *_labels;
     NSMutableArray *_branches;
+    
+    UIColor *_labelColor;
 }
 
 @property (nonatomic, copy) NSString *repositoryString;

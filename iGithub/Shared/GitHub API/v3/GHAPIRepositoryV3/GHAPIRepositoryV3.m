@@ -8,6 +8,7 @@
 
 #import "GHAPIRepositoryV3.h"
 #import "GithubAPI.h"
+#import "UIColor-Expanded.h"
 
 @interface GHAPIRepositoryV3 ()
 
@@ -505,6 +506,40 @@
                                      handler(finalArray, nextPage, nil);
                                  }
                              }];
+}
+
++ (void)createLabelOnRepository:(NSString *)repository name:(NSString *)name color:(UIColor *)color completionHandler:(void (^)(GHAPILabelV3 *label, NSError *error))handler {
+    // v3: POST /repos/:user/:repo/labels
+    
+    NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.github.com/repos/%@/labels", 
+                                       [repository stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]];
+    
+    [[GHAPIBackgroundQueueV3 sharedInstance] sendRequestToURL:URL 
+                                                 setupHandler:^(ASIFormDataRequest *request) {
+                                                     [request setRequestMethod:@"POST"];
+                                                     
+                                                     NSMutableDictionary *jsonDictionary = [NSMutableDictionary dictionaryWithCapacity:2];
+                                                     
+                                                     if (name) {
+                                                         [jsonDictionary setObject:name forKey:@"name"];
+                                                     }
+                                                     if (color) {
+                                                         DLog(@"%@", [color hexStringFromColor]);
+                                                         [jsonDictionary setObject:[color hexStringFromColor] forKey:@"color"];
+                                                     }
+                                                     
+                                                     NSString *jsonString = [jsonDictionary JSONString];
+                                                     NSMutableData *jsonData = [[jsonString dataUsingEncoding:NSUTF8StringEncoding] mutableCopy];
+                                                     [request setPostBody:jsonData];
+                                                     [request setPostLength:[jsonString length] ];
+                                                     
+                                                 } completionHandler:^(id object, NSError *error, ASIFormDataRequest *request) {
+                                                     if (error) {
+                                                         handler(nil, error);
+                                                     } else {
+                                                         handler([[GHAPILabelV3 alloc] initWithRawDictionary:object], nil);
+                                                     }
+                                                 }];
 }
 
 @end

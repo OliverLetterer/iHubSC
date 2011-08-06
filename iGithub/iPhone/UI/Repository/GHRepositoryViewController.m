@@ -22,6 +22,7 @@
 #import "GHViewLabelViewController.h"
 #import "ANNotificationQueue.h"
 #import "GHViewREADMEViewController.h"
+#import "GHColorAlertView.h"
 
 #define kUITableViewSectionUserData         0
 #define kUITableViewSectionOwner            1
@@ -43,6 +44,8 @@
 #define kUITableViewNumberOfSections        16
 
 #define kUIAlertViewAddCollaboratorTag      1337
+#define kUIAlertViewLabelColorTag           1338
+#define kUIAlertViewLabelNameTag            1339
 
 #define kUIActionSheetSelectOrganizationTag 9865
 
@@ -835,6 +838,36 @@
                                       }
                                   }];
         }
+    } else if (alertView.tag == kUIAlertViewLabelColorTag) {
+        if (buttonIndex == 1) {
+            GHColorAlertView *alert = (GHColorAlertView *)alertView;
+            _labelColor = alert.selectedColor;
+            
+            UIAlertView *secondAlert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Input Name", @"") 
+                                                             message:nil 
+                                                            delegate:self 
+                                                   cancelButtonTitle:NSLocalizedString(@"Cancel", @"") 
+                                                   otherButtonTitles:NSLocalizedString(@"OK", @""), nil];
+            secondAlert.alertViewStyle = UIAlertViewStylePlainTextInput;
+            secondAlert.tag = kUIAlertViewLabelNameTag;
+            [secondAlert show];
+        }
+    } else if (alertView.tag == kUIAlertViewLabelNameTag) {
+        if (buttonIndex == 1) {
+            NSString *name = [alertView textFieldAtIndex:0].text;
+            
+            [GHAPIRepositoryV3 createLabelOnRepository:self.repositoryString name:name color:_labelColor 
+                                     completionHandler:^(GHAPILabelV3 *label, NSError *error) {
+                                         if (error) {
+                                             [self handleError:error];
+                                         } else {
+                                             [self.labels insertObject:label atIndex:0];
+                                             if (self.isViewLoaded) {
+                                                 [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:kUITableViewSectionLabels] withRowAnimation:UITableViewRowAnimationAutomatic];
+                                             }
+                                         }
+                                     }];
+        }
     } else {
         if (buttonIndex == 1) {
             self.view.userInteractionEnabled = NO;
@@ -1033,6 +1066,15 @@
             UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:viewController];
             
             [self presentModalViewController:navController animated:YES];
+        } else if ([title isEqualToString:NSLocalizedString(@"Create Label", @"")]) {
+            GHColorAlertView *alert = [[GHColorAlertView alloc] initWithTitle:NSLocalizedString(@"Select Color", @"") 
+                                                                      message:nil 
+                                                                     delegate:self 
+                                                            cancelButtonTitle:NSLocalizedString(@"Cancel", @"") 
+                                                            otherButtonTitles:NSLocalizedString(@"OK", @""), nil];
+            alert.tag = kUIAlertViewLabelColorTag;
+            [alert show];
+            
         } else if ([title isEqualToString:NSLocalizedString(@"Add Collaborator", @"")]) {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Enter Username", @"") 
                                                             message:nil 
@@ -1137,6 +1179,9 @@
     
     if (self.canAdministrateRepository) {
         [sheet addButtonWithTitle:NSLocalizedString(@"Create Milestone", @"")];
+        currentButtonIndex++;
+        
+        [sheet addButtonWithTitle:NSLocalizedString(@"Create Label", @"")];
         currentButtonIndex++;
     }
     
