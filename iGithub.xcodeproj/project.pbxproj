@@ -1011,7 +1011,7 @@
 		A784203C13E1987C00131648 /* GHUserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHUserViewController.m; sourceTree = "<group>"; };
 		A784203E13E1987C00131648 /* GHWebViewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHWebViewViewController.h; sourceTree = "<group>"; };
 		A784203F13E1987C00131648 /* GHWebViewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHWebViewViewController.m; sourceTree = "<group>"; };
-		A7A9E8D213EDA738001F468F /* GHColorAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; path = GHColorAlertView.h; sourceTree = "<group>"; };
+		A7A9E8D213EDA738001F468F /* GHColorAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHColorAlertView.h; sourceTree = "<group>"; };
 		A7A9E8D313EDA738001F468F /* GHColorAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHColorAlertView.m; sourceTree = "<group>"; };
 		A7AE937313EC0843007B7CE1 /* GHAPIV3NotificationUserDictionaryKeys.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHAPIV3NotificationUserDictionaryKeys.h; sourceTree = "<group>"; };
 		A7AE937413EC0843007B7CE1 /* GHAPIV3NotificationUserDictionaryKeys.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHAPIV3NotificationUserDictionaryKeys.m; sourceTree = "<group>"; };
@@ -3837,7 +3837,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				CLANG_ARC_MIGRATION = precheck;
+				CLANG_ARC_MIGRATION = donothing;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_OBJCPP_ARC_ABI = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -3861,10 +3861,7 @@
 					"Submodules/GHMarkdownParser/**",
 					"Submodules/Kal/**",
 				);
-				OTHER_LDFLAGS = (
-					"-Objc",
-					"-all_load",
-				);
+				OTHER_LDFLAGS = "";
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
@@ -3876,7 +3873,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				CLANG_ARC_MIGRATION = precheck;
+				CLANG_ARC_MIGRATION = donothing;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_OBJCPP_ARC_ABI = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -3898,10 +3895,7 @@
 					"Submodules/Kal/**",
 				);
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
-				OTHER_LDFLAGS = (
-					"-Objc",
-					"-all_load",
-				);
+				OTHER_LDFLAGS = "";
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
