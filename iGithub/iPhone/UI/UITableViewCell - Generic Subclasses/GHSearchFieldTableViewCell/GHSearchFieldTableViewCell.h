@@ -16,7 +16,6 @@ extern CGFloat const kGHSearchFieldTableViewCellHeight;
     UISearchBar *_searchBar;
 }
 
-@property (nonatomic, readonly) UISearchBar *searchBar;
-
+@property (nonatomic, readonly, retain) UISearchBar *searchBar;
 
 @end
