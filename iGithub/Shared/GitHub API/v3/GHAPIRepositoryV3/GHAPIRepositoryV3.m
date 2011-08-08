@@ -48,7 +48,7 @@
 #pragma mark - Initialization
 
 - (id)initWithRawDictionary:(NSDictionary *)rawDictionary parseChildren:(BOOL)parse {
-    rawDictionary = GHAPIObjectExpectedClass(rawDictionary, NSDictionary.class);
+    GHAPIObjectExpectedClass(&rawDictionary, NSDictionary.class);
     if ((self = [super init])) {
         // Initialization code
         self.URL = [rawDictionary objectForKeyOrNilOnNullObject:@"url"];
@@ -163,7 +163,7 @@
                                  if (error) {
                                      handler(nil, GHAPIPaginationNextPageNotFound, error);
                                  } else {
-                                     NSArray *rawArray = GHAPIObjectExpectedClass(object, NSArray.class);
+                                     NSArray *rawArray = GHAPIObjectExpectedClass(&object, NSArray.class);
                                      
                                      NSMutableArray *finalArray = [NSMutableArray arrayWithCapacity:rawArray.count];
                                      [rawArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
@@ -212,7 +212,7 @@
                                  if (error) {
                                      handler(nil, GHAPIPaginationNextPageNotFound, error);
                                  } else {
-                                     NSArray *rawArray = GHAPIObjectExpectedClass(object, NSArray.class);
+                                     NSArray *rawArray = GHAPIObjectExpectedClass(&object, NSArray.class);
                                      
                                      NSMutableArray *finalArray = [NSMutableArray arrayWithCapacity:rawArray.count];
                                      for (NSDictionary *rawDictionary in rawArray) {
@@ -235,7 +235,7 @@
                                  if (error) {
                                      handler(nil, GHAPIPaginationNextPageNotFound, error);
                                  } else {
-                                     NSArray *rawArray = GHAPIObjectExpectedClass(object, NSArray.class);
+                                     NSArray *rawArray = GHAPIObjectExpectedClass(&object, NSArray.class);
                                      
                                      NSMutableArray *finalArray = [NSMutableArray arrayWithCapacity:rawArray.count];
                                      [rawArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
@@ -258,7 +258,7 @@
                                  if (error) {
                                      handler(nil, GHAPIPaginationNextPageNotFound, error);
                                  } else {
-                                     NSArray *rawArray = GHAPIObjectExpectedClass(object, NSArray.class);
+                                     NSArray *rawArray = GHAPIObjectExpectedClass(&object, NSArray.class);
                                      
                                      NSMutableArray *finalArray = [NSMutableArray arrayWithCapacity:rawArray.count];
                                      [rawArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
@@ -281,7 +281,7 @@
                                  if (error) {
                                      handler(nil, GHAPIPaginationNextPageNotFound, error);
                                  } else {
-                                     NSArray *rawArray = GHAPIObjectExpectedClass(object, NSArray.class);
+                                     NSArray *rawArray = GHAPIObjectExpectedClass(&object, NSArray.class);
                                      
                                      NSMutableArray *finalArray = [NSMutableArray arrayWithCapacity:rawArray.count];
                                      [rawArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
@@ -351,7 +351,7 @@
                                  if (error) {
                                      handler(nil, GHAPIPaginationNextPageNotFound, error);
                                  } else {
-                                     NSArray *rawArray = GHAPIObjectExpectedClass(object, NSArray.class);
+                                     NSArray *rawArray = GHAPIObjectExpectedClass(&object, NSArray.class);
                                      
                                      NSMutableArray *finalArray = [NSMutableArray arrayWithCapacity:rawArray.count];
                                      [rawArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
@@ -496,7 +496,7 @@
                                  if (error) {
                                      handler(nil, GHAPIPaginationNextPageNotFound, error);
                                  } else {
-                                     NSArray *rawArray = GHAPIObjectExpectedClass(object, NSArray.class);
+                                     NSArray *rawArray = GHAPIObjectExpectedClass(&object, NSArray.class);
                                      
                                      NSMutableArray *finalArray = [NSMutableArray arrayWithCapacity:rawArray.count];
                                      [rawArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {

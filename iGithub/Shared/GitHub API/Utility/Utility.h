@@ -8,6 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
-static inline id GHAPIObjectExpectedClass(id object, Class class) {
-    return [object isKindOfClass:class] ? object : nil;
+static inline id GHAPIObjectExpectedClass(id *object, Class class) {
+    if (![*object isKindOfClass:class]) {
+        *object = nil;
+    }
+    return *object;
 }

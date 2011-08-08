@@ -109,9 +109,10 @@
             if (myError) {
                 handler(nil, myError);
             } else {
-                NSDictionary *dictionary = GHAPIObjectExpectedClass([[request responseString] objectFromJSONString], NSDictionary.class);
-                
-                NSArray *allUsers = GHAPIObjectExpectedClass([dictionary objectForKeyOrNilOnNullObject:@"users"], NSArray.class);
+                id object = [[request responseString] objectFromJSONString];
+                NSDictionary *dictionary = GHAPIObjectExpectedClass(&object, NSDictionary.class);
+                NSArray *__users = [dictionary objectForKeyOrNilOnNullObject:@"users"];
+                NSArray *allUsers = GHAPIObjectExpectedClass(&__users, NSArray.class);
                 NSMutableArray *users = [NSMutableArray arrayWithCapacity:[allUsers count] ];
                 
                 for (NSDictionary *rawUser in allUsers) {
@@ -125,7 +126,7 @@
 }
 
 - (id)initWithRawUserDictionary:(NSDictionary *)rawDictionary {
-    rawDictionary = GHAPIObjectExpectedClass(rawDictionary, NSDictionary.class);
+    GHAPIObjectExpectedClass(&rawDictionary, NSDictionary.class);
     NSDictionary *userDictionary = [rawDictionary objectForKeyOrNilOnNullObject:@"user"];
     if ((self = [self initWithRawDictionary:userDictionary])) {
         // setup here
@@ -134,7 +135,7 @@
 }
 
 - (id)initWithRawDictionary:(NSDictionary *)rawDictionary {
-    rawDictionary = GHAPIObjectExpectedClass(rawDictionary, NSDictionary.class);
+    GHAPIObjectExpectedClass(&rawDictionary, NSDictionary.class);
     if ((self = [super init])) {
         // setup here
         self.createdAt = [rawDictionary objectForKeyOrNilOnNullObject:@"created_at"];

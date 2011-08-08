@@ -16,7 +16,7 @@
 #pragma mark - Initialization
 
 - (id)initWithRawArray:(NSArray *)array {
-    array = GHAPIObjectExpectedClass(array, NSArray.class);
+    GHAPIObjectExpectedClass(&array, NSArray.class);
     if ((self = [super init]) && array) {
         // Initialization code
         self.head = [array objectAtIndex:0];

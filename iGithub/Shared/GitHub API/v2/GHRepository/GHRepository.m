@@ -61,8 +61,10 @@
             if (myError) {
                 handler(nil, myError);
             } else {
-                NSDictionary *dict = GHAPIObjectExpectedClass([jsonString objectFromJSONString], NSDictionary.class);
-                handler(GHAPIObjectExpectedClass([dict objectForKey:@"delete_token"], NSString.class), nil);
+                id object = [jsonString objectFromJSONString];
+                NSDictionary *dict = GHAPIObjectExpectedClass(&object, NSDictionary.class);
+                NSString *token = [dict objectForKey:@"delete_token"];
+                handler(GHAPIObjectExpectedClass(&token, NSString.class), nil);
             }
         });
     });
@@ -126,7 +128,8 @@
             if (myError) {
                 handler(nil, myError);
             } else {
-                NSDictionary *dictionary = GHAPIObjectExpectedClass([[request responseString] objectFromJSONString], NSDictionary.class);
+                id object = [[request responseString] objectFromJSONString];
+                NSDictionary *dictionary = GHAPIObjectExpectedClass(&object, NSDictionary.class);
                 
                 GHDirectory *rootDirectory = [[GHDirectory alloc] initWithFilesDictionary:[dictionary objectForKeyOrNilOnNullObject:@"blobs"] name:@"" ];
                 
@@ -161,7 +164,8 @@
             if (myError) {
                 handler(nil, myError);
             } else {
-                NSDictionary *dictionary = GHAPIObjectExpectedClass([[request responseString] objectFromJSONString], NSDictionary.class);
+                id object = [[request responseString] objectFromJSONString];
+                NSDictionary *dictionary = GHAPIObjectExpectedClass(&object, NSDictionary.class);
                 
                 NSArray *allRepos = [dictionary objectForKeyOrNilOnNullObject:@"repositories"];
                 NSMutableArray *repos = [NSMutableArray arrayWithCapacity:[allRepos count] ];
@@ -179,7 +183,7 @@
 #pragma mark - Initialization
 
 - (id)initWithRawDictionary:(NSDictionary *)rawDictionary {
-    rawDictionary = GHAPIObjectExpectedClass(rawDictionary, NSDictionary.class);
+    GHAPIObjectExpectedClass(&rawDictionary, NSDictionary.class);
     if ((self = [super init])) {
         // Initialization code
         self.creationDate = [rawDictionary objectForKeyOrNilOnNullObject:@"created_at"];

@@ -10,14 +10,13 @@
 #import "GithubAPI.h"
 
 @implementation GHAPIRepositoryBranchV3
-
 @synthesize name = _name, ID = _ID;
 
 #pragma mark - Initialization
 
 - (id)initWithName:(NSString *)name ID:(NSString *)ID {
-    name = GHAPIObjectExpectedClass(name, NSString.class);
-    ID = GHAPIObjectExpectedClass(ID, NSString.class);
+    GHAPIObjectExpectedClass(&name, NSString.class);
+    GHAPIObjectExpectedClass(&ID, NSString.class);
     if ((self = [super init])) {
         // Initialization code
         self.name = name;
@@ -27,7 +26,7 @@
 }
 
 - (id)initWithRawDictionary:(NSDictionary *)rawDictionary {
-    rawDictionary = GHAPIObjectExpectedClass(rawDictionary, NSDictionary.class);
+    GHAPIObjectExpectedClass(&rawDictionary, NSDictionary.class);
     if ((self = [super init])) {
         self.name = [rawDictionary objectForKeyOrNilOnNullObject:@"name"];
         self.ID = [rawDictionary objectForKeyOrNilOnNullObject:@"sha"];

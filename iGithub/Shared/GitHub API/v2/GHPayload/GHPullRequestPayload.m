@@ -22,7 +22,7 @@
 #pragma mark - Initialization
 
 - (id)initWithRawDictionary:(NSDictionary *)rawDictionary {
-    rawDictionary = GHAPIObjectExpectedClass(rawDictionary, NSDictionary.class);
+    GHAPIObjectExpectedClass(&rawDictionary, NSDictionary.class);
     if ((self = [super initWithRawDictionary:rawDictionary])) {
         self.number = [rawDictionary objectForKeyOrNilOnNullObject:@"number"];
         self.action = [rawDictionary objectForKeyOrNilOnNullObject:@"action"];
