@@ -776,8 +776,7 @@
         GHAPIRepositoryBranchV3 *branch = [self.branches objectAtIndex:indexPath.row - 1];
         
         GHRecentCommitsViewController *recentViewController = [[GHRecentCommitsViewController alloc] initWithRepository:self.repositoryString 
-                                                                                                                  branch:branch.name];
-        recentViewController.branchHash = branch.ID;
+                                                                                                                  branchName:branch.name branchHash:branch.ID];
         [self.navigationController pushViewController:recentViewController animated:YES];
     } else if (indexPath.section == kUITableViewSectionBrowseBranches) {
         GHAPIRepositoryBranchV3 *branch = [self.branches objectAtIndex:indexPath.row - 1];

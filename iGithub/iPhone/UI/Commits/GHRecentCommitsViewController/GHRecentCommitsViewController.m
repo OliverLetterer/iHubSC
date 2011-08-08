@@ -17,20 +17,18 @@
 
 #pragma mark - Initialization
 
-- (id)initWithRepository:(NSString *)repository branch:(NSString *)branch {
+- (id)initWithRepository:(NSString *)repository branchName:(NSString *)branchName branchHash:(NSString *)branchHash {
     if ((self = [super initWithStyle:UITableViewStylePlain])) {
         // Custom initialization
         self.title = NSLocalizedString(@"Recent Commits", @"");
         self.repository = repository;
-        self.branch = branch;
+        self.branch = branchName;
+        self.branchHash = branchHash;
         self.isDownloadingEssentialData = YES;
         [self downloadCommitData];
     }
     return self;
 }
-
-#pragma mark - Memory management
-
 
 #pragma mark - pagination
 

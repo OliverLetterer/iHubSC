@@ -23,7 +23,7 @@
 @property (nonatomic, retain) NSMutableArray *commits;
 @property (nonatomic, copy) NSString *branchHash;
 
-- (id)initWithRepository:(NSString *)repository branch:(NSString *)branch;
+- (id)initWithRepository:(NSString *)repository branchName:(NSString *)branchName branchHash:(NSString *)branchHash;
 
 - (void)downloadCommitData;
 - (void)cacheHeightsForCommits;
