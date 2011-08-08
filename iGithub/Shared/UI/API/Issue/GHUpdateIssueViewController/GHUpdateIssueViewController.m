@@ -97,7 +97,7 @@
                                  assignee:self.assigneeString ? self.assigneeString : (id)[NSNull null]
                                     state:self.issue.state 
                                 milestone:self.selectedMilestoneNumber ? self.selectedMilestoneNumber : (id)[NSNull null]
-                                   labels:self.selectedLabels.count > 0 ? self.selectedLabels : (id)[NSNull null]
+                                   labels:self.selectedLabels
                         completionHandler:^(GHAPIIssueV3 *issue, NSError *error) {
                             self.navigationItem.rightBarButtonItem = self.saveButton;
                             if (error) {

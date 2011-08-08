@@ -87,6 +87,9 @@ extern NSString *const kGHAPIIssueStateV3Closed;
                          labels:(NSArray *)labels 
               completionHandler:(void (^)(GHAPIIssueV3 *issue, NSError *error))handler;
 
++ (void)replaceLabelOfIssueOnRepository:(NSString *)repository 
+                                 number:(NSNumber *)number withLabels:(NSArray *)labels completionHandler:(GHAPIErrorHandler)handler;
+
 + (void)milestonesForIssueOnRepository:(NSString *)repository 
                             withNumber:(NSNumber *)number 
                                   page:(NSInteger)page

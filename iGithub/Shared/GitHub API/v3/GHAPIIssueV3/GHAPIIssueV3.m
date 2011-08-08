@@ -510,6 +510,34 @@ NSString *const kGHAPIIssueStateV3Closed = @"closed";
                              }];
 }
 
++ (void)replaceLabelOfIssueOnRepository:(NSString *)repository 
+                                 number:(NSNumber *)number withLabels:(NSArray *)labels completionHandler:(GHAPIErrorHandler)handler {
+    // v3: PUT /repos/:user/:repo/issues/:id/labels
+    
+    if (!labels) {
+        handler(nil);
+        return;
+    }
+    
+    NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.github.com/repos/%@/issues/%@/labels",
+                                       [repository stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding], number ] ];
+    
+    
+    [[GHAPIBackgroundQueueV3 sharedInstance] sendRequestToURL:URL 
+                                                 setupHandler:^(ASIFormDataRequest *request) { 
+                                                     [request setRequestMethod:@"PUT"];
+                                                     
+                                                     NSString *jsonString = [labels JSONString];
+                                                     NSMutableData *jsonData = [[jsonString dataUsingEncoding:NSUTF8StringEncoding] mutableCopy];
+                                                     
+                                                     [request setPostBody:jsonData];
+                                                     [request setPostLength:[jsonString length] ];
+                                                 } 
+                                            completionHandler:^(id object, NSError *error, ASIFormDataRequest *request) {
+                                                handler(error);
+                                            }];
+}
+
 + (void)updateIssueOnRepository:(NSString *)repository 
                      withNumber:(NSNumber *)number 
                           title:(NSString *)title 
@@ -524,46 +552,49 @@ NSString *const kGHAPIIssueStateV3Closed = @"closed";
     NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.github.com/repos/%@/issues/%@",
                                        [repository stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding], number ] ];
     
-    
-    [[GHAPIBackgroundQueueV3 sharedInstance] sendRequestToURL:URL 
-                                                 setupHandler:^(ASIFormDataRequest *request) { 
-                                                     [request setRequestMethod:@"PATCH"];
-                                                     NSMutableDictionary *jsonDictionary = [NSMutableDictionary dictionaryWithCapacity:6];
-                                                     
-                                                     if (title) {
-                                                         [jsonDictionary setObject:title forKey:@"title"];
-                                                     }
-                                                     if (body) {
-                                                         [jsonDictionary setObject:body forKey:@"body"];
-                                                     }
-                                                     if (assignee) {
-                                                         [jsonDictionary setObject:assignee forKey:@"assignee"];
-                                                     }
-                                                     if (state) {
-                                                         [jsonDictionary setObject:state forKey:@"state"];
-                                                     }
-                                                     if (milestone) {
-                                                         [jsonDictionary setObject:milestone forKey:@"milestone"];
-                                                     }
-                                                     if (labels) {
-                                                         [jsonDictionary setObject:labels forKey:@"labels"];
-                                                     }
-                                                     NSString *jsonString = [jsonDictionary JSONString];
-                                                     NSMutableData *jsonData = [[jsonString dataUsingEncoding:NSUTF8StringEncoding] mutableCopy];
-                                                     
-                                                     [request setPostBody:jsonData];
-                                                     [request setPostLength:[jsonString length] ];
-                                                 } 
-                                            completionHandler:^(id object, NSError *error, ASIFormDataRequest *request) {
-                                                if (error) {
-                                                    handler(nil, error);
-                                                } else {
-                                                    GHAPIIssueV3 *issue = [[GHAPIIssueV3 alloc] initWithRawDictionary:object];
-                                                    [[NSNotificationCenter defaultCenter] postNotificationName:GHAPIIssueV3ContentChangedNotification object:nil 
-                                                                                                      userInfo:[NSDictionary dictionaryWithObject:issue forKey:GHAPIV3NotificationUserDictionaryIssueKey] ];
-                                                    handler(issue, nil);
-                                                }
-                                            }];
+    [self replaceLabelOfIssueOnRepository:repository number:number withLabels:labels 
+                        completionHandler:^(NSError *error) {
+                            if (error) {
+                                handler(nil, error);
+                            } else {
+                                [[GHAPIBackgroundQueueV3 sharedInstance] sendRequestToURL:URL 
+                                                                             setupHandler:^(ASIFormDataRequest *request) { 
+                                                                                 [request setRequestMethod:@"PATCH"];
+                                                                                 NSMutableDictionary *jsonDictionary = [NSMutableDictionary dictionaryWithCapacity:6];
+                                                                                 
+                                                                                 if (title) {
+                                                                                     [jsonDictionary setObject:title forKey:@"title"];
+                                                                                 }
+                                                                                 if (body) {
+                                                                                     [jsonDictionary setObject:body forKey:@"body"];
+                                                                                 }
+                                                                                 if (assignee) {
+                                                                                     [jsonDictionary setObject:assignee forKey:@"assignee"];
+                                                                                 }
+                                                                                 if (state) {
+                                                                                     [jsonDictionary setObject:state forKey:@"state"];
+                                                                                 }
+                                                                                 if (milestone) {
+                                                                                     [jsonDictionary setObject:milestone forKey:@"milestone"];
+                                                                                 }
+                                                                                 NSString *jsonString = [jsonDictionary JSONString];
+                                                                                 NSMutableData *jsonData = [[jsonString dataUsingEncoding:NSUTF8StringEncoding] mutableCopy];
+                                                                                 
+                                                                                 [request setPostBody:jsonData];
+                                                                                 [request setPostLength:[jsonString length] ];
+                                                                             } 
+                                                                        completionHandler:^(id object, NSError *error, ASIFormDataRequest *request) {
+                                                                            if (error) {
+                                                                                handler(nil, error);
+                                                                            } else {
+                                                                                GHAPIIssueV3 *issue = [[GHAPIIssueV3 alloc] initWithRawDictionary:object];
+                                                                                [[NSNotificationCenter defaultCenter] postNotificationName:GHAPIIssueV3ContentChangedNotification object:nil 
+                                                                                                                                  userInfo:[NSDictionary dictionaryWithObject:issue forKey:GHAPIV3NotificationUserDictionaryIssueKey] ];
+                                                                                handler(issue, nil);
+                                                                            }
+                                                                        }];
+                            }
+                        }];
 }
 
 + (void)allIssuesOfAuthenticatedUserWithCompletionHandler:(void (^)(NSMutableArray *issues, NSError *error))handler {

@@ -92,7 +92,7 @@ NSInteger const kGHCreateIssueTableViewControllerSectionLabels = kUITableViewSec
     self.navigationItem.rightBarButtonItem = self.loadingButton;
     [GHAPIIssueV3 createIssueOnRepository:self.repository 
                                     title:title body:body assignee:self.assigneeString milestone:self.selectedMilestoneNumber 
-                                   labels:self.selectedLabels.count > 0 ? self.selectedLabels : nil 
+                                   labels:self.selectedLabels 
                         completionHandler:^(GHAPIIssueV3 *issue, NSError *error) {
                             self.navigationItem.rightBarButtonItem = self.saveButton;
                             if (error) {
