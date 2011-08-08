@@ -63,7 +63,9 @@
         
         NSURL *URL = [NSURL URLWithString:@"http://github.com/api/v2/json/blob/show/"];
         URL = [URL URLByAppendingPathComponent:[repository stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-        URL = [URL URLByAppendingPathComponent:[tree stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+        if (tree) {
+            URL = [URL URLByAppendingPathComponent:[tree stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+        }
         if (![relativeURL isEqualToString:@"/"]) {
             URL = [URL URLByAppendingPathComponent:relativeURL];
         }

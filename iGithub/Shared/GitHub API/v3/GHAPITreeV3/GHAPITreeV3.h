@@ -22,6 +22,8 @@
 
 + (void)contentOfBranch:(NSString *)branchHash onRepository:(NSString *)repository completionHandler:(void(^)(GHAPITreeV3 *tree, NSError *error))handler;
 
++ (void)treeOfCommit:(NSString *)commitID onRepository:(NSString *)repository completionHandler:(void(^)(GHAPITreeV3 *tree, NSError *error))handler;
+
 - (id)initWithRawDictionary:(NSDictionary *)rawDictionary;
 
 @end

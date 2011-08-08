@@ -35,7 +35,7 @@
 
 + (void)contentOfBranch:(NSString *)branchHash onRepository:(NSString *)repository 
       completionHandler:(void(^)(GHAPITreeV3 *tree, NSError *error))handler {
-    // GET /repos/:user/:repo/git/trees/:sha
+    // v3: GET /repos/:user/:repo/git/trees/:sha
     
     NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.github.com/repos/%@/git/trees/%@", 
                                        [repository stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
@@ -47,6 +47,24 @@
                                                     handler(nil, error);
                                                 } else {
                                                     handler([[GHAPITreeV3 alloc] initWithRawDictionary:object], nil);
+                                                }
+                                            }];
+}
+
++ (void)treeOfCommit:(NSString *)commitID onRepository:(NSString *)repository completionHandler:(void(^)(GHAPITreeV3 *tree, NSError *error))handler {
+    // v3: GET /repos/:user/:repo/git/commits/:sha
+    
+    NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.github.com/repos/%@/git/commits/%@", 
+                                       [repository stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
+                                       [commitID stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]] ];
+    
+    [[GHAPIBackgroundQueueV3 sharedInstance] sendRequestToURL:URL setupHandler:nil 
+                                            completionHandler:^(id object, NSError *error, ASIFormDataRequest *request) {
+                                                if (error) {
+                                                    handler(nil, error);
+                                                } else {
+                                                    NSDictionary *dictionary = object;
+                                                    handler([[GHAPITreeV3 alloc] initWithRawDictionary:[dictionary objectForKeyOrNilOnNullObject:@"tree"] ], nil);
                                                 }
                                             }];
 }

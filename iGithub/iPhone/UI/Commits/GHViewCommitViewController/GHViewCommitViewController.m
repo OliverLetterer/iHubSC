@@ -31,26 +31,27 @@
     return self;
 }
 
-#pragma mark - Memory management
-
-
-- (void)didReceiveMemoryWarning {
-    // Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
-    
-    // Release any cached data, images, etc that aren't in use.
-}
-
 #pragma mark - instance methods
 
 - (void)downloadCommitData {
-    [GHCommit commit:self.commitID onRepository:self.repository completionHandler:^(GHCommit *commit, NSError *error) {
-        self.isDownloadingEssentialData = NO;
+    [GHAPITreeV3 treeOfCommit:self.commitID onRepository:self.repository completionHandler:^(GHAPITreeV3 *tree, NSError *error) {
         if (error) {
             [self handleError:error];
         } else {
-            self.commit = commit;
-            [self.tableView reloadData];
+            self.branchHash = tree.SHA;
+            
+            [GHCommit commit:self.commitID onRepository:self.repository completionHandler:^(GHCommit *commit, NSError *error) {
+                self.isDownloadingEssentialData = NO;
+                if (error) {
+                    [self handleError:error];
+                } else {
+                    self.commit = commit;
+                    
+                    if (self.isViewLoaded) {
+                        [self.tableView reloadData];
+                    }
+                }
+            }];
         }
     }];
 }
@@ -151,41 +152,6 @@
     return cell;
 }
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
 #pragma mark - Table view delegate
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -206,7 +172,7 @@
         NSString *base = [filename lastPathComponent];
         
         GHViewCloudFileViewController *fileViewController = [[GHViewCloudFileViewController alloc] initWithRepository:self.repository 
-                                                                                                                  tree:self.branchHash 
+                                                                                                                  tree:self.commitID 
                                                                                                               filename:base 
                                                                                                            relativeURL:URL];
         [self.navigationController pushViewController:fileViewController animated:YES];
