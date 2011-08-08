@@ -13,7 +13,7 @@
 
 @implementation GHViewCommitViewController
 
-@synthesize repository=_repository, commitID=_commitID, commit=_commit, branchHash=_branchHash;
+@synthesize repository=_repository, commitID=_commitID, commit=_commit;
 
 #pragma mark - setters and getters
 
@@ -34,24 +34,16 @@
 #pragma mark - instance methods
 
 - (void)downloadCommitData {
-    [GHAPITreeV3 treeOfCommit:self.commitID onRepository:self.repository completionHandler:^(GHAPITreeV3 *tree, NSError *error) {
+    [GHCommit commit:self.commitID onRepository:self.repository completionHandler:^(GHCommit *commit, NSError *error) {
+        self.isDownloadingEssentialData = NO;
         if (error) {
             [self handleError:error];
         } else {
-            self.branchHash = tree.SHA;
+            self.commit = commit;
             
-            [GHCommit commit:self.commitID onRepository:self.repository completionHandler:^(GHCommit *commit, NSError *error) {
-                self.isDownloadingEssentialData = NO;
-                if (error) {
-                    [self handleError:error];
-                } else {
-                    self.commit = commit;
-                    
-                    if (self.isViewLoaded) {
-                        [self.tableView reloadData];
-                    }
-                }
-            }];
+            if (self.isViewLoaded) {
+                [self.tableView reloadData];
+            }
         }
     }];
 }
@@ -188,7 +180,6 @@
     [encoder encodeObject:_repository forKey:@"repository"];
     [encoder encodeObject:_commitID forKey:@"commitID"];
     [encoder encodeObject:_commit forKey:@"commit"];
-    [encoder encodeObject:_branchHash forKey:@"branchHash"];
 }
 
 - (id)initWithCoder:(NSCoder *)decoder {
@@ -196,7 +187,6 @@
         _repository = [decoder decodeObjectForKey:@"repository"];
         _commitID = [decoder decodeObjectForKey:@"commitID"];
         _commit = [decoder decodeObjectForKey:@"commit"];
-        _branchHash = [decoder decodeObjectForKey:@"branchHash"];
     }
     return self;
 }

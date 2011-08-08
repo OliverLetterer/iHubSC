@@ -15,13 +15,11 @@
     NSString *_repository;
     NSString *_commitID;
     GHCommit *_commit;
-    NSString *_branchHash;
 }
 
 @property (nonatomic, copy) NSString *repository;
 @property (nonatomic, copy) NSString *commitID;
 @property (nonatomic, retain) GHCommit *commit;
-@property (nonatomic, copy) NSString *branchHash;
 
 - (id)initWithRepository:(NSString *)repository commitID:(NSString *)commitID;
 

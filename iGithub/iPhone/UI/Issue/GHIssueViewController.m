@@ -585,7 +585,6 @@
         
         GHViewCommitViewController *commitViewController = [[GHViewCommitViewController alloc] initWithRepository:repo
                                                                                                           commitID:commit.ID];
-        commitViewController.branchHash = commit.tree;
         [self.navigationController pushViewController:commitViewController animated:YES];
     } else if (indexPath.section == kUITableViewSectionLabels && indexPath.row > 0) {
         GHAPILabelV3 *label = [self.issue.labels objectAtIndex:indexPath.row - 1];

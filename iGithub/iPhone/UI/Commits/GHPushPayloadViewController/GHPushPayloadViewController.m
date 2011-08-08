@@ -127,7 +127,6 @@
     
     GHViewCommitViewController *commitViewController = [[GHViewCommitViewController alloc] initWithRepository:self.repository
                                                                                                       commitID:message.head];
-    commitViewController.branchHash = self.payload.head;
     [self.navigationController pushViewController:commitViewController animated:YES];
 }
 
