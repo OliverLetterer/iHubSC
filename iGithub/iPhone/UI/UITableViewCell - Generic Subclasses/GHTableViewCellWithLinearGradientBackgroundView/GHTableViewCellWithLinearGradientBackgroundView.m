@@ -7,12 +7,11 @@
 //
 
 #import "GHTableViewCellWithLinearGradientBackgroundView.h"
-#import "UITableViewCell+Background.h"
 #import "GHLinearGradientBackgroundView.h"
+#import "GHLinearGradientSelectedBackgroundView.h"
 
 @implementation GHTableViewCellWithLinearGradientBackgroundView
-
-@synthesize linearBackgroundView=_linearBackgroundView;
+@synthesize linearBackgroundView=_linearBackgroundView, selectedLinearGradientView=_selectedLinearGradientView;
 
 - (UIColor *)defaultShadowColor {
     return [UIColor whiteColor];
@@ -36,9 +35,13 @@
     if ((self = [super initWithStyle:style reuseIdentifier:reuseIdentifier])) {
         // Initialization code
         
-        GHLinearGradientBackgroundView *backgroundView = [[GHLinearGradientBackgroundView alloc] initWithFrame:self.bounds];
+        GHLinearGradientBackgroundView *backgroundView = [[GHLinearGradientBackgroundView alloc] initWithFrame:CGRectZero];
         self.backgroundView = backgroundView;
         _linearBackgroundView = backgroundView;
+        
+        GHLinearGradientSelectedBackgroundView *selectedBackgroundView = [[GHLinearGradientSelectedBackgroundView alloc] initWithFrame:CGRectZero];
+        self.selectedBackgroundView = selectedBackgroundView;
+        _selectedLinearGradientView = selectedBackgroundView;
         
         self.textLabel.backgroundColor = [UIColor clearColor];
         self.detailTextLabel.backgroundColor = [UIColor clearColor];
@@ -50,7 +53,6 @@
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-    [self setBackgroundShadowHeight:5.0];
     
     [self.contentView.subviews enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         UIView *view = obj;
@@ -62,7 +64,6 @@
 
 - (void)setHighlighted:(BOOL)highlighted animated:(BOOL)animated {
     [super setHighlighted:highlighted animated:animated];
-    [self setBackgroundShadowHeight:5.0];
     
     [self.contentView.subviews enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         UIView *view = obj;

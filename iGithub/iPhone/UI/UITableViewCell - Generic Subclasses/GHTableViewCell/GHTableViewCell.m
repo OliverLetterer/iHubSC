@@ -7,7 +7,6 @@
 //
 
 #import "GHTableViewCell.h"
-#import "UITableViewCell+Background.h"
 #import <QuartzCore/QuartzCore.h>
 
 #define GHNewsFeedItemTableViewCellRepositoryLabelHeight 21.0

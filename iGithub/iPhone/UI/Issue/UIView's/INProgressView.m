@@ -34,8 +34,8 @@
 - (void)_updateBackgroundColor {
 	UIGraphicsBeginImageContext(CGSizeMake(1, self.bounds.size.height));
 	CGContextRef ctx = UIGraphicsGetCurrentContext();
-	CGColorRef blackColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:1.0].CGColor; 
-	CGColorRef darkGrayColor = [UIColor colorWithRed:88.0/255.0 green:88.0/255.0 blue:88.0/255.0 alpha:1.0].CGColor;
+	UIColor *blackColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:1.0]; 
+	UIColor *darkGrayColor = [UIColor colorWithRed:88.0/255.0 green:88.0/255.0 blue:88.0/255.0 alpha:1.0];
 	
 	drawLinearGradient(ctx, CGRectMake(0, 0, 2, self.bounds.size.height), blackColor, darkGrayColor);
 	UIImage *backgroundImage = UIGraphicsGetImageFromCurrentImageContext();

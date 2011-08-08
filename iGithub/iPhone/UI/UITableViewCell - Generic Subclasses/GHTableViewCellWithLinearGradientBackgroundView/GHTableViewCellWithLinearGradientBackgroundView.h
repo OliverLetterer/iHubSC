@@ -9,14 +9,17 @@
 #import <UIKit/UIKit.h>
 #import <QuartzCore/QuartzCore.h>
 
-@class GHLinearGradientBackgroundView;
+@class GHLinearGradientBackgroundView, GHLinearGradientSelectedBackgroundView;
 
 @interface GHTableViewCellWithLinearGradientBackgroundView : UITableViewCell {
 @private
     GHLinearGradientBackgroundView *_linearBackgroundView;
+    GHLinearGradientSelectedBackgroundView *_selectedLinearGradientView;
 }
 
 @property (nonatomic, retain, readonly) GHLinearGradientBackgroundView *linearBackgroundView;
+@property (nonatomic, retain, readonly) GHLinearGradientSelectedBackgroundView *selectedLinearGradientView;
+
 
 @property (nonatomic, readonly) UIColor *defaultShadowColor;
 @property (nonatomic, readonly) CGSize defaultShadowOffset;

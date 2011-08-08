@@ -15,5 +15,5 @@ static inline double radians (double degrees);
 
 CGMutablePathRef CGMutablePathCreateForProgressViewWithRect(CGRect rect);
 void CGContextDrawLinearGradientWithColorsInRect(CGContextRef context, NSArray *colors, CGRect rect);
-void drawLinearGradient(CGContextRef context, CGRect rect, CGColorRef startColor, 
-						CGColorRef  endColor);
+void drawLinearGradient(CGContextRef context, CGRect rect, UIColor *startColor, 
+						UIColor *endColor);

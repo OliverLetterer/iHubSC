@@ -7,7 +7,6 @@
 //
 
 #import "GHDescriptionTableViewCell.h"
-#import "UITableViewCell+Background.h"
 
 @implementation GHDescriptionTableViewCell
 
