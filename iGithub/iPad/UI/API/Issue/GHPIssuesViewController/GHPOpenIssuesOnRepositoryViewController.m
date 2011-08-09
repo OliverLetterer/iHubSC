@@ -28,7 +28,6 @@
 }
 
 #pragma mark - Notifications
-#warning contains issue - update
 
 - (void)issueCreationNotificationCallback:(NSNotification *)notification {
     GHAPIIssueV3 *issue = [notification.userInfo objectForKey:GHAPIV3NotificationUserDictionaryIssueKey];
@@ -60,6 +59,11 @@
                 [self.dataArray removeObjectAtIndex:index];
             }
             changed = YES;
+        } else {
+            if (issue.isOpen) {
+                [self.dataArray insertObject:issue atIndex:0];
+                changed = YES;
+            }
         }
     }
     

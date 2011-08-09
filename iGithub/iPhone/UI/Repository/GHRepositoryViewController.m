@@ -88,16 +88,26 @@
 }
 
 #pragma mark - Notifications
-#warning contains issue - update
 
 - (void)issueChangedNotificationCallback:(NSNotification *)notification {
     GHAPIIssueV3 *issue = [notification.userInfo objectForKey:GHAPIV3NotificationUserDictionaryIssueKey];
     BOOL changed = NO;
     
-    NSUInteger index = [self.issuesArray indexOfObject:issue];
-    if (index != NSNotFound) {
-        [self.issuesArray replaceObjectAtIndex:index withObject:issue];
-        changed = YES;
+    if ([issue.repository isEqualToString:self.repositoryString]) {
+        NSUInteger index = [self.issuesArray indexOfObject:issue];
+        if (index != NSNotFound) {
+            if (issue.isOpen) {
+                [self.issuesArray replaceObjectAtIndex:index withObject:issue];
+            } else {
+                [self.issuesArray removeObjectAtIndex:index];
+            }
+            changed = YES;
+        } else {
+            if (issue.isOpen) {
+                [self.issuesArray insertObject:issue atIndex:0];
+                changed = YES;
+            }
+        }
     }
     
     if (changed) {
