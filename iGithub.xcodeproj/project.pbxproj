@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		A703B9471347562B0014235D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A703B9461347562B0014235D /* QuartzCore.framework */; };
 		A7204D8113E4759F0098C86A /* GHAPIMarkdownFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = A7204D8013E4759F0098C86A /* GHAPIMarkdownFormatter.m */; };
-		A730A34213E9330E0007C06C /* GHAlertViewOverlayImage.png in Resources */ = {isa = PBXBuildFile; fileRef = A730A34113E9330E0007C06C /* GHAlertViewOverlayImage.png */; };
+		A74301B113F1CFD000DA63DC /* GHTableViewAlertView.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A74301B013F1CFD000DA63DC /* GHTableViewAlertView.bundle */; };
 		A744F56C13E72D030038C189 /* styles.css in Resources */ = {isa = PBXBuildFile; fileRef = A744F56B13E72D030038C189 /* styles.css */; };
 		A744F57913E730E40038C189 /* libGHMarkdownParser.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A744F57613E72DE60038C189 /* libGHMarkdownParser.a */; };
 		A744F58813E73E490038C189 /* DTRangedAttribute.m in Sources */ = {isa = PBXBuildFile; fileRef = A744F58513E73E490038C189 /* DTRangedAttribute.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -98,7 +98,6 @@
 		A757982F13E1C1D5008670B0 /* GHTableViewAlertViewTableViewBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = A757982913E1C1D5008670B0 /* GHTableViewAlertViewTableViewBackgroundView.m */; };
 		A757983013E1C1D5008670B0 /* GHTableViewAlertViewTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A757982B13E1C1D5008670B0 /* GHTableViewAlertViewTableViewCell.m */; };
 		A76B2E9B13EFD22500D723AC /* GHLinearGradientSelectedBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = A76B2E9A13EFD22500D723AC /* GHLinearGradientSelectedBackgroundView.m */; };
-		A76C011913E9D022005E26C4 /* GHAlertViewOverlayImage@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A76C011813E9D022005E26C4 /* GHAlertViewOverlayImage@2x.png */; };
 		A76C011E13E9D3DD005E26C4 /* compass in Resources */ = {isa = PBXBuildFile; fileRef = A76C011A13E9D3DD005E26C4 /* compass */; };
 		A76C011F13E9D3DD005E26C4 /* scripts in Resources */ = {isa = PBXBuildFile; fileRef = A76C011B13E9D3DD005E26C4 /* scripts */; };
 		A76C012013E9D3DD005E26C4 /* src in Resources */ = {isa = PBXBuildFile; fileRef = A76C011C13E9D3DD005E26C4 /* src */; };
@@ -424,7 +423,7 @@
 		A703B9461347562B0014235D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		A7204D7F13E4759F0098C86A /* GHAPIMarkdownFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GHAPIMarkdownFormatter.h; path = Markdown/GHAPIMarkdownFormatter.h; sourceTree = "<group>"; };
 		A7204D8013E4759F0098C86A /* GHAPIMarkdownFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GHAPIMarkdownFormatter.m; path = Markdown/GHAPIMarkdownFormatter.m; sourceTree = "<group>"; };
-		A730A34113E9330E0007C06C /* GHAlertViewOverlayImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GHAlertViewOverlayImage.png; sourceTree = "<group>"; };
+		A74301B013F1CFD000DA63DC /* GHTableViewAlertView.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = GHTableViewAlertView.bundle; sourceTree = "<group>"; };
 		A744F56B13E72D030038C189 /* styles.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = styles.css; sourceTree = "<group>"; };
 		A744F56E13E72DE60038C189 /* GHMarkdownParser.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = GHMarkdownParser.xcodeproj; path = Submodules/GHMarkdownParser/GHMarkdownParser/GHMarkdownParser.xcodeproj; sourceTree = SOURCE_ROOT; };
 		A744F58413E73E490038C189 /* DTRangedAttribute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DTRangedAttribute.h; path = "Submodules/NSAttributedString-Additions-for-HTML/Classes/DTRangedAttribute.h"; sourceTree = SOURCE_ROOT; };
@@ -592,7 +591,6 @@
 		A757982B13E1C1D5008670B0 /* GHTableViewAlertViewTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHTableViewAlertViewTableViewCell.m; sourceTree = "<group>"; };
 		A76B2E9913EFD22500D723AC /* GHLinearGradientSelectedBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHLinearGradientSelectedBackgroundView.h; sourceTree = "<group>"; };
 		A76B2E9A13EFD22500D723AC /* GHLinearGradientSelectedBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHLinearGradientSelectedBackgroundView.m; sourceTree = "<group>"; };
-		A76C011813E9D022005E26C4 /* GHAlertViewOverlayImage@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GHAlertViewOverlayImage@2x.png"; sourceTree = "<group>"; };
 		A76C011A13E9D3DD005E26C4 /* compass */ = {isa = PBXFileReference; lastKnownFileType = folder; path = compass; sourceTree = "<group>"; };
 		A76C011B13E9D3DD005E26C4 /* scripts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = scripts; sourceTree = "<group>"; };
 		A76C011C13E9D3DD005E26C4 /* src */ = {isa = PBXFileReference; lastKnownFileType = folder; path = src; sourceTree = "<group>"; };
@@ -1772,14 +1770,13 @@
 		A757982513E1C1D5008670B0 /* GHTableViewAlertView */ = {
 			isa = PBXGroup;
 			children = (
-				A76C011813E9D022005E26C4 /* GHAlertViewOverlayImage@2x.png */,
-				A730A34113E9330E0007C06C /* GHAlertViewOverlayImage.png */,
 				A757982613E1C1D5008670B0 /* GHTableViewAlertView.h */,
 				A757982713E1C1D5008670B0 /* GHTableViewAlertView.m */,
 				A757982813E1C1D5008670B0 /* GHTableViewAlertViewTableViewBackgroundView.h */,
 				A757982913E1C1D5008670B0 /* GHTableViewAlertViewTableViewBackgroundView.m */,
 				A757982A13E1C1D5008670B0 /* GHTableViewAlertViewTableViewCell.h */,
 				A757982B13E1C1D5008670B0 /* GHTableViewAlertViewTableViewCell.m */,
+				A74301B013F1CFD000DA63DC /* GHTableViewAlertView.bundle */,
 			);
 			name = GHTableViewAlertView;
 			path = Submodules/GHTableViewAlertView/GHTableViewAlertView;
@@ -3484,8 +3481,6 @@
 				A75796FB13E1A030008670B0 /* MainWindow_iPad.xib in Resources */,
 				A7C5257313E6ADF90003EEE5 /* Kal.bundle in Resources */,
 				A744F56C13E72D030038C189 /* styles.css in Resources */,
-				A730A34213E9330E0007C06C /* GHAlertViewOverlayImage.png in Resources */,
-				A76C011913E9D022005E26C4 /* GHAlertViewOverlayImage@2x.png in Resources */,
 				A76C011E13E9D3DD005E26C4 /* compass in Resources */,
 				A76C011F13E9D3DD005E26C4 /* scripts in Resources */,
 				A76C012013E9D3DD005E26C4 /* src in Resources */,
@@ -3494,6 +3489,7 @@
 				A76C013013E9D7E6005E26C4 /* 162-receipt.png in Resources */,
 				A7DC78F213EACEE0002ABD4B /* Settings.bundle in Resources */,
 				A7AE93BE13ED3CE3007B7CE1 /* UIBarButtonItemSaveBackground~iPad.png in Resources */,
+				A74301B113F1CFD000DA63DC /* GHTableViewAlertView.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
