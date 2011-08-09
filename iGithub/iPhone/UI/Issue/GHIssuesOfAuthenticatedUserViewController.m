@@ -50,7 +50,6 @@
 }
 
 #pragma mark - Notifications
-#warning contains issue - update
 
 - (void)issueChangedNotificationCallback:(NSNotification *)notification {
     GHAPIIssueV3 *issue = [notification.userInfo objectForKey:GHAPIV3NotificationUserDictionaryIssueKey];
@@ -58,14 +57,32 @@
     
     NSUInteger index = [self.assignedIssues indexOfObject:issue];
     if (index != NSNotFound) {
-        [self.assignedIssues replaceObjectAtIndex:index withObject:issue];
+        if ([issue.assignee isEqualToUser:[GHAPIAuthenticationManager sharedInstance].authenticatedUser ] && issue.isOpen) {
+            [self.assignedIssues replaceObjectAtIndex:index withObject:issue];
+        } else {
+            [self.assignedIssues removeObjectAtIndex:index];
+        }
         changed = YES;
+    } else {
+        if ([issue.assignee isEqualToUser:[GHAPIAuthenticationManager sharedInstance].authenticatedUser ] && issue.isOpen) {
+            [self.assignedIssues insertObject:issue atIndex:0];
+            changed = YES;
+        }
     }
     
     index = [self.filteresIssues indexOfObject:issue];
     if (index != NSNotFound) {
-        [self.filteresIssues replaceObjectAtIndex:index withObject:issue];
+        if ([issue.assignee isEqualToUser:[GHAPIAuthenticationManager sharedInstance].authenticatedUser ] && issue.isOpen) {
+            [self.filteresIssues replaceObjectAtIndex:index withObject:issue];
+        } else {
+            [self.filteresIssues removeObjectAtIndex:index];
+        }
         changed = YES;
+    } else {
+        if ([issue.assignee isEqualToUser:[GHAPIAuthenticationManager sharedInstance].authenticatedUser ] && issue.isOpen) {
+            [self.filteresIssues insertObject:issue atIndex:0];
+            changed = YES;
+        }
     }
     
     if (changed) {
@@ -73,6 +90,7 @@
         [self cacheAssignedIssuesHeight];
         if (self.isViewLoaded) {
             [self.tableView reloadData];
+            [_mySearchDisplayController.searchResultsTableView reloadData];
         }
     }
 }

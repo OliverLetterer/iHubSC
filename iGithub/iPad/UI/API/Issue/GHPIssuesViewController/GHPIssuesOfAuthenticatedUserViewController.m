@@ -35,7 +35,6 @@
 }
 
 #pragma mark - Notifications
-#warning contains issue - update
 
 - (void)issueCreationNotificationCallback:(NSNotification *)notification {
     GHAPIIssueV3 *issue = [notification.userInfo objectForKey:GHAPIV3NotificationUserDictionaryIssueKey];
@@ -65,24 +64,32 @@
     GHAPIIssueV3 *issue = [notification.userInfo objectForKey:GHAPIV3NotificationUserDictionaryIssueKey];
     BOOL changed = NO;
     
-    if ([issue.assignee.login isEqualToString:[GHAPIAuthenticationManager sharedInstance].authenticatedUser.login]) {
-        // issue belongs here
-        if (issue.isOpen) {
-            // issue is open
-            if (![self.dataArray containsObject:issue]) {
-                [self.dataArray insertObject:issue atIndex:0];
-                changed = YES;
-            }
+    NSUInteger index = [self.dataArray indexOfObject:issue];
+    if (index != NSNotFound) {
+        if ([issue.assignee isEqualToUser:[GHAPIAuthenticationManager sharedInstance].authenticatedUser ] && issue.isOpen) {
+            [self.dataArray replaceObjectAtIndex:index withObject:issue];
         } else {
-            // issue is closed
-            if ([self.dataArray containsObject:issue]) {
-                [self.dataArray removeObject:issue];
-                changed = YES;
-            }
+            [self.dataArray removeObjectAtIndex:index];
         }
+        changed = YES;
     } else {
-        if ([self.dataArray containsObject:issue]) {
-            [self.dataArray removeObject:issue];
+        if ([issue.assignee isEqualToUser:[GHAPIAuthenticationManager sharedInstance].authenticatedUser ] && issue.isOpen) {
+            [self.dataArray insertObject:issue atIndex:0];
+            changed = YES;
+        }
+    }
+    
+    index = [self.filteresIssues indexOfObject:issue];
+    if (index != NSNotFound) {
+        if ([issue.assignee isEqualToUser:[GHAPIAuthenticationManager sharedInstance].authenticatedUser ] && issue.isOpen) {
+            [self.filteresIssues replaceObjectAtIndex:index withObject:issue];
+        } else {
+            [self.filteresIssues removeObjectAtIndex:index];
+        }
+        changed = YES;
+    } else {
+        if ([issue.assignee isEqualToUser:[GHAPIAuthenticationManager sharedInstance].authenticatedUser ] && issue.isOpen) {
+            [self.filteresIssues insertObject:issue atIndex:0];
             changed = YES;
         }
     }
@@ -90,7 +97,7 @@
     if (changed) {
         [self cacheDataArrayHeights];
         if (self.isViewLoaded) {
-            [self.tableView reloadDataAndResetExpansionStates:NO];
+            [self.tableView reloadData];
             [_mySearchDisplayController.searchResultsTableView reloadData];
         }
     }
