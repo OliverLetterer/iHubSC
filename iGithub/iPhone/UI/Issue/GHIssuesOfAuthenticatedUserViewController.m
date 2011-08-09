@@ -50,7 +50,7 @@
 }
 
 #pragma mark - Notifications
-#warning contains issue - create + update
+#warning contains issue - update
 
 - (void)issueChangedNotificationCallback:(NSNotification *)notification {
     GHAPIIssueV3 *issue = [notification.userInfo objectForKey:GHAPIV3NotificationUserDictionaryIssueKey];
@@ -81,7 +81,7 @@
     GHAPIIssueV3 *issue = [notification.userInfo objectForKey:GHAPIV3NotificationUserDictionaryIssueKey];
     BOOL changed = NO;
     
-    if ([issue.assignee.login isEqualToString:[GHAPIAuthenticationManager sharedInstance].authenticatedUser.login] && [issue.state isEqualToString:kGHAPIIssueStateV3Open]) {
+    if ([issue.assignee isEqualToUser:[GHAPIAuthenticationManager sharedInstance].authenticatedUser] && [issue.state isEqualToString:kGHAPIIssueStateV3Open]) {
         [self.assignedIssues insertObject:issue atIndex:0];
         
         if ([issue matchedString:self.searchString]) {

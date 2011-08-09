@@ -88,7 +88,7 @@
 }
 
 #pragma mark - Notifications
-#warning contains issue - create + update
+#warning contains issue - update
 
 - (void)issueChangedNotificationCallback:(NSNotification *)notification {
     GHAPIIssueV3 *issue = [notification.userInfo objectForKey:GHAPIV3NotificationUserDictionaryIssueKey];
@@ -104,6 +104,22 @@
         [self cacheHeightForIssuesArray];
         if (self.isViewLoaded) {
             [self.tableView reloadDataAndResetExpansionStates:NO];
+        }
+    }
+}
+
+- (void)issueCreationNotificationCallback:(NSNotification *)notification {
+    GHAPIIssueV3 *issue = [notification.userInfo objectForKey:GHAPIV3NotificationUserDictionaryIssueKey];
+    
+    if ([issue.repository isEqualToString:self.repositoryString] && [issue.state isEqualToString:kGHAPIIssueStateV3Open]) {
+        // issue belongs to us ;)
+        [self.issuesArray insertObject:issue.repository atIndex:0];
+        [self cacheHeightForIssuesArray];
+        self.repository.openIssues = [NSNumber numberWithInt:[self.repository.openIssues intValue]+1 ];
+        
+        if (self.isViewLoaded) {
+            [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:kUITableViewSectionIssues] 
+                          withRowAnimation:UITableViewRowAnimationAutomatic];
         }
     }
 }
@@ -914,13 +930,8 @@
     [self dismissModalViewControllerAnimated:YES];
 }
 
-#warning remove because we receive notification
 - (void)createIssueViewController:(GHCreateIssueTableViewController *)createViewController didCreateIssue:(GHAPIIssueV3 *)issue {
     [[ANNotificationQueue sharedInstance] detatchSuccesNotificationWithTitle:NSLocalizedString(@"Created Issue", @"") message:issue.title];
-    [self.issuesArray insertObject:issue atIndex:0];
-    self.repository.openIssues = [NSNumber numberWithInt:[self.repository.openIssues intValue]+1 ];
-    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:kUITableViewSectionIssues] 
-                  withRowAnimation:UITableViewRowAnimationNone];
     [self dismissModalViewControllerAnimated:YES];
 }
 
