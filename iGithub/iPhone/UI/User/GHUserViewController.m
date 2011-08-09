@@ -186,10 +186,6 @@
     }];
 }
 
-- (NSString *)descriptionForAssignedIssue:(GHAPIIssueV3 *)issue {
-    return [NSString stringWithFormat:NSLocalizedString(@"on %@\n\n%@", @""), issue.repository, issue.title];
-}
-
 #pragma mark - UIExpandableTableViewDatasource
 
 - (BOOL)tableView:(UIExpandableTableView *)tableView canExpandSection:(NSInteger)section {

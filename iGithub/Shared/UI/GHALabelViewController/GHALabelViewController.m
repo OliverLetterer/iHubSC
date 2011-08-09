@@ -88,6 +88,8 @@
     }
 }
 
+#warning contains issue - create + update
+
 - (void)issueCreationNotificationCallback:(NSNotification *)notification {
     GHAPIIssueV3 *issue = [notification.userInfo objectForKey:GHAPIV3NotificationUserDictionaryIssueKey];
     BOOL changed = NO;

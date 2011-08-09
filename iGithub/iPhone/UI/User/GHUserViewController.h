@@ -53,6 +53,5 @@
 - (void)cacheHeightForTableView;
 - (void)cacheHeightForWatchedRepositories;
 - (void)cacheGistsHeight;
-- (NSString *)descriptionForAssignedIssue:(GHAPIIssueV3 *)issue;
 
 @end

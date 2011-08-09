@@ -88,6 +88,7 @@
 }
 
 #pragma mark - Notifications
+#warning contains issue - create + update
 
 - (void)issueChangedNotificationCallback:(NSNotification *)notification {
     GHAPIIssueV3 *issue = [notification.userInfo objectForKey:GHAPIV3NotificationUserDictionaryIssueKey];
@@ -913,6 +914,7 @@
     [self dismissModalViewControllerAnimated:YES];
 }
 
+#warning remove because we receive notification
 - (void)createIssueViewController:(GHCreateIssueTableViewController *)createViewController didCreateIssue:(GHAPIIssueV3 *)issue {
     [[ANNotificationQueue sharedInstance] detatchSuccesNotificationWithTitle:NSLocalizedString(@"Created Issue", @"") message:issue.title];
     [self.issuesArray insertObject:issue atIndex:0];

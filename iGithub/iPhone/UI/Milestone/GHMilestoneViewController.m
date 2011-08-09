@@ -62,6 +62,7 @@
 }
 
 #pragma mark - Notifications
+#warning contains issue - create + update
 
 - (void)issueChangedNotificationCallback:(NSNotification *)notification {
     GHAPIIssueV3 *issue = [notification.userInfo objectForKey:GHAPIV3NotificationUserDictionaryIssueKey];
