@@ -48,22 +48,34 @@
     
     if ([issue.labels containsObject:self.label]) {
         // issue belongs here
-        if ([self.openIssues containsObject:issue] && !issue.isOpen) {
-            // state changed
-            [self.openIssues removeObject:issue];
-            [self.closedIssues insertObject:issue atIndex:0];
-            changed = YES;
-        } else if ([self.closedIssues containsObject:issue] && issue.isOpen) {
-            // state changed
-            [self.closedIssues removeObject:issue];
-            [self.openIssues insertObject:issue atIndex:0];
+        NSUInteger openIndex = [self.openIssues indexOfObject:issue];
+        if (openIndex != NSNotFound) {
+            if (issue.isOpen) {
+                [self.openIssues replaceObjectAtIndex:openIndex withObject:issue];
+            } else {
+                [self.openIssues removeObjectAtIndex:openIndex];
+                [self.closedIssues insertObject:issue atIndex:0];
+            }
             changed = YES;
         } else {
-            if ([issue.state isEqualToString:kGHAPIIssueStateV3Closed]) {
-                [self.closedIssues insertObject:issue atIndex:0];
-                changed = YES;
-            } else {
+            if (issue.isOpen) {
                 [self.openIssues insertObject:issue atIndex:0];
+                changed = YES;
+            }
+        }
+        
+        NSUInteger closedIndex = [self.closedIssues indexOfObject:issue];
+        if (closedIndex != NSNotFound) {
+            if (!issue.isOpen) {
+                [self.closedIssues replaceObjectAtIndex:closedIndex withObject:issue];
+            } else {
+                [self.closedIssues removeObjectAtIndex:closedIndex];
+                [self.openIssues insertObject:issue atIndex:0];
+            }
+            changed = YES;
+        } else {
+            if (!issue.isOpen) {
+                [self.closedIssues insertObject:issue atIndex:0];
                 changed = YES;
             }
         }
@@ -87,8 +99,6 @@
         }
     }
 }
-
-#warning contains issue - update
 
 - (void)issueCreationNotificationCallback:(NSNotification *)notification {
     GHAPIIssueV3 *issue = [notification.userInfo objectForKey:GHAPIV3NotificationUserDictionaryIssueKey];
