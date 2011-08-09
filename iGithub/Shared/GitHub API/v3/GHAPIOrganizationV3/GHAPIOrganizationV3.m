@@ -315,14 +315,19 @@
         if (error) {
             handler(NO, error);
         } else {
-            GHAPITeamV3 *ownersTeam = nil;
-            for (GHAPITeamV3 *team in teams) {
-                if ([team.name isEqualToString:@"Owners"]) {
-                    ownersTeam = team;
-                    break;
-                }
+            NSUInteger index = [teams indexOfObjectPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {
+                GHAPITeamV3 *team = obj;
+                BOOL found = [team.name isEqualToString:@"Owners"];
+                *stop = found;
+                return found;
+            }];
+            
+            if (index != NSNotFound) {
+                GHAPITeamV3 *ownersTeam = [teams objectAtIndex:index];
+                [GHAPITeamV3 isUser:username memberInTeamByID:ownersTeam.ID completionHandler:handler];
+            } else {
+                handler(NO, [NSError errorWithDomain:@"error" code:0 userInfo:[NSDictionary dictionaryWithObject:NSLocalizedString(@"Owners Team not found on repo", @"") forKey:NSLocalizedDescriptionKey] ]);
             }
-            [GHAPITeamV3 isUser:username memberInTeamByID:ownersTeam.ID completionHandler:handler];
         }
     }];
 }
