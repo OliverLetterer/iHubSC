@@ -53,34 +53,41 @@
 }
 
 #pragma mark - Notifications
-#warning contains issue - update
 
 - (void)issueChangedNotificationCallback:(NSNotification *)notification {
     GHAPIIssueV3 *issue = [notification.userInfo objectForKey:GHAPIV3NotificationUserDictionaryIssueKey];
     BOOL changed = NO;
     
-    // issue now has this milestone -> add based on state
-    // issue changed state without milestone -> swap in arrays
-    // issue was present but milestone changed -> remove
-    
-    if ([issue.milestone isEqualToMilestone:self.milestone]) {
+    if ([self.milestone isEqualToMilestone:issue.milestone]) {
         // issue belongs here
-        if ([self.openIssues containsObject:issue] && !issue.isOpen) {
-            // state changed
-            [self.openIssues removeObject:issue];
-            [self.closedIssues insertObject:issue atIndex:0];
+        NSUInteger openIndex = [self.openIssues indexOfObject:issue];
+        if (openIndex != NSNotFound) {
+            if (issue.isOpen) {
+                [self.openIssues replaceObjectAtIndex:openIndex withObject:issue];
+            } else {
+                [self.openIssues removeObjectAtIndex:openIndex];
+                [self.closedIssues insertObject:issue atIndex:0];
+            }
             changed = YES;
-        } else if ([self.closedIssues containsObject:issue] && issue.isOpen) {
-            // state changed
-            [self.closedIssues removeObject:issue];
-            [self.openIssues insertObject:issue atIndex:0];
+        } else {
+            if (issue.isOpen) {
+                [self.openIssues insertObject:issue atIndex:0];
+                changed = YES;
+            }
+        }
+        
+        NSUInteger closedIndex = [self.closedIssues indexOfObject:issue];
+        if (closedIndex != NSNotFound) {
+            if (!issue.isOpen) {
+                [self.closedIssues replaceObjectAtIndex:closedIndex withObject:issue];
+            } else {
+                [self.closedIssues removeObjectAtIndex:closedIndex];
+                [self.openIssues insertObject:issue atIndex:0];
+            }
             changed = YES;
         } else {
             if (!issue.isOpen) {
                 [self.closedIssues insertObject:issue atIndex:0];
-                changed = YES;
-            } else {
-                [self.openIssues insertObject:issue atIndex:0];
                 changed = YES;
             }
         }
