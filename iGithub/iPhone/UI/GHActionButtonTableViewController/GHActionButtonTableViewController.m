@@ -7,6 +7,8 @@
 //
 
 #import "GHActionButtonTableViewController.h"
+#import "UIBarButtonItem+GHEmpty.h"
+#import "UIColor+GithubUI.h"
 
 NSInteger const kUIActionButtonActionSheetTag = 549532;
 
@@ -25,16 +27,15 @@ NSInteger const kUIActionButtonActivityIndicatorView = 123908;
 
 - (UIBarButtonItem *)loadingActionButton {
     if (!_loadingActionButton) {
-        UIView *wrapperView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 43.0f, 30.0f)];
-        UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"GHEmptyBarButtonItem.png"] ];
-        [wrapperView addSubview:imageView];
+        UIBarButtonItem *emptyButton = [UIBarButtonItem emptyBarButtonItemWithWidth:43.0f tintColor:[UIColor defaultNavigationBarTintColor] ];
+        
+        UIView *wrapperView = emptyButton.customView;
         UIActivityIndicatorView *activityIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
         activityIndicatorView.tag = kUIActionButtonActivityIndicatorView;
         [wrapperView addSubview:activityIndicatorView];
         [activityIndicatorView startAnimating];
         activityIndicatorView.center = CGPointMake(CGRectGetMidX(wrapperView.bounds), CGRectGetMidY(wrapperView.bounds));
-        _loadingActionButton = [[UIBarButtonItem alloc] initWithCustomView:wrapperView];
-        _loadingActionButton.enabled = NO;
+        _loadingActionButton = emptyButton;
     }
     return _loadingActionButton;
 }

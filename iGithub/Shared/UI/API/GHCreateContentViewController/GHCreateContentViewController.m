@@ -7,7 +7,8 @@
 //
 
 #import "GHCreateContentViewController.h"
-
+#import "UIBarButtonItem+GHEmpty.h"
+#import "UIColor+GithubUI.h"
 
 @implementation GHCreateContentViewController
 
@@ -26,15 +27,14 @@
             _loadingButton = [[UIBarButtonItem alloc] initWithCustomView:wrapperView];
             _loadingButton.enabled = NO;
         } else {
-            UIView *wrapperView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 49.0f, 30.0f)];
-            UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"UIBarButtonItemSaveBackground.png"] ];
-            [wrapperView addSubview:imageView];
+            UIBarButtonItem *emptyButton = [UIBarButtonItem emptyBarButtonItemWithWidth:49.0f tintColor:[UIColor defaultNavigationBarTintColor]];
+            
+            UIView *wrapperView = emptyButton.customView;
             UIActivityIndicatorView *activityIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
             [wrapperView addSubview:activityIndicatorView];
             [activityIndicatorView startAnimating];
             activityIndicatorView.center = CGPointMake(CGRectGetMidX(wrapperView.bounds), CGRectGetMidY(wrapperView.bounds));
-            _loadingButton = [[UIBarButtonItem alloc] initWithCustomView:wrapperView];
-            _loadingButton.enabled = NO;
+            _loadingButton = emptyButton;
         }
     }
     return _loadingButton;
