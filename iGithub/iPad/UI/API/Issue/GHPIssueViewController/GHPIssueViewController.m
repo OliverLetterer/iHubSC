@@ -740,7 +740,7 @@
         [sheet addButtonWithTitle:NSLocalizedString(@"Edit", @"")];
         currentButtonIndex++;
         
-        if (issue.isOpen) {
+        if (self.issue.isOpen) {
             [sheet addButtonWithTitle:NSLocalizedString(@"Close", @"")];
             sheet.destructiveButtonIndex = currentButtonIndex;
             currentButtonIndex++;
