@@ -36,6 +36,10 @@ NSString *const kGHAPIIssueStateV3Closed = @"closed";
     return self.milestone.number != nil;
 }
 
+- (BOOL)isOpen {
+    return [self.state isEqualToString:kGHAPIIssueStateV3Open];
+}
+
 - (NSAttributedString *)attributedBody {
     if (!_attributedBody) {
         _attributedBody = self.body.nonSelectedAttributesStringFromMarkdown;

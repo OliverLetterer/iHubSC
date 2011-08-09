@@ -81,7 +81,7 @@
     GHAPIIssueV3 *issue = [notification.userInfo objectForKey:GHAPIV3NotificationUserDictionaryIssueKey];
     BOOL changed = NO;
     
-    if ([issue.assignee isEqualToUser:[GHAPIAuthenticationManager sharedInstance].authenticatedUser] && [issue.state isEqualToString:kGHAPIIssueStateV3Open]) {
+    if ([issue.assignee isEqualToUser:[GHAPIAuthenticationManager sharedInstance].authenticatedUser] && issue.isOpen) {
         [self.assignedIssues insertObject:issue atIndex:0];
         
         if ([issue matchedString:self.searchString]) {

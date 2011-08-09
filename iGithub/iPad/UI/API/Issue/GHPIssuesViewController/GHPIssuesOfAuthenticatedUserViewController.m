@@ -41,7 +41,7 @@
     GHAPIIssueV3 *issue = [notification.userInfo objectForKey:GHAPIV3NotificationUserDictionaryIssueKey];
     BOOL changed = NO;
     
-    if ([issue.assignee.login isEqualToString:[GHAPIAuthenticationManager sharedInstance].authenticatedUser.login] && [issue.state isEqualToString:kGHAPIIssueStateV3Open]) {
+    if ([issue.assignee.login isEqualToString:[GHAPIAuthenticationManager sharedInstance].authenticatedUser.login] && issue.isOpen) {
         // issue is open and belongs to us ;)
         [self.dataArray insertObject:issue atIndex:0];
         
@@ -67,7 +67,7 @@
     
     if ([issue.assignee.login isEqualToString:[GHAPIAuthenticationManager sharedInstance].authenticatedUser.login]) {
         // issue belongs here
-        if ([issue.state isEqualToString:kGHAPIIssueStateV3Open]) {
+        if (issue.isOpen) {
             // issue is open
             if (![self.dataArray containsObject:issue]) {
                 [self.dataArray insertObject:issue atIndex:0];

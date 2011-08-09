@@ -64,6 +64,7 @@ extern NSString *const kGHAPIIssueStateV3Closed;
 @property (nonatomic, readonly) BOOL isPullRequest;
 @property (nonatomic, readonly) BOOL hasAssignee;
 @property (nonatomic, readonly) BOOL hasMilestone;
+@property (nonatomic, readonly) BOOL isOpen;
 
 - (BOOL)matchedString:(NSString *)string;
 

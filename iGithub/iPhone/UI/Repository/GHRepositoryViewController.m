@@ -111,7 +111,7 @@
 - (void)issueCreationNotificationCallback:(NSNotification *)notification {
     GHAPIIssueV3 *issue = [notification.userInfo objectForKey:GHAPIV3NotificationUserDictionaryIssueKey];
     
-    if ([issue.repository isEqualToString:self.repositoryString] && [issue.state isEqualToString:kGHAPIIssueStateV3Open]) {
+    if ([issue.repository isEqualToString:self.repositoryString] && issue.isOpen) {
         // issue belongs to us ;)
         [self.issuesArray insertObject:issue.repository atIndex:0];
         [self cacheHeightForIssuesArray];

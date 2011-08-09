@@ -74,18 +74,18 @@
     
     if ([issue.milestone isEqualToMilestone:self.milestone]) {
         // issue belongs here
-        if ([self.openIssues containsObject:issue] && [issue.state isEqualToString:kGHAPIIssueStateV3Closed]) {
+        if ([self.openIssues containsObject:issue] && !issue.isOpen) {
             // state changed
             [self.openIssues removeObject:issue];
             [self.closedIssues insertObject:issue atIndex:0];
             changed = YES;
-        } else if ([self.closedIssues containsObject:issue] && [issue.state isEqualToString:kGHAPIIssueStateV3Open]) {
+        } else if ([self.closedIssues containsObject:issue] && issue.isOpen) {
             // state changed
             [self.closedIssues removeObject:issue];
             [self.openIssues insertObject:issue atIndex:0];
             changed = YES;
         } else {
-            if ([issue.state isEqualToString:kGHAPIIssueStateV3Closed]) {
+            if (!issue.isOpen) {
                 [self.closedIssues insertObject:issue atIndex:0];
                 changed = YES;
             } else {
@@ -119,7 +119,7 @@
     BOOL changed = NO;
     
     if ([issue.milestone isEqualToMilestone:self.milestone]) {
-        if ([issue.state isEqualToString:kGHAPIIssueStateV3Open]) {
+        if (issue.isOpen) {
             [self.openIssues insertObject:issue atIndex:0];
         } else {
             [self.closedIssues insertObject:issue atIndex:0];

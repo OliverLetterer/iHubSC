@@ -48,12 +48,12 @@
     
     if ([issue.labels containsObject:self.label]) {
         // issue belongs here
-        if ([self.openIssues containsObject:issue] && [issue.state isEqualToString:kGHAPIIssueStateV3Closed]) {
+        if ([self.openIssues containsObject:issue] && !issue.isOpen) {
             // state changed
             [self.openIssues removeObject:issue];
             [self.closedIssues insertObject:issue atIndex:0];
             changed = YES;
-        } else if ([self.closedIssues containsObject:issue] && [issue.state isEqualToString:kGHAPIIssueStateV3Open]) {
+        } else if ([self.closedIssues containsObject:issue] && issue.isOpen) {
             // state changed
             [self.closedIssues removeObject:issue];
             [self.openIssues insertObject:issue atIndex:0];
@@ -95,7 +95,7 @@
     BOOL changed = NO;
     
     if ([issue.labels containsObject:self.label]) {
-        if ([issue.state isEqualToString:kGHAPIIssueStateV3Open]) {
+        if (issue.isOpen) {
             [self.openIssues insertObject:issue atIndex:0];
         } else {
             [self.closedIssues insertObject:issue atIndex:0];

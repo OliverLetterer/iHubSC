@@ -34,7 +34,7 @@
     GHAPIIssueV3 *issue = [notification.userInfo objectForKey:GHAPIV3NotificationUserDictionaryIssueKey];
     BOOL changed = NO;
     
-    if ([issue.repository isEqualToString:self.repository] && [issue.state isEqualToString:kGHAPIIssueStateV3Open]) {
+    if ([issue.repository isEqualToString:self.repository] && issue.isOpen) {
         [self.dataArray insertObject:issue atIndex:0];
         changed = YES;
     }
@@ -54,7 +54,7 @@
     if ([issue.repository isEqualToString:self.repository]) {
         NSUInteger index = [self.dataArray indexOfObject:issue];
         if (index != NSNotFound) {
-            if ([issue.state isEqualToString:kGHAPIIssueStateV3Open]) {
+            if (issue.isOpen) {
                 [self.dataArray replaceObjectAtIndex:index withObject:issue];
             } else {
                 [self.dataArray removeObjectAtIndex:index];
