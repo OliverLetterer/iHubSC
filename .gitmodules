@@ -37,3 +37,6 @@
 [submodule "GHMarkdownParser"]
 	path = Submodules/GHMarkdownParser
 	url = git@github.com:OliverLetterer/GHMarkdownParser.git
+[submodule "Submodules/GHGlossProgressView"]
+	path = Submodules/GHGlossProgressView
+	url = git@github.com:OliverLetterer/GHGlossProgressView.git

@@ -265,16 +265,16 @@
             
             GHAPIMilestoneV3TableViewCell *cell = (GHAPIMilestoneV3TableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
             if (!cell) {
-                cell = [[GHAPIMilestoneV3TableViewCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:CellIdentifier];
-                cell.accessoryType = UITableViewCellAccessoryNone;
+                cell = [[GHAPIMilestoneV3TableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
             }
             
             GHAPIMilestoneV3 *milestone = self.milestone;
             
             cell.textLabel.text = milestone.title;
-            cell.detailTextLabel.text = milestone.dueFormattedString;
-            cell.progressView.progress = [milestone.closedIssues floatValue] / ([milestone.closedIssues floatValue] + [milestone.openIssues floatValue]);
+            cell.detailTextLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ (%d%% completed)", @""), milestone.dueFormattedString, (int)(milestone.progress*100)];
+            
+            cell.progressView.progress = milestone.progress;
             
             if (milestone.dueInTime) {
                 [cell.progressView setTintColor:[UIColor greenColor] ];
@@ -341,6 +341,8 @@
         return [self cachedHeightForRowAtIndexPath:indexPath];
     } else if (indexPath.section == kUITableViewControllerSectionInfoClosedIssues && indexPath.row > 0) {
         return [self cachedHeightForRowAtIndexPath:indexPath];
+    } else if (indexPath.section == kUITableViewControllerSectionInfo) {
+        return kGHAPIMilestoneV3TableViewCellHeight;
     }
     
     return 44.0f;

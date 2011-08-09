@@ -308,8 +308,6 @@
 		A784204513E1987C00131648 /* GHViewCommitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841FE613E1987C00131648 /* GHViewCommitViewController.m */; };
 		A784204613E1987C00131648 /* GHGistViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841FE913E1987C00131648 /* GHGistViewController.m */; };
 		A784204913E1987C00131648 /* GHIssueViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841FF213E1987C00131648 /* GHIssueViewController.m */; };
-		A784204A13E1987C00131648 /* CGCommon.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841FF513E1987C00131648 /* CGCommon.m */; };
-		A784204B13E1987C00131648 /* INProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841FF713E1987C00131648 /* INProgressView.m */; };
 		A784204C13E1987C00131648 /* GHViewLabelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841FFA13E1987C00131648 /* GHViewLabelViewController.m */; };
 		A784204D13E1987C00131648 /* GHLabelTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841FFD13E1987C00131648 /* GHLabelTableViewCell.m */; };
 		A784204E13E1987C00131648 /* GHMilestoneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A784200013E1987C00131648 /* GHMilestoneViewController.m */; };
@@ -364,6 +362,8 @@
 		A7CE1B831346349200169F94 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7CE1B821346349000169F94 /* CoreData.framework */; };
 		A7D14F451354E5A700E1B980 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7D14F441354E5A600E1B980 /* MessageUI.framework */; };
 		A7D888FE13F13B79002ED2FF /* UIBarButtonItem+GHEmpty.m in Sources */ = {isa = PBXBuildFile; fileRef = A7D888FD13F13B79002ED2FF /* UIBarButtonItem+GHEmpty.m */; };
+		A7D8894D13F17859002ED2FF /* GHGlossProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = A7D8894913F17859002ED2FF /* GHGlossProgressView.m */; };
+		A7D8894E13F17859002ED2FF /* CGCommon.m in Sources */ = {isa = PBXBuildFile; fileRef = A7D8894C13F17859002ED2FF /* CGCommon.m */; };
 		A7DC78F213EACEE0002ABD4B /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A7DC78F113EACEE0002ABD4B /* Settings.bundle */; };
 		A7DC78F613EACFFC002ABD4B /* NSUserDefaults+Settings.m in Sources */ = {isa = PBXBuildFile; fileRef = A7DC78F513EACFFC002ABD4B /* NSUserDefaults+Settings.m */; };
 		A7FDA6A113E7446F00DE4FF3 /* GHCreateTeamViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7FDA6A013E7446F00DE4FF3 /* GHCreateTeamViewController.m */; };
@@ -954,10 +954,6 @@
 		A7841FE913E1987C00131648 /* GHGistViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHGistViewController.m; sourceTree = "<group>"; };
 		A7841FF113E1987C00131648 /* GHIssueViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHIssueViewController.h; sourceTree = "<group>"; };
 		A7841FF213E1987C00131648 /* GHIssueViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHIssueViewController.m; sourceTree = "<group>"; };
-		A7841FF413E1987C00131648 /* CGCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGCommon.h; sourceTree = "<group>"; };
-		A7841FF513E1987C00131648 /* CGCommon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CGCommon.m; sourceTree = "<group>"; };
-		A7841FF613E1987C00131648 /* INProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INProgressView.h; sourceTree = "<group>"; };
-		A7841FF713E1987C00131648 /* INProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INProgressView.m; sourceTree = "<group>"; };
 		A7841FF913E1987C00131648 /* GHViewLabelViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHViewLabelViewController.h; sourceTree = "<group>"; };
 		A7841FFA13E1987C00131648 /* GHViewLabelViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHViewLabelViewController.m; sourceTree = "<group>"; };
 		A7841FFC13E1987C00131648 /* GHLabelTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHLabelTableViewCell.h; sourceTree = "<group>"; };
@@ -1058,6 +1054,10 @@
 		A7D41AC41358B6B500CD3A5C /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		A7D888FC13F13B79002ED2FF /* UIBarButtonItem+GHEmpty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIBarButtonItem+GHEmpty.h"; path = "UIBarButtonItem+GHEmpty/UIBarButtonItem+GHEmpty.h"; sourceTree = "<group>"; };
 		A7D888FD13F13B79002ED2FF /* UIBarButtonItem+GHEmpty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIBarButtonItem+GHEmpty.m"; path = "UIBarButtonItem+GHEmpty/UIBarButtonItem+GHEmpty.m"; sourceTree = "<group>"; };
+		A7D8894813F17859002ED2FF /* GHGlossProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHGlossProgressView.h; sourceTree = "<group>"; };
+		A7D8894913F17859002ED2FF /* GHGlossProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHGlossProgressView.m; sourceTree = "<group>"; };
+		A7D8894B13F17859002ED2FF /* CGCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGCommon.h; sourceTree = "<group>"; };
+		A7D8894C13F17859002ED2FF /* CGCommon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CGCommon.m; sourceTree = "<group>"; };
 		A7DC78F113EACEE0002ABD4B /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		A7DC78F413EACFFC002ABD4B /* NSUserDefaults+Settings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSUserDefaults+Settings.h"; sourceTree = "<group>"; };
 		A7DC78F513EACFFC002ABD4B /* NSUserDefaults+Settings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSUserDefaults+Settings.m"; sourceTree = "<group>"; };
@@ -1807,6 +1807,7 @@
 		A7841C7013E184F500131648 /* Submodules */ = {
 			isa = PBXGroup;
 			children = (
+				A7D8894713F17858002ED2FF /* GHGlossProgressView */,
 				A744F56D13E72DDF0038C189 /* GHMarkdownParser */,
 				A7C5255A13E6AB420003EEE5 /* Kal */,
 				A757979113E1A622008670B0 /* GHPieChartProgressView */,
@@ -2744,20 +2745,8 @@
 				A7841FF213E1987C00131648 /* GHIssueViewController.m */,
 				A76C012613E9D649005E26C4 /* GHIssuesOfAuthenticatedUserViewController.h */,
 				A76C012713E9D649005E26C4 /* GHIssuesOfAuthenticatedUserViewController.m */,
-				A7841FF313E1987C00131648 /* UIView's */,
 			);
 			path = Issue;
-			sourceTree = "<group>";
-		};
-		A7841FF313E1987C00131648 /* UIView's */ = {
-			isa = PBXGroup;
-			children = (
-				A7841FF413E1987C00131648 /* CGCommon.h */,
-				A7841FF513E1987C00131648 /* CGCommon.m */,
-				A7841FF613E1987C00131648 /* INProgressView.h */,
-				A7841FF713E1987C00131648 /* INProgressView.m */,
-			);
-			path = "UIView's";
 			sourceTree = "<group>";
 		};
 		A7841FF813E1987C00131648 /* Label */ = {
@@ -3263,6 +3252,26 @@
 			name = "UIBarButtonItem+GHEmpty";
 			sourceTree = "<group>";
 		};
+		A7D8894713F17858002ED2FF /* GHGlossProgressView */ = {
+			isa = PBXGroup;
+			children = (
+				A7D8894813F17859002ED2FF /* GHGlossProgressView.h */,
+				A7D8894913F17859002ED2FF /* GHGlossProgressView.m */,
+				A7D8894A13F17859002ED2FF /* Private */,
+			);
+			name = GHGlossProgressView;
+			path = Submodules/GHGlossProgressView/GHGlossProgressView;
+			sourceTree = SOURCE_ROOT;
+		};
+		A7D8894A13F17859002ED2FF /* Private */ = {
+			isa = PBXGroup;
+			children = (
+				A7D8894B13F17859002ED2FF /* CGCommon.h */,
+				A7D8894C13F17859002ED2FF /* CGCommon.m */,
+			);
+			path = Private;
+			sourceTree = "<group>";
+		};
 		A7DC78F313EACFD4002ABD4B /* NSUserDefaults+Additions */ = {
 			isa = PBXGroup;
 			children = (
@@ -3636,8 +3645,6 @@
 				A784204513E1987C00131648 /* GHViewCommitViewController.m in Sources */,
 				A784204613E1987C00131648 /* GHGistViewController.m in Sources */,
 				A784204913E1987C00131648 /* GHIssueViewController.m in Sources */,
-				A784204A13E1987C00131648 /* CGCommon.m in Sources */,
-				A784204B13E1987C00131648 /* INProgressView.m in Sources */,
 				A784204C13E1987C00131648 /* GHViewLabelViewController.m in Sources */,
 				A784204D13E1987C00131648 /* GHLabelTableViewCell.m in Sources */,
 				A784204E13E1987C00131648 /* GHMilestoneViewController.m in Sources */,
@@ -3768,6 +3775,8 @@
 				A7A9E8D413EDA738001F468F /* GHColorAlertView.m in Sources */,
 				A76B2E9B13EFD22500D723AC /* GHLinearGradientSelectedBackgroundView.m in Sources */,
 				A7D888FE13F13B79002ED2FF /* UIBarButtonItem+GHEmpty.m in Sources */,
+				A7D8894D13F17859002ED2FF /* GHGlossProgressView.m in Sources */,
+				A7D8894E13F17859002ED2FF /* CGCommon.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

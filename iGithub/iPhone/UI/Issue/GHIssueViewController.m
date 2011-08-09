@@ -352,13 +352,13 @@
             
             GHAPIMilestoneV3TableViewCell *cell = (GHAPIMilestoneV3TableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
             if (!cell) {
-                cell = [[GHAPIMilestoneV3TableViewCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:CellIdentifier];
+                cell = [[GHAPIMilestoneV3TableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
             }
             
             GHAPIMilestoneV3 *milestone = self.issue.milestone;
             
-            cell.textLabel.text = milestone.title;
-            cell.detailTextLabel.text = milestone.dueFormattedString;
+            cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Milestone %@", @""), milestone.title];
+            cell.detailTextLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ (%d%% completed)", @""), milestone.dueFormattedString, (int)(milestone.progress*100)];
             
             cell.progressView.progress = milestone.progress;
             
@@ -367,8 +367,6 @@
             } else {
                 [cell.progressView setTintColor:[UIColor redColor] ];
             }
-            
-            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             
             return cell;
         }
@@ -485,8 +483,6 @@
         } else if (indexPath.row == 1) {
             // the description
             return 44.0f;
-        } else if (indexPath.row == 3) {
-            return GHAPIMilestoneV3TableViewCellHeight;
         }
     } else if (indexPath.section == kUITableViewSectionHistory && indexPath.row > 0) {
         if (indexPath.row == [self.history count] + 1) {
@@ -498,6 +494,8 @@
         GHCommit *commit = [self.discussion.commits objectAtIndex:indexPath.row - 1];
         
         return [GHDescriptionTableViewCell heightWithContent:commit.message];
+    } else if (indexPath.section == kUITableViewSectionMilestone) {
+        return kGHAPIMilestoneV3TableViewCellHeight;
     }
     
     return result;

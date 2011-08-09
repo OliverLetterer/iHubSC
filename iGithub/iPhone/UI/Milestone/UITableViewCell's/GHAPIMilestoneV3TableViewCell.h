@@ -7,16 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "INProgressView.h"
+#import "GHGlossProgressView.h"
 #import "GHTableViewCellWithLinearGradientBackgroundView.h"
 
-#define GHAPIMilestoneV3TableViewCellHeight 44.0f;
+extern CGFloat const kGHAPIMilestoneV3TableViewCellHeight;
 
 @interface GHAPIMilestoneV3TableViewCell : GHTableViewCellWithLinearGradientBackgroundView {
 @private
-    INProgressView *_progressView;
+    GHGlossProgressView *_progressView;
 }
 
-@property (nonatomic, retain) INProgressView *progressView;
+@property (nonatomic, retain) GHGlossProgressView *progressView;
 
 @end
