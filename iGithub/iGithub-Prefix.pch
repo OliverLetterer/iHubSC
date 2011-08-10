@@ -15,11 +15,18 @@
 
 
 # define ALog(format, ...) NSLog((@"%s [%d] " format), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__);
+# define _OLog(format, ...) NSLog((@"%s [%d] > %@: " format), __PRETTY_FUNCTION__, __LINE__, self, ##__VA_ARGS__);
 
 # ifdef DEBUG
 #  define DLog(format, ...) ALog(format, ##__VA_ARGS__);
 # else  
 #   define DLog(...)  
+# endif
+
+# ifdef DEBUG
+#  define OLog(format, ...) _OLog(format, ##__VA_ARGS__);
+# else  
+#   define OLog(...)  
 # endif
 
 #define DT_USE_THREAD_SAFE_INITIALIZATION
