@@ -56,21 +56,24 @@ dispatch_queue_t GHAPIBackgroundQueue() {
         }
         [request startSynchronous];
         
+        id responseObject = [[request responseString] objectFromJSONString];
+        
         NSString *XRatelimitRemaing = [[request responseHeaders] objectForKey:@"X-RateLimit-Remaining"];
         _remainingAPICalls = [XRatelimitRemaing integerValue];
         
         myError = [request error];
         
         if (!myError) {
-            myError = [NSError errorFromRawDictionary:[[request responseString] objectFromJSONString] ];
+            myError = [NSError errorFromRawDictionary:responseObject];
         }
         
         dispatch_async(dispatch_get_main_queue(), ^(void) {
             if (myError) {
-                DLog(@"error in URL: %@", URL);
+                DLog(@"error in URL (%@):\n%@", URL, myError);
+                DLog(@"%@", responseObject);
                 completionHandler(nil, myError, request);
             } else {
-                completionHandler([[request responseString] objectFromJSONString], nil, request);
+                completionHandler(responseObject, nil, request);
             }
         });
         
