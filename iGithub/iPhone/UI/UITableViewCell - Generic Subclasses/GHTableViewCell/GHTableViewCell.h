@@ -14,7 +14,7 @@
     UILabel *_timeLabel;
 }
 
-@property (nonatomic, retain) UILabel *timeLabel;
+@property (nonatomic, retain, readonly) UILabel *timeLabel;
 
 + (CGFloat)heightWithContent:(NSString *)content;
 

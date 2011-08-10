@@ -14,7 +14,6 @@
 
 
 @implementation GHTableViewCell
-
 @synthesize timeLabel=_timeLabel;
 
 #pragma mark - setters and getters
@@ -29,22 +28,22 @@
     if ((self = [super initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:reuseIdentifier])) {
         // setup my views
         self.textLabel.font = [UIFont boldSystemFontOfSize:13.0f];
-        self.textLabel.textColor = [UIColor colorWithWhite:0.25 alpha:1.0];
+        self.textLabel.textColor = [UIColor colorWithWhite:0.25f alpha:1.0f];
         self.textLabel.highlightedTextColor = [UIColor whiteColor];
         self.textLabel.backgroundColor = [UIColor clearColor];
         
-        self.detailTextLabel.font = [UIFont fontWithName:@"Helvetica-Oblique" size:13.0f];
-        self.detailTextLabel.textColor = [UIColor colorWithWhite:0.25 alpha:1.0];
+        self.detailTextLabel.font = [UIFont systemFontOfSize:13.0f];
+        self.detailTextLabel.textColor = [UIColor colorWithWhite:0.25f alpha:1.0f];
         self.detailTextLabel.highlightedTextColor = [UIColor whiteColor];
         self.detailTextLabel.textAlignment = UITextAlignmentRight;
         self.detailTextLabel.backgroundColor = [UIColor clearColor];
         
-        self.timeLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-        self.timeLabel.font = [UIFont systemFontOfSize:12.0f];
-        self.timeLabel.textColor = [UIColor colorWithWhite:0.25f alpha:1.0f];
-        self.timeLabel.highlightedTextColor = [UIColor whiteColor];
-        self.timeLabel.backgroundColor = [UIColor clearColor];
-        [self.contentView addSubview:self.timeLabel];
+        _timeLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+        _timeLabel.font = [UIFont systemFontOfSize:12.0f];
+        _timeLabel.textColor = [UIColor colorWithWhite:0.25f alpha:1.0f];
+        _timeLabel.highlightedTextColor = [UIColor whiteColor];
+        _timeLabel.backgroundColor = [UIColor clearColor];
+        [self.contentView addSubview:_timeLabel];
         
         self.imageView.contentMode = UIViewContentModeScaleAspectFit;
         self.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
@@ -53,14 +52,6 @@
 }
 
 #pragma mark - super implementation
-
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
-}
-
-- (void)setHighlighted:(BOOL)highlighted animated:(BOOL)animated {
-    [super setHighlighted:highlighted animated:animated];
-}
 
 - (void)layoutSubviews {
     [super layoutSubviews];
@@ -81,8 +72,5 @@
     self.detailTextLabel.text = nil;
     self.timeLabel.text = nil;
 }
-
-#pragma mark - Memory management
-
 
 @end

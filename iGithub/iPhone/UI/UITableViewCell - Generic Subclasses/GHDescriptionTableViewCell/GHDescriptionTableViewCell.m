@@ -9,7 +9,6 @@
 #import "GHDescriptionTableViewCell.h"
 
 @implementation GHDescriptionTableViewCell
-
 @synthesize descriptionLabel=_descriptionLabel;
 
 #pragma mark - Initialization
@@ -64,8 +63,5 @@
     
     return height < minHeight ? minHeight : height;
 }
-
-#pragma mark - Memory management
-
 
 @end

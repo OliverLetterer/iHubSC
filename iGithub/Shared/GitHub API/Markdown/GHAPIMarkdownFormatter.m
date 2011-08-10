@@ -25,18 +25,21 @@
 + (NSString *)issueFormattedHTMLStringFromMarkdownString:(NSString *)markdown {
     NSString *fontSize = nil;
     NSString *color = nil;
+    NSString *shadow = nil;
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
         fontSize = @"14px";
         color = @"rgb(127,127,127)";
+        shadow = @";text-shadow:0px 0.5px #FFFFFF";
     } else {
         fontSize = @"13px";
         color = @"rgb(64,64,64)";
+        shadow = @"";
     }
     
     NSMutableString *HTML = [markdown.flavoredHTMLStringFromMarkdown mutableCopy];
     
     [HTML replaceOccurrencesOfString:@"<p>" 
-                          withString:[NSString stringWithFormat:@"<p style=\"color:%@;font-family:Helvetica;font-size:%@;text-shadow:0px 0.5px #FFFFFF\">", color, fontSize] 
+                          withString:[NSString stringWithFormat:@"<p style=\"color:%@;font-family:Helvetica;font-size:%@%@\">", color, fontSize, shadow] 
                              options:NSLiteralSearch 
                                range:NSMakeRange(0, HTML.length)];
     
@@ -56,33 +59,33 @@
                                range:NSMakeRange(0, HTML.length)];
     
     [HTML replaceOccurrencesOfString:@"<div>" 
-                          withString:[NSString stringWithFormat:@"<div style=\"color:%@;font-family:Helvetica;font-size:%@;text-shadow:0px 0.5px #FFFFFF\">", color, fontSize] 
+                          withString:[NSString stringWithFormat:@"<div style=\"color:%@;font-family:Helvetica;font-size:%@%@\">", color, fontSize, shadow] 
                              options:NSLiteralSearch 
                                range:NSMakeRange(0, HTML.length)];
     
     [HTML replaceOccurrencesOfString:@"<div>" 
-                          withString:@"<div style=\"color:%@;font-family:Helvetica;font-size:%@;text-shadow:0px 0.5px #FFFFFF\">" 
+                          withString:[NSString stringWithFormat:@"<div style=\"color:%@;font-family:Helvetica;font-size:%@%@\">" , color, fontSize, shadow]
                              options:NSLiteralSearch 
                                range:NSMakeRange(0, HTML.length)];
     
     [HTML replaceOccurrencesOfString:@"<ol>" 
-                          withString:[NSString stringWithFormat:@"<ol style=\"color:%@;font-family:Helvetica;font-size:%@;text-shadow:0px 0.5px #FFFFFF\">", color, fontSize] 
+                          withString:[NSString stringWithFormat:@"<ol style=\"color:%@;font-family:Helvetica;font-size:%@%@\">", color, fontSize, shadow] 
                              options:NSLiteralSearch 
                                range:NSMakeRange(0, HTML.length)];
     
     [HTML replaceOccurrencesOfString:@"<ul>" 
-                          withString:[NSString stringWithFormat:@"<ul style=\"color:%@;font-family:Helvetica;font-size:%@;text-shadow:0px 0.5px #FFFFFF\">", color, fontSize] 
+                          withString:[NSString stringWithFormat:@"<ul style=\"color:%@;font-family:Helvetica;font-size:%@%@\">", color, fontSize, shadow] 
                              options:NSLiteralSearch 
                                range:NSMakeRange(0, HTML.length)];
     
     [HTML replaceOccurrencesOfString:@"<li>" 
-                          withString:[NSString stringWithFormat:@"<li style=\"color:%@;font-family:Helvetica;font-size:%@;text-shadow:0px 0.5px #FFFFFF\">", color, fontSize] 
+                          withString:[NSString stringWithFormat:@"<li style=\"color:%@;font-family:Helvetica;font-size:%@%@\">", color, fontSize, shadow] 
                              options:NSLiteralSearch 
                                range:NSMakeRange(0, HTML.length)];
     
     for (NSUInteger i = 1; i <= 6; i++) {
         [HTML replaceOccurrencesOfString:[NSString stringWithFormat:@"<h%u>", i] 
-                              withString:[NSString stringWithFormat:@"<h%u style=\"color:%@;font-family:Helvetica;text-shadow:0px 0.5px #FFFFFF\">", i, color] 
+                              withString:[NSString stringWithFormat:@"<h%u style=\"color:%@;font-family:Helvetica%@\">", i, color, shadow] 
                                  options:NSLiteralSearch 
                                    range:NSMakeRange(0, HTML.length)];
     }
