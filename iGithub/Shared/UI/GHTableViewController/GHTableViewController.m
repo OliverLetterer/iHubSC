@@ -657,7 +657,7 @@ static CGFloat wrapperViewHeight = 21.0f;
     
     [[NSNotificationCenter defaultCenter] addObserver:self 
                                              selector:@selector(applicationWillEnterForegroundCallback:) 
-                                                 name:UIApplicationDidBecomeActiveNotification 
+                                                 name:UIApplicationDidFinishLaunchingNotification 
                                                object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self 
