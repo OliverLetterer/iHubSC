@@ -88,10 +88,6 @@
             atIndexPath:(NSIndexPath *)indexPath 
          withAvatarURLString:(NSString *)avatarURLString;
 
-- (void)authenticationManagerDidAuthenticateUserCallback:(NSNotification *)notification;
-- (void)applicationWillEnterForegroundCallback:(NSNotification *)notification;
-- (void)applicationDidEnterBackgroundCallback:(NSNotification *)notification;
-
 - (id)keyForSection:(NSUInteger)section;
 - (void)setNextPage:(NSUInteger)nextPage forSection:(NSUInteger)section;
 - (BOOL)needsToDownloadNextDataInSection:(NSUInteger)section;
@@ -106,7 +102,7 @@
 
 
 
-@interface GHTableViewController (GHAPIV3Notifications)
+@interface GHTableViewController (Notifications)
 
 - (void)setupNotifications;
 
@@ -115,6 +111,10 @@
 
 - (void)issueChangedNotificationCallback:(NSNotification *)notification;
 - (void)issueCreationNotificationCallback:(NSNotification *)notification;
+
+- (void)authenticationManagerDidAuthenticateUserCallback:(NSNotification *)notification;
+- (void)applicationWillEnterForegroundCallback:(NSNotification *)notification;
+- (void)applicationDidEnterBackgroundCallback:(NSNotification *)notification;
 
 @end
 

@@ -15,7 +15,6 @@
 #define kUIActivityIndicatorImageViewTag        1236453
 
 @implementation GHTableViewController
-
 @synthesize nextPageForSectionsDictionary=_nextPageForSectionsDictionary, cachedHeightsDictionary=_cachedHeightsDictionary;
 @synthesize reloadDataIfNewUserGotAuthenticated=_reloadDataIfNewUserGotAuthenticated, reloadDataOnApplicationWillEnterForeground=_reloadDataOnApplicationWillEnterForeground;
 @synthesize isDownloadingEssentialData=_isDownloadingEssentialData, downloadingEssentialDataView=_downloadingEssentialDataView;
@@ -24,6 +23,20 @@
 @synthesize presentedInPopoverController=_presentedInPopoverController;
 
 #pragma mark - setters and getters
+
+- (NSMutableDictionary *)nextPageForSectionsDictionary {
+    if (!_nextPageForSectionsDictionary) {
+        _nextPageForSectionsDictionary = [NSMutableDictionary dictionary];
+    }
+    return _nextPageForSectionsDictionary;
+}
+
+- (NSMutableDictionary *)cachedHeightsDictionary {
+    if (!_cachedHeightsDictionary) {
+        _cachedHeightsDictionary = [NSMutableDictionary dictionary];
+    }
+    return _cachedHeightsDictionary;
+}
 
 - (UIView *)tableFooterShadowView {
     NSDictionary *newActions = [NSDictionary dictionaryWithObjectsAndKeys:[NSNull null], @"onOrderIn",
@@ -258,25 +271,6 @@ static CGFloat wrapperViewHeight = 21.0f;
     [self updateImageView:imageView inTableView:self.tableView atIndexPath:indexPath withAvatarURLString:avatarURLString];
 }
 
-#pragma mark - Target actions
-
-- (void)authenticationManagerDidAuthenticateUserCallback:(NSNotification *)notification {
-    if (self.reloadDataIfNewUserGotAuthenticated) {
-        [self pullToReleaseTableViewReloadData];
-    }
-}
-
-- (void)applicationWillEnterForegroundCallback:(NSNotification *)notification {
-    _isInBackgroundMode = NO;
-    if (self.reloadDataOnApplicationWillEnterForeground) {
-        [self pullToReleaseTableViewReloadData];
-    }
-}
-
-- (void)applicationDidEnterBackgroundCallback:(NSNotification *)notification {
-    _isInBackgroundMode = YES;
-}
-
 #pragma mark - pagination
 
 - (id)keyForSection:(NSUInteger)section {
@@ -310,30 +304,14 @@ static CGFloat wrapperViewHeight = 21.0f;
         [self setupNotifications];
         _myTableViewStyle = style;
         // Custom initialization
-        self.cachedHeightsDictionary = [NSMutableDictionary dictionary];
-        
-        [[NSNotificationCenter defaultCenter] addObserver:self 
-                                                 selector:@selector(authenticationManagerDidAuthenticateUserCallback:) 
-                                                     name:GHAPIAuthenticationManagerDidChangeAuthenticatedUserNotification 
-                                                   object:nil];
-        
-        [[NSNotificationCenter defaultCenter] addObserver:self 
-                                                 selector:@selector(applicationWillEnterForegroundCallback:) 
-                                                     name:UIApplicationWillEnterForegroundNotification 
-                                                   object:nil];
-        
-        [[NSNotificationCenter defaultCenter] addObserver:self 
-                                                 selector:@selector(applicationDidEnterBackgroundCallback:) 
-                                                     name:UIApplicationDidEnterBackgroundNotification 
-                                                   object:nil];
-        
         if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
             self.reloadDataOnApplicationWillEnterForeground = NO;
             self.pullToReleaseEnabled = NO;
         } else {
             self.reloadDataOnApplicationWillEnterForeground = YES;
         }
-        self.nextPageForSectionsDictionary = [NSMutableDictionary dictionary];
+        
+        [self setupNotifications];
     }
     return self;
 }
@@ -610,21 +588,6 @@ static CGFloat wrapperViewHeight = 21.0f;
         _lastContentOffset = [decoder decodeCGPointForKey:@"lastContentOffset"];
         _lastSelectedIndexPath = [decoder decodeObjectForKey:@"lastSelectedIndexPath"];
         _sectionsStateArray = [decoder decodeObjectForKey:@"sectionsStateArray"];
-        
-        [[NSNotificationCenter defaultCenter] addObserver:self 
-                                                 selector:@selector(authenticationManagerDidAuthenticateUserCallback:) 
-                                                     name:GHAPIAuthenticationManagerDidChangeAuthenticatedUserNotification 
-                                                   object:nil];
-        
-        [[NSNotificationCenter defaultCenter] addObserver:self 
-                                                 selector:@selector(applicationWillEnterForegroundCallback:) 
-                                                     name:UIApplicationWillEnterForegroundNotification 
-                                                   object:nil];
-        
-        [[NSNotificationCenter defaultCenter] addObserver:self 
-                                                 selector:@selector(applicationDidEnterBackgroundCallback:) 
-                                                     name:UIApplicationDidEnterBackgroundNotification 
-                                                   object:nil];
     }
     return self;
 }
@@ -679,9 +642,29 @@ static CGFloat wrapperViewHeight = 21.0f;
 
 
 
-@implementation GHTableViewController (GHAPIV3Notifications)
+@implementation GHTableViewController (Notifications)
 
 - (void)setupNotifications {
+    [[NSNotificationCenter defaultCenter] addObserver:self 
+                                             selector:@selector(authenticationManagerDidAuthenticateUserCallback:) 
+                                                 name:GHAPIAuthenticationManagerDidChangeAuthenticatedUserNotification 
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self 
+                                             selector:@selector(applicationWillEnterForegroundCallback:) 
+                                                 name:UIApplicationWillEnterForegroundNotification 
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self 
+                                             selector:@selector(applicationWillEnterForegroundCallback:) 
+                                                 name:UIApplicationDidBecomeActiveNotification 
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self 
+                                             selector:@selector(applicationDidEnterBackgroundCallback:) 
+                                                 name:UIApplicationDidEnterBackgroundNotification 
+                                               object:nil];
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(gistDeletedNotificationCallback:) name:GHAPIGistV3DeleteNotification object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(gistCreatedNotificationCallback:) name:GHAPIGistV3CreatedNotification object:nil];
@@ -715,6 +698,23 @@ static CGFloat wrapperViewHeight = 21.0f;
 
 - (void)issueCreationNotificationCallback:(NSNotification *)notification {
     
+}
+
+- (void)authenticationManagerDidAuthenticateUserCallback:(NSNotification *)notification {
+    if (self.reloadDataIfNewUserGotAuthenticated) {
+        [self pullToReleaseTableViewReloadData];
+    }
+}
+
+- (void)applicationWillEnterForegroundCallback:(NSNotification *)notification {
+    _isInBackgroundMode = NO;
+    if (self.reloadDataOnApplicationWillEnterForeground) {
+        [self pullToReleaseTableViewReloadData];
+    }
+}
+
+- (void)applicationDidEnterBackgroundCallback:(NSNotification *)notification {
+    _isInBackgroundMode = YES;
 }
 
 @end
