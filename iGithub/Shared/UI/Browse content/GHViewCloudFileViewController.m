@@ -8,9 +8,9 @@
 
 #import "GHViewCloudFileViewController.h"
 #import "GHLinearGradientBackgroundView.h"
+#import "GHWebViewViewController.h"
 
 @implementation GHViewCloudFileViewController
-
 @synthesize repository=_repository, tree=_tree, filename=_filename, relativeURL=_relativeURL;
 @synthesize metadata=_metadata, contentString=_contentString, markdownString=_markdownString, contentImage=_contentImage;
 @synthesize request=_request;
@@ -262,6 +262,7 @@
     CGRect frame = self.view.bounds;
     
     UIWebView *webView = [[UIWebView alloc] initWithFrame:frame];
+    webView.delegate = self;
     [webView loadHTMLString:self.contentString baseURL:[[NSBundle mainBundle] URLForResource:@"" withExtension:nil]];
     webView.scalesPageToFit = YES;
     webView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
@@ -285,6 +286,7 @@
     CGRect frame = self.view.bounds;
     
     UIWebView *webView = [[UIWebView alloc] initWithFrame:frame];
+    webView.delegate = self;
     [webView loadHTMLString:self.markdownString baseURL:nil];
     webView.scalesPageToFit = YES;
     webView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
@@ -367,6 +369,27 @@
     _activityIndicatorView = nil;
     _progressView = nil;
     _imageView = nil;
+}
+
+#pragma mark - UIWebViewDelegate
+
+- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
+    
+    NSURL *URL = request.URL;
+    if ([[URL absoluteString] rangeOfString:@"about:blank"].location != NSNotFound) {
+        return YES;
+    }
+    
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        GHWebViewViewController *viewController = [[GHWebViewViewController alloc] initWithURL:URL];
+        UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:viewController];
+        [self.advancedNavigationController pushViewController:navController afterViewController:self animated:YES];
+    } else {
+        GHWebViewViewController *viewController = [[GHWebViewViewController alloc] initWithURL:URL];
+        [self.navigationController pushViewController:viewController animated:YES];
+    }
+    
+    return NO;
 }
 
 #pragma mark - Keyed Archiving

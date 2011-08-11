@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "ANAdvancedNavigationController.h"
 
 @interface GHViewController : UIViewController <NSCoding> {
 @private

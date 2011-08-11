@@ -13,7 +13,7 @@
 #import "DDProgressView.h"
 #import "GHViewController.h"
 
-@interface GHViewCloudFileViewController : GHViewController <UIScrollViewDelegate, ASIProgressDelegate> {
+@interface GHViewCloudFileViewController : GHViewController <UIScrollViewDelegate, ASIProgressDelegate, UIWebViewDelegate> {
 @private
     NSString *_repository;
     NSString *_tree;
