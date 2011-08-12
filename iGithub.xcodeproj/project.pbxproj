@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		A703B9471347562B0014235D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A703B9461347562B0014235D /* QuartzCore.framework */; };
+		A71DF5ED13F5349300D8038E /* DTCSSListStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = A71DF5EC13F5349200D8038E /* DTCSSListStyle.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		A7204D8113E4759F0098C86A /* GHAPIMarkdownFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = A7204D8013E4759F0098C86A /* GHAPIMarkdownFormatter.m */; };
 		A74301B113F1CFD000DA63DC /* GHTableViewAlertView.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A74301B013F1CFD000DA63DC /* GHTableViewAlertView.bundle */; };
 		A744F56C13E72D030038C189 /* styles.css in Resources */ = {isa = PBXBuildFile; fileRef = A744F56B13E72D030038C189 /* styles.css */; };
@@ -421,6 +422,8 @@
 /* Begin PBXFileReference section */
 		A703B9451347560F0014235D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		A703B9461347562B0014235D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		A71DF5EB13F5349200D8038E /* DTCSSListStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DTCSSListStyle.h; path = "Submodules/NSAttributedString-Additions-for-HTML/Classes/DTCSSListStyle.h"; sourceTree = SOURCE_ROOT; };
+		A71DF5EC13F5349200D8038E /* DTCSSListStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DTCSSListStyle.m; path = "Submodules/NSAttributedString-Additions-for-HTML/Classes/DTCSSListStyle.m"; sourceTree = SOURCE_ROOT; };
 		A7204D7F13E4759F0098C86A /* GHAPIMarkdownFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GHAPIMarkdownFormatter.h; path = Markdown/GHAPIMarkdownFormatter.h; sourceTree = "<group>"; };
 		A7204D8013E4759F0098C86A /* GHAPIMarkdownFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GHAPIMarkdownFormatter.m; path = Markdown/GHAPIMarkdownFormatter.m; sourceTree = "<group>"; };
 		A74301B013F1CFD000DA63DC /* GHTableViewAlertView.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = GHTableViewAlertView.bundle; sourceTree = "<group>"; };
@@ -2952,6 +2955,8 @@
 		A798898C13DB396B0052FD50 /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				A71DF5EB13F5349200D8038E /* DTCSSListStyle.h */,
+				A71DF5EC13F5349200D8038E /* DTCSSListStyle.m */,
 				A7841C7113E1853200131648 /* CGUtils.h */,
 				A7841C7213E1853200131648 /* CGUtils.m */,
 				A7841C7D13E1853200131648 /* DTCoreTextFontCollection.h */,
@@ -3773,6 +3778,7 @@
 				A7D888FE13F13B79002ED2FF /* UIBarButtonItem+GHEmpty.m in Sources */,
 				A7D8894D13F17859002ED2FF /* GHGlossProgressView.m in Sources */,
 				A7D8894E13F17859002ED2FF /* CGCommon.m in Sources */,
+				A71DF5ED13F5349300D8038E /* DTCSSListStyle.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

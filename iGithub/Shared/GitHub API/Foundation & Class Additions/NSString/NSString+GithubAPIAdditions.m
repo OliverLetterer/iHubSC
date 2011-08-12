@@ -140,13 +140,17 @@
 - (NSAttributedString *)selectedAttributesStringFromMarkdown {
     NSString *HTML = [GHAPIMarkdownFormatter selectedFormattedHTMLStringFromMarkdownString:self];
     NSData *HTMLData = [HTML dataUsingEncoding:NSUTF8StringEncoding];
-    return [NSAttributedString attributedStringWithHTML:HTMLData options:nil];
+    CGSize maxImageSize = CGSizeMake(100.0f, 100.0f);
+    NSDictionary *options = [NSDictionary dictionaryWithObjectsAndKeys:[NSValue valueWithCGSize:maxImageSize], DTMaxImageSize, nil];
+    return [NSAttributedString attributedStringWithHTML:HTMLData options:options];
 }
 
 - (NSAttributedString *)nonSelectedAttributesStringFromMarkdown {
     NSString *HTML = [GHAPIMarkdownFormatter issueFormattedHTMLStringFromMarkdownString:self];
     NSData *HTMLData = [HTML dataUsingEncoding:NSUTF8StringEncoding];
-    return [NSAttributedString attributedStringWithHTML:HTMLData options:nil];
+    CGSize maxImageSize = CGSizeMake(100.0f, 100.0f);
+    NSDictionary *options = [NSDictionary dictionaryWithObjectsAndKeys:[NSValue valueWithCGSize:maxImageSize], DTMaxImageSize, nil];
+    return [NSAttributedString attributedStringWithHTML:HTMLData options:options];
 }
 
 @end

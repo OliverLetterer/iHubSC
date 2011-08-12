@@ -647,11 +647,25 @@
     }];
 }
 
-#pragma mark - GHIssueTitleTableViewCellDelegate
+#pragma mark - GHAttributedTableViewCellDelegate
 
 - (void)attributedTableViewCell:(GHAttributedTableViewCell *)cell receivedClickForButton:(DTLinkButton *)button {
     GHWebViewViewController *viewController = [[GHWebViewViewController alloc] initWithURL:button.url ];
     [self.navigationController pushViewController:viewController animated:YES];
+}
+
+- (void)attributedTableViewCellDidChangeBounds:(GHAttributedTableViewCell *)cell {
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+    if (indexPath) {
+        CGFloat height = CGRectGetHeight(cell.attributedTextView.bounds) + 65.0f;
+        [self cacheHeight:height forRowAtIndexPath:indexPath];
+        if (self.isViewLoaded) {
+            @try {
+                [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationNone];
+            }
+            @catch (NSException *exception) { }
+        }
+    }
 }
 
 #pragma mark - Keyed Archiving

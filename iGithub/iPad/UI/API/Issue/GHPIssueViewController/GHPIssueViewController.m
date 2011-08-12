@@ -429,6 +429,7 @@
                 
                 cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ (%@ ago)", @""), comment.user.login, comment.updatedAt.prettyTimeIntervalSinceNow];
                 cell.buttonDelegate = self;
+                [cell.attributedTextView removeAllCustomViews];
                 cell.attributedTextView.attributedString = comment.attributedBody;
                 
                 return cell;
@@ -806,6 +807,19 @@
     [sheet showFromRect:[button convertRect:button.bounds toView:self.view] inView:self.view animated:YES];
 }
 
+- (void)issueInfoTableViewCellDidChangeBounds:(GHPIssueInfoTableViewCell *)cell {
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+    if (indexPath) {
+        _bodyHeight = CGRectGetHeight(cell.attributedTextView.bounds) + 65.0f;
+        if (self.isViewLoaded) {
+            @try {
+                [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationNone];
+            }
+            @catch (NSException *exception) { }
+        }
+    }
+}
+
 #pragma mark - GHPNewCommentTableViewCellDelegate
 
 - (void)newCommentTableViewCell:(GHPNewCommentTableViewCell *)cell didEnterText:(NSString *)text {
@@ -842,6 +856,20 @@
     UIViewController *viewController = [[GHWebViewViewController alloc] initWithURL:button.url ];
     viewController = [[UINavigationController alloc] initWithRootViewController:viewController];
     [self.advancedNavigationController pushViewController:viewController afterViewController:self animated:YES];
+}
+
+- (void)attributedTableViewCellDidChangeBounds:(GHPAttributedTableViewCell *)cell {
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+    if (indexPath) {
+        CGFloat height = CGRectGetHeight(cell.attributedTextView.bounds) + 65.0f;
+        [self cacheHeight:height forRowAtIndexPath:indexPath];
+        if (self.isViewLoaded) {
+            @try {
+                [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationNone];
+            }
+            @catch (NSException *exception) { }
+        }
+    }
 }
 
 #pragma mark - Keyed Archiving

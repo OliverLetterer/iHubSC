@@ -10,19 +10,21 @@
 #import "GHDescriptionTableViewCell.h"
 #import "DTAttributedTextView.h"
 #import "DTLinkButton.h"
+#import "DTLazyImageView.h"
 
 @class GHAttributedTableViewCell;
 
 @protocol GHAttributedTableViewCellDelegate <NSObject>
 
 - (void)attributedTableViewCell:(GHAttributedTableViewCell *)cell receivedClickForButton:(DTLinkButton *)button;
+- (void)attributedTableViewCellDidChangeBounds:(GHAttributedTableViewCell *)cell;
 
 @optional
 - (void)attributedTableViewCell:(GHAttributedTableViewCell *)cell longPressRecognizedForButton:(DTLinkButton *)button;
 
 @end
 
-@interface GHAttributedTableViewCell : GHDescriptionTableViewCell <DTAttributedTextContentViewDelegate, UIActionSheetDelegate> {
+@interface GHAttributedTableViewCell : GHDescriptionTableViewCell <DTAttributedTextContentViewDelegate, UIActionSheetDelegate, DTLazyImageViewDelegate> {
 @private
     DTAttributedTextContentView *_attributedTextView;
     id<GHAttributedTableViewCellDelegate> __weak _buttonDelegate;
@@ -31,6 +33,8 @@
     NSAttributedString *_selectedAttributesString;
     
     NSURL *_selectedURL;
+    
+    NSMutableArray *_lazyImageViews;
 }
 
 @property (nonatomic, retain) DTAttributedTextContentView *attributedTextView;
@@ -40,6 +44,9 @@
 @property (nonatomic, retain) NSAttributedString *selectedAttributesString;
 
 @property (nonatomic, copy) NSURL *selectedURL;
+
+@property (nonatomic, retain, readonly) NSMutableArray *lazyImageViews;
+
 
 - (void)linkButtonClicked:(DTLinkButton *)sender;
 - (void)longPressRecognized:(UILongPressGestureRecognizer *)recognizer;

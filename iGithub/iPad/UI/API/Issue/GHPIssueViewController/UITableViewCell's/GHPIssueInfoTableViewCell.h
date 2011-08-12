@@ -10,6 +10,7 @@
 #import "GHPInfoTableViewCell.h"
 #import "DTAttributedTextView.h"
 #import "DTLinkButton.h"
+#import "DTLazyImageView.h"
 
 @class GHPIssueInfoTableViewCell;
 
@@ -17,18 +18,23 @@
 
 - (void)issueInfoTableViewCell:(GHPIssueInfoTableViewCell *)cell receivedClickForButton:(DTLinkButton *)button;
 - (void)issueInfoTableViewCell:(GHPIssueInfoTableViewCell *)cell longPressRecognizedForButton:(DTLinkButton *)button;
+- (void)issueInfoTableViewCellDidChangeBounds:(GHPIssueInfoTableViewCell *)cell;
 
 @end
 
-@interface GHPIssueInfoTableViewCell : GHPInfoTableViewCell <DTAttributedTextContentViewDelegate> {
+@interface GHPIssueInfoTableViewCell : GHPInfoTableViewCell <DTAttributedTextContentViewDelegate, DTLazyImageViewDelegate> {
 @private
     DTAttributedTextContentView *_attributedTextView;
     
     id<GHPIssueInfoTableViewCellDelegate> __weak _buttonDelegate;
+    
+    NSMutableArray *_lazyImageViews;
 }
 
 @property (nonatomic, retain) DTAttributedTextContentView *attributedTextView;
 @property (nonatomic, weak) id<GHPIssueInfoTableViewCellDelegate> buttonDelegate;
+
+@property (nonatomic, retain, readonly) NSMutableArray *lazyImageViews;
 
 - (void)linkButtonClicked:(DTLinkButton *)sender;
 - (void)longPressRecognized:(UILongPressGestureRecognizer *)recognizer;

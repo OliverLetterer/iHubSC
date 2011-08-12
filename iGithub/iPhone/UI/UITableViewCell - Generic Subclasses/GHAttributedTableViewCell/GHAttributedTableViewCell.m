@@ -7,8 +7,7 @@
 //
 
 #import "GHAttributedTableViewCell.h"
-
-
+#import "UIImage+Resize.h"
 
 #define kUIActionSheetTagLongPressedLink        127386
 
@@ -17,6 +16,29 @@
 @synthesize buttonDelegate=_buttonDelegate;
 @synthesize attributedString=_attributedString, selectedAttributesString=_selectedAttributesString;
 @synthesize selectedURL=_selectedURL;
+
+#pragma mark - setters and getters
+
+- (NSMutableArray *)lazyImageViews {
+    if (!_lazyImageViews) {
+        _lazyImageViews = [NSMutableArray array];
+    }
+    return _lazyImageViews;
+}
+
+- (void)setAttributedString:(NSAttributedString *)attributedString {
+    if(attributedString != _attributedString) {
+        _attributedString = attributedString;
+        [_attributedTextView removeAllCustomViews];
+    }
+}
+
+- (void)setSelectedAttributesString:(NSAttributedString *)selectedAttributesString {
+    if (selectedAttributesString != _selectedAttributesString) {
+        _selectedAttributesString = selectedAttributesString;
+        [_attributedTextView removeAllCustomViews];
+    }
+}
 
 #pragma mark - Initialization
 
@@ -32,31 +54,38 @@
     return self;
 }
 
+#pragma mark - DTLazyImageViewDelegate
+
+- (void)lazyImageView:(DTLazyImageView *)lazyImageView didChangeImageSize:(CGSize)size {
+    CGSize imageSize = size;
+    NSURL *url = lazyImageView.url;
+    
+    NSPredicate *pred = [NSPredicate predicateWithFormat:@"contentURL == %@", url];
+	
+	// update all attachments that matchin this URL (possibly multiple images with same size)
+	for (DTTextAttachment *oneAttachment in [_attributedTextView.layoutFrame textAttachmentsWithPredicate:pred]) {
+		oneAttachment.originalSize = imageSize;
+		
+        if (imageSize.width > 222.0f) {
+            CGFloat scale = 222.0f / imageSize.width;
+            imageSize.width *= scale;
+            imageSize.height *= scale;
+        }
+        oneAttachment.displaySize = imageSize;
+	}
+	
+	// redo layout
+	// here we're layouting the entire string, might be more efficient to only relayout the paragraphs that contain these attachments
+	[_attributedTextView relayoutText];
+    
+    [self.buttonDelegate attributedTableViewCellDidChangeBounds:self];
+}
+
 #pragma mark - super implementation
-
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
-    
-    if (selected) {
-        self.attributedTextView.attributedString = self.selectedAttributesString;
-    } else {
-        self.attributedTextView.attributedString = self.attributedString;
-    }
-}
-
-- (void)setHighlighted:(BOOL)highlighted animated:(BOOL)animated {
-    [super setHighlighted:highlighted animated:animated];
-    
-    if (highlighted) {
-        self.attributedTextView.attributedString = self.selectedAttributesString;
-    } else {
-        self.attributedTextView.attributedString = self.attributedString;
-    }
-}
 
 - (void)layoutSubviews {
     [super layoutSubviews];
-    self.attributedTextView.frame = CGRectMake(78.0, 21.0, 222.0, self.contentView.bounds.size.height - 48.0);
+    self.attributedTextView.frame = CGRectMake(78.0f, 21.0f, 222.0f, self.contentView.bounds.size.height - 48.0f);
     [self.attributedTextView layoutSubviews];
 }
 
@@ -128,6 +157,32 @@
 	return button;
 }
 
+- (UIView *)attributedTextContentView:(DTAttributedTextContentView *)attributedTextContentView viewForAttachment:(DTTextAttachment *)attachment frame:(CGRect)frame {
+    if (attachment.contentType == DTTextAttachmentTypeImage) {
+        NSURL *imageURL = attachment.contentURL;
+		// if the attachment has a hyperlinkURL then this is currently ignored
+		DTLazyImageView *imageView = [[DTLazyImageView alloc] initWithFrame:frame];
+        imageView.delegate = self;
+        
+		if (attachment.contents) {
+			imageView.image = attachment.contents;
+		}
+        
+        // url for deferred loading
+        imageView.url = imageURL;
+        
+        if (![self.lazyImageViews containsObject:imageView]) {
+            [self.lazyImageViews addObject:imageView];
+        }
+        
+		return imageView;
+	}
+    
+    return nil;
+}
+
+#pragma mark - Height
+
 + (CGFloat)heightWithAttributedString:(NSAttributedString *)content {
     DTAttributedTextContentView *contentView = [[DTAttributedTextContentView alloc] initWithAttributedString:content width:222.0f];
     CGFloat minimumHeight = [self height];
@@ -136,6 +191,17 @@
     CGFloat height = size.height + 65.0f;
     
     return height < minimumHeight ? minimumHeight : height;
+}
+
+#pragma mark - Memory management
+
+- (void)dealloc {
+    [_lazyImageViews enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        DTLazyImageView *imageView = obj;
+        if (imageView.delegate == self) {
+            imageView.delegate = nil;
+        }
+    }];
 }
 
 @end

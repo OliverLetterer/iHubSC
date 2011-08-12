@@ -12,7 +12,7 @@
 	url = https://github.com/ars/uicolor-utilities.git
 [submodule "NSAttributedString-Additions-for-HTML"]
 	path = Submodules/NSAttributedString-Additions-for-HTML
-	url = https://github.com/Cocoanetics/NSAttributedString-Additions-for-HTML.git
+	url = git@github.com:OliverLetterer/NSAttributedString-Additions-for-HTML.git
 [submodule "UIExpandableTableView"]
 	path = Submodules/UIExpandableTableView
 	url = git@github.com:OliverLetterer/UIExpandableTableView.git
