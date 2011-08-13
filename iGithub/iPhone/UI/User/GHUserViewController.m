@@ -140,7 +140,6 @@
 }
 
 - (void)pullToReleaseTableViewReloadData {
-    DLog(@"here");
     [super pullToReleaseTableViewReloadData];
     
     self.repositoriesArray = nil;
