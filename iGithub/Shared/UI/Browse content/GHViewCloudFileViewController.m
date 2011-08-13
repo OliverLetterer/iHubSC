@@ -98,7 +98,6 @@
 #pragma mark - HTML parsing
 
 - (NSString *)HTMLPageStringFromFileContent:(NSString *)fileContent {
-    DLog(@"now");
     NSMutableDictionary *brushesForFileExtensionsDictionary = [NSMutableDictionary dictionary];
     [brushesForFileExtensionsDictionary setObject:@"javascript" forKey:@".js"];
     [brushesForFileExtensionsDictionary setObject:@"ruby" forKey:@".rb"];
@@ -262,7 +261,6 @@
     CGRect frame = self.view.bounds;
     
     UIWebView *webView = [[UIWebView alloc] initWithFrame:frame];
-    webView.delegate = self;
     [webView loadHTMLString:self.contentString baseURL:[[NSBundle mainBundle] URLForResource:@"" withExtension:nil]];
     webView.scalesPageToFit = YES;
     webView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
@@ -374,9 +372,9 @@
 #pragma mark - UIWebViewDelegate
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
-    
     NSURL *URL = request.URL;
-    if ([[URL absoluteString] rangeOfString:@"about:blank"].location != NSNotFound) {
+    
+    if (URL.isFileURL || [URL.absoluteString rangeOfString:@"about:blank"].location != NSNotFound) {
         return YES;
     }
     
