@@ -14,11 +14,17 @@
     NSString *_SHA;
     NSString *_URL;
     NSArray *_content;
+    
+    NSArray *_directories;
+    NSArray *_files;
 }
 
 @property (nonatomic, copy) NSString *SHA;
 @property (nonatomic, copy) NSString *URL;
 @property (nonatomic, retain) NSArray *content;
+@property (nonatomic, retain) NSArray *directories;
+@property (nonatomic, retain) NSArray *files;
+
 
 + (void)contentOfBranch:(NSString *)branchHash onRepository:(NSString *)repository completionHandler:(void(^)(GHAPITreeV3 *tree, NSError *error))handler;
 

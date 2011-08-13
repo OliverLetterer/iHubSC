@@ -12,8 +12,9 @@
 #import "GHPInfoSectionTableViewController.h"
 #import "GHCreateIssueTableViewController.h"
 #import "GHCreateMilestoneViewController.h"
+#import "SVModalWebViewController.h"
 
-@interface GHPRepositoryViewController : GHPInfoSectionTableViewController <GHCreateIssueTableViewControllerDelegate, NSCoding, GHCreateMilestoneViewControllerDelegate> {
+@interface GHPRepositoryViewController : GHPInfoSectionTableViewController <GHCreateIssueTableViewControllerDelegate, NSCoding, GHCreateMilestoneViewControllerDelegate, SVModalWebViewControllerDelegate> {
 @private
     NSString *_repositoryString;
     GHAPIRepositoryV3 *_repository;

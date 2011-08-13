@@ -9,6 +9,7 @@
 #import "GHViewDirectoryViewController.h"
 #import "GHTableViewCellWithLinearGradientBackgroundView.h"
 #import "GHViewCloudFileViewController.h"
+#import "SVModalWebViewController.h"
 
 @implementation GHViewDirectoryViewController
 
@@ -33,9 +34,6 @@
     }
     return self;
 }
-
-#pragma mark - Memory management
-
 
 #pragma mark - Table view data source
 
@@ -68,6 +66,8 @@
         GHDirectory *directory = [self.directory.directories objectAtIndex:indexPath.row];
         cell.textLabel.text = [NSString stringWithFormat:@"%@/", directory.lastNameComponent];
         cell.imageView.image = [UIImage imageNamed:@"GHFolder.png"];
+        
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     } else if (indexPath.section == 1) {
         GHFile *file = [self.directory.files objectAtIndex:indexPath.row];
         cell.textLabel.text = file.name;
@@ -78,9 +78,9 @@
             image = [UIImage imageNamed:@"GHFile.png"];
         }
         cell.imageView.image = image;
+        
+        cell.accessoryType = UITableViewCellAccessoryNone;
     }
-    
-    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     
     return cell;
 }
@@ -105,12 +105,25 @@
         // wow a file, show this baby
         GHFile *file = [self.directory.files objectAtIndex:indexPath.row];
         
-        GHViewCloudFileViewController *fileViewController = [[GHViewCloudFileViewController alloc] initWithRepository:self.repository 
-                                                                                                                  tree:self.hash 
-                                                                                                              filename:file.name 
-                                                                                                           relativeURL:self.directory.name];
-        [self.navigationController pushViewController:fileViewController animated:YES];
+        // https://github.com/OliverLetterer/SVSegmentedControl/blob/master/LICENSE.txt
+        NSString *URLString = [NSString stringWithFormat:@"https://github.com"];
+        URLString = [URLString stringByAppendingPathComponent:self.repository];
+        URLString = [URLString stringByAppendingPathComponent:@"blob"];
+        URLString = [URLString stringByAppendingPathComponent:self.branch];
+        URLString = [URLString stringByAppendingPathComponent:self.directory.name];
+        URLString = [URLString stringByAppendingPathComponent:file.name];
+        NSURL *URL = [NSURL URLWithString:URLString];
+        
+        SVModalWebViewController *webViewController = [[SVModalWebViewController alloc] initWithURL:URL];
+        webViewController.webDelegate = self;
+        [self presentViewController:webViewController animated:YES completion:nil];
     }
+}
+
+#pragma mark - SVModalWebViewControllerDelegate
+
+- (void)modalWebViewControllerIsDone:(SVModalWebViewController *)viewController {
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark - Keyed Archiving

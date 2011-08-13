@@ -21,7 +21,6 @@
 #import "GHLabelTableViewCell.h"
 #import "GHViewLabelViewController.h"
 #import "ANNotificationQueue.h"
-#import "GHViewREADMEViewController.h"
 #import "GHColorAlertView.h"
 
 #define kUITableViewSectionUserData         0
@@ -835,11 +834,19 @@
             [self.navigationController pushViewController:viewController animated:YES];
         }
     } else if (indexPath.section == kUITableViewSectionUserData) {
-        GHViewREADMEViewController *viewController = [[GHViewREADMEViewController alloc] initWithRepository:self.repositoryString];
-        [self.navigationController pushViewController:viewController animated:YES];
+        NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://github.com/%@", [self.repositoryString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]] ];
+        SVModalWebViewController *viewController = [[SVModalWebViewController alloc] initWithURL:URL];
+        viewController.webDelegate = self;
+        [self presentViewController:viewController animated:YES completion:nil];
     } else {
         [self.tableView deselectRowAtIndexPath:indexPath animated:NO];
     }
+}
+
+#pragma mark - SVModalWebViewControllerDelegate
+
+- (void)modalWebViewControllerIsDone:(SVModalWebViewController *)viewController {
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark - UIAlertViewDelegate

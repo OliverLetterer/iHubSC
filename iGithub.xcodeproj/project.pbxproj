@@ -332,12 +332,14 @@
 		A784206313E1987D00131648 /* GHTableViewCellWithLinearGradientBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = A784203913E1987C00131648 /* GHTableViewCellWithLinearGradientBackgroundView.m */; };
 		A784206413E1987D00131648 /* GHUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A784203C13E1987C00131648 /* GHUserViewController.m */; };
 		A784206513E1987D00131648 /* GHWebViewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A784203F13E1987C00131648 /* GHWebViewViewController.m */; };
+		A786CF6713F6CF7F00E22E13 /* SVWebViewController.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A786CF6413F6CF7F00E22E13 /* SVWebViewController.bundle */; };
+		A786CF6813F6CF7F00E22E13 /* SVWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A786CF6613F6CF7F00E22E13 /* SVWebViewController.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		A786CF7C13F6DB6200E22E13 /* SVModalWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A786CF7B13F6DB6100E22E13 /* SVModalWebViewController.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		A7A9E8D413EDA738001F468F /* GHColorAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = A7A9E8D313EDA738001F468F /* GHColorAlertView.m */; };
 		A7AE937513EC0843007B7CE1 /* GHAPIV3NotificationUserDictionaryKeys.m in Sources */ = {isa = PBXBuildFile; fileRef = A7AE937413EC0843007B7CE1 /* GHAPIV3NotificationUserDictionaryKeys.m */; };
 		A7AE93BE13ED3CE3007B7CE1 /* UIBarButtonItemSaveBackground~iPad.png in Resources */ = {isa = PBXBuildFile; fileRef = A7AE93BB13ED3CE3007B7CE1 /* UIBarButtonItemSaveBackground~iPad.png */; };
 		A7AE93C313ED3D6B007B7CE1 /* GHCreateContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7AE93C213ED3D6B007B7CE1 /* GHCreateContentViewController.m */; };
 		A7B6545613EA9189009E4414 /* libANAdvancedNavigationController.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A7B6545313EA917B009E4414 /* libANAdvancedNavigationController.a */; };
-		A7BD1EEB13E49D880016A662 /* GHViewREADMEViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7BD1EEA13E49D870016A662 /* GHViewREADMEViewController.m */; };
 		A7BD1EF013E49F230016A662 /* GHAPITreeV3.m in Sources */ = {isa = PBXBuildFile; fileRef = A7BD1EEF13E49F230016A662 /* GHAPITreeV3.m */; };
 		A7BD1EF313E4A12A0016A662 /* GHAPITreeFileV3.m in Sources */ = {isa = PBXBuildFile; fileRef = A7BD1EF213E4A12A0016A662 /* GHAPITreeFileV3.m */; };
 		A7BD1EF613E4A49C0016A662 /* GHAPITreeInfoV3.m in Sources */ = {isa = PBXBuildFile; fileRef = A7BD1EF513E4A49B0016A662 /* GHAPITreeInfoV3.m */; };
@@ -1003,6 +1005,11 @@
 		A784203C13E1987C00131648 /* GHUserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHUserViewController.m; sourceTree = "<group>"; };
 		A784203E13E1987C00131648 /* GHWebViewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHWebViewViewController.h; sourceTree = "<group>"; };
 		A784203F13E1987C00131648 /* GHWebViewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHWebViewViewController.m; sourceTree = "<group>"; };
+		A786CF6413F6CF7F00E22E13 /* SVWebViewController.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SVWebViewController.bundle; sourceTree = "<group>"; };
+		A786CF6513F6CF7F00E22E13 /* SVWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVWebViewController.h; sourceTree = "<group>"; };
+		A786CF6613F6CF7F00E22E13 /* SVWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVWebViewController.m; sourceTree = "<group>"; };
+		A786CF7A13F6DB6100E22E13 /* SVModalWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVModalWebViewController.h; sourceTree = "<group>"; };
+		A786CF7B13F6DB6100E22E13 /* SVModalWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVModalWebViewController.m; sourceTree = "<group>"; };
 		A7A9E8D213EDA738001F468F /* GHColorAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHColorAlertView.h; sourceTree = "<group>"; };
 		A7A9E8D313EDA738001F468F /* GHColorAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHColorAlertView.m; sourceTree = "<group>"; };
 		A7AE937313EC0843007B7CE1 /* GHAPIV3NotificationUserDictionaryKeys.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHAPIV3NotificationUserDictionaryKeys.h; sourceTree = "<group>"; };
@@ -1011,8 +1018,6 @@
 		A7AE93C113ED3D6B007B7CE1 /* GHCreateContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHCreateContentViewController.h; sourceTree = "<group>"; };
 		A7AE93C213ED3D6B007B7CE1 /* GHCreateContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHCreateContentViewController.m; sourceTree = "<group>"; };
 		A7B6544B13EA917B009E4414 /* ANAdvancedNavigationController.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = ANAdvancedNavigationController.xcodeproj; sourceTree = "<group>"; };
-		A7BD1EE913E49D870016A662 /* GHViewREADMEViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHViewREADMEViewController.h; sourceTree = "<group>"; };
-		A7BD1EEA13E49D870016A662 /* GHViewREADMEViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHViewREADMEViewController.m; sourceTree = "<group>"; };
 		A7BD1EEE13E49F230016A662 /* GHAPITreeV3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHAPITreeV3.h; sourceTree = "<group>"; };
 		A7BD1EEF13E49F230016A662 /* GHAPITreeV3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHAPITreeV3.m; sourceTree = "<group>"; };
 		A7BD1EF113E4A1290016A662 /* GHAPITreeFileV3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHAPITreeFileV3.h; sourceTree = "<group>"; };
@@ -1807,6 +1812,7 @@
 		A7841C7013E184F500131648 /* Submodules */ = {
 			isa = PBXGroup;
 			children = (
+				A786CF6313F6CF7F00E22E13 /* SVWebViewController */,
 				A7D8894713F17858002ED2FF /* GHGlossProgressView */,
 				A744F56D13E72DDF0038C189 /* GHMarkdownParser */,
 				A7C5255A13E6AB420003EEE5 /* Kal */,
@@ -2592,8 +2598,6 @@
 				A7841F4D13E194BB00131648 /* GHViewDirectoryViewController.m */,
 				A7841F4E13E194BB00131648 /* GHViewRootDirectoryViewController.h */,
 				A7841F4F13E194BB00131648 /* GHViewRootDirectoryViewController.m */,
-				A7BD1EE913E49D870016A662 /* GHViewREADMEViewController.h */,
-				A7BD1EEA13E49D870016A662 /* GHViewREADMEViewController.m */,
 			);
 			path = "Browse content";
 			sourceTree = "<group>";
@@ -2937,6 +2941,19 @@
 			);
 			path = WebView;
 			sourceTree = "<group>";
+		};
+		A786CF6313F6CF7F00E22E13 /* SVWebViewController */ = {
+			isa = PBXGroup;
+			children = (
+				A786CF6413F6CF7F00E22E13 /* SVWebViewController.bundle */,
+				A786CF6513F6CF7F00E22E13 /* SVWebViewController.h */,
+				A786CF6613F6CF7F00E22E13 /* SVWebViewController.m */,
+				A786CF7A13F6DB6100E22E13 /* SVModalWebViewController.h */,
+				A786CF7B13F6DB6100E22E13 /* SVModalWebViewController.m */,
+			);
+			name = SVWebViewController;
+			path = Submodules/SVWebViewController/SVWebViewController;
+			sourceTree = SOURCE_ROOT;
 		};
 		A798886F13DB24880052FD50 /* NSAttributedString-Additions-for-HTML */ = {
 			isa = PBXGroup;
@@ -3495,6 +3512,7 @@
 				A7DC78F213EACEE0002ABD4B /* Settings.bundle in Resources */,
 				A7AE93BE13ED3CE3007B7CE1 /* UIBarButtonItemSaveBackground~iPad.png in Resources */,
 				A74301B113F1CFD000DA63DC /* GHTableViewAlertView.bundle in Resources */,
+				A786CF6713F6CF7F00E22E13 /* SVWebViewController.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3742,7 +3760,6 @@
 				A757982F13E1C1D5008670B0 /* GHTableViewAlertViewTableViewBackgroundView.m in Sources */,
 				A757983013E1C1D5008670B0 /* GHTableViewAlertViewTableViewCell.m in Sources */,
 				A7204D8113E4759F0098C86A /* GHAPIMarkdownFormatter.m in Sources */,
-				A7BD1EEB13E49D880016A662 /* GHViewREADMEViewController.m in Sources */,
 				A7BD1EF013E49F230016A662 /* GHAPITreeV3.m in Sources */,
 				A7BD1EF313E4A12A0016A662 /* GHAPITreeFileV3.m in Sources */,
 				A7BD1EF613E4A49C0016A662 /* GHAPITreeInfoV3.m in Sources */,
@@ -3779,6 +3796,8 @@
 				A7D8894D13F17859002ED2FF /* GHGlossProgressView.m in Sources */,
 				A7D8894E13F17859002ED2FF /* CGCommon.m in Sources */,
 				A71DF5ED13F5349300D8038E /* DTCSSListStyle.m in Sources */,
+				A786CF6813F6CF7F00E22E13 /* SVWebViewController.m in Sources */,
+				A786CF7C13F6DB6200E22E13 /* SVModalWebViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

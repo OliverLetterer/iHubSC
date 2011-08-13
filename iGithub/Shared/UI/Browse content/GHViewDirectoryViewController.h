@@ -9,8 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "GithubAPI.h"
 #import "GHTableViewController.h"
+#import "SVModalWebViewController.h"
 
-@interface GHViewDirectoryViewController : GHTableViewController {
+@interface GHViewDirectoryViewController : GHTableViewController <SVModalWebViewControllerDelegate> {
 @private
     GHDirectory *_directory;
     

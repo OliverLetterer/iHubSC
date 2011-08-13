@@ -542,4 +542,21 @@
                                                  }];
 }
 
++ (void)contentOfTree:(NSString *)treeHash onRepository:(NSString *)repository completionHandler:(void (^)(GHAPITreeV3 *tree, NSError *error))handler {
+    // v3: GET /repos/:user/:repo/git/trees/:sha
+    
+    NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.github.com/repos/%@/git/trees/%@", 
+                                       [repository stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
+                                       [treeHash stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]];
+    
+    [[GHAPIBackgroundQueueV3 sharedInstance] sendRequestToURL:URL 
+                                                 setupHandler:nil completionHandler:^(id object, NSError *error, ASIFormDataRequest *request) {
+                                                     if (error) {
+                                                         handler(nil, error);
+                                                     } else {
+                                                         handler([[GHAPITreeV3 alloc] initWithRawDictionary:object], nil);
+                                                     }
+                                                 }];
+}
+
 @end

@@ -11,7 +11,7 @@
 #import "GHWebViewViewController.h"
 
 @implementation GHViewCloudFileViewController
-@synthesize repository=_repository, tree=_tree, filename=_filename, relativeURL=_relativeURL;
+@synthesize repository=_repository, tree=_tree, filename=_filename, relativeURL=_relativeURL, branch=_branch;
 @synthesize metadata=_metadata, contentString=_contentString, markdownString=_markdownString, contentImage=_contentImage;
 @synthesize request=_request;
 @synthesize scrollView=_scrollView, backgroundGradientLayer=_backgroundGradientLayer, loadingLabel=_loadingLabel, activityIndicatorView=_activityIndicatorView, progressView=_progressView, imageView=_imageView;
@@ -90,7 +90,18 @@
     if (self = [super init]) {
         self.filename = filename;
         self.contentString = content;
-        self.title = filename;
+    }
+    return self;
+}
+
+- (id)initWithRepository:(NSString *)repository filename:(NSString *)filename branch:(NSString *)branch relativeURL:(NSString *)relativeURL {
+    if (self = [super init]) {
+        self.repository = repository;
+        self.filename = filename;
+        self.branch = branch;
+        self.relativeURL = relativeURL;
+        
+        _showFileFromGitHub = YES;
     }
     return self;
 }
@@ -174,16 +185,7 @@
 #pragma mark - Memory management
 
 - (void)dealloc {
-    
     [_request clearDelegatesAndCancel];
-    
-}
-
-- (void)didReceiveMemoryWarning {
-    // Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
-    
-    // Release any cached data, images, etc that aren't in use.
 }
 
 #pragma mark - View lifecycle
@@ -191,45 +193,64 @@
 - (void)loadView {
     self.view = [[GHLinearGradientBackgroundView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 320.0f, 480.0f)];
     
-    self.scrollView = [[UIScrollView alloc] initWithFrame:self.view.bounds];
-    self.scrollView.backgroundColor = [UIColor clearColor];
-    self.scrollView.alwaysBounceVertical = YES;
-    self.scrollView.alwaysBounceHorizontal = YES;
-    self.scrollView.indicatorStyle = UIScrollViewIndicatorStyleBlack;
-    self.scrollView.showsVerticalScrollIndicator = YES;
-    self.scrollView.showsHorizontalScrollIndicator = YES;
-    self.scrollView.contentInset = UIEdgeInsetsMake(5.0, 5.0, 5.0, 5.0);
-    self.scrollView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-    self.scrollView.delegate = self;
-    [self.view addSubview:self.scrollView];
-    
-    self.loadingLabel = [[UILabel alloc] initWithFrame:CGRectMake(0.0, 170.0, 320.0, 20.0)];
-    self.loadingLabel.backgroundColor = [UIColor clearColor];
-    self.loadingLabel.textColor = [UIColor blackColor];
-    self.loadingLabel.textAlignment = UITextAlignmentCenter;
-    self.loadingLabel.text = NSLocalizedString(@"Downloading ...", @"");
-    self.loadingLabel.font = [UIFont systemFontOfSize:17.0];
-    [self.loadingLabel sizeToFit];
-    self.loadingLabel.center = CGPointMake(CGRectGetWidth(self.view.bounds)/2.0f, CGRectGetHeight(self.view.bounds)/2.0f);
-    self.loadingLabel.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
-    [self.view addSubview:self.loadingLabel];
-    
-    self.activityIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-    self.activityIndicatorView.center = CGPointMake(self.loadingLabel.frame.origin.x - 10.0f, CGRectGetHeight(self.view.bounds)/2.0f);
-    self.activityIndicatorView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
-    [self.activityIndicatorView startAnimating];
-    [self.view addSubview:self.activityIndicatorView];
-    
-    if (self.contentString) {
-        [self updateViewToShowPlainTextFile];
-    } else if (self.markdownString) {
-        [self updateViewToShowMarkdownFile];
-    } else if (self.contentImage) {
-        [self updateViewForImageContent];
-    } else if (self.request) {
-        [self updateViewForImageDownload];
-    } else if (_isMimeTypeUnkonw) {
-        [self updateViewForUnkownMimeType];
+    if (_showFileFromGitHub) {
+        // https://github.com/OliverLetterer/SVSegmentedControl/blob/master/LICENSE.txt
+        NSString *URLString = [NSString stringWithFormat:@"https://github.com"];
+        URLString = [URLString stringByAppendingPathComponent:self.repository];
+        URLString = [URLString stringByAppendingPathComponent:@"blob"];
+        URLString = [URLString stringByAppendingPathComponent:self.branch];
+        URLString = [URLString stringByAppendingPathComponent:self.relativeURL];
+        URLString = [URLString stringByAppendingPathComponent:self.filename];
+        NSURL *URL = [NSURL URLWithString:URLString];
+        
+        UIWebView *webView = [[UIWebView alloc] initWithFrame:self.view.bounds];
+        [webView loadRequest:[NSURLRequest requestWithURL:URL] ];
+        webView.scalesPageToFit = YES;
+        webView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+        webView.scrollView.backgroundColor = [UIColor clearColor];
+        webView.backgroundColor = [UIColor clearColor];
+        [self.view addSubview:webView];
+    } else {
+        self.scrollView = [[UIScrollView alloc] initWithFrame:self.view.bounds];
+        self.scrollView.backgroundColor = [UIColor clearColor];
+        self.scrollView.alwaysBounceVertical = YES;
+        self.scrollView.alwaysBounceHorizontal = YES;
+        self.scrollView.indicatorStyle = UIScrollViewIndicatorStyleBlack;
+        self.scrollView.showsVerticalScrollIndicator = YES;
+        self.scrollView.showsHorizontalScrollIndicator = YES;
+        self.scrollView.contentInset = UIEdgeInsetsMake(5.0, 5.0, 5.0, 5.0);
+        self.scrollView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+        self.scrollView.delegate = self;
+        [self.view addSubview:self.scrollView];
+        
+        self.loadingLabel = [[UILabel alloc] initWithFrame:CGRectMake(0.0, 170.0, 320.0, 20.0)];
+        self.loadingLabel.backgroundColor = [UIColor clearColor];
+        self.loadingLabel.textColor = [UIColor blackColor];
+        self.loadingLabel.textAlignment = UITextAlignmentCenter;
+        self.loadingLabel.text = NSLocalizedString(@"Downloading ...", @"");
+        self.loadingLabel.font = [UIFont systemFontOfSize:17.0];
+        [self.loadingLabel sizeToFit];
+        self.loadingLabel.center = CGPointMake(CGRectGetWidth(self.view.bounds)/2.0f, CGRectGetHeight(self.view.bounds)/2.0f);
+        self.loadingLabel.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
+        [self.view addSubview:self.loadingLabel];
+        
+        self.activityIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+        self.activityIndicatorView.center = CGPointMake(self.loadingLabel.frame.origin.x - 10.0f, CGRectGetHeight(self.view.bounds)/2.0f);
+        self.activityIndicatorView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
+        [self.activityIndicatorView startAnimating];
+        [self.view addSubview:self.activityIndicatorView];
+        
+        if (self.contentString) {
+            [self updateViewToShowPlainTextFile];
+        } else if (self.markdownString) {
+            [self updateViewToShowMarkdownFile];
+        } else if (self.contentImage) {
+            [self updateViewForImageContent];
+        } else if (self.request) {
+            [self updateViewForImageDownload];
+        } else if (_isMimeTypeUnkonw) {
+            [self updateViewForUnkownMimeType];
+        }
     }
 }
 
@@ -409,13 +430,15 @@
     [encoder encodeObject:_activityIndicatorView forKey:@"activityIndicatorView"];
     [encoder encodeObject:_progressView forKey:@"progressView"];
     [encoder encodeObject:_imageView forKey:@"imageView"];
+    [encoder encodeObject:_branch forKey:@"branch"];
+    [encoder encodeBool:_showFileFromGitHub forKey:@"_showFileFromGitHub"];
 }
 
 - (id)initWithCoder:(NSCoder *)decoder {
     if ((self = [super initWithCoder:decoder])) {
         _repository = [decoder decodeObjectForKey:@"repository"];
         _tree = [decoder decodeObjectForKey:@"tree"];
-        _filename = [decoder decodeObjectForKey:@"filename"];
+        self.filename = [decoder decodeObjectForKey:@"filename"];
         _relativeURL = [decoder decodeObjectForKey:@"relativeURL"];
         _metadata = [decoder decodeObjectForKey:@"metadata"];
         _contentString = [decoder decodeObjectForKey:@"contentString"];
@@ -428,6 +451,8 @@
         _activityIndicatorView = [decoder decodeObjectForKey:@"activityIndicatorView"];
         _progressView = [decoder decodeObjectForKey:@"progressView"];
         _imageView = [decoder decodeObjectForKey:@"imageView"];
+        _branch = [decoder decodeObjectForKey:@"branch"];
+        _showFileFromGitHub = [decoder decodeBoolForKey:@"_showFileFromGitHub"];
     }
     return self;
 }

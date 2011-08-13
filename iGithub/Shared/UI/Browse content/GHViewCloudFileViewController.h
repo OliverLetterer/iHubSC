@@ -19,12 +19,15 @@
     NSString *_tree;
     NSString *_filename;
     NSString *_relativeURL;
+    NSString *_branch;
     
     GHFileMetaData *_metadata;
     NSString *_contentString;
     NSString *_markdownString;
     UIImage *_contentImage;
     BOOL _isMimeTypeUnkonw;
+    
+    BOOL _showFileFromGitHub;
     
     ASIHTTPRequest *_request;
     
@@ -40,6 +43,7 @@
 @property (nonatomic, copy) NSString *tree;
 @property (nonatomic, copy) NSString *filename;
 @property (nonatomic, copy) NSString *relativeURL;
+@property (nonatomic, copy) NSString *branch;
 
 @property (nonatomic, retain) GHFileMetaData *metadata;
 @property (nonatomic, copy) NSString *contentString;
@@ -57,6 +61,7 @@
 
 - (id)initWithRepository:(NSString *)repository tree:(NSString *)tree filename:(NSString *)filename relativeURL:(NSString *)relativeURL;
 - (id)initWithFile:(NSString *)filename contentsOfFile:(NSString *)content;
+- (id)initWithRepository:(NSString *)repository filename:(NSString *)filename branch:(NSString *)branch relativeURL:(NSString *)relativeURL;
 
 - (void)updateViewToShowPlainTextFile;
 - (void)updateViewToShowMarkdownFile;

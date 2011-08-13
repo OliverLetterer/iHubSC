@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "GHAPIConnectionHandlersV3.h"
 
-@class GHAPIUserV3, GHAPIOrganizationV3, GHAPILabelV3;
+@class GHAPIUserV3, GHAPIOrganizationV3, GHAPILabelV3, GHAPITreeV3;
 
 @interface GHAPIRepositoryV3 : NSObject <NSCoding> {
 @private
@@ -104,5 +104,7 @@
                   branchSHA:(NSString *)branchSHA 
                        page:(NSUInteger)page 
           completionHandler:(GHAPIPaginationHandler)handler;
+
++ (void)contentOfTree:(NSString *)treeHash onRepository:(NSString *)repository completionHandler:(void (^)(GHAPITreeV3 *tree, NSError *error))handler;
 
 @end

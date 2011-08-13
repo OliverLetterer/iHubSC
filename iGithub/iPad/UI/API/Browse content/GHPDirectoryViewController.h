@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "GHTableViewController.h"
+#import "SVModalWebViewController.h"
 
-@interface GHPDirectoryViewController : GHTableViewController <NSCoding> {
+@interface GHPDirectoryViewController : GHTableViewController <NSCoding, SVModalWebViewControllerDelegate> {
 @private
     GHDirectory *_directory;
     

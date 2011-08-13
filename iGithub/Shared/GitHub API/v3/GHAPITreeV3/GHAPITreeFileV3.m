@@ -9,8 +9,17 @@
 #import "GHAPITreeFileV3.h"
 #import "GithubAPI.h"
 
+NSString *const kGHAPITreeFileV3TypeBlob = @"blob";
+NSString *const kGHAPITreeFileV3TypeTree = @"tree";
+
 @implementation GHAPITreeFileV3
 @synthesize path=_path, mode=_mode, type=_type, size=_size, SHA=_SHA, URL=_URL;
+
+#pragma mark - setters and getters
+
+- (BOOL)isDirectoy {
+    return [self.type isEqualToString:kGHAPITreeFileV3TypeTree];
+}
 
 #pragma mark - Initialization
 

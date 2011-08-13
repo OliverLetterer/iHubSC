@@ -40,3 +40,6 @@
 [submodule "Submodules/GHGlossProgressView"]
 	path = Submodules/GHGlossProgressView
 	url = git@github.com:OliverLetterer/GHGlossProgressView.git
+[submodule "Submodules/SVWebViewController"]
+	path = Submodules/SVWebViewController
+	url = git@github.com:OliverLetterer/SVWebViewController.git

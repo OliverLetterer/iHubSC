@@ -96,10 +96,19 @@
         // wow a file, show this baby
         GHFile *file = [self.directory.files objectAtIndex:indexPath.row];
         
-        viewController = [[GHViewCloudFileViewController alloc] initWithRepository:self.repository 
-                                                                               tree:self.hash 
-                                                                           filename:file.name 
-                                                                        relativeURL:self.directory.name];
+        // https://github.com/OliverLetterer/SVSegmentedControl/blob/master/LICENSE.txt
+        NSString *URLString = [NSString stringWithFormat:@"https://github.com"];
+        URLString = [URLString stringByAppendingPathComponent:self.repository];
+        URLString = [URLString stringByAppendingPathComponent:@"blob"];
+        URLString = [URLString stringByAppendingPathComponent:self.branch];
+        URLString = [URLString stringByAppendingPathComponent:self.directory.name];
+        URLString = [URLString stringByAppendingPathComponent:file.name];
+        NSURL *URL = [NSURL URLWithString:URLString];
+        
+        SVModalWebViewController *webViewController = [[SVModalWebViewController alloc] initWithURL:URL];
+        webViewController.webDelegate = self;
+        webViewController.modalPresentationStyle = UIModalPresentationPageSheet;
+        [self presentViewController:webViewController animated:YES completion:nil];
     }
     
     if (viewController) {
@@ -107,6 +116,12 @@
     } else {
         [tableView deselectRowAtIndexPath:indexPath animated:NO];
     }
+}
+
+#pragma mark - SVModalWebViewControllerDelegate
+
+- (void)modalWebViewControllerIsDone:(SVModalWebViewController *)viewController {
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark - Keyed Archiving

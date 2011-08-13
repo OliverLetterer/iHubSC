@@ -22,7 +22,6 @@
 #import "GHPLabelViewController.h"
 #import "ANNotificationQueue.h"
 #import "GHWebViewViewController.h"
-#import "GHViewREADMEViewController.h"
 #import "GHColorAlertView.h"
 
 #define kUIAlertViewTagDeleteRepository     1337
@@ -343,7 +342,7 @@
         cell.textLabel.text = NSLocalizedString(@"README", @"");
         cell.imageView.image = [UIImage imageNamed:@"GHFile.png"];
         
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        cell.accessoryType = UITableViewCellAccessoryNone;
         
         return cell;
     }
@@ -412,7 +411,11 @@
         viewController = [[GHPLabelViewController alloc] initWithRepository:self.repositoryString 
                                                                        label:label];
     } else if (indexPath.section == KUITableViewSectionREADME) {
-        viewController = [[GHViewREADMEViewController alloc] initWithRepository:self.repositoryString];
+        NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://github.com/%@", [self.repositoryString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]] ];
+        SVModalWebViewController *modalViewController = [[SVModalWebViewController alloc] initWithURL:URL];
+        modalViewController.webDelegate = self;
+        modalViewController.modalPresentationStyle = UIModalPresentationPageSheet;
+        [self presentViewController:modalViewController animated:YES completion:nil];
     }
     
     if (viewController) {
@@ -420,6 +423,12 @@
     } else {
         [tableView deselectRowAtIndexPath:indexPath animated:NO];
     }
+}
+
+#pragma mark - SVModalWebViewControllerDelegate
+
+- (void)modalWebViewControllerIsDone:(SVModalWebViewController *)viewController {
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark - UIActionSheetDelegate

@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+extern NSString *const kGHAPITreeFileV3TypeBlob;
+extern NSString *const kGHAPITreeFileV3TypeTree;
 
 @interface GHAPITreeFileV3 : NSObject <NSCoding> {
 @private
@@ -25,6 +27,9 @@
 @property (nonatomic, copy) NSNumber *size;
 @property (nonatomic, copy) NSString *SHA;
 @property (nonatomic, copy) NSString *URL;
+
+@property (nonatomic, readonly) BOOL isDirectoy;
+
 
 - (id)initWithRawDictionary:(NSDictionary *)rawDictionary;
 

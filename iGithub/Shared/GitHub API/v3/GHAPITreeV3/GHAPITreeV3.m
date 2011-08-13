@@ -10,23 +10,35 @@
 #import "GithubAPI.h"
 
 @implementation GHAPITreeV3
-@synthesize SHA=_SHA, URL=_URL, content=_content;
+@synthesize SHA=_SHA, URL=_URL, content=_content, directories=_directories, files=_files;
 
 #pragma mark - Initialization
 
 - (id)initWithRawDictionary:(NSDictionary *)rawDictionary {
     GHAPIObjectExpectedClass(&rawDictionary, NSDictionary.class);
     if ((self = [super init])) {
+        DLog(@"%@", rawDictionary);
         // Initialization code
         self.SHA = [rawDictionary objectForKeyOrNilOnNullObject:@"sha"];
         self.URL = [rawDictionary objectForKeyOrNilOnNullObject:@"url"];
         
         NSArray *rawArray = [rawDictionary objectForKeyOrNilOnNullObject:@"tree"];
         NSMutableArray *contentArray = [NSMutableArray arrayWithCapacity:rawArray.count];
+        NSMutableArray *directories = [NSMutableArray arrayWithCapacity:rawArray.count];
+        NSMutableArray *files = [NSMutableArray arrayWithCapacity:rawArray.count];
         [rawArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-            [contentArray addObject:[[GHAPITreeFileV3 alloc] initWithRawDictionary:obj] ];
+            GHAPITreeFileV3 *file = [[GHAPITreeFileV3 alloc] initWithRawDictionary:obj];
+            
+            [contentArray addObject:file];
+            if (file.isDirectoy) {
+                [directories addObject:file];
+            } else {
+                [files addObject:file];
+            }
         }];
         self.content = contentArray;
+        self.files = files;
+        self.directories = directories;
     }
     return self;
 }
