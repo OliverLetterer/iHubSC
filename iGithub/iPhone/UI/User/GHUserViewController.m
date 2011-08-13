@@ -83,6 +83,7 @@
     if ((self = [super initWithStyle:UITableViewStylePlain])) {
         // Custom initialization
         self.username = username;
+        self.reloadDataOnApplicationWillEnterForeground = NO;
     }
     return self;
 }
@@ -139,6 +140,7 @@
 }
 
 - (void)pullToReleaseTableViewReloadData {
+    DLog(@"here");
     [super pullToReleaseTableViewReloadData];
     
     self.repositoriesArray = nil;
