@@ -22,6 +22,7 @@
 #import "GHViewLabelViewController.h"
 #import "ANNotificationQueue.h"
 #import "GHColorAlertView.h"
+#import "UIColor+GithubUI.h"
 
 #define kUITableViewSectionUserData         0
 #define kUITableViewSectionOwner            1
@@ -835,9 +836,11 @@
         }
     } else if (indexPath.section == kUITableViewSectionUserData) {
         NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://github.com/%@", [self.repositoryString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]] ];
-        SVModalWebViewController *viewController = [[SVModalWebViewController alloc] initWithURL:URL];
-        viewController.webDelegate = self;
-        [self presentViewController:viewController animated:YES completion:nil];
+        SVModalWebViewController *webViewController = [[SVModalWebViewController alloc] initWithURL:URL];
+        webViewController.webDelegate = self;
+        webViewController.navigationBar.tintColor = [UIColor defaultNavigationBarTintColor];
+        webViewController.toolbar.tintColor = [UIColor defaultNavigationBarTintColor];
+        [self presentViewController:webViewController animated:YES completion:nil];
     } else {
         [self.tableView deselectRowAtIndexPath:indexPath animated:NO];
     }

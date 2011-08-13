@@ -8,6 +8,7 @@
 
 #import "GHPDirectoryViewController.h"
 #import "GHViewCloudFileViewController.h"
+#import "UIColor+GithubUI.h"
 
 @implementation GHPDirectoryViewController
 
