@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		A703B9471347562B0014235D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A703B9461347562B0014235D /* QuartzCore.framework */; };
 		A7204D8113E4759F0098C86A /* GHAPIMarkdownFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = A7204D8013E4759F0098C86A /* GHAPIMarkdownFormatter.m */; };
+		A72398F313FFB2BA00AC1B09 /* libANAdvancedNavigationController.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A72398F013FFB1F600AC1B09 /* libANAdvancedNavigationController.a */; };
+		A72398F613FFB2F700AC1B09 /* DTCSSListStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = A72398F513FFB2F700AC1B09 /* DTCSSListStyle.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		A744F56C13E72D030038C189 /* styles.css in Resources */ = {isa = PBXBuildFile; fileRef = A744F56B13E72D030038C189 /* styles.css */; };
 		A744F57913E730E40038C189 /* libGHMarkdownParser.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A744F57613E72DE60038C189 /* libGHMarkdownParser.a */; };
 		A744F58813E73E490038C189 /* DTRangedAttribute.m in Sources */ = {isa = PBXBuildFile; fileRef = A744F58513E73E490038C189 /* DTRangedAttribute.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -20,12 +22,6 @@
 		A7528E5913D42A7F0007C4D9 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7528E5813D42A7F0007C4D9 /* CoreText.framework */; };
 		A7528E5B13D42AA20007C4D9 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7528E5A13D42AA20007C4D9 /* MediaPlayer.framework */; };
 		A7528E6113D42E310007C4D9 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7528E6013D42E310007C4D9 /* ImageIO.framework */; };
-		A757963513E19B18008670B0 /* ANAdvancedNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = A757962613E19B18008670B0 /* ANAdvancedNavigationController.m */; };
-		A757963613E19B18008670B0 /* ANRectangleView.m in Sources */ = {isa = PBXBuildFile; fileRef = A757962813E19B18008670B0 /* ANRectangleView.m */; };
-		A757963713E19B18008670B0 /* ANRemoveRectangleIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = A757962A13E19B18008670B0 /* ANRemoveRectangleIndicatorView.m */; };
-		A757963813E19B18008670B0 /* ANAdvancedNavigationController+LeftViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A757962F13E19B18008670B0 /* ANAdvancedNavigationController+LeftViewController.m */; };
-		A757963913E19B18008670B0 /* ANAdvancedNavigationController+RightViewControllers+Anchors.m in Sources */ = {isa = PBXBuildFile; fileRef = A757963213E19B18008670B0 /* ANAdvancedNavigationController+RightViewControllers+Anchors.m */; };
-		A757963A13E19B18008670B0 /* ANAdvancedNavigationController+RightViewControllers.m in Sources */ = {isa = PBXBuildFile; fileRef = A757963413E19B18008670B0 /* ANAdvancedNavigationController+RightViewControllers.m */; };
 		A75796FB13E1A030008670B0 /* MainWindow_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = A757963C13E1A030008670B0 /* MainWindow_iPad.xib */; };
 		A75796FC13E1A030008670B0 /* iGithubAppDelegate_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = A757963F13E1A030008670B0 /* iGithubAppDelegate_iPad.m */; };
 		A75796FD13E1A030008670B0 /* GHPDirectoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A757964413E1A030008670B0 /* GHPDirectoryViewController.m */; };
@@ -98,7 +94,6 @@
 		A757982E13E1C1D5008670B0 /* GHTableViewAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = A757982713E1C1D5008670B0 /* GHTableViewAlertView.m */; };
 		A757982F13E1C1D5008670B0 /* GHTableViewAlertViewTableViewBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = A757982913E1C1D5008670B0 /* GHTableViewAlertViewTableViewBackgroundView.m */; };
 		A757983013E1C1D5008670B0 /* GHTableViewAlertViewTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A757982B13E1C1D5008670B0 /* GHTableViewAlertViewTableViewCell.m */; };
-		A757983113E1C1D5008670B0 /* GHTableViewAlertViewTableViewCellSeperatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = A757982D13E1C1D5008670B0 /* GHTableViewAlertViewTableViewCellSeperatorView.m */; };
 		A7841C6F13E1849200131648 /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841C6E13E1849200131648 /* JSONKit.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		A7841CAF13E1853200131648 /* CGUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841C7213E1853200131648 /* CGUtils.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		A7841CB413E1853200131648 /* DTAttributedTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841C7C13E1853200131648 /* DTAttributedTextView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -395,6 +390,20 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		A72398EF13FFB1F600AC1B09 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A72398E813FFB1F600AC1B09 /* ANAdvancedNavigationController.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = A7C3773213EA8EF800B9943A;
+			remoteInfo = ANAdvancedNavigationController;
+		};
+		A72398F113FFB2B300AC1B09 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A72398E813FFB1F600AC1B09 /* ANAdvancedNavigationController.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = A7C3773113EA8EF800B9943A;
+			remoteInfo = ANAdvancedNavigationController;
+		};
 		A744F57513E72DE60038C189 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = A744F56E13E72DE60038C189 /* GHMarkdownParser.xcodeproj */;
@@ -430,6 +439,9 @@
 		A703B9461347562B0014235D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		A7204D7F13E4759F0098C86A /* GHAPIMarkdownFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GHAPIMarkdownFormatter.h; path = Markdown/GHAPIMarkdownFormatter.h; sourceTree = "<group>"; };
 		A7204D8013E4759F0098C86A /* GHAPIMarkdownFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GHAPIMarkdownFormatter.m; path = Markdown/GHAPIMarkdownFormatter.m; sourceTree = "<group>"; };
+		A72398E813FFB1F600AC1B09 /* ANAdvancedNavigationController.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = ANAdvancedNavigationController.xcodeproj; sourceTree = "<group>"; };
+		A72398F413FFB2F700AC1B09 /* DTCSSListStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DTCSSListStyle.h; path = "Submodules/NSAttributedString-Additions-for-HTML/Classes/DTCSSListStyle.h"; sourceTree = SOURCE_ROOT; };
+		A72398F513FFB2F700AC1B09 /* DTCSSListStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DTCSSListStyle.m; path = "Submodules/NSAttributedString-Additions-for-HTML/Classes/DTCSSListStyle.m"; sourceTree = SOURCE_ROOT; };
 		A744F56B13E72D030038C189 /* styles.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = styles.css; sourceTree = "<group>"; };
 		A744F56E13E72DE60038C189 /* GHMarkdownParser.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = GHMarkdownParser.xcodeproj; path = Submodules/GHMarkdownParser/GHMarkdownParser/GHMarkdownParser.xcodeproj; sourceTree = SOURCE_ROOT; };
 		A744F58413E73E490038C189 /* DTRangedAttribute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DTRangedAttribute.h; path = "Submodules/NSAttributedString-Additions-for-HTML/Classes/DTRangedAttribute.h"; sourceTree = SOURCE_ROOT; };
@@ -444,19 +456,6 @@
 		A7528E5813D42A7F0007C4D9 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		A7528E5A13D42AA20007C4D9 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		A7528E6013D42E310007C4D9 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
-		A757962513E19B18008670B0 /* ANAdvancedNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANAdvancedNavigationController.h; sourceTree = "<group>"; };
-		A757962613E19B18008670B0 /* ANAdvancedNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANAdvancedNavigationController.m; sourceTree = "<group>"; };
-		A757962713E19B18008670B0 /* ANRectangleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANRectangleView.h; sourceTree = "<group>"; };
-		A757962813E19B18008670B0 /* ANRectangleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANRectangleView.m; sourceTree = "<group>"; };
-		A757962913E19B18008670B0 /* ANRemoveRectangleIndicatorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANRemoveRectangleIndicatorView.h; sourceTree = "<group>"; };
-		A757962A13E19B18008670B0 /* ANRemoveRectangleIndicatorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANRemoveRectangleIndicatorView.m; sourceTree = "<group>"; };
-		A757962C13E19B18008670B0 /* ANAdvancedNavigationController+private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ANAdvancedNavigationController+private.h"; sourceTree = "<group>"; };
-		A757962E13E19B18008670B0 /* ANAdvancedNavigationController+LeftViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ANAdvancedNavigationController+LeftViewController.h"; sourceTree = "<group>"; };
-		A757962F13E19B18008670B0 /* ANAdvancedNavigationController+LeftViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ANAdvancedNavigationController+LeftViewController.m"; sourceTree = "<group>"; };
-		A757963113E19B18008670B0 /* ANAdvancedNavigationController+RightViewControllers+Anchors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ANAdvancedNavigationController+RightViewControllers+Anchors.h"; sourceTree = "<group>"; };
-		A757963213E19B18008670B0 /* ANAdvancedNavigationController+RightViewControllers+Anchors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ANAdvancedNavigationController+RightViewControllers+Anchors.m"; sourceTree = "<group>"; };
-		A757963313E19B18008670B0 /* ANAdvancedNavigationController+RightViewControllers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ANAdvancedNavigationController+RightViewControllers.h"; sourceTree = "<group>"; };
-		A757963413E19B18008670B0 /* ANAdvancedNavigationController+RightViewControllers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ANAdvancedNavigationController+RightViewControllers.m"; sourceTree = "<group>"; };
 		A757963D13E1A030008670B0 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow_iPad.xib; sourceTree = "<group>"; };
 		A757963E13E1A030008670B0 /* iGithubAppDelegate_iPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iGithubAppDelegate_iPad.h; sourceTree = "<group>"; };
 		A757963F13E1A030008670B0 /* iGithubAppDelegate_iPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iGithubAppDelegate_iPad.m; sourceTree = "<group>"; };
@@ -600,8 +599,6 @@
 		A757982913E1C1D5008670B0 /* GHTableViewAlertViewTableViewBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHTableViewAlertViewTableViewBackgroundView.m; sourceTree = "<group>"; };
 		A757982A13E1C1D5008670B0 /* GHTableViewAlertViewTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHTableViewAlertViewTableViewCell.h; sourceTree = "<group>"; };
 		A757982B13E1C1D5008670B0 /* GHTableViewAlertViewTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHTableViewAlertViewTableViewCell.m; sourceTree = "<group>"; };
-		A757982C13E1C1D5008670B0 /* GHTableViewAlertViewTableViewCellSeperatorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHTableViewAlertViewTableViewCellSeperatorView.h; sourceTree = "<group>"; };
-		A757982D13E1C1D5008670B0 /* GHTableViewAlertViewTableViewCellSeperatorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHTableViewAlertViewTableViewCellSeperatorView.m; sourceTree = "<group>"; };
 		A7841C6D13E1849200131648 /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JSONKit.h; path = Submodules/JSONKit/JSONKit.h; sourceTree = "<group>"; };
 		A7841C6E13E1849200131648 /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JSONKit.m; path = Submodules/JSONKit/JSONKit.m; sourceTree = "<group>"; };
 		A7841C7113E1853200131648 /* CGUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CGUtils.h; path = "Submodules/NSAttributedString-Additions-for-HTML/Classes/CGUtils.h"; sourceTree = SOURCE_ROOT; };
@@ -1132,6 +1129,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A72398F313FFB2BA00AC1B09 /* libANAdvancedNavigationController.a in Frameworks */,
 				A744F57913E730E40038C189 /* libGHMarkdownParser.a in Frameworks */,
 				A7C5256F13E6ADA10003EEE5 /* libKal.a in Frameworks */,
 				A7528E6113D42E310007C4D9 /* ImageIO.framework in Frameworks */,
@@ -1183,6 +1181,14 @@
 			name = Markdown;
 			sourceTree = "<group>";
 		};
+		A72398E913FFB1F600AC1B09 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A72398F013FFB1F600AC1B09 /* libANAdvancedNavigationController.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		A744F56D13E72DDF0038C189 /* GHMarkdownParser */ = {
 			isa = PBXGroup;
 			children = (
@@ -1232,47 +1238,11 @@
 		A757962413E19B18008670B0 /* ANAdvancedNavigationController */ = {
 			isa = PBXGroup;
 			children = (
-				A757962513E19B18008670B0 /* ANAdvancedNavigationController.h */,
-				A757962613E19B18008670B0 /* ANAdvancedNavigationController.m */,
-				A757962713E19B18008670B0 /* ANRectangleView.h */,
-				A757962813E19B18008670B0 /* ANRectangleView.m */,
-				A757962913E19B18008670B0 /* ANRemoveRectangleIndicatorView.h */,
-				A757962A13E19B18008670B0 /* ANRemoveRectangleIndicatorView.m */,
-				A757962B13E19B18008670B0 /* Private */,
+				A72398E813FFB1F600AC1B09 /* ANAdvancedNavigationController.xcodeproj */,
 			);
 			name = ANAdvancedNavigationController;
 			path = Submodules/ANAdvancedNavigationController/ANAdvancedNavigationController;
 			sourceTree = SOURCE_ROOT;
-		};
-		A757962B13E19B18008670B0 /* Private */ = {
-			isa = PBXGroup;
-			children = (
-				A757962C13E19B18008670B0 /* ANAdvancedNavigationController+private.h */,
-				A757962D13E19B18008670B0 /* LeftViewController */,
-				A757963013E19B18008670B0 /* RightViewControllers */,
-			);
-			path = Private;
-			sourceTree = "<group>";
-		};
-		A757962D13E19B18008670B0 /* LeftViewController */ = {
-			isa = PBXGroup;
-			children = (
-				A757962E13E19B18008670B0 /* ANAdvancedNavigationController+LeftViewController.h */,
-				A757962F13E19B18008670B0 /* ANAdvancedNavigationController+LeftViewController.m */,
-			);
-			path = LeftViewController;
-			sourceTree = "<group>";
-		};
-		A757963013E19B18008670B0 /* RightViewControllers */ = {
-			isa = PBXGroup;
-			children = (
-				A757963113E19B18008670B0 /* ANAdvancedNavigationController+RightViewControllers+Anchors.h */,
-				A757963213E19B18008670B0 /* ANAdvancedNavigationController+RightViewControllers+Anchors.m */,
-				A757963313E19B18008670B0 /* ANAdvancedNavigationController+RightViewControllers.h */,
-				A757963413E19B18008670B0 /* ANAdvancedNavigationController+RightViewControllers.m */,
-			);
-			path = RightViewControllers;
-			sourceTree = "<group>";
 		};
 		A757963B13E1A030008670B0 /* iPad */ = {
 			isa = PBXGroup;
@@ -1843,8 +1813,6 @@
 				A757982913E1C1D5008670B0 /* GHTableViewAlertViewTableViewBackgroundView.m */,
 				A757982A13E1C1D5008670B0 /* GHTableViewAlertViewTableViewCell.h */,
 				A757982B13E1C1D5008670B0 /* GHTableViewAlertViewTableViewCell.m */,
-				A757982C13E1C1D5008670B0 /* GHTableViewAlertViewTableViewCellSeperatorView.h */,
-				A757982D13E1C1D5008670B0 /* GHTableViewAlertViewTableViewCellSeperatorView.m */,
 			);
 			name = GHTableViewAlertView;
 			path = Submodules/GHTableViewAlertView/GHTableViewAlertView;
@@ -3132,6 +3100,8 @@
 		A798898C13DB396B0052FD50 /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				A72398F413FFB2F700AC1B09 /* DTCSSListStyle.h */,
+				A72398F513FFB2F700AC1B09 /* DTCSSListStyle.m */,
 				A7841C7113E1853200131648 /* CGUtils.h */,
 				A7841C7213E1853200131648 /* CGUtils.m */,
 				A7841C7D13E1853200131648 /* DTCoreTextFontCollection.h */,
@@ -3404,6 +3374,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				A72398F213FFB2B300AC1B09 /* PBXTargetDependency */,
 				A744F58313E73D2D0038C189 /* PBXTargetDependency */,
 				A7C5256E13E6AD890003EEE5 /* PBXTargetDependency */,
 			);
@@ -3433,6 +3404,10 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
+					ProductGroup = A72398E913FFB1F600AC1B09 /* Products */;
+					ProjectRef = A72398E813FFB1F600AC1B09 /* ANAdvancedNavigationController.xcodeproj */;
+				},
+				{
 					ProductGroup = A744F56F13E72DE60038C189 /* Products */;
 					ProjectRef = A744F56E13E72DE60038C189 /* GHMarkdownParser.xcodeproj */;
 				},
@@ -3449,6 +3424,13 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		A72398F013FFB1F600AC1B09 /* libANAdvancedNavigationController.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libANAdvancedNavigationController.a;
+			remoteRef = A72398EF13FFB1F600AC1B09 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		A744F57613E72DE60038C189 /* libGHMarkdownParser.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -3754,12 +3736,6 @@
 				A784206313E1987D00131648 /* GHTableViewCellWithLinearGradientBackgroundView.m in Sources */,
 				A784206413E1987D00131648 /* GHUserViewController.m in Sources */,
 				A784206513E1987D00131648 /* GHWebViewViewController.m in Sources */,
-				A757963513E19B18008670B0 /* ANAdvancedNavigationController.m in Sources */,
-				A757963613E19B18008670B0 /* ANRectangleView.m in Sources */,
-				A757963713E19B18008670B0 /* ANRemoveRectangleIndicatorView.m in Sources */,
-				A757963813E19B18008670B0 /* ANAdvancedNavigationController+LeftViewController.m in Sources */,
-				A757963913E19B18008670B0 /* ANAdvancedNavigationController+RightViewControllers+Anchors.m in Sources */,
-				A757963A13E19B18008670B0 /* ANAdvancedNavigationController+RightViewControllers.m in Sources */,
 				A75796FC13E1A030008670B0 /* iGithubAppDelegate_iPad.m in Sources */,
 				A75796FD13E1A030008670B0 /* GHPDirectoryViewController.m in Sources */,
 				A75796FE13E1A030008670B0 /* GHPRootDirectoryViewController.m in Sources */,
@@ -3831,7 +3807,6 @@
 				A757982E13E1C1D5008670B0 /* GHTableViewAlertView.m in Sources */,
 				A757982F13E1C1D5008670B0 /* GHTableViewAlertViewTableViewBackgroundView.m in Sources */,
 				A757983013E1C1D5008670B0 /* GHTableViewAlertViewTableViewCell.m in Sources */,
-				A757983113E1C1D5008670B0 /* GHTableViewAlertViewTableViewCellSeperatorView.m in Sources */,
 				A7204D8113E4759F0098C86A /* GHAPIMarkdownFormatter.m in Sources */,
 				A7BD1EEB13E49D880016A662 /* GHViewREADMEViewController.m in Sources */,
 				A7BD1EF013E49F230016A662 /* GHAPITreeV3.m in Sources */,
@@ -3849,12 +3824,18 @@
 				A7C5259613E6E0170003EEE5 /* GHUpdateMilestoneViewController.m in Sources */,
 				A744F58813E73E490038C189 /* DTRangedAttribute.m in Sources */,
 				A744F58913E73E490038C189 /* DTRangedAttributesOptimizer.m in Sources */,
+				A72398F613FFB2F700AC1B09 /* DTCSSListStyle.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		A72398F213FFB2B300AC1B09 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = ANAdvancedNavigationController;
+			targetProxy = A72398F113FFB2B300AC1B09 /* PBXContainerItemProxy */;
+		};
 		A744F58313E73D2D0038C189 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = GHMarkdownParser;
@@ -3899,7 +3880,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				CLANG_ARC_MIGRATION = precheck;
+				CLANG_ARC_MIGRATION = donothing;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_OBJCPP_ARC_ABI = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -3912,6 +3893,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
+					"Submodules/**",
 					"Submodules/GHMarkdownParser/**",
 					"Submodules/Kal/**",
 				);
@@ -3935,7 +3917,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				CLANG_ARC_MIGRATION = precheck;
+				CLANG_ARC_MIGRATION = donothing;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_OBJCPP_ARC_ABI = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -3945,6 +3927,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
+					"Submodules/**",
 					"Submodules/GHMarkdownParser/**",
 					"Submodules/Kal/**",
 				);

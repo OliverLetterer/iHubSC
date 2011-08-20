@@ -10,7 +10,6 @@
 
 
 @implementation GHLinearGradientBackgroundView
-
 @synthesize colors=_colors;
 
 #pragma mark - setters and getters
