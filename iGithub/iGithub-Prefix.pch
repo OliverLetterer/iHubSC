@@ -13,6 +13,7 @@
     #import <Foundation/Foundation.h>
 #endif
 
+#define ALLOW_IPHONE_SPECIAL_CASES 1
 
 # define ALog(format, ...) NSLog((@"%s [%d] " format), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__);
 # define _OLog(format, ...) NSLog((@"%s [%d] > %@: " format), __PRETTY_FUNCTION__, __LINE__, self, ##__VA_ARGS__);

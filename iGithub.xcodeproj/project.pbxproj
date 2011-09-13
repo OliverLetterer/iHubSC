@@ -335,6 +335,7 @@
 		A786CF6713F6CF7F00E22E13 /* SVWebViewController.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A786CF6413F6CF7F00E22E13 /* SVWebViewController.bundle */; };
 		A786CF6813F6CF7F00E22E13 /* SVWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A786CF6613F6CF7F00E22E13 /* SVWebViewController.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		A786CF7C13F6DB6200E22E13 /* SVModalWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A786CF7B13F6DB6100E22E13 /* SVModalWebViewController.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		A79433E2141FCEDD000EF1FC /* DTCSSStylesheet.m in Sources */ = {isa = PBXBuildFile; fileRef = A79433E1141FCEDD000EF1FC /* DTCSSStylesheet.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		A7A9E8D413EDA738001F468F /* GHColorAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = A7A9E8D313EDA738001F468F /* GHColorAlertView.m */; };
 		A7AE937513EC0843007B7CE1 /* GHAPIV3NotificationUserDictionaryKeys.m in Sources */ = {isa = PBXBuildFile; fileRef = A7AE937413EC0843007B7CE1 /* GHAPIV3NotificationUserDictionaryKeys.m */; };
 		A7AE93BE13ED3CE3007B7CE1 /* UIBarButtonItemSaveBackground~iPad.png in Resources */ = {isa = PBXBuildFile; fileRef = A7AE93BB13ED3CE3007B7CE1 /* UIBarButtonItemSaveBackground~iPad.png */; };
@@ -1010,6 +1011,8 @@
 		A786CF6613F6CF7F00E22E13 /* SVWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVWebViewController.m; sourceTree = "<group>"; };
 		A786CF7A13F6DB6100E22E13 /* SVModalWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVModalWebViewController.h; sourceTree = "<group>"; };
 		A786CF7B13F6DB6100E22E13 /* SVModalWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVModalWebViewController.m; sourceTree = "<group>"; };
+		A79433E0141FCEDD000EF1FC /* DTCSSStylesheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DTCSSStylesheet.h; path = "Submodules/NSAttributedString-Additions-for-HTML/Classes/DTCSSStylesheet.h"; sourceTree = SOURCE_ROOT; };
+		A79433E1141FCEDD000EF1FC /* DTCSSStylesheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DTCSSStylesheet.m; path = "Submodules/NSAttributedString-Additions-for-HTML/Classes/DTCSSStylesheet.m"; sourceTree = SOURCE_ROOT; };
 		A7A9E8D213EDA738001F468F /* GHColorAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHColorAlertView.h; sourceTree = "<group>"; };
 		A7A9E8D313EDA738001F468F /* GHColorAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHColorAlertView.m; sourceTree = "<group>"; };
 		A7AE937313EC0843007B7CE1 /* GHAPIV3NotificationUserDictionaryKeys.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHAPIV3NotificationUserDictionaryKeys.h; sourceTree = "<group>"; };
@@ -2972,6 +2975,8 @@
 		A798898C13DB396B0052FD50 /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				A79433E0141FCEDD000EF1FC /* DTCSSStylesheet.h */,
+				A79433E1141FCEDD000EF1FC /* DTCSSStylesheet.m */,
 				A71DF5EB13F5349200D8038E /* DTCSSListStyle.h */,
 				A71DF5EC13F5349200D8038E /* DTCSSListStyle.m */,
 				A7841C7113E1853200131648 /* CGUtils.h */,
@@ -3798,6 +3803,7 @@
 				A71DF5ED13F5349300D8038E /* DTCSSListStyle.m in Sources */,
 				A786CF6813F6CF7F00E22E13 /* SVWebViewController.m in Sources */,
 				A786CF7C13F6DB6200E22E13 /* SVModalWebViewController.m in Sources */,
+				A79433E2141FCEDD000EF1FC /* DTCSSStylesheet.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

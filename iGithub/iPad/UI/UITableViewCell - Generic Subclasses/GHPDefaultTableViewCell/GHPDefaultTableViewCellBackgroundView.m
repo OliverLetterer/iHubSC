@@ -47,7 +47,7 @@
         CGFloat *locations = malloc(sizeof(CGFloat) * numberOfColors);
         
         for (int i = 0; i < numberOfColors; i++) {
-            locations[i] = ((CGFloat)i) / numberOfColors;
+            locations[i] = ((CGFloat)i) / (numberOfColors - 1);
         }
         
         CGGradientRelease(_gradient);
