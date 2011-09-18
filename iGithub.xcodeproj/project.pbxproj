@@ -1061,6 +1061,7 @@
 		A7CE1B821346349000169F94 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		A7D14F441354E5A600E1B980 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		A7D41AC41358B6B500CD3A5C /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
+		A7D79E971425F2B6004E0E83 /* CHANGELOG.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CHANGELOG.md; sourceTree = SOURCE_ROOT; };
 		A7D888FC13F13B79002ED2FF /* UIBarButtonItem+GHEmpty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIBarButtonItem+GHEmpty.h"; path = "UIBarButtonItem+GHEmpty/UIBarButtonItem+GHEmpty.h"; sourceTree = "<group>"; };
 		A7D888FD13F13B79002ED2FF /* UIBarButtonItem+GHEmpty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIBarButtonItem+GHEmpty.m"; path = "UIBarButtonItem+GHEmpty/UIBarButtonItem+GHEmpty.m"; sourceTree = "<group>"; };
 		A7D8894813F17859002ED2FF /* GHGlossProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHGlossProgressView.h; sourceTree = "<group>"; };
@@ -1857,6 +1858,7 @@
 				A7841D7913E18E2D00131648 /* TabBarIcons */,
 				A7841D7E13E18E2D00131648 /* TODO.txt */,
 				A7841D3613E18E2D00131648 /* Changelog.txt */,
+				A7D79E971425F2B6004E0E83 /* CHANGELOG.md */,
 				A7DC78F113EACEE0002ABD4B /* Settings.bundle */,
 			);
 			path = Resources;

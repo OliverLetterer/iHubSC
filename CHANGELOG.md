@@ -17,3 +17,93 @@
 - view assigned issues and filter by title, body, milestone, repository, assignee, label
 - view commit diffs in a super elegant and clean way.
 - new Account management to support multiple GitHub Accounts.
+
+## V1.9
+- you can now open/close issues and merge pull requests
+- further API V3 adoption
+- fixed bug that caused the message indicator to be displayed in wrong places
+- fixed bug that caused the pull to release indicator to disappear to early
+- various other bug fixes
+
+## V1.8
+- viewing diffs in a commit is now much more memory efficent
+- support for syntax highlighting in top 10 github languages
+- fixed crash that was caused by changed branch API
+- new Notification System
+
+## V1.7
+- fixed starring Gists Issue
+- migrated Repository and Organization to API v3
+- fork any Repository to your Account or to any of your Organizations
+- only letting user select a Milestone on a Repository, if the user is a collaborator
+- view/delete/add collaborators an a Repository you own
+- statusbar now shows, how many new messages you have in your News Feed
+- .mdown files are now recognized as Markdown files
+
+## V1.6
+- added remaining API calls for today. Click Account under My Profile
+- auto selecting Organization, if user is only a member in one organization
+- new design
+- minor bugfixes
+
+## V1.5
+- You are now able to view fully formatted .md and .markdown files (like README.md) on any Repository
+- adopted new JSON-NewsFeed
+- if someone commented on an Issue in a NewsFeed, you are now able to view this issue directly
+
+## V1.4.1
+- showing commit, if an Issue was closed in a commit.
+- fixed wrong displaying of homepage in repository.
+
+### Milestones
+- Browse Milstone with current status, Open Issues, Closed Issues
+
+## V1.4
+- removed deprected API calls
+- support for API V3: User
+### Updated Issue and Pull Request:
+- Issues and Pull Requests are treated the same now
+- view attached Commits
+- Browse Event-History
+- Label support
+
+## V1.3.1
+- storing last known News Feed position
+- if user can't close/open an issue, Administration is no longer displayed
+- visual improvements
+
+## V1.3
+- new Icon
+### Gist support:
+- View Gists of any User
+- View all Files attatched to a Gist
+- Watch users that forked a Gist
+- Delete your own Gists
+- Star and unstar any Gist
+- View and write comments
+
+## V1.2
+- Add news feed to GHOrganizationViewController
+- fixed error handling bug
+
+### Support for Issues v2.0:
+- View assigned Milestone
+- View assignee.
+- View attatched pull request.
+- Create new Issues and assign someone and select a milestone.
+
+### Repositories:
+- View Milestones.
+
+## V1.1
+- memory efficient TextView
+
+### Organizations
+- View Organization News Feed
+- View Organizations that a User is part of.
+- View Public Repositories and Members.
+- View Teams (Administration access required)
+- Delete Teams
+- View and delete Users of a Team
+- View and delete repos of a Team
+- minor interface improvements
