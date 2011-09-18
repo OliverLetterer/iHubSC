@@ -51,12 +51,20 @@ dispatch_queue_t GHAPIBackgroundQueue() {
         NSError *myError = nil;
         
         ASIFormDataRequest *request = [ASIFormDataRequest authenticatedFormDataRequestWithURL:URL];
+        NSMutableDictionary *requestHeaders = request.requestHeaders;
+        if (!requestHeaders) {
+            requestHeaders = [NSMutableDictionary dictionary];
+            request.requestHeaders = requestHeaders;
+        }
+        [request.requestHeaders setObject:@"UTF-8" forKey:@"spenc"];
+        
         if (setupHandler) {
             setupHandler(request);
         }
         [request startSynchronous];
         
-        id responseObject = [[request responseString] objectFromJSONString];
+        NSString *responseString = [[NSString alloc] initWithData:request.responseData encoding:NSUTF8StringEncoding];
+        id responseObject = responseString.objectFromJSONString;
         
         NSString *XRatelimitRemaing = [[request responseHeaders] objectForKey:@"X-RateLimit-Remaining"];
         _remainingAPICalls = [XRatelimitRemaing integerValue];
