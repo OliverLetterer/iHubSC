@@ -51,6 +51,10 @@
 }
 
 + (CGFloat)heightWithContent:(NSString *)content {
+    if (!content) {
+        return 0.0f;
+    }
+    
     CGSize size = [content sizeWithFont:GHPDiffViewFont() 
                       constrainedToSize:CGSizeMake(CGFLOAT_MAX, CGFLOAT_MAX) 
                           lineBreakMode:UILineBreakModeWordWrap];

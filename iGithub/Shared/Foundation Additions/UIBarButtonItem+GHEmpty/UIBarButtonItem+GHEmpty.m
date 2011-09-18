@@ -11,7 +11,10 @@
 @implementation UIBarButtonItem (GHEmpty)
 
 + (UIBarButtonItem *)emptyBarButtonItemWithSizeOfTitle:(NSString *)title tintColor:(UIColor *)tintColor {
-    CGSize size = [title sizeWithFont:[UIFont systemFontOfSize:12.0f] ];
+    CGSize size = CGSizeZero;
+    if (title) {
+        size = [title sizeWithFont:[UIFont systemFontOfSize:12.0f] ];
+    }
     
     return [self emptyBarButtonItemWithWidth:size.width + 24.0f tintColor:tintColor];
 }

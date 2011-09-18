@@ -84,7 +84,7 @@
 
 + (CGFloat)heightWithContent:(NSString *)content {
     if (!content) {
-        return UITableViewAutomaticDimension;
+        return 70.0f;
     }
     CGSize size = [content sizeWithFont:[UIFont systemFontOfSize:14.0f]
                       constrainedToSize:CGSizeMake(349.0f, CGFLOAT_MAX) 

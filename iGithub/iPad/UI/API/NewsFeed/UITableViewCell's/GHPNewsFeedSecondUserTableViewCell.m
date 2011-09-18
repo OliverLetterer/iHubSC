@@ -61,6 +61,10 @@
 }
 
 + (CGFloat)heightWithContent:(NSString *)content {
+    if (!content) {
+        return GHPDefaultNewsFeedTableViewCellHeight;
+    }
+    
     CGSize size = [content sizeWithFont:[UIFont systemFontOfSize:14.0f]
                       constrainedToSize:CGSizeMake(317.0f, CGFLOAT_MAX) 
                           lineBreakMode:UILineBreakModeWordWrap];

@@ -60,6 +60,9 @@
 + (CGFloat)heightWithContent:(NSString *)content {
     CGFloat minHeight = [self height];
     
+    if (!content) {
+        return minHeight;
+    }
     CGSize newSize = [content sizeWithFont:[UIFont systemFontOfSize:13.0f] 
                          constrainedToSize:CGSizeMake(222.0f, MAXFLOAT)
                              lineBreakMode:UILineBreakModeWordWrap];

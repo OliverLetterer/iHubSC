@@ -51,6 +51,10 @@
 }
 
 + (CGFloat)heightWithContent:(NSString *)content {
+    if (!content) {
+        return 80.0f;
+    }
+    
     CGSize size = [content sizeWithFont:[UIFont systemFontOfSize:14.0f]
                       constrainedToSize:CGSizeMake(311.0f, CGFLOAT_MAX) 
                           lineBreakMode:UILineBreakModeWordWrap];
