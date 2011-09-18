@@ -17,7 +17,6 @@
 - (id)initWithRawDictionary:(NSDictionary *)rawDictionary {
     GHAPIObjectExpectedClass(&rawDictionary, NSDictionary.class);
     if ((self = [super init])) {
-        DLog(@"%@", rawDictionary);
         // Initialization code
         self.SHA = [rawDictionary objectForKeyOrNilOnNullObject:@"sha"];
         self.URL = [rawDictionary objectForKeyOrNilOnNullObject:@"url"];

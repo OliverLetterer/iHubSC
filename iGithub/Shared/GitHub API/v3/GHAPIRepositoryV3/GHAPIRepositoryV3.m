@@ -524,7 +524,6 @@
                                                          [jsonDictionary setObject:name forKey:@"name"];
                                                      }
                                                      if (color) {
-                                                         DLog(@"%@", [color hexStringFromColor]);
                                                          [jsonDictionary setObject:[color hexStringFromColor] forKey:@"color"];
                                                      }
                                                      

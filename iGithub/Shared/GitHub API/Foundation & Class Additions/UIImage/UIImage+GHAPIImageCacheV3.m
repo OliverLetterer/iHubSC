@@ -55,7 +55,6 @@
             
             dispatch_async(dispatch_get_main_queue(), ^(void) {
                 if (myError) {
-                    DLog(@"errro");
                     [[GHAPIImageCacheV3 sharedInstance] cacheImage:[UIImage imageNamed:@"DefaultUserImage.png"] forURL:avatarURLString storeOnDisk:NO];
                     handler([UIImage imageNamed:@"DefaultUserImage.png"]);
                 } else {
