@@ -17,6 +17,7 @@
 - view assigned issues and filter by title, body, milestone, repository, assignee, label
 - view commit diffs in a super elegant and clean way.
 - new Account management to support multiple GitHub Accounts.
+- access to wiki pages if available
 
 ## V1.9
 - you can now open/close issues and merge pull requests
