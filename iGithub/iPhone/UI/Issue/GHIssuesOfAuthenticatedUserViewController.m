@@ -100,9 +100,15 @@
     BOOL changed = NO;
     
     if ([issue.assignee isEqualToUser:[GHAPIAuthenticationManager sharedInstance].authenticatedUser] && issue.isOpen) {
+        if ([self.assignedIssues containsObject:issue]) {
+            [self.assignedIssues removeObject:issue];
+        }
         [self.assignedIssues insertObject:issue atIndex:0];
         
         if ([issue matchedString:self.searchString]) {
+            if ([self.filteresIssues containsObject:issue]) {
+                [self.filteresIssues removeObject:issue];
+            }
             [self.filteresIssues insertObject:issue atIndex:0];
         }
         
