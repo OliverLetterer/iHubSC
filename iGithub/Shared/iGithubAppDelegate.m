@@ -47,9 +47,7 @@
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
-#ifdef DEBUG
     [self nowSerializeState];
-#endif
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
@@ -57,9 +55,7 @@
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
-#ifndef DEBUG
-    [self nowSerializeState];
-#endif
+    
 }
 
 #pragma mark - Serializations
