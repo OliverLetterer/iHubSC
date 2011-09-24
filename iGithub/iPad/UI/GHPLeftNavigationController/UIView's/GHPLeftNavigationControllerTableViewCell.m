@@ -7,7 +7,7 @@
 //
 
 #import "GHPLeftNavigationControllerTableViewCell.h"
-#import "UIImage+GHTabBar.h"
+#import "UIImage+UITabBarStyle.h"
 #import "GHPEdgedLineView.h"
 #import "ANAdvancedNavigationController.h"
 
@@ -18,9 +18,8 @@
 #pragma mark - setters and getters
 
 - (void)setItemImage:(UIImage *)itemImage {
-    self.imageView.image = [itemImage tabBarStyledImageWithSize:itemImage.size style:NO];
-    
-    self.imageView.highlightedImage = [itemImage tabBarStyledImageWithSize:itemImage.size style:YES];
+    self.imageView.image = itemImage.unselectedTabBarStyledImage;
+    self.imageView.highlightedImage = itemImage.selectedTabBarStyledImage;
 }
 
 #pragma mark - Initialization

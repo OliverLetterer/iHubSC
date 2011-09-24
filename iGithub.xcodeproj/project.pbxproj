@@ -10,6 +10,9 @@
 		A703B9471347562B0014235D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A703B9461347562B0014235D /* QuartzCore.framework */; };
 		A71DF5ED13F5349300D8038E /* DTCSSListStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = A71DF5EC13F5349200D8038E /* DTCSSListStyle.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		A7204D8113E4759F0098C86A /* GHAPIMarkdownFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = A7204D8013E4759F0098C86A /* GHAPIMarkdownFormatter.m */; };
+		A72B1B37142E799B0086750C /* UIImage+UITabBarStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = A72B1B34142E799B0086750C /* UIImage+UITabBarStyle.m */; };
+		A72B1B38142E799B0086750C /* UITabBarItemGradient.png in Resources */ = {isa = PBXBuildFile; fileRef = A72B1B35142E799B0086750C /* UITabBarItemGradient.png */; };
+		A72B1B39142E799B0086750C /* UITabBarItemGradient@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A72B1B36142E799B0086750C /* UITabBarItemGradient@2x.png */; };
 		A74301B113F1CFD000DA63DC /* GHTableViewAlertView.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A74301B013F1CFD000DA63DC /* GHTableViewAlertView.bundle */; };
 		A744F56C13E72D030038C189 /* styles.css in Resources */ = {isa = PBXBuildFile; fileRef = A744F56B13E72D030038C189 /* styles.css */; };
 		A744F57913E730E40038C189 /* libGHMarkdownParser.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A744F57613E72DE60038C189 /* libGHMarkdownParser.a */; };
@@ -85,7 +88,6 @@
 		A757973613E1A030008670B0 /* GHPLeftNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = A75796DF13E1A030008670B0 /* GHPLeftNavigationController.m */; };
 		A757973713E1A030008670B0 /* GHPEdgedLineView.m in Sources */ = {isa = PBXBuildFile; fileRef = A75796E213E1A030008670B0 /* GHPEdgedLineView.m */; };
 		A757973813E1A030008670B0 /* GHPLeftNavigationControllerTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A75796E413E1A030008670B0 /* GHPLeftNavigationControllerTableViewCell.m */; };
-		A757973913E1A030008670B0 /* UIImage+GHTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = A75796E613E1A030008670B0 /* UIImage+GHTabBar.m */; };
 		A757973A13E1A030008670B0 /* GHPAttributedTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A75796EA13E1A030008670B0 /* GHPAttributedTableViewCell.m */; };
 		A757973B13E1A030008670B0 /* GHPCollapsingAndSpinningTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A75796ED13E1A030008670B0 /* GHPCollapsingAndSpinningTableViewCell.m */; };
 		A757973C13E1A030008670B0 /* GHPDefaultTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A75796F013E1A030008670B0 /* GHPDefaultTableViewCell.m */; };
@@ -179,8 +181,6 @@
 		A7841D9D13E18E2E00131648 /* ANBackgroundImage.png in Resources */ = {isa = PBXBuildFile; fileRef = A7841D5813E18E2D00131648 /* ANBackgroundImage.png */; };
 		A7841D9E13E18E2E00131648 /* Lupe.PNG in Resources */ = {isa = PBXBuildFile; fileRef = A7841D5913E18E2D00131648 /* Lupe.PNG */; };
 		A7841D9F13E18E2E00131648 /* Lupe@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A7841D5A13E18E2D00131648 /* Lupe@2x.png */; };
-		A7841DA013E18E2E00131648 /* TabBarItemSelectedBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = A7841D5B13E18E2D00131648 /* TabBarItemSelectedBackground.png */; };
-		A7841DA113E18E2E00131648 /* TabBarItemSelectedBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A7841D5C13E18E2D00131648 /* TabBarItemSelectedBackground@2x.png */; };
 		A7841DA213E18E2E00131648 /* GHBackgroundImage.png in Resources */ = {isa = PBXBuildFile; fileRef = A7841D5E13E18E2D00131648 /* GHBackgroundImage.png */; };
 		A7841DA313E18E2E00131648 /* GHBackgroundImage@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A7841D5F13E18E2D00131648 /* GHBackgroundImage@2x.png */; };
 		A7841DA613E18E2E00131648 /* PullToRefreshArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = A7841D6213E18E2D00131648 /* PullToRefreshArrow.png */; };
@@ -429,6 +429,10 @@
 		A71DF5EC13F5349200D8038E /* DTCSSListStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DTCSSListStyle.m; path = "Submodules/NSAttributedString-Additions-for-HTML/Classes/DTCSSListStyle.m"; sourceTree = SOURCE_ROOT; };
 		A7204D7F13E4759F0098C86A /* GHAPIMarkdownFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GHAPIMarkdownFormatter.h; path = Markdown/GHAPIMarkdownFormatter.h; sourceTree = "<group>"; };
 		A7204D8013E4759F0098C86A /* GHAPIMarkdownFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GHAPIMarkdownFormatter.m; path = Markdown/GHAPIMarkdownFormatter.m; sourceTree = "<group>"; };
+		A72B1B33142E799B0086750C /* UIImage+UITabBarStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+UITabBarStyle.h"; sourceTree = "<group>"; };
+		A72B1B34142E799B0086750C /* UIImage+UITabBarStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+UITabBarStyle.m"; sourceTree = "<group>"; };
+		A72B1B35142E799B0086750C /* UITabBarItemGradient.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UITabBarItemGradient.png; sourceTree = "<group>"; };
+		A72B1B36142E799B0086750C /* UITabBarItemGradient@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UITabBarItemGradient@2x.png"; sourceTree = "<group>"; };
 		A74301B013F1CFD000DA63DC /* GHTableViewAlertView.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = GHTableViewAlertView.bundle; sourceTree = "<group>"; };
 		A744F56B13E72D030038C189 /* styles.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = styles.css; sourceTree = "<group>"; };
 		A744F56E13E72DE60038C189 /* GHMarkdownParser.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = GHMarkdownParser.xcodeproj; path = Submodules/GHMarkdownParser/GHMarkdownParser/GHMarkdownParser.xcodeproj; sourceTree = SOURCE_ROOT; };
@@ -569,8 +573,6 @@
 		A75796E213E1A030008670B0 /* GHPEdgedLineView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPEdgedLineView.m; sourceTree = "<group>"; };
 		A75796E313E1A030008670B0 /* GHPLeftNavigationControllerTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPLeftNavigationControllerTableViewCell.h; sourceTree = "<group>"; };
 		A75796E413E1A030008670B0 /* GHPLeftNavigationControllerTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPLeftNavigationControllerTableViewCell.m; sourceTree = "<group>"; };
-		A75796E513E1A030008670B0 /* UIImage+GHTabBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+GHTabBar.h"; sourceTree = "<group>"; };
-		A75796E613E1A030008670B0 /* UIImage+GHTabBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+GHTabBar.m"; sourceTree = "<group>"; };
 		A75796E913E1A030008670B0 /* GHPAttributedTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPAttributedTableViewCell.h; sourceTree = "<group>"; };
 		A75796EA13E1A030008670B0 /* GHPAttributedTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPAttributedTableViewCell.m; sourceTree = "<group>"; };
 		A75796EC13E1A030008670B0 /* GHPCollapsingAndSpinningTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPCollapsingAndSpinningTableViewCell.h; sourceTree = "<group>"; };
@@ -724,8 +726,6 @@
 		A7841D5813E18E2D00131648 /* ANBackgroundImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ANBackgroundImage.png; sourceTree = "<group>"; };
 		A7841D5913E18E2D00131648 /* Lupe.PNG */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Lupe.PNG; sourceTree = "<group>"; };
 		A7841D5A13E18E2D00131648 /* Lupe@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Lupe@2x.png"; sourceTree = "<group>"; };
-		A7841D5B13E18E2D00131648 /* TabBarItemSelectedBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TabBarItemSelectedBackground.png; sourceTree = "<group>"; };
-		A7841D5C13E18E2D00131648 /* TabBarItemSelectedBackground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TabBarItemSelectedBackground@2x.png"; sourceTree = "<group>"; };
 		A7841D5E13E18E2D00131648 /* GHBackgroundImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GHBackgroundImage.png; sourceTree = "<group>"; };
 		A7841D5F13E18E2D00131648 /* GHBackgroundImage@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GHBackgroundImage@2x.png"; sourceTree = "<group>"; };
 		A7841D6213E18E2D00131648 /* PullToRefreshArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PullToRefreshArrow.png; sourceTree = "<group>"; };
@@ -1141,6 +1141,18 @@
 			);
 			name = Markdown;
 			sourceTree = "<group>";
+		};
+		A72B1B32142E799B0086750C /* UIImage+UITabBarStyle */ = {
+			isa = PBXGroup;
+			children = (
+				A72B1B33142E799B0086750C /* UIImage+UITabBarStyle.h */,
+				A72B1B34142E799B0086750C /* UIImage+UITabBarStyle.m */,
+				A72B1B35142E799B0086750C /* UITabBarItemGradient.png */,
+				A72B1B36142E799B0086750C /* UITabBarItemGradient@2x.png */,
+			);
+			name = "UIImage+UITabBarStyle";
+			path = "Submodules/UIImage-UITabBarStyle/UIImage+UITabBarStyle";
+			sourceTree = SOURCE_ROOT;
 		};
 		A744F56D13E72DDF0038C189 /* GHMarkdownParser */ = {
 			isa = PBXGroup;
@@ -1691,8 +1703,6 @@
 				A75796E213E1A030008670B0 /* GHPEdgedLineView.m */,
 				A75796E313E1A030008670B0 /* GHPLeftNavigationControllerTableViewCell.h */,
 				A75796E413E1A030008670B0 /* GHPLeftNavigationControllerTableViewCell.m */,
-				A75796E513E1A030008670B0 /* UIImage+GHTabBar.h */,
-				A75796E613E1A030008670B0 /* UIImage+GHTabBar.m */,
 			);
 			path = "UIView's";
 			sourceTree = "<group>";
@@ -1816,6 +1826,7 @@
 		A7841C7013E184F500131648 /* Submodules */ = {
 			isa = PBXGroup;
 			children = (
+				A72B1B32142E799B0086750C /* UIImage+UITabBarStyle */,
 				A786CF6313F6CF7F00E22E13 /* SVWebViewController */,
 				A7D8894713F17858002ED2FF /* GHGlossProgressView */,
 				A744F56D13E72DDF0038C189 /* GHMarkdownParser */,
@@ -1934,8 +1945,6 @@
 				A7841D5813E18E2D00131648 /* ANBackgroundImage.png */,
 				A7841D5913E18E2D00131648 /* Lupe.PNG */,
 				A7841D5A13E18E2D00131648 /* Lupe@2x.png */,
-				A7841D5B13E18E2D00131648 /* TabBarItemSelectedBackground.png */,
-				A7841D5C13E18E2D00131648 /* TabBarItemSelectedBackground@2x.png */,
 			);
 			path = GHPLeftViewController;
 			sourceTree = "<group>";
@@ -3477,8 +3486,6 @@
 				A7841D9D13E18E2E00131648 /* ANBackgroundImage.png in Resources */,
 				A7841D9E13E18E2E00131648 /* Lupe.PNG in Resources */,
 				A7841D9F13E18E2E00131648 /* Lupe@2x.png in Resources */,
-				A7841DA013E18E2E00131648 /* TabBarItemSelectedBackground.png in Resources */,
-				A7841DA113E18E2E00131648 /* TabBarItemSelectedBackground@2x.png in Resources */,
 				A7841DA213E18E2E00131648 /* GHBackgroundImage.png in Resources */,
 				A7841DA313E18E2E00131648 /* GHBackgroundImage@2x.png in Resources */,
 				A7841DA613E18E2E00131648 /* PullToRefreshArrow.png in Resources */,
@@ -3520,6 +3527,8 @@
 				A7AE93BE13ED3CE3007B7CE1 /* UIBarButtonItemSaveBackground~iPad.png in Resources */,
 				A74301B113F1CFD000DA63DC /* GHTableViewAlertView.bundle in Resources */,
 				A786CF6713F6CF7F00E22E13 /* SVWebViewController.bundle in Resources */,
+				A72B1B38142E799B0086750C /* UITabBarItemGradient.png in Resources */,
+				A72B1B39142E799B0086750C /* UITabBarItemGradient@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3753,7 +3762,6 @@
 				A757973613E1A030008670B0 /* GHPLeftNavigationController.m in Sources */,
 				A757973713E1A030008670B0 /* GHPEdgedLineView.m in Sources */,
 				A757973813E1A030008670B0 /* GHPLeftNavigationControllerTableViewCell.m in Sources */,
-				A757973913E1A030008670B0 /* UIImage+GHTabBar.m in Sources */,
 				A757973A13E1A030008670B0 /* GHPAttributedTableViewCell.m in Sources */,
 				A757973B13E1A030008670B0 /* GHPCollapsingAndSpinningTableViewCell.m in Sources */,
 				A757973C13E1A030008670B0 /* GHPDefaultTableViewCell.m in Sources */,
@@ -3806,6 +3814,7 @@
 				A786CF6813F6CF7F00E22E13 /* SVWebViewController.m in Sources */,
 				A786CF7C13F6DB6200E22E13 /* SVModalWebViewController.m in Sources */,
 				A79433E2141FCEDD000EF1FC /* DTCSSStylesheet.m in Sources */,
+				A72B1B37142E799B0086750C /* UIImage+UITabBarStyle.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

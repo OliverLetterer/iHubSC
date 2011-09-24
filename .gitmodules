@@ -43,3 +43,6 @@
 [submodule "Submodules/SVWebViewController"]
 	path = Submodules/SVWebViewController
 	url = git@github.com:OliverLetterer/SVWebViewController.git
+[submodule "Submodules/UIImage-UITabBarStyle"]
+	path = Submodules/UIImage-UITabBarStyle
+	url = git@github.com:OliverLetterer/UIImage-UITabBarStyle.git

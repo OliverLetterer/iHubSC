@@ -12,7 +12,7 @@
 #import "GHAPIAuthenticationManager.h"
 #import "GithubAPI.h"
 #import "UIImage+Resize.h"
-#import "UIImage+GHTabBar.h"
+#import "UIImage+UITabBarStyle.h"
 #import "ANAdvancedNavigationController.h"
 #import "GHPSearchViewController.h"
 #import "GHPOwnersNewsFeedViewController.h"
@@ -126,9 +126,9 @@
     
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
     UIImage *gear = [UIImage imageNamed:@"19-gear.png"];
-    [button setImage:[gear tabBarStyledImageWithSize:gear.size style:NO] forState:UIControlStateNormal];
-    [button setImage:[gear tabBarStyledImageWithSize:gear.size style:YES] forState:UIControlStateHighlighted];
-    [button setImage:[gear tabBarStyledImageWithSize:gear.size style:YES] forState:UIControlStateSelected];
+    [button setImage:gear.unselectedTabBarStyledImage forState:UIControlStateNormal];
+    [button setImage:gear.selectedTabBarStyledImage forState:UIControlStateHighlighted];
+    [button setImage:gear.selectedTabBarStyledImage forState:UIControlStateSelected];
     [button addTarget:self action:@selector(gearButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     button.frame = CGRectMake(0.0f, 0.0f, CGRectGetHeight(wrapperView.bounds), CGRectGetHeight(wrapperView.bounds));
     [wrapperView addSubview:button];
