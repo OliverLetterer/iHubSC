@@ -28,6 +28,7 @@
 
 - (void)_detachNotification:(ANNotificationView *)notificationView;
 - (void)_displayNextNotification;
+- (void)_loadWindow;
 
 -(CAAnimation *)flipAnimationWithDuration:(NSTimeInterval)aDuration forLayerBeginningOnTop:(BOOL)beginsOnTop scaleFactor:(CGFloat)scaleFactor;
 
@@ -45,6 +46,7 @@ CGFloat const ANNotificationQueueAnimationDuration = 0.35f*2.0f;
 - (id)init {
     if ((self = [super init])) {
         self.notifications = [NSMutableArray array];
+        [self _loadWindow];
     }
     return self;
 }
@@ -85,14 +87,19 @@ CGFloat const ANNotificationQueueAnimationDuration = 0.35f*2.0f;
     return width;
 }
 
+- (void)_loadWindow {
+    _currentWindow = [[ANNotificationQueueWindow alloc] initWithFrame:[UIApplication sharedApplication].delegate.window.frame];
+    UIWindow *lastKeyWindow = [UIApplication sharedApplication].keyWindow;
+    [_currentWindow makeKeyAndVisible];
+    [_currentWindow resignKeyWindow];
+    [lastKeyWindow makeKeyWindow];
+    self.currentWindow.alpha = 0.0f;
+
+}
+
 - (UIWindow *)currentWindow {
     if (!_currentWindow) {
-        _currentWindow = [[ANNotificationQueueWindow alloc] initWithFrame:[UIApplication sharedApplication].delegate.window.frame];
-        UIWindow *lastKeyWindow = [UIApplication sharedApplication].keyWindow;
-        [_currentWindow makeKeyAndVisible];
-        [_currentWindow resignKeyWindow];
-        [lastKeyWindow makeKeyWindow];
-        self.currentWindow.alpha = 0.0f;
+        [self _loadWindow];
     }
     return _currentWindow;
 }
@@ -130,6 +137,7 @@ CGFloat const ANNotificationQueueAnimationDuration = 0.35f*2.0f;
     
     
     UIView *topContainerView = self.currentWindow.rootViewController.view;
+    topContainerView.autoresizesSubviews = YES;
     
     UIView *containerView = [[UIView alloc] initWithFrame:topContainerView.bounds];
     containerView.backgroundColor = [UIColor clearColor];

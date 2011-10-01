@@ -34,6 +34,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     [ASIHTTPRequest setDefaultTimeOutSeconds:20.0];
+    [ANNotificationQueue sharedInstance];
     [self.window makeKeyAndVisible];
     return YES;
 }
