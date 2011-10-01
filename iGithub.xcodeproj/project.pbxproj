@@ -109,6 +109,7 @@
 		A76C012F13E9D7E6005E26C4 /* 162-receipt@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A76C012D13E9D7E6005E26C4 /* 162-receipt@2x.png */; };
 		A76C013013E9D7E6005E26C4 /* 162-receipt.png in Resources */ = {isa = PBXBuildFile; fileRef = A76C012E13E9D7E6005E26C4 /* 162-receipt.png */; };
 		A76C013413E9DE99005E26C4 /* GHSearchFieldTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A76C013313E9DE99005E26C4 /* GHSearchFieldTableViewCell.m */; };
+		A7824A7314372A6300A11956 /* GHGollumPageEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = A7824A7214372A6300A11956 /* GHGollumPageEvent.m */; };
 		A7841C6F13E1849200131648 /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841C6E13E1849200131648 /* JSONKit.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		A7841CAF13E1853200131648 /* CGUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841C7213E1853200131648 /* CGUtils.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		A7841CB413E1853200131648 /* DTAttributedTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841C7C13E1853200131648 /* DTAttributedTextView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -609,6 +610,8 @@
 		A76C012E13E9D7E6005E26C4 /* 162-receipt.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "162-receipt.png"; sourceTree = "<group>"; };
 		A76C013213E9DE99005E26C4 /* GHSearchFieldTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHSearchFieldTableViewCell.h; sourceTree = "<group>"; };
 		A76C013313E9DE99005E26C4 /* GHSearchFieldTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHSearchFieldTableViewCell.m; sourceTree = "<group>"; };
+		A7824A7114372A6300A11956 /* GHGollumPageEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHGollumPageEvent.h; sourceTree = "<group>"; };
+		A7824A7214372A6300A11956 /* GHGollumPageEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHGollumPageEvent.m; sourceTree = "<group>"; };
 		A7841C6D13E1849200131648 /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JSONKit.h; path = Submodules/JSONKit/JSONKit.h; sourceTree = "<group>"; };
 		A7841C6E13E1849200131648 /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JSONKit.m; path = Submodules/JSONKit/JSONKit.m; sourceTree = "<group>"; };
 		A7841C7113E1853200131648 /* CGUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CGUtils.h; path = "Submodules/NSAttributedString-Additions-for-HTML/Classes/CGUtils.h"; sourceTree = SOURCE_ROOT; };
@@ -1823,6 +1826,17 @@
 			path = ..;
 			sourceTree = "<group>";
 		};
+		A7824A7014372A4600A11956 /* Wiki */ = {
+			isa = PBXGroup;
+			children = (
+				A7841ED313E194BB00131648 /* GHGollumEventPayload.h */,
+				A7841ED413E194BB00131648 /* GHGollumEventPayload.m */,
+				A7824A7114372A6300A11956 /* GHGollumPageEvent.h */,
+				A7824A7214372A6300A11956 /* GHGollumPageEvent.m */,
+			);
+			name = Wiki;
+			sourceTree = "<group>";
+		};
 		A7841C7013E184F500131648 /* Submodules */ = {
 			isa = PBXGroup;
 			children = (
@@ -2339,8 +2353,7 @@
 				A7841ED013E194BB00131648 /* GHForkEventPayload.m */,
 				A7841ED113E194BB00131648 /* GHGistEventPayload.h */,
 				A7841ED213E194BB00131648 /* GHGistEventPayload.m */,
-				A7841ED313E194BB00131648 /* GHGollumEventPayload.h */,
-				A7841ED413E194BB00131648 /* GHGollumEventPayload.m */,
+				A7824A7014372A4600A11956 /* Wiki */,
 				A7841ED513E194BB00131648 /* GHIssuePayload.h */,
 				A7841ED613E194BB00131648 /* GHIssuePayload.m */,
 				A7841ED713E194BB00131648 /* GHIssuesCommentPayload.h */,
@@ -3815,6 +3828,7 @@
 				A786CF7C13F6DB6200E22E13 /* SVModalWebViewController.m in Sources */,
 				A79433E2141FCEDD000EF1FC /* DTCSSStylesheet.m in Sources */,
 				A72B1B37142E799B0086750C /* UIImage+UITabBarStyle.m in Sources */,
+				A7824A7314372A6300A11956 /* GHGollumPageEvent.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -11,17 +11,9 @@
 
 // :user created/deleted :pageName in Wiki
 @interface GHGollumEventPayload : GHPayload {
-    NSString *_action;
-    NSString *_pageName;
-    NSString *_sha;
-    NSString *_summary;
-    NSString *_title;
+    NSArray *_events;
 }
 
-@property (nonatomic, copy) NSString *action;
-@property (nonatomic, copy) NSString *pageName;
-@property (nonatomic, copy) NSString *sha;
-@property (nonatomic, copy) NSString *summary;
-@property (nonatomic, copy) NSString *title;
+@property (nonatomic, strong) NSArray *events; // contains GHGollumPageEvent
 
 @end

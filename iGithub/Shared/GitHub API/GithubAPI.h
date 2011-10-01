@@ -80,6 +80,7 @@
 #import "GHIssuesCommentPayload.h"
 #import "GHForkApplyEventPayload.h"
 #import "GHPublicEventPayload.h"
+#import "GHGollumPageEvent.h"
 
 #import "JSONKit.h"
 #import "NSDictionary+GHNullTermination.h"

@@ -429,7 +429,13 @@
         description = [NSString stringWithFormat:NSLocalizedString(@"deleted %@ %@", @""), payload.refType, payload.ref];
     } else if(item.payload.type == GHPayloadGollumEvent) {
         GHGollumEventPayload *payload = (GHGollumEventPayload *)item.payload;
-        description = [NSString stringWithFormat:NSLocalizedString(@"%@ %@ in wiki", @""), payload.action, payload.pageName];
+        NSMutableString *desctiptionString = [NSMutableString string];
+        
+        for (GHGollumPageEvent *event in payload.events) {
+            [desctiptionString appendFormat:NSLocalizedString(@"%@ %@ in wiki\n", @""), event.action, event.pageName];
+        }
+        
+        description = desctiptionString;
     } else if(item.payload.type == GHPayloadGistEvent) {
         GHGistEventPayload *payload = (GHGistEventPayload *)item.payload;
         

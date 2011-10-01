@@ -10,8 +10,7 @@
 #import "GithubAPI.h"
 
 @implementation GHGollumEventPayload
-
-@synthesize action=_action, pageName=_pageName, sha=_sha, summary=_summary, title=_title;
+@synthesize events=_events;
 
 - (GHPayloadEvent)type {
     return GHPayloadGollumEvent;
@@ -23,36 +22,30 @@
     GHAPIObjectExpectedClass(&rawDictionary, NSDictionary.class);
     if ((self = [super initWithRawDictionary:rawDictionary])) {
         // Initialization code
-        self.action = [rawDictionary objectForKeyOrNilOnNullObject:@"action"];
-        self.pageName = [rawDictionary objectForKeyOrNilOnNullObject:@"page_name"];
-        self.sha = [rawDictionary objectForKeyOrNilOnNullObject:@"sha"];
-        self.summary = [rawDictionary objectForKeyOrNilOnNullObject:@"summary"];
-        self.title = [rawDictionary objectForKeyOrNilOnNullObject:@"title"];
+        NSArray *pages = [rawDictionary objectForKeyOrNilOnNullObject:@"pages"];
+        GHAPIObjectExpectedClass(&pages, NSArray.class);
+        NSMutableArray *events = [NSMutableArray arrayWithCapacity:pages.count];
+        
+        for (NSDictionary *rawEventDictionary in pages) {
+            GHGollumPageEvent *event = [[GHGollumPageEvent alloc] initWithRawDictionary:rawEventDictionary];
+            [events addObject:event];
+        }
+        
+        _events = events;
     }
     return self;
 }
-
-#pragma mark - Memory management
-
 
 #pragma mark - NSCoding
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     [super encodeWithCoder:aCoder];
-    [aCoder encodeObject:self.action forKey:@"action"];
-    [aCoder encodeObject:self.pageName forKey:@"pageName"];
-    [aCoder encodeObject:self.sha forKey:@"sha"];
-    [aCoder encodeObject:self.summary forKey:@"summary"];
-    [aCoder encodeObject:self.title forKey:@"title"];
+    [aCoder encodeObject:_events forKey:@"events"];
 }
 
 - (id)initWithCoder:(NSCoder *)aDecoder {
     if (self = [super initWithCoder:aDecoder]) {
-        self.action = [aDecoder decodeObjectForKey:@"action"];
-        self.pageName = [aDecoder decodeObjectForKey:@"pageName"];
-        self.sha = [aDecoder decodeObjectForKey:@"sha"];
-        self.summary = [aDecoder decodeObjectForKey:@"summary"];
-        self.title = [aDecoder decodeObjectForKey:@"title"];
+        _events = [aDecoder decodeObjectForKey:@"events"];
     }
     return self;
 }
