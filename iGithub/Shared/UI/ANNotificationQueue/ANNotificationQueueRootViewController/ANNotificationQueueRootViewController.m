@@ -14,6 +14,9 @@
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     // Return YES for supported orientations
+    if (UIUserInterfaceIdiomPhone == UI_USER_INTERFACE_IDIOM()) {
+        return UIInterfaceOrientationPortrait == interfaceOrientation;
+    }
 	return YES;
 }
 
