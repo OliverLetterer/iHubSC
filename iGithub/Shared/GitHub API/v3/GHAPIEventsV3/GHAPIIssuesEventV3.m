@@ -11,6 +11,7 @@
 
 
 @implementation GHAPIIssuesEventV3
+@synthesize action=_action, issue=_issue;
 
 #pragma mark - Initialization
 
@@ -19,6 +20,8 @@
     GHAPIObjectExpectedClass(&rawDictionary, NSDictionary.class);
     if (self = [super initWithRawDictionary:rawDictionary]) {
         // Initialization code
+        _action = [rawDictionary objectForKeyOrNilOnNullObject:@"action"];
+        _issue = [[GHAPIIssueV3 alloc] initWithRawDictionary:[rawDictionary objectForKeyOrNilOnNullObject:@"issue"] ];
     }
     return self;
 }

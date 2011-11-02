@@ -13,11 +13,13 @@
 
 /**
  @class     GHAPIGollumEventEventV3
- @abstract  <#abstract comment#>
+ @abstract  Wiki pages got updated.
  */
 @interface GHAPIGollumEventV3 : GHAPIEventV3 {
 @private
-    
+    NSArray *_pages;
 }
+
+@property (nonatomic, readonly) NSArray *pages;
 
 @end

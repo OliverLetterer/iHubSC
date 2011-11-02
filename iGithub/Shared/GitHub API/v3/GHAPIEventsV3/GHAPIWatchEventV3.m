@@ -11,6 +11,7 @@
 
 
 @implementation GHAPIWatchEventV3
+@synthesize action=_action;
 
 #pragma mark - Initialization
 
@@ -19,6 +20,7 @@
     GHAPIObjectExpectedClass(&rawDictionary, NSDictionary.class);
     if (self = [super initWithRawDictionary:rawDictionary]) {
         // Initialization code
+        _action = [rawDictionary objectForKeyOrNilOnNullObject:@"action"];
     }
     return self;
 }

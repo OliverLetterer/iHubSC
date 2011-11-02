@@ -7,17 +7,20 @@
 //
 
 #import "GHAPIEventV3.h"
+#import "GHAPIUserV3.h"
 #warning NSCoding
 
 
 
 /**
  @class     GHAPIFollowEventEventV3
- @abstract  <#abstract comment#>
+ @abstract  The user that was just followed.
  */
 @interface GHAPIFollowEventV3 : GHAPIEventV3 {
 @private
-    
+    GHAPIUserV3 *_user;
 }
+
+@property (nonatomic, readonly) GHAPIUserV3 *user;
 
 @end

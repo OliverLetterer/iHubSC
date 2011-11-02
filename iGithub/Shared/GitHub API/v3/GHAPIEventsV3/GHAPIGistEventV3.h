@@ -7,17 +7,22 @@
 //
 
 #import "GHAPIEventV3.h"
+#import "GHAPIGistV3.h"
 #warning NSCoding
 
 
 
 /**
  @class     GHAPIGistEventEventV3
- @abstract  <#abstract comment#>
+ @abstract  Gist got created or updated.
  */
 @interface GHAPIGistEventV3 : GHAPIEventV3 {
 @private
-    
+    NSString *_action;
+    GHAPIGistV3 *_gist;
 }
+
+@property (nonatomic, readonly) NSString *action;
+@property (nonatomic, readonly) GHAPIGistV3 *gist;
 
 @end

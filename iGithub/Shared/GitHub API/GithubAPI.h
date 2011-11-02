@@ -65,6 +65,7 @@
 #import "GHAPIIssuesEventV3.h"
 #import "GHAPIIssueCommentEventV3.h"
 #import "GHAPIGollumEventV3.h"
+#import "GHAPIGollumPageV3.h"
 #import "GHAPIGistEventV3.h"
 #import "GHAPIForkApplyEventV3.h"
 #import "GHAPIForkEventV3.h"

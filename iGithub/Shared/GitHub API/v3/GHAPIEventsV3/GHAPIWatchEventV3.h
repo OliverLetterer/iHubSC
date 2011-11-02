@@ -13,11 +13,13 @@
 
 /**
  @class     GHAPIWatchEventV3
- @abstract  <#abstract comment#>
+ @abstract  The event’s actor is the watcher, and the event’s repo is the watched repository.
  */
 @interface GHAPIWatchEventV3 : GHAPIEventV3 {
 @private
-    
+    NSString *_action;
 }
+
+@property (nonatomic, readonly) NSString *action;
 
 @end

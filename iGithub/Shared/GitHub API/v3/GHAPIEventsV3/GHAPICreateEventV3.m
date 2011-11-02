@@ -11,6 +11,7 @@
 
 
 @implementation GHAPICreateEventV3
+@synthesize createdObject=_createdObject, objectName=_objectName, masterBranch=_masterBranch, description=_description;
 
 #pragma mark - Initialization
 
@@ -19,6 +20,10 @@
     GHAPIObjectExpectedClass(&rawDictionary, NSDictionary.class);
     if (self = [super initWithRawDictionary:rawDictionary]) {
         // Initialization code
+        _createdObject = [rawDictionary objectForKeyOrNilOnNullObject:@"ref_type"];
+        _objectName = [rawDictionary objectForKeyOrNilOnNullObject:@"ref"];
+        _masterBranch = [rawDictionary objectForKeyOrNilOnNullObject:@"master_branch"];
+        _description = [rawDictionary objectForKeyOrNilOnNullObject:@"description"];
     }
     return self;
 }

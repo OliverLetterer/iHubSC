@@ -381,6 +381,7 @@
 		A7C667F71461902C004E6EAA /* GHAPIPushEventV3.m in Sources */ = {isa = PBXBuildFile; fileRef = A7C667F61461902A004E6EAA /* GHAPIPushEventV3.m */; };
 		A7C667FA14619041004E6EAA /* GHAPITeamAddEventV3.m in Sources */ = {isa = PBXBuildFile; fileRef = A7C667F91461903F004E6EAA /* GHAPITeamAddEventV3.m */; };
 		A7C667FD14619062004E6EAA /* GHAPIWatchEventV3.m in Sources */ = {isa = PBXBuildFile; fileRef = A7C667FC14619061004E6EAA /* GHAPIWatchEventV3.m */; };
+		A7C6682B1461BD69004E6EAA /* GHAPIGollumPageV3.m in Sources */ = {isa = PBXBuildFile; fileRef = A7C6682A1461BD68004E6EAA /* GHAPIGollumPageV3.m */; };
 		A7CE1B831346349200169F94 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7CE1B821346349000169F94 /* CoreData.framework */; };
 		A7D14F451354E5A700E1B980 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7D14F441354E5A600E1B980 /* MessageUI.framework */; };
 		A7D888FE13F13B79002ED2FF /* UIBarButtonItem+GHEmpty.m in Sources */ = {isa = PBXBuildFile; fileRef = A7D888FD13F13B79002ED2FF /* UIBarButtonItem+GHEmpty.m */; };
@@ -1083,38 +1084,40 @@
 		A7C667C914616AFB004E6EAA /* GHAPIEventV3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHAPIEventV3.m; sourceTree = "<group>"; };
 		A7C667CB14617001004E6EAA /* GHAPICommitCommentEventV3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHAPICommitCommentEventV3.h; sourceTree = "<group>"; };
 		A7C667CC14617001004E6EAA /* GHAPICommitCommentEventV3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHAPICommitCommentEventV3.m; sourceTree = "<group>"; };
-		A7C667CE14617031004E6EAA /* GHAPICreateEventV3.h */ = {isa = PBXFileReference; fileEncoding = 4; path = GHAPICreateEventV3.h; sourceTree = "<group>"; };
+		A7C667CE14617031004E6EAA /* GHAPICreateEventV3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHAPICreateEventV3.h; sourceTree = "<group>"; };
 		A7C667CF14617031004E6EAA /* GHAPICreateEventV3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHAPICreateEventV3.m; sourceTree = "<group>"; };
-		A7C667D114617041004E6EAA /* GHAPIDeleteEventV3.h */ = {isa = PBXFileReference; fileEncoding = 4; path = GHAPIDeleteEventV3.h; sourceTree = "<group>"; };
+		A7C667D114617041004E6EAA /* GHAPIDeleteEventV3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHAPIDeleteEventV3.h; sourceTree = "<group>"; };
 		A7C667D214617042004E6EAA /* GHAPIDeleteEventV3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHAPIDeleteEventV3.m; sourceTree = "<group>"; };
-		A7C667D414617052004E6EAA /* GHAPIDownloadEventV3.h */ = {isa = PBXFileReference; fileEncoding = 4; path = GHAPIDownloadEventV3.h; sourceTree = "<group>"; };
+		A7C667D414617052004E6EAA /* GHAPIDownloadEventV3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHAPIDownloadEventV3.h; sourceTree = "<group>"; };
 		A7C667D514617052004E6EAA /* GHAPIDownloadEventV3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHAPIDownloadEventV3.m; sourceTree = "<group>"; };
-		A7C667D714617061004E6EAA /* GHAPIFollowEventV3.h */ = {isa = PBXFileReference; fileEncoding = 4; path = GHAPIFollowEventV3.h; sourceTree = "<group>"; };
+		A7C667D714617061004E6EAA /* GHAPIFollowEventV3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHAPIFollowEventV3.h; sourceTree = "<group>"; };
 		A7C667D814617061004E6EAA /* GHAPIFollowEventV3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHAPIFollowEventV3.m; sourceTree = "<group>"; };
-		A7C667DA14617071004E6EAA /* GHAPIForkEventV3.h */ = {isa = PBXFileReference; fileEncoding = 4; path = GHAPIForkEventV3.h; sourceTree = "<group>"; };
+		A7C667DA14617071004E6EAA /* GHAPIForkEventV3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHAPIForkEventV3.h; sourceTree = "<group>"; };
 		A7C667DB14617072004E6EAA /* GHAPIForkEventV3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHAPIForkEventV3.m; sourceTree = "<group>"; };
-		A7C667DD1461708B004E6EAA /* GHAPIForkApplyEventV3.h */ = {isa = PBXFileReference; fileEncoding = 4; path = GHAPIForkApplyEventV3.h; sourceTree = "<group>"; };
+		A7C667DD1461708B004E6EAA /* GHAPIForkApplyEventV3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHAPIForkApplyEventV3.h; sourceTree = "<group>"; };
 		A7C667DE1461708B004E6EAA /* GHAPIForkApplyEventV3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHAPIForkApplyEventV3.m; sourceTree = "<group>"; };
-		A7C667E01461709B004E6EAA /* GHAPIGistEventV3.h */ = {isa = PBXFileReference; fileEncoding = 4; path = GHAPIGistEventV3.h; sourceTree = "<group>"; };
+		A7C667E01461709B004E6EAA /* GHAPIGistEventV3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHAPIGistEventV3.h; sourceTree = "<group>"; };
 		A7C667E11461709B004E6EAA /* GHAPIGistEventV3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHAPIGistEventV3.m; sourceTree = "<group>"; };
-		A7C667E3146170B0004E6EAA /* GHAPIGollumEventV3.h */ = {isa = PBXFileReference; fileEncoding = 4; path = GHAPIGollumEventV3.h; sourceTree = "<group>"; };
+		A7C667E3146170B0004E6EAA /* GHAPIGollumEventV3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHAPIGollumEventV3.h; sourceTree = "<group>"; };
 		A7C667E4146170B1004E6EAA /* GHAPIGollumEventV3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHAPIGollumEventV3.m; sourceTree = "<group>"; };
-		A7C667E6146170C1004E6EAA /* GHAPIIssueCommentEventV3.h */ = {isa = PBXFileReference; fileEncoding = 4; path = GHAPIIssueCommentEventV3.h; sourceTree = "<group>"; };
+		A7C667E6146170C1004E6EAA /* GHAPIIssueCommentEventV3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHAPIIssueCommentEventV3.h; sourceTree = "<group>"; };
 		A7C667E7146170C1004E6EAA /* GHAPIIssueCommentEventV3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHAPIIssueCommentEventV3.m; sourceTree = "<group>"; };
-		A7C667E9146170D2004E6EAA /* GHAPIIssuesEventV3.h */ = {isa = PBXFileReference; fileEncoding = 4; path = GHAPIIssuesEventV3.h; sourceTree = "<group>"; };
+		A7C667E9146170D2004E6EAA /* GHAPIIssuesEventV3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHAPIIssuesEventV3.h; sourceTree = "<group>"; };
 		A7C667EA146170D3004E6EAA /* GHAPIIssuesEventV3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHAPIIssuesEventV3.m; sourceTree = "<group>"; };
-		A7C667EC146170ED004E6EAA /* GHAPIMemberEventV3.h */ = {isa = PBXFileReference; fileEncoding = 4; path = GHAPIMemberEventV3.h; sourceTree = "<group>"; };
+		A7C667EC146170ED004E6EAA /* GHAPIMemberEventV3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHAPIMemberEventV3.h; sourceTree = "<group>"; };
 		A7C667ED146170EE004E6EAA /* GHAPIMemberEventV3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHAPIMemberEventV3.m; sourceTree = "<group>"; };
-		A7C667EF14618F9F004E6EAA /* GHAPIPublicEventV3.h */ = {isa = PBXFileReference; fileEncoding = 4; path = GHAPIPublicEventV3.h; sourceTree = "<group>"; };
+		A7C667EF14618F9F004E6EAA /* GHAPIPublicEventV3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHAPIPublicEventV3.h; sourceTree = "<group>"; };
 		A7C667F014618FA0004E6EAA /* GHAPIPublicEventV3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHAPIPublicEventV3.m; sourceTree = "<group>"; };
-		A7C667F214618FB5004E6EAA /* GHAPIPullRequestEventV3.h */ = {isa = PBXFileReference; fileEncoding = 4; path = GHAPIPullRequestEventV3.h; sourceTree = "<group>"; };
+		A7C667F214618FB5004E6EAA /* GHAPIPullRequestEventV3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHAPIPullRequestEventV3.h; sourceTree = "<group>"; };
 		A7C667F314618FB7004E6EAA /* GHAPIPullRequestEventV3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHAPIPullRequestEventV3.m; sourceTree = "<group>"; };
-		A7C667F514619029004E6EAA /* GHAPIPushEventV3.h */ = {isa = PBXFileReference; fileEncoding = 4; path = GHAPIPushEventV3.h; sourceTree = "<group>"; };
+		A7C667F514619029004E6EAA /* GHAPIPushEventV3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHAPIPushEventV3.h; sourceTree = "<group>"; };
 		A7C667F61461902A004E6EAA /* GHAPIPushEventV3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHAPIPushEventV3.m; sourceTree = "<group>"; };
 		A7C667F81461903E004E6EAA /* GHAPITeamAddEventV3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHAPITeamAddEventV3.h; sourceTree = "<group>"; };
 		A7C667F91461903F004E6EAA /* GHAPITeamAddEventV3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHAPITeamAddEventV3.m; sourceTree = "<group>"; };
 		A7C667FB1461905E004E6EAA /* GHAPIWatchEventV3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHAPIWatchEventV3.h; sourceTree = "<group>"; };
 		A7C667FC14619061004E6EAA /* GHAPIWatchEventV3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHAPIWatchEventV3.m; sourceTree = "<group>"; };
+		A7C668291461BD65004E6EAA /* GHAPIGollumPageV3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHAPIGollumPageV3.h; sourceTree = "<group>"; };
+		A7C6682A1461BD68004E6EAA /* GHAPIGollumPageV3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHAPIGollumPageV3.m; sourceTree = "<group>"; };
 		A7CE1B821346349000169F94 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		A7D14F441354E5A600E1B980 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		A7D41AC41358B6B500CD3A5C /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
@@ -3369,6 +3372,8 @@
 				A7C667E11461709B004E6EAA /* GHAPIGistEventV3.m */,
 				A7C667E3146170B0004E6EAA /* GHAPIGollumEventV3.h */,
 				A7C667E4146170B1004E6EAA /* GHAPIGollumEventV3.m */,
+				A7C668291461BD65004E6EAA /* GHAPIGollumPageV3.h */,
+				A7C6682A1461BD68004E6EAA /* GHAPIGollumPageV3.m */,
 				A7C667E6146170C1004E6EAA /* GHAPIIssueCommentEventV3.h */,
 				A7C667E7146170C1004E6EAA /* GHAPIIssueCommentEventV3.m */,
 				A7C667E9146170D2004E6EAA /* GHAPIIssuesEventV3.h */,
@@ -3945,6 +3950,7 @@
 				A7C667F71461902C004E6EAA /* GHAPIPushEventV3.m in Sources */,
 				A7C667FA14619041004E6EAA /* GHAPITeamAddEventV3.m in Sources */,
 				A7C667FD14619062004E6EAA /* GHAPIWatchEventV3.m in Sources */,
+				A7C6682B1461BD69004E6EAA /* GHAPIGollumPageV3.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

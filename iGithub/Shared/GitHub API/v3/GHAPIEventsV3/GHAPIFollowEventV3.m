@@ -11,6 +11,7 @@
 
 
 @implementation GHAPIFollowEventV3
+@synthesize user=_user;
 
 #pragma mark - Initialization
 
@@ -19,6 +20,7 @@
     GHAPIObjectExpectedClass(&rawDictionary, NSDictionary.class);
     if (self = [super initWithRawDictionary:rawDictionary]) {
         // Initialization code
+        _user = [[GHAPIUserV3 alloc] initWithRawDictionary:[rawDictionary objectForKeyOrNilOnNullObject:@"target"]];
     }
     return self;
 }

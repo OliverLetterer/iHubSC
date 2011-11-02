@@ -12,11 +12,19 @@
 
 /**
  @class     GHAPICreateEventEventV3
- @abstract  <#abstract comment#>
+ @abstract  Represents a created repository, branch, or tag.
  */
 @interface GHAPICreateEventV3 : GHAPIEventV3 {
 @private
-    
+    NSString *_createdObject;
+    NSString *_objectName;
+    NSString *_masterBranch;
+    NSString *_description;
 }
+
+@property (nonatomic, readonly) NSString *createdObject;
+@property (nonatomic, readonly) NSString *objectName;
+@property (nonatomic, readonly) NSString *masterBranch;
+@property (nonatomic, readonly) NSString *description;
 
 @end

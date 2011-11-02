@@ -13,11 +13,15 @@
 
 /**
  @class     GHAPIDeleteEventEventV3
- @abstract  <#abstract comment#>
+ @abstract  Represents a deleted branch or tag.
  */
 @interface GHAPIDeleteEventV3 : GHAPIEventV3 {
 @private
-    
+    NSString *_objectType;
+    NSString *_objectName;
 }
+
+@property (nonatomic, readonly) NSString *objectType;
+@property (nonatomic, readonly) NSString *objectName;
 
 @end

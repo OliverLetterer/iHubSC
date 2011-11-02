@@ -11,6 +11,7 @@
 
 
 @implementation GHAPIForkApplyEventV3
+@synthesize head=_head, before=_before, after=_after;
 
 #pragma mark - Initialization
 
@@ -19,6 +20,9 @@
     GHAPIObjectExpectedClass(&rawDictionary, NSDictionary.class);
     if (self = [super initWithRawDictionary:rawDictionary]) {
         // Initialization code
+        _head = [rawDictionary objectForKeyOrNilOnNullObject:@"head"];
+        _before = [rawDictionary objectForKeyOrNilOnNullObject:@"before"];
+        _after = [rawDictionary objectForKeyOrNilOnNullObject:@"after"];
     }
     return self;
 }

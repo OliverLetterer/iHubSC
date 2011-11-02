@@ -11,6 +11,7 @@
 
 
 @implementation GHAPIGistEventV3
+@synthesize action=_action, gist=_gist;
 
 #pragma mark - Initialization
 
@@ -19,6 +20,8 @@
     GHAPIObjectExpectedClass(&rawDictionary, NSDictionary.class);
     if (self = [super initWithRawDictionary:rawDictionary]) {
         // Initialization code
+        _action = [rawDictionary objectForKeyOrNilOnNullObject:@"action"];
+        _gist = [[GHAPIGistV3 alloc] initWithRawDictionary:[rawDictionary objectForKeyOrNilOnNullObject:@"gist"] ];
     }
     return self;
 }

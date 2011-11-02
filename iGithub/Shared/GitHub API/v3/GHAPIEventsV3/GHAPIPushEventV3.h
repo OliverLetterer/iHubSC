@@ -17,7 +17,15 @@
  */
 @interface GHAPIPushEventV3 : GHAPIEventV3 {
 @private
-    
+    NSString *_head;
+    NSString *_ref; // The full Git ref that was pushed. Example: “refs/heads/master”
+    NSNumber *_numberOfCommits;
+    NSArray *_commits;
 }
+
+@property (nonatomic, readonly) NSString *head;
+@property (nonatomic, readonly) NSString *ref;
+@property (nonatomic, readonly) NSNumber *numberOfCommits;
+@property (nonatomic, readonly) NSArray *commits;
 
 @end

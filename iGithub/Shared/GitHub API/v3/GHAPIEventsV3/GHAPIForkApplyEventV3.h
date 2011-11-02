@@ -13,11 +13,17 @@
 
 /**
  @class     GHAPIForkApplyEventEventV3
- @abstract  <#abstract comment#>
+ @abstract  Triggered when a patch is applied in the Fork Queue.
  */
 @interface GHAPIForkApplyEventV3 : GHAPIEventV3 {
 @private
-    
+    NSString *_head;
+    NSString *_before;
+    NSString *_after;
 }
+
+@property (nonatomic, readonly) NSString *head;
+@property (nonatomic, readonly) NSString *before;
+@property (nonatomic, readonly) NSString *after;
 
 @end

@@ -13,7 +13,7 @@
 
 /**
  @class     GHAPIPublicEventEventV3
- @abstract  <#abstract comment#>
+ @abstract  This is triggered when a private repo is open sourced.
  */
 @interface GHAPIPublicEventV3 : GHAPIEventV3 {
 @private

@@ -7,6 +7,7 @@
 //
 
 #import "GHAPIEventV3.h"
+#warning not supported right now
 #warning NSCoding
 
 

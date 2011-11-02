@@ -11,6 +11,7 @@
 
 
 @implementation GHAPIDeleteEventV3
+@synthesize objectType=_objectType, objectName=_objectName;
 
 #pragma mark - Initialization
 
@@ -19,6 +20,8 @@
     GHAPIObjectExpectedClass(&rawDictionary, NSDictionary.class);
     if (self = [super initWithRawDictionary:rawDictionary]) {
         // Initialization code
+        _objectType = [rawDictionary objectForKeyOrNilOnNullObject:@"ref_type"];
+        _objectName = [rawDictionary objectForKeyOrNilOnNullObject:@"ref"];
     }
     return self;
 }
