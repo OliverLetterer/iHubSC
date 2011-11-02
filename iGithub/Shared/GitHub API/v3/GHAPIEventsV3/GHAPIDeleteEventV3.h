@@ -7,7 +7,6 @@
 //
 
 #import "GHAPIEventV3.h"
-#warning NSCoding
 
 
 
@@ -15,7 +14,7 @@
  @class     GHAPIDeleteEventEventV3
  @abstract  Represents a deleted branch or tag.
  */
-@interface GHAPIDeleteEventV3 : GHAPIEventV3 {
+@interface GHAPIDeleteEventV3 : GHAPIEventV3 <NSCoding> {
 @private
     NSString *_objectType;
     NSString *_objectName;

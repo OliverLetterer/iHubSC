@@ -37,4 +37,26 @@
     return self;
 }
 
+#pragma mark - NSCoding
+
+- (void)encodeWithCoder:(NSCoder *)encoder 
+{
+    [super encodeWithCoder:encoder];
+    [encoder encodeObject:_head forKey:@"head"];
+    [encoder encodeObject:_ref forKey:@"ref"];
+    [encoder encodeObject:_numberOfCommits forKey:@"numberOfCommits"];
+    [encoder encodeObject:_commits forKey:@"commits"];
+}
+
+- (id)initWithCoder:(NSCoder *)decoder 
+{
+    if ((self = [super initWithCoder:decoder])) {
+        _head = [decoder decodeObjectForKey:@"head"];
+        _ref = [decoder decodeObjectForKey:@"ref"];
+        _numberOfCommits = [decoder decodeObjectForKey:@"numberOfCommits"];
+        _commits = [decoder decodeObjectForKey:@"commits"];
+    }
+    return self;
+}
+
 @end

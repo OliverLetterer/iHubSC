@@ -7,7 +7,6 @@
 //
 
 #import "GHAPIEventV3.h"
-#warning NSCoding
 
 
 
@@ -15,7 +14,7 @@
  @class     GHAPIForkApplyEventEventV3
  @abstract  Triggered when a patch is applied in the Fork Queue.
  */
-@interface GHAPIForkApplyEventV3 : GHAPIEventV3 {
+@interface GHAPIForkApplyEventV3 : GHAPIEventV3 <NSCoding> {
 @private
     NSString *_head;
     NSString *_before;

@@ -8,7 +8,6 @@
 
 #import "GHAPIEventV3.h"
 #import "GHAPIUserV3.h"
-#warning NSCoding
 
 
 
@@ -16,7 +15,7 @@
  @class     GHAPIMemberEventEventV3
  @abstract  Triggered when a user is added as a collaborator to a repository.
  */
-@interface GHAPIMemberEventV3 : GHAPIEventV3 {
+@interface GHAPIMemberEventV3 : GHAPIEventV3 <NSCoding> {
 @private
     NSString *_action;
     GHAPIUserV3 *_member;

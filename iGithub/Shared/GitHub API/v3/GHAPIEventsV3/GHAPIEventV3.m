@@ -29,7 +29,7 @@ NSString *const GHAPIEventV3TypeWatchEvent = @"WatchEvent";
 
 
 @implementation GHAPIEventV3
-@synthesize repository=_repository, actor=_actor, organization=_organization, createdAtString=_createdAtString, typeString=_typeString, public=_public;
+@synthesize repository=_repository, actor=_actor, organization=_organization, createdAtString=_createdAtString, typeString=_typeString, public=_public, type=_type;
 
 #pragma mark - Initialization
 
@@ -83,6 +83,31 @@ NSString *const GHAPIEventV3TypeWatchEvent = @"WatchEvent";
         } else {
             NSAssert(NO, @"_typeString (%@) in GHAPIEventV3 is of unknown type", _typeString);
         }
+    }
+    return self;
+}
+
+#pragma mark - NSCoding
+
+- (void)encodeWithCoder:(NSCoder *)encoder {
+    [encoder encodeObject:_repository forKey:@"repository"];
+    [encoder encodeObject:_actor forKey:@"actor"];
+    [encoder encodeObject:_organization forKey:@"organization"];
+    [encoder encodeObject:_createdAtString forKey:@"createdAtString"];
+    [encoder encodeObject:_typeString forKey:@"typeString"];
+    [encoder encodeObject:_public forKey:@"public"];
+    [encoder encodeInteger:_type forKey:@"type"];
+}
+
+- (id)initWithCoder:(NSCoder *)decoder {
+    if ((self = [super init])) {
+        _repository = [decoder decodeObjectForKey:@"repository"];
+        _actor = [decoder decodeObjectForKey:@"actor"];
+        _organization = [decoder decodeObjectForKey:@"organization"];
+        _createdAtString = [decoder decodeObjectForKey:@"createdAtString"];
+        _typeString = [decoder decodeObjectForKey:@"typeString"];
+        _public = [decoder decodeObjectForKey:@"public"];
+        _type = [decoder decodeIntegerForKey:@"type"];
     }
     return self;
 }

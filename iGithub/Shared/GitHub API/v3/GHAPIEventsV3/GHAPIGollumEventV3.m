@@ -33,4 +33,20 @@
     return self;
 }
 
+#pragma mark - NSCoding
+
+- (void)encodeWithCoder:(NSCoder *)encoder 
+{
+    [super encodeWithCoder:encoder];
+    [encoder encodeObject:_pages forKey:@"customPages"];
+}
+
+- (id)initWithCoder:(NSCoder *)decoder 
+{
+    if ((self = [super initWithCoder:decoder])) {
+        _pages = [decoder decodeObjectForKey:@"customPages"];
+    }
+    return self;
+}
+
 @end

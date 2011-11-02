@@ -25,4 +25,20 @@
     return self;
 }
 
+#pragma mark - NSCoding
+
+- (void)encodeWithCoder:(NSCoder *)encoder 
+{
+    [super encodeWithCoder:encoder];
+    [encoder encodeObject:_forkedRepository forKey:@"customForkedRepository"];
+}
+
+- (id)initWithCoder:(NSCoder *)decoder 
+{
+    if ((self = [super initWithCoder:decoder])) {
+        _forkedRepository = [decoder decodeObjectForKey:@"customForkedRepository"];
+    }
+    return self;
+}
+
 @end

@@ -7,7 +7,6 @@
 //
 
 #import "GHAPIEventV3.h"
-#warning NSCoding
 
 
 
@@ -15,7 +14,7 @@
  @class     GHAPIWatchEventV3
  @abstract  The event’s actor is the watcher, and the event’s repo is the watched repository.
  */
-@interface GHAPIWatchEventV3 : GHAPIEventV3 {
+@interface GHAPIWatchEventV3 : GHAPIEventV3 <NSCoding> {
 @private
     NSString *_action;
 }

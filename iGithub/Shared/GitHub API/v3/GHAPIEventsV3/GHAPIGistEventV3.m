@@ -26,4 +26,22 @@
     return self;
 }
 
+#pragma mark - NSCoding
+
+- (void)encodeWithCoder:(NSCoder *)encoder 
+{
+    [super encodeWithCoder:encoder];
+    [encoder encodeObject:_action forKey:@"customAction"];
+    [encoder encodeObject:_gist forKey:@"customGist"];
+}
+
+- (id)initWithCoder:(NSCoder *)decoder 
+{
+    if ((self = [super initWithCoder:decoder])) {
+        _action = [decoder decodeObjectForKey:@"customAction"];
+        _gist = [decoder decodeObjectForKey:@"customGist"];
+    }
+    return self;
+}
+
 @end

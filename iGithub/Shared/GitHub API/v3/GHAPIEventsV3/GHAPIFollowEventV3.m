@@ -25,4 +25,20 @@
     return self;
 }
 
+#pragma mark - NSCoding
+
+- (void)encodeWithCoder:(NSCoder *)encoder 
+{
+    [super encodeWithCoder:encoder];
+    [encoder encodeObject:_user forKey:@"customUser"];
+}
+
+- (id)initWithCoder:(NSCoder *)decoder 
+{
+    if ((self = [super initWithCoder:decoder])) {
+        _user = [decoder decodeObjectForKey:@"customUser"];
+    }
+    return self;
+}
+
 @end

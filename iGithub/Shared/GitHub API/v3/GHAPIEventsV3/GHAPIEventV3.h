@@ -53,8 +53,7 @@ typedef enum {
  @class     GHAPIEventV3
  @abstract  represents an Event
  */
-#warning NSCoding support
-@interface GHAPIEventV3 : NSObject {
+@interface GHAPIEventV3 : NSObject <NSCoding> {
 @private
     GHAPIRepositoryV3 *_repository;
     GHAPIUserV3 *_actor;

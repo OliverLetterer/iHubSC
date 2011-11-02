@@ -8,7 +8,6 @@
 
 #import "GHAPIEventV3.h"
 #import "GHAPIRepositoryV3.h"
-#warning NSCoding
 
 
 
@@ -16,7 +15,7 @@
  @class     GHAPIForkEventEventV3
  @abstract  Repository got forked.
  */
-@interface GHAPIForkEventV3 : GHAPIEventV3 {
+@interface GHAPIForkEventV3 : GHAPIEventV3 <NSCoding> {
 @private
     GHAPIRepositoryV3 *_forkedRepository;
 }

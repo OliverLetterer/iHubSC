@@ -7,14 +7,13 @@
 //
 
 #import "GHAPIEventV3.h"
-#warning NSCoding
 
 
 /**
  @class     GHAPICreateEventEventV3
  @abstract  Represents a created repository, branch, or tag.
  */
-@interface GHAPICreateEventV3 : GHAPIEventV3 {
+@interface GHAPICreateEventV3 : GHAPIEventV3 <NSCoding> {
 @private
     NSString *_createdObject;
     NSString *_objectName;

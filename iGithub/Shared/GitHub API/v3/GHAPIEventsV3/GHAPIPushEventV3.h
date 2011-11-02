@@ -7,7 +7,6 @@
 //
 
 #import "GHAPIEventV3.h"
-#warning NSCoding
 
 
 
@@ -15,7 +14,7 @@
  @class     GHAPIPushEventEventV3
  @abstract  <#abstract comment#>
  */
-@interface GHAPIPushEventV3 : GHAPIEventV3 {
+@interface GHAPIPushEventV3 : GHAPIEventV3 <NSCoding> {
 @private
     NSString *_head;
     NSString *_ref; // The full Git ref that was pushed. Example: “refs/heads/master”

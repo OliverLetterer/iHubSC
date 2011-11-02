@@ -8,7 +8,6 @@
 
 #import "GHAPIEventV3.h"
 #import "GHAPIIssueV3.h"
-#warning NSCoding
 
 
 
@@ -16,7 +15,7 @@
  @class     GHAPIIssuesEventEventV3
  @abstract  <#abstract comment#>
  */
-@interface GHAPIIssuesEventV3 : GHAPIEventV3 {
+@interface GHAPIIssuesEventV3 : GHAPIEventV3 <NSCoding> {
 @private
     NSString *_action;
     GHAPIIssueV3 *_issue;

@@ -10,7 +10,6 @@
 #import "GHAPITeamV3.h"
 #import "GHAPIUserV3.h"
 #import "GHAPIRepositoryV3.h"
-#warning NSCoding
 
 
 
@@ -18,7 +17,7 @@
  @class     GHAPITeamAddEventV3
  @abstract  <#abstract comment#>
  */
-@interface GHAPITeamAddEventV3 : GHAPIEventV3 {
+@interface GHAPITeamAddEventV3 : GHAPIEventV3 <NSCoding> {
 @private
     GHAPIRepositoryV3 *_teamRepository;
     GHAPITeamV3 *_team;

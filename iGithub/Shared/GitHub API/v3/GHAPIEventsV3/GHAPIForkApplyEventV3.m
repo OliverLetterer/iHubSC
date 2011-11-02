@@ -27,4 +27,24 @@
     return self;
 }
 
+#pragma mark - NSCoding
+
+- (void)encodeWithCoder:(NSCoder *)encoder 
+{
+    [super encodeWithCoder:encoder];
+    [encoder encodeObject:_head forKey:@"customHead"];
+    [encoder encodeObject:_before forKey:@"customBefore"];
+    [encoder encodeObject:_after forKey:@"customAfter"];
+}
+
+- (id)initWithCoder:(NSCoder *)decoder 
+{
+    if ((self = [super initWithCoder:decoder])) {
+        _head = [decoder decodeObjectForKey:@"customHead"];
+        _before = [decoder decodeObjectForKey:@"customBefore"];
+        _after = [decoder decodeObjectForKey:@"customAfter"];
+    }
+    return self;
+}
+
 @end

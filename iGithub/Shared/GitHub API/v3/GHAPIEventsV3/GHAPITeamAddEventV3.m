@@ -27,4 +27,24 @@
     return self;
 }
 
+#pragma mark - NSCoding
+
+- (void)encodeWithCoder:(NSCoder *)encoder 
+{
+    [super encodeWithCoder:encoder];
+    [encoder encodeObject:_teamRepository forKey:@"teamRepository"];
+    [encoder encodeObject:_team forKey:@"team"];
+    [encoder encodeObject:_teamUser forKey:@"teamUser"];
+}
+
+- (id)initWithCoder:(NSCoder *)decoder 
+{
+    if ((self = [super initWithCoder:decoder])) {
+        _teamRepository = [decoder decodeObjectForKey:@"teamRepository"];
+        _team = [decoder decodeObjectForKey:@"team"];
+        _teamUser = [decoder decodeObjectForKey:@"teamUser"];
+    }
+    return self;
+}
+
 @end

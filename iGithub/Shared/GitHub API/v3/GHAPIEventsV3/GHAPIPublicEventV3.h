@@ -7,7 +7,6 @@
 //
 
 #import "GHAPIEventV3.h"
-#warning NSCoding
 
 
 
@@ -15,7 +14,7 @@
  @class     GHAPIPublicEventEventV3
  @abstract  This is triggered when a private repo is open sourced.
  */
-@interface GHAPIPublicEventV3 : GHAPIEventV3 {
+@interface GHAPIPublicEventV3 : GHAPIEventV3 <NSCoding> {
 @private
     
 }

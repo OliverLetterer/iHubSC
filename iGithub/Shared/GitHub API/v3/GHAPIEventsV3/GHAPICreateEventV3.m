@@ -28,4 +28,26 @@
     return self;
 }
 
+#pragma mark - NSCoding
+
+- (void)encodeWithCoder:(NSCoder *)encoder 
+{
+    [super encodeWithCoder:encoder];
+    [encoder encodeObject:_createdObject forKey:@"customCreatedObject"];
+    [encoder encodeObject:_objectName forKey:@"customObjectName"];
+    [encoder encodeObject:_masterBranch forKey:@"customMasterBranch"];
+    [encoder encodeObject:_description forKey:@"customDescription"];
+}
+
+- (id)initWithCoder:(NSCoder *)decoder 
+{
+    if ((self = [super initWithCoder:decoder])) {
+        _createdObject = [decoder decodeObjectForKey:@"customCreatedObject"];
+        _objectName = [decoder decodeObjectForKey:@"customObjectName"];
+        _masterBranch = [decoder decodeObjectForKey:@"customMasterBranch"];
+        _description = [decoder decodeObjectForKey:@"customDescription"];
+    }
+    return self;
+}
+
 @end

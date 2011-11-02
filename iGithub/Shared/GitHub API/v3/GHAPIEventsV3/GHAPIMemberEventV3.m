@@ -26,4 +26,22 @@
     return self;
 }
 
+#pragma mark - NSCoding
+
+- (void)encodeWithCoder:(NSCoder *)encoder 
+{
+    [super encodeWithCoder:encoder];
+    [encoder encodeObject:_action forKey:@"action"];
+    [encoder encodeObject:_member forKey:@"member"];
+}
+
+- (id)initWithCoder:(NSCoder *)decoder 
+{
+    if ((self = [super initWithCoder:decoder])) {
+        _action = [decoder decodeObjectForKey:@"action"];
+        _member = [decoder decodeObjectForKey:@"member"];
+    }
+    return self;
+}
+
 @end

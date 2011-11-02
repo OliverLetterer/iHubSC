@@ -29,4 +29,27 @@
     return self;
 }
 
+#pragma mark - NSCoding
+
+- (void)encodeWithCoder:(NSCoder *)encoder 
+{
+    [encoder encodeObject:_pageName forKey:@"customPageName"];
+    [encoder encodeObject:_title forKey:@"customTitle"];
+    [encoder encodeObject:_action forKey:@"customAction"];
+    [encoder encodeObject:_SHA forKey:@"customSHA"];
+    [encoder encodeObject:_HTMLURL forKey:@"customHTMLURL"];
+}
+
+- (id)initWithCoder:(NSCoder *)decoder 
+{
+    if ((self = [super init])) {
+        _pageName = [decoder decodeObjectForKey:@"customPageName"];
+        _title = [decoder decodeObjectForKey:@"customTitle"];
+        _action = [decoder decodeObjectForKey:@"customAction"];
+        _SHA = [decoder decodeObjectForKey:@"customSHA"];
+        _HTMLURL = [decoder decodeObjectForKey:@"customHTMLURL"];
+    }
+    return self;
+}
+
 @end

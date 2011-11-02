@@ -26,4 +26,22 @@
     return self;
 }
 
+#pragma mark - NSCoding
+
+- (void)encodeWithCoder:(NSCoder *)encoder 
+{
+    [super encodeWithCoder:encoder];
+    [encoder encodeObject:_objectType forKey:@"customObjectType"];
+    [encoder encodeObject:_objectName forKey:@"customObjectName"];
+}
+
+- (id)initWithCoder:(NSCoder *)decoder 
+{
+    if ((self = [super initWithCoder:decoder])) {
+        _objectType = [decoder decodeObjectForKey:@"customObjectType"];
+        _objectName = [decoder decodeObjectForKey:@"customObjectName"];
+    }
+    return self;
+}
+
 @end

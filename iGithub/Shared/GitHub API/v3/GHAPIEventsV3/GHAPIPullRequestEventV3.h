@@ -8,7 +8,6 @@
 
 #import "GHAPIEventV3.h"
 #import "GHAPIIssueV3.h"
-#warning NSCoding
 
 
 
@@ -16,7 +15,7 @@
  @class     GHAPIPullRequestEventEventV3
  @abstract  <#abstract comment#>
  */
-@interface GHAPIPullRequestEventV3 : GHAPIEventV3 {
+@interface GHAPIPullRequestEventV3 : GHAPIEventV3 <NSCoding> {
 @private
     GHAPIIssueV3 *_pullRequest;
     NSString *_action;

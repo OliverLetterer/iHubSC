@@ -6,15 +6,13 @@
 //  Copyright 2011 Home. All rights reserved.
 //
 
-#warning NSCoding
-
 
 
 /**
  @class     GHAPIGollumPageV3
  @abstract  one page of GHAPIGollumEventV3.
  */
-@interface GHAPIGollumPageV3 : NSObject {
+@interface GHAPIGollumPageV3 : NSObject <NSCoding> {
 @private
     NSString *_pageName;
     NSString *_title;

@@ -7,7 +7,6 @@
 //
 
 #import "GHAPIEventV3.h"
-#warning NSCoding
 
 
 
@@ -15,7 +14,7 @@
  @class     GHAPIGollumEventEventV3
  @abstract  Wiki pages got updated.
  */
-@interface GHAPIGollumEventV3 : GHAPIEventV3 {
+@interface GHAPIGollumEventV3 : GHAPIEventV3 <NSCoding> {
 @private
     NSArray *_pages;
 }
