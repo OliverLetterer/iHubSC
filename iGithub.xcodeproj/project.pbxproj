@@ -363,6 +363,24 @@
 		A7C5257E13E6B2B80003EEE5 /* GHDateSelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7C5257D13E6B2B80003EEE5 /* GHDateSelectViewController.m */; };
 		A7C5258113E6B64A0003EEE5 /* GHPCreateMilestoneTitleAndDescriptionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A7C5258013E6B64A0003EEE5 /* GHPCreateMilestoneTitleAndDescriptionTableViewCell.m */; };
 		A7C5259613E6E0170003EEE5 /* GHUpdateMilestoneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7C5259513E6E0160003EEE5 /* GHUpdateMilestoneViewController.m */; };
+		A7C667CA14616AFB004E6EAA /* GHAPIEventV3.m in Sources */ = {isa = PBXBuildFile; fileRef = A7C667C914616AFB004E6EAA /* GHAPIEventV3.m */; };
+		A7C667CD14617001004E6EAA /* GHAPICommitCommentEventV3.m in Sources */ = {isa = PBXBuildFile; fileRef = A7C667CC14617001004E6EAA /* GHAPICommitCommentEventV3.m */; };
+		A7C667D014617031004E6EAA /* GHAPICreateEventV3.m in Sources */ = {isa = PBXBuildFile; fileRef = A7C667CF14617031004E6EAA /* GHAPICreateEventV3.m */; };
+		A7C667D314617042004E6EAA /* GHAPIDeleteEventV3.m in Sources */ = {isa = PBXBuildFile; fileRef = A7C667D214617042004E6EAA /* GHAPIDeleteEventV3.m */; };
+		A7C667D614617053004E6EAA /* GHAPIDownloadEventV3.m in Sources */ = {isa = PBXBuildFile; fileRef = A7C667D514617052004E6EAA /* GHAPIDownloadEventV3.m */; };
+		A7C667D914617062004E6EAA /* GHAPIFollowEventV3.m in Sources */ = {isa = PBXBuildFile; fileRef = A7C667D814617061004E6EAA /* GHAPIFollowEventV3.m */; };
+		A7C667DC14617072004E6EAA /* GHAPIForkEventV3.m in Sources */ = {isa = PBXBuildFile; fileRef = A7C667DB14617072004E6EAA /* GHAPIForkEventV3.m */; };
+		A7C667DF1461708B004E6EAA /* GHAPIForkApplyEventV3.m in Sources */ = {isa = PBXBuildFile; fileRef = A7C667DE1461708B004E6EAA /* GHAPIForkApplyEventV3.m */; };
+		A7C667E21461709C004E6EAA /* GHAPIGistEventV3.m in Sources */ = {isa = PBXBuildFile; fileRef = A7C667E11461709B004E6EAA /* GHAPIGistEventV3.m */; };
+		A7C667E5146170B2004E6EAA /* GHAPIGollumEventV3.m in Sources */ = {isa = PBXBuildFile; fileRef = A7C667E4146170B1004E6EAA /* GHAPIGollumEventV3.m */; };
+		A7C667E8146170C2004E6EAA /* GHAPIIssueCommentEventV3.m in Sources */ = {isa = PBXBuildFile; fileRef = A7C667E7146170C1004E6EAA /* GHAPIIssueCommentEventV3.m */; };
+		A7C667EB146170D4004E6EAA /* GHAPIIssuesEventV3.m in Sources */ = {isa = PBXBuildFile; fileRef = A7C667EA146170D3004E6EAA /* GHAPIIssuesEventV3.m */; };
+		A7C667EE146170EF004E6EAA /* GHAPIMemberEventV3.m in Sources */ = {isa = PBXBuildFile; fileRef = A7C667ED146170EE004E6EAA /* GHAPIMemberEventV3.m */; };
+		A7C667F114618FA2004E6EAA /* GHAPIPublicEventV3.m in Sources */ = {isa = PBXBuildFile; fileRef = A7C667F014618FA0004E6EAA /* GHAPIPublicEventV3.m */; };
+		A7C667F414618FB8004E6EAA /* GHAPIPullRequestEventV3.m in Sources */ = {isa = PBXBuildFile; fileRef = A7C667F314618FB7004E6EAA /* GHAPIPullRequestEventV3.m */; };
+		A7C667F71461902C004E6EAA /* GHAPIPushEventV3.m in Sources */ = {isa = PBXBuildFile; fileRef = A7C667F61461902A004E6EAA /* GHAPIPushEventV3.m */; };
+		A7C667FA14619041004E6EAA /* GHAPITeamAddEventV3.m in Sources */ = {isa = PBXBuildFile; fileRef = A7C667F91461903F004E6EAA /* GHAPITeamAddEventV3.m */; };
+		A7C667FD14619062004E6EAA /* GHAPIWatchEventV3.m in Sources */ = {isa = PBXBuildFile; fileRef = A7C667FC14619061004E6EAA /* GHAPIWatchEventV3.m */; };
 		A7CE1B831346349200169F94 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7CE1B821346349000169F94 /* CoreData.framework */; };
 		A7D14F451354E5A700E1B980 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7D14F441354E5A600E1B980 /* MessageUI.framework */; };
 		A7D888FE13F13B79002ED2FF /* UIBarButtonItem+GHEmpty.m in Sources */ = {isa = PBXBuildFile; fileRef = A7D888FD13F13B79002ED2FF /* UIBarButtonItem+GHEmpty.m */; };
@@ -1061,6 +1079,42 @@
 		A7C5258013E6B64A0003EEE5 /* GHPCreateMilestoneTitleAndDescriptionTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPCreateMilestoneTitleAndDescriptionTableViewCell.m; sourceTree = "<group>"; };
 		A7C5259413E6E0160003EEE5 /* GHUpdateMilestoneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHUpdateMilestoneViewController.h; sourceTree = "<group>"; };
 		A7C5259513E6E0160003EEE5 /* GHUpdateMilestoneViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHUpdateMilestoneViewController.m; sourceTree = "<group>"; };
+		A7C667C814616AFB004E6EAA /* GHAPIEventV3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHAPIEventV3.h; sourceTree = "<group>"; };
+		A7C667C914616AFB004E6EAA /* GHAPIEventV3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHAPIEventV3.m; sourceTree = "<group>"; };
+		A7C667CB14617001004E6EAA /* GHAPICommitCommentEventV3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHAPICommitCommentEventV3.h; sourceTree = "<group>"; };
+		A7C667CC14617001004E6EAA /* GHAPICommitCommentEventV3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHAPICommitCommentEventV3.m; sourceTree = "<group>"; };
+		A7C667CE14617031004E6EAA /* GHAPICreateEventV3.h */ = {isa = PBXFileReference; fileEncoding = 4; path = GHAPICreateEventV3.h; sourceTree = "<group>"; };
+		A7C667CF14617031004E6EAA /* GHAPICreateEventV3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHAPICreateEventV3.m; sourceTree = "<group>"; };
+		A7C667D114617041004E6EAA /* GHAPIDeleteEventV3.h */ = {isa = PBXFileReference; fileEncoding = 4; path = GHAPIDeleteEventV3.h; sourceTree = "<group>"; };
+		A7C667D214617042004E6EAA /* GHAPIDeleteEventV3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHAPIDeleteEventV3.m; sourceTree = "<group>"; };
+		A7C667D414617052004E6EAA /* GHAPIDownloadEventV3.h */ = {isa = PBXFileReference; fileEncoding = 4; path = GHAPIDownloadEventV3.h; sourceTree = "<group>"; };
+		A7C667D514617052004E6EAA /* GHAPIDownloadEventV3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHAPIDownloadEventV3.m; sourceTree = "<group>"; };
+		A7C667D714617061004E6EAA /* GHAPIFollowEventV3.h */ = {isa = PBXFileReference; fileEncoding = 4; path = GHAPIFollowEventV3.h; sourceTree = "<group>"; };
+		A7C667D814617061004E6EAA /* GHAPIFollowEventV3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHAPIFollowEventV3.m; sourceTree = "<group>"; };
+		A7C667DA14617071004E6EAA /* GHAPIForkEventV3.h */ = {isa = PBXFileReference; fileEncoding = 4; path = GHAPIForkEventV3.h; sourceTree = "<group>"; };
+		A7C667DB14617072004E6EAA /* GHAPIForkEventV3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHAPIForkEventV3.m; sourceTree = "<group>"; };
+		A7C667DD1461708B004E6EAA /* GHAPIForkApplyEventV3.h */ = {isa = PBXFileReference; fileEncoding = 4; path = GHAPIForkApplyEventV3.h; sourceTree = "<group>"; };
+		A7C667DE1461708B004E6EAA /* GHAPIForkApplyEventV3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHAPIForkApplyEventV3.m; sourceTree = "<group>"; };
+		A7C667E01461709B004E6EAA /* GHAPIGistEventV3.h */ = {isa = PBXFileReference; fileEncoding = 4; path = GHAPIGistEventV3.h; sourceTree = "<group>"; };
+		A7C667E11461709B004E6EAA /* GHAPIGistEventV3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHAPIGistEventV3.m; sourceTree = "<group>"; };
+		A7C667E3146170B0004E6EAA /* GHAPIGollumEventV3.h */ = {isa = PBXFileReference; fileEncoding = 4; path = GHAPIGollumEventV3.h; sourceTree = "<group>"; };
+		A7C667E4146170B1004E6EAA /* GHAPIGollumEventV3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHAPIGollumEventV3.m; sourceTree = "<group>"; };
+		A7C667E6146170C1004E6EAA /* GHAPIIssueCommentEventV3.h */ = {isa = PBXFileReference; fileEncoding = 4; path = GHAPIIssueCommentEventV3.h; sourceTree = "<group>"; };
+		A7C667E7146170C1004E6EAA /* GHAPIIssueCommentEventV3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHAPIIssueCommentEventV3.m; sourceTree = "<group>"; };
+		A7C667E9146170D2004E6EAA /* GHAPIIssuesEventV3.h */ = {isa = PBXFileReference; fileEncoding = 4; path = GHAPIIssuesEventV3.h; sourceTree = "<group>"; };
+		A7C667EA146170D3004E6EAA /* GHAPIIssuesEventV3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHAPIIssuesEventV3.m; sourceTree = "<group>"; };
+		A7C667EC146170ED004E6EAA /* GHAPIMemberEventV3.h */ = {isa = PBXFileReference; fileEncoding = 4; path = GHAPIMemberEventV3.h; sourceTree = "<group>"; };
+		A7C667ED146170EE004E6EAA /* GHAPIMemberEventV3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHAPIMemberEventV3.m; sourceTree = "<group>"; };
+		A7C667EF14618F9F004E6EAA /* GHAPIPublicEventV3.h */ = {isa = PBXFileReference; fileEncoding = 4; path = GHAPIPublicEventV3.h; sourceTree = "<group>"; };
+		A7C667F014618FA0004E6EAA /* GHAPIPublicEventV3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHAPIPublicEventV3.m; sourceTree = "<group>"; };
+		A7C667F214618FB5004E6EAA /* GHAPIPullRequestEventV3.h */ = {isa = PBXFileReference; fileEncoding = 4; path = GHAPIPullRequestEventV3.h; sourceTree = "<group>"; };
+		A7C667F314618FB7004E6EAA /* GHAPIPullRequestEventV3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHAPIPullRequestEventV3.m; sourceTree = "<group>"; };
+		A7C667F514619029004E6EAA /* GHAPIPushEventV3.h */ = {isa = PBXFileReference; fileEncoding = 4; path = GHAPIPushEventV3.h; sourceTree = "<group>"; };
+		A7C667F61461902A004E6EAA /* GHAPIPushEventV3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHAPIPushEventV3.m; sourceTree = "<group>"; };
+		A7C667F81461903E004E6EAA /* GHAPITeamAddEventV3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHAPITeamAddEventV3.h; sourceTree = "<group>"; };
+		A7C667F91461903F004E6EAA /* GHAPITeamAddEventV3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHAPITeamAddEventV3.m; sourceTree = "<group>"; };
+		A7C667FB1461905E004E6EAA /* GHAPIWatchEventV3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHAPIWatchEventV3.h; sourceTree = "<group>"; };
+		A7C667FC14619061004E6EAA /* GHAPIWatchEventV3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHAPIWatchEventV3.m; sourceTree = "<group>"; };
 		A7CE1B821346349000169F94 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		A7D14F441354E5A600E1B980 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		A7D41AC41358B6B500CD3A5C /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
@@ -2430,6 +2484,7 @@
 		A7841F0013E194BB00131648 /* v3 */ = {
 			isa = PBXGroup;
 			children = (
+				A7C667C714616AE8004E6EAA /* GHAPIEventsV3 */,
 				A7BD1EED13E49F0C0016A662 /* GHAPITreeV3 */,
 				A7841F0113E194BB00131648 /* GHAPIBackgroundQueueV3 */,
 				A7841F0413E194BB00131648 /* GHAPICommitV3 */,
@@ -3291,6 +3346,49 @@
 			path = GHDateSelectViewController;
 			sourceTree = "<group>";
 		};
+		A7C667C714616AE8004E6EAA /* GHAPIEventsV3 */ = {
+			isa = PBXGroup;
+			children = (
+				A7C667C814616AFB004E6EAA /* GHAPIEventV3.h */,
+				A7C667C914616AFB004E6EAA /* GHAPIEventV3.m */,
+				A7C667CB14617001004E6EAA /* GHAPICommitCommentEventV3.h */,
+				A7C667CC14617001004E6EAA /* GHAPICommitCommentEventV3.m */,
+				A7C667CE14617031004E6EAA /* GHAPICreateEventV3.h */,
+				A7C667CF14617031004E6EAA /* GHAPICreateEventV3.m */,
+				A7C667D114617041004E6EAA /* GHAPIDeleteEventV3.h */,
+				A7C667D214617042004E6EAA /* GHAPIDeleteEventV3.m */,
+				A7C667D414617052004E6EAA /* GHAPIDownloadEventV3.h */,
+				A7C667D514617052004E6EAA /* GHAPIDownloadEventV3.m */,
+				A7C667D714617061004E6EAA /* GHAPIFollowEventV3.h */,
+				A7C667D814617061004E6EAA /* GHAPIFollowEventV3.m */,
+				A7C667DA14617071004E6EAA /* GHAPIForkEventV3.h */,
+				A7C667DB14617072004E6EAA /* GHAPIForkEventV3.m */,
+				A7C667DD1461708B004E6EAA /* GHAPIForkApplyEventV3.h */,
+				A7C667DE1461708B004E6EAA /* GHAPIForkApplyEventV3.m */,
+				A7C667E01461709B004E6EAA /* GHAPIGistEventV3.h */,
+				A7C667E11461709B004E6EAA /* GHAPIGistEventV3.m */,
+				A7C667E3146170B0004E6EAA /* GHAPIGollumEventV3.h */,
+				A7C667E4146170B1004E6EAA /* GHAPIGollumEventV3.m */,
+				A7C667E6146170C1004E6EAA /* GHAPIIssueCommentEventV3.h */,
+				A7C667E7146170C1004E6EAA /* GHAPIIssueCommentEventV3.m */,
+				A7C667E9146170D2004E6EAA /* GHAPIIssuesEventV3.h */,
+				A7C667EA146170D3004E6EAA /* GHAPIIssuesEventV3.m */,
+				A7C667EC146170ED004E6EAA /* GHAPIMemberEventV3.h */,
+				A7C667ED146170EE004E6EAA /* GHAPIMemberEventV3.m */,
+				A7C667EF14618F9F004E6EAA /* GHAPIPublicEventV3.h */,
+				A7C667F014618FA0004E6EAA /* GHAPIPublicEventV3.m */,
+				A7C667F214618FB5004E6EAA /* GHAPIPullRequestEventV3.h */,
+				A7C667F314618FB7004E6EAA /* GHAPIPullRequestEventV3.m */,
+				A7C667F514619029004E6EAA /* GHAPIPushEventV3.h */,
+				A7C667F61461902A004E6EAA /* GHAPIPushEventV3.m */,
+				A7C667F81461903E004E6EAA /* GHAPITeamAddEventV3.h */,
+				A7C667F91461903F004E6EAA /* GHAPITeamAddEventV3.m */,
+				A7C667FB1461905E004E6EAA /* GHAPIWatchEventV3.h */,
+				A7C667FC14619061004E6EAA /* GHAPIWatchEventV3.m */,
+			);
+			path = GHAPIEventsV3;
+			sourceTree = "<group>";
+		};
 		A7D888FF13F13B86002ED2FF /* UIBarButtonItem+GHEmpty */ = {
 			isa = PBXGroup;
 			children = (
@@ -3829,6 +3927,24 @@
 				A79433E2141FCEDD000EF1FC /* DTCSSStylesheet.m in Sources */,
 				A72B1B37142E799B0086750C /* UIImage+UITabBarStyle.m in Sources */,
 				A7824A7314372A6300A11956 /* GHGollumPageEvent.m in Sources */,
+				A7C667CA14616AFB004E6EAA /* GHAPIEventV3.m in Sources */,
+				A7C667CD14617001004E6EAA /* GHAPICommitCommentEventV3.m in Sources */,
+				A7C667D014617031004E6EAA /* GHAPICreateEventV3.m in Sources */,
+				A7C667D314617042004E6EAA /* GHAPIDeleteEventV3.m in Sources */,
+				A7C667D614617053004E6EAA /* GHAPIDownloadEventV3.m in Sources */,
+				A7C667D914617062004E6EAA /* GHAPIFollowEventV3.m in Sources */,
+				A7C667DC14617072004E6EAA /* GHAPIForkEventV3.m in Sources */,
+				A7C667DF1461708B004E6EAA /* GHAPIForkApplyEventV3.m in Sources */,
+				A7C667E21461709C004E6EAA /* GHAPIGistEventV3.m in Sources */,
+				A7C667E5146170B2004E6EAA /* GHAPIGollumEventV3.m in Sources */,
+				A7C667E8146170C2004E6EAA /* GHAPIIssueCommentEventV3.m in Sources */,
+				A7C667EB146170D4004E6EAA /* GHAPIIssuesEventV3.m in Sources */,
+				A7C667EE146170EF004E6EAA /* GHAPIMemberEventV3.m in Sources */,
+				A7C667F114618FA2004E6EAA /* GHAPIPublicEventV3.m in Sources */,
+				A7C667F414618FB8004E6EAA /* GHAPIPullRequestEventV3.m in Sources */,
+				A7C667F71461902C004E6EAA /* GHAPIPushEventV3.m in Sources */,
+				A7C667FA14619041004E6EAA /* GHAPITeamAddEventV3.m in Sources */,
+				A7C667FD14619062004E6EAA /* GHAPIWatchEventV3.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3912,8 +4028,8 @@
 					"-Objc",
 					"-all_load",
 				);
-				PROVISIONING_PROFILE = "43F45573-3082-4610-A27E-226882E16FC6";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "43F45573-3082-4610-A27E-226882E16FC6";
+				PROVISIONING_PROFILE = "B8206DF7-45D0-44F3-A17B-4EE63ED7E94B";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "B8206DF7-45D0-44F3-A17B-4EE63ED7E94B";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -3926,8 +4042,8 @@
 				CLANG_ARC_MIGRATION = donothing;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_OBJCPP_ARC_ABI = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Oliver Letterer (U4JU39Q339)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Oliver Letterer (U4JU39Q339)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Oliver Letterer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Oliver Letterer";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -3949,8 +4065,8 @@
 					"-Objc",
 					"-all_load",
 				);
-				PROVISIONING_PROFILE = "43F45573-3082-4610-A27E-226882E16FC6";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "43F45573-3082-4610-A27E-226882E16FC6";
+				PROVISIONING_PROFILE = "24B11464-9774-4202-97EA-8E6AB1752539";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "24B11464-9774-4202-97EA-8E6AB1752539";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
