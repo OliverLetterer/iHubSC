@@ -26,6 +26,50 @@ NSString *const GHAPIEventV3TypePushEvent = @"PushEvent";
 NSString *const GHAPIEventV3TypeTeamAddEvent = @"TeamAddEvent";
 NSString *const GHAPIEventV3TypeWatchEvent = @"WatchEvent";
 
+GHAPIEventTypeV3 GHAPIEventTypeV3FromNSString(NSString *eventType)
+{
+    GHAPIEventTypeV3 type = GHAPIEventTypeV3Unkown;
+    
+    if ([eventType isEqualToString:GHAPIEventV3TypeCommitComment]) {
+        type = GHAPIEventTypeV3CommitComment;
+    } else if ([eventType isEqualToString:GHAPIEventV3TypeCreateEvent]) {
+        type = GHAPIEventTypeV3CreateEvent;
+    } else if ([eventType isEqualToString:GHAPIEventV3TypeDeleteEvent]) {
+        type = GHAPIEventTypeV3DeleteEvent;
+    } else if ([eventType isEqualToString:GHAPIEventV3TypeDownloadEvent]) {
+        type = GHAPIEventTypeV3DownloadEvent;
+    } else if ([eventType isEqualToString:GHAPIEventV3TypeFollowEvent]) {
+        type = GHAPIEventTypeV3FollowEvent;
+    } else if ([eventType isEqualToString:GHAPIEventV3TypeForkEvent]) {
+        type = GHAPIEventTypeV3ForkEvent;
+    } else if ([eventType isEqualToString:GHAPIEventV3TypeForkApplyEvent]) {
+        type = GHAPIEventTypeV3ForkApplyEvent;
+    } else if ([eventType isEqualToString:GHAPIEventV3TypeGistEvent]) {
+        type = GHAPIEventTypeV3GistEvent;
+    } else if ([eventType isEqualToString:GHAPIEventV3TypeGollumEvent]) {
+        type = GHAPIEventTypeV3GollumEvent;
+    } else if ([eventType isEqualToString:GHAPIEventV3TypeIssueCommentEvent]) {
+        type = GHAPIEventTypeV3IssueCommentEvent;
+    } else if ([eventType isEqualToString:GHAPIEventV3TypeIssuesEvent]) {
+        type = GHAPIEventTypeV3IssuesEvent;
+    } else if ([eventType isEqualToString:GHAPIEventV3TypeMemberEvent]) {
+        type = GHAPIEventTypeV3MemberEvent;
+    } else if ([eventType isEqualToString:GHAPIEventV3TypePublicEvent]) {
+        type = GHAPIEventTypeV3PublicEvent;
+    } else if ([eventType isEqualToString:GHAPIEventV3TypePullRequestEvent]) {
+        type = GHAPIEventTypeV3PullRequestEvent;
+    } else if ([eventType isEqualToString:GHAPIEventV3TypePushEvent]) {
+        type = GHAPIEventTypeV3PushEvent;
+    } else if ([eventType isEqualToString:GHAPIEventV3TypeTeamAddEvent]) {
+        type = GHAPIEventTypeV3TeamAddEvent;
+    } else if ([eventType isEqualToString:GHAPIEventV3TypeWatchEvent]) {
+        type = GHAPIEventTypeV3WatchEvent;
+    } else {
+        type = GHAPIEventTypeV3Unkown;
+    }
+    
+    return type;
+}
 
 
 @implementation GHAPIEventV3
@@ -46,43 +90,8 @@ NSString *const GHAPIEventV3TypeWatchEvent = @"WatchEvent";
         _typeString = [rawDictionary objectForKeyOrNilOnNullObject:@"type"];
         _public = [rawDictionary objectForKeyOrNilOnNullObject:@"public"];
         
-        if ([_typeString isEqualToString:GHAPIEventV3TypeCommitComment]) {
-            _type = GHAPIEventTypeV3CommitComment;
-        } else if ([_typeString isEqualToString:GHAPIEventV3TypeCreateEvent]) {
-            _type = GHAPIEventTypeV3CreateEvent;
-        } else if ([_typeString isEqualToString:GHAPIEventV3TypeDeleteEvent]) {
-            _type = GHAPIEventTypeV3DeleteEvent;
-        } else if ([_typeString isEqualToString:GHAPIEventV3TypeDownloadEvent]) {
-            _type = GHAPIEventTypeV3DownloadEvent;
-        } else if ([_typeString isEqualToString:GHAPIEventV3TypeFollowEvent]) {
-            _type = GHAPIEventTypeV3FollowEvent;
-        } else if ([_typeString isEqualToString:GHAPIEventV3TypeForkEvent]) {
-            _type = GHAPIEventTypeV3ForkEvent;
-        } else if ([_typeString isEqualToString:GHAPIEventV3TypeForkApplyEvent]) {
-            _type = GHAPIEventTypeV3ForkApplyEvent;
-        } else if ([_typeString isEqualToString:GHAPIEventV3TypeGistEvent]) {
-            _type = GHAPIEventTypeV3GistEvent;
-        } else if ([_typeString isEqualToString:GHAPIEventV3TypeGollumEvent]) {
-            _type = GHAPIEventTypeV3GollumEvent;
-        } else if ([_typeString isEqualToString:GHAPIEventV3TypeIssueCommentEvent]) {
-            _type = GHAPIEventTypeV3IssueCommentEvent;
-        } else if ([_typeString isEqualToString:GHAPIEventV3TypeIssuesEvent]) {
-            _type = GHAPIEventTypeV3IssuesEvent;
-        } else if ([_typeString isEqualToString:GHAPIEventV3TypeMemberEvent]) {
-            _type = GHAPIEventTypeV3MemberEvent;
-        } else if ([_typeString isEqualToString:GHAPIEventV3TypePublicEvent]) {
-            _type = GHAPIEventTypeV3PublicEvent;
-        } else if ([_typeString isEqualToString:GHAPIEventV3TypePullRequestEvent]) {
-            _type = GHAPIEventTypeV3PullRequestEvent;
-        } else if ([_typeString isEqualToString:GHAPIEventV3TypePushEvent]) {
-            _type = GHAPIEventTypeV3PushEvent;
-        } else if ([_typeString isEqualToString:GHAPIEventV3TypeTeamAddEvent]) {
-            _type = GHAPIEventTypeV3TeamAddEvent;
-        } else if ([_typeString isEqualToString:GHAPIEventV3TypeWatchEvent]) {
-            _type = GHAPIEventTypeV3WatchEvent;
-        } else {
-            NSAssert(NO, @"_typeString (%@) in GHAPIEventV3 is of unknown type", _typeString);
-        }
+        _type = GHAPIEventTypeV3FromNSString(_typeString);
+        NSAssert(_type != GHAPIEventTypeV3Unkown, @"_typeString (%@) cannot be unkown", _typeString);
     }
     return self;
 }

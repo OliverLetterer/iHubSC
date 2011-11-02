@@ -29,7 +29,8 @@ extern NSString *const GHAPIEventV3TypeTeamAddEvent;
 extern NSString *const GHAPIEventV3TypeWatchEvent;
 
 typedef enum {
-    GHAPIEventTypeV3CommitComment = 0,
+    GHAPIEventTypeV3Unkown = 0,
+    GHAPIEventTypeV3CommitComment,
     GHAPIEventTypeV3CreateEvent,
     GHAPIEventTypeV3DeleteEvent,
     GHAPIEventTypeV3DownloadEvent,
@@ -48,6 +49,7 @@ typedef enum {
     GHAPIEventTypeV3WatchEvent,
 } GHAPIEventTypeV3;
 
+GHAPIEventTypeV3 GHAPIEventTypeV3FromNSString(NSString *eventType);
 
 /**
  @class     GHAPIEventV3
