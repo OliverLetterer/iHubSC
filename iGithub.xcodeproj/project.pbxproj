@@ -11,6 +11,7 @@
 		A71DF5ED13F5349300D8038E /* DTCSSListStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = A71DF5EC13F5349200D8038E /* DTCSSListStyle.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		A7204D8113E4759F0098C86A /* GHAPIMarkdownFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = A7204D8013E4759F0098C86A /* GHAPIMarkdownFormatter.m */; };
 		A7218E861461E76A0081CB02 /* GHAPIDownloadV3.m in Sources */ = {isa = PBXBuildFile; fileRef = A7218E851461E76A0081CB02 /* GHAPIDownloadV3.m */; };
+		A7218E8C1461E92D0081CB02 /* GHAPICommitCommentV3.m in Sources */ = {isa = PBXBuildFile; fileRef = A7218E8B1461E92D0081CB02 /* GHAPICommitCommentV3.m */; };
 		A72B1B37142E799B0086750C /* UIImage+UITabBarStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = A72B1B34142E799B0086750C /* UIImage+UITabBarStyle.m */; };
 		A72B1B38142E799B0086750C /* UITabBarItemGradient.png in Resources */ = {isa = PBXBuildFile; fileRef = A72B1B35142E799B0086750C /* UITabBarItemGradient.png */; };
 		A72B1B39142E799B0086750C /* UITabBarItemGradient@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A72B1B36142E799B0086750C /* UITabBarItemGradient@2x.png */; };
@@ -452,6 +453,8 @@
 		A7204D8013E4759F0098C86A /* GHAPIMarkdownFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GHAPIMarkdownFormatter.m; path = Markdown/GHAPIMarkdownFormatter.m; sourceTree = "<group>"; };
 		A7218E841461E76A0081CB02 /* GHAPIDownloadV3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHAPIDownloadV3.h; sourceTree = "<group>"; };
 		A7218E851461E76A0081CB02 /* GHAPIDownloadV3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHAPIDownloadV3.m; sourceTree = "<group>"; };
+		A7218E8A1461E92D0081CB02 /* GHAPICommitCommentV3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHAPICommitCommentV3.h; sourceTree = "<group>"; };
+		A7218E8B1461E92D0081CB02 /* GHAPICommitCommentV3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHAPICommitCommentV3.m; sourceTree = "<group>"; };
 		A72B1B33142E799B0086750C /* UIImage+UITabBarStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+UITabBarStyle.h"; sourceTree = "<group>"; };
 		A72B1B34142E799B0086750C /* UIImage+UITabBarStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+UITabBarStyle.m"; sourceTree = "<group>"; };
 		A72B1B35142E799B0086750C /* UITabBarItemGradient.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UITabBarItemGradient.png; sourceTree = "<group>"; };
@@ -2532,6 +2535,8 @@
 			children = (
 				A7841F0513E194BB00131648 /* GHAPICommitV3.h */,
 				A7841F0613E194BB00131648 /* GHAPICommitV3.m */,
+				A7218E8A1461E92D0081CB02 /* GHAPICommitCommentV3.h */,
+				A7218E8B1461E92D0081CB02 /* GHAPICommitCommentV3.m */,
 			);
 			path = GHAPICommitV3;
 			sourceTree = "<group>";
@@ -3965,6 +3970,7 @@
 				A7C667FD14619062004E6EAA /* GHAPIWatchEventV3.m in Sources */,
 				A7C6682B1461BD69004E6EAA /* GHAPIGollumPageV3.m in Sources */,
 				A7218E861461E76A0081CB02 /* GHAPIDownloadV3.m in Sources */,
+				A7218E8C1461E92D0081CB02 /* GHAPICommitCommentV3.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

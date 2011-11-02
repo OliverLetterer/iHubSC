@@ -32,6 +32,7 @@
 
 // v3
 #import "GHAPICommitV3.h"
+#import "GHAPICommitCommentV3.h"
 #import "GHAPITreeInfoV3.h"
 #import "GHAPIIssueCommentV3.h"
 #import "GHAPIIssueV3.h"
