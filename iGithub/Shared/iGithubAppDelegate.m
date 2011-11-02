@@ -10,6 +10,7 @@
 #import "GHAPIAuthenticationManager.h"
 #import "ASIHTTPRequest.h"
 #import "ANNotificationQueue.h"
+#import "GithubAPI.h"
 
 @implementation iGithubAppDelegate
 
@@ -36,6 +37,12 @@
     [ASIHTTPRequest setDefaultTimeOutSeconds:20.0];
     [ANNotificationQueue sharedInstance];
     [self.window makeKeyAndVisible];
+    
+    [GHAPIEventV3 eventsOfAuthenticatedUserOnPage:1
+                                completionHandler:^(NSMutableArray *array, NSUInteger nextPage, NSError *error) {
+                                    DLog(@"%@", array);
+                                    DLog(@"nextPage = %u", nextPage);
+                                }];
     return YES;
 }
 

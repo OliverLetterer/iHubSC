@@ -46,7 +46,7 @@ typedef enum {
     GHAPIEventTypeV3PullRequestEvent,
     GHAPIEventTypeV3PushEvent,
     GHAPIEventTypeV3TeamAddEvent,
-    GHAPIEventTypeV3WatchEvent,
+    GHAPIEventTypeV3WatchEvent
 } GHAPIEventTypeV3;
 
 GHAPIEventTypeV3 GHAPIEventTypeV3FromNSString(NSString *eventType);
@@ -68,6 +68,9 @@ GHAPIEventTypeV3 GHAPIEventTypeV3FromNSString(NSString *eventType);
     GHAPIEventTypeV3 _type;
 }
 
+- (id)initWithRawDictionary:(NSDictionary *)rawDictionary;
++ (id)eventWithRawDictionary:(NSDictionary *)rawDictionary;
+
 @property (nonatomic, readonly) GHAPIRepositoryV3 *repository;
 @property (nonatomic, readonly) GHAPIUserV3 *actor;
 @property (nonatomic, readonly) GHAPIOrganizationV3 *organization;
@@ -77,6 +80,7 @@ GHAPIEventTypeV3 GHAPIEventTypeV3FromNSString(NSString *eventType);
 
 @property (nonatomic, readonly) GHAPIEventTypeV3 type;
 
-- (id)initWithRawDictionary:(NSDictionary *)rawDictionary;
++ (void)eventsForAuthenticatedUserOnPage:(NSUInteger)page 
+                       completionHandler:(GHAPIPaginationHandler)completionHandler;
 
 @end

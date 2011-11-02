@@ -8,7 +8,7 @@
 
 #import "GithubAPI.h"
 
-NSString *const GHAPIEventV3TypeCommitComment = @"CommitComment";
+NSString *const GHAPIEventV3TypeCommitComment = @"CommitCommentEvent";
 NSString *const GHAPIEventV3TypeCreateEvent = @"CreateEvent";
 NSString *const GHAPIEventV3TypeDeleteEvent = @"DeleteEvent";
 NSString *const GHAPIEventV3TypeDownloadEvent = @"DownloadEvent";
@@ -96,6 +96,92 @@ GHAPIEventTypeV3 GHAPIEventTypeV3FromNSString(NSString *eventType)
     return self;
 }
 
++ (id)eventWithRawDictionary:(NSDictionary *)rawDictionary
+{
+    GHAPIEventV3 *event = nil;
+    
+    if (GHAPIObjectExpectedClass(&rawDictionary, NSDictionary.class)) {
+        NSString *typeString = [rawDictionary objectForKeyOrNilOnNullObject:@"type"];
+        GHAPIEventTypeV3 type = GHAPIEventTypeV3FromNSString(typeString);
+        
+        switch (type) {
+            case GHAPIEventTypeV3CommitComment: {
+                event = [[GHAPICommitCommentEventV3 alloc] initWithRawDictionary:rawDictionary];
+                break;
+            }
+            case GHAPIEventTypeV3CreateEvent: {
+                event = [[GHAPICreateEventV3 alloc] initWithRawDictionary:rawDictionary];
+                break;
+            }
+            case GHAPIEventTypeV3DeleteEvent: {
+                event = [[GHAPIDeleteEventV3 alloc] initWithRawDictionary:rawDictionary];
+                break;
+            }
+            case GHAPIEventTypeV3DownloadEvent: {
+                event = [[GHAPIDownloadEventV3 alloc] initWithRawDictionary:rawDictionary];
+                break;
+            }
+            case GHAPIEventTypeV3FollowEvent: {
+                event = [[GHAPIFollowEventV3 alloc] initWithRawDictionary:rawDictionary];
+                break;
+            }
+            case GHAPIEventTypeV3ForkEvent: {
+                event = [[GHAPIForkEventV3 alloc] initWithRawDictionary:rawDictionary];
+                break;
+            }
+            case GHAPIEventTypeV3ForkApplyEvent: {
+                event = [[GHAPIForkApplyEventV3 alloc] initWithRawDictionary:rawDictionary];
+                break;
+            }
+            case GHAPIEventTypeV3GistEvent: {
+                event = [[GHAPIGistEventV3 alloc] initWithRawDictionary:rawDictionary];
+                break;
+            }
+            case GHAPIEventTypeV3GollumEvent: {
+                event = [[GHAPIGollumEventV3 alloc] initWithRawDictionary:rawDictionary];
+                break;
+            }
+            case GHAPIEventTypeV3IssueCommentEvent: {
+                event = [[GHAPIIssueCommentEventV3 alloc] initWithRawDictionary:rawDictionary];
+                break;
+            }
+            case GHAPIEventTypeV3IssuesEvent: {
+                event = [[GHAPIIssuesEventV3 alloc] initWithRawDictionary:rawDictionary];
+                break;
+            }
+            case GHAPIEventTypeV3MemberEvent: {
+                event = [[GHAPIMemberEventV3 alloc] initWithRawDictionary:rawDictionary];
+                break;
+            }
+            case GHAPIEventTypeV3PublicEvent: {
+                event = [[GHAPIPublicEventV3 alloc] initWithRawDictionary:rawDictionary];
+                break;
+            }
+            case GHAPIEventTypeV3PullRequestEvent: {
+                event = [[GHAPIPullRequestEventV3 alloc] initWithRawDictionary:rawDictionary];
+                break;
+            }
+            case GHAPIEventTypeV3PushEvent: {
+                event = [[GHAPIPushEventV3 alloc] initWithRawDictionary:rawDictionary];
+                break;
+            }
+            case GHAPIEventTypeV3TeamAddEvent: {
+                event = [[GHAPITeamAddEventV3 alloc] initWithRawDictionary:rawDictionary];
+                break;
+            }
+            case GHAPIEventTypeV3WatchEvent: {
+                event = [[GHAPIWatchEventV3 alloc] initWithRawDictionary:rawDictionary];
+                break;
+            }
+            default:
+                NSAssert(NO, @"default case for typeString (%@) and type (%d) is not supported", typeString, type);
+                break;
+        }
+    }
+    
+    return event;
+}
+
 #pragma mark - NSCoding
 
 - (void)encodeWithCoder:(NSCoder *)encoder {
@@ -119,6 +205,40 @@ GHAPIEventTypeV3 GHAPIEventTypeV3FromNSString(NSString *eventType)
         _type = [decoder decodeIntegerForKey:@"type"];
     }
     return self;
+}
+
+#pragma mark - Class methods
+
++ (void)eventsForAuthenticatedUserOnPage:(NSUInteger)page 
+                       completionHandler:(GHAPIPaginationHandler)completionHandler
+{
+    //v3: GET /users/:user/received_events
+    
+    NSString *username = [GHAPIAuthenticationManager sharedInstance].authenticatedUser.login;
+    
+    NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.github.com/users/%@/received_events",
+                                       [username stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] ] ];
+    
+    [[GHAPIBackgroundQueueV3 sharedInstance] sendRequestToURL:URL 
+                                                         page:page 
+                                                 setupHandler:nil 
+                                  completionPaginationHandler:^(id object, NSError *error, ASIFormDataRequest *request, NSUInteger nextPage) {
+                                      if (error) {
+                                          completionHandler(nil, GHAPIPaginationNextPageNotFound, error);
+                                      } else {
+                                          NSArray *rawArray = GHAPIObjectExpectedClass(&object, NSArray.class);
+                                          NSMutableArray *finalArray = [NSMutableArray arrayWithCapacity:rawArray.count];
+                                          
+                                          [rawArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+                                              GHAPIEventV3 *event = [GHAPIEventV3 eventWithRawDictionary:obj];
+                                              if (event) {
+                                                  [finalArray addObject:event];
+                                              }
+                                          }];
+                                          
+                                          completionHandler(finalArray, nextPage, nil);
+                                      }
+                                  }];
 }
 
 @end
