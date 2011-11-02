@@ -7,8 +7,7 @@
 //
 
 #import "GHAPIEventV3.h"
-#warning NSCoding
-#warning not supported right now
+#import "GHAPIDownloadV3.h"
 
 
 
@@ -16,9 +15,11 @@
  @class     GHAPIDownloadEventEventV3
  @abstract  The download that was just created.
  */
-@interface GHAPIDownloadEventV3 : GHAPIEventV3 {
+@interface GHAPIDownloadEventV3 : GHAPIEventV3 <NSCoding> {
 @private
-    
+    GHAPIDownloadV3 *_download;
 }
+
+@property (nonatomic, readonly) GHAPIDownloadV3 *download;
 
 @end

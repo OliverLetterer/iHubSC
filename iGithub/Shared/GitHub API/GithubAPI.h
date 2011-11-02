@@ -54,6 +54,7 @@
 #import "UIImage+GHAPIImageCacheV3.h"
 #import "GHAPITreeV3.h"
 #import "GHAPITreeFileV3.h"
+#import "GHAPIDownloadV3.h"
 
 #import "GHAPIEventV3.h"
 #import "GHAPIWatchEventV3.h"

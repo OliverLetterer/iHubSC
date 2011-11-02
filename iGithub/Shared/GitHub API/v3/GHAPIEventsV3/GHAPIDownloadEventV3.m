@@ -11,6 +11,7 @@
 
 
 @implementation GHAPIDownloadEventV3
+@synthesize download=_download;
 
 #pragma mark - Initialization
 
@@ -19,6 +20,23 @@
     GHAPIObjectExpectedClass(&rawDictionary, NSDictionary.class);
     if (self = [super initWithRawDictionary:rawDictionary]) {
         // Initialization code
+        _download = [[GHAPIDownloadV3 alloc] initWithRawDictionary:[rawDictionary objectForKeyOrNilOnNullObject:@"download"] ];
+    }
+    return self;
+}
+
+#pragma mark - NSCoding
+
+- (void)encodeWithCoder:(NSCoder *)encoder 
+{
+    [super encodeWithCoder:encoder];
+    [encoder encodeObject:_download forKey:@"download"];
+}
+
+- (id)initWithCoder:(NSCoder *)decoder 
+{
+    if ((self = [super initWithCoder:decoder])) {
+        _download = [decoder decodeObjectForKey:@"download"];
     }
     return self;
 }
