@@ -252,8 +252,6 @@ GHAPIEventTypeV3 GHAPIEventTypeV3FromNSString(NSString *eventType)
                                               }
                                           }];
                                           
-                                          DLog(@"%@", object);
-                                          
                                           completionHandler(finalArray, nextPage, nil);
                                       }
                                   }];
