@@ -71,9 +71,15 @@
             cell = [[GHDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         }
         
-        [self updateImageView:cell.imageView 
-                  atIndexPath:indexPath 
-          withAvatarURLString:event.actor.avatarURL];
+        if (event.actor.avatarURL) {
+            [self updateImageView:cell.imageView 
+                      atIndexPath:indexPath 
+              withAvatarURLString:event.actor.avatarURL];
+        } else {
+            [self updateImageView:cell.imageView 
+                      atIndexPath:indexPath 
+                   withGravatarID:event.actor.gravatarID];
+        }
         
         cell.textLabel.text = event.actor.login;
         cell.detailTextLabel.text = event.repository.name;
@@ -89,9 +95,15 @@
             cell = [[GHFollowEventTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         }
         
-        [self updateImageView:cell.imageView 
-                  atIndexPath:indexPath 
-          withAvatarURLString:event.actor.avatarURL];
+        if (event.actor.avatarURL) {
+            [self updateImageView:cell.imageView 
+                      atIndexPath:indexPath 
+              withAvatarURLString:event.actor.avatarURL];
+        } else {
+            [self updateImageView:cell.imageView 
+                      atIndexPath:indexPath 
+                   withGravatarID:event.actor.gravatarID];
+        }
         
         GHAPIFollowEventV3 *followEvent = (GHAPIFollowEventV3 *)event;
         
@@ -112,7 +124,6 @@
 
 #pragma mark - instance methods
 
-#warning update here
 - (NSString *)descriptionForEvent:(GHAPIEventV3 *)event
 {
     NSString *description = nil;
@@ -206,9 +217,9 @@
     } else if (event.type == GHAPIEventTypeV3TeamAddEvent) {
         GHAPITeamAddEventV3 *addEvent = (GHAPITeamAddEventV3 *)event;
         
-        if (addEvent.teamRepository) {
+        if (addEvent.teamRepository.name) {
             description = [NSString stringWithFormat:@"added repository %@ to team %@", addEvent.teamRepository.name, addEvent.team.name];
-        } else if (addEvent.teamUser) {
+        } else if (addEvent.teamUser.login) {
             description = [NSString stringWithFormat:@"added member %@ to team %@", addEvent.teamUser.login, addEvent.team.name];
         }
     }
@@ -313,9 +324,9 @@
     } else if (event.type == GHAPIEventTypeV3TeamAddEvent) {
         GHAPITeamAddEventV3 *addEvent = (GHAPITeamAddEventV3 *)event;
         
-        if (addEvent.teamRepository) {
+        if (addEvent.teamRepository.name) {
             viewController = [[GHRepositoryViewController alloc] initWithRepositoryString:addEvent.teamRepository.name];
-        } else if (addEvent.teamUser) {
+        } else if (addEvent.teamUser.login) {
             viewController = [[GHUserViewController alloc] initWithUsername:addEvent.teamUser.name];
         }
     }
