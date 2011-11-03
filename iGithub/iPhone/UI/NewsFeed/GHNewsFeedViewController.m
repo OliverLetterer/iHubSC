@@ -75,7 +75,7 @@
                   atIndexPath:indexPath 
           withAvatarURLString:event.actor.avatarURL];
         
-        cell.textLabel.text = event.actor.name;
+        cell.textLabel.text = event.actor.login;
         cell.detailTextLabel.text = event.repository.name;
         cell.timeLabel.text = event.createdAtString.prettyShortTimeIntervalSinceNow;
         cell.descriptionLabel.text = [self descriptionForEvent:event];
@@ -95,9 +95,9 @@
         
         GHAPIFollowEventV3 *followEvent = (GHAPIFollowEventV3 *)event;
         
-        cell.textLabel.text = followEvent.actor.name;
+        cell.textLabel.text = followEvent.actor.login;
         cell.descriptionLabel.text = [self descriptionForEvent:event];
-        cell.targetNameLabel.text = followEvent.user.name;
+        cell.targetNameLabel.text = followEvent.user.login;
         cell.descriptionLabel.text = [self descriptionForEvent:event];
         
         [self updateImageView:cell.targetImageView 
@@ -120,7 +120,7 @@
     if (event.type == GHAPIEventTypeV3IssuesEvent) {
         GHAPIIssuesEventV3 *myEvent = (GHAPIIssuesEventV3 *)event;
         
-        description = [NSString stringWithFormat:NSLocalizedString(@"%@ Issue %@:\n\n%@", @""), myEvent.actor, myEvent.issue.number, myEvent.issue.title];
+        description = [NSString stringWithFormat:NSLocalizedString(@"%@ Issue %@:\n\n%@", @""), myEvent.action, myEvent.issue.number, myEvent.issue.title];
     } else if (event.type == GHAPIEventTypeV3PushEvent) {
         GHAPIPushEventV3 *pushEvent = (GHAPIPushEventV3 *)event;
         // this is a commit / push message, we will display max 2 commits
@@ -193,7 +193,7 @@
     } else if(event.type == GHAPIEventTypeV3MemberEvent) {
         GHAPIMemberEventV3 *memberEvent = (GHAPIMemberEventV3 *)event;
         
-        description = [NSString stringWithFormat:NSLocalizedString(@"%@ %@", @""), memberEvent.action, memberEvent.member.name];
+        description = [NSString stringWithFormat:NSLocalizedString(@"%@ %@", @""), memberEvent.action, memberEvent.member.login];
     } else if(event.type == GHAPIEventTypeV3IssueCommentEvent) {
         GHAPIIssueCommentEventV3 *commentEvent = (GHAPIIssueCommentEventV3 *)event;
         
@@ -209,7 +209,7 @@
         if (addEvent.teamRepository) {
             description = [NSString stringWithFormat:@"added repository %@ to team %@", addEvent.teamRepository.name, addEvent.team.name];
         } else if (addEvent.teamUser) {
-            description = [NSString stringWithFormat:@"added member %@ to team %@", addEvent.teamUser.name, addEvent.team.name];
+            description = [NSString stringWithFormat:@"added member %@ to team %@", addEvent.teamUser.login, addEvent.team.name];
         }
     }
     
