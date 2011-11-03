@@ -45,6 +45,9 @@
         self.ID = [rawDictionary objectForKeyOrNilOnNullObject:@"id"];
         self.avatarURL = [rawDictionary objectForKeyOrNilOnNullObject:@"avatar_url"];
         self.gravatarID = [[rawDictionary objectForKeyOrNilOnNullObject:@"avatar_url"] gravarID];
+        if (!_gravatarID) {
+            _gravatarID = [rawDictionary objectForKeyOrNilOnNullObject:@"gravatar_id"];
+        }
         self.URL = [rawDictionary objectForKeyOrNilOnNullObject:@"url"];
         self.name = [rawDictionary objectForKeyOrNilOnNullObject:@"name"];
         self.company = [rawDictionary objectForKeyOrNilOnNullObject:@"company"];
