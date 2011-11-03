@@ -129,7 +129,7 @@
     } else if(event.type == GHAPIEventTypeV3PullRequestEvent) {
         GHAPIPullRequestEventV3 *pullEvent = (GHAPIPullRequestEventV3 *)event;
         
-        description = [NSString stringWithFormat:NSLocalizedString(@"%@ Pull Request %\n\n%@", @""), pullEvent.action, pullEvent.pullRequest.number, pullEvent.pullRequest.title];
+        description = [NSString stringWithFormat:NSLocalizedString(@"%@ Pull Request %@\n\n%@", @""), pullEvent.action, pullEvent.pullRequest.number, pullEvent.pullRequest.title];
         
 #warning maybe add additions and deletions as info
         //        NSString *additionsString = [NSString stringWithFormat:NSLocalizedString(@"%@ %@", @""), payload.pullRequest.additions, [payload.pullRequest.additions intValue] == 1 ? NSLocalizedString(@"addition", @"") : NSLocalizedString(@"additions", @"") ];
