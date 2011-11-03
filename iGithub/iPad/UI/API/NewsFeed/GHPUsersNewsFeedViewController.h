@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "GHPNewsFeedViewController.h"
 
+
+
 @interface GHPUsersNewsFeedViewController : GHPNewsFeedViewController <NSCoding> {
 @private
     NSString *_username;

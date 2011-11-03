@@ -20,7 +20,7 @@
 
 @interface GHPOwnersNewsFeedViewController (GHPOwnersNewsFeedViewControllerSerializaiton)
 
-- (void)serializeNewsFeed:(GHNewsFeed *)newsFeed;
-- (GHNewsFeed *)loadSerializedNewsFeed;
+- (void)serializeEvents:(NSArray *)events;
+- (NSArray *)loadSerializedEvents;
 
 @end

@@ -25,14 +25,17 @@
 #pragma mark - Downloading
 
 - (void)downloadNewsFeed {
-    [GHNewsFeed privateNewsWithCompletionHandler:^(GHNewsFeed *feed, NSError *error) {
-        if (error) {
-            [self handleError:error];
-        } else {
-            self.newsFeed = feed;
-            [self serializeNewsFeed:feed];
-        }
-    }];
+    [GHAPIEventV3 eventsForAuthenticatedUserOnPage:1 
+                                 completionHandler:^(NSMutableArray *array, NSUInteger nextPage, NSError *error) {
+                                     self.isDownloadingEssentialData = NO;
+                                     
+                                     if (error) {
+                                         [self handleError:error];
+                                     } else {
+                                         self.events = array;
+                                         [self serializeEvents:array];
+                                     }
+                                 }];
 }
 
 #pragma mark - View lifecycle
@@ -40,42 +43,45 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    if (!self.newsFeed) {
-        self.newsFeed = [self loadSerializedNewsFeed];
+    if (!self.events) {
+        self.events = [self loadSerializedEvents];
+    }
+    
+    if (self.events) {
+        self.isDownloadingEssentialData = NO;
     }
 }
 
 #pragma mark - UITableViewDelegate
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    GHNewsFeedItem *item = [self.newsFeed.items objectAtIndex:indexPath.row];
-    
+- (void)tableView:(UITableView *)tableView didSelectEvent:(GHAPIEventV3 *)event atIndexPath:(NSIndexPath *)indexPath
+{
     UIViewController *viewController = nil;
     
-    if (item.payload.type == GHPayloadWatchEvent) {
-        if ([item.repository.fullName hasPrefix:[GHAPIAuthenticationManager sharedInstance].authenticatedUser.login]) {
+    if (event.type == GHAPIEventTypeV3WatchEvent) {
+        if ([event.repository.name hasPrefix:[GHAPIAuthenticationManager sharedInstance].authenticatedUser.login]) {
             // watched my repo, show the user
-            viewController = [[GHPUserViewController alloc] initWithUsername:item.actorAttributes.login];
+            viewController = [[GHPUserViewController alloc] initWithUsername:event.actor.login];
         } else {
             // show me the repo that he is following
-            viewController = [[GHPRepositoryViewController alloc] initWithRepositoryString:item.repository.fullName];
+            viewController = [[GHPRepositoryViewController alloc] initWithRepositoryString:event.repository.name];
         }
-    } else if (item.payload.type == GHPayloadFollowEvent) {
-        GHFollowEventPayload *payload = (GHFollowEventPayload *)item.payload;
-        if ([payload.target.login isEqualToString:[GHAPIAuthenticationManager sharedInstance].authenticatedUser.login]) {
+    } else if (event.type == GHAPIEventTypeV3FollowEvent) {
+        GHAPIFollowEventV3 *followEvent = (GHAPIFollowEventV3 *)event;
+        if ([followEvent.user.login isEqualToString:[GHAPIAuthenticationManager sharedInstance].authenticatedUser.login]) {
             // started following me, show me the user
-            viewController = [[GHPUserViewController alloc] initWithUsername:item.actorAttributes.login];
+            viewController = [[GHPUserViewController alloc] initWithUsername:followEvent.actor.login];
         } else {
             // following someone else, show me the target
-            viewController = [[GHPUserViewController alloc] initWithUsername:payload.target.login];
+            viewController = [[GHPUserViewController alloc] initWithUsername:followEvent.user.login];
         }
-    } else if (item.payload.type == GHPayloadForkEvent) {
-        if ([item.repository.fullName hasPrefix:[GHAPIAuthenticationManager sharedInstance].authenticatedUser.login]) {
+    } else if (event.type == GHAPIEventTypeV3ForkEvent) {
+        if ([event.repository.name hasPrefix:[GHAPIAuthenticationManager sharedInstance].authenticatedUser.login]) {
             // forked my repository, show me the user
-            viewController = [[GHPUserViewController alloc] initWithUsername:item.actorAttributes.login];
+            viewController = [[GHPUserViewController alloc] initWithUsername:event.actor.login];
         } else {
             // didn't fork my repo, show me the repo
-            viewController = [[GHPRepositoryViewController alloc] initWithRepositoryString:item.repository.fullName];
+            viewController = [[GHPRepositoryViewController alloc] initWithRepositoryString:event.repository.name];
         }
     }
     
@@ -94,18 +100,20 @@
 
 
 
-NSString *const GHPOwnersNewsFeedViewControllerNewsFeedSerializationFileName = @"de.olettere.lastKnownNewsFeed.plist";
+NSString *const GHPOwnersNewsFeedViewControllerNewsFeedSerializationFileName = @"de.olettere.lastKnownNewsFeedV3.plist";
 
 @implementation GHPOwnersNewsFeedViewController (GHPOwnersNewsFeedViewControllerSerializaiton)
 
-- (void)serializeNewsFeed:(GHNewsFeed *)newsFeed {
+- (void)serializeEvents:(NSArray *)events
+{
     NSString *documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
     NSString *filePath = [documentsDirectory stringByAppendingPathComponent:GHPOwnersNewsFeedViewControllerNewsFeedSerializationFileName];
     
-    [NSKeyedArchiver archiveRootObject:newsFeed toFile:filePath];
+    [NSKeyedArchiver archiveRootObject:events toFile:filePath];
 }
 
-- (GHNewsFeed *)loadSerializedNewsFeed {
+- (NSArray *)loadSerializedEvents
+{
     NSString *documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
     NSString *filePath = [documentsDirectory stringByAppendingPathComponent:GHPOwnersNewsFeedViewControllerNewsFeedSerializationFileName];
     
