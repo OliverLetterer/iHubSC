@@ -24,7 +24,7 @@
         _ref = [rawDictionary objectForKeyOrNilOnNullObject:@"ref"];
         _numberOfCommits = [rawDictionary objectForKeyOrNilOnNullObject:@"size"];
         
-        NSArray *rawArray = [rawDictionary objectForKeyOrNilOnNullObject:@"pages"];
+        NSArray *rawArray = [rawDictionary objectForKeyOrNilOnNullObject:@"commits"];
         GHAPIObjectExpectedClass(&rawArray, NSArray.class);
         
         NSMutableArray *finalArray = [NSMutableArray arrayWithCapacity:rawArray.count];
