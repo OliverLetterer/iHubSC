@@ -37,6 +37,32 @@
     return self;
 }
 
+#pragma mark - Instance methods
+
+- (NSString *)previewString 
+{
+    NSMutableString *previewString = [NSMutableString string];
+    
+    [_commits enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        GHAPICommitV3 *commit = obj;
+        if (idx == 1) {
+            [previewString appendFormat:@"\n- %@", commit.message];
+        } else if (idx == 2) {
+            NSUInteger remainingCommits = _commits.count - idx;
+            if (remainingCommits == 1) {
+                [previewString appendFormat:@"\n%d more commit...", remainingCommits];
+            } else {
+                [previewString appendFormat:@"\n%d more commits...", remainingCommits];
+            }
+            *stop = YES;
+        } else {
+            [previewString appendFormat:@"- %@", commit.message];
+        }
+    }];
+    
+    return previewString;
+}
+
 #pragma mark - NSCoding
 
 - (void)encodeWithCoder:(NSCoder *)encoder 

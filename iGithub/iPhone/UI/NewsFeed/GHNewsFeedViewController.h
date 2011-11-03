@@ -9,17 +9,21 @@
 #import <UIKit/UIKit.h>
 #import "GHTableViewController.h"
 
-@class GHNewsFeed, GHTableViewCell, GHNewsFeedItem;
+
 
 @interface GHNewsFeedViewController : GHTableViewController {
 @protected
-    GHNewsFeed *_newsFeed;
+    NSArray *_events;
 }
 
-@property (nonatomic, retain) GHNewsFeed *newsFeed;
+@property (nonatomic, strong) NSArray *events;
+
+- (void)tableView:(UITableView *)tableView 
+   didSelectEvent:(GHAPIEventV3 *)event 
+      atIndexPath:(NSIndexPath *)indexPath;
 
 - (void)cacheHeightForTableView;
 
-- (NSString *)descriptionForNewsFeedItem:(GHNewsFeedItem *)item;
+- (NSString *)descriptionForEvent:(GHAPIEventV3 *)event;
 
 @end

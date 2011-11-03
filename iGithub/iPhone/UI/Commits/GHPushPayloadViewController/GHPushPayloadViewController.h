@@ -10,6 +10,7 @@
 #import "GHTableViewController.h"
 #import "GithubAPI.h"
 
+#warning get rid of this class. No longer needed because of new Events API.
 @interface GHPushPayloadViewController : GHTableViewController {
 @private
     GHPushPayload *_payload;

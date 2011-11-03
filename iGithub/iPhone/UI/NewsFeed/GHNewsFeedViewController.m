@@ -17,14 +17,15 @@
 #import "GHGistViewController.h"
 
 @implementation GHNewsFeedViewController
-
-@synthesize newsFeed=_newsFeed;
+@synthesize events=_events;
 
 #pragma mark - setters and getters
 
-- (void)setNewsFeed:(GHNewsFeed *)newsFeed {
-    if (newsFeed != _newsFeed) {
-        _newsFeed = newsFeed;
+- (void)setEvents:(NSArray *)events
+{
+    if (events != _events) {
+        _events = events;
+        
         [self cacheHeightForTableView];
         if (self.isViewLoaded) {
             [self.tableView reloadData];
@@ -35,7 +36,8 @@
 
 #pragma mark - Initialization
 
-- (id)init {
+- (id)init 
+{
     if ((self = [super initWithStyle:UITableViewStylePlain])) {
         // Custom initialization
         self.pullToReleaseEnabled = YES;
@@ -43,437 +45,172 @@
     return self;
 }
 
-#pragma mark - Memory management
-
-
-- (void)didReceiveMemoryWarning {
-    // Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
-    
-    // Release any cached data, images, etc that aren't in use.
-}
-
-#pragma mark - View lifecycle
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-}
-
-- (void)viewDidUnload {
-    [super viewDidUnload];
-    
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-}
-
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-}
-
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-}
-
-- (void)viewDidDisappear:(BOOL)animated {
-    [super viewDidDisappear:animated];
-}
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    // Return YES for supported orientations
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
-}
-
 #pragma mark - Table view data source
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView 
+{
     // Return the number of sections.
     return 1;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section 
+{
     // Return the number of rows in the section.
-    return [self.newsFeed.items count];
+    return _events.count;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath 
+{
+    GHAPIEventV3 *event = [_events objectAtIndex:indexPath.row];
     
-    GHNewsFeedItem *item = [self.newsFeed.items objectAtIndex:indexPath.row];
-    
-    if (item.payload.type == GHPayloadIssuesEvent) {
-        // we will display an issue
+    if (event.type == GHAPIEventTypeV3IssuesEvent || event.type == GHAPIEventTypeV3PushEvent || event.type == GHAPIEventTypeV3CommitComment || event.type == GHAPIEventTypeV3WatchEvent || event.type == GHAPIEventTypeV3CreateEvent || event.type == GHAPIEventTypeV3ForkEvent || event.type == GHAPIEventTypeV3DeleteEvent || event.type == GHAPIEventTypeV3GollumEvent || event.type == GHAPIEventTypeV3GistEvent || event.type == GHAPIEventTypeV3DownloadEvent || event.type == GHAPIEventTypeV3PullRequestEvent || event.type == GHAPIEventTypeV3MemberEvent || event.type == GHAPIEventTypeV3IssueCommentEvent || event.type == GHAPIEventTypeV3ForkApplyEvent || event.type == GHAPIEventTypeV3PublicEvent || event.type == GHAPIEventTypeV3TeamAddEvent) {
         static NSString *CellIdentifier = @"GHFeedItemWithDescriptionTableViewCell";
-        GHDescriptionTableViewCell *cell = (GHDescriptionTableViewCell *)[self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        GHDescriptionTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         
         if (!cell) {
             cell = [[GHDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         }
         
-        GHIssuePayload *payload = (GHIssuePayload *)item.payload;
+        [self updateImageView:cell.imageView 
+                  atIndexPath:indexPath 
+          withAvatarURLString:event.actor.avatarURL];
         
-        [self updateImageView:cell.imageView atIndexPath:indexPath withGravatarID:item.actorAttributes.gravatarID];
-        
-        cell.textLabel.text = item.actor;
-        cell.detailTextLabel.text = item.repository.fullName;
-        cell.timeLabel.text = item.creationDate.prettyShortTimeIntervalSinceNow;
-        
-        GHIssue *issue = [GHIssue issueFromDatabaseOnRepository:item.repository.fullName withNumber:payload.number];
-        
-        if (issue) {
-            cell.descriptionLabel.text = [self descriptionForNewsFeedItem:item];
-        } else {
-            [GHIssue issueOnRepository:[NSString stringWithFormat:@"%@/%@", item.repository.owner, item.repository.name] 
-                            withNumber:payload.number 
-                 useDatabaseIfPossible:YES 
-                     completionHandler:^(GHIssue *issue, NSError *error, BOOL didDownload) {
-                         if (error) {
-                             [self handleError:error];
-                         } else {
-                             CGFloat height = [GHDescriptionTableViewCell heightWithContent:[self descriptionForNewsFeedItem:item]];
-                             
-                             [self cacheHeight:height forRowAtIndexPath:indexPath];
-                             if ([tableView containsIndexPath:indexPath]) {
-                                 [tableView reloadRowAtIndexPath:indexPath withRowAnimation:UITableViewRowAnimationNone];
-                             }
-                         }
-                     }];
-        }
-                
-        return cell;
-    } else if (item.payload.type == GHPayloadPushEvent) {
-        // tableView is asking for a push item
-        
-        static NSString *CellIdentifier = @"GHFeedItemWithDescriptionTableViewCell";
-        GHDescriptionTableViewCell *cell = (GHDescriptionTableViewCell *)[self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-        
-        if (!cell) {
-            cell = [[GHDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-        }
-        
-        [self updateImageView:cell.imageView atIndexPath:indexPath withGravatarID:item.actorAttributes.gravatarID];
-        cell.detailTextLabel.text = item.repository.fullName;
-        cell.textLabel.text = item.actor;
-        cell.descriptionLabel.text = [self descriptionForNewsFeedItem:item];
-        cell.timeLabel.text = item.creationDate.prettyShortTimeIntervalSinceNow;
+        cell.textLabel.text = event.actor.name;
+        cell.detailTextLabel.text = event.repository.name;
+        cell.timeLabel.text = event.createdAtString.prettyShortTimeIntervalSinceNow;
+        cell.descriptionLabel.text = [self descriptionForEvent:event];
         
         return cell;
-    } else if (item.payload.type == GHPayloadCommitCommentEvent) {
-        static NSString *CellIdentifier = @"GHFeedItemWithDescriptionTableViewCell";
-        GHDescriptionTableViewCell *cell = (GHDescriptionTableViewCell *)[self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-        
-        if (!cell) {
-            cell = [[GHDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-        }
-        
-        [self updateImageView:cell.imageView atIndexPath:indexPath withGravatarID:item.actorAttributes.gravatarID];
-        
-        cell.textLabel.text = item.actor;
-        cell.detailTextLabel.text = item.repository.fullName;
-        cell.descriptionLabel.text = [self descriptionForNewsFeedItem:item];
-        cell.timeLabel.text = item.creationDate.prettyShortTimeIntervalSinceNow;
-        
-        return cell;
-    } else if (item.payload.type == GHPayloadFollowEvent) {
+    } else if (event.type == GHAPIEventTypeV3FollowEvent) {
         static NSString *CellIdentifier = @"GHFollowEventTableViewCell";
-        GHFollowEventTableViewCell *cell = (GHFollowEventTableViewCell *)[self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        GHFollowEventTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         
         if (!cell) {
             cell = [[GHFollowEventTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         }
-        [self updateImageView:cell.imageView atIndexPath:indexPath withGravatarID:item.actorAttributes.gravatarID];
         
-        GHFollowEventPayload *payload = (GHFollowEventPayload *)item.payload;
+        [self updateImageView:cell.imageView 
+                  atIndexPath:indexPath 
+          withAvatarURLString:event.actor.avatarURL];
         
-        cell.textLabel.text = item.actor;
-        cell.descriptionLabel.text = [self descriptionForNewsFeedItem:item];
-        cell.targetNameLabel.text = payload.target.login;
-        [self updateImageView:cell.targetImageView atIndexPath:indexPath withGravatarID:payload.target.gravatarID];
-        cell.timeLabel.text = item.creationDate.prettyShortTimeIntervalSinceNow;
+        GHAPIFollowEventV3 *followEvent = (GHAPIFollowEventV3 *)event;
         
-        return cell;
-    } else if (item.payload.type == GHPayloadWatchEvent) {
-        static NSString *CellIdentifier = @"GHFeedItemWithDescriptionTableViewCell";
-        GHDescriptionTableViewCell *cell = (GHDescriptionTableViewCell *)[self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        cell.textLabel.text = followEvent.actor.name;
+        cell.descriptionLabel.text = [self descriptionForEvent:event];
+        cell.targetNameLabel.text = followEvent.user.name;
+        cell.descriptionLabel.text = [self descriptionForEvent:event];
         
-        if (!cell) {
-            cell = [[GHDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-        }
-        [self updateImageView:cell.imageView atIndexPath:indexPath withGravatarID:item.actorAttributes.gravatarID];
-        
-        cell.textLabel.text = item.actor;
-        cell.detailTextLabel.text = item.repository.fullName;
-        cell.descriptionLabel.text = [self descriptionForNewsFeedItem:item];
-        cell.timeLabel.text = item.creationDate.prettyShortTimeIntervalSinceNow;
-        
-        return cell;
-    } else if (item.payload.type == GHPayloadCreateEvent) {
-        static NSString *CellIdentifier = @"GHFeedItemWithDescriptionTableViewCell";
-        GHDescriptionTableViewCell *cell = (GHDescriptionTableViewCell *)[self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-        
-        if (!cell) {
-            cell = [[GHDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-        }
-        [self updateImageView:cell.imageView atIndexPath:indexPath withGravatarID:item.actorAttributes.gravatarID];
-        
-        cell.descriptionLabel.text = [self descriptionForNewsFeedItem:item];
-        cell.textLabel.text = item.actor;
-        cell.detailTextLabel.text = item.repository.fullName;
-        cell.timeLabel.text = item.creationDate.prettyShortTimeIntervalSinceNow;
-        
-        return cell;
-    } else if (item.payload.type == GHPayloadForkEvent) {
-        static NSString *CellIdentifier = @"GHFeedItemWithDescriptionTableViewCell";
-        GHDescriptionTableViewCell *cell = (GHDescriptionTableViewCell *)[self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-        
-        if (!cell) {
-            cell = [[GHDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-        }
-        [self updateImageView:cell.imageView atIndexPath:indexPath withGravatarID:item.actorAttributes.gravatarID];
-        
-        cell.textLabel.text = item.actor;
-        cell.descriptionLabel.text = [self descriptionForNewsFeedItem:item];
-        cell.detailTextLabel.text = item.repository.fullName;
-        cell.timeLabel.text = item.creationDate.prettyShortTimeIntervalSinceNow;
-        
-        return cell;
-    } else if (item.payload.type == GHPayloadDeleteEvent) {
-        static NSString *CellIdentifier = @"GHFeedItemWithDescriptionTableViewCell";
-        GHDescriptionTableViewCell *cell = (GHDescriptionTableViewCell *)[self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-        
-        if (!cell) {
-            cell = [[GHDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-        }
-        [self updateImageView:cell.imageView atIndexPath:indexPath withGravatarID:item.actorAttributes.gravatarID];
-        
-        cell.textLabel.text = item.actor;
-        cell.descriptionLabel.text = [self descriptionForNewsFeedItem:item];
-        
-        NSString *repoURL = item.repository.URL;
-        NSArray *components = [repoURL componentsSeparatedByString:@"/"];
-        NSUInteger count = [components count];
-        if (count > 1) {
-            cell.detailTextLabel.text = [NSString stringWithFormat:@"%@/%@", [components objectAtIndex:count-2], [components lastObject]];
-        } else {
-            cell.detailTextLabel.text = item.repository.name;
-        }
-        cell.timeLabel.text = item.creationDate.prettyShortTimeIntervalSinceNow;
-        
-        return cell;
-    } else if (item.payload.type == GHPayloadGollumEvent) {
-        static NSString *CellIdentifier = @"GHFeedItemWithDescriptionTableViewCell";
-        GHDescriptionTableViewCell *cell = (GHDescriptionTableViewCell *)[self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-        
-        if (!cell) {
-            cell = [[GHDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-        }
-        [self updateImageView:cell.imageView atIndexPath:indexPath withGravatarID:item.actorAttributes.gravatarID];
-        
-        cell.textLabel.text = item.actor;
-        cell.descriptionLabel.text = [self descriptionForNewsFeedItem:item];
-        cell.detailTextLabel.text = item.repository.fullName;
-        cell.timeLabel.text = item.creationDate.prettyShortTimeIntervalSinceNow;
-        
-        return cell;
-    } else if (item.payload.type == GHPayloadGistEvent) {
-        static NSString *CellIdentifier = @"GHFeedItemWithDescriptionTableViewCell";
-        GHDescriptionTableViewCell *cell = (GHDescriptionTableViewCell *)[self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-        
-        if (!cell) {
-            cell = [[GHDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-        }
-        [self updateImageView:cell.imageView atIndexPath:indexPath withGravatarID:item.actorAttributes.gravatarID];
-        
-        cell.detailTextLabel.text = nil;
-        cell.textLabel.text = item.actor;
-        cell.descriptionLabel.text = [self descriptionForNewsFeedItem:item];
-        cell.timeLabel.text = item.creationDate.prettyShortTimeIntervalSinceNow;
-        
-        return cell;
-    } else if (item.payload.type == GHPayloadDownloadEvent) {
-        static NSString *CellIdentifier = @"GHFeedItemWithDescriptionTableViewCell";
-        GHDescriptionTableViewCell *cell = (GHDescriptionTableViewCell *)[self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-        
-        if (!cell) {
-            cell = [[GHDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-        }
-        [self updateImageView:cell.imageView atIndexPath:indexPath withGravatarID:item.actorAttributes.gravatarID];
-        
-        cell.detailTextLabel.text = item.repository.fullName;
-        cell.textLabel.text = item.actor;
-        cell.descriptionLabel.text = [self descriptionForNewsFeedItem:item];
-        cell.timeLabel.text = item.creationDate.prettyShortTimeIntervalSinceNow;
-        
-        return cell;
-    } else if (item.payload.type == GHPayloadPullRequestEvent) {
-        static NSString *CellIdentifier = @"GHFeedItemWithDescriptionTableViewCell";
-        GHDescriptionTableViewCell *cell = (GHDescriptionTableViewCell *)[self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-        
-        if (!cell) {
-            cell = [[GHDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-        }
-        [self updateImageView:cell.imageView atIndexPath:indexPath withGravatarID:item.actorAttributes.gravatarID];
-        
-        cell.detailTextLabel.text = item.repository.fullName;
-        cell.descriptionLabel.text = [self descriptionForNewsFeedItem:item];
-        cell.textLabel.text = item.actor;
-        cell.timeLabel.text = item.creationDate.prettyShortTimeIntervalSinceNow;
-        
-        return cell;
-    } else if (item.payload.type == GHPayloadMemberEvent) {
-        static NSString *CellIdentifier = @"GHFeedItemWithDescriptionTableViewCell";
-        GHDescriptionTableViewCell *cell = (GHDescriptionTableViewCell *)[self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-        
-        if (!cell) {
-            cell = [[GHDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-        }
-        [self updateImageView:cell.imageView atIndexPath:indexPath withGravatarID:item.actorAttributes.gravatarID];
-        
-        cell.detailTextLabel.text = item.repository.fullName;
-        cell.textLabel.text = item.actor;
-        cell.descriptionLabel.text = [self descriptionForNewsFeedItem:item];
-        cell.timeLabel.text = item.creationDate.prettyShortTimeIntervalSinceNow;
-        
-        return cell;
-    } else if (item.payload.type == GHPayloadIssueCommentEvent) {
-        static NSString *CellIdentifier = @"GHFeedItemWithDescriptionTableViewCell";
-        GHDescriptionTableViewCell *cell = (GHDescriptionTableViewCell *)[self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-        
-        if (!cell) {
-            cell = [[GHDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-        }
-        [self updateImageView:cell.imageView atIndexPath:indexPath withGravatarID:item.actorAttributes.gravatarID];
-        
-        cell.detailTextLabel.text = item.repository.fullName;
-        cell.textLabel.text = item.actor;
-        cell.descriptionLabel.text = [self descriptionForNewsFeedItem:item];
-        cell.timeLabel.text = item.creationDate.prettyShortTimeIntervalSinceNow;
-        
-        return cell;
-    } else if (item.payload.type == GHPayloadForkApplyEvent) {
-        static NSString *CellIdentifier = @"GHFeedItemWithDescriptionTableViewCell";
-        GHDescriptionTableViewCell *cell = (GHDescriptionTableViewCell *)[self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-        
-        if (!cell) {
-            cell = [[GHDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-        }
-        [self updateImageView:cell.imageView atIndexPath:indexPath withGravatarID:item.actorAttributes.gravatarID];
-        
-        cell.detailTextLabel.text = item.repository.fullName;
-        cell.textLabel.text = item.actor;
-        cell.descriptionLabel.text = [self descriptionForNewsFeedItem:item];
-        cell.timeLabel.text = item.creationDate.prettyShortTimeIntervalSinceNow;
-        
-        return cell;
-    } else if (item.payload.type == GHPayloadPublicEvent) {
-        static NSString *CellIdentifier = @"GHFeedItemWithDescriptionTableViewCell";
-        GHDescriptionTableViewCell *cell = (GHDescriptionTableViewCell *)[self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-        
-        if (!cell) {
-            cell = [[GHDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-        }
-        [self updateImageView:cell.imageView atIndexPath:indexPath withGravatarID:item.actorAttributes.gravatarID];
-        
-        cell.detailTextLabel.text = item.repository.fullName;
-        cell.descriptionLabel.text = [self descriptionForNewsFeedItem:item];
-        cell.textLabel.text = item.actor;
-        cell.timeLabel.text = item.creationDate.prettyShortTimeIntervalSinceNow;
+        [self updateImageView:cell.targetImageView 
+                  atIndexPath:indexPath 
+          withAvatarURLString:followEvent.user.avatarURL];
         
         return cell;
     }
-    
-    return [self dummyCellWithText:item.type];
+        
+    return [self dummyCellWithText:event.typeString];
 }
 
 #pragma mark - instance methods
 
-- (NSString *)descriptionForNewsFeedItem:(GHNewsFeedItem *)item {
+#warning update here
+- (NSString *)descriptionForEvent:(GHAPIEventV3 *)event
+{
     NSString *description = nil;
     
-    if (item.payload.type == GHPayloadIssuesEvent) {
-        // this is the height for an issue cell, we will display the whole issue
-        GHIssuePayload *payload = (GHIssuePayload *)item.payload;
+    if (event.type == GHAPIEventTypeV3IssuesEvent) {
+        GHAPIIssuesEventV3 *myEvent = (GHAPIIssuesEventV3 *)event;
         
-        if ([GHIssue isIssueAvailableForRepository:item.repository.fullName withNumber:payload.number]) {
-            GHIssue *issue = [GHIssue issueFromDatabaseOnRepository:item.repository.fullName 
-                                                         withNumber:payload.number];
-            
-            description = [NSString stringWithFormat:NSLocalizedString(@"%@ Issue %@:\n\n%@", @""), payload.action, payload.number, issue.title];
-        }
-    } else if (item.payload.type == GHPayloadPushEvent) {
-        GHPushPayload *payload = (GHPushPayload *)item.payload;
+        description = [NSString stringWithFormat:NSLocalizedString(@"%@ Issue %@:\n\n%@", @""), myEvent.actor, myEvent.issue.number, myEvent.issue.title];
+    } else if (event.type == GHAPIEventTypeV3PushEvent) {
+        GHAPIPushEventV3 *pushEvent = (GHAPIPushEventV3 *)event;
         // this is a commit / push message, we will display max 2 commits
-        description = [NSString stringWithFormat:NSLocalizedString(@"pushed to %@ (%d)\n\n%@", @""), payload.branch, payload.commits.count, payload.previewString];
-    } else if(item.payload.type == GHPayloadCommitCommentEvent) {
+        description = [NSString stringWithFormat:NSLocalizedString(@"pushed to %@ (%d)\n\n%@", @""), pushEvent.ref, pushEvent.commits.count, pushEvent.previewString];
+    } else if(event.type == GHAPIEventTypeV3CommitComment) {
+#warning add more details here
         description = NSLocalizedString(@"commented on a commit", @"");
-    } else if(item.payload.type == GHPayloadFollowEvent) {
+    } else if(event.type == GHAPIEventTypeV3FollowEvent) {
         description = NSLocalizedString(@"started following", @"");
-    } else if(item.payload.type == GHPayloadWatchEvent) {
-        GHWatchEventPayload *payload = (GHWatchEventPayload *)item.payload;
-        description = [NSString stringWithFormat:NSLocalizedString(@"%@ watching", @""), payload.action];
-    } else if(item.payload.type == GHPayloadCreateEvent) {
-        GHCreateEventPayload *payload = (GHCreateEventPayload *)item.payload;
-        if (payload.objectType == GHCreateEventObjectRepository) {
-            description = NSLocalizedString(@"created repository", @"");
-        } else if (payload.objectType == GHCreateEventObjectBranch) {
-            description = [NSString stringWithFormat:NSLocalizedString(@"created branch %@", @""), payload.ref];
-        } else if (payload.objectType == GHCreateEventObjectTag) {
-            description = [NSString stringWithFormat:NSLocalizedString(@"created tag %@", @""), payload.ref];
-        } else {
-            description = @"__UNKNWON_CREATE_EVENT__";
+    } else if(event.type == GHAPIEventTypeV3WatchEvent) {
+        GHAPIWatchEventV3 *watchEvent = (GHAPIWatchEventV3 *)event;
+        description = [NSString stringWithFormat:NSLocalizedString(@"%@ watching", @""), watchEvent.action];
+    } else if(event.type == GHAPIEventTypeV3CreateEvent) {
+        GHAPICreateEventV3 *createEvent = (GHAPICreateEventV3 *)event;
+        
+        description = [NSString stringWithFormat:NSLocalizedString(@"created %@", @""), createEvent.createdObject];
+        
+        if (createEvent.objectName) {
+            description = [description stringByAppendingFormat:@" %@", createEvent.objectName];
         }
-    } else if(item.payload.type == GHPayloadForkEvent) {
+    } else if(event.type == GHAPIEventTypeV3ForkEvent) {
         description = NSLocalizedString(@"forked repository", @"");
-    } else if(item.payload.type == GHPayloadDeleteEvent) {
-        GHDeleteEventPayload *payload = (GHDeleteEventPayload *)item.payload;
-        description = [NSString stringWithFormat:NSLocalizedString(@"deleted %@ %@", @""), payload.refType, payload.ref];
-    } else if(item.payload.type == GHPayloadGollumEvent) {
-        GHGollumEventPayload *payload = (GHGollumEventPayload *)item.payload;
+    } else if(event.type == GHAPIEventTypeV3DeleteEvent) {
+        GHAPIDeleteEventV3 *deleteEvent = (GHAPIDeleteEventV3 *)event;
+        description = [NSString stringWithFormat:NSLocalizedString(@"deleted %@ %@", @""), deleteEvent.objectType, deleteEvent.objectName];
+    } else if(event.type == GHAPIEventTypeV3GollumEvent) {
+        GHAPIGollumEventV3 *gollumEvent = (GHAPIGollumEventV3 *)event;
+        
         NSMutableString *desctiptionString = [NSMutableString string];
         
-        for (GHGollumPageEvent *event in payload.events) {
-            [desctiptionString appendFormat:NSLocalizedString(@"%@ %@ in wiki\n", @""), event.action, event.pageName];
+        for (GHAPIGollumPageV3 *page in gollumEvent.pages) {
+            [desctiptionString appendFormat:NSLocalizedString(@"%@ %@ in wiki\n", @""), page.action, page.pageName];
         }
         
         description = desctiptionString;
-    } else if(item.payload.type == GHPayloadGistEvent) {
-        GHGistEventPayload *payload = (GHGistEventPayload *)item.payload;
+    } else if(event.type == GHAPIEventTypeV3GistEvent) {
+        GHAPIGistEventV3 *gistEvent = (GHAPIGistEventV3 *)event;
         
-        NSString *action = payload.action;
+        NSString *action = gistEvent.action;
         if ([action hasSuffix:@"e"]) {
             action = [action stringByAppendingString:@"d"];
         } else {
             action = [action stringByAppendingString:@"ed"];
         }
         
-        description = [NSString stringWithFormat:@"%@ %@:\n\n%@", action, payload.name, payload.descriptionGist ? payload.descriptionGist : payload.snippet];
-    } else if(item.payload.type == GHPayloadDownloadEvent) {
-        // this is the height for an issue cell, we will display the whole issue
-        GHDownloadEventPayload *payload = (GHDownloadEventPayload *)item.payload;
-        description = [NSString stringWithFormat:NSLocalizedString(@"uploaded file:%@", @""), item.actor, [payload.URL lastPathComponent]];
-    } else if(item.payload.type == GHPayloadPullRequestEvent) {
-        // this is the height for an issue cell, we will display the whole issue
-        GHPullRequestPayload *payload = (GHPullRequestPayload *)item.payload;
+        description = [NSString stringWithFormat:@"%@ Gist %@:\n\n%@", action, gistEvent.gist.ID, gistEvent.gist.description];
+    } else if(event.type == GHAPIEventTypeV3DownloadEvent) {
+        GHAPIDownloadEventV3 *downloadEvent = (GHAPIDownloadEventV3 *)event;
         
-        if (payload.pullRequest) {
-            NSString *additionsString = [NSString stringWithFormat:NSLocalizedString(@"%@ %@", @""), payload.pullRequest.additions, [payload.pullRequest.additions intValue] == 1 ? NSLocalizedString(@"addition", @"") : NSLocalizedString(@"additions", @"") ];
-            NSString *deletionsString = [NSString stringWithFormat:NSLocalizedString(@"%@ %@", @""), payload.pullRequest.deletions, [payload.pullRequest.deletions intValue] == 1 ? NSLocalizedString(@"deletion", @"") : NSLocalizedString(@"deletions", @"") ];
-            NSString *commitsString = [NSString stringWithFormat:NSLocalizedString(@"%@ %@", @""), payload.pullRequest.commits, [payload.pullRequest.commits intValue] == 1 ? NSLocalizedString(@"commit", @"") : NSLocalizedString(@"commits", @"") ];
-            
-            description = [NSString stringWithFormat:NSLocalizedString(@"%@ with %@ and %@", @""), commitsString, additionsString, deletionsString];
+        description = [NSString stringWithFormat:NSLocalizedString(@"created download: %@", @""), downloadEvent.download.name];
+        if (downloadEvent.download.description) {
+            description = [description stringByAppendingFormat:@"\n\n%@", downloadEvent.download.description];
         }
-        description = [NSString stringWithFormat:NSLocalizedString(@"%@ pull request %@:\n\n%@\n\n%@", @""), payload.action, payload.number, payload.pullRequest.title, description];
-    } else if(item.payload.type == GHPayloadMemberEvent) {
-        GHMemberEventPayload *payload = (GHMemberEventPayload *)item.payload;
+    } else if(event.type == GHAPIEventTypeV3PullRequestEvent) {
+        GHAPIPullRequestEventV3 *pullEvent = (GHAPIPullRequestEventV3 *)event;
         
-        description = [NSString stringWithFormat:NSLocalizedString(@"%@ %@", @""), payload.action, payload.member.login];
-    } else if(item.payload.type == GHPayloadIssueCommentEvent) {
-        GHIssuesCommentPayload *payload = (GHIssuesCommentPayload *)item.payload;
-        description = [NSString stringWithFormat:NSLocalizedString(@"commented on Issue %@", @""), payload.issueID];
-    } else if(item.payload.type == GHPayloadForkApplyEvent) {
+        description = [NSString stringWithFormat:NSLocalizedString(@"%@ Pull Request %\n\n%@", @""), pullEvent.action, pullEvent.pullRequest.number, pullEvent.pullRequest.title];
+        
+#warning maybe add additions and deletions as info
+//        NSString *additionsString = [NSString stringWithFormat:NSLocalizedString(@"%@ %@", @""), payload.pullRequest.additions, [payload.pullRequest.additions intValue] == 1 ? NSLocalizedString(@"addition", @"") : NSLocalizedString(@"additions", @"") ];
+//        NSString *deletionsString = [NSString stringWithFormat:NSLocalizedString(@"%@ %@", @""), payload.pullRequest.deletions, [payload.pullRequest.deletions intValue] == 1 ? NSLocalizedString(@"deletion", @"") : NSLocalizedString(@"deletions", @"") ];
+//        NSString *commitsString = [NSString stringWithFormat:NSLocalizedString(@"%@ %@", @""), payload.pullRequest.commits, [payload.pullRequest.commits intValue] == 1 ? NSLocalizedString(@"commit", @"") : NSLocalizedString(@"commits", @"") ];
+//        
+//        description = [NSString stringWithFormat:NSLocalizedString(@"%@ with %@ and %@", @""), commitsString, additionsString, deletionsString];
+//        
+//        if (payload.pullRequest) {
+//            
+//        }
+//        description = [NSString stringWithFormat:NSLocalizedString(@"%@ pull request %@:\n\n%@\n\n%@", @""), payload.action, payload.number, payload.pullRequest.title, description];
+    } else if(event.type == GHAPIEventTypeV3MemberEvent) {
+        GHAPIMemberEventV3 *memberEvent = (GHAPIMemberEventV3 *)event;
+        
+        description = [NSString stringWithFormat:NSLocalizedString(@"%@ %@", @""), memberEvent.action, memberEvent.member.name];
+    } else if(event.type == GHAPIEventTypeV3IssueCommentEvent) {
+        GHAPIIssueCommentEventV3 *commentEvent = (GHAPIIssueCommentEventV3 *)event;
+        
+        
+        description = [NSString stringWithFormat:NSLocalizedString(@"commented on Issue %@\n\n%@", @""), commentEvent.issue.number, commentEvent.issue.title ];
+    } else if(event.type == GHAPIEventTypeV3ForkApplyEvent) {
         description = NSLocalizedString(@"applied fork commits", @"");
-    } else if (item.payload.type == GHPayloadPublicEvent) {
+    } else if (event.type == GHAPIEventTypeV3PublicEvent) {
         description = NSLocalizedString(@"open sourced", @"");
+    } else if (event.type == GHAPIEventTypeV3TeamAddEvent) {
+        GHAPITeamAddEventV3 *addEvent = (GHAPITeamAddEventV3 *)event;
+        
+        if (addEvent.teamRepository) {
+            description = [NSString stringWithFormat:@"added repository %@ to team %@", addEvent.teamRepository.name, addEvent.team.name];
+        } else if (addEvent.teamUser) {
+            description = [NSString stringWithFormat:@"added member %@ to team %@", addEvent.teamUser.name, addEvent.team.name];
+        }
     }
     
     return description;
@@ -481,7 +218,7 @@
 
 - (void)cacheHeightForTableView {
     int i = 0;
-    for (GHNewsFeedItem *item in self.newsFeed.items) {
+    for (GHAPIEventV3 *event in _events) {
         CGFloat height = 0.0;
         CGFloat minimumHeight = 0.0;
         
@@ -489,8 +226,8 @@
         minimumHeight = 15.0f;
 #endif
         
-        NSString *description = [self descriptionForNewsFeedItem:item];
-        if (item.payload.type == GHPayloadFollowEvent) {
+        NSString *description = [self descriptionForEvent:event];
+        if (event.type == GHAPIEventTypeV3FollowEvent) {
             height = [GHFollowEventTableViewCell heightWithContent:description];
         } else {
             height = [GHDescriptionTableViewCell heightWithContent:description];
@@ -503,95 +240,112 @@
 
 #pragma mark - Table view delegate
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath 
+{
     return [self cachedHeightForRowAtIndexPath:indexPath];
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    GHNewsFeedItem *item = [self.newsFeed.items objectAtIndex:indexPath.row];
+- (void)tableView:(UITableView *)tableView 
+   didSelectEvent:(GHAPIEventV3 *)event 
+      atIndexPath:(NSIndexPath *)indexPath
+{
+    UIViewController *viewController = nil;
     
-    if (item.payload.type == GHPayloadIssuesEvent) {
-        GHIssuePayload *payload = (GHIssuePayload *)item.payload;
-        GHIssueViewController *viewIssueViewController = [[GHIssueViewController alloc] 
-                                                                    initWithRepository:item.repository.fullName 
-                                                                    issueNumber:payload.number];
-        [self.navigationController pushViewController:viewIssueViewController animated:YES];
-    } else if (item.payload.type == GHPayloadPullRequestEvent) {
-        GHPullRequestPayload *payload = (GHPullRequestPayload *)item.payload;
-        GHIssueViewController *viewIssueViewController = [[GHIssueViewController alloc] initWithRepository:item.repository.fullName issueNumber:payload.number];
-        [self.navigationController pushViewController:viewIssueViewController animated:YES];
-    } else if (item.payload.type == GHPayloadPushEvent) {
-        GHPushPayloadViewController *pushViewController = [[GHPushPayloadViewController alloc] initWithPayload:(GHPushPayload *)item.payload onRepository:item.repository.fullName];
-        [self.navigationController pushViewController:pushViewController animated:YES];
-    } else if (item.payload.type == GHPayloadWatchEvent) {
-        GHRepositoryViewController *repoViewController = [[GHRepositoryViewController alloc] initWithRepositoryString:item.repository.fullName];
-        [self.navigationController pushViewController:repoViewController animated:YES];
-    } else if (item.payload.type == GHPayloadFollowEvent) {
-        GHFollowEventPayload *payload = (GHFollowEventPayload *)item.payload;
+    if (event.type == GHAPIEventTypeV3IssuesEvent) {
+        GHAPIIssuesEventV3 *myEvent = (GHAPIIssuesEventV3 *)event;
         
-        GHUserViewController *userViewController = [[GHUserViewController alloc] initWithUsername:payload.target.login];
-        [self.navigationController pushViewController:userViewController animated:YES];
-    } else if (item.payload.type == GHPayloadCreateEvent) {
-        NSString *repo = item.repository.fullName;
+        viewController = [[GHIssueViewController alloc] 
+                          initWithRepository:myEvent.repository.name 
+                          issueNumber:myEvent.issue.number];
+    } else if (event.type == GHAPIEventTypeV3PushEvent) {
+        GHAPIPushEventV3 *pushEvent = (GHAPIPushEventV3 *)event;
         
-        GHRepositoryViewController *repoViewController = [[GHRepositoryViewController alloc] initWithRepositoryString:repo];
-        [self.navigationController pushViewController:repoViewController animated:YES];
-    } else if (item.payload.type == GHPayloadIssueCommentEvent) {
-        GHIssuesCommentPayload *payload = (GHIssuesCommentPayload *)item.payload;
+#warning we need a new viewController to display pushed commits
+        //        GHPushPayloadViewController *pushViewController = [[GHPushPayloadViewController alloc] initWithPayload:(GHPushPayload *)item.payload onRepository:item.repository.fullName];
+        //        [self.navigationController pushViewController:pushViewController animated:YES];
+    } else if(event.type == GHAPIEventTypeV3CommitComment) {
+#warning check for more details
+        viewController = [[GHRepositoryViewController alloc] initWithRepositoryString:event.repository.name];
+    } else if(event.type == GHAPIEventTypeV3FollowEvent) {
+        GHAPIFollowEventV3 *followEvent = (GHAPIFollowEventV3 *)event;
         
-        GHIssueViewController *viewIssueViewController = [[GHIssueViewController alloc] initWithRepository:item.repository.fullName issueNumber:payload.issueID];
-        [self.navigationController pushViewController:viewIssueViewController animated:YES];
-    } else if (item.payload.type == GHPayloadPublicEvent) {
-        GHRepositoryViewController *repoViewController = [[GHRepositoryViewController alloc] initWithRepositoryString:item.repository.fullName];
-        [self.navigationController pushViewController:repoViewController animated:YES];
-    } else if (item.payload.type == GHPayloadCommitCommentEvent) {
-        GHRepositoryViewController *repoViewController = [[GHRepositoryViewController alloc] initWithRepositoryString:item.repository.fullName];
-        [self.navigationController pushViewController:repoViewController animated:YES];
-    } else if (item.payload.type == GHPayloadDeleteEvent) {
-        GHRepositoryViewController *repoViewController = [[GHRepositoryViewController alloc] initWithRepositoryString:
-                                                                 [NSString stringWithFormat:@"%@/%@", item.repository.owner, item.repository.name] ];
-        [self.navigationController pushViewController:repoViewController animated:YES];
-    } else if (item.payload.type == GHPayloadDownloadEvent) {
-        GHRepositoryViewController *repoViewController = [[GHRepositoryViewController alloc] initWithRepositoryString:
-                                                                 [NSString stringWithFormat:@"%@/%@", item.repository.owner, item.repository.name] ];
-        [self.navigationController pushViewController:repoViewController animated:YES];
-    } else if (item.payload.type == GHPayloadForkApplyEvent) {
-        GHRepositoryViewController *repoViewController = [[GHRepositoryViewController alloc] initWithRepositoryString:
-                                                                 [NSString stringWithFormat:@"%@/%@", item.repository.owner, item.repository.name] ];
-        [self.navigationController pushViewController:repoViewController animated:YES];
-    } else if (item.payload.type == GHPayloadGollumEvent) {
-        GHRepositoryViewController *repoViewController = [[GHRepositoryViewController alloc] initWithRepositoryString:
-                                                                 [NSString stringWithFormat:@"%@/%@", item.repository.owner, item.repository.name] ];
-        [self.navigationController pushViewController:repoViewController animated:YES];
-    } else if (item.payload.type == GHPayloadForkEvent) {
-        GHRepositoryViewController *repoViewController = [[GHRepositoryViewController alloc] initWithRepositoryString:
-                                                                 item.repository.fullName ];
-        [self.navigationController pushViewController:repoViewController animated:YES];
-    } else if (item.payload.type == GHPayloadMemberEvent) {
-        GHMemberEventPayload *payload = (GHMemberEventPayload *)item.payload;
+        viewController = [[GHUserViewController alloc] initWithUsername:followEvent.user.login];
+    } else if(event.type == GHAPIEventTypeV3WatchEvent) {
+        GHAPIWatchEventV3 *watchEvent = (GHAPIWatchEventV3 *)event;
         
-        GHUserViewController *userViewController = [[GHUserViewController alloc] initWithUsername:payload.member.login];
-        [self.navigationController pushViewController:userViewController animated:YES];
-    } else if (item.payload.type == GHPayloadGistEvent) {
-        GHGistEventPayload *payload = (GHGistEventPayload *)item.payload;
+        viewController = [[GHRepositoryViewController alloc] initWithRepositoryString:watchEvent.repository.name];
+    } else if(event.type == GHAPIEventTypeV3CreateEvent) {
+        GHAPICreateEventV3 *createEvent = (GHAPICreateEventV3 *)event;
         
-        GHGistViewController *gistViewController = [[GHGistViewController alloc] initWithID:payload.gistID];
-        [self.navigationController pushViewController:gistViewController animated:YES];
+        viewController = [[GHRepositoryViewController alloc] initWithRepositoryString:createEvent.repository.name];
+    } else if(event.type == GHAPIEventTypeV3ForkEvent) {
+        viewController = [[GHRepositoryViewController alloc] initWithRepositoryString:event.repository.name];
+    } else if(event.type == GHAPIEventTypeV3DeleteEvent) {
+        GHAPIDeleteEventV3 *deleteEvent = (GHAPIDeleteEventV3 *)event;
+        
+        viewController = [[GHRepositoryViewController alloc] initWithRepositoryString:deleteEvent.repository.name];
+    } else if(event.type == GHAPIEventTypeV3GollumEvent) {
+        viewController = [[GHRepositoryViewController alloc] initWithRepositoryString:event.repository.name];
+    } else if(event.type == GHAPIEventTypeV3GistEvent) {
+        GHAPIGistEventV3 *gistEvent = (GHAPIGistEventV3 *)event;
+        
+        viewController = [[GHGistViewController alloc] initWithID:gistEvent.gist.ID];
+    } else if(event.type == GHAPIEventTypeV3DownloadEvent) {
+        GHAPIDownloadEventV3 *downloadEvent = (GHAPIDownloadEventV3 *)event;
+        
+        viewController = [[GHRepositoryViewController alloc] initWithRepositoryString:downloadEvent.repository.name];
+    } else if(event.type == GHAPIEventTypeV3PullRequestEvent) {
+        GHAPIPullRequestEventV3 *pullEvent = (GHAPIPullRequestEventV3 *)event;
+        
+        viewController = [[GHIssueViewController alloc] initWithRepository:pullEvent.repository.name issueNumber:pullEvent.pullRequest.number];
+    } else if(event.type == GHAPIEventTypeV3MemberEvent) {
+        GHAPIMemberEventV3 *memberEvent = (GHAPIMemberEventV3 *)event;
+        
+        viewController = [[GHUserViewController alloc] initWithUsername:memberEvent.member.login];
+    } else if(event.type == GHAPIEventTypeV3IssueCommentEvent) {
+        GHAPIIssueCommentEventV3 *commentEvent = (GHAPIIssueCommentEventV3 *)event;
+        
+        viewController = [[GHIssueViewController alloc] initWithRepository:commentEvent.repository.name issueNumber:commentEvent.issue.number];
+    } else if(event.type == GHAPIEventTypeV3ForkApplyEvent) {
+        viewController = [[GHRepositoryViewController alloc] initWithRepositoryString:event.repository.name];
+    } else if (event.type == GHAPIEventTypeV3PublicEvent) {
+        viewController = [[GHRepositoryViewController alloc] initWithRepositoryString:event.repository.name];
+    } else if (event.type == GHAPIEventTypeV3TeamAddEvent) {
+        GHAPITeamAddEventV3 *addEvent = (GHAPITeamAddEventV3 *)event;
+        
+        if (addEvent.teamRepository) {
+            viewController = [[GHRepositoryViewController alloc] initWithRepositoryString:addEvent.teamRepository.name];
+        } else if (addEvent.teamUser) {
+            viewController = [[GHUserViewController alloc] initWithUsername:addEvent.teamUser.name];
+        }
+    }
+    
+    if (viewController) {
+        [self.navigationController pushViewController:viewController animated:YES];
     } else {
         [self.tableView deselectRowAtIndexPath:indexPath animated:NO];
     }
 }
 
-#pragma mark - Keyed Archiving
-
-- (void)encodeWithCoder:(NSCoder *)encoder {
-    [super encodeWithCoder:encoder];
-    [encoder encodeObject:_newsFeed forKey:@"newsFeed"];
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath 
+{
+    GHAPIEventV3 *event = [_events objectAtIndex:indexPath.row];
+    
+    [self tableView:tableView didSelectEvent:event atIndexPath:indexPath];
 }
 
-- (id)initWithCoder:(NSCoder *)decoder {
+#pragma mark - Keyed Archiving
+
+- (void)encodeWithCoder:(NSCoder *)encoder 
+{
+    [super encodeWithCoder:encoder];
+    [encoder encodeObject:_events forKey:@"events"];
+}
+
+- (id)initWithCoder:(NSCoder *)decoder 
+{
     if ((self = [super initWithCoder:decoder])) {
-        _newsFeed = [decoder decodeObjectForKey:@"newsFeed"];
+        _events = [decoder decodeObjectForKey:@"events"];
     }
     return self;
 }
