@@ -44,18 +44,23 @@
 
 - (void)pullToReleaseTableViewReloadData {
     [super pullToReleaseTableViewReloadData];
-    if (!self.newsFeed) {
+    if (!self.events) {
         self.isDownloadingEssentialData = YES;
     }
-    [GHNewsFeed newsFeedForUserNamed:self.username completionHandler:^(GHNewsFeed *feed, NSError *error) {
-        self.isDownloadingEssentialData = NO;
-        if (error) {
-            [self handleError:error];
-        } else {
-            self.newsFeed = feed;
-        }
-        [self pullToReleaseTableViewDidReloadData];
-    }];
+    
+    [GHAPIEventV3 eventsForUserNamed:_username 
+                                page:1 
+                   completionHandler:^(NSMutableArray *array, NSUInteger nextPage, NSError *error) {
+                       self.isDownloadingEssentialData = NO;
+                       
+                       if (error) {
+                           [self handleError:error];
+                       } else {
+                           self.events = array;
+                       }
+                       
+                       [self pullToReleaseTableViewDidReloadData];
+                   }];
 }
 
 #pragma mark - Keyed Archiving
