@@ -368,24 +368,6 @@
 {
     UIViewController *viewController = nil;
     
-//    GHAPIEventTypeV3CommitComment,
-//    GHAPIEventTypeV3CreateEvent,
-//    GHAPIEventTypeV3DeleteEvent,
-//    GHAPIEventTypeV3DownloadEvent,
-//    ,
-//    ,
-//    GHAPIEventTypeV3ForkApplyEvent,
-//    GHAPIEventTypeV3GistEvent,
-//    GHAPIEventTypeV3GollumEvent,
-//    GHAPIEventTypeV3IssueCommentEvent,
-//    GHAPIEventTypeV3IssuesEvent,
-//    GHAPIEventTypeV3MemberEvent,
-//    GHAPIEventTypeV3PublicEvent,
-//    GHAPIEventTypeV3PullRequestEvent,
-//    GHAPIEventTypeV3PushEvent,
-//    GHAPIEventTypeV3TeamAddEvent,
-//    
-    
     if (event.type == GHAPIEventTypeV3WatchEvent) {
         if ([event.repository.name hasPrefix:[GHAPIAuthenticationManager sharedInstance].authenticatedUser.login]) {
             // watched my repo, show the user
