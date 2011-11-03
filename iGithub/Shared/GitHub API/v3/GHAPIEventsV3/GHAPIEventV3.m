@@ -212,12 +212,95 @@ GHAPIEventTypeV3 GHAPIEventTypeV3FromNSString(NSString *eventType)
 + (void)eventsForAuthenticatedUserOnPage:(NSUInteger)page 
                        completionHandler:(GHAPIPaginationHandler)completionHandler
 {
-    //v3: GET /users/:user/received_events
-    
     NSString *username = [GHAPIAuthenticationManager sharedInstance].authenticatedUser.login;
+    
+    [self eventsForUserNamed:username
+                        page:page
+           completionHandler:completionHandler];
+}
+
++ (void)eventsForUserNamed:(NSString *)username 
+                      page:(NSUInteger)page 
+         completionHandler:(GHAPIPaginationHandler)completionHandler
+{
+    //v3: GET /users/:user/received_events
     
     NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.github.com/users/%@/received_events",
                                        [username stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] ] ];
+    
+    [[GHAPIBackgroundQueueV3 sharedInstance] sendRequestToURL:URL 
+                                                         page:page 
+                                                 setupHandler:nil 
+                                  completionPaginationHandler:^(id object, NSError *error, ASIFormDataRequest *request, NSUInteger nextPage) {
+                                      if (error) {
+                                          completionHandler(nil, GHAPIPaginationNextPageNotFound, error);
+                                      } else {
+                                          NSArray *rawArray = GHAPIObjectExpectedClass(&object, NSArray.class);
+                                          NSMutableArray *finalArray = [NSMutableArray arrayWithCapacity:rawArray.count];
+                                          
+                                          [rawArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+                                              GHAPIEventV3 *event = [GHAPIEventV3 eventWithRawDictionary:obj];
+                                              if (event) {
+                                                  [finalArray addObject:event];
+                                              }
+                                          }];
+                                          
+                                          completionHandler(finalArray, nextPage, nil);
+                                      }
+                                  }];
+}
+
++ (void)eventsByUserNamed:(NSString *)username 
+                     page:(NSUInteger)page 
+        completionHandler:(GHAPIPaginationHandler)completionHandler
+{
+    // v3: GET /users/:user/events
+    NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.github.com/users/%@/events",
+                                       [username stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] ] ];
+    
+    [[GHAPIBackgroundQueueV3 sharedInstance] sendRequestToURL:URL 
+                                                         page:page 
+                                                 setupHandler:nil 
+                                  completionPaginationHandler:^(id object, NSError *error, ASIFormDataRequest *request, NSUInteger nextPage) {
+                                      if (error) {
+                                          completionHandler(nil, GHAPIPaginationNextPageNotFound, error);
+                                      } else {
+                                          NSArray *rawArray = GHAPIObjectExpectedClass(&object, NSArray.class);
+                                          NSMutableArray *finalArray = [NSMutableArray arrayWithCapacity:rawArray.count];
+                                          
+                                          [rawArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+                                              GHAPIEventV3 *event = [GHAPIEventV3 eventWithRawDictionary:obj];
+                                              if (event) {
+                                                  [finalArray addObject:event];
+                                              }
+                                          }];
+                                          
+                                          completionHandler(finalArray, nextPage, nil);
+                                      }
+                                  }];
+}
+
++ (void)eventsByAuthenticatedUserOnPage:(NSUInteger)page 
+                      completionHandler:(GHAPIPaginationHandler)completionHandler
+{
+    NSString *username = [GHAPIAuthenticationManager sharedInstance].authenticatedUser.login;
+    
+    [self eventsByUserNamed:username
+                       page:page
+          completionHandler:completionHandler];
+}
+
++ (void)eventsForOrganizationNamed:(NSString *)organizationName 
+                              page:(NSUInteger)page 
+                 completionHandler:(GHAPIPaginationHandler)completionHandler
+{
+    // v3: GET /users/:user/events/orgs/:org
+    
+    NSString *username = [GHAPIAuthenticationManager sharedInstance].authenticatedUser.login;
+    
+    NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.github.com/users/%@/events/orgs/%@",
+                                       [username stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding], 
+                                       [organizationName stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] ]];
     
     [[GHAPIBackgroundQueueV3 sharedInstance] sendRequestToURL:URL 
                                                          page:page 

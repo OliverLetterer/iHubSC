@@ -83,4 +83,28 @@ GHAPIEventTypeV3 GHAPIEventTypeV3FromNSString(NSString *eventType);
 + (void)eventsForAuthenticatedUserOnPage:(NSUInteger)page 
                        completionHandler:(GHAPIPaginationHandler)completionHandler;
 
+/**
+ @abstract  These are events that you’ve received by watching repos and following users. If you are authenticated as the given user, you will see private events. Otherwise, you’ll only see public events.
+ */
++ (void)eventsForUserNamed:(NSString *)username 
+                      page:(NSUInteger)page 
+         completionHandler:(GHAPIPaginationHandler)completionHandler;
+
+/**
+ @abstract  If you are authenticated as the given user, you will see your private events. Otherwise, you’ll only see public events.
+ */
++ (void)eventsByUserNamed:(NSString *)username 
+                     page:(NSUInteger)page 
+        completionHandler:(GHAPIPaginationHandler)completionHandler;
+
++ (void)eventsByAuthenticatedUserOnPage:(NSUInteger)page 
+                      completionHandler:(GHAPIPaginationHandler)completionHandler;
+
+/**
+ @abstract  This is the user’s organization dashboard. You must be authenticated as the user to view this.
+ */
++ (void)eventsForOrganizationNamed:(NSString *)organizationName 
+                              page:(NSUInteger)page 
+                 completionHandler:(GHAPIPaginationHandler)completionHandler;
+
 @end
