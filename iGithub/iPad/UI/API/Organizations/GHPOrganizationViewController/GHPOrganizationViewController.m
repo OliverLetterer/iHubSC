@@ -7,7 +7,7 @@
 //
 
 #import "GHPOrganizationViewController.h"
-#import "GHPUsersNewsFeedViewController.h"
+#import "GHPOrganizationNewsFeedViewController.h"
 #import "GHPRepositoriesOfOrganizationViewController.h"
 #import "GHPMembersOfOrganizationViewController.h"
 #import "GHPTeamsOfOrganizationViewController.h"
@@ -147,7 +147,7 @@
     
     if (indexPath.section == kUITableViewSectionContent) {
         if (indexPath.row == 0) {
-            viewController = [[GHPUsersNewsFeedViewController alloc] initWithUsername:self.organizationName];
+            viewController = [[GHPOrganizationNewsFeedViewController alloc] initWithUsername:self.organizationName];
         } else if (indexPath.row == 1) {
             viewController = [[GHPRepositoriesOfOrganizationViewController alloc] initWithUsername:self.organizationName];
         } else if (indexPath.row == 2) {

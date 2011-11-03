@@ -12,6 +12,7 @@
 		A7204D8113E4759F0098C86A /* GHAPIMarkdownFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = A7204D8013E4759F0098C86A /* GHAPIMarkdownFormatter.m */; };
 		A7218E861461E76A0081CB02 /* GHAPIDownloadV3.m in Sources */ = {isa = PBXBuildFile; fileRef = A7218E851461E76A0081CB02 /* GHAPIDownloadV3.m */; };
 		A7218E8C1461E92D0081CB02 /* GHAPICommitCommentV3.m in Sources */ = {isa = PBXBuildFile; fileRef = A7218E8B1461E92D0081CB02 /* GHAPICommitCommentV3.m */; };
+		A7218E8F14629D0F0081CB02 /* GHPOrganizationNewsFeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7218E8E14629D0E0081CB02 /* GHPOrganizationNewsFeedViewController.m */; };
 		A72B1B37142E799B0086750C /* UIImage+UITabBarStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = A72B1B34142E799B0086750C /* UIImage+UITabBarStyle.m */; };
 		A72B1B38142E799B0086750C /* UITabBarItemGradient.png in Resources */ = {isa = PBXBuildFile; fileRef = A72B1B35142E799B0086750C /* UITabBarItemGradient.png */; };
 		A72B1B39142E799B0086750C /* UITabBarItemGradient@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A72B1B36142E799B0086750C /* UITabBarItemGradient@2x.png */; };
@@ -455,6 +456,8 @@
 		A7218E851461E76A0081CB02 /* GHAPIDownloadV3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHAPIDownloadV3.m; sourceTree = "<group>"; };
 		A7218E8A1461E92D0081CB02 /* GHAPICommitCommentV3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHAPICommitCommentV3.h; sourceTree = "<group>"; };
 		A7218E8B1461E92D0081CB02 /* GHAPICommitCommentV3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHAPICommitCommentV3.m; sourceTree = "<group>"; };
+		A7218E8D14629D0C0081CB02 /* GHPOrganizationNewsFeedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPOrganizationNewsFeedViewController.h; sourceTree = "<group>"; };
+		A7218E8E14629D0E0081CB02 /* GHPOrganizationNewsFeedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPOrganizationNewsFeedViewController.m; sourceTree = "<group>"; };
 		A72B1B33142E799B0086750C /* UIImage+UITabBarStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+UITabBarStyle.h"; sourceTree = "<group>"; };
 		A72B1B34142E799B0086750C /* UIImage+UITabBarStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+UITabBarStyle.m"; sourceTree = "<group>"; };
 		A72B1B35142E799B0086750C /* UITabBarItemGradient.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UITabBarItemGradient.png; sourceTree = "<group>"; };
@@ -1544,6 +1547,8 @@
 				A757968513E1A030008670B0 /* GHPOwnersNewsFeedViewController.m */,
 				A757968613E1A030008670B0 /* GHPUsersNewsFeedViewController.h */,
 				A757968713E1A030008670B0 /* GHPUsersNewsFeedViewController.m */,
+				A7218E8D14629D0C0081CB02 /* GHPOrganizationNewsFeedViewController.h */,
+				A7218E8E14629D0E0081CB02 /* GHPOrganizationNewsFeedViewController.m */,
 				A757968813E1A030008670B0 /* UITableViewCell's */,
 			);
 			path = NewsFeed;
@@ -3971,6 +3976,7 @@
 				A7C6682B1461BD69004E6EAA /* GHAPIGollumPageV3.m in Sources */,
 				A7218E861461E76A0081CB02 /* GHAPIDownloadV3.m in Sources */,
 				A7218E8C1461E92D0081CB02 /* GHAPICommitCommentV3.m in Sources */,
+				A7218E8F14629D0F0081CB02 /* GHPOrganizationNewsFeedViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

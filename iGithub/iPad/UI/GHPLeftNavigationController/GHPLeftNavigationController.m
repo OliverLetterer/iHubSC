@@ -19,6 +19,7 @@
 #import "GHPUsersNewsFeedViewController.h"
 #import "GHManageAuthenticatedUsersAlertView.h"
 #import "GHPIssuesOfAuthenticatedUserViewController.h"
+#import "GHPOrganizationNewsFeedViewController.h"
 
 #import "GHPUserViewController.h"
 
@@ -313,7 +314,7 @@
     } else if (indexPath.section == kUITableViewSectionOrganizations) {
         // My Profile + Search
         GHAPIOrganizationV3 *organization = [self.organizations objectAtIndex:indexPath.row];
-        viewController = [[GHPUsersNewsFeedViewController alloc] initWithUsername:organization.login ];
+        viewController = [[GHPOrganizationNewsFeedViewController alloc] initWithUsername:organization.login ];
     }
     
     if (viewController) {
