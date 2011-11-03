@@ -18,6 +18,10 @@
 
 @property (nonatomic, strong) NSArray *events;
 
+- (UITableViewCell *)tableView:(UITableView *)tableView 
+                  cellForEvent:(GHAPIEventV3 *)event 
+                   atIndexPath:(NSIndexPath *)indexPath;
+
 - (void)tableView:(UITableView *)tableView 
    didSelectEvent:(GHAPIEventV3 *)event 
       atIndexPath:(NSIndexPath *)indexPath;

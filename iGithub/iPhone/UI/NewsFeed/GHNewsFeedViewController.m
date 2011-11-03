@@ -59,10 +59,10 @@
     return _events.count;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath 
+- (UITableViewCell *)tableView:(UITableView *)tableView 
+                  cellForEvent:(GHAPIEventV3 *)event 
+                   atIndexPath:(NSIndexPath *)indexPath;
 {
-    GHAPIEventV3 *event = [_events objectAtIndex:indexPath.row];
-    
     if (event.type == GHAPIEventTypeV3IssuesEvent || event.type == GHAPIEventTypeV3PushEvent || event.type == GHAPIEventTypeV3CommitComment || event.type == GHAPIEventTypeV3WatchEvent || event.type == GHAPIEventTypeV3CreateEvent || event.type == GHAPIEventTypeV3ForkEvent || event.type == GHAPIEventTypeV3DeleteEvent || event.type == GHAPIEventTypeV3GollumEvent || event.type == GHAPIEventTypeV3GistEvent || event.type == GHAPIEventTypeV3DownloadEvent || event.type == GHAPIEventTypeV3PullRequestEvent || event.type == GHAPIEventTypeV3MemberEvent || event.type == GHAPIEventTypeV3IssueCommentEvent || event.type == GHAPIEventTypeV3ForkApplyEvent || event.type == GHAPIEventTypeV3PublicEvent || event.type == GHAPIEventTypeV3TeamAddEvent) {
         static NSString *CellIdentifier = @"GHFeedItemWithDescriptionTableViewCell";
         GHDescriptionTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
@@ -110,7 +110,7 @@
         cell.textLabel.text = followEvent.actor.login;
         cell.descriptionLabel.text = [self descriptionForEvent:event];
         cell.targetNameLabel.text = followEvent.user.login;
-        cell.descriptionLabel.text = [self descriptionForEvent:event];
+        cell.timeLabel.text = event.createdAtString.prettyShortTimeIntervalSinceNow;
         
         [self updateImageView:cell.targetImageView 
                   atIndexPath:indexPath 
@@ -118,8 +118,15 @@
         
         return cell;
     }
-        
+    
     return [self dummyCellWithText:event.typeString];
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath 
+{
+    GHAPIEventV3 *event = [_events objectAtIndex:indexPath.row];
+    
+    return [self tableView:tableView cellForEvent:event atIndexPath:indexPath];
 }
 
 #pragma mark - instance methods
@@ -271,7 +278,7 @@
     } else if (event.type == GHAPIEventTypeV3PushEvent) {
         GHAPIPushEventV3 *pushEvent = (GHAPIPushEventV3 *)event;
         
-#warning we need a new viewController to display pushed commits
+#warning we need a new viewController to display pushed commits on iPhone
         //        GHPushPayloadViewController *pushViewController = [[GHPushPayloadViewController alloc] initWithPayload:(GHPushPayload *)item.payload onRepository:item.repository.fullName];
         //        [self.navigationController pushViewController:pushViewController animated:YES];
     } else if(event.type == GHAPIEventTypeV3CommitComment) {
