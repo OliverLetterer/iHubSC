@@ -77,10 +77,17 @@ GHAPIEventTypeV3 GHAPIEventTypeV3FromNSString(NSString *eventType)
 
 #pragma mark - Initialization
 
+- (id)initWithRawPayloadDictionary:(NSDictionary *)rawPayloadDictionary
+{
+    return [super init];
+}
+
 - (id)initWithRawDictionary:(NSDictionary *)rawDictionary
 {
     GHAPIObjectExpectedClass(&rawDictionary, NSDictionary.class);
-    if (self = [super init]) {
+    NSDictionary *rawPayloadDictionary = [rawDictionary objectForKeyOrNilOnNullObject:@"payload"];
+    
+    if (self = [self initWithRawPayloadDictionary:rawPayloadDictionary]) {
         // Initialization code
         _repository = [[GHAPIRepositoryV3 alloc] initWithRawDictionary:[rawDictionary objectForKeyOrNilOnNullObject:@"repo"]];
         _actor = [[GHAPIUserV3 alloc] initWithRawDictionary:[rawDictionary objectForKeyOrNilOnNullObject:@"actor"]];
@@ -244,6 +251,8 @@ GHAPIEventTypeV3 GHAPIEventTypeV3FromNSString(NSString *eventType)
                                                   [finalArray addObject:event];
                                               }
                                           }];
+                                          
+                                          DLog(@"%@", object);
                                           
                                           completionHandler(finalArray, nextPage, nil);
                                       }

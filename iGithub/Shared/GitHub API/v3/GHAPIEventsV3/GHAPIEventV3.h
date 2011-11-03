@@ -68,6 +68,8 @@ GHAPIEventTypeV3 GHAPIEventTypeV3FromNSString(NSString *eventType);
     GHAPIEventTypeV3 _type;
 }
 
+- (id)initWithRawPayloadDictionary:(NSDictionary *)rawPayloadDictionary;
+
 - (id)initWithRawDictionary:(NSDictionary *)rawDictionary;
 + (id)eventWithRawDictionary:(NSDictionary *)rawDictionary;
 

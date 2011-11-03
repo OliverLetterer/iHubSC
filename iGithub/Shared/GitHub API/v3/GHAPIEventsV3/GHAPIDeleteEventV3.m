@@ -15,10 +15,10 @@
 
 #pragma mark - Initialization
 
-- (id)initWithRawDictionary:(NSDictionary *)rawDictionary 
+- (id)initWithRawPayloadDictionary:(NSDictionary *)rawDictionary 
 {
     GHAPIObjectExpectedClass(&rawDictionary, NSDictionary.class);
-    if (self = [super initWithRawDictionary:rawDictionary]) {
+    if (self = [super initWithRawPayloadDictionary:rawDictionary]) {
         // Initialization code
         _objectType = [rawDictionary objectForKeyOrNilOnNullObject:@"ref_type"];
         _objectName = [rawDictionary objectForKeyOrNilOnNullObject:@"ref"];
