@@ -57,18 +57,16 @@
     return _lastCreationDate;
 }
 
-- (void)setNewsFeed:(GHNewsFeed *)newsFeed updateScrollView:(BOOL)updateScrollView {
-    [super setNewsFeed:newsFeed];
+- (void)setEvents:(NSArray *)events updateScrollView:(BOOL)updateScrollView {
+    [super setEvents:events];
     
-    if (newsFeed) {
+    if (events) {
         
-        NSUInteger index = [_newsFeed.items indexOfObjectPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {
-            GHNewsFeedItem *item = obj;
-            if ([item.creationDate isEqualToString:self.lastCreationDate]) {
-                *stop = YES;
-                return YES;
-            }
-            return NO;
+        NSUInteger index = [events indexOfObjectPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {
+            GHAPIEventV3 *event = obj;
+            
+            *stop = [event.createdAtString isEqualToString:self.lastCreationDate];
+            return *stop;
         }];
         
         if (updateScrollView) {
@@ -79,9 +77,9 @@
             }
         }
         
-        if (newsFeed.items.count > 0) {
-            GHNewsFeedItem *item = [newsFeed.items objectAtIndex:0];
-            self.lastCreationDate = item.creationDate;
+        if (events.count > 0) {
+            GHAPIEventV3 *event = [events objectAtIndex:0];
+            self.lastCreationDate = event.createdAtString;
         }
         
         if (index == NSNotFound) {
@@ -91,18 +89,17 @@
     }
 }
 
-- (void)setNewsFeed:(GHNewsFeed *)newsFeed {
-    [super setNewsFeed:newsFeed];
+- (void)setEvents:(NSArray *)events
+{
+    [super setEvents:events];
     
-    if (newsFeed) {
+    if (events) {
         
-        NSUInteger index = [_newsFeed.items indexOfObjectPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {
-            GHNewsFeedItem *item = obj;
-            if ([item.creationDate isEqualToString:self.lastCreationDate]) {
-                *stop = YES;
-                return YES;
-            }
-            return NO;
+        NSUInteger index = [events indexOfObjectPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {
+            GHAPIEventV3 *event = obj;
+            
+            *stop = [event.createdAtString isEqualToString:self.lastCreationDate];
+            return *stop;
         }];
         
         if (index != NSNotFound && index > 0) {
@@ -111,9 +108,9 @@
             [self.tableView setContentOffset:scrollPoint animated:NO];
         }
         
-        if (newsFeed.items.count > 0) {
-            GHNewsFeedItem *item = [newsFeed.items objectAtIndex:0];
-            self.lastCreationDate = item.creationDate;
+        if (events.count > 0) {
+            GHAPIEventV3 *event = [events objectAtIndex:0];
+            self.lastCreationDate = event.createdAtString;
         }
         
         if (index == NSNotFound) {
@@ -137,16 +134,6 @@
         self.pendingStateStringsArray = [NSMutableArray array];
     }
     return self;
-}
-
-#pragma mark - Memory management
-
-
-- (void)didReceiveMemoryWarning {
-    // Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
-    
-    // Release any cached data, images, etc that aren't in use.
 }
 
 #pragma mark - View lifecycle
@@ -178,7 +165,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    if (!self.newsFeed) {
+    if (!self.events) {
         [self pullToReleaseTableViewReloadData];
     }
 }
@@ -216,7 +203,7 @@
     self.segmentControl.userInteractionEnabled = NO;
     self.segmentControl.alpha = 0.5;
     
-    if (!self.newsFeed) {
+    if (!self.events) {
         self.isDownloadingEssentialData = YES;
     }
     if (self.segmentControl) {
@@ -229,55 +216,64 @@
         // News Feed
         self.defaultOrganizationName = nil;
         [self showLoadingInformation:NSLocalizedString(@"Fetching private News Feed", @"")];
-        [GHNewsFeed privateNewsWithCompletionHandler:^(GHNewsFeed *feed, NSError *error) {
-            self.isDownloadingEssentialData = NO;
-            if (error) {
-                [self detachNewStateString:NSLocalizedString(@"Error", @"") removeAfterDisplayed:YES];
-                self.segmentControl.userInteractionEnabled = YES;
-                self.segmentControl.alpha = 1.0;
-                [self handleError:error];
-            } else {
-                [self setNewsFeed:feed updateScrollView:_updateScrollView];
-                self.segmentControl.userInteractionEnabled = YES;
-                self.segmentControl.alpha = 1.0;
-            }
-            [self pullToReleaseTableViewDidReloadData];
-        }];
+        [GHAPIEventV3 eventsForAuthenticatedUserOnPage:1 
+                                     completionHandler:^(NSMutableArray *array, NSUInteger nextPage, NSError *error) {
+                                         self.isDownloadingEssentialData = NO;
+                                         
+                                         if (error) {
+                                             [self detachNewStateString:NSLocalizedString(@"Error", @"") removeAfterDisplayed:YES];
+                                             self.segmentControl.userInteractionEnabled = YES;
+                                             self.segmentControl.alpha = 1.0;
+                                             [self handleError:error];
+                                         } else {
+                                             [self setEvents:array updateScrollView:_updateScrollView];
+                                             self.segmentControl.userInteractionEnabled = YES;
+                                             self.segmentControl.alpha = 1.0;
+                                         }
+                                         
+                                         [self pullToReleaseTableViewDidReloadData];
+                                     }];
     } else if (_lastSelectedSegmentControlIndex == 1) {
         // My Actions
         [self showLoadingInformation:NSLocalizedString(@"Fetching My Actions", @"")];
-        [GHNewsFeed newsFeedForUserNamed:[GHAPIAuthenticationManager sharedInstance].authenticatedUser.login 
-                       completionHandler:^(GHNewsFeed *feed, NSError *error) {
-                           self.isDownloadingEssentialData = NO;
-                           if (error) {
-                               [self detachNewStateString:NSLocalizedString(@"Error", @"") removeAfterDisplayed:YES];
-                               self.segmentControl.userInteractionEnabled = YES;
-                               self.segmentControl.alpha = 1.0;
-                               [self handleError:error];
-                           } else {
-                               [self setNewsFeed:feed updateScrollView:_updateScrollView];
-                               self.segmentControl.userInteractionEnabled = YES;
-                               self.segmentControl.alpha = 1.0;
-                           }
-                           [self pullToReleaseTableViewDidReloadData];
-                       }];
+        [GHAPIEventV3 eventsByAuthenticatedUserOnPage:1 
+                                    completionHandler:^(NSMutableArray *array, NSUInteger nextPage, NSError *error) {
+                                        self.isDownloadingEssentialData = NO;
+                                        
+                                        if (error) {
+                                            [self detachNewStateString:NSLocalizedString(@"Error", @"") removeAfterDisplayed:YES];
+                                            self.segmentControl.userInteractionEnabled = YES;
+                                            self.segmentControl.alpha = 1.0;
+                                            [self handleError:error];
+                                        } else {
+                                            [self setEvents:array updateScrollView:_updateScrollView];
+                                            self.segmentControl.userInteractionEnabled = YES;
+                                            self.segmentControl.alpha = 1.0;
+                                        }
+                                        
+                                        [self pullToReleaseTableViewDidReloadData];
+                                    }];
     } else if (_lastSelectedSegmentControlIndex == 2) {
         if (self.defaultOrganizationName) {
             [self showLoadingInformation:[NSString stringWithFormat:NSLocalizedString(@"Fetching %@ News Feed", @""), self.defaultOrganizationName] ];
-            [GHNewsFeed newsFeedForUserNamed:self.defaultOrganizationName completionHandler:^(GHNewsFeed *feed, NSError *error) {
-                self.isDownloadingEssentialData = NO;
-                if (error) {
-                    [self detachNewStateString:NSLocalizedString(@"Error", @"") removeAfterDisplayed:YES];
-                    self.segmentControl.userInteractionEnabled = YES;
-                    self.segmentControl.alpha = 1.0;
-                    [self handleError:error];
-                } else {
-                    [self setNewsFeed:feed updateScrollView:_updateScrollView];
-                    self.segmentControl.userInteractionEnabled = YES;
-                    self.segmentControl.alpha = 1.0;
-                }
-                [self pullToReleaseTableViewDidReloadData];
-            }];
+            [GHAPIEventV3 eventsForOrganizationNamed:self.defaultOrganizationName 
+                                                page:1 
+                                   completionHandler:^(NSMutableArray *array, NSUInteger nextPage, NSError *error) {
+                                       self.isDownloadingEssentialData = NO;
+                                       
+                                       if (error) {
+                                           [self detachNewStateString:NSLocalizedString(@"Error", @"") removeAfterDisplayed:YES];
+                                           self.segmentControl.userInteractionEnabled = YES;
+                                           self.segmentControl.alpha = 1.0;
+                                           [self handleError:error];
+                                       } else {
+                                           [self setEvents:array updateScrollView:_updateScrollView];
+                                           self.segmentControl.userInteractionEnabled = YES;
+                                           self.segmentControl.alpha = 1.0;
+                                       }
+                                       
+                                       [self pullToReleaseTableViewDidReloadData];
+                                   }];
         } else {
             [self showLoadingInformation:NSLocalizedString(@"Fetching Organizations", @"")];
             [GHAPIOrganizationV3 organizationsOfUser:[GHAPIAuthenticationManager sharedInstance].authenticatedUser.login 
@@ -331,19 +327,22 @@
     
     [self showLoadingInformation:[NSString stringWithFormat:NSLocalizedString(@"Download %@ News Feed", @""), self.defaultOrganizationName] ];
     
-    [GHNewsFeed newsFeedForUserNamed:self.defaultOrganizationName completionHandler:^(GHNewsFeed *feed, NSError *error) {
-        if (error) {
-            [self detachNewStateString:NSLocalizedString(@"Error", @"") removeAfterDisplayed:YES];
-            self.segmentControl.userInteractionEnabled = YES;
-            self.segmentControl.alpha = 1.0;
-            [self handleError:error];
-        } else {
-            [self setNewsFeed:feed updateScrollView:_updateScrollView];
-            self.segmentControl.userInteractionEnabled = YES;
-            self.segmentControl.alpha = 1.0;
-        }
-        [self pullToReleaseTableViewDidReloadData];
-    }];
+    [GHAPIEventV3 eventsForOrganizationNamed:self.defaultOrganizationName
+                                        page:1
+                           completionHandler:^(NSMutableArray *array, NSUInteger nextPage, NSError *error) {
+                               if (error) {
+                                   [self detachNewStateString:NSLocalizedString(@"Error", @"") removeAfterDisplayed:YES];
+                                   self.segmentControl.userInteractionEnabled = YES;
+                                   self.segmentControl.alpha = 1.0;
+                                   [self handleError:error];
+                               } else {
+                                   [self setEvents:array updateScrollView:_updateScrollView];
+                                   self.segmentControl.userInteractionEnabled = YES;
+                                   self.segmentControl.alpha = 1.0;
+                               }
+                               
+                               [self pullToReleaseTableViewDidReloadData];
+                           }];
 }
 
 #pragma mark - UIActionSheetDelegate
@@ -360,47 +359,64 @@
 
 - (void)segmentControlValueChanged:(UISegmentedControl *)segmentControl {
     [self pullToReleaseTableViewReloadData];
-    self.newsFeed = nil;
+    self.events = nil;
 }
 
 #pragma mark - UITableViewDelegate
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    GHNewsFeedItem *item = [self.newsFeed.items objectAtIndex:indexPath.row];
-    
+- (void)tableView:(UITableView *)tableView didSelectEvent:(GHAPIEventV3 *)event atIndexPath:(NSIndexPath *)indexPath
+{
     UIViewController *viewController = nil;
     
-    if (item.payload.type == GHPayloadWatchEvent) {
-        if ([item.repository.fullName hasPrefix:[GHAPIAuthenticationManager sharedInstance].authenticatedUser.login]) {
+//    GHAPIEventTypeV3CommitComment,
+//    GHAPIEventTypeV3CreateEvent,
+//    GHAPIEventTypeV3DeleteEvent,
+//    GHAPIEventTypeV3DownloadEvent,
+//    ,
+//    ,
+//    GHAPIEventTypeV3ForkApplyEvent,
+//    GHAPIEventTypeV3GistEvent,
+//    GHAPIEventTypeV3GollumEvent,
+//    GHAPIEventTypeV3IssueCommentEvent,
+//    GHAPIEventTypeV3IssuesEvent,
+//    GHAPIEventTypeV3MemberEvent,
+//    GHAPIEventTypeV3PublicEvent,
+//    GHAPIEventTypeV3PullRequestEvent,
+//    GHAPIEventTypeV3PushEvent,
+//    GHAPIEventTypeV3TeamAddEvent,
+//    
+    
+    if (event.type == GHAPIEventTypeV3WatchEvent) {
+        if ([event.repository.name hasPrefix:[GHAPIAuthenticationManager sharedInstance].authenticatedUser.login]) {
             // watched my repo, show the user
-            viewController = [[GHUserViewController alloc] initWithUsername:item.actorAttributes.login];
+            viewController = [[GHUserViewController alloc] initWithUsername:event.actor.login];
         } else {
             // show me the repo that he is following
-            viewController = [[GHRepositoryViewController alloc] initWithRepositoryString:item.repository.fullName];
+            viewController = [[GHRepositoryViewController alloc] initWithRepositoryString:event.repository.name];
         }
-    } else if (item.payload.type == GHPayloadFollowEvent) {
-        GHFollowEventPayload *payload = (GHFollowEventPayload *)item.payload;
-        if ([payload.target.login isEqualToString:[GHAPIAuthenticationManager sharedInstance].authenticatedUser.login]) {
+    } else if (event.type == GHAPIEventTypeV3FollowEvent) {
+        GHAPIFollowEventV3 *followEvent = (GHAPIFollowEventV3 *)event;
+        if ([followEvent.user.login isEqualToString:[GHAPIAuthenticationManager sharedInstance].authenticatedUser.login]) {
             // started following me, show me the user
-            viewController = [[GHUserViewController alloc] initWithUsername:item.actorAttributes.login];
+            viewController = [[GHUserViewController alloc] initWithUsername:followEvent.actor.login];
         } else {
             // following someone else, show me the target
-            viewController = [[GHUserViewController alloc] initWithUsername:payload.target.login];
+            viewController = [[GHUserViewController alloc] initWithUsername:followEvent.user.login];
         }
-    } else if (item.payload.type == GHPayloadForkEvent) {
-        if ([item.repository.fullName hasPrefix:[GHAPIAuthenticationManager sharedInstance].authenticatedUser.login]) {
+    } else if (event.type == GHAPIEventTypeV3ForkEvent) {
+        if ([event.repository.name hasPrefix:[GHAPIAuthenticationManager sharedInstance].authenticatedUser.login]) {
             // forked my repository, show me the user
-            viewController = [[GHUserViewController alloc] initWithUsername:item.actorAttributes.login];
+            viewController = [[GHUserViewController alloc] initWithUsername:event.actor.login];
         } else {
             // didn't fork my repo, show me the repo
-            viewController = [[GHRepositoryViewController alloc] initWithRepositoryString:item.repository.fullName];
+            viewController = [[GHRepositoryViewController alloc] initWithRepositoryString:event.repository.name];
         }
     }
     
     if (viewController) {
         [self.navigationController pushViewController:viewController animated:YES];
     } else {
-        [super tableView:tableView didSelectRowAtIndexPath:indexPath];
+        [super tableView:tableView didSelectEvent:event atIndexPath:indexPath];
     }
 }
 
