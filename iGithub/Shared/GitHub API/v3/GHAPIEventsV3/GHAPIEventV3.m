@@ -216,6 +216,73 @@ GHAPIEventTypeV3 GHAPIEventTypeV3FromNSString(NSString *eventType)
 
 #pragma mark - Class methods
 
++ (void)_dumpEventsForAuthenticatedUserSinceLastEventDateString:(NSString *)lastEventDateString 
+                                                 nextPageToDump:(NSUInteger)nextPage 
+                                                        inArray:(NSMutableArray *)eventsArray
+                                              completionHandler:(void(^)(NSArray *events, NSError *error))completionHandler
+{
+    if (nextPage == GHAPIPaginationNextPageNotFound) {
+        completionHandler(eventsArray, nil);
+        return;
+    }
+    
+    NSDate *lastEventDate = lastEventDateString.dateFromGithubAPIDateString;
+    NSTimeInterval lastEventTimeIterval = lastEventDate.timeIntervalSince1970;
+    
+    [self eventsForAuthenticatedUserOnPage:nextPage 
+                         completionHandler:^(NSMutableArray *array, NSUInteger nextPage, NSError *error) {
+                             if (error) {
+                                 completionHandler(nil, error);
+                             } else {
+                                 // enumerate and check if any event matches lastEventDateString
+                                 for (GHAPIEventV3 *event in array) {
+                                     NSDate *eventDate = event.createdAtString.dateFromGithubAPIDateString;
+                                     NSTimeInterval eventTimeInterval = eventDate.timeIntervalSince1970;
+                                     
+                                     if (eventTimeInterval == lastEventTimeIterval) {
+                                         // this event matches the requested lastEventDateString
+                                         completionHandler(eventsArray, nil);
+                                         return;
+                                     } else if (eventTimeInterval < lastEventTimeIterval) {
+                                         // this event is older that the last known Event => abort
+                                         completionHandler(eventsArray, nil);
+                                         return;
+                                     } else {
+                                         [eventsArray addObject:event];
+                                     }
+                                 }
+                                 
+                                 // did not found last event in this array, dump next
+                                 [self _dumpEventsForAuthenticatedUserSinceLastEventDateString:lastEventDateString
+                                                                                nextPageToDump:nextPage
+                                                                                       inArray:eventsArray
+                                                                             completionHandler:completionHandler];
+                             }
+                         }];
+}
+
++ (void)eventsForAuthenticatedUserSinceLastEventDateString:(NSString *)lastEventDateString 
+                                         completionHandler:(void(^)(NSArray *events, NSError *error))completionHandler
+{
+    if (!lastEventDateString) {
+        [self eventsForAuthenticatedUserOnPage:1 
+                             completionHandler:^(NSMutableArray *array, NSUInteger nextPage, NSError *error) {
+                                 if (error) {
+                                     completionHandler(nil, error);
+                                 } else {
+                                     completionHandler(array, nil);
+                                 }
+                             }];
+    } else {
+        [self _dumpEventsForAuthenticatedUserSinceLastEventDateString:lastEventDateString
+                                                       nextPageToDump:1
+                                                              inArray:[NSMutableArray array] 
+                                                    completionHandler:^(NSArray *events, NSError *error) {
+                                                        completionHandler(events, error);
+                                                    }];
+    }
+}
+
 + (void)eventsForAuthenticatedUserOnPage:(NSUInteger)page 
                        completionHandler:(GHAPIPaginationHandler)completionHandler
 {

@@ -82,6 +82,9 @@ GHAPIEventTypeV3 GHAPIEventTypeV3FromNSString(NSString *eventType);
 
 @property (nonatomic, readonly) GHAPIEventTypeV3 type;
 
++ (void)eventsForAuthenticatedUserSinceLastEventDateString:(NSString *)lastEventDateString 
+                                         completionHandler:(void(^)(NSArray *events, NSError *error))completionHandler;
+
 + (void)eventsForAuthenticatedUserOnPage:(NSUInteger)page 
                        completionHandler:(GHAPIPaginationHandler)completionHandler;
 
@@ -108,5 +111,10 @@ GHAPIEventTypeV3 GHAPIEventTypeV3FromNSString(NSString *eventType);
 + (void)eventsForOrganizationNamed:(NSString *)organizationName 
                               page:(NSUInteger)page 
                  completionHandler:(GHAPIPaginationHandler)completionHandler;
+
++ (void)_dumpEventsForAuthenticatedUserSinceLastEventDateString:(NSString *)lastEventDateString 
+                                                 nextPageToDump:(NSUInteger)nextPage 
+                                                        inArray:(NSMutableArray *)eventsArray
+                                              completionHandler:(void(^)(NSArray *events, NSError *error))completionHandler;
 
 @end
