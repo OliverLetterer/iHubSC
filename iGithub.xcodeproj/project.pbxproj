@@ -225,7 +225,6 @@
 		A7841F7313E194BC00131648 /* UIColor+GithubAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841E7C13E194BB00131648 /* UIColor+GithubAPI.m */; };
 		A7841F7413E194BC00131648 /* UIImage+GHAPIImageCacheV3.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841E7F13E194BB00131648 /* UIImage+GHAPIImageCacheV3.m */; };
 		A7841F7513E194BC00131648 /* GHAPIAuthenticationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841E8213E194BB00131648 /* GHAPIAuthenticationManager.m */; };
-		A7841F8213E194BC00131648 /* GHActorAttributes.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841EA113E194BB00131648 /* GHActorAttributes.m */; };
 		A7841F8313E194BC00131648 /* GHCommit.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841EA413E194BB00131648 /* GHCommit.m */; };
 		A7841F8413E194BC00131648 /* GHCommitFileInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841EA613E194BB00131648 /* GHCommitFileInformation.m */; };
 		A7841F8513E194BC00131648 /* GHCommitMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841EA913E194BB00131648 /* GHCommitMessage.m */; };
@@ -845,8 +844,6 @@
 		A7841E8313E194BB00131648 /* GithubAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GithubAPI.h; sourceTree = "<group>"; };
 		A7841E9B13E194BB00131648 /* GHAPIConnectionHandlersV3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHAPIConnectionHandlersV3.h; sourceTree = "<group>"; };
 		A7841E9C13E194BB00131648 /* Utility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utility.h; sourceTree = "<group>"; };
-		A7841EA013E194BB00131648 /* GHActorAttributes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHActorAttributes.h; sourceTree = "<group>"; };
-		A7841EA113E194BB00131648 /* GHActorAttributes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHActorAttributes.m; sourceTree = "<group>"; };
 		A7841EA313E194BB00131648 /* GHCommit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHCommit.h; sourceTree = "<group>"; };
 		A7841EA413E194BB00131648 /* GHCommit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHCommit.m; sourceTree = "<group>"; };
 		A7841EA513E194BB00131648 /* GHCommitFileInformation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHCommitFileInformation.h; sourceTree = "<group>"; };
@@ -2293,7 +2290,6 @@
 		A7841E9E13E194BB00131648 /* v2 */ = {
 			isa = PBXGroup;
 			children = (
-				A7841E9F13E194BB00131648 /* GHActorAttributes */,
 				A7841EA213E194BB00131648 /* GHCommit */,
 				A7841EA713E194BB00131648 /* GHCommitMessage */,
 				A7841EAA13E194BB00131648 /* GHFileSystem */,
@@ -2305,15 +2301,6 @@
 				A7841EF913E194BB00131648 /* Gravatar */,
 			);
 			path = v2;
-			sourceTree = "<group>";
-		};
-		A7841E9F13E194BB00131648 /* GHActorAttributes */ = {
-			isa = PBXGroup;
-			children = (
-				A7841EA013E194BB00131648 /* GHActorAttributes.h */,
-				A7841EA113E194BB00131648 /* GHActorAttributes.m */,
-			);
-			path = GHActorAttributes;
 			sourceTree = "<group>";
 		};
 		A7841EA213E194BB00131648 /* GHCommit */ = {
@@ -3706,7 +3693,6 @@
 				A7841F7313E194BC00131648 /* UIColor+GithubAPI.m in Sources */,
 				A7841F7413E194BC00131648 /* UIImage+GHAPIImageCacheV3.m in Sources */,
 				A7841F7513E194BC00131648 /* GHAPIAuthenticationManager.m in Sources */,
-				A7841F8213E194BC00131648 /* GHActorAttributes.m in Sources */,
 				A7841F8313E194BC00131648 /* GHCommit.m in Sources */,
 				A7841F8413E194BC00131648 /* GHCommitFileInformation.m in Sources */,
 				A7841F8513E194BC00131648 /* GHCommitMessage.m in Sources */,
