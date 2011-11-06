@@ -12,7 +12,6 @@
 #import "GHAPIBackgroundQueueV3.h"
 #import "GHUser.h"
 #import "GHActorAttributes.h"
-#import "GHIssue.h"
 #import "GHRawIssue.h"
 #import "GHTarget.h"
 #import "GHIssueComment.h"
