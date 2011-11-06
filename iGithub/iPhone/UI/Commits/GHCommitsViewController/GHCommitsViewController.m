@@ -6,18 +6,33 @@
 //  Copyright 2011 Home. All rights reserved.
 //
 
-#import "GHRecentCommitsViewController.h"
+#import "GHCommitsViewController.h"
 #import "GithubAPI.h"
 #import "GHDescriptionTableViewCell.h"
 #import "GHViewCommitViewController.h"
 
-@implementation GHRecentCommitsViewController
-
+@implementation GHCommitsViewController
 @synthesize repository=_repository, branch=_branch, commits=_commits, branchHash=_branchHash;
+
+#pragma mark - setters and getters
+
+- (void)setCommits:(NSMutableArray *)commits
+{
+    if (commits != _commits) {
+        _commits = commits;
+        
+        [self cacheHeightsForCommits];
+        
+        if (self.isViewLoaded) {
+            [self.tableView reloadData];
+        }
+    }
+}
 
 #pragma mark - Initialization
 
-- (id)initWithRepository:(NSString *)repository branchName:(NSString *)branchName branchHash:(NSString *)branchHash {
+- (id)initWithRepository:(NSString *)repository branchName:(NSString *)branchName branchHash:(NSString *)branchHash 
+{
     if ((self = [super initWithStyle:UITableViewStylePlain])) {
         // Custom initialization
         self.title = NSLocalizedString(@"Recent Commits", @"");
@@ -26,6 +41,17 @@
         self.branchHash = branchHash;
         self.isDownloadingEssentialData = YES;
         [self downloadCommitData];
+    }
+    return self;
+}
+
+- (id)initWithRepository:(NSString *)repository commits:(NSArray *)commits
+{
+    if ((self = [super initWithStyle:UITableViewStylePlain])) {
+        // Custom initialization
+        self.title = NSLocalizedString(@"Commits", @"");
+        self.repository = repository;
+        self.commits = commits.mutableCopy;
     }
     return self;
 }
@@ -99,7 +125,8 @@
     
     [self updateImageView:cell.imageView atIndexPath:indexPath withAvatarURLString:commit.author.avatarURL];
     
-    cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ committed %@", @""), commit.author.login, commit.SHA];
+    NSString *username = commit.author.login ? commit.author.login : commit.author.name;
+    cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ committed %@", @""), username, commit.SHA];
     cell.descriptionLabel.text = commit.message;
     
     return cell;

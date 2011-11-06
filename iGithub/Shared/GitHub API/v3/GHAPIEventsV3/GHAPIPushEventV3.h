@@ -27,6 +27,7 @@
 @property (nonatomic, readonly) NSNumber *numberOfCommits;
 @property (nonatomic, readonly) NSArray *commits;
 
+@property (nonatomic, readonly) NSString *branch;
 @property (nonatomic, readonly) NSString *previewString;
 
 @end

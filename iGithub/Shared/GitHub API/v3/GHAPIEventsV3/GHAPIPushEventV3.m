@@ -13,31 +13,12 @@
 @implementation GHAPIPushEventV3
 @synthesize head=_head, ref=_ref, numberOfCommits=_numberOfCommits, commits=_commits;
 
-#pragma mark - Initialization
+#pragma mark - setters and getters
 
-- (id)initWithRawPayloadDictionary:(NSDictionary *)rawDictionary 
+- (NSString *)branch
 {
-    GHAPIObjectExpectedClass(&rawDictionary, NSDictionary.class);
-    if (self = [super initWithRawPayloadDictionary:rawDictionary]) {
-        // Initialization code
-        _head = [rawDictionary objectForKeyOrNilOnNullObject:@"head"];
-        _ref = [rawDictionary objectForKeyOrNilOnNullObject:@"ref"];
-        _numberOfCommits = [rawDictionary objectForKeyOrNilOnNullObject:@"size"];
-        
-        NSArray *rawArray = [rawDictionary objectForKeyOrNilOnNullObject:@"commits"];
-        GHAPIObjectExpectedClass(&rawArray, NSArray.class);
-        
-        NSMutableArray *finalArray = [NSMutableArray arrayWithCapacity:rawArray.count];
-        [rawArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-            [finalArray addObject:[[GHAPICommitV3 alloc] initWithRawDictionary:obj] ];
-        }];
-        
-        _commits = finalArray;
-    }
-    return self;
+    return [_ref componentsSeparatedByString:@"/"].lastObject;
 }
-
-#pragma mark - Instance methods
 
 - (NSString *)previewString 
 {
@@ -61,6 +42,30 @@
     }];
     
     return previewString;
+}
+
+#pragma mark - Initialization
+
+- (id)initWithRawPayloadDictionary:(NSDictionary *)rawDictionary 
+{
+    GHAPIObjectExpectedClass(&rawDictionary, NSDictionary.class);
+    if (self = [super initWithRawPayloadDictionary:rawDictionary]) {
+        // Initialization code
+        _head = [rawDictionary objectForKeyOrNilOnNullObject:@"head"];
+        _ref = [rawDictionary objectForKeyOrNilOnNullObject:@"ref"];
+        _numberOfCommits = [rawDictionary objectForKeyOrNilOnNullObject:@"size"];
+        
+        NSArray *rawArray = [rawDictionary objectForKeyOrNilOnNullObject:@"commits"];
+        GHAPIObjectExpectedClass(&rawArray, NSArray.class);
+        
+        NSMutableArray *finalArray = [NSMutableArray arrayWithCapacity:rawArray.count];
+        [rawArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+            [finalArray addObject:[[GHAPICommitV3 alloc] initWithRawDictionary:obj] ];
+        }];
+        
+        _commits = finalArray;
+    }
+    return self;
 }
 
 #pragma mark - NSCoding

@@ -309,7 +309,6 @@
 		A784204113E1987C00131648 /* iGithubAppDelegate_iPhone.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841FD813E1987C00131648 /* iGithubAppDelegate_iPhone.m */; };
 		A784204213E1987C00131648 /* GHCommitDiffViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841FDD13E1987C00131648 /* GHCommitDiffViewController.m */; };
 		A784204313E1987C00131648 /* GHPushPayloadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841FE013E1987C00131648 /* GHPushPayloadViewController.m */; };
-		A784204413E1987C00131648 /* GHRecentCommitsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841FE313E1987C00131648 /* GHRecentCommitsViewController.m */; };
 		A784204513E1987C00131648 /* GHViewCommitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841FE613E1987C00131648 /* GHViewCommitViewController.m */; };
 		A784204613E1987C00131648 /* GHGistViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841FE913E1987C00131648 /* GHGistViewController.m */; };
 		A784204913E1987C00131648 /* GHIssueViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841FF213E1987C00131648 /* GHIssueViewController.m */; };
@@ -397,6 +396,7 @@
 		A7D9C3CB1466908C0009F10B /* GHOwnersActionsNewsFeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7D9C3CA1466908B0009F10B /* GHOwnersActionsNewsFeedViewController.m */; };
 		A7D9C3CE146692270009F10B /* GHOwnersOrganizationsNewsFeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7D9C3CD146692250009F10B /* GHOwnersOrganizationsNewsFeedViewController.m */; };
 		A7D9C3EB14669BD10009F10B /* libBlocksKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A7D9C3E214669B700009F10B /* libBlocksKit.a */; };
+		A7D9C3EF1466A9F20009F10B /* GHCommitsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7D9C3EE1466A9F20009F10B /* GHCommitsViewController.m */; };
 		A7DC78F213EACEE0002ABD4B /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A7DC78F113EACEE0002ABD4B /* Settings.bundle */; };
 		A7DC78F613EACFFC002ABD4B /* NSUserDefaults+Settings.m in Sources */ = {isa = PBXBuildFile; fileRef = A7DC78F513EACFFC002ABD4B /* NSUserDefaults+Settings.m */; };
 		A7FDA6A113E7446F00DE4FF3 /* GHCreateTeamViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7FDA6A013E7446F00DE4FF3 /* GHCreateTeamViewController.m */; };
@@ -1039,8 +1039,6 @@
 		A7841FDD13E1987C00131648 /* GHCommitDiffViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHCommitDiffViewController.m; sourceTree = "<group>"; };
 		A7841FDF13E1987C00131648 /* GHPushPayloadViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPushPayloadViewController.h; sourceTree = "<group>"; };
 		A7841FE013E1987C00131648 /* GHPushPayloadViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPushPayloadViewController.m; sourceTree = "<group>"; };
-		A7841FE213E1987C00131648 /* GHRecentCommitsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHRecentCommitsViewController.h; sourceTree = "<group>"; };
-		A7841FE313E1987C00131648 /* GHRecentCommitsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHRecentCommitsViewController.m; sourceTree = "<group>"; };
 		A7841FE513E1987C00131648 /* GHViewCommitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHViewCommitViewController.h; sourceTree = "<group>"; };
 		A7841FE613E1987C00131648 /* GHViewCommitViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHViewCommitViewController.m; sourceTree = "<group>"; };
 		A7841FE813E1987C00131648 /* GHGistViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHGistViewController.h; sourceTree = "<group>"; };
@@ -1206,6 +1204,8 @@
 		A7D9C3CC146692230009F10B /* GHOwnersOrganizationsNewsFeedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHOwnersOrganizationsNewsFeedViewController.h; sourceTree = "<group>"; };
 		A7D9C3CD146692250009F10B /* GHOwnersOrganizationsNewsFeedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHOwnersOrganizationsNewsFeedViewController.m; sourceTree = "<group>"; };
 		A7D9C3D014669B700009F10B /* BlocksKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = BlocksKit.xcodeproj; path = Submodules/BlocksKit/BlocksKit.xcodeproj; sourceTree = SOURCE_ROOT; };
+		A7D9C3ED1466A9F20009F10B /* GHCommitsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHCommitsViewController.h; sourceTree = "<group>"; };
+		A7D9C3EE1466A9F20009F10B /* GHCommitsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHCommitsViewController.m; sourceTree = "<group>"; };
 		A7DC78F113EACEE0002ABD4B /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		A7DC78F413EACFFC002ABD4B /* NSUserDefaults+Settings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSUserDefaults+Settings.h"; sourceTree = "<group>"; };
 		A7DC78F513EACFFC002ABD4B /* NSUserDefaults+Settings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSUserDefaults+Settings.m"; sourceTree = "<group>"; };
@@ -2868,9 +2868,9 @@
 		A7841FDA13E1987C00131648 /* Commits */ = {
 			isa = PBXGroup;
 			children = (
+				A7D9C3EC1466A9F20009F10B /* GHCommitsViewController */,
 				A7841FDB13E1987C00131648 /* GHCommitDiffViewController */,
 				A7841FDE13E1987C00131648 /* GHPushPayloadViewController */,
-				A7841FE113E1987C00131648 /* GHRecentCommitsViewController */,
 				A7841FE413E1987C00131648 /* GHViewCommitViewController */,
 			);
 			path = Commits;
@@ -2892,15 +2892,6 @@
 				A7841FE013E1987C00131648 /* GHPushPayloadViewController.m */,
 			);
 			path = GHPushPayloadViewController;
-			sourceTree = "<group>";
-		};
-		A7841FE113E1987C00131648 /* GHRecentCommitsViewController */ = {
-			isa = PBXGroup;
-			children = (
-				A7841FE213E1987C00131648 /* GHRecentCommitsViewController.h */,
-				A7841FE313E1987C00131648 /* GHRecentCommitsViewController.m */,
-			);
-			path = GHRecentCommitsViewController;
 			sourceTree = "<group>";
 		};
 		A7841FE413E1987C00131648 /* GHViewCommitViewController */ = {
@@ -3550,6 +3541,15 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		A7D9C3EC1466A9F20009F10B /* GHCommitsViewController */ = {
+			isa = PBXGroup;
+			children = (
+				A7D9C3ED1466A9F20009F10B /* GHCommitsViewController.h */,
+				A7D9C3EE1466A9F20009F10B /* GHCommitsViewController.m */,
+			);
+			path = GHCommitsViewController;
+			sourceTree = "<group>";
+		};
 		A7DC78F313EACFD4002ABD4B /* NSUserDefaults+Additions */ = {
 			isa = PBXGroup;
 			children = (
@@ -3966,7 +3966,6 @@
 				A784204113E1987C00131648 /* iGithubAppDelegate_iPhone.m in Sources */,
 				A784204213E1987C00131648 /* GHCommitDiffViewController.m in Sources */,
 				A784204313E1987C00131648 /* GHPushPayloadViewController.m in Sources */,
-				A784204413E1987C00131648 /* GHRecentCommitsViewController.m in Sources */,
 				A784204513E1987C00131648 /* GHViewCommitViewController.m in Sources */,
 				A784204613E1987C00131648 /* GHGistViewController.m in Sources */,
 				A784204913E1987C00131648 /* GHIssueViewController.m in Sources */,
@@ -4134,6 +4133,7 @@
 				A7D9C3C8146688250009F10B /* GHUsersNewsFeedsViewController.m in Sources */,
 				A7D9C3CB1466908C0009F10B /* GHOwnersActionsNewsFeedViewController.m in Sources */,
 				A7D9C3CE146692270009F10B /* GHOwnersOrganizationsNewsFeedViewController.m in Sources */,
+				A7D9C3EF1466A9F20009F10B /* GHCommitsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

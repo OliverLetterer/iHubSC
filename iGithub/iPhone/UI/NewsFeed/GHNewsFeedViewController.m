@@ -9,6 +9,7 @@
 #import "GHNewsFeedViewController.h"
 #import "GithubAPI.h"
 #import "GHDescriptionTableViewCell.h"
+#import "GHCommitsViewController.h"
 #import "GHFollowEventTableViewCell.h"
 #import "GHIssueViewController.h"
 #import "GHPushPayloadViewController.h"
@@ -402,9 +403,8 @@
     } else if (event.type == GHAPIEventTypeV3PushEvent) {
         GHAPIPushEventV3 *pushEvent = (GHAPIPushEventV3 *)event;
         
-#warning we need a new viewController to display pushed commits on iPhone
-        //        GHPushPayloadViewController *pushViewController = [[GHPushPayloadViewController alloc] initWithPayload:(GHPushPayload *)item.payload onRepository:item.repository.fullName];
-        //        [self.navigationController pushViewController:pushViewController animated:YES];
+        viewController = [[GHCommitsViewController alloc] initWithRepository:event.repository.name 
+                                                                           commits:pushEvent.commits];
     } else if(event.type == GHAPIEventTypeV3CommitComment) {
 #warning check for more details
         viewController = [[GHRepositoryViewController alloc] initWithRepositoryString:event.repository.name];

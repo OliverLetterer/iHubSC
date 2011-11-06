@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "GHTableViewController.h"
 
-@interface GHRecentCommitsViewController : GHTableViewController {
+@interface GHCommitsViewController : GHTableViewController {
 @private
     NSString *_repository;
     NSString *_branch;
@@ -24,6 +24,7 @@
 @property (nonatomic, copy) NSString *branchHash;
 
 - (id)initWithRepository:(NSString *)repository branchName:(NSString *)branchName branchHash:(NSString *)branchHash;
+- (id)initWithRepository:(NSString *)repository commits:(NSArray *)commits;
 
 - (void)downloadCommitData;
 - (void)cacheHeightsForCommits;

@@ -14,7 +14,7 @@
 #import "GHIssueViewController.h"
 #import "GHTableViewCell.h"
 #import "GHUserViewController.h"
-#import "GHRecentCommitsViewController.h"
+#import "GHCommitsViewController.h"
 #import "GHViewRootDirectoryViewController.h"
 #import "GHAPIMilestoneV3TableViewCell.h"
 #import "GHMilestoneViewController.h"
@@ -800,7 +800,7 @@
     } else if (indexPath.section == kUITableViewSectionRecentCommits) {
         GHAPIRepositoryBranchV3 *branch = [self.branches objectAtIndex:indexPath.row - 1];
         
-        GHRecentCommitsViewController *recentViewController = [[GHRecentCommitsViewController alloc] initWithRepository:self.repositoryString 
+        GHCommitsViewController *recentViewController = [[GHCommitsViewController alloc] initWithRepository:self.repositoryString 
                                                                                                                   branchName:branch.name branchHash:branch.ID];
         [self.navigationController pushViewController:recentViewController animated:YES];
     } else if (indexPath.section == kUITableViewSectionBrowseBranches) {
