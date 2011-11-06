@@ -388,7 +388,7 @@
 		A7D888FE13F13B79002ED2FF /* UIBarButtonItem+GHEmpty.m in Sources */ = {isa = PBXBuildFile; fileRef = A7D888FD13F13B79002ED2FF /* UIBarButtonItem+GHEmpty.m */; };
 		A7D8894D13F17859002ED2FF /* GHGlossProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = A7D8894913F17859002ED2FF /* GHGlossProgressView.m */; };
 		A7D8894E13F17859002ED2FF /* CGCommon.m in Sources */ = {isa = PBXBuildFile; fileRef = A7D8894C13F17859002ED2FF /* CGCommon.m */; };
-		A7D9C3C21465ADFF0009F10B /* GHNewOwnersNeedsFeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7D9C3C11465ADFF0009F10B /* GHNewOwnersNeedsFeedViewController.m */; };
+		A7D9C3C21465ADFF0009F10B /* GHOwnersNeedsFeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7D9C3C11465ADFF0009F10B /* GHOwnersNeedsFeedViewController.m */; };
 		A7D9C3C51465D9920009F10B /* GHNewEventsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A7D9C3C41465D9920009F10B /* GHNewEventsTableViewCell.m */; };
 		A7D9C3C8146688250009F10B /* GHUsersNewsFeedsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7D9C3C7146688230009F10B /* GHUsersNewsFeedsViewController.m */; };
 		A7D9C3CB1466908C0009F10B /* GHOwnersActionsNewsFeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7D9C3CA1466908B0009F10B /* GHOwnersActionsNewsFeedViewController.m */; };
@@ -1187,8 +1187,8 @@
 		A7D8894913F17859002ED2FF /* GHGlossProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHGlossProgressView.m; sourceTree = "<group>"; };
 		A7D8894B13F17859002ED2FF /* CGCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGCommon.h; sourceTree = "<group>"; };
 		A7D8894C13F17859002ED2FF /* CGCommon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CGCommon.m; sourceTree = "<group>"; };
-		A7D9C3C01465ADFF0009F10B /* GHNewOwnersNeedsFeedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHNewOwnersNeedsFeedViewController.h; sourceTree = "<group>"; };
-		A7D9C3C11465ADFF0009F10B /* GHNewOwnersNeedsFeedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHNewOwnersNeedsFeedViewController.m; sourceTree = "<group>"; };
+		A7D9C3C01465ADFF0009F10B /* GHOwnersNeedsFeedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHOwnersNeedsFeedViewController.h; sourceTree = "<group>"; };
+		A7D9C3C11465ADFF0009F10B /* GHOwnersNeedsFeedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHOwnersNeedsFeedViewController.m; sourceTree = "<group>"; };
 		A7D9C3C31465D9920009F10B /* GHNewEventsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHNewEventsTableViewCell.h; sourceTree = "<group>"; };
 		A7D9C3C41465D9920009F10B /* GHNewEventsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHNewEventsTableViewCell.m; sourceTree = "<group>"; };
 		A7D9C3C6146688220009F10B /* GHUsersNewsFeedsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHUsersNewsFeedsViewController.h; sourceTree = "<group>"; };
@@ -2963,8 +2963,8 @@
 				A784200B13E1987C00131648 /* GHRecentActivityViewController.h */,
 				A784200C13E1987C00131648 /* GHRecentActivityViewController.m */,
 				A784200D13E1987C00131648 /* UITableViewCell's */,
-				A7D9C3C01465ADFF0009F10B /* GHNewOwnersNeedsFeedViewController.h */,
-				A7D9C3C11465ADFF0009F10B /* GHNewOwnersNeedsFeedViewController.m */,
+				A7D9C3C01465ADFF0009F10B /* GHOwnersNeedsFeedViewController.h */,
+				A7D9C3C11465ADFF0009F10B /* GHOwnersNeedsFeedViewController.m */,
 				A7D9C3C6146688220009F10B /* GHUsersNewsFeedsViewController.h */,
 				A7D9C3C7146688230009F10B /* GHUsersNewsFeedsViewController.m */,
 				A7D9C3C9146690890009F10B /* GHOwnersActionsNewsFeedViewController.h */,
@@ -4116,7 +4116,7 @@
 				A7218E8C1461E92D0081CB02 /* GHAPICommitCommentV3.m in Sources */,
 				A7218E8F14629D0F0081CB02 /* GHPOrganizationNewsFeedViewController.m in Sources */,
 				A7218EF014642DCB0081CB02 /* GHAPINewEventsEventV3.m in Sources */,
-				A7D9C3C21465ADFF0009F10B /* GHNewOwnersNeedsFeedViewController.m in Sources */,
+				A7D9C3C21465ADFF0009F10B /* GHOwnersNeedsFeedViewController.m in Sources */,
 				A7D9C3C51465D9920009F10B /* GHNewEventsTableViewCell.m in Sources */,
 				A7D9C3C8146688250009F10B /* GHUsersNewsFeedsViewController.m in Sources */,
 				A7D9C3CB1466908C0009F10B /* GHOwnersActionsNewsFeedViewController.m in Sources */,

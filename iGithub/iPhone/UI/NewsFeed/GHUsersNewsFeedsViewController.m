@@ -10,7 +10,7 @@
 #import "UIColor+GithubUI.h"
 #import "GHRepositoryViewController.h"
 #import "GHUserViewController.h"
-#import "GHNewOwnersNeedsFeedViewController.h"
+#import "GHOwnersNeedsFeedViewController.h"
 #import "GHOwnersActionsNewsFeedViewController.h"
 #import "GHOwnersOrganizationsNewsFeedViewController.h"
 
@@ -100,7 +100,7 @@
     UIViewController *replacementViewController = nil;
     
     if (segmentedControl.selectedSegmentIndex == 0) {
-        replacementViewController = [[GHNewOwnersNeedsFeedViewController alloc] initAndDownloadData];
+        replacementViewController = [[GHOwnersNeedsFeedViewController alloc] initAndDownloadData];
     } else if (segmentedControl.selectedSegmentIndex == 1) {
         replacementViewController = [[GHOwnersActionsNewsFeedViewController alloc] initAndDownloadData];
     } else if (segmentedControl.selectedSegmentIndex == 2) {

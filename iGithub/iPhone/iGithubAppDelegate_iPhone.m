@@ -89,7 +89,7 @@
         self.tabBarController = [[UITabBarController alloc] init];
         self.window.rootViewController = self.tabBarController;
         
-        self.newsFeedViewController = [[GHNewOwnersNeedsFeedViewController alloc] init];
+        self.newsFeedViewController = [[GHOwnersNeedsFeedViewController alloc] init];
         [tabBarItems addObject:[[UINavigationController alloc] initWithRootViewController:self.newsFeedViewController] ];
         
         self.profileViewController = [[GHAuthenticatedUserViewController alloc] init];
