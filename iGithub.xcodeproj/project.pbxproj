@@ -233,7 +233,6 @@
 		A7841F8813E194BC00131648 /* GHFileMetaData.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841EB013E194BB00131648 /* GHFileMetaData.m */; };
 		A7841F8913E194BC00131648 /* GHFileSystemItem.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841EB213E194BB00131648 /* GHFileSystemItem.m */; };
 		A7841F8B13E194BC00131648 /* GHIssueComment.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841EB713E194BB00131648 /* GHIssueComment.m */; };
-		A7841FA313E194BC00131648 /* GHPullRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841EEB13E194BB00131648 /* GHPullRequest.m */; };
 		A7841FA413E194BC00131648 /* GHPullRequestDiscussion.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841EED13E194BB00131648 /* GHPullRequestDiscussion.m */; };
 		A7841FA513E194BC00131648 /* GHPullRequestRepositoryInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841EEF13E194BB00131648 /* GHPullRequestRepositoryInformation.m */; };
 		A7841FA613E194BC00131648 /* GHRepository.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841EF213E194BB00131648 /* GHRepository.m */; };
@@ -858,8 +857,6 @@
 		A7841EB213E194BB00131648 /* GHFileSystemItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHFileSystemItem.m; sourceTree = "<group>"; };
 		A7841EB613E194BB00131648 /* GHIssueComment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHIssueComment.h; sourceTree = "<group>"; };
 		A7841EB713E194BB00131648 /* GHIssueComment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHIssueComment.m; sourceTree = "<group>"; };
-		A7841EEA13E194BB00131648 /* GHPullRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPullRequest.h; sourceTree = "<group>"; };
-		A7841EEB13E194BB00131648 /* GHPullRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPullRequest.m; sourceTree = "<group>"; };
 		A7841EEC13E194BB00131648 /* GHPullRequestDiscussion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPullRequestDiscussion.h; sourceTree = "<group>"; };
 		A7841EED13E194BB00131648 /* GHPullRequestDiscussion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPullRequestDiscussion.m; sourceTree = "<group>"; };
 		A7841EEE13E194BB00131648 /* GHPullRequestRepositoryInformation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPullRequestRepositoryInformation.h; sourceTree = "<group>"; };
@@ -2343,8 +2340,6 @@
 		A7841EE913E194BB00131648 /* GHPullRequest */ = {
 			isa = PBXGroup;
 			children = (
-				A7841EEA13E194BB00131648 /* GHPullRequest.h */,
-				A7841EEB13E194BB00131648 /* GHPullRequest.m */,
 				A7841EEC13E194BB00131648 /* GHPullRequestDiscussion.h */,
 				A7841EED13E194BB00131648 /* GHPullRequestDiscussion.m */,
 				A7841EEE13E194BB00131648 /* GHPullRequestRepositoryInformation.h */,
@@ -3683,7 +3678,6 @@
 				A7841F8813E194BC00131648 /* GHFileMetaData.m in Sources */,
 				A7841F8913E194BC00131648 /* GHFileSystemItem.m in Sources */,
 				A7841F8B13E194BC00131648 /* GHIssueComment.m in Sources */,
-				A7841FA313E194BC00131648 /* GHPullRequest.m in Sources */,
 				A7841FA413E194BC00131648 /* GHPullRequestDiscussion.m in Sources */,
 				A7841FA513E194BC00131648 /* GHPullRequestRepositoryInformation.m in Sources */,
 				A7841FA613E194BC00131648 /* GHRepository.m in Sources */,

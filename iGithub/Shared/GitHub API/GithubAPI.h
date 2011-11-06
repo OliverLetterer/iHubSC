@@ -14,7 +14,6 @@
 #import "GHCommit.h"
 #import "GHCommitFileInformation.h"
 #import "GHCommitMessage.h"
-#import "GHPullRequest.h"
 #import "GHPullRequestDiscussion.h"
 #import "GHPullRequestRepositoryInformation.h"
 #import "GHRepository.h"
