@@ -42,6 +42,8 @@
         self.tabBarItem = [[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"News", @"") 
                                                         image:[UIImage imageNamed:@"56-feed.png"] 
                                                           tag:0];
+        
+        self.reloadDataIfNewUserGotAuthenticated = YES;
     }
     return self;
 }
