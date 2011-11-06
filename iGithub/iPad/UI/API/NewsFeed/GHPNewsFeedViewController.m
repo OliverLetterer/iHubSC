@@ -22,7 +22,7 @@
 
 #pragma mark - setters and getters
 
-- (void)setEvents:(NSArray *)events
+- (void)setEvents:(NSMutableArray *)events
 {
     if (events != _events) {
         _events = events;
@@ -56,6 +56,8 @@
         
         if (event.type == GHAPIEventTypeV3FollowEvent) {
             height = [GHPNewsFeedSecondUserTableViewCell heightWithContent:description];
+        } else if (event.type == GHAPIEventTypeV3NewEvents) {
+            height = 30.0f;
         } else {
             height = [GHPDefaultNewsFeedTableViewCell heightWithContent:description];
         }
@@ -267,6 +269,22 @@
         [self updateImageView:cell.secondImageView atIndexPath:indexPath withGravatarID:followEvent.user.avatarURL];
         
         return cell;
+    } else if (event.type == GHAPIEventTypeV3NewEvents) {
+        static NSString *CellIdentifier = @"GHPDefaultTableViewCell";
+        GHPDefaultTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        
+        if (!cell) {
+            cell = [[GHPDefaultTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        }
+        
+        [self setupDefaultTableViewCell:cell forRowAtIndexPath:indexPath];
+        
+        GHAPINewEventsEventV3 *newMessagesEvent = (GHAPINewEventsEventV3 *)event;
+        
+        cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ new Messages", @""), newMessagesEvent.numberOfNewEvents];
+        
+        return cell;
     }
     
     return [self dummyCellWithText:event.typeString];
@@ -289,9 +307,8 @@
     } else if (event.type == GHAPIEventTypeV3PushEvent) {
         GHAPIPushEventV3 *pushEvent = (GHAPIPushEventV3 *)event;
         
-#warning we need a new viewController to display pushed commits on iPad
-        //        GHPushPayloadViewController *pushViewController = [[GHPushPayloadViewController alloc] initWithPayload:(GHPushPayload *)item.payload onRepository:item.repository.fullName];
-        //        [self.navigationController pushViewController:pushViewController animated:YES];
+        viewController = [[GHPCommitsViewController alloc] initWithRepository:event.repository.name 
+                                                                      commits:pushEvent.commits];
     } else if(event.type == GHAPIEventTypeV3CommitComment) {
 #warning check for more details
         viewController = [[GHPRepositoryViewController alloc] initWithRepositoryString:event.repository.name];
@@ -345,7 +362,7 @@
         if (addEvent.teamRepository.name) {
             viewController = [[GHPRepositoryViewController alloc] initWithRepositoryString:addEvent.teamRepository.name];
         } else if (addEvent.teamUser.login) {
-            viewController = [[GHPUserViewController alloc] initWithUsername:addEvent.teamUser.name];
+            viewController = [[GHPUserViewController alloc] initWithUsername:addEvent.teamUser.login];
         }
     }
     
@@ -363,5 +380,20 @@
     [self tableView:tableView didSelectEvent:event atIndexPath:indexPath];
 }
 
+#pragma mark - NSCoding
+
+- (void)encodeWithCoder:(NSCoder *)encoder 
+{
+    [super encodeWithCoder:encoder];
+    [encoder encodeObject:_events forKey:@"events"];
+}
+
+- (id)initWithCoder:(NSCoder *)decoder 
+{
+    if (self = [super initWithCoder:decoder]) {
+        _events = [decoder decodeObjectForKey:@"events"];
+    }
+    return self;
+}
 
 @end

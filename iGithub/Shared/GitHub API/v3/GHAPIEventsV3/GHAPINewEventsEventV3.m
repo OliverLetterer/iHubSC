@@ -28,12 +28,13 @@
 
 - (void)encodeWithCoder:(NSCoder *)encoder 
 {
+    [super encodeWithCoder:encoder];
     [encoder encodeObject:_numberOfNewEvents forKey:@"numberOfNewEvents"];
 }
 
 - (id)initWithCoder:(NSCoder *)decoder 
 {
-    if ((self = [super init])) {
+    if ((self = [super initWithCoder:decoder])) {
         _numberOfNewEvents = [decoder decodeObjectForKey:@"numberOfNewEvents"];
     }
     return self;

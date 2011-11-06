@@ -32,6 +32,7 @@
     
     NSMutableDictionary *dictionary = [self deserializeState];
     
+//    dictionary = nil;
     if (dictionary) {
         NSArray *rightViewControllers = [dictionary objectForKey:@"rightViewControllers"];  
         GHPLeftNavigationController *leftViewController = [dictionary objectForKey:@"leftViewController"];

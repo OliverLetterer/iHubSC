@@ -30,6 +30,12 @@
 
 #define kUITableViewNumberOfSections        4
 
+@interface GHPLeftNavigationController ()
+
+- (NSURL *)_URLForOwnersNewsFeedViewController;
+
+@end
+
 @implementation GHPLeftNavigationController
 
 @synthesize lineView=_lineView, controllerView=_controllerView;
@@ -296,9 +302,26 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     UIViewController *viewController = nil;
     
+    // serialize GHPOwnersNewsFeedViewController if there is one
+    NSArray *rightViewControllers = self.advancedNavigationController.rightViewControllers;
+    if (rightViewControllers.count > 0) {
+        UIViewController *rootViewController = [rightViewControllers objectAtIndex:0];
+        
+        if ([rootViewController isKindOfClass:GHPOwnersNewsFeedViewController.class]) {
+            NSURL *serializationURL = self._URLForOwnersNewsFeedViewController;
+            
+            [NSKeyedArchiver archiveRootObject:rootViewController toFile:serializationURL.relativePath];
+        }
+    }
+    
     if (indexPath.section == kUITableViewSectionNewsFeed) {
         if (indexPath.row == 0) {
-            viewController = [[GHPOwnersNewsFeedViewController alloc] init];
+            NSURL *serializationURL = self._URLForOwnersNewsFeedViewController;
+            viewController = [NSKeyedUnarchiver unarchiveObjectWithFile:serializationURL.relativePath];
+            
+            if (!viewController) {
+                viewController = [[GHPOwnersNewsFeedViewController alloc] init];
+            }
         } else if (indexPath.row == 1) {
             viewController = [[GHPUsersNewsFeedViewController alloc] initWithUsername:[GHAPIAuthenticationManager sharedInstance].authenticatedUser.login ];
         }
@@ -362,6 +385,20 @@
         self.lastSelectedIndexPath = nil;
     }
     return self;
+}
+
+#pragma mark - private implementation ()
+
+- (NSURL *)_URLForOwnersNewsFeedViewController
+{
+    NSURL *documentsURL = [[NSFileManager defaultManager] URLsForDirectory:NSLibraryDirectory inDomains:NSUserDomainMask].lastObject;
+    
+    NSString *bundleVersionKey = (NSString *)kCFBundleVersionKey;
+    NSString *bundleVersion = [[NSBundle mainBundle] objectForInfoDictionaryKey:bundleVersionKey];
+    
+    NSString *fileName = [NSString stringWithFormat:@"de.olettere.GHPOwnersNewsFeedViewController.%@.plist", bundleVersion];
+    
+    return [documentsURL URLByAppendingPathComponent:fileName];
 }
 
 @end

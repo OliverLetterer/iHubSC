@@ -11,10 +11,10 @@
 
 @interface GHPNewsFeedViewController : GHTableViewController <NSCoding> {
 @protected
-    NSArray *_events;
+    NSMutableArray *_events;
 }
 
-@property (nonatomic, strong) NSArray *events;
+@property (nonatomic, strong) NSMutableArray *events;
 
 - (UITableViewCell *)tableView:(UITableView *)tableView 
                   cellForEvent:(GHAPIEventV3 *)event 

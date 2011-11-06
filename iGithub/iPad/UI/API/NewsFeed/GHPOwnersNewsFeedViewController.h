@@ -9,18 +9,12 @@
 #import <UIKit/UIKit.h>
 #import "GHPNewsFeedViewController.h"
 
-@interface GHPOwnersNewsFeedViewController : GHPNewsFeedViewController {
+@interface GHPOwnersNewsFeedViewController : GHPNewsFeedViewController <NSCoding> {
 @private
-    
+    NSString *_lastKnownEventDateString;
 }
 
-@end
-
-
-
-@interface GHPOwnersNewsFeedViewController (GHPOwnersNewsFeedViewControllerSerializaiton)
-
-- (void)serializeEvents:(NSArray *)events;
-- (NSArray *)loadSerializedEvents;
+- (void)downloadNewEventsAfterLastKnownEventDateString:(NSString *)lastKnownEventDateString; // overwrite
+- (void)appendNewEvents:(NSArray *)newEvents;   // call when done
 
 @end
