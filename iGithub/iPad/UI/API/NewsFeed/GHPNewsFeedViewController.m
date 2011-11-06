@@ -309,7 +309,6 @@
         viewController = [[GHPCommitsViewController alloc] initWithRepository:event.repository.name 
                                                                       commits:pushEvent.commits];
     } else if(event.type == GHAPIEventTypeV3CommitComment) {
-#warning check for more details
         viewController = [[GHPRepositoryViewController alloc] initWithRepositoryString:event.repository.name];
     } else if(event.type == GHAPIEventTypeV3FollowEvent) {
         GHAPIFollowEventV3 *followEvent = (GHAPIFollowEventV3 *)event;
