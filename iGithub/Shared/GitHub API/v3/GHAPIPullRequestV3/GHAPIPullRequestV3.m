@@ -11,9 +11,12 @@
 
 @implementation GHAPIPullRequestV3
 
-+ (void)mergPullRequestOnRepository:(NSString *)repository withNumber:(NSNumber *)pullRequestNumber commitMessage:(NSString *)commitMessage 
-                  completionHandler:(void(^)(GHAPIPullRequestMergeStateV3 *state, NSError *error))handler {
-    //v3: PUT /repos/:user/:repo/pulls/:id/merge
++ (void)mergPullRequestOnRepository:(NSString *)repository 
+                         withNumber:(NSNumber *)pullRequestNumber 
+                      commitMessage:(NSString *)commitMessage 
+                  completionHandler:(void(^)(GHAPIPullRequestMergeStateV3 *state, NSError *error))handler 
+{
+    // v3: PUT /repos/:user/:repo/pulls/:id/merge
     
     NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.github.com/repos/%@/pulls/%@/merge",
                                        [repository stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
@@ -38,6 +41,34 @@
                                                handler([[GHAPIPullRequestMergeStateV3 alloc] initWithRawDictionary:object], nil);
                                            }
                                        }];
+}
+
++ (void)commitsOfPullRequestOnRepository:(NSString *)repository 
+                              withNumber:(NSNumber *)pullRequestNumber 
+                       completionHandler:(void(^)(NSArray *commits, NSError *error))completionHandler
+{
+    // v3: GET /repos/:user/:repo/pulls/:id/commits
+    
+    NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.github.com/repos/%@/pulls/%@/commits",
+                                       [repository stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
+                                       pullRequestNumber ]];
+    
+    [[GHAPIBackgroundQueueV3 sharedInstance] sendRequestToURL:URL 
+                                                 setupHandler:nil
+                                            completionHandler:^(id object, NSError *error, ASIFormDataRequest *request) {
+                                                if (error) {
+                                                    completionHandler(nil, error);
+                                                } else {
+                                                    NSArray *rawArray = GHAPIObjectExpectedClass(&object, NSArray.class);
+                                                    
+                                                    NSMutableArray *finalArray = [NSMutableArray arrayWithCapacity:rawArray.count];
+                                                    for (NSDictionary *rawDictionary in rawArray) {
+                                                        [finalArray addObject:[[GHAPICommitV3 alloc] initWithRawDictionary:rawDictionary] ];
+                                                    }
+                                                    
+                                                    completionHandler(finalArray, nil);
+                                                }
+                                            }];
 }
 
 @end

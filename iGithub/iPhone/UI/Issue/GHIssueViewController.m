@@ -37,7 +37,7 @@
 
 @synthesize issue=_issue;
 @synthesize repository=_repository, number=_number;
-@synthesize history=_history, discussion=_discussion;
+@synthesize history=_history;
 @synthesize lastUserComment=_lastUserComment;
 
 #pragma mark - setters and getters
@@ -186,7 +186,7 @@
     if (section == kUITableViewSectionHistory) {
         return self.history == nil;
     } else if (section == kUITableViewSectionCommits) {
-        return self.discussion == nil;
+        return _attachedCommits == nil;
     }
     return NO;
 }
@@ -227,17 +227,17 @@
                               }
                           }];
     } else if (section == kUITableViewSectionCommits) {
-        [GHPullRequest pullRequestDiscussionOnRepository:self.repository 
-                                                  number:self.number 
-                                       completionHandler:^(GHPullRequestDiscussion *discussion, NSError *error) {
-                                           if (error) {
-                                               [self handleError:error];
-                                               [tableView cancelDownloadInSection:section];
-                                           } else {
-                                               self.discussion = discussion;
-                                               [tableView expandSection:section animated:YES];
-                                           }
-                                       }];
+        [GHAPIPullRequestV3 commitsOfPullRequestOnRepository:_repository 
+                                                  withNumber:_number 
+                                           completionHandler:^(NSArray *commits, NSError *error) {
+                                               if (error) {
+                                                   [self handleError:error];
+                                                   [tableView cancelDownloadInSection:section];
+                                               } else {
+                                                   _attachedCommits = commits;
+                                                   [tableView expandSection:section animated:YES];
+                                               }
+                                           }];
     }
 }
 
@@ -275,7 +275,7 @@
     } else if (section == kUITableViewSectionHistory) {
         return self.history.count + 2;
     } else if (section == kUITableViewSectionCommits) {
-        return self.issue.isPullRequest ? [self.discussion.commits count] + 1 : 0;
+        return self.issue.isPullRequest ? _attachedCommits.count + 1 : 0;
     } else if (section == kUITableViewSectionLabels) {
         if (self.issue.labels.count == 0) {
             return 0;
@@ -444,11 +444,13 @@
         
         cell.selectionStyle = UITableViewCellSelectionStyleBlue;
         
-        GHCommit *commit = [self.discussion.commits objectAtIndex:indexPath.row-1];
+        GHAPICommitV3 *commit = [_attachedCommits objectAtIndex:indexPath.row-1];
         
-        [self updateImageView:cell.imageView atIndexPath:indexPath withGravatarID:commit.user.gravatarID];
+        [self updateImageView:cell.imageView 
+                  atIndexPath:indexPath 
+          withAvatarURLString:commit.committer.avatarURL];
         
-        cell.textLabel.text = commit.ID;
+        cell.textLabel.text = commit.SHA;
         cell.descriptionLabel.text = commit.message;
         
         return cell;
@@ -491,7 +493,7 @@
         
         return [self cachedHeightForRowAtIndexPath:indexPath];
     } else if (indexPath.section == kUITableViewSectionCommits && indexPath.row > 0) {
-        GHCommit *commit = [self.discussion.commits objectAtIndex:indexPath.row - 1];
+        GHAPICommitV3 *commit = [_attachedCommits objectAtIndex:indexPath.row - 1];
         
         return [GHDescriptionTableViewCell heightWithContent:commit.message];
     } else if (indexPath.section == kUITableViewSectionMilestone) {
@@ -577,12 +579,10 @@
 
         
     } else if (indexPath.section == kUITableViewSectionCommits && indexPath.row > 0) {
-        GHCommit *commit = [self.discussion.commits objectAtIndex:indexPath.row-1];
+        GHAPICommitV3 *commit = [_attachedCommits objectAtIndex:indexPath.row-1];
         
-        NSString *repo = [NSString stringWithFormat:@"%@/%@", self.discussion.head.repository.owner, self.discussion.head.repository.name];
-        
-        GHViewCommitViewController *commitViewController = [[GHViewCommitViewController alloc] initWithRepository:repo
-                                                                                                          commitID:commit.ID];
+        GHViewCommitViewController *commitViewController = [[GHViewCommitViewController alloc] initWithRepository:_repository
+                                                                                                          commitID:commit.SHA];
         [self.navigationController pushViewController:commitViewController animated:YES];
     } else if (indexPath.section == kUITableViewSectionLabels && indexPath.row > 0) {
         GHAPILabelV3 *label = [self.issue.labels objectAtIndex:indexPath.row - 1];
@@ -676,7 +676,7 @@
     [encoder encodeObject:_repository forKey:@"repository"];
     [encoder encodeObject:_number forKey:@"number"];
     [encoder encodeObject:_history forKey:@"history"];
-    [encoder encodeObject:_discussion forKey:@"discussion"];
+    [encoder encodeObject:_attachedCommits forKey:@"attachedCommits"];
     [encoder encodeBool:_hasCollaboratorData forKey:@"hasCollaboratorData"];
     [encoder encodeBool:_isCollaborator forKey:@"isCollaborator"];
     
@@ -701,7 +701,7 @@
         _repository = [decoder decodeObjectForKey:@"repository"];
         _number = [decoder decodeObjectForKey:@"number"];
         _history = [decoder decodeObjectForKey:@"history"];
-        _discussion = [decoder decodeObjectForKey:@"discussion"];
+        _attachedCommits = [decoder decodeObjectForKey:@"attachedCommits"];
         _hasCollaboratorData = [decoder decodeBoolForKey:@"hasCollaboratorData"];
         _isCollaborator = [decoder decodeBoolForKey:@"isCollaborator"];
         _lastUserComment = [decoder decodeObjectForKey:@"lastUserComment"];

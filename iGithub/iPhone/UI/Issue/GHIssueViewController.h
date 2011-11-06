@@ -22,7 +22,7 @@
     NSNumber *_number;
     
     NSArray *_history;
-    GHPullRequestDiscussion *_discussion;
+    NSArray *_attachedCommits;
     
     BOOL _hasCollaboratorData;
     
@@ -41,7 +41,6 @@
 @property (nonatomic, readonly) NSString *issueName;
 
 @property (nonatomic, retain) NSArray *history;
-@property (nonatomic, retain) GHPullRequestDiscussion *discussion;
 
 - (NSString *)descriptionForEvent:(GHAPIIssueEventV3 *)event;
 

@@ -30,10 +30,6 @@
 
 - (id)initWithRawDictionary:(NSDictionary *)rawDictionary;
 
-+ (void)pullRequestDiscussionOnRepository:(NSString *)repository 
-                                   number:(NSNumber *)number 
-                        completionHandler:(void(^)(GHPullRequestDiscussion *discussion, NSError *error))handler;
-
 + (void)pullRequestsOnRepository:(NSString *)repository 
                completionHandler:(void(^)(NSArray *requests, NSError *error))handler;   // requests contains GHPullRequestDiscussion's
 

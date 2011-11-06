@@ -22,8 +22,8 @@
     GHAPIIssueV3 *_issue;
     GHAPIRepositoryV3 *_repository;
     
-    GHPullRequestDiscussion *_discussion;
     NSMutableArray *_history;
+    NSArray *_attachedCommits;
     
     BOOL _hasCollaboratorData;
     BOOL _isCollaborator;
@@ -43,7 +43,6 @@
 @property (nonatomic, retain) GHAPIIssueV3 *issue;
 @property (nonatomic, retain) GHAPIRepositoryV3 *repository;
 
-@property (nonatomic, retain) GHPullRequestDiscussion *discussion;
 @property (nonatomic, retain) NSMutableArray *history;
 
 @property (nonatomic, readonly) NSString *issueName;

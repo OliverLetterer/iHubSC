@@ -57,44 +57,6 @@
 
 #pragma mark - Class methods
 
-+ (void)pullRequestDiscussionOnRepository:(NSString *)repository 
-                                   number:(NSNumber *)number 
-                        completionHandler:(void(^)(GHPullRequestDiscussion *discussion, NSError *error))handler {
-    
-    dispatch_async(GHAPIBackgroundQueue(), ^(void) {
-        
-        // /pulls/:user/:repo/:number
-        
-        NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://github.com/api/v2/json/pulls/%@/%@",
-                                           [repository stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
-                                           number] ];
-        
-        NSError *myError = nil;
-        
-        ASIFormDataRequest *request = [ASIFormDataRequest authenticatedFormDataRequestWithURL:URL];
-        [request startSynchronous];
-        
-        myError = [request error];
-        
-        if (!myError) {
-            myError = [NSError errorFromRawDictionary:[[request responseString] objectFromJSONString] ];
-        }
-        
-        NSString *jsonString = [request responseString];
-        
-        dispatch_async(dispatch_get_main_queue(), ^(void) {
-            if (myError) {
-                handler(nil, myError);
-            } else {
-                id object = jsonString.objectFromJSONString;
-                NSDictionary *dictionary = GHAPIObjectExpectedClass(&object, NSDictionary.class);
-                
-                handler([[GHPullRequestDiscussion alloc] initWithRawDictionary:[dictionary objectForKey:@"pull"]], nil);
-            }
-        });
-    });
-}
-
 + (void)pullRequestsOnRepository:(NSString *)repository 
                completionHandler:(void (^)(NSArray *, NSError *))handler {
     

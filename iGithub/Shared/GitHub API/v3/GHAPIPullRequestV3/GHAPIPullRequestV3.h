@@ -15,7 +15,13 @@
     
 }
 
-+ (void)mergPullRequestOnRepository:(NSString *)repository withNumber:(NSNumber *)pullRequestNumber commitMessage:(NSString *)commitMessage
++ (void)mergPullRequestOnRepository:(NSString *)repository 
+                         withNumber:(NSNumber *)pullRequestNumber 
+                      commitMessage:(NSString *)commitMessage
                   completionHandler:(void(^)(GHAPIPullRequestMergeStateV3 *state, NSError *error))handler;
+
++ (void)commitsOfPullRequestOnRepository:(NSString *)repository 
+                              withNumber:(NSNumber *)pullRequestNumber 
+                       completionHandler:(void(^)(NSArray *commits, NSError *error))completionHandler;
 
 @end

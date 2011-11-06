@@ -38,7 +38,7 @@
 @implementation GHPIssueViewController
 
 @synthesize repositoryString=_repositoryString, issueNumber=_issueNumber;
-@synthesize repository=_repository, discussion=_discussion, history=_history;
+@synthesize repository=_repository, history=_history;
 @synthesize issue=_issue;
 @synthesize selectedURL=_selectedURL;
 @synthesize lastUserComment=_lastUserComment;
@@ -160,7 +160,7 @@
 
 - (BOOL)tableView:(UIExpandableTableView *)tableView needsToDownloadDataForExpandableSection:(NSInteger)section {
     if (section == kUITableViewSectionCommits) {
-        return self.discussion == nil;
+        return _attachedCommits == nil;
     } else if (section == kUITableViewSectionHistory) {
         return self.history == nil;
     }
@@ -185,17 +185,17 @@
 
 - (void)tableView:(UIExpandableTableView *)tableView downloadDataForExpandableSection:(NSInteger)section {
     if (section == kUITableViewSectionCommits) {
-        [GHPullRequest pullRequestDiscussionOnRepository:self.repositoryString 
-                                                  number:self.issueNumber 
-                                       completionHandler:^(GHPullRequestDiscussion *discussion, NSError *error) {
-                                           if (error) {
-                                               [self handleError:error];
-                                               [tableView cancelDownloadInSection:section];
-                                           } else {
-                                               self.discussion = discussion;
-                                               [tableView expandSection:section animated:YES];
-                                           }
-                                       }];
+        [GHAPIPullRequestV3 commitsOfPullRequestOnRepository:_repositoryString 
+                                                  withNumber:_issueNumber 
+                                           completionHandler:^(NSArray *commits, NSError *error) {
+                                               if (error) {
+                                                   [self handleError:error];
+                                                   [tableView cancelDownloadInSection:section];
+                                               } else {
+                                                   _attachedCommits = commits;
+                                                   [tableView expandSection:section animated:YES];
+                                               }
+                                           }];
     } else if (section == kUITableViewSectionHistory) {
         [GHAPIIssueV3 historyForIssueWithID:self.issueNumber onRepository:self.repositoryString 
                           completionHandler:^(NSMutableArray *history, NSError *error) {
@@ -235,7 +235,7 @@
         }
         return counter;
     } else if (section == kUITableViewSectionCommits) {
-        return self.issue.isPullRequest ? [self.discussion.commits count] + 1 : 0;
+        return self.issue.isPullRequest ? _attachedCommits.count + 1 : 0;
     } else if (section == kUITableViewSectionHistory) {
         return self.history.count + 2;
     } else if (section == kUITableViewSectionLabels) {
@@ -378,13 +378,14 @@
         
         [self setupDefaultTableViewCell:cell forRowAtIndexPath:indexPath];
         
-        GHCommit *commit = [self.discussion.commits objectAtIndex:indexPath.row-1];
+        GHAPICommitV3 *commit = [_attachedCommits objectAtIndex:indexPath.row-1];
         
-        [self updateImageView:cell.imageView atIndexPath:indexPath withGravatarID:commit.user.gravatarID];
-        cell.textLabel.text = [NSString stringWithFormat:@"%@ - %@", commit.commiter.name, commit.ID];
+        [self updateImageView:cell.imageView 
+                  atIndexPath:indexPath 
+          withAvatarURLString:commit.committer.avatarURL];
+        
+        cell.textLabel.text = [NSString stringWithFormat:@"%@ - %@", commit.committer.login, commit.SHA];
         cell.detailTextLabel.text = commit.message;
-        
-        // Configure the cell...
         
         return cell;
     } else if (indexPath.section == kUITableViewSectionHistory) {
@@ -497,7 +498,7 @@
             return GHPMileStoneTableViewCellHeight;
         }
     } else if (indexPath.section == kUITableViewSectionCommits && indexPath.row > 0) {
-        GHCommit *commit = [self.discussion.commits objectAtIndex:indexPath.row - 1];
+        GHAPICommitV3 *commit = [_attachedCommits objectAtIndex:indexPath.row - 1];
         
         return [GHPImageDetailTableViewCell heightWithContent:commit.message];
     } else if (indexPath.section == kUITableViewSectionHistory && indexPath.row > 0) {
@@ -529,10 +530,10 @@
             }
         }
     } else if (indexPath.section == kUITableViewSectionCommits && indexPath.row > 0) {
-        GHCommit *commit = [self.discussion.commits objectAtIndex:indexPath.row-1];
+        GHAPICommitV3 *commit = [_attachedCommits objectAtIndex:indexPath.row-1];
         
         viewController = [[GHPCommitViewController alloc] initWithRepository:self.repositoryString 
-                                                                     commitID:commit.ID];
+                                                                     commitID:commit.SHA];
     } else if (indexPath.section == kUITableViewSectionHistory && indexPath.row > 0 && indexPath.row < [self.history count]+1) {
         
         NSObject *object = [self.history objectAtIndex:indexPath.row - 1];
@@ -880,7 +881,7 @@
     [encoder encodeObject:_issueNumber forKey:@"issueNumber"];
     [encoder encodeObject:_issue forKey:@"issue"];
     [encoder encodeObject:_repository forKey:@"repository"];
-    [encoder encodeObject:_discussion forKey:@"discussion"];
+    [encoder encodeObject:_attachedCommits forKey:@"attachedCommits"];
     [encoder encodeObject:_history forKey:@"history"];
     [encoder encodeFloat:_bodyHeight forKey:@"bodyHeight"];
     if (self.isViewLoaded) {
@@ -904,7 +905,7 @@
         _issueNumber = [decoder decodeObjectForKey:@"issueNumber"];
         _issue = [decoder decodeObjectForKey:@"issue"];
         _repository = [decoder decodeObjectForKey:@"repository"];
-        _discussion = [decoder decodeObjectForKey:@"discussion"];
+        _attachedCommits = [decoder decodeObjectForKey:@"attachedCommits"];
         _history = [decoder decodeObjectForKey:@"history"];
         _bodyHeight = [decoder decodeFloatForKey:@"bodyHeight"];
         _lastUserComment = [decoder decodeObjectForKey:@"lastUserComment"];
