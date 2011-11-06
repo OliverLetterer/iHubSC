@@ -80,8 +80,8 @@
         // this is a commit / push message, we will display max 2 commits
         description = [NSString stringWithFormat:NSLocalizedString(@"pushed to %@ (%d)\n\n%@", @""), pushEvent.ref, pushEvent.commits.count, pushEvent.previewString];
     } else if(event.type == GHAPIEventTypeV3CommitComment) {
-#warning add more details here
-        description = NSLocalizedString(@"commented on a commit", @"");
+        GHAPICommitCommentEventV3 *commentEvent = (GHAPICommitCommentEventV3 *)event;
+        description = commentEvent.comment.body;
     } else if(event.type == GHAPIEventTypeV3FollowEvent) {
         description = NSLocalizedString(@"started following", @"");
     } else if(event.type == GHAPIEventTypeV3WatchEvent) {
