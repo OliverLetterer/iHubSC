@@ -308,7 +308,6 @@
 		A784204013E1987C00131648 /* MainWindow_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = A7841FD513E1987C00131648 /* MainWindow_iPhone.xib */; };
 		A784204113E1987C00131648 /* iGithubAppDelegate_iPhone.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841FD813E1987C00131648 /* iGithubAppDelegate_iPhone.m */; };
 		A784204213E1987C00131648 /* GHCommitDiffViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841FDD13E1987C00131648 /* GHCommitDiffViewController.m */; };
-		A784204313E1987C00131648 /* GHPushPayloadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841FE013E1987C00131648 /* GHPushPayloadViewController.m */; };
 		A784204513E1987C00131648 /* GHViewCommitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841FE613E1987C00131648 /* GHViewCommitViewController.m */; };
 		A784204613E1987C00131648 /* GHGistViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841FE913E1987C00131648 /* GHGistViewController.m */; };
 		A784204913E1987C00131648 /* GHIssueViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841FF213E1987C00131648 /* GHIssueViewController.m */; };
@@ -1035,8 +1034,6 @@
 		A7841FD813E1987C00131648 /* iGithubAppDelegate_iPhone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iGithubAppDelegate_iPhone.m; sourceTree = "<group>"; };
 		A7841FDC13E1987C00131648 /* GHCommitDiffViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHCommitDiffViewController.h; sourceTree = "<group>"; };
 		A7841FDD13E1987C00131648 /* GHCommitDiffViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHCommitDiffViewController.m; sourceTree = "<group>"; };
-		A7841FDF13E1987C00131648 /* GHPushPayloadViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPushPayloadViewController.h; sourceTree = "<group>"; };
-		A7841FE013E1987C00131648 /* GHPushPayloadViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPushPayloadViewController.m; sourceTree = "<group>"; };
 		A7841FE513E1987C00131648 /* GHViewCommitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHViewCommitViewController.h; sourceTree = "<group>"; };
 		A7841FE613E1987C00131648 /* GHViewCommitViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHViewCommitViewController.m; sourceTree = "<group>"; };
 		A7841FE813E1987C00131648 /* GHGistViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHGistViewController.h; sourceTree = "<group>"; };
@@ -2864,7 +2861,6 @@
 			children = (
 				A7D9C3EC1466A9F20009F10B /* GHCommitsViewController */,
 				A7841FDB13E1987C00131648 /* GHCommitDiffViewController */,
-				A7841FDE13E1987C00131648 /* GHPushPayloadViewController */,
 				A7841FE413E1987C00131648 /* GHViewCommitViewController */,
 			);
 			path = Commits;
@@ -2877,15 +2873,6 @@
 				A7841FDD13E1987C00131648 /* GHCommitDiffViewController.m */,
 			);
 			path = GHCommitDiffViewController;
-			sourceTree = "<group>";
-		};
-		A7841FDE13E1987C00131648 /* GHPushPayloadViewController */ = {
-			isa = PBXGroup;
-			children = (
-				A7841FDF13E1987C00131648 /* GHPushPayloadViewController.h */,
-				A7841FE013E1987C00131648 /* GHPushPayloadViewController.m */,
-			);
-			path = GHPushPayloadViewController;
 			sourceTree = "<group>";
 		};
 		A7841FE413E1987C00131648 /* GHViewCommitViewController */ = {
@@ -3955,7 +3942,6 @@
 				A7841FD313E194BC00131648 /* GHViewController.m in Sources */,
 				A784204113E1987C00131648 /* iGithubAppDelegate_iPhone.m in Sources */,
 				A784204213E1987C00131648 /* GHCommitDiffViewController.m in Sources */,
-				A784204313E1987C00131648 /* GHPushPayloadViewController.m in Sources */,
 				A784204513E1987C00131648 /* GHViewCommitViewController.m in Sources */,
 				A784204613E1987C00131648 /* GHGistViewController.m in Sources */,
 				A784204913E1987C00131648 /* GHIssueViewController.m in Sources */,

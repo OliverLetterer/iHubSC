@@ -12,7 +12,6 @@
 #import "GHCommitsViewController.h"
 #import "GHFollowEventTableViewCell.h"
 #import "GHIssueViewController.h"
-#import "GHPushPayloadViewController.h"
 #import "GHRepositoryViewController.h"
 #import "GHUserViewController.h"
 #import "GHGistViewController.h"
