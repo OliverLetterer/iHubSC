@@ -176,8 +176,6 @@
     if ((self = [super initWithStyle:UITableViewStyleGrouped])) {
         // Custom initialization
         self.isDownloadingEssentialData = YES;
-#warning check if this still needs to be available
-        [self performSelector:@selector(downloadNewsFeed) withObject:nil afterDelay:0.01];
     }
     return self;
 }
@@ -276,6 +274,7 @@
         if (!cell) {
             cell = [[GHPDefaultTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            cell.textLabel.textAlignment = UITextAlignmentCenter;
         }
         
         [self setupDefaultTableViewCell:cell forRowAtIndexPath:indexPath];
