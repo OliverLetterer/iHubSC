@@ -11,7 +11,6 @@
 #import "GHAPIBackgroundQueueV3.h"
 #import "GHUser.h"
 #import "GHRawIssue.h"
-#import "GHTarget.h"
 #import "GHIssueComment.h"
 #import "GHCommit.h"
 #import "GHCommitFileInformation.h"
