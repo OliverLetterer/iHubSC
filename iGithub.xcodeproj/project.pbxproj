@@ -179,7 +179,6 @@
 		A7841D9713E18E2E00131648 /* GHFile_sh@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A7841D5113E18E2D00131648 /* GHFile_sh@2x.png */; };
 		A7841D9813E18E2E00131648 /* GHFolder.png in Resources */ = {isa = PBXBuildFile; fileRef = A7841D5213E18E2D00131648 /* GHFolder.png */; };
 		A7841D9913E18E2E00131648 /* GHFolder@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A7841D5313E18E2D00131648 /* GHFolder@2x.png */; };
-		A7841D9A13E18E2E00131648 /* GHDatabase.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = A7841D5413E18E2D00131648 /* GHDatabase.xcdatamodel */; };
 		A7841D9B13E18E2E00131648 /* 19-gear.png in Resources */ = {isa = PBXBuildFile; fileRef = A7841D5613E18E2D00131648 /* 19-gear.png */; };
 		A7841D9C13E18E2E00131648 /* 19-gear@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A7841D5713E18E2D00131648 /* 19-gear@2x.png */; };
 		A7841D9D13E18E2E00131648 /* ANBackgroundImage.png in Resources */ = {isa = PBXBuildFile; fileRef = A7841D5813E18E2D00131648 /* ANBackgroundImage.png */; };
@@ -780,7 +779,6 @@
 		A7841D5113E18E2D00131648 /* GHFile_sh@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GHFile_sh@2x.png"; sourceTree = "<group>"; };
 		A7841D5213E18E2D00131648 /* GHFolder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GHFolder.png; sourceTree = "<group>"; };
 		A7841D5313E18E2D00131648 /* GHFolder@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GHFolder@2x.png"; sourceTree = "<group>"; };
-		A7841D5413E18E2D00131648 /* GHDatabase.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GHDatabase.xcdatamodel; sourceTree = "<group>"; };
 		A7841D5613E18E2D00131648 /* 19-gear.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "19-gear.png"; sourceTree = "<group>"; };
 		A7841D5713E18E2D00131648 /* 19-gear@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "19-gear@2x.png"; sourceTree = "<group>"; };
 		A7841D5813E18E2D00131648 /* ANBackgroundImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ANBackgroundImage.png; sourceTree = "<group>"; };
@@ -1924,7 +1922,6 @@
 				A7841E4A13E1905200131648 /* ANNotificationQueue */,
 				A7841DBF13E1902500131648 /* SyntaxHighlighting */,
 				A7841D7113E18E2D00131648 /* iHub - Icon Template.psd */,
-				A7841D5413E18E2D00131648 /* GHDatabase.xcdatamodel */,
 				A7841D3413E18E2D00131648 /* Action Button */,
 				A7841D3713E18E2D00131648 /* CollapsingTableViewCell */,
 				A7841D3D13E18E2D00131648 /* Defaults */,
@@ -3695,7 +3692,6 @@
 				A7841CF813E1894500131648 /* UIExpandableTableView.m in Sources */,
 				A7841CFD13E1899000131648 /* GHPullToReleaseTableHeaderView.m in Sources */,
 				A7841CFE13E1899000131648 /* GHPullToReleaseTableViewController.m in Sources */,
-				A7841D9A13E18E2E00131648 /* GHDatabase.xcdatamodel in Sources */,
 				A7841F6713E194BC00131648 /* NSString+Additions.m in Sources */,
 				A7841F6813E194BC00131648 /* UIColor+GithubUI.m in Sources */,
 				A7841F6913E194BC00131648 /* UIImage+Resize.m in Sources */,
