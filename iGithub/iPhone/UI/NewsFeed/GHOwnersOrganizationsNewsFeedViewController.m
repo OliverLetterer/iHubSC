@@ -18,6 +18,8 @@
 - (void)downloadNewEventsAfterLastKnownEventDateString:(NSString *)lastKnownEventDateString
 {
     if (_defaultOrganizationName) {
+        _isDownloadingNewsFeedData = YES;
+        
         [GHAPIEventV3 eventsForOrganizationNamed:_defaultOrganizationName 
                         sinceLastEventDateString:lastKnownEventDateString 
                                completionHandler:^(NSArray *events, NSError *error) {
@@ -29,6 +31,8 @@
                                    
                                    self.isDownloadingEssentialData = NO;
                                    [self pullToReleaseTableViewDidReloadData];
+                                   
+                                   _isDownloadingNewsFeedData = NO;
                                }];
     } else {
         NSString *username = [GHAPIAuthenticationManager sharedInstance].authenticatedUser.login;

@@ -65,7 +65,7 @@
 {
     [super pullToReleaseTableViewReloadData];
     
-    if (!self.isDownloadingEssentialData) {
+    if (!self.isDownloadingEssentialData && !_isDownloadingNewsFeedData) {
         if (_events.count == 0) {
             self.isDownloadingEssentialData = YES;
         }
@@ -543,7 +543,12 @@
             NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row inSection:0];
             NSArray *indexPaths = [NSArray arrayWithObject:indexPath];
             
-            [self.tableView deleteRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationTop];
+            @try {
+                [self.tableView deleteRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationTop];
+            }
+            @catch (NSException *exception) {
+                [self.tableView reloadData];
+            }
         } else {
             NSAssert(NO, @"_events needs to contain an event of type GHAPIEventTypeV3NewEvents");
         }

@@ -14,8 +14,9 @@
 @interface GHNewsFeedViewController : GHTableViewController {
 @protected
     NSMutableArray *_events;
-    
     NSString *_lastKnownEventDateString;
+    
+    BOOL _isDownloadingNewsFeedData;
 }
 
 @property (nonatomic, strong) NSMutableArray *events;

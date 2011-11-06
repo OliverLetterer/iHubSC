@@ -12,6 +12,8 @@
 @interface GHPOwnersNewsFeedViewController : GHPNewsFeedViewController <NSCoding> {
 @private
     NSString *_lastKnownEventDateString;
+    
+    BOOL _isDownloadingNewsFeedData;
 }
 
 - (void)downloadNewEventsAfterLastKnownEventDateString:(NSString *)lastKnownEventDateString; // overwrite

@@ -16,6 +16,8 @@
 
 - (void)downloadNewEventsAfterLastKnownEventDateString:(NSString *)lastKnownEventDateString
 {
+    _isDownloadingNewsFeedData = YES;
+    
     [GHAPIEventV3 eventsByAuthenticatedUserSinceLastEventDateString:lastKnownEventDateString 
                                                   completionHandler:^(NSArray *events, NSError *error) {
                                                       if (error) {
@@ -26,6 +28,8 @@
                                                       
                                                       self.isDownloadingEssentialData = NO;
                                                       [self pullToReleaseTableViewDidReloadData];
+                                                      
+                                                      _isDownloadingNewsFeedData = NO;
                                                   }];
 }
 

@@ -59,7 +59,9 @@
 {
     [super pullToReleaseTableViewReloadData];
     
-    [self downloadNewEventsAfterLastKnownEventDateString:self.lastKnownEventDateString];
+    if (!_isDownloadingNewsFeedData) {
+        [self downloadNewEventsAfterLastKnownEventDateString:self.lastKnownEventDateString];
+    }
 }
 
 - (void)downloadNewEventsAfterLastKnownEventDateString:(NSString *)lastKnownEventDateString
@@ -67,6 +69,8 @@
     if (!_events) {
         self.isDownloadingEssentialData = YES;
     }
+    
+    _isDownloadingNewsFeedData = YES;
     
     [GHAPIEventV3 eventsForAuthenticatedUserSinceLastEventDateString:lastKnownEventDateString 
                                                    completionHandler:^(NSArray *events, NSError *error) {
@@ -78,6 +82,8 @@
                                                        
                                                        self.isDownloadingEssentialData = NO;
                                                        [self pullToReleaseTableViewDidReloadData];
+                                                       
+                                                       _isDownloadingNewsFeedData = NO;
                                                    }];
 }
 
@@ -258,7 +264,12 @@
             NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row inSection:0];
             NSArray *indexPaths = [NSArray arrayWithObject:indexPath];
             
-            [self.tableView deleteRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationTop];
+            @try {
+                [self.tableView deleteRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationTop];
+            }
+            @catch (NSException *exception) {
+                [self.tableView reloadData];
+            }
         } else {
             NSAssert(NO, @"_events needs to contain an event of type GHAPIEventTypeV3NewEvents");
         }
