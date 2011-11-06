@@ -12,7 +12,6 @@
 #import "GHUser.h"
 #import "GHCommit.h"
 #import "GHCommitFileInformation.h"
-#import "GHCommitMessage.h"
 #import "GHRepository.h"
 #import "GHFileSystemItem.h"
 #import "GHFile.h"

@@ -227,7 +227,6 @@
 		A7841F7513E194BC00131648 /* GHAPIAuthenticationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841E8213E194BB00131648 /* GHAPIAuthenticationManager.m */; };
 		A7841F8313E194BC00131648 /* GHCommit.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841EA413E194BB00131648 /* GHCommit.m */; };
 		A7841F8413E194BC00131648 /* GHCommitFileInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841EA613E194BB00131648 /* GHCommitFileInformation.m */; };
-		A7841F8513E194BC00131648 /* GHCommitMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841EA913E194BB00131648 /* GHCommitMessage.m */; };
 		A7841F8613E194BC00131648 /* GHDirectory.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841EAC13E194BB00131648 /* GHDirectory.m */; };
 		A7841F8713E194BC00131648 /* GHFile.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841EAE13E194BB00131648 /* GHFile.m */; };
 		A7841F8813E194BC00131648 /* GHFileMetaData.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841EB013E194BB00131648 /* GHFileMetaData.m */; };
@@ -842,8 +841,6 @@
 		A7841EA413E194BB00131648 /* GHCommit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHCommit.m; sourceTree = "<group>"; };
 		A7841EA513E194BB00131648 /* GHCommitFileInformation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHCommitFileInformation.h; sourceTree = "<group>"; };
 		A7841EA613E194BB00131648 /* GHCommitFileInformation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHCommitFileInformation.m; sourceTree = "<group>"; };
-		A7841EA813E194BB00131648 /* GHCommitMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHCommitMessage.h; sourceTree = "<group>"; };
-		A7841EA913E194BB00131648 /* GHCommitMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHCommitMessage.m; sourceTree = "<group>"; };
 		A7841EAB13E194BB00131648 /* GHDirectory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHDirectory.h; sourceTree = "<group>"; };
 		A7841EAC13E194BB00131648 /* GHDirectory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHDirectory.m; sourceTree = "<group>"; };
 		A7841EAD13E194BB00131648 /* GHFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHFile.h; sourceTree = "<group>"; };
@@ -2273,7 +2270,6 @@
 			isa = PBXGroup;
 			children = (
 				A7841EA213E194BB00131648 /* GHCommit */,
-				A7841EA713E194BB00131648 /* GHCommitMessage */,
 				A7841EAA13E194BB00131648 /* GHFileSystem */,
 				A7841EF013E194BB00131648 /* GHRepository */,
 				A7841EF613E194BB00131648 /* GHUser */,
@@ -2291,15 +2287,6 @@
 				A7841EA613E194BB00131648 /* GHCommitFileInformation.m */,
 			);
 			path = GHCommit;
-			sourceTree = "<group>";
-		};
-		A7841EA713E194BB00131648 /* GHCommitMessage */ = {
-			isa = PBXGroup;
-			children = (
-				A7841EA813E194BB00131648 /* GHCommitMessage.h */,
-				A7841EA913E194BB00131648 /* GHCommitMessage.m */,
-			);
-			path = GHCommitMessage;
 			sourceTree = "<group>";
 		};
 		A7841EAA13E194BB00131648 /* GHFileSystem */ = {
@@ -3641,7 +3628,6 @@
 				A7841F7513E194BC00131648 /* GHAPIAuthenticationManager.m in Sources */,
 				A7841F8313E194BC00131648 /* GHCommit.m in Sources */,
 				A7841F8413E194BC00131648 /* GHCommitFileInformation.m in Sources */,
-				A7841F8513E194BC00131648 /* GHCommitMessage.m in Sources */,
 				A7841F8613E194BC00131648 /* GHDirectory.m in Sources */,
 				A7841F8713E194BC00131648 /* GHFile.m in Sources */,
 				A7841F8813E194BC00131648 /* GHFileMetaData.m in Sources */,
