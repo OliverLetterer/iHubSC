@@ -131,19 +131,11 @@
     } else if(event.type == GHAPIEventTypeV3PullRequestEvent) {
         GHAPIPullRequestEventV3 *pullEvent = (GHAPIPullRequestEventV3 *)event;
         
-        description = [NSString stringWithFormat:NSLocalizedString(@"%@ Pull Request %@\n\n%@", @""), pullEvent.action, pullEvent.pullRequest.number, pullEvent.pullRequest.title];
+        NSString *additionsString = [NSString stringWithFormat:NSLocalizedString(@"%@ %@", @""), pullEvent.pullRequest.additions, [pullEvent.pullRequest.additions intValue] == 1 ? NSLocalizedString(@"addition", @"") : NSLocalizedString(@"additions", @"") ];
+        NSString *deletionsString = [NSString stringWithFormat:NSLocalizedString(@"%@ %@", @""), pullEvent.pullRequest.deletions, [pullEvent.pullRequest.deletions intValue] == 1 ? NSLocalizedString(@"deletion", @"") : NSLocalizedString(@"deletions", @"") ];
+        NSString *commitsString = [NSString stringWithFormat:NSLocalizedString(@"%@ %@", @""), pullEvent.pullRequest.commits, [pullEvent.pullRequest.commits intValue] == 1 ? NSLocalizedString(@"commit", @"") : NSLocalizedString(@"commits", @"") ];
         
-#warning maybe add additions and deletions as info
-        //        NSString *additionsString = [NSString stringWithFormat:NSLocalizedString(@"%@ %@", @""), payload.pullRequest.additions, [payload.pullRequest.additions intValue] == 1 ? NSLocalizedString(@"addition", @"") : NSLocalizedString(@"additions", @"") ];
-        //        NSString *deletionsString = [NSString stringWithFormat:NSLocalizedString(@"%@ %@", @""), payload.pullRequest.deletions, [payload.pullRequest.deletions intValue] == 1 ? NSLocalizedString(@"deletion", @"") : NSLocalizedString(@"deletions", @"") ];
-        //        NSString *commitsString = [NSString stringWithFormat:NSLocalizedString(@"%@ %@", @""), payload.pullRequest.commits, [payload.pullRequest.commits intValue] == 1 ? NSLocalizedString(@"commit", @"") : NSLocalizedString(@"commits", @"") ];
-        //        
-        //        description = [NSString stringWithFormat:NSLocalizedString(@"%@ with %@ and %@", @""), commitsString, additionsString, deletionsString];
-        //        
-        //        if (payload.pullRequest) {
-        //            
-        //        }
-        //        description = [NSString stringWithFormat:NSLocalizedString(@"%@ pull request %@:\n\n%@\n\n%@", @""), payload.action, payload.number, payload.pullRequest.title, description];
+        description = [NSString stringWithFormat:NSLocalizedString(@"%@ Pull Request %@\n\n%@\n\n%@ with %@ and %@", @""), pullEvent.action, pullEvent.pullRequest.ID, pullEvent.pullRequest.title, commitsString, additionsString, deletionsString];
     } else if(event.type == GHAPIEventTypeV3MemberEvent) {
         GHAPIMemberEventV3 *memberEvent = (GHAPIMemberEventV3 *)event;
         
@@ -341,7 +333,7 @@
     } else if(event.type == GHAPIEventTypeV3PullRequestEvent) {
         GHAPIPullRequestEventV3 *pullEvent = (GHAPIPullRequestEventV3 *)event;
         
-        viewController = [[GHPIssueViewController alloc] initWithIssueNumber:pullEvent.pullRequest.number onRepository:event.repository.name];
+        viewController = [[GHPIssueViewController alloc] initWithIssueNumber:pullEvent.pullRequest.ID onRepository:event.repository.name];
     } else if(event.type == GHAPIEventTypeV3MemberEvent) {
         GHAPIMemberEventV3 *memberEvent = (GHAPIMemberEventV3 *)event;
         

@@ -22,7 +22,7 @@
         // Initialization code
         _number = [rawDictionary objectForKeyOrNilOnNullObject:@"number"];
         _action = [rawDictionary objectForKeyOrNilOnNullObject:@"action"];
-        _pullRequest = [[GHAPIIssueV3 alloc] initWithRawDictionary:[rawDictionary objectForKeyOrNilOnNullObject:@"pull_request"] ];
+        _pullRequest = [[GHAPIPullRequestV3 alloc] initWithRawDictionary:[rawDictionary objectForKeyOrNilOnNullObject:@"pull_request"] ];
     }
     return self;
 }

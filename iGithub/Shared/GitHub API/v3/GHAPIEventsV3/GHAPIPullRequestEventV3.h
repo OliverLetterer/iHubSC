@@ -7,7 +7,7 @@
 //
 
 #import "GHAPIEventV3.h"
-#import "GHAPIIssueV3.h"
+#import "GHAPIPullRequestV3.h"
 
 
 
@@ -17,12 +17,12 @@
  */
 @interface GHAPIPullRequestEventV3 : GHAPIEventV3 <NSCoding> {
 @private
-    GHAPIIssueV3 *_pullRequest;
+    GHAPIPullRequestV3 *_pullRequest;
     NSString *_action;
     NSNumber *_number;
 }
 
-@property (nonatomic, readonly) GHAPIIssueV3 *pullRequest;
+@property (nonatomic, readonly) GHAPIPullRequestV3 *pullRequest;
 @property (nonatomic, readonly) NSString *action;
 @property (nonatomic, readonly) NSNumber *number;
 
