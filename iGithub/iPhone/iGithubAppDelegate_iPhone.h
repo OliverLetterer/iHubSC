@@ -18,14 +18,14 @@
 
 @interface iGithubAppDelegate_iPhone : iGithubAppDelegate <MFMailComposeViewControllerDelegate> {
     UITabBarController *_tabBarController;
-    GHOwnersNeedsFeedViewController *_newsFeedViewController;
+    GHNewsFeedViewController *_newsFeedViewController;
     GHAuthenticatedUserViewController *_profileViewController;
     GHSearchViewController *_searchViewController;
     GHIssuesOfAuthenticatedUserViewController *_issuesOfUserViewController;
 }
 
 @property (nonatomic, retain) UITabBarController *tabBarController;
-@property (nonatomic, retain) GHOwnersNeedsFeedViewController *newsFeedViewController;
+@property (nonatomic, retain) GHNewsFeedViewController *newsFeedViewController;
 @property (nonatomic, retain) GHAuthenticatedUserViewController *profileViewController;
 @property (nonatomic, retain) GHSearchViewController *searchViewController;
 @property (nonatomic, retain) GHIssuesOfAuthenticatedUserViewController *issuesOfUserViewController;

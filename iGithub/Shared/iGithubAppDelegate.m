@@ -84,7 +84,13 @@
 }
 
 - (NSMutableDictionary *)deserializeState {
-    NSMutableDictionary *dictionary = [NSKeyedUnarchiver unarchiveObjectWithFile:self.lastKnownApplicationStateDictionaryFilePath];
+    NSMutableDictionary *dictionary = nil;
+    @try {
+        dictionary = [NSKeyedUnarchiver unarchiveObjectWithFile:self.lastKnownApplicationStateDictionaryFilePath];
+    }
+    @catch (NSException *exception) {
+        DLog(@"WARNING: Caught exception while deserializeState: %@", exception);
+    }
     
     [[NSFileManager defaultManager] removeItemAtPath:self.lastKnownApplicationStateDictionaryFilePath error:NULL];
     
