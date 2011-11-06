@@ -113,7 +113,6 @@
 		A76C012F13E9D7E6005E26C4 /* 162-receipt@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A76C012D13E9D7E6005E26C4 /* 162-receipt@2x.png */; };
 		A76C013013E9D7E6005E26C4 /* 162-receipt.png in Resources */ = {isa = PBXBuildFile; fileRef = A76C012E13E9D7E6005E26C4 /* 162-receipt.png */; };
 		A76C013413E9DE99005E26C4 /* GHSearchFieldTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A76C013313E9DE99005E26C4 /* GHSearchFieldTableViewCell.m */; };
-		A7824A7314372A6300A11956 /* GHGollumPageEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = A7824A7214372A6300A11956 /* GHGollumPageEvent.m */; };
 		A7841C6F13E1849200131648 /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841C6E13E1849200131648 /* JSONKit.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		A7841CAF13E1853200131648 /* CGUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841C7213E1853200131648 /* CGUtils.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		A7841CB413E1853200131648 /* DTAttributedTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841C7C13E1853200131648 /* DTAttributedTextView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -239,27 +238,6 @@
 		A7841F8B13E194BC00131648 /* GHIssueComment.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841EB713E194BB00131648 /* GHIssueComment.m */; };
 		A7841F8C13E194BC00131648 /* GHRawIssue.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841EB913E194BB00131648 /* GHRawIssue.m */; };
 		A7841F8D13E194BC00131648 /* GHManagedObjectContext.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841EBC13E194BB00131648 /* GHManagedObjectContext.m */; };
-		A7841F8E13E194BC00131648 /* GHNewsFeed.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841EBF13E194BB00131648 /* GHNewsFeed.m */; };
-		A7841F8F13E194BC00131648 /* GHNewsFeedItem.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841EC113E194BB00131648 /* GHNewsFeedItem.m */; };
-		A7841F9013E194BC00131648 /* GHCommitEventPayload.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841EC413E194BB00131648 /* GHCommitEventPayload.m */; };
-		A7841F9113E194BC00131648 /* GHCreateEventPayload.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841EC613E194BB00131648 /* GHCreateEventPayload.m */; };
-		A7841F9213E194BC00131648 /* GHDeleteEventPayload.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841EC813E194BB00131648 /* GHDeleteEventPayload.m */; };
-		A7841F9313E194BC00131648 /* GHDownloadEventPayload.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841ECA13E194BB00131648 /* GHDownloadEventPayload.m */; };
-		A7841F9413E194BC00131648 /* GHFollowEventPayload.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841ECC13E194BB00131648 /* GHFollowEventPayload.m */; };
-		A7841F9513E194BC00131648 /* GHForkApplyEventPayload.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841ECE13E194BB00131648 /* GHForkApplyEventPayload.m */; };
-		A7841F9613E194BC00131648 /* GHForkEventPayload.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841ED013E194BB00131648 /* GHForkEventPayload.m */; };
-		A7841F9713E194BC00131648 /* GHGistEventPayload.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841ED213E194BB00131648 /* GHGistEventPayload.m */; };
-		A7841F9813E194BC00131648 /* GHGollumEventPayload.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841ED413E194BB00131648 /* GHGollumEventPayload.m */; };
-		A7841F9913E194BC00131648 /* GHIssuePayload.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841ED613E194BB00131648 /* GHIssuePayload.m */; };
-		A7841F9A13E194BC00131648 /* GHIssuesCommentPayload.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841ED813E194BB00131648 /* GHIssuesCommentPayload.m */; };
-		A7841F9B13E194BC00131648 /* GHMemberEventPayload.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841EDA13E194BB00131648 /* GHMemberEventPayload.m */; };
-		A7841F9C13E194BC00131648 /* GHPayload.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841EDC13E194BB00131648 /* GHPayload.m */; };
-		A7841F9D13E194BC00131648 /* GHPayloadWithActor.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841EDE13E194BB00131648 /* GHPayloadWithActor.m */; };
-		A7841F9E13E194BC00131648 /* GHPayloadWithRepository.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841EE013E194BB00131648 /* GHPayloadWithRepository.m */; };
-		A7841F9F13E194BC00131648 /* GHPublicEventPayload.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841EE213E194BB00131648 /* GHPublicEventPayload.m */; };
-		A7841FA013E194BC00131648 /* GHPullRequestPayload.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841EE413E194BB00131648 /* GHPullRequestPayload.m */; };
-		A7841FA113E194BC00131648 /* GHPushPayload.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841EE613E194BB00131648 /* GHPushPayload.m */; };
-		A7841FA213E194BC00131648 /* GHWatchEventPayload.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841EE813E194BB00131648 /* GHWatchEventPayload.m */; };
 		A7841FA313E194BC00131648 /* GHPullRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841EEB13E194BB00131648 /* GHPullRequest.m */; };
 		A7841FA413E194BC00131648 /* GHPullRequestDiscussion.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841EED13E194BB00131648 /* GHPullRequestDiscussion.m */; };
 		A7841FA513E194BC00131648 /* GHPullRequestRepositoryInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841EEF13E194BB00131648 /* GHPullRequestRepositoryInformation.m */; };
@@ -693,8 +671,6 @@
 		A76C012E13E9D7E6005E26C4 /* 162-receipt.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "162-receipt.png"; sourceTree = "<group>"; };
 		A76C013213E9DE99005E26C4 /* GHSearchFieldTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHSearchFieldTableViewCell.h; sourceTree = "<group>"; };
 		A76C013313E9DE99005E26C4 /* GHSearchFieldTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHSearchFieldTableViewCell.m; sourceTree = "<group>"; };
-		A7824A7114372A6300A11956 /* GHGollumPageEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHGollumPageEvent.h; sourceTree = "<group>"; };
-		A7824A7214372A6300A11956 /* GHGollumPageEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHGollumPageEvent.m; sourceTree = "<group>"; };
 		A7841C6D13E1849200131648 /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JSONKit.h; path = Submodules/JSONKit/JSONKit.h; sourceTree = "<group>"; };
 		A7841C6E13E1849200131648 /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JSONKit.m; path = Submodules/JSONKit/JSONKit.m; sourceTree = "<group>"; };
 		A7841C7113E1853200131648 /* CGUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CGUtils.h; path = "Submodules/NSAttributedString-Additions-for-HTML/Classes/CGUtils.h"; sourceTree = SOURCE_ROOT; };
@@ -897,48 +873,6 @@
 		A7841EB913E194BB00131648 /* GHRawIssue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHRawIssue.m; sourceTree = "<group>"; };
 		A7841EBB13E194BB00131648 /* GHManagedObjectContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHManagedObjectContext.h; sourceTree = "<group>"; };
 		A7841EBC13E194BB00131648 /* GHManagedObjectContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHManagedObjectContext.m; sourceTree = "<group>"; };
-		A7841EBE13E194BB00131648 /* GHNewsFeed.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHNewsFeed.h; sourceTree = "<group>"; };
-		A7841EBF13E194BB00131648 /* GHNewsFeed.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHNewsFeed.m; sourceTree = "<group>"; };
-		A7841EC013E194BB00131648 /* GHNewsFeedItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHNewsFeedItem.h; sourceTree = "<group>"; };
-		A7841EC113E194BB00131648 /* GHNewsFeedItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHNewsFeedItem.m; sourceTree = "<group>"; };
-		A7841EC313E194BB00131648 /* GHCommitEventPayload.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHCommitEventPayload.h; sourceTree = "<group>"; };
-		A7841EC413E194BB00131648 /* GHCommitEventPayload.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHCommitEventPayload.m; sourceTree = "<group>"; };
-		A7841EC513E194BB00131648 /* GHCreateEventPayload.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHCreateEventPayload.h; sourceTree = "<group>"; };
-		A7841EC613E194BB00131648 /* GHCreateEventPayload.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHCreateEventPayload.m; sourceTree = "<group>"; };
-		A7841EC713E194BB00131648 /* GHDeleteEventPayload.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHDeleteEventPayload.h; sourceTree = "<group>"; };
-		A7841EC813E194BB00131648 /* GHDeleteEventPayload.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHDeleteEventPayload.m; sourceTree = "<group>"; };
-		A7841EC913E194BB00131648 /* GHDownloadEventPayload.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHDownloadEventPayload.h; sourceTree = "<group>"; };
-		A7841ECA13E194BB00131648 /* GHDownloadEventPayload.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHDownloadEventPayload.m; sourceTree = "<group>"; };
-		A7841ECB13E194BB00131648 /* GHFollowEventPayload.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHFollowEventPayload.h; sourceTree = "<group>"; };
-		A7841ECC13E194BB00131648 /* GHFollowEventPayload.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHFollowEventPayload.m; sourceTree = "<group>"; };
-		A7841ECD13E194BB00131648 /* GHForkApplyEventPayload.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHForkApplyEventPayload.h; sourceTree = "<group>"; };
-		A7841ECE13E194BB00131648 /* GHForkApplyEventPayload.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHForkApplyEventPayload.m; sourceTree = "<group>"; };
-		A7841ECF13E194BB00131648 /* GHForkEventPayload.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHForkEventPayload.h; sourceTree = "<group>"; };
-		A7841ED013E194BB00131648 /* GHForkEventPayload.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHForkEventPayload.m; sourceTree = "<group>"; };
-		A7841ED113E194BB00131648 /* GHGistEventPayload.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHGistEventPayload.h; sourceTree = "<group>"; };
-		A7841ED213E194BB00131648 /* GHGistEventPayload.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHGistEventPayload.m; sourceTree = "<group>"; };
-		A7841ED313E194BB00131648 /* GHGollumEventPayload.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHGollumEventPayload.h; sourceTree = "<group>"; };
-		A7841ED413E194BB00131648 /* GHGollumEventPayload.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHGollumEventPayload.m; sourceTree = "<group>"; };
-		A7841ED513E194BB00131648 /* GHIssuePayload.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHIssuePayload.h; sourceTree = "<group>"; };
-		A7841ED613E194BB00131648 /* GHIssuePayload.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHIssuePayload.m; sourceTree = "<group>"; };
-		A7841ED713E194BB00131648 /* GHIssuesCommentPayload.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHIssuesCommentPayload.h; sourceTree = "<group>"; };
-		A7841ED813E194BB00131648 /* GHIssuesCommentPayload.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHIssuesCommentPayload.m; sourceTree = "<group>"; };
-		A7841ED913E194BB00131648 /* GHMemberEventPayload.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHMemberEventPayload.h; sourceTree = "<group>"; };
-		A7841EDA13E194BB00131648 /* GHMemberEventPayload.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHMemberEventPayload.m; sourceTree = "<group>"; };
-		A7841EDB13E194BB00131648 /* GHPayload.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPayload.h; sourceTree = "<group>"; };
-		A7841EDC13E194BB00131648 /* GHPayload.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPayload.m; sourceTree = "<group>"; };
-		A7841EDD13E194BB00131648 /* GHPayloadWithActor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPayloadWithActor.h; sourceTree = "<group>"; };
-		A7841EDE13E194BB00131648 /* GHPayloadWithActor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPayloadWithActor.m; sourceTree = "<group>"; };
-		A7841EDF13E194BB00131648 /* GHPayloadWithRepository.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPayloadWithRepository.h; sourceTree = "<group>"; };
-		A7841EE013E194BB00131648 /* GHPayloadWithRepository.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPayloadWithRepository.m; sourceTree = "<group>"; };
-		A7841EE113E194BB00131648 /* GHPublicEventPayload.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPublicEventPayload.h; sourceTree = "<group>"; };
-		A7841EE213E194BB00131648 /* GHPublicEventPayload.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPublicEventPayload.m; sourceTree = "<group>"; };
-		A7841EE313E194BB00131648 /* GHPullRequestPayload.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPullRequestPayload.h; sourceTree = "<group>"; };
-		A7841EE413E194BB00131648 /* GHPullRequestPayload.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPullRequestPayload.m; sourceTree = "<group>"; };
-		A7841EE513E194BB00131648 /* GHPushPayload.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPushPayload.h; sourceTree = "<group>"; };
-		A7841EE613E194BB00131648 /* GHPushPayload.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPushPayload.m; sourceTree = "<group>"; };
-		A7841EE713E194BB00131648 /* GHWatchEventPayload.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHWatchEventPayload.h; sourceTree = "<group>"; };
-		A7841EE813E194BB00131648 /* GHWatchEventPayload.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHWatchEventPayload.m; sourceTree = "<group>"; };
 		A7841EEA13E194BB00131648 /* GHPullRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPullRequest.h; sourceTree = "<group>"; };
 		A7841EEB13E194BB00131648 /* GHPullRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPullRequest.m; sourceTree = "<group>"; };
 		A7841EEC13E194BB00131648 /* GHPullRequestDiscussion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPullRequestDiscussion.h; sourceTree = "<group>"; };
@@ -1964,17 +1898,6 @@
 			path = ..;
 			sourceTree = "<group>";
 		};
-		A7824A7014372A4600A11956 /* Wiki */ = {
-			isa = PBXGroup;
-			children = (
-				A7841ED313E194BB00131648 /* GHGollumEventPayload.h */,
-				A7841ED413E194BB00131648 /* GHGollumEventPayload.m */,
-				A7824A7114372A6300A11956 /* GHGollumPageEvent.h */,
-				A7824A7214372A6300A11956 /* GHGollumPageEvent.m */,
-			);
-			name = Wiki;
-			sourceTree = "<group>";
-		};
 		A7841C7013E184F500131648 /* Submodules */ = {
 			isa = PBXGroup;
 			children = (
@@ -2385,8 +2308,6 @@
 				A7841EAA13E194BB00131648 /* GHFileSystem */,
 				A7841EB313E194BB00131648 /* GHIssue */,
 				A7841EBA13E194BB00131648 /* GHManagedObjectContext */,
-				A7841EBD13E194BB00131648 /* GHNewsFeed */,
-				A7841EC213E194BB00131648 /* GHPayload */,
 				A7841EE913E194BB00131648 /* GHPullRequest */,
 				A7841EF013E194BB00131648 /* GHRepository */,
 				A7841EF313E194BB00131648 /* GHTarget */,
@@ -2460,61 +2381,6 @@
 				A7841EBC13E194BB00131648 /* GHManagedObjectContext.m */,
 			);
 			path = GHManagedObjectContext;
-			sourceTree = "<group>";
-		};
-		A7841EBD13E194BB00131648 /* GHNewsFeed */ = {
-			isa = PBXGroup;
-			children = (
-				A7841EBE13E194BB00131648 /* GHNewsFeed.h */,
-				A7841EBF13E194BB00131648 /* GHNewsFeed.m */,
-				A7841EC013E194BB00131648 /* GHNewsFeedItem.h */,
-				A7841EC113E194BB00131648 /* GHNewsFeedItem.m */,
-			);
-			path = GHNewsFeed;
-			sourceTree = "<group>";
-		};
-		A7841EC213E194BB00131648 /* GHPayload */ = {
-			isa = PBXGroup;
-			children = (
-				A7841EC313E194BB00131648 /* GHCommitEventPayload.h */,
-				A7841EC413E194BB00131648 /* GHCommitEventPayload.m */,
-				A7841EC513E194BB00131648 /* GHCreateEventPayload.h */,
-				A7841EC613E194BB00131648 /* GHCreateEventPayload.m */,
-				A7841EC713E194BB00131648 /* GHDeleteEventPayload.h */,
-				A7841EC813E194BB00131648 /* GHDeleteEventPayload.m */,
-				A7841EC913E194BB00131648 /* GHDownloadEventPayload.h */,
-				A7841ECA13E194BB00131648 /* GHDownloadEventPayload.m */,
-				A7841ECB13E194BB00131648 /* GHFollowEventPayload.h */,
-				A7841ECC13E194BB00131648 /* GHFollowEventPayload.m */,
-				A7841ECD13E194BB00131648 /* GHForkApplyEventPayload.h */,
-				A7841ECE13E194BB00131648 /* GHForkApplyEventPayload.m */,
-				A7841ECF13E194BB00131648 /* GHForkEventPayload.h */,
-				A7841ED013E194BB00131648 /* GHForkEventPayload.m */,
-				A7841ED113E194BB00131648 /* GHGistEventPayload.h */,
-				A7841ED213E194BB00131648 /* GHGistEventPayload.m */,
-				A7824A7014372A4600A11956 /* Wiki */,
-				A7841ED513E194BB00131648 /* GHIssuePayload.h */,
-				A7841ED613E194BB00131648 /* GHIssuePayload.m */,
-				A7841ED713E194BB00131648 /* GHIssuesCommentPayload.h */,
-				A7841ED813E194BB00131648 /* GHIssuesCommentPayload.m */,
-				A7841ED913E194BB00131648 /* GHMemberEventPayload.h */,
-				A7841EDA13E194BB00131648 /* GHMemberEventPayload.m */,
-				A7841EDB13E194BB00131648 /* GHPayload.h */,
-				A7841EDC13E194BB00131648 /* GHPayload.m */,
-				A7841EDD13E194BB00131648 /* GHPayloadWithActor.h */,
-				A7841EDE13E194BB00131648 /* GHPayloadWithActor.m */,
-				A7841EDF13E194BB00131648 /* GHPayloadWithRepository.h */,
-				A7841EE013E194BB00131648 /* GHPayloadWithRepository.m */,
-				A7841EE113E194BB00131648 /* GHPublicEventPayload.h */,
-				A7841EE213E194BB00131648 /* GHPublicEventPayload.m */,
-				A7841EE313E194BB00131648 /* GHPullRequestPayload.h */,
-				A7841EE413E194BB00131648 /* GHPullRequestPayload.m */,
-				A7841EE513E194BB00131648 /* GHPushPayload.h */,
-				A7841EE613E194BB00131648 /* GHPushPayload.m */,
-				A7841EE713E194BB00131648 /* GHWatchEventPayload.h */,
-				A7841EE813E194BB00131648 /* GHWatchEventPayload.m */,
-			);
-			path = GHPayload;
 			sourceTree = "<group>";
 		};
 		A7841EE913E194BB00131648 /* GHPullRequest */ = {
@@ -3874,27 +3740,6 @@
 				A7841F8B13E194BC00131648 /* GHIssueComment.m in Sources */,
 				A7841F8C13E194BC00131648 /* GHRawIssue.m in Sources */,
 				A7841F8D13E194BC00131648 /* GHManagedObjectContext.m in Sources */,
-				A7841F8E13E194BC00131648 /* GHNewsFeed.m in Sources */,
-				A7841F8F13E194BC00131648 /* GHNewsFeedItem.m in Sources */,
-				A7841F9013E194BC00131648 /* GHCommitEventPayload.m in Sources */,
-				A7841F9113E194BC00131648 /* GHCreateEventPayload.m in Sources */,
-				A7841F9213E194BC00131648 /* GHDeleteEventPayload.m in Sources */,
-				A7841F9313E194BC00131648 /* GHDownloadEventPayload.m in Sources */,
-				A7841F9413E194BC00131648 /* GHFollowEventPayload.m in Sources */,
-				A7841F9513E194BC00131648 /* GHForkApplyEventPayload.m in Sources */,
-				A7841F9613E194BC00131648 /* GHForkEventPayload.m in Sources */,
-				A7841F9713E194BC00131648 /* GHGistEventPayload.m in Sources */,
-				A7841F9813E194BC00131648 /* GHGollumEventPayload.m in Sources */,
-				A7841F9913E194BC00131648 /* GHIssuePayload.m in Sources */,
-				A7841F9A13E194BC00131648 /* GHIssuesCommentPayload.m in Sources */,
-				A7841F9B13E194BC00131648 /* GHMemberEventPayload.m in Sources */,
-				A7841F9C13E194BC00131648 /* GHPayload.m in Sources */,
-				A7841F9D13E194BC00131648 /* GHPayloadWithActor.m in Sources */,
-				A7841F9E13E194BC00131648 /* GHPayloadWithRepository.m in Sources */,
-				A7841F9F13E194BC00131648 /* GHPublicEventPayload.m in Sources */,
-				A7841FA013E194BC00131648 /* GHPullRequestPayload.m in Sources */,
-				A7841FA113E194BC00131648 /* GHPushPayload.m in Sources */,
-				A7841FA213E194BC00131648 /* GHWatchEventPayload.m in Sources */,
 				A7841FA313E194BC00131648 /* GHPullRequest.m in Sources */,
 				A7841FA413E194BC00131648 /* GHPullRequestDiscussion.m in Sources */,
 				A7841FA513E194BC00131648 /* GHPullRequestRepositoryInformation.m in Sources */,
@@ -4078,7 +3923,6 @@
 				A786CF7C13F6DB6200E22E13 /* SVModalWebViewController.m in Sources */,
 				A79433E2141FCEDD000EF1FC /* DTCSSStylesheet.m in Sources */,
 				A72B1B37142E799B0086750C /* UIImage+UITabBarStyle.m in Sources */,
-				A7824A7314372A6300A11956 /* GHGollumPageEvent.m in Sources */,
 				A7C667CA14616AFB004E6EAA /* GHAPIEventV3.m in Sources */,
 				A7C667CD14617001004E6EAA /* GHAPICommitCommentEventV3.m in Sources */,
 				A7C667D014617031004E6EAA /* GHAPICreateEventV3.m in Sources */,
