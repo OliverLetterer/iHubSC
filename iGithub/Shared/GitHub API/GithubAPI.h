@@ -6,7 +6,6 @@
 //  Copyright 2011 Home. All rights reserved.
 //
 
-#import "GHManagedObjectContext.h"
 #import "GHAPIAuthenticationManager.h"
 
 #import "GHAPIBackgroundQueueV3.h"

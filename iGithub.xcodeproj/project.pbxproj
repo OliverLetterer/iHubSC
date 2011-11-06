@@ -236,7 +236,6 @@
 		A7841F8913E194BC00131648 /* GHFileSystemItem.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841EB213E194BB00131648 /* GHFileSystemItem.m */; };
 		A7841F8B13E194BC00131648 /* GHIssueComment.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841EB713E194BB00131648 /* GHIssueComment.m */; };
 		A7841F8C13E194BC00131648 /* GHRawIssue.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841EB913E194BB00131648 /* GHRawIssue.m */; };
-		A7841F8D13E194BC00131648 /* GHManagedObjectContext.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841EBC13E194BB00131648 /* GHManagedObjectContext.m */; };
 		A7841FA313E194BC00131648 /* GHPullRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841EEB13E194BB00131648 /* GHPullRequest.m */; };
 		A7841FA413E194BC00131648 /* GHPullRequestDiscussion.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841EED13E194BB00131648 /* GHPullRequestDiscussion.m */; };
 		A7841FA513E194BC00131648 /* GHPullRequestRepositoryInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841EEF13E194BB00131648 /* GHPullRequestRepositoryInformation.m */; };
@@ -868,8 +867,6 @@
 		A7841EB713E194BB00131648 /* GHIssueComment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHIssueComment.m; sourceTree = "<group>"; };
 		A7841EB813E194BB00131648 /* GHRawIssue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHRawIssue.h; sourceTree = "<group>"; };
 		A7841EB913E194BB00131648 /* GHRawIssue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHRawIssue.m; sourceTree = "<group>"; };
-		A7841EBB13E194BB00131648 /* GHManagedObjectContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHManagedObjectContext.h; sourceTree = "<group>"; };
-		A7841EBC13E194BB00131648 /* GHManagedObjectContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHManagedObjectContext.m; sourceTree = "<group>"; };
 		A7841EEA13E194BB00131648 /* GHPullRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPullRequest.h; sourceTree = "<group>"; };
 		A7841EEB13E194BB00131648 /* GHPullRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPullRequest.m; sourceTree = "<group>"; };
 		A7841EEC13E194BB00131648 /* GHPullRequestDiscussion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPullRequestDiscussion.h; sourceTree = "<group>"; };
@@ -2304,7 +2301,6 @@
 				A7841EA713E194BB00131648 /* GHCommitMessage */,
 				A7841EAA13E194BB00131648 /* GHFileSystem */,
 				A7841EB313E194BB00131648 /* GHIssue */,
-				A7841EBA13E194BB00131648 /* GHManagedObjectContext */,
 				A7841EE913E194BB00131648 /* GHPullRequest */,
 				A7841EF013E194BB00131648 /* GHRepository */,
 				A7841EF313E194BB00131648 /* GHTarget */,
@@ -2367,15 +2363,6 @@
 				A7841EB913E194BB00131648 /* GHRawIssue.m */,
 			);
 			path = GHIssue;
-			sourceTree = "<group>";
-		};
-		A7841EBA13E194BB00131648 /* GHManagedObjectContext */ = {
-			isa = PBXGroup;
-			children = (
-				A7841EBB13E194BB00131648 /* GHManagedObjectContext.h */,
-				A7841EBC13E194BB00131648 /* GHManagedObjectContext.m */,
-			);
-			path = GHManagedObjectContext;
 			sourceTree = "<group>";
 		};
 		A7841EE913E194BB00131648 /* GHPullRequest */ = {
@@ -3733,7 +3720,6 @@
 				A7841F8913E194BC00131648 /* GHFileSystemItem.m in Sources */,
 				A7841F8B13E194BC00131648 /* GHIssueComment.m in Sources */,
 				A7841F8C13E194BC00131648 /* GHRawIssue.m in Sources */,
-				A7841F8D13E194BC00131648 /* GHManagedObjectContext.m in Sources */,
 				A7841FA313E194BC00131648 /* GHPullRequest.m in Sources */,
 				A7841FA413E194BC00131648 /* GHPullRequestDiscussion.m in Sources */,
 				A7841FA513E194BC00131648 /* GHPullRequestRepositoryInformation.m in Sources */,
