@@ -10,7 +10,6 @@
 
 #import "GHAPIBackgroundQueueV3.h"
 #import "GHUser.h"
-#import "GHIssueComment.h"
 #import "GHCommit.h"
 #import "GHCommitFileInformation.h"
 #import "GHCommitMessage.h"

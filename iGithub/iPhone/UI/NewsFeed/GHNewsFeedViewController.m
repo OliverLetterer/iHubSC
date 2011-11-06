@@ -508,7 +508,12 @@
         [_events insertObject:newMessagesEvents atIndex:row];
         [self cacheHeightForTableView];
         
-        [self.tableView insertRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationTop];
+        @try {
+            [self.tableView insertRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationTop];
+        }
+        @catch (NSException *exception) {
+            [self.tableView reloadData];
+        }
     } else {
         NSAssert(NO, @"_events need to contain event %@", event);
     }

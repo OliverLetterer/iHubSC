@@ -232,7 +232,6 @@
 		A7841F8713E194BC00131648 /* GHFile.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841EAE13E194BB00131648 /* GHFile.m */; };
 		A7841F8813E194BC00131648 /* GHFileMetaData.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841EB013E194BB00131648 /* GHFileMetaData.m */; };
 		A7841F8913E194BC00131648 /* GHFileSystemItem.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841EB213E194BB00131648 /* GHFileSystemItem.m */; };
-		A7841F8B13E194BC00131648 /* GHIssueComment.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841EB713E194BB00131648 /* GHIssueComment.m */; };
 		A7841FA613E194BC00131648 /* GHRepository.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841EF213E194BB00131648 /* GHRepository.m */; };
 		A7841FA813E194BC00131648 /* GHUser.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841EF813E194BB00131648 /* GHUser.m */; };
 		A7841FAB13E194BC00131648 /* UIImage+Gravatar.m in Sources */ = {isa = PBXBuildFile; fileRef = A7841EFF13E194BB00131648 /* UIImage+Gravatar.m */; };
@@ -853,8 +852,6 @@
 		A7841EB013E194BB00131648 /* GHFileMetaData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHFileMetaData.m; sourceTree = "<group>"; };
 		A7841EB113E194BB00131648 /* GHFileSystemItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHFileSystemItem.h; sourceTree = "<group>"; };
 		A7841EB213E194BB00131648 /* GHFileSystemItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHFileSystemItem.m; sourceTree = "<group>"; };
-		A7841EB613E194BB00131648 /* GHIssueComment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHIssueComment.h; sourceTree = "<group>"; };
-		A7841EB713E194BB00131648 /* GHIssueComment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHIssueComment.m; sourceTree = "<group>"; };
 		A7841EF113E194BB00131648 /* GHRepository.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHRepository.h; sourceTree = "<group>"; };
 		A7841EF213E194BB00131648 /* GHRepository.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHRepository.m; sourceTree = "<group>"; };
 		A7841EF713E194BB00131648 /* GHUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHUser.h; sourceTree = "<group>"; };
@@ -2278,7 +2275,6 @@
 				A7841EA213E194BB00131648 /* GHCommit */,
 				A7841EA713E194BB00131648 /* GHCommitMessage */,
 				A7841EAA13E194BB00131648 /* GHFileSystem */,
-				A7841EB313E194BB00131648 /* GHIssue */,
 				A7841EF013E194BB00131648 /* GHRepository */,
 				A7841EF613E194BB00131648 /* GHUser */,
 				A7841EF913E194BB00131648 /* Gravatar */,
@@ -2319,15 +2315,6 @@
 				A7841EB213E194BB00131648 /* GHFileSystemItem.m */,
 			);
 			path = GHFileSystem;
-			sourceTree = "<group>";
-		};
-		A7841EB313E194BB00131648 /* GHIssue */ = {
-			isa = PBXGroup;
-			children = (
-				A7841EB613E194BB00131648 /* GHIssueComment.h */,
-				A7841EB713E194BB00131648 /* GHIssueComment.m */,
-			);
-			path = GHIssue;
 			sourceTree = "<group>";
 		};
 		A7841EF013E194BB00131648 /* GHRepository */ = {
@@ -3659,7 +3646,6 @@
 				A7841F8713E194BC00131648 /* GHFile.m in Sources */,
 				A7841F8813E194BC00131648 /* GHFileMetaData.m in Sources */,
 				A7841F8913E194BC00131648 /* GHFileSystemItem.m in Sources */,
-				A7841F8B13E194BC00131648 /* GHIssueComment.m in Sources */,
 				A7841FA613E194BC00131648 /* GHRepository.m in Sources */,
 				A7841FA813E194BC00131648 /* GHUser.m in Sources */,
 				A7841FAB13E194BC00131648 /* UIImage+Gravatar.m in Sources */,
