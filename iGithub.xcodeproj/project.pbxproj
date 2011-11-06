@@ -13,6 +13,7 @@
 		A7218E861461E76A0081CB02 /* GHAPIDownloadV3.m in Sources */ = {isa = PBXBuildFile; fileRef = A7218E851461E76A0081CB02 /* GHAPIDownloadV3.m */; };
 		A7218E8C1461E92D0081CB02 /* GHAPICommitCommentV3.m in Sources */ = {isa = PBXBuildFile; fileRef = A7218E8B1461E92D0081CB02 /* GHAPICommitCommentV3.m */; };
 		A7218E8F14629D0F0081CB02 /* GHPOrganizationNewsFeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7218E8E14629D0E0081CB02 /* GHPOrganizationNewsFeedViewController.m */; };
+		A7218EF014642DCB0081CB02 /* GHAPINewEventsEventV3.m in Sources */ = {isa = PBXBuildFile; fileRef = A7218EEF14642DCA0081CB02 /* GHAPINewEventsEventV3.m */; };
 		A72B1B37142E799B0086750C /* UIImage+UITabBarStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = A72B1B34142E799B0086750C /* UIImage+UITabBarStyle.m */; };
 		A72B1B38142E799B0086750C /* UITabBarItemGradient.png in Resources */ = {isa = PBXBuildFile; fileRef = A72B1B35142E799B0086750C /* UITabBarItemGradient.png */; };
 		A72B1B39142E799B0086750C /* UITabBarItemGradient@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A72B1B36142E799B0086750C /* UITabBarItemGradient@2x.png */; };
@@ -390,6 +391,12 @@
 		A7D888FE13F13B79002ED2FF /* UIBarButtonItem+GHEmpty.m in Sources */ = {isa = PBXBuildFile; fileRef = A7D888FD13F13B79002ED2FF /* UIBarButtonItem+GHEmpty.m */; };
 		A7D8894D13F17859002ED2FF /* GHGlossProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = A7D8894913F17859002ED2FF /* GHGlossProgressView.m */; };
 		A7D8894E13F17859002ED2FF /* CGCommon.m in Sources */ = {isa = PBXBuildFile; fileRef = A7D8894C13F17859002ED2FF /* CGCommon.m */; };
+		A7D9C3C21465ADFF0009F10B /* GHNewOwnersNeedsFeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7D9C3C11465ADFF0009F10B /* GHNewOwnersNeedsFeedViewController.m */; };
+		A7D9C3C51465D9920009F10B /* GHNewEventsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A7D9C3C41465D9920009F10B /* GHNewEventsTableViewCell.m */; };
+		A7D9C3C8146688250009F10B /* GHUsersNewsFeedsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7D9C3C7146688230009F10B /* GHUsersNewsFeedsViewController.m */; };
+		A7D9C3CB1466908C0009F10B /* GHOwnersActionsNewsFeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7D9C3CA1466908B0009F10B /* GHOwnersActionsNewsFeedViewController.m */; };
+		A7D9C3CE146692270009F10B /* GHOwnersOrganizationsNewsFeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7D9C3CD146692250009F10B /* GHOwnersOrganizationsNewsFeedViewController.m */; };
+		A7D9C3EB14669BD10009F10B /* libBlocksKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A7D9C3E214669B700009F10B /* libBlocksKit.a */; };
 		A7DC78F213EACEE0002ABD4B /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A7DC78F113EACEE0002ABD4B /* Settings.bundle */; };
 		A7DC78F613EACFFC002ABD4B /* NSUserDefaults+Settings.m in Sources */ = {isa = PBXBuildFile; fileRef = A7DC78F513EACFFC002ABD4B /* NSUserDefaults+Settings.m */; };
 		A7FDA6A113E7446F00DE4FF3 /* GHCreateTeamViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7FDA6A013E7446F00DE4FF3 /* GHCreateTeamViewController.m */; };
@@ -443,6 +450,55 @@
 			remoteGlobalIDString = D2AAC07D0554694100DB518D;
 			remoteInfo = Kal;
 		};
+		A7D9C3DD14669B700009F10B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A7D9C3D014669B700009F10B /* BlocksKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 6CC40A2A1447B58600E47595;
+			remoteInfo = "iOS Framework";
+		};
+		A7D9C3DF14669B700009F10B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A7D9C3D014669B700009F10B /* BlocksKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 6CC40A751447BB1400E47595;
+			remoteInfo = "OS X Framework";
+		};
+		A7D9C3E114669B700009F10B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A7D9C3D014669B700009F10B /* BlocksKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 6C3DBF8D1382F1BA00E6C9AA;
+			remoteInfo = "iOS Library";
+		};
+		A7D9C3E314669B700009F10B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A7D9C3D014669B700009F10B /* BlocksKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 6CC08FCE1385555D00DDEABB;
+			remoteInfo = "OS X Library";
+		};
+		A7D9C3E514669B700009F10B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A7D9C3D014669B700009F10B /* BlocksKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 6CC0900913855CAE00DDEABB;
+			remoteInfo = "Chameleon Library";
+		};
+		A7D9C3E714669B700009F10B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A7D9C3D014669B700009F10B /* BlocksKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 60FF000713C023CB004A1394;
+			remoteInfo = "iOS Tests";
+		};
+		A7D9C3E914669BC80009F10B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A7D9C3D014669B700009F10B /* BlocksKit.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 6C3DBF8C1382F1BA00E6C9AA;
+			remoteInfo = "iOS Library";
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -458,6 +514,8 @@
 		A7218E8B1461E92D0081CB02 /* GHAPICommitCommentV3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHAPICommitCommentV3.m; sourceTree = "<group>"; };
 		A7218E8D14629D0C0081CB02 /* GHPOrganizationNewsFeedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPOrganizationNewsFeedViewController.h; sourceTree = "<group>"; };
 		A7218E8E14629D0E0081CB02 /* GHPOrganizationNewsFeedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPOrganizationNewsFeedViewController.m; sourceTree = "<group>"; };
+		A7218EEE14642DCA0081CB02 /* GHAPINewEventsEventV3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHAPINewEventsEventV3.h; sourceTree = "<group>"; };
+		A7218EEF14642DCA0081CB02 /* GHAPINewEventsEventV3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHAPINewEventsEventV3.m; sourceTree = "<group>"; };
 		A72B1B33142E799B0086750C /* UIImage+UITabBarStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+UITabBarStyle.h"; sourceTree = "<group>"; };
 		A72B1B34142E799B0086750C /* UIImage+UITabBarStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+UITabBarStyle.m"; sourceTree = "<group>"; };
 		A72B1B35142E799B0086750C /* UITabBarItemGradient.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UITabBarItemGradient.png; sourceTree = "<group>"; };
@@ -1137,6 +1195,17 @@
 		A7D8894913F17859002ED2FF /* GHGlossProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHGlossProgressView.m; sourceTree = "<group>"; };
 		A7D8894B13F17859002ED2FF /* CGCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGCommon.h; sourceTree = "<group>"; };
 		A7D8894C13F17859002ED2FF /* CGCommon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CGCommon.m; sourceTree = "<group>"; };
+		A7D9C3C01465ADFF0009F10B /* GHNewOwnersNeedsFeedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHNewOwnersNeedsFeedViewController.h; sourceTree = "<group>"; };
+		A7D9C3C11465ADFF0009F10B /* GHNewOwnersNeedsFeedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHNewOwnersNeedsFeedViewController.m; sourceTree = "<group>"; };
+		A7D9C3C31465D9920009F10B /* GHNewEventsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHNewEventsTableViewCell.h; sourceTree = "<group>"; };
+		A7D9C3C41465D9920009F10B /* GHNewEventsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHNewEventsTableViewCell.m; sourceTree = "<group>"; };
+		A7D9C3C6146688220009F10B /* GHUsersNewsFeedsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHUsersNewsFeedsViewController.h; sourceTree = "<group>"; };
+		A7D9C3C7146688230009F10B /* GHUsersNewsFeedsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHUsersNewsFeedsViewController.m; sourceTree = "<group>"; };
+		A7D9C3C9146690890009F10B /* GHOwnersActionsNewsFeedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHOwnersActionsNewsFeedViewController.h; sourceTree = "<group>"; };
+		A7D9C3CA1466908B0009F10B /* GHOwnersActionsNewsFeedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHOwnersActionsNewsFeedViewController.m; sourceTree = "<group>"; };
+		A7D9C3CC146692230009F10B /* GHOwnersOrganizationsNewsFeedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHOwnersOrganizationsNewsFeedViewController.h; sourceTree = "<group>"; };
+		A7D9C3CD146692250009F10B /* GHOwnersOrganizationsNewsFeedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHOwnersOrganizationsNewsFeedViewController.m; sourceTree = "<group>"; };
+		A7D9C3D014669B700009F10B /* BlocksKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = BlocksKit.xcodeproj; path = Submodules/BlocksKit/BlocksKit.xcodeproj; sourceTree = SOURCE_ROOT; };
 		A7DC78F113EACEE0002ABD4B /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		A7DC78F413EACFFC002ABD4B /* NSUserDefaults+Settings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSUserDefaults+Settings.h"; sourceTree = "<group>"; };
 		A7DC78F513EACFFC002ABD4B /* NSUserDefaults+Settings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSUserDefaults+Settings.m"; sourceTree = "<group>"; };
@@ -1159,6 +1228,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A7D9C3EB14669BD10009F10B /* libBlocksKit.a in Frameworks */,
 				A7B6545613EA9189009E4414 /* libANAdvancedNavigationController.a in Frameworks */,
 				A744F57913E730E40038C189 /* libGHMarkdownParser.a in Frameworks */,
 				A7C5256F13E6ADA10003EEE5 /* libKal.a in Frameworks */,
@@ -1917,6 +1987,7 @@
 		A7841C7013E184F500131648 /* Submodules */ = {
 			isa = PBXGroup;
 			children = (
+				A7D9C3CF14669B630009F10B /* BlocksKit */,
 				A72B1B32142E799B0086750C /* UIImage+UITabBarStyle */,
 				A786CF6313F6CF7F00E22E13 /* SVWebViewController */,
 				A7D8894713F17858002ED2FF /* GHGlossProgressView */,
@@ -2911,6 +2982,14 @@
 				A784200B13E1987C00131648 /* GHRecentActivityViewController.h */,
 				A784200C13E1987C00131648 /* GHRecentActivityViewController.m */,
 				A784200D13E1987C00131648 /* UITableViewCell's */,
+				A7D9C3C01465ADFF0009F10B /* GHNewOwnersNeedsFeedViewController.h */,
+				A7D9C3C11465ADFF0009F10B /* GHNewOwnersNeedsFeedViewController.m */,
+				A7D9C3C6146688220009F10B /* GHUsersNewsFeedsViewController.h */,
+				A7D9C3C7146688230009F10B /* GHUsersNewsFeedsViewController.m */,
+				A7D9C3C9146690890009F10B /* GHOwnersActionsNewsFeedViewController.h */,
+				A7D9C3CA1466908B0009F10B /* GHOwnersActionsNewsFeedViewController.m */,
+				A7D9C3CC146692230009F10B /* GHOwnersOrganizationsNewsFeedViewController.h */,
+				A7D9C3CD146692250009F10B /* GHOwnersOrganizationsNewsFeedViewController.m */,
 			);
 			path = NewsFeed;
 			sourceTree = "<group>";
@@ -2920,6 +2999,8 @@
 			children = (
 				A784200E13E1987C00131648 /* GHFollowEventTableViewCell.h */,
 				A784200F13E1987C00131648 /* GHFollowEventTableViewCell.m */,
+				A7D9C3C31465D9920009F10B /* GHNewEventsTableViewCell.h */,
+				A7D9C3C41465D9920009F10B /* GHNewEventsTableViewCell.m */,
 			);
 			path = "UITableViewCell's";
 			sourceTree = "<group>";
@@ -3413,6 +3494,8 @@
 				A7C667F91461903F004E6EAA /* GHAPITeamAddEventV3.m */,
 				A7C667FB1461905E004E6EAA /* GHAPIWatchEventV3.h */,
 				A7C667FC14619061004E6EAA /* GHAPIWatchEventV3.m */,
+				A7218EEE14642DCA0081CB02 /* GHAPINewEventsEventV3.h */,
+				A7218EEF14642DCA0081CB02 /* GHAPINewEventsEventV3.m */,
 			);
 			path = GHAPIEventsV3;
 			sourceTree = "<group>";
@@ -3444,6 +3527,27 @@
 				A7D8894C13F17859002ED2FF /* CGCommon.m */,
 			);
 			path = Private;
+			sourceTree = "<group>";
+		};
+		A7D9C3CF14669B630009F10B /* BlocksKit */ = {
+			isa = PBXGroup;
+			children = (
+				A7D9C3D014669B700009F10B /* BlocksKit.xcodeproj */,
+			);
+			name = BlocksKit;
+			sourceTree = "<group>";
+		};
+		A7D9C3D114669B700009F10B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A7D9C3DE14669B700009F10B /* BlocksKit.framework */,
+				A7D9C3E014669B700009F10B /* BlocksKit.framework */,
+				A7D9C3E214669B700009F10B /* libBlocksKit.a */,
+				A7D9C3E414669B700009F10B /* BlocksKit.dylib */,
+				A7D9C3E614669B700009F10B /* BlocksKit_Chameleon.dylib */,
+				A7D9C3E814669B700009F10B /* iOS Tests.app */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		A7DC78F313EACFD4002ABD4B /* NSUserDefaults+Additions */ = {
@@ -3515,6 +3619,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				A7D9C3EA14669BC80009F10B /* PBXTargetDependency */,
 				A7B6545513EA9183009E4414 /* PBXTargetDependency */,
 				A744F58313E73D2D0038C189 /* PBXTargetDependency */,
 				A7C5256E13E6AD890003EEE5 /* PBXTargetDependency */,
@@ -3547,6 +3652,10 @@
 				{
 					ProductGroup = A7B6544C13EA917B009E4414 /* Products */;
 					ProjectRef = A7B6544B13EA917B009E4414 /* ANAdvancedNavigationController.xcodeproj */;
+				},
+				{
+					ProductGroup = A7D9C3D114669B700009F10B /* Products */;
+					ProjectRef = A7D9C3D014669B700009F10B /* BlocksKit.xcodeproj */;
 				},
 				{
 					ProductGroup = A744F56F13E72DE60038C189 /* Products */;
@@ -3584,6 +3693,48 @@
 			fileType = archive.ar;
 			path = libKal.a;
 			remoteRef = A7C5256B13E6ACCD0003EEE5 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		A7D9C3DE14669B700009F10B /* BlocksKit.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = BlocksKit.framework;
+			remoteRef = A7D9C3DD14669B700009F10B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		A7D9C3E014669B700009F10B /* BlocksKit.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = BlocksKit.framework;
+			remoteRef = A7D9C3DF14669B700009F10B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		A7D9C3E214669B700009F10B /* libBlocksKit.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libBlocksKit.a;
+			remoteRef = A7D9C3E114669B700009F10B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		A7D9C3E414669B700009F10B /* BlocksKit.dylib */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.dylib";
+			path = BlocksKit.dylib;
+			remoteRef = A7D9C3E314669B700009F10B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		A7D9C3E614669B700009F10B /* BlocksKit_Chameleon.dylib */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.dylib";
+			path = BlocksKit_Chameleon.dylib;
+			remoteRef = A7D9C3E514669B700009F10B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		A7D9C3E814669B700009F10B /* iOS Tests.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = "iOS Tests.app";
+			remoteRef = A7D9C3E714669B700009F10B /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -3977,6 +4128,12 @@
 				A7218E861461E76A0081CB02 /* GHAPIDownloadV3.m in Sources */,
 				A7218E8C1461E92D0081CB02 /* GHAPICommitCommentV3.m in Sources */,
 				A7218E8F14629D0F0081CB02 /* GHPOrganizationNewsFeedViewController.m in Sources */,
+				A7218EF014642DCB0081CB02 /* GHAPINewEventsEventV3.m in Sources */,
+				A7D9C3C21465ADFF0009F10B /* GHNewOwnersNeedsFeedViewController.m in Sources */,
+				A7D9C3C51465D9920009F10B /* GHNewEventsTableViewCell.m in Sources */,
+				A7D9C3C8146688250009F10B /* GHUsersNewsFeedsViewController.m in Sources */,
+				A7D9C3CB1466908C0009F10B /* GHOwnersActionsNewsFeedViewController.m in Sources */,
+				A7D9C3CE146692270009F10B /* GHOwnersOrganizationsNewsFeedViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3997,6 +4154,11 @@
 			isa = PBXTargetDependency;
 			name = Kal;
 			targetProxy = A7C5256D13E6AD890003EEE5 /* PBXContainerItemProxy */;
+		};
+		A7D9C3EA14669BC80009F10B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "iOS Library";
+			targetProxy = A7D9C3E914669BC80009F10B /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 

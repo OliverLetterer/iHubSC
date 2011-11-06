@@ -7,6 +7,7 @@
 //
 
 #import "GHLinearGradientBackgroundView.h"
+#import <QuartzCore/QuartzCore.h>
 
 
 @implementation GHLinearGradientBackgroundView
@@ -15,7 +16,8 @@
 
 #pragma mark - setters and getters
 
-- (void)setColors:(NSArray *)colors {
+- (void)setColors:(NSArray *)colors 
+{
     if (colors != _colors) {
         _colors = colors;
         
@@ -36,20 +38,13 @@
     }
 }
 
-- (void)setFrame:(CGRect)frame {
-    CGRect bounds = self.bounds;
-    [super setFrame:frame];
-    
-    if (!CGRectEqualToRect(bounds, self.bounds)) {
-        [self setNeedsDisplay];
-    }
-}
-
 #pragma mark - Initialization
 
-- (id)initWithFrame:(CGRect)frame {
+- (id)initWithFrame:(CGRect)frame 
+{
     if ((self = [super initWithFrame:frame])) {
         // Initialization code
+        self.layer.needsDisplayOnBoundsChange = YES;
         _colorSpace = CGColorSpaceCreateDeviceRGB();
         self.backgroundColor = [UIColor clearColor];
         self.colors = [NSArray arrayWithObjects:
@@ -62,7 +57,8 @@
 
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
+- (void)drawRect:(CGRect)rect 
+{
     // Drawing code
     CGContextRef ctx = UIGraphicsGetCurrentContext();
     
@@ -75,8 +71,8 @@
 
 #pragma mark - Memory management
 
-- (void)dealloc {
-    
+- (void)dealloc
+{
     if (_gradient) {
         CGGradientRelease(_gradient);
     }

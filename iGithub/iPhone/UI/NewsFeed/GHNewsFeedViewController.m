@@ -15,13 +15,38 @@
 #import "GHRepositoryViewController.h"
 #import "GHUserViewController.h"
 #import "GHGistViewController.h"
+#import "GHNewEventsTableViewCell.h"
+
+@interface GHNewsFeedViewController ()
+
+@property (nonatomic, strong) NSString *lastKnownEventDateString;
+@property (nonatomic, readonly) BOOL isShowingNewMessagesIndicator;
+
+- (void)_showNewMessagesIndicatorBeforeEvent:(GHAPIEventV3 *)event;
+- (void)_hideNewMessagesIndicator;
+
+@end
+
+
+
+
 
 @implementation GHNewsFeedViewController
-@synthesize events=_events;
+@synthesize events=_events, lastKnownEventDateString=_lastKnownEventDateString;
 
 #pragma mark - setters and getters
 
-- (void)setEvents:(NSArray *)events
+- (BOOL)isShowingNewMessagesIndicator
+{
+    return [_events indexOfObjectPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {
+        GHAPIEventV3 *event = obj;
+        
+        *stop = event.type == GHAPIEventTypeV3NewEvents;
+        return *stop;
+    }] != NSNotFound;
+}
+
+- (void)setEvents:(NSMutableArray *)events
 {
     if (events != _events) {
         _events = events;
@@ -31,6 +56,90 @@
             [self.tableView reloadData];
             [self scrollViewDidEndDecelerating:self.tableView];
         }
+    }
+}
+
+#pragma mark - Pull to release
+
+- (void)pullToReleaseTableViewReloadData
+{
+    [super pullToReleaseTableViewReloadData];
+    
+    if (!self.isDownloadingEssentialData) {
+        if (_events.count == 0) {
+            self.isDownloadingEssentialData = YES;
+        }
+        [self downloadNewEventsAfterLastKnownEventDateString:self.lastKnownEventDateString];
+    }
+}
+
+#pragma mark - Instance methods
+
+- (void)downloadNewEventsAfterLastKnownEventDateString:(NSString *)lastKnownEventDateString
+{
+    [self doesNotRecognizeSelector:_cmd];
+}
+
+- (void)appendNewEvents:(NSArray *)newEvents
+{
+    if (!_events) {
+        _events = [NSMutableArray array];
+    }
+    
+    NSInteger index = [_events indexOfObjectPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {
+        GHAPIEventV3 *event = obj;
+        
+        *stop = [event.createdAtString isEqualToString:self.lastKnownEventDateString];
+        return *stop;
+    }];
+    
+    GHAPIEventV3 *lastKnownEvent = nil;
+    if (index != NSNotFound) {
+        lastKnownEvent = [_events objectAtIndex:index];
+    }
+    
+    GHAPIEventV3 *topVisibleEvent = nil;
+    CGFloat topVisibleCellInset = 0.0f;
+    if (self.isViewLoaded) {
+        NSArray *visibleIndexPaths = [self.tableView indexPathsForVisibleRows];
+        if (visibleIndexPaths.count > 0) {
+            NSIndexPath *topVisibleIndexPath = [visibleIndexPaths objectAtIndex:0];
+            
+            CGRect topVisibleTableViewCellFrame = [self.tableView rectForRowAtIndexPath:topVisibleIndexPath];
+            topVisibleCellInset = CGRectGetMinY(self.tableView.bounds) - CGRectGetMinY(topVisibleTableViewCellFrame);
+            
+            topVisibleEvent = [_events objectAtIndex:topVisibleIndexPath.row];
+        }
+    }
+    
+    NSIndexSet *indexSet = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, newEvents.count)];
+    
+    [_events insertObjects:newEvents atIndexes:indexSet];
+    [self cacheHeightForTableView];
+    
+    if (self.isViewLoaded) {
+        [self.tableView reloadData];
+        
+        if (topVisibleEvent) {
+            NSInteger indexOfLastTopVisibleEvent = [_events indexOfObject:topVisibleEvent];
+            NSIndexPath *lastTopVisibleIndexPath = [NSIndexPath indexPathForRow:indexOfLastTopVisibleEvent inSection:0];
+            
+            CGRect topVisibleTableViewCellFrame = [self.tableView rectForRowAtIndexPath:lastTopVisibleIndexPath];
+            
+            CGFloat contentOffsetY = CGRectGetMinY(topVisibleTableViewCellFrame) + topVisibleCellInset;
+            [self.tableView setContentOffset:CGPointMake(0.0f, contentOffsetY) animated:NO];
+        }
+    }
+    
+    if (lastKnownEvent && [_events indexOfObject:lastKnownEvent] != 0) {
+        [self _showNewMessagesIndicatorBeforeEvent:lastKnownEvent];
+    } else {
+        [self _hideNewMessagesIndicator];
+    }
+    
+    if (_events.count > 0) {
+        GHAPIEventV3 *event = [_events objectAtIndex:0];
+        self.lastKnownEventDateString = event.createdAtString;
     }
 }
 
@@ -115,6 +224,19 @@
         [self updateImageView:cell.targetImageView 
                   atIndexPath:indexPath 
           withAvatarURLString:followEvent.user.avatarURL];
+        
+        return cell;
+    } else if (event.type == GHAPIEventTypeV3NewEvents) {
+        static NSString *CellIdentifier = @"GHNewEventsTableViewCell";
+        GHNewEventsTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        
+        if (!cell) {
+            cell = [[GHNewEventsTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        }
+        
+        GHAPINewEventsEventV3 *newMessagesEvent = (GHAPINewEventsEventV3 *)event;
+        
+        cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ new Messages", @""), newMessagesEvent.numberOfNewEvents];
         
         return cell;
     }
@@ -247,6 +369,8 @@
         NSString *description = [self descriptionForEvent:event];
         if (event.type == GHAPIEventTypeV3FollowEvent) {
             height = [GHFollowEventTableViewCell heightWithContent:description];
+        } else if (event.type == GHAPIEventTypeV3NewEvents) {
+            height = 30.0f;
         } else {
             height = [GHDescriptionTableViewCell heightWithContent:description];
         }
@@ -334,7 +458,7 @@
         if (addEvent.teamRepository.name) {
             viewController = [[GHRepositoryViewController alloc] initWithRepositoryString:addEvent.teamRepository.name];
         } else if (addEvent.teamUser.login) {
-            viewController = [[GHUserViewController alloc] initWithUsername:addEvent.teamUser.name];
+            viewController = [[GHUserViewController alloc] initWithUsername:addEvent.teamUser.login];
         }
     }
     
@@ -358,14 +482,73 @@
 {
     [super encodeWithCoder:encoder];
     [encoder encodeObject:_events forKey:@"events"];
+    [encoder encodeObject:_lastKnownEventDateString forKey:@"lastKnownEventDateString"];
 }
 
 - (id)initWithCoder:(NSCoder *)decoder 
 {
     if ((self = [super initWithCoder:decoder])) {
         _events = [decoder decodeObjectForKey:@"events"];
+        _lastKnownEventDateString = [decoder decodeObjectForKey:@"lastKnownEventDateString"];
     }
     return self;
+}
+
+#pragma mark - private implementation ()
+
+- (void)_showNewMessagesIndicatorBeforeEvent:(GHAPIEventV3 *)event
+{
+    if (event.type == GHAPIEventTypeV3NewEvents) {
+        return;
+    }
+    
+    if (self.isShowingNewMessagesIndicator) {
+        [self _hideNewMessagesIndicator];
+    }
+    
+    NSInteger row = [_events indexOfObject:event];
+    
+    if (row != NSNotFound) {
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row inSection:0];
+        NSArray *indexPaths = [NSArray arrayWithObject:indexPath];
+        
+        GHAPINewEventsEventV3 *newMessagesEvents = [[GHAPINewEventsEventV3 alloc] init];
+        newMessagesEvents.numberOfNewEvents = [NSNumber numberWithInt:row];
+        
+        [_events insertObject:newMessagesEvents atIndex:row];
+        [self cacheHeightForTableView];
+        
+        [self.tableView insertRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationTop];
+    } else {
+        NSAssert(NO, @"_events need to contain event %@", event);
+    }
+}
+
+- (void)_hideNewMessagesIndicator
+{
+    if (!self.isShowingNewMessagesIndicator) {
+        return;
+    } else {
+        NSInteger row = [_events indexOfObjectPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {
+            GHAPIEventV3 *event = obj;
+            
+            *stop = (event.type == GHAPIEventTypeV3NewEvents);
+            return *stop;
+        }];
+        
+        if (row != NSNotFound) {
+            // we found the newMessages Event. Now remove it from our database and UI
+            [_events removeObjectAtIndex:row];
+            [self cacheHeightForTableView];
+            
+            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row inSection:0];
+            NSArray *indexPaths = [NSArray arrayWithObject:indexPath];
+            
+            [self.tableView deleteRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationTop];
+        } else {
+            NSAssert(NO, @"_events needs to contain an event of type GHAPIEventTypeV3NewEvents");
+        }
+    }
 }
 
 @end

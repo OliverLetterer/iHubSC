@@ -46,7 +46,8 @@ typedef enum {
     GHAPIEventTypeV3PullRequestEvent,
     GHAPIEventTypeV3PushEvent,
     GHAPIEventTypeV3TeamAddEvent,
-    GHAPIEventTypeV3WatchEvent
+    GHAPIEventTypeV3WatchEvent,
+    GHAPIEventTypeV3NewEvents
 } GHAPIEventTypeV3;
 
 GHAPIEventTypeV3 GHAPIEventTypeV3FromNSString(NSString *eventType);
@@ -56,7 +57,7 @@ GHAPIEventTypeV3 GHAPIEventTypeV3FromNSString(NSString *eventType);
  @abstract  represents an Event
  */
 @interface GHAPIEventV3 : NSObject <NSCoding> {
-@private
+@protected
     GHAPIRepositoryV3 *_repository;
     GHAPIUserV3 *_actor;
     GHAPIOrganizationV3 *_organization;
@@ -98,9 +99,16 @@ GHAPIEventTypeV3 GHAPIEventTypeV3FromNSString(NSString *eventType);
 /**
  @abstract  If you are authenticated as the given user, you will see your private events. Otherwise, you’ll only see public events.
  */
++ (void)eventsByAuthenticatedUserSinceLastEventDateString:(NSString *)lastEventDateString
+        completionHandler:(void(^)(NSArray *events, NSError *error))completionHandler;
+
 + (void)eventsByUserNamed:(NSString *)username 
                      page:(NSUInteger)page 
         completionHandler:(GHAPIPaginationHandler)completionHandler;
+
++ (void)eventsByUserNamed:(NSString *)username 
+ sinceLastEventDateString:(NSString *)lastEventDateString
+        completionHandler:(void(^)(NSArray *events, NSError *error))completionHandler;
 
 + (void)eventsByAuthenticatedUserOnPage:(NSUInteger)page 
                       completionHandler:(GHAPIPaginationHandler)completionHandler;
@@ -112,8 +120,18 @@ GHAPIEventTypeV3 GHAPIEventTypeV3FromNSString(NSString *eventType);
                               page:(NSUInteger)page 
                  completionHandler:(GHAPIPaginationHandler)completionHandler;
 
-+ (void)_dumpEventsForAuthenticatedUserSinceLastEventDateString:(NSString *)lastEventDateString 
++ (void)eventsForOrganizationNamed:(NSString *)organizationName 
+          sinceLastEventDateString:(NSString *)lastEventDateString
+                 completionHandler:(void(^)(NSArray *events, NSError *error))completionHandler;
+
+
+
+/**
+ @abstract  dumps events since lastEventDateString
+ */
++ (void)_dumpEventsSinceLastEventDateString:(NSString *)lastEventDateString 
                                                  nextPageToDump:(NSUInteger)nextPage 
+                                                downloadHandler:(void(^)(NSUInteger nextPage, GHAPIPaginationHandler pageHandler))downloadHandler
                                                         inArray:(NSMutableArray *)eventsArray
                                               completionHandler:(void(^)(NSArray *events, NSError *error))completionHandler;
 

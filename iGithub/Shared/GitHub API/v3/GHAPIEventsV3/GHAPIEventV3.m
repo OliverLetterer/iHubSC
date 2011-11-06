@@ -216,8 +216,9 @@ GHAPIEventTypeV3 GHAPIEventTypeV3FromNSString(NSString *eventType)
 
 #pragma mark - Class methods
 
-+ (void)_dumpEventsForAuthenticatedUserSinceLastEventDateString:(NSString *)lastEventDateString 
++ (void)_dumpEventsSinceLastEventDateString:(NSString *)lastEventDateString 
                                                  nextPageToDump:(NSUInteger)nextPage 
+                                                downloadHandler:(void(^)(NSUInteger nextPage, GHAPIPaginationHandler pageHandler))downloadHandler
                                                         inArray:(NSMutableArray *)eventsArray
                                               completionHandler:(void(^)(NSArray *events, NSError *error))completionHandler
 {
@@ -229,43 +230,45 @@ GHAPIEventTypeV3 GHAPIEventTypeV3FromNSString(NSString *eventType)
     NSDate *lastEventDate = lastEventDateString.dateFromGithubAPIDateString;
     NSTimeInterval lastEventTimeIterval = lastEventDate.timeIntervalSince1970;
     
-    [self eventsForAuthenticatedUserOnPage:nextPage 
-                         completionHandler:^(NSMutableArray *array, NSUInteger nextPage, NSError *error) {
-                             if (error) {
-                                 completionHandler(nil, error);
-                             } else {
-                                 // enumerate and check if any event matches lastEventDateString
-                                 for (GHAPIEventV3 *event in array) {
-                                     NSDate *eventDate = event.createdAtString.dateFromGithubAPIDateString;
-                                     NSTimeInterval eventTimeInterval = eventDate.timeIntervalSince1970;
-                                     
-                                     if (eventTimeInterval == lastEventTimeIterval) {
-                                         // this event matches the requested lastEventDateString
-                                         completionHandler(eventsArray, nil);
-                                         return;
-                                     } else if (eventTimeInterval < lastEventTimeIterval) {
-                                         // this event is older that the last known Event => abort
-                                         completionHandler(eventsArray, nil);
-                                         return;
-                                     } else {
-                                         [eventsArray addObject:event];
-                                     }
-                                 }
-                                 
-                                 // did not found last event in this array, dump next
-                                 [self _dumpEventsForAuthenticatedUserSinceLastEventDateString:lastEventDateString
-                                                                                nextPageToDump:nextPage
-                                                                                       inArray:eventsArray
-                                                                             completionHandler:completionHandler];
-                             }
-                         }];
+    GHAPIPaginationHandler pageHandler = ^(NSMutableArray *array, NSUInteger nextPage, NSError *error) {
+        if (error) {
+            completionHandler(nil, error);
+        } else {
+            // enumerate and check if any event matches lastEventDateString
+            for (GHAPIEventV3 *event in array) {
+                NSDate *eventDate = event.createdAtString.dateFromGithubAPIDateString;
+                NSTimeInterval eventTimeInterval = eventDate.timeIntervalSince1970;
+                
+                if (eventTimeInterval == lastEventTimeIterval) {
+                    // this event matches the requested lastEventDateString
+                    completionHandler(eventsArray, nil);
+                    return;
+                } else if (eventTimeInterval < lastEventTimeIterval) {
+                    // this event is older that the last known Event => abort
+                    completionHandler(eventsArray, nil);
+                    return;
+                } else {
+                    [eventsArray addObject:event];
+                }
+            }
+            
+            // did not found last event in this array, dump next
+            [self _dumpEventsSinceLastEventDateString:lastEventDateString
+                                                           nextPageToDump:nextPage 
+                                                          downloadHandler:downloadHandler
+                                                                  inArray:eventsArray
+                                                        completionHandler:completionHandler];
+        }
+    };
+    
+    downloadHandler(nextPage, pageHandler);
 }
 
 + (void)eventsForAuthenticatedUserSinceLastEventDateString:(NSString *)lastEventDateString 
                                          completionHandler:(void(^)(NSArray *events, NSError *error))completionHandler
 {
     if (!lastEventDateString) {
-        [self eventsForAuthenticatedUserOnPage:1 
+        [self eventsForAuthenticatedUserOnPage:1
                              completionHandler:^(NSMutableArray *array, NSUInteger nextPage, NSError *error) {
                                  if (error) {
                                      completionHandler(nil, error);
@@ -274,12 +277,47 @@ GHAPIEventTypeV3 GHAPIEventTypeV3FromNSString(NSString *eventType)
                                  }
                              }];
     } else {
-        [self _dumpEventsForAuthenticatedUserSinceLastEventDateString:lastEventDateString
-                                                       nextPageToDump:1
+        
+        void(^downloadHandler)(NSUInteger nextPage, GHAPIPaginationHandler pageHandler) = ^(NSUInteger nextPage, GHAPIPaginationHandler pageHandler) {
+            [self eventsForAuthenticatedUserOnPage:nextPage 
+                                 completionHandler:pageHandler];
+        };
+        
+        [self _dumpEventsSinceLastEventDateString:lastEventDateString
+                                                       nextPageToDump:1 
+                                                      downloadHandler:downloadHandler
                                                               inArray:[NSMutableArray array] 
                                                     completionHandler:^(NSArray *events, NSError *error) {
                                                         completionHandler(events, error);
                                                     }];
+    }
+}
+
++ (void)eventsByAuthenticatedUserSinceLastEventDateString:(NSString *)lastEventDateString
+                                        completionHandler:(void(^)(NSArray *events, NSError *error))completionHandler;
+{
+    if (!lastEventDateString) {
+        [self eventsByAuthenticatedUserOnPage:1
+                            completionHandler:^(NSMutableArray *array, NSUInteger nextPage, NSError *error) {
+                                if (error) {
+                                    completionHandler(nil, error);
+                                } else {
+                                    completionHandler(array, nil);
+                                }
+                            }];
+    } else {
+        void(^downloadHandler)(NSUInteger nextPage, GHAPIPaginationHandler pageHandler) = ^(NSUInteger nextPage, GHAPIPaginationHandler pageHandler) {
+            [self eventsByAuthenticatedUserOnPage:nextPage 
+                                completionHandler:pageHandler];
+        };
+        
+        [self _dumpEventsSinceLastEventDateString:lastEventDateString
+                                   nextPageToDump:1 
+                                  downloadHandler:downloadHandler
+                                          inArray:[NSMutableArray array] 
+                                completionHandler:^(NSArray *events, NSError *error) {
+                                    completionHandler(events, error);
+                                }];
     }
 }
 
@@ -362,6 +400,64 @@ GHAPIEventTypeV3 GHAPIEventTypeV3FromNSString(NSString *eventType)
     [self eventsByUserNamed:username
                        page:page
           completionHandler:completionHandler];
+}
+
++ (void)eventsByUserNamed:(NSString *)username 
+ sinceLastEventDateString:(NSString *)lastEventDateString
+        completionHandler:(void(^)(NSArray *events, NSError *error))completionHandler
+{
+    if (!lastEventDateString) {
+        [self eventsByUserNamed:username 
+                           page:1 
+              completionHandler:^(NSMutableArray *array, NSUInteger nextPage, NSError *error) {
+                  if (error) {
+                      completionHandler(nil, error);
+                  } else {
+                      completionHandler(array, nil);
+                  }
+              }];
+    } else {
+        void(^downloadHandler)(NSUInteger nextPage, GHAPIPaginationHandler pageHandler) = ^(NSUInteger nextPage, GHAPIPaginationHandler pageHandler) {
+            [self eventsByUserNamed:username page:nextPage completionHandler:pageHandler];
+        };
+        
+        [self _dumpEventsSinceLastEventDateString:lastEventDateString
+                                   nextPageToDump:1 
+                                  downloadHandler:downloadHandler
+                                          inArray:[NSMutableArray array] 
+                                completionHandler:^(NSArray *events, NSError *error) {
+                                    completionHandler(events, error);
+                                }];
+    }
+}
+
++ (void)eventsForOrganizationNamed:(NSString *)organizationName 
+          sinceLastEventDateString:(NSString *)lastEventDateString
+                 completionHandler:(void(^)(NSArray *events, NSError *error))completionHandler
+{
+    if (!lastEventDateString) {
+        [self eventsForOrganizationNamed:organizationName 
+                                    page:1 
+                       completionHandler:^(NSMutableArray *array, NSUInteger nextPage, NSError *error) {
+                           if (error) {
+                               completionHandler(nil, error);
+                           } else {
+                               completionHandler(array, nil);
+                           }
+                       }];
+    } else {
+        void(^downloadHandler)(NSUInteger nextPage, GHAPIPaginationHandler pageHandler) = ^(NSUInteger nextPage, GHAPIPaginationHandler pageHandler) {
+            [self eventsForOrganizationNamed:organizationName page:nextPage completionHandler:pageHandler];
+        };
+        
+        [self _dumpEventsSinceLastEventDateString:lastEventDateString
+                                   nextPageToDump:1 
+                                  downloadHandler:downloadHandler
+                                          inArray:[NSMutableArray array] 
+                                completionHandler:^(NSArray *events, NSError *error) {
+                                    completionHandler(events, error);
+                                }];
+    }
 }
 
 + (void)eventsForOrganizationNamed:(NSString *)organizationName 

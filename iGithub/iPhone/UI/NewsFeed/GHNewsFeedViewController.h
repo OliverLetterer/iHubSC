@@ -13,10 +13,12 @@
 
 @interface GHNewsFeedViewController : GHTableViewController {
 @protected
-    NSArray *_events;
+    NSMutableArray *_events;
+    
+    NSString *_lastKnownEventDateString;
 }
 
-@property (nonatomic, strong) NSArray *events;
+@property (nonatomic, strong) NSMutableArray *events;
 
 - (UITableViewCell *)tableView:(UITableView *)tableView 
                   cellForEvent:(GHAPIEventV3 *)event 
@@ -29,5 +31,8 @@
 - (void)cacheHeightForTableView;
 
 - (NSString *)descriptionForEvent:(GHAPIEventV3 *)event;
+
+- (void)downloadNewEventsAfterLastKnownEventDateString:(NSString *)lastKnownEventDateString; // overwrite
+- (void)appendNewEvents:(NSArray *)newEvents;   // call when done
 
 @end

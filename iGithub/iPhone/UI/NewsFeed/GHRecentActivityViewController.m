@@ -10,13 +10,13 @@
 #import "GithubAPI.h"
 
 @implementation GHRecentActivityViewController
-
 @synthesize username=_username;
 
 #pragma mark - setters and getters
 
 - (void)setUsername:(NSString *)username {
     _username = [username copy];
+    
     [self pullToReleaseTableViewReloadData];
 }
 
@@ -37,30 +37,46 @@
     return self;
 }
 
-#pragma mark - Memory management
+//#pragma mark - Memory management
+//
+//
+//#pragma mark - instance methods
+//
+//- (void)pullToReleaseTableViewReloadData {
+//    [super pullToReleaseTableViewReloadData];
+//    if (!self.events) {
+//        self.isDownloadingEssentialData = YES;
+//    }
+//    
+//    [GHAPIEventV3 eventsForUserNamed:_username 
+//                                page:1 
+//                   completionHandler:^(NSMutableArray *array, NSUInteger nextPage, NSError *error) {
+//                       self.isDownloadingEssentialData = NO;
+//                       
+//                       if (error) {
+//                           [self handleError:error];
+//                       } else {
+//                           self.events = array;
+//                       }
+//                       
+//                       [self pullToReleaseTableViewDidReloadData];
+//                   }];
+//}
 
-
-#pragma mark - instance methods
-
-- (void)pullToReleaseTableViewReloadData {
-    [super pullToReleaseTableViewReloadData];
-    if (!self.events) {
-        self.isDownloadingEssentialData = YES;
-    }
-    
-    [GHAPIEventV3 eventsForUserNamed:_username 
-                                page:1 
-                   completionHandler:^(NSMutableArray *array, NSUInteger nextPage, NSError *error) {
-                       self.isDownloadingEssentialData = NO;
-                       
-                       if (error) {
-                           [self handleError:error];
-                       } else {
-                           self.events = array;
-                       }
-                       
-                       [self pullToReleaseTableViewDidReloadData];
-                   }];
+- (void)downloadNewEventsAfterLastKnownEventDateString:(NSString *)lastKnownEventDateString
+{
+    [GHAPIEventV3 eventsByUserNamed:_username 
+           sinceLastEventDateString:lastKnownEventDateString 
+                  completionHandler:^(NSArray *events, NSError *error) {
+                      if (error) {
+                          [self handleError:error];
+                      } else {
+                          [self appendNewEvents:events];
+                      }
+                      
+                      self.isDownloadingEssentialData = NO;
+                      [self pullToReleaseTableViewDidReloadData];
+                  }];
 }
 
 #pragma mark - Keyed Archiving

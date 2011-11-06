@@ -46,3 +46,6 @@
 [submodule "Submodules/UIImage-UITabBarStyle"]
 	path = Submodules/UIImage-UITabBarStyle
 	url = git@github.com:OliverLetterer/UIImage-UITabBarStyle.git
+[submodule "Submodules/BlocksKit"]
+	path = Submodules/BlocksKit
+	url = https://github.com/zwaldowski/BlocksKit.git

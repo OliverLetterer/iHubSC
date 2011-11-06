@@ -56,6 +56,7 @@
 #import "GHAPITreeV3.h"
 #import "GHAPITreeFileV3.h"
 #import "GHAPIDownloadV3.h"
+#import "GHAPINewEventsEventV3.h"
 
 #import "GHAPIEventV3.h"
 #import "GHAPIWatchEventV3.h"
