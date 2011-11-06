@@ -317,8 +317,6 @@
 		A784204E13E1987C00131648 /* GHMilestoneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A784200013E1987C00131648 /* GHMilestoneViewController.m */; };
 		A784204F13E1987C00131648 /* GHAPIMilestoneV3TableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A784200313E1987C00131648 /* GHAPIMilestoneV3TableViewCell.m */; };
 		A784205013E1987C00131648 /* GHNewsFeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A784200613E1987C00131648 /* GHNewsFeedViewController.m */; };
-		A784205113E1987C00131648 /* GHOwnerNewsFeedViewController+Private.m in Sources */ = {isa = PBXBuildFile; fileRef = A784200813E1987C00131648 /* GHOwnerNewsFeedViewController+Private.m */; };
-		A784205213E1987C00131648 /* GHOwnerNewsFeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A784200A13E1987C00131648 /* GHOwnerNewsFeedViewController.m */; };
 		A784205313E1987D00131648 /* GHRecentActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A784200C13E1987C00131648 /* GHRecentActivityViewController.m */; };
 		A784205413E1987D00131648 /* GHFollowEventTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A784200F13E1987C00131648 /* GHFollowEventTableViewCell.m */; };
 		A784205513E1987D00131648 /* GHOrganizationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A784201213E1987C00131648 /* GHOrganizationViewController.m */; };
@@ -1055,10 +1053,6 @@
 		A784200313E1987C00131648 /* GHAPIMilestoneV3TableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHAPIMilestoneV3TableViewCell.m; sourceTree = "<group>"; };
 		A784200513E1987C00131648 /* GHNewsFeedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHNewsFeedViewController.h; sourceTree = "<group>"; };
 		A784200613E1987C00131648 /* GHNewsFeedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHNewsFeedViewController.m; sourceTree = "<group>"; };
-		A784200713E1987C00131648 /* GHOwnerNewsFeedViewController+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GHOwnerNewsFeedViewController+Private.h"; sourceTree = "<group>"; };
-		A784200813E1987C00131648 /* GHOwnerNewsFeedViewController+Private.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "GHOwnerNewsFeedViewController+Private.m"; sourceTree = "<group>"; };
-		A784200913E1987C00131648 /* GHOwnerNewsFeedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHOwnerNewsFeedViewController.h; sourceTree = "<group>"; };
-		A784200A13E1987C00131648 /* GHOwnerNewsFeedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHOwnerNewsFeedViewController.m; sourceTree = "<group>"; };
 		A784200B13E1987C00131648 /* GHRecentActivityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHRecentActivityViewController.h; sourceTree = "<group>"; };
 		A784200C13E1987C00131648 /* GHRecentActivityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHRecentActivityViewController.m; sourceTree = "<group>"; };
 		A784200E13E1987C00131648 /* GHFollowEventTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHFollowEventTableViewCell.h; sourceTree = "<group>"; };
@@ -2966,10 +2960,6 @@
 			children = (
 				A784200513E1987C00131648 /* GHNewsFeedViewController.h */,
 				A784200613E1987C00131648 /* GHNewsFeedViewController.m */,
-				A784200713E1987C00131648 /* GHOwnerNewsFeedViewController+Private.h */,
-				A784200813E1987C00131648 /* GHOwnerNewsFeedViewController+Private.m */,
-				A784200913E1987C00131648 /* GHOwnerNewsFeedViewController.h */,
-				A784200A13E1987C00131648 /* GHOwnerNewsFeedViewController.m */,
 				A784200B13E1987C00131648 /* GHRecentActivityViewController.h */,
 				A784200C13E1987C00131648 /* GHRecentActivityViewController.m */,
 				A784200D13E1987C00131648 /* UITableViewCell's */,
@@ -3974,8 +3964,6 @@
 				A784204E13E1987C00131648 /* GHMilestoneViewController.m in Sources */,
 				A784204F13E1987C00131648 /* GHAPIMilestoneV3TableViewCell.m in Sources */,
 				A784205013E1987C00131648 /* GHNewsFeedViewController.m in Sources */,
-				A784205113E1987C00131648 /* GHOwnerNewsFeedViewController+Private.m in Sources */,
-				A784205213E1987C00131648 /* GHOwnerNewsFeedViewController.m in Sources */,
 				A784205313E1987D00131648 /* GHRecentActivityViewController.m in Sources */,
 				A784205413E1987D00131648 /* GHFollowEventTableViewCell.m in Sources */,
 				A784205513E1987D00131648 /* GHOrganizationViewController.m in Sources */,
