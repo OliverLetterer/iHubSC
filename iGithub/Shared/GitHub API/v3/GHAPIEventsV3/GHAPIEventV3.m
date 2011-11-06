@@ -268,7 +268,7 @@ GHAPIEventTypeV3 GHAPIEventTypeV3FromNSString(NSString *eventType)
                                          completionHandler:(void(^)(NSArray *events, NSError *error))completionHandler
 {
     if (!lastEventDateString) {
-        [self eventsForAuthenticatedUserOnPage:7
+        [self eventsForAuthenticatedUserOnPage:1
                              completionHandler:^(NSMutableArray *array, NSUInteger nextPage, NSError *error) {
                                  if (error) {
                                      completionHandler(nil, error);
