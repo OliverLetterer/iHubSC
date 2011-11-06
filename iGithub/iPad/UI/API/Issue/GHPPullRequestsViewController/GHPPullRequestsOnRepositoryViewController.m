@@ -16,14 +16,28 @@
 - (void)setRepository:(NSString *)repository {
     [super setRepository:repository];
     
-    [GHPullRequest pullRequestsOnRepository:self.repository 
-                          completionHandler:^(NSArray *requests, NSError *error) {
-                              if (error) {
-                                  [self handleError:error];
-                              } else {
-                                  [self setDataArray:[requests mutableCopy] nextPage:GHAPIPaginationNextPageNotFound];
-                              }
-                          }];
+    [GHAPIPullRequestV3 pullRequestsOnRepository:self.repository 
+                                            page:1 
+                               completionHandler:^(NSMutableArray *array, NSUInteger nextPage, NSError *error) {
+                                   if (error) {
+                                       [self handleError:error];
+                                   } else {
+                                       [self setDataArray:array nextPage:nextPage];
+                                   }
+                               }];
+}
+
+- (void)downloadDataForPage:(NSUInteger)page inSection:(NSUInteger)section
+{
+    [GHAPIPullRequestV3 pullRequestsOnRepository:self.repository 
+                                            page:page
+                               completionHandler:^(NSMutableArray *array, NSUInteger nextPage, NSError *error) {
+                                   if (error) {
+                                       [self handleError:error];
+                                   } else {
+                                       [self appendDataFromArray:array nextPage:nextPage];
+                                   }
+                               }];
 }
 
 @end

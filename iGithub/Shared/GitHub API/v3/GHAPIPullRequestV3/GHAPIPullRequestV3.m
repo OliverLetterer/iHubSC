@@ -11,7 +11,7 @@
 
 
 @implementation GHAPIPullRequestV3
-@synthesize ID = _ID, state = _state, title = _title, body = _body, createdAt = _createdAt, updatedAt = _updatedAt, closedAt = _closedAt, mergedAt = _mergedAt, merged = _merged, isMergable = _isMergable, mergedBy = _mergedBy, comments = _comments, commits = _commits, additions = _additions, deletions = _deletions, changedFiles = _changedFiles;
+@synthesize ID = _ID, state = _state, title = _title, body = _body, createdAt = _createdAt, updatedAt = _updatedAt, closedAt = _closedAt, mergedAt = _mergedAt, merged = _merged, isMergable = _isMergable, mergedBy = _mergedBy, comments = _comments, commits = _commits, additions = _additions, deletions = _deletions, changedFiles = _changedFiles, user=_user;
 
 #pragma mark - Initialization
 
@@ -35,6 +35,9 @@
         _additions = [rawDictionary objectForKeyOrNilOnNullObject:@"additions"];
         _deletions = [rawDictionary objectForKeyOrNilOnNullObject:@"deletions"];
         _changedFiles = [rawDictionary objectForKeyOrNilOnNullObject:@"changed_files"];
+        
+        id rawUserDictionary = [rawDictionary objectForKeyOrNilOnNullObject:@"user"];
+        _user = [[GHAPIUserV3 alloc] initWithRawDictionary:rawUserDictionary];
     }
     return self;
 }
@@ -59,6 +62,7 @@
     [encoder encodeObject:_additions forKey:@"additions"];
     [encoder encodeObject:_deletions forKey:@"deletions"];
     [encoder encodeObject:_changedFiles forKey:@"changedFiles"];
+    [encoder encodeObject:_user forKey:@"user"];
 }
 
 - (id)initWithCoder:(NSCoder *)decoder 
@@ -80,11 +84,38 @@
         _additions = [decoder decodeObjectForKey:@"additions"];
         _deletions = [decoder decodeObjectForKey:@"deletions"];
         _changedFiles = [decoder decodeObjectForKey:@"changedFiles"];
+        _user = [decoder decodeObjectForKey:@"user"];
     }
     return self;
 }
 
 #pragma mark - Class methods
+
++ (void)pullRequestsOnRepository:(NSString *)repository 
+                            page:(NSUInteger)page 
+               completionHandler:(GHAPIPaginationHandler)handler
+{
+    // v3: GET /repos/:user/:repo/pulls
+    
+    NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.github.com/repos/%@/pulls",
+                                       [repository stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] ] ];
+    
+    [[GHAPIBackgroundQueueV3 sharedInstance] sendRequestToURL:URL page:page setupHandler:nil 
+                                  completionPaginationHandler:^(id object, NSError *error, ASIFormDataRequest *request, NSUInteger nextPage) {
+                                      if (error) {
+                                          handler(nil, GHAPIPaginationNextPageNotFound, error);
+                                      } else {
+                                          NSArray *rawArray = GHAPIObjectExpectedClass(&object, NSArray.class);
+                                          
+                                          NSMutableArray *finalArray = [NSMutableArray arrayWithCapacity:rawArray.count];
+                                          for (NSDictionary *rawDictionary in rawArray) {
+                                              [finalArray addObject:[[GHAPIPullRequestV3 alloc] initWithRawDictionary:rawDictionary] ];
+                                          }
+                                          
+                                          handler(finalArray, nextPage, nil);
+                                      }
+                                  }];
+}
 
 + (void)mergPullRequestOnRepository:(NSString *)repository 
                          withNumber:(NSNumber *)pullRequestNumber 

@@ -30,6 +30,7 @@
     NSNumber *_additions;
     NSNumber *_deletions;
     NSNumber *_changedFiles;
+    GHAPIUserV3 *_user;
 }
 
 @property (nonatomic, strong) NSNumber *ID;
@@ -48,8 +49,13 @@
 @property (nonatomic, strong) NSNumber *additions;
 @property (nonatomic, strong) NSNumber *deletions;
 @property (nonatomic, strong) NSNumber *changedFiles;
+@property (nonatomic, strong) GHAPIUserV3 *user;
 
 - (id)initWithRawDictionary:(NSDictionary *)rawDictionary;
+
++ (void)pullRequestsOnRepository:(NSString *)repository 
+                            page:(NSUInteger)page 
+               completionHandler:(GHAPIPaginationHandler)handler;
 
 + (void)mergPullRequestOnRepository:(NSString *)repository 
                          withNumber:(NSNumber *)pullRequestNumber 

@@ -95,11 +95,11 @@
     }
     [self setupDefaultTableViewCell:cell forRowAtIndexPath:indexPath];
     
-    GHPullRequestDiscussion *request = [self.dataArray objectAtIndex:indexPath.row];
+    GHAPIPullRequestV3 *request = [self.dataArray objectAtIndex:indexPath.row];
     
     [self updateImageView:cell.imageView atIndexPath:indexPath withGravatarID:request.user.gravatarID];
     cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ (%@ ago)", @""), request.user.login, request.createdAt.prettyTimeIntervalSinceNow];
-    cell.detailTextLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Pull Request %@ - %@", @""), request.number, request.title];
+    cell.detailTextLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Pull Request %@ - %@", @""), request.ID, request.title];
     
     // Configure the cell...
     
@@ -109,9 +109,9 @@
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    GHPullRequestDiscussion *request = [self.dataArray objectAtIndex:indexPath.row];
+    GHAPIPullRequestV3 *request = [self.dataArray objectAtIndex:indexPath.row];
     
-    GHPIssueViewController *viewController = [[GHPIssueViewController alloc] initWithIssueNumber:request.number onRepository:self.repository];
+    GHPIssueViewController *viewController = [[GHPIssueViewController alloc] initWithIssueNumber:request.ID onRepository:self.repository];
     
     [self.advancedNavigationController pushViewController:viewController afterViewController:self animated:YES];
 }
@@ -120,8 +120,9 @@
 
 - (void)cacheDataArrayHeights {
     [self.dataArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        GHPullRequestDiscussion *request = obj;
-        NSString *content = [NSString stringWithFormat:NSLocalizedString(@"Pull Request %@ - %@", @""), request.number, request.title];
+        GHAPIPullRequestV3 *request = obj;
+        
+        NSString *content = [NSString stringWithFormat:NSLocalizedString(@"Pull Request %@ - %@", @""), request.ID, request.title];
         [self cacheHeight:[GHPImageDetailTableViewCell heightWithContent:content] forRowAtIndexPath:[NSIndexPath indexPathForRow:idx inSection:0] ];
     }];
 }

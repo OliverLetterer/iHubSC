@@ -230,26 +230,29 @@
                                   }
                               }];
     } else if (section == kUITableViewSectionPullRequests) {
-        [GHPullRequest pullRequestsOnRepository:self.repositoryString 
-                              completionHandler:^(NSArray *requests, NSError *error) {
-                                  if (error) {
-                                      [tableView cancelDownloadInSection:section];
-                                      [self handleError:error];
-                                  } else {
-                                      self.pullRequests = requests;
-                                      [self cacheHeightForPullRequests];
-                                      [self.tableView expandSection:section animated:YES];
-                                      
-                                      if ([self.pullRequests count] == 0) {
-                                          UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", @"") 
-                                                                                           message:NSLocalizedString(@"This repository does not have any Pull Requests.", @"") 
-                                                                                          delegate:nil 
-                                                                                 cancelButtonTitle:NSLocalizedString(@"OK", @"") 
-                                                                                 otherButtonTitles:nil];
-                                          [alert show];
-                                      }
-                                  }
-                              }];
+        [GHAPIPullRequestV3 pullRequestsOnRepository:_repositoryString
+                                                page:1
+                                   completionHandler:^(NSMutableArray *array, NSUInteger nextPage, NSError *error) {
+                                       if (error) {
+                                           [tableView cancelDownloadInSection:section];
+                                           [self handleError:error];
+                                       } else {
+                                           self.pullRequests = array;
+                                           [self setNextPage:nextPage forSection:section];
+                                           
+                                           [self cacheHeightForPullRequests];
+                                           [self.tableView expandSection:section animated:YES];
+                                           
+                                           if ([self.pullRequests count] == 0) {
+                                               UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", @"") 
+                                                                                               message:NSLocalizedString(@"This repository does not have any Pull Requests.", @"") 
+                                                                                              delegate:nil 
+                                                                                     cancelButtonTitle:NSLocalizedString(@"OK", @"") 
+                                                                                     otherButtonTitles:nil];
+                                               [alert show];
+                                           }
+                                       }
+                                   }];
     } else if (section == kUITableViewSectionRecentCommits || section == kUITableViewSectionBrowseBranches) {
         [GHAPIRepositoryV3 branchesOnRepository:self.repositoryString page:1 
                               completionHandler:^(NSMutableArray *array, NSUInteger nextPage, NSError *error) {
@@ -367,6 +370,21 @@
                                                           withRowAnimation:UITableViewRowAnimationAutomatic];
                                         }
                                     }];
+    } else if (section == kUITableViewSectionPullRequests) {
+        [GHAPIPullRequestV3 pullRequestsOnRepository:_repositoryString
+                                                page:page
+                                   completionHandler:^(NSMutableArray *array, NSUInteger nextPage, NSError *error) {
+                                       if (error) {
+                                           [self handleError:error];
+                                       } else {
+                                           [self.pullRequests addObjectsFromArray:array];
+                                           [self setNextPage:nextPage forSection:section];
+                                           
+                                           [self cacheHeightForPullRequests];
+                                           [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:section] 
+                                                         withRowAnimation:UITableViewRowAnimationAutomatic];
+                                       }
+                                   }];
     }
 }
 
@@ -646,14 +664,16 @@
         
         cell.selectionStyle = UITableViewCellSelectionStyleBlue;
         
-        GHPullRequestDiscussion *discussion = [self.pullRequests objectAtIndex:indexPath.row-1];
+        GHAPIPullRequestV3 *pullRequest = [self.pullRequests objectAtIndex:indexPath.row-1];
         
-        cell.textLabel.text = discussion.user.login;
-        cell.descriptionLabel.text = discussion.title;
+        cell.textLabel.text = pullRequest.user.login;
+        cell.descriptionLabel.text = pullRequest.title;
         
-        cell.detailTextLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ ago", @""), discussion.createdAt.prettyTimeIntervalSinceNow];
+        cell.detailTextLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ ago", @""), pullRequest.createdAt.prettyTimeIntervalSinceNow];
         
-        [self updateImageView:cell.imageView atIndexPath:indexPath withGravatarID:discussion.user.gravatarID];
+        [self updateImageView:cell.imageView
+                  atIndexPath:indexPath
+          withAvatarURLString:pullRequest.user.avatarURL];
         
         return cell;
     } else if (indexPath.section == kUITableViewSectionRecentCommits || indexPath.section == kUITableViewSectionBrowseBranches) {
@@ -791,11 +811,10 @@
         GHUserViewController *userViewController = [[GHUserViewController alloc] initWithUsername:user.login];
         [self.navigationController pushViewController:userViewController animated:YES];
     } else if (indexPath.section == kUITableViewSectionPullRequests) {
-        GHPullRequestDiscussion *discussion = [self.pullRequests objectAtIndex:indexPath.row-1];
+        GHAPIPullRequestV3 *pullRequest = [self.pullRequests objectAtIndex:indexPath.row-1];
         
-        NSString *repo = [NSString stringWithFormat:@"%@/%@", discussion.base.repository.owner, discussion.base.repository.name];
-        
-        GHIssueViewController *viewIssueViewController = [[GHIssueViewController alloc] initWithRepository:repo issueNumber:discussion.number];
+        GHIssueViewController *viewIssueViewController = [[GHIssueViewController alloc] initWithRepository:_repositoryString
+                                                                                               issueNumber:pullRequest.ID];
         [self.navigationController pushViewController:viewIssueViewController animated:YES];
     } else if (indexPath.section == kUITableViewSectionRecentCommits) {
         GHAPIRepositoryBranchV3 *branch = [self.branches objectAtIndex:indexPath.row - 1];
@@ -932,8 +951,9 @@
 
 - (void)cacheHeightForPullRequests {
     NSInteger i = 1;
-    for (GHPullRequestDiscussion *discussion in self.pullRequests) {
-        [self cacheHeight:[GHDescriptionTableViewCell heightWithContent:discussion.title] forRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:kUITableViewSectionPullRequests] ];
+    for (GHAPIPullRequestV3 *pullRequest in self.pullRequests) {
+        [self cacheHeight:[GHDescriptionTableViewCell heightWithContent:pullRequest.title] 
+        forRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:kUITableViewSectionPullRequests] ];
         i++;
     }
 }

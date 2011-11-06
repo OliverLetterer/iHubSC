@@ -33,7 +33,7 @@
     
     id<GHSingleRepositoryViewControllerDelegate> __weak _delegate;
     
-    NSArray *_pullRequests;
+    NSMutableArray *_pullRequests;
     
     NSMutableArray *_branches;
     NSMutableArray *_labels;
@@ -62,7 +62,7 @@
 @property (nonatomic, copy) NSString *deleteToken;
 @property (nonatomic, weak) id<GHSingleRepositoryViewControllerDelegate> delegate;
 
-@property (nonatomic, retain) NSArray *pullRequests;
+@property (nonatomic, retain) NSMutableArray *pullRequests;
 - (void)cacheHeightForPullRequests;
 
 @property (nonatomic, retain) NSMutableArray *branches;
