@@ -222,7 +222,7 @@ GHAPIEventTypeV3 GHAPIEventTypeV3FromNSString(NSString *eventType)
                                                         inArray:(NSMutableArray *)eventsArray
                                               completionHandler:(void(^)(NSArray *events, NSError *error))completionHandler
 {
-    if (nextPage == GHAPIPaginationNextPageNotFound) {
+    if (nextPage == GHAPIPaginationNextPageNotFound || nextPage == 7) {
         completionHandler(eventsArray, nil);
         return;
     }
@@ -267,7 +267,7 @@ GHAPIEventTypeV3 GHAPIEventTypeV3FromNSString(NSString *eventType)
 + (void)eventsForAuthenticatedUserSinceLastEventDateString:(NSString *)lastEventDateString 
                                          completionHandler:(void(^)(NSArray *events, NSError *error))completionHandler
 {
-    if (!lastEventDateString) {
+    if (!lastEventDateString || !lastEventDateString.dateFromGithubAPIDateString) {
         [self eventsForAuthenticatedUserOnPage:1
                              completionHandler:^(NSMutableArray *array, NSUInteger nextPage, NSError *error) {
                                  if (error) {
@@ -296,7 +296,7 @@ GHAPIEventTypeV3 GHAPIEventTypeV3FromNSString(NSString *eventType)
 + (void)eventsByAuthenticatedUserSinceLastEventDateString:(NSString *)lastEventDateString
                                         completionHandler:(void(^)(NSArray *events, NSError *error))completionHandler;
 {
-    if (!lastEventDateString) {
+    if (!lastEventDateString || !lastEventDateString.dateFromGithubAPIDateString) {
         [self eventsByAuthenticatedUserOnPage:1
                             completionHandler:^(NSMutableArray *array, NSUInteger nextPage, NSError *error) {
                                 if (error) {
@@ -406,7 +406,7 @@ GHAPIEventTypeV3 GHAPIEventTypeV3FromNSString(NSString *eventType)
  sinceLastEventDateString:(NSString *)lastEventDateString
         completionHandler:(void(^)(NSArray *events, NSError *error))completionHandler
 {
-    if (!lastEventDateString) {
+    if (!lastEventDateString || !lastEventDateString.dateFromGithubAPIDateString) {
         [self eventsByUserNamed:username 
                            page:1 
               completionHandler:^(NSMutableArray *array, NSUInteger nextPage, NSError *error) {
@@ -435,7 +435,7 @@ GHAPIEventTypeV3 GHAPIEventTypeV3FromNSString(NSString *eventType)
           sinceLastEventDateString:(NSString *)lastEventDateString
                  completionHandler:(void(^)(NSArray *events, NSError *error))completionHandler
 {
-    if (!lastEventDateString) {
+    if (!lastEventDateString || !lastEventDateString.dateFromGithubAPIDateString) {
         [self eventsForOrganizationNamed:organizationName 
                                     page:1 
                        completionHandler:^(NSMutableArray *array, NSUInteger nextPage, NSError *error) {
