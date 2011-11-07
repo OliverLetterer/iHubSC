@@ -38,6 +38,11 @@
 
 - (void)issueCreationNotificationCallback:(NSNotification *)notification {
     GHAPIIssueV3 *issue = [notification.userInfo objectForKey:GHAPIV3NotificationUserDictionaryIssueKey];
+    
+    if ([self.dataArray containsObject:issue]) {
+        return;
+    }
+    
     BOOL changed = NO;
     
     if ([issue.assignee.login isEqualToString:[GHAPIAuthenticationManager sharedInstance].authenticatedUser.login] && issue.isOpen) {
