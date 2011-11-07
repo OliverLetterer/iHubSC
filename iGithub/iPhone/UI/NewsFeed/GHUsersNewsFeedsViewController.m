@@ -30,6 +30,13 @@
                                                                        NSLocalizedString(@"Organizations", @""),
                                                                        nil]];
         _segmentedControl.segmentedControlStyle = UISegmentedControlStyleBar;
+        
+        _segmentedControl.userInteractionEnabled = YES;
+        _segmentedControl.alpha = 1.0f;
+        _segmentedControl.tintColor = [UIColor defaultNavigationBarTintColor];
+        [_segmentedControl addTarget:self action:@selector(segmentControlValueChanged:) forControlEvents:UIControlEventValueChanged];
+        
+        self.navigationItem.titleView = _segmentedControl;
     }
     return _segmentedControl;
 }
@@ -72,27 +79,15 @@
 {
     [super loadView];
     
-    UIView *wrapperView = [[UIView alloc] initWithFrame:CGRectMake(17.0f, 6.0f, 286.0f, 32.0f)];
-    [wrapperView addSubview:self.segmentedControl];
-    self.navigationItem.titleView = wrapperView;
-    
-    _segmentedControl.userInteractionEnabled = YES;
-    _segmentedControl.alpha = 1.0f;
-    _segmentedControl.tintColor = [UIColor defaultNavigationBarTintColor];
-    [_segmentedControl addTarget:self action:@selector(segmentControlValueChanged:) forControlEvents:UIControlEventValueChanged];
+//    UIView *wrapperView = [[UIView alloc] initWithFrame:CGRectMake(17.0f, 6.0f, 286.0f, 32.0f)];
+//    [wrapperView addSubview:self.segmentedControl];
+//    self.navigationItem.titleView = self.segmentedControl;
     
     if (_downloadDataInViewDidLoad) {
         _downloadDataInViewDidLoad = NO;
         
         [self pullToReleaseTableViewReloadData];
     }
-}
-
-- (void)viewDidUnload
-{
-    [super viewDidUnload];
-    
-    _segmentedControl = nil;
 }
 
 #pragma mark - Instance methods
@@ -129,7 +124,6 @@
     [super pullToReleaseTableViewReloadData];
     
     // update segmented control
-    self.segmentedControl.alpha = 0.5f;
     self.segmentedControl.userInteractionEnabled = NO;
 }
 
@@ -137,7 +131,6 @@
 {
     [super pullToReleaseTableViewDidReloadData];
     
-    self.segmentedControl.alpha = 1.0f;
     self.segmentedControl.userInteractionEnabled = YES;
 }
 
