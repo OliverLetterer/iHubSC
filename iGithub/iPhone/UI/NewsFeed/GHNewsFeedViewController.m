@@ -114,6 +114,25 @@
     
     NSIndexSet *indexSet = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, newEvents.count)];
     
+    NSInteger maximumNumberOfEvents = 300;
+    NSTimeInterval maximumTimeInterval = 432000.0;
+    
+    if (_events.count > maximumNumberOfEvents) {
+        // we have more than 300 events stored
+        GHAPIEventV3 *event = [_events objectAtIndex:maximumNumberOfEvents];
+        
+        NSDate *createDate = event.createdAtString.dateFromGithubAPIDateString;
+        NSDate *now = [NSDate date];
+        
+        NSTimeInterval differenceSinceNow = [now timeIntervalSinceDate:createDate];
+        
+        if (fabs(differenceSinceNow) > maximumTimeInterval) {
+            // 300th event is older than 5 days
+            NSIndexSet *indizesToBeRemoves = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(maximumNumberOfEvents, _events.count - maximumNumberOfEvents)];
+            [_events removeObjectsAtIndexes:indizesToBeRemoves];
+        }
+    }
+    
     [_events insertObjects:newEvents atIndexes:indexSet];
     [self cacheHeightForTableView];
     
@@ -122,12 +141,14 @@
         
         if (topVisibleEvent) {
             NSInteger indexOfLastTopVisibleEvent = [_events indexOfObject:topVisibleEvent];
-            NSIndexPath *lastTopVisibleIndexPath = [NSIndexPath indexPathForRow:indexOfLastTopVisibleEvent inSection:0];
-            
-            CGRect topVisibleTableViewCellFrame = [self.tableView rectForRowAtIndexPath:lastTopVisibleIndexPath];
-            
-            CGFloat contentOffsetY = CGRectGetMinY(topVisibleTableViewCellFrame) + topVisibleCellInset;
-            [self.tableView setContentOffset:CGPointMake(0.0f, contentOffsetY) animated:NO];
+            if (indexOfLastTopVisibleEvent != NSNotFound) {
+                NSIndexPath *lastTopVisibleIndexPath = [NSIndexPath indexPathForRow:indexOfLastTopVisibleEvent inSection:0];
+                
+                CGRect topVisibleTableViewCellFrame = [self.tableView rectForRowAtIndexPath:lastTopVisibleIndexPath];
+                
+                CGFloat contentOffsetY = CGRectGetMinY(topVisibleTableViewCellFrame) + topVisibleCellInset;
+                [self.tableView setContentOffset:CGPointMake(0.0f, contentOffsetY) animated:NO];
+            }
         }
     }
     
