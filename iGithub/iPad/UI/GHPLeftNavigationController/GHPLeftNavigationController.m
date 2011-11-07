@@ -320,6 +320,20 @@
             viewController = [NSKeyedUnarchiver unarchiveObjectWithFile:serializationURL.relativePath];
             
             if (!viewController) {
+                // GHPOwnersNewsFeedViewController was not found because it was never used or the version was updated. perform some cleanup
+                NSURL *libraryURL = [[NSFileManager defaultManager] URLsForDirectory:NSLibraryDirectory inDomains:NSUserDomainMask].lastObject;
+                
+                NSArray *libraryContent = [[NSFileManager defaultManager] contentsOfDirectoryAtURL:libraryURL 
+                                                                        includingPropertiesForKeys:nil 
+                                                                                           options:0
+                                                                                             error:NULL];
+                for (NSURL *fileURL in libraryContent) {
+                    NSString *fileName = fileURL.lastPathComponent;
+                    if ([fileName hasPrefix:@"de.olettere.GHPOwnersNewsFeedViewController."] && [fileName hasSuffix:@".plist"]) {
+                        [[NSFileManager defaultManager] removeItemAtURL:fileURL error:NULL];
+                    }
+                }
+                
                 viewController = [[GHPOwnersNewsFeedViewController alloc] init];
             }
         } else if (indexPath.row == 1) {
