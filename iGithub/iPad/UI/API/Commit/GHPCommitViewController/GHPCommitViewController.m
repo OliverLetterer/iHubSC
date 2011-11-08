@@ -24,6 +24,8 @@
         if (self.isViewLoaded) {
             [self.tableView reloadData];
         }
+        
+        self.title = _commit.message;
     }
 }
 
