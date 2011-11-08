@@ -363,6 +363,7 @@
 		A7D9C3EF1466A9F20009F10B /* GHCommitsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7D9C3EE1466A9F20009F10B /* GHCommitsViewController.m */; };
 		A7DC78F213EACEE0002ABD4B /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A7DC78F113EACEE0002ABD4B /* Settings.bundle */; };
 		A7DC78F613EACFFC002ABD4B /* NSUserDefaults+Settings.m in Sources */ = {isa = PBXBuildFile; fileRef = A7DC78F513EACFFC002ABD4B /* NSUserDefaults+Settings.m */; };
+		A7E153EB1469370600F7FB5C /* GHPModalCommitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7E153EA1469370600F7FB5C /* GHPModalCommitViewController.m */; };
 		A7FDA6A113E7446F00DE4FF3 /* GHCreateTeamViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7FDA6A013E7446F00DE4FF3 /* GHCreateTeamViewController.m */; };
 		A7FDA6B413E7DD6D00DE4FF3 /* GHTextFieldTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A7FDA6B313E7DD6D00DE4FF3 /* GHTextFieldTableViewCell.m */; };
 		A7FDA6C513E7DECA00DE4FF3 /* GHPTextFieldTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A7FDA6C413E7DECA00DE4FF3 /* GHPTextFieldTableViewCell.m */; };
@@ -1102,6 +1103,8 @@
 		A7DC78F113EACEE0002ABD4B /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		A7DC78F413EACFFC002ABD4B /* NSUserDefaults+Settings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSUserDefaults+Settings.h"; sourceTree = "<group>"; };
 		A7DC78F513EACFFC002ABD4B /* NSUserDefaults+Settings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSUserDefaults+Settings.m"; sourceTree = "<group>"; };
+		A7E153E91469370600F7FB5C /* GHPModalCommitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPModalCommitViewController.h; sourceTree = "<group>"; };
+		A7E153EA1469370600F7FB5C /* GHPModalCommitViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPModalCommitViewController.m; sourceTree = "<group>"; };
 		A7FDA69F13E7446F00DE4FF3 /* GHCreateTeamViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHCreateTeamViewController.h; sourceTree = "<group>"; };
 		A7FDA6A013E7446F00DE4FF3 /* GHCreateTeamViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHCreateTeamViewController.m; sourceTree = "<group>"; };
 		A7FDA6B213E7DD6D00DE4FF3 /* GHTextFieldTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHTextFieldTableViewCell.h; sourceTree = "<group>"; };
@@ -1348,6 +1351,8 @@
 			children = (
 				A757964C13E1A030008670B0 /* GHPCommitViewController.h */,
 				A757964D13E1A030008670B0 /* GHPCommitViewController.m */,
+				A7E153E91469370600F7FB5C /* GHPModalCommitViewController.h */,
+				A7E153EA1469370600F7FB5C /* GHPModalCommitViewController.m */,
 			);
 			path = GHPCommitViewController;
 			sourceTree = "<group>";
@@ -3840,6 +3845,7 @@
 				A7D9C3CB1466908C0009F10B /* GHOwnersActionsNewsFeedViewController.m in Sources */,
 				A7D9C3CE146692270009F10B /* GHOwnersOrganizationsNewsFeedViewController.m in Sources */,
 				A7D9C3EF1466A9F20009F10B /* GHCommitsViewController.m in Sources */,
+				A7E153EB1469370600F7FB5C /* GHPModalCommitViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
