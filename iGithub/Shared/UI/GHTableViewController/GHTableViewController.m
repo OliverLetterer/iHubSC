@@ -543,6 +543,11 @@ static CGFloat wrapperViewHeight = 21.0f;
     self.tableView.backgroundView.frame = frame;
 }
 
+- (void)scrollViewDidScrollToTop:(UIScrollView *)scrollView
+{
+    _lastContentOffset = self.tableView.contentOffset;
+}
+
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
     _lastContentOffset = self.tableView.contentOffset;
 }
