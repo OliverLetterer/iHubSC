@@ -256,7 +256,15 @@
         cell.secondLabel.text = followEvent.user.login;
         cell.timeLabel.text = event.createdAtString.prettyShortTimeIntervalSinceNow;
         
-        [self updateImageView:cell.secondImageView atIndexPath:indexPath withGravatarID:followEvent.user.avatarURL];
+        if (followEvent.user.avatarURL) {
+            [self updateImageView:cell.secondImageView 
+                      atIndexPath:indexPath 
+              withAvatarURLString:followEvent.user.avatarURL];
+        } else {
+            [self updateImageView:cell.secondImageView 
+                      atIndexPath:indexPath 
+              withAvatarURLString:followEvent.user.gravatarID];
+        }
         
         return cell;
     } else if (event.type == GHAPIEventTypeV3NewEvents) {
