@@ -9,6 +9,7 @@
 #import "GHPDiffViewContentView.h"
 #import "GHPDiffView.h"
 #import "GHPDiffViewLineNumbersView.h"
+#import <QuartzCore/QuartzCore.h>
 
 @implementation GHPDiffViewContentView
 
@@ -37,6 +38,7 @@
     if ((self = [super initWithFrame:frame])) {
         // Initialization code
         self.backgroundColor = [UIColor clearColor];
+        self.layer.needsDisplayOnBoundsChange = YES;
     }
     return self;
 }

@@ -8,6 +8,7 @@
 
 #import "GHPDiffView.h"
 #import "NSString+Additions.h"
+#import <QuartzCore/QuartzCore.h>
 
 UIFont *GHPDiffViewFont(void) {
     return [UIFont fontWithName:@"CourierNewPSMT" size:14.0f];
@@ -96,6 +97,8 @@ UIFont *GHPDiffViewBoldFont(void) {
         self.scrollView.scrollsToTop = NO;
         [self.scrollView addSubview:self.contentDiffView];
         [self addSubview:self.scrollView];
+        
+        self.layer.needsDisplayOnBoundsChange = YES;
     }
     return self;
 }
@@ -123,9 +126,6 @@ UIFont *GHPDiffViewBoldFont(void) {
     self.contentDiffView.frame = CGRectMake(0.0f, 0.0f, contentDiffViewWidth, CGRectGetHeight(self.bounds));
     self.scrollView.contentSize = self.contentDiffView.frame.size;
 }
-
-#pragma mark - Memory management
-
 
 #pragma mark - Keyed Archiving
 

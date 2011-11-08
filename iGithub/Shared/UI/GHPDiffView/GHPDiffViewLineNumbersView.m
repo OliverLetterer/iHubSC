@@ -8,6 +8,7 @@
 
 #import "GHPDiffViewLineNumbersView.h"
 #import "GHPDiffView.h"
+#import <QuartzCore/QuartzCore.h>
 
 @implementation GHPDiffViewLineNumbersView
 
@@ -37,14 +38,6 @@
     return MAX(MAX(size3.height, size4.height), MAX(size1.width, size2.width))*2.0f + 30.0f; 
 }
 
-- (void)setFrame:(CGRect)frame {
-    CGRect bounds = self.bounds;
-    [super setFrame:frame];
-    if (!CGRectEqualToRect(bounds, self.bounds)) {
-        [self setNeedsDisplay];
-    }
-}
-
 #pragma mark - Initialization
 
 - (id)initWithFrame:(CGRect)frame {
@@ -63,6 +56,8 @@
         CGFloat locations[] = {0.0f, 1.0f};
         _oldNewGradient = CGGradientCreateWithColors(colorSpace, (__bridge CFArrayRef)colors, locations);
         CGColorSpaceRelease(colorSpace);
+        
+        self.layer.needsDisplayOnBoundsChange = YES;
     }
     return self;
 }
