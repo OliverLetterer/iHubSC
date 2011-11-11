@@ -152,10 +152,17 @@
         GHPModalCommitViewController *viewController = [[GHPModalCommitViewController alloc] initWithRepository:_repository commitID:commit.SHA];
         [self presentViewController:viewController
                            animated:YES
-                         completion:^{
-                             [self.tableView deselectRowAtIndexPath:indexPath animated:NO];
-                         }];
+                         completion:nil];
     }
+}
+
+#pragma mark - view lifecycle
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    [self.tableView deselectRowAtIndexPath:self.tableView.indexPathForSelectedRow animated:animated];
 }
 
 #pragma mark - height caching
