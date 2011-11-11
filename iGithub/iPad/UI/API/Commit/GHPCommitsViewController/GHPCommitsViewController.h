@@ -12,7 +12,7 @@
 
 
 @interface GHPCommitsViewController : GHPDataArrayViewController <NSCoding> {
-@private
+@protected
     NSString *_repository;
     NSString *_branchHash;
 }

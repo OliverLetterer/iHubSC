@@ -11,6 +11,7 @@
 #import "ANAdvancedNavigationController.h"
 #import "GHAPIAuthenticationManager.h"
 #import "GHPSearchScopeTableViewCell.h"
+#import "UIColor+GithubUI.h"
 
 @implementation iGithubAppDelegate_iPad
 
@@ -25,6 +26,9 @@
     [proxy setTitleShadowColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [proxy setBackgroundImage:[[UIImage imageNamed:@"GHPSelectedBackgroundImage.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(10.0f, 10.0f, 10.0f, 10.0f)] forState:UIControlStateHighlighted];
     [proxy setBackgroundImage:[[UIImage imageNamed:@"GHPSelectedBackgroundImage.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(10.0f, 10.0f, 10.0f, 10.0f)] forState:UIControlStateSelected];
+    
+    proxy = [UINavigationBar appearance];
+    [proxy setTintColor:[UIColor defaultNavigationBarTintColor]];
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {

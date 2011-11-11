@@ -434,7 +434,6 @@ static CGFloat wrapperViewHeight = 21.0f;
             [view.layer addSublayer:gradientLayer];
             _hasGradientBackgrounds = YES;
         }
-        self.navigationController.navigationBar.tintColor = [UIColor defaultNavigationBarTintColor];
     } else {
         if (!CGPointEqualToPoint(_lastContentOffset, CGPointZero)) {
             [self.tableView setContentOffset:_lastContentOffset animated:NO];

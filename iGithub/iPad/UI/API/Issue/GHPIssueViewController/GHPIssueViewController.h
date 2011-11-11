@@ -23,7 +23,6 @@
     GHAPIRepositoryV3 *_repository;
     
     NSMutableArray *_history;
-    NSArray *_attachedCommits;
     
     BOOL _hasCollaboratorData;
     BOOL _isCollaborator;

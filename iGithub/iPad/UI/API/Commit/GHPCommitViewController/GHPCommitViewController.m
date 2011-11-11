@@ -202,7 +202,12 @@
                                                                                                                   tree:self.commitID 
                                                                                                               filename:base 
                                                                                                            relativeURL:URL];
-        [self.advancedNavigationController pushViewController:fileViewController afterViewController:self animated:YES];
+        
+        if (self.advancedNavigationController) {
+            [self.advancedNavigationController pushViewController:fileViewController afterViewController:self animated:YES];
+        } else if (self.navigationController) {
+            [self.navigationController pushViewController:fileViewController animated:YES];
+        }
     } else {
         [tableView deselectRowAtIndexPath:indexPath animated:NO];
     }

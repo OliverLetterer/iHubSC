@@ -104,6 +104,7 @@
 		A757982E13E1C1D5008670B0 /* GHTableViewAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = A757982713E1C1D5008670B0 /* GHTableViewAlertView.m */; };
 		A757982F13E1C1D5008670B0 /* GHTableViewAlertViewTableViewBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = A757982913E1C1D5008670B0 /* GHTableViewAlertViewTableViewBackgroundView.m */; };
 		A757983013E1C1D5008670B0 /* GHTableViewAlertViewTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A757982B13E1C1D5008670B0 /* GHTableViewAlertViewTableViewCell.m */; };
+		A7632E49146CFA1500752F43 /* GHPCommitsOfPullRequestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7632E48146CFA1500752F43 /* GHPCommitsOfPullRequestViewController.m */; };
 		A76B2E9B13EFD22500D723AC /* GHLinearGradientSelectedBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = A76B2E9A13EFD22500D723AC /* GHLinearGradientSelectedBackgroundView.m */; };
 		A76C011E13E9D3DD005E26C4 /* compass in Resources */ = {isa = PBXBuildFile; fileRef = A76C011A13E9D3DD005E26C4 /* compass */; };
 		A76C011F13E9D3DD005E26C4 /* scripts in Resources */ = {isa = PBXBuildFile; fileRef = A76C011B13E9D3DD005E26C4 /* scripts */; };
@@ -649,6 +650,8 @@
 		A757982913E1C1D5008670B0 /* GHTableViewAlertViewTableViewBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHTableViewAlertViewTableViewBackgroundView.m; sourceTree = "<group>"; };
 		A757982A13E1C1D5008670B0 /* GHTableViewAlertViewTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHTableViewAlertViewTableViewCell.h; sourceTree = "<group>"; };
 		A757982B13E1C1D5008670B0 /* GHTableViewAlertViewTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHTableViewAlertViewTableViewCell.m; sourceTree = "<group>"; };
+		A7632E47146CFA1500752F43 /* GHPCommitsOfPullRequestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPCommitsOfPullRequestViewController.h; sourceTree = "<group>"; };
+		A7632E48146CFA1500752F43 /* GHPCommitsOfPullRequestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPCommitsOfPullRequestViewController.m; sourceTree = "<group>"; };
 		A76B2E9913EFD22500D723AC /* GHLinearGradientSelectedBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHLinearGradientSelectedBackgroundView.h; sourceTree = "<group>"; };
 		A76B2E9A13EFD22500D723AC /* GHLinearGradientSelectedBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHLinearGradientSelectedBackgroundView.m; sourceTree = "<group>"; };
 		A76C011A13E9D3DD005E26C4 /* compass */ = {isa = PBXFileReference; lastKnownFileType = folder; path = compass; sourceTree = "<group>"; };
@@ -1342,6 +1345,8 @@
 			children = (
 				A757964913E1A030008670B0 /* GHPCommitsViewController.h */,
 				A757964A13E1A030008670B0 /* GHPCommitsViewController.m */,
+				A7632E47146CFA1500752F43 /* GHPCommitsOfPullRequestViewController.h */,
+				A7632E48146CFA1500752F43 /* GHPCommitsOfPullRequestViewController.m */,
 			);
 			path = GHPCommitsViewController;
 			sourceTree = "<group>";
@@ -3846,6 +3851,7 @@
 				A7D9C3CE146692270009F10B /* GHOwnersOrganizationsNewsFeedViewController.m in Sources */,
 				A7D9C3EF1466A9F20009F10B /* GHCommitsViewController.m in Sources */,
 				A7E153EB1469370600F7FB5C /* GHPModalCommitViewController.m in Sources */,
+				A7632E49146CFA1500752F43 /* GHPCommitsOfPullRequestViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
