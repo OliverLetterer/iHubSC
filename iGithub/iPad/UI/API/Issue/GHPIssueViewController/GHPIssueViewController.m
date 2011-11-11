@@ -26,8 +26,8 @@
 #define kUITableViewSectionInfo             0
 #define kUITableViewSectionDetails          1
 #define kUITableViewSectionLabels           2
-#define kUITableViewSectionHistory          3
-#define kUITableViewSectionCommits          4
+#define kUITableViewSectionCommits          3
+#define kUITableViewSectionHistory          4
 
 #define kUITableViewNumberOfSections        5
 
