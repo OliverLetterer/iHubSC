@@ -220,7 +220,7 @@
         }
         
         cell.textLabel.text = event.actor.login;
-        if (event.type == GHAPIEventTypeV3GistEvent) {
+        if (event.type == GHAPIEventTypeV3GistEvent || event.type == GHAPIEventTypeV3TeamAddEvent) {
             cell.detailTextLabel.text = nil;
         } else {
             cell.detailTextLabel.text = event.repository.name;
