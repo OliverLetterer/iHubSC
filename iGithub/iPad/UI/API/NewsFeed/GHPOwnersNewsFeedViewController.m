@@ -121,23 +121,31 @@
     
     NSIndexSet *indexSet = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, newEvents.count)];
     
-    NSInteger maximumNumberOfEvents = 300;
-    NSTimeInterval maximumTimeInterval = 432000.0;
+    NSInteger maximumNumberOfEvents = 100;
+    NSTimeInterval maximumTimeInterval = 2.0 * 24.0 * 60.0 * 60.0;
     
     if (_events.count > maximumNumberOfEvents) {
-        // we have more than 300 events stored
-        GHAPIEventV3 *event = [_events objectAtIndex:maximumNumberOfEvents];
-        
-        NSDate *createDate = event.createdAtString.dateFromGithubAPIDateString;
+        // we have more than 100 events stored
         NSDate *now = [NSDate date];
         
-        NSTimeInterval differenceSinceNow = [now timeIntervalSinceDate:createDate];
+        NSMutableIndexSet *deletionSet = [NSMutableIndexSet indexSet];
+        NSIndexSet *enumerationSet = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(maximumNumberOfEvents, _events.count - maximumNumberOfEvents)];
         
-        if (fabs(differenceSinceNow) > maximumTimeInterval) {
-            // 300th event is older than 5 days
-            NSIndexSet *indizesToBeRemoves = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(maximumNumberOfEvents, _events.count - maximumNumberOfEvents)];
-            [_events removeObjectsAtIndexes:indizesToBeRemoves];
-        }
+        [_events enumerateObjectsAtIndexes:enumerationSet 
+                                   options:NSEnumerationConcurrent
+                                usingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+                                    GHAPIEventV3 *event = obj;
+                                    
+                                    NSDate *createDate = event.createdAtString.dateFromGithubAPIDateString;
+                                    NSTimeInterval differenceSinceNow = [now timeIntervalSinceDate:createDate];
+                                    
+                                    if (fabs(differenceSinceNow) > maximumTimeInterval) {
+                                        // this event is older than 5 days
+                                        [deletionSet addIndex:idx];
+                                    }
+                                }];
+        
+        [_events removeObjectsAtIndexes:deletionSet];
     }
     
     [_events insertObjects:newEvents atIndexes:indexSet];

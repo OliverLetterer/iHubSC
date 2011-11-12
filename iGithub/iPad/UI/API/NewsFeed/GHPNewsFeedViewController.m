@@ -224,9 +224,9 @@
         
         cell.textLabel.text = event.actor.login;
         if (event.type == GHAPIEventTypeV3GistEvent) {
-            cell.detailTextLabel.text = nil;
+            cell.repositoryLabel.text = nil;
         } else {
-            cell.detailTextLabel.text = event.repository.name;
+            cell.repositoryLabel.text = event.repository.name;
         }
         cell.detailTextLabel.text = [self descriptionForEvent:event];
         cell.timeLabel.text = event.createdAtString.prettyShortTimeIntervalSinceNow;

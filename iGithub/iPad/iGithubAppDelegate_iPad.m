@@ -29,6 +29,9 @@
     
     proxy = [UINavigationBar appearance];
     [proxy setTintColor:[UIColor defaultNavigationBarTintColor]];
+    
+    proxy = [UIToolbar appearance];
+    [proxy setTintColor:[UIColor defaultNavigationBarTintColor]];
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
