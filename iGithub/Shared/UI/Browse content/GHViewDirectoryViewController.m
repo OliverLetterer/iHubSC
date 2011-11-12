@@ -117,8 +117,6 @@
         
         SVModalWebViewController *webViewController = [[SVModalWebViewController alloc] initWithURL:URL];
         webViewController.webDelegate = self;
-        webViewController.navigationBar.tintColor = [UIColor defaultNavigationBarTintColor];
-        webViewController.toolbar.tintColor = [UIColor defaultNavigationBarTintColor];
         [self presentViewController:webViewController animated:YES completion:nil];
     }
 }

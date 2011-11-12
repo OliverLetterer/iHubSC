@@ -8,6 +8,7 @@
 
 #import "iGithubAppDelegate_iPhone.h"
 #import "GithubAPI.h"
+#import "UIColor+GithubUI.h"
 
 @implementation iGithubAppDelegate_iPhone
 
@@ -19,6 +20,18 @@
     self.profileViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"My Profile", @"") 
                                                                            image:[UIImage imageNamed:@"145-persondot.png"] 
                                                                              tag:0];
+}
+
+- (void)setupAppearences
+{
+    id appearanceProxy = [UINavigationBar appearance];
+    [appearanceProxy setTintColor:[UIColor defaultNavigationBarTintColor] ];
+    
+    appearanceProxy = [UIToolbar appearance];
+    [appearanceProxy setTintColor:[UIColor defaultNavigationBarTintColor] ];
+    
+    appearanceProxy = [UISearchBar appearance];
+    [appearanceProxy setTintColor:[UIColor defaultNavigationBarTintColor] ];
 }
 
 - (void)unknownPayloadEventTypeCallback:(NSNotification *)notification {

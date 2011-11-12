@@ -857,8 +857,6 @@
         NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://github.com/%@", [self.repositoryString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]] ];
         SVModalWebViewController *webViewController = [[SVModalWebViewController alloc] initWithURL:URL];
         webViewController.webDelegate = self;
-        webViewController.navigationBar.tintColor = [UIColor defaultNavigationBarTintColor];
-        webViewController.toolbar.tintColor = [UIColor defaultNavigationBarTintColor];
         [self presentViewController:webViewController animated:YES completion:nil];
     } else {
         [self.tableView deselectRowAtIndexPath:indexPath animated:NO];

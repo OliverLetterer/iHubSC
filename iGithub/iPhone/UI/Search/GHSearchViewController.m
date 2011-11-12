@@ -56,7 +56,6 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     _canTrackSearchBarState = YES;
-    self.navigationController.navigationBar.tintColor = [UIColor defaultNavigationBarTintColor];
 }
 
 - (void)viewDidAppear:(BOOL)animated {

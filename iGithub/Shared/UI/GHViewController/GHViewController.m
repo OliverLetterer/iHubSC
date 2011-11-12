@@ -14,12 +14,6 @@
 @synthesize navigationTintColor=_navigationTintColor;
 @synthesize presentedInPopoverController=_presentedInPopoverController;
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    self.navigationController.navigationBar.tintColor = [UIColor defaultNavigationBarTintColor];
-}
-
-
 - (void)encodeWithCoder:(NSCoder *)coder {
     [coder encodeObject:self.title forKey:@"title"];
 }

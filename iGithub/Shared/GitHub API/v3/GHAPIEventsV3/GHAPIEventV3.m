@@ -217,10 +217,10 @@ GHAPIEventTypeV3 GHAPIEventTypeV3FromNSString(NSString *eventType)
 #pragma mark - Class methods
 
 + (void)_dumpEventsSinceLastEventDateString:(NSString *)lastEventDateString 
-                                                 nextPageToDump:(NSUInteger)nextPage 
-                                                downloadHandler:(void(^)(NSUInteger nextPage, GHAPIPaginationHandler pageHandler))downloadHandler
-                                                        inArray:(NSMutableArray *)eventsArray
-                                              completionHandler:(void(^)(NSArray *events, NSError *error))completionHandler
+                             nextPageToDump:(NSUInteger)nextPage 
+                            downloadHandler:(void(^)(NSUInteger nextPage, GHAPIPaginationHandler pageHandler))downloadHandler
+                                    inArray:(NSMutableArray *)eventsArray
+                          completionHandler:(void(^)(NSArray *events, NSError *error))completionHandler
 {
     if (nextPage == GHAPIPaginationNextPageNotFound || nextPage == 7) {
         completionHandler(eventsArray, nil);
@@ -261,7 +261,9 @@ GHAPIEventTypeV3 GHAPIEventTypeV3FromNSString(NSString *eventType)
         }
     };
     
-    downloadHandler(nextPage, pageHandler);
+    dispatch_async(dispatch_get_main_queue(), ^(void) {
+        downloadHandler(nextPage, pageHandler);
+    });
 }
 
 + (void)eventsForAuthenticatedUserSinceLastEventDateString:(NSString *)lastEventDateString 

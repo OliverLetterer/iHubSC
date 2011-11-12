@@ -212,7 +212,11 @@
         }
         
         cell.textLabel.text = event.actor.login;
-        cell.detailTextLabel.text = event.repository.name;
+        if (event.type == GHAPIEventTypeV3GistEvent) {
+            cell.detailTextLabel.text = nil;
+        } else {
+            cell.detailTextLabel.text = event.repository.name;
+        }
         cell.timeLabel.text = event.createdAtString.prettyShortTimeIntervalSinceNow;
         cell.descriptionLabel.text = [self descriptionForEvent:event];
         
