@@ -10,23 +10,24 @@
 #import "ANNotificationQueue.h"
 
 @implementation GHPDataArrayViewController
-
 @synthesize dataArray=_dataArray;
 
 #pragma mark - setters and getters
 
-- (NSString *)emptyArrayErrorMessage {
+- (NSString *)emptyArrayErrorMessage
+{
     return NSLocalizedString(@"No Data available", @"");
 }
 
-- (void)setDataArray:(NSMutableArray *)dataArray nextPage:(NSUInteger)nextPage {
+- (void)setDataArray:(NSMutableArray *)dataArray nextPage:(NSUInteger)nextPage 
+{
     if (dataArray != _dataArray) {
         _dataArray = dataArray;
         
         self.isDownloadingEssentialData = NO;
         [self cacheDataArrayHeights];
         
-        [self setNextPage:nextPage forSection:0];
+        [self setNextPage:nextPage forSection:[self numberOfSectionsInTableView:self.tableView]-1];
         
         if (dataArray != nil && dataArray.count == 0) {
             [[ANNotificationQueue sharedInstance] detatchErrorNotificationWithTitle:NSLocalizedString(@"Error", @"") errorMessage:self.emptyArrayErrorMessage];
@@ -39,18 +40,19 @@
     }
 }
 
-- (void)appendDataFromArray:(NSMutableArray *)array nextPage:(NSUInteger)nextPage {
+- (void)appendDataFromArray:(NSMutableArray *)array nextPage:(NSUInteger)nextPage
+{
     [self.dataArray addObjectsFromArray:array];
-    [self setNextPage:nextPage forSection:0];
+    [self setNextPage:nextPage forSection:[self numberOfSectionsInTableView:self.tableView]-1 ];
     [self cacheDataArrayHeights];
     
     if (self.isViewLoaded) {
-        [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] 
-                      withRowAnimation:UITableViewRowAnimationAutomatic];
+        [self.tableView reloadData];
     }
 }
 
-- (void)dataArrayRemoveObjectsInSet:(NSIndexSet *)indexSet {
+- (void)dataArrayRemoveObjectsInSet:(NSIndexSet *)indexSet
+{
     [self.dataArray removeObjectsAtIndexes:indexSet];
     [self cacheDataArrayHeights];
     if (self.isViewLoaded) {
@@ -60,7 +62,8 @@
 
 #pragma mark - Initialization
 
-- (id)initWithStyle:(UITableViewStyle)style {
+- (id)initWithStyle:(UITableViewStyle)style
+{
     if ((self = [super initWithStyle:style])) {
         // Custom initialization
         self.isDownloadingEssentialData = YES;
@@ -70,7 +73,8 @@
 
 #pragma mark - Table view data source
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
     if (!self.dataArray) {
         return 0;
     }
@@ -78,12 +82,14 @@
     return 1;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
     // Return the number of rows in the section.
     return self.dataArray.count;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
     if ([self isHeightCachedForRowAtIndexPath:indexPath]) {
         return [self cachedHeightForRowAtIndexPath:indexPath];
     }
@@ -93,18 +99,21 @@
 
 #pragma mark - Height caching
 
-- (void)cacheDataArrayHeights {
+- (void)cacheDataArrayHeights 
+{
     
 }
 
 #pragma mark - Keyed Archiving
 
-- (void)encodeWithCoder:(NSCoder *)encoder {
+- (void)encodeWithCoder:(NSCoder *)encoder 
+{
     [super encodeWithCoder:encoder];
     [encoder encodeObject:_dataArray forKey:@"dataArray"];
 }
 
-- (id)initWithCoder:(NSCoder *)decoder {
+- (id)initWithCoder:(NSCoder *)decoder 
+{
     if ((self = [super initWithCoder:decoder])) {
         _dataArray = [decoder decodeObjectForKey:@"dataArray"];
     }

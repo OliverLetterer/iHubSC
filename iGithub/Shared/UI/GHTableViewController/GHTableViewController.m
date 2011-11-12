@@ -239,7 +239,8 @@ static CGFloat wrapperViewHeight = 21.0f;
 - (void)updateImageView:(UIImageView *)imageView 
             inTableView:(UITableView *)tableView 
             atIndexPath:(NSIndexPath *)indexPath 
-    withAvatarURLString:(NSString *)avatarURLString {
+    withAvatarURLString:(NSString *)avatarURLString 
+{
     UIImage *avatarImage = [UIImage cachedImageFromAvatarURLString:avatarURLString];
     
     if (avatarImage) {
@@ -267,8 +268,12 @@ static CGFloat wrapperViewHeight = 21.0f;
 
 - (void)updateImageView:(UIImageView *)imageView 
             atIndexPath:(NSIndexPath *)indexPath 
-    withAvatarURLString:(NSString *)avatarURLString {
-    [self updateImageView:imageView inTableView:self.tableView atIndexPath:indexPath withAvatarURLString:avatarURLString];
+    withAvatarURLString:(NSString *)avatarURLString 
+{
+    [self updateImageView:imageView 
+              inTableView:self.tableView
+              atIndexPath:indexPath
+      withAvatarURLString:avatarURLString];
 }
 
 #pragma mark - pagination
@@ -496,7 +501,9 @@ static CGFloat wrapperViewHeight = 21.0f;
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     if ([self needsToDownloadNextDataInSection:indexPath.section] && indexPath.row != 0 && indexPath.row == [tableView numberOfRowsInSection:indexPath.section] - 1) {
-        [self downloadDataForPage:[self nextPageForSection:indexPath.section] inSection:indexPath.section];
+        NSUInteger nextPage = [self nextPageForSection:indexPath.section];
+        [self.nextPageForSectionsDictionary removeObjectForKey:[self keyForSection:indexPath.section] ];
+        [self downloadDataForPage:nextPage inSection:indexPath.section];
     }
 }
 
