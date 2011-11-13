@@ -354,7 +354,7 @@
             return cell;
         }
     } else if (indexPath.section == kUITableViewSectionCommits) {
-        NSString *CellIdentifier = @"GHPImageDetailTableViewCell";
+        NSString *CellIdentifier = @"GHPDefaultTableViewCell";
         
         GHPDefaultTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         if (cell == nil) {
