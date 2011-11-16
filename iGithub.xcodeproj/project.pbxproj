@@ -104,6 +104,8 @@
 		A757982E13E1C1D5008670B0 /* GHTableViewAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = A757982713E1C1D5008670B0 /* GHTableViewAlertView.m */; };
 		A757982F13E1C1D5008670B0 /* GHTableViewAlertViewTableViewBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = A757982913E1C1D5008670B0 /* GHTableViewAlertViewTableViewBackgroundView.m */; };
 		A757983013E1C1D5008670B0 /* GHTableViewAlertViewTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A757982B13E1C1D5008670B0 /* GHTableViewAlertViewTableViewCell.m */; };
+		A75CFA7D14740E7C003B45EC /* 11-arrows-out.png in Resources */ = {isa = PBXBuildFile; fileRef = A75CFA7B14740E7C003B45EC /* 11-arrows-out.png */; };
+		A75CFA7E14740E7C003B45EC /* 11-arrows-out@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A75CFA7C14740E7C003B45EC /* 11-arrows-out@2x.png */; };
 		A7632E49146CFA1500752F43 /* GHPCommitsOfPullRequestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7632E48146CFA1500752F43 /* GHPCommitsOfPullRequestViewController.m */; };
 		A76B2E9B13EFD22500D723AC /* GHLinearGradientSelectedBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = A76B2E9A13EFD22500D723AC /* GHLinearGradientSelectedBackgroundView.m */; };
 		A76C011E13E9D3DD005E26C4 /* compass in Resources */ = {isa = PBXBuildFile; fileRef = A76C011A13E9D3DD005E26C4 /* compass */; };
@@ -650,6 +652,8 @@
 		A757982913E1C1D5008670B0 /* GHTableViewAlertViewTableViewBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHTableViewAlertViewTableViewBackgroundView.m; sourceTree = "<group>"; };
 		A757982A13E1C1D5008670B0 /* GHTableViewAlertViewTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHTableViewAlertViewTableViewCell.h; sourceTree = "<group>"; };
 		A757982B13E1C1D5008670B0 /* GHTableViewAlertViewTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHTableViewAlertViewTableViewCell.m; sourceTree = "<group>"; };
+		A75CFA7B14740E7C003B45EC /* 11-arrows-out.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "11-arrows-out.png"; sourceTree = "<group>"; };
+		A75CFA7C14740E7C003B45EC /* 11-arrows-out@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "11-arrows-out@2x.png"; sourceTree = "<group>"; };
 		A7632E47146CFA1500752F43 /* GHPCommitsOfPullRequestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHPCommitsOfPullRequestViewController.h; sourceTree = "<group>"; };
 		A7632E48146CFA1500752F43 /* GHPCommitsOfPullRequestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHPCommitsOfPullRequestViewController.m; sourceTree = "<group>"; };
 		A76B2E9913EFD22500D723AC /* GHLinearGradientSelectedBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHLinearGradientSelectedBackgroundView.h; sourceTree = "<group>"; };
@@ -1904,6 +1908,8 @@
 		A7841D3313E18E2D00131648 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				A75CFA7B14740E7C003B45EC /* 11-arrows-out.png */,
+				A75CFA7C14740E7C003B45EC /* 11-arrows-out@2x.png */,
 				A744F56B13E72D030038C189 /* styles.css */,
 				A7841E4A13E1905200131648 /* ANNotificationQueue */,
 				A7841DBF13E1902500131648 /* SyntaxHighlighting */,
@@ -3571,6 +3577,8 @@
 				A786CF6713F6CF7F00E22E13 /* SVWebViewController.bundle in Resources */,
 				A72B1B38142E799B0086750C /* UITabBarItemGradient.png in Resources */,
 				A72B1B39142E799B0086750C /* UITabBarItemGradient@2x.png in Resources */,
+				A75CFA7D14740E7C003B45EC /* 11-arrows-out.png in Resources */,
+				A75CFA7E14740E7C003B45EC /* 11-arrows-out@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

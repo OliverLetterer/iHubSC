@@ -10,6 +10,7 @@
 #import "GHTableViewCellWithLinearGradientBackgroundView.h"
 #import "GHLinearGradientBackgroundView.h"
 #import "GHPDiffViewTableViewCell.h"
+#import "BlocksKit.h"
 
 @implementation GHCommitDiffViewController
 
@@ -45,28 +46,79 @@
 #pragma mark - View lifecycle
 
 - (void)loadView {
-    UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:[UIScreen mainScreen].bounds ];
-    scrollView.backgroundColor = [UIColor whiteColor];
-    scrollView.scrollsToTop = YES;
-    self.view = scrollView;
-    
+    _scrollView = [[UIScrollView alloc] initWithFrame:[UIScreen mainScreen].bounds ];
+    _scrollView.backgroundColor = [UIColor whiteColor];
+    _scrollView.scrollsToTop = YES;
+    self.view = _scrollView;
     
     CGFloat height = [GHPDiffViewTableViewCell heightWithContent:self.diffString];
-    CGRect frame = scrollView.bounds;
+    CGRect frame = _scrollView.bounds;
     frame.size.height = height;
     self.diffView = [[GHPDiffView alloc] initWithFrame:frame];
     self.diffView.diffString = self.diffString;
-    scrollView.contentSize = self.diffView.bounds.size;
+    _scrollView.contentSize = self.diffView.bounds.size;
     [self.view addSubview:self.diffView];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    NSArray *viewControllers = self.navigationController.viewControllers;
+    if (viewControllers.count > 0 && [viewControllers objectAtIndex:0] == self) {
+        UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
+                                                                                   handler:^(id sender) {
+                                                                                       [self dismissModalViewControllerAnimated:YES];
+                                                                                   }];
+        self.navigationItem.rightBarButtonItem = doneButton;
+    } else {
+        UIImage *image = [UIImage imageNamed:@"11-arrows-out.png"];
+        UIBarButtonItem *fullScreenButton = [[UIBarButtonItem alloc] initWithImage:image
+                                                                             style:UIBarButtonItemStyleBordered
+                                                                           handler:^(id sender) {
+                                                                               GHCommitDiffViewController *viewController = [[GHCommitDiffViewController alloc] initWithDiffString:_diffString];
+                                                                               viewController.title = self.title;
+                                                                               
+                                                                               UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:viewController];
+                                                                               
+                                                                               [self presentModalViewController:navigationController animated:YES];
+                                                                           }];
+        
+        self.navigationItem.rightBarButtonItem = fullScreenButton;
+    }
 }
 
 - (void)viewDidUnload {
     [super viewDidUnload];
-    self.diffView = nil;
+    
+    _diffView = nil;
+    _scrollView = nil;
+}
+
+- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+{
+    [super willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
+    
+    CGRect frame = _diffView.frame;
+    frame.size.width = CGRectGetWidth(self.view.bounds);
+    _diffView.frame = frame;
+    
+    _scrollView.contentSize = _diffView.bounds.size;
+}
+
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
+{
+    [super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
+    
+    CGRect frame = _diffView.frame;
+    frame.size.width = CGRectGetWidth(self.view.bounds);
+    _diffView.frame = frame;
+    
+    _scrollView.contentSize = _diffView.bounds.size;
+}
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
+{
+    return toInterfaceOrientation != UIInterfaceOrientationPortraitUpsideDown;
 }
 
 #pragma mark - Keyed Archiving

@@ -15,6 +15,7 @@
 @private
     NSString *_diffString;
     
+    UIScrollView *_scrollView;
     GHPDiffView *_diffView;
 }
 
