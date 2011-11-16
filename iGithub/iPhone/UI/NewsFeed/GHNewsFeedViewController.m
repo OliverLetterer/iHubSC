@@ -129,7 +129,7 @@
                                 usingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
                                     GHAPIEventV3 *event = obj;
                                     
-                                    NSDate *createDate = event.createdAtString.dateFromGithubAPIDateString;
+                                    NSDate *createDate = event.creationDate;
                                     NSTimeInterval differenceSinceNow = [now timeIntervalSinceDate:createDate];
                                     
                                     if (fabs(differenceSinceNow) > maximumTimeInterval) {
@@ -225,7 +225,7 @@
         } else {
             cell.detailTextLabel.text = event.repository.name;
         }
-        cell.timeLabel.text = event.createdAtString.prettyShortTimeIntervalSinceNow;
+        cell.timeLabel.text = event.creationDate.prettyShortTimeIntervalSinceNow;
         cell.descriptionLabel.text = [self descriptionForEvent:event];
         
         return cell;
@@ -252,7 +252,7 @@
         cell.textLabel.text = followEvent.actor.login;
         cell.descriptionLabel.text = [self descriptionForEvent:event];
         cell.targetNameLabel.text = followEvent.user.login;
-        cell.timeLabel.text = event.createdAtString.prettyShortTimeIntervalSinceNow;
+        cell.timeLabel.text = event.creationDate.prettyShortTimeIntervalSinceNow;
         
         [self updateImageView:cell.targetImageView 
                   atIndexPath:indexPath 

@@ -229,7 +229,7 @@
             cell.repositoryLabel.text = event.repository.name;
         }
         cell.detailTextLabel.text = [self descriptionForEvent:event];
-        cell.timeLabel.text = event.createdAtString.prettyShortTimeIntervalSinceNow;
+        cell.timeLabel.text = event.creationDate.prettyShortTimeIntervalSinceNow;
         
         return cell;
     } else if (event.type == GHAPIEventTypeV3FollowEvent) {
@@ -258,7 +258,7 @@
         cell.textLabel.text = followEvent.actor.login;
         cell.detailTextLabel.text = [self descriptionForEvent:event];
         cell.secondLabel.text = followEvent.user.login;
-        cell.timeLabel.text = event.createdAtString.prettyShortTimeIntervalSinceNow;
+        cell.timeLabel.text = event.creationDate.prettyShortTimeIntervalSinceNow;
         
         if (followEvent.user.avatarURL) {
             [self updateImageView:cell.secondImageView 

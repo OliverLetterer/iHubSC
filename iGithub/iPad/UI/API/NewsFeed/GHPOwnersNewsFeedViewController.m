@@ -136,7 +136,7 @@
                                 usingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
                                     GHAPIEventV3 *event = obj;
                                     
-                                    NSDate *createDate = event.createdAtString.dateFromGithubAPIDateString;
+                                    NSDate *createDate = event.creationDate;
                                     NSTimeInterval differenceSinceNow = [now timeIntervalSinceDate:createDate];
                                     
                                     if (fabs(differenceSinceNow) > maximumTimeInterval) {

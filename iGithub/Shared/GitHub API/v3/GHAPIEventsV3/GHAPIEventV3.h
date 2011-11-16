@@ -63,6 +63,7 @@ GHAPIEventTypeV3 GHAPIEventTypeV3FromNSString(NSString *eventType);
     GHAPIOrganizationV3 *_organization;
     
     NSString *_createdAtString;
+    NSDate *_creationDate;
     NSString *_typeString;
     NSNumber *_public;
     
@@ -80,6 +81,7 @@ GHAPIEventTypeV3 GHAPIEventTypeV3FromNSString(NSString *eventType);
 @property (nonatomic, readonly) NSString *createdAtString;
 @property (nonatomic, readonly) NSString *typeString;
 @property (nonatomic, readonly) NSNumber *public;
+@property (nonatomic, readonly) NSDate *creationDate;
 
 @property (nonatomic, readonly) GHAPIEventTypeV3 type;
 

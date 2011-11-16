@@ -73,7 +73,17 @@ GHAPIEventTypeV3 GHAPIEventTypeV3FromNSString(NSString *eventType)
 
 
 @implementation GHAPIEventV3
-@synthesize repository=_repository, actor=_actor, organization=_organization, createdAtString=_createdAtString, typeString=_typeString, public=_public, type=_type;
+@synthesize repository=_repository, actor=_actor, organization=_organization, createdAtString=_createdAtString, typeString=_typeString, public=_public, type=_type, creationDate=_creationDate;
+
+#pragma mark - setters and getters
+
+- (NSDate *)creationDate
+{
+    if (!_creationDate) {
+        _creationDate = _createdAtString.dateFromGithubAPIDateString;
+    }
+    return _creationDate;
+}
 
 #pragma mark - Initialization
 
@@ -94,6 +104,7 @@ GHAPIEventTypeV3 GHAPIEventTypeV3FromNSString(NSString *eventType)
         _organization = [[GHAPIOrganizationV3 alloc] initWithRawDictionary:[rawDictionary objectForKeyOrNilOnNullObject:@"org"]];
         
         _createdAtString = [rawDictionary objectForKeyOrNilOnNullObject:@"created_at"];
+        _creationDate = _createdAtString.dateFromGithubAPIDateString;
         _typeString = [rawDictionary objectForKeyOrNilOnNullObject:@"type"];
         _public = [rawDictionary objectForKeyOrNilOnNullObject:@"public"];
         
@@ -199,6 +210,7 @@ GHAPIEventTypeV3 GHAPIEventTypeV3FromNSString(NSString *eventType)
     [encoder encodeObject:_typeString forKey:@"typeString"];
     [encoder encodeObject:_public forKey:@"public"];
     [encoder encodeInteger:_type forKey:@"type"];
+    [encoder encodeObject:_creationDate forKey:@"creationDate"];
 }
 
 - (id)initWithCoder:(NSCoder *)decoder {
@@ -210,6 +222,7 @@ GHAPIEventTypeV3 GHAPIEventTypeV3FromNSString(NSString *eventType)
         _typeString = [decoder decodeObjectForKey:@"typeString"];
         _public = [decoder decodeObjectForKey:@"public"];
         _type = [decoder decodeIntegerForKey:@"type"];
+        _creationDate = [decoder decodeObjectForKey:@"creationDate"];
     }
     return self;
 }
@@ -236,7 +249,7 @@ GHAPIEventTypeV3 GHAPIEventTypeV3FromNSString(NSString *eventType)
         } else {
             // enumerate and check if any event matches lastEventDateString
             for (GHAPIEventV3 *event in array) {
-                NSDate *eventDate = event.createdAtString.dateFromGithubAPIDateString;
+                NSDate *eventDate = event.creationDate;
                 NSTimeInterval eventTimeInterval = eventDate.timeIntervalSince1970;
                 
                 if (eventTimeInterval == lastEventTimeIterval) {
