@@ -3962,8 +3962,8 @@
 				CLANG_ARC_MIGRATION = donothing;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_OBJCPP_ARC_ABI = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Oliver Letterer (U4JU39Q339)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Oliver Letterer (U4JU39Q339)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Oliver Letterer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Oliver Letterer";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -3985,8 +3985,8 @@
 					"-Objc",
 					"-all_load",
 				);
-				PROVISIONING_PROFILE = "41FE697E-BF0F-4543-86D5-F3FDDDD068FC";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "41FE697E-BF0F-4543-86D5-F3FDDDD068FC";
+				PROVISIONING_PROFILE = "7AD10582-11C6-4F0B-B78E-7F04AA20274F";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "7AD10582-11C6-4F0B-B78E-7F04AA20274F";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
