@@ -1,5 +1,11 @@
 # Changelog
 
+## V2.1
+- Improved NewsFeeds 
+- Bugfixes 
+- Fullscreen Commit Diffs on iPad
+- Fullscreen and Landscape Commit Diffs on iPhone
+
 ## V2.0
 - brand new iPad UI
 - view issues that are assigned to the authenticated user
