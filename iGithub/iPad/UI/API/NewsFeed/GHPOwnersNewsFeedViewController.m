@@ -128,24 +128,26 @@
         // we have more than 100 events stored
         NSDate *now = [NSDate date];
         
-        NSMutableIndexSet *deletionSet = [NSMutableIndexSet indexSet];
         NSIndexSet *enumerationSet = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(maximumNumberOfEvents, _events.count - maximumNumberOfEvents)];
         
-        [_events enumerateObjectsAtIndexes:enumerationSet 
-                                   options:NSEnumerationConcurrent
-                                usingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-                                    GHAPIEventV3 *event = obj;
-                                    
-                                    NSDate *createDate = event.creationDate;
-                                    NSTimeInterval differenceSinceNow = [now timeIntervalSinceDate:createDate];
-                                    
-                                    if (fabs(differenceSinceNow) > maximumTimeInterval) {
-                                        // this event is older than 5 days
-                                        [deletionSet addIndex:idx];
-                                    }
-                                }];
+        NSUInteger index = [_events indexOfObjectAtIndexes:enumerationSet
+                                                   options:NSEnumerationConcurrent
+                                               passingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) 
+                            {
+                                GHAPIEventV3 *event = obj;
+                                
+                                NSDate *createDate = event.creationDate;
+                                NSTimeInterval differenceSinceNow = [now timeIntervalSinceDate:createDate];
+                                
+                                *stop = fabs(differenceSinceNow) > maximumTimeInterval;
+                                return *stop;
+                            }];
         
-        [_events removeObjectsAtIndexes:deletionSet];
+        if (index != NSNotFound) {
+            NSIndexSet *deletionSet = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(index, _events.count - index)];
+            
+            [_events removeObjectsAtIndexes:deletionSet];
+        }
     }
     
     [_events insertObjects:newEvents atIndexes:indexSet];
