@@ -11,9 +11,22 @@
 #import "ASIHTTPRequest.h"
 #import "ANNotificationQueue.h"
 #import "GithubAPI.h"
+#import "BlocksKit.h"
 
 @implementation iGithubAppDelegate
 @synthesize window=_window;
+
+#pragma mark - setters and getters
+
+- (NSString *)lastDetectedURLString
+{
+    return [[NSUserDefaults standardUserDefaults] objectForKey:@"lastDetectedURLString"];
+}
+
+- (void)setLastDetectedURLString:(NSString *)lastDetectedURLString
+{
+    [[NSUserDefaults standardUserDefaults] setObject:lastDetectedURLString forKey:@"lastDetectedURLString"];
+}
 
 - (NSMutableDictionary *)serializedStateDictionary {
     return nil;
@@ -52,11 +65,71 @@
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
+    UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
     
+    static NSString *githubPrefix = @"https://github.com/";
+    
+    NSString *githubURLString = pasteboard.string;
+    
+    if ([githubURLString hasPrefix:githubPrefix] && ![githubURLString isEqualToString:self.lastDetectedURLString] && [GHAPIAuthenticationManager sharedInstance].authenticatedUser != nil) {
+        NSURL *githubURL = [NSURL URLWithString:githubURLString];
+        
+        NSMutableArray *pathComponents = githubURL.pathComponents.mutableCopy;
+        [pathComponents removeObject:@"/"];
+        
+        NSString *username = nil;
+        NSString *repository = nil;
+        
+        if (pathComponents.count > 0) {
+            // first index can contain a user name
+            username = [pathComponents objectAtIndex:0];
+        }
+        
+        if (pathComponents.count > 1) {
+            NSString *repositoryName = [pathComponents objectAtIndex:1];
+            if (![repository.lowercaseString isEqualToString:@"following"] && ![repositoryName.lowercaseString isEqualToString:@"repositories"]) {
+                repository = [NSString stringWithFormat:@"%@/%@", [pathComponents objectAtIndex:0], repositoryName];
+            }
+        }
+        
+        if (username != nil || repository != nil) {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"GitHub URL detected", @"") 
+                                                            message:nil
+                                                           delegate:nil 
+                                                  cancelButtonTitle:NSLocalizedString(@"Cancel", @"") 
+                                                  otherButtonTitles:nil];
+            if (username) {
+                [alert addButtonWithTitle:username
+                                  handler:^{
+                                      [self showUserWithName:username];
+                                  }];
+            }
+            if (repository) {
+                [alert addButtonWithTitle:repository
+                                  handler:^{
+                                      [self showRepositoryWithName:repository];
+                                  }];
+            }
+            
+            [alert show];
+        }
+        
+        self.lastDetectedURLString = githubURLString;
+    }
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     
+}
+
+- (void)showUserWithName:(NSString *)username
+{
+    [self doesNotRecognizeSelector:_cmd];
+}
+
+- (void)showRepositoryWithName:(NSString *)repositoryString
+{
+    [self doesNotRecognizeSelector:_cmd];
 }
 
 #pragma mark - Serializations

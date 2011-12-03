@@ -9,6 +9,7 @@
 #import "iGithubAppDelegate_iPhone.h"
 #import "GithubAPI.h"
 #import "UIColor+GithubUI.h"
+#import "BlocksKit.h"
 
 @implementation iGithubAppDelegate_iPhone
 
@@ -39,7 +40,7 @@
     controller.mailComposeDelegate = self;
     [controller setSubject:@"Unkown Event Type found"];
     [controller setMessageBody:[[notification userInfo] description] isHTML:NO]; 
-    [self.tabBarController presentModalViewController:controller animated:YES];
+    [self.tabBarController presentViewController:controller animated:YES completion:nil];
 }
 
 - (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error {
@@ -122,6 +123,34 @@
                                                                              tag:0];
     
     return [super application:application didFinishLaunchingWithOptions:launchOptions];
+}
+
+- (void)showUserWithName:(NSString *)username
+{
+    GHUserViewController *viewController = [[GHUserViewController alloc] initWithUsername:username];
+    
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:viewController];
+    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
+                                                                         handler:^(id sender) {
+                                                                             [self.tabBarController dismissModalViewControllerAnimated:YES];
+                                                                         }];
+    viewController.navigationItem.leftBarButtonItem = item;
+    
+    [self.tabBarController presentViewController:navigationController animated:YES completion:nil];
+}
+
+- (void)showRepositoryWithName:(NSString *)repositoryString
+{
+    GHRepositoryViewController *viewController = [[GHRepositoryViewController alloc] initWithRepositoryString:repositoryString];
+    
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:viewController];
+    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
+                                                                         handler:^(id sender) {
+                                                                             [self.tabBarController dismissModalViewControllerAnimated:YES];
+                                                                         }];
+    viewController.navigationItem.leftBarButtonItem = item;
+    
+    [self.tabBarController presentViewController:navigationController animated:YES completion:nil];
 }
 
 #pragma mark - Serialization

@@ -12,6 +12,8 @@
 #import "GHAPIAuthenticationManager.h"
 #import "GHPSearchScopeTableViewCell.h"
 #import "UIColor+GithubUI.h"
+#import "GHPRepositoryViewController.h"
+#import "GHPUserViewController.h"
 
 @implementation iGithubAppDelegate_iPad
 
@@ -66,6 +68,24 @@
 
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (void)showUserWithName:(NSString *)username
+{
+    GHPUserViewController *viewController = [[GHPUserViewController alloc] initWithUsername:username];
+    
+    [self.advancedNavigationController pushViewController:viewController
+                                      afterViewController:nil
+                                                 animated:YES];
+}
+
+- (void)showRepositoryWithName:(NSString *)repositoryString
+{
+    GHPRepositoryViewController *viewController = [[GHPRepositoryViewController alloc] initWithRepositoryString:repositoryString];
+    
+    [self.advancedNavigationController pushViewController:viewController
+                                      afterViewController:nil
+                                                 animated:YES];
 }
 
 #pragma mark - Serialization

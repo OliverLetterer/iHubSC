@@ -15,6 +15,8 @@
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
 
+@property (nonatomic, strong) NSString *lastDetectedURLString;
+
 @property (nonatomic, readonly) NSMutableDictionary *serializedStateDictionary;
 @property (nonatomic, readonly) NSString *lastKnownApplicationStateDictionaryFilePath;
 
@@ -23,5 +25,8 @@
 - (void)nowSerializeState;
 - (BOOL)serializeStateInDictionary:(NSMutableDictionary *)dictionary;
 - (NSMutableDictionary *)deserializeState;
+
+- (void)showUserWithName:(NSString *)username;
+- (void)showRepositoryWithName:(NSString *)repositoryString;
 
 @end
