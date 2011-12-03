@@ -488,7 +488,7 @@
         viewController.delegate = self;
         
         UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:viewController];
-        [self presentModalViewController:navController animated:YES];
+        [self presentViewController:navController animated:YES completion:nil];
     } else if ([title isEqualToString:NSLocalizedString(@"View Blog in Safari", @"")]) {
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:self.organization.blog] ];
     } else if ([title isEqualToString:NSLocalizedString(@"E-Mail", @"")]) {

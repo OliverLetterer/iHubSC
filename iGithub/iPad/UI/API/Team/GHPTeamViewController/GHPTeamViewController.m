@@ -301,7 +301,7 @@
         
         UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:viewController];
         navController.modalPresentationStyle = UIModalPresentationFormSheet;
-        [self presentModalViewController:navController animated:YES];
+        [self presentViewController:navController animated:YES completion:nil];
     } else if ([title isEqualToString:NSLocalizedString(@"Delete", @"")]) {
         [GHAPITeamV3 deleteTeamWithID:self.teamID completionHandler:^(NSError *error) {
             if (error) {

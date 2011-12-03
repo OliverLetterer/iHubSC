@@ -69,7 +69,7 @@
                                            
                                            sheet.actionSheetStyle = UIActionSheetStyleBlackTranslucent;
                                            
-                                           [sheet showInView:self.tabBarController.view];
+                                           [self presentActionSheetFromParentViewController:sheet];
                                        } else {
                                            // user is not part of any organization
                                            

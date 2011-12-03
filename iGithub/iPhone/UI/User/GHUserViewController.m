@@ -932,7 +932,7 @@
             createViewController.delegate = self;
             
             UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:createViewController];
-            [self presentModalViewController:navController animated:YES];
+            [self presentViewController:navController animated:YES completion:nil];
         } else if ([title isEqualToString:NSLocalizedString(@"E-Mail", @"")]) {
             MFMailComposeViewController *mailViewController = [[MFMailComposeViewController alloc] init];
             mailViewController.mailComposeDelegate = self;

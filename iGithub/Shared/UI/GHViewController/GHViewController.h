@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "ANAdvancedNavigationController.h"
+#import "UIViewController+GHUIActionSheetPresenting.h"
 
 @interface GHViewController : UIViewController <NSCoding> {
 @private

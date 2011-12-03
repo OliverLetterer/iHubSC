@@ -1007,7 +1007,7 @@
             viewController.delegate = self;
             
             UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:viewController];
-            [self presentModalViewController:navController animated:YES];
+            [self presentViewController:navController animated:YES completion:nil];
         } else if ([title isEqualToString:NSLocalizedString(@"Delete", @"")]) {
             self.actionButtonActive = YES;
             [GHRepository deleteTokenForRepository:self.repositoryString 
@@ -1093,7 +1093,7 @@
                                                    sheet.tag = kUIActionSheetSelectOrganizationTag;
                                                    sheet.delegate = self;
                                                    
-                                                   [sheet showInView:self.tabBarController.view];
+                                                   [self presentActionSheetFromParentViewController:sheet];
                                                }
                                            } else {
                                                self.actionButtonActive = NO;
@@ -1113,7 +1113,7 @@
             
             UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:viewController];
             
-            [self presentModalViewController:navController animated:YES];
+            [self presentViewController:navController animated:YES completion:nil];
         } else if ([title isEqualToString:NSLocalizedString(@"Create Label", @"")]) {
             GHColorAlertView *alert = [[GHColorAlertView alloc] initWithTitle:NSLocalizedString(@"Select Color", @"") 
                                                                       message:nil 

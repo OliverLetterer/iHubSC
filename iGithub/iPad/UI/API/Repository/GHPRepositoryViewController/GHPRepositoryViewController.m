@@ -540,7 +540,7 @@
                                                sheet.delegate = self;
                                                sheet.tag = kUIActionSheetTagSelectOrganization;
                                                
-                                               [sheet showInView:self.parentViewController.view];
+                                               [self presentActionSheetFromParentViewController:sheet];
                                            }
                                        } else {
                                            self.infoCell.actionButton.alpha = 1.0f;

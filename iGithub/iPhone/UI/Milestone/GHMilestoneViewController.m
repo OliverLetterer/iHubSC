@@ -448,7 +448,7 @@
             viewController.delegate = self;
             
             UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:viewController];
-            [self presentModalViewController:navController animated:YES];
+            [self presentViewController:navController animated:YES completion:nil];
         } else if ([title isEqualToString:NSLocalizedString(@"Delete", @"")]) {
             [GHAPIMilestoneV3 deleteMilstoneOnRepository:self.repository withID:self.milestoneNumber completionHandler:^(NSError *error) {
                 if (error) {

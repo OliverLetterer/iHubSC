@@ -14,6 +14,8 @@ NSInteger const kUIActionButtonActionSheetTag = 549532;
 
 NSInteger const kUIActionButtonActivityIndicatorView = 123908;
 
+
+
 @implementation GHActionButtonTableViewController
 
 #pragma mark - setters and getters
@@ -97,9 +99,7 @@ NSInteger const kUIActionButtonActivityIndicatorView = 123908;
         UIActionSheet *sheet = self.actionButtonActionSheet;
         sheet.tag = kUIActionButtonActionSheetTag;
         
-        if (self.tabBarController.view) {
-            [sheet showInView:self.tabBarController.view];
-        }
+        [self presentActionSheetFromParentViewController:sheet];
     }
 }
 

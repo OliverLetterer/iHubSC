@@ -33,9 +33,6 @@
     return self;
 }
 
-#pragma mark - Memory management
-
-
 - (void)didReceiveMemoryWarning {
     // Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
@@ -80,7 +77,7 @@
                                                                                
                                                                                UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:viewController];
                                                                                
-                                                                               [self presentModalViewController:navigationController animated:YES];
+                                                                               [self presentViewController:navigationController animated:YES completion:nil];
                                                                            }];
         
         self.navigationItem.rightBarButtonItem = fullScreenButton;

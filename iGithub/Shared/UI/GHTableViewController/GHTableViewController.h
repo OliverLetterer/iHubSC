@@ -19,6 +19,7 @@
 #import "GHPCollapsingAndSpinningTableViewCell.h"
 #import "GHCollapsingAndSpinningTableViewCell.h"
 #import "ANNotificationQueue.h"
+#import "UIViewController+GHUIActionSheetPresenting.h"
 
 @class GHTableViewCell;
 

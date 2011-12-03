@@ -56,7 +56,7 @@
             [sheet showFromBarButtonItem:sender animated:YES];
         }
     } else {
-        [sheet showInView:self.tabBarController.view];
+        [self presentActionSheetFromParentViewController:sheet];
     }
 }
 

@@ -326,6 +326,7 @@
 		A7BF14061342149C001AE50D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A7BF14041342149C001AE50D /* InfoPlist.strings */; };
 		A7BF14091342149C001AE50D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A7BF14081342149C001AE50D /* main.m */; };
 		A7BF143113421572001AE50D /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7BF143013421572001AE50D /* Security.framework */; };
+		A7C2834F148A488000D4F496 /* UIViewController+GHUIActionSheetPresenting.m in Sources */ = {isa = PBXBuildFile; fileRef = A7C2834E148A488000D4F496 /* UIViewController+GHUIActionSheetPresenting.m */; };
 		A7C5254D13E69E360003EEE5 /* GHCreateMilestoneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7C5254C13E69E360003EEE5 /* GHCreateMilestoneViewController.m */; };
 		A7C5255013E69F9A0003EEE5 /* GHCreateMilestoneTitleAndDescriptionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A7C5254F13E69F9A0003EEE5 /* GHCreateMilestoneTitleAndDescriptionTableViewCell.m */; };
 		A7C5256F13E6ADA10003EEE5 /* libKal.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A7C5256C13E6ACCD0003EEE5 /* libKal.a */; };
@@ -1034,6 +1035,8 @@
 		A7BF14071342149C001AE50D /* iGithub-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "iGithub-Prefix.pch"; sourceTree = "<group>"; };
 		A7BF14081342149C001AE50D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		A7BF143013421572001AE50D /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		A7C2834D148A488000D4F496 /* UIViewController+GHUIActionSheetPresenting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+GHUIActionSheetPresenting.h"; sourceTree = "<group>"; };
+		A7C2834E148A488000D4F496 /* UIViewController+GHUIActionSheetPresenting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+GHUIActionSheetPresenting.m"; sourceTree = "<group>"; };
 		A7C5254B13E69E360003EEE5 /* GHCreateMilestoneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHCreateMilestoneViewController.h; sourceTree = "<group>"; };
 		A7C5254C13E69E360003EEE5 /* GHCreateMilestoneViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHCreateMilestoneViewController.m; sourceTree = "<group>"; };
 		A7C5254E13E69F9A0003EEE5 /* GHCreateMilestoneTitleAndDescriptionTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHCreateMilestoneTitleAndDescriptionTableViewCell.h; sourceTree = "<group>"; };
@@ -2167,6 +2170,8 @@
 				A7841E6613E194BB00131648 /* GHAuthenticationAlertView.m */,
 				A7841E6713E194BB00131648 /* UIViewController+GHErrorHandling.h */,
 				A7841E6813E194BB00131648 /* UIViewController+GHErrorHandling.m */,
+				A7C2834D148A488000D4F496 /* UIViewController+GHUIActionSheetPresenting.h */,
+				A7C2834E148A488000D4F496 /* UIViewController+GHUIActionSheetPresenting.m */,
 			);
 			path = "UIViewController+GHViewControllerErrorhandling";
 			sourceTree = "<group>";
@@ -3860,6 +3865,7 @@
 				A7D9C3EF1466A9F20009F10B /* GHCommitsViewController.m in Sources */,
 				A7E153EB1469370600F7FB5C /* GHPModalCommitViewController.m in Sources */,
 				A7632E49146CFA1500752F43 /* GHPCommitsOfPullRequestViewController.m in Sources */,
+				A7C2834F148A488000D4F496 /* UIViewController+GHUIActionSheetPresenting.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
