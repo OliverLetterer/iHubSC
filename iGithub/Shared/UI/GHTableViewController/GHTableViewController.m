@@ -469,6 +469,17 @@ static CGFloat wrapperViewHeight = 21.0f;
 	return interfaceOrientation == UIInterfaceOrientationPortrait;
 }
 
+#pragma mark - UIContainerViewControllerCallbacks
+
+- (void)willMoveToParentViewController:(UIViewController *)parent
+{
+    [super willMoveToParentViewController:parent];
+    
+    if (!parent) {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
+}
+
 #pragma mark - UIExpandableTableViewDatasource
 
 - (BOOL)tableView:(UIExpandableTableView *)tableView canExpandSection:(NSInteger)section {

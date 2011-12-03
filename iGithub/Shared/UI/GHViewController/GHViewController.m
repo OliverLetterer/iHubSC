@@ -14,6 +14,8 @@
 @synthesize navigationTintColor=_navigationTintColor;
 @synthesize presentedInPopoverController=_presentedInPopoverController;
 
+#pragma mark - NSCoding
+
 - (void)encodeWithCoder:(NSCoder *)coder {
     [coder encodeObject:self.title forKey:@"title"];
 }
@@ -24,6 +26,8 @@
     }
     return self;
 }
+
+#pragma mark - View lifecycle
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation {
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
@@ -82,6 +86,17 @@
     gradientLayer.actions = newActions;
     [view.layer addSublayer:gradientLayer];
     return view;
+}
+
+#pragma mark - UIContainerViewControllerCallbacks
+
+- (void)willMoveToParentViewController:(UIViewController *)parent
+{
+    [super willMoveToParentViewController:parent];
+    
+    if (!parent) {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
 }
 
 @end
