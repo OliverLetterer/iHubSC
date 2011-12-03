@@ -51,6 +51,16 @@
     return self;
 }
 
+#pragma mark - authentication
+
+- (void)authenticationManagerDidAuthenticateUserCallback:(NSNotification *)notification
+{
+    _lastKnownEventDateString = nil;
+    self.events = nil;
+    
+    [super authenticationManagerDidAuthenticateUserCallback:notification];
+}
+
 #pragma mark - Downloading
 
 - (void)downloadNewsFeed { }

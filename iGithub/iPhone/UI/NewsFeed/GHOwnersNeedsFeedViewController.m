@@ -33,6 +33,16 @@
                                                    }];
 }
 
+#pragma mark - manage authentication
+
+- (void)authenticationManagerDidAuthenticateUserCallback:(NSNotification *)notification
+{
+    _lastKnownEventDateString = nil;
+    self.events = nil;
+    
+    [super authenticationManagerDidAuthenticateUserCallback:notification];
+}
+
 #pragma mark - View lifecycle
 
 - (void)viewDidLoad

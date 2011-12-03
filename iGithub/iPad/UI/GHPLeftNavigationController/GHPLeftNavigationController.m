@@ -67,6 +67,8 @@
     if (self.isViewLoaded) {
         [self.tableView reloadData];
         
+        _resetNewsFeedData = YES;
+        
         NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:kUITableViewSectionNewsFeed];
         [self.tableView selectRowAtIndexPath:indexPath 
                                     animated:NO 
@@ -318,6 +320,11 @@
         if (indexPath.row == 0) {
             NSURL *serializationURL = self._URLForOwnersNewsFeedViewController;
             viewController = [NSKeyedUnarchiver unarchiveObjectWithFile:serializationURL.relativePath];
+            
+            if (_resetNewsFeedData) {
+                viewController = nil;
+                _resetNewsFeedData = NO;
+            }
             
             if (!viewController) {
                 // GHPOwnersNewsFeedViewController was not found because it was never used or the version was updated. perform some cleanup

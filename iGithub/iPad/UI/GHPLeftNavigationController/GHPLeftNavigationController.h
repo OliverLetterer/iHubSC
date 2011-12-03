@@ -14,6 +14,8 @@
     GHPEdgedLineView *_lineView;
     UIView *_controllerView;
     
+    BOOL _resetNewsFeedData;
+    
     NSArray *_organizations;
     
     NSIndexPath *_mySelectedIndexPath;
