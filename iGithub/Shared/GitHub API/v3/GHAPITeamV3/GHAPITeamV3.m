@@ -33,6 +33,11 @@ NSString *const GHAPITeamV3PermissionAdmin = @"admin";
     return self;
 }
 
+- (NSString *)description
+{
+    return [NSString stringWithFormat:@"%@: %@", super.description, self.name];
+}
+
 #pragma mark - Keyed Archiving
 
 - (void)encodeWithCoder:(NSCoder *)encoder {

@@ -323,18 +323,10 @@
             [self failedToDownloadDataToDisplayActionButtonWithError:error];
         } else {
             _isAdmin = state;
-            if ([self.team.permission isEqualToString:GHAPITeamV3PermissionAdmin]) {
-                [GHAPITeamV3 isUser:username memberInTeamByID:self.teamID 
-                  completionHandler:^(BOOL state, NSError *error) {
-                      if (error) {
-                          [self failedToDownloadDataToDisplayActionButtonWithError:error];
-                      } else {
-                          _hasAdminData = YES;
-                          _canEditTeam = state;
-                          [self didDownloadDataToDisplayActionButton];
-                      }
-                  }];
-            }
+            _canEditTeam = state;
+            _hasAdminData = YES;
+            
+            [self didDownloadDataToDisplayActionButton];
         }
     }];
 }

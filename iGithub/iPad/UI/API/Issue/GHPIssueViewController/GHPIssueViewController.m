@@ -131,7 +131,7 @@
             break;
             
         case GHAPIIssueEventTypeV3Merged:
-            description = [NSString stringWithFormat:NSLocalizedString(@"Merged this %@ with %@", @""), self.issueName], event.commitID;
+            description = [NSString stringWithFormat:NSLocalizedString(@"Merged this %@ with %@", @""), self.issueName, event.commitID];
             break;
             
         case GHAPIIssueEventTypeV3Referenced:

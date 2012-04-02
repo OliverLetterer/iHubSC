@@ -326,7 +326,7 @@
                 GHAPITeamV3 *ownersTeam = [teams objectAtIndex:index];
                 [GHAPITeamV3 isUser:username memberInTeamByID:ownersTeam.ID completionHandler:handler];
             } else {
-                handler(NO, [NSError errorWithDomain:@"error" code:0 userInfo:[NSDictionary dictionaryWithObject:NSLocalizedString(@"Owners Team not found on repo", @"") forKey:NSLocalizedDescriptionKey] ]);
+                handler(NO, [NSError errorWithDomain:@"error" code:0 userInfo:[NSDictionary dictionaryWithObject:NSLocalizedString(@"Only members of the owner’s team are allowed to perform this action.", @"") forKey:NSLocalizedDescriptionKey] ]);
             }
         }
     }];

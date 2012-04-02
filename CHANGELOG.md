@@ -1,5 +1,9 @@
 # Changelog
 
+## V2.1.3
+- Bug fixes:
+    Fixes not working action button in organizations.
+
 ## V2.1
 - Improved NewsFeeds 
 - Bugfixes 

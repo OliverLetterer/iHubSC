@@ -378,6 +378,7 @@
         
         GHAPITeamV3 *team = [self.teams objectAtIndex:indexPath.row - 1];
         
+        cell.imageView.image = nil;
         cell.textLabel.text = team.name;
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         
