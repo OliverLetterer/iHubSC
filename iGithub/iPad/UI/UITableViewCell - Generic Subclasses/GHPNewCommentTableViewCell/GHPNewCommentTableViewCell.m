@@ -196,6 +196,11 @@ CGFloat const GHPNewCommentTableViewCellHeight = 200.0f;
     item.enabled = textView.selectedRange.length > 0;
 }
 
+- (void)textViewDidChange:(UITextView *)textView
+{
+    [_delegate newCommentTableViewCell:self didEnterText:textView.text];
+}
+
 #pragma mark - Initialization
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {

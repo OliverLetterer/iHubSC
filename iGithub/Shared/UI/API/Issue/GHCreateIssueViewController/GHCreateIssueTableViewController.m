@@ -74,20 +74,8 @@ NSInteger const kGHCreateIssueTableViewControllerSectionLabels = kUITableViewSec
 #pragma mark - target actions
 
 - (void)saveButtonClicked:(UIBarButtonItem *)sender {
-    NSString *title = nil;
-    NSString *body = nil;
-    
-    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-        GHPCreateIssueTitleAndDescriptionTableViewCell *cell = (GHPCreateIssueTitleAndDescriptionTableViewCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:kUITableViewSectionTitle] ];
-        
-        title = cell.textField.text;
-        body = cell.textView.text;
-    } else {
-        GHCreateIssueTableViewCell *cell = (GHCreateIssueTableViewCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:kUITableViewSectionTitle] ];
-        
-        title = cell.titleTextField.text;
-        body = cell.textView.text;
-    }
+    NSString *title = _issueTitle;
+    NSString *body = _issueDescription;
     
     self.navigationItem.rightBarButtonItem = self.loadingButton;
     [GHAPIIssueV3 createIssueOnRepository:self.repository 
@@ -108,6 +96,11 @@ NSInteger const kGHCreateIssueTableViewControllerSectionLabels = kUITableViewSec
 }
 
 #pragma mark - instance methods
+
+- (void)titleTextFieldValueChanged:(UITextField *)textField
+{
+    _issueTitle = textField.text;
+}
 
 - (void)downloadDataWithDownloadBlock:(void(^)(void))downloadBlock forTableView:(UIExpandableTableView *)tableView inSection:(NSUInteger)section {
     if (!_hasCollaboratorState) {
@@ -321,11 +314,12 @@ NSInteger const kGHCreateIssueTableViewControllerSectionLabels = kUITableViewSec
                 GHPCreateIssueTitleAndDescriptionTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
                 if (cell == nil) {
                     cell = [[GHPCreateIssueTitleAndDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+                    [cell.textField addTarget:self action:@selector(titleTextFieldValueChanged:) forControlEvents:UIControlEventEditingChanged];
+                    cell.delegate = self;
                 }
+                
                 [self setupDefaultTableViewCell:cell forRowAtIndexPath:indexPath];
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                
-                // Configure the cell...
                 
                 return cell;
             } else {
@@ -335,6 +329,9 @@ NSInteger const kGHCreateIssueTableViewControllerSectionLabels = kUITableViewSec
                 if (cell == nil) {
                     cell = [[GHCreateIssueTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
                     cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                    
+                    [cell.titleTextField addTarget:self action:@selector(titleTextFieldValueChanged:) forControlEvents:UIControlEventEditingChanged];
+                    cell.delegate = self;
                 }
                 
                 [self updateImageView:cell.imageView atIndexPath:indexPath withAvatarURLString:[GHAPIAuthenticationManager sharedInstance].authenticatedUser.avatarURL];
@@ -526,6 +523,13 @@ NSInteger const kGHCreateIssueTableViewControllerSectionLabels = kUITableViewSec
         _selectedMilestoneNumber = [decoder decodeObjectForKey:@"_selectedMilestoneNumber"];
     }
     return self;
+}
+
+#pragma mark - GHNewCommentTableViewCellDelegate
+
+- (void)newCommentTableViewCell:(GHNewCommentTableViewCell *)cell didEnterText:(NSString *)text
+{
+    _issueDescription = text;
 }
 
 @end

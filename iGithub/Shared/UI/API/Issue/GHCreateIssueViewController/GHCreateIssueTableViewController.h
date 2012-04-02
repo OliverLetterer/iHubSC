@@ -6,7 +6,7 @@
 //  Copyright 2011 Home. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "GHPNewCommentTableViewCell.h"
 #import "GHCreateContentViewController.h"
 #import "GithubAPI.h"
 #import "GHCreateIssueTableViewCell.h"
@@ -29,13 +29,16 @@ extern NSInteger const kGHCreateIssueTableViewControllerSectionLabels;
 
 
 
-@interface GHCreateIssueTableViewController : GHCreateContentViewController {
+@interface GHCreateIssueTableViewController : GHCreateContentViewController <GHNewCommentTableViewCellDelegate, GHPNewCommentTableViewCellDelegate> {
 @private
     id<GHCreateIssueTableViewControllerDelegate> __weak _delegate;
     NSString *_repository;
     
     NSMutableArray *_collaborators;
     NSString *_assigneeString;
+    
+    NSString *_issueTitle;
+    NSString *_issueDescription;
     
     BOOL _hasCollaboratorState;
     BOOL _isCollaborator;
@@ -59,6 +62,7 @@ extern NSInteger const kGHCreateIssueTableViewControllerSectionLabels;
 @property (nonatomic, retain) NSMutableArray *labels;
 @property (nonatomic, retain) NSMutableArray *selectedLabels;
 
+- (void)titleTextFieldValueChanged:(UITextField *)textField;
 
 - (void)downloadDataWithDownloadBlock:(void(^)(void))downloadBlock forTableView:(UIExpandableTableView *)tableView inSection:(NSUInteger)section;
 
