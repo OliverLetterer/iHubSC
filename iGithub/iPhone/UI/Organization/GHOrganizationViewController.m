@@ -20,9 +20,9 @@
 #define kUITableViewSectionEMail                1
 #define kUITableViewSectionLocation             2
 #define kUITableViewSectionBlog                 3
-#define kUITableViewSectionPublicActivity       4
-#define kUITableViewSectionPublicRepositories   5
-#define kUITableViewSectionPublicMembers        6
+#define kUITableViewSectionActivity             4
+#define kUITableViewSectionRepositories         5
+#define kUITableViewSectionMembers              6
 #define kUITableViewSectionTeams                7
 
 #define kUITableViewNumberOfSections            8
@@ -72,13 +72,13 @@
 #pragma mark - UIExpandableTableViewDatasource
 
 - (BOOL)tableView:(UIExpandableTableView *)tableView canExpandSection:(NSInteger)section {
-    return section == kUITableViewSectionPublicRepositories || section == kUITableViewSectionPublicMembers || section == kUITableViewSectionTeams;
+    return section == kUITableViewSectionRepositories || section == kUITableViewSectionMembers || section == kUITableViewSectionTeams;
 }
 
 - (BOOL)tableView:(UIExpandableTableView *)tableView needsToDownloadDataForExpandableSection:(NSInteger)section {
-    if (section == kUITableViewSectionPublicRepositories) {
+    if (section == kUITableViewSectionRepositories) {
         return self.publicRepositories == nil;
-    } else if (section == kUITableViewSectionPublicMembers) {
+    } else if (section == kUITableViewSectionMembers) {
         return self.publicMembers == nil;
     } else if (section == kUITableViewSectionTeams) {
         return self.teams == nil;
@@ -95,10 +95,10 @@
         cell = [[GHCollapsingAndSpinningTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdientifier];
     }
     
-    if (section == kUITableViewSectionPublicRepositories) {
-        cell.textLabel.text = NSLocalizedString(@"Public Repositories", @"");
-    } else if (section == kUITableViewSectionPublicMembers) {
-        cell.textLabel.text = NSLocalizedString(@"Public Members", @"");
+    if (section == kUITableViewSectionRepositories) {
+        cell.textLabel.text = NSLocalizedString(@"Repositories", @"");
+    } else if (section == kUITableViewSectionMembers) {
+        cell.textLabel.text = NSLocalizedString(@"Members", @"");
     } else if (section == kUITableViewSectionTeams) {
         cell.textLabel.text = NSLocalizedString(@"Teams", @"");
     }
@@ -109,7 +109,7 @@
 #pragma mark - pagination
 
 - (void)downloadDataForPage:(NSUInteger)page inSection:(NSUInteger)section {
-    if (section == kUITableViewSectionPublicRepositories) {
+    if (section == kUITableViewSectionRepositories) {
         [GHAPIOrganizationV3 repositoriesOfOrganizationNamed:self.organization.login page:page 
                                             completionHandler:^(NSMutableArray *array, NSUInteger nextPage, NSError *error) {
                                                 if (error) {
@@ -121,7 +121,7 @@
                                                                   withRowAnimation:UITableViewRowAnimationAutomatic];
                                                 }
                                             }];
-    } else if (section == kUITableViewSectionPublicMembers) {
+    } else if (section == kUITableViewSectionMembers) {
         [GHAPIOrganizationV3 membersOfOrganizationNamed:self.organization.login page:1 
                                       completionHandler:^(NSMutableArray *array, NSUInteger nextPage, NSError *error) {
                                           if (error) {
@@ -151,7 +151,7 @@
 #pragma mark - UIExpandableTableViewDelegate
 
 - (void)tableView:(UIExpandableTableView *)tableView downloadDataForExpandableSection:(NSInteger)section {
-    if (section == kUITableViewSectionPublicRepositories) {
+    if (section == kUITableViewSectionRepositories) {
         [GHAPIOrganizationV3 repositoriesOfOrganizationNamed:self.organization.login page:1 
                                            completionHandler:^(NSMutableArray *array, NSUInteger nextPage, NSError *error) {
                                                 if (error) {
@@ -163,7 +163,7 @@
                                                     [tableView expandSection:section animated:YES];
                                                 }
                                             }];
-    } else if (section == kUITableViewSectionPublicMembers) {
+    } else if (section == kUITableViewSectionMembers) {
         [GHAPIOrganizationV3 membersOfOrganizationNamed:self.organization.login page:1 
                                       completionHandler:^(NSMutableArray *array, NSUInteger nextPage, NSError *error) {
                                           if (error) {
@@ -224,11 +224,11 @@
         if (self.organization.hasBlog) {
             return 1;
         }
-    } else if (section == kUITableViewSectionPublicActivity) {
+    } else if (section == kUITableViewSectionActivity) {
         return 1;
-    } else if (section == kUITableViewSectionPublicRepositories) {
+    } else if (section == kUITableViewSectionRepositories) {
         return self.publicRepositories.count + 1;
-    } else if (section == kUITableViewSectionPublicMembers) {
+    } else if (section == kUITableViewSectionMembers) {
         return self.publicMembers.count + 1;
     } else if (section == kUITableViewSectionTeams) {
         return self.teams.count + 1;
@@ -311,7 +311,7 @@
             
             return cell;
         }
-    } else if (indexPath.section == kUITableViewSectionPublicActivity) {
+    } else if (indexPath.section == kUITableViewSectionActivity) {
         if (indexPath.row == 0) {
             NSString *CellIdentifier = @"DetailsTableViewCell";
             
@@ -328,7 +328,7 @@
             
             return cell;
         }
-    } else if (indexPath.section == kUITableViewSectionPublicRepositories) {
+    } else if (indexPath.section == kUITableViewSectionRepositories) {
         NSString *CellIdentifier = @"GHFeedItemWithDescriptionTableViewCell";
         
         GHDescriptionTableViewCell *cell = (GHDescriptionTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
@@ -351,7 +351,7 @@
         // Configure the cell...
         
         return cell;
-    } else if (indexPath.section == kUITableViewSectionPublicMembers) {
+    } else if (indexPath.section == kUITableViewSectionMembers) {
         NSString *CellIdentifier = @"UITableViewCellWithLinearGradientBackgroundView";
         
         GHTableViewCellWithLinearGradientBackgroundView *cell = (GHTableViewCellWithLinearGradientBackgroundView *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
@@ -396,7 +396,7 @@
             return 71.0f;
         }
         return 44.0f;
-    } else if (indexPath.section == kUITableViewSectionPublicRepositories) {
+    } else if (indexPath.section == kUITableViewSectionRepositories) {
         if (indexPath.row == 0) {
             return 44.0f;
         }
@@ -412,15 +412,15 @@
         NSURL *URL = [NSURL URLWithString:self.organization.blog];
         GHWebViewViewController *web = [[GHWebViewViewController alloc] initWithURL:URL];
         [self.navigationController pushViewController:web animated:YES];
-    } else if (indexPath.section == kUITableViewSectionPublicActivity && indexPath.row == 0) {
+    } else if (indexPath.section == kUITableViewSectionActivity && indexPath.row == 0) {
         GHRecentActivityViewController *recentViewController = [[GHRecentActivityViewController alloc] initWithUsername:self.organization.login];
         [self.navigationController pushViewController:recentViewController animated:YES];
-    } else if (indexPath.section == kUITableViewSectionPublicRepositories) {
+    } else if (indexPath.section == kUITableViewSectionRepositories) {
         GHAPIRepositoryV3 *repo = [self.publicRepositories objectAtIndex:indexPath.row-1];
         
         GHRepositoryViewController *viewController = [[GHRepositoryViewController alloc] initWithRepositoryString:[NSString stringWithFormat:@"%@/%@", repo.owner.login, repo.name] ];
         [self.navigationController pushViewController:viewController animated:YES];
-    } else if (indexPath.section == kUITableViewSectionPublicMembers) {
+    } else if (indexPath.section == kUITableViewSectionMembers) {
         GHAPIUserV3 *user = [self.publicMembers objectAtIndex:indexPath.row - 1];
         
         GHUserViewController *userViewController = [[GHUserViewController alloc] initWithUsername:user.login];
