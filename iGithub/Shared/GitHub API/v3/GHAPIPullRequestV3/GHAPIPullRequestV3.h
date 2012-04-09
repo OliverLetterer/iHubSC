@@ -57,6 +57,10 @@
                             page:(NSUInteger)page 
                completionHandler:(GHAPIPaginationHandler)handler;
 
++ (void)pullRequestIssueOnRepository:(NSString *)repository 
+                          withNumber:(NSNumber *)number 
+                   completionHandler:(void (^)(GHAPIIssueV3 *issue, NSError *error))handler;
+
 + (void)mergPullRequestOnRepository:(NSString *)repository 
                          withNumber:(NSNumber *)pullRequestNumber 
                       commitMessage:(NSString *)commitMessage

@@ -98,6 +98,7 @@
 
 - (void)encodeWithCoder:(NSCoder *)encoder 
 {
+    [super encodeWithCoder:encoder];
     [encoder encodeObject:_defaultOrganizationName forKey:@"defaultOrganizationName"];
 }
 

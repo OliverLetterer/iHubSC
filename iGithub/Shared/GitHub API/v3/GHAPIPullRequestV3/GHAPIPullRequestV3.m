@@ -117,36 +117,54 @@
                                   }];
 }
 
++ (void)pullRequestIssueOnRepository:(NSString *)repository 
+                          withNumber:(NSNumber *)number 
+                   completionHandler:(void (^)(GHAPIIssueV3 *issue, NSError *error))handler
+{
+    // v3: GET /repos/:user/:repo/pulls/:number
+    
+    NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.github.com/repos/%@/pulls/%@",
+                                       [repository stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
+                                       number]];
+    
+    [[GHAPIBackgroundQueueV3 sharedInstance] sendRequestToURL:URL setupHandler:nil completionHandler:^(id object, NSError *error, ASIFormDataRequest *request) {
+        if (error) {
+            handler(nil, error);
+        } else {
+            handler([[GHAPIIssueV3 alloc] initWithRawDictionary:object], nil);
+        }
+    }];
+}
+
 + (void)mergPullRequestOnRepository:(NSString *)repository 
                          withNumber:(NSNumber *)pullRequestNumber 
                       commitMessage:(NSString *)commitMessage 
                   completionHandler:(void(^)(GHAPIPullRequestMergeStateV3 *state, NSError *error))handler 
 {
     // v3: PUT /repos/:user/:repo/pulls/:id/merge
-    
     NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.github.com/repos/%@/pulls/%@/merge",
                                        [repository stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
                                        pullRequestNumber ]];
     
     [[GHAPIBackgroundQueueV3 sharedInstance] sendRequestToURL:URL 
-                                            setupHandler:^(ASIFormDataRequest *request) {
-                                                [request setRequestMethod:@"PUT"];
-                                                
-                                                NSDictionary *jsonDictionary = [NSDictionary dictionaryWithObject:commitMessage 
-                                                                                                           forKey:@"commit_message"];
-                                                
-                                                NSString *jsonString = [jsonDictionary JSONString];
-                                                NSMutableData *jsonData = [[jsonString dataUsingEncoding:NSUTF8StringEncoding] mutableCopy];
-                                                [request setPostBody:jsonData];
-                                                [request setPostLength:[jsonString length] ];
-                                            }
-                                       completionHandler:^(id object, NSError *error, ASIFormDataRequest *request) {
-                                           if (error) {
-                                               handler(nil, error);
-                                           } else {
-                                               handler([[GHAPIPullRequestMergeStateV3 alloc] initWithRawDictionary:object], nil);
-                                           }
-                                       }];
+                                                 setupHandler:^(ASIFormDataRequest *request) {
+                                                     [request setRequestMethod:@"PUT"];
+                                                     
+                                                     NSDictionary *jsonDictionary = [NSDictionary dictionaryWithObject:commitMessage 
+                                                                                                                forKey:@"commit_message"];
+                                                     
+                                                     NSString *jsonString = [jsonDictionary JSONString];
+                                                     NSMutableData *jsonData = [[jsonString dataUsingEncoding:NSUTF8StringEncoding] mutableCopy];
+                                                     [request setPostBody:jsonData];
+                                                     [request setPostLength:[jsonString length] ];
+                                                 }
+                                            completionHandler:^(id object, NSError *error, ASIFormDataRequest *request) {
+                                                if (error) {
+                                                    handler(nil, error);
+                                                } else {
+                                                    handler([[GHAPIPullRequestMergeStateV3 alloc] initWithRawDictionary:object], nil);
+                                                }
+                                            }];
 }
 
 + (void)commitsOfPullRequestOnRepository:(NSString *)repository 

@@ -59,10 +59,30 @@
     _issueNumber = [issueNumber copy];
     
     self.isDownloadingEssentialData = YES;
+    
     [GHAPIIssueV3 issueOnRepository:_repositoryString withNumber:_issueNumber 
                   completionHandler:^(GHAPIIssueV3 *issue, NSError *error) {
                       if (error) {
-                          [self handleError:error];
+                          [GHAPIPullRequestV3 pullRequestIssueOnRepository:_repositoryString
+                                                                withNumber:_issueNumber
+                                                         completionHandler:^(GHAPIIssueV3 *issue, NSError *error2)
+                           {
+                               if (error2) {
+                                   [self handleError:error];
+                                   [self handleError:error2];
+                               } else {
+                                   [GHAPIRepositoryV3 repositoryNamed:_repositoryString 
+                                                withCompletionHandler:^(GHAPIRepositoryV3 *repository, NSError *error) {
+                                                    if (error) {
+                                                        [self handleError:error];
+                                                    } else {
+                                                        self.issue = issue;
+                                                        self.repository = repository;
+                                                        self.isDownloadingEssentialData = NO;
+                                                    }
+                                                }];
+                               }
+                           }];
                       } else {
                           [GHAPIRepositoryV3 repositoryNamed:_repositoryString 
                                        withCompletionHandler:^(GHAPIRepositoryV3 *repository, NSError *error) {
@@ -236,7 +256,7 @@
     if (indexPath.section == kUITableViewSectionInfo) {
         if (indexPath.row == 0) {
             GHPInfoTableViewCell *cell = self.infoCell;
-                        
+            
             cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ (%@ ago)", @""), self.issue.user.login, self.issue.createdAt.prettyTimeIntervalSinceNow];
             cell.detailTextLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Issue %@ - %@", @""), self.issue.number, self.issue.title];
             
@@ -248,7 +268,7 @@
             GHPIssueInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
             if (!cell) {
                 cell = [[GHPIssueInfoTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault 
-                                                              reuseIdentifier:CellIdentifier];
+                                                        reuseIdentifier:CellIdentifier];
             }
             
             [cell.actionButton removeFromSuperview];
@@ -400,7 +420,7 @@
                     cell = [[GHPAttributedTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
                 }
                 [self setupDefaultTableViewCell:cell forRowAtIndexPath:indexPath];
-
+                
                 
                 // display a comment
                 GHAPIIssueCommentV3 *comment = (GHAPIIssueCommentV3 *)object;
