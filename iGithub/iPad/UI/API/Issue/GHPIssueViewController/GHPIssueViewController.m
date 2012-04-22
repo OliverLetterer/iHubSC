@@ -786,16 +786,16 @@
 #pragma mark - GHPIssueInfoTableViewCellDelegate
 
 - (void)issueInfoTableViewCell:(GHPIssueInfoTableViewCell *)cell receivedClickForButton:(DTLinkButton *)button {
-    UIViewController *viewController = [[GHWebViewViewController alloc] initWithURL:button.url ];
+    UIViewController *viewController = [[GHWebViewViewController alloc] initWithURL:button.URL];
     viewController = [[UINavigationController alloc] initWithRootViewController:viewController];
     [self.advancedNavigationController pushViewController:viewController afterViewController:self animated:YES];
 }
 
 - (void)issueInfoTableViewCell:(GHPIssueInfoTableViewCell *)cell longPressRecognizedForButton:(DTLinkButton *)button {
-    self.selectedURL = button.url;
+    self.selectedURL = button.URL;
     UIActionSheet *sheet = [[UIActionSheet alloc] init];
     
-    sheet.title = button.url.absoluteString;
+    sheet.title = button.URL.absoluteString;
     [sheet addButtonWithTitle:NSLocalizedString(@"View in Safari", @"")];
     sheet.delegate = self;
     sheet.tag = kUIActionSheetTagLongPressedLink;
@@ -849,7 +849,7 @@
 #pragma mark - GHPAttributedTableViewCellDelegate
 
 - (void)attributedTableViewCell:(GHPAttributedTableViewCell *)cell receivedClickForButton:(DTLinkButton *)button {
-    UIViewController *viewController = [[GHWebViewViewController alloc] initWithURL:button.url ];
+    UIViewController *viewController = [[GHWebViewViewController alloc] initWithURL:button.URL];
     viewController = [[UINavigationController alloc] initWithRootViewController:viewController];
     [self.advancedNavigationController pushViewController:viewController afterViewController:self animated:YES];
 }

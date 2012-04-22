@@ -72,9 +72,9 @@
 
 - (UIView *)attributedTextContentView:(DTAttributedTextContentView *)attributedTextContentView viewForLink:(NSURL *)url identifier:(NSString *)identifier frame:(CGRect)frame {
 	DTLinkButton *button = [[DTLinkButton alloc] initWithFrame:frame];
-	button.url = url;
+	button.URL = url;
 	button.minimumHitSize = CGSizeMake(25, 25); // adjusts it's bounds so that button is always large enough
-	button.guid = identifier;
+	button.GUID = identifier;
 	
 	// use normal push action for opening URL
 	[button addTarget:self action:@selector(linkButtonClicked:) forControlEvents:UIControlEventTouchUpInside];

@@ -650,7 +650,7 @@
 #pragma mark - GHAttributedTableViewCellDelegate
 
 - (void)attributedTableViewCell:(GHAttributedTableViewCell *)cell receivedClickForButton:(DTLinkButton *)button {
-    GHWebViewViewController *viewController = [[GHWebViewViewController alloc] initWithURL:button.url ];
+    GHWebViewViewController *viewController = [[GHWebViewViewController alloc] initWithURL:button.URL];
     [self.navigationController pushViewController:viewController animated:YES];
 }
 

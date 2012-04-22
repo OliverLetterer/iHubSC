@@ -54,7 +54,7 @@
                                        } else if (array.count > 1) {
                                            // we have more that one organization, ask the user which one to choose
                                            
-                                           UIActionSheet *sheet = [UIActionSheet sheetWithTitle:NSLocalizedString(@"Select an Organization", @"")];
+                                           UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:NSLocalizedString(@"Select an Organization", @"")];
                                            
                                            for (GHAPIOrganizationV3 *organization in array) {
                                                [sheet addButtonWithTitle:organization.login 

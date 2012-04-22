@@ -11,7 +11,8 @@
 #import "UIColor+GithubAPI.h"
 #import "GithubAPI.h"
 #import <CommonCrypto/CommonDigest.h> // Need to import for CC_MD5 access
-#import "NSAttributedString+HTML.h"
+#import "DTCoreText.h"
+#import "DTHTMLAttributedStringBuilder.h"
 
 @implementation NSString (GHAPIDateFormatting)
 
@@ -137,12 +138,17 @@
 
 @implementation NSString (GHMarkdownParsing)
 
-- (NSAttributedString *)selectedAttributesStringFromMarkdown {
+- (NSAttributedString *)selectedAttributesStringFromMarkdown
+{
     NSString *HTML = [GHAPIMarkdownFormatter selectedFormattedHTMLStringFromMarkdownString:self];
     NSData *HTMLData = [HTML dataUsingEncoding:NSUTF8StringEncoding];
     CGSize maxImageSize = CGSizeMake(100.0f, 100.0f);
     NSDictionary *options = [NSDictionary dictionaryWithObjectsAndKeys:[NSValue valueWithCGSize:maxImageSize], DTMaxImageSize, nil];
-    return [NSAttributedString attributedStringWithHTML:HTMLData options:options];
+    DTHTMLAttributedStringBuilder *stringBuilder = [[DTHTMLAttributedStringBuilder alloc] initWithHTML:HTMLData
+                                                                                               options:options
+                                                                                    documentAttributes:NULL];
+    
+    return stringBuilder.buildString ? stringBuilder.generatedAttributedString : nil;
 }
 
 - (NSAttributedString *)nonSelectedAttributesStringFromMarkdown {
@@ -150,7 +156,11 @@
     NSData *HTMLData = [HTML dataUsingEncoding:NSUTF8StringEncoding];
     CGSize maxImageSize = CGSizeMake(100.0f, 100.0f);
     NSDictionary *options = [NSDictionary dictionaryWithObjectsAndKeys:[NSValue valueWithCGSize:maxImageSize], DTMaxImageSize, nil];
-    return [NSAttributedString attributedStringWithHTML:HTMLData options:options];
+    DTHTMLAttributedStringBuilder *stringBuilder = [[DTHTMLAttributedStringBuilder alloc] initWithHTML:HTMLData
+                                                                                               options:options
+                                                                                    documentAttributes:NULL];
+    
+    return stringBuilder.buildString ? stringBuilder.generatedAttributedString : nil;
 }
 
 @end

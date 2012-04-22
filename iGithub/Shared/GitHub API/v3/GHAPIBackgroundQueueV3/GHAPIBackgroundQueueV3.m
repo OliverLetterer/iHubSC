@@ -51,16 +51,20 @@ dispatch_queue_t GHAPIBackgroundQueue() {
         NSError *myError = nil;
         
         ASIFormDataRequest *request = [ASIFormDataRequest authenticatedFormDataRequestWithURL:URL];
-        NSMutableDictionary *requestHeaders = request.requestHeaders;
-        if (!requestHeaders) {
-            requestHeaders = [NSMutableDictionary dictionary];
-            request.requestHeaders = requestHeaders;
-        }
-        [request.requestHeaders setObject:@"UTF-8" forKey:@"spenc"];
+        request.requestMethod = @"GET";
         
-        if (setupHandler) {
-            setupHandler(request);
-        }
+//        NSMutableDictionary *requestHeaders = request.requestHeaders;
+//        if (!requestHeaders) {
+//            requestHeaders = [NSMutableDictionary dictionary];
+//            request.requestHeaders = requestHeaders;
+//        }
+        [request addRequestHeader:@"spenc" value:@"UTF-8"];
+        [request addRequestHeader:@"Accept" value:@"application/json"];
+//        [request.requestHeaders setObject:@"UTF-8" forKey:@"spenc"];
+//        [request.requestHeaders setObject:@"application/json" forKey:@"Accept"];
+        
+        if (setupHandler) setupHandler(request);
+        
         [request startSynchronous];
         
         NSString *responseString = [[NSString alloc] initWithData:request.responseData encoding:NSUTF8StringEncoding];

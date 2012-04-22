@@ -61,10 +61,10 @@
         if ([self.buttonDelegate respondsToSelector:@selector(attributedTableViewCell:longPressRecognizedForButton:)]) {
             [self.buttonDelegate attributedTableViewCell:self longPressRecognizedForButton:button];
         } else {
-            self.selectedURL = button.url;
+            self.selectedURL = button.URL;
             UIActionSheet *sheet = [[UIActionSheet alloc] init];
             
-            sheet.title = button.url.absoluteString;
+            sheet.title = button.URL.absoluteString;
             [sheet addButtonWithTitle:NSLocalizedString(@"View in Safari", @"")];
             sheet.delegate = self;
             sheet.tag = kUIActionSheetTagLongPressedLink;
@@ -96,9 +96,9 @@
 
 - (UIView *)attributedTextContentView:(DTAttributedTextContentView *)attributedTextContentView viewForLink:(NSURL *)url identifier:(NSString *)identifier frame:(CGRect)frame {
 	DTLinkButton *button = [[DTLinkButton alloc] initWithFrame:frame];
-	button.url = url;
+	button.URL = url;
 	button.minimumHitSize = CGSizeMake(25, 25); // adjusts it's bounds so that button is always large enough
-	button.guid = identifier;
+	button.GUID = identifier;
 	
 	// use normal push action for opening URL
 	[button addTarget:self action:@selector(linkButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
