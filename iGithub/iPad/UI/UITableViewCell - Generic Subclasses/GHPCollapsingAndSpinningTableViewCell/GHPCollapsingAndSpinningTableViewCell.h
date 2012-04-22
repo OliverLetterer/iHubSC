@@ -21,9 +21,4 @@
 @property (nonatomic, retain) UIActivityIndicatorView *activityIndicatorView;
 @property (nonatomic, retain) UIImageView *disclosureIndicatorImageView;
 
-- (void)setSpinning:(BOOL)spinning;
-
-- (void)setLoading:(BOOL)loading;
-- (void)setExpansionStyle:(UIExpansionStyle)style;
-
 @end

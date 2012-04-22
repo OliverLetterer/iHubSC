@@ -42,9 +42,9 @@
 @synthesize organizations=_organizations;
 @synthesize mySelectedIndexPath=_mySelectedIndexPath;
 
-- (id)initWithStyle:(UITableViewStyle)style {
-    self = [super initWithStyle:UITableViewStylePlain];
-    if (self) {
+- (id)initWithStyle:(UITableViewStyle)style
+{
+    if (self = [super initWithStyle:UITableViewStylePlain]) {
         // Custom initialization
         [self pullToReleaseTableViewReloadData];
         self.reloadDataOnApplicationWillEnterForeground = YES;
@@ -53,14 +53,16 @@
     return self;
 }
 
-- (void)pullToReleaseTableViewReloadData {
+- (void)pullToReleaseTableViewReloadData
+{
     [super pullToReleaseTableViewReloadData];
     [self downloadOrganizations];
 }
 
 #pragma mark - authentication
 
-- (void)authenticationManagerDidAuthenticateUserCallback:(NSNotification *)notification {
+- (void)authenticationManagerDidAuthenticateUserCallback:(NSNotification *)notification
+{
     [super authenticationManagerDidAuthenticateUserCallback:notification];
     [self downloadOrganizations];
     
@@ -79,7 +81,8 @@
 
 #pragma mark - instance methods
 
-- (void)downloadOrganizations {
+- (void)downloadOrganizations
+{
     self.organizations = nil;
     if (self.isViewLoaded) {
         [self.tableView reloadData];
@@ -100,7 +103,8 @@
                            }];
 }
 
-- (void)gearButtonClicked:(UIButton *)button {
+- (void)gearButtonClicked:(UIButton *)button
+{
     GHManageAuthenticatedUsersAlertView *alert = [[GHManageAuthenticatedUsersAlertView alloc] initWithTitle:nil 
                                                                                                     message:nil 
                                                                                                    delegate:nil 
@@ -111,7 +115,8 @@
 
 #pragma mark - View lifecycle
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     
     self.tableView.backgroundColor = [UIColor clearColor];
@@ -177,20 +182,23 @@
     [self scrollViewDidScroll:self.tableView];
 }
 
-- (void)viewDidUnload {
+- (void)viewDidUnload
+{
     [super viewDidUnload];
     self.lineView = nil;
     self.controllerView = nil;
     self.lastSelectedIndexPath = nil;
 }
 
-- (void)viewWillAppear:(BOOL)animated {
+- (void)viewWillAppear:(BOOL)animated
+{
     [super viewWillAppear:animated];
     
     [self scrollViewDidScroll:self.tableView];
 }
 
-- (void)viewDidAppear:(BOOL)animated {
+- (void)viewDidAppear:(BOOL)animated
+{
     [super viewDidAppear:animated];
     
     [self.tableView reloadData];
@@ -209,19 +217,22 @@
     }
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
     // Return YES for supported orientations
 	return YES;
 }
 
 #pragma mark - Table view data source
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
     // Return the number of sections.
     return kUITableViewNumberOfSections;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
     if (section == kUITableViewSectionUsername) {
         return 1;
     } else if (section == kUITableViewSectionNewsFeed) {
@@ -237,11 +248,12 @@
     return 0;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
     if (indexPath.section == kUITableViewSectionUsername) {
         static NSString *CellIdentifier = @"GHPLeftNavigationControllerTableViewCellUser";
         
-        GHPLeftNavigationControllerTableViewCell *cell = (GHPLeftNavigationControllerTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        GHPLeftNavigationControllerTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         if (cell == nil) {
             cell = [[GHPLeftNavigationControllerTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault 
                                                                     reuseIdentifier:CellIdentifier];
@@ -256,7 +268,7 @@
     } else {
         static NSString *CellIdentifier = @"GHPLeftNavigationControllerTableViewCell";
         
-        GHPLeftNavigationControllerTableViewCell *cell = (GHPLeftNavigationControllerTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        GHPLeftNavigationControllerTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         if (cell == nil) {
             cell = [[GHPLeftNavigationControllerTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault 
                                                                     reuseIdentifier:CellIdentifier];
@@ -295,13 +307,15 @@
     
 }
 
-- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
+{
     [self scrollViewDidScroll:self.tableView];
 }
 
 #pragma mark - Table view delegate
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
     UIViewController *viewController = nil;
     
     // serialize GHPOwnersNewsFeedViewController if there is one
@@ -370,7 +384,8 @@
     }
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
     if (indexPath.section == kUITableViewSectionUsername) {
         return 60.0f;
     }
@@ -379,7 +394,8 @@
 
 #pragma mark - UIScrollViewDelegate
 
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
     if ([super respondsToSelector:@selector(scrollViewDidScroll:)]) {
         [super scrollViewDidScroll:scrollView];
     }
@@ -394,12 +410,14 @@
 
 #pragma mark - Keyed Archiving
 
-- (void)encodeWithCoder:(NSCoder *)encoder {
+- (void)encodeWithCoder:(NSCoder *)encoder
+{
     [super encodeWithCoder:encoder];
     [encoder encodeObject:_organizations forKey:@"organizations"];
 }
 
-- (id)initWithCoder:(NSCoder *)decoder {
+- (id)initWithCoder:(NSCoder *)decoder
+{
     if ((self = [super initWithCoder:decoder])) {
         _organizations = [decoder decodeObjectForKey:@"organizations"];
         self.mySelectedIndexPath = self.lastSelectedIndexPath;

@@ -15,7 +15,8 @@
 
 #pragma mark - Initialization
 
-- (void)setSpinning:(BOOL)spinning {
+- (void)setSpinning:(BOOL)spinning
+{
     _isSpinning = spinning;
     if (spinning) {
         self.accessoryView = self.activityIndicatorView;
@@ -24,7 +25,8 @@
     }
 }
 
-- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
+- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
+{
     if ((self = [super initWithStyle:style reuseIdentifier:reuseIdentifier])) {
         // Initialization code
         self.disclosureIndicatorImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"UITableViewCellAccessoryDisclosureIndicator.PNG"]];
@@ -36,7 +38,8 @@
 
 #pragma mark - super implementation
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
+- (void)setSelected:(BOOL)selected animated:(BOOL)animated
+{
     [super setSelected:selected animated:animated];
     
     if (selected) {
@@ -46,7 +49,8 @@
     }
 }
 
-- (void)setHighlighted:(BOOL)highlighted animated:(BOOL)animated {
+- (void)setHighlighted:(BOOL)highlighted animated:(BOOL)animated
+{
     [super setHighlighted:highlighted animated:animated];
     
     if (highlighted) {
@@ -56,31 +60,43 @@
     }
 }
 
-- (void)layoutSubviews {
+- (void)layoutSubviews
+{
     [super layoutSubviews];
 }
 
-- (void)prepareForReuse {
+- (void)prepareForReuse
+{
     [super prepareForReuse];
     
 }
 
-- (void)setLoading:(BOOL)loading {
+- (void)setLoading:(BOOL)loading
+{
     [self setSpinning:loading];
 }
 
-- (void)setExpansionStyle:(UIExpansionStyle)style {
-    self.accessoryView = self.disclosureIndicatorImageView;
-    switch (style) {
-        case UIExpansionStyleExpanded:
-            self.accessoryView.transform = CGAffineTransformIdentity;
-            break;
-        case UIExpansionStyleCollapsed:
-            self.accessoryView.transform = CGAffineTransformMakeRotation(M_PI);
-            break;
-            
-        default:
-            break;
+- (void)setExpansionStyle:(UIExpansionStyle)style animated:(BOOL)animated
+{
+    void(^animationBlock)(void) = ^ {
+        self.accessoryView = self.disclosureIndicatorImageView;
+        switch (style) {
+            case UIExpansionStyleExpanded:
+                self.accessoryView.transform = CGAffineTransformIdentity;
+                break;
+            case UIExpansionStyleCollapsed:
+                self.accessoryView.transform = CGAffineTransformMakeRotation(M_PI);
+                break;
+                
+            default:
+                break;
+        }
+    };
+    
+    if (animated) {
+        [UIView animateWithDuration:0.25f animations:animationBlock];
+    } else {
+        animationBlock();
     }
 }
 

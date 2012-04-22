@@ -4,6 +4,7 @@
 - Bug fixes:
     Fixes not working action button in organizations.
     Fixes disappearing organizations news feed.
+- iPad retina support
 
 ## V2.1
 - Improved NewsFeeds 
