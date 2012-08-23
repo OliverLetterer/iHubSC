@@ -104,15 +104,6 @@
 + (void)filesOnRepository:(NSString *)repository 
                    branch:(NSString *)branch 
         completionHandler:(void (^)(GHDirectory *, NSError *))handler {
-    
-    NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.github.com/repos/%@/git/trees/%@",
-                                       [repository stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding], branch ] ];
-    
-    [[GHAPIBackgroundQueueV3 sharedInstance] sendRequestToURL:URL setupHandler:nil
-                                            completionHandler:^(id object, NSError *error, ASIFormDataRequest *request) {
-                                                
-                                            }];
-    
     dispatch_async(GHAPIBackgroundQueue(), ^(void) {
         
         // http://github.com/api/v2/json/blob/all/defunkt/facebox/master
