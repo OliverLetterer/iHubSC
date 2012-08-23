@@ -8,9 +8,16 @@
 
 #import "GHPDefaultTableViewCell.h"
 #import "GHPDefaultTableViewCellBackgroundView.h"
+#import <objc/runtime.h>
+
+@interface GHPDefaultTableViewCell (SectionLocation)
+
+- (void)setSectionLocation:(int)location animated:(BOOL)animated;
+- (void)setSectionLocation:(int)location;
+
+@end
 
 @implementation GHPDefaultTableViewCell
-
 @synthesize customStyle=_customStyle, myBackgroundView=_myBackgroundView, mySelectedBackgroundView=_mySelectedBackgroundView;
 
 #pragma mark - setters ans getters
@@ -34,6 +41,16 @@
             self.accessoryView = nil;
         }
     }
+}
+
+- (void)setSectionLocation:(int)location animated:(BOOL)animated
+{
+    self.customStyle = location;
+}
+
+- (void)setSectionLocation:(int)location
+{
+    self.customStyle = location;
 }
 
 #pragma mark - Initialization

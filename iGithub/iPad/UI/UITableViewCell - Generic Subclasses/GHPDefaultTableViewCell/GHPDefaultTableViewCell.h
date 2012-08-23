@@ -12,10 +12,10 @@
 @class GHPDefaultTableViewCellBackgroundView;
 
 typedef enum {
-    GHPDefaultTableViewCellStyleTop = 0,
-    GHPDefaultTableViewCellStyleBottom = 1,
-    GHPDefaultTableViewCellStyleCenter = 2,
-    GHPDefaultTableViewCellStyleTopAndBottom = 3
+    GHPDefaultTableViewCellStyleTop = 2,
+    GHPDefaultTableViewCellStyleBottom = 3,
+    GHPDefaultTableViewCellStyleCenter = 1,
+    GHPDefaultTableViewCellStyleTopAndBottom = 4
 } GHPDefaultTableViewCellStyle;
 
 @interface GHPDefaultTableViewCell : UITableViewCell {
