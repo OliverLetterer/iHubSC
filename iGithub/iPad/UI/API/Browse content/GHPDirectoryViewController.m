@@ -143,6 +143,7 @@
     [encoder encodeObject:_repository forKey:@"repository"];
     [encoder encodeObject:_branch forKey:@"branch"];
     [encoder encodeObject:_hash forKey:@"hash"];
+    [encoder encodeObject:_tree forKey:@"tree"];
 }
 
 - (id)initWithCoder:(NSCoder *)decoder {
@@ -151,6 +152,7 @@
         _repository = [decoder decodeObjectForKey:@"repository"];
         _branch = [decoder decodeObjectForKey:@"branch"];
         _hash = [decoder decodeObjectForKey:@"hash"];
+        _tree = [decoder decodeObjectForKey:@"tree"];
     }
     return self;
 }

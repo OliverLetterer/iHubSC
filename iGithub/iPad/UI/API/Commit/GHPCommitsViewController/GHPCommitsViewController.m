@@ -10,6 +10,11 @@
 #import "GHPImageDetailTableViewCell.h"
 #import "GHPCommitViewController.h"
 #import "GHPModalCommitViewController.h"
+#import "SVModalWebViewController.h"
+
+@interface GHPCommitsViewController () <SVModalWebViewControllerDelegate>
+
+@end
 
 @implementation GHPCommitsViewController
 
@@ -79,81 +84,51 @@
 {
     // 0: the actual commit
     // 1: view in full screen
-    return 2;
+    return 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     GHAPICommitV3 *commit = [self.dataArray objectAtIndex:indexPath.section];
     
-    if (indexPath.row == 0) {
-        // the actual commit
-        static NSString *CellIdentifier = @"GHPImageDetailTableViewCell";
-        
-        GHPImageDetailTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-        if (cell == nil) {
-            cell = [[GHPImageDetailTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
-        }
-        [self setupDefaultTableViewCell:cell forRowAtIndexPath:indexPath];
-        
-        [self updateImageView:cell.imageView 
-                  atIndexPath:indexPath 
-          withAvatarURLString:commit.committer.avatarURL];
-        
-        NSString *username = commit.committer.login ? commit.committer.login : commit.committer.name;
-        if (!username) {
-            username = commit.author.login ? commit.author.login : commit.author.name;
-        }
-        
-        cell.textLabel.text = [NSString stringWithFormat:@"%@ - %@", username, commit.SHA];
-        cell.detailTextLabel.text = commit.message;
-        
-        // Configure the cell...
-        
-        return cell;
-    } else if (indexPath.row == 1) {
-        // view in full screen
-        static NSString *CellIdentifier = @"GHPDefaultTableViewCell";
-        
-        GHPDefaultTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-        if (cell == nil) {
-            cell = [[GHPDefaultTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
-        }
-        [self setupDefaultTableViewCell:cell forRowAtIndexPath:indexPath];
-        
-        cell.textLabel.text = NSLocalizedString(@"View in Fullscreen", @"");
-        cell.textLabel.textAlignment = UITextAlignmentCenter;
-        
-        return cell;
+    // the actual commit
+    static NSString *CellIdentifier = @"GHPImageDetailTableViewCell";
+    
+    GHPImageDetailTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (cell == nil) {
+        cell = [[GHPImageDetailTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
+    }
+    [self setupDefaultTableViewCell:cell forRowAtIndexPath:indexPath];
+    
+    [self updateImageView:cell.imageView
+              atIndexPath:indexPath
+      withAvatarURLString:commit.committer.avatarURL];
+    
+    NSString *username = commit.committer.login ? commit.committer.login : commit.committer.name;
+    if (!username) {
+        username = commit.author.login ? commit.author.login : commit.author.name;
     }
     
-    return nil;
+    cell.textLabel.text = [NSString stringWithFormat:@"%@ - %@", username, commit.SHA];
+    cell.detailTextLabel.text = commit.message;
+    
+    // Configure the cell...
+    
+    return cell;
 }
 
 #pragma mark - Table view delegate
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    UIViewController *viewController = nil;
-    
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
     GHAPICommitV3 *commit = [self.dataArray objectAtIndex:indexPath.section];
+    NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://github.com/%@/commit/%@", _repository, commit.SHA]];
     
-    if (indexPath.row == 0) {
-        // the actual commit
-        viewController = [[GHPCommitViewController alloc] initWithRepository:self.repository 
-                                                                    commitID:commit.SHA];
-        
-        if (viewController) {
-            
-            [self.advancedNavigationController pushViewController:viewController afterViewController:self animated:YES];
-        } else {
-            [tableView deselectRowAtIndexPath:indexPath animated:NO];
-        }
-    } else if (indexPath.row == 1) {
-        // view in Fullscreen
-        GHPModalCommitViewController *viewController = [[GHPModalCommitViewController alloc] initWithRepository:_repository commitID:commit.SHA];
-        [self presentViewController:viewController
-                           animated:YES
-                         completion:nil];
-    }
+    SVModalWebViewController *webViewController = [[SVModalWebViewController alloc] initWithURL:URL];
+    webViewController.webDelegate = self;
+    webViewController.modalPresentationStyle = UIModalPresentationPageSheet;
+    [self presentViewController:webViewController animated:YES completion:nil];
+    
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
 }
 
 #pragma mark - view lifecycle
@@ -177,6 +152,13 @@
         [self cacheHeight:height forRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:idx] ];
         [self cacheHeight:44.0f forRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:idx] ];
     }];
+}
+
+#pragma mark - SVModalWebViewControllerDelegate
+
+- (void)modalWebViewControllerIsDone:(SVModalWebViewController *)viewController
+{
+    [self dismissModalViewControllerAnimated:YES];
 }
 
 #pragma mark - Keyed Archiving
