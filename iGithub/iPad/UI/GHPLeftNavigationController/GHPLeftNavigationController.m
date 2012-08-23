@@ -239,8 +239,8 @@
         // News Feed + Your Actions
         return 2;
     } else if (section == kUITableViewSectionBottom) {
-        // My Profile + My Issues + Search
-        return 3;
+        // My Profile + My Issues
+        return 2;
     } else if (section == kUITableViewSectionOrganizations) {
         // My Profile + Search
         return self.organizations.count;
@@ -289,9 +289,6 @@
             } else if (indexPath.row == 1) {
                 cell.textLabel.text = NSLocalizedString(@"My Issues", @"");
                 [cell setItemImage:[UIImage imageNamed:@"162-receipt.png"] ];
-            } else if (indexPath.row == 2) {
-                cell.textLabel.text = NSLocalizedString(@"Search", @"");
-                [cell setItemImage:[UIImage imageNamed:@"Lupe.PNG"] ];
             }
         } else if (indexPath.section == kUITableViewSectionOrganizations) {
             // My Profile + Search
@@ -366,8 +363,6 @@
             [(GHPUserViewController *)viewController setReloadDataIfNewUserGotAuthenticated:YES];
         } else if (indexPath.row == 1) {
             viewController = [[GHPIssuesOfAuthenticatedUserViewController alloc] init];
-        } else if (indexPath.row == 2) {
-            viewController = [[GHPSearchViewController alloc] init];
         }
     } else if (indexPath.section == kUITableViewSectionOrganizations) {
         // My Profile + Search
