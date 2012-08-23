@@ -10,6 +10,11 @@
 #import "GithubAPI.h"
 #import "GHDescriptionTableViewCell.h"
 #import "GHViewCommitViewController.h"
+#import "SVModalWebViewController.h"
+
+@interface GHCommitsViewController () <SVModalWebViewControllerDelegate>
+
+@end
 
 @implementation GHCommitsViewController
 @synthesize repository=_repository, branch=_branch, commits=_commits, branchHash=_branchHash;
@@ -140,10 +145,18 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     GHAPICommitV3 *commit = [self.commits objectAtIndex:indexPath.row];
+    NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://github.com/%@/commit/%@", _repository, commit.SHA]];
     
-    GHViewCommitViewController *commitViewController = [[GHViewCommitViewController alloc] initWithRepository:self.repository 
-                                                                                                      commitID:commit.SHA];
-    [self.navigationController pushViewController:commitViewController animated:YES];
+    SVModalWebViewController *webViewController = [[SVModalWebViewController alloc] initWithURL:URL];
+    webViewController.webDelegate = self;
+    [self presentViewController:webViewController animated:YES completion:nil];
+}
+
+#pragma mark - SVModalWebViewControllerDelegate
+
+- (void)modalWebViewControllerIsDone:(SVModalWebViewController *)viewController
+{
+    [self dismissModalViewControllerAnimated:YES];
 }
 
 #pragma mark - Keyed Archiving

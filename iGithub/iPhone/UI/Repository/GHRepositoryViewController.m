@@ -60,7 +60,7 @@
     _repositoryString = [repositoryString copy];
     
     self.isDownloadingEssentialData = YES;
-    [GHAPIRepositoryV3 repositoryNamed:self.repositoryString 
+    [GHAPIRepositoryV3 repositoryNamed:self.repositoryString
                  withCompletionHandler:^(GHAPIRepositoryV3 *repository, NSError *error) {
                      self.isDownloadingEssentialData = NO;
                      if (error) {
@@ -128,7 +128,7 @@
         self.repository.openIssues = [NSNumber numberWithInt:[self.repository.openIssues intValue]+1 ];
         
         if (self.isViewLoaded) {
-            [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:kUITableViewSectionIssues] 
+            [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:kUITableViewSectionIssues]
                           withRowAnimation:UITableViewRowAnimationAutomatic];
         }
     }
@@ -205,7 +205,7 @@
 
 - (void)tableView:(UIExpandableTableView *)tableView downloadDataForExpandableSection:(NSInteger)section {
     if (section == kUITableViewSectionIssues) {
-        [GHAPIIssueV3 openedIssuesOnRepository:self.repositoryString page:1 
+        [GHAPIIssueV3 openedIssuesOnRepository:self.repositoryString page:1
                              completionHandler:^(NSMutableArray *array, NSUInteger nextPage, NSError *error) {
                                  if (error) {
                                      [self handleError:error];
@@ -218,7 +218,7 @@
                                  }
                              }];
     } else if (section == kUITableViewSectionWatchingUsers) {
-        [GHAPIRepositoryV3 watchersOfRepository:self.repositoryString page:1 
+        [GHAPIRepositoryV3 watchersOfRepository:self.repositoryString page:1
                               completionHandler:^(NSMutableArray *array, NSUInteger nextPage, NSError *error) {
                                   if (error) {
                                       [tableView cancelDownloadInSection:section];
@@ -244,17 +244,17 @@
                                            [self.tableView expandSection:section animated:YES];
                                            
                                            if ([self.pullRequests count] == 0) {
-                                               UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", @"") 
-                                                                                               message:NSLocalizedString(@"This repository does not have any Pull Requests.", @"") 
-                                                                                              delegate:nil 
-                                                                                     cancelButtonTitle:NSLocalizedString(@"OK", @"") 
+                                               UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", @"")
+                                                                                               message:NSLocalizedString(@"This repository does not have any Pull Requests.", @"")
+                                                                                              delegate:nil
+                                                                                     cancelButtonTitle:NSLocalizedString(@"OK", @"")
                                                                                      otherButtonTitles:nil];
                                                [alert show];
                                            }
                                        }
                                    }];
     } else if (section == kUITableViewSectionRecentCommits || section == kUITableViewSectionBrowseBranches) {
-        [GHAPIRepositoryV3 branchesOnRepository:self.repositoryString page:1 
+        [GHAPIRepositoryV3 branchesOnRepository:self.repositoryString page:1
                               completionHandler:^(NSMutableArray *array, NSUInteger nextPage, NSError *error) {
                                   if (error) {
                                       [self handleError:error];
@@ -266,7 +266,7 @@
                                   }
                               }];
     } else if (section == kUITableViewSectionMilestones) {
-        [GHAPIIssueV3 milestonesForIssueOnRepository:self.repositoryString withNumber:nil page:1 
+        [GHAPIIssueV3 milestonesForIssueOnRepository:self.repositoryString withNumber:nil page:1
                                    completionHandler:^(NSMutableArray *array, NSUInteger nextPage, NSError *error) {
                                        if (error) {
                                            [self handleError:error];
@@ -278,8 +278,8 @@
                                        }
                                    }];
     } else if (section == kUITableViewSectionLabels) {
-        [GHAPIRepositoryV3 labelsOnRepository:self.repositoryString 
-                                         page:1 
+        [GHAPIRepositoryV3 labelsOnRepository:self.repositoryString
+                                         page:1
                             completionHandler:^(NSMutableArray *array, NSUInteger nextPage, NSError *error) {
                                 if (error) {
                                     [tableView cancelDownloadInSection:section];
@@ -291,7 +291,7 @@
                                 }
                             }];
     } else if (section == kUITableViewSectionCollaborators) {
-        [GHAPIRepositoryV3 collaboratorsForRepository:self.repositoryString page:1 
+        [GHAPIRepositoryV3 collaboratorsForRepository:self.repositoryString page:1
                                     completionHandler:^(NSMutableArray *array, NSUInteger nextPage, NSError *error) {
                                         if (error) {
                                             [tableView cancelDownloadInSection:section];
@@ -309,8 +309,8 @@
 
 - (void)downloadDataForPage:(NSUInteger)page inSection:(NSUInteger)section {
     if (section == kUITableViewSectionLabels) {
-        [GHAPIRepositoryV3 labelsOnRepository:self.repositoryString 
-                                         page:page 
+        [GHAPIRepositoryV3 labelsOnRepository:self.repositoryString
+                                         page:page
                             completionHandler:^(NSMutableArray *array, NSUInteger nextPage, NSError *error) {
                                 if (error) {
                                     [self handleError:error];
@@ -322,7 +322,7 @@
                                 }
                             }];
     } else if (section == kUITableViewSectionRecentCommits || section == kUITableViewSectionBrowseBranches) {
-        [GHAPIRepositoryV3 branchesOnRepository:self.repositoryString page:page 
+        [GHAPIRepositoryV3 branchesOnRepository:self.repositoryString page:page
                               completionHandler:^(NSMutableArray *array, NSUInteger nextPage, NSError *error) {
                                   if (error) {
                                       [self handleError:error];
@@ -334,7 +334,7 @@
                                   }
                               }];
     } else if (section == kUITableViewSectionIssues) {
-        [GHAPIIssueV3 openedIssuesOnRepository:self.repositoryString page:page 
+        [GHAPIIssueV3 openedIssuesOnRepository:self.repositoryString page:page
                              completionHandler:^(NSMutableArray *array, NSUInteger nextPage, NSError *error) {
                                  if (error) {
                                      [self handleError:error];
@@ -342,31 +342,31 @@
                                      [self.issuesArray addObjectsFromArray:array];
                                      [self setNextPage:nextPage forSection:section];
                                      [self cacheHeightForIssuesArray];
-                                     [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:section] 
+                                     [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:section]
                                                    withRowAnimation:UITableViewRowAnimationAutomatic];
                                  }
                              }];
     } else if (section == kUITableViewSectionMilestones) {
-        [GHAPIIssueV3 milestonesForIssueOnRepository:self.repositoryString withNumber:nil page:1 
+        [GHAPIIssueV3 milestonesForIssueOnRepository:self.repositoryString withNumber:nil page:1
                                    completionHandler:^(NSMutableArray *array, NSUInteger nextPage, NSError *error) {
                                        if (error) {
                                            [self handleError:error];
                                        } else {
                                            [self.milestones addObjectsFromArray:array];
                                            [self setNextPage:nextPage forSection:section];
-                                           [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:section] 
+                                           [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:section]
                                                          withRowAnimation:UITableViewRowAnimationAutomatic];
                                        }
                                    }];
     } else if (section == kUITableViewSectionCollaborators) {
-        [GHAPIRepositoryV3 collaboratorsForRepository:self.repositoryString page:page 
+        [GHAPIRepositoryV3 collaboratorsForRepository:self.repositoryString page:page
                                     completionHandler:^(NSMutableArray *array, NSUInteger nextPage, NSError *error) {
                                         if (error) {
                                             [self handleError:error];
                                         } else {
                                             [self.collaborators addObjectsFromArray:array];
                                             [self setNextPage:nextPage forSection:section];
-                                            [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:section] 
+                                            [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:section]
                                                           withRowAnimation:UITableViewRowAnimationAutomatic];
                                         }
                                     }];
@@ -381,7 +381,7 @@
                                            [self setNextPage:nextPage forSection:section];
                                            
                                            [self cacheHeightForPullRequests];
-                                           [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:section] 
+                                           [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:section]
                                                          withRowAnimation:UITableViewRowAnimationAutomatic];
                                        }
                                    }];
@@ -748,7 +748,7 @@
         // Delete the row from the data source
         GHAPIUserV3 *user = [self.collaborators objectAtIndex:indexPath.row-1];
         
-        [GHAPIRepositoryV3 deleteCollaboratorNamed:user.login onRepository:self.repositoryString 
+        [GHAPIRepositoryV3 deleteCollaboratorNamed:user.login onRepository:self.repositoryString
                                  completionHandler:^(NSError *error) {
                                      if (error) {
                                          [self handleError:error];
@@ -757,10 +757,10 @@
                                          [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
                                      }
                                  }];
-    }   
+    }
     else if (editingStyle == UITableViewCellEditingStyleInsert) {
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -768,7 +768,7 @@
     if (indexPath.section == kUITableViewSectionUserData && indexPath.row == 0) {
         // title + description
         if (![self isHeightCachedForRowAtIndexPath:indexPath]) {
-            [self cacheHeight:[GHDescriptionTableViewCell heightWithContent:self.repository.description] 
+            [self cacheHeight:[GHDescriptionTableViewCell heightWithContent:self.repository.description]
             forRowAtIndexPath:indexPath];
         }
         
@@ -801,8 +801,8 @@
         [self.navigationController pushViewController:webViewController animated:YES];
     } else if (indexPath.section == kUITableViewSectionIssues) {
         GHAPIIssueV3 *issue = [self.issuesArray objectAtIndex:indexPath.row-1];
-        GHIssueViewController *issueViewController = [[GHIssueViewController alloc] 
-                                                      initWithRepository:self.repositoryString 
+        GHIssueViewController *issueViewController = [[GHIssueViewController alloc]
+                                                      initWithRepository:self.repositoryString
                                                       issueNumber:issue.number];
         [self.navigationController pushViewController:issueViewController animated:YES];
     } else if (indexPath.section == kUITableViewSectionWatchingUsers) {
@@ -819,27 +819,27 @@
     } else if (indexPath.section == kUITableViewSectionRecentCommits) {
         GHAPIRepositoryBranchV3 *branch = [self.branches objectAtIndex:indexPath.row - 1];
         
-        GHCommitsViewController *recentViewController = [[GHCommitsViewController alloc] initWithRepository:self.repositoryString 
-                                                                                                                  branchName:branch.name branchHash:branch.ID];
+        GHCommitsViewController *recentViewController = [[GHCommitsViewController alloc] initWithRepository:self.repositoryString
+                                                                                                 branchName:branch.name branchHash:branch.ID];
         [self.navigationController pushViewController:recentViewController animated:YES];
     } else if (indexPath.section == kUITableViewSectionBrowseBranches) {
         GHAPIRepositoryBranchV3 *branch = [self.branches objectAtIndex:indexPath.row - 1];
         
         GHViewRootDirectoryViewController *rootViewController = [[GHViewRootDirectoryViewController alloc] initWithRepository:self.repositoryString
-                                                                                                                        branch:branch.name
-                                                                                                                          hash:branch.ID];
+                                                                                                                       branch:branch.name
+                                                                                                                         hash:branch.ID];
         [self.navigationController pushViewController:rootViewController animated:YES];
     } else if (indexPath.section == kUITableViewSectionMilestones && indexPath.row > 0) {
         GHAPIMilestoneV3 *milestone = [self.milestones objectAtIndex:indexPath.row - 1];
         
         GHMilestoneViewController *milestoneViewController = [[GHMilestoneViewController alloc] initWithRepository:self.repositoryString
-                                                                                                            milestoneNumber:milestone.number];
+                                                                                                   milestoneNumber:milestone.number];
         [self.navigationController pushViewController:milestoneViewController animated:YES];
     } else if (indexPath.section == kUITableViewSectionLabels && indexPath.row > 0) {
         GHAPILabelV3 *label = [self.labels objectAtIndex:indexPath.row - 1];
         
-        GHViewLabelViewController *labelViewController = [[GHViewLabelViewController alloc] initWithRepository:self.repositoryString  
-                                                                                                          label:label];
+        GHViewLabelViewController *labelViewController = [[GHViewLabelViewController alloc] initWithRepository:self.repositoryString
+                                                                                                         label:label];
         [self.navigationController pushViewController:labelViewController animated:YES];
     } else if (indexPath.section == kUITableViewSectionCollaborators) {
         GHAPIUserV3 *user = [self.collaborators objectAtIndex:indexPath.row - 1];
@@ -877,7 +877,7 @@
         if (buttonIndex == 1) {
             // OK clicked
             NSString *username = [alertView textFieldAtIndex:0].text;
-            [GHAPIRepositoryV3 addCollaboratorNamed:username onRepository:self.repositoryString 
+            [GHAPIRepositoryV3 addCollaboratorNamed:username onRepository:self.repositoryString
                                   completionHandler:^(NSError *error) {
                                       if (error) {
                                           [self handleError:error];
@@ -894,11 +894,11 @@
             GHColorAlertView *alert = (GHColorAlertView *)alertView;
             _labelColor = alert.selectedColor;
             
-            UIAlertView *secondAlert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Input Name", @"") 
-                                                             message:nil 
-                                                            delegate:self 
-                                                   cancelButtonTitle:NSLocalizedString(@"Cancel", @"") 
-                                                   otherButtonTitles:NSLocalizedString(@"OK", @""), nil];
+            UIAlertView *secondAlert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Input Name", @"")
+                                                                  message:nil
+                                                                 delegate:self
+                                                        cancelButtonTitle:NSLocalizedString(@"Cancel", @"")
+                                                        otherButtonTitles:NSLocalizedString(@"OK", @""), nil];
             secondAlert.alertViewStyle = UIAlertViewStylePlainTextInput;
             secondAlert.tag = kUIAlertViewLabelNameTag;
             [secondAlert show];
@@ -907,7 +907,7 @@
         if (buttonIndex == 1) {
             NSString *name = [alertView textFieldAtIndex:0].text;
             
-            [GHAPIRepositoryV3 createLabelOnRepository:self.repositoryString name:name color:_labelColor 
+            [GHAPIRepositoryV3 createLabelOnRepository:self.repositoryString name:name color:_labelColor
                                      completionHandler:^(GHAPILabelV3 *label, NSError *error) {
                                          if (error) {
                                              [self handleError:error];
@@ -922,8 +922,8 @@
     } else {
         if (buttonIndex == 1) {
             self.view.userInteractionEnabled = NO;
-            [GHRepository deleteRepository:self.repositoryString 
-                                 withToken:self.deleteToken 
+            [GHRepository deleteRepository:self.repositoryString
+                                 withToken:self.deleteToken
                          completionHandler:^(NSError *error) {
                              self.actionButtonActive = NO;
                              if (error) {
@@ -950,7 +950,7 @@
 - (void)cacheHeightForPullRequests {
     NSInteger i = 1;
     for (GHAPIPullRequestV3 *pullRequest in self.pullRequests) {
-        [self cacheHeight:[GHDescriptionTableViewCell heightWithContent:pullRequest.title] 
+        [self cacheHeight:[GHDescriptionTableViewCell heightWithContent:pullRequest.title]
         forRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:kUITableViewSectionPullRequests] ];
         i++;
     }
@@ -978,7 +978,7 @@
 - (void)createMilestoneViewController:(GHCreateMilestoneViewController *)createViewController didCreateMilestone:(GHAPIMilestoneV3 *)milestone {
     [[ANNotificationQueue sharedInstance] detatchSuccesNotificationWithTitle:NSLocalizedString(@"Created Milestone", @"") message:milestone.title];
     [self.milestones insertObject:milestone atIndex:0];
-    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:kUITableViewSectionMilestones] 
+    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:kUITableViewSectionMilestones]
                   withRowAnimation:UITableViewRowAnimationNone];
     [self dismissModalViewControllerAnimated:YES];
 }
@@ -1010,7 +1010,7 @@
             [self presentViewController:navController animated:YES completion:nil];
         } else if ([title isEqualToString:NSLocalizedString(@"Delete", @"")]) {
             self.actionButtonActive = YES;
-            [GHRepository deleteTokenForRepository:self.repositoryString 
+            [GHRepository deleteTokenForRepository:self.repositoryString
                              withCompletionHandler:^(NSString *deleteToken, NSError *error) {
                                  if (error) {
                                      self.actionButtonActive = NO;
@@ -1018,17 +1018,17 @@
                                  } else {
                                      self.deleteToken = deleteToken;
                                      
-                                     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:NSLocalizedString(@"Delete %@", @""), self.repositoryString] 
-                                                                                     message:[NSString stringWithFormat:NSLocalizedString(@"Are you absolutely sure that you want to delete %@? This action can't be undone!", @""), self.repositoryString] 
-                                                                                    delegate:self 
-                                                                           cancelButtonTitle:NSLocalizedString(@"Cancel", @"") 
+                                     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:NSLocalizedString(@"Delete %@", @""), self.repositoryString]
+                                                                                     message:[NSString stringWithFormat:NSLocalizedString(@"Are you absolutely sure that you want to delete %@? This action can't be undone!", @""), self.repositoryString]
+                                                                                    delegate:self
+                                                                           cancelButtonTitle:NSLocalizedString(@"Cancel", @"")
                                                                            otherButtonTitles:NSLocalizedString(@"Delete", @""), nil];
                                      [alert show];
                                  }
                              }];
         } else if ([title isEqualToString:NSLocalizedString(@"Unwatch", @"")]) {
             self.actionButtonActive = YES;
-            [GHAPIRepositoryV3 unwatchRepository:self.repositoryString 
+            [GHAPIRepositoryV3 unwatchRepository:self.repositoryString
                                completionHandler:^(NSError *error) {
                                    self.actionButtonActive = NO;
                                    if (error) {
@@ -1040,7 +1040,7 @@
                                }];
         } else if ([title isEqualToString:NSLocalizedString(@"Watch", @"")]) {
             self.actionButtonActive = YES;
-            [GHAPIRepositoryV3 watchRepository:self.repositoryString 
+            [GHAPIRepositoryV3 watchRepository:self.repositoryString
                              completionHandler:^(NSError *error) {
                                  self.actionButtonActive = NO;
                                  if (error) {
@@ -1052,8 +1052,8 @@
                              }];
         } else if ([title isEqualToString:NSLocalizedString(@"Fork to my Account", @"")]) {
             self.actionButtonActive = YES;
-            [GHAPIRepositoryV3 forkRepository:self.repositoryString 
-                               toOrganization:nil 
+            [GHAPIRepositoryV3 forkRepository:self.repositoryString
+                               toOrganization:nil
                             completionHandler:^(GHAPIRepositoryV3 *repository, NSError *error) {
                                 self.actionButtonActive = NO;
                                 if (error) {
@@ -1064,7 +1064,7 @@
                             }];
         } else if ([title isEqualToString:NSLocalizedString(@"Fork to an Organization", @"")]) {
             self.actionButtonActive = YES;
-            [GHAPIOrganizationV3 organizationsOfUser:[GHAPIAuthenticationManager sharedInstance].authenticatedUser.login page:1 
+            [GHAPIOrganizationV3 organizationsOfUser:[GHAPIAuthenticationManager sharedInstance].authenticatedUser.login page:1
                                    completionHandler:^(NSMutableArray *array, NSUInteger nextPage, NSError *error) {
                                        
                                        if (error) {
@@ -1097,10 +1097,10 @@
                                                }
                                            } else {
                                                self.actionButtonActive = NO;
-                                               UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Organization Error", @"") 
-                                                                                               message:NSLocalizedString(@"You are not part of any Organization!", @"") 
-                                                                                              delegate:nil 
-                                                                                     cancelButtonTitle:NSLocalizedString(@"OK", @"") 
+                                               UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Organization Error", @"")
+                                                                                               message:NSLocalizedString(@"You are not part of any Organization!", @"")
+                                                                                              delegate:nil
+                                                                                     cancelButtonTitle:NSLocalizedString(@"OK", @"")
                                                                                      otherButtonTitles:nil];
                                                [alert show];
                                            }
@@ -1115,19 +1115,19 @@
             
             [self presentViewController:navController animated:YES completion:nil];
         } else if ([title isEqualToString:NSLocalizedString(@"Create Label", @"")]) {
-            GHColorAlertView *alert = [[GHColorAlertView alloc] initWithTitle:NSLocalizedString(@"Select Color", @"") 
-                                                                      message:nil 
-                                                                     delegate:self 
-                                                            cancelButtonTitle:NSLocalizedString(@"Cancel", @"") 
+            GHColorAlertView *alert = [[GHColorAlertView alloc] initWithTitle:NSLocalizedString(@"Select Color", @"")
+                                                                      message:nil
+                                                                     delegate:self
+                                                            cancelButtonTitle:NSLocalizedString(@"Cancel", @"")
                                                             otherButtonTitles:NSLocalizedString(@"OK", @""), nil];
             alert.tag = kUIAlertViewLabelColorTag;
             [alert show];
             
         } else if ([title isEqualToString:NSLocalizedString(@"Add Collaborator", @"")]) {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Enter Username", @"") 
-                                                            message:nil 
-                                                           delegate:self 
-                                                  cancelButtonTitle:NSLocalizedString(@"Cancel", @"") 
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Enter Username", @"")
+                                                            message:nil
+                                                           delegate:self
+                                                  cancelButtonTitle:NSLocalizedString(@"Cancel", @"")
                                                   otherButtonTitles:NSLocalizedString(@"OK", @""), nil];
             alert.alertViewStyle = UIAlertViewStylePlainTextInput;
             alert.tag = kUIAlertViewAddCollaboratorTag;
@@ -1139,8 +1139,8 @@
 - (void)organizationsActionSheetDidSelectOrganizationAtIndex:(NSUInteger)index {
     GHAPIOrganizationV3 *organization = [self.organizations objectAtIndex:index];
     
-    [GHAPIRepositoryV3 forkRepository:self.repositoryString 
-                       toOrganization:organization.login 
+    [GHAPIRepositoryV3 forkRepository:self.repositoryString
+                       toOrganization:organization.login
                     completionHandler:^(GHAPIRepositoryV3 *repository, NSError *error) {
                         self.actionButtonActive = NO;
                         if (error) {
@@ -1192,7 +1192,7 @@
 #pragma mark - GHActionButtonTableViewController
 
 - (void)downloadDataToDisplayActionButton {
-    [GHAPIRepositoryV3 isWatchingRepository:self.repositoryString 
+    [GHAPIRepositoryV3 isWatchingRepository:self.repositoryString
                           completionHandler:^(BOOL watching, NSError *error) {
                               if (error) {
                                   [self failedToDownloadDataToDisplayActionButtonWithError:error];
