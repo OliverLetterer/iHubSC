@@ -11,19 +11,19 @@
 #import "SVModalWebViewController.h"
 
 @interface GHPDirectoryViewController : GHTableViewController <NSCoding, SVModalWebViewControllerDelegate> {
-@private
-    GHDirectory *_directory;
-    
     NSString *_repository;
     NSString *_branch;
     NSString *_hash;
+    
+    NSString *_directory;
 }
 
-@property (nonatomic, retain) GHDirectory *directory;
+@property (nonatomic, strong) GHAPITreeV3 *tree;
+
 @property (nonatomic, copy) NSString *repository;
 @property (nonatomic, copy) NSString *branch;
 @property (nonatomic, copy) NSString *hash;
 
-- (id)initWithDirectory:(GHDirectory *)directory repository:(NSString *)repository branch:(NSString *)branch hash:(NSString *)hash;
+- (id)initWithTreeFile:(GHAPITreeFileV3 *)file repository:(NSString *)repository directory:(NSString *)directory branch:(NSString *)branch;
 
 @end
