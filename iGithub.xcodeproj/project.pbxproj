@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A701BDAE15E6B0F20087C36F /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A701BDAC15E6B0F20087C36F /* Default@2x.png */; };
+		A701BDAF15E6B0F20087C36F /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = A701BDAD15E6B0F20087C36F /* Default.png */; };
 		A703B9471347562B0014235D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A703B9461347562B0014235D /* QuartzCore.framework */; };
 		A7204D8113E4759F0098C86A /* GHAPIMarkdownFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = A7204D8013E4759F0098C86A /* GHAPIMarkdownFormatter.m */; };
 		A7218E861461E76A0081CB02 /* GHAPIDownloadV3.m in Sources */ = {isa = PBXBuildFile; fileRef = A7218E851461E76A0081CB02 /* GHAPIDownloadV3.m */; };
@@ -131,8 +133,6 @@
 		A7841D8513E18E2D00131648 /* UITableViewCellAccessoryDisclosureIndicatorSelected@2x.PNG in Resources */ = {isa = PBXBuildFile; fileRef = A7841D3C13E18E2D00131648 /* UITableViewCellAccessoryDisclosureIndicatorSelected@2x.PNG */; };
 		A7841D8613E18E2D00131648 /* Default-Landscape~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = A7841D3E13E18E2D00131648 /* Default-Landscape~ipad.png */; };
 		A7841D8713E18E2D00131648 /* Default-Portrait~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = A7841D3F13E18E2D00131648 /* Default-Portrait~ipad.png */; };
-		A7841D8813E18E2D00131648 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = A7841D4013E18E2D00131648 /* Default.png */; };
-		A7841D8913E18E2D00131648 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A7841D4113E18E2D00131648 /* Default@2x.png */; };
 		A7841D8A13E18E2D00131648 /* DefaultUserImage.png in Resources */ = {isa = PBXBuildFile; fileRef = A7841D4313E18E2D00131648 /* DefaultUserImage.png */; };
 		A7841D8B13E18E2D00131648 /* DefaultUserImage@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A7841D4413E18E2D00131648 /* DefaultUserImage@2x.png */; };
 		A7841D8C13E18E2D00131648 /* GHFile.png in Resources */ = {isa = PBXBuildFile; fileRef = A7841D4613E18E2D00131648 /* GHFile.png */; };
@@ -487,6 +487,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A701BDAC15E6B0F20087C36F /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		A701BDAD15E6B0F20087C36F /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		A703B9451347560F0014235D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		A703B9461347562B0014235D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		A7204D7F13E4759F0098C86A /* GHAPIMarkdownFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GHAPIMarkdownFormatter.h; path = Markdown/GHAPIMarkdownFormatter.h; sourceTree = "<group>"; };
@@ -713,8 +715,6 @@
 		A7841D3C13E18E2D00131648 /* UITableViewCellAccessoryDisclosureIndicatorSelected@2x.PNG */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UITableViewCellAccessoryDisclosureIndicatorSelected@2x.PNG"; sourceTree = "<group>"; };
 		A7841D3E13E18E2D00131648 /* Default-Landscape~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape~ipad.png"; sourceTree = "<group>"; };
 		A7841D3F13E18E2D00131648 /* Default-Portrait~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait~ipad.png"; sourceTree = "<group>"; };
-		A7841D4013E18E2D00131648 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
-		A7841D4113E18E2D00131648 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		A7841D4313E18E2D00131648 /* DefaultUserImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DefaultUserImage.png; sourceTree = "<group>"; };
 		A7841D4413E18E2D00131648 /* DefaultUserImage@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "DefaultUserImage@2x.png"; sourceTree = "<group>"; };
 		A7841D4613E18E2D00131648 /* GHFile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GHFile.png; sourceTree = "<group>"; };
@@ -1935,8 +1935,8 @@
 				A76352071544236D008359C2 /* Default-Portrait@2x~ipad.png */,
 				A7841D3E13E18E2D00131648 /* Default-Landscape~ipad.png */,
 				A7841D3F13E18E2D00131648 /* Default-Portrait~ipad.png */,
-				A7841D4013E18E2D00131648 /* Default.png */,
-				A7841D4113E18E2D00131648 /* Default@2x.png */,
+				A701BDAC15E6B0F20087C36F /* Default@2x.png */,
+				A701BDAD15E6B0F20087C36F /* Default.png */,
 			);
 			path = Defaults;
 			sourceTree = "<group>";
@@ -3472,8 +3472,6 @@
 				A7841D8513E18E2D00131648 /* UITableViewCellAccessoryDisclosureIndicatorSelected@2x.PNG in Resources */,
 				A7841D8613E18E2D00131648 /* Default-Landscape~ipad.png in Resources */,
 				A7841D8713E18E2D00131648 /* Default-Portrait~ipad.png in Resources */,
-				A7841D8813E18E2D00131648 /* Default.png in Resources */,
-				A7841D8913E18E2D00131648 /* Default@2x.png in Resources */,
 				A7841D8A13E18E2D00131648 /* DefaultUserImage.png in Resources */,
 				A7841D8B13E18E2D00131648 /* DefaultUserImage@2x.png in Resources */,
 				A7841D8C13E18E2D00131648 /* GHFile.png in Resources */,
@@ -3548,6 +3546,8 @@
 				A7ECD29515DB96100024A3E2 /* UITabBarItemGradient@2x.png in Resources */,
 				A7ECD2A415DB96590024A3E2 /* GHTableViewAlertView.bundle in Resources */,
 				A7ECD2AE15DB96770024A3E2 /* SVWebViewController.bundle in Resources */,
+				A701BDAE15E6B0F20087C36F /* Default@2x.png in Resources */,
+				A701BDAF15E6B0F20087C36F /* Default.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

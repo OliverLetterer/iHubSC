@@ -678,7 +678,7 @@
         return cell;
     } else if (indexPath.section == kUITableViewSectionRecentCommits || indexPath.section == kUITableViewSectionBrowseBranches) {
         if (indexPath.row > 0) {
-            NSString *CellIdentifier = @"UITableViewCellWithLinearGradientBackgroundView";
+            NSString *CellIdentifier = @"UITableViewCellWithLinearGradientBackgroundViewPlain";
             
             GHTableViewCellWithLinearGradientBackgroundView *cell = (GHTableViewCellWithLinearGradientBackgroundView *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
             if (!cell) {

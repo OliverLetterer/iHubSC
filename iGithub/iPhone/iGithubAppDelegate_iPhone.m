@@ -13,7 +13,7 @@
 
 @implementation iGithubAppDelegate_iPhone
 
-@synthesize tabBarController=_tabBarController, newsFeedViewController=_newsFeedViewController, profileViewController=_profileViewController, searchViewController=_searchViewController, issuesOfUserViewController=_issuesOfUserViewController;
+@synthesize tabBarController=_tabBarController, newsFeedViewController=_newsFeedViewController, profileViewController=_profileViewController, issuesOfUserViewController=_issuesOfUserViewController;
 
 - (void)authenticationManagerDidAuthenticateUserCallback:(NSNotification *)notification {
     self.profileViewController.username = [GHAPIAuthenticationManager sharedInstance].authenticatedUser.login;
@@ -72,7 +72,6 @@
         NSArray *viewControllers0 = [dictionary objectForKey:[NSNumber numberWithUnsignedInteger:0]];
         NSArray *viewControllers1 = [dictionary objectForKey:[NSNumber numberWithUnsignedInteger:1]];
         NSArray *viewControllers2 = [dictionary objectForKey:[NSNumber numberWithUnsignedInteger:2]];
-        NSArray *viewControllers3 = [dictionary objectForKey:[NSNumber numberWithUnsignedInteger:3]];
         
         UINavigationController *navigationController = [[UINavigationController alloc] init];
         [navigationController setViewControllers:viewControllers0 animated:NO];
@@ -86,17 +85,12 @@
         [navigationController setViewControllers:viewControllers2 animated:NO];
         [viewControllers addObject:navigationController];
         
-        navigationController = [[UINavigationController alloc] init];
-        [navigationController setViewControllers:viewControllers3 animated:NO];
-        [viewControllers addObject:navigationController];
-        
         self.tabBarController.viewControllers = viewControllers;
         self.tabBarController.selectedIndex = [[dictionary objectForKey:@"self.tabBarController.selectedIndex"] unsignedIntegerValue];
         
         self.newsFeedViewController = [viewControllers0 objectAtIndex:0];
         self.profileViewController = [viewControllers1 objectAtIndex:0];
         self.issuesOfUserViewController = [viewControllers2 objectAtIndex:0];
-        self.searchViewController = [viewControllers3 objectAtIndex:0];
     } else {
         NSMutableArray *tabBarItems = [NSMutableArray array];
         
@@ -111,9 +105,6 @@
         
         self.issuesOfUserViewController = [[GHIssuesOfAuthenticatedUserViewController alloc] init];
         [tabBarItems addObject:[[UINavigationController alloc] initWithRootViewController:self.issuesOfUserViewController] ];
-        
-        self.searchViewController = [[GHSearchViewController alloc] init];
-        [tabBarItems addObject:[[UINavigationController alloc] initWithRootViewController:self.searchViewController] ];
         
         self.tabBarController.viewControllers = tabBarItems;
     }

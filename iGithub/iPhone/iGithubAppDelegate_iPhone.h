@@ -20,16 +20,13 @@
     UITabBarController *_tabBarController;
     GHNewsFeedViewController *_newsFeedViewController;
     GHAuthenticatedUserViewController *_profileViewController;
-    GHSearchViewController *_searchViewController;
     GHIssuesOfAuthenticatedUserViewController *_issuesOfUserViewController;
 }
 
 @property (nonatomic, retain) UITabBarController *tabBarController;
 @property (nonatomic, retain) GHNewsFeedViewController *newsFeedViewController;
 @property (nonatomic, retain) GHAuthenticatedUserViewController *profileViewController;
-@property (nonatomic, retain) GHSearchViewController *searchViewController;
 @property (nonatomic, retain) GHIssuesOfAuthenticatedUserViewController *issuesOfUserViewController;
-
 
 - (void)authenticationManagerDidAuthenticateUserCallback:(NSNotification *)notification;
 
