@@ -10,7 +10,7 @@
 #import "GHPDefaultTableViewCellBackgroundView.h"
 #import <objc/runtime.h>
 
-@interface GHPDefaultTableViewCell (SectionLocation)
+@interface GHPDefaultTableViewCell ()
 
 - (void)setSectionLocation:(int)location animated:(BOOL)animated;
 - (void)setSectionLocation:(int)location;
