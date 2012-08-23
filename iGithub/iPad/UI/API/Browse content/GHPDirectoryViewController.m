@@ -30,6 +30,7 @@
         _repository = repository;
         _directory = directory;
         _branch = branch;
+        self.title = file.path;
         
         self.isDownloadingEssentialData = YES;
         [GHAPITreeV3 contentOfBranch:file.SHA onRepository:repository completionHandler:^(GHAPITreeV3 *tree, NSError *error) {

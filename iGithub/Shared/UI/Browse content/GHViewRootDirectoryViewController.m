@@ -14,20 +14,23 @@
 #pragma mark - Initialization
 
 - (id)initWithRepository:(NSString *)repository branch:(NSString *)branch hash:(NSString *)hash {
-    if ((self = [super initWithDirectory:nil repository:repository branch:branch hash:hash])) {
+    if (self = [super initWithStyle:UITableViewStylePlain]) {
         // Custom initialization
         self.title = self.branch;
-        [GHRepository filesOnRepository:self.repository 
-                                 branch:self.branch 
-                      completionHandler:^(GHDirectory *rootDirectory, NSError *error) {
-                          if (error) {
-                              [self handleError:error];
-                          } else {
-                              self.directory = rootDirectory;
-                              self.title = self.branch;
-                              [self.tableView reloadData];
-                          }
-                      }];
+        self.isDownloadingEssentialData = YES;
+        _directory = @"";
+        _branch = branch;
+        _repository = repository;
+        
+        [GHAPITreeV3 contentOfBranch:hash onRepository:repository completionHandler:^(GHAPITreeV3 *tree, NSError *error) {
+            self.isDownloadingEssentialData = NO;
+            if (error) {
+                [self handleError:error];
+            } else {
+                self.tree = tree;
+            }
+            
+        }];
     }
     return self;
 }
