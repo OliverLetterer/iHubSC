@@ -79,6 +79,9 @@
                                                                                  cancelButtonTitle:NSLocalizedString(@"OK", @"") 
                                                                                  otherButtonTitles:nil];
                                            [alert show];
+
+                                           self.isDownloadingEssentialData = NO;
+                                           [self pullToReleaseTableViewDidReloadData];
                                        }
                                    }
                                }];
